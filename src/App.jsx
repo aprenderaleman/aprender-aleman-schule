@@ -14,8 +14,13 @@ import ExercisePlayer from './pages/ExercisePlayer'
 import Progress from './pages/Progress'
 import Profile from './pages/Profile'
 import Achievements from './pages/Achievements'
+import Flashcards from './pages/Flashcards'
+import Pricing from './pages/Pricing'
 import AutoLogin from './pages/AutoLogin'
 import AdminLayout from './components/Layout/AdminLayout'
+import Paywall from './components/UI/Paywall'
+import TrialBanner from './components/UI/TrialBanner'
+import Navbar from './components/Layout/Navbar'
 
 // Lazy load admin pages
 const AdminDashboard = lazy(() => import('./pages/admin/AdminDashboard'))
@@ -25,6 +30,28 @@ const AdminUserDetail = lazy(() => import('./pages/admin/AdminUserDetail'))
 function ProtectedRoute({ children }) {
   const { user } = useAuth()
   if (!user) return <Navigate to="/login" replace />
+  return children
+}
+
+// Protected route that also requires active subscription/trial
+function PaidRoute({ children }) {
+  const { user } = useAuth()
+  if (!user) return <Navigate to="/login" replace />
+
+  // Admins always pass
+  if (user.role === 'superadmin' || user.role === 'admin') return children
+
+  // Check subscription
+  const sub = user.subscription
+  if (!sub || !sub.hasAccess) {
+    return (
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+        <Navbar />
+        <Paywall />
+      </div>
+    )
+  }
+
   return children
 }
 
@@ -56,23 +83,30 @@ function PublicRoute({ children }) {
 
 function AppRoutes() {
   return (
-    <Routes>
-      <Route path="/" element={<Landing />} />
-      <Route path="/auto-login" element={<AutoLogin />} />
-      <Route path="/login" element={<PublicRoute><Login /></PublicRoute>} />
-      <Route path="/registro" element={<PublicRoute><Register /></PublicRoute>} />
-      <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
-      <Route path="/ejercicios" element={<ProtectedRoute><Exercises /></ProtectedRoute>} />
-      <Route path="/ejercicio/:id" element={<ProtectedRoute><ExercisePlayer /></ProtectedRoute>} />
-      <Route path="/progreso" element={<ProtectedRoute><Progress /></ProtectedRoute>} />
-      <Route path="/perfil" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
-      <Route path="/logros" element={<ProtectedRoute><Achievements /></ProtectedRoute>} />
-      {/* Admin routes */}
-      <Route path="/admin" element={<AdminRoute><AdminDashboard /></AdminRoute>} />
-      <Route path="/admin/usuarios" element={<AdminRoute><AdminUsers /></AdminRoute>} />
-      <Route path="/admin/usuarios/:userId" element={<AdminRoute><AdminUserDetail /></AdminRoute>} />
-      <Route path="*" element={<Navigate to="/" replace />} />
-    </Routes>
+    <>
+      <TrialBanner />
+      <Routes>
+        <Route path="/" element={<Landing />} />
+        <Route path="/auto-login" element={<AutoLogin />} />
+        <Route path="/pricing" element={<Pricing />} />
+        <Route path="/login" element={<PublicRoute><Login /></PublicRoute>} />
+        <Route path="/registro" element={<PublicRoute><Register /></PublicRoute>} />
+        {/* Dashboard always accessible (shows paywall inside if needed) */}
+        <Route path="/dashboard" element={<PaidRoute><Dashboard /></PaidRoute>} />
+        {/* Content routes require subscription */}
+        <Route path="/ejercicios" element={<PaidRoute><Exercises /></PaidRoute>} />
+        <Route path="/ejercicio/:id" element={<PaidRoute><ExercisePlayer /></PaidRoute>} />
+        <Route path="/progreso" element={<PaidRoute><Progress /></PaidRoute>} />
+        <Route path="/perfil" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+        <Route path="/logros" element={<PaidRoute><Achievements /></PaidRoute>} />
+        <Route path="/flashcards" element={<PaidRoute><Flashcards /></PaidRoute>} />
+        {/* Admin routes */}
+        <Route path="/admin" element={<AdminRoute><AdminDashboard /></AdminRoute>} />
+        <Route path="/admin/usuarios" element={<AdminRoute><AdminUsers /></AdminRoute>} />
+        <Route path="/admin/usuarios/:userId" element={<AdminRoute><AdminUserDetail /></AdminRoute>} />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </>
   )
 }
 

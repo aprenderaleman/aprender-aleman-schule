@@ -3,6 +3,7 @@ import cors from 'cors'
 import mysql from 'mysql2/promise'
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
+import Stripe from 'stripe'
 import dotenv from 'dotenv'
 import path from 'path'
 import { fileURLToPath } from 'url'
@@ -24,7 +25,11 @@ app.use(cors({
   },
   credentials: true,
 }))
-app.use(express.json({ limit: '50kb' }))
+// Parse JSON for all routes except Stripe webhook (needs raw body)
+app.use((req, res, next) => {
+  if (req.originalUrl === '/api/stripe/webhook') return next()
+  express.json({ limit: '50kb' })(req, res, next)
+})
 
 // Rate limiting for login
 const loginAttempts = new Map()
@@ -90,6 +95,77 @@ const pool = mysql.createPool({
   connectionLimit: 10,
 })
 
+// ─── STRIPE SETUP ────────────────────────────────────
+const STRIPE_SECRET_KEY = process.env.STRIPE_SECRET_KEY
+const STRIPE_WEBHOOK_SECRET = process.env.STRIPE_WEBHOOK_SECRET
+const STRIPE_PRICE_ID = process.env.STRIPE_PRICE_ID // monthly 15€ price
+const stripe = STRIPE_SECRET_KEY ? new Stripe(STRIPE_SECRET_KEY) : null
+
+// Auto-create schule_subscriptions table
+;(async () => {
+  try {
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS schule_subscriptions (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        userId VARCHAR(191) NOT NULL UNIQUE,
+        trialEndsAt DATETIME NOT NULL,
+        subscriptionStatus ENUM('trialing','active','past_due','canceled','none') DEFAULT 'trialing',
+        stripeCustomerId VARCHAR(255) DEFAULT NULL,
+        stripeSubscriptionId VARCHAR(255) DEFAULT NULL,
+        ssoUser TINYINT(1) DEFAULT 0,
+        createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+        updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+        INDEX idx_userId (userId),
+        INDEX idx_stripeCustomerId (stripeCustomerId)
+      )
+    `)
+  } catch (err) {
+    console.error('Failed to create schule_subscriptions table:', err.message)
+  }
+})()
+
+// Helper: get user subscription status
+async function getSubscriptionInfo(userId) {
+  const [rows] = await pool.query('SELECT * FROM schule_subscriptions WHERE userId = ?', [userId])
+  if (rows.length === 0) return null
+  const sub = rows[0]
+  const now = new Date()
+  const trialActive = sub.subscriptionStatus === 'trialing' && new Date(sub.trialEndsAt) > now
+  const paid = sub.subscriptionStatus === 'active'
+  const isSso = sub.ssoUser === 1
+  return {
+    status: sub.subscriptionStatus,
+    trialEndsAt: sub.trialEndsAt,
+    trialActive,
+    paid,
+    ssoUser: isSso,
+    hasAccess: isSso || paid || trialActive,
+    stripeCustomerId: sub.stripeCustomerId,
+    stripeSubscriptionId: sub.stripeSubscriptionId,
+  }
+}
+
+// Middleware: require active subscription or trial
+function subscriptionMiddleware(req, res, next) {
+  // Admins always have access
+  if (req.user?.role === 'superadmin' || req.user?.role === 'admin') return next()
+
+  // Check subscription asynchronously
+  getSubscriptionInfo(req.user.id).then(sub => {
+    if (!sub) {
+      return res.status(403).json({ error: 'subscription_required', message: 'Suscripción requerida.' })
+    }
+    if (!sub.hasAccess) {
+      return res.status(403).json({ error: 'subscription_expired', message: 'Tu prueba ha terminado. Suscríbete para continuar.' })
+    }
+    req.subscription = sub
+    next()
+  }).catch(err => {
+    console.error('Subscription check error:', err)
+    res.status(500).json({ error: 'Error al verificar suscripción.' })
+  })
+}
+
 // Middleware to verify JWT token
 function authMiddleware(req, res, next) {
   const header = req.headers.authorization
@@ -150,6 +226,15 @@ app.post('/api/auth/login', loginRateLimit, async (req, res) => {
       { expiresIn: '30d' }
     )
 
+    // Get subscription info
+    let subscription = null
+    if (user.role === 'student') {
+      const sub = await getSubscriptionInfo(user.id)
+      if (sub) {
+        subscription = { status: sub.status, trialEndsAt: sub.trialEndsAt, trialActive: sub.trialActive, paid: sub.paid, ssoUser: sub.ssoUser, hasAccess: sub.hasAccess }
+      }
+    }
+
     res.json({
       token,
       user: {
@@ -160,6 +245,7 @@ app.post('/api/auth/login', loginRateLimit, async (req, res) => {
         level: user.level ? user.level.toUpperCase() : 'A1',
         studentId: user.studentId,
         classType: user.classType,
+        subscription,
       },
     })
   } catch (err) {
@@ -190,6 +276,18 @@ app.get('/api/auth/me', authMiddleware, async (req, res) => {
     // Auto-create schule_progress if missing (e.g. user registered on the other app)
     await pool.query('INSERT IGNORE INTO schule_progress (userId) VALUES (?)', [user.id])
 
+    // Get subscription info
+    let subscription = null
+    if (user.role === 'student') {
+      subscription = await getSubscriptionInfo(user.id)
+      // Auto-create subscription record for SSO users (from aprender-aleman.de) who don't have one
+      if (!subscription) {
+        // Check if user came via SSO by looking if they existed before schule app
+        // SSO users are those with studentId already set from the other app
+        // For now, they'll get a record created when they first use SSO
+      }
+    }
+
     res.json({
       id: user.id,
       name: user.fullName,
@@ -198,6 +296,14 @@ app.get('/api/auth/me', authMiddleware, async (req, res) => {
       level: user.level ? user.level.toUpperCase() : 'A1',
       studentId: user.studentId,
       classType: user.classType,
+      subscription: subscription ? {
+        status: subscription.status,
+        trialEndsAt: subscription.trialEndsAt,
+        trialActive: subscription.trialActive,
+        paid: subscription.paid,
+        ssoUser: subscription.ssoUser,
+        hasAccess: subscription.hasAccess,
+      } : null,
     })
   } catch (err) {
     console.error('Me error:', err)
@@ -287,6 +393,14 @@ app.get('/api/auth/sso-verify', async (req, res) => {
 
     const user = users[0]
 
+    // Auto-create or update subscription for SSO users (free access)
+    await pool.query(
+      `INSERT INTO schule_subscriptions (userId, trialEndsAt, subscriptionStatus, ssoUser)
+       VALUES (?, DATE_ADD(NOW(), INTERVAL 100 YEAR), 'active', 1)
+       ON DUPLICATE KEY UPDATE ssoUser = 1, subscriptionStatus = 'active'`,
+      [user.id]
+    )
+
     // Generate a long-lived session token for the new app
     const sessionToken = jwt.sign(
       {
@@ -311,6 +425,7 @@ app.get('/api/auth/sso-verify', async (req, res) => {
         level: user.level ? user.level.toUpperCase() : 'A1',
         studentId: user.studentId,
         classType: user.classType,
+        subscription: { status: 'active', trialActive: false, paid: false, ssoUser: true, hasAccess: true },
       },
     })
   } catch (err) {
@@ -361,6 +476,13 @@ app.post('/api/auth/register', loginRateLimit, async (req, res) => {
       [userId]
     )
 
+    // Create subscription with 5-day free trial
+    const trialEndsAt = new Date(Date.now() + 5 * 24 * 60 * 60 * 1000)
+    await pool.query(
+      'INSERT INTO schule_subscriptions (userId, trialEndsAt, subscriptionStatus, ssoUser) VALUES (?, ?, ?, ?)',
+      [userId, trialEndsAt, 'trialing', 0]
+    )
+
     // Generate JWT
     const token = jwt.sign(
       { id: userId, email: email.trim().toLowerCase(), fullName: fullName.trim(), role: 'student', studentId, level: 'A1' },
@@ -370,7 +492,10 @@ app.post('/api/auth/register', loginRateLimit, async (req, res) => {
 
     res.status(201).json({
       token,
-      user: { id: userId, name: fullName.trim(), email: email.trim().toLowerCase(), role: 'student', level: 'A1', studentId, classType: 'group' },
+      user: {
+        id: userId, name: fullName.trim(), email: email.trim().toLowerCase(), role: 'student', level: 'A1', studentId, classType: 'group',
+        subscription: { status: 'trialing', trialEndsAt, trialActive: true, paid: false, ssoUser: false, hasAccess: true },
+      },
     })
   } catch (err) {
     console.error('Register error:', err)
@@ -379,7 +504,7 @@ app.post('/api/auth/register', loginRateLimit, async (req, res) => {
 })
 
 // ─── PROGRESS: GET ───────────────────────────────────
-app.get('/api/progress', authMiddleware, async (req, res) => {
+app.get('/api/progress', authMiddleware, subscriptionMiddleware, async (req, res) => {
   try {
     const userId = req.user.id
 
@@ -432,7 +557,7 @@ app.get('/api/progress', authMiddleware, async (req, res) => {
 })
 
 // ─── PROGRESS: RECORD EXERCISE ───────────────────────
-app.post('/api/progress/exercise', authMiddleware, async (req, res) => {
+app.post('/api/progress/exercise', authMiddleware, subscriptionMiddleware, async (req, res) => {
   try {
     const userId = req.user.id
     const { exerciseId, exerciseType, score, perfect, xpEarned, timeSpent } = req.body
@@ -882,6 +1007,166 @@ Schreibe auf Deutsch. Gib 2-3 Beispiele auf Deutsch. Schwierige Grammatikbegriff
     console.error('AI grammar error:', err.message)
     res.status(500).json({ error: 'Error al generar explicación.' })
   }
+})
+
+// ─── STRIPE: CREATE CHECKOUT SESSION ─────────────────
+app.post('/api/stripe/create-checkout', authMiddleware, async (req, res) => {
+  try {
+    if (!stripe || !STRIPE_PRICE_ID) {
+      return res.status(503).json({ error: 'Stripe no está configurado.' })
+    }
+
+    const userId = req.user.id
+    const [users] = await pool.query('SELECT email, fullName FROM users WHERE id = ?', [userId])
+    if (users.length === 0) return res.status(404).json({ error: 'Usuario no encontrado.' })
+
+    const { email, fullName } = users[0]
+
+    // Check if user already has a Stripe customer
+    const [subs] = await pool.query('SELECT stripeCustomerId FROM schule_subscriptions WHERE userId = ?', [userId])
+    let customerId = subs[0]?.stripeCustomerId
+
+    if (!customerId) {
+      const customer = await stripe.customers.create({ email, name: fullName, metadata: { userId } })
+      customerId = customer.id
+      await pool.query(
+        'UPDATE schule_subscriptions SET stripeCustomerId = ? WHERE userId = ?',
+        [customerId, userId]
+      )
+    }
+
+    const frontendUrl = process.env.FRONTEND_URL || 'https://schule.aprender-aleman.de'
+    const session = await stripe.checkout.sessions.create({
+      customer: customerId,
+      mode: 'subscription',
+      line_items: [{ price: STRIPE_PRICE_ID, quantity: 1 }],
+      success_url: `${frontendUrl}/dashboard?payment=success`,
+      cancel_url: `${frontendUrl}/pricing?payment=canceled`,
+      metadata: { userId },
+      subscription_data: { metadata: { userId } },
+    })
+
+    res.json({ url: session.url })
+  } catch (err) {
+    console.error('Stripe checkout error:', err.message)
+    res.status(500).json({ error: 'Error al crear sesión de pago.' })
+  }
+})
+
+// ─── STRIPE: CUSTOMER PORTAL ─────────────────────────
+app.post('/api/stripe/portal', authMiddleware, async (req, res) => {
+  try {
+    if (!stripe) return res.status(503).json({ error: 'Stripe no está configurado.' })
+
+    const [subs] = await pool.query('SELECT stripeCustomerId FROM schule_subscriptions WHERE userId = ?', [req.user.id])
+    if (!subs[0]?.stripeCustomerId) {
+      return res.status(400).json({ error: 'No tienes una suscripción activa.' })
+    }
+
+    const frontendUrl = process.env.FRONTEND_URL || 'https://schule.aprender-aleman.de'
+    const session = await stripe.billingPortal.sessions.create({
+      customer: subs[0].stripeCustomerId,
+      return_url: `${frontendUrl}/perfil`,
+    })
+
+    res.json({ url: session.url })
+  } catch (err) {
+    console.error('Stripe portal error:', err.message)
+    res.status(500).json({ error: 'Error al abrir portal de facturación.' })
+  }
+})
+
+// ─── STRIPE: GET SUBSCRIPTION STATUS ─────────────────
+app.get('/api/subscription', authMiddleware, async (req, res) => {
+  try {
+    const sub = await getSubscriptionInfo(req.user.id)
+    if (!sub) {
+      return res.json({ status: 'none', hasAccess: false, trialActive: false, paid: false, ssoUser: false })
+    }
+    res.json({
+      status: sub.status,
+      trialEndsAt: sub.trialEndsAt,
+      trialActive: sub.trialActive,
+      paid: sub.paid,
+      ssoUser: sub.ssoUser,
+      hasAccess: sub.hasAccess,
+    })
+  } catch (err) {
+    console.error('Subscription status error:', err)
+    res.status(500).json({ error: 'Error al obtener estado de suscripción.' })
+  }
+})
+
+// ─── STRIPE: WEBHOOK ─────────────────────────────────
+// IMPORTANT: This must use raw body, not JSON parsed
+app.post('/api/stripe/webhook', express.raw({ type: 'application/json' }), async (req, res) => {
+  if (!stripe || !STRIPE_WEBHOOK_SECRET) return res.status(400).send('Webhook not configured')
+
+  let event
+  try {
+    event = stripe.webhooks.constructEvent(req.body, req.headers['stripe-signature'], STRIPE_WEBHOOK_SECRET)
+  } catch (err) {
+    console.error('Webhook signature verification failed:', err.message)
+    return res.status(400).send(`Webhook Error: ${err.message}`)
+  }
+
+  try {
+    switch (event.type) {
+      case 'checkout.session.completed': {
+        const session = event.data.object
+        const userId = session.metadata?.userId
+        if (userId && session.subscription) {
+          await pool.query(
+            `UPDATE schule_subscriptions SET subscriptionStatus = 'active', stripeSubscriptionId = ?, stripeCustomerId = ?, updatedAt = NOW() WHERE userId = ?`,
+            [session.subscription, session.customer, userId]
+          )
+        }
+        break
+      }
+      case 'customer.subscription.updated': {
+        const subscription = event.data.object
+        const userId = subscription.metadata?.userId
+        const status = subscription.status // active, past_due, canceled, etc.
+        if (userId) {
+          const mappedStatus = ['active', 'trialing'].includes(status) ? status
+            : status === 'past_due' ? 'past_due'
+            : status === 'canceled' ? 'canceled'
+            : 'none'
+          await pool.query(
+            `UPDATE schule_subscriptions SET subscriptionStatus = ?, updatedAt = NOW() WHERE userId = ?`,
+            [mappedStatus, userId]
+          )
+        }
+        break
+      }
+      case 'customer.subscription.deleted': {
+        const subscription = event.data.object
+        const userId = subscription.metadata?.userId
+        if (userId) {
+          await pool.query(
+            `UPDATE schule_subscriptions SET subscriptionStatus = 'canceled', stripeSubscriptionId = NULL, updatedAt = NOW() WHERE userId = ?`,
+            [userId]
+          )
+        }
+        break
+      }
+      case 'invoice.payment_failed': {
+        const invoice = event.data.object
+        const subId = invoice.subscription
+        if (subId) {
+          await pool.query(
+            `UPDATE schule_subscriptions SET subscriptionStatus = 'past_due', updatedAt = NOW() WHERE stripeSubscriptionId = ?`,
+            [subId]
+          )
+        }
+        break
+      }
+    }
+  } catch (err) {
+    console.error('Webhook handler error:', err)
+  }
+
+  res.json({ received: true })
 })
 
 // ─── SERVE FRONTEND IN PRODUCTION ────────────────────

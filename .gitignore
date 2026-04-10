@@ -5,4 +5,5 @@ dist/
 .env.production
 .DS_Store
 *.log
-.claude
+.claude/
+deploy/env.production

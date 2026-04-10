@@ -1,15 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { motion } from 'framer-motion'
-import { User, Mail, GraduationCap, LogOut, ExternalLink } from 'lucide-react'
+import { User, Mail, GraduationCap, LogOut, ExternalLink, CreditCard, Shield, Clock, Zap, Loader2 } from 'lucide-react'
 import { useAuth } from '../context/AuthContext'
 import { useProgress } from '../context/ProgressContext'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import Navbar from '../components/Layout/Navbar'
 import Button from '../components/UI/Button'
 import Toast from '../components/UI/Toast'
 
+const API_URL = import.meta.env.VITE_API_URL || ''
+
 export default function Profile() {
-  const { user, logout, toast } = useAuth()
+  const { user, logout, toast, getToken, showToast } = useAuth()
+  const [portalLoading, setPortalLoading] = useState(false)
   const { progress } = useProgress()
   const navigate = useNavigate()
 
@@ -125,6 +128,90 @@ export default function Profile() {
             ))}
           </div>
         </motion.div>
+
+        {/* Subscription */}
+        {user?.role === 'student' && (
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.25 }}
+            className="card mb-6"
+          >
+            <h2 className="font-bold text-gray-800 dark:text-gray-100 text-lg mb-4 flex items-center gap-2">
+              <CreditCard size={18} className="text-orange-500" /> Suscripcion
+            </h2>
+            {user.subscription?.ssoUser ? (
+              <div className="bg-blue-50 dark:bg-blue-900/20 rounded-xl p-4 flex items-center gap-3">
+                <Shield size={20} className="text-blue-500 shrink-0" />
+                <div>
+                  <p className="font-bold text-blue-700 dark:text-blue-300">Acceso incluido</p>
+                  <p className="text-sm text-blue-600/70 dark:text-blue-400/70">Tu suscripcion a Aprender-Aleman.de incluye acceso completo a la Schule.</p>
+                </div>
+              </div>
+            ) : user.subscription?.paid ? (
+              <div>
+                <div className="bg-green-50 dark:bg-green-900/20 rounded-xl p-4 flex items-center gap-3 mb-3">
+                  <Zap size={20} className="text-green-500 shrink-0" />
+                  <div>
+                    <p className="font-bold text-green-700 dark:text-green-300">Suscripcion activa</p>
+                    <p className="text-sm text-green-600/70 dark:text-green-400/70">15&euro;/mes. Acceso completo a todo el contenido.</p>
+                  </div>
+                </div>
+                <button
+                  onClick={async () => {
+                    setPortalLoading(true)
+                    try {
+                      const res = await fetch(`${API_URL}/api/stripe/portal`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${getToken()}` },
+                      })
+                      const data = await res.json()
+                      if (!res.ok) throw new Error(data.error)
+                      window.location.href = data.url
+                    } catch (err) {
+                      showToast(err.message || 'Error al abrir portal.', 'error')
+                    } finally {
+                      setPortalLoading(false)
+                    }
+                  }}
+                  disabled={portalLoading}
+                  className="text-sm text-orange-500 font-semibold hover:text-orange-600 flex items-center gap-1"
+                >
+                  {portalLoading ? <Loader2 size={14} className="animate-spin" /> : <ExternalLink size={14} />}
+                  Gestionar suscripcion en Stripe
+                </button>
+              </div>
+            ) : user.subscription?.trialActive ? (
+              <div>
+                <div className="bg-orange-50 dark:bg-orange-900/20 rounded-xl p-4 flex items-center gap-3 mb-3">
+                  <Clock size={20} className="text-orange-500 shrink-0" />
+                  <div>
+                    <p className="font-bold text-orange-700 dark:text-orange-300">Prueba gratuita</p>
+                    <p className="text-sm text-orange-600/70 dark:text-orange-400/70">
+                      Tu prueba termina el {new Date(user.subscription.trialEndsAt).toLocaleDateString('es-ES')}.
+                    </p>
+                  </div>
+                </div>
+                <Link to="/pricing" className="text-sm text-orange-500 font-semibold hover:text-orange-600 flex items-center gap-1">
+                  <Zap size={14} /> Suscribirme ahora
+                </Link>
+              </div>
+            ) : (
+              <div>
+                <div className="bg-red-50 dark:bg-red-900/20 rounded-xl p-4 flex items-center gap-3 mb-3">
+                  <Clock size={20} className="text-red-500 shrink-0" />
+                  <div>
+                    <p className="font-bold text-red-700 dark:text-red-300">Sin suscripcion activa</p>
+                    <p className="text-sm text-red-600/70 dark:text-red-400/70">Tu prueba ha terminado. Suscribete para continuar.</p>
+                  </div>
+                </div>
+                <Link to="/pricing" className="inline-flex items-center gap-2 bg-orange-500 text-white font-bold px-5 py-2.5 rounded-xl hover:bg-orange-600 transition-colors text-sm">
+                  <Zap size={16} /> Suscribirme por 15&euro;/mes
+                </Link>
+              </div>
+            )}
+          </motion.div>
+        )}
 
         {/* Logout */}
         <motion.div

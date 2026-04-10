@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Moon, Sun, Menu, X, BookOpen, BarChart2, User, Trophy, Home, LogOut, Zap } from 'lucide-react'
+import { Moon, Sun, Menu, X, BookOpen, BarChart2, User, Trophy, Home, LogOut, Zap, Layers } from 'lucide-react'
 import { useAuth } from '../../context/AuthContext'
 import { useTheme } from '../../context/ThemeContext'
 import { useProgress } from '../../context/ProgressContext'
@@ -9,6 +9,7 @@ import { useProgress } from '../../context/ProgressContext'
 const navLinks = [
   { to: '/dashboard', icon: <Home size={18} />, label: 'Inicio' },
   { to: '/ejercicios', icon: <BookOpen size={18} />, label: 'Ejercicios' },
+  { to: '/flashcards', icon: <Layers size={18} />, label: 'Flashcards' },
   { to: '/progreso', icon: <BarChart2 size={18} />, label: 'Progreso' },
   { to: '/logros', icon: <Trophy size={18} />, label: 'Logros' },
   { to: '/perfil', icon: <User size={18} />, label: 'Perfil' },

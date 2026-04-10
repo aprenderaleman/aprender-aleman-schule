@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { Zap, Play, Trophy, Flame } from 'lucide-react'
+import { Zap, Play, Trophy, Flame, Layers } from 'lucide-react'
 import { useAuth } from '../context/AuthContext'
 import { useProgress } from '../context/ProgressContext'
 import Navbar from '../components/Layout/Navbar'
@@ -148,33 +148,70 @@ export default function Dashboard() {
           </motion.div>
         </div>
 
-        {/* Hans - Virtual Teacher */}
+        {/* Flashcards */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.45 }}
           className="mt-6"
         >
+          <Link
+            to="/flashcards"
+            className="block bg-gradient-to-r from-orange-500 to-amber-500 rounded-2xl p-5 hover:shadow-xl transition-all group"
+          >
+            <div className="flex items-center gap-4">
+              <div className="bg-white/20 rounded-xl p-3 shrink-0">
+                <Layers size={28} className="text-white" />
+              </div>
+              <div className="flex-1">
+                <h3 className="text-white font-bold text-lg group-hover:text-yellow-200 transition-colors">
+                  Flashcards 🇩🇪
+                </h3>
+                <p className="text-white/80 text-sm mt-1">
+                  Aprende vocabulario con repetición espaciada tipo Anki. Temas por nivel: comida, trabajo, viajes y más.
+                </p>
+              </div>
+            </div>
+          </Link>
+        </motion.div>
+
+        {/* Hans - Virtual Teacher CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5 }}
+          className="mt-6"
+        >
           <a
             href="https://hans.aprender-aleman.de"
             target="_blank"
             rel="noopener noreferrer"
-            className="block bg-gradient-to-r from-blue-600 to-indigo-600 rounded-2xl p-5 hover:shadow-xl transition-all group"
+            className="block relative overflow-hidden bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-700 rounded-2xl p-6 hover:shadow-2xl hover:scale-[1.01] transition-all group"
           >
-            <div className="flex items-center gap-4">
-              <div className="bg-white/20 rounded-xl p-3 text-4xl shrink-0">
+            {/* Decorative circles */}
+            <div className="absolute -top-6 -right-6 w-32 h-32 bg-white/10 rounded-full" />
+            <div className="absolute -bottom-4 -left-4 w-24 h-24 bg-white/5 rounded-full" />
+
+            <div className="relative flex items-center gap-5">
+              <div className="bg-white/20 backdrop-blur-sm rounded-2xl p-4 text-5xl shrink-0 group-hover:scale-110 transition-transform">
                 🤖
               </div>
               <div className="flex-1">
-                <h3 className="text-white font-bold text-lg group-hover:text-yellow-200 transition-colors">
-                  ¡Practica con Hans! 🇩🇪
-                </h3>
-                <p className="text-white/80 text-sm mt-1">
-                  Tu profesor virtual de alemán disponible <strong>24/7</strong>. Conversa, pregunta dudas y practica con inteligencia artificial.
+                <div className="flex items-center gap-2 mb-1">
+                  <h3 className="text-white font-extrabold text-xl">
+                    ¡Practica con Hans!
+                  </h3>
+                  <span className="bg-yellow-400 text-yellow-900 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">
+                    IA 24/7
+                  </span>
+                </div>
+                <p className="text-white/80 text-sm leading-relaxed">
+                  Tu profesor virtual de alemán. Conversa, pregunta dudas de gramática y practica con inteligencia artificial — disponible a cualquier hora.
                 </p>
-              </div>
-              <div className="text-white/60 group-hover:text-white transition-colors shrink-0">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                <div className="mt-3 inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm text-white text-sm font-bold px-4 py-2 rounded-xl group-hover:bg-white/30 transition-colors">
+                  Abrir Hans
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                </div>
               </div>
             </div>
           </a>

@@ -78,7 +78,7 @@ export default function Landing() {
               </Button>
             </Link>
           </div>
-          <p className="text-sm text-gray-400 mt-4">Sin tarjeta de crédito · 100% gratis</p>
+          <p className="text-sm text-gray-400 mt-4">5 dias gratis · Luego solo 15&euro;/mes · Sin permanencia</p>
         </motion.div>
 
         {/* Hero illustration */}
