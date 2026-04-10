@@ -3,7 +3,8 @@ import { useParams, useNavigate, Link } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
   Clock, ArrowLeft, ArrowRight, CheckCircle2, XCircle, Trophy,
-  AlertTriangle, BookOpen, Play, RotateCcw, ChevronRight
+  AlertTriangle, BookOpen, Play, RotateCcw, ChevronRight,
+  Headphones, Volume2, Eye, EyeOff
 } from 'lucide-react'
 import Navbar from '../components/Layout/Navbar'
 import { useAuth } from '../context/AuthContext'
@@ -377,13 +378,15 @@ function PartView({ part, responses, setAnswer }) {
 
       {/* Questions */}
       {part.questions.map((q, idx) => (
-        <QuestionRenderer
-          key={q.id}
-          q={q}
-          idx={idx}
-          value={responses[q.id]}
-          onChange={(v) => setAnswer(q.id, v)}
-        />
+        <div key={q.id} className="space-y-3">
+          {q.audio && <AudioContext ctx={{ type: 'audio', ...q.audio }} />}
+          <QuestionRenderer
+            q={q}
+            idx={idx}
+            value={responses[q.id]}
+            onChange={(v) => setAnswer(q.id, v)}
+          />
+        </div>
       ))}
     </motion.div>
   )
@@ -402,7 +405,79 @@ function ContextView({ ctx }) {
       </div>
     )
   }
+  if (ctx.type === 'audio') {
+    return <AudioContext ctx={ctx} />
+  }
   return null
+}
+
+function AudioContext({ ctx }) {
+  const allowed = ctx.allowedPlays || 1
+  const [playsLeft, setPlaysLeft] = useState(allowed)
+  const [showTranscript, setShowTranscript] = useState(false)
+  const audioRef = useRef(null)
+
+  const handlePlay = () => {
+    if (playsLeft <= 0) {
+      if (audioRef.current) audioRef.current.pause()
+      return
+    }
+  }
+  const handleEnded = () => {
+    setPlaysLeft(p => Math.max(0, p - 1))
+  }
+
+  return (
+    <div className="bg-gradient-to-br from-purple-50 to-indigo-50 dark:from-purple-900/20 dark:to-indigo-900/20 border-2 border-indigo-200 dark:border-indigo-800 rounded-2xl p-5">
+      <div className="flex items-center justify-between mb-3">
+        <p className="text-sm font-bold text-indigo-800 dark:text-indigo-200 flex items-center gap-2">
+          <Headphones size={16} /> {ctx.label || 'Hörtext'}
+        </p>
+        <div className="flex items-center gap-2 text-xs">
+          <span className={`px-2 py-1 rounded-full font-bold ${playsLeft > 0 ? 'bg-indigo-100 text-indigo-700 dark:bg-indigo-900/40 dark:text-indigo-300' : 'bg-gray-200 text-gray-500'}`}>
+            <Volume2 size={12} className="inline mr-1" />
+            {playsLeft}/{allowed}{allowed === 1 ? ' x hören' : ' Wiedergaben'}
+          </span>
+        </div>
+      </div>
+
+      {ctx.audioUrl ? (
+        <audio
+          ref={audioRef}
+          src={ctx.audioUrl}
+          controls
+          controlsList="nodownload noplaybackrate"
+          onPlay={handlePlay}
+          onEnded={handleEnded}
+          className="w-full"
+        />
+      ) : (
+        <div className="bg-white/60 dark:bg-gray-800/60 rounded-xl p-4 text-center">
+          <p className="text-xs text-gray-600 dark:text-gray-300 italic">
+            Audio wird gerade aufgenommen. Bis dahin kannst du das Transkript lesen.
+          </p>
+        </div>
+      )}
+
+      {ctx.transcript && (
+        <div className="mt-3">
+          <button
+            type="button"
+            onClick={() => setShowTranscript(s => !s)}
+            className="text-xs font-bold text-indigo-700 dark:text-indigo-300 hover:underline flex items-center gap-1"
+          >
+            {showTranscript ? <EyeOff size={12} /> : <Eye size={12} />}
+            {showTranscript ? 'Transkript verstecken' : (ctx.audioUrl ? 'Transkript anzeigen' : 'Transkript lesen')}
+          </button>
+          {showTranscript && (
+            <div className="mt-2 bg-white dark:bg-gray-800 border border-indigo-100 dark:border-indigo-900 rounded-xl p-4 text-sm text-gray-800 dark:text-gray-100 whitespace-pre-line leading-relaxed">
+              {ctx.transcript}
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  )
 }
 
 function QuestionRenderer({ q, idx, value, onChange }) {
