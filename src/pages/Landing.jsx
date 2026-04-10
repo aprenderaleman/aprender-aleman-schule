@@ -3,28 +3,29 @@ import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { CheckCircle, Zap, BookOpen, Trophy, ChevronRight } from 'lucide-react'
 import Button from '../components/UI/Button'
+import Footer from '../components/Layout/Footer'
 import { useTheme } from '../context/ThemeContext'
 import { Moon, Sun } from 'lucide-react'
 
 const features = [
-  { icon: '🤖', title: 'IA como profesor', desc: 'Correcciones personalizadas con Claude AI en tiempo real' },
-  { icon: '📊', title: 'Seguimiento de progreso', desc: 'Gráficas detalladas de tus 4 habilidades lingüísticas' },
-  { icon: '🔥', title: 'Sistema de rachas', desc: 'Mantén tu motivación con rachas diarias y logros' },
-  { icon: '🎧', title: '4 tipos de ejercicios', desc: 'Gramática, lectura, audición y escritura para cada nivel' },
+  { icon: '🤖', title: 'KI als Lehrer', desc: 'Personalisierte Korrekturen mit Claude KI in Echtzeit' },
+  { icon: '📊', title: 'Fortschrittsverfolgung', desc: 'Detaillierte Grafiken deiner 4 Sprachfertigkeiten' },
+  { icon: '🔥', title: 'Serien-System', desc: 'Behalte deine Motivation mit täglichen Serien und Erfolgen' },
+  { icon: '🎧', title: '4 Übungstypen', desc: 'Grammatik, Lesen, Hören und Schreiben für jedes Niveau' },
 ]
 
 const levels = [
-  { level: 'A1', desc: 'Principiante absoluto', color: 'bg-green-100 text-green-800' },
-  { level: 'A2', desc: 'Básico', color: 'bg-blue-100 text-blue-800' },
-  { level: 'B1', desc: 'Intermedio', color: 'bg-yellow-100 text-yellow-800' },
-  { level: 'B2', desc: 'Intermedio alto', color: 'bg-orange-100 text-orange-800' },
-  { level: 'C1', desc: 'Avanzado', color: 'bg-red-100 text-red-800' },
+  { level: 'A1', desc: 'Absoluter Anfänger', color: 'bg-green-100 text-green-800' },
+  { level: 'A2', desc: 'Grundlagen', color: 'bg-blue-100 text-blue-800' },
+  { level: 'B1', desc: 'Mittelstufe', color: 'bg-yellow-100 text-yellow-800' },
+  { level: 'B2', desc: 'Obere Mittelstufe', color: 'bg-orange-100 text-orange-800' },
+  { level: 'C1', desc: 'Fortgeschritten', color: 'bg-red-100 text-red-800' },
 ]
 
 const testimonials = [
-  { name: 'Laura G.', text: 'En 3 meses pasé de A1 a A2. Las correcciones de la IA son increíbles.', avatar: '👩' },
-  { name: 'Carlos M.', text: 'Lo mejor es que puedo practicar a cualquier hora y a mi ritmo.', avatar: '👨' },
-  { name: 'Ana P.', text: 'Las explicaciones en español hacen que todo sea mucho más claro.', avatar: '👩‍🦱' },
+  { name: 'Laura G.', text: 'In 3 Monaten bin ich von A1 auf A2 gekommen. Die KI-Korrekturen sind unglaublich.', avatar: '👩' },
+  { name: 'Carlos M.', text: 'Das Beste ist, dass ich jederzeit und in meinem eigenen Tempo üben kann.', avatar: '👨' },
+  { name: 'Ana P.', text: 'Die klaren Erklärungen machen alles viel verständlicher.', avatar: '👩‍🦱' },
 ]
 
 export default function Landing() {
@@ -36,18 +37,18 @@ export default function Landing() {
       <nav className="sticky top-0 z-40 bg-white/95 dark:bg-gray-900/95 backdrop-blur border-b border-gray-200 dark:border-gray-700">
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <img src="/logo.svg" alt="Logo" className="w-9 h-9" />
-            <span className="font-extrabold text-orange-500 text-lg">Aprender-Aleman.de</span>
+            <img src="/logo.svg" alt="Schule Logo" className="w-9 h-9" />
+            <span className="font-extrabold text-orange-500 text-lg">Schule</span>
           </div>
           <div className="flex items-center gap-3">
-            <button onClick={toggleDarkMode} className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-500">
+            <button onClick={toggleDarkMode} className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-500" aria-label={darkMode ? 'Hellen Modus aktivieren' : 'Dunklen Modus aktivieren'}>
               {darkMode ? <Sun size={20} /> : <Moon size={20} />}
             </button>
             <Link to="/login" className="text-sm font-semibold text-gray-600 dark:text-gray-300 hover:text-orange-500 transition-colors">
-              Iniciar sesión
+              Anmelden
             </Link>
             <Link to="/registro">
-              <Button variant="primary" size="sm">Empieza gratis</Button>
+              <Button variant="primary" size="sm">Kostenlos starten</Button>
             </Link>
           </div>
         </div>
@@ -57,28 +58,28 @@ export default function Landing() {
       <section className="max-w-7xl mx-auto px-6 pt-16 pb-20 text-center">
         <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
           <div className="inline-flex items-center gap-2 bg-orange-50 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400 px-4 py-2 rounded-full text-sm font-semibold mb-6">
-            <Zap size={16} /> Aprende alemán con inteligencia artificial
+            <Zap size={16} /> Lerne Deutsch mit künstlicher Intelligenz
           </div>
           <h1 className="text-4xl sm:text-6xl font-extrabold leading-tight mb-6">
-            Habla alemán con{' '}
-            <span className="text-gradient">confianza</span>
+            Dein Online-{' '}
+            <span className="text-gradient">Klassenraum</span>
           </h1>
           <p className="text-lg sm:text-xl text-gray-500 dark:text-gray-400 max-w-2xl mx-auto mb-8 leading-relaxed">
-            La plataforma de aprendizaje de alemán diseñada para hispanohablantes. Ejercicios adaptativos, feedback de IA y seguimiento personalizado desde A1 hasta C1.
+            Die Plattform zum Deutschlernen mit adaptiven Übungen, KI-Feedback und personalisierter Fortschrittsverfolgung von A1 bis C1.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/registro">
               <Button variant="primary" size="lg" className="w-full sm:w-auto">
-                Empieza gratis <ChevronRight size={20} className="ml-1" />
+                Kostenlos starten <ChevronRight size={20} className="ml-1" />
               </Button>
             </Link>
             <Link to="/login">
               <Button variant="secondary" size="lg" className="w-full sm:w-auto">
-                Ya tengo cuenta
+                Ich habe schon ein Konto
               </Button>
             </Link>
           </div>
-          <p className="text-sm text-gray-400 mt-4">5 dias gratis · Luego solo 15&euro;/mes · Sin permanencia</p>
+          <p className="text-sm text-gray-400 mt-4">5 Tage kostenlos · Danach nur 15&euro;/Monat · Keine Bindung</p>
         </motion.div>
 
         {/* Hero illustration */}
@@ -94,11 +95,11 @@ export default function Landing() {
                 <div className="w-3 h-3 rounded-full bg-red-400" />
                 <div className="w-3 h-3 rounded-full bg-yellow-400" />
                 <div className="w-3 h-3 rounded-full bg-green-400" />
-                <span className="text-sm text-gray-400 ml-2">ejercicio-gramática.de</span>
+                <span className="text-sm text-gray-400 ml-2">grammatik-übung.de</span>
               </div>
               <div className="bg-white dark:bg-gray-800 rounded-xl p-4 shadow-sm">
-                <p className="text-sm text-gray-500 mb-1">Completa la frase:</p>
-                <p className="text-lg font-semibold text-gray-800 dark:text-gray-100">Ich ___ müde. (Yo estoy cansado)</p>
+                <p className="text-sm text-gray-500 mb-1">Vervollständige den Satz:</p>
+                <p className="text-lg font-semibold text-gray-800 dark:text-gray-100">Ich ___ müde.</p>
               </div>
               <div className="grid grid-cols-2 gap-3">
                 {['bin ✓', 'bist', 'ist', 'sind'].map((opt, i) => (
@@ -109,7 +110,7 @@ export default function Landing() {
               </div>
               <div className="bg-green-50 dark:bg-green-900/30 border border-green-300 rounded-xl p-3">
                 <p className="text-sm text-green-700 dark:text-green-300 font-semibold">
-                  🎉 ¡Muy bien, María! Con "ich" usamos "bin". +10 XP
+                  🎉 Sehr gut, Maria! Mit "ich" verwenden wir "bin". +10 XP
                 </p>
               </div>
             </div>
@@ -121,7 +122,7 @@ export default function Landing() {
       <section className="bg-gray-50 dark:bg-gray-800 py-16 px-6">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-3xl font-extrabold text-center mb-12">
-            Todo lo que necesitas para aprender alemán
+            Alles, was du zum Deutschlernen brauchst
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {features.map((f, i) => (
@@ -144,8 +145,8 @@ export default function Landing() {
       {/* Levels */}
       <section className="py-16 px-6">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl font-extrabold mb-4">Desde cero hasta avanzado</h2>
-          <p className="text-gray-500 dark:text-gray-400 mb-10">Contenido adaptado a cada nivel del Marco Europeo de Referencia</p>
+          <h2 className="text-3xl font-extrabold mb-4">Von null bis fortgeschritten</h2>
+          <p className="text-gray-500 dark:text-gray-400 mb-10">Inhalte angepasst an jedes Niveau des Europäischen Referenzrahmens</p>
           <div className="flex flex-wrap gap-4 justify-center">
             {levels.map((l, i) => (
               <motion.div
@@ -164,7 +165,7 @@ export default function Landing() {
       {/* Testimonials */}
       <section className="bg-orange-50 dark:bg-gray-800 py-16 px-6">
         <div className="max-w-5xl mx-auto">
-          <h2 className="text-3xl font-extrabold text-center mb-12">Lo que dicen nuestros estudiantes</h2>
+          <h2 className="text-3xl font-extrabold text-center mb-12">Was unsere Schüler sagen</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {testimonials.map((t, i) => (
               <motion.div
@@ -187,21 +188,19 @@ export default function Landing() {
       <section className="py-20 px-6 text-center bg-gradient-to-r from-orange-500 to-orange-600">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-white mb-4">
-            ¿Listo para empezar? 🚀
+            Bereit anzufangen? 🚀
           </h2>
-          <p className="text-orange-100 mb-8 text-lg">Únete gratis y empieza tu primer ejercicio en menos de 2 minutos</p>
+          <p className="text-orange-100 mb-8 text-lg">Melde dich kostenlos an und starte deine erste Übung in weniger als 2 Minuten</p>
           <Link to="/registro">
             <Button variant="dark" size="xl">
-              Empieza gratis ahora
+              Jetzt kostenlos starten
             </Button>
           </Link>
         </motion.div>
       </section>
 
       {/* Footer */}
-      <footer className="py-8 px-6 text-center text-sm text-gray-400 dark:text-gray-500 border-t border-gray-200 dark:border-gray-700">
-        <p>© {new Date().getFullYear()} Aprender-Aleman.de — Hecho con ❤️ para hispanohablantes</p>
-      </footer>
+      <Footer />
     </div>
   )
 }

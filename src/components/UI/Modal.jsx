@@ -55,7 +55,7 @@ export default function Modal({ isOpen, onClose, title, children, size = 'md' })
                 {onClose && (
                   <button
                     onClick={onClose}
-                    aria-label="Cerrar modal"
+                    aria-label="Modal schließen"
                     className="p-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400 transition-colors"
                   >
                     <X size={18} />

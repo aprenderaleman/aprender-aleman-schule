@@ -175,10 +175,10 @@ export function ProgressProvider({ children }) {
 
   const getSkillLevel = useCallback((skill) => {
     const score = progress.skillScores[skill] || 0
-    if (score >= 80) return 'Avanzado'
-    if (score >= 50) return 'Intermedio'
-    if (score >= 20) return 'Básico'
-    return 'Principiante'
+    if (score >= 80) return 'Fortgeschritten'
+    if (score >= 50) return 'Mittelstufe'
+    if (score >= 20) return 'Grundlagen'
+    return 'Anfänger'
   }, [progress.skillScores])
 
   return (

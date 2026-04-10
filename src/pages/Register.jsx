@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { Eye, EyeOff } from 'lucide-react'
+import { Eye, EyeOff, Shield, ExternalLink } from 'lucide-react'
 import { useAuth } from '../context/AuthContext'
 import Button from '../components/UI/Button'
 
@@ -18,13 +18,13 @@ export default function Register() {
     setError('')
 
     if (!form.fullName.trim() || !form.email.trim() || !form.password) {
-      return setError('Todos los campos son obligatorios.')
+      return setError('Alle Felder sind erforderlich.')
     }
     if (form.password.length < 6) {
-      return setError('La contraseña debe tener al menos 6 caracteres.')
+      return setError('Das Passwort muss mindestens 6 Zeichen lang sein.')
     }
     if (form.password !== form.confirmPassword) {
-      return setError('Las contraseñas no coinciden.')
+      return setError('Die Passwörter stimmen nicht überein.')
     }
 
     setLoading(true)
@@ -41,11 +41,41 @@ export default function Register() {
         <div className="text-center mb-8">
           <Link to="/" className="inline-flex items-center gap-2 mb-4">
             <img src="/logo.svg" alt="Logo" className="w-10 h-10" />
-            <span className="font-extrabold text-orange-500 text-2xl">Aprender-Aleman.de</span>
+            <span className="font-extrabold text-orange-500 text-2xl">Schule</span>
           </Link>
-          <h1 className="text-2xl font-bold text-gray-800 dark:text-gray-100">Crear cuenta</h1>
-          <p className="text-gray-500 dark:text-gray-400 mt-1">Empieza a aprender alemán hoy</p>
+          <h1 className="text-2xl font-bold text-gray-800 dark:text-gray-100">Konto erstellen</h1>
+          <p className="text-gray-500 dark:text-gray-400 mt-1">Starte noch heute mit dem Deutschlernen</p>
         </div>
+
+        {/* SSO reminder for existing Aprender-Aleman.de students */}
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.15 }}
+          className="mb-5 rounded-2xl border-2 border-blue-200 dark:border-blue-800 bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 p-4"
+        >
+          <div className="flex items-start gap-3">
+            <div className="bg-blue-500 text-white rounded-xl p-2 shrink-0">
+              <Shield size={18} />
+            </div>
+            <div className="flex-1">
+              <h3 className="font-bold text-blue-900 dark:text-blue-200 text-sm mb-1">
+                Bist du bereits Schüler von Aprender-Aleman.de?
+              </h3>
+              <p className="text-xs text-blue-800/80 dark:text-blue-300/80 leading-relaxed mb-2">
+                Dein Zugriff auf Schule ist <strong>kostenlos inbegriffen</strong>. Melde dich nicht hier an — logge dich auf deiner Hauptplattform ein und du wirst automatisch weitergeleitet.
+              </p>
+              <a
+                href="https://app.aprender-aleman.de"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 text-xs font-bold text-blue-600 dark:text-blue-300 hover:text-blue-700 dark:hover:text-blue-200 transition-colors"
+              >
+                Zu app.aprender-aleman.de <ExternalLink size={12} />
+              </a>
+            </div>
+          </div>
+        </motion.div>
 
         <form onSubmit={handleSubmit} className="card">
           {error && (
@@ -56,45 +86,45 @@ export default function Register() {
 
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Nombre completo</label>
+              <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Vollständiger Name</label>
               <input
                 type="text"
                 value={form.fullName}
                 onChange={e => setForm(f => ({ ...f, fullName: e.target.value }))}
                 className="input-field"
-                placeholder="Tu nombre"
+                placeholder="Dein Name"
                 autoComplete="name"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Correo electrónico</label>
+              <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">E-Mail</label>
               <input
                 type="email"
                 value={form.email}
                 onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
                 className="input-field"
-                placeholder="tu@email.com"
+                placeholder="du@beispiel.de"
                 autoComplete="email"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Contraseña</label>
+              <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Passwort</label>
               <div className="relative">
                 <input
                   type={showPass ? 'text' : 'password'}
                   value={form.password}
                   onChange={e => setForm(f => ({ ...f, password: e.target.value }))}
                   className="input-field pr-10"
-                  placeholder="Mínimo 6 caracteres"
+                  placeholder="Mindestens 6 Zeichen"
                   autoComplete="new-password"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPass(p => !p)}
                   className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
-                  aria-label={showPass ? 'Ocultar contraseña' : 'Mostrar contraseña'}
+                  aria-label={showPass ? 'Passwort verbergen' : 'Passwort anzeigen'}
                 >
                   {showPass ? <EyeOff size={18} /> : <Eye size={18} />}
                 </button>
@@ -102,27 +132,27 @@ export default function Register() {
             </div>
 
             <div>
-              <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Confirmar contraseña</label>
+              <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Passwort bestätigen</label>
               <input
                 type="password"
                 value={form.confirmPassword}
                 onChange={e => setForm(f => ({ ...f, confirmPassword: e.target.value }))}
                 className="input-field"
-                placeholder="Repite tu contraseña"
+                placeholder="Passwort wiederholen"
                 autoComplete="new-password"
               />
             </div>
           </div>
 
           <Button type="submit" variant="primary" size="lg" className="w-full mt-6" disabled={loading}>
-            {loading ? 'Creando cuenta...' : 'Crear cuenta'}
+            {loading ? 'Konto wird erstellt...' : 'Konto erstellen'}
           </Button>
 
           <div className="mt-6 pt-5 border-t border-gray-100 dark:border-gray-700 text-center">
             <p className="text-sm text-gray-500 dark:text-gray-400">
-              ¿Ya tienes cuenta?{' '}
+              Schon ein Konto?{' '}
               <Link to="/login" className="font-semibold text-orange-500 hover:text-orange-600 transition-colors">
-                Inicia sesión
+                Anmelden
               </Link>
             </p>
           </div>
@@ -130,7 +160,7 @@ export default function Register() {
 
         <p className="text-center mt-6">
           <Link to="/" className="text-sm text-gray-400 hover:text-orange-500 transition-colors">
-            ← Volver al inicio
+            ← Zurück zur Startseite
           </Link>
         </p>
       </motion.div>

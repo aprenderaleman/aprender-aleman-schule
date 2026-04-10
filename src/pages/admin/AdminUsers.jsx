@@ -171,7 +171,7 @@ export default function AdminUsers() {
       const res = await fetch(`${API_URL}/api/admin/users?${params}`, {
         headers: getAuthHeaders()
       })
-      if (!res.ok) throw new Error('Error al cargar usuarios')
+      if (!res.ok) throw new Error('Fehler beim Laden der Benutzer')
       const data = await res.json()
       setUsers(data.users)
       setTotal(data.total)
@@ -203,7 +203,7 @@ export default function AdminUsers() {
         headers: getAuthHeaders(),
         body: JSON.stringify(createForm)
       })
-      if (!res.ok) throw new Error('Error al crear usuario')
+      if (!res.ok) throw new Error('Fehler beim Erstellen des Benutzers')
       setCreateOpen(false)
       setCreateForm({
         fullName: '',
@@ -215,7 +215,7 @@ export default function AdminUsers() {
       fetchUsers()
     } catch (err) {
       console.error(err)
-      alert('No se pudo crear el usuario.')
+      alert('Der Benutzer konnte nicht erstellt werden.')
     } finally {
       setSaving(false)
     }
@@ -254,13 +254,13 @@ export default function AdminUsers() {
           body: JSON.stringify(body)
         }
       )
-      if (!res.ok) throw new Error('Error al actualizar')
+      if (!res.ok) throw new Error('Fehler beim Aktualisieren')
       setEditOpen(false)
       setEditingUser(null)
       fetchUsers()
     } catch (err) {
       console.error(err)
-      alert('No se pudo actualizar el usuario.')
+      alert('Der Benutzer konnte nicht aktualisiert werden.')
     } finally {
       setSaving(false)
     }
@@ -275,11 +275,11 @@ export default function AdminUsers() {
         headers: getAuthHeaders(),
         body: JSON.stringify({ status: newStatus })
       })
-      if (!res.ok) throw new Error('Error al cambiar estado')
+      if (!res.ok) throw new Error('Fehler beim Ändern des Status')
       fetchUsers()
     } catch (err) {
       console.error(err)
-      alert('No se pudo cambiar el estado del usuario.')
+      alert('Der Status des Benutzers konnte nicht geändert werden.')
     }
   }
 
@@ -287,7 +287,7 @@ export default function AdminUsers() {
   const handleDelete = async (user) => {
     if (
       !window.confirm(
-        `¿Seguro que quieres eliminar a "${user.fullName}"? Esta acción no se puede deshacer.`
+        `Möchtest du "${user.fullName}" wirklich löschen? Diese Aktion kann nicht rückgängig gemacht werden.`
       )
     )
       return
@@ -296,18 +296,18 @@ export default function AdminUsers() {
         method: 'DELETE',
         headers: getAuthHeaders()
       })
-      if (!res.ok) throw new Error('Error al eliminar')
+      if (!res.ok) throw new Error('Fehler beim Löschen')
       fetchUsers()
     } catch (err) {
       console.error(err)
-      alert('No se pudo eliminar el usuario.')
+      alert('Der Benutzer konnte nicht gelöscht werden.')
     }
   }
 
   // ── Format helpers ───────────────────────────────────────────
   const formatDate = (dateStr) => {
     if (!dateStr) return '—'
-    return new Date(dateStr).toLocaleDateString('es-ES', {
+    return new Date(dateStr).toLocaleDateString('de-DE', {
       day: '2-digit',
       month: 'short',
       year: 'numeric'
@@ -321,11 +321,10 @@ export default function AdminUsers() {
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
-            Usuarios
+            Benutzer
           </h1>
           <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
-            {total} usuario{total !== 1 ? 's' : ''} registrado
-            {total !== 1 ? 's' : ''}
+            {total} {total !== 1 ? 'registrierte Benutzer' : 'registrierter Benutzer'}
           </p>
         </div>
         <motion.button
@@ -335,7 +334,7 @@ export default function AdminUsers() {
           className="inline-flex items-center gap-2 px-4 py-2.5 bg-orange-500 hover:bg-orange-600 text-white font-medium rounded-xl shadow-lg shadow-orange-500/25 transition-colors"
         >
           <UserPlus size={18} />
-          Nuevo usuario
+          Neuer Benutzer
         </motion.button>
       </div>
 
@@ -349,7 +348,7 @@ export default function AdminUsers() {
             />
             <input
               type="text"
-              placeholder="Buscar por nombre o email..."
+              placeholder="Nach Name oder E-Mail suchen..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-shadow"
@@ -362,7 +361,7 @@ export default function AdminUsers() {
               onChange={(e) => setFilterLevel(e.target.value)}
               className="px-3 py-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-shadow"
             >
-              <option value="">Todos los niveles</option>
+              <option value="">Alle Niveaus</option>
               {LEVELS.map((l) => (
                 <option key={l} value={l}>
                   {l}
@@ -374,10 +373,10 @@ export default function AdminUsers() {
               onChange={(e) => setFilterStatus(e.target.value)}
               className="px-3 py-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-shadow"
             >
-              <option value="">Todos los estados</option>
+              <option value="">Alle Status</option>
               {STATUSES.map((s) => (
                 <option key={s} value={s}>
-                  {s === 'active' ? 'Activo' : 'Inactivo'}
+                  {s === 'active' ? 'Aktiv' : 'Inaktiv'}
                 </option>
               ))}
             </select>
@@ -392,31 +391,31 @@ export default function AdminUsers() {
             <thead>
               <tr className="border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50">
                 <th className="px-4 py-3 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                  Nombre
+                  Name
                 </th>
                 <th className="px-4 py-3 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                  Email
+                  E-Mail
                 </th>
                 <th className="px-4 py-3 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider text-center">
-                  Nivel
+                  Niveau
                 </th>
                 <th className="px-4 py-3 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider text-right">
                   XP
                 </th>
                 <th className="px-4 py-3 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider text-right">
-                  Ejercicios
+                  Übungen
                 </th>
                 <th className="px-4 py-3 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider text-right">
-                  Racha
+                  Serie
                 </th>
                 <th className="px-4 py-3 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                  Última actividad
+                  Letzte Aktivität
                 </th>
                 <th className="px-4 py-3 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider text-center">
-                  Estado
+                  Status
                 </th>
                 <th className="px-4 py-3 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider text-center">
-                  Acciones
+                  Aktionen
                 </th>
               </tr>
             </thead>
@@ -434,7 +433,7 @@ export default function AdminUsers() {
                         }}
                         className="w-5 h-5 border-2 border-orange-500 border-t-transparent rounded-full"
                       />
-                      Cargando usuarios...
+                      Benutzer werden geladen...
                     </div>
                   </td>
                 </tr>
@@ -444,7 +443,7 @@ export default function AdminUsers() {
                     colSpan={9}
                     className="px-4 py-16 text-center text-gray-400"
                   >
-                    No se encontraron usuarios.
+                    Keine Benutzer gefunden.
                   </td>
                 </tr>
               ) : (
@@ -473,10 +472,10 @@ export default function AdminUsers() {
                       </span>
                     </td>
                     <td className="px-4 py-3 text-sm text-right text-gray-700 dark:text-gray-300 font-medium tabular-nums">
-                      {user.xp?.toLocaleString('es-ES') ?? '—'}
+                      {user.xp?.toLocaleString('de-DE') ?? '—'}
                     </td>
                     <td className="px-4 py-3 text-sm text-right text-gray-700 dark:text-gray-300 tabular-nums">
-                      {user.exerciseCount?.toLocaleString('es-ES') ?? '—'}
+                      {user.exerciseCount?.toLocaleString('de-DE') ?? '—'}
                     </td>
                     <td className="px-4 py-3 text-sm text-right text-gray-700 dark:text-gray-300 tabular-nums">
                       {user.streak ?? '—'}
@@ -499,14 +498,14 @@ export default function AdminUsers() {
                               : 'bg-red-500'
                           }`}
                         />
-                        {user.status === 'active' ? 'Activo' : 'Inactivo'}
+                        {user.status === 'active' ? 'Aktiv' : 'Inaktiv'}
                       </span>
                     </td>
                     <td className="px-4 py-3">
                       <div className="flex items-center justify-center gap-1">
                         <button
                           onClick={() => openEdit(user)}
-                          title="Editar"
+                          title="Bearbeiten"
                           className="p-1.5 rounded-lg text-gray-400 hover:text-orange-500 hover:bg-orange-50 dark:hover:bg-orange-500/10 transition-colors"
                         >
                           <Edit2 size={16} />
@@ -515,8 +514,8 @@ export default function AdminUsers() {
                           onClick={() => toggleStatus(user)}
                           title={
                             user.status === 'active'
-                              ? 'Desactivar'
-                              : 'Activar'
+                              ? 'Deaktivieren'
+                              : 'Aktivieren'
                           }
                           className="p-1.5 rounded-lg text-gray-400 hover:text-blue-500 hover:bg-blue-50 dark:hover:bg-blue-500/10 transition-colors"
                         >
@@ -528,7 +527,7 @@ export default function AdminUsers() {
                         </button>
                         <button
                           onClick={() => handleDelete(user)}
-                          title="Eliminar"
+                          title="Löschen"
                           className="p-1.5 rounded-lg text-gray-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-500/10 transition-colors"
                         >
                           <Trash2 size={16} />
@@ -546,7 +545,7 @@ export default function AdminUsers() {
         {totalPages > 1 && (
           <div className="flex items-center justify-between px-4 py-3 border-t border-gray-200 dark:border-gray-700">
             <p className="text-sm text-gray-500 dark:text-gray-400">
-              Página {page} de {totalPages}
+              Seite {page} von {totalPages}
             </p>
             <div className="flex items-center gap-2">
               <button
@@ -555,14 +554,14 @@ export default function AdminUsers() {
                 className="inline-flex items-center gap-1 px-3 py-1.5 text-sm font-medium rounded-lg border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
               >
                 <ChevronLeft size={16} />
-                Anterior
+                Zurück
               </button>
               <button
                 onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
                 disabled={page >= totalPages}
                 className="inline-flex items-center gap-1 px-3 py-1.5 text-sm font-medium rounded-lg border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
               >
-                Siguiente
+                Weiter
                 <ChevronRight size={16} />
               </button>
             </div>
@@ -574,11 +573,11 @@ export default function AdminUsers() {
       <Modal
         isOpen={createOpen}
         onClose={() => setCreateOpen(false)}
-        title="Nuevo usuario"
+        title="Neuer Benutzer"
       >
         <form onSubmit={handleCreate} className="space-y-4">
           <InputField
-            label="Nombre completo"
+            label="Vollständiger Name"
             id="create-name"
             type="text"
             required
@@ -588,7 +587,7 @@ export default function AdminUsers() {
             }
           />
           <InputField
-            label="Email"
+            label="E-Mail"
             id="create-email"
             type="email"
             required
@@ -598,7 +597,7 @@ export default function AdminUsers() {
             }
           />
           <InputField
-            label="Contraseña"
+            label="Passwort"
             id="create-password"
             type="password"
             required
@@ -610,7 +609,7 @@ export default function AdminUsers() {
           />
           <div className="grid grid-cols-2 gap-4">
             <SelectField
-              label="Nivel"
+              label="Niveau"
               id="create-level"
               options={LEVELS}
               value={createForm.level}
@@ -619,7 +618,7 @@ export default function AdminUsers() {
               }
             />
             <SelectField
-              label="Estado"
+              label="Status"
               id="create-status"
               options={STATUSES}
               value={createForm.status}
@@ -634,14 +633,14 @@ export default function AdminUsers() {
               onClick={() => setCreateOpen(false)}
               className="px-4 py-2 text-sm font-medium rounded-xl border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
             >
-              Cancelar
+              Abbrechen
             </button>
             <button
               type="submit"
               disabled={saving}
               className="px-4 py-2 text-sm font-medium rounded-xl bg-orange-500 hover:bg-orange-600 text-white shadow-lg shadow-orange-500/25 disabled:opacity-50 transition-colors"
             >
-              {saving ? 'Creando...' : 'Crear usuario'}
+              {saving ? 'Wird erstellt...' : 'Benutzer erstellen'}
             </button>
           </div>
         </form>
@@ -654,11 +653,11 @@ export default function AdminUsers() {
           setEditOpen(false)
           setEditingUser(null)
         }}
-        title="Editar usuario"
+        title="Benutzer bearbeiten"
       >
         <form onSubmit={handleEdit} className="space-y-4">
           <InputField
-            label="Nombre completo"
+            label="Vollständiger Name"
             id="edit-name"
             type="text"
             required
@@ -668,7 +667,7 @@ export default function AdminUsers() {
             }
           />
           <InputField
-            label="Email"
+            label="E-Mail"
             id="edit-email"
             type="email"
             required
@@ -678,7 +677,7 @@ export default function AdminUsers() {
             }
           />
           <InputField
-            label="Nueva contraseña (dejar vacío para no cambiar)"
+            label="Neues Passwort (leer lassen, um nicht zu ändern)"
             id="edit-password"
             type="password"
             value={editForm.password}
@@ -688,7 +687,7 @@ export default function AdminUsers() {
           />
           <div className="grid grid-cols-2 gap-4">
             <SelectField
-              label="Nivel"
+              label="Niveau"
               id="edit-level"
               options={LEVELS}
               value={editForm.level}
@@ -697,7 +696,7 @@ export default function AdminUsers() {
               }
             />
             <SelectField
-              label="Estado"
+              label="Status"
               id="edit-status"
               options={STATUSES}
               value={editForm.status}
@@ -715,14 +714,14 @@ export default function AdminUsers() {
               }}
               className="px-4 py-2 text-sm font-medium rounded-xl border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
             >
-              Cancelar
+              Abbrechen
             </button>
             <button
               type="submit"
               disabled={saving}
               className="px-4 py-2 text-sm font-medium rounded-xl bg-orange-500 hover:bg-orange-600 text-white shadow-lg shadow-orange-500/25 disabled:opacity-50 transition-colors"
             >
-              {saving ? 'Guardando...' : 'Guardar cambios'}
+              {saving ? 'Wird gespeichert...' : 'Änderungen speichern'}
             </button>
           </div>
         </form>

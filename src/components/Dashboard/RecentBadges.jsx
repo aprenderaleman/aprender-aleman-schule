@@ -14,9 +14,9 @@ export default function RecentBadges({ earnedIds = [] }) {
   return (
     <div className="card">
       <div className="flex items-center justify-between mb-4">
-        <h3 className="font-bold text-gray-800 dark:text-gray-100">Logros recientes</h3>
+        <h3 className="font-bold text-gray-800 dark:text-gray-100">Neueste Erfolge</h3>
         <Link to="/logros" className="text-xs text-orange-500 hover:text-orange-600 font-semibold transition-colors">
-          Ver todos →
+          Alle anzeigen →
         </Link>
       </div>
 
@@ -24,7 +24,7 @@ export default function RecentBadges({ earnedIds = [] }) {
         <div className="text-center py-4">
           <span className="text-4xl">🏅</span>
           <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
-            Completa ejercicios para desbloquear logros
+            Schließe Übungen ab, um Erfolge freizuschalten
           </p>
         </div>
       ) : (

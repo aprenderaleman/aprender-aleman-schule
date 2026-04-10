@@ -12,7 +12,7 @@ export default function ListeningExercise({ exercise, userName, onComplete }) {
 
   const speak = useCallback(() => {
     if (!('speechSynthesis' in window)) {
-      alert('Tu navegador no soporta síntesis de voz. Lee la transcripción.')
+      alert('Dein Browser unterstützt keine Sprachsynthese. Lies das Transkript.')
       setShowTranscript(true)
       return
     }
@@ -54,24 +54,24 @@ export default function ListeningExercise({ exercise, userName, onComplete }) {
       {/* Audio player */}
       <div className="bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 rounded-2xl p-6 border border-purple-200 dark:border-purple-800 text-center">
         <p className="text-sm font-semibold text-purple-600 dark:text-purple-400 mb-4">
-          Escucha el audio y responde las preguntas
+          Höre dir das Audio an und beantworte die Fragen
         </p>
         <motion.button
           whileTap={{ scale: 0.95 }}
           whileHover={{ scale: 1.05 }}
           onClick={speak}
           disabled={speaking}
-          aria-label="Reproducir audio"
+          aria-label="Audio abspielen"
           className={`w-20 h-20 rounded-full flex items-center justify-center mx-auto shadow-lg transition-all ${speaking ? 'bg-purple-600 animate-pulse' : 'bg-purple-500 hover:bg-purple-600'}`}
         >
           <Volume2 size={36} className="text-white" />
         </motion.button>
         {speaking && (
           <p className="text-sm text-purple-600 dark:text-purple-400 mt-3 animate-pulse font-medium">
-            🎧 Reproduciendo...
+            🎧 Wird abgespielt...
           </p>
         )}
-        <p className="text-xs text-gray-400 mt-2">Puedes escucharlo varias veces</p>
+        <p className="text-xs text-gray-400 mt-2">Du kannst es mehrmals anhören</p>
       </div>
 
       {/* Transcript toggle */}
@@ -79,10 +79,10 @@ export default function ListeningExercise({ exercise, userName, onComplete }) {
         <button
           onClick={() => setShowTranscript(prev => !prev)}
           className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 hover:text-orange-500 transition-colors"
-          aria-label={showTranscript ? 'Ocultar transcripción' : 'Ver transcripción'}
+          aria-label={showTranscript ? 'Transkript ausblenden' : 'Transkript anzeigen'}
         >
           {showTranscript ? <EyeOff size={16} /> : <Eye size={16} />}
-          {showTranscript ? 'Ocultar transcripción' : 'Ver transcripción (ayuda)'}
+          {showTranscript ? 'Transkript ausblenden' : 'Transkript anzeigen (Hilfe)'}
         </button>
       </div>
 
@@ -92,7 +92,7 @@ export default function ListeningExercise({ exercise, userName, onComplete }) {
           animate={{ opacity: 1, height: 'auto' }}
           className="bg-gray-50 dark:bg-gray-700 rounded-xl p-4 border border-gray-200 dark:border-gray-600"
         >
-          <p className="text-xs font-bold text-gray-500 uppercase mb-2">Transcripción</p>
+          <p className="text-xs font-bold text-gray-500 uppercase mb-2">Transkript</p>
           <p className="text-gray-700 dark:text-gray-200 text-sm leading-relaxed italic">{exercise.audioText}</p>
         </motion.div>
       )}
@@ -128,7 +128,7 @@ export default function ListeningExercise({ exercise, userName, onComplete }) {
             </div>
             {submitted && (
               <p className={`mt-2 text-xs font-semibold flex items-center gap-1 ${answers[qi] === q.answer ? 'text-green-600' : 'text-red-500'}`}>
-                {answers[qi] === q.answer ? <><CheckCircle size={14} /> ¡Correcto!</> : <><XCircle size={14} /> Correcto: {q.answer}</>}
+                {answers[qi] === q.answer ? <><CheckCircle size={14} /> Richtig!</> : <><XCircle size={14} /> Richtig: {q.answer}</>}
               </p>
             )}
           </div>
@@ -137,7 +137,7 @@ export default function ListeningExercise({ exercise, userName, onComplete }) {
 
       {!submitted && (
         <Button onClick={handleSubmit} disabled={!allAnswered} variant="primary" className="w-full">
-          Enviar respuestas
+          Antworten absenden
         </Button>
       )}
     </div>

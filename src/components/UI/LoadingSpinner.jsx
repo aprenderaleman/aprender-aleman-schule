@@ -1,7 +1,7 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 
-export default function LoadingSpinner({ message = 'Cargando...', fullScreen = false }) {
+export default function LoadingSpinner({ message = 'Lädt...', fullScreen = false }) {
   const content = (
     <div className="flex flex-col items-center gap-4">
       <div className="relative">

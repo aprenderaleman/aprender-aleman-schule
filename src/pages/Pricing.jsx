@@ -11,12 +11,12 @@ import Toast from '../components/UI/Toast'
 const API_URL = import.meta.env.VITE_API_URL || ''
 
 const features = [
-  { icon: BookOpen, text: 'Ejercicios de gramática, lectura, audición y escritura' },
-  { icon: Brain, text: 'Correcciones personalizadas con IA (Claude)' },
-  { icon: Layers, text: 'Flashcards con repetición espaciada (456+ tarjetas)' },
-  { icon: Trophy, text: 'Sistema de rachas, logros y progreso detallado' },
-  { icon: Zap, text: 'Niveles A1 a C1 con contenido completo' },
-  { icon: Shield, text: 'Acceso ilimitado a todas las funciones' },
+  { icon: BookOpen, text: 'Übungen zu Grammatik, Lesen, Hören und Schreiben' },
+  { icon: Brain, text: 'Personalisierte Korrekturen mit KI (Claude)' },
+  { icon: Layers, text: 'Karteikarten mit Spaced Repetition (456+ Karten)' },
+  { icon: Trophy, text: 'Serien-System, Erfolge und detaillierter Fortschritt' },
+  { icon: Zap, text: 'Niveaus A1 bis C1 mit vollständigen Inhalten' },
+  { icon: Shield, text: 'Unbegrenzter Zugriff auf alle Funktionen' },
 ]
 
 export default function Pricing() {
@@ -48,7 +48,7 @@ export default function Pricing() {
       // Redirect to Stripe Checkout
       window.location.href = data.url
     } catch (err) {
-      showToast(err.message || 'Error al iniciar el pago.', 'error')
+      showToast(err.message || 'Fehler beim Starten der Zahlung.', 'error')
     } finally {
       setLoading(false)
     }
@@ -79,15 +79,15 @@ export default function Pricing() {
       <nav className="sticky top-0 z-40 bg-white/95 dark:bg-gray-900/95 backdrop-blur border-b border-gray-200 dark:border-gray-700">
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <img src="/logo.svg" alt="Logo" className="w-9 h-9" />
-            <span className="font-extrabold text-orange-500 text-lg">Aprender-Aleman.de</span>
+            <img src="/logo.svg" alt="Schule Logo" className="w-9 h-9" />
+            <span className="font-extrabold text-orange-500 text-lg">Schule</span>
           </div>
           <div className="flex items-center gap-3">
             <button onClick={toggleDarkMode} className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-500">
               {darkMode ? <Sun size={20} /> : <Moon size={20} />}
             </button>
             <Link to="/login" className="text-sm font-semibold text-gray-600 dark:text-gray-300 hover:text-orange-500">
-              Iniciar sesion
+              Anmelden
             </Link>
           </div>
         </div>
@@ -117,17 +117,17 @@ function PricingContent({ subscription, onSubscribe, loading, paymentCanceled, l
           className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-xl p-4 mb-6 flex items-center gap-3"
         >
           <AlertCircle size={20} className="text-amber-500 shrink-0" />
-          <p className="text-sm text-amber-700 dark:text-amber-300">El pago fue cancelado. Puedes intentarlo de nuevo cuando quieras.</p>
+          <p className="text-sm text-amber-700 dark:text-amber-300">Die Zahlung wurde abgebrochen. Du kannst es jederzeit erneut versuchen.</p>
         </motion.div>
       )}
 
       {/* Header */}
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-10">
         <h1 className="text-4xl font-extrabold text-gray-800 dark:text-gray-100 mb-3">
-          Aprende aleman de verdad
+          Lerne Deutsch richtig
         </h1>
         <p className="text-lg text-gray-500 dark:text-gray-400">
-          Todo lo que necesitas para dominar el aleman, por menos que un cafe a la semana.
+          Alles, was du brauchst, um Deutsch zu meistern - für weniger als einen Kaffee pro Woche.
         </p>
       </motion.div>
 
@@ -142,8 +142,8 @@ function PricingContent({ subscription, onSubscribe, loading, paymentCanceled, l
         <div className="bg-gradient-to-r from-orange-500 to-amber-500 px-6 py-3 text-center">
           <p className="text-white font-bold text-sm">
             {loggedIn && subscription?.trialActive
-              ? `Te quedan ${trialDaysLeft} dia${trialDaysLeft !== 1 ? 's' : ''} de prueba gratis`
-              : '5 dias de prueba gratis'}
+              ? `Du hast noch ${trialDaysLeft} ${trialDaysLeft !== 1 ? 'Tage' : 'Tag'} kostenlose Testphase`
+              : '5 Tage kostenlos testen'}
           </p>
         </div>
 
@@ -152,9 +152,9 @@ function PricingContent({ subscription, onSubscribe, loading, paymentCanceled, l
           <div className="text-center mb-6">
             <div className="flex items-baseline justify-center gap-1">
               <span className="text-5xl font-extrabold text-gray-800 dark:text-gray-100">15</span>
-              <span className="text-2xl font-bold text-gray-400">&euro;/mes</span>
+              <span className="text-2xl font-bold text-gray-400">&euro;/Monat</span>
             </div>
-            <p className="text-sm text-gray-400 mt-2">Cancela en cualquier momento</p>
+            <p className="text-sm text-gray-400 mt-2">Jederzeit kündbar</p>
           </div>
 
           {/* Features */}
@@ -173,13 +173,13 @@ function PricingContent({ subscription, onSubscribe, loading, paymentCanceled, l
           {subscription?.paid ? (
             <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-xl p-4 text-center">
               <p className="text-green-700 dark:text-green-300 font-bold flex items-center justify-center gap-2">
-                <Check size={18} /> Tu suscripcion esta activa
+                <Check size={18} /> Dein Abonnement ist aktiv
               </p>
             </div>
           ) : subscription?.ssoUser ? (
             <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-xl p-4 text-center">
               <p className="text-blue-700 dark:text-blue-300 font-bold flex items-center justify-center gap-2">
-                <Shield size={18} /> Acceso incluido con tu curso de Aprender-Aleman.de
+                <Shield size={18} /> Zugriff inbegriffen mit deinem Kurs auf Aprender-Aleman.de
               </p>
             </div>
           ) : (
@@ -189,19 +189,19 @@ function PricingContent({ subscription, onSubscribe, loading, paymentCanceled, l
               className="w-full bg-gradient-to-r from-orange-500 to-amber-500 text-white font-bold text-lg py-4 rounded-xl hover:shadow-lg hover:scale-[1.02] transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
             >
               {loading ? (
-                <><Loader2 size={20} className="animate-spin" /> Redirigiendo a Stripe...</>
+                <><Loader2 size={20} className="animate-spin" /> Weiterleitung zu Stripe...</>
               ) : loggedIn ? (
-                <><Zap size={20} /> Suscribirme por 15&euro;/mes</>
+                <><Zap size={20} /> Für 15&euro;/Monat abonnieren</>
               ) : (
-                <><Zap size={20} /> Empezar 5 dias gratis</>
+                <><Zap size={20} /> 5 Tage kostenlos starten</>
               )}
             </button>
           )}
 
           {/* Trust */}
           <div className="mt-6 flex items-center justify-center gap-4 text-xs text-gray-400">
-            <span className="flex items-center gap-1"><Shield size={12} /> Pago seguro con Stripe</span>
-            <span className="flex items-center gap-1"><Clock size={12} /> Sin permanencia</span>
+            <span className="flex items-center gap-1"><Shield size={12} /> Sichere Zahlung mit Stripe</span>
+            <span className="flex items-center gap-1"><Clock size={12} /> Jederzeit kündbar</span>
           </div>
         </div>
       </motion.div>
@@ -213,10 +213,10 @@ function PricingContent({ subscription, onSubscribe, loading, paymentCanceled, l
         transition={{ delay: 0.3 }}
         className="mt-8 bg-blue-50 dark:bg-blue-900/20 rounded-xl p-5 border border-blue-200 dark:border-blue-800"
       >
-        <h3 className="font-bold text-blue-700 dark:text-blue-300 mb-2">Ya eres estudiante de Aprender-Aleman.de?</h3>
+        <h3 className="font-bold text-blue-700 dark:text-blue-300 mb-2">Du bist bereits Schüler von Aprender-Aleman.de?</h3>
         <p className="text-sm text-blue-600/80 dark:text-blue-400/80">
-          Si ya tienes un curso activo en <strong>app.aprender-aleman.de</strong>, tu acceso a la Schule es <strong>gratuito</strong>.
-          Inicia sesion desde la plataforma principal y seras redirigido automaticamente.
+          Wenn du bereits einen aktiven Kurs auf <strong>app.aprender-aleman.de</strong> hast, ist dein Zugriff auf die Schule <strong>kostenlos</strong>.
+          Melde dich auf der Hauptplattform an und du wirst automatisch weitergeleitet.
         </p>
       </motion.div>
     </div>

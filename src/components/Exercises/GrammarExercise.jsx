@@ -48,7 +48,7 @@ export default function GrammarExercise({ exercise, userName, onComplete }) {
 
         {!submitted && (
           <Button onClick={handleSubmit} variant="primary" className="w-full">
-            Comprobar
+            Überprüfen
           </Button>
         )}
 
@@ -94,7 +94,7 @@ export default function GrammarExercise({ exercise, userName, onComplete }) {
 
       {!submitted && (
         <Button onClick={handleSubmit} disabled={!selected} variant="primary" className="w-full">
-          Comprobar respuesta
+          Antwort überprüfen
         </Button>
       )}
 
@@ -127,8 +127,8 @@ function FeedbackBlock({ correct, explanation, answer, userName }) {
         <div>
           <p className={`font-bold mb-1 ${correct ? 'text-green-700 dark:text-green-300' : 'text-red-700 dark:text-red-300'}`}>
             {correct
-              ? `¡Muy bien, ${userName}!`
-              : `Casi, ${userName}. La respuesta correcta es "${answer}"`
+              ? `Sehr gut, ${userName}!`
+              : `Fast, ${userName}. Die richtige Antwort ist "${answer}"`
             }
           </p>
           <p className="text-sm text-gray-600 dark:text-gray-300">{explanation}</p>

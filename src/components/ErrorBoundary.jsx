@@ -21,16 +21,16 @@ export default class ErrorBoundary extends React.Component {
           <div className="text-center max-w-md">
             <div className="text-6xl mb-4">😕</div>
             <h1 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-2">
-              Algo salió mal
+              Etwas ist schief gelaufen
             </h1>
             <p className="text-gray-500 dark:text-gray-400 mb-6">
-              Ha ocurrido un error inesperado. Intenta recargar la página.
+              Ein unerwarteter Fehler ist aufgetreten. Versuche, die Seite neu zu laden.
             </p>
             <button
               onClick={() => window.location.reload()}
               className="bg-orange-500 text-white font-bold px-6 py-3 rounded-xl hover:bg-orange-600 transition-colors"
             >
-              Recargar página
+              Seite neu laden
             </button>
           </div>
         </div>

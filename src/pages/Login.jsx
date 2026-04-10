@@ -20,7 +20,7 @@ export default function Login() {
     e.preventDefault()
     setError('')
     if (!form.email || !form.password) {
-      setError('Por favor completa todos los campos.')
+      setError('Bitte fülle alle Felder aus.')
       return
     }
     setLoading(true)
@@ -50,17 +50,17 @@ export default function Login() {
         <div className="text-center mb-8">
           <Link to="/" className="inline-flex items-center gap-2 mb-4">
             <img src="/logo.svg" alt="Logo" className="w-10 h-10" />
-            <span className="font-extrabold text-orange-500 text-2xl">Aprender-Aleman.de</span>
+            <span className="font-extrabold text-orange-500 text-2xl">Schule</span>
           </Link>
-          <h1 className="text-2xl font-bold text-gray-800 dark:text-gray-100">Bienvenido/a de nuevo</h1>
-          <p className="text-gray-500 dark:text-gray-400 mt-1">Inicia sesión para continuar aprendiendo</p>
+          <h1 className="text-2xl font-bold text-gray-800 dark:text-gray-100">Willkommen zurück</h1>
+          <p className="text-gray-500 dark:text-gray-400 mt-1">Melde dich an, um weiter zu lernen</p>
         </div>
 
         <div className="card">
           <form onSubmit={handleSubmit} className="space-y-5" noValidate>
             <div>
               <label htmlFor="email" className="block text-sm font-semibold text-gray-700 dark:text-gray-200 mb-1.5">
-                Correo electrónico
+                E-Mail
               </label>
               <div className="relative">
                 <Mail size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
@@ -71,8 +71,8 @@ export default function Login() {
                   autoComplete="email"
                   value={form.email}
                   onChange={handleChange}
-                  placeholder="tu@correo.com"
-                  aria-label="Correo electrónico"
+                  placeholder="du@beispiel.de"
+                  aria-label="E-Mail"
                   className="input-field pl-10"
                 />
               </div>
@@ -80,7 +80,7 @@ export default function Login() {
 
             <div>
               <label htmlFor="password" className="block text-sm font-semibold text-gray-700 dark:text-gray-200 mb-1.5">
-                Contraseña
+                Passwort
               </label>
               <div className="relative">
                 <Lock size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
@@ -91,14 +91,14 @@ export default function Login() {
                   autoComplete="current-password"
                   value={form.password}
                   onChange={handleChange}
-                  placeholder="Tu contraseña"
-                  aria-label="Contraseña"
+                  placeholder="Dein Passwort"
+                  aria-label="Passwort"
                   className="input-field pl-10 pr-10"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPass(p => !p)}
-                  aria-label={showPass ? 'Ocultar contraseña' : 'Mostrar contraseña'}
+                  aria-label={showPass ? 'Passwort verbergen' : 'Passwort anzeigen'}
                   className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
                 >
                   {showPass ? <EyeOff size={18} /> : <Eye size={18} />}
@@ -117,15 +117,15 @@ export default function Login() {
             )}
 
             <Button type="submit" loading={loading} variant="primary" className="w-full" size="lg">
-              Iniciar sesión
+              Anmelden
             </Button>
           </form>
 
           <div className="mt-6 pt-5 border-t border-gray-100 dark:border-gray-700 text-center">
             <p className="text-sm text-gray-500 dark:text-gray-400">
-              ¿No tienes cuenta?{' '}
+              Noch kein Konto?{' '}
               <Link to="/registro" className="font-semibold text-orange-500 hover:text-orange-600 transition-colors">
-                Regístrate gratis
+                Kostenlos registrieren
               </Link>
             </p>
           </div>
@@ -133,7 +133,7 @@ export default function Login() {
 
         <p className="text-center mt-6">
           <Link to="/" className="text-sm text-gray-400 hover:text-orange-500 transition-colors">
-            ← Volver al inicio
+            ← Zurück zur Startseite
           </Link>
         </p>
       </motion.div>

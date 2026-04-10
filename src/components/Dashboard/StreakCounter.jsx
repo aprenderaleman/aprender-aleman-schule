@@ -7,7 +7,7 @@ export default function StreakCounter({ streak = 0 }) {
   return (
     <div className="card">
       <div className="flex items-center justify-between mb-4">
-        <h3 className="font-bold text-gray-800 dark:text-gray-100">Racha actual</h3>
+        <h3 className="font-bold text-gray-800 dark:text-gray-100">Aktuelle Serie</h3>
         <motion.div
           animate={streak > 0 ? { scale: [1, 1.1, 1] } : {}}
           transition={{ duration: 1, repeat: Infinity, repeatDelay: 2 }}
@@ -15,7 +15,7 @@ export default function StreakCounter({ streak = 0 }) {
         >
           <span className="text-xl">🔥</span>
           <span className="font-extrabold text-orange-500 text-xl">{streak}</span>
-          <span className="text-xs text-orange-400 font-semibold">días</span>
+          <span className="text-xs text-orange-400 font-semibold">Tage</span>
         </motion.div>
       </div>
 
@@ -37,7 +37,7 @@ export default function StreakCounter({ streak = 0 }) {
                 {isActive ? '🔥' : '○'}
               </motion.div>
               <span className="text-xs text-gray-400 dark:text-gray-500">
-                {['L', 'M', 'X', 'J', 'V', 'S', 'D'][day]}
+                {['M', 'D', 'M', 'D', 'F', 'S', 'S'][day]}
               </span>
             </div>
           )
@@ -46,12 +46,12 @@ export default function StreakCounter({ streak = 0 }) {
 
       {streak === 0 && (
         <p className="text-xs text-gray-500 dark:text-gray-400 mt-3 text-center">
-          ¡Haz tu primer ejercicio hoy para comenzar tu racha!
+          Mach heute deine erste Übung, um deine Serie zu starten!
         </p>
       )}
       {streak >= 7 && (
         <p className="text-xs text-orange-600 dark:text-orange-400 mt-3 text-center font-semibold">
-          ¡Impresionante! ¡{streak} días seguidos! 🏆
+          Beeindruckend! {streak} Tage in Folge! 🏆
         </p>
       )}
     </div>

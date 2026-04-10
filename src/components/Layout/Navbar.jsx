@@ -7,12 +7,12 @@ import { useTheme } from '../../context/ThemeContext'
 import { useProgress } from '../../context/ProgressContext'
 
 const navLinks = [
-  { to: '/dashboard', icon: <Home size={18} />, label: 'Inicio' },
-  { to: '/ejercicios', icon: <BookOpen size={18} />, label: 'Ejercicios' },
-  { to: '/flashcards', icon: <Layers size={18} />, label: 'Flashcards' },
-  { to: '/progreso', icon: <BarChart2 size={18} />, label: 'Progreso' },
-  { to: '/logros', icon: <Trophy size={18} />, label: 'Logros' },
-  { to: '/perfil', icon: <User size={18} />, label: 'Perfil' },
+  { to: '/dashboard', icon: <Home size={18} />, label: 'Start' },
+  { to: '/ejercicios', icon: <BookOpen size={18} />, label: 'Übungen' },
+  { to: '/flashcards', icon: <Layers size={18} />, label: 'Karteikarten' },
+  { to: '/progreso', icon: <BarChart2 size={18} />, label: 'Fortschritt' },
+  { to: '/logros', icon: <Trophy size={18} />, label: 'Erfolge' },
+  { to: '/perfil', icon: <User size={18} />, label: 'Profil' },
 ]
 
 export default function Navbar() {
@@ -36,9 +36,9 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link to="/dashboard" className="flex items-center gap-2 group">
-            <img src="/logo.svg" alt="Logo" className="w-9 h-9" />
+            <img src="/logo.svg" alt="Schule Logo" className="w-9 h-9" />
             <span className="font-extrabold text-orange-500 text-lg hidden sm:block group-hover:text-orange-600 transition-colors">
-              Aprender-Aleman.de
+              Schule
             </span>
           </Link>
 
@@ -72,7 +72,7 @@ export default function Navbar() {
             {/* Dark mode toggle */}
             <button
               onClick={toggleDarkMode}
-              aria-label={darkMode ? 'Activar modo claro' : 'Activar modo oscuro'}
+              aria-label={darkMode ? 'Hellen Modus aktivieren' : 'Dunklen Modus aktivieren'}
               className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-600 dark:text-gray-300 transition-colors"
             >
               {darkMode ? <Sun size={20} /> : <Moon size={20} />}
@@ -81,7 +81,7 @@ export default function Navbar() {
             {/* Logout */}
             <button
               onClick={handleLogout}
-              aria-label="Cerrar sesión"
+              aria-label="Abmelden"
               className="hidden md:flex items-center gap-1.5 p-2 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20 text-gray-500 hover:text-red-500 transition-colors"
             >
               <LogOut size={18} />
@@ -90,7 +90,7 @@ export default function Navbar() {
             {/* Mobile menu toggle */}
             <button
               onClick={() => setMobileOpen(prev => !prev)}
-              aria-label="Abrir menú"
+              aria-label="Menü öffnen"
               className="md:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-600 dark:text-gray-300"
             >
               {mobileOpen ? <X size={22} /> : <Menu size={22} />}
@@ -138,7 +138,7 @@ export default function Navbar() {
                 className="flex items-center gap-2 px-3 py-2.5 rounded-lg text-sm font-medium text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 transition-all mt-1"
               >
                 <LogOut size={18} />
-                Cerrar sesión
+                Abmelden
               </button>
             </div>
           </motion.div>

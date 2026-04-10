@@ -24,17 +24,17 @@ const TYPE_EMOJIS = {
 function formatDate(dateStr) {
   if (!dateStr) return ''
   const d = new Date(dateStr)
-  const months = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic']
-  return `${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}`
+  const months = ['Jan', 'Feb', 'Mär', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez']
+  return `${d.getDate()}. ${months[d.getMonth()]} ${d.getFullYear()}`
 }
 
 function formatDateTime(dateStr) {
   if (!dateStr) return ''
   const d = new Date(dateStr)
-  const months = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic']
+  const months = ['Jan', 'Feb', 'Mär', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez']
   const hh = String(d.getHours()).padStart(2, '0')
   const mm = String(d.getMinutes()).padStart(2, '0')
-  return `${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}, ${hh}:${mm}`
+  return `${d.getDate()}. ${months[d.getMonth()]} ${d.getFullYear()}, ${hh}:${mm}`
 }
 
 function scoreColor(score) {
@@ -73,7 +73,7 @@ export default function AdminUserDetail() {
           headers: getAuthHeaders()
         })
         if (!res.ok) {
-          if (res.status === 404) throw new Error('Usuario no encontrado')
+          if (res.status === 404) throw new Error('Benutzer nicht gefunden')
           throw new Error(`Error ${res.status}`)
         }
         const json = await res.json()
@@ -92,7 +92,7 @@ export default function AdminUserDetail() {
       <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
         <div className="flex flex-col items-center gap-4">
           <div className="w-12 h-12 border-4 border-orange-500 border-t-transparent rounded-full animate-spin" />
-          <p className="text-gray-400 text-lg">Cargando datos del estudiante...</p>
+          <p className="text-gray-400 text-lg">Schülerdaten werden geladen...</p>
         </div>
       </div>
     )
@@ -108,7 +108,7 @@ export default function AdminUserDetail() {
             className="inline-flex items-center gap-2 text-orange-400 hover:text-orange-300 transition-colors"
           >
             <ArrowLeft size={18} />
-            Volver a usuarios
+            Zurück zu den Benutzern
           </Link>
         </div>
       </div>
@@ -124,15 +124,15 @@ export default function AdminUserDetail() {
   }
 
   const statusLabels = {
-    active: 'Activo',
-    inactive: 'Inactivo',
-    suspended: 'Suspendido'
+    active: 'Aktiv',
+    inactive: 'Inaktiv',
+    suspended: 'Gesperrt'
   }
 
   const classLabels = {
-    group: 'Grupo',
-    individual: 'Individual',
-    self: 'Autodidacta'
+    group: 'Gruppe',
+    individual: 'Einzelunterricht',
+    self: 'Autodidakt'
   }
 
   const skillData = Object.entries(user.skillScores || {}).map(([skill, value]) => ({
@@ -142,10 +142,10 @@ export default function AdminUserDetail() {
   }))
 
   const stats = [
-    { label: 'XP Total', value: user.xp.toLocaleString(), icon: Zap, color: 'text-orange-400', bg: 'bg-orange-500/10' },
-    { label: 'Racha', value: `${user.streak} dias`, icon: Flame, color: 'text-red-400', bg: 'bg-red-500/10' },
-    { label: 'Racha Perfecta', value: user.perfectStreak, icon: Award, color: 'text-yellow-400', bg: 'bg-yellow-500/10' },
-    { label: 'Ejercicios', value: exerciseResults.length, icon: BookOpen, color: 'text-blue-400', bg: 'bg-blue-500/10' }
+    { label: 'XP gesamt', value: user.xp.toLocaleString(), icon: Zap, color: 'text-orange-400', bg: 'bg-orange-500/10' },
+    { label: 'Serie', value: `${user.streak} Tage`, icon: Flame, color: 'text-red-400', bg: 'bg-red-500/10' },
+    { label: 'Perfekte Serie', value: user.perfectStreak, icon: Award, color: 'text-yellow-400', bg: 'bg-yellow-500/10' },
+    { label: 'Übungen', value: exerciseResults.length, icon: BookOpen, color: 'text-blue-400', bg: 'bg-blue-500/10' }
   ]
 
   const recentExercises = exerciseResults.slice(-50).reverse()
@@ -159,7 +159,7 @@ export default function AdminUserDetail() {
           className="inline-flex items-center gap-2 text-gray-400 hover:text-orange-400 transition-colors group"
         >
           <ArrowLeft size={18} className="group-hover:-translate-x-1 transition-transform" />
-          Volver a usuarios
+          Zurück zu den Benutzern
         </Link>
 
         {/* Profile header */}
@@ -177,7 +177,7 @@ export default function AdminUserDetail() {
               <p className="text-gray-400 truncate">{user.email}</p>
               <div className="flex flex-wrap items-center gap-2 mt-3">
                 <span className="px-3 py-1 rounded-full text-xs font-semibold bg-orange-500/20 text-orange-400 border border-orange-500/30">
-                  Nivel {user.level}
+                  Niveau {user.level}
                 </span>
                 <span className={`px-3 py-1 rounded-full text-xs font-semibold border ${statusColors[user.status] || statusColors.inactive}`}>
                   {statusLabels[user.status] || user.status}
@@ -189,7 +189,7 @@ export default function AdminUserDetail() {
                 )}
                 <span className="text-xs text-gray-500 flex items-center gap-1">
                   <Clock size={12} />
-                  Miembro desde {formatDate(user.createdAt)}
+                  Mitglied seit {formatDate(user.createdAt)}
                 </span>
               </div>
             </div>
@@ -226,7 +226,7 @@ export default function AdminUserDetail() {
             transition={{ delay: 0.3 }}
             className="card rounded-2xl p-6"
           >
-            <h2 className="text-lg font-semibold mb-4">Habilidades</h2>
+            <h2 className="text-lg font-semibold mb-4">Fähigkeiten</h2>
             {skillData.length > 0 ? (
               <ResponsiveContainer width="100%" height={250}>
                 <BarChart data={skillData} layout="vertical" margin={{ left: 20 }}>
@@ -242,7 +242,7 @@ export default function AdminUserDetail() {
                 </BarChart>
               </ResponsiveContainer>
             ) : (
-              <p className="text-gray-500 text-center py-12">Sin datos de habilidades</p>
+              <p className="text-gray-500 text-center py-12">Keine Daten zu Fähigkeiten</p>
             )}
           </motion.div>
 
@@ -253,7 +253,7 @@ export default function AdminUserDetail() {
             transition={{ delay: 0.4 }}
             className="card rounded-2xl p-6"
           >
-            <h2 className="text-lg font-semibold mb-4">Actividad diaria</h2>
+            <h2 className="text-lg font-semibold mb-4">Tägliche Aktivität</h2>
             {activityByDay && activityByDay.length > 0 ? (
               <ResponsiveContainer width="100%" height={250}>
                 <LineChart data={activityByDay}>
@@ -273,12 +273,12 @@ export default function AdminUserDetail() {
                     labelStyle={{ color: '#F9FAFB' }}
                     labelFormatter={(d) => formatDate(d)}
                   />
-                  <Line yAxisId="left" type="monotone" dataKey="count" stroke="#F97316" strokeWidth={2} dot={false} name="Ejercicios" />
-                  <Line yAxisId="right" type="monotone" dataKey="avgScore" stroke="#60A5FA" strokeWidth={2} dot={false} name="Puntuacion media" />
+                  <Line yAxisId="left" type="monotone" dataKey="count" stroke="#F97316" strokeWidth={2} dot={false} name="Übungen" />
+                  <Line yAxisId="right" type="monotone" dataKey="avgScore" stroke="#60A5FA" strokeWidth={2} dot={false} name="Durchschnittspunktzahl" />
                 </LineChart>
               </ResponsiveContainer>
             ) : (
-              <p className="text-gray-500 text-center py-12">Sin datos de actividad</p>
+              <p className="text-gray-500 text-center py-12">Keine Aktivitätsdaten</p>
             )}
           </motion.div>
         </div>
@@ -291,7 +291,7 @@ export default function AdminUserDetail() {
             transition={{ delay: 0.5 }}
             className="card rounded-2xl p-6"
           >
-            <h2 className="text-lg font-semibold mb-4">Puntuacion media por tipo</h2>
+            <h2 className="text-lg font-semibold mb-4">Durchschnittliche Punktzahl nach Typ</h2>
             <ResponsiveContainer width="100%" height={200}>
               <BarChart
                 data={scoreByType.map((s) => ({
@@ -309,7 +309,7 @@ export default function AdminUserDetail() {
                   labelStyle={{ color: '#F9FAFB' }}
                   itemStyle={{ color: '#F97316' }}
                 />
-                <Bar dataKey="avgScore" fill="#F97316" radius={[0, 6, 6, 0]} barSize={22} name="Puntuacion media" />
+                <Bar dataKey="avgScore" fill="#F97316" radius={[0, 6, 6, 0]} barSize={22} name="Durchschnittspunktzahl" />
               </BarChart>
             </ResponsiveContainer>
           </motion.div>
@@ -323,7 +323,7 @@ export default function AdminUserDetail() {
             transition={{ delay: 0.55 }}
             className="card rounded-2xl p-6"
           >
-            <h2 className="text-lg font-semibold mb-4">Logros ({achievements.length})</h2>
+            <h2 className="text-lg font-semibold mb-4">Erfolge ({achievements.length})</h2>
             <div className="flex flex-wrap gap-2">
               {achievements.map((a) => (
                 <span
@@ -345,9 +345,9 @@ export default function AdminUserDetail() {
           className="card rounded-2xl p-6"
         >
           <h2 className="text-lg font-semibold mb-4">
-            Historial de ejercicios
+            Übungsverlauf
             <span className="text-sm text-gray-500 font-normal ml-2">
-              (ultimos {recentExercises.length})
+              (letzte {recentExercises.length})
             </span>
           </h2>
 
@@ -356,12 +356,12 @@ export default function AdminUserDetail() {
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-gray-200 dark:border-gray-700 text-gray-400 text-left">
-                    <th className="pb-3 pr-4 font-medium">Ejercicio</th>
-                    <th className="pb-3 pr-4 font-medium">Tipo</th>
-                    <th className="pb-3 pr-4 font-medium">Puntuacion</th>
+                    <th className="pb-3 pr-4 font-medium">Übung</th>
+                    <th className="pb-3 pr-4 font-medium">Typ</th>
+                    <th className="pb-3 pr-4 font-medium">Punktzahl</th>
                     <th className="pb-3 pr-4 font-medium">XP</th>
-                    <th className="pb-3 pr-4 font-medium">Tiempo</th>
-                    <th className="pb-3 font-medium">Fecha</th>
+                    <th className="pb-3 pr-4 font-medium">Zeit</th>
+                    <th className="pb-3 font-medium">Datum</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -389,7 +389,7 @@ export default function AdminUserDetail() {
               </table>
             </div>
           ) : (
-            <p className="text-gray-500 text-center py-8">Este estudiante aun no ha completado ejercicios.</p>
+            <p className="text-gray-500 text-center py-8">Dieser Schüler hat noch keine Übungen abgeschlossen.</p>
           )}
         </motion.div>
 

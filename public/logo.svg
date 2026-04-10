@@ -1,42 +1,47 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
-  <!-- Robot head -->
-  <ellipse cx="100" cy="72" rx="52" ry="48" fill="white" stroke="#333" stroke-width="4"/>
-  <!-- Visor -->
-  <path d="M58 55 Q100 45 142 55 Q145 80 100 85 Q55 80 58 55Z" fill="#1a1a2e" rx="10"/>
-  <!-- Eyes -->
-  <circle cx="80" cy="68" r="10" fill="#F97316"/>
-  <circle cx="80" cy="68" r="5" fill="#FBBF24"/>
-  <circle cx="120" cy="68" r="10" fill="#F97316"/>
-  <circle cx="120" cy="68" r="5" fill="#FBBF24"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 220">
+  <!-- Head -->
+  <ellipse cx="110" cy="78" rx="60" ry="55" fill="white" stroke="#1a1a1a" stroke-width="5"/>
+  <!-- Visor (black screen face) -->
+  <path d="M58 62 Q110 48 162 62 Q165 98 110 102 Q55 98 58 62 Z" fill="#0f0f1a" stroke="#1a1a1a" stroke-width="3"/>
+  <!-- Glowing eyes -->
+  <circle cx="88" cy="78" r="12" fill="#F97316"/>
+  <circle cx="88" cy="78" r="6" fill="#FBBF24"/>
+  <circle cx="132" cy="78" r="12" fill="#F97316"/>
+  <circle cx="132" cy="78" r="6" fill="#FBBF24"/>
   <!-- Smile -->
-  <path d="M85 78 Q100 88 115 78" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M95 90 Q110 100 125 90" fill="none" stroke="white" stroke-width="3" stroke-linecap="round"/>
   <!-- Orange stripe on head -->
-  <path d="M60 45 Q100 38 140 45" fill="none" stroke="#F97316" stroke-width="3"/>
-  <!-- Antenna -->
-  <line x1="100" y1="24" x2="100" y2="14" stroke="#333" stroke-width="3"/>
-  <circle cx="100" cy="11" r="5" fill="#F97316"/>
-  <!-- Ear pieces -->
-  <ellipse cx="48" cy="72" rx="10" ry="14" fill="#F97316" stroke="#333" stroke-width="2"/>
-  <ellipse cx="152" cy="72" rx="10" ry="14" fill="#F97316" stroke="#333" stroke-width="2"/>
+  <path d="M115 40 Q120 50 118 60" fill="none" stroke="#F97316" stroke-width="3" stroke-linecap="round"/>
+  <!-- Headphone/ear pieces -->
+  <ellipse cx="52" cy="82" rx="12" ry="18" fill="#F97316" stroke="#1a1a1a" stroke-width="3"/>
+  <ellipse cx="168" cy="82" rx="12" ry="18" fill="#F97316" stroke="#1a1a1a" stroke-width="3"/>
+  <ellipse cx="52" cy="82" rx="6" ry="10" fill="#FBBF24" opacity="0.5"/>
+  <ellipse cx="168" cy="82" rx="6" ry="10" fill="#FBBF24" opacity="0.5"/>
   <!-- Neck -->
-  <rect x="90" y="118" width="20" height="12" rx="3" fill="#F97316" stroke="#333" stroke-width="2"/>
+  <rect x="98" y="130" width="24" height="12" rx="3" fill="#F97316" stroke="#1a1a1a" stroke-width="2"/>
   <!-- Body -->
-  <rect x="65" y="128" width="70" height="50" rx="15" fill="white" stroke="#333" stroke-width="4"/>
-  <!-- Orange belt -->
-  <rect x="65" y="150" width="70" height="10" fill="#F97316" opacity="0.3"/>
+  <path d="M60 142 Q60 135 70 135 L150 135 Q160 135 160 142 L160 185 Q160 195 150 195 L70 195 Q60 195 60 185 Z" fill="white" stroke="#1a1a1a" stroke-width="5"/>
+  <!-- Orange chest details -->
+  <path d="M90 135 Q110 142 130 135" fill="none" stroke="#F97316" stroke-width="2.5" stroke-linecap="round"/>
+  <circle cx="70" cy="148" r="4" fill="#F97316" stroke="#1a1a1a" stroke-width="1.5"/>
+  <circle cx="150" cy="148" r="4" fill="#F97316" stroke="#1a1a1a" stroke-width="1.5"/>
   <!-- Book -->
-  <rect x="72" y="155" width="30" height="22" rx="2" fill="#F97316" stroke="#333" stroke-width="2"/>
-  <line x1="87" y1="155" x2="87" y2="177" stroke="#333" stroke-width="1.5"/>
-  <rect x="74" y="160" width="11" height="2" rx="1" fill="white" opacity="0.7"/>
-  <rect x="74" y="164" width="9" height="2" rx="1" fill="white" opacity="0.5"/>
-  <rect x="89" y="160" width="11" height="2" rx="1" fill="white" opacity="0.7"/>
-  <rect x="89" y="164" width="9" height="2" rx="1" fill="white" opacity="0.5"/>
+  <path d="M75 165 L110 160 L145 165 L145 200 L110 195 L75 200 Z" fill="#F97316" stroke="#1a1a1a" stroke-width="3"/>
+  <line x1="110" y1="160" x2="110" y2="195" stroke="#1a1a1a" stroke-width="2"/>
+  <!-- Book page lines -->
+  <line x1="82" y1="172" x2="103" y2="170" stroke="white" stroke-width="1.5" opacity="0.8"/>
+  <line x1="82" y1="178" x2="103" y2="176" stroke="white" stroke-width="1.5" opacity="0.7"/>
+  <line x1="82" y1="184" x2="103" y2="182" stroke="white" stroke-width="1.5" opacity="0.6"/>
+  <line x1="117" y1="170" x2="138" y2="172" stroke="white" stroke-width="1.5" opacity="0.8"/>
+  <line x1="117" y1="176" x2="138" y2="178" stroke="white" stroke-width="1.5" opacity="0.7"/>
+  <line x1="117" y1="182" x2="138" y2="184" stroke="white" stroke-width="1.5" opacity="0.6"/>
   <!-- Left arm (waving) -->
-  <path d="M65 138 Q40 125 35 105" fill="none" stroke="#333" stroke-width="4" stroke-linecap="round"/>
-  <circle cx="35" cy="105" r="3" fill="#F97316"/>
+  <path d="M60 150 Q35 135 28 110" fill="none" stroke="#1a1a1a" stroke-width="5" stroke-linecap="round"/>
+  <!-- Waving hand -->
+  <circle cx="28" cy="108" r="9" fill="white" stroke="#1a1a1a" stroke-width="3"/>
+  <path d="M22 104 L20 96" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round"/>
+  <path d="M27 102 L26 93" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round"/>
+  <path d="M32 103 L33 95" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round"/>
   <!-- Right arm (holding book) -->
-  <path d="M135 138 Q145 150 105 170" fill="none" stroke="#333" stroke-width="4" stroke-linecap="round"/>
-  <!-- Legs -->
-  <ellipse cx="85" cy="182" rx="14" ry="10" fill="white" stroke="#333" stroke-width="3"/>
-  <ellipse cx="115" cy="182" rx="14" ry="10" fill="white" stroke="#333" stroke-width="3"/>
+  <path d="M160 150 Q175 170 145 185" fill="none" stroke="#1a1a1a" stroke-width="5" stroke-linecap="round"/>
 </svg>

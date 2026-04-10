@@ -49,7 +49,7 @@ export default function ReadingExercise({ exercise, userName, onComplete }) {
       <div className="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-2xl p-5 border border-blue-200 dark:border-blue-800">
         <div className="flex items-center gap-2 mb-3">
           <BookOpen size={18} className="text-blue-500" />
-          <span className="text-sm font-semibold text-blue-600 dark:text-blue-400">Texto en alemán — Toca una palabra para ver su traducción</span>
+          <span className="text-sm font-semibold text-blue-600 dark:text-blue-400">Deutscher Text — Tippe auf ein Wort, um die Übersetzung zu sehen</span>
         </div>
         <p className="text-gray-800 dark:text-gray-100 leading-relaxed text-base">
           {exercise.text.split(' ').map((word, i) => (
@@ -83,7 +83,7 @@ export default function ReadingExercise({ exercise, userName, onComplete }) {
       {/* Vocabulary list */}
       {exercise.vocabulary && exercise.vocabulary.length > 0 && (
         <div className="bg-white dark:bg-gray-700 rounded-xl p-4 border border-gray-200 dark:border-gray-600">
-          <p className="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-2">Vocabulario clave</p>
+          <p className="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-2">Wichtiger Wortschatz</p>
           <div className="flex flex-wrap gap-2">
             {exercise.vocabulary.map((v, i) => (
               <span key={i} className="text-xs bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 px-2 py-1 rounded-lg">
@@ -125,7 +125,7 @@ export default function ReadingExercise({ exercise, userName, onComplete }) {
             </div>
             {submitted && (
               <p className={`mt-2 text-xs font-semibold flex items-center gap-1 ${answers[qi] === q.answer ? 'text-green-600' : 'text-red-500'}`}>
-                {answers[qi] === q.answer ? <><CheckCircle size={14} /> ¡Correcto!</> : <><XCircle size={14} /> Correcto: {q.answer}</>}
+                {answers[qi] === q.answer ? <><CheckCircle size={14} /> Richtig!</> : <><XCircle size={14} /> Richtig: {q.answer}</>}
               </p>
             )}
           </div>
@@ -134,7 +134,7 @@ export default function ReadingExercise({ exercise, userName, onComplete }) {
 
       {!submitted && (
         <Button onClick={handleSubmit} disabled={!allAnswered} variant="primary" className="w-full">
-          Enviar respuestas
+          Antworten absenden
         </Button>
       )}
     </div>

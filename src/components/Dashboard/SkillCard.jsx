@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom'
 import ProgressBar from '../UI/ProgressBar'
 
 const skillConfig = {
-  grammar: { icon: '📚', label: 'Gramática', color: 'blue', type: 'grammar', desc: 'Verbos, casos, sintaxis' },
-  reading: { icon: '📖', label: 'Lectura', color: 'green', type: 'reading', desc: 'Comprensión de textos' },
-  listening: { icon: '🎧', label: 'Audición', color: 'purple', type: 'listening', desc: 'Comprensión oral' },
-  writing: { icon: '✍️', label: 'Escritura', color: 'pink', type: 'writing', desc: 'Producción escrita' },
+  grammar: { icon: '📚', label: 'Grammatik', color: 'blue', type: 'grammar', desc: 'Verben, Fälle, Syntax' },
+  reading: { icon: '📖', label: 'Lesen', color: 'green', type: 'reading', desc: 'Textverständnis' },
+  listening: { icon: '🎧', label: 'Hören', color: 'purple', type: 'listening', desc: 'Hörverständnis' },
+  writing: { icon: '✍️', label: 'Schreiben', color: 'pink', type: 'writing', desc: 'Schriftlicher Ausdruck' },
 }
 
 const bgColors = {
@@ -21,7 +21,7 @@ export default function SkillCard({ skill, score = 0, index = 0 }) {
   const config = skillConfig[skill]
   if (!config) return null
 
-  const level = score >= 80 ? 'Avanzado' : score >= 50 ? 'Intermedio' : score >= 20 ? 'Básico' : 'Principiante'
+  const level = score >= 80 ? 'Fortgeschritten' : score >= 50 ? 'Mittelstufe' : score >= 20 ? 'Grundlagen' : 'Anfänger'
 
   return (
     <motion.div
@@ -32,7 +32,7 @@ export default function SkillCard({ skill, score = 0, index = 0 }) {
       <Link
         to={`/ejercicios?tipo=${config.type}`}
         className={`block p-5 rounded-2xl border-2 ${bgColors[config.color]} hover:shadow-md transition-all duration-200 group`}
-        aria-label={`Ir a ejercicios de ${config.label}`}
+        aria-label={`Zu ${config.label}-Übungen gehen`}
       >
         <div className="flex items-center gap-3 mb-3">
           <span className="text-3xl">{config.icon}</span>

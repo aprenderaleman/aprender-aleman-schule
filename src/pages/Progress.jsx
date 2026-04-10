@@ -12,10 +12,10 @@ import Navbar from '../components/Layout/Navbar'
 import ProgressBar from '../components/UI/ProgressBar'
 
 const SKILL_META = {
-  grammar:   { label: 'Gramática',  icon: Brain,      color: '#f97316' },
-  reading:   { label: 'Lectura',    icon: BookOpen,   color: '#3b82f6' },
-  listening: { label: 'Audición',   icon: Headphones, color: '#8b5cf6' },
-  writing:   { label: 'Escritura',  icon: PenLine,    color: '#22c55e' },
+  grammar:   { label: 'Grammatik',  icon: Brain,      color: '#f97316' },
+  reading:   { label: 'Lesen',      icon: BookOpen,   color: '#3b82f6' },
+  listening: { label: 'Hören',      icon: Headphones, color: '#8b5cf6' },
+  writing:   { label: 'Schreiben',  icon: PenLine,    color: '#22c55e' },
 }
 
 const LEVEL_XP = { A1: 500, A2: 1000, B1: 2000, B2: 3500, C1: 5000 }
@@ -37,7 +37,7 @@ export default function Progress() {
         .filter(h => h.date?.startsWith(dateStr))
         .reduce((sum, h) => sum + (h.xpEarned || 0), 0)
       days.push({
-        day: date.toLocaleDateString('es-ES', { weekday: 'short' }),
+        day: date.toLocaleDateString('de-DE', { weekday: 'short' }),
         XP: xpDay,
       })
     }
@@ -59,16 +59,16 @@ export default function Progress() {
     })
     return Object.entries(counts).map(([type, count]) => ({
       name: SKILL_META[type]?.label || type,
-      Ejercicios: count,
+      Übungen: count,
       fill: SKILL_META[type]?.color,
     }))
   }, [progress.exerciseHistory])
 
   const stats = [
-    { label: 'XP Total', value: progress.xp || 0, icon: Zap, color: 'text-orange-500' },
-    { label: 'Racha actual', value: `${progress.streak || 0} días`, icon: Flame, color: 'text-red-500' },
-    { label: 'Ejercicios', value: progress.completedExercises?.length || 0, icon: Trophy, color: 'text-yellow-500' },
-    { label: 'Nivel', value: user?.level || 'A1', icon: TrendingUp, color: 'text-green-500' },
+    { label: 'Gesamt-XP', value: progress.xp || 0, icon: Zap, color: 'text-orange-500' },
+    { label: 'Aktuelle Serie', value: `${progress.streak || 0} Tage`, icon: Flame, color: 'text-red-500' },
+    { label: 'Übungen', value: progress.completedExercises?.length || 0, icon: Trophy, color: 'text-yellow-500' },
+    { label: 'Niveau', value: user?.level || 'A1', icon: TrendingUp, color: 'text-green-500' },
   ]
 
   return (
@@ -76,8 +76,8 @@ export default function Progress() {
       <Navbar />
       <main className="max-w-6xl mx-auto px-4 py-8">
         <div className="mb-8">
-          <h1 className="text-3xl font-extrabold text-gray-800 dark:text-gray-100">Mi Progreso</h1>
-          <p className="text-gray-500 dark:text-gray-400 mt-1">Tu historial de aprendizaje, {user?.name}.</p>
+          <h1 className="text-3xl font-extrabold text-gray-800 dark:text-gray-100">Mein Fortschritt</h1>
+          <p className="text-gray-500 dark:text-gray-400 mt-1">Dein Lernverlauf, {user?.name}.</p>
         </div>
 
         {/* Stats cards */}
@@ -103,7 +103,7 @@ export default function Progress() {
           transition={{ delay: 0.1 }}
           className="card mb-6"
         >
-          <h2 className="font-bold text-gray-800 dark:text-gray-100 mb-4 text-lg">Progreso de nivel {user?.level}</h2>
+          <h2 className="font-bold text-gray-800 dark:text-gray-100 mb-4 text-lg">Fortschritt Niveau {user?.level}</h2>
           <ProgressBar value={levelProgress} color="orange" showPercent height="lg" />
           <p className="text-sm text-gray-400 mt-2">{progress.xp} / {levelXP} XP</p>
         </motion.div>
@@ -117,7 +117,7 @@ export default function Progress() {
             transition={{ delay: 0.2 }}
             className="card"
           >
-            <h2 className="font-bold text-gray-800 dark:text-gray-100 mb-4">XP últimos 7 días</h2>
+            <h2 className="font-bold text-gray-800 dark:text-gray-100 mb-4">XP der letzten 7 Tage</h2>
             <ResponsiveContainer width="100%" height={200}>
               <BarChart data={activityData}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
@@ -138,7 +138,7 @@ export default function Progress() {
             transition={{ delay: 0.2 }}
             className="card"
           >
-            <h2 className="font-bold text-gray-800 dark:text-gray-100 mb-4">Ejercicios por tipo</h2>
+            <h2 className="font-bold text-gray-800 dark:text-gray-100 mb-4">Übungen nach Typ</h2>
             <ResponsiveContainer width="100%" height={200}>
               <BarChart data={typeBreakdown} layout="vertical">
                 <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
@@ -147,7 +147,7 @@ export default function Progress() {
                 <Tooltip
                   contentStyle={{ background: '#1f2937', border: 'none', borderRadius: 8, color: '#f9fafb' }}
                 />
-                <Bar dataKey="Ejercicios" radius={[0, 6, 6, 0]}>
+                <Bar dataKey="Übungen" radius={[0, 6, 6, 0]}>
                   {typeBreakdown.map((entry, idx) => (
                     <rect key={idx} fill={entry.fill} />
                   ))}
@@ -164,7 +164,7 @@ export default function Progress() {
           transition={{ delay: 0.3 }}
           className="card mb-6"
         >
-          <h2 className="font-bold text-gray-800 dark:text-gray-100 mb-5 text-lg">Habilidades por área</h2>
+          <h2 className="font-bold text-gray-800 dark:text-gray-100 mb-5 text-lg">Fertigkeiten nach Bereich</h2>
           <div className="space-y-5">
             {Object.entries(SKILL_META).map(([key, meta]) => {
               const Icon = meta.icon
@@ -200,7 +200,7 @@ export default function Progress() {
           transition={{ delay: 0.4 }}
           className="card"
         >
-          <h2 className="font-bold text-gray-800 dark:text-gray-100 mb-4 text-lg">Historial reciente</h2>
+          <h2 className="font-bold text-gray-800 dark:text-gray-100 mb-4 text-lg">Letzte Aktivitäten</h2>
           {progress.exerciseHistory?.length > 0 ? (
             <div className="space-y-2">
               {progress.exerciseHistory.slice(0, 10).map((h, i) => {
@@ -226,7 +226,7 @@ export default function Progress() {
               })}
             </div>
           ) : (
-            <p className="text-gray-400 text-sm">Aún no has completado ningún ejercicio.</p>
+            <p className="text-gray-400 text-sm">Du hast noch keine Übung abgeschlossen.</p>
           )}
         </motion.div>
       </main>

@@ -30,7 +30,7 @@ export default function WritingExercise({ exercise, userName, userLevel, onCompl
         throw new Error('No feedback returned')
       }
     } catch (err) {
-      setError('Die Bewertung konnte nicht geladen werden. Bitte versuche es erneut. (No se pudo evaluar tu texto.)')
+      setError('Die Bewertung konnte nicht geladen werden. Bitte versuche es erneut.')
       const fallbackScore = Math.min(100, Math.round((wordCount / (exercise.minWords * 1.5)) * 70))
       setSubmitted(true)
       onComplete({ score: fallbackScore, feedback: null })

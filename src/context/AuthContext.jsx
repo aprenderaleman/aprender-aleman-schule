@@ -73,15 +73,15 @@ export function AuthProvider({ children }) {
       const data = await res.json()
 
       if (!res.ok) {
-        return { error: data.error || 'Error al iniciar sesión.' }
+        return { error: data.error || 'Fehler bei der Anmeldung.' }
       }
 
       storeAuth(data.token, data.user)
       setUser(data.user)
-      showToast(`¡Hola de nuevo, ${data.user.name}!`, 'success')
+      showToast(`Willkommen zurück, ${data.user.name}!`, 'success')
       return { success: true }
     } catch {
-      return { error: 'No se pudo conectar con el servidor.' }
+      return { error: 'Verbindung zum Server fehlgeschlagen.' }
     }
   }, [showToast])
 
@@ -93,13 +93,13 @@ export function AuthProvider({ children }) {
         body: JSON.stringify({ fullName, email, password }),
       })
       const data = await res.json()
-      if (!res.ok) return { error: data.error || 'Error al registrar.' }
+      if (!res.ok) return { error: data.error || 'Fehler bei der Registrierung.' }
       storeAuth(data.token, data.user)
       setUser(data.user)
-      showToast(`¡Bienvenido/a, ${data.user.name}! 🎉`, 'success')
+      showToast(`Willkommen, ${data.user.name}! 🎉`, 'success')
       return { success: true }
     } catch {
-      return { error: 'No se pudo conectar con el servidor.' }
+      return { error: 'Verbindung zum Server fehlgeschlagen.' }
     }
   }, [showToast])
 
@@ -113,14 +113,14 @@ export function AuthProvider({ children }) {
     const updated = { ...user, ...updates }
     setUser(updated)
     localStorage.setItem('auth_user', JSON.stringify(updated))
-    showToast('Perfil actualizado correctamente.', 'success')
+    showToast('Profil erfolgreich aktualisiert.', 'success')
   }, [user, showToast])
 
   // SSO login: called from /auto-login page with token from main app
   const ssoLogin = useCallback((token, userData) => {
     storeAuth(token, userData)
     setUser(userData)
-    showToast(`¡Bienvenido/a, ${userData.name}! 🎉`, 'success')
+    showToast(`Willkommen, ${userData.name}! 🎉`, 'success')
   }, [showToast])
 
   // Helper to get the auth token for API calls

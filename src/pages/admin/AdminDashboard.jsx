@@ -116,7 +116,7 @@ export default function AdminDashboard() {
         setStats(data)
       } catch (err) {
         console.error('Failed to fetch admin stats:', err)
-        setError(err.message || 'Failed to load dashboard data.')
+        setError(err.message || 'Dashboard-Daten konnten nicht geladen werden.')
       } finally {
         setLoading(false)
       }
@@ -129,7 +129,7 @@ export default function AdminDashboard() {
       <div className="flex items-center justify-center min-h-[60vh]">
         <div className="flex flex-col items-center gap-4">
           <div className="w-12 h-12 border-4 border-orange-500 border-t-transparent rounded-full animate-spin" />
-          <p className="text-gray-500 dark:text-gray-400 text-sm">Loading dashboard...</p>
+          <p className="text-gray-500 dark:text-gray-400 text-sm">Dashboard lädt...</p>
         </div>
       </div>
     )
@@ -143,14 +143,14 @@ export default function AdminDashboard() {
             <span className="text-red-500 text-2xl font-bold">!</span>
           </div>
           <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2">
-            Error Loading Dashboard
+            Fehler beim Laden des Dashboards
           </h3>
           <p className="text-gray-500 dark:text-gray-400 mb-4">{error}</p>
           <button
             onClick={() => window.location.reload()}
             className="px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white rounded-lg transition-colors"
           >
-            Retry
+            Erneut versuchen
           </button>
         </div>
       </div>
@@ -171,10 +171,10 @@ export default function AdminDashboard() {
   } = stats || {}
 
   const statCards = [
-    { icon: Users, label: 'Total Users', value: totalUsers, color: COLORS.blue },
-    { icon: UserCheck, label: 'Active Users', value: activeUsers, color: COLORS.green },
-    { icon: BookOpen, label: 'Total Exercises', value: totalExercises, color: COLORS.purple },
-    { icon: Zap, label: 'Total XP', value: totalXP, color: COLORS.orange },
+    { icon: Users, label: 'Benutzer insgesamt', value: totalUsers, color: COLORS.blue },
+    { icon: UserCheck, label: 'Aktive Benutzer', value: activeUsers, color: COLORS.green },
+    { icon: BookOpen, label: 'Übungen insgesamt', value: totalExercises, color: COLORS.purple },
+    { icon: Zap, label: 'XP insgesamt', value: totalXP, color: COLORS.orange },
   ]
 
   return (
@@ -187,10 +187,10 @@ export default function AdminDashboard() {
       >
         <h1 className="text-3xl font-bold text-gray-800 dark:text-gray-100 flex items-center gap-3">
           <TrendingUp className="w-8 h-8 text-orange-500" />
-          Admin Dashboard
+          Administrationsbereich
         </h1>
         <p className="text-gray-500 dark:text-gray-400 mt-1">
-          Overview of the platform's key metrics and activity.
+          Übersicht über die wichtigsten Kennzahlen und Aktivitäten der Plattform.
         </p>
       </motion.div>
 
@@ -204,7 +204,7 @@ export default function AdminDashboard() {
       {/* Charts Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
         {/* Activity Line Chart */}
-        <ChartCard title="Daily Activity (Last 30 Days)">
+        <ChartCard title="Tägliche Aktivität (letzte 30 Tage)">
           <ResponsiveContainer width="100%" height={300}>
             <LineChart data={activityByDay}>
               <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
@@ -226,7 +226,7 @@ export default function AdminDashboard() {
                 strokeWidth={2}
                 dot={false}
                 activeDot={{ r: 5 }}
-                name="Exercises"
+                name="Übungen"
               />
               <Line
                 type="monotone"
@@ -235,21 +235,21 @@ export default function AdminDashboard() {
                 strokeWidth={2}
                 dot={false}
                 activeDot={{ r: 5 }}
-                name="Active Users"
+                name="Aktive Benutzer"
               />
             </LineChart>
           </ResponsiveContainer>
         </ChartCard>
 
         {/* Students by Level Bar Chart */}
-        <ChartCard title="Students by Level">
+        <ChartCard title="Schüler nach Niveau">
           <ResponsiveContainer width="100%" height={300}>
             <BarChart data={byLevel}>
               <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
               <XAxis dataKey="level" tick={{ fontSize: 12 }} />
               <YAxis tick={{ fontSize: 12 }} />
               <Tooltip content={<CustomTooltip />} />
-              <Bar dataKey="count" name="Students" radius={[6, 6, 0, 0]}>
+              <Bar dataKey="count" name="Schüler" radius={[6, 6, 0, 0]}>
                 {byLevel.map((_, i) => (
                   <Cell key={i} fill={PIE_COLORS[i % PIE_COLORS.length]} />
                 ))}
@@ -259,7 +259,7 @@ export default function AdminDashboard() {
         </ChartCard>
 
         {/* Exercise Type Distribution Pie Chart */}
-        <ChartCard title="Exercise Type Distribution">
+        <ChartCard title="Verteilung der Übungstypen">
           <ResponsiveContainer width="100%" height={300}>
             <PieChart>
               <Pie
@@ -285,14 +285,14 @@ export default function AdminDashboard() {
         </ChartCard>
 
         {/* Average Scores by Type Bar Chart */}
-        <ChartCard title="Average Scores by Exercise Type">
+        <ChartCard title="Durchschnittliche Punktzahl nach Übungstyp">
           <ResponsiveContainer width="100%" height={300}>
             <BarChart data={avgScores}>
               <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
               <XAxis dataKey="type" tick={{ fontSize: 12 }} />
               <YAxis domain={[0, 100]} tick={{ fontSize: 12 }} />
               <Tooltip content={<CustomTooltip />} />
-              <Bar dataKey="avg_score" name="Avg Score" radius={[6, 6, 0, 0]}>
+              <Bar dataKey="avg_score" name="Durchschnittspunktzahl" radius={[6, 6, 0, 0]}>
                 {avgScores.map((_, i) => (
                   <Cell key={i} fill={PIE_COLORS[i % PIE_COLORS.length]} />
                 ))}
@@ -302,7 +302,7 @@ export default function AdminDashboard() {
         </ChartCard>
 
         {/* Registrations Line Chart */}
-        <ChartCard title="New Registrations (Last 30 Days)">
+        <ChartCard title="Neue Registrierungen (letzte 30 Tage)">
           <ResponsiveContainer width="100%" height={300}>
             <LineChart data={registrationsByDay}>
               <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
@@ -323,7 +323,7 @@ export default function AdminDashboard() {
                 strokeWidth={2}
                 dot={false}
                 activeDot={{ r: 5 }}
-                name="Registrations"
+                name="Registrierungen"
                 fill={`${COLORS.green}20`}
               />
             </LineChart>
@@ -341,7 +341,7 @@ export default function AdminDashboard() {
       >
         <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-4 flex items-center gap-2">
           <Award className="w-5 h-5 text-orange-500" />
-          Top 10 Students
+          Top 10 Schüler
         </h3>
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
@@ -349,11 +349,11 @@ export default function AdminDashboard() {
               <tr className="border-b border-gray-200 dark:border-gray-700">
                 <th className="text-left py-3 px-4 font-semibold text-gray-600 dark:text-gray-400">#</th>
                 <th className="text-left py-3 px-4 font-semibold text-gray-600 dark:text-gray-400">Name</th>
-                <th className="text-left py-3 px-4 font-semibold text-gray-600 dark:text-gray-400">Email</th>
-                <th className="text-left py-3 px-4 font-semibold text-gray-600 dark:text-gray-400">Level</th>
+                <th className="text-left py-3 px-4 font-semibold text-gray-600 dark:text-gray-400">E-Mail</th>
+                <th className="text-left py-3 px-4 font-semibold text-gray-600 dark:text-gray-400">Niveau</th>
                 <th className="text-right py-3 px-4 font-semibold text-gray-600 dark:text-gray-400">XP</th>
-                <th className="text-right py-3 px-4 font-semibold text-gray-600 dark:text-gray-400">Streak</th>
-                <th className="text-right py-3 px-4 font-semibold text-gray-600 dark:text-gray-400">Exercises</th>
+                <th className="text-right py-3 px-4 font-semibold text-gray-600 dark:text-gray-400">Serie</th>
+                <th className="text-right py-3 px-4 font-semibold text-gray-600 dark:text-gray-400">Übungen</th>
               </tr>
             </thead>
             <tbody>
@@ -380,7 +380,7 @@ export default function AdminDashboard() {
                     {student.xp?.toLocaleString()}
                   </td>
                   <td className="py-3 px-4 text-right text-gray-600 dark:text-gray-300">
-                    {student.streak} days
+                    {student.streak} Tage
                   </td>
                   <td className="py-3 px-4 text-right text-gray-600 dark:text-gray-300">
                     {student.exerciseCount?.toLocaleString()}
@@ -390,7 +390,7 @@ export default function AdminDashboard() {
               {topStudents.length === 0 && (
                 <tr>
                   <td colSpan={7} className="py-8 text-center text-gray-400 dark:text-gray-500">
-                    No student data available.
+                    Keine Schülerdaten verfügbar.
                   </td>
                 </tr>
               )}

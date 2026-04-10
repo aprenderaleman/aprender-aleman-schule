@@ -16,14 +16,14 @@ export default function AutoLogin() {
     const token = searchParams.get('token')
 
     if (!token) {
-      setError('No se recibió token de autenticación.')
+      setError('Kein Authentifizierungstoken erhalten.')
       return
     }
 
     // Verify SSO token with backend and log in
     fetch(`${API_URL}/api/auth/sso-verify?token=${encodeURIComponent(token)}`)
       .then(res => {
-        if (!res.ok) throw new Error('Token inválido o expirado')
+        if (!res.ok) throw new Error('Ungültiges oder abgelaufenes Token')
         return res.json()
       })
       .then(data => {
@@ -31,7 +31,7 @@ export default function AutoLogin() {
         navigate('/dashboard', { replace: true })
       })
       .catch(() => {
-        setError('El enlace de acceso ha expirado o no es válido. Vuelve a tu panel en app.aprender-aleman.de e inténtalo de nuevo.')
+        setError('Der Zugangslink ist abgelaufen oder ungültig. Kehre zu deinem Dashboard unter app.aprender-aleman.de zurück und versuche es erneut.')
       })
   }, [searchParams, ssoLogin, navigate])
 
@@ -41,12 +41,12 @@ export default function AutoLogin() {
         <div className="text-center max-w-md">
           <div className="text-5xl mb-4">😕</div>
           <h1 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-3">
-            No se pudo iniciar sesión
+            Anmeldung fehlgeschlagen
           </h1>
           <p className="text-gray-500 dark:text-gray-400 mb-6">{error}</p>
           <a href="https://app.aprender-aleman.de" rel="noopener noreferrer">
             <Button variant="primary" size="lg">
-              Volver a app.aprender-aleman.de
+              Zurück zu app.aprender-aleman.de
             </Button>
           </a>
         </div>
@@ -56,7 +56,7 @@ export default function AutoLogin() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-amber-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 flex items-center justify-center p-4">
-      <LoadingSpinner message="Iniciando sesión automáticamente..." />
+      <LoadingSpinner message="Automatische Anmeldung läuft..." />
     </div>
   )
 }

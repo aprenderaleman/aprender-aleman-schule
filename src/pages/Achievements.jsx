@@ -20,19 +20,19 @@ export default function Achievements() {
       <Navbar />
       <main className="max-w-4xl mx-auto px-4 py-8">
         <div className="mb-8">
-          <h1 className="text-3xl font-extrabold text-gray-800 dark:text-gray-100">Logros</h1>
+          <h1 className="text-3xl font-extrabold text-gray-800 dark:text-gray-100">Erfolge</h1>
           <p className="text-gray-500 dark:text-gray-400 mt-1">
-            {user?.name}, has desbloqueado{' '}
+            {user?.name}, du hast{' '}
             <span className="font-bold text-orange-500">{earned.length}</span>
-            {' '}de{' '}
-            <span className="font-bold">{ACHIEVEMENT_DEFS.length}</span> logros.
+            {' '}von{' '}
+            <span className="font-bold">{ACHIEVEMENT_DEFS.length}</span> Erfolgen freigeschaltet.
           </p>
         </div>
 
         {/* Progress bar */}
         <div className="card mb-8">
           <div className="flex justify-between items-center mb-2">
-            <span className="text-sm font-semibold text-gray-600 dark:text-gray-300">Progreso de logros</span>
+            <span className="text-sm font-semibold text-gray-600 dark:text-gray-300">Erfolgsfortschritt</span>
             <span className="text-sm font-bold text-orange-500">
               {Math.round((earned.length / ACHIEVEMENT_DEFS.length) * 100)}%
             </span>
@@ -67,7 +67,7 @@ export default function Achievements() {
               >
                 {isEarned && (
                   <div className="absolute -top-2 -right-2 bg-yellow-400 text-xs font-bold px-2 py-0.5 rounded-full text-gray-800 shadow">
-                    ✓ Obtenido
+                    ✓ Erhalten
                   </div>
                 )}
                 <div className="text-4xl mb-3">{ach.emoji}</div>
@@ -76,7 +76,7 @@ export default function Achievements() {
                 {!isEarned && (
                   <div className="flex items-center gap-1 mt-3 text-xs text-gray-400">
                     <Lock size={12} />
-                    Bloqueado
+                    Gesperrt
                   </div>
                 )}
               </motion.div>

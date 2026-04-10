@@ -6,9 +6,9 @@ import { useAuth } from '../../context/AuthContext'
 import { useTheme } from '../../context/ThemeContext'
 
 const adminLinks = [
-  { to: '/admin', icon: <LayoutDashboard size={18} />, label: 'Panel', exact: true },
-  { to: '/admin/usuarios', icon: <Users size={18} />, label: 'Estudiantes' },
-  { to: '/dashboard', icon: <BookOpen size={18} />, label: 'Ver App' },
+  { to: '/admin', icon: <LayoutDashboard size={18} />, label: 'Übersicht', exact: true },
+  { to: '/admin/usuarios', icon: <Users size={18} />, label: 'Schüler' },
+  { to: '/dashboard', icon: <BookOpen size={18} />, label: 'App ansehen' },
 ]
 
 export default function AdminNavbar() {
@@ -30,7 +30,7 @@ export default function AdminNavbar() {
             <img src="/logo.svg" alt="Logo" className="w-9 h-9" />
             <div className="hidden sm:block">
               <span className="font-extrabold text-orange-500 text-lg group-hover:text-orange-600 transition-colors">Admin</span>
-              <span className="text-xs text-gray-400 ml-2">Aprender-Aleman.de</span>
+              <span className="text-xs text-gray-400 ml-2">Schule</span>
             </div>
           </Link>
 
@@ -100,7 +100,7 @@ export default function AdminNavbar() {
                 onClick={() => { logout(); navigate('/') }}
                 className="flex items-center gap-2 px-3 py-2.5 rounded-lg text-sm font-medium text-red-500 hover:bg-red-50 mt-1"
               >
-                <LogOut size={18} /> Cerrar sesión
+                <LogOut size={18} /> Abmelden
               </button>
             </div>
           </motion.div>

@@ -1,10 +1,11 @@
 import React, { useMemo } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { Zap, Play, Trophy, Flame, Layers } from 'lucide-react'
+import { Zap, Play, Trophy, Flame, Layers, MessageCircle, Mic, Sparkles, Clock, ArrowRight } from 'lucide-react'
 import { useAuth } from '../context/AuthContext'
 import { useProgress } from '../context/ProgressContext'
 import Navbar from '../components/Layout/Navbar'
+import Footer from '../components/Layout/Footer'
 import SkillCard from '../components/Dashboard/SkillCard'
 import StreakCounter from '../components/Dashboard/StreakCounter'
 import RecentBadges from '../components/Dashboard/RecentBadges'
@@ -36,18 +37,18 @@ export default function Dashboard() {
   const item = { hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0 } }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex flex-col">
       <Navbar />
       <Toast toast={toast} />
 
-      <main className="max-w-6xl mx-auto px-4 py-8">
+      <main className="max-w-6xl mx-auto px-4 py-8 flex-1 w-full">
         {/* Greeting */}
         <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
           <h1 className="text-3xl font-extrabold text-gray-800 dark:text-gray-100">
-            Hola, <span className="text-orange-500">{user?.name}</span>! 👋
+            Hallo, <span className="text-orange-500">{user?.name}</span>! 👋
           </h1>
           <p className="text-gray-500 dark:text-gray-400 mt-1 text-lg">
-            Sigues en nivel <span className="font-bold text-orange-500">{user?.level}</span>. ¡Vamos a practicar!
+            Du bist auf Niveau <span className="font-bold text-orange-500">{user?.level}</span>. Lass uns üben!
           </p>
         </motion.div>
 
@@ -58,7 +59,7 @@ export default function Dashboard() {
             <div className="flex items-center justify-between mb-3">
               <div className="flex items-center gap-2">
                 <Zap size={20} className="text-orange-500" />
-                <span className="font-bold text-gray-800 dark:text-gray-100">Progreso de nivel</span>
+                <span className="font-bold text-gray-800 dark:text-gray-100">Niveau-Fortschritt</span>
               </div>
               <span className="text-sm font-semibold text-orange-500 bg-orange-50 dark:bg-orange-900/30 px-2 py-1 rounded-full">
                 {progress.xp} XP
@@ -66,7 +67,7 @@ export default function Dashboard() {
             </div>
             <ProgressBar value={levelProgress} color="orange" showPercent />
             <p className="text-xs text-gray-400 mt-2">
-              {progress.xp} / {levelXP} XP para completar nivel {user?.level}
+              {progress.xp} / {levelXP} XP zum Abschluss von Niveau {user?.level}
             </p>
           </motion.div>
 
@@ -81,17 +82,17 @@ export default function Dashboard() {
           <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="mb-6">
             <div className="bg-gradient-to-r from-orange-500 to-amber-500 rounded-2xl p-5 flex items-center justify-between shadow-lg">
               <div>
-                <p className="text-white/80 text-sm font-medium">Continúa donde lo dejaste</p>
+                <p className="text-white/80 text-sm font-medium">Mach dort weiter, wo du aufgehört hast</p>
                 <p className="text-white font-bold text-lg mt-0.5">{lastExercise.title}</p>
-                <p className="text-white/70 text-xs mt-0.5 capitalize">{lastExercise.type} · Nivel {lastExercise.level}</p>
+                <p className="text-white/70 text-xs mt-0.5 capitalize">{lastExercise.type} · Niveau {lastExercise.level}</p>
               </div>
               <button
                 onClick={() => navigate(`/ejercicio/${lastExercise.id}`)}
-                aria-label="Continuar último ejercicio"
+                aria-label="Letzte Übung fortsetzen"
                 className="bg-white text-orange-500 font-bold px-5 py-2.5 rounded-xl hover:bg-orange-50 transition-colors flex items-center gap-2 shadow"
               >
                 <Play size={16} />
-                Continuar
+                Weiter
               </button>
             </div>
           </motion.div>
@@ -120,19 +121,19 @@ export default function Dashboard() {
           >
             <h2 className="font-bold text-gray-800 dark:text-gray-100 text-lg mb-4 flex items-center gap-2">
               <Play size={18} className="text-orange-500" />
-              Inicio rápido
+              Schnellstart
             </h2>
             <div className="grid grid-cols-2 gap-3">
               {[
-                { type: 'grammar',   label: 'Gramática', emoji: '📚', color: 'bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300' },
-                { type: 'reading',   label: 'Lectura',   emoji: '📖', color: 'bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300' },
-                { type: 'listening', label: 'Audición',  emoji: '🎧', color: 'bg-purple-50 dark:bg-purple-900/20 text-purple-700 dark:text-purple-300' },
-                { type: 'writing',   label: 'Escritura', emoji: '✍️', color: 'bg-pink-50 dark:bg-pink-900/20 text-pink-700 dark:text-pink-300' },
+                { type: 'grammar',   label: 'Grammatik', emoji: '📚', color: 'bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300' },
+                { type: 'reading',   label: 'Lesen',     emoji: '📖', color: 'bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300' },
+                { type: 'listening', label: 'Hören',     emoji: '🎧', color: 'bg-purple-50 dark:bg-purple-900/20 text-purple-700 dark:text-purple-300' },
+                { type: 'writing',   label: 'Schreiben', emoji: '✍️', color: 'bg-pink-50 dark:bg-pink-900/20 text-pink-700 dark:text-pink-300' },
               ].map(({ type, label, emoji, color }) => (
                   <button
                     key={type}
                     onClick={() => navigate(`/ejercicios?tipo=${type}`)}
-                    aria-label={`Empezar ejercicio de ${label}`}
+                    aria-label={`${label}-Übung starten`}
                     className={`${color} rounded-xl p-4 text-left hover:opacity-80 transition-opacity`}
                   >
                     <span className="text-2xl block mb-2">{emoji}</span>
@@ -165,52 +166,89 @@ export default function Dashboard() {
               </div>
               <div className="flex-1">
                 <h3 className="text-white font-bold text-lg group-hover:text-yellow-200 transition-colors">
-                  Flashcards 🇩🇪
+                  Karteikarten 🇩🇪
                 </h3>
                 <p className="text-white/80 text-sm mt-1">
-                  Aprende vocabulario con repetición espaciada tipo Anki. Temas por nivel: comida, trabajo, viajes y más.
+                  Lerne Vokabeln mit verteilter Wiederholung im Anki-Stil. Themen nach Niveau: Essen, Arbeit, Reisen und mehr.
                 </p>
               </div>
             </div>
           </Link>
         </motion.div>
 
-        {/* Hans - Virtual Teacher CTA */}
+        {/* Hans - Virtual Teacher CTA (HERO) */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5 }}
-          className="mt-6"
+          className="mt-8"
         >
           <a
             href="https://hans.aprender-aleman.de"
             target="_blank"
             rel="noopener noreferrer"
-            className="block relative overflow-hidden bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-700 rounded-2xl p-6 hover:shadow-2xl hover:scale-[1.01] transition-all group"
+            className="block relative overflow-hidden bg-gradient-to-br from-indigo-700 via-purple-700 to-pink-600 rounded-3xl p-8 md:p-10 hover:shadow-2xl hover:scale-[1.005] transition-all group border-2 border-white/10"
           >
-            {/* Decorative circles */}
-            <div className="absolute -top-6 -right-6 w-32 h-32 bg-white/10 rounded-full" />
-            <div className="absolute -bottom-4 -left-4 w-24 h-24 bg-white/5 rounded-full" />
+            {/* Decorative animated gradient orbs */}
+            <div className="absolute -top-20 -right-20 w-64 h-64 bg-gradient-to-br from-pink-400/30 to-purple-500/20 rounded-full blur-3xl" />
+            <div className="absolute -bottom-20 -left-20 w-72 h-72 bg-gradient-to-br from-blue-400/30 to-indigo-500/20 rounded-full blur-3xl" />
+            <div className="absolute top-1/2 left-1/2 w-40 h-40 bg-yellow-400/10 rounded-full blur-2xl animate-pulse" />
 
-            <div className="relative flex items-center gap-5">
-              <div className="bg-white/20 backdrop-blur-sm rounded-2xl p-4 text-5xl shrink-0 group-hover:scale-110 transition-transform">
-                🤖
-              </div>
-              <div className="flex-1">
-                <div className="flex items-center gap-2 mb-1">
-                  <h3 className="text-white font-extrabold text-xl">
-                    ¡Practica con Hans!
-                  </h3>
-                  <span className="bg-yellow-400 text-yellow-900 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">
-                    IA 24/7
-                  </span>
+            {/* "NEW" ribbon */}
+            <div className="absolute top-5 right-5 md:top-7 md:right-7 flex items-center gap-1.5 bg-yellow-400 text-yellow-900 text-[10px] md:text-xs font-extrabold px-3 py-1.5 rounded-full uppercase tracking-widest shadow-lg animate-pulse">
+              <Sparkles size={12} /> KI 24/7
+            </div>
+
+            <div className="relative flex flex-col md:flex-row items-center gap-6 md:gap-8">
+              {/* Big robot avatar with glow */}
+              <div className="relative shrink-0">
+                <div className="absolute inset-0 bg-white/20 rounded-full blur-2xl scale-110 group-hover:scale-125 transition-transform" />
+                <div className="relative w-28 h-28 md:w-36 md:h-36 bg-gradient-to-br from-white/30 to-white/10 backdrop-blur-sm rounded-full flex items-center justify-center text-7xl md:text-8xl border-2 border-white/20 shadow-2xl group-hover:scale-110 transition-transform">
+                  🤖
                 </div>
-                <p className="text-white/80 text-sm leading-relaxed">
-                  Tu profesor virtual de alemán. Conversa, pregunta dudas de gramática y practica con inteligencia artificial — disponible a cualquier hora.
+                {/* Pulse indicator */}
+                <div className="absolute bottom-2 right-2 w-5 h-5 md:w-6 md:h-6 bg-green-400 rounded-full border-4 border-white shadow-lg">
+                  <span className="absolute inset-0 rounded-full bg-green-400 animate-ping opacity-75" />
+                </div>
+              </div>
+
+              {/* Content */}
+              <div className="flex-1 text-center md:text-left">
+                <div className="inline-flex items-center gap-2 bg-white/15 backdrop-blur-sm rounded-full px-3 py-1 mb-3 border border-white/20">
+                  <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
+                  <span className="text-white/90 text-xs font-semibold uppercase tracking-wider">Jetzt online</span>
+                </div>
+                <h2 className="text-white font-extrabold text-3xl md:text-4xl leading-tight mb-2">
+                  Triff <span className="text-yellow-300">Hans</span> 👋
+                </h2>
+                <p className="text-white/90 text-lg md:text-xl font-semibold mb-2">
+                  Dein virtueller Deutschlehrer — rund um die Uhr verfügbar
                 </p>
-                <div className="mt-3 inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm text-white text-sm font-bold px-4 py-2 rounded-xl group-hover:bg-white/30 transition-colors">
-                  Abrir Hans
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                <p className="text-white/75 text-sm md:text-base leading-relaxed mb-5 max-w-2xl">
+                  Unterhalte dich mit Hans per <strong className="text-white">Text oder Sprache</strong>. Er korrigiert deine Aussprache, erklärt Grammatik, beantwortet Fragen und hilft dir beim Üben natürlicher Konversationen — wann immer du willst.
+                </p>
+
+                {/* Feature chips */}
+                <div className="flex flex-wrap justify-center md:justify-start gap-2 mb-5">
+                  <div className="inline-flex items-center gap-1.5 bg-white/15 backdrop-blur-sm text-white text-xs md:text-sm font-semibold px-3 py-1.5 rounded-full border border-white/20">
+                    <MessageCircle size={14} /> Textchat
+                  </div>
+                  <div className="inline-flex items-center gap-1.5 bg-white/15 backdrop-blur-sm text-white text-xs md:text-sm font-semibold px-3 py-1.5 rounded-full border border-white/20">
+                    <Mic size={14} /> Sprachchat
+                  </div>
+                  <div className="inline-flex items-center gap-1.5 bg-white/15 backdrop-blur-sm text-white text-xs md:text-sm font-semibold px-3 py-1.5 rounded-full border border-white/20">
+                    <Clock size={14} /> 24/7 verfügbar
+                  </div>
+                  <div className="inline-flex items-center gap-1.5 bg-white/15 backdrop-blur-sm text-white text-xs md:text-sm font-semibold px-3 py-1.5 rounded-full border border-white/20">
+                    <Sparkles size={14} /> KI-gestützt
+                  </div>
+                </div>
+
+                {/* CTA button */}
+                <div className="inline-flex items-center gap-2 bg-white text-purple-700 text-base md:text-lg font-extrabold px-6 py-3 rounded-2xl shadow-xl group-hover:shadow-2xl group-hover:scale-105 transition-all">
+                  <MessageCircle size={20} />
+                  Jetzt mit Hans sprechen
+                  <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
                 </div>
               </div>
             </div>
@@ -225,9 +263,9 @@ export default function Dashboard() {
           className="mt-6 grid grid-cols-3 gap-4"
         >
           {[
-            { label: 'Ejercicios completados', value: progress.completedExercises?.length || 0, icon: Trophy },
-            { label: 'XP total ganado',         value: progress.xp || 0,                        icon: Zap },
-            { label: 'Días de racha',            value: progress.streak || 0,                    icon: Flame },
+            { label: 'Abgeschlossene Übungen', value: progress.completedExercises?.length || 0, icon: Trophy },
+            { label: 'Gesamt-XP',              value: progress.xp || 0,                        icon: Zap },
+            { label: 'Serien-Tage',            value: progress.streak || 0,                    icon: Flame },
           ].map(({ label, value, icon: Icon }) => (
             <div key={label} className="card text-center">
               <Icon size={24} className="text-orange-500 mx-auto mb-2" />
@@ -237,6 +275,7 @@ export default function Dashboard() {
           ))}
         </motion.div>
       </main>
+      <Footer />
     </div>
   )
 }

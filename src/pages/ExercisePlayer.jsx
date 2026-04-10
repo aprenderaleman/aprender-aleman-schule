@@ -29,7 +29,7 @@ export default function ExercisePlayer() {
   const [timerOn, setTimerOn] = useState(false)
   const [seconds, setSeconds] = useState(0)
   const [showAchievement, setShowAchievement] = useState(false)
-  // Resetear estado cuando cambia el id
+  // Reset state when id changes
   useEffect(() => {
     setScore(null)
     setShowResult(false)
@@ -48,7 +48,7 @@ export default function ExercisePlayer() {
   // Auto-start timer
   useEffect(() => { setTimerOn(true) }, [])
 
-  // Siguiente ejercicio del mismo tipo
+  // Next exercise of the same type
   const nextExercise = useMemo(() => {
     if (!exercise) return null
     const sameType = EXERCISES.filter(e => e.type === exercise.type)
@@ -62,8 +62,8 @@ export default function ExercisePlayer() {
     return (
       <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
         <div className="text-center">
-          <p className="text-2xl text-gray-500">Ejercicio no encontrado.</p>
-          <Button onClick={() => navigate('/ejercicios')} className="mt-4">Volver a ejercicios</Button>
+          <p className="text-2xl text-gray-500">Übung nicht gefunden.</p>
+          <Button onClick={() => navigate('/ejercicios')} className="mt-4">Zurück zu den Übungen</Button>
         </div>
       </div>
     )
@@ -96,9 +96,9 @@ export default function ExercisePlayer() {
   }
 
   const getMotivationalMessage = (s) => {
-    if (s < 50) return `No te desanimes, ${user?.name}. ¡Practica más y volverás a intentarlo!`
-    if (s < 80) return `Buen trabajo, ${user?.name}. ¡Ya casi lo tienes!`
-    return `¡Excelente, ${user?.name}! ¡Eso es alemán de verdad!`
+    if (s < 50) return `Lass dich nicht entmutigen, ${user?.name}. Übe weiter und versuche es nochmal!`
+    if (s < 80) return `Gut gemacht, ${user?.name}. Du hast es fast geschafft!`
+    return `Ausgezeichnet, ${user?.name}! Das ist echtes Deutsch!`
   }
 
   const getScoreColor = (s) => {
@@ -134,10 +134,10 @@ export default function ExercisePlayer() {
           <button
             onClick={() => navigate(`/ejercicios?tipo=${exercise.type}`)}
             className="flex items-center gap-1 text-gray-400 hover:text-orange-500 transition-colors text-sm"
-            aria-label="Volver a ejercicios"
+            aria-label="Zurück zu den Übungen"
           >
             <ArrowLeft size={18} />
-            Ejercicios
+            Übungen
           </button>
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-1 text-gray-400 text-sm">
@@ -146,9 +146,9 @@ export default function ExercisePlayer() {
               <button
                 onClick={() => setTimerOn(t => !t)}
                 className="ml-1 text-xs underline hover:text-orange-500"
-                aria-label={timerOn ? 'Pausar temporizador' : 'Reanudar temporizador'}
+                aria-label={timerOn ? 'Timer pausieren' : 'Timer fortsetzen'}
               >
-                {timerOn ? 'Pausar' : 'Reanudar'}
+                {timerOn ? 'Pause' : 'Fortsetzen'}
               </button>
             </div>
             <span className="flex items-center gap-1 text-orange-500 text-sm font-semibold">
@@ -166,11 +166,11 @@ export default function ExercisePlayer() {
         >
           <div className="flex items-center gap-2 mb-2">
             <span className="text-xs font-bold bg-orange-100 text-orange-600 dark:bg-orange-900/30 dark:text-orange-400 px-2 py-1 rounded-full capitalize">
-              {exercise.type === 'grammar' ? 'Gramática' :
-                exercise.type === 'reading' ? 'Lectura' :
-                  exercise.type === 'listening' ? 'Audición' : 'Escritura'}
+              {exercise.type === 'grammar' ? 'Grammatik' :
+                exercise.type === 'reading' ? 'Lesen' :
+                  exercise.type === 'listening' ? 'Hören' : 'Schreiben'}
             </span>
-            <span className="text-xs text-gray-400">Nivel {exercise.level} · Unidad {exercise.unit}</span>
+            <span className="text-xs text-gray-400">Niveau {exercise.level} · Einheit {exercise.unit}</span>
           </div>
           <h1 className="text-2xl font-extrabold text-gray-800 dark:text-gray-100">{exercise.title}</h1>
         </motion.div>
@@ -199,7 +199,7 @@ export default function ExercisePlayer() {
               <h2 className="text-3xl font-extrabold text-gray-800 dark:text-gray-100 mb-1">
                 <span className={getScoreColor(score)}>{score}%</span>
               </h2>
-              <p className="text-gray-500 dark:text-gray-400 mb-2">Puntuación final</p>
+              <p className="text-gray-500 dark:text-gray-400 mb-2">Endpunktzahl</p>
               <p className="text-gray-700 dark:text-gray-200 font-medium text-lg mb-6 max-w-sm mx-auto">
                 {getMotivationalMessage(score)}
               </p>
@@ -213,18 +213,18 @@ export default function ExercisePlayer() {
                   onClick={() => { setShowResult(false); setScore(null); setSeconds(0); setTimerOn(true) }}
                   variant="secondary"
                 >
-                  Repetir ejercicio
+                  Übung wiederholen
                 </Button>
                 {nextExercise ? (
                   <Button
                     onClick={() => navigate(`/ejercicio/${nextExercise.id}`)}
                     variant="primary"
                   >
-                    Siguiente ejercicio →
+                    Nächste Übung →
                   </Button>
                 ) : (
                   <Button onClick={() => navigate(`/ejercicios?tipo=${exercise.type}`)} variant="primary">
-                    Más ejercicios
+                    Mehr Übungen
                   </Button>
                 )}
               </div>
@@ -243,13 +243,13 @@ export default function ExercisePlayer() {
             >
               <span className="text-2xl">🏅</span>
               <div>
-                <p className="font-bold text-sm">¡Nuevo logro desbloqueado!</p>
+                <p className="font-bold text-sm">Neuer Erfolg freigeschaltet!</p>
                 <p className="text-xs mt-0.5">{newAchievements[0]?.label}</p>
               </div>
               <button
                 onClick={() => setShowAchievement(false)}
                 className="ml-auto"
-                aria-label="Cerrar notificación de logro"
+                aria-label="Erfolgsbenachrichtigung schließen"
               >
                 <X size={16} />
               </button>

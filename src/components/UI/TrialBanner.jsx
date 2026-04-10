@@ -30,14 +30,14 @@ export default function TrialBanner() {
         <Clock size={14} />
         <span>
           {daysLeft === 1
-            ? 'Te queda 1 dia de prueba gratis.'
-            : `Te quedan ${daysLeft} dias de prueba gratis.`}
+            ? 'Du hast noch 1 Tag kostenlose Testphase.'
+            : `Du hast noch ${daysLeft} Tage kostenlose Testphase.`}
         </span>
         <Link
           to="/pricing"
           className="inline-flex items-center gap-1 bg-white/20 hover:bg-white/30 px-3 py-0.5 rounded-full text-xs font-bold transition-colors"
         >
-          <Zap size={12} /> Suscribirme
+          <Zap size={12} /> Jetzt abonnieren
         </Link>
       </div>
     </div>

@@ -6,7 +6,7 @@ export default function Badge({ icon, title, description, color = 'from-orange-4
     <motion.div
       whileHover={{ scale: locked ? 1 : 1.05 }}
       className={`relative flex flex-col items-center ${small ? 'gap-1' : 'gap-2'} ${locked ? 'opacity-40 grayscale' : ''}`}
-      title={locked ? 'Logro bloqueado' : title}
+      title={locked ? 'Erfolg gesperrt' : title}
     >
       <div className={`${small ? 'w-12 h-12 text-2xl' : 'w-16 h-16 text-3xl'} rounded-2xl bg-gradient-to-br ${color} flex items-center justify-center shadow-lg`}>
         {locked ? '🔒' : icon}
@@ -38,10 +38,10 @@ export function LevelBadge({ level }) {
 
 export function TypeBadge({ type }) {
   const config = {
-    grammar: { label: 'Gramática', cls: 'bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300' },
-    reading: { label: 'Lectura', cls: 'bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300' },
-    listening: { label: 'Audición', cls: 'bg-purple-100 text-purple-700 dark:bg-purple-900 dark:text-purple-300' },
-    writing: { label: 'Escritura', cls: 'bg-pink-100 text-pink-700 dark:bg-pink-900 dark:text-pink-300' },
+    grammar: { label: 'Grammatik', cls: 'bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300' },
+    reading: { label: 'Lesen', cls: 'bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300' },
+    listening: { label: 'Hören', cls: 'bg-purple-100 text-purple-700 dark:bg-purple-900 dark:text-purple-300' },
+    writing: { label: 'Schreiben', cls: 'bg-pink-100 text-pink-700 dark:bg-pink-900 dark:text-pink-300' },
   }
   const c = config[type] || config.grammar
   return (

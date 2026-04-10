@@ -15,7 +15,7 @@ export const EXERCISES_PART1 = [
     question: 'Ich ___ müde.',
     options: ['bin', 'bist', 'ist', 'sind'],
     answer: 'bin',
-    explanation: 'El verbo "sein" (ser/estar) se conjuga "bin" con el pronombre "ich" (yo). Ich bin = Yo soy/estoy.',
+    explanation: 'Das Verb "sein" wird mit dem Pronomen "ich" als "bin" konjugiert. Beispiel: Ich bin müde.',
     xp: 10,
   },
   {
@@ -28,7 +28,7 @@ export const EXERCISES_PART1 = [
     question: 'Wir ___ zwei Kinder.',
     options: ['habe', 'hast', 'hat', 'haben'],
     answer: 'haben',
-    explanation: 'El verbo "haben" (tener) se conjuga "haben" con el pronombre "wir" (nosotros). Wir haben = Nosotros tenemos.',
+    explanation: 'Das Verb "haben" wird mit dem Pronomen "wir" als "haben" konjugiert. Beispiel: Wir haben zwei Kinder.',
     xp: 10,
   },
   {
@@ -41,7 +41,7 @@ export const EXERCISES_PART1 = [
     question: 'Er ___ Lehrer.',
     options: ['bin', 'bist', 'ist', 'seid'],
     answer: 'ist',
-    explanation: '"Sein" se conjuga "ist" con "er/sie/es" (él/ella/ello). Er ist Lehrer = Él es profesor.',
+    explanation: '"Sein" wird mit "er/sie/es" als "ist" konjugiert. Beispiel: Er ist Lehrer.',
     xp: 10,
   },
   {
@@ -54,7 +54,7 @@ export const EXERCISES_PART1 = [
     question: '___ bist sehr nett.',
     options: ['Ich', 'Du', 'Er', 'Wir'],
     answer: 'Du',
-    explanation: 'El pronombre "du" (tú) se usa con la conjugación "bist". Du bist = Tú eres/estás.',
+    explanation: 'Das Pronomen "du" wird mit der Verbform "bist" verwendet. Beispiel: Du bist sehr nett.',
     xp: 10,
   },
   {
@@ -67,7 +67,7 @@ export const EXERCISES_PART1 = [
     question: 'Welcher Satz ist richtig?',
     options: ['Sie ist eine Studentin.', 'Ist sie eine Studentin.', 'Eine Studentin sie ist.', 'Sie eine Studentin ist.'],
     answer: 'Sie ist eine Studentin.',
-    explanation: 'En alemán, el orden básico de la oración es: Sujeto + Verbo + Complemento. Sie ist eine Studentin = Ella es una estudiante.',
+    explanation: 'Im Deutschen ist die Grundstellung im Hauptsatz: Subjekt + Verb + Ergänzung. Das Verb steht immer an Position 2.',
     xp: 10,
   },
 
@@ -81,10 +81,10 @@ export const EXERCISES_PART1 = [
     title: 'Sich vorstellen',
     text: 'Hallo! Ich heiße Anna. Ich bin 25 Jahre alt. Ich komme aus Spanien, aber ich wohne jetzt in Berlin. Ich bin Studentin. Ich habe einen Bruder. Er heißt Carlos und ist 30 Jahre alt.',
     vocabulary: [
-      { word: 'heißen', translation: 'llamarse' },
-      { word: 'wohnen', translation: 'vivir' },
-      { word: 'der Bruder', translation: 'el hermano' },
-      { word: 'jetzt', translation: 'ahora' },
+      { word: 'heißen', translation: 'einen Namen haben' },
+      { word: 'wohnen', translation: 'an einem Ort leben' },
+      { word: 'der Bruder', translation: 'männliches Geschwister' },
+      { word: 'jetzt', translation: 'in diesem Moment' },
     ],
     questions: [
       {
@@ -109,10 +109,10 @@ export const EXERCISES_PART1 = [
     title: 'Im Deutschkurs',
     text: 'Guten Morgen! Ich bin Herr Müller. Ich bin der Deutschlehrer. Hier sind acht Studenten. Sie kommen aus Spanien, Italien und der Türkei. Wir lernen Deutsch. Der Kurs ist von Montag bis Freitag.',
     vocabulary: [
-      { word: 'der Lehrer', translation: 'el profesor' },
-      { word: 'der Student', translation: 'el estudiante' },
-      { word: 'lernen', translation: 'aprender' },
-      { word: 'der Kurs', translation: 'el curso' },
+      { word: 'der Lehrer', translation: 'Person, die unterrichtet' },
+      { word: 'der Student', translation: 'Person, die an der Uni studiert' },
+      { word: 'lernen', translation: 'Wissen erwerben' },
+      { word: 'der Kurs', translation: 'eine Unterrichtsreihe' },
     ],
     questions: [
       {
@@ -204,7 +204,7 @@ export const EXERCISES_PART1 = [
     question: '___ Buch ist interessant.',
     options: ['Der', 'Die', 'Das', 'Den'],
     answer: 'Das',
-    explanation: '"Buch" (libro) es neutro en alemán, por lo tanto lleva el artículo "das". Los artículos definidos son: der (masculino), die (femenino), das (neutro).',
+    explanation: '"Buch" ist im Deutschen ein Neutrum und hat daher den Artikel "das". Die bestimmten Artikel sind: der (maskulin), die (feminin), das (neutrum).',
     xp: 10,
   },
   {
@@ -217,7 +217,7 @@ export const EXERCISES_PART1 = [
     question: 'Ich möchte ___ Kaffee, bitte.',
     options: ['ein', 'eine', 'einen', 'einer'],
     answer: 'einen',
-    explanation: '"Kaffee" es masculino (der Kaffee). Con "möchten" se usa el acusativo, por lo que "ein" se convierte en "einen". Einen Kaffee = un café (acusativo masculino).',
+    explanation: '"Kaffee" ist maskulin (der Kaffee). Nach "möchten" steht der Akkusativ, deshalb wird aus "ein" die Form "einen". Akkusativ maskulin: einen Kaffee.',
     xp: 10,
   },
   {
@@ -230,7 +230,7 @@ export const EXERCISES_PART1 = [
     question: '___ Frau trinkt Tee.',
     options: ['Der', 'Die', 'Das', 'Ein'],
     answer: 'Die',
-    explanation: '"Frau" (mujer) es femenino en alemán y lleva el artículo "die". Die Frau = La mujer.',
+    explanation: '"Frau" ist im Deutschen feminin und hat den Artikel "die". Beispiel: Die Frau trinkt Tee.',
     xp: 10,
   },
   {
@@ -243,7 +243,7 @@ export const EXERCISES_PART1 = [
     question: 'Zwei ___ bitte!',
     options: ['Wasser', 'Wässer', 'Wassers', 'Wassern'],
     answer: 'Wasser',
-    explanation: 'La palabra "Wasser" (agua) no cambia en plural cuando se usa como bebida en un restaurante. Zwei Wasser = Dos aguas.',
+    explanation: 'Das Wort "Wasser" ändert sich im Plural nicht, wenn man es im Restaurant als Getränk bestellt. Beispiel: Zwei Wasser, bitte!',
     xp: 10,
   },
   {
@@ -256,7 +256,7 @@ export const EXERCISES_PART1 = [
     question: 'Welcher Satz ist richtig?',
     options: ['Ich hätte gern ein Brot.', 'Gern ich hätte ein Brot.', 'Ein Brot ich hätte gern.', 'Hätte ich gern ein Brot.'],
     answer: 'Ich hätte gern ein Brot.',
-    explanation: 'Para pedir comida educadamente se usa "Ich hätte gern..." (Me gustaría...). El verbo va en segunda posición.',
+    explanation: 'Um höflich Essen zu bestellen, verwendet man "Ich hätte gern...". Das Verb steht an Position 2 im Satz.',
     xp: 10,
   },
 
@@ -270,10 +270,10 @@ export const EXERCISES_PART1 = [
     title: 'Im Restaurant',
     text: 'Luisa geht ins Restaurant. Sie ist hungrig. Sie liest die Speisekarte. Es gibt Suppe, Salat und Pizza. Luisa bestellt eine Pizza und ein Wasser. Die Pizza kostet acht Euro. Das Wasser kostet zwei Euro. Luisa bezahlt zehn Euro.',
     vocabulary: [
-      { word: 'hungrig', translation: 'hambriento/a' },
-      { word: 'die Speisekarte', translation: 'la carta / el menú' },
-      { word: 'bestellen', translation: 'pedir / ordenar' },
-      { word: 'kosten', translation: 'costar' },
+      { word: 'hungrig', translation: 'Hunger haben' },
+      { word: 'die Speisekarte', translation: 'Liste mit Essen und Preisen im Restaurant' },
+      { word: 'bestellen', translation: 'im Restaurant etwas zu essen verlangen' },
+      { word: 'kosten', translation: 'einen bestimmten Preis haben' },
     ],
     questions: [
       {
@@ -298,10 +298,10 @@ export const EXERCISES_PART1 = [
     title: 'Im Supermarkt',
     text: 'Martin geht am Samstag in den Supermarkt. Er kauft Milch, Brot, Käse und Äpfel. Die Milch kostet einen Euro. Das Brot kostet zwei Euro fünfzig. Er braucht auch Eier, aber es gibt keine Eier mehr. Martin bezahlt an der Kasse.',
     vocabulary: [
-      { word: 'kaufen', translation: 'comprar' },
-      { word: 'die Milch', translation: 'la leche' },
-      { word: 'der Käse', translation: 'el queso' },
-      { word: 'die Kasse', translation: 'la caja (para pagar)' },
+      { word: 'kaufen', translation: 'etwas gegen Geld erwerben' },
+      { word: 'die Milch', translation: 'weißes Getränk von der Kuh' },
+      { word: 'der Käse', translation: 'Milchprodukt, oft auf Brot' },
+      { word: 'die Kasse', translation: 'Ort zum Bezahlen im Geschäft' },
     ],
     questions: [
       {
@@ -393,7 +393,7 @@ export const EXERCISES_PART1 = [
     question: 'Er ___ jeden Tag Deutsch. (lernen)',
     options: ['lerne', 'lernst', 'lernt', 'lernen'],
     answer: 'lernt',
-    explanation: 'Los verbos regulares en presente se conjugan quitando "-en" y añadiendo la terminación. Para "er/sie/es" la terminación es "-t": lernen → lernt.',
+    explanation: 'Regelmäßige Verben im Präsens werden konjugiert, indem man "-en" entfernt und die Endung anhängt. Für "er/sie/es" lautet die Endung "-t": lernen → lernt.',
     xp: 10,
   },
   {
@@ -406,7 +406,7 @@ export const EXERCISES_PART1 = [
     question: 'Ich komme heute ___ zur Schule.',
     options: ['nicht', 'kein', 'keine', 'nein'],
     answer: 'nicht',
-    explanation: '"Nicht" se usa para negar verbos, adjetivos y adverbios. "Kein/keine" se usa para negar sustantivos con artículo indefinido. Aquí se niega el verbo "kommen".',
+    explanation: '"Nicht" verwendet man, um Verben, Adjektive und Adverbien zu verneinen. "Kein/keine" verwendet man, um Nomen mit unbestimmtem Artikel zu verneinen. Hier wird das Verb "kommen" verneint.',
     xp: 10,
   },
   {
@@ -419,7 +419,7 @@ export const EXERCISES_PART1 = [
     question: 'Ich habe ___ Auto.',
     options: ['nicht', 'kein', 'keine', 'nichts'],
     answer: 'kein',
-    explanation: '"Kein" se usa para negar sustantivos que llevarían el artículo indefinido "ein". Auto es neutro (das Auto), así que se usa "kein" (kein = no/ningún).',
+    explanation: '"Kein" verwendet man, um Nomen zu verneinen, die sonst den unbestimmten Artikel "ein" hätten. "Auto" ist neutrum (das Auto), deshalb verwendet man "kein".',
     xp: 10,
   },
   {
@@ -432,7 +432,7 @@ export const EXERCISES_PART1 = [
     question: 'Ihr ___ um 7 Uhr auf. (aufstehen)',
     options: ['stehe auf', 'stehst auf', 'steht auf', 'stehen auf'],
     answer: 'steht auf',
-    explanation: '"Aufstehen" (levantarse) es un verbo separable. Con "ihr" (vosotros) se conjuga "steht...auf". El prefijo "auf" va al final de la oración.',
+    explanation: '"Aufstehen" ist ein trennbares Verb. Mit "ihr" konjugiert man "steht ... auf". Das Präfix "auf" steht am Ende des Satzes.',
     xp: 10,
   },
   {
@@ -445,7 +445,7 @@ export const EXERCISES_PART1 = [
     question: 'Welcher Satz ist richtig?',
     options: ['Um acht Uhr frühstücke ich.', 'Ich um acht Uhr frühstücke.', 'Frühstücke ich um acht Uhr.', 'Um acht Uhr ich frühstücke.'],
     answer: 'Um acht Uhr frühstücke ich.',
-    explanation: 'Cuando la oración empieza con una expresión de tiempo, el verbo sigue en segunda posición y el sujeto se coloca después del verbo (inversión).',
+    explanation: 'Wenn der Satz mit einer Zeitangabe beginnt, bleibt das Verb an Position 2 und das Subjekt steht nach dem Verb (Inversion).',
     xp: 10,
   },
 
@@ -459,10 +459,10 @@ export const EXERCISES_PART1 = [
     title: 'Mein Tag',
     text: 'Ich stehe um 6 Uhr auf. Um halb sieben dusche ich. Dann frühstücke ich um 7 Uhr. Ich esse Brot mit Käse und trinke Kaffee. Um 8 Uhr fahre ich zur Arbeit. Ich arbeite von 9 bis 17 Uhr. Am Abend koche ich und sehe fern. Um 23 Uhr gehe ich ins Bett.',
     vocabulary: [
-      { word: 'aufstehen', translation: 'levantarse' },
-      { word: 'duschen', translation: 'ducharse' },
-      { word: 'frühstücken', translation: 'desayunar' },
-      { word: 'fernsehen', translation: 'ver la televisión' },
+      { word: 'aufstehen', translation: 'aus dem Bett kommen' },
+      { word: 'duschen', translation: 'sich mit Wasser waschen' },
+      { word: 'frühstücken', translation: 'am Morgen essen' },
+      { word: 'fernsehen', translation: 'Sendungen im TV schauen' },
     ],
     questions: [
       {
@@ -487,10 +487,10 @@ export const EXERCISES_PART1 = [
     title: 'Am Wochenende',
     text: 'Am Samstag schlafe ich bis 9 Uhr. Ich frühstücke nicht, ich trinke nur Orangensaft. Um 10 Uhr treffe ich meine Freunde im Park. Wir spielen Fußball. Am Nachmittag gehe ich einkaufen. Am Sonntag mache ich nichts. Ich lese und höre Musik.',
     vocabulary: [
-      { word: 'schlafen', translation: 'dormir' },
-      { word: 'treffen', translation: 'encontrarse con' },
-      { word: 'einkaufen gehen', translation: 'ir de compras' },
-      { word: 'nichts', translation: 'nada' },
+      { word: 'schlafen', translation: 'nachts im Bett sein' },
+      { word: 'treffen', translation: 'jemanden sehen und Zeit verbringen' },
+      { word: 'einkaufen gehen', translation: 'in Geschäften etwas kaufen' },
+      { word: 'nichts', translation: 'überhaupt keine Sache' },
     ],
     questions: [
       {
@@ -582,7 +582,7 @@ export const EXERCISES_PART1 = [
     question: 'Ich ___ gestern einen Film gesehen.',
     options: ['bin', 'habe', 'hat', 'ist'],
     answer: 'habe',
-    explanation: 'El Perfekt (pretérito perfecto) se forma con "haben" o "sein" + participio. "Sehen" (ver) usa "haben": Ich habe gesehen = Yo he visto.',
+    explanation: 'Das Perfekt bildet man mit "haben" oder "sein" + Partizip II. "Sehen" wird mit "haben" gebildet: Ich habe gesehen.',
     xp: 10,
   },
   {
@@ -595,7 +595,7 @@ export const EXERCISES_PART1 = [
     question: 'Wir ___ nach Spanien gefahren.',
     options: ['haben', 'sind', 'hat', 'ist'],
     answer: 'sind',
-    explanation: 'Los verbos de movimiento y cambio de estado usan "sein" en Perfekt. "Fahren" (ir/conducir) indica movimiento: Wir sind gefahren = Nosotros hemos ido.',
+    explanation: 'Verben der Bewegung und Zustandsänderung bilden das Perfekt mit "sein". "Fahren" drückt eine Bewegung aus: Wir sind gefahren.',
     xp: 10,
   },
   {
@@ -608,7 +608,7 @@ export const EXERCISES_PART1 = [
     question: 'Hast du schon den Koffer ___? (packen)',
     options: ['gepackt', 'gepacken', 'packt', 'gepacktet'],
     answer: 'gepackt',
-    explanation: 'El participio II de verbos regulares se forma con "ge-" + raíz + "-t". Packen → gepackt (empacar → empacado).',
+    explanation: 'Das Partizip II regelmäßiger Verben wird mit "ge-" + Wortstamm + "-t" gebildet. Beispiel: packen → gepackt.',
     xp: 10,
   },
   {
@@ -621,7 +621,7 @@ export const EXERCISES_PART1 = [
     question: 'Er ___ früh ___. (aufstehen)',
     options: ['hat ... aufgestanden', 'ist ... aufgestanden', 'hat ... aufgesteht', 'ist ... aufgesteht'],
     answer: 'ist ... aufgestanden',
-    explanation: 'Los verbos separables forman el participio II con "ge-" entre el prefijo y la raíz: auf-ge-standen. "Aufstehen" usa "sein" porque indica un cambio de estado.',
+    explanation: 'Trennbare Verben bilden das Partizip II mit "ge-" zwischen dem Präfix und dem Wortstamm: auf-ge-standen. "Aufstehen" verwendet "sein", weil es eine Zustandsänderung ausdrückt.',
     xp: 10,
   },
   {
@@ -634,7 +634,7 @@ export const EXERCISES_PART1 = [
     question: 'Welcher Satz ist richtig?',
     options: ['Im Sommer sind wir nach Italien geflogen.', 'Im Sommer wir sind nach Italien geflogen.', 'Im Sommer geflogen wir sind nach Italien.', 'Im Sommer sind geflogen wir nach Italien.'],
     answer: 'Im Sommer sind wir nach Italien geflogen.',
-    explanation: 'En el Perfekt, el verbo auxiliar (haben/sein) va en segunda posición y el participio II va al final de la oración.',
+    explanation: 'Im Perfekt steht das Hilfsverb (haben/sein) an Position 2 und das Partizip II steht am Ende des Satzes.',
     xp: 10,
   },
 
@@ -648,11 +648,11 @@ export const EXERCISES_PART1 = [
     title: 'Urlaub am Meer',
     text: 'Letzten Sommer bin ich mit meiner Familie nach Mallorca geflogen. Wir haben in einem Hotel am Strand gewohnt. Das Wetter war toll, die Sonne hat jeden Tag geschienen. Wir sind im Meer geschwommen und haben Sandburgen gebaut. Am Abend haben wir in verschiedenen Restaurants gegessen. Ich habe auch Souvenirs für meine Freunde gekauft. Der Urlaub war wunderbar!',
     vocabulary: [
-      { word: 'der Strand', translation: 'la playa' },
-      { word: 'das Meer', translation: 'el mar' },
-      { word: 'schwimmen', translation: 'nadar' },
-      { word: 'die Sandburg', translation: 'el castillo de arena' },
-      { word: 'wunderbar', translation: 'maravilloso' },
+      { word: 'der Strand', translation: 'Sandfläche am Meer' },
+      { word: 'das Meer', translation: 'großes Salzwasser, z. B. Ostsee' },
+      { word: 'schwimmen', translation: 'sich im Wasser bewegen' },
+      { word: 'die Sandburg', translation: 'aus Sand gebautes Bauwerk am Strand' },
+      { word: 'wunderbar', translation: 'sehr schön, fantastisch' },
     ],
     questions: [
       {
@@ -677,11 +677,11 @@ export const EXERCISES_PART1 = [
     title: 'Eine Postkarte aus Wien',
     text: 'Liebe Mama, viele Grüße aus Wien! Gestern bin ich angekommen und habe mein Hotelzimmer bezogen. Heute Morgen habe ich den Stephansdom besichtigt. Danach bin ich durch die Altstadt spaziert und habe eine Sachertorte probiert. Sie war köstlich! Morgen plane ich, das Schloss Schönbrunn zu besuchen. Das Wetter ist kalt, aber schön. Bis bald! Dein Sohn Marco.',
     vocabulary: [
-      { word: 'besichtigen', translation: 'visitar (un lugar turístico)' },
-      { word: 'die Altstadt', translation: 'el casco antiguo' },
-      { word: 'probieren', translation: 'probar' },
-      { word: 'köstlich', translation: 'delicioso' },
-      { word: 'das Schloss', translation: 'el castillo / palacio' },
+      { word: 'besichtigen', translation: 'einen Ort als Tourist anschauen' },
+      { word: 'die Altstadt', translation: 'der historische Teil einer Stadt' },
+      { word: 'probieren', translation: 'etwas zum ersten Mal essen oder testen' },
+      { word: 'köstlich', translation: 'sehr lecker, wunderbar im Geschmack' },
+      { word: 'das Schloss', translation: 'großes, altes Gebäude von Königen oder Adligen' },
     ],
     questions: [
       {
@@ -773,7 +773,7 @@ export const EXERCISES_PART1 = [
     question: 'Ich ___ gut Deutsch sprechen.',
     options: ['kann', 'kannst', 'können', 'könnt'],
     answer: 'kann',
-    explanation: 'El verbo modal "können" (poder) se conjuga "kann" con "ich". Los verbos modales van en segunda posición y el infinitivo va al final de la oración.',
+    explanation: 'Das Modalverb "können" wird mit "ich" als "kann" konjugiert. Modalverben stehen an Position 2 und der Infinitiv steht am Satzende.',
     xp: 10,
   },
   {
@@ -786,7 +786,7 @@ export const EXERCISES_PART1 = [
     question: 'Du ___ morgen um 8 Uhr aufstehen.',
     options: ['muss', 'musst', 'müssen', 'müsst'],
     answer: 'musst',
-    explanation: '"Müssen" (deber/tener que) se conjuga "musst" con "du". Du musst = Tú debes / Tú tienes que.',
+    explanation: '"Müssen" wird mit "du" als "musst" konjugiert. Beispiel: Du musst früh aufstehen.',
     xp: 10,
   },
   {
@@ -799,7 +799,7 @@ export const EXERCISES_PART1 = [
     question: 'Hier ___ man nicht rauchen.',
     options: ['darf', 'darfst', 'dürfen', 'dürft'],
     answer: 'darf',
-    explanation: '"Dürfen" (tener permiso) se conjuga "darf" con "man" (se/uno). Man darf nicht = No se puede / No está permitido.',
+    explanation: '"Dürfen" wird mit "man" als "darf" konjugiert. "Man darf nicht" bedeutet, dass etwas nicht erlaubt ist.',
     xp: 10,
   },
   {
@@ -812,7 +812,7 @@ export const EXERCISES_PART1 = [
     question: 'Welcher Satz ist richtig?',
     options: ['Sie möchte ein Kleid kaufen.', 'Sie möchte kaufen ein Kleid.', 'Ein Kleid möchte sie kaufen.', 'Kaufen möchte sie ein Kleid.'],
     answer: 'Sie möchte ein Kleid kaufen.',
-    explanation: 'Con verbos modales, el modal va en segunda posición conjugado y el infinitivo va al final: Sujeto + Modal + Complementos + Infinitivo.',
+    explanation: 'Mit Modalverben steht das konjugierte Modalverb an Position 2 und der Infinitiv am Satzende: Subjekt + Modalverb + Ergänzungen + Infinitiv.',
     xp: 10,
   },
   {
@@ -825,7 +825,7 @@ export const EXERCISES_PART1 = [
     question: 'Die Kinder ___ Eis essen.',
     options: ['will', 'willst', 'wollen', 'wollt'],
     answer: 'wollen',
-    explanation: '"Wollen" (querer) se conjuga "wollen" con "die Kinder" (los niños = sie/plural). Die Kinder wollen = Los niños quieren.',
+    explanation: '"Wollen" wird mit "die Kinder" (3. Person Plural / sie) als "wollen" konjugiert. Beispiel: Die Kinder wollen Eis essen.',
     xp: 10,
   },
 
@@ -839,10 +839,10 @@ export const EXERCISES_PART1 = [
     title: 'Wegbeschreibung',
     text: 'Entschuldigung, wie komme ich zum Bahnhof? Gehen Sie hier geradeaus bis zur Ampel. An der Ampel biegen Sie links ab. Dann gehen Sie die zweite Straße rechts. Der Bahnhof ist auf der linken Seite, neben der Post. Das sind ungefähr zehn Minuten zu Fuß. Sie können auch den Bus Nummer 5 nehmen. Die Bushaltestelle ist gleich hier um die Ecke.',
     vocabulary: [
-      { word: 'der Bahnhof', translation: 'la estación de tren' },
-      { word: 'die Ampel', translation: 'el semáforo' },
-      { word: 'abbiegen', translation: 'girar / doblar' },
-      { word: 'die Bushaltestelle', translation: 'la parada de autobús' },
+      { word: 'der Bahnhof', translation: 'Ort, wo Züge ankommen und abfahren' },
+      { word: 'die Ampel', translation: 'Verkehrssignal mit roten und grünen Lichtern' },
+      { word: 'abbiegen', translation: 'die Richtung ändern, z. B. nach rechts' },
+      { word: 'die Bushaltestelle', translation: 'Ort, wo man in den Bus einsteigt' },
     ],
     questions: [
       {
@@ -867,10 +867,10 @@ export const EXERCISES_PART1 = [
     title: 'Im Kaufhaus',
     text: 'Heute hat Sara im Kaufhaus eingekauft. Sie wollte ein Geschenk für ihre Mutter kaufen. Zuerst hat sie sich Handtaschen angeschaut, aber die waren zu teuer. Dann ist sie in die Schmuckabteilung gegangen. Dort hat sie eine schöne Halskette für 35 Euro gefunden. Die Verkäuferin hat die Kette in ein hübsches Geschenkpapier eingepackt. Sara war zufrieden.',
     vocabulary: [
-      { word: 'das Kaufhaus', translation: 'los grandes almacenes' },
-      { word: 'das Geschenk', translation: 'el regalo' },
-      { word: 'die Halskette', translation: 'el collar' },
-      { word: 'zufrieden', translation: 'satisfecho/a' },
+      { word: 'das Kaufhaus', translation: 'großes Geschäft mit vielen Abteilungen' },
+      { word: 'das Geschenk', translation: 'etwas, das man jemandem gibt' },
+      { word: 'die Halskette', translation: 'Schmuck, den man um den Hals trägt' },
+      { word: 'zufrieden', translation: 'glücklich mit etwas' },
     ],
     questions: [
       {
@@ -962,7 +962,7 @@ export const EXERCISES_PART1 = [
     question: 'Ich sehe ___ Mann.',
     options: ['der', 'den', 'dem', 'des'],
     answer: 'den',
-    explanation: 'El acusativo se usa con el complemento directo. El artículo masculino "der" cambia a "den" en acusativo. Ich sehe den Mann = Yo veo al hombre.',
+    explanation: 'Der Akkusativ wird für das direkte Objekt verwendet. Der maskuline Artikel "der" wird im Akkusativ zu "den". Beispiel: Ich sehe den Mann.',
     xp: 10,
   },
   {
@@ -975,7 +975,7 @@ export const EXERCISES_PART1 = [
     question: 'Ich gebe ___ Frau das Buch.',
     options: ['die', 'der', 'den', 'dem'],
     answer: 'der',
-    explanation: 'El dativo se usa con el complemento indirecto. El artículo femenino "die" cambia a "der" en dativo. Der Frau = a la mujer.',
+    explanation: 'Der Dativ wird für das indirekte Objekt verwendet. Der feminine Artikel "die" wird im Dativ zu "der". Beispiel: Ich gebe der Frau das Buch.',
     xp: 10,
   },
   {
@@ -988,7 +988,7 @@ export const EXERCISES_PART1 = [
     question: 'Ich wohne ___ meiner Schwester. (bei)',
     options: ['bei', 'mit', 'nach', 'von'],
     answer: 'bei',
-    explanation: '"Bei" (en casa de) es una preposición que siempre rige dativo. "Bei meiner Schwester" = en casa de mi hermana. Otras preposiciones con dativo: mit, nach, von, zu, seit, aus, gegenüber.',
+    explanation: '"Bei" ist eine Präposition, die immer mit dem Dativ steht. "Bei meiner Schwester" bedeutet, dass man im Haus der Schwester wohnt. Weitere Präpositionen mit Dativ: mit, nach, von, zu, seit, aus, gegenüber.',
     xp: 10,
   },
   {
@@ -1001,7 +1001,7 @@ export const EXERCISES_PART1 = [
     question: 'Ich stelle die Lampe auf ___ Tisch. (der Tisch)',
     options: ['den', 'dem', 'der', 'das'],
     answer: 'den',
-    explanation: 'Las "Wechselpräpositionen" (in, an, auf, über, unter, vor, hinter, neben, zwischen) usan acusativo con movimiento (wohin?) y dativo sin movimiento (wo?). Aquí hay movimiento (stellen = colocar), por eso se usa acusativo: den Tisch.',
+    explanation: 'Die Wechselpräpositionen (in, an, auf, über, unter, vor, hinter, neben, zwischen) stehen mit Akkusativ bei Bewegung (wohin?) und mit Dativ ohne Bewegung (wo?). Hier liegt Bewegung vor (stellen), deshalb steht der Akkusativ: den Tisch.',
     xp: 10,
   },
   {
@@ -1014,7 +1014,7 @@ export const EXERCISES_PART1 = [
     question: 'Welcher Satz ist richtig?',
     options: ['Er schenkt seiner Mutter einen Ring.', 'Er schenkt einen Ring seiner Mutter.', 'Seiner Mutter er schenkt einen Ring.', 'Er einen Ring seiner Mutter schenkt.'],
     answer: 'Er schenkt seiner Mutter einen Ring.',
-    explanation: 'Cuando hay dativo y acusativo en una oración, el orden habitual es: Sujeto + Verbo + Dativo + Acusativo. "Seiner Mutter" (dativo) va antes de "einen Ring" (acusativo).',
+    explanation: 'Wenn Dativ und Akkusativ im Satz vorkommen, ist die übliche Reihenfolge: Subjekt + Verb + Dativ + Akkusativ. "Seiner Mutter" (Dativ) steht vor "einen Ring" (Akkusativ).',
     xp: 10,
   },
 
@@ -1028,10 +1028,10 @@ export const EXERCISES_PART1 = [
     title: 'Meine Wohnung',
     text: 'Ich wohne in einer Dreizimmerwohnung in der Stadtmitte. Die Wohnung hat ein Wohnzimmer, ein Schlafzimmer und ein Arbeitszimmer. Die Küche ist klein, aber modern. Im Wohnzimmer steht ein großes Sofa neben dem Fenster. An der Wand hängt ein Bild von meiner Familie. Das Schlafzimmer ist ruhig, weil es zum Hinterhof liegt. Die Miete ist 750 Euro im Monat, mit Nebenkosten.',
     vocabulary: [
-      { word: 'die Wohnung', translation: 'el piso / apartamento' },
-      { word: 'das Arbeitszimmer', translation: 'el estudio / despacho' },
-      { word: 'die Miete', translation: 'el alquiler' },
-      { word: 'die Nebenkosten', translation: 'los gastos adicionales' },
+      { word: 'die Wohnung', translation: 'Räume, in denen man wohnt' },
+      { word: 'das Arbeitszimmer', translation: 'Zimmer, in dem man zu Hause arbeitet' },
+      { word: 'die Miete', translation: 'Geld, das man monatlich für eine Wohnung zahlt' },
+      { word: 'die Nebenkosten', translation: 'zusätzliche Kosten, z. B. für Wasser und Heizung' },
     ],
     questions: [
       {
@@ -1056,10 +1056,10 @@ export const EXERCISES_PART1 = [
     title: 'Stellenanzeige',
     text: 'Wir suchen eine freundliche Kellnerin oder einen freundlichen Kellner für unser Restaurant in der Altstadt. Sie müssen Erfahrung in der Gastronomie haben und gut Deutsch sprechen. Die Arbeitszeit ist von Dienstag bis Samstag, von 11 bis 22 Uhr. Wir bieten einen guten Lohn und ein nettes Team. Bitte schicken Sie Ihren Lebenslauf an info@restaurant-altstadtglueck.de.',
     vocabulary: [
-      { word: 'der Kellner / die Kellnerin', translation: 'el camarero / la camarera' },
-      { word: 'die Erfahrung', translation: 'la experiencia' },
-      { word: 'der Lohn', translation: 'el salario / sueldo' },
-      { word: 'der Lebenslauf', translation: 'el currículum vitae' },
+      { word: 'der Kellner / die Kellnerin', translation: 'Person, die im Restaurant bedient' },
+      { word: 'die Erfahrung', translation: 'Wissen, das man durch Praxis bekommt' },
+      { word: 'der Lohn', translation: 'Geld, das man für seine Arbeit bekommt' },
+      { word: 'der Lebenslauf', translation: 'Übersicht über Ausbildung und Berufserfahrung' },
     ],
     questions: [
       {
@@ -1151,7 +1151,7 @@ export const EXERCISES_PART1 = [
     question: 'Wenn ich Zeit hätte, ___ ich ins Kino gehen.',
     options: ['werde', 'würde', 'wollte', 'will'],
     answer: 'würde',
-    explanation: 'El Konjunktiv II se usa para expresar deseos, situaciones hipotéticas o cortesía. Se forma con "würde" + infinitivo: Ich würde gehen = Yo iría.',
+    explanation: 'Der Konjunktiv II drückt Wünsche, hypothetische Situationen oder Höflichkeit aus. Er wird mit "würde" + Infinitiv gebildet: Ich würde gehen.',
     xp: 10,
   },
   {
@@ -1164,7 +1164,7 @@ export const EXERCISES_PART1 = [
     question: 'Wenn ich reich ___, würde ich eine Weltreise machen.',
     options: ['wäre', 'hätte', 'bin', 'sei'],
     answer: 'wäre',
-    explanation: '"Sein" tiene su propia forma de Konjunktiv II: wäre (sería/estaría). "Haben" → hätte (tendría). Se prefieren estas formas a "würde sein" o "würde haben".',
+    explanation: '"Sein" hat eine eigene Konjunktiv-II-Form: wäre. "Haben" → hätte. Diese Formen verwendet man lieber statt "würde sein" oder "würde haben".',
     xp: 10,
   },
   {
@@ -1177,7 +1177,7 @@ export const EXERCISES_PART1 = [
     question: 'Ich lerne Deutsch, ___ ich in Deutschland arbeiten möchte.',
     options: ['weil', 'obwohl', 'wenn', 'damit'],
     answer: 'weil',
-    explanation: '"Weil" (porque) introduce una oración subordinada causal. El verbo conjugado va al final de la oración subordinada: ...weil ich arbeiten möchte.',
+    explanation: '"Weil" leitet einen kausalen Nebensatz ein. Das konjugierte Verb steht am Ende des Nebensatzes: ...weil ich arbeiten möchte.',
     xp: 10,
   },
   {
@@ -1190,7 +1190,7 @@ export const EXERCISES_PART1 = [
     question: 'Er geht zur Arbeit, ___ er krank ist.',
     options: ['weil', 'obwohl', 'dass', 'wenn'],
     answer: 'obwohl',
-    explanation: '"Obwohl" (aunque) introduce una oración concesiva. Indica una contradicción: está enfermo, pero va a trabajar de todos modos.',
+    explanation: '"Obwohl" leitet einen konzessiven Nebensatz ein. Es drückt einen Gegensatz aus: Er ist krank, geht aber trotzdem zur Arbeit.',
     xp: 10,
   },
   {
@@ -1208,7 +1208,7 @@ export const EXERCISES_PART1 = [
       'Ich denke, dass er kommt morgen.',
     ],
     answer: 'Ich denke, dass er morgen kommt.',
-    explanation: 'En oraciones subordinadas con "dass" (que), el verbo conjugado va al final de la subordinada: ...dass er morgen kommt.',
+    explanation: 'In Nebensätzen mit "dass" steht das konjugierte Verb am Ende des Nebensatzes: ...dass er morgen kommt.',
     xp: 10,
   },
 
@@ -1222,11 +1222,11 @@ export const EXERCISES_PART1 = [
     title: 'Bewerbungsschreiben',
     text: 'Sehr geehrte Damen und Herren, ich bewerbe mich hiermit um die Stelle als Marketingassistentin, die Sie auf Ihrer Webseite ausgeschrieben haben. Ich habe Kommunikationswissenschaften studiert und verfüge über zwei Jahre Berufserfahrung im Bereich Online-Marketing. Derzeit arbeite ich bei einer kleinen Agentur, möchte mich aber beruflich weiterentwickeln. Ich bin kreativ, teamfähig und belastbar. Über eine Einladung zum Vorstellungsgespräch würde ich mich sehr freuen. Mit freundlichen Grüßen, Elena García.',
     vocabulary: [
-      { word: 'sich bewerben', translation: 'postularse / solicitar un empleo' },
-      { word: 'die Berufserfahrung', translation: 'la experiencia laboral' },
-      { word: 'sich weiterentwickeln', translation: 'desarrollarse profesionalmente' },
-      { word: 'belastbar', translation: 'resistente al estrés' },
-      { word: 'das Vorstellungsgespräch', translation: 'la entrevista de trabajo' },
+      { word: 'sich bewerben', translation: 'eine Stelle schriftlich anfragen' },
+      { word: 'die Berufserfahrung', translation: 'Erfahrung, die man im Beruf gesammelt hat' },
+      { word: 'sich weiterentwickeln', translation: 'beruflich oder persönlich Fortschritte machen' },
+      { word: 'belastbar', translation: 'auch unter Stress gut arbeiten können' },
+      { word: 'das Vorstellungsgespräch', translation: 'Gespräch mit einem Arbeitgeber über eine Stelle' },
     ],
     questions: [
       {
@@ -1251,11 +1251,11 @@ export const EXERCISES_PART1 = [
     title: 'Ratgeber: Das Vorstellungsgespräch',
     text: 'Ein Vorstellungsgespräch kann stressig sein, aber mit guter Vorbereitung schaffen Sie es. Informieren Sie sich vorher über das Unternehmen und überlegen Sie, warum Sie dort arbeiten möchten. Kleiden Sie sich angemessen und kommen Sie pünktlich. Während des Gesprächs sollten Sie Blickkontakt halten und selbstbewusst sprechen. Wenn Sie nach Ihren Schwächen gefragt werden, nennen Sie eine echte Schwäche, aber erklären Sie, wie Sie daran arbeiten. Nach dem Gespräch sollten Sie eine kurze Dankes-E-Mail schreiben.',
     vocabulary: [
-      { word: 'die Vorbereitung', translation: 'la preparación' },
-      { word: 'das Unternehmen', translation: 'la empresa' },
-      { word: 'angemessen', translation: 'adecuado / apropiado' },
-      { word: 'selbstbewusst', translation: 'seguro de sí mismo' },
-      { word: 'die Schwäche', translation: 'la debilidad' },
+      { word: 'die Vorbereitung', translation: 'alles, was man vor einem Ereignis organisiert' },
+      { word: 'das Unternehmen', translation: 'eine Firma' },
+      { word: 'angemessen', translation: 'passend zur Situation' },
+      { word: 'selbstbewusst', translation: 'von sich selbst überzeugt, sicher' },
+      { word: 'die Schwäche', translation: 'ein Punkt, in dem man nicht so gut ist' },
     ],
     questions: [
       {
@@ -1347,7 +1347,7 @@ export const EXERCISES_PART1 = [
     question: 'Das Auto ___ in der Werkstatt repariert.',
     options: ['wird', 'werden', 'ist', 'hat'],
     answer: 'wird',
-    explanation: 'El Passiv (voz pasiva) en presente se forma con "werden" + participio II. Para "das Auto" (singular): wird repariert = es reparado.',
+    explanation: 'Das Passiv im Präsens wird mit "werden" + Partizip II gebildet. Für "das Auto" (Singular): wird repariert.',
     xp: 10,
   },
   {
@@ -1360,7 +1360,7 @@ export const EXERCISES_PART1 = [
     question: 'Das Problem ___ sofort gelöst werden.',
     options: ['muss', 'müssen', 'musste', 'müsste'],
     answer: 'muss',
-    explanation: 'El Passiv con verbo modal se forma: Modalverb + Partizip II + "werden". El verbo modal se conjuga y "werden" va en infinitivo al final: muss gelöst werden = debe ser solucionado.',
+    explanation: 'Das Passiv mit Modalverb wird gebildet: Modalverb + Partizip II + "werden". Das Modalverb wird konjugiert, und "werden" steht im Infinitiv am Ende: muss gelöst werden.',
     xp: 10,
   },
   {
@@ -1373,7 +1373,7 @@ export const EXERCISES_PART1 = [
     question: 'Der ___ Mann liest eine Zeitung. (alt)',
     options: ['alter', 'alte', 'alten', 'altes'],
     answer: 'alte',
-    explanation: 'Después de un artículo definido (der/die/das), el adjetivo recibe la terminación débil. Nominativo masculino: der alte Mann. La terminación es "-e".',
+    explanation: 'Nach einem bestimmten Artikel (der/die/das) bekommt das Adjektiv die schwache Endung. Nominativ maskulin: der alte Mann. Die Endung ist "-e".',
     xp: 10,
   },
   {
@@ -1386,7 +1386,7 @@ export const EXERCISES_PART1 = [
     question: 'Sie trägt ein ___ Kleid. (rot)',
     options: ['rotes', 'rote', 'rotem', 'roten'],
     answer: 'rotes',
-    explanation: 'Después de un artículo indefinido, el adjetivo recibe la terminación fuerte cuando el artículo no muestra el género. Neutro nominativo/acusativo: ein rotes Kleid (la "-es" indica el género neutro).',
+    explanation: 'Nach einem unbestimmten Artikel bekommt das Adjektiv die starke Endung, wenn der Artikel das Genus nicht zeigt. Neutrum Nominativ/Akkusativ: ein rotes Kleid (das "-es" zeigt das Neutrum an).',
     xp: 10,
   },
   {
@@ -1404,7 +1404,7 @@ export const EXERCISES_PART1 = [
       'Viele Autos in Deutschland werden produziert.',
     ],
     answer: 'In Deutschland werden viele Autos produziert.',
-    explanation: 'En la voz pasiva, "werden" ocupa la segunda posición y el participio II va al final. Cuando la oración empieza con un complemento, el verbo sigue en segunda posición.',
+    explanation: 'Im Passiv steht "werden" an Position 2 und das Partizip II am Satzende. Wenn der Satz mit einer Ergänzung beginnt, bleibt das Verb trotzdem an Position 2.',
     xp: 10,
   },
 
@@ -1418,11 +1418,11 @@ export const EXERCISES_PART1 = [
     title: 'Umweltschutz im Alltag',
     text: 'Umweltschutz beginnt im Alltag. In Deutschland wird der Müll sorgfältig getrennt: Papier, Plastik, Glas und Biomüll kommen in verschiedene Tonnen. Außerdem wird das Pfandsystem für Flaschen genutzt, um Verpackungsmüll zu reduzieren. Viele Menschen fahren mit dem Fahrrad oder benutzen öffentliche Verkehrsmittel, anstatt das Auto zu nehmen. Erneuerbare Energien wie Wind- und Solarenergie werden immer wichtiger. Obwohl Deutschland viel für den Klimaschutz tut, gibt es noch Herausforderungen, zum Beispiel beim Kohleausstieg.',
     vocabulary: [
-      { word: 'der Umweltschutz', translation: 'la protección del medio ambiente' },
-      { word: 'der Müll', translation: 'la basura' },
-      { word: 'trennen', translation: 'separar' },
-      { word: 'erneuerbar', translation: 'renovable' },
-      { word: 'die Herausforderung', translation: 'el desafío' },
+      { word: 'der Umweltschutz', translation: 'Maßnahmen zum Schutz der Natur' },
+      { word: 'der Müll', translation: 'Abfall, den man wegwirft' },
+      { word: 'trennen', translation: 'in verschiedene Teile aufteilen' },
+      { word: 'erneuerbar', translation: 'immer wieder verfügbar, z. B. Sonne und Wind' },
+      { word: 'die Herausforderung', translation: 'schwierige Aufgabe, die man bewältigen muss' },
     ],
     questions: [
       {
@@ -1447,11 +1447,11 @@ export const EXERCISES_PART1 = [
     title: 'Digitalisierung und Arbeitswelt',
     text: 'Die Digitalisierung verändert die Arbeitswelt grundlegend. Viele Aufgaben, die früher von Menschen erledigt wurden, werden heute von Computern und Robotern übernommen. Homeoffice ist durch neue Technologien möglich geworden und wird von vielen Arbeitnehmern geschätzt. Gleichzeitig werden neue Berufe geschaffen, zum Beispiel im Bereich Datenanalyse oder Softwareentwicklung. Experten meinen, dass lebenslanges Lernen notwendig ist, weil sich die Anforderungen ständig ändern. Obwohl die Digitalisierung viele Vorteile bietet, machen sich manche Menschen Sorgen um ihren Arbeitsplatz.',
     vocabulary: [
-      { word: 'die Digitalisierung', translation: 'la digitalización' },
-      { word: 'übernehmen', translation: 'asumir / hacerse cargo' },
-      { word: 'der Arbeitnehmer', translation: 'el empleado / trabajador' },
-      { word: 'schaffen', translation: 'crear' },
-      { word: 'lebenslang', translation: 'a lo largo de la vida' },
+      { word: 'die Digitalisierung', translation: 'Umstellung auf digitale Technik' },
+      { word: 'übernehmen', translation: 'eine Aufgabe von jemandem bekommen' },
+      { word: 'der Arbeitnehmer', translation: 'Person, die bei einer Firma angestellt ist' },
+      { word: 'schaffen', translation: 'etwas Neues hervorbringen, erschaffen' },
+      { word: 'lebenslang', translation: 'das ganze Leben lang' },
     ],
     questions: [
       {
@@ -1543,7 +1543,7 @@ export const EXERCISES_PART1 = [
     question: '___ du Kopfschmerzen hast, solltest du eine Tablette nehmen.',
     options: ['Wenn', 'Weil', 'Obwohl', 'Dass'],
     answer: 'Wenn',
-    explanation: '"Wenn" (si/cuando) introduce una oración condicional o temporal. El verbo conjugado va al final de la subordinada: Wenn du Kopfschmerzen hast = Si tienes dolor de cabeza.',
+    explanation: '"Wenn" leitet einen konditionalen oder temporalen Nebensatz ein. Das konjugierte Verb steht am Ende des Nebensatzes: Wenn du Kopfschmerzen hast, ...',
     xp: 10,
   },
   {
@@ -1556,7 +1556,7 @@ export const EXERCISES_PART1 = [
     question: '___ dem Studium hat sie sofort eine Stelle gefunden.',
     options: ['Seit', 'Vor', 'Nach', 'Während'],
     answer: 'Nach',
-    explanation: '"Nach" (después de) + dativo indica un evento posterior. "Nach dem Studium" = Después de los estudios. "Seit" = desde, "vor" = antes de/hace, "während" = durante.',
+    explanation: '"Nach" + Dativ drückt ein späteres Ereignis aus. "Nach dem Studium" bedeutet: im Anschluss an das Studium. "Seit" drückt einen Zeitraum ab einem Punkt in der Vergangenheit aus, "vor" ein früheres Ereignis, "während" etwas Gleichzeitiges.',
     xp: 10,
   },
   {
@@ -1569,7 +1569,7 @@ export const EXERCISES_PART1 = [
     question: 'Nachdem er gefrühstückt ___, ging er zur Arbeit.',
     options: ['hat', 'hatte', 'war', 'ist'],
     answer: 'hatte',
-    explanation: 'El Plusquamperfekt (pluscuamperfecto) se forma con hatte/war + participio II. Se usa para una acción anterior a otra en el pasado: Nachdem er gefrühstückt hatte = Después de que había desayunado.',
+    explanation: 'Das Plusquamperfekt wird mit hatte/war + Partizip II gebildet. Es beschreibt eine Handlung, die vor einer anderen Handlung in der Vergangenheit passiert ist: Nachdem er gefrühstückt hatte, ...',
     xp: 10,
   },
   {
@@ -1582,7 +1582,7 @@ export const EXERCISES_PART1 = [
     question: 'Das ist der Arzt, ___ mir geholfen hat.',
     options: ['der', 'den', 'dem', 'dessen'],
     answer: 'der',
-    explanation: 'El pronombre relativo concuerda en género y número con el sustantivo al que se refiere. "Der Arzt" es masculino nominativo, y como el pronombre es sujeto del Relativsatz, se usa "der".',
+    explanation: 'Das Relativpronomen stimmt im Genus und Numerus mit dem Nomen überein, auf das es sich bezieht. "Der Arzt" ist maskulin, und weil das Pronomen Subjekt im Relativsatz ist, steht es im Nominativ: "der".',
     xp: 10,
   },
   {
@@ -1600,7 +1600,7 @@ export const EXERCISES_PART1 = [
       'Nachdem ich abgeschlossen das Studium hatte, begann ich eine Ausbildung.',
     ],
     answer: 'Nachdem ich das Studium abgeschlossen hatte, begann ich eine Ausbildung.',
-    explanation: 'En oraciones con "nachdem", la subordinada lleva el verbo al final (Plusquamperfekt). La oración principal que sigue empieza con el verbo en segunda posición (inversión).',
+    explanation: 'In Sätzen mit "nachdem" steht das Verb (im Plusquamperfekt) am Ende des Nebensatzes. Der darauf folgende Hauptsatz beginnt mit dem Verb an Position 2 (Inversion).',
     xp: 10,
   },
 
@@ -1614,11 +1614,11 @@ export const EXERCISES_PART1 = [
     title: 'Das deutsche Bildungssystem',
     text: 'Das deutsche Bildungssystem ist komplex. Nach der vierjährigen Grundschule werden die Kinder auf verschiedene Schulen aufgeteilt: Hauptschule, Realschule oder Gymnasium. Das Gymnasium führt zum Abitur, das für ein Universitätsstudium notwendig ist. Seit einigen Jahren gibt es auch Gesamtschulen, in denen alle Schüler gemeinsam lernen. Nach der Schule können Jugendliche eine Berufsausbildung machen oder studieren. Das duale Ausbildungssystem, bei dem man gleichzeitig in der Berufsschule und im Betrieb lernt, ist international bekannt und wird oft als Vorbild genannt.',
     vocabulary: [
-      { word: 'die Grundschule', translation: 'la escuela primaria' },
-      { word: 'das Abitur', translation: 'el bachillerato (examen final)' },
-      { word: 'die Berufsausbildung', translation: 'la formación profesional' },
-      { word: 'der Betrieb', translation: 'la empresa' },
-      { word: 'das Vorbild', translation: 'el modelo / ejemplo' },
+      { word: 'die Grundschule', translation: 'die ersten vier Schuljahre in Deutschland' },
+      { word: 'das Abitur', translation: 'Abschlussprüfung am Gymnasium, Voraussetzung fürs Studium' },
+      { word: 'die Berufsausbildung', translation: 'praktische Ausbildung für einen Beruf' },
+      { word: 'der Betrieb', translation: 'eine Firma oder ein Unternehmen' },
+      { word: 'das Vorbild', translation: 'Beispiel, an dem sich andere orientieren' },
     ],
     questions: [
       {
@@ -1643,11 +1643,11 @@ export const EXERCISES_PART1 = [
     title: 'Gesund leben',
     text: 'Gesundheit ist mehr als nur die Abwesenheit von Krankheit. Experten empfehlen, dass man sich mindestens 30 Minuten am Tag bewegen sollte. Regelmäßiger Sport stärkt das Immunsystem und reduziert Stress. Auch die Ernährung spielt eine wichtige Rolle: Man sollte viel Obst und Gemüse essen und wenig Zucker konsumieren. Ausreichend Schlaf ist ebenfalls wichtig, weil sich der Körper in der Nacht erholt. Obwohl viele Menschen wissen, was gesund ist, fällt es ihnen oft schwer, gesunde Gewohnheiten beizubehalten, besonders wenn der Alltag stressig ist.',
     vocabulary: [
-      { word: 'sich bewegen', translation: 'moverse / hacer ejercicio' },
-      { word: 'das Immunsystem', translation: 'el sistema inmunológico' },
-      { word: 'die Ernährung', translation: 'la alimentación' },
-      { word: 'sich erholen', translation: 'recuperarse' },
-      { word: 'beibehalten', translation: 'mantener' },
+      { word: 'sich bewegen', translation: 'aktiv sein, Sport machen' },
+      { word: 'das Immunsystem', translation: 'Abwehrsystem des Körpers gegen Krankheiten' },
+      { word: 'die Ernährung', translation: 'was und wie man isst' },
+      { word: 'sich erholen', translation: 'wieder fit werden, neue Kraft bekommen' },
+      { word: 'beibehalten', translation: 'etwas weiterhin so machen wie bisher' },
     ],
     questions: [
       {
