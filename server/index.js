@@ -124,6 +124,50 @@ const stripe = STRIPE_SECRET_KEY ? new Stripe(STRIPE_SECRET_KEY) : null
   }
 })()
 
+// Auto-create Prüfungen tables
+;(async () => {
+  try {
+    // User exam preparation plan (one per user)
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS schule_pruefungen_plans (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        userId VARCHAR(191) NOT NULL UNIQUE,
+        provider VARCHAR(32) NOT NULL DEFAULT 'goethe',
+        level VARCHAR(8) NOT NULL,
+        examDate DATE DEFAULT NULL,
+        createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+        updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+        INDEX idx_userId (userId)
+      )
+    `)
+    // Each attempt at a simulation/practice (one row per started attempt)
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS schule_pruefungen_attempts (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        userId VARCHAR(191) NOT NULL,
+        provider VARCHAR(32) NOT NULL DEFAULT 'goethe',
+        level VARCHAR(8) NOT NULL,
+        module VARCHAR(16) NOT NULL,
+        examId VARCHAR(64) NOT NULL,
+        mode ENUM('practice','simulation') NOT NULL DEFAULT 'simulation',
+        startedAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+        finishedAt DATETIME DEFAULT NULL,
+        score DECIMAL(5,2) DEFAULT NULL,
+        maxScore DECIMAL(5,2) DEFAULT NULL,
+        passed TINYINT(1) DEFAULT NULL,
+        durationSeconds INT DEFAULT NULL,
+        responses JSON DEFAULT NULL,
+        feedback JSON DEFAULT NULL,
+        INDEX idx_user_module (userId, module),
+        INDEX idx_user_level (userId, level),
+        INDEX idx_user_finished (userId, finishedAt)
+      )
+    `)
+  } catch (err) {
+    console.error('Failed to create Pruefungen tables:', err.message)
+  }
+})()
+
 // Helper: get user subscription status
 async function getSubscriptionInfo(userId) {
   const [rows] = await pool.query('SELECT * FROM schule_subscriptions WHERE userId = ?', [userId])
@@ -1094,6 +1138,215 @@ app.get('/api/subscription', authMiddleware, async (req, res) => {
   } catch (err) {
     console.error('Subscription status error:', err)
     res.status(500).json({ error: 'Error al obtener estado de suscripción.' })
+  }
+})
+
+// ─── PRÜFUNGEN ────────────────────────────────────────
+
+// GET current user's exam plan
+app.get('/api/pruefungen/plan', authMiddleware, subscriptionMiddleware, async (req, res) => {
+  try {
+    const [rows] = await pool.query('SELECT * FROM schule_pruefungen_plans WHERE userId = ? LIMIT 1', [req.user.id])
+    if (rows.length === 0) return res.json({ plan: null })
+    const plan = rows[0]
+
+    // Aggregate progress per module from finished attempts
+    const [attempts] = await pool.query(
+      `SELECT module, MAX(score / NULLIF(maxScore,0) * 100) AS bestPct, COUNT(*) AS totalAttempts
+       FROM schule_pruefungen_attempts
+       WHERE userId = ? AND finishedAt IS NOT NULL AND maxScore > 0
+       GROUP BY module`,
+      [req.user.id]
+    )
+    const progress = { lesen: 0, hoeren: 0, schreiben: 0, sprechen: 0 }
+    for (const row of attempts) {
+      progress[row.module] = Math.round(Number(row.bestPct) || 0)
+    }
+
+    res.json({
+      plan: {
+        provider: plan.provider,
+        level: plan.level,
+        examDate: plan.examDate,
+        createdAt: plan.createdAt,
+        progress,
+      },
+    })
+  } catch (err) {
+    console.error('Get plan error:', err)
+    res.status(500).json({ error: 'Error al obtener el plan.' })
+  }
+})
+
+// CREATE/UPDATE exam plan
+app.post('/api/pruefungen/plan', authMiddleware, subscriptionMiddleware, async (req, res) => {
+  try {
+    const { provider = 'goethe', level, examDate } = req.body
+    const ALLOWED_LEVELS = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2']
+    if (!ALLOWED_LEVELS.includes(level)) {
+      return res.status(400).json({ error: 'Nivel inválido.' })
+    }
+    let date = null
+    if (examDate) {
+      const d = new Date(examDate)
+      if (isNaN(d.getTime())) return res.status(400).json({ error: 'Fecha inválida.' })
+      date = d.toISOString().split('T')[0]
+    }
+    await pool.query(
+      `INSERT INTO schule_pruefungen_plans (userId, provider, level, examDate)
+       VALUES (?, ?, ?, ?)
+       ON DUPLICATE KEY UPDATE provider = VALUES(provider), level = VALUES(level), examDate = VALUES(examDate), updatedAt = NOW()`,
+      [req.user.id, provider, level, date]
+    )
+    res.json({ ok: true })
+  } catch (err) {
+    console.error('Save plan error:', err)
+    res.status(500).json({ error: 'Error al guardar el plan.' })
+  }
+})
+
+// DELETE exam plan
+app.delete('/api/pruefungen/plan', authMiddleware, subscriptionMiddleware, async (req, res) => {
+  try {
+    await pool.query('DELETE FROM schule_pruefungen_plans WHERE userId = ?', [req.user.id])
+    res.json({ ok: true })
+  } catch (err) {
+    console.error('Delete plan error:', err)
+    res.status(500).json({ error: 'Error al eliminar el plan.' })
+  }
+})
+
+// START a new attempt — returns attempt id and server-side timestamp for fair timing
+app.post('/api/pruefungen/attempts', authMiddleware, subscriptionMiddleware, async (req, res) => {
+  try {
+    const { provider = 'goethe', level, module, examId, mode = 'simulation' } = req.body
+    if (!level || !module || !examId) {
+      return res.status(400).json({ error: 'Faltan datos.' })
+    }
+    const [result] = await pool.query(
+      `INSERT INTO schule_pruefungen_attempts (userId, provider, level, module, examId, mode)
+       VALUES (?, ?, ?, ?, ?, ?)`,
+      [req.user.id, provider, level, module, examId, mode]
+    )
+    res.json({ attemptId: result.insertId, startedAt: new Date().toISOString() })
+  } catch (err) {
+    console.error('Start attempt error:', err)
+    res.status(500).json({ error: 'Error al iniciar el intento.' })
+  }
+})
+
+// FINISH attempt — saves score, responses, feedback
+app.post('/api/pruefungen/attempts/:id/finish', authMiddleware, subscriptionMiddleware, async (req, res) => {
+  try {
+    const attemptId = parseInt(req.params.id)
+    const { score, maxScore, responses, feedback } = req.body
+    if (typeof score !== 'number' || typeof maxScore !== 'number' || maxScore <= 0) {
+      return res.status(400).json({ error: 'Datos de puntuación inválidos.' })
+    }
+    // Verify ownership
+    const [rows] = await pool.query('SELECT userId, startedAt FROM schule_pruefungen_attempts WHERE id = ? LIMIT 1', [attemptId])
+    if (rows.length === 0) return res.status(404).json({ error: 'Intento no encontrado.' })
+    if (rows[0].userId !== req.user.id) return res.status(403).json({ error: 'No autorizado.' })
+
+    const durationSec = Math.round((Date.now() - new Date(rows[0].startedAt).getTime()) / 1000)
+    const passed = (score / maxScore) >= 0.6 ? 1 : 0 // Goethe: 60% to pass
+
+    await pool.query(
+      `UPDATE schule_pruefungen_attempts
+       SET finishedAt = NOW(), score = ?, maxScore = ?, passed = ?, durationSeconds = ?, responses = ?, feedback = ?
+       WHERE id = ?`,
+      [score, maxScore, passed, durationSec, JSON.stringify(responses || null), JSON.stringify(feedback || null), attemptId]
+    )
+    res.json({ ok: true, score, maxScore, passed: !!passed, percentage: Math.round((score / maxScore) * 100) })
+  } catch (err) {
+    console.error('Finish attempt error:', err)
+    res.status(500).json({ error: 'Error al finalizar el intento.' })
+  }
+})
+
+// LIST recent attempts for current user
+app.get('/api/pruefungen/attempts', authMiddleware, subscriptionMiddleware, async (req, res) => {
+  try {
+    const { module, level, limit = 20 } = req.query
+    const filters = ['userId = ?']
+    const params = [req.user.id]
+    if (module) { filters.push('module = ?'); params.push(module) }
+    if (level) { filters.push('level = ?'); params.push(level) }
+    const lim = Math.min(parseInt(limit) || 20, 100)
+    const [rows] = await pool.query(
+      `SELECT id, provider, level, module, examId, mode, startedAt, finishedAt, score, maxScore, passed, durationSeconds
+       FROM schule_pruefungen_attempts
+       WHERE ${filters.join(' AND ')}
+       ORDER BY startedAt DESC
+       LIMIT ${lim}`,
+      params
+    )
+    res.json({ attempts: rows })
+  } catch (err) {
+    console.error('List attempts error:', err)
+    res.status(500).json({ error: 'Error al obtener los intentos.' })
+  }
+})
+
+// GRADE Schreiben submission with Claude using Goethe rubric
+app.post('/api/pruefungen/grade-schreiben', authMiddleware, subscriptionMiddleware, aiRateLimit, async (req, res) => {
+  try {
+    if (!ANTHROPIC_API_KEY) return res.status(503).json({ error: 'Servicio de IA no disponible.' })
+    const { level, taskType, taskPrompt, submission, minWords } = req.body
+    if (!level || !taskPrompt || !submission) {
+      return res.status(400).json({ error: 'Faltan datos.' })
+    }
+
+    const wordCount = submission.trim().split(/\s+/).filter(Boolean).length
+    const userName = req.user.fullName || 'Student'
+
+    const message = `Du bist offizieller Prüfer für das Goethe-Zertifikat ${level}. Bewerte diesen Schreibteil nach der offiziellen Goethe-Bewertungsskala.
+
+AUFGABE (${taskType || 'Schreibaufgabe'}):
+${taskPrompt}
+
+MINDESTWORTANZAHL: ${minWords || '?'} | TATSÄCHLICH: ${wordCount} Wörter
+
+EINREICHUNG DES STUDENTEN:
+"""
+${submission}
+"""
+
+Bewerte nach den 4 offiziellen Goethe-Kriterien (jeweils 0-25 Punkte, Gesamt max. 100):
+1. Erfüllung der Aufgabe (Inhaltliche Vollständigkeit, Textsortenadäquatheit)
+2. Kohärenz (Textaufbau, Verknüpfung der Sätze)
+3. Wortschatz (Bandbreite und Korrektheit)
+4. Strukturen (Grammatik, Syntax, morphologische Korrektheit)
+
+Antworte AUSSCHLIESSLICH mit gültigem JSON, ohne Markdown-Codeblock:
+{
+  "scores": {
+    "erfuellung": 20,
+    "kohaerenz": 18,
+    "wortschatz": 15,
+    "strukturen": 17
+  },
+  "total": 70,
+  "passed": true,
+  "wordCount": ${wordCount},
+  "errors": [
+    {"original": "exakte Stelle aus dem Text", "correction": "Korrektur", "explanation": "kurze Erklärung", "severity": "low|medium|high"}
+  ],
+  "strengths": ["Was gut gemacht wurde, in 1-2 Sätzen"],
+  "improvements": ["Konkreter Verbesserungsvorschlag"],
+  "overall": "Gesamtkommentar (2-3 Sätze, ermutigend aber präzise)"
+}
+
+passed = true wenn total >= 60.`
+
+    const text = await callAnthropic([{ role: 'user', content: message }], userName, level, 2500)
+    const jsonMatch = text.match(/\{[\s\S]*\}/)
+    if (!jsonMatch) return res.status(500).json({ error: 'Error al procesar respuesta de IA.' })
+    const result = JSON.parse(jsonMatch[0])
+    res.json(result)
+  } catch (err) {
+    console.error('Grade Schreiben error:', err.message)
+    res.status(500).json({ error: 'Error al evaluar el escrito.' })
   }
 })
 

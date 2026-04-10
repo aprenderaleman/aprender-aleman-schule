@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import {
   GraduationCap, ArrowRight, ArrowLeft, Calendar, Target,
   CheckCircle2, Clock, BookOpen, Headphones, PenLine, Mic,
-  Sparkles, Trophy, Flame
+  Sparkles, Trophy, Flame, Loader2, Lock, Play
 } from 'lucide-react'
 import Navbar from '../components/Layout/Navbar'
 import Footer from '../components/Layout/Footer'
+import { useAuth } from '../context/AuthContext'
+import { getExamsFor, countsByModule } from '../data/pruefungen'
 
-const STORAGE_KEY = 'schule_pruefung_plan'
+const API_URL = import.meta.env.VITE_API_URL || ''
 
 const LEVELS = [
   { code: 'A1', title: 'Goethe-Zertifikat A1', subtitle: 'Start Deutsch 1', desc: 'Absoluter Anfänger. Du kannst dich vorstellen und einfache Fragen stellen.', color: 'from-green-500 to-emerald-500', border: 'border-green-300' },
@@ -19,6 +21,7 @@ const LEVELS = [
   { code: 'C1', title: 'Goethe-Zertifikat C1', subtitle: 'Oberstufenprüfung', desc: 'Fortgeschritten. Voraussetzung für ein Studium an deutschen Universitäten.', color: 'from-orange-500 to-red-500', border: 'border-orange-300' },
   { code: 'C2', title: 'Goethe-Zertifikat C2', subtitle: 'Großes Deutsches Sprachdiplom', desc: 'Höchstes Niveau. Annähernd muttersprachliche Kompetenz.', color: 'from-rose-500 to-pink-600', border: 'border-rose-300' },
 ]
+const LEVEL_BY_CODE = Object.fromEntries(LEVELS.map(l => [l.code, l]))
 
 const MODULES = [
   { id: 'lesen', label: 'Lesen', icon: BookOpen, color: 'text-blue-500', bg: 'bg-blue-50 dark:bg-blue-900/20', desc: 'Textverständnis' },
@@ -27,57 +30,97 @@ const MODULES = [
   { id: 'sprechen', label: 'Sprechen', icon: Mic, color: 'text-orange-500', bg: 'bg-orange-50 dark:bg-orange-900/20', desc: 'Mündlicher Ausdruck' },
 ]
 
-function loadPlan() {
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY)
-    return raw ? JSON.parse(raw) : null
-  } catch {
-    return null
-  }
-}
-
-function savePlan(plan) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(plan))
-}
-
-function clearPlan() {
-  localStorage.removeItem(STORAGE_KEY)
-}
-
 export default function Pruefungen() {
-  const [plan, setPlan] = useState(() => loadPlan())
+  const { getToken } = useAuth()
+  const [plan, setPlan] = useState(null)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
 
-  if (plan) return <PruefungsDashboard plan={plan} onReset={() => { clearPlan(); setPlan(null) }} />
-  return <PruefungsWizard onComplete={(p) => { savePlan(p); setPlan(p) }} />
+  const fetchPlan = async () => {
+    try {
+      const res = await fetch(`${API_URL}/api/pruefungen/plan`, {
+        headers: { Authorization: `Bearer ${getToken()}` },
+      })
+      if (!res.ok) throw new Error('Konnte den Plan nicht laden')
+      const data = await res.json()
+      setPlan(data.plan)
+    } catch (err) {
+      setError(err.message)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  useEffect(() => { fetchPlan() }, [])
+
+  const handleSavePlan = async (newPlan) => {
+    setLoading(true)
+    try {
+      const res = await fetch(`${API_URL}/api/pruefungen/plan`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${getToken()}` },
+        body: JSON.stringify({ provider: 'goethe', level: newPlan.level.code, examDate: newPlan.examDate }),
+      })
+      if (!res.ok) throw new Error('Konnte den Plan nicht speichern')
+      await fetchPlan()
+    } catch (err) {
+      setError(err.message)
+      setLoading(false)
+    }
+  }
+
+  const handleResetPlan = async () => {
+    setLoading(true)
+    try {
+      await fetch(`${API_URL}/api/pruefungen/plan`, {
+        method: 'DELETE',
+        headers: { Authorization: `Bearer ${getToken()}` },
+      })
+      setPlan(null)
+    } catch (err) {
+      setError(err.message)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex flex-col">
+        <Navbar />
+        <div className="flex-1 flex items-center justify-center">
+          <Loader2 size={32} className="animate-spin text-indigo-500" />
+        </div>
+      </div>
+    )
+  }
+
+  if (plan) return <PruefungsDashboard plan={plan} onReset={handleResetPlan} onRefresh={fetchPlan} />
+  return <PruefungsWizard onComplete={handleSavePlan} initialError={error} />
 }
 
 /* ==========================
-   WIZARD (3 steps)
+   WIZARD
    ========================== */
-function PruefungsWizard({ onComplete }) {
+function PruefungsWizard({ onComplete, initialError }) {
   const [step, setStep] = useState(1)
   const [level, setLevel] = useState(null)
   const [examDate, setExamDate] = useState('')
   const [noDate, setNoDate] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
 
   const canContinue = (step === 1 && level) || (step === 2 && (examDate || noDate))
 
-  const handleFinish = () => {
-    onComplete({
-      provider: 'goethe',
-      level,
-      examDate: noDate ? null : examDate,
-      createdAt: new Date().toISOString(),
-      progress: { lesen: 0, hoeren: 0, schreiben: 0, sprechen: 0 },
-      completedAttempts: [],
-    })
+  const handleFinish = async () => {
+    setSubmitting(true)
+    await onComplete({ level, examDate: noDate ? null : examDate })
+    setSubmitting(false)
   }
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex flex-col">
       <Navbar />
       <main className="flex-1 max-w-4xl w-full mx-auto px-4 py-8 md:py-12">
-        {/* Header */}
         <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="mb-8 text-center">
           <div className="inline-flex items-center gap-2 bg-indigo-100 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300 px-4 py-1.5 rounded-full text-sm font-bold mb-4">
             <Sparkles size={14} /> NEU · Prüfungsvorbereitung
@@ -104,8 +147,13 @@ function PruefungsWizard({ onComplete }) {
           ))}
         </div>
 
+        {initialError && (
+          <div className="max-w-md mx-auto bg-red-50 border border-red-200 text-red-700 rounded-xl p-3 mb-6 text-sm">
+            {initialError}
+          </div>
+        )}
+
         <AnimatePresence mode="wait">
-          {/* STEP 1 — Level */}
           {step === 1 && (
             <motion.div key="s1" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}>
               <h2 className="text-xl md:text-2xl font-bold text-gray-800 dark:text-gray-100 mb-1 text-center">Welches Niveau?</h2>
@@ -136,7 +184,6 @@ function PruefungsWizard({ onComplete }) {
             </motion.div>
           )}
 
-          {/* STEP 2 — Date */}
           {step === 2 && (
             <motion.div key="s2" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}>
               <h2 className="text-xl md:text-2xl font-bold text-gray-800 dark:text-gray-100 mb-1 text-center">Wann ist deine Prüfung?</h2>
@@ -173,7 +220,6 @@ function PruefungsWizard({ onComplete }) {
             </motion.div>
           )}
 
-          {/* STEP 3 — Confirmation */}
           {step === 3 && (
             <motion.div key="s3" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}>
               <h2 className="text-xl md:text-2xl font-bold text-gray-800 dark:text-gray-100 mb-1 text-center">Alles bereit!</h2>
@@ -216,7 +262,6 @@ function PruefungsWizard({ onComplete }) {
           )}
         </AnimatePresence>
 
-        {/* Navigation */}
         <div className="flex items-center justify-between mt-10 max-w-md mx-auto">
           <button
             onClick={() => setStep((s) => Math.max(1, s - 1))}
@@ -236,9 +281,10 @@ function PruefungsWizard({ onComplete }) {
           ) : (
             <button
               onClick={handleFinish}
-              className="flex items-center gap-1.5 px-6 py-2.5 rounded-xl font-bold text-sm bg-gradient-to-r from-indigo-600 to-purple-600 text-white hover:from-indigo-700 hover:to-purple-700 transition shadow-lg"
+              disabled={submitting}
+              className="flex items-center gap-1.5 px-6 py-2.5 rounded-xl font-bold text-sm bg-gradient-to-r from-indigo-600 to-purple-600 text-white hover:from-indigo-700 hover:to-purple-700 transition shadow-lg disabled:opacity-60"
             >
-              <Sparkles size={16} /> Plan starten
+              {submitting ? <Loader2 size={16} className="animate-spin" /> : <Sparkles size={16} />} Plan starten
             </button>
           )}
         </div>
@@ -251,11 +297,12 @@ function PruefungsWizard({ onComplete }) {
 /* ==========================
    PRÜFUNGS-DASHBOARD
    ========================== */
-function PruefungsDashboard({ plan, onReset }) {
+function PruefungsDashboard({ plan, onReset, onRefresh }) {
   const navigate = useNavigate()
-  const totalProgress = Math.round(
-    (plan.progress.lesen + plan.progress.hoeren + plan.progress.schreiben + plan.progress.sprechen) / 4
-  )
+  const levelMeta = LEVEL_BY_CODE[plan.level] || LEVEL_BY_CODE.A1
+  const progress = plan.progress || { lesen: 0, hoeren: 0, schreiben: 0, sprechen: 0 }
+  const totalProgress = Math.round((progress.lesen + progress.hoeren + progress.schreiben + progress.sprechen) / 4)
+  const counts = countsByModule(plan.level)
 
   const daysLeft = plan.examDate
     ? Math.max(0, Math.ceil((new Date(plan.examDate) - new Date()) / (1000 * 60 * 60 * 24)))
@@ -265,17 +312,14 @@ function PruefungsDashboard({ plan, onReset }) {
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex flex-col">
       <Navbar />
       <main className="flex-1 max-w-6xl w-full mx-auto px-4 py-8">
-        {/* Header */}
         <div className="mb-8">
           <div className="flex items-start justify-between gap-4 flex-wrap">
             <div>
               <div className="inline-flex items-center gap-2 bg-indigo-100 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300 px-3 py-1 rounded-full text-xs font-bold mb-2">
                 <GraduationCap size={12} /> Mein Vorbereitungsplan
               </div>
-              <h1 className="text-3xl md:text-4xl font-extrabold text-gray-800 dark:text-gray-100">
-                {plan.level.title}
-              </h1>
-              <p className="text-gray-500 dark:text-gray-400 mt-1">{plan.level.subtitle}</p>
+              <h1 className="text-3xl md:text-4xl font-extrabold text-gray-800 dark:text-gray-100">{levelMeta.title}</h1>
+              <p className="text-gray-500 dark:text-gray-400 mt-1">{levelMeta.subtitle}</p>
             </div>
             <button
               onClick={onReset}
@@ -288,12 +332,9 @@ function PruefungsDashboard({ plan, onReset }) {
 
         {/* Top stats */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-          {/* Days left */}
           <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="bg-gradient-to-br from-indigo-600 to-purple-700 text-white rounded-2xl p-5 shadow-lg">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-xs font-bold uppercase tracking-wide opacity-90">
-                {daysLeft !== null ? 'Bis zur Prüfung' : 'Zeit zum Lernen'}
-              </span>
+              <span className="text-xs font-bold uppercase tracking-wide opacity-90">{daysLeft !== null ? 'Bis zur Prüfung' : 'Zeit zum Lernen'}</span>
               <Calendar size={18} className="opacity-90" />
             </div>
             <div className="text-4xl font-extrabold">
@@ -307,7 +348,6 @@ function PruefungsDashboard({ plan, onReset }) {
             </p>
           </motion.div>
 
-          {/* Total progress */}
           <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.05 }} className="bg-white dark:bg-gray-800 rounded-2xl p-5 border-2 border-gray-100 dark:border-gray-700">
             <div className="flex items-center justify-between mb-2">
               <span className="text-xs font-bold uppercase tracking-wide text-gray-500 dark:text-gray-400">Vorbereitung</span>
@@ -319,40 +359,26 @@ function PruefungsDashboard({ plan, onReset }) {
             </div>
           </motion.div>
 
-          {/* Attempts */}
           <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="bg-white dark:bg-gray-800 rounded-2xl p-5 border-2 border-gray-100 dark:border-gray-700">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-xs font-bold uppercase tracking-wide text-gray-500 dark:text-gray-400">Simulationen</span>
-              <Trophy size={18} className="text-orange-500" />
+              <span className="text-xs font-bold uppercase tracking-wide text-gray-500 dark:text-gray-400">Verfügbare Module</span>
+              <Sparkles size={18} className="text-orange-500" />
             </div>
-            <div className="text-4xl font-extrabold text-gray-800 dark:text-gray-100">{plan.completedAttempts.length}</div>
-            <p className="text-xs text-gray-400 mt-1">abgeschlossen</p>
+            <div className="text-4xl font-extrabold text-gray-800 dark:text-gray-100">
+              {Object.values(counts).filter(n => n > 0).length}<span className="text-base font-semibold text-gray-400 ml-1">/ 4</span>
+            </div>
+            <p className="text-xs text-gray-400 mt-1">{counts.lesen + counts.hoeren + counts.schreiben + counts.sprechen} Simulationen bereit</p>
           </motion.div>
         </div>
 
-        {/* Today's recommendation (placeholder until backend) */}
-        <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15 }} className="bg-gradient-to-r from-orange-400 to-amber-500 text-white rounded-2xl p-6 mb-8 shadow-md flex items-center justify-between gap-4 flex-wrap">
-          <div className="flex items-center gap-3">
-            <div className="bg-white/20 backdrop-blur rounded-2xl p-3">
-              <Flame size={24} />
-            </div>
-            <div>
-              <p className="text-xs uppercase tracking-wide font-bold opacity-90">Heute empfohlen</p>
-              <p className="font-bold text-lg">Starte mit einem Diagnose-Test</p>
-              <p className="text-sm opacity-90">5 Minuten, um deinen aktuellen Stand zu kennen</p>
-            </div>
-          </div>
-          <button disabled className="bg-white/20 backdrop-blur text-white font-bold px-5 py-2.5 rounded-xl text-sm flex items-center gap-1.5 cursor-not-allowed opacity-70">
-            Bald verfügbar <Clock size={14} />
-          </button>
-        </motion.div>
-
-        {/* Modules */}
-        <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">Die 4 Module der Prüfung</h2>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+        {/* Modules with simulacros */}
+        <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">Die 4 Module</h2>
+        <div className="grid md:grid-cols-2 gap-4 mb-8">
           {MODULES.map((m, i) => {
             const Icon = m.icon
-            const score = plan.progress[m.id] || 0
+            const score = progress[m.id] || 0
+            const exams = getExamsFor(plan.level, m.id)
+            const hasContent = exams.length > 0
             return (
               <motion.div
                 key={m.id}
@@ -361,28 +387,64 @@ function PruefungsDashboard({ plan, onReset }) {
                 transition={{ delay: 0.2 + i * 0.05 }}
                 className="bg-white dark:bg-gray-800 rounded-2xl p-5 border-2 border-gray-100 dark:border-gray-700 hover:border-indigo-200 dark:hover:border-indigo-800 transition"
               >
-                <div className={`inline-flex p-3 rounded-2xl ${m.bg} mb-3`}>
-                  <Icon size={22} className={m.color} />
+                <div className="flex items-start gap-3 mb-3">
+                  <div className={`p-3 rounded-2xl ${m.bg}`}>
+                    <Icon size={22} className={m.color} />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <h3 className="font-bold text-gray-800 dark:text-gray-100">{m.label}</h3>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">{m.desc}</p>
+                  </div>
+                  {hasContent ? (
+                    <span className="text-[10px] font-bold uppercase tracking-wide bg-green-100 text-green-700 dark:bg-green-900/40 dark:text-green-300 px-2 py-0.5 rounded-full">
+                      {exams.length} bereit
+                    </span>
+                  ) : (
+                    <span className="text-[10px] font-bold uppercase tracking-wide bg-gray-100 text-gray-500 dark:bg-gray-700 dark:text-gray-400 px-2 py-0.5 rounded-full flex items-center gap-1">
+                      <Lock size={10} /> Bald
+                    </span>
+                  )}
                 </div>
-                <h3 className="font-bold text-gray-800 dark:text-gray-100">{m.label}</h3>
-                <p className="text-xs text-gray-500 dark:text-gray-400 mb-3">{m.desc}</p>
-                <div className="h-1.5 bg-gray-100 dark:bg-gray-700 rounded-full overflow-hidden mb-2">
+                <div className="h-1.5 bg-gray-100 dark:bg-gray-700 rounded-full overflow-hidden mb-3">
                   <div className="h-full bg-indigo-500" style={{ width: `${score}%` }} />
                 </div>
-                <p className="text-xs text-gray-400">{score}% bereit</p>
+                <p className="text-xs text-gray-400 mb-3">{score}% bereit</p>
+
+                {/* Exam list */}
+                {hasContent && (
+                  <div className="space-y-2 pt-2 border-t border-gray-100 dark:border-gray-700">
+                    {exams.map(ex => (
+                      <Link
+                        key={ex.id}
+                        to={`/pruefungen/${ex.id}`}
+                        className="flex items-center justify-between gap-2 p-2.5 rounded-xl bg-gray-50 dark:bg-gray-700/50 hover:bg-indigo-50 dark:hover:bg-indigo-900/20 group transition"
+                      >
+                        <div className="min-w-0">
+                          <p className="text-sm font-semibold text-gray-800 dark:text-gray-100 truncate">{ex.title}</p>
+                          <p className="text-xs text-gray-500 dark:text-gray-400">
+                            {ex.durationMinutes} min · {ex.maxScore} Punkte
+                          </p>
+                        </div>
+                        <Play size={14} className="text-indigo-500 shrink-0 group-hover:translate-x-0.5 transition-transform" />
+                      </Link>
+                    ))}
+                  </div>
+                )}
               </motion.div>
             )
           })}
         </div>
 
-        {/* Coming soon banner */}
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }} className="bg-indigo-50 dark:bg-indigo-900/20 border-2 border-dashed border-indigo-200 dark:border-indigo-800 rounded-2xl p-6 text-center">
-          <Sparkles size={28} className="text-indigo-500 mx-auto mb-2" />
-          <h3 className="font-bold text-indigo-700 dark:text-indigo-300 mb-1">Inhalte werden gerade vorbereitet</h3>
-          <p className="text-sm text-indigo-600/80 dark:text-indigo-400/80 max-w-lg mx-auto">
-            Wir arbeiten an echten Simulationsprüfungen für {plan.level.code} mit KI-Korrektur. Du wirst benachrichtigt, sobald sie verfügbar sind.
-          </p>
-        </motion.div>
+        {/* Coming soon banner if not all modules ready */}
+        {Object.values(counts).filter(n => n > 0).length < 4 && (
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }} className="bg-indigo-50 dark:bg-indigo-900/20 border-2 border-dashed border-indigo-200 dark:border-indigo-800 rounded-2xl p-6 text-center">
+            <Sparkles size={28} className="text-indigo-500 mx-auto mb-2" />
+            <h3 className="font-bold text-indigo-700 dark:text-indigo-300 mb-1">Weitere Module werden vorbereitet</h3>
+            <p className="text-sm text-indigo-600/80 dark:text-indigo-400/80 max-w-lg mx-auto">
+              Wir arbeiten an den restlichen Modulen für {plan.level} mit KI-Korrektur. Du wirst benachrichtigt, sobald sie verfügbar sind.
+            </p>
+          </motion.div>
+        )}
       </main>
       <Footer />
     </div>
