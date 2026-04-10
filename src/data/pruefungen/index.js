@@ -1,6 +1,10 @@
 import { goetheA1LesenExams } from './goethe-a1-lesen'
 import { goetheA1HoerenExams } from './goethe-a1-hoeren'
 import { goetheA1SchreibenExams } from './goethe-a1-schreiben'
+import { goetheA2LesenExams } from './goethe-a2-lesen'
+import { goetheA2HoerenExams } from './goethe-a2-hoeren'
+import { goetheA2SchreibenExams } from './goethe-a2-schreiben'
+import { goetheB1LesenExams } from './goethe-b1-lesen'
 
 /**
  * Master index of all Prüfungen exams.
@@ -10,6 +14,10 @@ export const PRUEFUNGEN_EXAMS = [
   ...goetheA1LesenExams,
   ...goetheA1HoerenExams,
   ...goetheA1SchreibenExams,
+  ...goetheA2LesenExams,
+  ...goetheA2HoerenExams,
+  ...goetheA2SchreibenExams,
+  ...goetheB1LesenExams,
 ]
 
 /** Group exams by level + module for quick lookup. */
