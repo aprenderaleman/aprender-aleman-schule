@@ -25,9 +25,43 @@ function formatTime(secs) {
 function flatQuestions(exam) {
   const list = []
   for (const part of exam.parts) {
-    for (const q of part.questions) list.push({ ...q, _part: part })
+    if (Array.isArray(part.questions)) {
+      for (const q of part.questions) list.push({ ...q, _part: part })
+    }
   }
   return list
+}
+
+function countTotalItems(exam) {
+  let n = 0
+  for (const part of exam.parts) {
+    if (Array.isArray(part.questions)) n += part.questions.length
+    else if (part.kind === 'formular') n += part.fields.length
+    else if (part.kind === 'writing-task') n += 1
+  }
+  return n
+}
+
+function countAnswered(exam, responses) {
+  let n = 0
+  for (const part of exam.parts) {
+    if (Array.isArray(part.questions)) {
+      for (const q of part.questions) {
+        const r = responses[q.id]
+        if (q.type === 'matching') {
+          if (r && Object.keys(r).length === Object.keys(q.correct).length) n++
+        } else if (r !== undefined) {
+          n++
+        }
+      }
+    } else if (part.kind === 'formular') {
+      const v = responses[part.id] || {}
+      for (const f of part.fields) if ((v[f.id] || '').trim()) n++
+    } else if (part.kind === 'writing-task') {
+      if ((responses[part.id] || '').trim()) n++
+    }
+  }
+  return n
 }
 
 /* ==========================
@@ -125,21 +159,120 @@ export default function PruefungPlayer() {
     setGrading(true)
     setError(null)
     try {
-      const grading = gradeObjectiveExam(exam, responses)
+      // Objective grading (Lesen / Hören questions)
+      const objective = gradeObjectiveExam(exam, responses)
+
+      // Subjective + formular grading
+      const writingFeedback = {}
+      let extraScore = 0
+      let extraMax = 0
+      let combinedDetail = [...objective.detail]
+
+      for (const part of exam.parts) {
+        if (part.kind === 'formular') {
+          const userVals = responses[part.id] || {}
+          let earned = 0
+          const fieldDetails = []
+          for (const f of part.fields) {
+            const userVal = (userVals[f.id] || '').trim().toLowerCase()
+            const ok = (f.expected || []).some(exp => {
+              const e = String(exp).trim().toLowerCase()
+              return userVal === e || (userVal && e.includes(userVal)) || (userVal && userVal.includes(e))
+            })
+            if (ok) earned += f.points || 1
+            fieldDetails.push({ id: f.id, label: f.label, user: userVals[f.id] || '', expected: f.expected, ok, points: f.points || 1 })
+          }
+          const possible = part.fields.reduce((s, f) => s + (f.points || 1), 0)
+          extraScore += earned
+          extraMax += possible
+          combinedDetail.push({
+            partId: part.id,
+            type: 'formular',
+            earned,
+            possible,
+            fields: fieldDetails,
+          })
+        }
+
+        if (part.kind === 'writing-task') {
+          const submission = (responses[part.id] || '').trim()
+          const possible = part.maxScore || 25
+          extraMax += possible
+          if (!submission) {
+            combinedDetail.push({
+              partId: part.id,
+              type: 'writing-task',
+              earned: 0,
+              possible,
+              skipped: true,
+            })
+            continue
+          }
+          // Call AI grader
+          try {
+            const res = await fetch(`${API_URL}/api/pruefungen/grade-schreiben`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${getToken()}` },
+              body: JSON.stringify({
+                level: exam.level,
+                taskType: part.taskType,
+                taskPrompt: part.taskPrompt + (part.bullets ? '\n\nPunkte:\n' + part.bullets.map(b => `- ${b}`).join('\n') : ''),
+                submission,
+                minWords: part.minWords,
+              }),
+            })
+            if (!res.ok) throw new Error('AI-Bewertung fehlgeschlagen')
+            const aiResult = await res.json()
+            // Map AI total (0-100) to part.maxScore
+            const earned = Math.round((aiResult.total / 100) * possible)
+            extraScore += earned
+            writingFeedback[part.id] = aiResult
+            combinedDetail.push({
+              partId: part.id,
+              type: 'writing-task',
+              earned,
+              possible,
+              ai: aiResult,
+            })
+          } catch (e) {
+            combinedDetail.push({
+              partId: part.id,
+              type: 'writing-task',
+              earned: 0,
+              possible,
+              error: e.message,
+            })
+          }
+        }
+      }
+
+      const totalScore = objective.score + extraScore
+      const totalMax = objective.maxScore + extraMax
+      const percentage = totalMax > 0 ? Math.round((totalScore / totalMax) * 100) : 0
+      const passed = percentage >= 60
+      const finalResult = {
+        score: totalScore,
+        maxScore: totalMax,
+        percentage,
+        passed,
+        detail: combinedDetail,
+        writingFeedback,
+      }
+
       // Save to backend
       if (attemptId) {
         await fetch(`${API_URL}/api/pruefungen/attempts/${attemptId}/finish`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${getToken()}` },
           body: JSON.stringify({
-            score: grading.score,
-            maxScore: grading.maxScore,
+            score: finalResult.score,
+            maxScore: finalResult.maxScore,
             responses,
-            feedback: { detail: grading.detail },
+            feedback: { detail: combinedDetail, writingFeedback },
           }),
         })
       }
-      setResult(grading)
+      setResult(finalResult)
       setPhase('results')
       window.scrollTo(0, 0)
     } catch (err) {
@@ -153,19 +286,8 @@ export default function PruefungPlayer() {
     setResponses(prev => ({ ...prev, [qid]: value }))
   }
 
-  const totalQuestions = useMemo(() => flatQuestions(exam).length, [exam])
-  const answeredCount = useMemo(() => {
-    let n = 0
-    for (const q of flatQuestions(exam)) {
-      const r = responses[q.id]
-      if (q.type === 'matching') {
-        if (r && Object.keys(r).length === Object.keys(q.correct).length) n++
-      } else if (r !== undefined) {
-        n++
-      }
-    }
-    return n
-  }, [exam, responses])
+  const totalQuestions = useMemo(() => countTotalItems(exam), [exam])
+  const answeredCount = useMemo(() => countAnswered(exam, responses), [exam, responses])
 
   /* ───── INTRO PHASE ───── */
   if (phase === 'intro') {
@@ -247,17 +369,31 @@ export default function PruefungPlayer() {
           {/* Per-question feedback */}
           <h2 className="font-bold text-gray-800 dark:text-gray-100 text-lg mb-3">Detaillierte Lösungen</h2>
           <div className="space-y-4 mb-6">
-            {exam.parts.map((part) => (
-              <div key={part.id} className="bg-white dark:bg-gray-800 rounded-2xl p-5 border border-gray-200 dark:border-gray-700">
-                <h3 className="font-bold text-gray-800 dark:text-gray-100 mb-3">{part.title}</h3>
-                <div className="space-y-2">
-                  {part.questions.map((q) => {
-                    const detail = result.detail.find(d => d.questionId === q.id)
-                    return <ResultRow key={q.id} question={q} detail={detail} />
-                  })}
+            {exam.parts.map((part) => {
+              const partDetail = result.detail.find(d => d.partId === part.id && (d.type === 'formular' || d.type === 'writing-task'))
+              return (
+                <div key={part.id} className="bg-white dark:bg-gray-800 rounded-2xl p-5 border border-gray-200 dark:border-gray-700">
+                  <h3 className="font-bold text-gray-800 dark:text-gray-100 mb-3">{part.title}</h3>
+                  {/* Objective questions */}
+                  {Array.isArray(part.questions) && (
+                    <div className="space-y-2">
+                      {part.questions.map((q) => {
+                        const detail = result.detail.find(d => d.questionId === q.id)
+                        return <ResultRow key={q.id} question={q} detail={detail} />
+                      })}
+                    </div>
+                  )}
+                  {/* Formular feedback */}
+                  {part.kind === 'formular' && partDetail && (
+                    <FormularResult part={part} detail={partDetail} />
+                  )}
+                  {/* Writing-task feedback */}
+                  {part.kind === 'writing-task' && partDetail && (
+                    <WritingTaskResult part={part} detail={partDetail} submission={result && (result.responses || {})[part.id]} />
+                  )}
                 </div>
-              </div>
-            ))}
+              )
+            })}
           </div>
 
           <div className="flex gap-3">
@@ -376,8 +512,16 @@ function PartView({ part, responses, setAnswer }) {
       {/* Context (reading texts) */}
       {part.context && <ContextView ctx={part.context} />}
 
-      {/* Questions */}
-      {part.questions.map((q, idx) => (
+      {/* Specialized part kinds (Schreiben/Sprechen) */}
+      {part.kind === 'formular' && (
+        <FormularView part={part} value={responses[part.id] || {}} onChange={(v) => setAnswer(part.id, v)} />
+      )}
+      {part.kind === 'writing-task' && (
+        <WritingTaskView part={part} value={responses[part.id] || ''} onChange={(v) => setAnswer(part.id, v)} />
+      )}
+
+      {/* Default: questions array (Lesen/Hören) */}
+      {part.questions && part.questions.map((q, idx) => (
         <div key={q.id} className="space-y-3">
           {q.audio && <AudioContext ctx={{ type: 'audio', ...q.audio }} />}
           <QuestionRenderer
@@ -389,6 +533,72 @@ function PartView({ part, responses, setAnswer }) {
         </div>
       ))}
     </motion.div>
+  )
+}
+
+function FormularView({ part, value, onChange }) {
+  return (
+    <div className="space-y-4">
+      {/* Source text */}
+      {part.sourceText && (
+        <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 p-5">
+          <p className="text-xs text-gray-500 dark:text-gray-400 font-bold uppercase tracking-wide mb-2">Informationsquelle</p>
+          <div className="text-sm text-gray-800 dark:text-gray-100 whitespace-pre-line leading-relaxed">{part.sourceText}</div>
+        </div>
+      )}
+
+      {/* Form fields */}
+      <div className="bg-white dark:bg-gray-800 rounded-2xl border-2 border-indigo-200 dark:border-indigo-800 p-5">
+        {part.formTitle && <h3 className="font-bold text-gray-800 dark:text-gray-100 mb-4 text-center">{part.formTitle}</h3>}
+        <div className="space-y-3">
+          {part.fields.map((f) => (
+            <div key={f.id} className="flex flex-col">
+              <label className="text-xs font-semibold text-gray-600 dark:text-gray-300 mb-1">{f.label}</label>
+              <input
+                type="text"
+                value={value[f.id] || ''}
+                onChange={(e) => onChange({ ...value, [f.id]: e.target.value })}
+                className="w-full px-3 py-2 rounded-lg border-2 border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-900 text-sm text-gray-800 dark:text-gray-100 focus:border-indigo-500 outline-none"
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function WritingTaskView({ part, value, onChange }) {
+  const wordCount = value.trim() ? value.trim().split(/\s+/).filter(Boolean).length : 0
+  const meetsMin = wordCount >= (part.minWords || 0)
+  return (
+    <div className="space-y-4">
+      <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 p-5">
+        <p className="text-xs text-gray-500 dark:text-gray-400 font-bold uppercase tracking-wide mb-2">{part.taskType || 'Schreibaufgabe'}</p>
+        <p className="text-sm text-gray-800 dark:text-gray-100 mb-4">{part.taskPrompt}</p>
+        {part.bullets && part.bullets.length > 0 && (
+          <ul className="space-y-1.5 text-sm text-gray-700 dark:text-gray-200 list-disc list-inside">
+            {part.bullets.map((b, i) => <li key={i}>{b}</li>)}
+          </ul>
+        )}
+      </div>
+
+      <div className="bg-white dark:bg-gray-800 rounded-2xl border-2 border-indigo-200 dark:border-indigo-800 p-5">
+        <textarea
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          placeholder="Schreibe hier deinen Text…"
+          rows={12}
+          className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-900 text-sm text-gray-800 dark:text-gray-100 focus:border-indigo-500 outline-none resize-y leading-relaxed"
+        />
+        <div className="flex items-center justify-between mt-2 text-xs">
+          <span className={`font-bold ${meetsMin ? 'text-green-600 dark:text-green-400' : 'text-orange-600 dark:text-orange-400'}`}>
+            {wordCount} Wörter {part.minWords ? `· min. ${part.minWords}` : ''}
+          </span>
+          {meetsMin && <span className="text-green-600 dark:text-green-400">✓ Mindestlänge erreicht</span>}
+        </div>
+      </div>
+    </div>
   )
 }
 
@@ -612,6 +822,102 @@ function ResultRow({ question, detail }) {
           </p>
         )}
       </div>
+    </div>
+  )
+}
+
+function FormularResult({ part, detail }) {
+  return (
+    <div>
+      <p className="font-semibold text-gray-700 dark:text-gray-200 text-sm mb-2">{detail.earned}/{detail.possible} Punkte</p>
+      <div className="space-y-2 text-sm">
+        {detail.fields.map((f) => (
+          <div key={f.id} className={`flex items-start gap-2 pl-3 border-l-2 ${f.ok ? 'border-green-400' : 'border-red-400'}`}>
+            {f.ok ? <CheckCircle2 size={16} className="mt-0.5 shrink-0 text-green-600" /> : <XCircle size={16} className="mt-0.5 shrink-0 text-red-600" />}
+            <div>
+              <p className="font-medium text-gray-800 dark:text-gray-100">{f.label}</p>
+              <p className="text-xs text-gray-600 dark:text-gray-300">
+                Deine Antwort: <strong>{f.user || '—'}</strong>
+                {!f.ok && <> · Erwartet: <strong>{Array.isArray(f.expected) ? f.expected[0] : f.expected}</strong></>}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+function WritingTaskResult({ part, detail }) {
+  if (detail.skipped) {
+    return <p className="text-sm text-orange-600 dark:text-orange-400">Du hast diese Aufgabe nicht beantwortet (0 Punkte).</p>
+  }
+  if (detail.error) {
+    return <p className="text-sm text-red-600 dark:text-red-400">Fehler bei der KI-Bewertung: {detail.error}</p>
+  }
+  const ai = detail.ai
+  if (!ai) return null
+
+  const criteria = [
+    { key: 'erfuellung', label: 'Erfüllung', max: 25 },
+    { key: 'kohaerenz', label: 'Kohärenz', max: 25 },
+    { key: 'wortschatz', label: 'Wortschatz', max: 25 },
+    { key: 'strukturen', label: 'Strukturen', max: 25 },
+  ]
+
+  return (
+    <div className="space-y-4">
+      <div className="flex items-baseline gap-2">
+        <span className="text-2xl font-extrabold text-gray-800 dark:text-gray-100">{detail.earned}</span>
+        <span className="text-sm text-gray-500">/ {detail.possible} Punkte · KI-Gesamtwertung {ai.total}/100</span>
+      </div>
+
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+        {criteria.map(c => (
+          <div key={c.key} className="bg-gray-50 dark:bg-gray-700 rounded-lg p-2 text-center">
+            <p className="text-[10px] text-gray-500 dark:text-gray-400 font-bold uppercase">{c.label}</p>
+            <p className="text-lg font-extrabold text-indigo-600 dark:text-indigo-300">{ai.scores?.[c.key] ?? 0}/{c.max}</p>
+          </div>
+        ))}
+      </div>
+
+      {ai.overall && (
+        <div className="bg-indigo-50 dark:bg-indigo-900/20 rounded-xl p-3 text-sm text-indigo-900 dark:text-indigo-100">
+          {ai.overall}
+        </div>
+      )}
+
+      {Array.isArray(ai.errors) && ai.errors.length > 0 && (
+        <div>
+          <p className="text-xs font-bold text-gray-600 dark:text-gray-300 uppercase mb-2">Fehler</p>
+          <div className="space-y-2">
+            {ai.errors.map((e, i) => (
+              <div key={i} className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-2 text-xs">
+                <p className="text-red-700 dark:text-red-300"><span className="line-through">{e.original}</span> → <strong>{e.correction}</strong></p>
+                {e.explanation && <p className="text-red-600 dark:text-red-400 mt-0.5">{e.explanation}</p>}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {Array.isArray(ai.strengths) && ai.strengths.length > 0 && (
+        <div>
+          <p className="text-xs font-bold text-green-700 dark:text-green-400 uppercase mb-1">Stärken</p>
+          <ul className="text-xs text-gray-700 dark:text-gray-200 list-disc list-inside space-y-0.5">
+            {ai.strengths.map((s, i) => <li key={i}>{s}</li>)}
+          </ul>
+        </div>
+      )}
+
+      {Array.isArray(ai.improvements) && ai.improvements.length > 0 && (
+        <div>
+          <p className="text-xs font-bold text-orange-700 dark:text-orange-400 uppercase mb-1">Verbesserungen</p>
+          <ul className="text-xs text-gray-700 dark:text-gray-200 list-disc list-inside space-y-0.5">
+            {ai.improvements.map((s, i) => <li key={i}>{s}</li>)}
+          </ul>
+        </div>
+      )}
     </div>
   )
 }
