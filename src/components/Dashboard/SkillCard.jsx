@@ -35,14 +35,14 @@ export default function SkillCard({ skill, score = 0, index = 0 }) {
         aria-label={`Zu ${config.label}-Übungen gehen`}
       >
         <div className="flex items-center gap-3 mb-3">
-          <span className="text-3xl">{config.icon}</span>
-          <div>
-            <h3 className="font-bold text-gray-800 dark:text-gray-100 group-hover:text-orange-600 transition-colors">
+          <span className="text-3xl shrink-0">{config.icon}</span>
+          <div className="min-w-0 flex-1">
+            <h3 className="font-bold text-gray-800 dark:text-gray-100 group-hover:text-orange-600 transition-colors truncate">
               {config.label}
             </h3>
-            <p className="text-xs text-gray-500 dark:text-gray-400">{config.desc}</p>
+            <p className="text-xs text-gray-500 dark:text-gray-400 truncate">{config.desc}</p>
           </div>
-          <span className="ml-auto text-xs font-semibold text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-700 px-2 py-0.5 rounded-full">
+          <span className="shrink-0 whitespace-nowrap text-[10px] font-semibold text-gray-600 dark:text-gray-300 bg-white dark:bg-gray-700 px-2 py-0.5 rounded-full">
             {level}
           </span>
         </div>
