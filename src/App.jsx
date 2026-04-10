@@ -17,6 +17,7 @@ import Achievements from './pages/Achievements'
 import Flashcards from './pages/Flashcards'
 import Pricing from './pages/Pricing'
 import AutoLogin from './pages/AutoLogin'
+import Pruefungen from './pages/Pruefungen'
 import AdminLayout from './components/Layout/AdminLayout'
 import Paywall from './components/UI/Paywall'
 import TrialBanner from './components/UI/TrialBanner'
@@ -100,6 +101,7 @@ function AppRoutes() {
         <Route path="/perfil" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
         <Route path="/logros" element={<PaidRoute><Achievements /></PaidRoute>} />
         <Route path="/flashcards" element={<PaidRoute><Flashcards /></PaidRoute>} />
+        <Route path="/pruefungen" element={<PaidRoute><Pruefungen /></PaidRoute>} />
         {/* Admin routes */}
         <Route path="/admin" element={<AdminRoute><AdminDashboard /></AdminRoute>} />
         <Route path="/admin/usuarios" element={<AdminRoute><AdminUsers /></AdminRoute>} />

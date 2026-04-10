@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
-import { User, Mail, GraduationCap, LogOut, ExternalLink, CreditCard, Shield, Clock, Zap, Loader2 } from 'lucide-react'
+import { User, Mail, GraduationCap, LogOut, ExternalLink, CreditCard, Shield, Clock, Zap, Loader2, Trophy, ChevronRight } from 'lucide-react'
 import { useAuth } from '../context/AuthContext'
 import { useProgress } from '../context/ProgressContext'
 import { useNavigate, Link } from 'react-router-dom'
@@ -127,6 +127,30 @@ export default function Profile() {
               </div>
             ))}
           </div>
+        </motion.div>
+
+        {/* Achievements shortcut */}
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.22 }}
+          className="mb-6"
+        >
+          <Link
+            to="/logros"
+            className="flex items-center gap-4 p-4 rounded-2xl bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20 border-2 border-amber-200 dark:border-amber-800 hover:shadow-md transition-all group"
+          >
+            <div className="bg-gradient-to-br from-amber-400 to-orange-500 text-white rounded-2xl p-3 shadow-md">
+              <Trophy size={22} />
+            </div>
+            <div className="flex-1 min-w-0">
+              <h3 className="font-bold text-gray-800 dark:text-gray-100">Meine Erfolge</h3>
+              <p className="text-xs text-gray-500 dark:text-gray-400">
+                {progress.achievements?.length || 0} freigeschaltet · Sieh deine Auszeichnungen
+              </p>
+            </div>
+            <ChevronRight size={20} className="text-amber-500 group-hover:translate-x-1 transition-transform" />
+          </Link>
         </motion.div>
 
         {/* Subscription */}

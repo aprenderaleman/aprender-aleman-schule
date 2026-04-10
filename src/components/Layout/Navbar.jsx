@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Moon, Sun, Menu, X, BookOpen, BarChart2, User, Trophy, Home, LogOut, Zap, Layers } from 'lucide-react'
+import { Moon, Sun, Menu, X, BookOpen, BarChart2, User, GraduationCap, Home, LogOut, Zap, Layers } from 'lucide-react'
 import { useAuth } from '../../context/AuthContext'
 import { useTheme } from '../../context/ThemeContext'
 import { useProgress } from '../../context/ProgressContext'
@@ -10,8 +10,8 @@ const navLinks = [
   { to: '/dashboard', icon: <Home size={18} />, label: 'Start' },
   { to: '/ejercicios', icon: <BookOpen size={18} />, label: 'Übungen' },
   { to: '/flashcards', icon: <Layers size={18} />, label: 'Karteikarten' },
+  { to: '/pruefungen', icon: <GraduationCap size={18} />, label: 'Prüfungen', highlight: true },
   { to: '/progreso', icon: <BarChart2 size={18} />, label: 'Fortschritt' },
-  { to: '/logros', icon: <Trophy size={18} />, label: 'Erfolge' },
   { to: '/perfil', icon: <User size={18} />, label: 'Profil' },
 ]
 
@@ -44,21 +44,31 @@ export default function Navbar() {
 
           {/* Desktop nav */}
           <div className="hidden md:flex items-center gap-1">
-            {navLinks.map(link => (
-              <Link
-                key={link.to}
-                to={link.to}
-                aria-label={link.label}
-                className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-150 ${
-                  location.pathname === link.to
-                    ? 'bg-orange-500 text-white shadow-sm'
-                    : 'text-gray-600 dark:text-gray-300 hover:bg-orange-50 dark:hover:bg-gray-800 hover:text-orange-600'
-                }`}
-              >
-                {link.icon}
-                {link.label}
-              </Link>
-            ))}
+            {navLinks.map(link => {
+              const active = location.pathname === link.to || location.pathname.startsWith(link.to + '/')
+              const baseClass = 'flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-150'
+              let stateClass
+              if (active) {
+                stateClass = link.highlight
+                  ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-sm'
+                  : 'bg-orange-500 text-white shadow-sm'
+              } else if (link.highlight) {
+                stateClass = 'text-indigo-600 dark:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-indigo-900/20 ring-1 ring-indigo-200 dark:ring-indigo-800'
+              } else {
+                stateClass = 'text-gray-600 dark:text-gray-300 hover:bg-orange-50 dark:hover:bg-gray-800 hover:text-orange-600'
+              }
+              return (
+                <Link
+                  key={link.to}
+                  to={link.to}
+                  aria-label={link.label}
+                  className={`${baseClass} ${stateClass}`}
+                >
+                  {link.icon}
+                  {link.label}
+                </Link>
+              )
+            })}
           </div>
 
           {/* Right side */}
@@ -118,21 +128,28 @@ export default function Navbar() {
                   <p className="text-xs text-orange-500 font-bold flex items-center gap-1"><Zap size={11} />{progress.xp} XP</p>
                 </div>
               </div>
-              {navLinks.map(link => (
-                <Link
-                  key={link.to}
-                  to={link.to}
-                  onClick={() => setMobileOpen(false)}
-                  className={`flex items-center gap-2 px-3 py-2.5 rounded-lg text-sm font-medium transition-all ${
-                    location.pathname === link.to
-                      ? 'bg-orange-500 text-white'
-                      : 'text-gray-700 dark:text-gray-200 hover:bg-orange-50 dark:hover:bg-gray-800'
-                  }`}
-                >
-                  {link.icon}
-                  {link.label}
-                </Link>
-              ))}
+              {navLinks.map(link => {
+                const active = location.pathname === link.to || location.pathname.startsWith(link.to + '/')
+                let stateClass
+                if (active) {
+                  stateClass = link.highlight ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white' : 'bg-orange-500 text-white'
+                } else if (link.highlight) {
+                  stateClass = 'text-indigo-600 dark:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-indigo-900/20 ring-1 ring-indigo-200 dark:ring-indigo-800'
+                } else {
+                  stateClass = 'text-gray-700 dark:text-gray-200 hover:bg-orange-50 dark:hover:bg-gray-800'
+                }
+                return (
+                  <Link
+                    key={link.to}
+                    to={link.to}
+                    onClick={() => setMobileOpen(false)}
+                    className={`flex items-center gap-2 px-3 py-2.5 rounded-lg text-sm font-medium transition-all ${stateClass}`}
+                  >
+                    {link.icon}
+                    {link.label}
+                  </Link>
+                )
+              })}
               <button
                 onClick={handleLogout}
                 className="flex items-center gap-2 px-3 py-2.5 rounded-lg text-sm font-medium text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 transition-all mt-1"
