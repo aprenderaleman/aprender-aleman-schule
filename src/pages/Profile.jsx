@@ -207,16 +207,16 @@ export default function Profile() {
               </div>
             ) : user.subscription?.trialActive ? (
               <div>
-                <div className="bg-orange-50 dark:bg-orange-900/20 rounded-xl p-4 flex items-center gap-3 mb-3">
-                  <Clock size={20} className="text-orange-500 shrink-0" />
+                <div className="bg-indigo-50 dark:bg-indigo-900/20 rounded-xl p-4 flex items-center gap-3 mb-3">
+                  <Clock size={20} className="text-indigo-500 shrink-0" />
                   <div>
-                    <p className="font-bold text-orange-700 dark:text-orange-300">Kostenlose Testversion</p>
-                    <p className="text-sm text-orange-600/70 dark:text-orange-400/70">
-                      Deine Testphase endet am {new Date(user.subscription.trialEndsAt).toLocaleDateString('de-DE')}.
+                    <p className="font-bold text-indigo-700 dark:text-indigo-300">Kostenlose Lektionen</p>
+                    <p className="text-sm text-indigo-600/70 dark:text-indigo-400/70">
+                      Du hast noch <strong>{user.subscription.freeLessonsRemaining ?? 0}</strong> von {user.subscription.freeLessonsLimit ?? 10} kostenlosen Lektionen übrig.
                     </p>
                   </div>
                 </div>
-                <Link to="/pricing" className="text-sm text-orange-500 font-semibold hover:text-orange-600 flex items-center gap-1">
+                <Link to="/pricing" className="text-sm text-indigo-500 font-semibold hover:text-indigo-600 flex items-center gap-1">
                   <Zap size={14} /> Jetzt abonnieren
                 </Link>
               </div>
@@ -226,7 +226,7 @@ export default function Profile() {
                   <Clock size={20} className="text-red-500 shrink-0" />
                   <div>
                     <p className="font-bold text-red-700 dark:text-red-300">Kein aktives Abonnement</p>
-                    <p className="text-sm text-red-600/70 dark:text-red-400/70">Deine Testphase ist abgelaufen. Abonniere, um fortzufahren.</p>
+                    <p className="text-sm text-red-600/70 dark:text-red-400/70">Du hast deine 10 kostenlosen Lektionen genutzt. Abonniere, um fortzufahren.</p>
                   </div>
                 </div>
                 <Link to="/pricing" className="inline-flex items-center gap-2 bg-orange-500 text-white font-bold px-5 py-2.5 rounded-xl hover:bg-orange-600 transition-colors text-sm">

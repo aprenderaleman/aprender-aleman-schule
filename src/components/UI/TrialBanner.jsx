@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { Clock, Zap } from 'lucide-react'
+import { GraduationCap, Zap } from 'lucide-react'
 import { useAuth } from '../../context/AuthContext'
 
 export default function TrialBanner() {
@@ -13,25 +13,24 @@ export default function TrialBanner() {
   // SSO users or paid users don't see banner
   if (subscription.ssoUser || subscription.paid) return null
 
-  // Only show for trialing users
-  if (subscription.status !== 'trialing') return null
+  // Only show during free-lessons phase
+  const limit = subscription.freeLessonsLimit ?? 10
+  const remaining = subscription.freeLessonsRemaining
+  if (remaining === undefined || remaining === null) return null
 
-  const trialEnd = new Date(subscription.trialEndsAt)
-  const now = new Date()
-  const daysLeft = Math.max(0, Math.ceil((trialEnd - now) / (1000 * 60 * 60 * 24)))
+  // No more free lessons left → user already sees the paywall, no banner needed
+  if (remaining <= 0) return null
 
-  if (daysLeft <= 0) return null
-
-  const urgent = daysLeft <= 2
+  const urgent = remaining <= 2
 
   return (
-    <div className={`${urgent ? 'bg-red-500' : 'bg-gradient-to-r from-orange-500 to-amber-500'} text-white text-center py-2 px-4 text-sm font-medium`}>
+    <div className={`${urgent ? 'bg-red-500' : 'bg-gradient-to-r from-indigo-600 to-purple-600'} text-white text-center py-2 px-4 text-sm font-medium`}>
       <div className="max-w-7xl mx-auto flex items-center justify-center gap-2 flex-wrap">
-        <Clock size={14} />
+        <GraduationCap size={14} />
         <span>
-          {daysLeft === 1
-            ? 'Du hast noch 1 Tag kostenlose Testphase.'
-            : `Du hast noch ${daysLeft} Tage kostenlose Testphase.`}
+          {remaining === 1
+            ? `Du hast noch 1 von ${limit} kostenlosen Lektionen übrig.`
+            : `Du hast noch ${remaining} von ${limit} kostenlosen Lektionen übrig.`}
         </span>
         <Link
           to="/pricing"

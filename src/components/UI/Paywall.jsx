@@ -15,10 +15,10 @@ export default function Paywall() {
           <Lock size={36} className="text-orange-500" />
         </div>
         <h2 className="text-2xl font-extrabold text-gray-800 dark:text-gray-100 mb-3">
-          Deine kostenlose Testphase ist abgelaufen
+          Du hast deine 10 kostenlosen Lektionen genutzt
         </h2>
         <p className="text-gray-500 dark:text-gray-400 mb-6">
-          Abonniere jetzt, um weiter Deutsch zu lernen - mit Übungen, Karteikarten, KI und vielem mehr.
+          Abonniere jetzt, um unbegrenzt weiter Deutsch zu lernen — Übungen, Karteikarten, Prüfungssimulation, KI-Bewertung und vieles mehr.
         </p>
         <Link
           to="/pricing"

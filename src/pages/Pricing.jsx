@@ -105,9 +105,9 @@ export default function Pricing() {
 }
 
 function PricingContent({ subscription, onSubscribe, loading, paymentCanceled, loggedIn }) {
-  const trialDaysLeft = subscription?.trialActive
-    ? Math.max(0, Math.ceil((new Date(subscription.trialEndsAt) - new Date()) / (1000 * 60 * 60 * 24)))
-    : 0
+  const freeLimit = subscription?.freeLessonsLimit ?? 10
+  const freeRemaining = subscription?.freeLessonsRemaining ?? freeLimit
+  const inFreePhase = !!subscription?.trialActive && freeRemaining > 0
 
   return (
     <div>
@@ -141,9 +141,9 @@ function PricingContent({ subscription, onSubscribe, loading, paymentCanceled, l
         {/* Top badge */}
         <div className="bg-gradient-to-r from-orange-500 to-amber-500 px-6 py-3 text-center">
           <p className="text-white font-bold text-sm">
-            {loggedIn && subscription?.trialActive
-              ? `Du hast noch ${trialDaysLeft} ${trialDaysLeft !== 1 ? 'Tage' : 'Tag'} kostenlose Testphase`
-              : '5 Tage kostenlos testen'}
+            {loggedIn && inFreePhase
+              ? `${freeRemaining} von ${freeLimit} kostenlosen Lektionen übrig`
+              : `${freeLimit} Lektionen gratis — danach 15 €/Monat`}
           </p>
         </div>
 
@@ -193,7 +193,7 @@ function PricingContent({ subscription, onSubscribe, loading, paymentCanceled, l
               ) : loggedIn ? (
                 <><Zap size={20} /> Für 15&euro;/Monat abonnieren</>
               ) : (
-                <><Zap size={20} /> 5 Tage kostenlos starten</>
+                <><Zap size={20} /> {freeLimit} Lektionen gratis starten</>
               )}
             </button>
           )}

@@ -79,7 +79,7 @@ export default function Landing() {
               </Button>
             </Link>
           </div>
-          <p className="text-sm text-gray-400 mt-4">5 Tage kostenlos · Danach nur 15&euro;/Monat · Keine Bindung</p>
+          <p className="text-sm text-gray-400 mt-4">10 Lektionen gratis · Danach nur 15&euro;/Monat · Keine Bindung</p>
         </motion.div>
 
         {/* Hero illustration */}

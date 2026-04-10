@@ -168,22 +168,57 @@ const stripe = STRIPE_SECRET_KEY ? new Stripe(STRIPE_SECRET_KEY) : null
   }
 })()
 
+// Free-lessons threshold: a "lesson passed" = exercise or exam attempt with score >= 70%
+const FREE_LESSONS_LIMIT = 10
+const FREE_LESSONS_PASS_PCT = 70
+
+// Helper: count distinct lessons passed by a user (exercises + exam attempts)
+async function countPassedLessons(userId) {
+  try {
+    const [exRows] = await pool.query(
+      'SELECT COUNT(DISTINCT exerciseId) AS n FROM schule_exercise_results WHERE userId = ? AND score >= ?',
+      [userId, FREE_LESSONS_PASS_PCT]
+    )
+    let count = exRows[0]?.n || 0
+    try {
+      const [examRows] = await pool.query(
+        'SELECT COUNT(DISTINCT examId) AS n FROM schule_pruefungen_attempts WHERE userId = ? AND maxScore > 0 AND (score / maxScore) * 100 >= ?',
+        [userId, FREE_LESSONS_PASS_PCT]
+      )
+      count += examRows[0]?.n || 0
+    } catch (e) {
+      // table may not exist on first boot
+    }
+    return count
+  } catch (e) {
+    console.error('countPassedLessons error:', e.message)
+    return 0
+  }
+}
+
 // Helper: get user subscription status
 async function getSubscriptionInfo(userId) {
   const [rows] = await pool.query('SELECT * FROM schule_subscriptions WHERE userId = ?', [userId])
   if (rows.length === 0) return null
   const sub = rows[0]
-  const now = new Date()
-  const trialActive = sub.subscriptionStatus === 'trialing' && new Date(sub.trialEndsAt) > now
   const paid = sub.subscriptionStatus === 'active'
   const isSso = sub.ssoUser === 1
+
+  // Count free lessons used (only relevant if not paid/SSO)
+  const lessonsPassed = (paid || isSso) ? 0 : await countPassedLessons(userId)
+  const freeLessonsRemaining = Math.max(0, FREE_LESSONS_LIMIT - lessonsPassed)
+  const freeAccess = !paid && !isSso && lessonsPassed < FREE_LESSONS_LIMIT
+
   return {
     status: sub.subscriptionStatus,
-    trialEndsAt: sub.trialEndsAt,
-    trialActive,
+    trialEndsAt: sub.trialEndsAt, // legacy, no longer used for gating
+    trialActive: freeAccess, // alias so legacy UI keeps working
     paid,
     ssoUser: isSso,
-    hasAccess: isSso || paid || trialActive,
+    hasAccess: isSso || paid || freeAccess,
+    lessonsPassed,
+    freeLessonsLimit: FREE_LESSONS_LIMIT,
+    freeLessonsRemaining,
     stripeCustomerId: sub.stripeCustomerId,
     stripeSubscriptionId: sub.stripeSubscriptionId,
   }
