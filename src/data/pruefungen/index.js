@@ -11,12 +11,15 @@ import { goetheB1HoerenExams } from './goethe-b1-hoeren'
 import { goetheB1SchreibenExams } from './goethe-b1-schreiben'
 import { goetheB1SprechenExams } from './goethe-b1-sprechen'
 import { goetheB2LesenExams } from './goethe-b2-lesen'
+import { goetheB2HoerenExams } from './goethe-b2-hoeren'
 import { goetheB2SchreibenExams } from './goethe-b2-schreiben'
 import { goetheB2SprechenExams } from './goethe-b2-sprechen'
 import { goetheC1LesenExams } from './goethe-c1-lesen'
+import { goetheC1HoerenExams } from './goethe-c1-hoeren'
 import { goetheC1SchreibenExams } from './goethe-c1-schreiben'
 import { goetheC1SprechenExams } from './goethe-c1-sprechen'
 import { goetheC2LesenExams } from './goethe-c2-lesen'
+import { goetheC2HoerenExams } from './goethe-c2-hoeren'
 import { goetheC2SchreibenExams } from './goethe-c2-schreiben'
 import { goetheC2SprechenExams } from './goethe-c2-sprechen'
 
@@ -38,12 +41,15 @@ export const PRUEFUNGEN_EXAMS = [
   ...goetheB1SchreibenExams,
   ...goetheB1SprechenExams,
   ...goetheB2LesenExams,
+  ...goetheB2HoerenExams,
   ...goetheB2SchreibenExams,
   ...goetheB2SprechenExams,
   ...goetheC1LesenExams,
+  ...goetheC1HoerenExams,
   ...goetheC1SchreibenExams,
   ...goetheC1SprechenExams,
   ...goetheC2LesenExams,
+  ...goetheC2HoerenExams,
   ...goetheC2SchreibenExams,
   ...goetheC2SprechenExams,
 ]
