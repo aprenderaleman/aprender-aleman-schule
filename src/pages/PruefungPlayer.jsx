@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import {
   Clock, ArrowLeft, ArrowRight, CheckCircle2, XCircle, Trophy,
   AlertTriangle, BookOpen, Play, RotateCcw, ChevronRight,
-  Headphones, Volume2, Eye, EyeOff
+  Headphones, Volume2, Eye, EyeOff, Mic, Square, Loader2, Pause
 } from 'lucide-react'
 import Navbar from '../components/Layout/Navbar'
 import { useAuth } from '../context/AuthContext'
@@ -38,6 +38,7 @@ function countTotalItems(exam) {
     if (Array.isArray(part.questions)) n += part.questions.length
     else if (part.kind === 'formular') n += part.fields.length
     else if (part.kind === 'writing-task') n += 1
+    else if (part.kind === 'speaking-task') n += 1
   }
   return n
 }
@@ -59,6 +60,9 @@ function countAnswered(exam, responses) {
       for (const f of part.fields) if ((v[f.id] || '').trim()) n++
     } else if (part.kind === 'writing-task') {
       if ((responses[part.id] || '').trim()) n++
+    } else if (part.kind === 'speaking-task') {
+      const v = responses[part.id]
+      if (v && (v.blob || v.transcript)) n++
     }
   }
   return n
@@ -194,6 +198,84 @@ export default function PruefungPlayer() {
           })
         }
 
+        if (part.kind === 'speaking-task') {
+          const v = responses[part.id]
+          const possible = part.maxScore || 25
+          extraMax += possible
+          if (!v || !v.blob) {
+            combinedDetail.push({
+              partId: part.id,
+              type: 'speaking-task',
+              earned: 0,
+              possible,
+              skipped: true,
+            })
+            continue
+          }
+          try {
+            // Transcribe
+            const tRes = await fetch(`${API_URL}/api/pruefungen/transcribe-sprechen`, {
+              method: 'POST',
+              headers: {
+                'Content-Type': v.mimeType || 'audio/webm',
+                Authorization: `Bearer ${getToken()}`,
+              },
+              body: v.blob,
+            })
+            if (!tRes.ok) throw new Error('Transkription fehlgeschlagen')
+            const { transcript } = await tRes.json()
+
+            // Persist transcript on response (so it survives serialization)
+            v.transcript = transcript
+
+            if (!transcript || !transcript.trim()) {
+              combinedDetail.push({
+                partId: part.id,
+                type: 'speaking-task',
+                earned: 0,
+                possible,
+                error: 'Keine Sprache erkannt.',
+              })
+              continue
+            }
+
+            // Grade
+            const gRes = await fetch(`${API_URL}/api/pruefungen/grade-sprechen`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${getToken()}` },
+              body: JSON.stringify({
+                level: exam.level,
+                taskType: part.taskType,
+                taskPrompt: part.taskPrompt + (part.bullets ? '\n\nPunkte:\n' + part.bullets.map(b => `- ${b}`).join('\n') : ''),
+                transcript,
+                durationSeconds: v.durationSeconds || 0,
+              }),
+            })
+            if (!gRes.ok) throw new Error('KI-Bewertung fehlgeschlagen')
+            const aiResult = await gRes.json()
+            const earned = Math.round((aiResult.total / 100) * possible)
+            extraScore += earned
+            writingFeedback[part.id] = aiResult
+            combinedDetail.push({
+              partId: part.id,
+              type: 'speaking-task',
+              earned,
+              possible,
+              transcript,
+              durationSeconds: v.durationSeconds || 0,
+              ai: aiResult,
+            })
+          } catch (e) {
+            combinedDetail.push({
+              partId: part.id,
+              type: 'speaking-task',
+              earned: 0,
+              possible,
+              error: e.message,
+            })
+          }
+        }
+
         if (part.kind === 'writing-task') {
           const submission = (responses[part.id] || '').trim()
           const possible = part.maxScore || 25
@@ -259,7 +341,20 @@ export default function PruefungPlayer() {
         writingFeedback,
       }
 
-      // Save to backend
+      // Save to backend (strip Blobs from speaking-task responses)
+      const cleanResponses = {}
+      for (const k of Object.keys(responses)) {
+        const v = responses[k]
+        if (v && typeof v === 'object' && v.blob instanceof Blob) {
+          cleanResponses[k] = {
+            transcript: v.transcript || '',
+            durationSeconds: v.durationSeconds || 0,
+            mimeType: v.mimeType || null,
+          }
+        } else {
+          cleanResponses[k] = v
+        }
+      }
       if (attemptId) {
         await fetch(`${API_URL}/api/pruefungen/attempts/${attemptId}/finish`, {
           method: 'POST',
@@ -267,7 +362,7 @@ export default function PruefungPlayer() {
           body: JSON.stringify({
             score: finalResult.score,
             maxScore: finalResult.maxScore,
-            responses,
+            responses: cleanResponses,
             feedback: { detail: combinedDetail, writingFeedback },
           }),
         })
@@ -370,7 +465,7 @@ export default function PruefungPlayer() {
           <h2 className="font-bold text-gray-800 dark:text-gray-100 text-lg mb-3">Detaillierte Lösungen</h2>
           <div className="space-y-4 mb-6">
             {exam.parts.map((part) => {
-              const partDetail = result.detail.find(d => d.partId === part.id && (d.type === 'formular' || d.type === 'writing-task'))
+              const partDetail = result.detail.find(d => d.partId === part.id && (d.type === 'formular' || d.type === 'writing-task' || d.type === 'speaking-task'))
               return (
                 <div key={part.id} className="bg-white dark:bg-gray-800 rounded-2xl p-5 border border-gray-200 dark:border-gray-700">
                   <h3 className="font-bold text-gray-800 dark:text-gray-100 mb-3">{part.title}</h3>
@@ -390,6 +485,10 @@ export default function PruefungPlayer() {
                   {/* Writing-task feedback */}
                   {part.kind === 'writing-task' && partDetail && (
                     <WritingTaskResult part={part} detail={partDetail} submission={result && (result.responses || {})[part.id]} />
+                  )}
+                  {/* Speaking-task feedback */}
+                  {part.kind === 'speaking-task' && partDetail && (
+                    <SpeakingTaskResult part={part} detail={partDetail} />
                   )}
                 </div>
               )
@@ -518,6 +617,9 @@ function PartView({ part, responses, setAnswer }) {
       )}
       {part.kind === 'writing-task' && (
         <WritingTaskView part={part} value={responses[part.id] || ''} onChange={(v) => setAnswer(part.id, v)} />
+      )}
+      {part.kind === 'speaking-task' && (
+        <SpeakingTaskView part={part} value={responses[part.id] || null} onChange={(v) => setAnswer(part.id, v)} />
       )}
 
       {/* Default: questions array (Lesen/Hören) */}
@@ -880,6 +982,326 @@ function WritingTaskResult({ part, detail }) {
           </div>
         ))}
       </div>
+
+      {ai.overall && (
+        <div className="bg-indigo-50 dark:bg-indigo-900/20 rounded-xl p-3 text-sm text-indigo-900 dark:text-indigo-100">
+          {ai.overall}
+        </div>
+      )}
+
+      {Array.isArray(ai.errors) && ai.errors.length > 0 && (
+        <div>
+          <p className="text-xs font-bold text-gray-600 dark:text-gray-300 uppercase mb-2">Fehler</p>
+          <div className="space-y-2">
+            {ai.errors.map((e, i) => (
+              <div key={i} className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-2 text-xs">
+                <p className="text-red-700 dark:text-red-300"><span className="line-through">{e.original}</span> → <strong>{e.correction}</strong></p>
+                {e.explanation && <p className="text-red-600 dark:text-red-400 mt-0.5">{e.explanation}</p>}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {Array.isArray(ai.strengths) && ai.strengths.length > 0 && (
+        <div>
+          <p className="text-xs font-bold text-green-700 dark:text-green-400 uppercase mb-1">Stärken</p>
+          <ul className="text-xs text-gray-700 dark:text-gray-200 list-disc list-inside space-y-0.5">
+            {ai.strengths.map((s, i) => <li key={i}>{s}</li>)}
+          </ul>
+        </div>
+      )}
+
+      {Array.isArray(ai.improvements) && ai.improvements.length > 0 && (
+        <div>
+          <p className="text-xs font-bold text-orange-700 dark:text-orange-400 uppercase mb-1">Verbesserungen</p>
+          <ul className="text-xs text-gray-700 dark:text-gray-200 list-disc list-inside space-y-0.5">
+            {ai.improvements.map((s, i) => <li key={i}>{s}</li>)}
+          </ul>
+        </div>
+      )}
+    </div>
+  )
+}
+
+/* ==========================
+   Sprechen: recorder + feedback
+   ========================== */
+function pickRecorderMime() {
+  if (typeof MediaRecorder === 'undefined') return ''
+  const candidates = [
+    'audio/webm;codecs=opus',
+    'audio/webm',
+    'audio/ogg;codecs=opus',
+    'audio/ogg',
+    'audio/mp4',
+  ]
+  for (const t of candidates) {
+    if (MediaRecorder.isTypeSupported(t)) return t
+  }
+  return ''
+}
+
+function SpeakingTaskView({ part, value, onChange }) {
+  // Phases: idle | preparing | recording | recorded
+  const initialPhase = value && value.blob ? 'recorded' : 'idle'
+  const [phase, setPhase] = useState(initialPhase)
+  const [secondsLeft, setSecondsLeft] = useState(0)
+  const [error, setError] = useState(null)
+  const mediaRecorderRef = useRef(null)
+  const streamRef = useRef(null)
+  const chunksRef = useRef([])
+  const startedAtRef = useRef(0)
+  const tickRef = useRef(null)
+  const audioUrl = useMemo(() => {
+    if (value && value.blob) return URL.createObjectURL(value.blob)
+    return null
+  }, [value && value.blob])
+
+  // Cleanup blob URL on unmount/change
+  useEffect(() => {
+    return () => { if (audioUrl) URL.revokeObjectURL(audioUrl) }
+  }, [audioUrl])
+
+  // Cleanup mic stream on unmount
+  useEffect(() => {
+    return () => {
+      if (streamRef.current) streamRef.current.getTracks().forEach(t => t.stop())
+      if (tickRef.current) clearInterval(tickRef.current)
+    }
+  }, [])
+
+  const startPreparation = () => {
+    setError(null)
+    if (!part.preparationSeconds) return startRecording()
+    setPhase('preparing')
+    setSecondsLeft(part.preparationSeconds)
+    if (tickRef.current) clearInterval(tickRef.current)
+    tickRef.current = setInterval(() => {
+      setSecondsLeft(s => {
+        if (s <= 1) {
+          clearInterval(tickRef.current)
+          startRecording()
+          return 0
+        }
+        return s - 1
+      })
+    }, 1000)
+  }
+
+  const skipPreparation = () => {
+    if (tickRef.current) clearInterval(tickRef.current)
+    startRecording()
+  }
+
+  const startRecording = async () => {
+    setError(null)
+    try {
+      if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+        throw new Error('Dein Browser unterstützt keine Audioaufnahme.')
+      }
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true })
+      streamRef.current = stream
+      const mimeType = pickRecorderMime()
+      const mr = new MediaRecorder(stream, mimeType ? { mimeType } : undefined)
+      mediaRecorderRef.current = mr
+      chunksRef.current = []
+      mr.ondataavailable = (e) => { if (e.data && e.data.size > 0) chunksRef.current.push(e.data) }
+      mr.onstop = () => {
+        const blob = new Blob(chunksRef.current, { type: mimeType || 'audio/webm' })
+        const durationSeconds = Math.max(1, Math.round((Date.now() - startedAtRef.current) / 1000))
+        onChange({ blob, mimeType: mimeType || 'audio/webm', durationSeconds })
+        setPhase('recorded')
+        if (streamRef.current) {
+          streamRef.current.getTracks().forEach(t => t.stop())
+          streamRef.current = null
+        }
+      }
+      mr.start()
+      startedAtRef.current = Date.now()
+      setPhase('recording')
+      const limit = part.maxRecordSeconds || 120
+      setSecondsLeft(limit)
+      if (tickRef.current) clearInterval(tickRef.current)
+      tickRef.current = setInterval(() => {
+        setSecondsLeft(s => {
+          if (s <= 1) {
+            clearInterval(tickRef.current)
+            stopRecording()
+            return 0
+          }
+          return s - 1
+        })
+      }, 1000)
+    } catch (err) {
+      setError(err.message || 'Fehler beim Mikrofon-Zugriff.')
+      setPhase('idle')
+    }
+  }
+
+  const stopRecording = () => {
+    if (tickRef.current) clearInterval(tickRef.current)
+    const mr = mediaRecorderRef.current
+    if (mr && mr.state !== 'inactive') mr.stop()
+  }
+
+  const reset = () => {
+    if (tickRef.current) clearInterval(tickRef.current)
+    if (streamRef.current) {
+      streamRef.current.getTracks().forEach(t => t.stop())
+      streamRef.current = null
+    }
+    onChange(null)
+    setPhase('idle')
+    setSecondsLeft(0)
+    setError(null)
+  }
+
+  return (
+    <div className="space-y-4">
+      {/* Task prompt */}
+      <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 p-5">
+        <p className="text-xs text-gray-500 dark:text-gray-400 font-bold uppercase tracking-wide mb-2">{part.taskType || 'Sprechaufgabe'}</p>
+        <p className="text-sm text-gray-800 dark:text-gray-100 mb-4">{part.taskPrompt}</p>
+        {part.bullets && part.bullets.length > 0 && (
+          <ul className="space-y-1.5 text-sm text-gray-700 dark:text-gray-200 list-disc list-inside">
+            {part.bullets.map((b, i) => <li key={i}>{b}</li>)}
+          </ul>
+        )}
+        <div className="mt-4 flex flex-wrap gap-2 text-xs">
+          {part.preparationSeconds ? (
+            <span className="bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300 px-2 py-1 rounded-full font-bold">
+              Vorbereitung: {part.preparationSeconds}s
+            </span>
+          ) : null}
+          <span className="bg-indigo-100 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300 px-2 py-1 rounded-full font-bold">
+            Max. Aufnahme: {part.maxRecordSeconds || 120}s
+          </span>
+        </div>
+      </div>
+
+      {/* Recorder */}
+      <div className="bg-gradient-to-br from-purple-50 to-indigo-50 dark:from-purple-900/20 dark:to-indigo-900/20 border-2 border-indigo-200 dark:border-indigo-800 rounded-2xl p-6">
+        {error && (
+          <div className="bg-red-50 border border-red-200 text-red-700 rounded-xl p-3 mb-4 text-sm">{error}</div>
+        )}
+
+        {phase === 'idle' && (
+          <div className="text-center">
+            <Mic size={40} className="mx-auto mb-3 text-indigo-500" />
+            <p className="text-sm text-gray-700 dark:text-gray-200 mb-4">
+              Klicke auf <strong>Start</strong>, um die Aufnahme vorzubereiten. Du brauchst Zugang zum Mikrofon.
+            </p>
+            <button
+              onClick={startPreparation}
+              className="inline-flex items-center gap-2 bg-indigo-600 text-white font-bold px-6 py-3 rounded-xl hover:bg-indigo-700 transition shadow"
+            >
+              <Play size={16} /> Start
+            </button>
+          </div>
+        )}
+
+        {phase === 'preparing' && (
+          <div className="text-center">
+            <p className="text-xs text-amber-700 dark:text-amber-300 font-bold uppercase tracking-wide mb-2">Vorbereitung</p>
+            <p className="text-5xl font-extrabold text-amber-600 dark:text-amber-400 mb-3">{secondsLeft}s</p>
+            <p className="text-sm text-gray-600 dark:text-gray-300 mb-4">Lies die Aufgabe und überlege dir, was du sagen möchtest.</p>
+            <button
+              onClick={skipPreparation}
+              className="inline-flex items-center gap-2 bg-indigo-600 text-white font-bold px-5 py-2.5 rounded-xl hover:bg-indigo-700 transition"
+            >
+              <Mic size={16} /> Jetzt aufnehmen
+            </button>
+          </div>
+        )}
+
+        {phase === 'recording' && (
+          <div className="text-center">
+            <div className="inline-flex items-center gap-2 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 px-3 py-1 rounded-full font-bold text-xs mb-3 animate-pulse">
+              <span className="w-2 h-2 bg-red-500 rounded-full" /> AUFNAHME LÄUFT
+            </div>
+            <p className="text-5xl font-extrabold text-red-600 dark:text-red-400 mb-3">{secondsLeft}s</p>
+            <p className="text-sm text-gray-600 dark:text-gray-300 mb-4">Sprich klar und deutlich auf Deutsch.</p>
+            <button
+              onClick={stopRecording}
+              className="inline-flex items-center gap-2 bg-red-600 text-white font-bold px-6 py-3 rounded-xl hover:bg-red-700 transition shadow"
+            >
+              <Square size={16} /> Aufnahme beenden
+            </button>
+          </div>
+        )}
+
+        {phase === 'recorded' && value && (
+          <div className="space-y-3">
+            <div className="flex items-center justify-between">
+              <p className="text-sm font-bold text-green-700 dark:text-green-300 flex items-center gap-2">
+                <CheckCircle2 size={16} /> Aufnahme bereit ({value.durationSeconds || 0}s)
+              </p>
+              <button
+                onClick={reset}
+                className="text-xs font-bold text-indigo-600 dark:text-indigo-300 hover:underline flex items-center gap-1"
+              >
+                <RotateCcw size={12} /> Neu aufnehmen
+              </button>
+            </div>
+            {audioUrl && (
+              <audio
+                src={audioUrl}
+                controls
+                controlsList="nodownload"
+                className="w-full"
+              />
+            )}
+            <p className="text-xs text-gray-500 dark:text-gray-400 italic">
+              Beim Abgeben wird die Aufnahme automatisch transkribiert und mit KI bewertet.
+              Aussprache kann nicht automatisch beurteilt werden.
+            </p>
+          </div>
+        )}
+      </div>
+    </div>
+  )
+}
+
+function SpeakingTaskResult({ part, detail }) {
+  if (detail.skipped) {
+    return <p className="text-sm text-orange-600 dark:text-orange-400">Du hast keine Aufnahme abgegeben (0 Punkte).</p>
+  }
+  if (detail.error) {
+    return <p className="text-sm text-red-600 dark:text-red-400">Fehler: {detail.error}</p>
+  }
+  const ai = detail.ai
+  if (!ai) return null
+
+  const criteria = [
+    { key: 'erfuellung', label: 'Erfüllung', max: 25 },
+    { key: 'kohaerenz', label: 'Kohärenz', max: 25 },
+    { key: 'wortschatz', label: 'Wortschatz', max: 25 },
+    { key: 'strukturen', label: 'Strukturen', max: 25 },
+  ]
+
+  return (
+    <div className="space-y-4">
+      <div className="flex items-baseline gap-2">
+        <span className="text-2xl font-extrabold text-gray-800 dark:text-gray-100">{detail.earned}</span>
+        <span className="text-sm text-gray-500">/ {detail.possible} Punkte · KI-Gesamtwertung {ai.total}/100 · {detail.durationSeconds || 0}s</span>
+      </div>
+
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+        {criteria.map(c => (
+          <div key={c.key} className="bg-gray-50 dark:bg-gray-700 rounded-lg p-2 text-center">
+            <p className="text-[10px] text-gray-500 dark:text-gray-400 font-bold uppercase">{c.label}</p>
+            <p className="text-lg font-extrabold text-indigo-600 dark:text-indigo-300">{ai.scores?.[c.key] ?? 0}/{c.max}</p>
+          </div>
+        ))}
+      </div>
+
+      {detail.transcript && (
+        <details className="bg-gray-50 dark:bg-gray-700 rounded-xl p-3 text-sm">
+          <summary className="cursor-pointer font-bold text-gray-700 dark:text-gray-200">Transkript anzeigen</summary>
+          <p className="mt-2 text-gray-700 dark:text-gray-200 whitespace-pre-line italic">"{detail.transcript}"</p>
+        </details>
+      )}
 
       {ai.overall && (
         <div className="bg-indigo-50 dark:bg-indigo-900/20 rounded-xl p-3 text-sm text-indigo-900 dark:text-indigo-100">

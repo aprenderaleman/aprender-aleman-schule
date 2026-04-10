@@ -25,9 +25,10 @@ app.use(cors({
   },
   credentials: true,
 }))
-// Parse JSON for all routes except Stripe webhook (needs raw body)
+// Parse JSON for all routes except Stripe webhook + Sprechen audio upload (need raw body)
 app.use((req, res, next) => {
   if (req.originalUrl === '/api/stripe/webhook') return next()
+  if (req.originalUrl === '/api/pruefungen/transcribe-sprechen') return next()
   express.json({ limit: '50kb' })(req, res, next)
 })
 
@@ -995,6 +996,7 @@ app.get('/api/health', async (req, res) => {
 
 // ─── AI PROXY ────────────────────────────────────────
 const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY
+const OPENAI_API_KEY = process.env.OPENAI_API_KEY
 
 function getSystemPrompt(userName, userLevel) {
   return `Du bist ein Deutschlehrer für spanischsprachige Studenten. Der Student heißt ${userName} und hat das Niveau ${userLevel}.
@@ -1382,6 +1384,121 @@ passed = true wenn total >= 60.`
   } catch (err) {
     console.error('Grade Schreiben error:', err.message)
     res.status(500).json({ error: 'Error al evaluar el escrito.' })
+  }
+})
+
+// TRANSCRIBE Sprechen audio with OpenAI Whisper
+// Body: raw binary audio (webm/ogg/mp3/wav). Header: Content-Type: audio/<format>
+app.post(
+  '/api/pruefungen/transcribe-sprechen',
+  express.raw({ type: ['audio/*', 'application/octet-stream'], limit: '15mb' }),
+  authMiddleware,
+  subscriptionMiddleware,
+  aiRateLimit,
+  async (req, res) => {
+    try {
+      if (!OPENAI_API_KEY) return res.status(503).json({ error: 'Servicio de transcripción no disponible.' })
+      if (!Buffer.isBuffer(req.body) || req.body.length === 0) {
+        return res.status(400).json({ error: 'Audio vacío.' })
+      }
+      if (req.body.length > 15 * 1024 * 1024) {
+        return res.status(413).json({ error: 'Audio demasiado grande (máx 15 MB).' })
+      }
+
+      const contentType = req.headers['content-type'] || 'audio/webm'
+      const ext = contentType.includes('mp3') ? 'mp3'
+        : contentType.includes('wav') ? 'wav'
+        : contentType.includes('ogg') ? 'ogg'
+        : contentType.includes('mp4') || contentType.includes('m4a') ? 'm4a'
+        : 'webm'
+
+      const formData = new FormData()
+      formData.append('file', new Blob([req.body], { type: contentType }), `recording.${ext}`)
+      formData.append('model', 'whisper-1')
+      formData.append('language', 'de')
+      formData.append('response_format', 'json')
+
+      const r = await fetch('https://api.openai.com/v1/audio/transcriptions', {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${OPENAI_API_KEY}` },
+        body: formData,
+      })
+
+      if (!r.ok) {
+        const errText = await r.text()
+        console.error('Whisper error:', r.status, errText)
+        return res.status(502).json({ error: 'Error de transcripción.' })
+      }
+      const data = await r.json()
+      res.json({ transcript: data.text || '' })
+    } catch (err) {
+      console.error('Transcribe error:', err.message)
+      res.status(500).json({ error: 'Error al transcribir el audio.' })
+    }
+  }
+)
+
+// GRADE Sprechen submission (transcript) with Claude using Goethe rubric
+app.post('/api/pruefungen/grade-sprechen', authMiddleware, subscriptionMiddleware, aiRateLimit, async (req, res) => {
+  try {
+    if (!ANTHROPIC_API_KEY) return res.status(503).json({ error: 'Servicio de IA no disponible.' })
+    const { level, taskType, taskPrompt, transcript, durationSeconds } = req.body
+    if (!level || !taskPrompt || !transcript) {
+      return res.status(400).json({ error: 'Faltan datos.' })
+    }
+
+    const wordCount = String(transcript).trim().split(/\s+/).filter(Boolean).length
+    const userName = req.user.fullName || 'Student'
+
+    const message = `Du bist offizieller Prüfer für das Goethe-Zertifikat ${level} Modul Sprechen. Du bewertest die TRANSKRIPTION einer mündlichen Antwort.
+
+WICHTIG: Du kannst keine Aussprache, Intonation oder Sprechflüssigkeit direkt hören — du arbeitest nur mit dem Transkript. Bewerte deshalb NUR Inhalt, Wortschatz, Strukturen und Kohärenz. Erwähne im Kommentar, dass Aussprache nicht automatisch bewertet werden konnte.
+
+AUFGABE (${taskType || 'Sprechaufgabe'}):
+${taskPrompt}
+
+DAUER: ${durationSeconds || '?'} Sekunden | WÖRTER: ${wordCount}
+
+TRANSKRIPT (automatisch erstellt mit Whisper, kann kleine Fehler enthalten):
+"""
+${transcript}
+"""
+
+Bewerte nach 4 Kriterien (jeweils 0-25 Punkte, Gesamt max. 100):
+1. Erfüllung der Aufgabe (Wurden alle Punkte angesprochen?)
+2. Kohärenz (Logischer Aufbau, Verknüpfungen)
+3. Wortschatz (Bandbreite, Angemessenheit)
+4. Strukturen (Grammatik soweit aus dem Transkript erkennbar)
+
+Antworte AUSSCHLIESSLICH mit gültigem JSON, ohne Markdown-Codeblock:
+{
+  "scores": {
+    "erfuellung": 20,
+    "kohaerenz": 18,
+    "wortschatz": 15,
+    "strukturen": 17
+  },
+  "total": 70,
+  "passed": true,
+  "wordCount": ${wordCount},
+  "errors": [
+    {"original": "exakte Stelle aus dem Transkript", "correction": "Korrektur", "explanation": "kurze Erklärung", "severity": "low|medium|high"}
+  ],
+  "strengths": ["Was gut gemacht wurde"],
+  "improvements": ["Konkreter Verbesserungsvorschlag"],
+  "overall": "Gesamtkommentar (2-3 Sätze, ermutigend; weise darauf hin, dass Aussprache nicht automatisch bewertet wurde)"
+}
+
+passed = true wenn total >= 60.`
+
+    const text = await callAnthropic([{ role: 'user', content: message }], userName, level, 2500)
+    const jsonMatch = text.match(/\{[\s\S]*\}/)
+    if (!jsonMatch) return res.status(500).json({ error: 'Error al procesar respuesta de IA.' })
+    const result = JSON.parse(jsonMatch[0])
+    res.json(result)
+  } catch (err) {
+    console.error('Grade Sprechen error:', err.message)
+    res.status(500).json({ error: 'Error al evaluar el oral.' })
   }
 })
 
