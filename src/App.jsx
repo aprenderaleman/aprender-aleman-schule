@@ -29,6 +29,7 @@ import ChatBot from './components/ChatBot/ChatBot'
 const AdminDashboard = lazy(() => import('./pages/admin/AdminDashboard'))
 const AdminUsers = lazy(() => import('./pages/admin/AdminUsers'))
 const AdminUserDetail = lazy(() => import('./pages/admin/AdminUserDetail'))
+const AdminFinances = lazy(() => import('./pages/admin/AdminFinances'))
 
 function ProtectedRoute({ children }) {
   const { user } = useAuth()
@@ -109,6 +110,7 @@ function AppRoutes() {
         <Route path="/admin" element={<AdminRoute><AdminDashboard /></AdminRoute>} />
         <Route path="/admin/usuarios" element={<AdminRoute><AdminUsers /></AdminRoute>} />
         <Route path="/admin/usuarios/:userId" element={<AdminRoute><AdminUserDetail /></AdminRoute>} />
+        <Route path="/admin/finanzen" element={<AdminRoute><AdminFinances /></AdminRoute>} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </>

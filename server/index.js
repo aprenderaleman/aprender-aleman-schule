@@ -1017,6 +1017,128 @@ app.get('/api/health', async (req, res) => {
   }
 })
 
+// ─── GOOGLE ADS CONFIG ──────────────────────────────
+const GOOGLE_ADS_DEVELOPER_TOKEN = process.env.GOOGLE_ADS_DEVELOPER_TOKEN
+const GOOGLE_ADS_CLIENT_ID = process.env.GOOGLE_ADS_CLIENT_ID
+const GOOGLE_ADS_CLIENT_SECRET = process.env.GOOGLE_ADS_CLIENT_SECRET
+const GOOGLE_ADS_REFRESH_TOKEN = process.env.GOOGLE_ADS_REFRESH_TOKEN
+const GOOGLE_ADS_CUSTOMER_ID = process.env.GOOGLE_ADS_CUSTOMER_ID?.replace(/-/g, '')
+const GOOGLE_ADS_CONFIGURED = !!(GOOGLE_ADS_DEVELOPER_TOKEN && GOOGLE_ADS_CLIENT_ID && GOOGLE_ADS_CLIENT_SECRET && GOOGLE_ADS_REFRESH_TOKEN && GOOGLE_ADS_CUSTOMER_ID)
+
+// ─── AUTO-CREATE FINANCIAL TRACKING TABLES ──────────
+;(async () => {
+  try {
+    // Google Ads agent logs
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS schule_ads_agent_logs (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
+        status ENUM('success','error') DEFAULT 'success',
+        summary TEXT,
+        changes JSON,
+        recommendations JSON,
+        metrics JSON,
+        INDEX idx_timestamp (timestamp)
+      )
+    `)
+    // Monthly financial snapshots for tracking
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS schule_financial_snapshots (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        month VARCHAR(7) NOT NULL,
+        revenue DECIMAL(10,2) DEFAULT 0,
+        adSpend DECIMAL(10,2) DEFAULT 0,
+        activeSubscribers INT DEFAULT 0,
+        newSubscribers INT DEFAULT 0,
+        canceled INT DEFAULT 0,
+        trialUsers INT DEFAULT 0,
+        conversions INT DEFAULT 0,
+        impressions INT DEFAULT 0,
+        clicks INT DEFAULT 0,
+        cpa DECIMAL(10,2) DEFAULT 0,
+        ctr DECIMAL(5,3) DEFAULT 0,
+        createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+        updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+        UNIQUE INDEX idx_month (month)
+      )
+    `)
+    console.log('Financial tracking tables ready')
+  } catch (err) {
+    console.error('Financial tables error:', err.message)
+  }
+})()
+
+// ─── GOOGLE ADS HELPER: Get Access Token ────────────
+async function getGoogleAdsAccessToken() {
+  const res = await fetch('https://oauth2.googleapis.com/token', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams({
+      client_id: GOOGLE_ADS_CLIENT_ID,
+      client_secret: GOOGLE_ADS_CLIENT_SECRET,
+      refresh_token: GOOGLE_ADS_REFRESH_TOKEN,
+      grant_type: 'refresh_token',
+    }),
+  })
+  if (!res.ok) throw new Error(`Google OAuth error: ${res.status}`)
+  const data = await res.json()
+  return data.access_token
+}
+
+// ─── GOOGLE ADS HELPER: Query API (GAQL) ────────────
+async function queryGoogleAds(gaql) {
+  if (!GOOGLE_ADS_CONFIGURED) return null
+  const accessToken = await getGoogleAdsAccessToken()
+  const res = await fetch(
+    `https://googleads.googleapis.com/v17/customers/${GOOGLE_ADS_CUSTOMER_ID}/googleAds:searchStream`,
+    {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        'developer-token': GOOGLE_ADS_DEVELOPER_TOKEN,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ query: gaql }),
+    }
+  )
+  if (!res.ok) {
+    const errText = await res.text()
+    throw new Error(`Google Ads API ${res.status}: ${errText}`)
+  }
+  const data = await res.json()
+  // searchStream returns array of result batches
+  const rows = []
+  if (Array.isArray(data)) {
+    for (const batch of data) {
+      if (batch.results) rows.push(...batch.results)
+    }
+  }
+  return rows
+}
+
+// ─── GOOGLE ADS HELPER: Mutate Campaign ─────────────
+async function mutateGoogleAds(operations) {
+  if (!GOOGLE_ADS_CONFIGURED) return null
+  const accessToken = await getGoogleAdsAccessToken()
+  const res = await fetch(
+    `https://googleads.googleapis.com/v17/customers/${GOOGLE_ADS_CUSTOMER_ID}/googleAds:mutate`,
+    {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        'developer-token': GOOGLE_ADS_DEVELOPER_TOKEN,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ mutateOperations: operations }),
+    }
+  )
+  if (!res.ok) {
+    const errText = await res.text()
+    throw new Error(`Google Ads Mutate ${res.status}: ${errText}`)
+  }
+  return await res.json()
+}
+
 // ─── AI PROXY ────────────────────────────────────────
 const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY
@@ -1215,6 +1337,520 @@ Bewertung von 0-10. Kein Text außerhalb des JSONs.`
   } catch (err) {
     console.error('Evaluate speaking error:', err.message)
     res.status(500).json({ error: 'Fehler bei der Bewertung.' })
+  }
+})
+
+// ═══════════════════════════════════════════════════════
+// ─── ADMIN: FINANCES DASHBOARD ──────────────────────
+// ═══════════════════════════════════════════════════════
+app.get('/api/admin/finances', authMiddleware, adminMiddleware, async (req, res) => {
+  try {
+    const period = req.query.period || '6months'
+    const monthsBack = period === '3months' ? 3 : period === '6months' ? 6 : period === '12months' ? 12 : 36
+
+    // ── STRIPE DATA ──
+    let stripeData = { mrr: 0, mrrChange: 0, activeSubscribers: 0, trialUsers: 0, totalRevenue: 0, avgRevenuePerUser: 0, churnRate: 0, canceledThisMonth: 0 }
+    let recentPayments = []
+
+    // Subscription counts from DB
+    const [activeSubs] = await pool.query("SELECT COUNT(*) as n FROM schule_subscriptions WHERE subscriptionStatus = 'active'")
+    const [trialSubs] = await pool.query("SELECT COUNT(*) as n FROM schule_subscriptions WHERE subscriptionStatus = 'trialing'")
+    const [canceledThisMonth] = await pool.query(
+      "SELECT COUNT(*) as n FROM schule_subscriptions WHERE subscriptionStatus = 'canceled' AND updatedAt >= DATE_FORMAT(NOW(), '%Y-%m-01')"
+    )
+    const [pastDueSubs] = await pool.query("SELECT COUNT(*) as n FROM schule_subscriptions WHERE subscriptionStatus = 'past_due'")
+    const [totalPayingEver] = await pool.query(
+      "SELECT COUNT(*) as n FROM schule_subscriptions WHERE stripeSubscriptionId IS NOT NULL"
+    )
+
+    const activeCount = activeSubs[0].n
+    const trialCount = trialSubs[0].n
+    const canceledCount = canceledThisMonth[0].n
+    const pricePerMonth = 15 // €15/month
+    const mrr = activeCount * pricePerMonth
+
+    // Calculate MRR change (compare with last month active count from snapshot)
+    const [lastMonthSnap] = await pool.query(
+      "SELECT activeSubscribers FROM schule_financial_snapshots WHERE month < DATE_FORMAT(NOW(), '%Y-%m') ORDER BY month DESC LIMIT 1"
+    )
+    const lastMonthActive = lastMonthSnap[0]?.activeSubscribers || 0
+    const mrrChange = lastMonthActive > 0 ? ((activeCount - lastMonthActive) / lastMonthActive) * 100 : 0
+
+    // Churn rate = canceled this month / (active last month + new this month)
+    const [newThisMonth] = await pool.query(
+      "SELECT COUNT(*) as n FROM schule_subscriptions WHERE subscriptionStatus = 'active' AND updatedAt >= DATE_FORMAT(NOW(), '%Y-%m-01')"
+    )
+    const churnBase = lastMonthActive + newThisMonth[0].n
+    const churnRate = churnBase > 0 ? (canceledCount / churnBase) * 100 : 0
+
+    stripeData = {
+      mrr,
+      mrrChange: parseFloat(mrrChange.toFixed(1)),
+      activeSubscribers: activeCount,
+      trialUsers: trialCount,
+      totalRevenue: 0,
+      avgRevenuePerUser: 0,
+      churnRate: parseFloat(churnRate.toFixed(1)),
+      canceledThisMonth: canceledCount,
+    }
+
+    // Fetch real data from Stripe API if configured
+    if (stripe) {
+      try {
+        // Total revenue from Stripe balance transactions
+        const charges = await stripe.charges.list({ limit: 100 })
+        let totalRev = 0
+        recentPayments = charges.data.slice(0, 20).map(c => {
+          if (c.status === 'succeeded') totalRev += c.amount
+          return {
+            date: new Date(c.created * 1000).toISOString(),
+            name: c.billing_details?.name || '',
+            email: c.billing_details?.email || c.receipt_email || '',
+            amount: c.amount,
+            status: c.status === 'succeeded' ? 'succeeded' : c.status === 'failed' ? 'failed' : 'pending',
+            type: 'Abo',
+          }
+        })
+        stripeData.totalRevenue = totalRev / 100
+        stripeData.avgRevenuePerUser = totalPayingEver[0].n > 0 ? (totalRev / 100) / totalPayingEver[0].n : 0
+      } catch (stripeErr) {
+        console.error('Stripe finance fetch error:', stripeErr.message)
+      }
+    }
+
+    // ── MONTHLY BREAKDOWN ──
+    const [snapshots] = await pool.query(
+      "SELECT * FROM schule_financial_snapshots ORDER BY month DESC LIMIT ?",
+      [monthsBack]
+    )
+    const monthly = snapshots.reverse().map(s => ({
+      month: s.month,
+      revenue: parseFloat(s.revenue) || 0,
+      adSpend: parseFloat(s.adSpend) || 0,
+      activeSubscribers: s.activeSubscribers || 0,
+      newSubscribers: s.newSubscribers || 0,
+      canceled: s.canceled || 0,
+    }))
+
+    // If no snapshots yet, create current month snapshot
+    if (snapshots.length === 0) {
+      const currentMonth = new Date().toISOString().slice(0, 7)
+      await pool.query(
+        `INSERT INTO schule_financial_snapshots (month, revenue, activeSubscribers, newSubscribers, canceled, trialUsers)
+         VALUES (?, ?, ?, ?, ?, ?)
+         ON DUPLICATE KEY UPDATE revenue=VALUES(revenue), activeSubscribers=VALUES(activeSubscribers), trialUsers=VALUES(trialUsers), updatedAt=NOW()`,
+        [currentMonth, stripeData.totalRevenue, activeCount, newThisMonth[0].n, canceledCount, trialCount]
+      )
+      monthly.push({
+        month: currentMonth,
+        revenue: stripeData.totalRevenue,
+        adSpend: 0,
+        activeSubscribers: activeCount,
+        newSubscribers: newThisMonth[0].n,
+        canceled: canceledCount,
+      })
+    }
+
+    // ── SUBSCRIPTION STATUS BREAKDOWN ──
+    const [statusCounts] = await pool.query(
+      "SELECT subscriptionStatus as status, COUNT(*) as count FROM schule_subscriptions GROUP BY subscriptionStatus"
+    )
+    const statusMap = { active: 'Aktiv', trialing: 'Probezeitraum', past_due: 'Überfällig', canceled: 'Gekündigt', none: 'Keine' }
+    const statusBreakdown = statusCounts.map(s => ({ status: statusMap[s.status] || s.status, count: s.count }))
+
+    // ── OVERVIEW CALCULATIONS ──
+    const totalRevenue = monthly.reduce((sum, m) => sum + m.revenue, 0) || stripeData.totalRevenue
+    const totalAdSpend = monthly.reduce((sum, m) => sum + m.adSpend, 0)
+    const netProfit = totalRevenue - totalAdSpend
+    const roas = totalAdSpend > 0 ? totalRevenue / totalAdSpend : 0
+    const avgLtv = totalPayingEver[0].n > 0 ? totalRevenue / totalPayingEver[0].n : 0
+
+    res.json({
+      stripe: stripeData,
+      monthly,
+      subscriptions: { statusBreakdown },
+      overview: {
+        totalRevenue,
+        totalAdSpend,
+        netProfit,
+        roas,
+        avgLtv,
+        payingUsers: totalPayingEver[0].n,
+      },
+      recentPayments,
+    })
+  } catch (err) {
+    console.error('Admin finances error:', err)
+    res.status(500).json({ error: 'Fehler beim Laden der Finanzdaten.' })
+  }
+})
+
+// ─── ADMIN: GOOGLE ADS METRICS ──────────────────────
+app.get('/api/admin/google-ads/metrics', authMiddleware, adminMiddleware, async (req, res) => {
+  try {
+    if (!GOOGLE_ADS_CONFIGURED) {
+      return res.json({ connected: false, currentMonth: {}, dailyMetrics: [] })
+    }
+
+    // Current month metrics
+    const today = new Date()
+    const firstOfMonth = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-01`
+    const todayStr = today.toISOString().slice(0, 10)
+
+    const monthlyRows = await queryGoogleAds(`
+      SELECT
+        metrics.cost_micros,
+        metrics.impressions,
+        metrics.clicks,
+        metrics.conversions,
+        metrics.ctr,
+        metrics.average_cpc
+      FROM campaign
+      WHERE segments.date BETWEEN '${firstOfMonth}' AND '${todayStr}'
+    `)
+
+    let spend = 0, impressions = 0, clicks = 0, conversions = 0
+    if (monthlyRows) {
+      for (const row of monthlyRows) {
+        const m = row.metrics || {}
+        spend += (parseInt(m.costMicros) || 0) / 1_000_000
+        impressions += parseInt(m.impressions) || 0
+        clicks += parseInt(m.clicks) || 0
+        conversions += parseFloat(m.conversions) || 0
+      }
+    }
+
+    const cpa = conversions > 0 ? spend / conversions : 0
+    const ctr = impressions > 0 ? (clicks / impressions) * 100 : 0
+
+    // Previous month for comparison
+    const prevMonth = new Date(today.getFullYear(), today.getMonth() - 1, 1)
+    const prevFirst = `${prevMonth.getFullYear()}-${String(prevMonth.getMonth() + 1).padStart(2, '0')}-01`
+    const prevLast = new Date(today.getFullYear(), today.getMonth(), 0).toISOString().slice(0, 10)
+
+    let prevSpend = 0
+    try {
+      const prevRows = await queryGoogleAds(`
+        SELECT metrics.cost_micros FROM campaign
+        WHERE segments.date BETWEEN '${prevFirst}' AND '${prevLast}'
+      `)
+      if (prevRows) {
+        for (const row of prevRows) {
+          prevSpend += (parseInt(row.metrics?.costMicros) || 0) / 1_000_000
+        }
+      }
+    } catch {}
+
+    const changeVsPrev = prevSpend > 0 ? ((spend - prevSpend) / prevSpend) * 100 : 0
+
+    // Daily metrics (last 30 days)
+    const thirtyDaysAgo = new Date(today.getTime() - 30 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10)
+    let dailyMetrics = []
+    try {
+      const dailyRows = await queryGoogleAds(`
+        SELECT
+          segments.date,
+          metrics.cost_micros,
+          metrics.impressions,
+          metrics.clicks,
+          metrics.conversions
+        FROM campaign
+        WHERE segments.date BETWEEN '${thirtyDaysAgo}' AND '${todayStr}'
+        ORDER BY segments.date
+      `)
+      if (dailyRows) {
+        const byDay = {}
+        for (const row of dailyRows) {
+          const d = row.segments?.date
+          if (!d) continue
+          if (!byDay[d]) byDay[d] = { date: d, spend: 0, impressions: 0, clicks: 0, conversions: 0 }
+          byDay[d].spend += (parseInt(row.metrics?.costMicros) || 0) / 1_000_000
+          byDay[d].impressions += parseInt(row.metrics?.impressions) || 0
+          byDay[d].clicks += parseInt(row.metrics?.clicks) || 0
+          byDay[d].conversions += parseFloat(row.metrics?.conversions) || 0
+        }
+        dailyMetrics = Object.values(byDay).map(d => ({
+          ...d,
+          spend: parseFloat(d.spend.toFixed(2)),
+        }))
+      }
+    } catch {}
+
+    // Save snapshot
+    const currentMonth = today.toISOString().slice(0, 7)
+    await pool.query(
+      `UPDATE schule_financial_snapshots SET adSpend = ?, conversions = ?, impressions = ?, clicks = ?, cpa = ?, ctr = ?, updatedAt = NOW()
+       WHERE month = ?`,
+      [spend.toFixed(2), Math.round(conversions), impressions, clicks, cpa.toFixed(2), ctr.toFixed(3), currentMonth]
+    )
+
+    res.json({
+      connected: true,
+      currentMonth: {
+        spend: parseFloat(spend.toFixed(2)),
+        impressions,
+        clicks,
+        conversions: Math.round(conversions),
+        cpa: parseFloat(cpa.toFixed(2)),
+        ctr: parseFloat(ctr.toFixed(2)),
+        changeVsPrev: parseFloat(changeVsPrev.toFixed(1)),
+      },
+      dailyMetrics,
+    })
+  } catch (err) {
+    console.error('Google Ads metrics error:', err.message)
+    res.json({ connected: false, error: err.message, currentMonth: {}, dailyMetrics: [] })
+  }
+})
+
+// ─── ADMIN: GOOGLE ADS AGENT LOGS ───────────────────
+app.get('/api/admin/google-ads/agent-logs', authMiddleware, adminMiddleware, async (req, res) => {
+  try {
+    const [logs] = await pool.query(
+      'SELECT * FROM schule_ads_agent_logs ORDER BY timestamp DESC LIMIT 30'
+    )
+    res.json(logs.map(l => ({
+      ...l,
+      changes: typeof l.changes === 'string' ? JSON.parse(l.changes) : l.changes,
+      recommendations: typeof l.recommendations === 'string' ? JSON.parse(l.recommendations) : l.recommendations,
+      metrics: typeof l.metrics === 'string' ? JSON.parse(l.metrics) : l.metrics,
+    })))
+  } catch (err) {
+    console.error('Agent logs error:', err)
+    res.json([])
+  }
+})
+
+// ─── ADMIN: RUN AI AD AGENT ─────────────────────────
+app.post('/api/admin/google-ads/agent-run', authMiddleware, adminMiddleware, async (req, res) => {
+  try {
+    if (!OPENAI_API_KEY) return res.status(503).json({ error: 'OpenAI nicht konfiguriert.' })
+
+    // 1. Gather current metrics
+    let metrics = {}
+    if (GOOGLE_ADS_CONFIGURED) {
+      try {
+        const today = new Date()
+        const todayStr = today.toISOString().slice(0, 10)
+        const firstOfMonth = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-01`
+        const sevenDaysAgo = new Date(today.getTime() - 7 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10)
+
+        // Monthly totals
+        const monthRows = await queryGoogleAds(`
+          SELECT metrics.cost_micros, metrics.impressions, metrics.clicks, metrics.conversions, metrics.ctr, metrics.average_cpc
+          FROM campaign WHERE segments.date BETWEEN '${firstOfMonth}' AND '${todayStr}'
+        `)
+        let mSpend = 0, mImpr = 0, mClicks = 0, mConv = 0
+        if (monthRows) for (const r of monthRows) {
+          mSpend += (parseInt(r.metrics?.costMicros) || 0) / 1_000_000
+          mImpr += parseInt(r.metrics?.impressions) || 0
+          mClicks += parseInt(r.metrics?.clicks) || 0
+          mConv += parseFloat(r.metrics?.conversions) || 0
+        }
+
+        // Last 7 days by campaign
+        const campaignRows = await queryGoogleAds(`
+          SELECT campaign.id, campaign.name, campaign.status,
+            campaign_budget.amount_micros,
+            metrics.cost_micros, metrics.impressions, metrics.clicks, metrics.conversions,
+            metrics.ctr, metrics.average_cpc
+          FROM campaign
+          WHERE segments.date BETWEEN '${sevenDaysAgo}' AND '${todayStr}'
+        `)
+        const campaigns = {}
+        if (campaignRows) for (const r of campaignRows) {
+          const id = r.campaign?.id
+          if (!id) continue
+          if (!campaigns[id]) campaigns[id] = {
+            id, name: r.campaign.name, status: r.campaign.status,
+            budgetMicros: parseInt(r.campaignBudget?.amountMicros) || 0,
+            spend: 0, impressions: 0, clicks: 0, conversions: 0,
+          }
+          campaigns[id].spend += (parseInt(r.metrics?.costMicros) || 0) / 1_000_000
+          campaigns[id].impressions += parseInt(r.metrics?.impressions) || 0
+          campaigns[id].clicks += parseInt(r.metrics?.clicks) || 0
+          campaigns[id].conversions += parseFloat(r.metrics?.conversions) || 0
+        }
+
+        // Keyword performance
+        let keywords = []
+        try {
+          const kwRows = await queryGoogleAds(`
+            SELECT ad_group_criterion.keyword.text, ad_group_criterion.keyword.match_type,
+              metrics.cost_micros, metrics.impressions, metrics.clicks, metrics.conversions, metrics.ctr
+            FROM keyword_view
+            WHERE segments.date BETWEEN '${sevenDaysAgo}' AND '${todayStr}'
+            ORDER BY metrics.cost_micros DESC
+            LIMIT 30
+          `)
+          if (kwRows) keywords = kwRows.map(r => ({
+            keyword: r.adGroupCriterion?.keyword?.text,
+            matchType: r.adGroupCriterion?.keyword?.matchType,
+            spend: ((parseInt(r.metrics?.costMicros) || 0) / 1_000_000).toFixed(2),
+            clicks: parseInt(r.metrics?.clicks) || 0,
+            conversions: parseFloat(r.metrics?.conversions) || 0,
+            ctr: parseFloat(r.metrics?.ctr) || 0,
+          }))
+        } catch {}
+
+        metrics = {
+          monthlySpend: mSpend.toFixed(2),
+          monthlyImpressions: mImpr,
+          monthlyClicks: mClicks,
+          monthlyConversions: Math.round(mConv),
+          monthlyCPA: mConv > 0 ? (mSpend / mConv).toFixed(2) : 'N/A',
+          monthlyCTR: mImpr > 0 ? ((mClicks / mImpr) * 100).toFixed(2) + '%' : '0%',
+          campaigns: Object.values(campaigns).map(c => ({
+            ...c,
+            budget: (c.budgetMicros / 1_000_000).toFixed(2),
+            spend: c.spend.toFixed(2),
+            cpa: c.conversions > 0 ? (c.spend / c.conversions).toFixed(2) : 'N/A',
+          })),
+          topKeywords: keywords,
+        }
+      } catch (adsErr) {
+        console.error('Agent ads fetch error:', adsErr.message)
+        metrics.error = adsErr.message
+      }
+    }
+
+    // Platform stats
+    const [activeSubs] = await pool.query("SELECT COUNT(*) as n FROM schule_subscriptions WHERE subscriptionStatus = 'active'")
+    const [trialSubs] = await pool.query("SELECT COUNT(*) as n FROM schule_subscriptions WHERE subscriptionStatus = 'trialing'")
+    metrics.activeSubscribers = activeSubs[0].n
+    metrics.trialUsers = trialSubs[0].n
+    metrics.pricePerMonth = 15
+
+    // 2. AI Analysis
+    const systemPrompt = `Du bist ein Google Ads Optimierungs-Agent für "Schule – Aprender Alemán", eine Online-Plattform zum Deutschlernen.
+Preis: €15/Monat. Ziel: 200 zahlende Nutzer/Monat bei minimalem CPA.
+
+Deine Aufgabe:
+1. Analysiere die aktuellen Google Ads Metriken
+2. Identifiziere Probleme und Chancen
+3. Gib konkrete Optimierungsvorschläge
+4. Wenn die Daten es erlauben, schlage spezifische Budgetänderungen vor (max. ±20% pro Kampagne)
+
+Antworte NUR mit gültigem JSON:
+{
+  "summary": "Kurze Zusammenfassung der Analyse (2-3 Sätze auf Deutsch)",
+  "changes": ["Liste konkreter Änderungen die durchgeführt werden sollten"],
+  "recommendations": ["Strategische Empfehlungen für die nächste Woche"],
+  "budgetAdjustments": [{"campaignId": "123", "campaignName": "...", "currentBudget": 10, "newBudget": 12, "reason": "..."}],
+  "keywordActions": [{"action": "pause|increase_bid|decrease_bid", "keyword": "...", "reason": "..."}]
+}`
+
+    const userMessage = `Hier sind die aktuellen Metriken:\n\n${JSON.stringify(metrics, null, 2)}\n\nAnalysiere die Performance und gib Optimierungsvorschläge.`
+
+    const aiReply = await callOpenAIChat(systemPrompt, [{ role: 'user', content: userMessage }], 1500)
+    const jsonMatch = aiReply.match(/\{[\s\S]*\}/)
+    let agentResult = { summary: aiReply, changes: [], recommendations: [] }
+
+    if (jsonMatch) {
+      try {
+        agentResult = JSON.parse(jsonMatch[0])
+      } catch {}
+    }
+
+    // 3. Auto-apply safe budget adjustments if Google Ads connected
+    const appliedChanges = [...(agentResult.changes || [])]
+    if (GOOGLE_ADS_CONFIGURED && agentResult.budgetAdjustments?.length > 0) {
+      for (const adj of agentResult.budgetAdjustments) {
+        // Safety: max ±20% change, min budget €1/day, max €100/day
+        const newBudget = Math.max(1, Math.min(100, adj.newBudget))
+        const changePercent = adj.currentBudget > 0 ? Math.abs((newBudget - adj.currentBudget) / adj.currentBudget) : 0
+        if (changePercent > 0.20) {
+          appliedChanges.push(`⚠️ Budget-Änderung für "${adj.campaignName}" übersprungen (>20% Änderung)`)
+          continue
+        }
+        try {
+          // Find the campaign budget resource name
+          const budgetRows = await queryGoogleAds(`
+            SELECT campaign.id, campaign_budget.resource_name
+            FROM campaign WHERE campaign.id = '${adj.campaignId}' LIMIT 1
+          `)
+          if (budgetRows?.length > 0) {
+            const budgetResource = budgetRows[0].campaignBudget?.resourceName
+            if (budgetResource) {
+              await mutateGoogleAds([{
+                campaignBudgetOperation: {
+                  update: {
+                    resourceName: budgetResource,
+                    amountMicros: String(Math.round(newBudget * 1_000_000)),
+                  },
+                  updateMask: 'amount_micros',
+                },
+              }])
+              appliedChanges.push(`✅ Budget für "${adj.campaignName}": €${adj.currentBudget} → €${newBudget} (${adj.reason})`)
+            }
+          }
+        } catch (mutErr) {
+          appliedChanges.push(`❌ Budget-Änderung für "${adj.campaignName}" fehlgeschlagen: ${mutErr.message}`)
+        }
+      }
+    }
+
+    // 4. Save log
+    const logEntry = {
+      status: 'success',
+      summary: agentResult.summary || 'Analyse abgeschlossen',
+      changes: JSON.stringify(appliedChanges),
+      recommendations: JSON.stringify(agentResult.recommendations || []),
+      metrics: JSON.stringify(metrics),
+    }
+
+    await pool.query(
+      'INSERT INTO schule_ads_agent_logs (status, summary, changes, recommendations, metrics) VALUES (?, ?, ?, ?, ?)',
+      [logEntry.status, logEntry.summary, logEntry.changes, logEntry.recommendations, logEntry.metrics]
+    )
+
+    res.json({
+      timestamp: new Date().toISOString(),
+      status: 'success',
+      summary: agentResult.summary,
+      changes: appliedChanges,
+      recommendations: agentResult.recommendations || [],
+    })
+  } catch (err) {
+    console.error('Agent run error:', err)
+    // Log the error
+    try {
+      await pool.query(
+        'INSERT INTO schule_ads_agent_logs (status, summary) VALUES (?, ?)',
+        ['error', `Agent-Fehler: ${err.message}`]
+      )
+    } catch {}
+    res.status(500).json({ error: 'Agent-Fehler: ' + err.message })
+  }
+})
+
+// ─── ADMIN: UPDATE MONTHLY FINANCIAL SNAPSHOT (cron-friendly) ───
+app.post('/api/admin/finances/snapshot', authMiddleware, adminMiddleware, async (req, res) => {
+  try {
+    const currentMonth = new Date().toISOString().slice(0, 7)
+    const [activeSubs] = await pool.query("SELECT COUNT(*) as n FROM schule_subscriptions WHERE subscriptionStatus = 'active'")
+    const [trialSubs] = await pool.query("SELECT COUNT(*) as n FROM schule_subscriptions WHERE subscriptionStatus = 'trialing'")
+    const [canceledThisMonth] = await pool.query(
+      "SELECT COUNT(*) as n FROM schule_subscriptions WHERE subscriptionStatus = 'canceled' AND updatedAt >= DATE_FORMAT(NOW(), '%Y-%m-01')"
+    )
+    const [newThisMonth] = await pool.query(
+      "SELECT COUNT(*) as n FROM schule_subscriptions WHERE subscriptionStatus = 'active' AND updatedAt >= DATE_FORMAT(NOW(), '%Y-%m-01')"
+    )
+
+    const revenue = activeSubs[0].n * 15 // €15/month per subscriber
+
+    await pool.query(
+      `INSERT INTO schule_financial_snapshots (month, revenue, activeSubscribers, newSubscribers, canceled, trialUsers)
+       VALUES (?, ?, ?, ?, ?, ?)
+       ON DUPLICATE KEY UPDATE revenue=VALUES(revenue), activeSubscribers=VALUES(activeSubscribers),
+         newSubscribers=VALUES(newSubscribers), canceled=VALUES(canceled), trialUsers=VALUES(trialUsers), updatedAt=NOW()`,
+      [currentMonth, revenue, activeSubs[0].n, newThisMonth[0].n, canceledThisMonth[0].n, trialSubs[0].n]
+    )
+
+    res.json({ ok: true, month: currentMonth })
+  } catch (err) {
+    console.error('Snapshot error:', err)
+    res.status(500).json({ error: err.message })
   }
 })
 

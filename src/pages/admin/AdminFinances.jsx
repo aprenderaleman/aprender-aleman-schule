@@ -1,0 +1,531 @@
+import React, { useState, useEffect, useCallback } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import {
+  DollarSign, TrendingUp, TrendingDown, Users, CreditCard, AlertTriangle,
+  RefreshCw, Megaphone, Target, MousePointerClick, Eye, ArrowUpRight,
+  Bot, Play, Clock, CheckCircle, XCircle, ChevronDown, ChevronUp,
+} from 'lucide-react'
+import {
+  LineChart, Line, BarChart, Bar, AreaChart, Area,
+  XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend,
+  PieChart, Pie, Cell, ComposedChart,
+} from 'recharts'
+
+const API_URL = import.meta.env.VITE_API_URL || ''
+
+function getAuthHeaders() {
+  const token = localStorage.getItem('auth_token')
+  return { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' }
+}
+
+const COLORS = {
+  orange: '#F97316', blue: '#3B82F6', green: '#22C55E',
+  purple: '#8B5CF6', pink: '#EC4899', teal: '#14B8A6',
+  red: '#EF4444', yellow: '#EAB308', indigo: '#6366F1',
+}
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: (i) => ({ opacity: 1, y: 0, transition: { delay: i * 0.08, duration: 0.4 } }),
+}
+const sectionVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+}
+
+function StatCard({ icon: Icon, label, value, subValue, color, trend, index }) {
+  return (
+    <motion.div
+      className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 p-5 flex items-center gap-4"
+      custom={index}
+      variants={cardVariants}
+      initial="hidden"
+      animate="visible"
+    >
+      <div className="flex items-center justify-center w-12 h-12 rounded-xl shrink-0" style={{ backgroundColor: `${color}18` }}>
+        <Icon className="w-6 h-6" style={{ color }} />
+      </div>
+      <div className="min-w-0 flex-1">
+        <p className="text-xs text-gray-500 dark:text-gray-400 font-medium">{label}</p>
+        <p className="text-xl font-bold text-gray-800 dark:text-gray-100 truncate">{value}</p>
+        {subValue && (
+          <p className={`text-[11px] font-semibold flex items-center gap-1 ${trend === 'up' ? 'text-green-500' : trend === 'down' ? 'text-red-500' : 'text-gray-400'}`}>
+            {trend === 'up' && <TrendingUp size={12} />}
+            {trend === 'down' && <TrendingDown size={12} />}
+            {subValue}
+          </p>
+        )}
+      </div>
+    </motion.div>
+  )
+}
+
+function ChartCard({ title, children, className = '' }) {
+  return (
+    <motion.div
+      className={`bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 p-5 ${className}`}
+      variants={sectionVariants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: '-50px' }}
+    >
+      <h3 className="text-base font-semibold text-gray-800 dark:text-gray-100 mb-4">{title}</h3>
+      {children}
+    </motion.div>
+  )
+}
+
+function CustomTooltip({ active, payload, label }) {
+  if (!active || !payload?.length) return null
+  return (
+    <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-3 shadow-lg text-xs">
+      <p className="font-semibold text-gray-600 dark:text-gray-300 mb-1">{label}</p>
+      {payload.map((p, i) => (
+        <p key={i} style={{ color: p.color }} className="font-medium">
+          {p.name}: {typeof p.value === 'number' && p.name?.toLowerCase().includes('€') ? `€${p.value.toFixed(2)}` : p.value?.toLocaleString?.() || p.value}
+        </p>
+      ))}
+    </div>
+  )
+}
+
+export default function AdminFinances() {
+  const [data, setData] = useState(null)
+  const [adsData, setAdsData] = useState(null)
+  const [agentLogs, setAgentLogs] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [adsLoading, setAdsLoading] = useState(false)
+  const [agentRunning, setAgentRunning] = useState(false)
+  const [error, setError] = useState(null)
+  const [showAgentLogs, setShowAgentLogs] = useState(false)
+  const [selectedPeriod, setSelectedPeriod] = useState('6months')
+
+  const fetchFinances = useCallback(async () => {
+    setLoading(true)
+    setError(null)
+    try {
+      const res = await fetch(`${API_URL}/api/admin/finances?period=${selectedPeriod}`, { headers: getAuthHeaders() })
+      if (!res.ok) throw new Error('Fehler beim Laden')
+      setData(await res.json())
+    } catch (err) {
+      setError(err.message)
+    }
+    setLoading(false)
+  }, [selectedPeriod])
+
+  const fetchAds = useCallback(async () => {
+    setAdsLoading(true)
+    try {
+      const res = await fetch(`${API_URL}/api/admin/google-ads/metrics`, { headers: getAuthHeaders() })
+      if (res.ok) setAdsData(await res.json())
+    } catch {}
+    setAdsLoading(false)
+  }, [])
+
+  const fetchAgentLogs = useCallback(async () => {
+    try {
+      const res = await fetch(`${API_URL}/api/admin/google-ads/agent-logs`, { headers: getAuthHeaders() })
+      if (res.ok) setAgentLogs(await res.json())
+    } catch {}
+  }, [])
+
+  const runAgent = async () => {
+    if (agentRunning) return
+    setAgentRunning(true)
+    try {
+      const res = await fetch(`${API_URL}/api/admin/google-ads/agent-run`, {
+        method: 'POST',
+        headers: getAuthHeaders(),
+      })
+      if (res.ok) {
+        const result = await res.json()
+        setAgentLogs(prev => [result, ...prev])
+        // Refresh ads data after agent run
+        fetchAds()
+      }
+    } catch {}
+    setAgentRunning(false)
+  }
+
+  useEffect(() => { fetchFinances() }, [fetchFinances])
+  useEffect(() => { fetchAds(); fetchAgentLogs() }, [fetchAds, fetchAgentLogs])
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center py-32">
+        <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-orange-500" />
+      </div>
+    )
+  }
+
+  if (error) {
+    return (
+      <div className="text-center py-20">
+        <AlertTriangle size={48} className="mx-auto text-red-400 mb-4" />
+        <p className="text-gray-500 dark:text-gray-400 mb-4">{error}</p>
+        <button onClick={fetchFinances} className="px-4 py-2 bg-orange-500 text-white rounded-xl hover:bg-orange-600 transition-colors">
+          Erneut versuchen
+        </button>
+      </div>
+    )
+  }
+
+  if (!data) return null
+
+  const { stripe, monthly, subscriptions, overview } = data
+
+  // P&L data for chart
+  const plData = (monthly || []).map(m => ({
+    month: m.month,
+    'Einnahmen €': m.revenue,
+    'Ads-Kosten €': m.adSpend || 0,
+    'Gewinn €': m.revenue - (m.adSpend || 0),
+  }))
+
+  return (
+    <div className="space-y-6">
+      {/* Header */}
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div>
+          <h1 className="text-2xl font-extrabold text-gray-800 dark:text-gray-100">Finanzen</h1>
+          <p className="text-sm text-gray-500 dark:text-gray-400 mt-0.5">Einnahmen, Abonnements und Werbeausgaben</p>
+        </div>
+        <div className="flex items-center gap-2">
+          <select
+            value={selectedPeriod}
+            onChange={e => setSelectedPeriod(e.target.value)}
+            className="px-3 py-2 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-sm text-gray-700 dark:text-gray-200 focus:ring-2 focus:ring-orange-400"
+          >
+            <option value="3months">Letzte 3 Monate</option>
+            <option value="6months">Letzte 6 Monate</option>
+            <option value="12months">Letzte 12 Monate</option>
+            <option value="all">Alles</option>
+          </select>
+          <button onClick={() => { fetchFinances(); fetchAds() }} className="p-2 rounded-xl bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors text-gray-500">
+            <RefreshCw size={18} />
+          </button>
+        </div>
+      </div>
+
+      {/* ════════ STRIPE OVERVIEW ════════ */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <StatCard icon={DollarSign} label="MRR (Monatlich)" value={`€${(stripe?.mrr || 0).toFixed(2)}`}
+          subValue={stripe?.mrrChange ? `${stripe.mrrChange > 0 ? '+' : ''}${stripe.mrrChange.toFixed(1)}% vs Vormonat` : null}
+          trend={stripe?.mrrChange > 0 ? 'up' : stripe?.mrrChange < 0 ? 'down' : null}
+          color={COLORS.green} index={0} />
+        <StatCard icon={CreditCard} label="Aktive Abonnenten" value={stripe?.activeSubscribers || 0}
+          subValue={`${stripe?.trialUsers || 0} im Probezeitraum`}
+          color={COLORS.blue} index={1} />
+        <StatCard icon={TrendingUp} label="Gesamteinnahmen" value={`€${(stripe?.totalRevenue || 0).toFixed(2)}`}
+          subValue={`Ø €${(stripe?.avgRevenuePerUser || 0).toFixed(2)}/Nutzer`}
+          color={COLORS.orange} index={2} />
+        <StatCard icon={Users} label="Churn-Rate" value={`${(stripe?.churnRate || 0).toFixed(1)}%`}
+          subValue={`${stripe?.canceledThisMonth || 0} Kündigungen diesen Monat`}
+          trend={stripe?.churnRate > 5 ? 'down' : 'up'}
+          color={stripe?.churnRate > 5 ? COLORS.red : COLORS.teal} index={3} />
+      </div>
+
+      {/* ════════ GOOGLE ADS OVERVIEW ════════ */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <StatCard icon={Megaphone} label="Ads-Ausgaben (Monat)" value={`€${(adsData?.currentMonth?.spend || 0).toFixed(2)}`}
+          subValue={adsData?.currentMonth?.changeVsPrev ? `${adsData.currentMonth.changeVsPrev > 0 ? '+' : ''}${adsData.currentMonth.changeVsPrev.toFixed(1)}%` : 'Google Ads nicht verbunden'}
+          trend={adsData?.connected ? (adsData.currentMonth.changeVsPrev > 0 ? 'up' : 'down') : null}
+          color={COLORS.purple} index={4} />
+        <StatCard icon={MousePointerClick} label="CPA (Kosten/Abo)" value={adsData?.connected ? `€${(adsData?.currentMonth?.cpa || 0).toFixed(2)}` : '—'}
+          subValue={adsData?.connected ? `Ziel: < €30` : 'Konfiguration erforderlich'}
+          trend={adsData?.currentMonth?.cpa < 30 ? 'up' : 'down'}
+          color={COLORS.indigo} index={5} />
+        <StatCard icon={Eye} label="Impressionen" value={adsData?.connected ? (adsData?.currentMonth?.impressions || 0).toLocaleString() : '—'}
+          subValue={adsData?.connected ? `CTR: ${(adsData?.currentMonth?.ctr || 0).toFixed(2)}%` : null}
+          color={COLORS.yellow} index={6} />
+        <StatCard icon={Target} label="Conversions (Monat)" value={adsData?.connected ? (adsData?.currentMonth?.conversions || 0) : '—'}
+          subValue={adsData?.connected ? `Ziel: 200/Monat` : null}
+          trend={adsData?.currentMonth?.conversions >= 200 ? 'up' : 'down'}
+          color={COLORS.pink} index={7} />
+      </div>
+
+      {/* ════════ CHARTS ROW 1: Revenue + P&L ════════ */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <ChartCard title="Monatliche Einnahmen">
+          <ResponsiveContainer width="100%" height={280}>
+            <AreaChart data={monthly || []}>
+              <defs>
+                <linearGradient id="revGrad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="5%" stopColor={COLORS.green} stopOpacity={0.3} />
+                  <stop offset="95%" stopColor={COLORS.green} stopOpacity={0} />
+                </linearGradient>
+              </defs>
+              <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+              <XAxis dataKey="month" tick={{ fontSize: 11 }} />
+              <YAxis tick={{ fontSize: 11 }} tickFormatter={v => `€${v}`} />
+              <Tooltip content={<CustomTooltip />} />
+              <Area type="monotone" dataKey="revenue" name="Einnahmen €" stroke={COLORS.green} fill="url(#revGrad)" strokeWidth={2} />
+            </AreaChart>
+          </ResponsiveContainer>
+        </ChartCard>
+
+        <ChartCard title="Gewinn & Verlust">
+          <ResponsiveContainer width="100%" height={280}>
+            <ComposedChart data={plData}>
+              <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+              <XAxis dataKey="month" tick={{ fontSize: 11 }} />
+              <YAxis tick={{ fontSize: 11 }} tickFormatter={v => `€${v}`} />
+              <Tooltip content={<CustomTooltip />} />
+              <Legend />
+              <Bar dataKey="Einnahmen €" fill={COLORS.green} radius={[4, 4, 0, 0]} />
+              <Bar dataKey="Ads-Kosten €" fill={COLORS.red} radius={[4, 4, 0, 0]} />
+              <Line type="monotone" dataKey="Gewinn €" stroke={COLORS.blue} strokeWidth={2} dot={{ r: 3 }} />
+            </ComposedChart>
+          </ResponsiveContainer>
+        </ChartCard>
+      </div>
+
+      {/* ════════ CHARTS ROW 2: Subscribers + Ads ════════ */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <ChartCard title="Abonnenten-Entwicklung">
+          <ResponsiveContainer width="100%" height={280}>
+            <LineChart data={monthly || []}>
+              <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+              <XAxis dataKey="month" tick={{ fontSize: 11 }} />
+              <YAxis tick={{ fontSize: 11 }} />
+              <Tooltip content={<CustomTooltip />} />
+              <Legend />
+              <Line type="monotone" dataKey="activeSubscribers" name="Aktive" stroke={COLORS.blue} strokeWidth={2} dot={{ r: 3 }} />
+              <Line type="monotone" dataKey="newSubscribers" name="Neue" stroke={COLORS.green} strokeWidth={2} dot={{ r: 3 }} />
+              <Line type="monotone" dataKey="canceled" name="Gekündigt" stroke={COLORS.red} strokeWidth={2} dot={{ r: 3 }} />
+            </LineChart>
+          </ResponsiveContainer>
+        </ChartCard>
+
+        {adsData?.connected && adsData?.dailyMetrics?.length > 0 ? (
+          <ChartCard title="Google Ads — Tägliche Performance">
+            <ResponsiveContainer width="100%" height={280}>
+              <ComposedChart data={adsData.dailyMetrics}>
+                <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+                <XAxis dataKey="date" tick={{ fontSize: 11 }} />
+                <YAxis yAxisId="left" tick={{ fontSize: 11 }} tickFormatter={v => `€${v}`} />
+                <YAxis yAxisId="right" orientation="right" tick={{ fontSize: 11 }} />
+                <Tooltip content={<CustomTooltip />} />
+                <Legend />
+                <Bar yAxisId="left" dataKey="spend" name="Kosten €" fill={COLORS.purple} radius={[3, 3, 0, 0]} />
+                <Line yAxisId="right" type="monotone" dataKey="clicks" name="Klicks" stroke={COLORS.orange} strokeWidth={2} />
+                <Line yAxisId="right" type="monotone" dataKey="conversions" name="Conversions" stroke={COLORS.green} strokeWidth={2} />
+              </ComposedChart>
+            </ResponsiveContainer>
+          </ChartCard>
+        ) : (
+          <ChartCard title="Google Ads — Tägliche Performance">
+            <div className="flex flex-col items-center justify-center h-64 text-center">
+              <Megaphone size={40} className="text-gray-300 dark:text-gray-600 mb-3" />
+              <p className="text-sm text-gray-500 dark:text-gray-400 font-medium">Google Ads nicht verbunden</p>
+              <p className="text-xs text-gray-400 mt-1 max-w-xs">
+                Setze die Umgebungsvariablen GOOGLE_ADS_DEVELOPER_TOKEN, GOOGLE_ADS_CLIENT_ID, GOOGLE_ADS_CLIENT_SECRET, GOOGLE_ADS_REFRESH_TOKEN und GOOGLE_ADS_CUSTOMER_ID in Coolify.
+              </p>
+            </div>
+          </ChartCard>
+        )}
+      </div>
+
+      {/* ════════ SUBSCRIPTION BREAKDOWN ════════ */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <ChartCard title="Abo-Status Verteilung">
+          <ResponsiveContainer width="100%" height={250}>
+            <PieChart>
+              <Pie
+                data={subscriptions?.statusBreakdown || []}
+                dataKey="count"
+                nameKey="status"
+                cx="50%"
+                cy="50%"
+                outerRadius={90}
+                label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
+              >
+                {(subscriptions?.statusBreakdown || []).map((_, i) => (
+                  <Cell key={i} fill={[COLORS.green, COLORS.blue, COLORS.yellow, COLORS.red, COLORS.purple][i % 5]} />
+                ))}
+              </Pie>
+              <Tooltip />
+            </PieChart>
+          </ResponsiveContainer>
+        </ChartCard>
+
+        <ChartCard title="Finanzübersicht" className="lg:col-span-2">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+            {[
+              { label: 'Gesamteinnahmen', value: `€${(overview?.totalRevenue || 0).toFixed(2)}`, color: COLORS.green },
+              { label: 'Gesamte Ads-Kosten', value: `€${(overview?.totalAdSpend || 0).toFixed(2)}`, color: COLORS.red },
+              { label: 'Nettogewinn', value: `€${(overview?.netProfit || 0).toFixed(2)}`, color: overview?.netProfit >= 0 ? COLORS.green : COLORS.red },
+              { label: 'ROAS', value: overview?.roas ? `${overview.roas.toFixed(1)}x` : '—', color: COLORS.blue },
+              { label: 'LTV (Ø)', value: `€${(overview?.avgLtv || 0).toFixed(2)}`, color: COLORS.orange },
+              { label: 'Zahlende Nutzer', value: overview?.payingUsers || 0, color: COLORS.teal },
+            ].map((item, i) => (
+              <div key={i} className="bg-gray-50 dark:bg-gray-900/50 rounded-xl p-4 text-center">
+                <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">{item.label}</p>
+                <p className="text-lg font-bold" style={{ color: item.color }}>{item.value}</p>
+              </div>
+            ))}
+          </div>
+        </ChartCard>
+      </div>
+
+      {/* ════════ AI AGENT SECTION ════════ */}
+      <motion.div
+        className="bg-gradient-to-br from-indigo-50 to-purple-50 dark:from-indigo-900/20 dark:to-purple-900/20 rounded-2xl border-2 border-indigo-200 dark:border-indigo-800 p-6"
+        variants={sectionVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+      >
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-4">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-xl bg-indigo-500/20 flex items-center justify-center">
+              <Bot size={22} className="text-indigo-500" />
+            </div>
+            <div>
+              <h3 className="text-lg font-bold text-gray-800 dark:text-gray-100">KI-Werbeagent</h3>
+              <p className="text-xs text-gray-500 dark:text-gray-400">Analysiert Google Ads und optimiert Kampagnen automatisch</p>
+            </div>
+          </div>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => setShowAgentLogs(!showAgentLogs)}
+              className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-sm font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+            >
+              <Clock size={14} />
+              Protokoll
+              {showAgentLogs ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
+            </button>
+            <button
+              onClick={runAgent}
+              disabled={agentRunning || !adsData?.connected}
+              className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-indigo-500 text-white text-sm font-semibold hover:bg-indigo-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {agentRunning ? <RefreshCw size={14} className="animate-spin" /> : <Play size={14} />}
+              {agentRunning ? 'Agent läuft...' : 'Jetzt analysieren'}
+            </button>
+          </div>
+        </div>
+
+        {/* Agent status */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4">
+          <div className="bg-white dark:bg-gray-800 rounded-xl p-3 border border-gray-200 dark:border-gray-700">
+            <p className="text-[10px] text-gray-400 font-bold uppercase">Status</p>
+            <p className={`text-sm font-semibold ${adsData?.connected ? 'text-green-500' : 'text-red-500'}`}>
+              {adsData?.connected ? '● Verbunden' : '● Nicht verbunden'}
+            </p>
+          </div>
+          <div className="bg-white dark:bg-gray-800 rounded-xl p-3 border border-gray-200 dark:border-gray-700">
+            <p className="text-[10px] text-gray-400 font-bold uppercase">Letzte Ausführung</p>
+            <p className="text-sm font-semibold text-gray-700 dark:text-gray-200">
+              {agentLogs[0]?.timestamp ? new Date(agentLogs[0].timestamp).toLocaleString('de-DE') : 'Noch nie'}
+            </p>
+          </div>
+          <div className="bg-white dark:bg-gray-800 rounded-xl p-3 border border-gray-200 dark:border-gray-700">
+            <p className="text-[10px] text-gray-400 font-bold uppercase">Ziel</p>
+            <p className="text-sm font-semibold text-indigo-500">200 zahlende Nutzer/Monat</p>
+          </div>
+        </div>
+
+        {/* Agent logs */}
+        <AnimatePresence>
+          {showAgentLogs && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: 'auto', opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              className="overflow-hidden"
+            >
+              <div className="space-y-2 max-h-96 overflow-y-auto">
+                {agentLogs.length === 0 ? (
+                  <p className="text-sm text-gray-400 text-center py-4">Noch keine Agent-Ausführungen</p>
+                ) : (
+                  agentLogs.map((log, i) => (
+                    <div key={i} className="bg-white dark:bg-gray-800 rounded-xl p-4 border border-gray-200 dark:border-gray-700">
+                      <div className="flex items-center justify-between mb-2">
+                        <div className="flex items-center gap-2">
+                          {log.status === 'success' ? (
+                            <CheckCircle size={14} className="text-green-500" />
+                          ) : (
+                            <XCircle size={14} className="text-red-500" />
+                          )}
+                          <span className="text-xs font-semibold text-gray-600 dark:text-gray-300">
+                            {new Date(log.timestamp).toLocaleString('de-DE')}
+                          </span>
+                        </div>
+                        {log.changes?.length > 0 && (
+                          <span className="text-[10px] font-bold bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 px-2 py-0.5 rounded-full">
+                            {log.changes.length} Änderung{log.changes.length > 1 ? 'en' : ''}
+                          </span>
+                        )}
+                      </div>
+                      <p className="text-sm text-gray-700 dark:text-gray-200 leading-relaxed">{log.summary}</p>
+                      {log.changes?.length > 0 && (
+                        <div className="mt-2 space-y-1">
+                          {log.changes.map((c, j) => (
+                            <div key={j} className="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400">
+                              <ArrowUpRight size={12} className="text-indigo-400" />
+                              {c}
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                      {log.recommendations?.length > 0 && (
+                        <div className="mt-2 bg-yellow-50 dark:bg-yellow-900/20 rounded-lg p-2">
+                          <p className="text-[10px] font-bold text-yellow-600 dark:text-yellow-400 mb-1">EMPFEHLUNGEN</p>
+                          {log.recommendations.map((r, j) => (
+                            <p key={j} className="text-xs text-gray-600 dark:text-gray-300">• {r}</p>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  ))
+                )}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </motion.div>
+
+      {/* ════════ RECENT PAYMENTS TABLE ════════ */}
+      <ChartCard title="Letzte Zahlungen">
+        <div className="overflow-x-auto -mx-2">
+          <table className="w-full text-sm">
+            <thead>
+              <tr className="text-xs text-gray-500 dark:text-gray-400 border-b border-gray-200 dark:border-gray-700">
+                <th className="text-left px-3 py-2 font-semibold">Datum</th>
+                <th className="text-left px-3 py-2 font-semibold">Nutzer</th>
+                <th className="text-left px-3 py-2 font-semibold">Betrag</th>
+                <th className="text-left px-3 py-2 font-semibold">Status</th>
+                <th className="text-left px-3 py-2 font-semibold">Typ</th>
+              </tr>
+            </thead>
+            <tbody>
+              {(data?.recentPayments || []).map((p, i) => (
+                <tr key={i} className="border-b border-gray-100 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+                  <td className="px-3 py-2.5 text-gray-600 dark:text-gray-300">{new Date(p.date).toLocaleDateString('de-DE')}</td>
+                  <td className="px-3 py-2.5 text-gray-800 dark:text-gray-100 font-medium">{p.name || p.email}</td>
+                  <td className="px-3 py-2.5 font-semibold text-green-600">€{(p.amount / 100).toFixed(2)}</td>
+                  <td className="px-3 py-2.5">
+                    <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${
+                      p.status === 'succeeded' ? 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400' :
+                      p.status === 'failed' ? 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400' :
+                      'bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400'
+                    }`}>
+                      {p.status === 'succeeded' ? 'Erfolgreich' : p.status === 'failed' ? 'Fehlgeschlagen' : 'Ausstehend'}
+                    </span>
+                  </td>
+                  <td className="px-3 py-2.5 text-gray-500 dark:text-gray-400">{p.type || 'Abo'}</td>
+                </tr>
+              ))}
+              {(!data?.recentPayments || data.recentPayments.length === 0) && (
+                <tr>
+                  <td colSpan={5} className="px-3 py-8 text-center text-gray-400">Noch keine Zahlungen</td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
+      </ChartCard>
+    </div>
+  )
+}

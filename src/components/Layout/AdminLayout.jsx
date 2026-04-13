@@ -1,13 +1,14 @@
 import React, { useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
-import { Moon, Sun, Menu, X, LayoutDashboard, Users, LogOut, BookOpen, ChevronLeft, Settings } from 'lucide-react'
+import { Moon, Sun, Menu, X, LayoutDashboard, Users, LogOut, BookOpen, ChevronLeft, Settings, DollarSign } from 'lucide-react'
 import { useAuth } from '../../context/AuthContext'
 import { useTheme } from '../../context/ThemeContext'
 
 const sidebarLinks = [
   { to: '/admin', icon: LayoutDashboard, label: 'Dashboard', exact: true },
   { to: '/admin/usuarios', icon: Users, label: 'Schüler' },
+  { to: '/admin/finanzen', icon: DollarSign, label: 'Finanzen' },
 ]
 
 const bottomLinks = [
@@ -167,6 +168,7 @@ export default function AdminLayout({ children }) {
               {location.pathname === '/admin' && 'Dashboard'}
               {location.pathname === '/admin/usuarios' && 'Schülerverwaltung'}
               {location.pathname.startsWith('/admin/usuarios/') && location.pathname !== '/admin/usuarios' && 'Schülerdetails'}
+              {location.pathname === '/admin/finanzen' && 'Finanzen & Werbung'}
             </h2>
           </div>
 
