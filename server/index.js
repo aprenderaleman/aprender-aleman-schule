@@ -1602,7 +1602,7 @@ REGELN:
       claudeMessages.push({ role: 'user', content: message })
     }
 
-    const reply = await callAnthropicRaw('claude-3-5-sonnet-20241022', systemPrompt, claudeMessages, 512)
+    const reply = await callAnthropicRaw('claude-3-5-haiku-20241022', systemPrompt, claudeMessages, 512)
     res.json({ reply })
   } catch (err) {
     console.error('Chat error:', err)
@@ -1674,7 +1674,7 @@ app.post('/api/chat/voice', authMiddleware, aiRateLimit, async (req, res) => {
       claudeMessages.push({ role: 'user', content: message })
     }
 
-    const reply = await callAnthropicRaw('claude-3-5-sonnet-20241022', systemPrompt, claudeMessages, 256)
+    const reply = await callAnthropicRaw('claude-3-5-haiku-20241022', systemPrompt, claudeMessages, 256)
 
     // Generate TTS with OpenAI
     const ttsVoice = voice || 'onyx'
