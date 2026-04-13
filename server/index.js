@@ -538,30 +538,49 @@ app.post('/api/auth/register', loginRateLimit, async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10)
     const now = new Date()
 
-    // Create student record first
-    await pool.query(
-      'INSERT INTO students (id, level, userId, classType) VALUES (?, ?, ?, ?)',
-      [studentId, 'a1', userId, 'group']
-    )
+    // Use transaction with FK checks disabled to handle circular dependency
+    // (students.userId → users.id AND users.studentId → students.id)
+    const conn = await pool.getConnection()
+    await conn.beginTransaction()
+    try {
+      await conn.query('SET FOREIGN_KEY_CHECKS=0')
 
-    // Create user record
-    await pool.query(
-      'INSERT INTO users (id, fullName, email, password, role, status, studentId, createdAt, updatedAt) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
-      [userId, fullName.trim(), email.trim().toLowerCase(), hashedPassword, 'student', 'active', studentId, now, now]
-    )
+      // Create user record
+      await conn.query(
+        'INSERT INTO users (id, fullName, email, password, role, status, studentId, createdAt, updatedAt) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
+        [userId, fullName.trim(), email.trim().toLowerCase(), hashedPassword, 'student', 'active', studentId, now, now]
+      )
 
-    // Create initial progress
-    await pool.query(
-      'INSERT INTO schule_progress (userId) VALUES (?)',
-      [userId]
-    )
+      // Create student record
+      await conn.query(
+        'INSERT INTO students (id, level, userId, classType) VALUES (?, ?, ?, ?)',
+        [studentId, 'a1', userId, 'group']
+      )
 
-    // Create subscription with 5-day free trial
+      await conn.query('SET FOREIGN_KEY_CHECKS=1')
+
+      // Create initial progress
+      await conn.query(
+        'INSERT INTO schule_progress (userId) VALUES (?)',
+        [userId]
+      )
+
+      // Create subscription with 5-day free trial
+      const trialEndsAt2 = new Date(Date.now() + 5 * 24 * 60 * 60 * 1000)
+      await conn.query(
+        'INSERT INTO schule_subscriptions (userId, trialEndsAt, subscriptionStatus, ssoUser) VALUES (?, ?, ?, ?)',
+        [userId, trialEndsAt2, 'trialing', 0]
+      )
+
+      await conn.commit()
+      conn.release()
+    } catch (txErr) {
+      await conn.rollback()
+      conn.release()
+      throw txErr
+    }
+
     const trialEndsAt = new Date(Date.now() + 5 * 24 * 60 * 60 * 1000)
-    await pool.query(
-      'INSERT INTO schule_subscriptions (userId, trialEndsAt, subscriptionStatus, ssoUser) VALUES (?, ?, ?, ?)',
-      [userId, trialEndsAt, 'trialing', 0]
-    )
 
     // Generate JWT
     const token = jwt.sign(
