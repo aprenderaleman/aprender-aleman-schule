@@ -109,6 +109,7 @@ export function gradeObjectiveExam(exam, responses) {
   const detail = []
 
   for (const part of exam.parts) {
+    if (!Array.isArray(part.questions)) continue
     for (const q of part.questions) {
       const userAnswer = responses?.[q.id]
 

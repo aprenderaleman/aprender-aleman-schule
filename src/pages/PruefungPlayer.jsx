@@ -534,6 +534,7 @@ export default function PruefungPlayer() {
       </header>
 
       <main className="max-w-4xl mx-auto px-4 py-6">
+        {error && <div className="bg-red-50 border border-red-200 text-red-700 rounded-xl p-3 mb-4 text-sm">{error}</div>}
         {/* Part navigation pills */}
         <div className="flex flex-wrap gap-2 mb-6">
           {exam.parts.map((p, i) => (
