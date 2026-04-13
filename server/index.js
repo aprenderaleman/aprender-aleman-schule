@@ -29,6 +29,7 @@ app.use(cors({
 app.use((req, res, next) => {
   if (req.originalUrl === '/api/stripe/webhook') return next()
   if (req.originalUrl === '/api/pruefungen/transcribe-sprechen') return next()
+  if (req.originalUrl === '/api/chat/transcribe') return next()
   express.json({ limit: '50kb' })(req, res, next)
 })
 
@@ -1616,6 +1617,155 @@ REGELN:
   } catch (err) {
     console.error('Chat error:', err)
     res.status(500).json({ error: 'Error al procesar el mensaje.' })
+  }
+})
+
+// ─── CHATBOT: TRANSCRIBE (Whisper) ──────────────────
+app.post(
+  '/api/chat/transcribe',
+  express.raw({ type: ['audio/*', 'application/octet-stream'], limit: '10mb' }),
+  authMiddleware,
+  aiRateLimit,
+  async (req, res) => {
+    try {
+      if (!OPENAI_API_KEY) return res.status(503).json({ error: 'Servicio no disponible.' })
+      if (!Buffer.isBuffer(req.body) || req.body.length === 0) return res.status(400).json({ error: 'Audio vacío.' })
+
+      const contentType = req.headers['content-type'] || 'audio/webm'
+      const ext = contentType.includes('mp3') ? 'mp3' : contentType.includes('wav') ? 'wav' : contentType.includes('ogg') ? 'ogg' : 'webm'
+
+      const formData = new FormData()
+      formData.append('file', new Blob([req.body], { type: contentType }), `chat.${ext}`)
+      formData.append('model', 'whisper-1')
+      formData.append('language', 'de')
+      formData.append('response_format', 'json')
+
+      const r = await fetch('https://api.openai.com/v1/audio/transcriptions', {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${OPENAI_API_KEY}` },
+        body: formData,
+      })
+      if (!r.ok) throw new Error(`Whisper ${r.status}`)
+      const data = await r.json()
+      res.json({ transcript: data.text || '' })
+    } catch (err) {
+      console.error('Chat transcribe error:', err.message)
+      res.status(500).json({ error: 'Error al transcribir.' })
+    }
+  }
+)
+
+// ─── CHATBOT: VOICE (Transcribe → Claude → TTS) ────
+app.post('/api/chat/voice', authMiddleware, aiRateLimit, async (req, res) => {
+  try {
+    if (!ANTHROPIC_API_KEY || !OPENAI_API_KEY) return res.status(503).json({ error: 'Servicio no disponible.' })
+
+    const { message, mode, history, voice } = req.body
+    if (!message) return res.status(400).json({ error: 'Mensaje vacío.' })
+
+    const userName = req.user.fullName || req.user.name || 'Estudiante'
+    const userLevel = req.user.level || 'A1'
+
+    // Build system prompt (same as /api/chat)
+    const systemPrompt = mode === 'support'
+      ? `Eres el asistente de soporte de "Schule – Aprender Alemán". RESPONDE SIEMPRE EN ESPAÑOL. Sé conciso (2-3 oraciones máximo). El usuario es ${userName}, nivel ${userLevel}. Responde sobre: ejercicios, suscripción (15€/mes, 5 días gratis), exámenes Goethe A1-C2, flashcards, progreso. Para problemas graves: info@aprender-aleman.de`
+      : `Du bist ein freundlicher Deutschlehrer. Der Schüler heißt ${userName}, Niveau ${userLevel}. WICHTIG: Antworte KURZ (2-3 Sätze) — das ist ein Sprachgespräch, kein Aufsatz. Passe die Sprache dem Niveau an. Für A1/A2: einfaches Deutsch + spanische Übersetzungen. Für B1+: mehr Deutsch. Korrigiere Fehler freundlich. Sei natürlich und gesprächig.`
+
+    // Get Claude response
+    const claudeMessages = []
+    if (Array.isArray(history)) {
+      for (const msg of history.slice(-14)) {
+        if (msg.role === 'user' || msg.role === 'assistant') {
+          claudeMessages.push({ role: msg.role, content: msg.content })
+        }
+      }
+    }
+    if (!claudeMessages.length || claudeMessages[claudeMessages.length - 1].content !== message) {
+      claudeMessages.push({ role: 'user', content: message })
+    }
+
+    const claudeRes = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'x-api-key': ANTHROPIC_API_KEY,
+        'anthropic-version': '2023-06-01',
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 256,
+        system: systemPrompt,
+        messages: claudeMessages,
+      }),
+    })
+    if (!claudeRes.ok) throw new Error(`Claude ${claudeRes.status}`)
+    const claudeData = await claudeRes.json()
+    const reply = claudeData.content[0].text
+
+    // Generate TTS with OpenAI
+    const ttsVoice = voice || 'onyx'
+    const ttsRes = await fetch('https://api.openai.com/v1/audio/speech', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${OPENAI_API_KEY}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        model: 'tts-1',
+        input: reply,
+        voice: ttsVoice,
+        response_format: 'mp3',
+        speed: 1.0,
+      }),
+    })
+    if (!ttsRes.ok) {
+      // Return text even if TTS fails
+      console.error('TTS error:', ttsRes.status)
+      return res.json({ reply, audioBase64: null })
+    }
+
+    const audioBuffer = Buffer.from(await ttsRes.arrayBuffer())
+    const audioBase64 = audioBuffer.toString('base64')
+
+    res.json({ reply, audioBase64 })
+  } catch (err) {
+    console.error('Voice chat error:', err)
+    res.status(500).json({ error: 'Error en la conversación por voz.' })
+  }
+})
+
+// ─── CHATBOT: TTS ONLY ─────────────────────────────
+app.post('/api/chat/tts', authMiddleware, aiRateLimit, async (req, res) => {
+  try {
+    if (!OPENAI_API_KEY) return res.status(503).json({ error: 'TTS no disponible.' })
+
+    const { text, voice } = req.body
+    if (!text) return res.status(400).json({ error: 'Texto vacío.' })
+
+    // Limit to 500 chars to control cost
+    const truncated = text.slice(0, 500)
+
+    const ttsRes = await fetch('https://api.openai.com/v1/audio/speech', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${OPENAI_API_KEY}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        model: 'tts-1',
+        input: truncated,
+        voice: voice || 'onyx',
+        response_format: 'mp3',
+        speed: 1.0,
+      }),
+    })
+    if (!ttsRes.ok) throw new Error(`TTS ${ttsRes.status}`)
+
+    const audioBuffer = Buffer.from(await ttsRes.arrayBuffer())
+    res.json({ audioBase64: audioBuffer.toString('base64') })
+  } catch (err) {
+    console.error('TTS error:', err)
+    res.status(500).json({ error: 'Error al generar audio.' })
   }
 })
 

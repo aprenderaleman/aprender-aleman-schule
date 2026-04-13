@@ -1,5 +1,5 @@
-import React, { useState, useRef, useEffect } from 'react'
-import { MessageCircle, X, Send, Bot, User, Sparkles, HelpCircle, Loader2, Trash2 } from 'lucide-react'
+import React, { useState, useRef, useEffect, useCallback } from 'react'
+import { MessageCircle, X, Send, Bot, User, Sparkles, HelpCircle, Loader2, Trash2, Mic, Square, Volume2, VolumeX } from 'lucide-react'
 import { useAuth } from '../../context/AuthContext'
 
 const API_URL = import.meta.env.VITE_API_URL || ''
@@ -9,16 +9,23 @@ const MODES = {
     label: 'Deutsch-Tutor',
     icon: Sparkles,
     color: 'from-orange-500 to-amber-500',
-    placeholder: 'Frag mich etwas auf Deutsch... / Pregúntame algo...',
+    placeholder: 'Frag mich etwas auf Deutsch...',
     description: 'Aprende alemán con tu tutor personal',
   },
   support: {
     label: 'Soporte',
     icon: HelpCircle,
     color: 'from-blue-500 to-indigo-500',
-    placeholder: '¿Cómo funciona...? / Tengo un problema con...',
+    placeholder: '¿Cómo funciona...?',
     description: 'Ayuda técnica sobre la plataforma',
   },
+}
+
+function pickMime() {
+  for (const m of ['audio/webm;codecs=opus', 'audio/webm', 'audio/ogg;codecs=opus', 'audio/mp4']) {
+    if (typeof MediaRecorder !== 'undefined' && MediaRecorder.isTypeSupported(m)) return m
+  }
+  return ''
 }
 
 export default function ChatBot() {
@@ -29,82 +36,235 @@ export default function ChatBot() {
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
   const [showPulse, setShowPulse] = useState(true)
+  const [voiceMode, setVoiceMode] = useState(false)
+  const [recording, setRecording] = useState(false)
+  const [recordingTime, setRecordingTime] = useState(0)
+  const [playingAudio, setPlayingAudio] = useState(null) // message index currently playing
+
   const messagesEndRef = useRef(null)
   const inputRef = useRef(null)
+  const recorderRef = useRef(null)
+  const chunksRef = useRef([])
+  const streamRef = useRef(null)
+  const timerRef = useRef(null)
+  const audioRef = useRef(null)
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
   }, [messages])
 
   useEffect(() => {
-    if (open && inputRef.current) {
-      inputRef.current.focus()
-    }
-  }, [open])
+    if (open && !voiceMode && inputRef.current) inputRef.current.focus()
+  }, [open, voiceMode])
 
-  // Hide pulse after first open
   useEffect(() => {
     if (open) setShowPulse(false)
   }, [open])
 
-  const sendMessage = async () => {
-    const text = input.trim()
-    if (!text || loading) return
+  // Cleanup on unmount
+  useEffect(() => {
+    return () => {
+      stopRecording()
+      if (audioRef.current) { audioRef.current.pause(); audioRef.current = null }
+    }
+  }, [])
 
-    const userMsg = { role: 'user', content: text }
+  const getToken = () => localStorage.getItem('auth_token')
+  const authHeaders = (extra = {}) => {
+    const token = getToken()
+    return { ...(token ? { Authorization: `Bearer ${token}` } : {}), ...extra }
+  }
+
+  // ─── TEXT CHAT ─────────────────────────────────────
+  const sendMessage = async (text) => {
+    const msg = (text || input).trim()
+    if (!msg || loading) return
+
+    const userMsg = { role: 'user', content: msg }
     const newMessages = [...messages, userMsg]
     setMessages(newMessages)
     setInput('')
     setLoading(true)
 
     try {
-      const token = localStorage.getItem('auth_token')
       const res = await fetch(`${API_URL}/api/chat`, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          ...(token ? { Authorization: `Bearer ${token}` } : {}),
-        },
-        body: JSON.stringify({
-          message: text,
-          mode,
-          history: newMessages.slice(-20), // Last 20 messages for context
-        }),
+        headers: authHeaders({ 'Content-Type': 'application/json' }),
+        body: JSON.stringify({ message: msg, mode, history: newMessages.slice(-20) }),
       })
-
-      if (!res.ok) {
-        throw new Error('Error en la respuesta')
-      }
-
+      if (!res.ok) throw new Error()
       const data = await res.json()
-      setMessages(prev => [...prev, { role: 'assistant', content: data.reply }])
+      const assistantMsg = { role: 'assistant', content: data.reply }
+      setMessages(prev => [...prev, assistantMsg])
+
+      // Auto-speak in voice mode
+      if (voiceMode && data.reply) {
+        speakText(data.reply)
+      }
     } catch {
-      setMessages(prev => [
-        ...prev,
-        { role: 'assistant', content: '❌ Error al conectar con el asistente. Inténtalo de nuevo.' },
-      ])
+      setMessages(prev => [...prev, { role: 'assistant', content: '❌ Error al conectar. Inténtalo de nuevo.' }])
     } finally {
       setLoading(false)
     }
   }
 
-  const handleKeyDown = (e) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault()
-      sendMessage()
+  // ─── VOICE: RECORD ────────────────────────────────
+  const startRecording = async () => {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true })
+      streamRef.current = stream
+      const mime = pickMime()
+      const recorder = new MediaRecorder(stream, mime ? { mimeType: mime } : {})
+      recorderRef.current = recorder
+      chunksRef.current = []
+
+      recorder.ondataavailable = (e) => { if (e.data.size > 0) chunksRef.current.push(e.data) }
+      recorder.onstop = () => handleRecordingDone()
+      recorder.start(250)
+      setRecording(true)
+      setRecordingTime(0)
+      timerRef.current = setInterval(() => setRecordingTime(t => t + 1), 1000)
+    } catch (err) {
+      console.error('Mic error:', err)
+      setMessages(prev => [...prev, { role: 'assistant', content: '❌ No se pudo acceder al micrófono. Verifica los permisos.' }])
     }
+  }
+
+  const stopRecording = useCallback(() => {
+    if (timerRef.current) { clearInterval(timerRef.current); timerRef.current = null }
+    if (recorderRef.current && recorderRef.current.state !== 'inactive') {
+      recorderRef.current.stop()
+    }
+    if (streamRef.current) {
+      streamRef.current.getTracks().forEach(t => t.stop())
+      streamRef.current = null
+    }
+    setRecording(false)
+  }, [])
+
+  const handleRecordingDone = async () => {
+    const chunks = chunksRef.current
+    if (!chunks.length) return
+
+    const blob = new Blob(chunks, { type: chunks[0].type || 'audio/webm' })
+    chunksRef.current = []
+
+    // Show placeholder
+    setMessages(prev => [...prev, { role: 'user', content: '🎙️ ...' }])
+    setLoading(true)
+
+    try {
+      // Step 1: Transcribe
+      const transcriptRes = await fetch(`${API_URL}/api/chat/transcribe`, {
+        method: 'POST',
+        headers: authHeaders({ 'Content-Type': blob.type || 'audio/webm' }),
+        body: blob,
+      })
+      if (!transcriptRes.ok) throw new Error('Transcription failed')
+      const { transcript } = await transcriptRes.json()
+
+      if (!transcript || transcript.trim().length === 0) {
+        setMessages(prev => {
+          const copy = [...prev]
+          copy[copy.length - 1] = { role: 'user', content: '🎙️ (no se detectó audio)' }
+          return copy
+        })
+        setLoading(false)
+        return
+      }
+
+      // Update placeholder with actual text
+      setMessages(prev => {
+        const copy = [...prev]
+        copy[copy.length - 1] = { role: 'user', content: transcript }
+        return copy
+      })
+
+      // Step 2: Get Claude response + TTS
+      const chatRes = await fetch(`${API_URL}/api/chat/voice`, {
+        method: 'POST',
+        headers: authHeaders({ 'Content-Type': 'application/json' }),
+        body: JSON.stringify({
+          message: transcript,
+          mode,
+          history: [...messages, { role: 'user', content: transcript }].slice(-20),
+          voice: mode === 'support' ? 'nova' : 'onyx',
+        }),
+      })
+      if (!chatRes.ok) throw new Error('Voice response failed')
+      const { reply, audioBase64 } = await chatRes.json()
+
+      const assistantMsg = { role: 'assistant', content: reply, audioBase64 }
+      setMessages(prev => [...prev, assistantMsg])
+
+      // Auto-play response
+      if (audioBase64) {
+        playAudioBase64(audioBase64, messages.length + 1)
+      }
+    } catch (err) {
+      console.error('Voice chat error:', err)
+      setMessages(prev => [...prev, { role: 'assistant', content: '❌ Error en la conversación por voz.' }])
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  // ─── TTS: Speak text (for text-mode messages) ─────
+  const speakText = async (text) => {
+    try {
+      const res = await fetch(`${API_URL}/api/chat/tts`, {
+        method: 'POST',
+        headers: authHeaders({ 'Content-Type': 'application/json' }),
+        body: JSON.stringify({ text, voice: mode === 'support' ? 'nova' : 'onyx' }),
+      })
+      if (!res.ok) return
+      const { audioBase64 } = await res.json()
+      if (audioBase64) playAudioBase64(audioBase64)
+    } catch { /* silent fail */ }
+  }
+
+  // ─── AUDIO PLAYBACK ───────────────────────────────
+  const playAudioBase64 = (base64, msgIndex) => {
+    if (audioRef.current) { audioRef.current.pause(); audioRef.current = null }
+    const audio = new Audio(`data:audio/mp3;base64,${base64}`)
+    audioRef.current = audio
+    setPlayingAudio(msgIndex ?? -1)
+    audio.onended = () => { setPlayingAudio(null); audioRef.current = null }
+    audio.onerror = () => { setPlayingAudio(null); audioRef.current = null }
+    audio.play().catch(() => setPlayingAudio(null))
+  }
+
+  const stopAudio = () => {
+    if (audioRef.current) { audioRef.current.pause(); audioRef.current = null }
+    setPlayingAudio(null)
+  }
+
+  // ─── HANDLERS ─────────────────────────────────────
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage() }
   }
 
   const clearChat = () => {
     setMessages([])
+    stopAudio()
   }
 
   const switchMode = (newMode) => {
-    if (newMode !== mode) {
-      setMode(newMode)
-      setMessages([])
-    }
+    if (newMode !== mode) { setMode(newMode); setMessages([]); stopAudio() }
   }
+
+  const toggleVoiceMode = () => {
+    if (recording) stopRecording()
+    stopAudio()
+    setVoiceMode(v => !v)
+  }
+
+  const handleMicClick = () => {
+    if (recording) stopRecording()
+    else startRecording()
+  }
+
+  const formatTime = (s) => `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`
 
   const currentMode = MODES[mode]
   const ModeIcon = currentMode.icon
@@ -121,9 +281,7 @@ export default function ChatBot() {
           aria-label="Abrir chat"
         >
           <MessageCircle className="w-6 h-6" />
-          {showPulse && (
-            <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full animate-pulse" />
-          )}
+          {showPulse && <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full animate-pulse" />}
         </button>
       )}
 
@@ -136,21 +294,17 @@ export default function ChatBot() {
               <div className="flex items-center gap-2">
                 <ModeIcon className="w-5 h-5" />
                 <span className="font-semibold">{currentMode.label}</span>
+                {voiceMode && (
+                  <span className="text-[10px] bg-white/25 px-1.5 py-0.5 rounded-full font-medium">VOZ</span>
+                )}
               </div>
               <div className="flex items-center gap-1">
                 {messages.length > 0 && (
-                  <button
-                    onClick={clearChat}
-                    className="p-1.5 rounded-lg hover:bg-white/20 transition-colors"
-                    title="Limpiar chat"
-                  >
+                  <button onClick={clearChat} className="p-1.5 rounded-lg hover:bg-white/20 transition-colors" title="Limpiar chat">
                     <Trash2 className="w-4 h-4" />
                   </button>
                 )}
-                <button
-                  onClick={() => setOpen(false)}
-                  className="p-1.5 rounded-lg hover:bg-white/20 transition-colors"
-                >
+                <button onClick={() => setOpen(false)} className="p-1.5 rounded-lg hover:bg-white/20 transition-colors">
                   <X className="w-4 h-4" />
                 </button>
               </div>
@@ -161,11 +315,7 @@ export default function ChatBot() {
                 <button
                   key={key}
                   onClick={() => switchMode(key)}
-                  className={`flex-1 text-xs py-1.5 px-2 rounded-lg transition-all ${
-                    mode === key
-                      ? 'bg-white/30 font-semibold'
-                      : 'bg-white/10 hover:bg-white/20'
-                  }`}
+                  className={`flex-1 text-xs py-1.5 px-2 rounded-lg transition-all ${mode === key ? 'bg-white/30 font-semibold' : 'bg-white/10 hover:bg-white/20'}`}
                 >
                   {m.label}
                 </button>
@@ -179,26 +329,18 @@ export default function ChatBot() {
               <div className="flex flex-col items-center justify-center h-full text-center text-gray-400 dark:text-gray-500 gap-3">
                 <ModeIcon className="w-10 h-10 opacity-50" />
                 <p className="text-sm">{currentMode.description}</p>
-                {mode === 'tutor' && (
+                {voiceMode ? (
+                  <p className="text-xs text-gray-400">Pulsa el micrófono para hablar</p>
+                ) : (
                   <div className="space-y-1.5 w-full">
-                    {['Was bedeutet „Konjunktiv II"?', '¿Cómo se usan los casos?', 'Erkläre mir die Wechselpräpositionen'].map((q) => (
+                    {(mode === 'tutor'
+                      ? ['Was bedeutet „Konjunktiv II"?', '¿Cómo se usan los casos?', 'Erkläre mir die Wechselpräpositionen']
+                      : ['¿Cómo funcionan los ejercicios?', '¿Qué incluye la suscripción?', '¿Cómo practico para el Goethe?']
+                    ).map((q) => (
                       <button
                         key={q}
                         onClick={() => { setInput(q); inputRef.current?.focus() }}
-                        className="w-full text-left text-xs px-3 py-2 rounded-lg bg-gray-50 dark:bg-gray-800 hover:bg-orange-50 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300 transition-colors"
-                      >
-                        {q}
-                      </button>
-                    ))}
-                  </div>
-                )}
-                {mode === 'support' && (
-                  <div className="space-y-1.5 w-full">
-                    {['¿Cómo funcionan los ejercicios?', '¿Qué incluye la suscripción?', '¿Cómo practico para el Goethe?'].map((q) => (
-                      <button
-                        key={q}
-                        onClick={() => { setInput(q); inputRef.current?.focus() }}
-                        className="w-full text-left text-xs px-3 py-2 rounded-lg bg-gray-50 dark:bg-gray-800 hover:bg-blue-50 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300 transition-colors"
+                        className={`w-full text-left text-xs px-3 py-2 rounded-lg bg-gray-50 dark:bg-gray-800 ${mode === 'tutor' ? 'hover:bg-orange-50' : 'hover:bg-blue-50'} dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300 transition-colors`}
                       >
                         {q}
                       </button>
@@ -215,14 +357,28 @@ export default function ChatBot() {
                     <Bot className="w-4 h-4 text-orange-600 dark:text-orange-400" />
                   </div>
                 )}
-                <div
-                  className={`max-w-[75%] rounded-2xl px-3.5 py-2.5 text-sm leading-relaxed whitespace-pre-wrap ${
-                    msg.role === 'user'
-                      ? 'bg-gradient-to-br from-orange-500 to-amber-500 text-white rounded-br-md'
-                      : 'bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 rounded-bl-md'
-                  }`}
-                >
+                <div className={`max-w-[75%] rounded-2xl px-3.5 py-2.5 text-sm leading-relaxed whitespace-pre-wrap ${
+                  msg.role === 'user'
+                    ? 'bg-gradient-to-br from-orange-500 to-amber-500 text-white rounded-br-md'
+                    : 'bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 rounded-bl-md'
+                }`}>
                   {msg.content}
+                  {/* Play button on assistant messages */}
+                  {msg.role === 'assistant' && !msg.content.startsWith('❌') && (
+                    <button
+                      onClick={() => {
+                        if (playingAudio === i) { stopAudio() }
+                        else if (msg.audioBase64) { playAudioBase64(msg.audioBase64, i) }
+                        else { speakText(msg.content); setPlayingAudio(i) }
+                      }}
+                      className="mt-1.5 flex items-center gap-1 text-[11px] opacity-60 hover:opacity-100 transition-opacity"
+                    >
+                      {playingAudio === i
+                        ? <><VolumeX className="w-3 h-3" /> Parar</>
+                        : <><Volume2 className="w-3 h-3" /> Escuchar</>
+                      }
+                    </button>
+                  )}
                 </div>
                 {msg.role === 'user' && (
                   <div className="flex-shrink-0 w-7 h-7 rounded-full bg-gradient-to-br from-gray-200 to-gray-300 dark:from-gray-700 dark:to-gray-600 flex items-center justify-center">
@@ -246,26 +402,69 @@ export default function ChatBot() {
             <div ref={messagesEndRef} />
           </div>
 
-          {/* Input */}
+          {/* Input area */}
           <div className="p-3 border-t border-gray-200 dark:border-gray-700">
-            <div className="flex gap-2">
-              <textarea
-                ref={inputRef}
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                onKeyDown={handleKeyDown}
-                placeholder={currentMode.placeholder}
-                rows={1}
-                className="flex-1 resize-none rounded-xl border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-800 px-3.5 py-2.5 text-sm text-gray-800 dark:text-gray-200 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-transparent"
-              />
-              <button
-                onClick={sendMessage}
-                disabled={!input.trim() || loading}
-                className="flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-orange-500 to-amber-500 text-white disabled:opacity-40 disabled:cursor-not-allowed hover:shadow-md transition-all"
-              >
-                <Send className="w-4 h-4" />
-              </button>
-            </div>
+            {/* Voice mode: big mic button */}
+            {voiceMode ? (
+              <div className="flex flex-col items-center gap-2">
+                {recording && (
+                  <div className="flex items-center gap-2 text-sm text-red-500">
+                    <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
+                    Grabando {formatTime(recordingTime)}
+                  </div>
+                )}
+                <div className="flex items-center gap-3">
+                  <button
+                    onClick={handleMicClick}
+                    disabled={loading}
+                    className={`flex items-center justify-center w-14 h-14 rounded-full transition-all duration-200 ${
+                      recording
+                        ? 'bg-red-500 hover:bg-red-600 animate-pulse'
+                        : 'bg-gradient-to-br from-orange-500 to-amber-500 hover:shadow-lg hover:scale-105'
+                    } text-white disabled:opacity-40`}
+                  >
+                    {recording ? <Square className="w-6 h-6" /> : <Mic className="w-6 h-6" />}
+                  </button>
+                  <button
+                    onClick={toggleVoiceMode}
+                    className="p-2 rounded-lg text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                    title="Cambiar a texto"
+                  >
+                    <Send className="w-5 h-5" />
+                  </button>
+                </div>
+                <p className="text-[11px] text-gray-400">
+                  {recording ? 'Pulsa para detener' : 'Pulsa para hablar'}
+                </p>
+              </div>
+            ) : (
+              /* Text mode */
+              <div className="flex gap-2">
+                <button
+                  onClick={toggleVoiceMode}
+                  className="flex items-center justify-center w-10 h-10 rounded-xl text-gray-400 hover:text-orange-500 hover:bg-orange-50 dark:hover:bg-gray-800 transition-all"
+                  title="Modo voz"
+                >
+                  <Mic className="w-5 h-5" />
+                </button>
+                <textarea
+                  ref={inputRef}
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  onKeyDown={handleKeyDown}
+                  placeholder={currentMode.placeholder}
+                  rows={1}
+                  className="flex-1 resize-none rounded-xl border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-800 px-3.5 py-2.5 text-sm text-gray-800 dark:text-gray-200 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-transparent"
+                />
+                <button
+                  onClick={() => sendMessage()}
+                  disabled={!input.trim() || loading}
+                  className="flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-orange-500 to-amber-500 text-white disabled:opacity-40 disabled:cursor-not-allowed hover:shadow-md transition-all"
+                >
+                  <Send className="w-4 h-4" />
+                </button>
+              </div>
+            )}
           </div>
         </div>
       )}
