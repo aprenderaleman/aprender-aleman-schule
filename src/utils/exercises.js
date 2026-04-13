@@ -42,4 +42,5 @@ export const EXERCISE_TYPES = [
   { key: 'reading', label: 'Lesen', icon: '📖', color: 'green' },
   { key: 'listening', label: 'Hören', icon: '🎧', color: 'purple' },
   { key: 'writing', label: 'Schreiben', icon: '✍️', color: 'pink' },
+  { key: 'speaking', label: 'Sprechen', icon: '🎤', color: 'teal' },
 ]

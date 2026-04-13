@@ -8,6 +8,7 @@ const skillConfig = {
   reading: { icon: '📖', label: 'Lesen', color: 'green', type: 'reading', desc: 'Textverständnis' },
   listening: { icon: '🎧', label: 'Hören', color: 'purple', type: 'listening', desc: 'Hörverständnis' },
   writing: { icon: '✍️', label: 'Schreiben', color: 'pink', type: 'writing', desc: 'Schriftlicher Ausdruck' },
+  speaking: { icon: '🎤', label: 'Sprechen', color: 'teal', type: 'speaking', desc: 'Mündlicher Ausdruck' },
 }
 
 const bgColors = {
@@ -15,6 +16,7 @@ const bgColors = {
   green: 'bg-green-50 dark:bg-green-900/20 border-green-200 dark:border-green-800',
   purple: 'bg-purple-50 dark:bg-purple-900/20 border-purple-200 dark:border-purple-800',
   pink: 'bg-pink-50 dark:bg-pink-900/20 border-pink-200 dark:border-pink-800',
+  teal: 'bg-teal-50 dark:bg-teal-900/20 border-teal-200 dark:border-teal-800',
 }
 
 export default function SkillCard({ skill, score = 0, index = 0 }) {

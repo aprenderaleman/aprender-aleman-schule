@@ -30,6 +30,7 @@ app.use((req, res, next) => {
   if (req.originalUrl === '/api/stripe/webhook') return next()
   if (req.originalUrl === '/api/pruefungen/transcribe-sprechen') return next()
   if (req.originalUrl === '/api/chat/transcribe') return next()
+  if (req.originalUrl === '/api/ai/transcribe-speaking') return next()
   express.json({ limit: '50kb' })(req, res, next)
 })
 
@@ -638,6 +639,7 @@ app.get('/api/progress', authMiddleware, subscriptionMiddleware, async (req, res
         reading: p.skillReading,
         listening: p.skillListening,
         writing: p.skillWriting,
+        speaking: p.skillSpeaking || 0,
       },
       completedExercises: [...new Set(results.map(r => r.exerciseId))],
       exerciseHistory: results.map(r => ({
@@ -672,7 +674,7 @@ app.post('/api/progress/exercise', authMiddleware, subscriptionMiddleware, async
     )
 
     // Update progress totals
-    const skillCol = { grammar: 'skillGrammar', reading: 'skillReading', listening: 'skillListening', writing: 'skillWriting' }[exerciseType] || 'skillGrammar'
+    const skillCol = { grammar: 'skillGrammar', reading: 'skillReading', listening: 'skillListening', writing: 'skillWriting', speaking: 'skillSpeaking' }[exerciseType] || 'skillGrammar'
 
     // Calculate new skill score (average of last 20 exercises of this type)
     const [recentScores] = await pool.query(
@@ -913,6 +915,7 @@ app.get('/api/admin/users/:userId', authMiddleware, adminMiddleware, async (req,
           reading: prog.skillReading || 0,
           listening: prog.skillListening || 0,
           writing: prog.skillWriting || 0,
+          speaking: prog.skillSpeaking || 0,
         },
       },
       exerciseResults: results,
@@ -1117,6 +1120,101 @@ Schreibe auf Deutsch. Gib 2-3 Beispiele auf Deutsch. Schwierige Grammatikbegriff
   } catch (err) {
     console.error('AI grammar error:', err.message)
     res.status(500).json({ error: 'Error al generar explicación.' })
+  }
+})
+
+// ─── SPEAKING EXERCISE: TRANSCRIBE ──────────────────
+app.post(
+  '/api/ai/transcribe-speaking',
+  express.raw({ type: ['audio/*', 'application/octet-stream'], limit: '15mb' }),
+  authMiddleware,
+  subscriptionMiddleware,
+  aiRateLimit,
+  async (req, res) => {
+    try {
+      if (!OPENAI_API_KEY) return res.status(503).json({ error: 'Transkriptionsdienst nicht verfügbar.' })
+      if (!Buffer.isBuffer(req.body) || req.body.length === 0) {
+        return res.status(400).json({ error: 'Leere Audiodatei.' })
+      }
+
+      const contentType = req.headers['content-type'] || 'audio/webm'
+      const ext = contentType.includes('mp3') ? 'mp3'
+        : contentType.includes('wav') ? 'wav'
+        : contentType.includes('ogg') ? 'ogg'
+        : contentType.includes('mp4') || contentType.includes('m4a') ? 'm4a'
+        : 'webm'
+
+      const formData = new FormData()
+      formData.append('file', new Blob([req.body], { type: contentType }), `speaking.${ext}`)
+      formData.append('model', 'whisper-1')
+      formData.append('language', 'de')
+      formData.append('response_format', 'json')
+
+      const r = await fetch('https://api.openai.com/v1/audio/transcriptions', {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${OPENAI_API_KEY}` },
+        body: formData,
+      })
+
+      if (!r.ok) {
+        const errText = await r.text()
+        console.error('Whisper speaking error:', r.status, errText)
+        return res.status(502).json({ error: 'Transkriptionsfehler.' })
+      }
+      const data = await r.json()
+      res.json({ transcript: data.text || '' })
+    } catch (err) {
+      console.error('Transcribe speaking error:', err.message)
+      res.status(500).json({ error: 'Fehler bei der Transkription.' })
+    }
+  }
+)
+
+// ─── SPEAKING EXERCISE: EVALUATE ────────────────────
+app.post('/api/ai/evaluate-speaking', authMiddleware, subscriptionMiddleware, aiRateLimit, async (req, res) => {
+  try {
+    if (!OPENAI_API_KEY) return res.status(503).json({ error: 'KI-Dienst nicht verfügbar.' })
+    const { prompt: taskPrompt, transcript, level, durationSeconds } = req.body
+    if (!taskPrompt || !transcript) {
+      return res.status(400).json({ error: 'Fehlende Daten.' })
+    }
+
+    const wordCount = String(transcript).trim().split(/\s+/).filter(Boolean).length
+    const userName = req.user.fullName || req.user.name || 'Student'
+
+    const systemPrompt = `Du bist ein erfahrener Deutschlehrer, der mündliche Antworten von Schülern bewertet. Du arbeitest mit einem automatischen Transkript (Whisper) — du kannst Aussprache nicht direkt hören. Bewerte Inhalt, Wortschatz, Grammatik und Kohärenz. Sei ermutigend aber ehrlich. Antworte NUR mit gültigem JSON.`
+
+    const userMessage = `Bewerte diese mündliche Antwort von ${userName} (Niveau ${level || 'A1'}).
+
+AUFGABE: ${taskPrompt}
+
+DAUER: ${durationSeconds || '?'} Sekunden | WÖRTER: ${wordCount}
+
+TRANSKRIPT:
+"""
+${transcript}
+"""
+
+Antworte NUR mit gültigem JSON (kein Markdown, kein Codeblock):
+{
+  "score": 7,
+  "grammar_errors": [{"error": "fehlerhafte Stelle", "correction": "Korrektur", "explanation": "kurze Erklärung"}],
+  "vocabulary_suggestions": [{"word": "verwendetes Wort", "better_alternative": "bessere Alternative", "reason": "Grund"}],
+  "pronunciation_tips": ["Tipp zur Aussprache basierend auf typischen Fehlern im Transkript"],
+  "positive_aspects": "Was gut gemacht wurde (1-2 Sätze)",
+  "fluency_feedback": "Feedback zum Sprachfluss und zur Kohärenz (1-2 Sätze)",
+  "overall_comment": "Ermutigender Gesamtkommentar (1-2 Sätze)"
+}
+Bewertung von 0-10. Kein Text außerhalb des JSONs.`
+
+    const reply = await callOpenAIChat(systemPrompt, [{ role: 'user', content: userMessage }], 1200)
+    const jsonMatch = reply.match(/\{[\s\S]*\}/)
+    if (!jsonMatch) return res.status(500).json({ error: 'Fehler bei der KI-Antwort.' })
+    const result = JSON.parse(jsonMatch[0])
+    res.json(result)
+  } catch (err) {
+    console.error('Evaluate speaking error:', err.message)
+    res.status(500).json({ error: 'Fehler bei der Bewertung.' })
   }
 })
 
@@ -1855,6 +1953,19 @@ app.get('/{*splat}', (req, res, next) => {
   if (req.path.startsWith('/api')) return next()
   res.sendFile(path.join(distPath, 'index.html'))
 })
+
+// ─── AUTO-MIGRATION: Add skillSpeaking column if missing ───
+;(async () => {
+  try {
+    await pool.query("ALTER TABLE schule_progress ADD COLUMN skillSpeaking INT DEFAULT 0")
+    console.log('Added skillSpeaking column to schule_progress')
+  } catch (err) {
+    // Column already exists — ignore
+    if (!err.message.includes('Duplicate column')) {
+      console.error('Migration warning:', err.message)
+    }
+  }
+})()
 
 const PORT = process.env.PORT || process.env.API_PORT || 3001
 app.listen(PORT, () => {

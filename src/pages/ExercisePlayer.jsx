@@ -9,6 +9,7 @@ import GrammarExercise from '../components/Exercises/GrammarExercise'
 import ReadingExercise from '../components/Exercises/ReadingExercise'
 import ListeningExercise from '../components/Exercises/ListeningExercise'
 import WritingExercise from '../components/Exercises/WritingExercise'
+import SpeakingExercise from '../components/Exercises/SpeakingExercise'
 import Confetti from '../components/UI/Confetti'
 import Modal from '../components/UI/Modal'
 import ProgressBar from '../components/UI/ProgressBar'
@@ -119,6 +120,7 @@ export default function ExercisePlayer() {
       case 'reading': return <ReadingExercise {...props} />
       case 'listening': return <ListeningExercise {...props} />
       case 'writing': return <WritingExercise {...props} />
+      case 'speaking': return <SpeakingExercise {...props} />
       default: return <GrammarExercise {...props} />
     }
   }
@@ -168,7 +170,8 @@ export default function ExercisePlayer() {
             <span className="text-xs font-bold bg-orange-100 text-orange-600 dark:bg-orange-900/30 dark:text-orange-400 px-2 py-1 rounded-full capitalize">
               {exercise.type === 'grammar' ? 'Grammatik' :
                 exercise.type === 'reading' ? 'Lesen' :
-                  exercise.type === 'listening' ? 'Hören' : 'Schreiben'}
+                  exercise.type === 'listening' ? 'Hören' :
+                    exercise.type === 'speaking' ? 'Sprechen' : 'Schreiben'}
             </span>
             <span className="text-xs text-gray-400">Niveau {exercise.level} · Einheit {exercise.unit}</span>
           </div>

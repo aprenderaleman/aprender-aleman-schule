@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { Brain, BookOpen, Headphones, PenLine, Filter, Search, Lock, CheckCircle, Play } from 'lucide-react'
+import { Brain, BookOpen, Headphones, PenLine, Mic, Filter, Search, Lock, CheckCircle, Play } from 'lucide-react'
 import { useAuth } from '../context/AuthContext'
 import { useProgress } from '../context/ProgressContext'
 import Navbar from '../components/Layout/Navbar'
@@ -12,9 +12,10 @@ const TYPE_META = {
   reading: { label: 'Lesen', icon: BookOpen, color: 'text-blue-500', bg: 'bg-blue-100 dark:bg-blue-900/30' },
   listening: { label: 'Hören', icon: Headphones, color: 'text-purple-500', bg: 'bg-purple-100 dark:bg-purple-900/30' },
   writing: { label: 'Schreiben', icon: PenLine, color: 'text-green-500', bg: 'bg-green-100 dark:bg-green-900/30' },
+  speaking: { label: 'Sprechen', icon: Mic, color: 'text-teal-500', bg: 'bg-teal-100 dark:bg-teal-900/30' },
 }
 const LEVELS = ['Alle', 'A1', 'A2', 'B1', 'B2', 'C1']
-const TYPES = ['Alle', 'grammar', 'reading', 'listening', 'writing']
+const TYPES = ['Alle', 'grammar', 'reading', 'listening', 'writing', 'speaking']
 
 export default function Exercises() {
   const { user } = useAuth()

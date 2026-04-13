@@ -1,6 +1,6 @@
 import React from 'react'
 import { motion } from 'framer-motion'
-import { Zap, Flame, Brain, BookOpen, Headphones, PenLine, Trophy, TrendingUp } from 'lucide-react'
+import { Zap, Flame, Brain, BookOpen, Headphones, PenLine, Mic, Trophy, TrendingUp } from 'lucide-react'
 import {
   RadialBarChart, RadialBar, ResponsiveContainer,
   BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid,
@@ -16,6 +16,7 @@ const SKILL_META = {
   reading:   { label: 'Lesen',      icon: BookOpen,   color: '#3b82f6' },
   listening: { label: 'Hören',      icon: Headphones, color: '#8b5cf6' },
   writing:   { label: 'Schreiben',  icon: PenLine,    color: '#22c55e' },
+  speaking:  { label: 'Sprechen',   icon: Mic,        color: '#14b8a6' },
 }
 
 const LEVEL_XP = { A1: 500, A2: 1000, B1: 2000, B2: 3500, C1: 5000 }
@@ -53,7 +54,7 @@ export default function Progress() {
 
   // Exercise type breakdown
   const typeBreakdown = React.useMemo(() => {
-    const counts = { grammar: 0, reading: 0, listening: 0, writing: 0 }
+    const counts = { grammar: 0, reading: 0, listening: 0, writing: 0, speaking: 0 }
     ;(progress.exerciseHistory || []).forEach(h => {
       if (counts[h.type] !== undefined) counts[h.type]++
     })

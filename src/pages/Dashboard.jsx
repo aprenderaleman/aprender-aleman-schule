@@ -14,7 +14,7 @@ import Toast from '../components/UI/Toast'
 import { EXERCISES } from '../utils/exercises'
 
 const LEVEL_XP = { A1: 500, A2: 1000, B1: 2000, B2: 3500, C1: 5000 }
-const SKILLS = ['grammar', 'reading', 'listening', 'writing']
+const SKILLS = ['grammar', 'reading', 'listening', 'writing', 'speaking']
 
 export default function Dashboard() {
   const { user, toast } = useAuth()
@@ -99,7 +99,7 @@ export default function Dashboard() {
         )}
 
         {/* Skills grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-8">
           {SKILLS.map((skill, idx) => (
             <SkillCard
               key={skill}

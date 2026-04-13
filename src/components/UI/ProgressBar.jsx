@@ -10,6 +10,7 @@ export default function ProgressBar({ value = 0, max = 100, color = 'orange', la
     green: 'from-green-400 to-green-600',
     purple: 'from-purple-400 to-purple-600',
     pink: 'from-pink-400 to-pink-600',
+    teal: 'from-teal-400 to-teal-600',
     yellow: 'from-yellow-400 to-yellow-500',
   }
 
