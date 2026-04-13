@@ -23,8 +23,6 @@ export default function SkillCard({ skill, score = 0, index = 0 }) {
   const config = skillConfig[skill]
   if (!config) return null
 
-  const level = score >= 80 ? 'Fortgeschritten' : score >= 50 ? 'Mittelstufe' : score >= 20 ? 'Grundlagen' : 'Anfänger'
-
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -44,9 +42,6 @@ export default function SkillCard({ skill, score = 0, index = 0 }) {
             </h3>
             <p className="text-[10px] text-gray-500 dark:text-gray-400">{config.desc}</p>
           </div>
-          <span className="shrink-0 whitespace-nowrap text-[10px] font-semibold text-gray-600 dark:text-gray-300 bg-white dark:bg-gray-700 px-2 py-0.5 rounded-full">
-            {level}
-          </span>
         </div>
         <ProgressBar value={score} max={100} color={config.color} showPercent={true} height="sm" />
       </Link>
