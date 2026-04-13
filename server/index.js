@@ -1029,31 +1029,41 @@ WICHTIGE SPRACHREGELN:
 - Passe die Sprache dem Niveau ${userLevel} an — einfaches Deutsch für A1/A2, komplexeres für B1/B2/C1`
 }
 
-async function callAnthropic(messages, userName, userLevel, maxTokens = 1024) {
+async function callAnthropicRaw(model, system, messages, maxTokens = 1024) {
   if (!ANTHROPIC_API_KEY) throw new Error('ANTHROPIC_API_KEY not configured')
 
-  const response = await fetch('https://api.anthropic.com/v1/messages', {
-    method: 'POST',
-    headers: {
-      'x-api-key': ANTHROPIC_API_KEY,
-      'anthropic-version': '2023-06-01',
-      'content-type': 'application/json',
-    },
-    body: JSON.stringify({
-      model: 'claude-sonnet-4-20250514',
-      max_tokens: maxTokens,
-      system: getSystemPrompt(userName, userLevel),
-      messages,
-    }),
-  })
+  const maxRetries = 3
+  for (let attempt = 0; attempt < maxRetries; attempt++) {
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'x-api-key': ANTHROPIC_API_KEY,
+        'anthropic-version': '2023-06-01',
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify({ model, max_tokens: maxTokens, system, messages }),
+    })
 
-  if (!response.ok) {
+    if (response.ok) {
+      const data = await response.json()
+      return data.content[0].text
+    }
+
+    // Retry on 529 (overloaded) or 500
+    if ((response.status === 529 || response.status === 500) && attempt < maxRetries - 1) {
+      const wait = (attempt + 1) * 2000
+      console.log(`Anthropic ${response.status}, retrying in ${wait}ms (attempt ${attempt + 1}/${maxRetries})`)
+      await new Promise(r => setTimeout(r, wait))
+      continue
+    }
+
     const err = await response.text()
     throw new Error(`Anthropic API error ${response.status}: ${err}`)
   }
+}
 
-  const data = await response.json()
-  return data.content[0].text
+async function callAnthropic(messages, userName, userLevel, maxTokens = 1024) {
+  return callAnthropicRaw('claude-sonnet-4-20250514', getSystemPrompt(userName, userLevel), messages, maxTokens)
 }
 
 // Evaluate writing exercise
@@ -1592,28 +1602,8 @@ REGELN:
       claudeMessages.push({ role: 'user', content: message })
     }
 
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: {
-        'x-api-key': ANTHROPIC_API_KEY,
-        'anthropic-version': '2023-06-01',
-        'content-type': 'application/json',
-      },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 512,
-        system: systemPrompt,
-        messages: claudeMessages,
-      }),
-    })
-
-    if (!response.ok) {
-      const err = await response.text()
-      throw new Error(`Anthropic API error ${response.status}: ${err}`)
-    }
-
-    const data = await response.json()
-    res.json({ reply: data.content[0].text })
+    const reply = await callAnthropicRaw('claude-sonnet-4-20250514', systemPrompt, claudeMessages, 512)
+    res.json({ reply })
   } catch (err) {
     console.error('Chat error:', err)
     res.status(500).json({ error: 'Error al procesar el mensaje.' })
@@ -1684,23 +1674,7 @@ app.post('/api/chat/voice', authMiddleware, aiRateLimit, async (req, res) => {
       claudeMessages.push({ role: 'user', content: message })
     }
 
-    const claudeRes = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: {
-        'x-api-key': ANTHROPIC_API_KEY,
-        'anthropic-version': '2023-06-01',
-        'content-type': 'application/json',
-      },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 256,
-        system: systemPrompt,
-        messages: claudeMessages,
-      }),
-    })
-    if (!claudeRes.ok) throw new Error(`Claude ${claudeRes.status}`)
-    const claudeData = await claudeRes.json()
-    const reply = claudeData.content[0].text
+    const reply = await callAnthropicRaw('claude-sonnet-4-20250514', systemPrompt, claudeMessages, 256)
 
     // Generate TTS with OpenAI
     const ttsVoice = voice || 'onyx'
