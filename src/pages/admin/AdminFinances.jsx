@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState, useEffect, useCallback, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
   DollarSign, TrendingUp, TrendingDown, Users, CreditCard, AlertTriangle,
   RefreshCw, Megaphone, Target, MousePointerClick, Eye, ArrowUpRight,
   Bot, Play, Clock, CheckCircle, XCircle, ChevronDown, ChevronUp,
+  Upload, FileSpreadsheet, X,
 } from 'lucide-react'
 import {
   LineChart, Line, BarChart, Bar, AreaChart, Area,
@@ -94,11 +95,16 @@ export default function AdminFinances() {
   const [adsData, setAdsData] = useState(null)
   const [agentLogs, setAgentLogs] = useState([])
   const [loading, setLoading] = useState(true)
-  const [adsLoading, setAdsLoading] = useState(false)
   const [agentRunning, setAgentRunning] = useState(false)
   const [error, setError] = useState(null)
   const [showAgentLogs, setShowAgentLogs] = useState(false)
   const [selectedPeriod, setSelectedPeriod] = useState('6months')
+
+  // CSV upload state
+  const [uploading, setUploading] = useState(false)
+  const [uploadResult, setUploadResult] = useState(null)
+  const [dragOver, setDragOver] = useState(false)
+  const fileInputRef = useRef(null)
 
   const fetchFinances = useCallback(async () => {
     setLoading(true)
@@ -114,17 +120,15 @@ export default function AdminFinances() {
   }, [selectedPeriod])
 
   const fetchAds = useCallback(async () => {
-    setAdsLoading(true)
     try {
-      const res = await fetch(`${API_URL}/api/admin/google-ads/metrics`, { headers: getAuthHeaders() })
+      const res = await fetch(`${API_URL}/api/admin/ads-metrics`, { headers: getAuthHeaders() })
       if (res.ok) setAdsData(await res.json())
     } catch {}
-    setAdsLoading(false)
   }, [])
 
   const fetchAgentLogs = useCallback(async () => {
     try {
-      const res = await fetch(`${API_URL}/api/admin/google-ads/agent-logs`, { headers: getAuthHeaders() })
+      const res = await fetch(`${API_URL}/api/admin/ads-agent/logs`, { headers: getAuthHeaders() })
       if (res.ok) setAgentLogs(await res.json())
     } catch {}
   }, [])
@@ -133,18 +137,58 @@ export default function AdminFinances() {
     if (agentRunning) return
     setAgentRunning(true)
     try {
-      const res = await fetch(`${API_URL}/api/admin/google-ads/agent-run`, {
+      const res = await fetch(`${API_URL}/api/admin/ads-agent/run`, {
         method: 'POST',
         headers: getAuthHeaders(),
       })
       if (res.ok) {
         const result = await res.json()
         setAgentLogs(prev => [result, ...prev])
-        // Refresh ads data after agent run
         fetchAds()
       }
     } catch {}
     setAgentRunning(false)
+  }
+
+  const handleCsvUpload = async (file) => {
+    if (!file || !file.name.endsWith('.csv')) {
+      setUploadResult({ ok: false, error: 'Bitte eine CSV-Datei auswählen.' })
+      return
+    }
+    setUploading(true)
+    setUploadResult(null)
+    try {
+      const text = await file.text()
+      const res = await fetch(`${API_URL}/api/admin/ads-report/upload`, {
+        method: 'POST',
+        headers: getAuthHeaders(),
+        body: JSON.stringify({ csvData: text }),
+      })
+      const result = await res.json()
+      if (res.ok) {
+        setUploadResult({ ok: true, ...result })
+        fetchAds()
+        fetchFinances()
+      } else {
+        setUploadResult({ ok: false, error: result.error })
+      }
+    } catch (err) {
+      setUploadResult({ ok: false, error: err.message })
+    }
+    setUploading(false)
+  }
+
+  const handleDrop = (e) => {
+    e.preventDefault()
+    setDragOver(false)
+    const file = e.dataTransfer?.files?.[0]
+    if (file) handleCsvUpload(file)
+  }
+
+  const handleFileInput = (e) => {
+    const file = e.target.files?.[0]
+    if (file) handleCsvUpload(file)
+    e.target.value = ''
   }
 
   useEffect(() => { fetchFinances() }, [fetchFinances])
@@ -225,24 +269,113 @@ export default function AdminFinances() {
           color={stripe?.churnRate > 5 ? COLORS.red : COLORS.teal} index={3} />
       </div>
 
-      {/* ════════ GOOGLE ADS OVERVIEW ════════ */}
+      {/* ════════ GOOGLE ADS OVERVIEW (from CSV) ════════ */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <StatCard icon={Megaphone} label="Ads-Ausgaben (Monat)" value={`€${(adsData?.currentMonth?.spend || 0).toFixed(2)}`}
-          subValue={adsData?.currentMonth?.changeVsPrev ? `${adsData.currentMonth.changeVsPrev > 0 ? '+' : ''}${adsData.currentMonth.changeVsPrev.toFixed(1)}%` : 'Google Ads nicht verbunden'}
-          trend={adsData?.connected ? (adsData.currentMonth.changeVsPrev > 0 ? 'up' : 'down') : null}
+          subValue={adsData?.hasData ? (adsData.currentMonth?.changeVsPrev ? `${adsData.currentMonth.changeVsPrev > 0 ? '+' : ''}${adsData.currentMonth.changeVsPrev.toFixed(1)}%` : 'Aktueller Monat') : 'Noch kein CSV hochgeladen'}
+          trend={adsData?.hasData ? (adsData.currentMonth?.changeVsPrev > 0 ? 'up' : 'down') : null}
           color={COLORS.purple} index={4} />
-        <StatCard icon={MousePointerClick} label="CPA (Kosten/Abo)" value={adsData?.connected ? `€${(adsData?.currentMonth?.cpa || 0).toFixed(2)}` : '—'}
-          subValue={adsData?.connected ? `Ziel: < €30` : 'Konfiguration erforderlich'}
+        <StatCard icon={MousePointerClick} label="CPA (Kosten/Abo)" value={adsData?.hasData ? `€${(adsData?.currentMonth?.cpa || 0).toFixed(2)}` : '—'}
+          subValue={adsData?.hasData ? `Ziel: < €30` : 'CSV hochladen'}
           trend={adsData?.currentMonth?.cpa < 30 ? 'up' : 'down'}
           color={COLORS.indigo} index={5} />
-        <StatCard icon={Eye} label="Impressionen" value={adsData?.connected ? (adsData?.currentMonth?.impressions || 0).toLocaleString() : '—'}
-          subValue={adsData?.connected ? `CTR: ${(adsData?.currentMonth?.ctr || 0).toFixed(2)}%` : null}
+        <StatCard icon={Eye} label="Impressionen" value={adsData?.hasData ? (adsData?.currentMonth?.impressions || 0).toLocaleString() : '—'}
+          subValue={adsData?.hasData ? `CTR: ${(adsData?.currentMonth?.ctr || 0).toFixed(2)}%` : null}
           color={COLORS.yellow} index={6} />
-        <StatCard icon={Target} label="Conversions (Monat)" value={adsData?.connected ? (adsData?.currentMonth?.conversions || 0) : '—'}
-          subValue={adsData?.connected ? `Ziel: 200/Monat` : null}
+        <StatCard icon={Target} label="Conversions (Monat)" value={adsData?.hasData ? (adsData?.currentMonth?.conversions || 0) : '—'}
+          subValue={adsData?.hasData ? `Ziel: 200/Monat` : null}
           trend={adsData?.currentMonth?.conversions >= 200 ? 'up' : 'down'}
           color={COLORS.pink} index={7} />
       </div>
+
+      {/* ════════ CSV UPLOAD AREA ════════ */}
+      <motion.div
+        className={`relative rounded-2xl border-2 border-dashed transition-colors ${
+          dragOver
+            ? 'border-purple-400 bg-purple-50 dark:bg-purple-900/20'
+            : 'border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800'
+        } p-6`}
+        variants={sectionVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        onDragOver={(e) => { e.preventDefault(); setDragOver(true) }}
+        onDragLeave={() => setDragOver(false)}
+        onDrop={handleDrop}
+      >
+        <input
+          ref={fileInputRef}
+          type="file"
+          accept=".csv"
+          onChange={handleFileInput}
+          className="hidden"
+        />
+        <div className="flex flex-col sm:flex-row items-center gap-4">
+          <div className="w-14 h-14 rounded-2xl bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center shrink-0">
+            {uploading ? (
+              <RefreshCw size={24} className="text-purple-500 animate-spin" />
+            ) : (
+              <Upload size={24} className="text-purple-500" />
+            )}
+          </div>
+          <div className="flex-1 text-center sm:text-left">
+            <h3 className="text-base font-semibold text-gray-800 dark:text-gray-100">Google Ads Bericht hochladen</h3>
+            <p className="text-sm text-gray-500 dark:text-gray-400 mt-0.5">
+              CSV-Datei hier ablegen oder <button onClick={() => fileInputRef.current?.click()} className="text-purple-500 font-semibold hover:underline">Datei auswählen</button>
+            </p>
+            <p className="text-xs text-gray-400 mt-1">
+              Exportiere den Bericht aus Google Ads (Kampagnen, Keywords, etc.) als CSV mit Datum, Kosten, Klicks, Impressionen, Conversions
+            </p>
+            {adsData?.lastUpload && (
+              <p className="text-xs text-gray-400 mt-1">
+                Letzter Upload: {new Date(adsData.lastUpload).toLocaleString('de-DE')}
+              </p>
+            )}
+          </div>
+          <button
+            onClick={() => fileInputRef.current?.click()}
+            disabled={uploading}
+            className="px-4 py-2.5 rounded-xl bg-purple-500 text-white text-sm font-semibold hover:bg-purple-600 transition-colors disabled:opacity-50 flex items-center gap-2 shrink-0"
+          >
+            <FileSpreadsheet size={16} />
+            {uploading ? 'Wird importiert...' : 'CSV hochladen'}
+          </button>
+        </div>
+
+        {/* Upload result */}
+        <AnimatePresence>
+          {uploadResult && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              className="mt-4"
+            >
+              <div className={`rounded-xl p-3 flex items-center justify-between ${
+                uploadResult.ok
+                  ? 'bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800'
+                  : 'bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800'
+              }`}>
+                <div className="flex items-center gap-2">
+                  {uploadResult.ok ? (
+                    <CheckCircle size={16} className="text-green-500" />
+                  ) : (
+                    <XCircle size={16} className="text-red-500" />
+                  )}
+                  <span className={`text-sm font-medium ${uploadResult.ok ? 'text-green-700 dark:text-green-400' : 'text-red-700 dark:text-red-400'}`}>
+                    {uploadResult.ok
+                      ? `${uploadResult.rowsImported} Zeilen importiert (${uploadResult.months?.join(', ')})`
+                      : uploadResult.error}
+                  </span>
+                </div>
+                <button onClick={() => setUploadResult(null)} className="text-gray-400 hover:text-gray-600">
+                  <X size={14} />
+                </button>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </motion.div>
 
       {/* ════════ CHARTS ROW 1: Revenue + P&L ════════ */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -297,8 +430,8 @@ export default function AdminFinances() {
           </ResponsiveContainer>
         </ChartCard>
 
-        {adsData?.connected && adsData?.dailyMetrics?.length > 0 ? (
-          <ChartCard title="Google Ads — Tägliche Performance">
+        {adsData?.hasData && adsData?.dailyMetrics?.length > 0 ? (
+          <ChartCard title="Google Ads — Tägliche Performance (CSV)">
             <ResponsiveContainer width="100%" height={280}>
               <ComposedChart data={adsData.dailyMetrics}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
@@ -316,10 +449,10 @@ export default function AdminFinances() {
         ) : (
           <ChartCard title="Google Ads — Tägliche Performance">
             <div className="flex flex-col items-center justify-center h-64 text-center">
-              <Megaphone size={40} className="text-gray-300 dark:text-gray-600 mb-3" />
-              <p className="text-sm text-gray-500 dark:text-gray-400 font-medium">Google Ads nicht verbunden</p>
+              <FileSpreadsheet size={40} className="text-gray-300 dark:text-gray-600 mb-3" />
+              <p className="text-sm text-gray-500 dark:text-gray-400 font-medium">Noch keine Ads-Daten vorhanden</p>
               <p className="text-xs text-gray-400 mt-1 max-w-xs">
-                Setze die Umgebungsvariablen GOOGLE_ADS_DEVELOPER_TOKEN, GOOGLE_ADS_CLIENT_ID, GOOGLE_ADS_CLIENT_SECRET, GOOGLE_ADS_REFRESH_TOKEN und GOOGLE_ADS_CUSTOMER_ID in Coolify.
+                Lade einen CSV-Bericht aus Google Ads hoch, um hier die tägliche Performance zu sehen.
               </p>
             </div>
           </ChartCard>
@@ -383,7 +516,7 @@ export default function AdminFinances() {
             </div>
             <div>
               <h3 className="text-lg font-bold text-gray-800 dark:text-gray-100">KI-Werbeagent</h3>
-              <p className="text-xs text-gray-500 dark:text-gray-400">Analysiert Google Ads und optimiert Kampagnen automatisch</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400">Analysiert hochgeladene Google Ads Daten und schlägt Optimierungen vor</p>
             </div>
           </div>
           <div className="flex items-center gap-2">
@@ -397,7 +530,7 @@ export default function AdminFinances() {
             </button>
             <button
               onClick={runAgent}
-              disabled={agentRunning || !adsData?.connected}
+              disabled={agentRunning || !adsData?.hasData}
               className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-indigo-500 text-white text-sm font-semibold hover:bg-indigo-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {agentRunning ? <RefreshCw size={14} className="animate-spin" /> : <Play size={14} />}
@@ -409,13 +542,13 @@ export default function AdminFinances() {
         {/* Agent status */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4">
           <div className="bg-white dark:bg-gray-800 rounded-xl p-3 border border-gray-200 dark:border-gray-700">
-            <p className="text-[10px] text-gray-400 font-bold uppercase">Status</p>
-            <p className={`text-sm font-semibold ${adsData?.connected ? 'text-green-500' : 'text-red-500'}`}>
-              {adsData?.connected ? '● Verbunden' : '● Nicht verbunden'}
+            <p className="text-[10px] text-gray-400 font-bold uppercase">Datenquelle</p>
+            <p className={`text-sm font-semibold ${adsData?.hasData ? 'text-green-500' : 'text-yellow-500'}`}>
+              {adsData?.hasData ? '● CSV hochgeladen' : '● Kein CSV vorhanden'}
             </p>
           </div>
           <div className="bg-white dark:bg-gray-800 rounded-xl p-3 border border-gray-200 dark:border-gray-700">
-            <p className="text-[10px] text-gray-400 font-bold uppercase">Letzte Ausführung</p>
+            <p className="text-[10px] text-gray-400 font-bold uppercase">Letzte Analyse</p>
             <p className="text-sm font-semibold text-gray-700 dark:text-gray-200">
               {agentLogs[0]?.timestamp ? new Date(agentLogs[0].timestamp).toLocaleString('de-DE') : 'Noch nie'}
             </p>
@@ -452,19 +585,20 @@ export default function AdminFinances() {
                             {new Date(log.timestamp).toLocaleString('de-DE')}
                           </span>
                         </div>
-                        {log.changes?.length > 0 && (
+                        {(log.changes?.length > 0 || log.proposedChanges?.length > 0) && (
                           <span className="text-[10px] font-bold bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 px-2 py-0.5 rounded-full">
-                            {log.changes.length} Änderung{log.changes.length > 1 ? 'en' : ''}
+                            {(log.proposedChanges || log.changes)?.length} Vorschläge
                           </span>
                         )}
                       </div>
                       <p className="text-sm text-gray-700 dark:text-gray-200 leading-relaxed">{log.summary}</p>
-                      {log.changes?.length > 0 && (
+                      {(log.proposedChanges || log.changes)?.length > 0 && (
                         <div className="mt-2 space-y-1">
-                          {log.changes.map((c, j) => (
-                            <div key={j} className="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400">
-                              <ArrowUpRight size={12} className="text-indigo-400" />
-                              {c}
+                          <p className="text-[10px] font-bold text-indigo-500 uppercase">Vorgeschlagene Änderungen</p>
+                          {(log.proposedChanges || log.changes).map((c, j) => (
+                            <div key={j} className="flex items-start gap-2 text-xs text-gray-600 dark:text-gray-300">
+                              <ArrowUpRight size={12} className="text-indigo-400 mt-0.5 shrink-0" />
+                              <span>{c}</span>
                             </div>
                           ))}
                         </div>

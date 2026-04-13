@@ -1017,18 +1017,10 @@ app.get('/api/health', async (req, res) => {
   }
 })
 
-// ─── GOOGLE ADS CONFIG ──────────────────────────────
-const GOOGLE_ADS_DEVELOPER_TOKEN = process.env.GOOGLE_ADS_DEVELOPER_TOKEN
-const GOOGLE_ADS_CLIENT_ID = process.env.GOOGLE_ADS_CLIENT_ID
-const GOOGLE_ADS_CLIENT_SECRET = process.env.GOOGLE_ADS_CLIENT_SECRET
-const GOOGLE_ADS_REFRESH_TOKEN = process.env.GOOGLE_ADS_REFRESH_TOKEN
-const GOOGLE_ADS_CUSTOMER_ID = process.env.GOOGLE_ADS_CUSTOMER_ID?.replace(/-/g, '')
-const GOOGLE_ADS_CONFIGURED = !!(GOOGLE_ADS_DEVELOPER_TOKEN && GOOGLE_ADS_CLIENT_ID && GOOGLE_ADS_CLIENT_SECRET && GOOGLE_ADS_REFRESH_TOKEN && GOOGLE_ADS_CUSTOMER_ID)
-
 // ─── AUTO-CREATE FINANCIAL TRACKING TABLES ──────────
 ;(async () => {
   try {
-    // Google Ads agent logs
+    // Ads agent logs
     await pool.query(`
       CREATE TABLE IF NOT EXISTS schule_ads_agent_logs (
         id INT AUTO_INCREMENT PRIMARY KEY,
@@ -1062,81 +1054,94 @@ const GOOGLE_ADS_CONFIGURED = !!(GOOGLE_ADS_DEVELOPER_TOKEN && GOOGLE_ADS_CLIENT
         UNIQUE INDEX idx_month (month)
       )
     `)
+    // Uploaded Google Ads CSV reports
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS schule_ads_reports (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        uploadedAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+        reportDate VARCHAR(10),
+        campaignName VARCHAR(255),
+        adGroupName VARCHAR(255),
+        keyword VARCHAR(255),
+        matchType VARCHAR(50),
+        impressions INT DEFAULT 0,
+        clicks INT DEFAULT 0,
+        costMicros BIGINT DEFAULT 0,
+        conversions DECIMAL(10,2) DEFAULT 0,
+        conversionValue DECIMAL(10,2) DEFAULT 0,
+        ctr DECIMAL(8,4) DEFAULT 0,
+        avgCpc DECIMAL(10,2) DEFAULT 0,
+        rawRow JSON,
+        INDEX idx_date (reportDate),
+        INDEX idx_campaign (campaignName)
+      )
+    `)
     console.log('Financial tracking tables ready')
   } catch (err) {
     console.error('Financial tables error:', err.message)
   }
 })()
 
-// ─── GOOGLE ADS HELPER: Get Access Token ────────────
-async function getGoogleAdsAccessToken() {
-  const res = await fetch('https://oauth2.googleapis.com/token', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: new URLSearchParams({
-      client_id: GOOGLE_ADS_CLIENT_ID,
-      client_secret: GOOGLE_ADS_CLIENT_SECRET,
-      refresh_token: GOOGLE_ADS_REFRESH_TOKEN,
-      grant_type: 'refresh_token',
-    }),
-  })
-  if (!res.ok) throw new Error(`Google OAuth error: ${res.status}`)
-  const data = await res.json()
-  return data.access_token
-}
-
-// ─── GOOGLE ADS HELPER: Query API (GAQL) ────────────
-async function queryGoogleAds(gaql) {
-  if (!GOOGLE_ADS_CONFIGURED) return null
-  const accessToken = await getGoogleAdsAccessToken()
-  const res = await fetch(
-    `https://googleads.googleapis.com/v17/customers/${GOOGLE_ADS_CUSTOMER_ID}/googleAds:searchStream`,
-    {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-        'developer-token': GOOGLE_ADS_DEVELOPER_TOKEN,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ query: gaql }),
+// ─── CSV PARSER HELPER ──────────────────────────────
+function parseGoogleAdsCsv(csvText) {
+  const lines = csvText.trim().split(/\r?\n/)
+  if (lines.length < 2) return []
+  // Skip summary rows at top (Google Ads exports sometimes have them)
+  let headerIdx = 0
+  for (let i = 0; i < lines.length; i++) {
+    // Find the header row: typically contains "Campaign" or "Day" or "Date"
+    if (/campaign|Campaign|Kampagne|Date|Day|Tag|Datum/i.test(lines[i]) && lines[i].includes(',')) {
+      headerIdx = i
+      break
     }
-  )
-  if (!res.ok) {
-    const errText = await res.text()
-    throw new Error(`Google Ads API ${res.status}: ${errText}`)
   }
-  const data = await res.json()
-  // searchStream returns array of result batches
+  const headers = lines[headerIdx].split(',').map(h => h.trim().replace(/^"|"$/g, ''))
   const rows = []
-  if (Array.isArray(data)) {
-    for (const batch of data) {
-      if (batch.results) rows.push(...batch.results)
+  for (let i = headerIdx + 1; i < lines.length; i++) {
+    const line = lines[i].trim()
+    if (!line || line.startsWith('Total') || line.startsWith('Gesamt')) continue
+    // Simple CSV split (handles quoted values with commas)
+    const values = []
+    let current = '', inQuotes = false
+    for (const ch of line) {
+      if (ch === '"') { inQuotes = !inQuotes; continue }
+      if (ch === ',' && !inQuotes) { values.push(current.trim()); current = ''; continue }
+      current += ch
     }
+    values.push(current.trim())
+    if (values.length < headers.length) continue
+    const obj = {}
+    headers.forEach((h, idx) => { obj[h] = values[idx] || '' })
+    rows.push(obj)
   }
   return rows
 }
 
-// ─── GOOGLE ADS HELPER: Mutate Campaign ─────────────
-async function mutateGoogleAds(operations) {
-  if (!GOOGLE_ADS_CONFIGURED) return null
-  const accessToken = await getGoogleAdsAccessToken()
-  const res = await fetch(
-    `https://googleads.googleapis.com/v17/customers/${GOOGLE_ADS_CUSTOMER_ID}/googleAds:mutate`,
-    {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-        'developer-token': GOOGLE_ADS_DEVELOPER_TOKEN,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ mutateOperations: operations }),
+function normalizeAdsRow(row) {
+  // Map common Google Ads CSV column names (EN/DE) to our schema
+  const find = (keys) => {
+    for (const k of keys) {
+      const match = Object.keys(row).find(h => h.toLowerCase().replace(/[^a-z]/g, '') === k.toLowerCase().replace(/[^a-z]/g, ''))
+      if (match) return row[match]
     }
-  )
-  if (!res.ok) {
-    const errText = await res.text()
-    throw new Error(`Google Ads Mutate ${res.status}: ${errText}`)
+    return ''
   }
-  return await res.json()
+  const cost = find(['Cost', 'Kosten', 'cost']) || '0'
+  const costNum = parseFloat(cost.replace(/[^0-9.,\-]/g, '').replace(',', '.')) || 0
+  return {
+    reportDate: find(['Day', 'Date', 'Tag', 'Datum', 'day', 'date']) || '',
+    campaignName: find(['Campaign', 'Kampagne', 'campaignname', 'CampaignName']) || '',
+    adGroupName: find(['AdGroup', 'Adgroup', 'AdGroupName', 'Anzeigengruppe', 'adgroup']) || '',
+    keyword: find(['Keyword', 'SearchTerm', 'Suchbegriff', 'keyword']) || '',
+    matchType: find(['MatchType', 'Matchtype', 'Keyword match type', 'Übereinstimmungstyp']) || '',
+    impressions: parseInt(String(find(['Impressions', 'Impr', 'Impressionen', 'impressions'])).replace(/[^0-9]/g, '')) || 0,
+    clicks: parseInt(String(find(['Clicks', 'Klicks', 'clicks'])).replace(/[^0-9]/g, '')) || 0,
+    costMicros: Math.round(costNum * 1_000_000),
+    conversions: parseFloat(String(find(['Conversions', 'Conv', 'Konversionen', 'conversions'])).replace(/[^0-9.,]/g, '').replace(',', '.')) || 0,
+    conversionValue: parseFloat(String(find(['ConversionValue', 'Conv.value', 'Conversionvalue', 'Konversionswert'])).replace(/[^0-9.,]/g, '').replace(',', '.')) || 0,
+    ctr: parseFloat(String(find(['CTR', 'ctr'])).replace(/[^0-9.,]/g, '').replace(',', '.')) || 0,
+    avgCpc: parseFloat(String(find(['AvgCPC', 'Avg.CPC', 'CPC', 'avgcpc', 'DurchschnCPC'])).replace(/[^0-9.,]/g, '').replace(',', '.')) || 0,
+  }
 }
 
 // ─── AI PROXY ────────────────────────────────────────
@@ -1485,126 +1490,147 @@ app.get('/api/admin/finances', authMiddleware, adminMiddleware, async (req, res)
   }
 })
 
-// ─── ADMIN: GOOGLE ADS METRICS ──────────────────────
-app.get('/api/admin/google-ads/metrics', authMiddleware, adminMiddleware, async (req, res) => {
+// ─── ADMIN: UPLOAD ADS CSV REPORT ───────────────────
+app.post('/api/admin/ads-report/upload', authMiddleware, adminMiddleware, async (req, res) => {
   try {
-    if (!GOOGLE_ADS_CONFIGURED) {
-      return res.json({ connected: false, currentMonth: {}, dailyMetrics: [] })
+    const { csvData } = req.body
+    if (!csvData || typeof csvData !== 'string') {
+      return res.status(400).json({ error: 'csvData (string) wird benötigt.' })
+    }
+    const rawRows = parseGoogleAdsCsv(csvData)
+    if (rawRows.length === 0) {
+      return res.status(400).json({ error: 'Keine gültigen Zeilen in der CSV gefunden. Überprüfe das Format.' })
+    }
+    const normalized = rawRows.map(r => normalizeAdsRow(r))
+    let inserted = 0
+    for (const row of normalized) {
+      if (!row.reportDate && !row.campaignName) continue
+      await pool.query(
+        `INSERT INTO schule_ads_reports (reportDate, campaignName, adGroupName, keyword, matchType, impressions, clicks, costMicros, conversions, conversionValue, ctr, avgCpc, rawRow)
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+        [row.reportDate, row.campaignName, row.adGroupName, row.keyword, row.matchType,
+         row.impressions, row.clicks, row.costMicros, row.conversions, row.conversionValue,
+         row.ctr, row.avgCpc, JSON.stringify(rawRows[inserted] || {})]
+      )
+      inserted++
+    }
+
+    // Update financial snapshots with ad spend data
+    const monthsInReport = [...new Set(normalized.filter(r => r.reportDate).map(r => r.reportDate.slice(0, 7)))]
+    for (const month of monthsInReport) {
+      const monthRows = normalized.filter(r => r.reportDate?.startsWith(month))
+      const totalSpend = monthRows.reduce((s, r) => s + r.costMicros, 0) / 1_000_000
+      const totalConv = monthRows.reduce((s, r) => s + r.conversions, 0)
+      const totalImpr = monthRows.reduce((s, r) => s + r.impressions, 0)
+      const totalClicks = monthRows.reduce((s, r) => s + r.clicks, 0)
+      const cpa = totalConv > 0 ? totalSpend / totalConv : 0
+      const ctr = totalImpr > 0 ? (totalClicks / totalImpr) * 100 : 0
+      await pool.query(
+        `INSERT INTO schule_financial_snapshots (month, adSpend, conversions, impressions, clicks, cpa, ctr)
+         VALUES (?, ?, ?, ?, ?, ?, ?)
+         ON DUPLICATE KEY UPDATE adSpend=VALUES(adSpend), conversions=VALUES(conversions),
+           impressions=VALUES(impressions), clicks=VALUES(clicks), cpa=VALUES(cpa), ctr=VALUES(ctr), updatedAt=NOW()`,
+        [month, totalSpend.toFixed(2), Math.round(totalConv), totalImpr, totalClicks, cpa.toFixed(2), ctr.toFixed(3)]
+      )
+    }
+
+    res.json({ ok: true, rowsImported: inserted, months: monthsInReport })
+  } catch (err) {
+    console.error('CSV upload error:', err)
+    res.status(500).json({ error: 'Fehler beim Import: ' + err.message })
+  }
+})
+
+// ─── ADMIN: ADS METRICS (from uploaded CSV data) ────
+app.get('/api/admin/ads-metrics', authMiddleware, adminMiddleware, async (req, res) => {
+  try {
+    // Check if we have any uploaded data
+    const [countResult] = await pool.query('SELECT COUNT(*) as n FROM schule_ads_reports')
+    const hasData = countResult[0].n > 0
+
+    if (!hasData) {
+      return res.json({ hasData: false, currentMonth: {}, dailyMetrics: [], campaigns: [] })
     }
 
     // Current month metrics
     const today = new Date()
-    const firstOfMonth = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-01`
-    const todayStr = today.toISOString().slice(0, 10)
+    const currentMonth = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}`
 
-    const monthlyRows = await queryGoogleAds(`
-      SELECT
-        metrics.cost_micros,
-        metrics.impressions,
-        metrics.clicks,
-        metrics.conversions,
-        metrics.ctr,
-        metrics.average_cpc
-      FROM campaign
-      WHERE segments.date BETWEEN '${firstOfMonth}' AND '${todayStr}'
-    `)
-
-    let spend = 0, impressions = 0, clicks = 0, conversions = 0
-    if (monthlyRows) {
-      for (const row of monthlyRows) {
-        const m = row.metrics || {}
-        spend += (parseInt(m.costMicros) || 0) / 1_000_000
-        impressions += parseInt(m.impressions) || 0
-        clicks += parseInt(m.clicks) || 0
-        conversions += parseFloat(m.conversions) || 0
-      }
-    }
-
+    const [monthlyAgg] = await pool.query(
+      `SELECT SUM(costMicros) as totalCost, SUM(impressions) as totalImpr, SUM(clicks) as totalClicks,
+              SUM(conversions) as totalConv
+       FROM schule_ads_reports WHERE reportDate LIKE ?`, [`${currentMonth}%`]
+    )
+    const m = monthlyAgg[0] || {}
+    const spend = (parseInt(m.totalCost) || 0) / 1_000_000
+    const impressions = parseInt(m.totalImpr) || 0
+    const clicks = parseInt(m.totalClicks) || 0
+    const conversions = parseFloat(m.totalConv) || 0
     const cpa = conversions > 0 ? spend / conversions : 0
     const ctr = impressions > 0 ? (clicks / impressions) * 100 : 0
 
     // Previous month for comparison
-    const prevMonth = new Date(today.getFullYear(), today.getMonth() - 1, 1)
-    const prevFirst = `${prevMonth.getFullYear()}-${String(prevMonth.getMonth() + 1).padStart(2, '0')}-01`
-    const prevLast = new Date(today.getFullYear(), today.getMonth(), 0).toISOString().slice(0, 10)
-
-    let prevSpend = 0
-    try {
-      const prevRows = await queryGoogleAds(`
-        SELECT metrics.cost_micros FROM campaign
-        WHERE segments.date BETWEEN '${prevFirst}' AND '${prevLast}'
-      `)
-      if (prevRows) {
-        for (const row of prevRows) {
-          prevSpend += (parseInt(row.metrics?.costMicros) || 0) / 1_000_000
-        }
-      }
-    } catch {}
-
+    const prevDate = new Date(today.getFullYear(), today.getMonth() - 1, 1)
+    const prevMonth = `${prevDate.getFullYear()}-${String(prevDate.getMonth() + 1).padStart(2, '0')}`
+    const [prevAgg] = await pool.query(
+      `SELECT SUM(costMicros) as totalCost FROM schule_ads_reports WHERE reportDate LIKE ?`, [`${prevMonth}%`]
+    )
+    const prevSpend = (parseInt(prevAgg[0]?.totalCost) || 0) / 1_000_000
     const changeVsPrev = prevSpend > 0 ? ((spend - prevSpend) / prevSpend) * 100 : 0
 
     // Daily metrics (last 30 days)
     const thirtyDaysAgo = new Date(today.getTime() - 30 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10)
-    let dailyMetrics = []
-    try {
-      const dailyRows = await queryGoogleAds(`
-        SELECT
-          segments.date,
-          metrics.cost_micros,
-          metrics.impressions,
-          metrics.clicks,
-          metrics.conversions
-        FROM campaign
-        WHERE segments.date BETWEEN '${thirtyDaysAgo}' AND '${todayStr}'
-        ORDER BY segments.date
-      `)
-      if (dailyRows) {
-        const byDay = {}
-        for (const row of dailyRows) {
-          const d = row.segments?.date
-          if (!d) continue
-          if (!byDay[d]) byDay[d] = { date: d, spend: 0, impressions: 0, clicks: 0, conversions: 0 }
-          byDay[d].spend += (parseInt(row.metrics?.costMicros) || 0) / 1_000_000
-          byDay[d].impressions += parseInt(row.metrics?.impressions) || 0
-          byDay[d].clicks += parseInt(row.metrics?.clicks) || 0
-          byDay[d].conversions += parseFloat(row.metrics?.conversions) || 0
-        }
-        dailyMetrics = Object.values(byDay).map(d => ({
-          ...d,
-          spend: parseFloat(d.spend.toFixed(2)),
-        }))
-      }
-    } catch {}
-
-    // Save snapshot
-    const currentMonth = today.toISOString().slice(0, 7)
-    await pool.query(
-      `UPDATE schule_financial_snapshots SET adSpend = ?, conversions = ?, impressions = ?, clicks = ?, cpa = ?, ctr = ?, updatedAt = NOW()
-       WHERE month = ?`,
-      [spend.toFixed(2), Math.round(conversions), impressions, clicks, cpa.toFixed(2), ctr.toFixed(3), currentMonth]
+    const [dailyRows] = await pool.query(
+      `SELECT reportDate as date, SUM(costMicros) as cost, SUM(impressions) as impr, SUM(clicks) as cl, SUM(conversions) as conv
+       FROM schule_ads_reports WHERE reportDate >= ? GROUP BY reportDate ORDER BY reportDate`, [thirtyDaysAgo]
     )
+    const dailyMetrics = dailyRows.map(d => ({
+      date: d.date,
+      spend: parseFloat(((parseInt(d.cost) || 0) / 1_000_000).toFixed(2)),
+      impressions: parseInt(d.impr) || 0,
+      clicks: parseInt(d.cl) || 0,
+      conversions: parseFloat(d.conv) || 0,
+    }))
+
+    // Campaign breakdown
+    const [campaignRows] = await pool.query(
+      `SELECT campaignName, SUM(costMicros) as cost, SUM(impressions) as impr, SUM(clicks) as cl, SUM(conversions) as conv
+       FROM schule_ads_reports WHERE reportDate LIKE ? GROUP BY campaignName ORDER BY cost DESC`, [`${currentMonth}%`]
+    )
+    const campaigns = campaignRows.map(c => ({
+      name: c.campaignName,
+      spend: parseFloat(((parseInt(c.cost) || 0) / 1_000_000).toFixed(2)),
+      impressions: parseInt(c.impr) || 0,
+      clicks: parseInt(c.cl) || 0,
+      conversions: parseFloat(c.conv) || 0,
+      cpa: parseFloat(c.conv) > 0 ? parseFloat(((parseInt(c.cost) / 1_000_000) / parseFloat(c.conv)).toFixed(2)) : 0,
+    }))
+
+    // Last upload date
+    const [lastUpload] = await pool.query('SELECT MAX(uploadedAt) as lastDate FROM schule_ads_reports')
 
     res.json({
-      connected: true,
+      hasData: true,
+      lastUpload: lastUpload[0]?.lastDate || null,
       currentMonth: {
         spend: parseFloat(spend.toFixed(2)),
-        impressions,
-        clicks,
+        impressions, clicks,
         conversions: Math.round(conversions),
         cpa: parseFloat(cpa.toFixed(2)),
         ctr: parseFloat(ctr.toFixed(2)),
         changeVsPrev: parseFloat(changeVsPrev.toFixed(1)),
       },
       dailyMetrics,
+      campaigns,
     })
   } catch (err) {
-    console.error('Google Ads metrics error:', err.message)
-    res.json({ connected: false, error: err.message, currentMonth: {}, dailyMetrics: [] })
+    console.error('Ads metrics error:', err.message)
+    res.json({ hasData: false, error: err.message, currentMonth: {}, dailyMetrics: [], campaigns: [] })
   }
 })
 
-// ─── ADMIN: GOOGLE ADS AGENT LOGS ───────────────────
-app.get('/api/admin/google-ads/agent-logs', authMiddleware, adminMiddleware, async (req, res) => {
+// ─── ADMIN: ADS AGENT LOGS ──────────────────────────
+app.get('/api/admin/ads-agent/logs', authMiddleware, adminMiddleware, async (req, res) => {
   try {
     const [logs] = await pool.query(
       'SELECT * FROM schule_ads_agent_logs ORDER BY timestamp DESC LIMIT 30'
@@ -1621,97 +1647,71 @@ app.get('/api/admin/google-ads/agent-logs', authMiddleware, adminMiddleware, asy
   }
 })
 
-// ─── ADMIN: RUN AI AD AGENT ─────────────────────────
-app.post('/api/admin/google-ads/agent-run', authMiddleware, adminMiddleware, async (req, res) => {
+// ─── ADMIN: RUN AI AD AGENT (CSV-based, propose only) ─
+app.post('/api/admin/ads-agent/run', authMiddleware, adminMiddleware, async (req, res) => {
   try {
     if (!OPENAI_API_KEY) return res.status(503).json({ error: 'OpenAI nicht konfiguriert.' })
 
-    // 1. Gather current metrics
-    let metrics = {}
-    if (GOOGLE_ADS_CONFIGURED) {
-      try {
-        const today = new Date()
-        const todayStr = today.toISOString().slice(0, 10)
-        const firstOfMonth = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-01`
-        const sevenDaysAgo = new Date(today.getTime() - 7 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10)
+    // 1. Gather metrics from uploaded CSV data
+    const today = new Date()
+    const todayStr = today.toISOString().slice(0, 10)
+    const currentMonth = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}`
+    const sevenDaysAgo = new Date(today.getTime() - 7 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10)
 
-        // Monthly totals
-        const monthRows = await queryGoogleAds(`
-          SELECT metrics.cost_micros, metrics.impressions, metrics.clicks, metrics.conversions, metrics.ctr, metrics.average_cpc
-          FROM campaign WHERE segments.date BETWEEN '${firstOfMonth}' AND '${todayStr}'
-        `)
-        let mSpend = 0, mImpr = 0, mClicks = 0, mConv = 0
-        if (monthRows) for (const r of monthRows) {
-          mSpend += (parseInt(r.metrics?.costMicros) || 0) / 1_000_000
-          mImpr += parseInt(r.metrics?.impressions) || 0
-          mClicks += parseInt(r.metrics?.clicks) || 0
-          mConv += parseFloat(r.metrics?.conversions) || 0
-        }
+    // Monthly totals from uploaded data
+    const [monthAgg] = await pool.query(
+      `SELECT SUM(costMicros) as cost, SUM(impressions) as impr, SUM(clicks) as cl, SUM(conversions) as conv
+       FROM schule_ads_reports WHERE reportDate LIKE ?`, [`${currentMonth}%`]
+    )
+    const mSpend = (parseInt(monthAgg[0]?.cost) || 0) / 1_000_000
+    const mImpr = parseInt(monthAgg[0]?.impr) || 0
+    const mClicks = parseInt(monthAgg[0]?.cl) || 0
+    const mConv = parseFloat(monthAgg[0]?.conv) || 0
 
-        // Last 7 days by campaign
-        const campaignRows = await queryGoogleAds(`
-          SELECT campaign.id, campaign.name, campaign.status,
-            campaign_budget.amount_micros,
-            metrics.cost_micros, metrics.impressions, metrics.clicks, metrics.conversions,
-            metrics.ctr, metrics.average_cpc
-          FROM campaign
-          WHERE segments.date BETWEEN '${sevenDaysAgo}' AND '${todayStr}'
-        `)
-        const campaigns = {}
-        if (campaignRows) for (const r of campaignRows) {
-          const id = r.campaign?.id
-          if (!id) continue
-          if (!campaigns[id]) campaigns[id] = {
-            id, name: r.campaign.name, status: r.campaign.status,
-            budgetMicros: parseInt(r.campaignBudget?.amountMicros) || 0,
-            spend: 0, impressions: 0, clicks: 0, conversions: 0,
-          }
-          campaigns[id].spend += (parseInt(r.metrics?.costMicros) || 0) / 1_000_000
-          campaigns[id].impressions += parseInt(r.metrics?.impressions) || 0
-          campaigns[id].clicks += parseInt(r.metrics?.clicks) || 0
-          campaigns[id].conversions += parseFloat(r.metrics?.conversions) || 0
-        }
+    // Campaign breakdown (last 7 days)
+    const [campaignRows] = await pool.query(
+      `SELECT campaignName, SUM(costMicros) as cost, SUM(impressions) as impr, SUM(clicks) as cl, SUM(conversions) as conv
+       FROM schule_ads_reports WHERE reportDate >= ? GROUP BY campaignName ORDER BY cost DESC`, [sevenDaysAgo]
+    )
 
-        // Keyword performance
-        let keywords = []
-        try {
-          const kwRows = await queryGoogleAds(`
-            SELECT ad_group_criterion.keyword.text, ad_group_criterion.keyword.match_type,
-              metrics.cost_micros, metrics.impressions, metrics.clicks, metrics.conversions, metrics.ctr
-            FROM keyword_view
-            WHERE segments.date BETWEEN '${sevenDaysAgo}' AND '${todayStr}'
-            ORDER BY metrics.cost_micros DESC
-            LIMIT 30
-          `)
-          if (kwRows) keywords = kwRows.map(r => ({
-            keyword: r.adGroupCriterion?.keyword?.text,
-            matchType: r.adGroupCriterion?.keyword?.matchType,
-            spend: ((parseInt(r.metrics?.costMicros) || 0) / 1_000_000).toFixed(2),
-            clicks: parseInt(r.metrics?.clicks) || 0,
-            conversions: parseFloat(r.metrics?.conversions) || 0,
-            ctr: parseFloat(r.metrics?.ctr) || 0,
-          }))
-        } catch {}
+    // Top keywords (last 7 days)
+    const [kwRows] = await pool.query(
+      `SELECT keyword, matchType, SUM(costMicros) as cost, SUM(impressions) as impr, SUM(clicks) as cl, SUM(conversions) as conv
+       FROM schule_ads_reports WHERE reportDate >= ? AND keyword != '' GROUP BY keyword, matchType ORDER BY cost DESC LIMIT 30`, [sevenDaysAgo]
+    )
 
-        metrics = {
-          monthlySpend: mSpend.toFixed(2),
-          monthlyImpressions: mImpr,
-          monthlyClicks: mClicks,
-          monthlyConversions: Math.round(mConv),
-          monthlyCPA: mConv > 0 ? (mSpend / mConv).toFixed(2) : 'N/A',
-          monthlyCTR: mImpr > 0 ? ((mClicks / mImpr) * 100).toFixed(2) + '%' : '0%',
-          campaigns: Object.values(campaigns).map(c => ({
-            ...c,
-            budget: (c.budgetMicros / 1_000_000).toFixed(2),
-            spend: c.spend.toFixed(2),
-            cpa: c.conversions > 0 ? (c.spend / c.conversions).toFixed(2) : 'N/A',
-          })),
-          topKeywords: keywords,
-        }
-      } catch (adsErr) {
-        console.error('Agent ads fetch error:', adsErr.message)
-        metrics.error = adsErr.message
-      }
+    // Previous month for comparison
+    const prevDate = new Date(today.getFullYear(), today.getMonth() - 1, 1)
+    const prevMonth = `${prevDate.getFullYear()}-${String(prevDate.getMonth() + 1).padStart(2, '0')}`
+    const [prevAgg] = await pool.query(
+      `SELECT SUM(costMicros) as cost, SUM(conversions) as conv FROM schule_ads_reports WHERE reportDate LIKE ?`, [`${prevMonth}%`]
+    )
+    const prevSpend = (parseInt(prevAgg[0]?.cost) || 0) / 1_000_000
+    const prevConv = parseFloat(prevAgg[0]?.conv) || 0
+
+    const metrics = {
+      monthlySpend: mSpend.toFixed(2),
+      monthlyImpressions: mImpr,
+      monthlyClicks: mClicks,
+      monthlyConversions: Math.round(mConv),
+      monthlyCPA: mConv > 0 ? (mSpend / mConv).toFixed(2) : 'N/A',
+      monthlyCTR: mImpr > 0 ? ((mClicks / mImpr) * 100).toFixed(2) + '%' : '0%',
+      previousMonth: { spend: prevSpend.toFixed(2), conversions: Math.round(prevConv) },
+      campaigns: campaignRows.map(c => ({
+        name: c.campaignName,
+        spend: ((parseInt(c.cost) || 0) / 1_000_000).toFixed(2),
+        impressions: parseInt(c.impr) || 0,
+        clicks: parseInt(c.cl) || 0,
+        conversions: parseFloat(c.conv) || 0,
+        cpa: parseFloat(c.conv) > 0 ? ((parseInt(c.cost) / 1_000_000) / parseFloat(c.conv)).toFixed(2) : 'N/A',
+      })),
+      topKeywords: kwRows.map(k => ({
+        keyword: k.keyword,
+        matchType: k.matchType,
+        spend: ((parseInt(k.cost) || 0) / 1_000_000).toFixed(2),
+        clicks: parseInt(k.cl) || 0,
+        conversions: parseFloat(k.conv) || 0,
+      })),
     }
 
     // Platform stats
@@ -1721,30 +1721,30 @@ app.post('/api/admin/google-ads/agent-run', authMiddleware, adminMiddleware, asy
     metrics.trialUsers = trialSubs[0].n
     metrics.pricePerMonth = 15
 
-    // 2. AI Analysis
-    const systemPrompt = `Du bist ein Google Ads Optimierungs-Agent für "Schule – Aprender Alemán", eine Online-Plattform zum Deutschlernen.
+    // 2. AI Analysis — propose only, no auto-apply
+    const systemPrompt = `Du bist ein Google Ads Optimierungs-Agent für "Schule – Aprender Alemán", eine Online-Plattform zum Deutschlernen (Zielgruppe: Spanischsprachige).
 Preis: €15/Monat. Ziel: 200 zahlende Nutzer/Monat bei minimalem CPA.
 
 Deine Aufgabe:
-1. Analysiere die aktuellen Google Ads Metriken
+1. Analysiere die hochgeladenen Google Ads Metriken (CSV-Daten)
 2. Identifiziere Probleme und Chancen
-3. Gib konkrete Optimierungsvorschläge
-4. Wenn die Daten es erlauben, schlage spezifische Budgetänderungen vor (max. ±20% pro Kampagne)
+3. SCHLAGE konkrete Änderungen VOR — du kannst KEINE Änderungen direkt durchführen
+4. Gib strategische Empfehlungen mit konkreten Zahlen
 
 Antworte NUR mit gültigem JSON:
 {
   "summary": "Kurze Zusammenfassung der Analyse (2-3 Sätze auf Deutsch)",
-  "changes": ["Liste konkreter Änderungen die durchgeführt werden sollten"],
+  "proposedChanges": ["Liste konkreter vorgeschlagener Änderungen, die der Admin manuell umsetzen soll"],
   "recommendations": ["Strategische Empfehlungen für die nächste Woche"],
-  "budgetAdjustments": [{"campaignId": "123", "campaignName": "...", "currentBudget": 10, "newBudget": 12, "reason": "..."}],
-  "keywordActions": [{"action": "pause|increase_bid|decrease_bid", "keyword": "...", "reason": "..."}]
+  "budgetSuggestions": [{"campaignName": "...", "currentSpend": 10, "suggestedBudget": 12, "reason": "..."}],
+  "keywordSuggestions": [{"action": "pausieren|Gebot erhöhen|Gebot senken|hinzufügen", "keyword": "...", "reason": "..."}]
 }`
 
-    const userMessage = `Hier sind die aktuellen Metriken:\n\n${JSON.stringify(metrics, null, 2)}\n\nAnalysiere die Performance und gib Optimierungsvorschläge.`
+    const userMessage = `Hier sind die aktuellen Metriken aus dem hochgeladenen CSV-Bericht:\n\n${JSON.stringify(metrics, null, 2)}\n\nAnalysiere die Performance und schlage Optimierungen vor. Du kannst KEINE Änderungen direkt durchführen — schlage sie nur vor.`
 
-    const aiReply = await callOpenAIChat(systemPrompt, [{ role: 'user', content: userMessage }], 1500)
+    const aiReply = await callOpenAIChat(systemPrompt, [{ role: 'user', content: userMessage }], 2000)
     const jsonMatch = aiReply.match(/\{[\s\S]*\}/)
-    let agentResult = { summary: aiReply, changes: [], recommendations: [] }
+    let agentResult = { summary: aiReply, proposedChanges: [], recommendations: [] }
 
     if (jsonMatch) {
       try {
@@ -1752,49 +1752,11 @@ Antworte NUR mit gültigem JSON:
       } catch {}
     }
 
-    // 3. Auto-apply safe budget adjustments if Google Ads connected
-    const appliedChanges = [...(agentResult.changes || [])]
-    if (GOOGLE_ADS_CONFIGURED && agentResult.budgetAdjustments?.length > 0) {
-      for (const adj of agentResult.budgetAdjustments) {
-        // Safety: max ±20% change, min budget €1/day, max €100/day
-        const newBudget = Math.max(1, Math.min(100, adj.newBudget))
-        const changePercent = adj.currentBudget > 0 ? Math.abs((newBudget - adj.currentBudget) / adj.currentBudget) : 0
-        if (changePercent > 0.20) {
-          appliedChanges.push(`⚠️ Budget-Änderung für "${adj.campaignName}" übersprungen (>20% Änderung)`)
-          continue
-        }
-        try {
-          // Find the campaign budget resource name
-          const budgetRows = await queryGoogleAds(`
-            SELECT campaign.id, campaign_budget.resource_name
-            FROM campaign WHERE campaign.id = '${adj.campaignId}' LIMIT 1
-          `)
-          if (budgetRows?.length > 0) {
-            const budgetResource = budgetRows[0].campaignBudget?.resourceName
-            if (budgetResource) {
-              await mutateGoogleAds([{
-                campaignBudgetOperation: {
-                  update: {
-                    resourceName: budgetResource,
-                    amountMicros: String(Math.round(newBudget * 1_000_000)),
-                  },
-                  updateMask: 'amount_micros',
-                },
-              }])
-              appliedChanges.push(`✅ Budget für "${adj.campaignName}": €${adj.currentBudget} → €${newBudget} (${adj.reason})`)
-            }
-          }
-        } catch (mutErr) {
-          appliedChanges.push(`❌ Budget-Änderung für "${adj.campaignName}" fehlgeschlagen: ${mutErr.message}`)
-        }
-      }
-    }
-
-    // 4. Save log
+    // 3. Save log (no auto-apply, only proposals)
     const logEntry = {
       status: 'success',
       summary: agentResult.summary || 'Analyse abgeschlossen',
-      changes: JSON.stringify(appliedChanges),
+      changes: JSON.stringify(agentResult.proposedChanges || agentResult.changes || []),
       recommendations: JSON.stringify(agentResult.recommendations || []),
       metrics: JSON.stringify(metrics),
     }
@@ -1808,12 +1770,13 @@ Antworte NUR mit gültigem JSON:
       timestamp: new Date().toISOString(),
       status: 'success',
       summary: agentResult.summary,
-      changes: appliedChanges,
+      proposedChanges: agentResult.proposedChanges || agentResult.changes || [],
       recommendations: agentResult.recommendations || [],
+      budgetSuggestions: agentResult.budgetSuggestions || [],
+      keywordSuggestions: agentResult.keywordSuggestions || [],
     })
   } catch (err) {
     console.error('Agent run error:', err)
-    // Log the error
     try {
       await pool.query(
         'INSERT INTO schule_ads_agent_logs (status, summary) VALUES (?, ?)',
