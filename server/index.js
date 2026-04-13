@@ -1532,21 +1532,10 @@ passed = true wenn total >= 60.`
   }
 })
 
-// ─── CHATBOT ─────────────────────────────────────────
-app.post('/api/chat', authMiddleware, aiRateLimit, async (req, res) => {
-  try {
-    if (!ANTHROPIC_API_KEY) return res.status(503).json({ error: 'Servicio de IA no disponible.' })
-
-    const { message, mode, history } = req.body
-    if (!message) return res.status(400).json({ error: 'Mensaje vacío.' })
-
-    const userName = req.user.fullName || req.user.name || 'Estudiante'
-    const userLevel = req.user.level || 'A1'
-
-    // Build system prompt based on mode
-    let systemPrompt
-    if (mode === 'support') {
-      systemPrompt = `Eres el asistente de soporte de "Schule – Aprender Alemán", una plataforma de aprendizaje de alemán para hispanohablantes.
+// ─── CHATBOT (OpenAI GPT-4o-mini) ───────────────────
+function getChatSystemPrompt(mode, userName, userLevel) {
+  if (mode === 'support') {
+    return `Eres el asistente de soporte de "Schule – Aprender Alemán", una plataforma de aprendizaje de alemán para hispanohablantes.
 
 RESPONDE SIEMPRE EN ESPAÑOL. Sé conciso, amable y útil.
 
@@ -1570,9 +1559,8 @@ REGLAS:
 - No inventes funcionalidades que no existen
 - Sé breve: máximo 3-4 oraciones por respuesta
 - Si preguntan sobre alemán (gramática, vocabulario), sugiere cambiar al modo "Deutsch-Tutor"`
-    } else {
-      // Tutor mode
-      systemPrompt = `Du bist ein freundlicher und geduldiger Deutschlehrer für spanischsprachige Schüler. Du arbeitest auf der Plattform "Schule – Aprender Alemán".
+  }
+  return `Du bist ein freundlicher und geduldiger Deutschlehrer für spanischsprachige Schüler. Du arbeitest auf der Plattform "Schule – Aprender Alemán".
 
 Der Schüler heißt ${userName} und hat das Niveau ${userLevel}.
 
@@ -1586,23 +1574,60 @@ REGELN:
 - Halte Antworten kompakt: maximal 6-8 Sätze, außer bei Tabellen oder Erklärungen
 - Sei ermutigend und motivierend
 - Wenn der Schüler technische Fragen zur App stellt, empfehle den Modus "Soporte"`
-    }
+}
 
-    // Build conversation history for Claude
-    const claudeMessages = []
+async function callOpenAIChat(systemPrompt, messages, maxTokens = 512) {
+  if (!OPENAI_API_KEY) throw new Error('OPENAI_API_KEY not configured')
+
+  const response = await fetch('https://api.openai.com/v1/chat/completions', {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${OPENAI_API_KEY}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      model: 'gpt-4o-mini',
+      max_tokens: maxTokens,
+      messages: [
+        { role: 'system', content: systemPrompt },
+        ...messages,
+      ],
+    }),
+  })
+
+  if (!response.ok) {
+    const err = await response.text()
+    throw new Error(`OpenAI API error ${response.status}: ${err}`)
+  }
+
+  const data = await response.json()
+  return data.choices[0].message.content
+}
+
+app.post('/api/chat', authMiddleware, aiRateLimit, async (req, res) => {
+  try {
+    if (!OPENAI_API_KEY) return res.status(503).json({ error: 'Servicio de IA no disponible.' })
+
+    const { message, mode, history } = req.body
+    if (!message) return res.status(400).json({ error: 'Mensaje vacío.' })
+
+    const userName = req.user.fullName || req.user.name || 'Estudiante'
+    const userLevel = req.user.level || 'A1'
+    const systemPrompt = getChatSystemPrompt(mode, userName, userLevel)
+
+    const chatMessages = []
     if (Array.isArray(history)) {
       for (const msg of history.slice(-18)) {
         if (msg.role === 'user' || msg.role === 'assistant') {
-          claudeMessages.push({ role: msg.role, content: msg.content })
+          chatMessages.push({ role: msg.role, content: msg.content })
         }
       }
     }
-    // Ensure last message is the current one
-    if (claudeMessages.length === 0 || claudeMessages[claudeMessages.length - 1].content !== message) {
-      claudeMessages.push({ role: 'user', content: message })
+    if (chatMessages.length === 0 || chatMessages[chatMessages.length - 1].content !== message) {
+      chatMessages.push({ role: 'user', content: message })
     }
 
-    const reply = await callAnthropicRaw('claude-3-5-haiku-20241022', systemPrompt, claudeMessages, 512)
+    const reply = await callOpenAIChat(systemPrompt, chatMessages, 512)
     res.json({ reply })
   } catch (err) {
     console.error('Chat error:', err)
@@ -1645,10 +1670,10 @@ app.post(
   }
 )
 
-// ─── CHATBOT: VOICE (Transcribe → Claude → TTS) ────
+// ─── CHATBOT: VOICE (Transcribe → GPT → TTS) ───────
 app.post('/api/chat/voice', authMiddleware, aiRateLimit, async (req, res) => {
   try {
-    if (!ANTHROPIC_API_KEY || !OPENAI_API_KEY) return res.status(503).json({ error: 'Servicio no disponible.' })
+    if (!OPENAI_API_KEY) return res.status(503).json({ error: 'Servicio no disponible.' })
 
     const { message, mode, history, voice } = req.body
     if (!message) return res.status(400).json({ error: 'Mensaje vacío.' })
@@ -1656,25 +1681,23 @@ app.post('/api/chat/voice', authMiddleware, aiRateLimit, async (req, res) => {
     const userName = req.user.fullName || req.user.name || 'Estudiante'
     const userLevel = req.user.level || 'A1'
 
-    // Build system prompt (same as /api/chat)
     const systemPrompt = mode === 'support'
       ? `Eres el asistente de soporte de "Schule – Aprender Alemán". RESPONDE SIEMPRE EN ESPAÑOL. Sé conciso (2-3 oraciones máximo). El usuario es ${userName}, nivel ${userLevel}. Responde sobre: ejercicios, suscripción (15€/mes, 5 días gratis), exámenes Goethe A1-C2, flashcards, progreso. Para problemas graves: info@aprender-aleman.de`
       : `Du bist ein freundlicher Deutschlehrer. Der Schüler heißt ${userName}, Niveau ${userLevel}. WICHTIG: Antworte KURZ (2-3 Sätze) — das ist ein Sprachgespräch, kein Aufsatz. Passe die Sprache dem Niveau an. Für A1/A2: einfaches Deutsch + spanische Übersetzungen. Für B1+: mehr Deutsch. Korrigiere Fehler freundlich. Sei natürlich und gesprächig.`
 
-    // Get Claude response
-    const claudeMessages = []
+    const chatMessages = []
     if (Array.isArray(history)) {
       for (const msg of history.slice(-14)) {
         if (msg.role === 'user' || msg.role === 'assistant') {
-          claudeMessages.push({ role: msg.role, content: msg.content })
+          chatMessages.push({ role: msg.role, content: msg.content })
         }
       }
     }
-    if (!claudeMessages.length || claudeMessages[claudeMessages.length - 1].content !== message) {
-      claudeMessages.push({ role: 'user', content: message })
+    if (!chatMessages.length || chatMessages[chatMessages.length - 1].content !== message) {
+      chatMessages.push({ role: 'user', content: message })
     }
 
-    const reply = await callAnthropicRaw('claude-3-5-haiku-20241022', systemPrompt, claudeMessages, 256)
+    const reply = await callOpenAIChat(systemPrompt, chatMessages, 256)
 
     // Generate TTS with OpenAI
     const ttsVoice = voice || 'onyx'
