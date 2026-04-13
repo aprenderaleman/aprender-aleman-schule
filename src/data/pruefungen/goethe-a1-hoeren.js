@@ -33,7 +33,7 @@ export const goetheA1HoerenExams = [
             id: 'h1-1',
             type: 'multiple-choice',
             audio: {
-              audioUrl: null,
+              audioUrl: '/audio/pruefungen/goethe-a1-hoeren-modellsatz-1/h1-1.mp3',
               allowedPlays: 2,
               label: 'Aufgabe 1',
               transcript:
@@ -52,7 +52,7 @@ export const goetheA1HoerenExams = [
             id: 'h1-2',
             type: 'multiple-choice',
             audio: {
-              audioUrl: null,
+              audioUrl: '/audio/pruefungen/goethe-a1-hoeren-modellsatz-1/h1-2.mp3',
               allowedPlays: 2,
               label: 'Aufgabe 2',
               transcript:
@@ -71,7 +71,7 @@ export const goetheA1HoerenExams = [
             id: 'h1-3',
             type: 'multiple-choice',
             audio: {
-              audioUrl: null,
+              audioUrl: '/audio/pruefungen/goethe-a1-hoeren-modellsatz-1/h1-3.mp3',
               allowedPlays: 2,
               label: 'Aufgabe 3',
               transcript:
@@ -90,7 +90,7 @@ export const goetheA1HoerenExams = [
             id: 'h1-4',
             type: 'multiple-choice',
             audio: {
-              audioUrl: null,
+              audioUrl: '/audio/pruefungen/goethe-a1-hoeren-modellsatz-1/h1-4.mp3',
               allowedPlays: 2,
               label: 'Aufgabe 4',
               transcript:
@@ -109,7 +109,7 @@ export const goetheA1HoerenExams = [
             id: 'h1-5',
             type: 'multiple-choice',
             audio: {
-              audioUrl: null,
+              audioUrl: '/audio/pruefungen/goethe-a1-hoeren-modellsatz-1/h1-5.mp3',
               allowedPlays: 2,
               label: 'Aufgabe 5',
               transcript:
@@ -128,7 +128,7 @@ export const goetheA1HoerenExams = [
             id: 'h1-6',
             type: 'multiple-choice',
             audio: {
-              audioUrl: null,
+              audioUrl: '/audio/pruefungen/goethe-a1-hoeren-modellsatz-1/h1-6.mp3',
               allowedPlays: 2,
               label: 'Aufgabe 6',
               transcript:
@@ -157,7 +157,7 @@ export const goetheA1HoerenExams = [
             id: 'h2-1',
             type: 'true-false',
             audio: {
-              audioUrl: null,
+              audioUrl: '/audio/pruefungen/goethe-a1-hoeren-modellsatz-1/h2-1.mp3',
               allowedPlays: 1,
               label: 'Aufgabe 7 — Durchsage im Kaufhaus',
               transcript:
@@ -171,7 +171,7 @@ export const goetheA1HoerenExams = [
             id: 'h2-2',
             type: 'true-false',
             audio: {
-              audioUrl: null,
+              audioUrl: '/audio/pruefungen/goethe-a1-hoeren-modellsatz-1/h2-2.mp3',
               allowedPlays: 1,
               label: 'Aufgabe 8 — Durchsage am Bahnhof',
               transcript:
@@ -185,7 +185,7 @@ export const goetheA1HoerenExams = [
             id: 'h2-3',
             type: 'true-false',
             audio: {
-              audioUrl: null,
+              audioUrl: '/audio/pruefungen/goethe-a1-hoeren-modellsatz-1/h2-3.mp3',
               allowedPlays: 1,
               label: 'Aufgabe 9 — Durchsage im Schwimmbad',
               transcript:
@@ -199,7 +199,7 @@ export const goetheA1HoerenExams = [
             id: 'h2-4',
             type: 'true-false',
             audio: {
-              audioUrl: null,
+              audioUrl: '/audio/pruefungen/goethe-a1-hoeren-modellsatz-1/h2-4.mp3',
               allowedPlays: 1,
               label: 'Aufgabe 10 — Durchsage im Bus',
               transcript:
@@ -223,7 +223,7 @@ export const goetheA1HoerenExams = [
             id: 'h3-1',
             type: 'multiple-choice',
             audio: {
-              audioUrl: null,
+              audioUrl: '/audio/pruefungen/goethe-a1-hoeren-modellsatz-1/h3-1.mp3',
               allowedPlays: 2,
               label: 'Aufgabe 11',
               transcript:
@@ -242,7 +242,7 @@ export const goetheA1HoerenExams = [
             id: 'h3-2',
             type: 'multiple-choice',
             audio: {
-              audioUrl: null,
+              audioUrl: '/audio/pruefungen/goethe-a1-hoeren-modellsatz-1/h3-2.mp3',
               allowedPlays: 2,
               label: 'Aufgabe 12',
               transcript:
@@ -261,7 +261,7 @@ export const goetheA1HoerenExams = [
             id: 'h3-3',
             type: 'multiple-choice',
             audio: {
-              audioUrl: null,
+              audioUrl: '/audio/pruefungen/goethe-a1-hoeren-modellsatz-1/h3-3.mp3',
               allowedPlays: 2,
               label: 'Aufgabe 13',
               transcript:
@@ -280,7 +280,7 @@ export const goetheA1HoerenExams = [
             id: 'h3-4',
             type: 'multiple-choice',
             audio: {
-              audioUrl: null,
+              audioUrl: '/audio/pruefungen/goethe-a1-hoeren-modellsatz-1/h3-4.mp3',
               allowedPlays: 2,
               label: 'Aufgabe 14',
               transcript:
@@ -299,7 +299,7 @@ export const goetheA1HoerenExams = [
             id: 'h3-5',
             type: 'multiple-choice',
             audio: {
-              audioUrl: null,
+              audioUrl: '/audio/pruefungen/goethe-a1-hoeren-modellsatz-1/h3-5.mp3',
               allowedPlays: 2,
               label: 'Aufgabe 15',
               transcript:

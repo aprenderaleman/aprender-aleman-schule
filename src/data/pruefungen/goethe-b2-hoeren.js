@@ -31,7 +31,7 @@ export const goetheB2HoerenExams = [
             id: 'b2h1-1',
             type: 'multiple-choice',
             audio: {
-              audioUrl: null,
+              audioUrl: '/audio/pruefungen/goethe-b2-hoeren-modellsatz-1/b2h1-1.mp3',
               allowedPlays: 1,
               label: 'Gespräch 1 — Im Büro',
               transcript:
@@ -50,7 +50,7 @@ export const goetheB2HoerenExams = [
             id: 'b2h1-2',
             type: 'multiple-choice',
             audio: {
-              audioUrl: null,
+              audioUrl: '/audio/pruefungen/goethe-b2-hoeren-modellsatz-1/b2h1-2.mp3',
               allowedPlays: 1,
               label: 'Gespräch 2 — Reisebüro',
               transcript:
@@ -69,7 +69,7 @@ export const goetheB2HoerenExams = [
             id: 'b2h1-3',
             type: 'multiple-choice',
             audio: {
-              audioUrl: null,
+              audioUrl: '/audio/pruefungen/goethe-b2-hoeren-modellsatz-1/b2h1-3.mp3',
               allowedPlays: 1,
               label: 'Gespräch 3 — Im Restaurant',
               transcript:
@@ -88,7 +88,7 @@ export const goetheB2HoerenExams = [
             id: 'b2h1-4',
             type: 'multiple-choice',
             audio: {
-              audioUrl: null,
+              audioUrl: '/audio/pruefungen/goethe-b2-hoeren-modellsatz-1/b2h1-4.mp3',
               allowedPlays: 1,
               label: 'Gespräch 4 — Beim Arzt',
               transcript:
@@ -107,7 +107,7 @@ export const goetheB2HoerenExams = [
             id: 'b2h1-5',
             type: 'multiple-choice',
             audio: {
-              audioUrl: null,
+              audioUrl: '/audio/pruefungen/goethe-b2-hoeren-modellsatz-1/b2h1-5.mp3',
               allowedPlays: 1,
               label: 'Gespräch 5 — In der Universität',
               transcript:
@@ -134,7 +134,7 @@ export const goetheB2HoerenExams = [
           type: 'audio',
           allowedPlays: 1,
           label: 'Radiosendung: Zero Waste — Leben ohne Müll',
-          audioUrl: null,
+          audioUrl: '/audio/pruefungen/goethe-b2-hoeren-modellsatz-1/teil-2.mp3',
           transcript:
             `Moderator: „Willkommen zu unserer Sendung 'Umwelt heute'. Heute sprechen wir über die Zero-Waste-Bewegung. Unser Gast ist Lena Hofmann, die seit fünf Jahren versucht, möglichst keinen Müll zu produzieren. Frau Hofmann, wie kam es dazu?"
 
@@ -170,7 +170,7 @@ Lena Hofmann: „Man muss nicht alles auf einmal ändern. Beginnt mit einer klei
           type: 'audio',
           allowedPlays: 2,
           label: 'Interview: Nachhaltiges Bauen mit Klaus Berger',
-          audioUrl: null,
+          audioUrl: '/audio/pruefungen/goethe-b2-hoeren-modellsatz-1/teil-3.mp3',
           transcript:
             `Interviewerin: „Herr Berger, was bedeutet eigentlich 'nachhaltiges Bauen'?"
 
@@ -265,7 +265,7 @@ Klaus Berger: „Holt euch von Anfang an einen Architekten, der Erfahrung mit Na
           type: 'audio',
           allowedPlays: 1,
           label: 'Vortrag: Das bedingungslose Grundeinkommen',
-          audioUrl: null,
+          audioUrl: '/audio/pruefungen/goethe-b2-hoeren-modellsatz-1/teil-4.mp3',
           transcript:
             `„Liebe Zuhörerinnen und Zuhörer, willkommen zu meinem Vortrag über das bedingungslose Grundeinkommen, kurz BGE.
 

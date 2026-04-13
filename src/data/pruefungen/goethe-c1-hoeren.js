@@ -28,7 +28,7 @@ export const goetheC1HoerenExams = [
           type: 'audio',
           allowedPlays: 1,
           label: 'Anrufbeantworter: Frau Dr. Hoffmann',
-          audioUrl: null,
+          audioUrl: '/audio/pruefungen/goethe-c1-hoeren-modellsatz-1/teil-1.mp3',
           transcript:
             `„Guten Tag, Herr Dr. Lehmann, hier ist Frau Dr. Hoffmann vom Institut für Sprachwissenschaft. Es geht um den geplanten Vortrag, den Sie nächsten Donnerstag bei uns halten sollen.
 
@@ -60,7 +60,7 @@ Bitte rufen Sie mich kurz zurück, am besten morgen Vormittag, um die letzten De
           type: 'audio',
           allowedPlays: 2,
           label: 'Podiumsdiskussion: Sollen Studiengebühren wieder eingeführt werden?',
-          audioUrl: null,
+          audioUrl: '/audio/pruefungen/goethe-c1-hoeren-modellsatz-1/teil-2.mp3',
           transcript:
             `Moderatorin: „Willkommen zu unserer Diskussion. Die Frage ist hochaktuell: Sollen Studiengebühren in Deutschland wieder eingeführt werden? Auf dem Podium begrüße ich Prof. Dr. Karin Müller, Bildungsforscherin, Stefan Berger vom Studierendenrat und die CDU-Politikerin Dr. Anna Weiß. Frau Dr. Müller, Sie haben sich kürzlich für moderate Studiengebühren ausgesprochen. Warum?"
 
@@ -153,7 +153,7 @@ Dr. Weiß: „Wir müssen die Diskussion ehrlich führen. Wenn wir gleichzeitig 
           type: 'audio',
           allowedPlays: 1,
           label: 'Vortrag: Wie der Schlaf das Lernen unterstützt',
-          audioUrl: null,
+          audioUrl: '/audio/pruefungen/goethe-c1-hoeren-modellsatz-1/teil-3.mp3',
           transcript:
             `„Sehr geehrte Damen und Herren, willkommen zu meinem Kurzvortrag über die Rolle des Schlafs für das Lernen.
 

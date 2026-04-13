@@ -32,7 +32,7 @@ export const goetheB1HoerenExams = [
             id: 'b1h1-1',
             type: 'multiple-choice',
             audio: {
-              audioUrl: null,
+              audioUrl: '/audio/pruefungen/goethe-b1-hoeren-modellsatz-1/b1h1-1.mp3',
               allowedPlays: 1,
               label: 'Aufgabe 1 — Anrufbeantworter',
               transcript:
@@ -51,7 +51,7 @@ export const goetheB1HoerenExams = [
             id: 'b1h1-2',
             type: 'multiple-choice',
             audio: {
-              audioUrl: null,
+              audioUrl: '/audio/pruefungen/goethe-b1-hoeren-modellsatz-1/b1h1-2.mp3',
               allowedPlays: 1,
               label: 'Aufgabe 2 — Wetterbericht',
               transcript:
@@ -70,7 +70,7 @@ export const goetheB1HoerenExams = [
             id: 'b1h1-3',
             type: 'multiple-choice',
             audio: {
-              audioUrl: null,
+              audioUrl: '/audio/pruefungen/goethe-b1-hoeren-modellsatz-1/b1h1-3.mp3',
               allowedPlays: 1,
               label: 'Aufgabe 3 — Verkehrsmeldung',
               transcript:
@@ -89,7 +89,7 @@ export const goetheB1HoerenExams = [
             id: 'b1h1-4',
             type: 'multiple-choice',
             audio: {
-              audioUrl: null,
+              audioUrl: '/audio/pruefungen/goethe-b1-hoeren-modellsatz-1/b1h1-4.mp3',
               allowedPlays: 1,
               label: 'Aufgabe 4 — Durchsage Bahnhof',
               transcript:
@@ -108,7 +108,7 @@ export const goetheB1HoerenExams = [
             id: 'b1h1-5',
             type: 'multiple-choice',
             audio: {
-              audioUrl: null,
+              audioUrl: '/audio/pruefungen/goethe-b1-hoeren-modellsatz-1/b1h1-5.mp3',
               allowedPlays: 1,
               label: 'Aufgabe 5 — Werbung',
               transcript:
@@ -133,7 +133,7 @@ export const goetheB1HoerenExams = [
         instructions: 'Du hörst eine Stadtführung. Du hörst den Text einmal. Wähle bei den Aufgaben 6-10 die richtige Lösung a, b oder c.',
         context: {
           type: 'audio',
-          audioUrl: null,
+          audioUrl: '/audio/pruefungen/goethe-b1-hoeren-modellsatz-1/teil-2.mp3',
           allowedPlays: 1,
           label: 'Stadtführung durch Heidelberg',
           transcript:
@@ -167,7 +167,7 @@ Die Tour dauert insgesamt etwa drei Stunden. Bitte bleiben Sie zusammen und stel
         instructions: 'Du hörst ein Gespräch zwischen zwei Freunden. Du hörst das Gespräch zweimal. Sind die Aussagen 11-15 richtig oder falsch?',
         context: {
           type: 'audio',
-          audioUrl: null,
+          audioUrl: '/audio/pruefungen/goethe-b1-hoeren-modellsatz-1/teil-3.mp3',
           allowedPlays: 2,
           label: 'Gespräch zwischen Lara und Tobias über den Urlaub',
           transcript:
@@ -208,7 +208,7 @@ Tobias: Auf jeden Fall, vielleicht im nächsten Frühling — dann ist es nicht 
           'Du hörst eine Diskussion zwischen Anna und Markus über das Thema „Im Homeoffice arbeiten“. Wer sagt was? Wähle für jede Aussage Anna (a), Markus (m) oder beide (b).',
         context: {
           type: 'audio',
-          audioUrl: null,
+          audioUrl: '/audio/pruefungen/goethe-b1-hoeren-modellsatz-1/teil-4.mp3',
           allowedPlays: 2,
           label: 'Diskussion: Homeoffice — pro und contra',
           transcript:

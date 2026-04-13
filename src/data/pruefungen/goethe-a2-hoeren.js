@@ -30,7 +30,7 @@ export const goetheA2HoerenExams = [
             id: 'a2h1-1',
             type: 'multiple-choice',
             audio: {
-              audioUrl: null,
+              audioUrl: '/audio/pruefungen/goethe-a2-hoeren-modellsatz-1/a2h1-1.mp3',
               allowedPlays: 2,
               label: 'Aufgabe 1',
               transcript:
@@ -49,7 +49,7 @@ export const goetheA2HoerenExams = [
             id: 'a2h1-2',
             type: 'multiple-choice',
             audio: {
-              audioUrl: null,
+              audioUrl: '/audio/pruefungen/goethe-a2-hoeren-modellsatz-1/a2h1-2.mp3',
               allowedPlays: 2,
               label: 'Aufgabe 2',
               transcript:
@@ -68,7 +68,7 @@ export const goetheA2HoerenExams = [
             id: 'a2h1-3',
             type: 'multiple-choice',
             audio: {
-              audioUrl: null,
+              audioUrl: '/audio/pruefungen/goethe-a2-hoeren-modellsatz-1/a2h1-3.mp3',
               allowedPlays: 2,
               label: 'Aufgabe 3',
               transcript:
@@ -87,7 +87,7 @@ export const goetheA2HoerenExams = [
             id: 'a2h1-4',
             type: 'multiple-choice',
             audio: {
-              audioUrl: null,
+              audioUrl: '/audio/pruefungen/goethe-a2-hoeren-modellsatz-1/a2h1-4.mp3',
               allowedPlays: 2,
               label: 'Aufgabe 4',
               transcript:
@@ -106,7 +106,7 @@ export const goetheA2HoerenExams = [
             id: 'a2h1-5',
             type: 'multiple-choice',
             audio: {
-              audioUrl: null,
+              audioUrl: '/audio/pruefungen/goethe-a2-hoeren-modellsatz-1/a2h1-5.mp3',
               allowedPlays: 2,
               label: 'Aufgabe 5',
               transcript:
@@ -134,7 +134,7 @@ export const goetheA2HoerenExams = [
             id: 'a2h2-1',
             type: 'true-false',
             audio: {
-              audioUrl: null,
+              audioUrl: '/audio/pruefungen/goethe-a2-hoeren-modellsatz-1/a2h2-1.mp3',
               allowedPlays: 1,
               label: 'Aufgabe 6 — Durchsage am Bahnhof',
               transcript:
@@ -148,7 +148,7 @@ export const goetheA2HoerenExams = [
             id: 'a2h2-2',
             type: 'true-false',
             audio: {
-              audioUrl: null,
+              audioUrl: '/audio/pruefungen/goethe-a2-hoeren-modellsatz-1/a2h2-2.mp3',
               allowedPlays: 1,
               label: 'Aufgabe 7 — Durchsage im Museum',
               transcript:
@@ -162,7 +162,7 @@ export const goetheA2HoerenExams = [
             id: 'a2h2-3',
             type: 'true-false',
             audio: {
-              audioUrl: null,
+              audioUrl: '/audio/pruefungen/goethe-a2-hoeren-modellsatz-1/a2h2-3.mp3',
               allowedPlays: 1,
               label: 'Aufgabe 8 — Verkehrsmeldung',
               transcript:
@@ -176,7 +176,7 @@ export const goetheA2HoerenExams = [
             id: 'a2h2-4',
             type: 'true-false',
             audio: {
-              audioUrl: null,
+              audioUrl: '/audio/pruefungen/goethe-a2-hoeren-modellsatz-1/a2h2-4.mp3',
               allowedPlays: 1,
               label: 'Aufgabe 9 — Anrufbeantworter Praxis',
               transcript:
@@ -190,7 +190,7 @@ export const goetheA2HoerenExams = [
             id: 'a2h2-5',
             type: 'true-false',
             audio: {
-              audioUrl: null,
+              audioUrl: '/audio/pruefungen/goethe-a2-hoeren-modellsatz-1/a2h2-5.mp3',
               allowedPlays: 1,
               label: 'Aufgabe 10 — Durchsage im Schwimmbad',
               transcript:
@@ -213,7 +213,7 @@ export const goetheA2HoerenExams = [
             id: 'a2h3-1',
             type: 'multiple-choice',
             audio: {
-              audioUrl: null,
+              audioUrl: '/audio/pruefungen/goethe-a2-hoeren-modellsatz-1/a2h3-1.mp3',
               allowedPlays: 1,
               label: 'Aufgabe 11',
               transcript:
@@ -232,7 +232,7 @@ export const goetheA2HoerenExams = [
             id: 'a2h3-2',
             type: 'multiple-choice',
             audio: {
-              audioUrl: null,
+              audioUrl: '/audio/pruefungen/goethe-a2-hoeren-modellsatz-1/a2h3-2.mp3',
               allowedPlays: 1,
               label: 'Aufgabe 12',
               transcript:
@@ -251,7 +251,7 @@ export const goetheA2HoerenExams = [
             id: 'a2h3-3',
             type: 'multiple-choice',
             audio: {
-              audioUrl: null,
+              audioUrl: '/audio/pruefungen/goethe-a2-hoeren-modellsatz-1/a2h3-3.mp3',
               allowedPlays: 1,
               label: 'Aufgabe 13',
               transcript:
@@ -270,7 +270,7 @@ export const goetheA2HoerenExams = [
             id: 'a2h3-4',
             type: 'multiple-choice',
             audio: {
-              audioUrl: null,
+              audioUrl: '/audio/pruefungen/goethe-a2-hoeren-modellsatz-1/a2h3-4.mp3',
               allowedPlays: 1,
               label: 'Aufgabe 14',
               transcript:
@@ -289,7 +289,7 @@ export const goetheA2HoerenExams = [
             id: 'a2h3-5',
             type: 'multiple-choice',
             audio: {
-              audioUrl: null,
+              audioUrl: '/audio/pruefungen/goethe-a2-hoeren-modellsatz-1/a2h3-5.mp3',
               allowedPlays: 1,
               label: 'Aufgabe 15',
               transcript:
@@ -314,7 +314,7 @@ export const goetheA2HoerenExams = [
         instructions: 'Du hörst ein Interview. Du hörst das Interview zweimal. Sind die Aussagen 16-20 richtig oder falsch?',
         context: {
           type: 'audio',
-          audioUrl: null,
+          audioUrl: '/audio/pruefungen/goethe-a2-hoeren-modellsatz-1/teil-4.mp3',
           allowedPlays: 2,
           label: 'Interview mit der Köchin Sarah Weiß',
           transcript:

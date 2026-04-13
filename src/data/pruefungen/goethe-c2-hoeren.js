@@ -28,7 +28,7 @@ export const goetheC2HoerenExams = [
           type: 'audio',
           allowedPlays: 2,
           label: 'Interview: Verantwortung im digitalen Zeitalter',
-          audioUrl: null,
+          audioUrl: '/audio/pruefungen/goethe-c2-hoeren-modellsatz-1/teil-1.mp3',
           transcript:
             `Interviewer: „Frau Professor Lehmann, Sie haben kürzlich ein vielbeachtetes Buch über Verantwortung im digitalen Zeitalter veröffentlicht. Was hat Sie zu diesem Thema gebracht?"
 
@@ -123,7 +123,7 @@ Prof. Dr. Lehmann: „Eher eine verteilte Verantwortung. Nicht jeder ist gleich 
           type: 'audio',
           allowedPlays: 1,
           label: 'Vortrag: Mehrsprachigkeit im Gehirn',
-          audioUrl: null,
+          audioUrl: '/audio/pruefungen/goethe-c2-hoeren-modellsatz-1/teil-2.mp3',
           transcript:
             `„Sehr verehrte Kolleginnen und Kollegen, in den nächsten Minuten möchte ich Ihnen einige Erkenntnisse aus der jüngeren neurolinguistischen Forschung vorstellen, die unser Verständnis von Mehrsprachigkeit grundlegend verändert haben.
 
