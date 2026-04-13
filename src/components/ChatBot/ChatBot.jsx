@@ -9,15 +9,15 @@ const MODES = {
     label: 'Deutsch-Tutor',
     icon: Sparkles,
     color: 'from-orange-500 to-amber-500',
-    placeholder: 'Frag mich etwas auf Deutsch...',
-    description: 'Aprende alemán con tu tutor personal',
+    placeholder: 'Schreib mir auf Deutsch...',
+    description: 'Dein persönlicher Deutsch-Tutor',
   },
   support: {
-    label: 'Soporte',
+    label: 'Hilfe',
     icon: HelpCircle,
     color: 'from-blue-500 to-indigo-500',
-    placeholder: '¿Cómo funciona...?',
-    description: 'Ayuda técnica sobre la plataforma',
+    placeholder: 'Wie funktioniert...?',
+    description: 'Technische Hilfe zur Plattform',
   },
 }
 
@@ -102,7 +102,7 @@ export default function ChatBot() {
         speakText(data.reply)
       }
     } catch {
-      setMessages(prev => [...prev, { role: 'assistant', content: '❌ Error al conectar. Inténtalo de nuevo.' }])
+      setMessages(prev => [...prev, { role: 'assistant', content: '❌ Verbindungsfehler. Bitte versuche es erneut.' }])
     } finally {
       setLoading(false)
     }
@@ -126,7 +126,7 @@ export default function ChatBot() {
       timerRef.current = setInterval(() => setRecordingTime(t => t + 1), 1000)
     } catch (err) {
       console.error('Mic error:', err)
-      setMessages(prev => [...prev, { role: 'assistant', content: '❌ No se pudo acceder al micrófono. Verifica los permisos.' }])
+      setMessages(prev => [...prev, { role: 'assistant', content: '❌ Kein Zugriff auf das Mikrofon. Bitte überprüfe die Berechtigungen.' }])
     }
   }
 
@@ -166,7 +166,7 @@ export default function ChatBot() {
       if (!transcript || transcript.trim().length === 0) {
         setMessages(prev => {
           const copy = [...prev]
-          copy[copy.length - 1] = { role: 'user', content: '🎙️ (no se detectó audio)' }
+          copy[copy.length - 1] = { role: 'user', content: '🎙️ (kein Audio erkannt)' }
           return copy
         })
         setLoading(false)
@@ -203,7 +203,7 @@ export default function ChatBot() {
       }
     } catch (err) {
       console.error('Voice chat error:', err)
-      setMessages(prev => [...prev, { role: 'assistant', content: '❌ Error en la conversación por voz.' }])
+      setMessages(prev => [...prev, { role: 'assistant', content: '❌ Fehler beim Sprachgespräch. Bitte versuche es erneut.' }])
     } finally {
       setLoading(false)
     }
@@ -300,7 +300,7 @@ export default function ChatBot() {
               </div>
               <div className="flex items-center gap-1">
                 {messages.length > 0 && (
-                  <button onClick={clearChat} className="p-1.5 rounded-lg hover:bg-white/20 transition-colors" title="Limpiar chat">
+                  <button onClick={clearChat} className="p-1.5 rounded-lg hover:bg-white/20 transition-colors" title="Chat löschen">
                     <Trash2 className="w-4 h-4" />
                   </button>
                 )}
@@ -330,12 +330,12 @@ export default function ChatBot() {
                 <ModeIcon className="w-10 h-10 opacity-50" />
                 <p className="text-sm">{currentMode.description}</p>
                 {voiceMode ? (
-                  <p className="text-xs text-gray-400">Pulsa el micrófono para hablar</p>
+                  <p className="text-xs text-gray-400">Drücke das Mikrofon zum Sprechen</p>
                 ) : (
                   <div className="space-y-1.5 w-full">
                     {(mode === 'tutor'
-                      ? ['Was bedeutet „Konjunktiv II"?', '¿Cómo se usan los casos?', 'Erkläre mir die Wechselpräpositionen']
-                      : ['¿Cómo funcionan los ejercicios?', '¿Qué incluye la suscripción?', '¿Cómo practico para el Goethe?']
+                      ? ['Was bedeutet „Konjunktiv II"?', 'Wie benutzt man die Fälle?', 'Erkläre mir die Wechselpräpositionen']
+                      : ['Wie funktionieren die Übungen?', 'Was beinhaltet das Abo?', 'Wie übe ich für die Goethe-Prüfung?']
                     ).map((q) => (
                       <button
                         key={q}
@@ -374,8 +374,8 @@ export default function ChatBot() {
                       className="mt-1.5 flex items-center gap-1 text-[11px] opacity-60 hover:opacity-100 transition-opacity"
                     >
                       {playingAudio === i
-                        ? <><VolumeX className="w-3 h-3" /> Parar</>
-                        : <><Volume2 className="w-3 h-3" /> Escuchar</>
+                        ? <><VolumeX className="w-3 h-3" /> Stopp</>
+                        : <><Volume2 className="w-3 h-3" /> Anhören</>
                       }
                     </button>
                   )}
@@ -410,7 +410,7 @@ export default function ChatBot() {
                 {recording && (
                   <div className="flex items-center gap-2 text-sm text-red-500">
                     <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
-                    Grabando {formatTime(recordingTime)}
+                    Aufnahme {formatTime(recordingTime)}
                   </div>
                 )}
                 <div className="flex items-center gap-3">
@@ -428,13 +428,13 @@ export default function ChatBot() {
                   <button
                     onClick={toggleVoiceMode}
                     className="p-2 rounded-lg text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-                    title="Cambiar a texto"
+                    title="Zum Text wechseln"
                   >
                     <Send className="w-5 h-5" />
                   </button>
                 </div>
                 <p className="text-[11px] text-gray-400">
-                  {recording ? 'Pulsa para detener' : 'Pulsa para hablar'}
+                  {recording ? 'Drücke zum Stoppen' : 'Drücke zum Sprechen'}
                 </p>
               </div>
             ) : (
@@ -443,7 +443,7 @@ export default function ChatBot() {
                 <button
                   onClick={toggleVoiceMode}
                   className="flex items-center justify-center w-10 h-10 rounded-xl text-gray-400 hover:text-orange-500 hover:bg-orange-50 dark:hover:bg-gray-800 transition-all"
-                  title="Modo voz"
+                  title="Sprachmodus"
                 >
                   <Mic className="w-5 h-5" />
                 </button>
