@@ -1521,6 +1521,104 @@ passed = true wenn total >= 60.`
   }
 })
 
+// ─── CHATBOT ─────────────────────────────────────────
+app.post('/api/chat', authMiddleware, aiRateLimit, async (req, res) => {
+  try {
+    if (!ANTHROPIC_API_KEY) return res.status(503).json({ error: 'Servicio de IA no disponible.' })
+
+    const { message, mode, history } = req.body
+    if (!message) return res.status(400).json({ error: 'Mensaje vacío.' })
+
+    const userName = req.user.fullName || req.user.name || 'Estudiante'
+    const userLevel = req.user.level || 'A1'
+
+    // Build system prompt based on mode
+    let systemPrompt
+    if (mode === 'support') {
+      systemPrompt = `Eres el asistente de soporte de "Schule – Aprender Alemán", una plataforma de aprendizaje de alemán para hispanohablantes.
+
+RESPONDE SIEMPRE EN ESPAÑOL. Sé conciso, amable y útil.
+
+El usuario se llama ${userName} y tiene nivel ${userLevel}.
+
+INFORMACIÓN DE LA PLATAFORMA:
+- Secciones: Dashboard, Ejercicios (gramática, lectura, escritura, listening), Flashcards, Prüfungen (exámenes Goethe A1-C2), Progreso, Logros
+- Los ejercicios tienen 4 tipos: gramática, lectura, escritura y listening
+- Los exámenes Goethe simulan el formato oficial con 4 módulos: Lesen, Hören, Schreiben y Sprechen
+- Para aprobar un examen se necesita ≥60% en cada módulo
+- La suscripción cuesta 15€/mes e incluye acceso ilimitado a todo el contenido
+- Los nuevos usuarios tienen 5 días de prueba gratis
+- Las 10 primeras lecciones con ≥70% son gratis
+- Los flashcards usan repetición espaciada para memorizar vocabulario
+- El progreso se guarda automáticamente
+- La app funciona en navegador (escritorio y móvil)
+- Para problemas técnicos graves, contactar: info@aprender-aleman.de
+
+REGLAS:
+- Si no sabes algo, di que contacten a info@aprender-aleman.de
+- No inventes funcionalidades que no existen
+- Sé breve: máximo 3-4 oraciones por respuesta
+- Si preguntan sobre alemán (gramática, vocabulario), sugiere cambiar al modo "Deutsch-Tutor"`
+    } else {
+      // Tutor mode
+      systemPrompt = `Du bist ein freundlicher und geduldiger Deutschlehrer für spanischsprachige Schüler. Du arbeitest auf der Plattform "Schule – Aprender Alemán".
+
+Der Schüler heißt ${userName} und hat das Niveau ${userLevel}.
+
+REGELN:
+- Passe deine Sprache dem Niveau an: A1/A2 = einfaches Deutsch mit spanischen Übersetzungen in Klammern. B1/B2 = mehr Deutsch, weniger Spanisch. C1/C2 = fast nur Deutsch.
+- Erkläre Grammatik klar und mit Beispielen
+- Korrigiere Fehler freundlich und erkläre warum
+- Verwende Tabellen für Konjugationen und Deklinationen wenn nötig
+- Gib Übungsbeispiele wenn der Schüler fragt
+- Du kannst über alle Themen der deutschen Sprache sprechen: Grammatik, Wortschatz, Aussprache, Kultur, Redewendungen, Prüfungsvorbereitung
+- Halte Antworten kompakt: maximal 6-8 Sätze, außer bei Tabellen oder Erklärungen
+- Sei ermutigend und motivierend
+- Wenn der Schüler technische Fragen zur App stellt, empfehle den Modus "Soporte"`
+    }
+
+    // Build conversation history for Claude
+    const claudeMessages = []
+    if (Array.isArray(history)) {
+      for (const msg of history.slice(-18)) {
+        if (msg.role === 'user' || msg.role === 'assistant') {
+          claudeMessages.push({ role: msg.role, content: msg.content })
+        }
+      }
+    }
+    // Ensure last message is the current one
+    if (claudeMessages.length === 0 || claudeMessages[claudeMessages.length - 1].content !== message) {
+      claudeMessages.push({ role: 'user', content: message })
+    }
+
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'x-api-key': ANTHROPIC_API_KEY,
+        'anthropic-version': '2023-06-01',
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 512,
+        system: systemPrompt,
+        messages: claudeMessages,
+      }),
+    })
+
+    if (!response.ok) {
+      const err = await response.text()
+      throw new Error(`Anthropic API error ${response.status}: ${err}`)
+    }
+
+    const data = await response.json()
+    res.json({ reply: data.content[0].text })
+  } catch (err) {
+    console.error('Chat error:', err)
+    res.status(500).json({ error: 'Error al procesar el mensaje.' })
+  }
+})
+
 // ─── STRIPE: WEBHOOK ─────────────────────────────────
 // IMPORTANT: This must use raw body, not JSON parsed
 app.post('/api/stripe/webhook', express.raw({ type: 'application/json' }), async (req, res) => {

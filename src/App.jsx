@@ -23,6 +23,7 @@ import AdminLayout from './components/Layout/AdminLayout'
 import Paywall from './components/UI/Paywall'
 import TrialBanner from './components/UI/TrialBanner'
 import Navbar from './components/Layout/Navbar'
+import ChatBot from './components/ChatBot/ChatBot'
 
 // Lazy load admin pages
 const AdminDashboard = lazy(() => import('./pages/admin/AdminDashboard'))
@@ -122,6 +123,7 @@ export default function App() {
           <AuthProvider>
             <ProgressProvider>
               <AppRoutes />
+              <ChatBot />
             </ProgressProvider>
           </AuthProvider>
         </ThemeProvider>
