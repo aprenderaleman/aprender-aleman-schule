@@ -1,16 +1,19 @@
 import React, { useState, useCallback, useRef } from 'react'
 import { motion } from 'framer-motion'
 import Button from '../UI/Button'
-import { Volume2, Eye, EyeOff, CheckCircle, XCircle } from 'lucide-react'
+import { Volume2, Eye, EyeOff, CheckCircle, XCircle, Pause } from 'lucide-react'
 
 export default function ListeningExercise({ exercise, userName, onComplete }) {
   const [answers, setAnswers] = useState({})
   const [submitted, setSubmitted] = useState(false)
   const [showTranscript, setShowTranscript] = useState(false)
-  const [speaking, setSpeaking] = useState(false)
+  const [playing, setPlaying] = useState(false)
+  const audioRef = useRef(null)
   const utteranceRef = useRef(null)
+  const useFallbackRef = useRef(false)
 
-  const speak = useCallback(() => {
+  // Fallback to speechSynthesis if audio file fails
+  const speakFallback = useCallback(() => {
     if (!('speechSynthesis' in window)) {
       alert('Dein Browser unterstützt keine Sprachsynthese. Lies das Transkript.')
       setShowTranscript(true)
@@ -26,16 +29,54 @@ export default function ListeningExercise({ exercise, userName, onComplete }) {
     const germanVoice = voices.find(v => v.lang.startsWith('de'))
     if (germanVoice) utterance.voice = germanVoice
 
-    utterance.onstart = () => setSpeaking(true)
-    utterance.onend = () => setSpeaking(false)
+    utterance.onstart = () => setPlaying(true)
+    utterance.onend = () => setPlaying(false)
     utterance.onerror = () => {
-      setSpeaking(false)
+      setPlaying(false)
       setShowTranscript(true)
     }
 
     utteranceRef.current = utterance
     window.speechSynthesis.speak(utterance)
   }, [exercise.audioText])
+
+  const play = useCallback(() => {
+    // If we already know audio file is broken, use fallback
+    if (useFallbackRef.current) {
+      speakFallback()
+      return
+    }
+
+    const audio = audioRef.current
+    if (!audio) {
+      speakFallback()
+      return
+    }
+
+    if (playing) {
+      // Pause
+      audio.pause()
+      window.speechSynthesis?.cancel()
+      setPlaying(false)
+      return
+    }
+
+    // Reset to beginning if ended
+    if (audio.ended) {
+      audio.currentTime = 0
+    }
+
+    audio.play().catch(() => {
+      // Audio file failed to play, use fallback
+      useFallbackRef.current = true
+      speakFallback()
+    })
+  }, [playing, speakFallback])
+
+  const handleAudioError = useCallback(() => {
+    // Audio file not found or failed to load — mark fallback
+    useFallbackRef.current = true
+  }, [])
 
   const handleSubmit = () => {
     let correct = 0
@@ -49,8 +90,21 @@ export default function ListeningExercise({ exercise, userName, onComplete }) {
 
   const allAnswered = exercise.questions.every((_, i) => answers[i] !== undefined)
 
+  const audioSrc = `/audio/exercises/${exercise.id}.mp3`
+
   return (
     <div className="space-y-6">
+      {/* Hidden audio element */}
+      <audio
+        ref={audioRef}
+        src={audioSrc}
+        preload="auto"
+        onPlay={() => setPlaying(true)}
+        onPause={() => setPlaying(false)}
+        onEnded={() => setPlaying(false)}
+        onError={handleAudioError}
+      />
+
       {/* Audio player */}
       <div className="bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 rounded-2xl p-6 border border-purple-200 dark:border-purple-800 text-center">
         <p className="text-sm font-semibold text-purple-600 dark:text-purple-400 mb-4">
@@ -59,14 +113,13 @@ export default function ListeningExercise({ exercise, userName, onComplete }) {
         <motion.button
           whileTap={{ scale: 0.95 }}
           whileHover={{ scale: 1.05 }}
-          onClick={speak}
-          disabled={speaking}
-          aria-label="Audio abspielen"
-          className={`w-20 h-20 rounded-full flex items-center justify-center mx-auto shadow-lg transition-all ${speaking ? 'bg-purple-600 animate-pulse' : 'bg-purple-500 hover:bg-purple-600'}`}
+          onClick={play}
+          aria-label={playing ? 'Audio pausieren' : 'Audio abspielen'}
+          className={`w-20 h-20 rounded-full flex items-center justify-center mx-auto shadow-lg transition-all ${playing ? 'bg-purple-600 animate-pulse' : 'bg-purple-500 hover:bg-purple-600'}`}
         >
-          <Volume2 size={36} className="text-white" />
+          {playing ? <Pause size={36} className="text-white" /> : <Volume2 size={36} className="text-white" />}
         </motion.button>
-        {speaking && (
+        {playing && (
           <p className="text-sm text-purple-600 dark:text-purple-400 mt-3 animate-pulse font-medium">
             🎧 Wird abgespielt...
           </p>
