@@ -97,6 +97,11 @@ export function AuthProvider({ children }) {
       storeAuth(data.token, data.user)
       setUser(data.user)
       showToast(`Willkommen, ${data.user.name}! 🎉`, 'success')
+      // Tracking Google Ads - registro prueba gratis
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        'event': 'registro_prueba_gratis'
+      });
       return { success: true }
     } catch {
       return { error: 'Verbindung zum Server fehlgeschlagen.' }
