@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { Zap, Play, Trophy, Flame, Layers, MessageCircle, Mic, Sparkles, Clock, ArrowRight } from 'lucide-react'
+import { Zap, Play, Trophy, Flame, Layers, MessageCircle, Mic, Sparkles, Clock, ArrowRight, Video, Users, ExternalLink } from 'lucide-react'
 import { useAuth } from '../context/AuthContext'
 import { useProgress } from '../context/ProgressContext'
 import Navbar from '../components/Layout/Navbar'
@@ -250,6 +250,45 @@ export default function Dashboard() {
                   Jetzt mit Hans sprechen
                   <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
                 </div>
+              </div>
+            </div>
+          </a>
+        </motion.div>
+
+        {/* CTA: Live classes */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.45 }}
+          className="mt-6"
+        >
+          <a
+            href="https://aprender-aleman.de/de"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group block relative overflow-hidden rounded-2xl bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-600 p-5 sm:p-6 shadow-lg hover:shadow-xl transition-all"
+          >
+            <div className="absolute top-0 right-0 w-48 h-48 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2" />
+            <div className="absolute bottom-0 left-0 w-32 h-32 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/2" />
+
+            <div className="relative flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
+              <div className="w-16 h-16 sm:w-20 sm:h-20 bg-white/15 backdrop-blur-sm rounded-2xl flex items-center justify-center shrink-0 border border-white/20 group-hover:scale-110 transition-transform">
+                <Video size={32} className="text-white sm:w-10 sm:h-10" />
+              </div>
+              <div className="flex-1 text-center sm:text-left">
+                <div className="inline-flex items-center gap-1.5 bg-white/15 text-white/90 text-[10px] sm:text-xs font-bold px-2.5 py-1 rounded-full uppercase tracking-wider mb-2">
+                  <Users size={12} /> Live-Unterricht
+                </div>
+                <h3 className="text-white font-extrabold text-lg sm:text-xl leading-tight mb-1">
+                  Lerne Deutsch mit <span className="text-yellow-300">muttersprachlichen Lehrern</span>
+                </h3>
+                <p className="text-white/80 text-sm leading-relaxed max-w-xl">
+                  Ergänze dein Selbststudium mit Live-Unterricht per Video. Kleine Gruppen, flexible Zeiten, echte Konversation.
+                </p>
+              </div>
+              <div className="inline-flex items-center gap-2 bg-white text-emerald-700 text-sm sm:text-base font-extrabold px-5 py-2.5 sm:px-6 sm:py-3 rounded-xl shadow-lg group-hover:shadow-xl group-hover:scale-105 transition-all shrink-0">
+                Mehr erfahren
+                <ExternalLink size={16} className="group-hover:translate-x-0.5 transition-transform" />
               </div>
             </div>
           </a>
