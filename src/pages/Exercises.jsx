@@ -76,13 +76,13 @@ export default function Exercises() {
             {/* Level filter */}
             <div className="flex items-center gap-2">
               <Filter size={16} className="text-gray-400 shrink-0" />
-              <div className="flex gap-1 flex-wrap">
+              <div className="flex gap-1.5 overflow-x-auto pb-1 -mb-1 scrollbar-hide">
                 {LEVELS.map(l => (
                   <button
                     key={l}
                     onClick={() => setLevel(l)}
                     aria-pressed={levelFilter === l}
-                    className={`px-3 py-1.5 rounded-lg text-sm font-semibold transition-all ${levelFilter === l
+                    className={`px-3 py-2 rounded-lg text-sm font-semibold transition-all whitespace-nowrap shrink-0 ${levelFilter === l
                         ? 'bg-orange-500 text-white'
                         : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-orange-100'
                       }`}
@@ -95,7 +95,7 @@ export default function Exercises() {
           </div>
 
           {/* Type filter */}
-          <div className="flex gap-2 mt-4 flex-wrap">
+          <div className="flex gap-2 mt-4 overflow-x-auto pb-1 -mb-1 scrollbar-hide">
             {TYPES.map(t => {
               const meta = TYPE_META[t]
               const Icon = meta?.icon
@@ -104,7 +104,7 @@ export default function Exercises() {
                   key={t}
                   onClick={() => setType(t)}
                   aria-pressed={typeFilter === t}
-                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-semibold transition-all ${typeFilter === t
+                  className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-semibold transition-all whitespace-nowrap shrink-0 ${typeFilter === t
                       ? 'bg-orange-500 text-white'
                       : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-orange-100'
                     }`}

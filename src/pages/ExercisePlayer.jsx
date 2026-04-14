@@ -242,7 +242,7 @@ export default function ExercisePlayer() {
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 50 }}
-              className="fixed bottom-6 right-6 bg-yellow-400 text-gray-900 rounded-2xl p-4 shadow-xl flex items-center gap-3 z-50 max-w-xs"
+              className="fixed bottom-20 sm:bottom-6 right-3 sm:right-6 left-3 sm:left-auto bg-yellow-400 text-gray-900 rounded-2xl p-4 shadow-xl flex items-center gap-3 z-50 sm:max-w-xs"
             >
               <span className="text-2xl">🏅</span>
               <div>

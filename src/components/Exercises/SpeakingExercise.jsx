@@ -196,10 +196,10 @@ export default function SpeakingExercise({ exercise, userName, userLevel, onComp
 
       {/* Recording area */}
       {phase !== 'done' && (
-        <div className="bg-white dark:bg-gray-800 rounded-2xl border-2 border-gray-200 dark:border-gray-600 p-6">
+        <div className="bg-white dark:bg-gray-800 rounded-2xl border-2 border-gray-200 dark:border-gray-600 p-4 sm:p-6">
           <div className="flex flex-col items-center gap-4">
             {/* Timer display */}
-            <div className={`text-3xl font-mono font-bold ${phase === 'recording' ? 'text-red-500' : 'text-gray-400'}`}>
+            <div className={`text-2xl sm:text-3xl font-mono font-bold ${phase === 'recording' ? 'text-red-500' : 'text-gray-400'}`}>
               {formatTime(recordingTime)}
             </div>
 

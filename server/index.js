@@ -172,7 +172,7 @@ const stripe = STRIPE_SECRET_KEY ? new Stripe(STRIPE_SECRET_KEY) : null
 })()
 
 // Free-lessons threshold: a "lesson passed" = exercise or exam attempt with score >= 70%
-const FREE_LESSONS_LIMIT = 10
+const FREE_LESSONS_LIMIT = 30
 const FREE_LESSONS_PASS_PCT = 70
 
 // Helper: count distinct lessons passed by a user (exercises + exam attempts)

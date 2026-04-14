@@ -277,8 +277,8 @@ export default function ChatBot() {
       {!open && (
         <button
           onClick={() => setOpen(true)}
-          className="fixed bottom-6 right-6 z-50 flex items-center justify-center w-14 h-14 rounded-full bg-gradient-to-br from-orange-500 to-amber-500 text-white shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-200"
-          aria-label="Abrir chat"
+          className="fixed bottom-20 sm:bottom-6 right-4 sm:right-6 z-50 flex items-center justify-center w-14 h-14 rounded-full bg-gradient-to-br from-orange-500 to-amber-500 text-white shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-200"
+          aria-label="Chat öffnen"
         >
           <MessageCircle className="w-6 h-6" />
           {showPulse && <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full animate-pulse" />}
@@ -287,35 +287,35 @@ export default function ChatBot() {
 
       {/* Chat window */}
       {open && (
-        <div className="fixed bottom-6 right-6 z-50 w-[380px] max-w-[calc(100vw-2rem)] h-[560px] max-h-[calc(100vh-4rem)] flex flex-col bg-white dark:bg-gray-900 rounded-2xl shadow-2xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+        <div className="fixed inset-0 sm:inset-auto sm:bottom-6 sm:right-6 z-50 w-full sm:w-[380px] sm:max-w-[calc(100vw-2rem)] h-full sm:h-[560px] sm:max-h-[calc(100dvh-4rem)] flex flex-col bg-white dark:bg-gray-900 sm:rounded-2xl shadow-2xl sm:border border-gray-200 dark:border-gray-700 overflow-hidden">
           {/* Header */}
-          <div className={`bg-gradient-to-r ${currentMode.color} p-4 text-white`}>
+          <div className={`bg-gradient-to-r ${currentMode.color} p-3 sm:p-4 text-white`}>
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <ModeIcon className="w-5 h-5" />
-                <span className="font-semibold">{currentMode.label}</span>
+                <span className="font-semibold text-sm sm:text-base">{currentMode.label}</span>
                 {voiceMode && (
                   <span className="text-[10px] bg-white/25 px-1.5 py-0.5 rounded-full font-medium">VOZ</span>
                 )}
               </div>
               <div className="flex items-center gap-1">
                 {messages.length > 0 && (
-                  <button onClick={clearChat} className="p-1.5 rounded-lg hover:bg-white/20 transition-colors" title="Chat löschen">
-                    <Trash2 className="w-4 h-4" />
+                  <button onClick={clearChat} className="p-2.5 sm:p-1.5 rounded-lg hover:bg-white/20 transition-colors" title="Chat löschen">
+                    <Trash2 className="w-5 h-5 sm:w-4 sm:h-4" />
                   </button>
                 )}
-                <button onClick={() => setOpen(false)} className="p-1.5 rounded-lg hover:bg-white/20 transition-colors">
-                  <X className="w-4 h-4" />
+                <button onClick={() => setOpen(false)} className="p-2.5 sm:p-1.5 rounded-lg hover:bg-white/20 transition-colors">
+                  <X className="w-5 h-5 sm:w-4 sm:h-4" />
                 </button>
               </div>
             </div>
             {/* Mode switcher */}
-            <div className="flex gap-2 mt-3">
+            <div className="flex gap-2 mt-2 sm:mt-3">
               {Object.entries(MODES).map(([key, m]) => (
                 <button
                   key={key}
                   onClick={() => switchMode(key)}
-                  className={`flex-1 text-xs py-1.5 px-2 rounded-lg transition-all ${mode === key ? 'bg-white/30 font-semibold' : 'bg-white/10 hover:bg-white/20'}`}
+                  className={`flex-1 text-xs py-2 sm:py-1.5 px-2 rounded-lg transition-all ${mode === key ? 'bg-white/30 font-semibold' : 'bg-white/10 hover:bg-white/20'}`}
                 >
                   {m.label}
                 </button>
@@ -324,7 +324,7 @@ export default function ChatBot() {
           </div>
 
           {/* Messages */}
-          <div className="flex-1 overflow-y-auto p-4 space-y-3">
+          <div className="flex-1 overflow-y-auto p-3 sm:p-4 space-y-3">
             {messages.length === 0 && (
               <div className="flex flex-col items-center justify-center h-full text-center text-gray-400 dark:text-gray-500 gap-3">
                 <ModeIcon className="w-10 h-10 opacity-50" />
@@ -340,7 +340,7 @@ export default function ChatBot() {
                       <button
                         key={q}
                         onClick={() => { setInput(q); inputRef.current?.focus() }}
-                        className={`w-full text-left text-xs px-3 py-2 rounded-lg bg-gray-50 dark:bg-gray-800 ${mode === 'tutor' ? 'hover:bg-orange-50' : 'hover:bg-blue-50'} dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300 transition-colors`}
+                        className={`w-full text-left text-sm sm:text-xs px-3 py-3 sm:py-2 rounded-xl sm:rounded-lg bg-gray-50 dark:bg-gray-800 ${mode === 'tutor' ? 'hover:bg-orange-50' : 'hover:bg-blue-50'} dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300 transition-colors`}
                       >
                         {q}
                       </button>
@@ -357,7 +357,7 @@ export default function ChatBot() {
                     <Bot className="w-4 h-4 text-orange-600 dark:text-orange-400" />
                   </div>
                 )}
-                <div className={`max-w-[75%] rounded-2xl px-3.5 py-2.5 text-sm leading-relaxed whitespace-pre-wrap ${
+                <div className={`max-w-[80%] sm:max-w-[75%] rounded-2xl px-3.5 py-2.5 text-sm leading-relaxed whitespace-pre-wrap break-words ${
                   msg.role === 'user'
                     ? 'bg-gradient-to-br from-orange-500 to-amber-500 text-white rounded-br-md'
                     : 'bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 rounded-bl-md'
@@ -371,11 +371,11 @@ export default function ChatBot() {
                         else if (msg.audioBase64) { playAudioBase64(msg.audioBase64, i) }
                         else { speakText(msg.content); setPlayingAudio(i) }
                       }}
-                      className="mt-1.5 flex items-center gap-1 text-[11px] opacity-60 hover:opacity-100 transition-opacity"
+                      className="mt-1.5 flex items-center gap-1.5 text-xs py-1 opacity-70 hover:opacity-100 transition-opacity"
                     >
                       {playingAudio === i
-                        ? <><VolumeX className="w-3 h-3" /> Stopp</>
-                        : <><Volume2 className="w-3 h-3" /> Anhören</>
+                        ? <><VolumeX className="w-3.5 h-3.5" /> Stopp</>
+                        : <><Volume2 className="w-3.5 h-3.5" /> Anhören</>
                       }
                     </button>
                   )}
@@ -403,10 +403,10 @@ export default function ChatBot() {
           </div>
 
           {/* Input area */}
-          <div className="p-3 border-t border-gray-200 dark:border-gray-700">
+          <div className="p-3 pb-[calc(0.75rem+env(safe-area-inset-bottom,0px))] border-t border-gray-200 dark:border-gray-700">
             {/* Voice mode: big mic button */}
             {voiceMode ? (
-              <div className="flex flex-col items-center gap-2">
+              <div className="flex flex-col items-center gap-2 py-2">
                 {recording && (
                   <div className="flex items-center gap-2 text-sm text-red-500">
                     <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
@@ -417,32 +417,32 @@ export default function ChatBot() {
                   <button
                     onClick={handleMicClick}
                     disabled={loading}
-                    className={`flex items-center justify-center w-14 h-14 rounded-full transition-all duration-200 ${
+                    className={`flex items-center justify-center w-16 h-16 rounded-full transition-all duration-200 ${
                       recording
                         ? 'bg-red-500 hover:bg-red-600 animate-pulse'
                         : 'bg-gradient-to-br from-orange-500 to-amber-500 hover:shadow-lg hover:scale-105'
                     } text-white disabled:opacity-40`}
                   >
-                    {recording ? <Square className="w-6 h-6" /> : <Mic className="w-6 h-6" />}
+                    {recording ? <Square className="w-7 h-7" /> : <Mic className="w-7 h-7" />}
                   </button>
                   <button
                     onClick={toggleVoiceMode}
-                    className="p-2 rounded-lg text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                    className="p-3 rounded-xl text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
                     title="Zum Text wechseln"
                   >
                     <Send className="w-5 h-5" />
                   </button>
                 </div>
-                <p className="text-[11px] text-gray-400">
+                <p className="text-xs text-gray-400">
                   {recording ? 'Drücke zum Stoppen' : 'Drücke zum Sprechen'}
                 </p>
               </div>
             ) : (
               /* Text mode */
-              <div className="flex gap-2">
+              <div className="flex gap-2 items-end">
                 <button
                   onClick={toggleVoiceMode}
-                  className="flex items-center justify-center w-10 h-10 rounded-xl text-gray-400 hover:text-orange-500 hover:bg-orange-50 dark:hover:bg-gray-800 transition-all"
+                  className="flex items-center justify-center w-11 h-11 shrink-0 rounded-xl text-gray-400 hover:text-orange-500 hover:bg-orange-50 dark:hover:bg-gray-800 transition-all"
                   title="Sprachmodus"
                 >
                   <Mic className="w-5 h-5" />
@@ -454,14 +454,15 @@ export default function ChatBot() {
                   onKeyDown={handleKeyDown}
                   placeholder={currentMode.placeholder}
                   rows={1}
+                  style={{ maxHeight: '120px' }}
                   className="flex-1 resize-none rounded-xl border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-800 px-3.5 py-2.5 text-sm text-gray-800 dark:text-gray-200 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-transparent"
                 />
                 <button
                   onClick={() => sendMessage()}
                   disabled={!input.trim() || loading}
-                  className="flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-orange-500 to-amber-500 text-white disabled:opacity-40 disabled:cursor-not-allowed hover:shadow-md transition-all"
+                  className="flex items-center justify-center w-11 h-11 shrink-0 rounded-xl bg-gradient-to-br from-orange-500 to-amber-500 text-white disabled:opacity-40 disabled:cursor-not-allowed hover:shadow-md transition-all"
                 >
-                  <Send className="w-4 h-4" />
+                  <Send className="w-5 h-5" />
                 </button>
               </div>
             )}

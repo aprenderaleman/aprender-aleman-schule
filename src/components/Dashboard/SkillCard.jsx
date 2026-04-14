@@ -40,7 +40,7 @@ export default function SkillCard({ skill, score = 0, index = 0 }) {
             <h3 className="font-bold text-sm text-gray-800 dark:text-gray-100 group-hover:text-orange-600 transition-colors">
               {config.label}
             </h3>
-            <p className="text-[10px] text-gray-500 dark:text-gray-400">{config.desc}</p>
+            <p className="text-xs text-gray-500 dark:text-gray-400">{config.desc}</p>
           </div>
         </div>
         <ProgressBar value={score} max={100} color={config.color} showPercent={true} height="sm" />

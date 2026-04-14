@@ -260,7 +260,7 @@ export default function Dashboard() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5 }}
-          className="mt-6 grid grid-cols-3 gap-4"
+          className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4"
         >
           {[
             { label: 'Abgeschlossene Übungen', value: progress.completedExercises?.length || 0, icon: Trophy },

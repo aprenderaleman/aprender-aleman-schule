@@ -70,3 +70,12 @@
 ::-webkit-scrollbar-thumb:hover {
   @apply bg-orange-400 dark:bg-orange-500;
 }
+
+/* Hide scrollbar but keep scroll functionality */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}

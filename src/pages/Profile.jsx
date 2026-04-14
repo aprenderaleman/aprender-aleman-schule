@@ -43,19 +43,25 @@ export default function Profile() {
         <motion.div
           initial={{ opacity: 0, y: -15 }}
           animate={{ opacity: 1, y: 0 }}
-          className="card mb-6 flex items-center gap-5"
+          className="card mb-6 flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-5"
         >
-          <div className="w-16 h-16 rounded-full bg-gradient-to-br from-orange-400 to-amber-500 flex items-center justify-center text-white text-2xl font-extrabold shadow-md">
-            {user?.name?.[0]?.toUpperCase() || 'U'}
+          <div className="flex items-center gap-4 w-full sm:w-auto">
+            <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-gradient-to-br from-orange-400 to-amber-500 flex items-center justify-center text-white text-xl sm:text-2xl font-extrabold shadow-md shrink-0">
+              {user?.name?.[0]?.toUpperCase() || 'U'}
+            </div>
+            <div className="min-w-0 flex-1">
+              <h2 className="text-lg sm:text-xl font-bold text-gray-800 dark:text-gray-100 truncate">{user?.name}</h2>
+              <p className="text-xs sm:text-sm text-gray-400 truncate">{user?.email}</p>
+              <span className={`text-xs font-bold px-2 py-0.5 rounded-full mt-1 inline-block ${levelColors[user?.level] || 'bg-gray-100'}`}>
+                Niveau {user?.level}
+              </span>
+            </div>
+            <div className="text-right sm:hidden">
+              <p className="text-xl font-extrabold text-orange-500">{progress.xp || 0}</p>
+              <p className="text-[10px] text-gray-400">XP</p>
+            </div>
           </div>
-          <div>
-            <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100">{user?.name}</h2>
-            <p className="text-sm text-gray-400">{user?.email}</p>
-            <span className={`text-xs font-bold px-2 py-0.5 rounded-full mt-1 inline-block ${levelColors[user?.level] || 'bg-gray-100'}`}>
-              Niveau {user?.level}
-            </span>
-          </div>
-          <div className="ml-auto text-right">
+          <div className="hidden sm:block ml-auto text-right">
             <p className="text-2xl font-extrabold text-orange-500">{progress.xp || 0}</p>
             <p className="text-xs text-gray-400">Gesamt-XP</p>
           </div>

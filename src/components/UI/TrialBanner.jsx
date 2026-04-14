@@ -24,19 +24,19 @@ export default function TrialBanner() {
   const urgent = remaining <= 2
 
   return (
-    <div className={`${urgent ? 'bg-red-500' : 'bg-gradient-to-r from-indigo-600 to-purple-600'} text-white text-center py-2 px-4 text-sm font-medium`}>
+    <div className={`${urgent ? 'bg-red-500' : 'bg-gradient-to-r from-indigo-600 to-purple-600'} text-white text-center py-2.5 px-3 sm:px-4 text-xs sm:text-sm font-medium`}>
       <div className="max-w-7xl mx-auto flex items-center justify-center gap-2 flex-wrap">
-        <GraduationCap size={14} />
+        <GraduationCap size={16} className="shrink-0" />
         <span>
           {remaining === 1
-            ? `Du hast noch 1 von ${limit} kostenlosen Lektionen übrig.`
-            : `Du hast noch ${remaining} von ${limit} kostenlosen Lektionen übrig.`}
+            ? `Noch 1 von ${limit} kostenlosen Lektionen`
+            : `Noch ${remaining} von ${limit} kostenlosen Lektionen`}
         </span>
         <Link
           to="/pricing"
-          className="inline-flex items-center gap-1 bg-white/20 hover:bg-white/30 px-3 py-0.5 rounded-full text-xs font-bold transition-colors"
+          className="inline-flex items-center gap-1 bg-white/20 hover:bg-white/30 px-3 py-1.5 rounded-full text-xs font-bold transition-colors"
         >
-          <Zap size={12} /> Jetzt abonnieren
+          <Zap size={14} /> Abonnieren
         </Link>
       </div>
     </div>
