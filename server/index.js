@@ -174,6 +174,37 @@ const stripe = STRIPE_SECRET_KEY ? new Stripe(STRIPE_SECRET_KEY) : null
 // Free-lessons threshold: a "lesson passed" = exercise or exam attempt with score >= 70%
 const FREE_LESSONS_LIMIT = 30
 const FREE_LESSONS_PASS_PCT = 70
+// Bonus lessons granted when the user completes the Explorer Challenge (≥1 exercise in each of the 5 skill types)
+const EXPLORER_CHALLENGE_ID = 'explorer_challenge'
+const EXPLORER_CHALLENGE_BONUS = 10
+
+// Helper: get the list of distinct skill types the user has completed at least one exercise in
+async function getExplorerSkills(userId) {
+  try {
+    const [rows] = await pool.query(
+      "SELECT DISTINCT exerciseType FROM schule_exercise_results WHERE userId = ?",
+      [userId]
+    )
+    return rows.map(r => r.exerciseType).filter(Boolean)
+  } catch (e) {
+    console.error('getExplorerSkills error:', e.message)
+    return []
+  }
+}
+
+// Helper: has the user claimed the Explorer Challenge bonus?
+async function hasExplorerBonus(userId) {
+  try {
+    const [rows] = await pool.query(
+      'SELECT 1 FROM schule_achievements WHERE userId = ? AND achievementId = ? LIMIT 1',
+      [userId, EXPLORER_CHALLENGE_ID]
+    )
+    return rows.length > 0
+  } catch (e) {
+    console.error('hasExplorerBonus error:', e.message)
+    return false
+  }
+}
 
 // Helper: count distinct lessons passed by a user (exercises + exam attempts)
 async function countPassedLessons(userId) {
@@ -209,8 +240,11 @@ async function getSubscriptionInfo(userId) {
 
   // Count free lessons used (only relevant if not paid/SSO)
   const lessonsPassed = (paid || isSso) ? 0 : await countPassedLessons(userId)
-  const freeLessonsRemaining = Math.max(0, FREE_LESSONS_LIMIT - lessonsPassed)
-  const freeAccess = !paid && !isSso && lessonsPassed < FREE_LESSONS_LIMIT
+  // Explorer Challenge bonus: +10 free lessons once the user has claimed all 5 skills
+  const bonusLessons = (paid || isSso) ? 0 : ((await hasExplorerBonus(userId)) ? EXPLORER_CHALLENGE_BONUS : 0)
+  const effectiveLimit = FREE_LESSONS_LIMIT + bonusLessons
+  const freeLessonsRemaining = Math.max(0, effectiveLimit - lessonsPassed)
+  const freeAccess = !paid && !isSso && lessonsPassed < effectiveLimit
 
   return {
     status: sub.subscriptionStatus,
@@ -220,7 +254,9 @@ async function getSubscriptionInfo(userId) {
     ssoUser: isSso,
     hasAccess: isSso || paid || freeAccess,
     lessonsPassed,
-    freeLessonsLimit: FREE_LESSONS_LIMIT,
+    freeLessonsLimit: effectiveLimit,
+    freeLessonsBaseLimit: FREE_LESSONS_LIMIT,
+    freeLessonsBonus: bonusLessons,
     freeLessonsRemaining,
     stripeCustomerId: sub.stripeCustomerId,
     stripeSubscriptionId: sub.stripeSubscriptionId,
@@ -726,6 +762,57 @@ app.post('/api/progress/achievement', authMiddleware, async (req, res) => {
   } catch (err) {
     console.error('Achievement error:', err)
     res.status(500).json({ error: 'Error al guardar logro.' })
+  }
+})
+
+// ─── EXPLORER CHALLENGE: STATUS ──────────────────────
+// Returns which of the 5 skill types the user has tried, whether the challenge
+// is completed, and whether the +10 lesson bonus has already been claimed.
+const EXPLORER_SKILLS = ['grammar', 'reading', 'listening', 'writing', 'speaking']
+
+app.get('/api/explorer-challenge', authMiddleware, async (req, res) => {
+  try {
+    const userId = req.user.id
+    const done = await getExplorerSkills(userId)
+    const skillsDone = EXPLORER_SKILLS.filter(s => done.includes(s))
+    const completed = skillsDone.length >= EXPLORER_SKILLS.length
+    const claimed = await hasExplorerBonus(userId)
+    res.json({
+      skills: EXPLORER_SKILLS,
+      skillsDone,
+      completed,
+      claimed,
+      bonus: EXPLORER_CHALLENGE_BONUS,
+    })
+  } catch (err) {
+    console.error('Explorer challenge status error:', err)
+    res.status(500).json({ error: 'Error al obtener el reto explorador.' })
+  }
+})
+
+// ─── EXPLORER CHALLENGE: CLAIM BONUS ─────────────────
+// Awards +10 free lessons once the user has completed ≥1 exercise in each
+// of the 5 skill types. Tracked via the schule_achievements table.
+app.post('/api/explorer-challenge/claim', authMiddleware, async (req, res) => {
+  try {
+    const userId = req.user.id
+    const alreadyClaimed = await hasExplorerBonus(userId)
+    if (alreadyClaimed) {
+      return res.json({ ok: true, alreadyClaimed: true, bonus: EXPLORER_CHALLENGE_BONUS })
+    }
+    const done = await getExplorerSkills(userId)
+    const missing = EXPLORER_SKILLS.filter(s => !done.includes(s))
+    if (missing.length > 0) {
+      return res.status(400).json({ error: 'Challenge noch nicht abgeschlossen.', missing })
+    }
+    await pool.query(
+      'INSERT IGNORE INTO schule_achievements (userId, achievementId) VALUES (?, ?)',
+      [userId, EXPLORER_CHALLENGE_ID]
+    )
+    res.json({ ok: true, alreadyClaimed: false, bonus: EXPLORER_CHALLENGE_BONUS })
+  } catch (err) {
+    console.error('Explorer challenge claim error:', err)
+    res.status(500).json({ error: 'Error al reclamar bonificación.' })
   }
 })
 

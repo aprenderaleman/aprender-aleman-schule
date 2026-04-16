@@ -4,7 +4,11 @@ import { getItem, setItem } from '../utils/storage'
 const ThemeContext = createContext(null)
 
 export function ThemeProvider({ children }) {
-  const [darkMode, setDarkMode] = useState(() => getItem('dark_mode') || false)
+  // Dark mode is the default. Only light if the user has explicitly opted out.
+  const [darkMode, setDarkMode] = useState(() => {
+    const stored = getItem('dark_mode')
+    return stored === null || stored === undefined ? true : !!stored
+  })
 
   useEffect(() => {
     if (darkMode) {

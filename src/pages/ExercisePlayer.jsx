@@ -10,6 +10,7 @@ import ReadingExercise from '../components/Exercises/ReadingExercise'
 import ListeningExercise from '../components/Exercises/ListeningExercise'
 import WritingExercise from '../components/Exercises/WritingExercise'
 import SpeakingExercise from '../components/Exercises/SpeakingExercise'
+import SkillSuggestion from '../components/Exercises/SkillSuggestion'
 import Confetti from '../components/UI/Confetti'
 import Modal from '../components/UI/Modal'
 import ProgressBar from '../components/UI/ProgressBar'
@@ -231,6 +232,12 @@ export default function ExercisePlayer() {
                   </Button>
                 )}
               </div>
+
+              {/* Skill suggestion: nudge toward an unexplored skill type */}
+              <SkillSuggestion
+                currentType={exercise.type}
+                exerciseHistory={progress.exerciseHistory || []}
+              />
             </motion.div>
           )}
         </AnimatePresence>

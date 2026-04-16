@@ -11,6 +11,23 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/logo.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Dark mode by default. Applied before React mounts to avoid a light flash. -->
+    <script>
+      (function () {
+        try {
+          var stored = localStorage.getItem('dark_mode');
+          var dark = stored === null || stored === undefined ? true : JSON.parse(stored);
+          if (dark) document.documentElement.classList.add('dark');
+        } catch (e) {
+          document.documentElement.classList.add('dark');
+        }
+      })();
+    </script>
+    <style>
+      /* Prevent white flash before the theme script runs */
+      html { background-color: #111827; }
+      html:not(.dark) { background-color: #f9fafb; }
+    </style>
     <meta name="description" content="Schule - Dein Online-Klassenraum. Lerne Deutsch interaktiv mit KI, Übungen, Karteikarten und personalisiertem Feedback." />
     <title>Schule - Dein Online-Klassenraum</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
