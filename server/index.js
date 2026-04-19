@@ -2683,12 +2683,25 @@ app.get('/{*splat}', (req, res, next) => {
 // clause no longer matches any rows.
 ;(async () => {
   try {
-    // 1. Identify SCHULE-only user IDs (those with ssoUser=0 who still have role='student')
+    // Identify SCHULE-only users who still have role='student'.
+    // A user is SCHULE-only if:
+    //   a) They have ssoUser=0 in schule_subscriptions, OR
+    //   b) They have a schule_progress record but NO schule_subscriptions
+    //      (admin-created SCHULE users that predate the subscription system)
+    // A user is an ACADEMY student if they have ssoUser=1 — those are NEVER touched.
+    // Users with NO schule_progress AND NO schule_subscriptions are pure academy
+    // users who never touched SCHULE — also never touched.
     const [schuleUsers] = await pool.query(
       `SELECT u.id, u.studentId
        FROM users u
-       INNER JOIN schule_subscriptions sub ON sub.userId = u.id AND sub.ssoUser = 0
-       WHERE u.role = 'student'`
+       WHERE u.role = 'student'
+         AND u.id NOT IN (SELECT userId FROM schule_subscriptions WHERE ssoUser = 1)
+         AND (
+           u.id IN (SELECT userId FROM schule_subscriptions WHERE ssoUser = 0)
+           OR
+           (u.id IN (SELECT userId FROM schule_progress)
+            AND u.id NOT IN (SELECT userId FROM schule_subscriptions))
+         )`
     )
 
     if (schuleUsers.length === 0) {
