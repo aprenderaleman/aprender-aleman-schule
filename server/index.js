@@ -2675,6 +2675,59 @@ app.get('/{*splat}', (req, res, next) => {
   }
 })()
 
+// ─── AUTO-MIGRATION: Separate SCHULE-only users from academy ────────
+// SCHULE-only users (ssoUser=0 in schule_subscriptions) should NOT have
+// a record in the `students` table (which belongs to the academy app) and
+// should use role='schule_student' instead of 'student'.
+// This migration runs once; subsequent runs are no-ops because the WHERE
+// clause no longer matches any rows.
+;(async () => {
+  try {
+    // 1. Identify SCHULE-only user IDs (those with ssoUser=0 who still have role='student')
+    const [schuleUsers] = await pool.query(
+      `SELECT u.id, u.studentId
+       FROM users u
+       INNER JOIN schule_subscriptions sub ON sub.userId = u.id AND sub.ssoUser = 0
+       WHERE u.role = 'student'`
+    )
+
+    if (schuleUsers.length === 0) {
+      console.log('[migration] No SCHULE-only users to migrate (already done or none exist).')
+      return
+    }
+
+    console.log(`[migration] Migrating ${schuleUsers.length} SCHULE-only users out of academy tables…`)
+
+    const conn = await pool.getConnection()
+    await conn.beginTransaction()
+    try {
+      await conn.query('SET FOREIGN_KEY_CHECKS=0')
+
+      for (const u of schuleUsers) {
+        // Update role to 'schule_student'
+        await conn.query("UPDATE users SET role = 'schule_student', studentId = NULL WHERE id = ?", [u.id])
+
+        // Delete the orphan students record (if it exists)
+        if (u.studentId) {
+          await conn.query('DELETE FROM students WHERE id = ?', [u.studentId])
+        }
+      }
+
+      await conn.query('SET FOREIGN_KEY_CHECKS=1')
+      await conn.commit()
+      conn.release()
+
+      console.log(`[migration] Successfully migrated ${schuleUsers.length} users: role → schule_student, removed students records.`)
+    } catch (txErr) {
+      await conn.rollback()
+      conn.release()
+      throw txErr
+    }
+  } catch (err) {
+    console.error('[migration] SCHULE user separation error:', err.message)
+  }
+})()
+
 const PORT = process.env.PORT || process.env.API_PORT || 3001
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`)
