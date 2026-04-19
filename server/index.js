@@ -553,6 +553,119 @@ app.get('/api/auth/sso-verify', async (req, res) => {
   }
 })
 
+// ─── B2C INTEGRATION: one-shot SSO link for active b2c students ──────
+// Called server-to-server by b2c.aprender-aleman.de whenever a b2c
+// student needs a direct-link to auto-login into Schule. Guarantees:
+//
+//   1. User exists in MySQL — created on-demand if not (same flow as
+//      /register, but with a random unguessable password and ssoUser=1).
+//   2. schule_subscriptions row is upserted to status='active' with a
+//      100-year trial, matching the SSO flow. Free access as long as
+//      b2c keeps calling this endpoint.
+//   3. Returns an SSO JWT + the /auto-login redirect URL the student
+//      should be sent to. Token expires in 5 minutes — one-shot.
+//
+// Auth: shared secret in env.B2C_SYNC_SECRET (separate from SSO_SECRET).
+// Both b2c and Schule must have the same value set.
+//
+// Body: { email, full_name?, phone?, secret }
+// Returns: { ssoToken, userId, redirectUrl }
+app.post('/api/b2c/sso-link', async (req, res) => {
+  try {
+    const { email, full_name, phone, secret } = req.body || {}
+
+    const B2C_SYNC_SECRET = process.env.B2C_SYNC_SECRET
+    if (!B2C_SYNC_SECRET) {
+      return res.status(500).json({ error: 'B2C_SYNC_SECRET no configurado en Schule.' })
+    }
+    if (secret !== B2C_SYNC_SECRET) {
+      return res.status(403).json({ error: 'Acceso denegado.' })
+    }
+    if (!email || typeof email !== 'string') {
+      return res.status(400).json({ error: 'email es obligatorio.' })
+    }
+
+    const normEmail = email.trim().toLowerCase()
+
+    // 1. Look up or create the user
+    let [users] = await pool.query(
+      'SELECT id, fullName, email, status FROM users WHERE email = ? LIMIT 1',
+      [normEmail]
+    )
+
+    let userId
+    if (users.length > 0) {
+      userId = users[0].id
+      // Re-activate if inactive (edge case: previously disabled user)
+      if (users[0].status !== 'active') {
+        await pool.query(
+          'UPDATE users SET status = ?, updatedAt = NOW() WHERE id = ?',
+          ['active', userId]
+        )
+      }
+    } else {
+      // Create a schule-only user with a random unguessable password.
+      // They log in via SSO, so this password is never used — we use 48
+      // hex chars of randomness + bcrypt at the default cost.
+      userId = (typeof crypto !== 'undefined' && crypto.randomUUID)
+        ? crypto.randomUUID()
+        : require('crypto').randomUUID()
+      const randomPassword = require('crypto').randomBytes(48).toString('hex')
+      const hashed = await bcrypt.hash(randomPassword, 10)
+      const now = new Date()
+
+      const conn = await pool.getConnection()
+      await conn.beginTransaction()
+      try {
+        await conn.query('SET FOREIGN_KEY_CHECKS=0')
+        await conn.query(
+          'INSERT INTO users (id, fullName, email, password, role, status, studentId, createdAt, updatedAt) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
+          [userId, (full_name || 'Estudiante').trim(), normEmail, hashed, 'schule_student', 'active', null, now, now]
+        )
+        await conn.query('SET FOREIGN_KEY_CHECKS=1')
+        await conn.query('INSERT INTO schule_progress (userId) VALUES (?)', [userId])
+        await conn.commit()
+      } catch (txErr) {
+        await conn.rollback()
+        throw txErr
+      } finally {
+        conn.release()
+      }
+    }
+
+    // 2. Upsert subscription: full access for 100 years (b2c re-asserts
+    //    this every call; if b2c stops calling → we can add a cleanup
+    //    job later, but for now SSO users never churn).
+    await pool.query(
+      `INSERT INTO schule_subscriptions (userId, trialEndsAt, subscriptionStatus, ssoUser)
+       VALUES (?, DATE_ADD(NOW(), INTERVAL 100 YEAR), 'active', 1)
+       ON DUPLICATE KEY UPDATE ssoUser = 1, subscriptionStatus = 'active',
+                               trialEndsAt = DATE_ADD(NOW(), INTERVAL 100 YEAR)`,
+      [userId]
+    )
+
+    // 3. Generate the SSO token
+    const ssoToken = jwt.sign(
+      { userId, sso: true },
+      JWT_SECRET,
+      { expiresIn: '5m' }
+    )
+
+    // 4. Return the ready-to-use redirect URL. The frontend at
+    //    schule.aprender-aleman.de/auto-login?token=... calls
+    //    /api/auth/sso-verify automatically on mount.
+    const origin = req.headers['x-forwarded-host']
+      ? `https://${req.headers['x-forwarded-host']}`
+      : (req.headers.origin || 'https://schule.aprender-aleman.de')
+    const redirectUrl = `${origin.replace(/\/$/, '')}/auto-login?token=${ssoToken}`
+
+    res.json({ ssoToken, userId, redirectUrl })
+  } catch (err) {
+    console.error('B2C SSO-link error:', err)
+    res.status(500).json({ error: 'Error interno del servidor.' })
+  }
+})
+
 // ─── REGISTER ────────────────────────────────────────
 // SCHULE-only registration.  Uses role = 'schule_student' so that these
 // users do NOT appear in the academy app (app.aprender-aleman.de), which
