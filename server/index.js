@@ -2683,26 +2683,81 @@ app.get('/{*splat}', (req, res, next) => {
 // clause no longer matches any rows.
 ;(async () => {
   try {
-    // Identify SCHULE-only users who still have role='student'.
-    // A user is SCHULE-only if:
-    //   a) They have ssoUser=0 in schule_subscriptions, OR
-    //   b) They have a schule_progress record but NO schule_subscriptions
-    //      (admin-created SCHULE users that predate the subscription system)
-    // A user is an ACADEMY student if they have ssoUser=1 — those are NEVER touched.
-    // Users with NO schule_progress AND NO schule_subscriptions are pure academy
-    // users who never touched SCHULE — also never touched.
-    const [schuleUsers] = await pool.query(
-      `SELECT u.id, u.studentId
-       FROM users u
-       WHERE u.role = 'student'
-         AND u.id NOT IN (SELECT userId FROM schule_subscriptions WHERE ssoUser = 1)
-         AND (
-           u.id IN (SELECT userId FROM schule_subscriptions WHERE ssoUser = 0)
-           OR
-           (u.id IN (SELECT userId FROM schule_progress)
-            AND u.id NOT IN (SELECT userId FROM schule_subscriptions))
-         )`
-    )
+    // ── Step 1: Discover the group-membership junction table ─────────
+    // The academy app (Prisma) links students to groups via a junction table
+    // (e.g. _GroupToStudent, _GroupStudents, group_members, etc.).
+    // We find it dynamically by checking INFORMATION_SCHEMA for tables that
+    // reference students.id via a foreign key.
+    let groupJunctionTable = null
+    let groupStudentCol = null
+    try {
+      const [fks] = await pool.query(
+        `SELECT TABLE_NAME, COLUMN_NAME
+         FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE
+         WHERE REFERENCED_TABLE_NAME = 'students'
+           AND REFERENCED_COLUMN_NAME = 'id'
+           AND TABLE_NAME != 'users'`
+      )
+      // Look for a junction table (contains 'group' or 'Group' in name)
+      for (const fk of fks) {
+        if (/group/i.test(fk.TABLE_NAME)) {
+          groupJunctionTable = fk.TABLE_NAME
+          groupStudentCol = fk.COLUMN_NAME
+          break
+        }
+      }
+      // Fallback: try common Prisma junction names directly
+      if (!groupJunctionTable) {
+        const candidates = ['_GroupToStudent', '_GroupStudents', 'group_members', '_ClassToStudent']
+        for (const t of candidates) {
+          try {
+            await pool.query(`SELECT 1 FROM \`${t}\` LIMIT 1`)
+            // Table exists — figure out the student column
+            const [cols] = await pool.query(`SHOW COLUMNS FROM \`${t}\``)
+            const sCol = cols.find(c => /student|B/i.test(c.Field))
+            if (sCol) { groupJunctionTable = t; groupStudentCol = sCol.Field; break }
+          } catch { /* table doesn't exist */ }
+        }
+      }
+    } catch (e) {
+      console.warn('[migration] Could not inspect foreign keys:', e.message)
+    }
+
+    console.log(`[migration] Group junction table: ${groupJunctionTable || 'NOT FOUND'}, column: ${groupStudentCol || 'N/A'}`)
+
+    // ── Step 2: Find SCHULE-only users ──────────────────────────────
+    // Strategy: users with role='student' who are NOT academy students.
+    // An academy student is one who:
+    //   - Has ssoUser=1 in schule_subscriptions, OR
+    //   - Is assigned to a group in the academy's junction table
+    let query
+    if (groupJunctionTable && groupStudentCol) {
+      // We found the groups table → use it as the definitive differentiator.
+      // Users with role='student' who are NOT in any group AND NOT ssoUser=1
+      // are SCHULE-only users.
+      query = `
+        SELECT u.id, u.studentId
+        FROM users u
+        WHERE u.role = 'student'
+          AND u.id NOT IN (SELECT userId FROM schule_subscriptions WHERE ssoUser = 1)
+          AND (u.studentId IS NULL OR u.studentId NOT IN (
+            SELECT \`${groupStudentCol}\` FROM \`${groupJunctionTable}\`
+          ))`
+    } else {
+      // Fallback: no group table found. Use schule_subscriptions + schule_progress.
+      query = `
+        SELECT u.id, u.studentId
+        FROM users u
+        WHERE u.role = 'student'
+          AND u.id NOT IN (SELECT userId FROM schule_subscriptions WHERE ssoUser = 1)
+          AND (
+            u.id IN (SELECT userId FROM schule_subscriptions WHERE ssoUser = 0)
+            OR (u.id IN (SELECT userId FROM schule_progress)
+                AND u.id NOT IN (SELECT userId FROM schule_subscriptions))
+          )`
+    }
+
+    const [schuleUsers] = await pool.query(query)
 
     if (schuleUsers.length === 0) {
       console.log('[migration] No SCHULE-only users to migrate (already done or none exist).')
@@ -2710,6 +2765,7 @@ app.get('/{*splat}', (req, res, next) => {
     }
 
     console.log(`[migration] Migrating ${schuleUsers.length} SCHULE-only users out of academy tables…`)
+    schuleUsers.forEach(u => console.log(`  → ${u.id} (studentId: ${u.studentId || 'NULL'})`))
 
     const conn = await pool.getConnection()
     await conn.beginTransaction()
@@ -2717,10 +2773,7 @@ app.get('/{*splat}', (req, res, next) => {
       await conn.query('SET FOREIGN_KEY_CHECKS=0')
 
       for (const u of schuleUsers) {
-        // Update role to 'schule_student'
         await conn.query("UPDATE users SET role = 'schule_student', studentId = NULL WHERE id = ?", [u.id])
-
-        // Delete the orphan students record (if it exists)
         if (u.studentId) {
           await conn.query('DELETE FROM students WHERE id = ?', [u.studentId])
         }
