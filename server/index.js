@@ -1116,6 +1116,160 @@ app.post('/api/admin/users', authMiddleware, adminMiddleware, async (req, res) =
   }
 })
 
+// ─── ADMIN: SCHULE USER MIGRATION ─────────────────────
+// GET  → diagnostic: shows all tables, group junction, and users to migrate
+// POST → executes the migration
+app.get('/api/admin/migrate-schule-users', authMiddleware, adminMiddleware, async (req, res) => {
+  try {
+    // 1. List ALL tables in the database
+    const [allTables] = await pool.query('SHOW TABLES')
+    const tableNames = allTables.map(r => Object.values(r)[0])
+
+    // 2. Find group junction tables (anything with 'group' or 'Group')
+    const groupTables = tableNames.filter(t => /group/i.test(t))
+
+    // 3. Try to find the student-group junction
+    let junctionInfo = null
+    for (const t of groupTables) {
+      try {
+        const [cols] = await pool.query(`SHOW COLUMNS FROM \`${t}\``)
+        const [count] = await pool.query(`SELECT COUNT(*) as n FROM \`${t}\``)
+        junctionInfo = { table: t, columns: cols.map(c => c.Field), rows: count[0].n }
+        break
+      } catch { /* skip */ }
+    }
+
+    // 4. Find users with role='student' who are NOT ssoUser=1
+    const [candidates] = await pool.query(
+      `SELECT u.id, u.fullName, u.email, u.studentId,
+        (SELECT sub.ssoUser FROM schule_subscriptions sub WHERE sub.userId = u.id LIMIT 1) as ssoUser,
+        (SELECT COUNT(*) FROM schule_progress p WHERE p.userId = u.id) as hasProgress,
+        (SELECT COUNT(*) FROM schule_subscriptions sub WHERE sub.userId = u.id) as hasSub
+       FROM users u
+       WHERE u.role = 'student'
+         AND u.id NOT IN (SELECT userId FROM schule_subscriptions WHERE ssoUser = 1)
+       ORDER BY u.fullName`
+    )
+
+    // 5. Check which of these have group membership
+    let withGroups = []
+    let withoutGroups = [...candidates]
+    if (junctionInfo) {
+      // Try to match students in the junction table
+      for (const c of candidates) {
+        if (c.studentId) {
+          try {
+            const col = junctionInfo.columns.find(col => /B|student/i.test(col)) || junctionInfo.columns[1]
+            const [match] = await pool.query(`SELECT 1 FROM \`${junctionInfo.table}\` WHERE \`${col}\` = ? LIMIT 1`, [c.studentId])
+            if (match.length > 0) {
+              withGroups.push(c)
+            }
+          } catch { /* ignore */ }
+        }
+      }
+      withoutGroups = candidates.filter(c => !withGroups.find(g => g.id === c.id))
+    }
+
+    res.json({
+      allTables: tableNames,
+      groupTables,
+      junctionInfo,
+      summary: {
+        totalCandidates: candidates.length,
+        withGroups: withGroups.length,
+        withoutGroups: withoutGroups.length,
+      },
+      willMigrate: withoutGroups.map(u => ({ id: u.id, name: u.fullName, email: u.email, studentId: u.studentId })),
+      willKeep: withGroups.map(u => ({ id: u.id, name: u.fullName, email: u.email })),
+    })
+  } catch (err) {
+    console.error('Migration diagnostic error:', err)
+    res.status(500).json({ error: err.message })
+  }
+})
+
+app.post('/api/admin/migrate-schule-users', authMiddleware, adminMiddleware, async (req, res) => {
+  try {
+    // Find ALL users with role='student' who are NOT ssoUser=1
+    const [candidates] = await pool.query(
+      `SELECT u.id, u.studentId
+       FROM users u
+       WHERE u.role = 'student'
+         AND u.id NOT IN (SELECT userId FROM schule_subscriptions WHERE ssoUser = 1)`
+    )
+
+    if (candidates.length === 0) {
+      return res.json({ ok: true, migrated: 0, message: 'No users to migrate.' })
+    }
+
+    // Try to detect group junction table to protect academy students
+    const [allTables] = await pool.query('SHOW TABLES')
+    const tableNames = allTables.map(r => Object.values(r)[0])
+    const groupTables = tableNames.filter(t => /group/i.test(t))
+
+    // Find students who ARE in groups (these are academy students, protect them)
+    const protectedStudentIds = new Set()
+    for (const t of groupTables) {
+      try {
+        const [cols] = await pool.query(`SHOW COLUMNS FROM \`${t}\``)
+        const studentCol = cols.find(c => /B|student/i.test(c.Field))
+        if (studentCol) {
+          const [rows] = await pool.query(`SELECT DISTINCT \`${studentCol.Field}\` as sid FROM \`${t}\``)
+          rows.forEach(r => protectedStudentIds.add(r.sid))
+        }
+      } catch { /* skip */ }
+    }
+
+    // Filter: only migrate users whose studentId is NOT in any group
+    const toMigrate = candidates.filter(u => !u.studentId || !protectedStudentIds.has(u.studentId))
+    const protected_ = candidates.filter(u => u.studentId && protectedStudentIds.has(u.studentId))
+
+    if (toMigrate.length === 0) {
+      return res.json({ ok: true, migrated: 0, protected: protected_.length, message: 'All candidates are in groups (academy students).' })
+    }
+
+    // Execute migration
+    const conn = await pool.getConnection()
+    await conn.beginTransaction()
+    try {
+      await conn.query('SET FOREIGN_KEY_CHECKS=0')
+      for (const u of toMigrate) {
+        await conn.query("UPDATE users SET role = 'schule_student', studentId = NULL WHERE id = ?", [u.id])
+        if (u.studentId) {
+          await conn.query('DELETE FROM students WHERE id = ?', [u.studentId])
+        }
+      }
+      await conn.query('SET FOREIGN_KEY_CHECKS=1')
+      await conn.commit()
+      conn.release()
+    } catch (txErr) {
+      await conn.rollback()
+      conn.release()
+      throw txErr
+    }
+
+    // Auto-create schule_subscriptions for migrated users that don't have one
+    for (const u of toMigrate) {
+      try {
+        await pool.query(
+          `INSERT IGNORE INTO schule_subscriptions (userId, trialEndsAt, subscriptionStatus, ssoUser) VALUES (?, DATE_ADD(NOW(), INTERVAL 5 DAY), 'trialing', 0)`,
+          [u.id]
+        )
+      } catch { /* ignore */ }
+    }
+
+    res.json({
+      ok: true,
+      migrated: toMigrate.length,
+      protected: protected_.length,
+      migratedUsers: toMigrate.map(u => u.id),
+    })
+  } catch (err) {
+    console.error('Migration execute error:', err)
+    res.status(500).json({ error: err.message })
+  }
+})
+
 // ─── HEALTH CHECK ─────────────────────────────────────
 app.get('/api/health', async (req, res) => {
   try {
