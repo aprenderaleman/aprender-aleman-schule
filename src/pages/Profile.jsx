@@ -160,7 +160,7 @@ export default function Profile() {
         </motion.div>
 
         {/* Subscription */}
-        {user?.role === 'student' && (
+        {(user?.role === 'student' || user?.role === 'schule_student') && (
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}

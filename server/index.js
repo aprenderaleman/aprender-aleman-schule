@@ -344,9 +344,9 @@ app.post('/api/auth/login', loginRateLimit, async (req, res) => {
       { expiresIn: '30d' }
     )
 
-    // Get subscription info
+    // Get subscription info (for both academy students and SCHULE-only users)
     let subscription = null
-    if (user.role === 'student') {
+    if (user.role === 'student' || user.role === 'schule_student') {
       const sub = await getSubscriptionInfo(user.id)
       if (sub) {
         subscription = { status: sub.status, trialEndsAt: sub.trialEndsAt, trialActive: sub.trialActive, paid: sub.paid, ssoUser: sub.ssoUser, hasAccess: sub.hasAccess }
@@ -394,13 +394,12 @@ app.get('/api/auth/me', authMiddleware, async (req, res) => {
     // Auto-create schule_progress if missing (e.g. user registered on the other app)
     await pool.query('INSERT IGNORE INTO schule_progress (userId) VALUES (?)', [user.id])
 
-    // Get subscription info
+    // Get subscription info (academy students + schule-only users)
     let subscription = null
-    if (user.role === 'student') {
+    if (user.role === 'student' || user.role === 'schule_student') {
       subscription = await getSubscriptionInfo(user.id)
       // Auto-create subscription record for SSO users (from aprender-aleman.de) who don't have one
       if (!subscription) {
-        // Check if user came via SSO by looking if they existed before schule app
         // SSO users are those with studentId already set from the other app
         // For now, they'll get a record created when they first use SSO
       }
@@ -421,6 +420,8 @@ app.get('/api/auth/me', authMiddleware, async (req, res) => {
         paid: subscription.paid,
         ssoUser: subscription.ssoUser,
         hasAccess: subscription.hasAccess,
+        freeLessonsLimit: subscription.freeLessonsLimit,
+        freeLessonsRemaining: subscription.freeLessonsRemaining,
       } : null,
     })
   } catch (err) {
@@ -553,6 +554,10 @@ app.get('/api/auth/sso-verify', async (req, res) => {
 })
 
 // ─── REGISTER ────────────────────────────────────────
+// SCHULE-only registration.  Uses role = 'schule_student' so that these
+// users do NOT appear in the academy app (app.aprender-aleman.de), which
+// queries WHERE role = 'student'.  No `students` record is created —
+// level defaults to A1 via COALESCE / fallback.
 app.post('/api/auth/register', loginRateLimit, async (req, res) => {
   try {
     const { fullName, email, password } = req.body
@@ -569,30 +574,21 @@ app.post('/api/auth/register', loginRateLimit, async (req, res) => {
       return res.status(409).json({ error: 'Este correo ya está registrado.' })
     }
 
-    // Generate UUIDs (matching Prisma format)
     const { randomUUID } = await import('crypto')
     const userId = randomUUID()
-    const studentId = randomUUID()
     const hashedPassword = await bcrypt.hash(password, 10)
     const now = new Date()
 
-    // Use transaction with FK checks disabled to handle circular dependency
-    // (students.userId → users.id AND users.studentId → students.id)
     const conn = await pool.getConnection()
     await conn.beginTransaction()
     try {
       await conn.query('SET FOREIGN_KEY_CHECKS=0')
 
-      // Create user record
+      // Create user with role 'schule_student' and NO studentId
+      // (no students record → invisible to the academy app)
       await conn.query(
         'INSERT INTO users (id, fullName, email, password, role, status, studentId, createdAt, updatedAt) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
-        [userId, fullName.trim(), email.trim().toLowerCase(), hashedPassword, 'student', 'active', studentId, now, now]
-      )
-
-      // Create student record
-      await conn.query(
-        'INSERT INTO students (id, level, userId, classType) VALUES (?, ?, ?, ?)',
-        [studentId, 'a1', userId, 'group']
+        [userId, fullName.trim(), email.trim().toLowerCase(), hashedPassword, 'schule_student', 'active', null, now, now]
       )
 
       await conn.query('SET FOREIGN_KEY_CHECKS=1')
@@ -603,7 +599,7 @@ app.post('/api/auth/register', loginRateLimit, async (req, res) => {
         [userId]
       )
 
-      // Create subscription with 5-day free trial
+      // Create subscription (free trial, not SSO)
       const trialEndsAt2 = new Date(Date.now() + 5 * 24 * 60 * 60 * 1000)
       await conn.query(
         'INSERT INTO schule_subscriptions (userId, trialEndsAt, subscriptionStatus, ssoUser) VALUES (?, ?, ?, ?)',
@@ -620,9 +616,9 @@ app.post('/api/auth/register', loginRateLimit, async (req, res) => {
 
     const trialEndsAt = new Date(Date.now() + 5 * 24 * 60 * 60 * 1000)
 
-    // Generate JWT
+    // Generate JWT — note: studentId is null, level defaults to A1
     const token = jwt.sign(
-      { id: userId, email: email.trim().toLowerCase(), fullName: fullName.trim(), role: 'student', studentId, level: 'A1' },
+      { id: userId, email: email.trim().toLowerCase(), fullName: fullName.trim(), role: 'schule_student', studentId: null, level: 'A1' },
       JWT_SECRET,
       { expiresIn: '30d' }
     )
@@ -630,7 +626,7 @@ app.post('/api/auth/register', loginRateLimit, async (req, res) => {
     res.status(201).json({
       token,
       user: {
-        id: userId, name: fullName.trim(), email: email.trim().toLowerCase(), role: 'student', level: 'A1', studentId, classType: 'group',
+        id: userId, name: fullName.trim(), email: email.trim().toLowerCase(), role: 'schule_student', level: 'A1', studentId: null, classType: null,
         subscription: { status: 'trialing', trialEndsAt, trialActive: true, paid: false, ssoUser: false, hasAccess: true },
       },
     })
@@ -827,13 +823,13 @@ function adminMiddleware(req, res, next) {
 // ─── ADMIN: DASHBOARD STATS ─────────────────────────
 app.get('/api/admin/stats', authMiddleware, adminMiddleware, async (req, res) => {
   try {
-    const [totalUsers] = await pool.query("SELECT COUNT(*) as n FROM users WHERE role = 'student'")
-    const [activeUsers] = await pool.query("SELECT COUNT(*) as n FROM users WHERE role = 'student' AND status = 'active'")
-    const [inactiveUsers] = await pool.query("SELECT COUNT(*) as n FROM users WHERE role = 'student' AND status = 'inactive'")
+    const [totalUsers] = await pool.query("SELECT COUNT(*) as n FROM users WHERE role IN ('student','schule_student')")
+    const [activeUsers] = await pool.query("SELECT COUNT(*) as n FROM users WHERE role IN ('student','schule_student') AND status = 'active'")
+    const [inactiveUsers] = await pool.query("SELECT COUNT(*) as n FROM users WHERE role IN ('student','schule_student') AND status = 'inactive'")
 
     // Users by level
     const [byLevel] = await pool.query(
-      "SELECT UPPER(s.level) as level, COUNT(*) as count FROM students s JOIN users u ON s.userId = u.id WHERE u.role = 'student' AND u.status = 'active' GROUP BY s.level"
+      "SELECT UPPER(COALESCE(s.level, 'a1')) as level, COUNT(*) as count FROM users u LEFT JOIN students s ON u.studentId = s.id WHERE u.role IN ('student','schule_student') AND u.status = 'active' GROUP BY level"
     )
 
     // Exercise activity last 30 days
@@ -848,7 +844,7 @@ app.get('/api/admin/stats', authMiddleware, adminMiddleware, async (req, res) =>
       FROM schule_progress p
       JOIN users u ON u.id = p.userId
       LEFT JOIN students s ON u.studentId = s.id
-      WHERE u.role = 'student'
+      WHERE u.role IN ('student','schule_student')
       ORDER BY p.xp DESC LIMIT 10`
     )
 
@@ -864,7 +860,7 @@ app.get('/api/admin/stats', authMiddleware, adminMiddleware, async (req, res) =>
 
     // New registrations last 30 days
     const [registrationsByDay] = await pool.query(
-      "SELECT DATE(createdAt) as date, COUNT(*) as count FROM users WHERE role = 'student' AND createdAt >= DATE_SUB(NOW(), INTERVAL 30 DAY) GROUP BY DATE(createdAt) ORDER BY date"
+      "SELECT DATE(createdAt) as date, COUNT(*) as count FROM users WHERE role IN ('student','schule_student') AND createdAt >= DATE_SUB(NOW(), INTERVAL 30 DAY) GROUP BY DATE(createdAt) ORDER BY date"
     )
 
     // Total XP across platform
@@ -903,7 +899,7 @@ app.get('/api/admin/users', authMiddleware, adminMiddleware, async (req, res) =>
     const { search, level, status, page = 1, limit = 50 } = req.query
     const offset = (parseInt(page) - 1) * parseInt(limit)
 
-    let where = "WHERE u.role = 'student'"
+    let where = "WHERE u.role IN ('student','schule_student')"
     const params = []
 
     if (search) {
@@ -911,7 +907,7 @@ app.get('/api/admin/users', authMiddleware, adminMiddleware, async (req, res) =>
       params.push(`%${search}%`, `%${search}%`)
     }
     if (level && level !== 'Todos') {
-      where += " AND UPPER(s.level) = ?"
+      where += " AND UPPER(COALESCE(s.level, 'a1')) = ?"
       params.push(level.toUpperCase())
     }
     if (status && status !== 'Todos') {
@@ -926,12 +922,13 @@ app.get('/api/admin/users', authMiddleware, adminMiddleware, async (req, res) =>
 
     const [users] = await pool.query(
       `SELECT u.id, u.fullName, u.email, u.role, u.status, u.createdAt, u.studentId,
-        UPPER(s.level) as level, s.classType,
+        UPPER(COALESCE(s.level, 'A1')) as level, s.classType,
         COALESCE(p.xp, 0) as xp, COALESCE(p.streak, 0) as streak,
         COALESCE(p.skillGrammar, 0) as skillGrammar, COALESCE(p.skillReading, 0) as skillReading,
         COALESCE(p.skillListening, 0) as skillListening, COALESCE(p.skillWriting, 0) as skillWriting,
         p.lastActivityDate,
-        (SELECT COUNT(*) FROM schule_exercise_results r WHERE r.userId = u.id) as exerciseCount
+        (SELECT COUNT(*) FROM schule_exercise_results r WHERE r.userId = u.id) as exerciseCount,
+        IF(u.role = 'schule_student', 'schule', 'academy') as origin
       FROM users u
       LEFT JOIN students s ON u.studentId = s.id
       LEFT JOIN schule_progress p ON p.userId = u.id
@@ -955,7 +952,8 @@ app.get('/api/admin/users/:userId', authMiddleware, adminMiddleware, async (req,
 
     const [users] = await pool.query(
       `SELECT u.id, u.fullName, u.email, u.role, u.status, u.createdAt, u.studentId,
-        UPPER(s.level) as level, s.classType
+        UPPER(COALESCE(s.level, 'A1')) as level, s.classType,
+        IF(u.role = 'schule_student', 'schule', 'academy') as origin
       FROM users u
       LEFT JOIN students s ON u.studentId = s.id
       WHERE u.id = ? LIMIT 1`,
@@ -1033,6 +1031,15 @@ app.patch('/api/admin/users/:userId', authMiddleware, adminMiddleware, async (re
       const [stu] = await pool.query('SELECT id FROM students WHERE userId = ?', [userId])
       if (stu.length > 0) {
         await pool.query('UPDATE students SET level = ? WHERE userId = ?', [level.toLowerCase(), userId])
+      } else {
+        // schule_student without a students record — create one so level is persisted
+        const { randomUUID } = await import('crypto')
+        const newStudentId = randomUUID()
+        await pool.query('SET FOREIGN_KEY_CHECKS=0')
+        await pool.query('INSERT INTO students (id, level, userId, classType) VALUES (?, ?, ?, ?)',
+          [newStudentId, level.toLowerCase(), userId, null])
+        await pool.query('UPDATE users SET studentId = ? WHERE id = ?', [newStudentId, userId])
+        await pool.query('SET FOREIGN_KEY_CHECKS=1')
       }
     }
 
@@ -1066,6 +1073,7 @@ app.delete('/api/admin/users/:userId', authMiddleware, adminMiddleware, async (r
 })
 
 // ─── ADMIN: CREATE USER ─────────────────────────────
+// Users created from the SCHULE admin panel get role 'schule_student' (no students record).
 app.post('/api/admin/users', authMiddleware, adminMiddleware, async (req, res) => {
   try {
     const { fullName, email, password, level, status } = req.body
@@ -1077,15 +1085,29 @@ app.post('/api/admin/users', authMiddleware, adminMiddleware, async (req, res) =
 
     const { randomUUID } = await import('crypto')
     const userId = randomUUID()
-    const studentId = randomUUID()
     const hash = await bcrypt.hash(password, 10)
     const now = new Date()
 
-    await pool.query('INSERT INTO students (id, level, userId, classType) VALUES (?, ?, ?, ?)',
-      [studentId, (level || 'a1').toLowerCase(), userId, 'group'])
+    await pool.query('SET FOREIGN_KEY_CHECKS=0')
     await pool.query('INSERT INTO users (id, fullName, email, password, role, status, studentId, createdAt, updatedAt) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
-      [userId, fullName.trim(), email.trim().toLowerCase(), hash, 'student', status || 'active', studentId, now, now])
+      [userId, fullName.trim(), email.trim().toLowerCase(), hash, 'schule_student', status || 'active', null, now, now])
+    await pool.query('SET FOREIGN_KEY_CHECKS=1')
     await pool.query('INSERT INTO schule_progress (userId) VALUES (?)', [userId])
+
+    // Create subscription (trial)
+    const trialEndsAt = new Date(Date.now() + 5 * 24 * 60 * 60 * 1000)
+    await pool.query('INSERT INTO schule_subscriptions (userId, trialEndsAt, subscriptionStatus, ssoUser) VALUES (?, ?, ?, ?)',
+      [userId, trialEndsAt, 'trialing', 0])
+
+    // If admin set a level other than A1, create a students record to persist it
+    if (level && level.toLowerCase() !== 'a1') {
+      const studentId = randomUUID()
+      await pool.query('SET FOREIGN_KEY_CHECKS=0')
+      await pool.query('INSERT INTO students (id, level, userId, classType) VALUES (?, ?, ?, ?)',
+        [studentId, level.toLowerCase(), userId, null])
+      await pool.query('UPDATE users SET studentId = ? WHERE id = ?', [studentId, userId])
+      await pool.query('SET FOREIGN_KEY_CHECKS=1')
+    }
 
     res.status(201).json({ ok: true, userId })
   } catch (err) {
