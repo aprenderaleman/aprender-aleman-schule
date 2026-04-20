@@ -651,13 +651,17 @@ app.post('/api/b2c/sso-link', async (req, res) => {
       { expiresIn: '5m' }
     )
 
-    // 4. Return the ready-to-use redirect URL. The frontend at
-    //    schule.aprender-aleman.de/auto-login?token=... calls
-    //    /api/auth/sso-verify automatically on mount.
-    const origin = req.headers['x-forwarded-host']
-      ? `https://${req.headers['x-forwarded-host']}`
-      : (req.headers.origin || 'https://schule.aprender-aleman.de')
-    const redirectUrl = `${origin.replace(/\/$/, '')}/auto-login?token=${ssoToken}`
+    // 4. Return the ready-to-use redirect URL. The /auto-login page is
+    //    served by the FRONTEND (Vite on Vercel), NOT by this Express
+    //    backend. Use CLIENT_URL if set, otherwise derive from the
+    //    request host by stripping the "api-" prefix when present.
+    let frontendOrigin = process.env.CLIENT_URL
+    if (!frontendOrigin) {
+      const host = String(req.headers['x-forwarded-host'] || req.headers.host || 'schule.aprender-aleman.de')
+      const frontendHost = host.replace(/^api-/, '')
+      frontendOrigin = `https://${frontendHost}`
+    }
+    const redirectUrl = `${frontendOrigin.replace(/\/$/, '')}/auto-login?token=${ssoToken}`
 
     res.json({ ssoToken, userId, redirectUrl })
   } catch (err) {
