@@ -150,44 +150,81 @@ export default function AdminFinances() {
     setAgentRunning(false)
   }
 
-  const handleCsvUpload = async (file) => {
-    if (!file || !file.name.endsWith('.csv')) {
-      setUploadResult({ ok: false, error: 'Bitte eine CSV-Datei auswählen.' })
+  const handleCsvUpload = async (files) => {
+    // Normalize to array: accept a single File or a FileList/array
+    const fileArray = Array.isArray(files) ? files : (files?.length !== undefined ? Array.from(files) : [files])
+    const csvFiles = fileArray.filter(f => f && /\.csv$/i.test(f.name))
+
+    if (csvFiles.length === 0) {
+      setUploadResult({ ok: false, error: 'Bitte mindestens eine CSV-Datei auswählen.' })
       return
     }
+
     setUploading(true)
     setUploadResult(null)
-    try {
-      const text = await file.text()
-      const res = await fetch(`${API_URL}/api/admin/ads-report/upload`, {
-        method: 'POST',
-        headers: getAuthHeaders(),
-        body: JSON.stringify({ csvData: text }),
-      })
-      const result = await res.json()
-      if (res.ok) {
-        setUploadResult({ ok: true, ...result })
-        fetchAds()
-        fetchFinances()
-      } else {
-        setUploadResult({ ok: false, error: result.error })
+
+    const results = []
+    let totalRows = 0
+    const allMonths = new Set()
+    const errors = []
+
+    for (const file of csvFiles) {
+      try {
+        const text = await file.text()
+        const res = await fetch(`${API_URL}/api/admin/ads-report/upload`, {
+          method: 'POST',
+          headers: getAuthHeaders(),
+          body: JSON.stringify({ csvData: text }),
+        })
+        const result = await res.json()
+        if (res.ok) {
+          results.push({ file: file.name, ok: true, ...result })
+          totalRows += result.rowsImported || 0
+          ;(result.months || []).forEach(m => allMonths.add(m))
+        } else {
+          errors.push(`${file.name}: ${result.error || 'Unbekannter Fehler'}`)
+          results.push({ file: file.name, ok: false, error: result.error })
+        }
+      } catch (err) {
+        errors.push(`${file.name}: ${err.message}`)
+        results.push({ file: file.name, ok: false, error: err.message })
       }
-    } catch (err) {
-      setUploadResult({ ok: false, error: err.message })
     }
+
+    const successCount = results.filter(r => r.ok).length
+    if (successCount > 0) {
+      setUploadResult({
+        ok: true,
+        fileCount: successCount,
+        totalFiles: csvFiles.length,
+        rowsImported: totalRows,
+        months: Array.from(allMonths).sort(),
+        errors: errors.length > 0 ? errors : null,
+        results,
+      })
+      fetchAds()
+      fetchFinances()
+    } else {
+      setUploadResult({
+        ok: false,
+        error: errors.join(' · ') || 'Upload fehlgeschlagen.',
+        results,
+      })
+    }
+
     setUploading(false)
   }
 
   const handleDrop = (e) => {
     e.preventDefault()
     setDragOver(false)
-    const file = e.dataTransfer?.files?.[0]
-    if (file) handleCsvUpload(file)
+    const files = e.dataTransfer?.files
+    if (files && files.length > 0) handleCsvUpload(files)
   }
 
   const handleFileInput = (e) => {
-    const file = e.target.files?.[0]
-    if (file) handleCsvUpload(file)
+    const files = e.target.files
+    if (files && files.length > 0) handleCsvUpload(files)
     e.target.value = ''
   }
 
@@ -306,7 +343,8 @@ export default function AdminFinances() {
         <input
           ref={fileInputRef}
           type="file"
-          accept=".csv"
+          accept=".csv,text/csv"
+          multiple
           onChange={handleFileInput}
           className="hidden"
         />
@@ -321,10 +359,10 @@ export default function AdminFinances() {
           <div className="flex-1 text-center sm:text-left">
             <h3 className="text-base font-semibold text-gray-800 dark:text-gray-100">Google Ads Bericht hochladen</h3>
             <p className="text-sm text-gray-500 dark:text-gray-400 mt-0.5">
-              CSV-Datei hier ablegen oder <button onClick={() => fileInputRef.current?.click()} className="text-purple-500 font-semibold hover:underline">Datei auswählen</button>
+              Eine oder mehrere CSV-Dateien hier ablegen oder <button onClick={() => fileInputRef.current?.click()} className="text-purple-500 font-semibold hover:underline">Dateien auswählen</button>
             </p>
             <p className="text-xs text-gray-400 mt-1">
-              Exportiere den Bericht aus Google Ads (Kampagnen, Keywords, etc.) als CSV mit Datum, Kosten, Klicks, Impressionen, Conversions
+              Exportiere Berichte aus Google Ads (Kampagnen, Keywords, etc.) als CSV mit Datum, Kosten, Klicks, Impressionen, Conversions. Mehrere Dateien werden nacheinander verarbeitet.
             </p>
             {adsData?.lastUpload && (
               <p className="text-xs text-gray-400 mt-1">
@@ -351,26 +389,45 @@ export default function AdminFinances() {
               exit={{ opacity: 0, height: 0 }}
               className="mt-4"
             >
-              <div className={`rounded-xl p-3 flex items-center justify-between ${
+              <div className={`rounded-xl p-3 ${
                 uploadResult.ok
                   ? 'bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800'
                   : 'bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800'
               }`}>
-                <div className="flex items-center gap-2">
-                  {uploadResult.ok ? (
-                    <CheckCircle size={16} className="text-green-500" />
-                  ) : (
-                    <XCircle size={16} className="text-red-500" />
-                  )}
-                  <span className={`text-sm font-medium ${uploadResult.ok ? 'text-green-700 dark:text-green-400' : 'text-red-700 dark:text-red-400'}`}>
-                    {uploadResult.ok
-                      ? `${uploadResult.rowsImported} Zeilen importiert (${uploadResult.months?.join(', ')})`
-                      : uploadResult.error}
-                  </span>
+                <div className="flex items-start justify-between gap-2">
+                  <div className="flex items-start gap-2 flex-1 min-w-0">
+                    {uploadResult.ok ? (
+                      <CheckCircle size={16} className="text-green-500 shrink-0 mt-0.5" />
+                    ) : (
+                      <XCircle size={16} className="text-red-500 shrink-0 mt-0.5" />
+                    )}
+                    <div className={`text-sm font-medium min-w-0 flex-1 ${uploadResult.ok ? 'text-green-700 dark:text-green-400' : 'text-red-700 dark:text-red-400'}`}>
+                      {uploadResult.ok ? (
+                        <>
+                          <p>
+                            {uploadResult.fileCount > 1
+                              ? `${uploadResult.fileCount} von ${uploadResult.totalFiles} Dateien importiert`
+                              : `${uploadResult.rowsImported} Zeilen importiert`}
+                            {uploadResult.fileCount > 1 && ` · ${uploadResult.rowsImported} Zeilen gesamt`}
+                          </p>
+                          {uploadResult.months?.length > 0 && (
+                            <p className="text-xs opacity-80 mt-0.5">Monate: {uploadResult.months.join(', ')}</p>
+                          )}
+                          {uploadResult.errors?.length > 0 && (
+                            <p className="text-xs text-amber-600 dark:text-amber-400 mt-1">
+                              ⚠️ {uploadResult.errors.length} Datei(en) fehlgeschlagen: {uploadResult.errors.join(' · ')}
+                            </p>
+                          )}
+                        </>
+                      ) : (
+                        <p className="break-words">{uploadResult.error}</p>
+                      )}
+                    </div>
+                  </div>
+                  <button onClick={() => setUploadResult(null)} className="text-gray-400 hover:text-gray-600 shrink-0">
+                    <X size={14} />
+                  </button>
                 </div>
-                <button onClick={() => setUploadResult(null)} className="text-gray-400 hover:text-gray-600">
-                  <X size={14} />
-                </button>
               </div>
             </motion.div>
           )}
