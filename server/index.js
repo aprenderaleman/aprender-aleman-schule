@@ -1497,6 +1497,32 @@ function parseGoogleAdsCsv(csvText) {
   return rows
 }
 
+// Normalize various date formats to YYYY-MM-DD
+function normalizeDate(raw) {
+  if (!raw) return ''
+  const s = String(raw).trim().replace(/^"|"$/g, '')
+  if (!s) return ''
+  // Already ISO: 2024-12-01
+  if (/^\d{4}-\d{2}-\d{2}/.test(s)) return s.slice(0, 10)
+  // European: 01/12/2024, 01.12.2024, 01-12-2024
+  let m = s.match(/^(\d{1,2})[./-](\d{1,2})[./-](\d{4})/)
+  if (m) return `${m[3]}-${m[2].padStart(2, '0')}-${m[1].padStart(2, '0')}`
+  // US: 12/01/2024 — ambiguous; assume DD/MM if first > 12, otherwise MM/DD
+  // "Dec 1, 2024" or "Dez 1, 2024"
+  m = s.match(/^(\w{3,})\s+(\d{1,2}),?\s+(\d{4})/)
+  if (m) {
+    const months = { jan:1, feb:2, mar:3, apr:4, may:5, mai:5, jun:6, jul:7, aug:8, sep:9, sept:9, oct:10, okt:10, nov:11, dec:12, dez:12 }
+    const mo = months[m[1].slice(0,3).toLowerCase()]
+    if (mo) return `${m[3]}-${String(mo).padStart(2,'0')}-${m[2].padStart(2,'0')}`
+  }
+  // Fallback: let Date parse it
+  try {
+    const d = new Date(s)
+    if (!isNaN(d.getTime())) return d.toISOString().slice(0, 10)
+  } catch {}
+  return s // return original if nothing matched
+}
+
 function normalizeAdsRow(row) {
   // Map common Google Ads CSV column names (EN/DE) to our schema
   const find = (keys) => {
@@ -1509,7 +1535,7 @@ function normalizeAdsRow(row) {
   const cost = find(['Cost', 'Kosten', 'cost']) || '0'
   const costNum = parseFloat(cost.replace(/[^0-9.,\-]/g, '').replace(',', '.')) || 0
   return {
-    reportDate: find(['Day', 'Date', 'Tag', 'Datum', 'day', 'date']) || '',
+    reportDate: normalizeDate(find(['Day', 'Date', 'Tag', 'Datum', 'day', 'date'])),
     campaignName: find(['Campaign', 'Kampagne', 'campaignname', 'CampaignName']) || '',
     adGroupName: find(['AdGroup', 'Adgroup', 'AdGroupName', 'Anzeigengruppe', 'adgroup']) || '',
     keyword: find(['Keyword', 'SearchTerm', 'Suchbegriff', 'keyword']) || '',
@@ -2035,8 +2061,27 @@ app.post('/api/admin/ads-agent/run', authMiddleware, adminMiddleware, async (req
     // 1. Gather metrics from uploaded CSV data
     const today = new Date()
     const todayStr = today.toISOString().slice(0, 10)
-    const currentMonth = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}`
-    const sevenDaysAgo = new Date(today.getTime() - 7 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10)
+    let currentMonth = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}`
+
+    // Fall back to the latest month with data if current month is empty
+    const [latestMonthRow] = await pool.query(
+      "SELECT SUBSTRING(MAX(reportDate), 1, 7) as latestMonth FROM schule_ads_reports"
+    )
+    const latestMonth = latestMonthRow[0]?.latestMonth
+    if (latestMonth && latestMonth !== currentMonth) {
+      const [currCheck] = await pool.query(
+        "SELECT COUNT(*) as n FROM schule_ads_reports WHERE reportDate LIKE ?", [`${currentMonth}%`]
+      )
+      if (currCheck[0].n === 0) currentMonth = latestMonth
+    }
+
+    // Analyze the last 7 days of data available (not just last 7 calendar days)
+    const [recentRow] = await pool.query(
+      "SELECT DISTINCT reportDate FROM schule_ads_reports ORDER BY reportDate DESC LIMIT 7"
+    )
+    const sevenDaysAgo = recentRow.length > 0
+      ? recentRow[recentRow.length - 1].reportDate
+      : new Date(today.getTime() - 7 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10)
 
     // Monthly totals from uploaded data
     const [monthAgg] = await pool.query(

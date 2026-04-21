@@ -133,20 +133,27 @@ export default function AdminFinances() {
     } catch {}
   }, [])
 
+  const [agentError, setAgentError] = useState(null)
+
   const runAgent = async () => {
     if (agentRunning) return
     setAgentRunning(true)
+    setAgentError(null)
     try {
       const res = await fetch(`${API_URL}/api/admin/ads-agent/run`, {
         method: 'POST',
         headers: getAuthHeaders(),
       })
+      const result = await res.json().catch(() => ({}))
       if (res.ok) {
-        const result = await res.json()
         setAgentLogs(prev => [result, ...prev])
         fetchAds()
+      } else {
+        setAgentError(result.error || `Fehler ${res.status}: ${res.statusText}`)
       }
-    } catch {}
+    } catch (err) {
+      setAgentError(err.message || 'Netzwerkfehler beim Ausführen des Agents.')
+    }
     setAgentRunning(false)
   }
 
@@ -595,6 +602,24 @@ export default function AdminFinances() {
             </button>
           </div>
         </div>
+
+        {/* Agent error */}
+        <AnimatePresence>
+          {agentError && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              className="mb-4 rounded-xl p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 flex items-start gap-2"
+            >
+              <XCircle size={16} className="text-red-500 shrink-0 mt-0.5" />
+              <div className="text-sm text-red-700 dark:text-red-400 flex-1 break-words">{agentError}</div>
+              <button onClick={() => setAgentError(null)} className="text-red-400 hover:text-red-600 shrink-0">
+                <X size={14} />
+              </button>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         {/* Agent status */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4">
