@@ -31,7 +31,9 @@ app.use((req, res, next) => {
   if (req.originalUrl === '/api/pruefungen/transcribe-sprechen') return next()
   if (req.originalUrl === '/api/chat/transcribe') return next()
   if (req.originalUrl === '/api/ai/transcribe-speaking') return next()
-  express.json({ limit: '50kb' })(req, res, next)
+  // CSV upload can be large (thousands of ad rows)
+  const limit = req.originalUrl === '/api/admin/ads-report/upload' ? '15mb' : '50kb'
+  express.json({ limit })(req, res, next)
 })
 
 // Rate limiting for login
@@ -1458,33 +1460,92 @@ app.get('/api/health', async (req, res) => {
 })()
 
 // ─── CSV PARSER HELPER ──────────────────────────────
+// Regex matching any header keyword in EN/DE/ES for auto-detecting the header row
+const HEADER_KEYWORDS_RE = /campaign|kampagne|campa[ñn]a|date|day|tag|datum|fecha|d[ií]a|impressions|impressionen|impresiones|clicks|klicks|clics|cost|kosten|coste|conversions|konversionen|conversiones|keyword|suchbegriff|palabra.?clave|t[ée]rmino|search.?term/i
+
+function splitCsvLine(line, sep) {
+  const values = []
+  let current = '', inQuotes = false
+  for (let i = 0; i < line.length; i++) {
+    const ch = line[i]
+    if (ch === '"') {
+      if (inQuotes && line[i + 1] === '"') { current += '"'; i++; continue } // escaped quote
+      inQuotes = !inQuotes
+      continue
+    }
+    if (ch === sep && !inQuotes) { values.push(current.trim()); current = ''; continue }
+    current += ch
+  }
+  values.push(current.trim())
+  return values
+}
+
+function detectSeparator(line) {
+  // Count occurrences outside quotes and pick the most frequent
+  const counts = { ',': 0, ';': 0, '\t': 0 }
+  let inQuotes = false
+  for (const ch of line) {
+    if (ch === '"') { inQuotes = !inQuotes; continue }
+    if (!inQuotes && counts[ch] !== undefined) counts[ch]++
+  }
+  // Prefer tab > semicolon > comma if tie, because Google Ads exports often use tabs
+  if (counts['\t'] >= 2) return '\t'
+  if (counts[';'] > counts[',']) return ';'
+  return ','
+}
+
 function parseGoogleAdsCsv(csvText) {
-  const lines = csvText.trim().split(/\r?\n/)
+  if (!csvText) return []
+  // Strip BOM
+  if (csvText.charCodeAt(0) === 0xFEFF) csvText = csvText.slice(1)
+  // Handle UTF-16 (some Google Ads exports) — detect NUL bytes
+  if (csvText.indexOf('\u0000') !== -1) {
+    csvText = csvText.replace(/\u0000/g, '')
+  }
+
+  const lines = csvText.split(/\r?\n/).map(l => l).filter(l => l.length > 0)
   if (lines.length < 2) return []
-  // Skip summary rows at top (Google Ads exports sometimes have them)
-  let headerIdx = 0
-  for (let i = 0; i < lines.length; i++) {
-    // Find the header row: typically contains "Campaign" or "Day" or "Date"
-    if (/campaign|Campaign|Kampagne|Date|Day|Tag|Datum/i.test(lines[i]) && lines[i].includes(',')) {
+
+  // Find the header row by scanning for a line that has >=3 separators AND
+  // contains at least one recognizable column keyword.
+  let headerIdx = -1
+  let sep = ','
+  for (let i = 0; i < Math.min(lines.length, 30); i++) {
+    const line = lines[i]
+    if (!line.trim()) continue
+    const s = detectSeparator(line)
+    const parts = splitCsvLine(line, s)
+    if (parts.length < 3) continue
+    const joined = parts.join('|')
+    if (HEADER_KEYWORDS_RE.test(joined)) {
       headerIdx = i
+      sep = s
       break
     }
   }
-  const headers = lines[headerIdx].split(',').map(h => h.trim().replace(/^"|"$/g, ''))
+
+  // Fallback: if no keyword match, use the first line with >=3 separators
+  if (headerIdx === -1) {
+    for (let i = 0; i < Math.min(lines.length, 30); i++) {
+      const s = detectSeparator(lines[i])
+      const parts = splitCsvLine(lines[i], s)
+      if (parts.length >= 3) { headerIdx = i; sep = s; break }
+    }
+  }
+  if (headerIdx === -1) return []
+
+  const headers = splitCsvLine(lines[headerIdx], sep).map(h => h.replace(/^"|"$/g, '').trim())
   const rows = []
   for (let i = headerIdx + 1; i < lines.length; i++) {
-    const line = lines[i].trim()
-    if (!line || line.startsWith('Total') || line.startsWith('Gesamt')) continue
-    // Simple CSV split (handles quoted values with commas)
-    const values = []
-    let current = '', inQuotes = false
-    for (const ch of line) {
-      if (ch === '"') { inQuotes = !inQuotes; continue }
-      if (ch === ',' && !inQuotes) { values.push(current.trim()); current = ''; continue }
-      current += ch
-    }
-    values.push(current.trim())
-    if (values.length < headers.length) continue
+    const line = lines[i]
+    const trimmed = line.trim()
+    if (!trimmed) continue
+    // Skip summary / total rows (EN/DE/ES)
+    if (/^(total|gesamt|summe|suma|totales?)\b/i.test(trimmed)) continue
+
+    const values = splitCsvLine(line, sep)
+    // Skip lines with too few values (likely blank or footer)
+    if (values.length < Math.max(2, Math.floor(headers.length / 2))) continue
     const obj = {}
     headers.forEach((h, idx) => { obj[h] = values[idx] || '' })
     rows.push(obj)
@@ -1519,29 +1580,40 @@ function normalizeDate(raw) {
 }
 
 function normalizeAdsRow(row) {
-  // Map common Google Ads CSV column names (EN/DE) to our schema
+  // Map common Google Ads CSV column names (EN/DE/ES) to our schema.
+  // Comparison is case-insensitive, alphanumeric-only (strips spaces/punct/accents).
+  const norm = s => String(s || '').toLowerCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, '') // strip accents
+    .replace(/[^a-z0-9]/g, '')
   const find = (keys) => {
     for (const k of keys) {
-      const match = Object.keys(row).find(h => h.toLowerCase().replace(/[^a-z]/g, '') === k.toLowerCase().replace(/[^a-z]/g, ''))
+      const target = norm(k)
+      const match = Object.keys(row).find(h => norm(h) === target)
+      if (match) return row[match]
+    }
+    // Partial match: column name contains target
+    for (const k of keys) {
+      const target = norm(k)
+      const match = Object.keys(row).find(h => norm(h).includes(target))
       if (match) return row[match]
     }
     return ''
   }
-  const cost = find(['Cost', 'Kosten', 'cost']) || '0'
+  const cost = String(find(['Cost', 'Kosten', 'Coste', 'Costo', 'Gastos'])) || '0'
   const costNum = parseFloat(cost.replace(/[^0-9.,\-]/g, '').replace(',', '.')) || 0
   return {
-    reportDate: normalizeDate(find(['Day', 'Date', 'Tag', 'Datum', 'day', 'date'])),
-    campaignName: find(['Campaign', 'Kampagne', 'campaignname', 'CampaignName']) || '',
-    adGroupName: find(['AdGroup', 'Adgroup', 'AdGroupName', 'Anzeigengruppe', 'adgroup']) || '',
-    keyword: find(['Keyword', 'SearchTerm', 'Suchbegriff', 'keyword']) || '',
-    matchType: find(['MatchType', 'Matchtype', 'Keyword match type', 'Übereinstimmungstyp']) || '',
-    impressions: parseInt(String(find(['Impressions', 'Impr', 'Impressionen', 'impressions'])).replace(/[^0-9]/g, '')) || 0,
-    clicks: parseInt(String(find(['Clicks', 'Klicks', 'clicks'])).replace(/[^0-9]/g, '')) || 0,
+    reportDate: normalizeDate(find(['Day', 'Date', 'Tag', 'Datum', 'Fecha', 'Dia'])),
+    campaignName: find(['Campaign', 'Kampagne', 'Campana', 'Campaña']) || '',
+    adGroupName: find(['AdGroup', 'Anzeigengruppe', 'GrupoDeAnuncios', 'Grupo de anuncios']) || '',
+    keyword: find(['Keyword', 'SearchTerm', 'Suchbegriff', 'PalabraClave', 'Palabra clave', 'Termino de busqueda', 'Término de búsqueda', 'Termino']) || '',
+    matchType: find(['MatchType', 'Keyword match type', 'Ubereinstimmungstyp', 'Übereinstimmungstyp', 'Tipo de concordancia']) || '',
+    impressions: parseInt(String(find(['Impressions', 'Impr', 'Impressionen', 'Impresiones'])).replace(/[^0-9]/g, '')) || 0,
+    clicks: parseInt(String(find(['Clicks', 'Klicks', 'Clics'])).replace(/[^0-9]/g, '')) || 0,
     costMicros: Math.round(costNum * 1_000_000),
-    conversions: parseFloat(String(find(['Conversions', 'Conv', 'Konversionen', 'conversions'])).replace(/[^0-9.,]/g, '').replace(',', '.')) || 0,
-    conversionValue: parseFloat(String(find(['ConversionValue', 'Conv.value', 'Conversionvalue', 'Konversionswert'])).replace(/[^0-9.,]/g, '').replace(',', '.')) || 0,
-    ctr: parseFloat(String(find(['CTR', 'ctr'])).replace(/[^0-9.,]/g, '').replace(',', '.')) || 0,
-    avgCpc: parseFloat(String(find(['AvgCPC', 'Avg.CPC', 'CPC', 'avgcpc', 'DurchschnCPC'])).replace(/[^0-9.,]/g, '').replace(',', '.')) || 0,
+    conversions: parseFloat(String(find(['Conversions', 'Conv', 'Konversionen', 'Conversiones'])).replace(/[^0-9.,]/g, '').replace(',', '.')) || 0,
+    conversionValue: parseFloat(String(find(['ConversionValue', 'Conv.value', 'Konversionswert', 'Valor de conversion', 'Valor de conversión'])).replace(/[^0-9.,]/g, '').replace(',', '.')) || 0,
+    ctr: parseFloat(String(find(['CTR', 'Porcentaje de clics'])).replace(/[^0-9.,]/g, '').replace(',', '.')) || 0,
+    avgCpc: parseFloat(String(find(['AvgCPC', 'Avg.CPC', 'CPC', 'DurchschnCPC', 'CPC medio', 'CPC prom.', 'CPC promedio'])).replace(/[^0-9.,]/g, '').replace(',', '.')) || 0,
   }
 }
 
@@ -1900,20 +1972,34 @@ app.post('/api/admin/ads-report/upload', authMiddleware, adminMiddleware, async 
     }
     const rawRows = parseGoogleAdsCsv(csvData)
     if (rawRows.length === 0) {
-      return res.status(400).json({ error: 'Keine gültigen Zeilen in der CSV gefunden. Überprüfe das Format.' })
+      return res.status(400).json({
+        error: 'Keine gültigen Zeilen in der CSV gefunden. Überprüfe das Format (Trennzeichen, Kodierung).',
+        detectedHeaders: null,
+      })
     }
+    const detectedHeaders = Object.keys(rawRows[0] || {})
     const normalized = rawRows.map(r => normalizeAdsRow(r))
     let inserted = 0
-    for (const row of normalized) {
-      if (!row.reportDate && !row.campaignName) continue
+    let skipped = 0
+    for (let i = 0; i < normalized.length; i++) {
+      const row = normalized[i]
+      // Skip rows without any identifiable data
+      if (!row.reportDate && !row.campaignName && !row.keyword) { skipped++; continue }
       await pool.query(
         `INSERT INTO schule_ads_reports (reportDate, campaignName, adGroupName, keyword, matchType, impressions, clicks, costMicros, conversions, conversionValue, ctr, avgCpc, rawRow)
          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
         [row.reportDate, row.campaignName, row.adGroupName, row.keyword, row.matchType,
          row.impressions, row.clicks, row.costMicros, row.conversions, row.conversionValue,
-         row.ctr, row.avgCpc, JSON.stringify(rawRows[inserted] || {})]
+         row.ctr, row.avgCpc, JSON.stringify(rawRows[i] || {})]
       )
       inserted++
+    }
+    if (inserted === 0) {
+      return res.status(400).json({
+        error: `0 Zeilen importiert. ${rawRows.length} Zeilen gefunden, aber keine enthält Datum, Kampagne oder Keyword. Erkannte Spalten: ${detectedHeaders.slice(0, 8).join(', ')}…`,
+        detectedHeaders,
+        sampleRow: rawRows[0],
+      })
     }
 
     // Update financial snapshots with ad spend data
@@ -1935,7 +2021,7 @@ app.post('/api/admin/ads-report/upload', authMiddleware, adminMiddleware, async 
       )
     }
 
-    res.json({ ok: true, rowsImported: inserted, months: monthsInReport })
+    res.json({ ok: true, rowsImported: inserted, skipped, months: monthsInReport, detectedHeaders })
   } catch (err) {
     console.error('CSV upload error:', err)
     res.status(500).json({ error: 'Fehler beim Import: ' + err.message })
