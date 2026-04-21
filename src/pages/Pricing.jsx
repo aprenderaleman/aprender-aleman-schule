@@ -105,8 +105,9 @@ export default function Pricing() {
 }
 
 function PricingContent({ subscription, onSubscribe, loading, paymentCanceled, loggedIn }) {
-  const freeLimit = subscription?.freeLessonsLimit ?? 10
-  const freeRemaining = subscription?.freeLessonsRemaining ?? freeLimit
+  const freeLimit = subscription?.freeXpLimit ?? subscription?.freeLessonsLimit ?? 10000
+  const freeRemaining = subscription?.xpRemaining ?? subscription?.freeLessonsRemaining ?? freeLimit
+  const xpEarned = subscription?.xpEarned ?? subscription?.lessonsPassed ?? 0
   const inFreePhase = !!subscription?.trialActive && freeRemaining > 0
 
   return (
@@ -142,8 +143,8 @@ function PricingContent({ subscription, onSubscribe, loading, paymentCanceled, l
         <div className="bg-gradient-to-r from-orange-500 to-amber-500 px-6 py-3 text-center">
           <p className="text-white font-bold text-sm">
             {loggedIn && inFreePhase
-              ? `${freeRemaining} von ${freeLimit} kostenlosen Lektionen übrig`
-              : `${freeLimit} Lektionen gratis — danach 15 €/Monat`}
+              ? `${xpEarned.toLocaleString('de-DE')} / ${freeLimit.toLocaleString('de-DE')} XP genutzt`
+              : `${freeLimit.toLocaleString('de-DE')} XP gratis — danach 15 €/Monat`}
           </p>
         </div>
 

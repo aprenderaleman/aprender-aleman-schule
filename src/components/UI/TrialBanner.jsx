@@ -13,24 +13,24 @@ export default function TrialBanner() {
   // SSO users or paid users don't see banner
   if (subscription.ssoUser || subscription.paid) return null
 
-  // Only show during free-lessons phase
-  const limit = subscription.freeLessonsLimit ?? 10
-  const remaining = subscription.freeLessonsRemaining
+  // XP-based trial: user keeps access until they reach the XP limit
+  const limit = subscription.freeXpLimit ?? subscription.freeLessonsLimit ?? 10000
+  const earned = subscription.xpEarned ?? subscription.lessonsPassed ?? 0
+  const remaining = subscription.xpRemaining ?? subscription.freeLessonsRemaining
   if (remaining === undefined || remaining === null) return null
 
-  // No more free lessons left → user already sees the paywall, no banner needed
+  // No more free XP left → user already sees the paywall, no banner needed
   if (remaining <= 0) return null
 
-  const urgent = remaining <= 2
+  const progress = Math.min(100, Math.round((earned / limit) * 100))
+  const urgent = remaining <= 500
 
   return (
     <div className={`${urgent ? 'bg-red-500' : 'bg-gradient-to-r from-indigo-600 to-purple-600'} text-white text-center py-2.5 px-3 sm:px-4 text-xs sm:text-sm font-medium`}>
       <div className="max-w-7xl mx-auto flex items-center justify-center gap-2 flex-wrap">
         <GraduationCap size={16} className="shrink-0" />
         <span>
-          {remaining === 1
-            ? `Noch 1 von ${limit} kostenlosen Lektionen`
-            : `Noch ${remaining} von ${limit} kostenlosen Lektionen`}
+          Kostenlose Testphase: <strong>{earned.toLocaleString('de-DE')}</strong> / {limit.toLocaleString('de-DE')} XP ({progress}%)
         </span>
         <Link
           to="/pricing"

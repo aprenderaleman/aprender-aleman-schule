@@ -171,12 +171,13 @@ const stripe = STRIPE_SECRET_KEY ? new Stripe(STRIPE_SECRET_KEY) : null
   }
 })()
 
-// Free-lessons threshold: a "lesson passed" = exercise or exam attempt with score >= 70%
-const FREE_LESSONS_LIMIT = 30
-const FREE_LESSONS_PASS_PCT = 70
-// Bonus lessons granted when the user completes the Explorer Challenge (≥1 exercise in each of the 5 skill types)
+// Free trial threshold — XP based. Users keep free access until they reach
+// this amount of total XP (across all exercises + exams).
+const FREE_XP_LIMIT = 10000
+// Bonus XP awarded when the user completes the Explorer Challenge
+// (≥1 exercise in each of the 5 skill types)
 const EXPLORER_CHALLENGE_ID = 'explorer_challenge'
-const EXPLORER_CHALLENGE_BONUS = 10
+const EXPLORER_CHALLENGE_BONUS_XP = 2000
 
 // Helper: get the list of distinct skill types the user has completed at least one exercise in
 async function getExplorerSkills(userId) {
@@ -206,26 +207,13 @@ async function hasExplorerBonus(userId) {
   }
 }
 
-// Helper: count distinct lessons passed by a user (exercises + exam attempts)
-async function countPassedLessons(userId) {
+// Helper: total XP earned by a user (stored in schule_progress.xp)
+async function getUserXP(userId) {
   try {
-    const [exRows] = await pool.query(
-      'SELECT COUNT(DISTINCT exerciseId) AS n FROM schule_exercise_results WHERE userId = ? AND score >= ?',
-      [userId, FREE_LESSONS_PASS_PCT]
-    )
-    let count = exRows[0]?.n || 0
-    try {
-      const [examRows] = await pool.query(
-        'SELECT COUNT(DISTINCT examId) AS n FROM schule_pruefungen_attempts WHERE userId = ? AND maxScore > 0 AND (score / maxScore) * 100 >= ?',
-        [userId, FREE_LESSONS_PASS_PCT]
-      )
-      count += examRows[0]?.n || 0
-    } catch (e) {
-      // table may not exist on first boot
-    }
-    return count
+    const [rows] = await pool.query('SELECT COALESCE(xp, 0) as xp FROM schule_progress WHERE userId = ?', [userId])
+    return parseInt(rows[0]?.xp) || 0
   } catch (e) {
-    console.error('countPassedLessons error:', e.message)
+    console.error('getUserXP error:', e.message)
     return 0
   }
 }
@@ -238,13 +226,13 @@ async function getSubscriptionInfo(userId) {
   const paid = sub.subscriptionStatus === 'active'
   const isSso = sub.ssoUser === 1
 
-  // Count free lessons used (only relevant if not paid/SSO)
-  const lessonsPassed = (paid || isSso) ? 0 : await countPassedLessons(userId)
-  // Explorer Challenge bonus: +10 free lessons once the user has claimed all 5 skills
-  const bonusLessons = (paid || isSso) ? 0 : ((await hasExplorerBonus(userId)) ? EXPLORER_CHALLENGE_BONUS : 0)
-  const effectiveLimit = FREE_LESSONS_LIMIT + bonusLessons
-  const freeLessonsRemaining = Math.max(0, effectiveLimit - lessonsPassed)
-  const freeAccess = !paid && !isSso && lessonsPassed < effectiveLimit
+  // XP earned (only relevant if not paid/SSO)
+  const xpEarned = (paid || isSso) ? 0 : await getUserXP(userId)
+  // Explorer Challenge bonus: +2000 XP to the limit once the user claims it
+  const bonusXP = (paid || isSso) ? 0 : ((await hasExplorerBonus(userId)) ? EXPLORER_CHALLENGE_BONUS_XP : 0)
+  const effectiveLimit = FREE_XP_LIMIT + bonusXP
+  const xpRemaining = Math.max(0, effectiveLimit - xpEarned)
+  const freeAccess = !paid && !isSso && xpEarned < effectiveLimit
 
   return {
     status: sub.subscriptionStatus,
@@ -253,11 +241,18 @@ async function getSubscriptionInfo(userId) {
     paid,
     ssoUser: isSso,
     hasAccess: isSso || paid || freeAccess,
-    lessonsPassed,
+    // XP-based trial fields
+    xpEarned,
+    freeXpLimit: effectiveLimit,
+    freeXpBaseLimit: FREE_XP_LIMIT,
+    freeXpBonus: bonusXP,
+    xpRemaining,
+    // Legacy aliases so existing frontend keeps working during migration
+    lessonsPassed: xpEarned,
     freeLessonsLimit: effectiveLimit,
-    freeLessonsBaseLimit: FREE_LESSONS_LIMIT,
-    freeLessonsBonus: bonusLessons,
-    freeLessonsRemaining,
+    freeLessonsBaseLimit: FREE_XP_LIMIT,
+    freeLessonsBonus: bonusXP,
+    freeLessonsRemaining: xpRemaining,
     stripeCustomerId: sub.stripeCustomerId,
     stripeSubscriptionId: sub.stripeSubscriptionId,
   }
@@ -895,7 +890,7 @@ app.get('/api/explorer-challenge', authMiddleware, async (req, res) => {
       skillsDone,
       completed,
       claimed,
-      bonus: EXPLORER_CHALLENGE_BONUS,
+      bonus: EXPLORER_CHALLENGE_BONUS_XP,
     })
   } catch (err) {
     console.error('Explorer challenge status error:', err)
@@ -911,7 +906,7 @@ app.post('/api/explorer-challenge/claim', authMiddleware, async (req, res) => {
     const userId = req.user.id
     const alreadyClaimed = await hasExplorerBonus(userId)
     if (alreadyClaimed) {
-      return res.json({ ok: true, alreadyClaimed: true, bonus: EXPLORER_CHALLENGE_BONUS })
+      return res.json({ ok: true, alreadyClaimed: true, bonus: EXPLORER_CHALLENGE_BONUS_XP })
     }
     const done = await getExplorerSkills(userId)
     const missing = EXPLORER_SKILLS.filter(s => !done.includes(s))
@@ -922,7 +917,7 @@ app.post('/api/explorer-challenge/claim', authMiddleware, async (req, res) => {
       'INSERT IGNORE INTO schule_achievements (userId, achievementId) VALUES (?, ?)',
       [userId, EXPLORER_CHALLENGE_ID]
     )
-    res.json({ ok: true, alreadyClaimed: false, bonus: EXPLORER_CHALLENGE_BONUS })
+    res.json({ ok: true, alreadyClaimed: false, bonus: EXPLORER_CHALLENGE_BONUS_XP })
   } catch (err) {
     console.error('Explorer challenge claim error:', err)
     res.status(500).json({ error: 'Error al reclamar bonificación.' })

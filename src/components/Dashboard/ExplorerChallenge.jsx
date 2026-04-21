@@ -57,7 +57,8 @@ export default function ExplorerChallenge() {
       if (res.ok) {
         setData(d => d ? { ...d, claimed: true } : d)
         setJustClaimed(true)
-        showToast?.('🎉 +10 kostenlose Lektionen freigeschaltet!', 'success')
+        const bonusAmount = (json?.bonus ?? data?.bonus ?? 2000).toLocaleString('de-DE')
+        showToast?.(`🎉 +${bonusAmount} XP Bonus freigeschaltet!`, 'success')
         // GTM: track explorer-challenge completion
         try {
           window.dataLayer = window.dataLayer || []
@@ -111,7 +112,7 @@ export default function ExplorerChallenge() {
               <p className="text-white/80 text-sm mt-0.5">
                 {ready
                   ? 'Geschafft! Hol dir deine Belohnung.'
-                  : <>Belohnung: <span className="font-bold text-yellow-200">+10 kostenlose Lektionen</span></>
+                  : <>Belohnung: <span className="font-bold text-yellow-200">+{(data?.bonus ?? 2000).toLocaleString('de-DE')} XP Bonus</span></>
                 }
               </p>
             </div>
@@ -183,7 +184,7 @@ export default function ExplorerChallenge() {
               className="mt-4 w-full bg-white text-fuchsia-700 font-extrabold py-3 rounded-xl shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all flex items-center justify-center gap-2 disabled:opacity-60"
             >
               <Gift size={18} />
-              {claiming ? 'Wird freigeschaltet…' : '+10 Lektionen freischalten'}
+              {claiming ? 'Wird freigeschaltet…' : `+${(data?.bonus ?? 2000).toLocaleString('de-DE')} XP freischalten`}
             </motion.button>
           )}
         </AnimatePresence>
@@ -195,7 +196,7 @@ export default function ExplorerChallenge() {
             className="mt-4 bg-white/15 backdrop-blur-sm border border-white/20 rounded-xl p-3 text-center text-white"
           >
             <p className="font-bold text-sm flex items-center justify-center gap-1.5">
-              <Sparkles size={14} /> 10 extra Lektionen hinzugefügt!
+              <Sparkles size={14} /> +{(data?.bonus ?? 2000).toLocaleString('de-DE')} XP hinzugefügt!
             </p>
           </motion.div>
         )}

@@ -213,13 +213,22 @@ export default function Profile() {
               </div>
             ) : user.subscription?.trialActive ? (
               <div>
-                <div className="bg-indigo-50 dark:bg-indigo-900/20 rounded-xl p-4 flex items-center gap-3 mb-3">
-                  <Clock size={20} className="text-indigo-500 shrink-0" />
-                  <div>
-                    <p className="font-bold text-indigo-700 dark:text-indigo-300">Kostenlose Lektionen</p>
-                    <p className="text-sm text-indigo-600/70 dark:text-indigo-400/70">
-                      Du hast noch <strong>{user.subscription.freeLessonsRemaining ?? 0}</strong> von {user.subscription.freeLessonsLimit ?? 10} kostenlosen Lektionen übrig.
-                    </p>
+                <div className="bg-indigo-50 dark:bg-indigo-900/20 rounded-xl p-4 mb-3">
+                  <div className="flex items-center gap-3 mb-2">
+                    <Clock size={20} className="text-indigo-500 shrink-0" />
+                    <div>
+                      <p className="font-bold text-indigo-700 dark:text-indigo-300">Kostenlose Testphase</p>
+                      <p className="text-sm text-indigo-600/70 dark:text-indigo-400/70">
+                        <strong>{(user.subscription.xpEarned ?? user.subscription.lessonsPassed ?? 0).toLocaleString('de-DE')}</strong>{' '}
+                        / {(user.subscription.freeXpLimit ?? user.subscription.freeLessonsLimit ?? 10000).toLocaleString('de-DE')} XP genutzt
+                      </p>
+                    </div>
+                  </div>
+                  <div className="h-2 bg-indigo-100 dark:bg-indigo-900/40 rounded-full overflow-hidden">
+                    <div
+                      className="h-full bg-gradient-to-r from-indigo-500 to-purple-500"
+                      style={{ width: `${Math.min(100, Math.round(((user.subscription.xpEarned ?? user.subscription.lessonsPassed ?? 0) / (user.subscription.freeXpLimit ?? user.subscription.freeLessonsLimit ?? 10000)) * 100))}%` }}
+                    />
                   </div>
                 </div>
                 <Link to="/pricing" className="text-sm text-indigo-500 font-semibold hover:text-indigo-600 flex items-center gap-1">
@@ -232,7 +241,7 @@ export default function Profile() {
                   <Clock size={20} className="text-red-500 shrink-0" />
                   <div>
                     <p className="font-bold text-red-700 dark:text-red-300">Kein aktives Abonnement</p>
-                    <p className="text-sm text-red-600/70 dark:text-red-400/70">Du hast deine 10 kostenlosen Lektionen genutzt. Abonniere, um fortzufahren.</p>
+                    <p className="text-sm text-red-600/70 dark:text-red-400/70">Du hast das XP-Limit der kostenlosen Testphase erreicht. Abonniere, um weiter zu lernen.</p>
                   </div>
                 </div>
                 <Link to="/pricing" className="inline-flex items-center gap-2 bg-orange-500 text-white font-bold px-5 py-2.5 rounded-xl hover:bg-orange-600 transition-colors text-sm">
