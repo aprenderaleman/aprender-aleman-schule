@@ -9,6 +9,8 @@ import Navbar from '../components/Layout/Navbar'
 import Toast from '../components/UI/Toast'
 
 const API_URL = import.meta.env.VITE_API_URL || ''
+// Stripe Payment Link for the €99/year annual plan
+const YEARLY_PAYMENT_LINK = 'https://buy.stripe.com/8x27sFg7o5mfbH84nY7Zu0l'
 
 const features = [
   { icon: BookOpen, text: 'Übungen zu Grammatik, Lesen, Hören und Schreiben' },
@@ -34,6 +36,17 @@ export default function Pricing() {
       return
     }
     setLoading(plan)
+
+    // Yearly plan uses a Stripe Payment Link. We pass the user's email and
+    // userId via the URL so we can match the subscription back in the webhook.
+    if (plan === 'yearly') {
+      const url = new URL(YEARLY_PAYMENT_LINK)
+      if (user.email) url.searchParams.set('prefilled_email', user.email)
+      if (user.id) url.searchParams.set('client_reference_id', user.id)
+      window.location.href = url.toString()
+      return
+    }
+
     try {
       const token = getToken()
       const res = await fetch(`${API_URL}/api/stripe/create-checkout`, {

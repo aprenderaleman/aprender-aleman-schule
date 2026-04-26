@@ -3009,38 +3009,72 @@ app.post('/api/stripe/webhook', express.raw({ type: 'application/json' }), async
     switch (event.type) {
       case 'checkout.session.completed': {
         const session = event.data.object
-        const userId = session.metadata?.userId
+        // userId comes from either:
+        //   - session.metadata.userId (our own create-checkout flow), OR
+        //   - session.client_reference_id (Stripe Payment Link with ?client_reference_id=...)
+        // Fallback: look up by customer email if neither is present.
+        let userId = session.metadata?.userId || session.client_reference_id || null
+        if (!userId && session.customer_details?.email) {
+          const [rows] = await pool.query('SELECT id FROM users WHERE email = ? LIMIT 1', [session.customer_details.email.toLowerCase()])
+          if (rows.length > 0) userId = rows[0].id
+        }
         if (userId && session.subscription) {
+          // Auto-create the schule_subscriptions row if missing (Payment Link
+          // bypasses our normal flow, so it might not exist yet)
           await pool.query(
-            `UPDATE schule_subscriptions SET subscriptionStatus = 'active', stripeSubscriptionId = ?, stripeCustomerId = ?, updatedAt = NOW() WHERE userId = ?`,
-            [session.subscription, session.customer, userId]
+            `INSERT INTO schule_subscriptions (userId, trialEndsAt, subscriptionStatus, stripeSubscriptionId, stripeCustomerId, ssoUser)
+             VALUES (?, NOW(), 'active', ?, ?, 0)
+             ON DUPLICATE KEY UPDATE subscriptionStatus = 'active', stripeSubscriptionId = VALUES(stripeSubscriptionId),
+               stripeCustomerId = VALUES(stripeCustomerId), updatedAt = NOW()`,
+            [userId, session.subscription, session.customer]
           )
+          // Also tag the subscription with the userId so subscription.updated/deleted webhooks find it
+          try {
+            await stripe.subscriptions.update(session.subscription, { metadata: { userId } })
+          } catch (e) { console.warn('Could not tag subscription metadata:', e.message) }
+        } else {
+          console.warn('Webhook checkout.session.completed: could not resolve userId', {
+            hasMetadata: !!session.metadata?.userId,
+            hasClientRef: !!session.client_reference_id,
+            email: session.customer_details?.email,
+          })
         }
         break
       }
       case 'customer.subscription.updated': {
         const subscription = event.data.object
-        const userId = subscription.metadata?.userId
+        let userId = subscription.metadata?.userId
         const status = subscription.status // active, past_due, canceled, etc.
+        const mappedStatus = ['active', 'trialing'].includes(status) ? status
+          : status === 'past_due' ? 'past_due'
+          : status === 'canceled' ? 'canceled'
+          : 'none'
         if (userId) {
-          const mappedStatus = ['active', 'trialing'].includes(status) ? status
-            : status === 'past_due' ? 'past_due'
-            : status === 'canceled' ? 'canceled'
-            : 'none'
           await pool.query(
             `UPDATE schule_subscriptions SET subscriptionStatus = ?, updatedAt = NOW() WHERE userId = ?`,
             [mappedStatus, userId]
+          )
+        } else {
+          // Fallback: locate row by stripeSubscriptionId / stripeCustomerId
+          await pool.query(
+            `UPDATE schule_subscriptions SET subscriptionStatus = ?, updatedAt = NOW() WHERE stripeSubscriptionId = ? OR stripeCustomerId = ?`,
+            [mappedStatus, subscription.id, subscription.customer]
           )
         }
         break
       }
       case 'customer.subscription.deleted': {
         const subscription = event.data.object
-        const userId = subscription.metadata?.userId
+        let userId = subscription.metadata?.userId
         if (userId) {
           await pool.query(
             `UPDATE schule_subscriptions SET subscriptionStatus = 'canceled', stripeSubscriptionId = NULL, updatedAt = NOW() WHERE userId = ?`,
             [userId]
+          )
+        } else {
+          await pool.query(
+            `UPDATE schule_subscriptions SET subscriptionStatus = 'canceled', stripeSubscriptionId = NULL, updatedAt = NOW() WHERE stripeSubscriptionId = ? OR stripeCustomerId = ?`,
+            [subscription.id, subscription.customer]
           )
         }
         break
