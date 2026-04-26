@@ -15,7 +15,9 @@
     <script>
       (function () {
         try {
-          var stored = localStorage.getItem('dark_mode');
+          // Wipe legacy preference so old users get the new default (dark)
+          localStorage.removeItem('dark_mode');
+          var stored = localStorage.getItem('dark_mode_v2');
           var dark = stored === null || stored === undefined ? true : JSON.parse(stored);
           if (dark) document.documentElement.classList.add('dark');
         } catch (e) {
