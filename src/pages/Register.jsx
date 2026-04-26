@@ -82,36 +82,6 @@ export default function Register() {
           </div>
         </motion.div>
 
-        {/* SSO reminder for existing Aprender-Aleman.de students */}
-        <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.15 }}
-          className="mb-5 rounded-2xl border-2 border-blue-200 dark:border-blue-800 bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 p-4"
-        >
-          <div className="flex items-start gap-3">
-            <div className="bg-blue-500 text-white rounded-xl p-2 shrink-0">
-              <Shield size={18} />
-            </div>
-            <div className="flex-1">
-              <h3 className="font-bold text-blue-900 dark:text-blue-200 text-sm mb-1">
-                Bist du bereits Schüler von Aprender-Aleman.de?
-              </h3>
-              <p className="text-xs text-blue-800/80 dark:text-blue-300/80 leading-relaxed mb-2">
-                Dein Zugriff auf Schule ist <strong>kostenlos inbegriffen</strong>. Melde dich nicht hier an — logge dich auf deiner Hauptplattform ein und du wirst automatisch weitergeleitet.
-              </p>
-              <a
-                href="https://app.aprender-aleman.de"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 text-xs font-bold text-blue-600 dark:text-blue-300 hover:text-blue-700 dark:hover:text-blue-200 transition-colors"
-              >
-                Zu app.aprender-aleman.de <ExternalLink size={12} />
-              </a>
-            </div>
-          </div>
-        </motion.div>
-
         <form onSubmit={handleSubmit} className="card">
           {error && (
             <div className="bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 text-sm p-3 rounded-xl mb-4">
@@ -195,6 +165,45 @@ export default function Register() {
             </p>
           </div>
         </form>
+
+        {/* SSO reminder for existing Aprender-Aleman.de students — placed below the form */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.25 }}
+          className="mt-5 rounded-2xl border-2 border-blue-200 dark:border-blue-800 bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 p-4"
+        >
+          <div className="flex items-start gap-3">
+            <div className="bg-blue-500 text-white rounded-xl p-2 shrink-0">
+              <Shield size={18} />
+            </div>
+            <div className="flex-1">
+              <h3 className="font-bold text-blue-900 dark:text-blue-200 text-sm mb-1">
+                Bist du bereits Schüler von{' '}
+                <a
+                  href="https://aprender-aleman.de"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline hover:text-blue-700 dark:hover:text-blue-100 transition-colors"
+                >
+                  Aprender-Aleman.de
+                </a>
+                ?
+              </h3>
+              <p className="text-xs text-blue-800/80 dark:text-blue-300/80 leading-relaxed mb-2">
+                Dein Zugriff auf Schule ist <strong>kostenlos inbegriffen</strong>. Melde dich nicht hier an — logge dich auf deiner Hauptplattform ein und du wirst automatisch weitergeleitet.
+              </p>
+              <a
+                href="https://app.aprender-aleman.de"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 text-xs font-bold text-blue-600 dark:text-blue-300 hover:text-blue-700 dark:hover:text-blue-200 transition-colors"
+              >
+                Zu app.aprender-aleman.de <ExternalLink size={12} />
+              </a>
+            </div>
+          </div>
+        </motion.div>
 
         <p className="text-center mt-6">
           <Link to="/" className="text-sm text-gray-400 hover:text-orange-500 transition-colors">
