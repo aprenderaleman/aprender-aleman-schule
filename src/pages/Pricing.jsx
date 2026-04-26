@@ -9,8 +9,11 @@ import Navbar from '../components/Layout/Navbar'
 import Toast from '../components/UI/Toast'
 
 const API_URL = import.meta.env.VITE_API_URL || ''
-// Stripe Payment Link for the €99/year annual plan
-const YEARLY_PAYMENT_LINK = 'https://buy.stripe.com/8x27sFg7o5mfbH84nY7Zu0l'
+// Stripe Payment Links (German locale)
+const PAYMENT_LINKS = {
+  monthly: 'https://buy.stripe.com/5kQeV78EWg0TfXo2fQ7Zu0k?locale=de',
+  yearly:  'https://buy.stripe.com/8x27sFg7o5mfbH84nY7Zu0l?locale=de',
+}
 
 const features = [
   { icon: BookOpen, text: 'Übungen zu Grammatik, Lesen, Hören und Schreiben' },
@@ -30,41 +33,19 @@ export default function Pricing() {
 
   const subscription = user?.subscription
 
-  const handleSubscribe = async (plan = 'monthly') => {
+  const handleSubscribe = (plan = 'monthly') => {
     if (!user) {
       window.location.href = '/registro'
       return
     }
+    const link = PAYMENT_LINKS[plan] || PAYMENT_LINKS.monthly
     setLoading(plan)
-
-    // Yearly plan uses a Stripe Payment Link. We pass the user's email and
-    // userId via the URL so we can match the subscription back in the webhook.
-    if (plan === 'yearly') {
-      const url = new URL(YEARLY_PAYMENT_LINK)
-      if (user.email) url.searchParams.set('prefilled_email', user.email)
-      if (user.id) url.searchParams.set('client_reference_id', user.id)
-      window.location.href = url.toString()
-      return
-    }
-
-    try {
-      const token = getToken()
-      const res = await fetch(`${API_URL}/api/stripe/create-checkout`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`,
-        },
-        body: JSON.stringify({ plan }),
-      })
-      const data = await res.json()
-      if (!res.ok) throw new Error(data.error || 'Error')
-      window.location.href = data.url
-    } catch (err) {
-      showToast(err.message || 'Fehler beim Starten der Zahlung.', 'error')
-    } finally {
-      setLoading(false)
-    }
+    // Both plans use Stripe Payment Links. Pass email + userId so the webhook
+    // can match the resulting subscription back to the user.
+    const url = new URL(link)
+    if (user.email) url.searchParams.set('prefilled_email', user.email)
+    if (user.id) url.searchParams.set('client_reference_id', user.id)
+    window.location.href = url.toString()
   }
 
   // If user is logged in, show with Navbar
