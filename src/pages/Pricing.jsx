@@ -28,12 +28,12 @@ export default function Pricing() {
 
   const subscription = user?.subscription
 
-  const handleSubscribe = async () => {
+  const handleSubscribe = async (plan = 'monthly') => {
     if (!user) {
       window.location.href = '/registro'
       return
     }
-    setLoading(true)
+    setLoading(plan)
     try {
       const token = getToken()
       const res = await fetch(`${API_URL}/api/stripe/create-checkout`, {
@@ -42,10 +42,10 @@ export default function Pricing() {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`,
         },
+        body: JSON.stringify({ plan }),
       })
       const data = await res.json()
       if (!res.ok) throw new Error(data.error || 'Error')
-      // Redirect to Stripe Checkout
       window.location.href = data.url
     } catch (err) {
       showToast(err.message || 'Fehler beim Starten der Zahlung.', 'error')
@@ -132,78 +132,127 @@ function PricingContent({ subscription, onSubscribe, loading, paymentCanceled, l
         </p>
       </motion.div>
 
-      {/* Pricing card */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ delay: 0.1 }}
-        className="bg-white dark:bg-gray-800 rounded-3xl shadow-xl border-2 border-orange-200 dark:border-orange-800 overflow-hidden"
-      >
-        {/* Top badge */}
-        <div className="bg-gradient-to-r from-orange-500 to-amber-500 px-6 py-3 text-center">
-          <p className="text-white font-bold text-sm">
-            {loggedIn && inFreePhase
-              ? `${xpEarned.toLocaleString('de-DE')} / ${freeLimit.toLocaleString('de-DE')} XP genutzt`
-              : `${freeLimit.toLocaleString('de-DE')} XP gratis — danach 15 €/Monat`}
+      {/* Free trial badge */}
+      <div className="text-center mb-6">
+        <span className="inline-flex items-center gap-2 bg-warm/10 dark:bg-warm/20 text-warm font-bold text-xs uppercase tracking-wider px-4 py-2 rounded-full">
+          <Zap size={14} />
+          {loggedIn && inFreePhase
+            ? `${xpEarned.toLocaleString('de-DE')} / ${freeLimit.toLocaleString('de-DE')} XP genutzt`
+            : `${freeLimit.toLocaleString('de-DE')} XP gratis testen`}
+        </span>
+      </div>
+
+      {/* Account-state banners */}
+      {subscription?.paid ? (
+        <motion.div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-xl p-4 text-center mb-6">
+          <p className="text-green-700 dark:text-green-300 font-bold flex items-center justify-center gap-2">
+            <Check size={18} /> Dein Abonnement ist aktiv
           </p>
-        </div>
+        </motion.div>
+      ) : subscription?.ssoUser ? (
+        <motion.div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-xl p-4 text-center mb-6">
+          <p className="text-blue-700 dark:text-blue-300 font-bold flex items-center justify-center gap-2">
+            <Shield size={18} /> Zugriff inbegriffen mit deinem Kurs auf Aprender-Aleman.de
+          </p>
+        </motion.div>
+      ) : null}
 
-        <div className="p-8">
-          {/* Price */}
-          <div className="text-center mb-6">
-            <div className="flex items-baseline justify-center gap-1">
-              <span className="text-5xl font-extrabold text-gray-800 dark:text-gray-100">15</span>
-              <span className="text-2xl font-bold text-gray-400">&euro;/Monat</span>
+      {/* Two pricing cards: monthly + annual */}
+      <div className="grid md:grid-cols-2 gap-5 mb-8">
+        {/* MONTHLY */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1 }}
+          className="bg-white dark:bg-gray-800 rounded-2xl shadow-md border border-gray-200 dark:border-gray-700 overflow-hidden flex flex-col"
+        >
+          <div className="p-6 flex-1 flex flex-col">
+            <h3 className="font-bold text-gray-700 dark:text-gray-200 text-sm uppercase tracking-wide mb-1">Monatlich</h3>
+            <p className="text-xs text-gray-400 mb-4">Flexibel — jederzeit kündbar</p>
+            <div className="flex items-baseline gap-1 mb-1">
+              <span className="text-4xl font-extrabold text-gray-800 dark:text-gray-100">15</span>
+              <span className="text-lg font-bold text-gray-400">&euro;/Monat</span>
             </div>
-            <p className="text-sm text-gray-400 mt-2">Jederzeit kündbar</p>
-          </div>
+            <p className="text-xs text-gray-400 mb-5">Entspricht 180&thinsp;€ pro Jahr</p>
 
-          {/* Features */}
-          <div className="space-y-3 mb-8">
-            {features.map(({ icon: Icon, text }, i) => (
-              <div key={i} className="flex items-center gap-3">
-                <div className="bg-orange-100 dark:bg-orange-900/30 rounded-lg p-1.5">
-                  <Icon size={16} className="text-orange-500" />
-                </div>
-                <span className="text-sm text-gray-700 dark:text-gray-300">{text}</span>
-              </div>
-            ))}
-          </div>
-
-          {/* CTA */}
-          {subscription?.paid ? (
-            <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-xl p-4 text-center">
-              <p className="text-green-700 dark:text-green-300 font-bold flex items-center justify-center gap-2">
-                <Check size={18} /> Dein Abonnement ist aktiv
-              </p>
-            </div>
-          ) : subscription?.ssoUser ? (
-            <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-xl p-4 text-center">
-              <p className="text-blue-700 dark:text-blue-300 font-bold flex items-center justify-center gap-2">
-                <Shield size={18} /> Zugriff inbegriffen mit deinem Kurs auf Aprender-Aleman.de
-              </p>
-            </div>
-          ) : (
             <button
-              onClick={onSubscribe}
-              disabled={loading}
-              className="w-full bg-gradient-to-r from-orange-500 to-amber-500 text-white font-bold text-lg py-4 rounded-xl hover:shadow-lg hover:scale-[1.02] transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+              onClick={() => onSubscribe('monthly')}
+              disabled={loading || subscription?.paid || subscription?.ssoUser}
+              className="w-full bg-gray-900 dark:bg-gray-700 text-white font-bold py-3 rounded-xl hover:bg-gray-800 dark:hover:bg-gray-600 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
             >
-              {loading ? (
-                <><Loader2 size={20} className="animate-spin" /> Weiterleitung zu Stripe...</>
-              ) : loggedIn ? (
-                <><Zap size={20} /> Für 15&euro;/Monat abonnieren</>
+              {loading === 'monthly' ? (
+                <><Loader2 size={18} className="animate-spin" /> Weiterleitung…</>
               ) : (
-                <><Zap size={20} /> {freeLimit} Lektionen gratis starten</>
+                <>Monatlich abonnieren</>
               )}
             </button>
-          )}
-
-          {/* Trust */}
-          <div className="mt-6 flex items-center justify-center gap-4 text-xs text-gray-400">
-            <span className="flex items-center gap-1"><Shield size={12} /> Sichere Zahlung mit Stripe</span>
-            <span className="flex items-center gap-1"><Clock size={12} /> Jederzeit kündbar</span>
           </div>
+        </motion.div>
+
+        {/* YEARLY — featured */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.15 }}
+          className="relative bg-gradient-to-br from-warm/10 to-amber-50 dark:from-warm/15 dark:to-amber-900/20 rounded-2xl shadow-xl border-2 border-warm overflow-hidden flex flex-col"
+        >
+          {/* "BEST VALUE" badge */}
+          <div className="absolute top-0 right-0 bg-warm text-warm-foreground text-[10px] font-extrabold uppercase tracking-wider px-3 py-1 rounded-bl-xl">
+            45% Rabatt
+          </div>
+
+          <div className="p-6 flex-1 flex flex-col">
+            <h3 className="font-bold text-warm text-sm uppercase tracking-wide mb-1">Jährlich</h3>
+            <p className="text-xs text-gray-500 dark:text-gray-400 mb-4">Beste Wahl für ernsthafte Lerner</p>
+
+            <div className="flex items-baseline gap-1 mb-1">
+              <span className="text-4xl font-extrabold text-gray-800 dark:text-gray-100">99</span>
+              <span className="text-lg font-bold text-gray-400">&euro;/Jahr</span>
+            </div>
+            <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">
+              Nur <strong className="text-gray-700 dark:text-gray-200">8,25&thinsp;€/Monat</strong>
+              <span className="line-through text-gray-400 ml-2">180&thinsp;€</span>
+            </p>
+            <p className="text-xs text-success font-bold mb-5">Du sparst 81&thinsp;€ pro Jahr</p>
+
+            <button
+              onClick={() => onSubscribe('yearly')}
+              disabled={loading || subscription?.paid || subscription?.ssoUser}
+              className="w-full bg-warm text-warm-foreground font-bold py-3 rounded-xl hover:shadow-lg hover:scale-[1.02] transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+            >
+              {loading === 'yearly' ? (
+                <><Loader2 size={18} className="animate-spin" /> Weiterleitung…</>
+              ) : (
+                <><Zap size={18} /> Jahresabo wählen</>
+              )}
+            </button>
+          </div>
+        </motion.div>
+      </div>
+
+      {/* Features card */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.25 }}
+        className="bg-white dark:bg-gray-800 rounded-2xl shadow-md border border-gray-200 dark:border-gray-700 p-6 mb-8"
+      >
+        <h3 className="font-bold text-gray-800 dark:text-gray-100 mb-4">In beiden Plänen enthalten:</h3>
+        <div className="grid sm:grid-cols-2 gap-3">
+          {features.map(({ icon: Icon, text }, i) => (
+            <div key={i} className="flex items-start gap-2.5">
+              <div className="bg-warm/15 rounded-lg p-1.5 shrink-0">
+                <Icon size={14} className="text-warm" />
+              </div>
+              <span className="text-sm text-gray-700 dark:text-gray-300">{text}</span>
+            </div>
+          ))}
+        </div>
+
+        {/* Trust */}
+        <div className="mt-5 pt-5 border-t border-gray-100 dark:border-gray-700 flex items-center justify-center gap-4 text-xs text-gray-400 flex-wrap">
+          <span className="flex items-center gap-1"><Shield size={12} /> Sichere Zahlung mit Stripe</span>
+          <span className="flex items-center gap-1"><Clock size={12} /> Jederzeit kündbar</span>
         </div>
       </motion.div>
 

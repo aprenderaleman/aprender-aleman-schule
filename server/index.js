@@ -104,6 +104,7 @@ const pool = mysql.createPool({
 const STRIPE_SECRET_KEY = process.env.STRIPE_SECRET_KEY
 const STRIPE_WEBHOOK_SECRET = process.env.STRIPE_WEBHOOK_SECRET
 const STRIPE_PRICE_ID = process.env.STRIPE_PRICE_ID // monthly 15€ price
+const STRIPE_PRICE_ID_YEARLY = process.env.STRIPE_PRICE_ID_YEARLY // annual 99€ price
 const stripe = STRIPE_SECRET_KEY ? new Stripe(STRIPE_SECRET_KEY) : null
 
 // Auto-create schule_subscriptions table
@@ -2324,10 +2325,21 @@ app.post('/api/admin/finances/snapshot', authMiddleware, adminMiddleware, async 
 })
 
 // ─── STRIPE: CREATE CHECKOUT SESSION ─────────────────
+// Body: { plan?: 'monthly' | 'yearly' } — defaults to 'monthly'
 app.post('/api/stripe/create-checkout', authMiddleware, async (req, res) => {
   try {
-    if (!stripe || !STRIPE_PRICE_ID) {
+    if (!stripe) {
       return res.status(503).json({ error: 'Stripe no está configurado.' })
+    }
+
+    const plan = req.body?.plan === 'yearly' ? 'yearly' : 'monthly'
+    const priceId = plan === 'yearly' ? STRIPE_PRICE_ID_YEARLY : STRIPE_PRICE_ID
+    if (!priceId) {
+      return res.status(503).json({
+        error: plan === 'yearly'
+          ? 'Jahresabo nicht konfiguriert (STRIPE_PRICE_ID_YEARLY fehlt).'
+          : 'Stripe Preis nicht konfiguriert.'
+      })
     }
 
     const userId = req.user.id
@@ -2353,14 +2365,15 @@ app.post('/api/stripe/create-checkout', authMiddleware, async (req, res) => {
     const session = await stripe.checkout.sessions.create({
       customer: customerId,
       mode: 'subscription',
-      line_items: [{ price: STRIPE_PRICE_ID, quantity: 1 }],
-      success_url: `${frontendUrl}/dashboard?payment=success`,
+      line_items: [{ price: priceId, quantity: 1 }],
+      success_url: `${frontendUrl}/dashboard?payment=success&plan=${plan}`,
       cancel_url: `${frontendUrl}/pricing?payment=canceled`,
-      metadata: { userId },
-      subscription_data: { metadata: { userId } },
+      metadata: { userId, plan },
+      subscription_data: { metadata: { userId, plan } },
+      allow_promotion_codes: true,
     })
 
-    res.json({ url: session.url })
+    res.json({ url: session.url, plan })
   } catch (err) {
     console.error('Stripe checkout error:', err.message)
     res.status(500).json({ error: 'Error al crear sesión de pago.' })
