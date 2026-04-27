@@ -130,6 +130,26 @@ const stripe = STRIPE_SECRET_KEY ? new Stripe(STRIPE_SECRET_KEY) : null
   }
 })()
 
+// Auto-create reviews table
+;(async () => {
+  try {
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS schule_reviews (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        userId VARCHAR(191) NOT NULL,
+        rating TINYINT NOT NULL,
+        comment TEXT,
+        published TINYINT(1) DEFAULT 0,
+        createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+        UNIQUE KEY uniq_user (userId),
+        INDEX idx_published (published, rating, createdAt)
+      )
+    `)
+  } catch (err) {
+    console.error('Failed to create schule_reviews table:', err.message)
+  }
+})()
+
 // Auto-create Prüfungen tables
 ;(async () => {
   try {
@@ -927,6 +947,68 @@ app.post('/api/explorer-challenge/claim', authMiddleware, async (req, res) => {
   }
 })
 
+// ─── REVIEWS ──────────────────────────────────────────
+// Get the current user's review (if any) — used by frontend to know
+// whether to show the prompt and to allow editing.
+app.get('/api/reviews/me', authMiddleware, async (req, res) => {
+  try {
+    const [rows] = await pool.query(
+      'SELECT id, rating, comment, published, createdAt FROM schule_reviews WHERE userId = ? LIMIT 1',
+      [req.user.id]
+    )
+    res.json({ review: rows[0] || null })
+  } catch (err) {
+    console.error('Get my review error:', err)
+    res.status(500).json({ error: 'Error al obtener reseña.' })
+  }
+})
+
+// Submit / update a review. Auto-publishes if rating >= 4.
+app.post('/api/reviews', authMiddleware, async (req, res) => {
+  try {
+    const { rating, comment } = req.body
+    const r = parseInt(rating)
+    if (!r || r < 1 || r > 5) return res.status(400).json({ error: 'Bewertung muss zwischen 1 und 5 liegen.' })
+    const text = String(comment || '').trim().slice(0, 1000)
+    const autoPublish = r >= 4 ? 1 : 0
+    await pool.query(
+      `INSERT INTO schule_reviews (userId, rating, comment, published)
+       VALUES (?, ?, ?, ?)
+       ON DUPLICATE KEY UPDATE rating = VALUES(rating), comment = VALUES(comment),
+         published = VALUES(published), createdAt = NOW()`,
+      [req.user.id, r, text, autoPublish]
+    )
+    res.json({ ok: true, published: !!autoPublish })
+  } catch (err) {
+    console.error('Submit review error:', err)
+    res.status(500).json({ error: 'Error al guardar reseña.' })
+  }
+})
+
+// Public list of published reviews (rating >= 4) for the landing page.
+app.get('/api/reviews/public', async (req, res) => {
+  try {
+    const [rows] = await pool.query(
+      `SELECT r.rating, r.comment, r.createdAt, u.fullName as name
+       FROM schule_reviews r
+       JOIN users u ON u.id = r.userId
+       WHERE r.published = 1 AND r.rating >= 4 AND r.comment IS NOT NULL AND r.comment != ''
+       ORDER BY r.rating DESC, r.createdAt DESC
+       LIMIT 12`
+    )
+    // Anonymize: use first name + last-initial
+    const reviews = rows.map(r => {
+      const parts = String(r.name || '').trim().split(/\s+/)
+      const display = parts[0] + (parts[1] ? ` ${parts[1][0]}.` : '')
+      return { name: display || 'Schüler', rating: r.rating, comment: r.comment, date: r.createdAt }
+    })
+    res.json({ reviews })
+  } catch (err) {
+    console.error('Public reviews error:', err)
+    res.json({ reviews: [] })
+  }
+})
+
 // ─── ADMIN MIDDLEWARE ─────────────────────────────────
 function adminMiddleware(req, res, next) {
   if (req.user?.role !== 'superadmin' && req.user?.role !== 'admin') {
@@ -1162,6 +1244,43 @@ app.patch('/api/admin/users/:userId', authMiddleware, adminMiddleware, async (re
   } catch (err) {
     console.error('Admin update user error:', err)
     res.status(500).json({ error: 'Error al actualizar usuario.' })
+  }
+})
+
+// ─── ADMIN: REVIEWS ────────────────────────────────
+app.get('/api/admin/reviews', authMiddleware, adminMiddleware, async (req, res) => {
+  try {
+    const [rows] = await pool.query(
+      `SELECT r.id, r.userId, r.rating, r.comment, r.published, r.createdAt,
+        u.fullName as userName, u.email as userEmail
+       FROM schule_reviews r
+       JOIN users u ON u.id = r.userId
+       ORDER BY r.createdAt DESC`
+    )
+    // Aggregate stats
+    const total = rows.length
+    const avgRating = total > 0 ? rows.reduce((s, r) => s + r.rating, 0) / total : 0
+    const distribution = [1,2,3,4,5].reduce((acc, n) => {
+      acc[n] = rows.filter(r => r.rating === n).length
+      return acc
+    }, {})
+    res.json({ reviews: rows, total, avgRating: parseFloat(avgRating.toFixed(2)), distribution })
+  } catch (err) {
+    console.error('Admin reviews error:', err)
+    res.status(500).json({ error: 'Error al obtener reseñas.' })
+  }
+})
+
+app.patch('/api/admin/reviews/:id', authMiddleware, adminMiddleware, async (req, res) => {
+  try {
+    const { id } = req.params
+    const { published } = req.body
+    if (published === undefined) return res.status(400).json({ error: 'published requerido.' })
+    await pool.query('UPDATE schule_reviews SET published = ? WHERE id = ?', [published ? 1 : 0, id])
+    res.json({ ok: true })
+  } catch (err) {
+    console.error('Admin patch review error:', err)
+    res.status(500).json({ error: 'Error al actualizar reseña.' })
   }
 })
 

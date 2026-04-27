@@ -30,6 +30,7 @@ const AdminDashboard = lazy(() => import('./pages/admin/AdminDashboard'))
 const AdminUsers = lazy(() => import('./pages/admin/AdminUsers'))
 const AdminUserDetail = lazy(() => import('./pages/admin/AdminUserDetail'))
 const AdminFinances = lazy(() => import('./pages/admin/AdminFinances'))
+const AdminReviews = lazy(() => import('./pages/admin/AdminReviews'))
 
 function ProtectedRoute({ children }) {
   const { user } = useAuth()
@@ -111,6 +112,7 @@ function AppRoutes() {
         <Route path="/admin/usuarios" element={<AdminRoute><AdminUsers /></AdminRoute>} />
         <Route path="/admin/usuarios/:userId" element={<AdminRoute><AdminUserDetail /></AdminRoute>} />
         <Route path="/admin/finanzen" element={<AdminRoute><AdminFinances /></AdminRoute>} />
+        <Route path="/admin/bewertungen" element={<AdminRoute><AdminReviews /></AdminRoute>} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </>

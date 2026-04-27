@@ -10,6 +10,7 @@ import SkillCard from '../components/Dashboard/SkillCard'
 import StreakCounter from '../components/Dashboard/StreakCounter'
 import RecentBadges from '../components/Dashboard/RecentBadges'
 import ExplorerChallenge from '../components/Dashboard/ExplorerChallenge'
+import ReviewPrompt from '../components/UI/ReviewPrompt'
 import ProgressBar from '../components/UI/ProgressBar'
 import Toast from '../components/UI/Toast'
 import { EXERCISES } from '../utils/exercises'
@@ -41,6 +42,7 @@ export default function Dashboard() {
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex flex-col">
       <Navbar />
       <Toast toast={toast} />
+      <ReviewPrompt exerciseHistory={progress.exerciseHistory || []} />
 
       <main className="max-w-6xl mx-auto px-4 py-8 flex-1 w-full">
         {/* Greeting */}

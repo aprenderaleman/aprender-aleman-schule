@@ -1,11 +1,13 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { CheckCircle, Zap, BookOpen, Trophy, ChevronRight } from 'lucide-react'
+import { CheckCircle, Zap, BookOpen, Trophy, ChevronRight, Star } from 'lucide-react'
 import Button from '../components/UI/Button'
 import Footer from '../components/Layout/Footer'
 import { useTheme } from '../context/ThemeContext'
 import { Moon, Sun } from 'lucide-react'
+
+const API_URL = import.meta.env.VITE_API_URL || ''
 
 const features = [
   { icon: '🤖', title: 'KI als Lehrer', desc: 'Personalisierte Korrekturen mit Claude KI in Echtzeit' },
@@ -22,14 +24,25 @@ const levels = [
   { level: 'C1', desc: 'Fortgeschritten', color: 'bg-red-100 text-red-800' },
 ]
 
-const testimonials = [
-  { name: 'Laura G.', text: 'In 3 Monaten bin ich von A1 auf A2 gekommen. Die KI-Korrekturen sind unglaublich.', avatar: '👩' },
-  { name: 'Carlos M.', text: 'Das Beste ist, dass ich jederzeit und in meinem eigenen Tempo üben kann.', avatar: '👨' },
-  { name: 'Ana P.', text: 'Die klaren Erklärungen machen alles viel verständlicher.', avatar: '👩‍🦱' },
+// Fallback testimonials shown only if there are no real reviews yet
+const FALLBACK_TESTIMONIALS = [
+  { name: 'Laura G.', comment: 'In 3 Monaten bin ich von A1 auf A2 gekommen. Die KI-Korrekturen sind unglaublich.', rating: 5 },
+  { name: 'Carlos M.', comment: 'Das Beste ist, dass ich jederzeit und in meinem eigenen Tempo üben kann.', rating: 5 },
+  { name: 'Ana P.', comment: 'Die klaren Erklärungen machen alles viel verständlicher.', rating: 5 },
 ]
 
 export default function Landing() {
   const { darkMode, toggleDarkMode } = useTheme()
+  const [reviews, setReviews] = useState([])
+
+  useEffect(() => {
+    fetch(`${API_URL}/api/reviews/public`)
+      .then(r => r.json())
+      .then(data => setReviews(Array.isArray(data.reviews) ? data.reviews : []))
+      .catch(() => {})
+  }, [])
+
+  const displayed = reviews.length >= 3 ? reviews.slice(0, 6) : FALLBACK_TESTIMONIALS
 
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-100">
@@ -162,12 +175,30 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* Testimonials */}
+      {/* Testimonials — real reviews from users (rating ≥4) */}
       <section className="bg-orange-50 dark:bg-gray-800 py-16 px-6">
         <div className="max-w-5xl mx-auto">
-          <h2 className="text-3xl font-extrabold text-center mb-12">Was unsere Schüler sagen</h2>
+          <h2 className="text-3xl font-extrabold text-center mb-2">Was unsere Schüler sagen</h2>
+          {reviews.length >= 3 && (
+            <p className="text-center text-sm text-gray-500 dark:text-gray-400 mb-10">
+              {(() => {
+                const avg = reviews.reduce((s, r) => s + r.rating, 0) / reviews.length
+                return (
+                  <span className="inline-flex items-center gap-1.5">
+                    <span className="flex items-center gap-0.5">
+                      {[1,2,3,4,5].map(n => (
+                        <Star key={n} size={14} className={n <= Math.round(avg) ? 'fill-orange-400 text-orange-400' : 'text-gray-300'} />
+                      ))}
+                    </span>
+                    <strong>{avg.toFixed(1)}</strong> · {reviews.length} Bewertungen
+                  </span>
+                )
+              })()}
+            </p>
+          )}
+          {reviews.length < 3 && <div className="mb-10" />}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {testimonials.map((t, i) => (
+            {displayed.map((t, i) => (
               <motion.div
                 key={i}
                 initial={{ opacity: 0, y: 20 }}
@@ -175,8 +206,12 @@ export default function Landing() {
                 transition={{ delay: i * 0.1 }}
                 className="bg-white dark:bg-gray-700 rounded-2xl p-6 shadow-sm"
               >
-                <div className="text-4xl mb-3">{t.avatar}</div>
-                <p className="text-gray-600 dark:text-gray-300 text-sm italic mb-4">"{t.text}"</p>
+                <div className="flex items-center gap-0.5 mb-3">
+                  {[1,2,3,4,5].map(n => (
+                    <Star key={n} size={16} className={n <= (t.rating || 5) ? 'fill-orange-400 text-orange-400' : 'text-gray-300'} />
+                  ))}
+                </div>
+                <p className="text-gray-600 dark:text-gray-300 text-sm italic mb-4">"{t.comment}"</p>
                 <p className="font-bold text-gray-800 dark:text-gray-100">{t.name}</p>
               </motion.div>
             ))}
