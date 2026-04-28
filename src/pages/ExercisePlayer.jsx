@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowLeft, Clock, Zap, X } from 'lucide-react'
 import { useAuth } from '../context/AuthContext'
 import { useProgress } from '../context/ProgressContext'
+import { useWakeLock } from '../hooks/useWakeLock'
 import Navbar from '../components/Layout/Navbar'
 import GrammarExercise from '../components/Exercises/GrammarExercise'
 import ReadingExercise from '../components/Exercises/ReadingExercise'
@@ -24,6 +25,9 @@ export default function ExercisePlayer() {
   const navigate = useNavigate()
 
   const exercise = EXERCISES.find(e => e.id === id)
+
+  // Keep the screen awake during the exercise
+  useWakeLock(!!exercise)
 
   const [score, setScore] = useState(null)
   const [showResult, setShowResult] = useState(false)

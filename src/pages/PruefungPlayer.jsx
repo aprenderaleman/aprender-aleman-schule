@@ -8,6 +8,7 @@ import {
 } from 'lucide-react'
 import Navbar from '../components/Layout/Navbar'
 import { useAuth } from '../context/AuthContext'
+import { useWakeLock } from '../hooks/useWakeLock'
 import { getExamById, gradeObjectiveExam } from '../data/pruefungen'
 
 const API_URL = import.meta.env.VITE_API_URL || ''
@@ -76,6 +77,9 @@ export default function PruefungPlayer() {
   const navigate = useNavigate()
   const { getToken } = useAuth()
   const exam = useMemo(() => getExamById(examId), [examId])
+
+  // Keep the screen awake during the exam
+  useWakeLock(!!exam)
 
   const [phase, setPhase] = useState('intro') // intro | running | results
   const [responses, setResponses] = useState({})
