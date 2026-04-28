@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Button from '../UI/Button'
 import { CheckCircle, XCircle } from 'lucide-react'
+import { haptics } from '../../utils/haptics'
 
 export default function GrammarExercise({ exercise, userName, onComplete }) {
   const [selected, setSelected] = useState(null)
@@ -17,6 +18,9 @@ export default function GrammarExercise({ exercise, userName, onComplete }) {
       ? dragOrder.join(' ') === exercise.answer
       : selected === exercise.answer
 
+    if (correct) haptics.success()
+    else haptics.error()
+
     onComplete({
       correct,
       selected: exercise.subtype === 'reorder' ? dragOrder.join(' ') : selected,
@@ -24,6 +28,31 @@ export default function GrammarExercise({ exercise, userName, onComplete }) {
       explanation: exercise.explanation,
     })
   }
+
+  // Keyboard shortcuts: 1-4 select an option, Enter submits
+  useEffect(() => {
+    if (submitted || exercise.subtype === 'reorder') return
+    const onKey = (e) => {
+      // Skip if user is typing in another field
+      const tag = e.target?.tagName
+      if (tag === 'INPUT' || tag === 'TEXTAREA') return
+      // 1..9 selects the matching option
+      const num = parseInt(e.key, 10)
+      if (!isNaN(num) && num >= 1 && num <= (exercise.options?.length || 0)) {
+        e.preventDefault()
+        setSelected(exercise.options[num - 1])
+        haptics.tap()
+        return
+      }
+      if (e.key === 'Enter') {
+        e.preventDefault()
+        handleSubmit()
+      }
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [submitted, selected, exercise])
 
   if (exercise.subtype === 'reorder') {
     return (
@@ -87,6 +116,7 @@ export default function GrammarExercise({ exercise, userName, onComplete }) {
             >
               <span className="mr-2 font-bold text-gray-400">{String.fromCharCode(65 + i)}.</span>
               {option}
+              <kbd className="hidden md:inline-flex items-center justify-center ml-2 w-5 h-5 text-[10px] font-bold text-gray-400 bg-gray-100 dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700 align-middle">{i + 1}</kbd>
             </motion.button>
           )
         })}

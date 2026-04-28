@@ -45,7 +45,7 @@ export default function Dashboard() {
       <Toast toast={toast} />
       <ReviewPrompt exerciseHistory={progress.exerciseHistory || []} />
 
-      <main className="max-w-6xl mx-auto px-4 py-8 flex-1 w-full">
+      <main id="main" className="max-w-7xl xl:pl-20 mx-auto px-4 sm:px-6 py-8 flex-1 w-full">
         {/* Greeting */}
         <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
           <h1 className="text-3xl font-extrabold text-gray-800 dark:text-gray-100">

@@ -51,7 +51,7 @@ export default function ReadingExercise({ exercise, userName, onComplete }) {
           <BookOpen size={18} className="text-blue-500" />
           <span className="text-sm font-semibold text-blue-600 dark:text-blue-400">Deutscher Text — Tippe auf ein Wort, um die Übersetzung zu sehen</span>
         </div>
-        <p className="text-gray-800 dark:text-gray-100 leading-relaxed text-base">
+        <p className="text-gray-800 dark:text-gray-100 leading-relaxed text-base prose-comfy">
           {exercise.text.split(' ').map((word, i) => (
             <span key={i}>
               <button

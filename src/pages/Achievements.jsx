@@ -18,7 +18,7 @@ export default function Achievements() {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <Navbar />
-      <main className="max-w-4xl mx-auto px-4 py-8">
+      <main id="main" className="max-w-5xl xl:pl-20 mx-auto px-4 sm:px-6 py-8">
         <div className="mb-8">
           <h1 className="text-3xl font-extrabold text-gray-800 dark:text-gray-100">Erfolge</h1>
           <p className="text-gray-500 dark:text-gray-400 mt-1">

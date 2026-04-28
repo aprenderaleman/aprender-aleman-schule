@@ -188,6 +188,27 @@ function FlashcardStudy({ topic, onBack }) {
     }, 600)
   }, [cardId, currentIndex, sortedCards.length])
 
+  // Keyboard shortcuts: Space to flip, 1-4 to answer (after flip)
+  useEffect(() => {
+    const onKey = (e) => {
+      const tag = e.target?.tagName
+      if (tag === 'INPUT' || tag === 'TEXTAREA') return
+      if (e.key === ' ' || e.key === 'Enter') {
+        e.preventDefault()
+        if (!flipped) handleFlip()
+        return
+      }
+      if (flipped && !answered) {
+        if (e.key === '1') { e.preventDefault(); handleAnswer(0) }
+        else if (e.key === '2') { e.preventDefault(); handleAnswer(1) }
+        else if (e.key === '3') { e.preventDefault(); handleAnswer(3) }
+        else if (e.key === '4') { e.preventDefault(); handleAnswer(5) }
+      }
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [flipped, answered, handleFlip, handleAnswer])
+
   if (sessionDone) {
     const pct = sessionStats.total > 0 ? Math.round((sessionStats.correct / sessionStats.total) * 100) : 0
     return (
@@ -393,7 +414,7 @@ export default function Flashcards() {
       <Navbar />
       <Toast toast={toast} />
 
-      <main className="max-w-5xl mx-auto px-4 py-8">
+      <main id="main" className="max-w-7xl xl:pl-20 mx-auto px-4 sm:px-6 py-8">
         <AnimatePresence mode="wait">
           {selectedTopic ? (
             <motion.div key="study" initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -30 }}>

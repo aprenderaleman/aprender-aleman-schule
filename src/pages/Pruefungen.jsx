@@ -120,7 +120,7 @@ function PruefungsWizard({ onComplete, initialError }) {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex flex-col">
       <Navbar />
-      <main className="flex-1 max-w-4xl w-full mx-auto px-4 py-8 md:py-12">
+      <main id="main" className="flex-1 max-w-5xl xl:pl-20 w-full mx-auto px-4 sm:px-6 py-8 md:py-12">
         <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="mb-8 text-center">
           <div className="inline-flex items-center gap-2 bg-indigo-100 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300 px-4 py-1.5 rounded-full text-sm font-bold mb-4">
             <Sparkles size={14} /> NEU · Prüfungsvorbereitung
@@ -311,7 +311,7 @@ function PruefungsDashboard({ plan, onReset, onRefresh }) {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex flex-col">
       <Navbar />
-      <main className="flex-1 max-w-6xl w-full mx-auto px-4 py-8">
+      <main id="main" className="flex-1 max-w-7xl xl:pl-20 w-full mx-auto px-4 sm:px-6 py-8">
         <div className="mb-8">
           <div className="flex items-start justify-between gap-4 flex-wrap">
             <div>
