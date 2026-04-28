@@ -27,16 +27,43 @@
 
   * {
     box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
   }
   html {
     scroll-behavior: smooth;
+    /* Disable iOS text-size adjust on orientation change */
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
   }
   body {
     @apply font-sans antialiased bg-background text-foreground;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    /* Eliminate the 300ms tap delay on touch devices */
+    touch-action: manipulation;
+    /* Prevent overscroll bounce showing the page below */
+    overscroll-behavior-y: none;
   }
   h1, h2, h3, h4, h5, h6 {
     @apply tracking-tight;
+    /* UI text shouldn't be selectable on touch — feels web-y */
+    user-select: none;
+    -webkit-user-select: none;
+  }
+  /* UI chrome (buttons, nav, badges) — no selection */
+  button, nav, [role="button"], [role="tab"], [role="navigation"] {
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+  }
+  /* Inputs MUST be 16px+ to prevent iOS zoom on focus */
+  input, textarea, select {
+    @apply text-base;
+    font-size: max(16px, 1rem);
+  }
+  /* Allow text selection in actual content areas */
+  p, article, [data-selectable] {
+    user-select: text;
+    -webkit-user-select: text;
   }
 }
 
@@ -91,6 +118,50 @@
   /* Backwards-compat: old class name still works */
   .gradient-orange {
     background: linear-gradient(135deg, #F4A261 0%, #DE8C46 100%);
+  }
+
+  /* ───── Safe areas (iOS notch / home indicator) ───── */
+  .pt-safe { padding-top: env(safe-area-inset-top, 0px); }
+  .pb-safe { padding-bottom: env(safe-area-inset-bottom, 0px); }
+  .pl-safe { padding-left: env(safe-area-inset-left, 0px); }
+  .pr-safe { padding-right: env(safe-area-inset-right, 0px); }
+  .h-safe-top    { height: env(safe-area-inset-top, 0px); }
+  .h-safe-bottom { height: env(safe-area-inset-bottom, 0px); }
+  /* Combined: padding + safe area */
+  .pt-safe-4  { padding-top: calc(1rem    + env(safe-area-inset-top,    0px)); }
+  .pb-safe-4  { padding-bottom: calc(1rem + env(safe-area-inset-bottom, 0px)); }
+  .pb-safe-20 { padding-bottom: calc(5rem + env(safe-area-inset-bottom, 0px)); }
+  /* Min-height that respects dynamic viewport (mobile keyboards/url bars) */
+  .min-h-screen-d { min-height: 100vh; min-height: 100dvh; }
+  .h-screen-d     { height: 100vh; height: 100dvh; }
+
+  /* ───── Touch feedback ───── */
+  .tap { transition: transform 100ms ease; }
+  .tap:active { transform: scale(0.96); }
+
+  /* ───── Native-feel scroll containers ───── */
+  .scroll-x-snap {
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+  .scroll-x-snap > * {
+    scroll-snap-align: start;
+  }
+
+  /* ───── Skeleton shimmer ───── */
+  .skeleton {
+    background: linear-gradient(
+      90deg,
+      rgb(var(--muted)) 0%,
+      rgb(var(--muted) / 0.6) 50%,
+      rgb(var(--muted)) 100%
+    );
+    background-size: 200% 100%;
+    animation: skeleton-shimmer 1.4s ease-in-out infinite;
+  }
+  @keyframes skeleton-shimmer {
+    0%   { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
   }
 }
 

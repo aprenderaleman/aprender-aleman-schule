@@ -69,6 +69,11 @@ export default function Login() {
                   name="email"
                   type="email"
                   autoComplete="email"
+                  inputMode="email"
+                  enterKeyHint="next"
+                  autoCapitalize="off"
+                  autoCorrect="off"
+                  spellCheck="false"
                   value={form.email}
                   onChange={handleChange}
                   placeholder="du@beispiel.de"
@@ -89,6 +94,10 @@ export default function Login() {
                   name="password"
                   type={showPass ? 'text' : 'password'}
                   autoComplete="current-password"
+                  enterKeyHint="go"
+                  autoCapitalize="off"
+                  autoCorrect="off"
+                  spellCheck="false"
                   value={form.password}
                   onChange={handleChange}
                   placeholder="Dein Passwort"

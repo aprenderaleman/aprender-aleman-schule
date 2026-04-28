@@ -99,6 +99,8 @@ export default function Register() {
                 className="input-field"
                 placeholder="Dein Name"
                 autoComplete="name"
+                autoCapitalize="words"
+                enterKeyHint="next"
               />
             </div>
 
@@ -111,6 +113,11 @@ export default function Register() {
                 className="input-field"
                 placeholder="du@beispiel.de"
                 autoComplete="email"
+                inputMode="email"
+                enterKeyHint="next"
+                autoCapitalize="off"
+                autoCorrect="off"
+                spellCheck="false"
               />
             </div>
 
