@@ -24,9 +24,12 @@ import Paywall from './components/UI/Paywall'
 import TrialBanner from './components/UI/TrialBanner'
 import Navbar from './components/Layout/Navbar'
 import MobileTabBar from './components/Layout/MobileTabBar'
+import DesktopRail from './components/Layout/DesktopRail'
 import NetworkStatus from './components/UI/NetworkStatus'
 import InstallPrompt from './components/UI/InstallPrompt'
+import CommandPalette from './components/UI/CommandPalette'
 import ChatBot from './components/ChatBot/ChatBot'
+import { useGlobalShortcuts } from './hooks/useGlobalShortcuts'
 
 // Lazy load admin pages
 const AdminDashboard = lazy(() => import('./pages/admin/AdminDashboard'))
@@ -89,9 +92,15 @@ function PublicRoute({ children }) {
   return children
 }
 
+function GlobalShortcutsBinder() {
+  useGlobalShortcuts()
+  return null
+}
+
 function AppRoutes() {
   return (
     <>
+      <GlobalShortcutsBinder />
       <TrialBanner />
       <Routes>
         <Route path="/" element={<Landing />} />
@@ -130,8 +139,10 @@ export default function App() {
           <AuthProvider>
             <ProgressProvider>
               <NetworkStatus />
+              <DesktopRail />
               <AppRoutes />
               <MobileTabBar />
+              <CommandPalette />
               <InstallPrompt />
               <ChatBot />
             </ProgressProvider>

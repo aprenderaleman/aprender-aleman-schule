@@ -35,6 +35,32 @@
     -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;
   }
+  /* Selection — match brand */
+  ::selection {
+    background: rgb(244 162 97 / 0.3);
+    color: rgb(var(--foreground));
+  }
+  /* Visible focus rings only when navigating with keyboard */
+  :focus { outline: none; }
+  :focus-visible {
+    outline: 2px solid #F4A261;
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
+  /* Buttons/inputs that already have a focus ring via Tailwind get nothing extra */
+  button:focus-visible, [role="button"]:focus-visible, a:focus-visible {
+    outline: 2px solid #F4A261;
+    outline-offset: 2px;
+  }
+  /* Reduced motion: turn off non-essential animations */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
   body {
     @apply font-sans antialiased bg-background text-foreground;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
@@ -178,19 +204,40 @@
   animation: confetti-fall linear forwards;
 }
 
-/* Custom scrollbar — themed via CSS vars */
+/* Custom scrollbar — themed, thin, macOS-style. Auto-hide on inactivity. */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 8px;
+  height: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: rgb(var(--muted));
+  background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: rgb(var(--muted-foreground) / 0.4);
+  background: rgb(var(--muted-foreground) / 0.25);
   border-radius: 9999px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgb(var(--muted-foreground) / 0.7);
+  background: rgb(var(--muted-foreground) / 0.5);
+  background-clip: padding-box;
+}
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(var(--muted-foreground) / 0.25) transparent;
+}
+
+/* Reading prose: comfortable line length on wide screens */
+.prose-comfy {
+  max-width: 65ch;
+}
+
+/* Hover effects only apply on devices that actually have hover (no sticky tap on mobile) */
+@media (hover: none) {
+  .hover\:scale-105:hover { transform: none; }
+  .hover\:shadow-xl:hover { box-shadow: inherit; }
+  .hover\:shadow-lg:hover { box-shadow: inherit; }
 }
 
 /* Hide scrollbar but keep scroll functionality */
