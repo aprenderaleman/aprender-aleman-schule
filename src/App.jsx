@@ -24,6 +24,7 @@ import Paywall from './components/UI/Paywall'
 import TrialBanner from './components/UI/TrialBanner'
 import Navbar from './components/Layout/Navbar'
 import MobileTabBar from './components/Layout/MobileTabBar'
+import NetworkStatus from './components/UI/NetworkStatus'
 import ChatBot from './components/ChatBot/ChatBot'
 
 // Lazy load admin pages
@@ -127,6 +128,7 @@ export default function App() {
         <ThemeProvider>
           <AuthProvider>
             <ProgressProvider>
+              <NetworkStatus />
               <AppRoutes />
               <MobileTabBar />
               <ChatBot />

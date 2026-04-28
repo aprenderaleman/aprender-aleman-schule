@@ -11,6 +11,7 @@ import StreakCounter from '../components/Dashboard/StreakCounter'
 import RecentBadges from '../components/Dashboard/RecentBadges'
 import ExplorerChallenge from '../components/Dashboard/ExplorerChallenge'
 import ReviewPrompt from '../components/UI/ReviewPrompt'
+import AnimatedNumber from '../components/UI/AnimatedNumber'
 import ProgressBar from '../components/UI/ProgressBar'
 import Toast from '../components/UI/Toast'
 import { EXERCISES } from '../utils/exercises'
@@ -65,7 +66,7 @@ export default function Dashboard() {
                 <span className="font-bold text-gray-800 dark:text-gray-100">Niveau-Fortschritt</span>
               </div>
               <span className="text-sm font-semibold text-orange-500 bg-orange-50 dark:bg-orange-900/30 px-2 py-1 rounded-full">
-                {progress.xp} XP
+                <AnimatedNumber value={progress.xp || 0} /> XP
               </span>
             </div>
             <ProgressBar value={levelProgress} color="orange" showPercent />
@@ -314,7 +315,9 @@ export default function Dashboard() {
           ].map(({ label, value, icon: Icon }) => (
             <div key={label} className="card text-center">
               <Icon size={24} className="text-orange-500 mx-auto mb-2" />
-              <p className="text-2xl font-extrabold text-gray-800 dark:text-gray-100">{value}</p>
+              <p className="text-2xl font-extrabold text-gray-800 dark:text-gray-100">
+                <AnimatedNumber value={value} />
+              </p>
               <p className="text-xs text-gray-400 mt-0.5">{label}</p>
             </div>
           ))}

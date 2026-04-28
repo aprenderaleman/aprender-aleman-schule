@@ -1,41 +1,70 @@
-import React, { useEffect, useRef } from 'react'
+import { useEffect } from 'react'
+import confetti from 'canvas-confetti'
+import { haptics } from '../../utils/haptics'
 
-const COLORS = ['#f97316', '#fb923c', '#fbbf24', '#34d399', '#60a5fa', '#a78bfa', '#f472b6']
+const COLORS = ['#F4A261', '#FBBF24', '#2D6A4F', '#15315A', '#F97316', '#A78BFA']
 
-function createPiece(container) {
-  const el = document.createElement('div')
-  el.className = 'confetti-piece'
-  const size = Math.random() * 10 + 6
-  el.style.cssText = `
-    position: fixed;
-    width: ${size}px;
-    height: ${size}px;
-    background: ${COLORS[Math.floor(Math.random() * COLORS.length)]};
-    left: ${Math.random() * 100}vw;
-    top: -20px;
-    border-radius: ${Math.random() > 0.5 ? '50%' : '2px'};
-    animation: confetti-fall ${Math.random() * 2 + 2}s linear forwards;
-    animation-delay: ${Math.random() * 1.5}s;
-    z-index: 9999;
-    pointer-events: none;
-  `
-  container.appendChild(el)
-  setTimeout(() => el.remove(), 4000)
-}
-
-export default function Confetti({ active, onDone }) {
-  const containerRef = useRef(document.body)
-
+/**
+ * Native-feel celebration: physics-based canvas confetti firing from
+ * both bottom corners with realistic gravity + drift. Triggers haptic
+ * celebration pattern on supported devices.
+ */
+export default function Confetti({ active, onDone, intensity = 'normal' }) {
   useEffect(() => {
     if (!active) return
-    const count = 80
-    for (let i = 0; i < count; i++) {
-      setTimeout(() => createPiece(containerRef.current), i * 30)
+
+    haptics.celebrate()
+
+    const duration = intensity === 'big' ? 2500 : 1800
+    const end = Date.now() + duration
+    const particleCount = intensity === 'big' ? 60 : 40
+
+    const fire = () => {
+      // Burst from bottom-left
+      confetti({
+        particleCount,
+        angle: 60,
+        spread: 80,
+        startVelocity: 55,
+        origin: { x: 0, y: 1 },
+        colors: COLORS,
+        scalar: 0.9,
+        ticks: 200,
+      })
+      // Burst from bottom-right
+      confetti({
+        particleCount,
+        angle: 120,
+        spread: 80,
+        startVelocity: 55,
+        origin: { x: 1, y: 1 },
+        colors: COLORS,
+        scalar: 0.9,
+        ticks: 200,
+      })
     }
-    if (onDone) {
-      setTimeout(onDone, 4000)
-    }
-  }, [active, onDone])
+
+    fire()
+    const interval = setInterval(() => {
+      if (Date.now() > end) {
+        clearInterval(interval)
+        onDone?.()
+        return
+      }
+      // Smaller follow-up bursts
+      confetti({
+        particleCount: 15,
+        angle: 90,
+        spread: 100,
+        startVelocity: 35,
+        origin: { x: Math.random(), y: 0.8 },
+        colors: COLORS,
+        scalar: 0.7,
+      })
+    }, 350)
+
+    return () => clearInterval(interval)
+  }, [active, onDone, intensity])
 
   return null
 }

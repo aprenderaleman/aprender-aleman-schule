@@ -1,5 +1,6 @@
 import React from 'react'
 import { motion } from 'framer-motion'
+import { haptics } from '../../utils/haptics'
 
 export default function Button({
   children,
@@ -11,8 +12,14 @@ export default function Button({
   type = 'button',
   className = '',
   'aria-label': ariaLabel,
+  hapticOnClick = true,
   ...props
 }) {
+  const handleClick = (e) => {
+    if (disabled || loading) return
+    if (hapticOnClick) haptics.tap()
+    onClick?.(e)
+  }
   const base = 'inline-flex items-center justify-center font-semibold rounded-xl transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2'
 
   const variants = {
@@ -32,11 +39,12 @@ export default function Button({
 
   return (
     <motion.button
-      whileTap={{ scale: disabled || loading ? 1 : 0.97 }}
+      whileTap={{ scale: disabled || loading ? 1 : 0.96 }}
       whileHover={{ scale: disabled || loading ? 1 : 1.02 }}
+      transition={{ type: 'spring', damping: 20, stiffness: 400 }}
       type={type}
       disabled={disabled || loading}
-      onClick={onClick}
+      onClick={handleClick}
       aria-label={ariaLabel}
       className={`${base} ${variants[variant]} ${sizes[size]} ${disabled || loading ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'} ${className}`}
       {...props}
