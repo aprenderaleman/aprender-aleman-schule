@@ -1,5 +1,6 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useFocusTrap } from '../../hooks/useFocusTrap'
 
 /**
  * Native-style bottom sheet. Drag down to dismiss. Backdrop click also
@@ -7,6 +8,8 @@ import { motion, AnimatePresence } from 'framer-motion'
  * mobile-first UI.
  */
 export default function BottomSheet({ open, onClose, children, title, snapHeight = 'auto' }) {
+  const sheetRef = useRef(null)
+  useFocusTrap(sheetRef, open)
   // Lock body scroll while open
   useEffect(() => {
     if (!open) return
@@ -38,6 +41,7 @@ export default function BottomSheet({ open, onClose, children, title, snapHeight
           />
           {/* Sheet */}
           <motion.div
+            ref={sheetRef}
             role="dialog"
             aria-modal="true"
             aria-label={title}

@@ -28,6 +28,7 @@ import DesktopRail from './components/Layout/DesktopRail'
 import NetworkStatus from './components/UI/NetworkStatus'
 import InstallPrompt from './components/UI/InstallPrompt'
 import CommandPalette from './components/UI/CommandPalette'
+import SkipLink from './components/UI/SkipLink'
 import ChatBot from './components/ChatBot/ChatBot'
 import { useGlobalShortcuts } from './hooks/useGlobalShortcuts'
 
@@ -138,6 +139,7 @@ export default function App() {
         <ThemeProvider>
           <AuthProvider>
             <ProgressProvider>
+              <SkipLink />
               <NetworkStatus />
               <DesktopRail />
               <AppRoutes />

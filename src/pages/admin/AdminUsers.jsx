@@ -13,6 +13,7 @@ import {
   ChevronLeft,
   ChevronRight
 } from 'lucide-react'
+import CopyButton from '../../components/UI/CopyButton'
 
 const API_URL = import.meta.env.VITE_API_URL || ''
 
@@ -464,7 +465,12 @@ export default function AdminUsers() {
                       </Link>
                     </td>
                     <td className="px-4 py-3 text-sm text-gray-500 dark:text-gray-400">
-                      {user.email}
+                      <span className="inline-flex items-center gap-1.5 group">
+                        <span>{user.email}</span>
+                        <span className="opacity-0 group-hover:opacity-100 transition-opacity">
+                          <CopyButton text={user.email} label="E-Mail kopieren" size={12} />
+                        </span>
+                      </span>
                     </td>
                     <td className="px-4 py-3 text-center">
                       <span className="inline-flex items-center justify-center w-10 h-6 text-xs font-bold rounded-md bg-orange-100 dark:bg-orange-500/20 text-orange-600 dark:text-orange-400">

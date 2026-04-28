@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useEffect, useCallback } from 'react'
 import { useAuth } from './AuthContext'
 import { checkAchievements } from '../utils/achievements'
+import { useBroadcastSync } from '../hooks/useBroadcastSync'
 
 const ProgressContext = createContext(null)
 const API_URL = import.meta.env.VITE_API_URL || ''
@@ -36,6 +37,14 @@ export function ProgressProvider({ children }) {
   const [progress, setProgress] = useState(defaultProgress)
   const [newAchievements, setNewAchievements] = useState([])
   const [loaded, setLoaded] = useState(false)
+  const [reloadTick, setReloadTick] = useState(0)
+
+  // Cross-tab sync: when another tab updates progress, refetch here
+  const broadcast = useBroadcastSync('schule-progress', (msg) => {
+    if (msg?.type === 'progress-updated' && msg?.userId === user?.id) {
+      setReloadTick(t => t + 1)
+    }
+  })
 
   // Load progress from backend
   useEffect(() => {
@@ -68,7 +77,8 @@ export function ProgressProvider({ children }) {
     }
     loadProgress()
     return () => { cancelled = true }
-  }, [user?.id, user?.level])
+  // reloadTick triggers a refetch when another tab broadcasts progress changes
+  }, [user?.id, user?.level, reloadTick])
 
   // Also save to localStorage as cache
   useEffect(() => {
@@ -151,16 +161,19 @@ export function ProgressProvider({ children }) {
         })
       }
 
-      // Sync exercise result to backend
+      // Sync exercise result to backend, then notify other tabs
       fetch(`${API_URL}/api/progress/exercise`, {
         method: 'POST',
         headers: getAuthHeaders(),
         body: JSON.stringify({ exerciseId, exerciseType: type, score, perfect, xpEarned: finalXpEarned, timeSpent: timeSpent || 0 }),
-      }).catch(() => {})
+      })
+        .then(() => broadcast({ type: 'progress-updated', userId: user?.id }))
+        .catch(() => {})
 
       return updated
     })
-  }, [])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user?.id])
 
   const unlockUnit = useCallback((level, unit) => {
     setProgress(prev => {
