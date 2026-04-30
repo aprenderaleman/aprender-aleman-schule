@@ -1,22 +1,23 @@
 // ─────────────────────────────────────────────────────────────────────
-// Migra estudiantes desde Supabase (PostgreSQL) → MySQL (Hetzner VPS)
+// Migra desde Supabase (PostgreSQL) → MySQL (Hetzner VPS)
+//
+// Mapeo basado en el schema real de aprender-aleman.de en Supabase:
+//   public.users      → users
+//   public.students   → students  (solo donde schule_access = true)
+//   schule_*          → autocreadas por el backend al iniciar
 //
 // Uso:
 //   1. npm i pg mysql2 bcryptjs
 //   2. Setear ambas connection strings:
 //      $env:PG_URL="postgresql://postgres:PW@db.<proj>.supabase.co:5432/postgres"
 //      $env:MYSQL_URL="mysql://aprenderaleman:PW@77.42.22.34:3307/aprenderaleman"
-//   3. (Opcional) DRY_RUN=1 para ver qué haría sin escribir:
+//   3. (Opcional) DRY_RUN para ver qué haría sin escribir:
 //      $env:DRY_RUN="1"
 //   4. node scripts/migrate-supabase-to-mysql.mjs
-//
-// IMPORTANTE: Editar la sección MAPPING después de inspeccionar Supabase
-// con scripts/inspect-supabase.mjs
 // ─────────────────────────────────────────────────────────────────────
 
 import pg from 'pg'
 import mysql from 'mysql2/promise'
-import bcrypt from 'bcryptjs'
 import { randomUUID } from 'node:crypto'
 
 const PG_URL    = process.env.PG_URL
@@ -29,88 +30,74 @@ if (!PG_URL || !MYSQL_URL) {
 }
 
 // ═══════════════════════════════════════════════════════════════════════
-// MAPPING — EDITAR DESPUÉS DE INSPECCIONAR SUPABASE
+// QUERIES — basadas en el schema real
 // ═══════════════════════════════════════════════════════════════════════
-//
-// Caso 1: Supabase usa auth.users (built-in auth) + tabla profiles
-//   SUPABASE_QUERY abajo tiene que hacer JOIN entre auth.users y profiles
-//
-// Caso 2: Supabase tiene tabla 'users' custom igual a la actual
-//   SUPABASE_QUERY = SELECT id, fullName, email, password, role, status FROM users
-//
-// Caso 3: Otra estructura — adaptar el SELECT y el rowToUser
-//
-// El password merece especial atención:
-//   - Si Supabase usa auth.users, los passwords están encriptados con un hash
-//     que el backend de SCHULE NO sabe leer (bcrypt sí, pero Supabase usa
-//     un schema propio). En ese caso vamos a generar un password random y
-//     forzar reset por mail al primer login.
-//   - Si la tabla users tiene passwords en bcrypt limpio, los copiamos tal cual.
-//   - Si están en otro algoritmo, hay que decidir caso por caso.
 
-const SUPABASE_QUERY = `
-  -- TODO: ajustar según el schema real de Supabase.
-  -- Default: asume tabla 'users' compatible.
+// Migrar TODOS los users activos (incluye admins/teachers/students).
+// Necesario para que admin UI y SSO funcionen completos.
+const Q_USERS = `
   SELECT
-    id,
-    "fullName" AS full_name,
+    id::text                AS id,
     email,
-    password,
-    role,
-    status,
-    "studentId" AS student_id,
-    "createdAt" AS created_at
-  FROM users
-  WHERE role = 'student' AND status = 'active'
+    password_hash           AS password,
+    role::text              AS role,
+    full_name               AS fullName,
+    active,
+    created_at              AS createdAt,
+    updated_at              AS updatedAt
+  FROM public.users
+  WHERE active = true
+  ORDER BY created_at
 `
 
-// Convierte una fila de Supabase a la estructura que MySQL espera.
-// Si el password no es un bcrypt válido, lo reemplaza por un placeholder
-// y marca al usuario para reset (campo TODO: agregar columna needsReset?).
-function rowToUser(r) {
-  const id          = r.id || randomUUID()
-  const fullName    = r.full_name || r.fullName || r.name || 'Schüler'
-  const email       = String(r.email || '').trim().toLowerCase()
-  const role        = r.role || 'student'
-  const status      = r.status || 'active'
-  const studentId   = r.student_id || r.studentId || null
-  const createdAt   = r.created_at ? new Date(r.created_at) : new Date()
+// Migrar students solo si tienen schule_access habilitado y user activo.
+const Q_STUDENTS = `
+  SELECT
+    s.id::text              AS id,
+    s.user_id::text         AS userId,
+    s.current_level::text   AS level,
+    s.subscription_type::text AS subscriptionType,
+    s.subscription_status::text AS subscriptionStatus,
+    s.schule_access         AS schuleAccess,
+    s.stripe_customer_id    AS stripeCustomerId,
+    s.stripe_subscription_id AS stripeSubscriptionId,
+    s.created_at            AS createdAt
+  FROM public.students s
+  JOIN public.users u ON u.id = s.user_id
+  WHERE u.active = true AND s.schule_access = true
+`
 
-  // Si el password parece bcrypt ($2a$ / $2b$ / $2y$) lo conservamos
-  let password = r.password || ''
-  if (!/^\$2[aby]\$/.test(password)) {
-    // Generar un placeholder bcrypt — usuario tendrá que resetear
-    const placeholder = bcrypt.hashSync(randomUUID(), 10)
-    password = placeholder
-  }
+// ═══════════════════════════════════════════════════════════════════════
+// HELPERS DE MAPPING
+// ═══════════════════════════════════════════════════════════════════════
 
+function mapUser(r) {
   return {
-    id,
-    fullName: String(fullName).trim().slice(0, 191),
-    email,
-    password,
-    role,
-    status,
-    studentId,
-    createdAt,
-    updatedAt: new Date(),
+    id:        r.id,
+    fullName:  String(r.fullname || r.full_name || 'Schüler').trim().slice(0, 191),
+    email:     String(r.email || '').trim().toLowerCase(),
+    password:  r.password,                           // bcrypt hash, copiar tal cual
+    role:      r.role || 'student',
+    status:    r.active ? 'active' : 'inactive',
+    studentId: null,                                 // se setea después en el paso 3
+    createdAt: r.createdat || new Date(),
+    updatedAt: r.updatedat || new Date(),
   }
 }
 
-// Si la tabla 'students' también está en Supabase, mapeamos también.
-// Si no, dejamos studentId=NULL en users y SCHULE crea student record on-demand.
-const STUDENTS_QUERY = `
-  -- TODO: ajustar
-  SELECT id, level, "userId" AS user_id, "classType" AS class_type
-  FROM students
-`
+function mapStudent(r) {
+  // Levels en Supabase: 'A0','A1','A2','B1','B2','C1','C2'
+  // MySQL espera lowercase: 'a1','a2','b1','b2','c1','c2'
+  let level = (r.level || 'A1').toLowerCase()
+  if (level === 'a0') level = 'a1'  // A0 no existe en SCHULE — empiezan en A1
 
-function rowToStudent(r) {
   return {
-    id: r.id || randomUUID(),
-    level: (r.level || 'a1').toLowerCase(),
-    userId: r.user_id || r.userId,
-    classType: r.class_type || r.classType || null,
+    id:        r.id,
+    userId:    r.userid,
+    level,
+    classType: r.subscriptiontype || 'group',  // 'individual' / 'group' / etc
+    stripeCustomerId:     r.stripecustomerid || null,
+    stripeSubscriptionId: r.stripesubscriptionid || null,
   }
 }
 
@@ -121,66 +108,87 @@ function rowToStudent(r) {
 async function run() {
   console.log(DRY_RUN ? '🟡 DRY RUN — no se escribe nada\n' : '🔴 LIVE MODE — escribiendo en MySQL\n')
 
-  const pgClient = new pg.Client({ connectionString: PG_URL, ssl: { rejectUnauthorized: false } })
+  const pgClient = new pg.Client({
+    connectionString: PG_URL,
+    ssl: { rejectUnauthorized: false },
+  })
   await pgClient.connect()
   console.log('✓ Conectado a Supabase')
 
   const mysqlConn = await mysql.createConnection(MYSQL_URL)
   console.log('✓ Conectado a MySQL\n')
 
-  // ── 1. Cargar usuarios desde Supabase ──
-  console.log('1/4 Leyendo users desde Supabase…')
-  const { rows: pgUsers } = await pgClient.query(SUPABASE_QUERY)
-  console.log(`   → ${pgUsers.length} users encontrados`)
+  // ── 1. Leer users de Supabase ──
+  console.log('1/5 Leyendo public.users…')
+  const { rows: pgUsers } = await pgClient.query(Q_USERS)
+  console.log(`   → ${pgUsers.length} users activos\n`)
 
-  // ── 2. Cargar students (si existe la tabla) ──
-  let pgStudents = []
-  try {
-    console.log('2/4 Leyendo students desde Supabase…')
-    const r = await pgClient.query(STUDENTS_QUERY)
-    pgStudents = r.rows
-    console.log(`   → ${pgStudents.length} students encontrados`)
-  } catch (e) {
-    console.log(`   (omitido: ${e.message})`)
+  // ── 2. Leer students con schule_access ──
+  console.log('2/5 Leyendo public.students (schule_access=true)…')
+  const { rows: pgStudents } = await pgClient.query(Q_STUDENTS)
+  console.log(`   → ${pgStudents.length} students con acceso a SCHULE\n`)
+
+  // ── 3. Mapear schemas ──
+  console.log('3/5 Mapeando…')
+  const usersMapped    = pgUsers.map(mapUser)
+  const studentsMapped = pgStudents.map(mapStudent)
+
+  // Build user→student lookup para el paso final (setear users.studentId)
+  const userIdToStudentId = new Map()
+  for (const s of studentsMapped) userIdToStudentId.set(s.userId, s.id)
+
+  // Aplicar studentId al user correspondiente
+  for (const u of usersMapped) {
+    const sid = userIdToStudentId.get(u.id)
+    if (sid) u.studentId = sid
   }
-
-  // ── 3. Mapear a structuras MySQL ──
-  console.log('3/4 Mapeando schema…')
-  const usersMapped    = pgUsers.map(rowToUser)
-  const studentsMapped = pgStudents.map(rowToStudent)
 
   // Detectar duplicados de email
-  const emails = new Set()
-  const dups = []
+  const emailSeen = new Set()
+  const dupEmails = []
   for (const u of usersMapped) {
-    if (emails.has(u.email)) dups.push(u.email)
-    emails.add(u.email)
+    if (emailSeen.has(u.email)) dupEmails.push(u.email)
+    emailSeen.add(u.email)
   }
-  if (dups.length > 0) {
-    console.warn(`   ⚠️  ${dups.length} emails duplicados — se importará solo el primero`)
+  if (dupEmails.length > 0) {
+    console.warn(`   ⚠️  ${dupEmails.length} emails duplicados — solo el primero se importa`)
   }
 
+  // Stats por rol
+  const byRole = usersMapped.reduce((acc, u) => {
+    acc[u.role] = (acc[u.role] || 0) + 1
+    return acc
+  }, {})
+  console.log(`   Users por rol:`, byRole)
+  console.log(`   ${studentsMapped.length} students serán importados\n`)
+
   if (DRY_RUN) {
-    console.log('\nDRY RUN — primeros 3 users mapeados:')
-    console.log(JSON.stringify(usersMapped.slice(0, 3).map(u => ({ ...u, password: '<bcrypt>' })), null, 2))
-    console.log(`\nTotal a importar: ${usersMapped.length} users + ${studentsMapped.length} students`)
+    console.log('DRY RUN — primeros 3 users (passwords censurados):')
+    console.log(JSON.stringify(usersMapped.slice(0, 3).map(u => ({
+      ...u,
+      password: u.password ? `<${u.password.slice(0, 7)}…>` : null
+    })), null, 2))
+    console.log('\nDRY RUN — primeros 3 students:')
+    console.log(JSON.stringify(studentsMapped.slice(0, 3), null, 2))
     await pgClient.end()
     await mysqlConn.end()
     return
   }
 
-  // ── 4. Insertar en MySQL (idempotente con INSERT IGNORE) ──
-  console.log('4/4 Insertando en MySQL…')
-
-  // Disable FK checks for the bulk insert (orden flexible)
+  // ── 4. Insertar en MySQL ──
+  console.log('4/5 Insertando en MySQL…')
   await mysqlConn.query('SET FOREIGN_KEY_CHECKS=0')
 
+  // 4a. Users
   let usersInserted = 0
   for (const u of usersMapped) {
     try {
       await mysqlConn.execute(
-        `INSERT IGNORE INTO users (id, fullName, email, password, role, status, studentId, createdAt, updatedAt)
-         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+        `INSERT INTO users (id, fullName, email, password, role, status, studentId, createdAt, updatedAt)
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+         ON DUPLICATE KEY UPDATE
+           fullName=VALUES(fullName), role=VALUES(role), status=VALUES(status),
+           studentId=VALUES(studentId), updatedAt=VALUES(updatedAt)`,
         [u.id, u.fullName, u.email, u.password, u.role, u.status, u.studentId, u.createdAt, u.updatedAt]
       )
       usersInserted++
@@ -188,13 +196,16 @@ async function run() {
       console.error(`   ✗ user ${u.email}: ${e.message}`)
     }
   }
-  console.log(`   ✓ ${usersInserted}/${usersMapped.length} users insertados`)
+  console.log(`   ✓ ${usersInserted}/${usersMapped.length} users`)
 
+  // 4b. Students
   let studentsInserted = 0
   for (const s of studentsMapped) {
     try {
       await mysqlConn.execute(
-        `INSERT IGNORE INTO students (id, level, userId, classType) VALUES (?, ?, ?, ?)`,
+        `INSERT INTO students (id, level, userId, classType)
+         VALUES (?, ?, ?, ?)
+         ON DUPLICATE KEY UPDATE level=VALUES(level), classType=VALUES(classType)`,
         [s.id, s.level, s.userId, s.classType]
       )
       studentsInserted++
@@ -202,34 +213,52 @@ async function run() {
       console.error(`   ✗ student ${s.id}: ${e.message}`)
     }
   }
-  console.log(`   ✓ ${studentsInserted}/${studentsMapped.length} students insertados`)
+  console.log(`   ✓ ${studentsInserted}/${studentsMapped.length} students`)
 
   await mysqlConn.query('SET FOREIGN_KEY_CHECKS=1')
 
-  // ── 5. Crear schule_progress + schule_subscriptions vacíos para cada student ──
-  console.log('\nBackfill schule_progress + schule_subscriptions…')
+  // ── 5. Backfill schule_subscriptions + schule_progress ──
+  console.log('\n5/5 Creando schule_subscriptions + schule_progress…')
+  let subsCreated = 0
+  let progressCreated = 0
   for (const u of usersMapped) {
-    if (u.role !== 'student' && u.role !== 'schule_student') continue
+    if (u.role !== 'student') continue
     try {
+      // Subscription: SSO user con acceso completo (los students de la academia
+      // pagan por la academia, no por SCHULE específicamente)
+      await mysqlConn.execute(
+        `INSERT IGNORE INTO schule_subscriptions
+           (userId, trialEndsAt, subscriptionStatus, ssoUser, stripeCustomerId, stripeSubscriptionId)
+         VALUES (?, DATE_ADD(NOW(), INTERVAL 100 YEAR), 'active', 1, ?, ?)`,
+        [
+          u.id,
+          studentsMapped.find(s => s.userId === u.id)?.stripeCustomerId || null,
+          studentsMapped.find(s => s.userId === u.id)?.stripeSubscriptionId || null,
+        ]
+      )
+      subsCreated++
       await mysqlConn.execute(
         `INSERT IGNORE INTO schule_progress (userId) VALUES (?)`,
         [u.id]
       )
-      await mysqlConn.execute(
-        `INSERT IGNORE INTO schule_subscriptions (userId, trialEndsAt, subscriptionStatus, ssoUser)
-         VALUES (?, DATE_ADD(NOW(), INTERVAL 100 YEAR), 'active', 1)`,
-        [u.id]
-      )
+      progressCreated++
     } catch (e) {
-      // Las tablas se autocrean al iniciar el backend — si fallan acá, correr backend primero.
+      console.error(`   ✗ backfill ${u.email}: ${e.message}`)
     }
   }
+  console.log(`   ✓ ${subsCreated} schule_subscriptions, ${progressCreated} schule_progress`)
 
   console.log('\n✓ Migración completa.\n')
-  console.log('Próximos pasos:')
-  console.log('  1. Cambiá DB_HOST/DB_PORT/etc en Coolify api-schule')
+  console.log('Resumen:')
+  console.log(`  - Users:                  ${usersInserted}`)
+  console.log(`    └─ por rol: ${JSON.stringify(byRole)}`)
+  console.log(`  - Students (SCHULE):      ${studentsInserted}`)
+  console.log(`  - schule_subscriptions:   ${subsCreated}`)
+  console.log(`  - schule_progress:        ${progressCreated}`)
+  console.log('\nPróximos pasos:')
+  console.log('  1. Cambiar DB_HOST/DB_PORT/etc en Coolify api-schule')
   console.log('  2. Restart del backend')
-  console.log('  3. Test login con un estudiante de la lista')
+  console.log('  3. Test login: usar email + password de un estudiante migrado')
 
   await pgClient.end()
   await mysqlConn.end()
