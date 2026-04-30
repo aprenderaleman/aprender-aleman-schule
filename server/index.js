@@ -319,17 +319,32 @@ function authMiddleware(req, res, next) {
 
 // ─── LOGIN ────────────────────────────────────────────
 app.post('/api/auth/login', loginRateLimit, async (req, res) => {
+  let stage = 'init'
   try {
     const { email, password } = req.body
     if (!email || !password) {
       return res.status(400).json({ error: 'Email y contraseña son obligatorios.' })
     }
 
-    // Find user by email
-    const [users] = await pool.query(
-      'SELECT u.id, u.fullName, u.email, u.password, u.role, u.status, u.studentId, s.level, s.classType FROM users u LEFT JOIN students s ON u.studentId = s.id WHERE u.email = ? LIMIT 1',
-      [email.trim().toLowerCase()]
-    )
+    // Try the full query with students JOIN. If that fails (e.g. students
+    // table is missing), fall back to a simple users lookup so login still
+    // works for schule_student users.
+    let users
+    stage = 'users-query-with-join'
+    try {
+      ;[users] = await pool.query(
+        'SELECT u.id, u.fullName, u.email, u.password, u.role, u.status, u.studentId, s.level, s.classType FROM users u LEFT JOIN students s ON u.studentId = s.id WHERE u.email = ? LIMIT 1',
+        [email.trim().toLowerCase()]
+      )
+    } catch (joinErr) {
+      console.error('[login] students JOIN failed, falling back:', joinErr.message)
+      stage = 'users-query-fallback'
+      ;[users] = await pool.query(
+        'SELECT id, fullName, email, password, role, status, studentId FROM users WHERE email = ? LIMIT 1',
+        [email.trim().toLowerCase()]
+      )
+      if (users[0]) { users[0].level = null; users[0].classType = null }
+    }
 
     if (users.length === 0) {
       return res.status(401).json({ error: 'Correo o contraseña incorrectos.' })
@@ -343,12 +358,14 @@ app.post('/api/auth/login', loginRateLimit, async (req, res) => {
     }
 
     // Verify password with bcrypt
+    stage = 'bcrypt-compare'
     const valid = await bcrypt.compare(password, user.password)
     if (!valid) {
       return res.status(401).json({ error: 'Correo o contraseña incorrectos.' })
     }
 
     // Generate JWT
+    stage = 'jwt-sign'
     const token = jwt.sign(
       {
         id: user.id,
@@ -362,12 +379,19 @@ app.post('/api/auth/login', loginRateLimit, async (req, res) => {
       { expiresIn: '30d' }
     )
 
-    // Get subscription info (for both academy students and SCHULE-only users)
+    // Get subscription info — wrapped so a subscription lookup failure
+    // doesn't block login. The /me endpoint will retry on next page load.
     let subscription = null
     if (user.role === 'student' || user.role === 'schule_student') {
-      const sub = await getSubscriptionInfo(user.id)
-      if (sub) {
-        subscription = { status: sub.status, trialEndsAt: sub.trialEndsAt, trialActive: sub.trialActive, paid: sub.paid, ssoUser: sub.ssoUser, hasAccess: sub.hasAccess }
+      stage = 'subscription-info'
+      try {
+        const sub = await getSubscriptionInfo(user.id)
+        if (sub) {
+          subscription = { status: sub.status, trialEndsAt: sub.trialEndsAt, trialActive: sub.trialActive, paid: sub.paid, ssoUser: sub.ssoUser, hasAccess: sub.hasAccess }
+        }
+      } catch (subErr) {
+        console.error('[login] getSubscriptionInfo failed for user', user.id, ':', subErr.message)
+        // Continue without subscription info; the user can still log in
       }
     }
 
@@ -385,18 +409,39 @@ app.post('/api/auth/login', loginRateLimit, async (req, res) => {
       },
     })
   } catch (err) {
-    console.error('Login error:', err)
-    res.status(500).json({ error: 'Error interno del servidor.' })
+    console.error(`[login] error at stage="${stage}":`, err)
+    // Surface the failure stage so we can diagnose without enabling
+    // verbose error mode in production. The actual error message is
+    // only included in non-production environments.
+    const debug = process.env.NODE_ENV !== 'production'
+    res.status(500).json({
+      error: 'Error interno del servidor.',
+      stage,
+      ...(debug ? { detail: err.message } : {}),
+    })
   }
 })
 
 // ─── VERIFY TOKEN / GET CURRENT USER ──────────────────
 app.get('/api/auth/me', authMiddleware, async (req, res) => {
+  let stage = 'init'
   try {
-    const [users] = await pool.query(
-      'SELECT u.id, u.fullName, u.email, u.role, u.status, u.studentId, s.level, s.classType FROM users u LEFT JOIN students s ON u.studentId = s.id WHERE u.id = ? LIMIT 1',
-      [req.user.id]
-    )
+    let users
+    stage = 'users-query-with-join'
+    try {
+      ;[users] = await pool.query(
+        'SELECT u.id, u.fullName, u.email, u.role, u.status, u.studentId, s.level, s.classType FROM users u LEFT JOIN students s ON u.studentId = s.id WHERE u.id = ? LIMIT 1',
+        [req.user.id]
+      )
+    } catch (joinErr) {
+      console.error('[me] students JOIN failed, falling back:', joinErr.message)
+      stage = 'users-query-fallback'
+      ;[users] = await pool.query(
+        'SELECT id, fullName, email, role, status, studentId FROM users WHERE id = ? LIMIT 1',
+        [req.user.id]
+      )
+      if (users[0]) { users[0].level = null; users[0].classType = null }
+    }
 
     if (users.length === 0) {
       return res.status(404).json({ error: 'Usuario no encontrado.' })
@@ -410,16 +455,22 @@ app.get('/api/auth/me', authMiddleware, async (req, res) => {
     }
 
     // Auto-create schule_progress if missing (e.g. user registered on the other app)
-    await pool.query('INSERT IGNORE INTO schule_progress (userId) VALUES (?)', [user.id])
+    stage = 'progress-upsert'
+    try {
+      await pool.query('INSERT IGNORE INTO schule_progress (userId) VALUES (?)', [user.id])
+    } catch (e) {
+      console.error('[me] progress upsert failed:', e.message)
+    }
 
     // Get subscription info (academy students + schule-only users)
     let subscription = null
     if (user.role === 'student' || user.role === 'schule_student') {
-      subscription = await getSubscriptionInfo(user.id)
-      // Auto-create subscription record for SSO users (from aprender-aleman.de) who don't have one
-      if (!subscription) {
-        // SSO users are those with studentId already set from the other app
-        // For now, they'll get a record created when they first use SSO
+      stage = 'subscription-info'
+      try {
+        subscription = await getSubscriptionInfo(user.id)
+      } catch (subErr) {
+        console.error('[me] getSubscriptionInfo failed for user', user.id, ':', subErr.message)
+        // Continue without subscription — user can still use the app
       }
     }
 
@@ -443,8 +494,13 @@ app.get('/api/auth/me', authMiddleware, async (req, res) => {
       } : null,
     })
   } catch (err) {
-    console.error('Me error:', err)
-    res.status(500).json({ error: 'Error interno del servidor.' })
+    console.error(`[me] error at stage="${stage}":`, err)
+    const debug = process.env.NODE_ENV !== 'production'
+    res.status(500).json({
+      error: 'Error interno del servidor.',
+      stage,
+      ...(debug ? { detail: err.message } : {}),
+    })
   }
 })
 
@@ -1512,6 +1568,58 @@ app.get('/api/health', async (req, res) => {
   } catch {
     res.status(500).json({ status: 'error', db: 'disconnected' })
   }
+})
+
+// Diagnostic endpoint: verifies which tables exist and which are missing.
+// Useful for debugging "Error interno del servidor" on login etc.
+app.get('/api/health/full', async (req, res) => {
+  const requiredTables = [
+    'users',
+    'students',
+    'schule_subscriptions',
+    'schule_progress',
+    'schule_exercise_results',
+    'schule_achievements',
+    'schule_reviews',
+  ]
+  const tableStatus = {}
+  let dbOk = true
+  try {
+    await pool.query('SELECT 1')
+  } catch {
+    dbOk = false
+  }
+  if (dbOk) {
+    for (const t of requiredTables) {
+      try {
+        const [rows] = await pool.query(`SELECT COUNT(*) as n FROM \`${t}\``)
+        tableStatus[t] = { exists: true, rowCount: rows[0].n }
+      } catch (e) {
+        tableStatus[t] = { exists: false, error: e.message }
+      }
+    }
+  }
+  // Try the problematic JOIN that login depends on
+  let loginJoinOk = false
+  let loginJoinErr = null
+  try {
+    await pool.query('SELECT u.id FROM users u LEFT JOIN students s ON u.studentId = s.id LIMIT 1')
+    loginJoinOk = true
+  } catch (e) {
+    loginJoinErr = e.message
+  }
+  res.json({
+    status: dbOk ? 'ok' : 'db-error',
+    db: dbOk,
+    tables: tableStatus,
+    loginJoin: { ok: loginJoinOk, error: loginJoinErr },
+    env: {
+      hasJwtSecret: !!JWT_SECRET,
+      hasDbHost: !!process.env.DB_HOST,
+      hasStripeKey: !!process.env.STRIPE_SECRET_KEY,
+      nodeEnv: process.env.NODE_ENV || 'unset',
+    },
+  })
 })
 
 // ─── AUTO-CREATE FINANCIAL TRACKING TABLES ──────────
