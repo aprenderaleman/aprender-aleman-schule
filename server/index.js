@@ -7,6 +7,11 @@ import Stripe from 'stripe'
 import dotenv from 'dotenv'
 import path from 'path'
 import { fileURLToPath } from 'url'
+import crypto from 'node:crypto'
+import cron from 'node-cron'
+import * as b2c from './b2cClient.js'
+import { createMagicLink, consumeMagicLink, purgeOld as purgeMagicLinks, TTL_MS as MAGIC_LINK_TTL_MS } from './magicLink.js'
+import { sendEmail, magicLinkTemplate } from './emailSender.js'
 
 dotenv.config()
 
@@ -281,25 +286,53 @@ async function getSubscriptionInfo(userId) {
   }
 }
 
-// Middleware: require active subscription or trial
-function subscriptionMiddleware(req, res, next) {
-  // Admins always have access
-  if (req.user?.role === 'superadmin' || req.user?.role === 'admin') return next()
+// Middleware: require active access.
+// Order of checks:
+//   1. Staff (admin/superadmin/teacher) → always allowed.
+//   2. b2c verification (cached 15min) — fail OPEN on 5xx/timeouts so a b2c
+//      outage doesn't kick out legitimate users; fail CLOSED on auth errors.
+//   3. Local subscription state — fallback if b2c not configured at all.
+async function subscriptionMiddleware(req, res, next) {
+  try {
+    const role = req.user?.role
+    // Staff bypass
+    if (role === 'superadmin' || role === 'admin' || role === 'teacher') return next()
 
-  // Check subscription asynchronously
-  getSubscriptionInfo(req.user.id).then(sub => {
-    if (!sub) {
-      return res.status(403).json({ error: 'subscription_required', message: 'Suscripción requerida.' })
+    // b2c-driven gating (preferred when configured)
+    if (b2c.isConfigured() && req.user?.email) {
+      try {
+        const verdict = await b2c.verifyEmailCached(req.user.email)
+        // Staff role coming from b2c also bypasses
+        if (verdict.role && verdict.role !== 'student') return next()
+        if (verdict.isActiveStudent) {
+          req.b2cVerdict = verdict
+          return next()
+        }
+        return res.status(403).json({
+          error: 'subscription_expired',
+          message: 'Tu suscripción no está activa. Contactá con la academia.',
+        })
+      } catch (err) {
+        if (err.code === 'B2C_AUTH') {
+          // Misconfig — fail closed once, but don't 500 the whole app
+          console.error('[gating] b2c auth failed:', err.message)
+          return res.status(503).json({ error: 'service_unavailable', message: 'Servicio no disponible.' })
+        }
+        // 5xx / timeout → fail OPEN (let user through), continue to local check below
+        console.warn('[gating] b2c unavailable, fail-open:', err.message)
+      }
     }
-    if (!sub.hasAccess) {
-      return res.status(403).json({ error: 'subscription_expired', message: 'Tu prueba ha terminado. Suscríbete para continuar.' })
-    }
+
+    // Fallback: legacy local subscription check
+    const sub = await getSubscriptionInfo(req.user.id)
+    if (!sub) return res.status(403).json({ error: 'subscription_required', message: 'Suscripción requerida.' })
+    if (!sub.hasAccess) return res.status(403).json({ error: 'subscription_expired', message: 'Tu prueba ha terminado. Suscríbete para continuar.' })
     req.subscription = sub
     next()
-  }).catch(err => {
+  } catch (err) {
     console.error('Subscription check error:', err)
     res.status(500).json({ error: 'Error al verificar suscripción.' })
-  })
+  }
 }
 
 // Middleware to verify JWT token
@@ -501,6 +534,215 @@ app.get('/api/auth/me', authMiddleware, async (req, res) => {
       stage,
       ...(debug ? { detail: err.message } : {}),
     })
+  }
+})
+
+// ─── MAGIC LINK: REQUEST ─────────────────────────────────────────────
+// User enters email → we verify with b2c → send magic link if active.
+// Always returns 200 (no email enumeration). Rate-limited by IP.
+app.post('/api/auth/magic-link', loginRateLimit, async (req, res) => {
+  try {
+    const email = String(req.body?.email || '').trim().toLowerCase()
+    if (!email || !email.includes('@')) {
+      return res.status(400).json({ error: 'Email inválido.' })
+    }
+
+    // Verify with b2c (fail-closed on auth errors, fail-open on 5xx)
+    let isActiveStudent = false
+    let langPref = null
+    let role = null
+    if (b2c.isConfigured()) {
+      try {
+        const result = await b2c.verifyEmailCached(email)
+        isActiveStudent = !!result.isActiveStudent
+        role = result.role
+        langPref = result.raw?.language_preference || null
+      } catch (err) {
+        if (err.code === 'B2C_AUTH') {
+          // Misconfigured key → fail closed, don't issue links blindly
+          console.error('[magic-link] b2c auth failed:', err.message)
+          return res.status(503).json({ error: 'Servicio temporalmente no disponible.' })
+        }
+        // 5xx / timeout → fail open: still issue link, user gets through
+        console.warn('[magic-link] b2c unavailable, fail-open:', err.message)
+        // Look up locally to see if user already exists with status=active
+        const [rows] = await pool.query(
+          "SELECT id, role, languagePreference FROM users WHERE email = ? AND status = 'active' LIMIT 1",
+          [email]
+        )
+        if (rows.length > 0) {
+          isActiveStudent = true
+          role = rows[0].role
+          langPref = rows[0].languagePreference
+        }
+      }
+    } else {
+      // No b2c configured → only allow magic-links for users that exist locally + active
+      const [rows] = await pool.query(
+        "SELECT id, role, languagePreference FROM users WHERE email = ? AND status = 'active' LIMIT 1",
+        [email]
+      )
+      if (rows.length > 0) {
+        isActiveStudent = true
+        role = rows[0].role
+        langPref = rows[0].languagePreference
+      }
+    }
+
+    if (!isActiveStudent) {
+      // Don't reveal whether the email exists. Always 200.
+      return res.json({ ok: true })
+    }
+
+    // Generate token + send email
+    const { token } = await createMagicLink(pool, {
+      email,
+      ip: req.ip,
+      userAgent: String(req.headers['user-agent'] || '').slice(0, 512),
+    })
+
+    const baseUrl = process.env.PUBLIC_APP_URL || `${req.protocol}://${req.headers.host}`
+    const url = `${baseUrl}/auto-login?magicToken=${encodeURIComponent(token)}`
+
+    const lang = langPref === 'de' ? 'de' : 'es'
+    const tpl = magicLinkTemplate({ url, lang, expiresInMin: Math.round(MAGIC_LINK_TTL_MS / 60000) })
+
+    try {
+      await sendEmail({ to: email, subject: tpl.subject, html: tpl.html, text: tpl.text })
+    } catch (emailErr) {
+      console.error('[magic-link] email send failed:', emailErr.message)
+      // Still return 200 to avoid enumeration; user can retry
+    }
+
+    res.json({ ok: true })
+  } catch (err) {
+    console.error('[magic-link] request error:', err)
+    // Still don't enumerate
+    res.json({ ok: true })
+  }
+})
+
+// ─── MAGIC LINK: CONSUME ─────────────────────────────────────────────
+// Frontend hits this after clicking the email link. Returns a JWT.
+app.post('/api/auth/magic-link/consume', async (req, res) => {
+  try {
+    const token = String(req.body?.token || '')
+    if (!token) return res.status(400).json({ error: 'Token requerido.' })
+
+    const consumed = await consumeMagicLink(pool, token)
+    if (!consumed) {
+      return res.status(401).json({ error: 'Enlace inválido, expirado o ya usado.' })
+    }
+
+    // Look up the user (must already exist — the bulk sync or a previous request inserted them)
+    const [users] = await pool.query(
+      `SELECT u.id, u.fullName, u.email, u.role, u.status, u.studentId, u.b2cRole,
+              s.level, s.classType
+       FROM users u LEFT JOIN students s ON u.studentId = s.id
+       WHERE u.email = ? LIMIT 1`,
+      [consumed.email]
+    )
+
+    let user = users[0]
+    if (!user) {
+      // Race case: bulk sync hasn't run yet but b2c said the email is active.
+      // Fetch from b2c on-demand and insert.
+      try {
+        const verified = await b2c.verifyEmailCached(consumed.email)
+        if (!verified.isActiveStudent) {
+          return res.status(403).json({ error: 'Cuenta no activa.' })
+        }
+        const newId = verified.userId || crypto.randomUUID()
+        await pool.query(
+          `INSERT INTO users (id, email, fullName, role, status, b2cUserId, b2cRole,
+                              lastB2cCheckAt, createdAt, updatedAt)
+           VALUES (?, ?, ?, ?, 'active', ?, ?, NOW(), NOW(), NOW())`,
+          [newId, consumed.email, verified.fullName || null, verified.role || 'student',
+           verified.userId || null, verified.role || 'student']
+        )
+        if ((verified.role || 'student') === 'student') {
+          await pool.query("INSERT IGNORE INTO schule_progress (userId) VALUES (?)", [newId])
+          await pool.query(
+            `INSERT IGNORE INTO schule_subscriptions
+               (userId, trialEndsAt, subscriptionStatus, ssoUser, stripeCustomerId)
+             VALUES (?, DATE_ADD(NOW(), INTERVAL 100 YEAR), 'active', 1, ?)`,
+            [newId, verified.stripeCustomerId || null]
+          )
+        }
+        const [refetch] = await pool.query(
+          `SELECT id, fullName, email, role, status, studentId, b2cRole, NULL as level, NULL as classType
+           FROM users WHERE id = ? LIMIT 1`, [newId]
+        )
+        user = refetch[0]
+      } catch (e) {
+        console.error('[magic-link] on-demand provisioning failed:', e.message)
+        return res.status(500).json({ error: 'No se pudo provisionar la cuenta.' })
+      }
+    }
+
+    if (user.status !== 'active') {
+      return res.status(403).json({ error: 'Tu cuenta está inactiva. Contacta con la academia.' })
+    }
+
+    // Sign JWT same shape as /api/auth/login
+    const token2 = jwt.sign(
+      {
+        id: user.id,
+        email: user.email,
+        fullName: user.fullName,
+        role: user.role,
+        studentId: user.studentId,
+        level: user.level ? user.level.toUpperCase() : 'A1',
+      },
+      JWT_SECRET,
+      { expiresIn: '30d' }
+    )
+
+    let subscription = null
+    if (user.role === 'student' || user.role === 'schule_student') {
+      try {
+        const sub = await getSubscriptionInfo(user.id)
+        if (sub) subscription = { status: sub.status, trialActive: sub.trialActive, paid: sub.paid, ssoUser: sub.ssoUser, hasAccess: sub.hasAccess }
+      } catch { /* swallow */ }
+    }
+
+    res.json({
+      token: token2,
+      user: {
+        id: user.id,
+        name: user.fullName,
+        email: user.email,
+        role: user.role,
+        level: user.level ? user.level.toUpperCase() : 'A1',
+        studentId: user.studentId,
+        classType: user.classType,
+        subscription,
+      },
+    })
+  } catch (err) {
+    console.error('[magic-link/consume] error:', err)
+    res.status(500).json({ error: 'Error interno.' })
+  }
+})
+
+// ─── ADMIN: TRIGGER B2C SYNC MANUALLY ────────────────────────────────
+app.post('/api/admin/b2c/sync', authMiddleware, adminMiddleware, async (req, res) => {
+  const result = await runB2cSync(`admin:${req.user.id}`)
+  res.json(result)
+})
+
+// ─── ADMIN: RECENT B2C SYNC RUNS ─────────────────────────────────────
+app.get('/api/admin/b2c/sync/logs', authMiddleware, adminMiddleware, async (req, res) => {
+  try {
+    const [rows] = await pool.query(
+      `SELECT id, ranAt, triggeredBy, ok, bulkCount, inserted, updated, deactivated,
+              durationMs, error
+       FROM schule_b2c_sync_log
+       ORDER BY ranAt DESC LIMIT 50`
+    )
+    res.json({ runs: rows })
+  } catch (err) {
+    res.status(500).json({ error: err.message })
   }
 })
 
@@ -3345,6 +3587,220 @@ app.get('/{*splat}', (req, res, next) => {
     }
   }
 })()
+
+// ─── AUTO-MIGRATION: b2c integration ─────────────────────────────────
+// Adds the columns and tables required to consume b2c.aprender-aleman.de
+// as the source of truth for which users are active students.
+;(async () => {
+  // 1. New columns on users — all nullable, additive
+  const newCols = [
+    "ALTER TABLE users ADD COLUMN b2cUserId VARCHAR(191) NULL",
+    "ALTER TABLE users ADD COLUMN lastB2cCheckAt DATETIME NULL",
+    "ALTER TABLE users ADD COLUMN b2cRole VARCHAR(32) NULL",
+    "ALTER TABLE users ADD COLUMN b2cSubscriptionStatus VARCHAR(32) NULL",
+    "ALTER TABLE users ADD COLUMN languagePreference VARCHAR(8) NULL",
+  ]
+  for (const sql of newCols) {
+    try { await pool.query(sql) }
+    catch (err) { if (!err.message.includes('Duplicate column')) console.warn('[b2c-migration]', err.message) }
+  }
+  // Index on b2cUserId for fast bulk-sync diff
+  try { await pool.query("CREATE INDEX idx_users_b2cUserId ON users(b2cUserId)") }
+  catch { /* exists */ }
+
+  // 2. Magic link tokens table
+  try {
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS schule_magic_links (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        email VARCHAR(255) NOT NULL,
+        tokenHash VARCHAR(64) NOT NULL UNIQUE,
+        expiresAt DATETIME NOT NULL,
+        usedAt DATETIME NULL,
+        requesterIp VARCHAR(64) NULL,
+        userAgent VARCHAR(512) NULL,
+        createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+        INDEX idx_email_expires (email, expiresAt),
+        INDEX idx_tokenHash (tokenHash)
+      )
+    `)
+  } catch (err) { console.error('[b2c-migration] magic_links:', err.message) }
+
+  // 3. Sync log table (cron history + manual triggers)
+  try {
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS schule_b2c_sync_log (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        ranAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+        triggeredBy VARCHAR(32) NOT NULL DEFAULT 'cron',
+        ok TINYINT(1) DEFAULT 0,
+        bulkCount INT DEFAULT 0,
+        inserted INT DEFAULT 0,
+        updated INT DEFAULT 0,
+        deactivated INT DEFAULT 0,
+        durationMs INT DEFAULT 0,
+        error TEXT NULL,
+        INDEX idx_ranAt (ranAt)
+      )
+    `)
+  } catch (err) { console.error('[b2c-migration] sync_log:', err.message) }
+
+  // 4. Make users.password nullable (magic-link flow doesn't need it)
+  try {
+    await pool.query("ALTER TABLE users MODIFY COLUMN password VARCHAR(255) NULL")
+  } catch (err) {
+    // Already nullable on most versions — ignore
+    if (!/already|null/i.test(err.message)) console.warn('[b2c-migration] password nullable:', err.message)
+  }
+
+  console.log('[b2c-migration] schema ready')
+})()
+
+// ─── B2C SYNC ────────────────────────────────────────────────────────
+// Pulls the bulk endpoint from b2c.aprender-aleman.de and reconciles the
+// local users table:
+//   - Email present in bulk + missing locally  → INSERT, status=active
+//   - Email present in bulk + existing locally → UPDATE (refresh fields)
+//   - Email missing in bulk + active locally   → mark inactive (preserve history)
+//
+// Triggered by:
+//   - cron daily at 03:00 Europe/Berlin
+//   - admin endpoint /api/admin/b2c/sync (manual)
+//   - server boot if BOOT_SYNC_B2C=1
+async function runB2cSync(triggeredBy = 'cron') {
+  const t0 = Date.now()
+  let bulkCount = 0, inserted = 0, updated = 0, deactivated = 0
+  let ok = false, errMsg = null
+  let bulkEmails = new Set()
+
+  try {
+    if (!b2c.isConfigured()) throw new Error('b2c not configured')
+
+    const payload = await b2c.fetchActiveStudents()
+    const list = payload?.students || []
+    bulkCount = list.length
+
+    for (const s of list) {
+      const email = String(s.email || '').trim().toLowerCase()
+      if (!email) continue
+      bulkEmails.add(email)
+
+      // Map role: anything not 'student' counts as staff (admin/teacher/superadmin)
+      const role = s.role || 'student'
+      // SCHULE access for staff is unconditional; for students we trust b2c's filter
+      const subStatus = s.subscription_status || (role !== 'student' ? 'active' : null)
+
+      // Upsert by email (canonical key across systems)
+      const [existing] = await pool.query(
+        "SELECT id, status FROM users WHERE email = ? LIMIT 1",
+        [email]
+      )
+
+      if (existing.length === 0) {
+        // INSERT — id can be the b2c user_id (UUID), preserves correlation
+        const newId = s.user_id || crypto.randomUUID()
+        await pool.query(
+          `INSERT INTO users
+             (id, email, fullName, role, status, b2cUserId, b2cRole, b2cSubscriptionStatus,
+              lastB2cCheckAt, languagePreference, createdAt, updatedAt)
+           VALUES (?, ?, ?, ?, 'active', ?, ?, ?, NOW(), ?, NOW(), NOW())`,
+          [newId, email, s.full_name || null, role, s.user_id || null, role, subStatus,
+           s.language_preference || null]
+        )
+        // Auto-create schule_progress + schule_subscriptions for student-role users
+        if (role === 'student') {
+          try {
+            await pool.query("INSERT IGNORE INTO schule_progress (userId) VALUES (?)", [newId])
+            await pool.query(
+              `INSERT IGNORE INTO schule_subscriptions
+                 (userId, trialEndsAt, subscriptionStatus, ssoUser, stripeCustomerId, stripeSubscriptionId)
+               VALUES (?, DATE_ADD(NOW(), INTERVAL 100 YEAR), 'active', 1, ?, ?)`,
+              [newId, s.stripe_customer_id || null, s.stripe_subscription_id || null]
+            )
+          } catch (e) { /* swallow */ }
+        }
+        inserted++
+      } else {
+        // UPDATE — refresh b2c-driven fields, ensure status=active
+        await pool.query(
+          `UPDATE users SET
+             status = 'active',
+             role = ?,
+             fullName = COALESCE(?, fullName),
+             b2cUserId = ?,
+             b2cRole = ?,
+             b2cSubscriptionStatus = ?,
+             lastB2cCheckAt = NOW(),
+             languagePreference = COALESCE(?, languagePreference),
+             updatedAt = NOW()
+           WHERE id = ?`,
+          [role, s.full_name || null, s.user_id || null, role, subStatus,
+           s.language_preference || null, existing[0].id]
+        )
+        // Refresh stripe fields on existing subscription
+        if (role === 'student') {
+          try {
+            await pool.query(
+              `UPDATE schule_subscriptions SET
+                 stripeCustomerId = COALESCE(?, stripeCustomerId),
+                 stripeSubscriptionId = COALESCE(?, stripeSubscriptionId),
+                 ssoUser = 1, subscriptionStatus = 'active', updatedAt = NOW()
+               WHERE userId = ?`,
+              [s.stripe_customer_id || null, s.stripe_subscription_id || null, existing[0].id]
+            )
+          } catch { /* may not have row yet */ }
+        }
+        updated++
+      }
+    }
+
+    // Mark missing-and-active as inactive (preserve history)
+    if (bulkEmails.size > 0) {
+      const placeholders = Array.from(bulkEmails).map(() => '?').join(',')
+      const [result] = await pool.query(
+        `UPDATE users SET status = 'inactive', updatedAt = NOW()
+         WHERE status = 'active'
+           AND role IN ('student', 'schule_student', 'teacher', 'admin', 'superadmin')
+           AND email NOT IN (${placeholders})
+           AND b2cUserId IS NOT NULL`,  // only deactivate users that came from b2c originally
+        Array.from(bulkEmails)
+      )
+      deactivated = result.affectedRows || 0
+    }
+
+    ok = true
+  } catch (err) {
+    errMsg = err.message
+    console.error('[b2c-sync] failed:', err)
+  }
+
+  const durationMs = Date.now() - t0
+  try {
+    await pool.query(
+      `INSERT INTO schule_b2c_sync_log
+         (triggeredBy, ok, bulkCount, inserted, updated, deactivated, durationMs, error)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+      [triggeredBy, ok ? 1 : 0, bulkCount, inserted, updated, deactivated, durationMs, errMsg]
+    )
+  } catch { /* swallow log errors */ }
+
+  console.log(`[b2c-sync] ok=${ok} bulk=${bulkCount} +${inserted} ~${updated} -${deactivated} (${durationMs}ms)`)
+  return { ok, bulkCount, inserted, updated, deactivated, durationMs, error: errMsg }
+}
+
+// Schedule daily at 03:00 Europe/Berlin
+if (b2c.isConfigured()) {
+  cron.schedule('0 3 * * *', () => runB2cSync('cron'), { timezone: 'Europe/Berlin' })
+  console.log('[b2c-sync] daily cron scheduled — 03:00 Europe/Berlin')
+
+  // Optional boot-time sync (set BOOT_SYNC_B2C=1 in env)
+  if (process.env.BOOT_SYNC_B2C === '1') {
+    setTimeout(() => runB2cSync('boot').catch(() => {}), 5000)
+  }
+}
+
+// Daily purge of expired magic links
+cron.schedule('30 3 * * *', () => purgeMagicLinks(pool).catch(() => {}), { timezone: 'Europe/Berlin' })
 
 const PORT = process.env.PORT || process.env.API_PORT || 3001
 app.listen(PORT, () => {
