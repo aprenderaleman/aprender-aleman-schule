@@ -71,7 +71,7 @@ export default function Register() {
                 </li>
                 <li className="flex items-start gap-1.5">
                   <Check size={14} className="text-success shrink-0 mt-0.5" />
-                  <span>Übungen, KI-Lehrer Hans, Karteikarten, Sprechen mit Aussprache-Feedback</span>
+                  <span>Übungen, Karteikarten, Sprechen mit Aussprache-Feedback, Prüfungssimulation</span>
                 </li>
                 <li className="flex items-start gap-1.5">
                   <Check size={14} className="text-success shrink-0 mt-0.5" />

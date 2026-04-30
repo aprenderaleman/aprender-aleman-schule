@@ -29,7 +29,8 @@ import NetworkStatus from './components/UI/NetworkStatus'
 import InstallPrompt from './components/UI/InstallPrompt'
 import CommandPalette from './components/UI/CommandPalette'
 import SkipLink from './components/UI/SkipLink'
-import ChatBot from './components/ChatBot/ChatBot'
+// Hans is temporarily out of service — disabled until further notice
+// import ChatBot from './components/ChatBot/ChatBot'
 import { useGlobalShortcuts } from './hooks/useGlobalShortcuts'
 
 // Lazy load admin pages
@@ -146,7 +147,7 @@ export default function App() {
               <MobileTabBar />
               <CommandPalette />
               <InstallPrompt />
-              <ChatBot />
+              {/* <ChatBot /> — Hans temporarily out of service */}
             </ProgressProvider>
           </AuthProvider>
         </ThemeProvider>

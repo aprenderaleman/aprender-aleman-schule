@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { Home, BookOpen, Layers, GraduationCap, BarChart2, User, MessageCircle } from 'lucide-react'
+import { Home, BookOpen, Layers, GraduationCap, BarChart2, User } from 'lucide-react'
 import { useAuth } from '../../context/AuthContext'
 import Tooltip from '../UI/Tooltip'
 
@@ -81,15 +81,7 @@ export default function DesktopRail() {
         })}
       </nav>
 
-      <Tooltip content="Hans öffnen" shortcut="⌘ /" side="right">
-        <button
-          onClick={() => document.querySelector('[aria-label="Chat öffnen"]')?.click()}
-          aria-label="Hans öffnen"
-          className="w-10 h-10 flex items-center justify-center rounded-xl bg-warm/15 hover:bg-warm/25 text-warm tap"
-        >
-          <MessageCircle size={20} />
-        </button>
-      </Tooltip>
+      {/* Hans button temporarily removed — service offline */}
     </aside>
   )
 }
