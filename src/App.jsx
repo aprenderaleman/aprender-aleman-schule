@@ -29,6 +29,7 @@ import NetworkStatus from './components/UI/NetworkStatus'
 import InstallPrompt from './components/UI/InstallPrompt'
 import CommandPalette from './components/UI/CommandPalette'
 import SkipLink from './components/UI/SkipLink'
+import MaintenanceGate from './components/MaintenanceGate'
 // Hans is temporarily out of service — disabled until further notice
 // import ChatBot from './components/ChatBot/ChatBot'
 import { useGlobalShortcuts } from './hooks/useGlobalShortcuts'
@@ -136,22 +137,24 @@ function AppRoutes() {
 export default function App() {
   return (
     <ErrorBoundary>
-      <BrowserRouter>
-        <ThemeProvider>
-          <AuthProvider>
-            <ProgressProvider>
-              <SkipLink />
-              <NetworkStatus />
-              <DesktopRail />
-              <AppRoutes />
-              <MobileTabBar />
-              <CommandPalette />
-              <InstallPrompt />
-              {/* <ChatBot /> — Hans temporarily out of service */}
-            </ProgressProvider>
-          </AuthProvider>
-        </ThemeProvider>
-      </BrowserRouter>
+      <MaintenanceGate>
+        <BrowserRouter>
+          <ThemeProvider>
+            <AuthProvider>
+              <ProgressProvider>
+                <SkipLink />
+                <NetworkStatus />
+                <DesktopRail />
+                <AppRoutes />
+                <MobileTabBar />
+                <CommandPalette />
+                <InstallPrompt />
+                {/* <ChatBot /> — Hans temporarily out of service */}
+              </ProgressProvider>
+            </AuthProvider>
+          </ThemeProvider>
+        </BrowserRouter>
+      </MaintenanceGate>
     </ErrorBoundary>
   )
 }
