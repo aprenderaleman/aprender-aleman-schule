@@ -86,13 +86,13 @@ export default function Landing() {
                 Kostenlos starten <ChevronRight size={20} className="ml-1" />
               </Button>
             </Link>
-            <Link to="/login">
+            <Link to="/test-de-nivel">
               <Button variant="secondary" size="lg" className="w-full sm:w-auto">
-                Ich habe schon ein Konto
+                🎯 Test de nivel gratuito
               </Button>
             </Link>
           </div>
-          <p className="text-sm text-gray-400 mt-4">10 Lektionen gratis · Danach nur 15&euro;/Monat · Keine Bindung</p>
+          <p className="text-sm text-gray-400 mt-4">10.000 XP gratis · Test de nivel sin compromiso · 15&euro;/Monat sin bindung</p>
         </motion.div>
 
         {/* Hero illustration */}

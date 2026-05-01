@@ -105,6 +105,25 @@ export default function Dashboard() {
         {/* Explorer Challenge (trial users only) */}
         <ExplorerChallenge />
 
+        {/* Level test CTA */}
+        <Link
+          to="/test-de-nivel"
+          className="block mb-6 group rounded-2xl border-2 border-dashed border-warm/40 bg-warm/5 hover:bg-warm/10 transition-colors p-4"
+        >
+          <div className="flex items-center gap-4">
+            <div className="w-11 h-11 rounded-xl bg-warm/15 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+              <span className="text-xl">🎯</span>
+            </div>
+            <div className="flex-1">
+              <p className="font-bold text-foreground text-sm">¿Cuál es tu nivel real?</p>
+              <p className="text-xs text-muted-foreground mt-0.5">
+                Test gratuito de 12 minutos · CEFR A1-C1 · Plan personalizado
+              </p>
+            </div>
+            <ArrowRight size={18} className="text-warm group-hover:translate-x-1 transition-transform" />
+          </div>
+        </Link>
+
         {/* Skills grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 mb-8">
           {SKILLS.map((skill, idx) => (

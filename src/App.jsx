@@ -19,6 +19,7 @@ import Pricing from './pages/Pricing'
 import AutoLogin from './pages/AutoLogin'
 import Pruefungen from './pages/Pruefungen'
 import PruefungPlayer from './pages/PruefungPlayer'
+import LevelTest from './pages/LevelTest'
 import AdminLayout from './components/Layout/AdminLayout'
 import Paywall from './components/UI/Paywall'
 import TrialBanner from './components/UI/TrialBanner'
@@ -109,6 +110,9 @@ function AppRoutes() {
         <Route path="/" element={<Landing />} />
         <Route path="/auto-login" element={<AutoLogin />} />
         <Route path="/pricing" element={<Pricing />} />
+        {/* Public level test — funnel for new users */}
+        <Route path="/test-de-nivel" element={<LevelTest />} />
+        <Route path="/niveau-test" element={<LevelTest />} />
         <Route path="/login" element={<PublicRoute><Login /></PublicRoute>} />
         <Route path="/registro" element={<PublicRoute><Register /></PublicRoute>} />
         {/* Dashboard always accessible (shows paywall inside if needed) */}
