@@ -3575,6 +3575,124 @@ app.get('/{*splat}', (req, res, next) => {
   res.sendFile(path.join(distPath, 'index.html'))
 })
 
+// ─── AUTO-MIGRATION: Core tables (users, students, progress, etc.) ───
+// On a fresh DB these don't exist yet (they used to come from the academy
+// app). Now SCHULE owns them. Create-if-missing pattern.
+;(async () => {
+  try {
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS users (
+        id VARCHAR(191) PRIMARY KEY,
+        fullName VARCHAR(255),
+        email VARCHAR(255) NOT NULL UNIQUE,
+        password VARCHAR(255) NULL,
+        role VARCHAR(32) NOT NULL DEFAULT 'student',
+        status VARCHAR(16) NOT NULL DEFAULT 'active',
+        studentId VARCHAR(191) NULL,
+        b2cUserId VARCHAR(191) NULL,
+        lastB2cCheckAt DATETIME NULL,
+        b2cRole VARCHAR(32) NULL,
+        b2cSubscriptionStatus VARCHAR(32) NULL,
+        languagePreference VARCHAR(8) NULL,
+        createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+        updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+        INDEX idx_email (email),
+        INDEX idx_studentId (studentId),
+        INDEX idx_b2cUserId (b2cUserId),
+        INDEX idx_role_status (role, status)
+      ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+    `)
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS students (
+        id VARCHAR(191) PRIMARY KEY,
+        level VARCHAR(8) NOT NULL DEFAULT 'a1',
+        userId VARCHAR(191) NULL,
+        classType VARCHAR(32) NULL,
+        createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+        updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+        INDEX idx_userId (userId)
+      ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+    `)
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS schule_progress (
+        userId VARCHAR(191) PRIMARY KEY,
+        xp INT DEFAULT 0,
+        streak INT DEFAULT 0,
+        perfectStreak INT DEFAULT 0,
+        lastActivityDate DATE NULL,
+        skillGrammar INT DEFAULT 0,
+        skillReading INT DEFAULT 0,
+        skillListening INT DEFAULT 0,
+        skillWriting INT DEFAULT 0,
+        skillSpeaking INT DEFAULT 0,
+        createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+        updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+      ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+    `)
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS schule_exercise_results (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        userId VARCHAR(191) NOT NULL,
+        exerciseId VARCHAR(64) NOT NULL,
+        exerciseType VARCHAR(32) NOT NULL,
+        score INT NOT NULL,
+        perfect TINYINT(1) DEFAULT 0,
+        xpEarned INT DEFAULT 0,
+        timeSpent INT DEFAULT 0,
+        completedAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+        INDEX idx_userId_completedAt (userId, completedAt),
+        INDEX idx_exerciseType (exerciseType)
+      ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+    `)
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS schule_achievements (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        userId VARCHAR(191) NOT NULL,
+        achievementId VARCHAR(64) NOT NULL,
+        earnedAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+        UNIQUE KEY uniq_user_achievement (userId, achievementId)
+      ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+    `)
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS schule_pruefungen_attempts (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        userId VARCHAR(191) NOT NULL,
+        examId VARCHAR(64) NOT NULL,
+        score INT DEFAULT 0,
+        maxScore INT DEFAULT 0,
+        startedAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+        finishedAt DATETIME NULL,
+        responses JSON NULL,
+        INDEX idx_userId_examId (userId, examId)
+      ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+    `)
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS schule_ads_reports (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        reportDate VARCHAR(10),
+        campaignName VARCHAR(255),
+        adGroupName VARCHAR(255),
+        keyword VARCHAR(255),
+        matchType VARCHAR(64),
+        impressions INT DEFAULT 0,
+        clicks INT DEFAULT 0,
+        costMicros BIGINT DEFAULT 0,
+        conversions DECIMAL(10,2) DEFAULT 0,
+        conversionValue DECIMAL(10,2) DEFAULT 0,
+        ctr DECIMAL(8,4) DEFAULT 0,
+        avgCpc DECIMAL(10,2) DEFAULT 0,
+        rawRow JSON NULL,
+        uploadedAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+        INDEX idx_reportDate (reportDate),
+        INDEX idx_campaignName (campaignName)
+      ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+    `)
+    console.log('[core-migration] base tables ready')
+  } catch (err) {
+    console.error('[core-migration] failed:', err.message)
+  }
+})()
+
 // ─── AUTO-MIGRATION: Add skillSpeaking column if missing ───
 ;(async () => {
   try {
