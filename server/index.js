@@ -1394,7 +1394,7 @@ app.get('/api/admin/users', authMiddleware, adminMiddleware, async (req, res) =>
   try {
     // Auto-create schule_progress for any users missing it (e.g. registered on the other app)
     await pool.query(
-      'INSERT IGNORE INTO schule_progress (userId) SELECT u.id FROM users u LEFT JOIN schule_progress p ON p.userId = u.id WHERE p.id IS NULL'
+      'INSERT IGNORE INTO schule_progress (userId) SELECT u.id FROM users u LEFT JOIN schule_progress p ON p.userId = u.id WHERE p.userId IS NULL'
     )
 
     const { search, level, status, page = 1, limit = 50 } = req.query
