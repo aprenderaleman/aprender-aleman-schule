@@ -547,11 +547,29 @@ app.post('/api/auth/magic-link', loginRateLimit, async (req, res) => {
       return res.status(400).json({ error: 'Email inválido.' })
     }
 
-    // Verify with b2c (fail-closed on auth errors, fail-open on 5xx)
+    // Resolve user state. Two sources:
+    //   1. LOCAL DB — if user exists locally as staff (admin/superadmin/teacher)
+    //      we let them in regardless of b2c. SCHULE-only admins live here.
+    //   2. b2c — for students, b2c is the source of truth for "is active".
     let isActiveStudent = false
     let langPref = null
     let role = null
-    if (b2c.isConfigured()) {
+
+    // Step 1: local lookup first
+    const [localRows] = await pool.query(
+      "SELECT id, role, languagePreference FROM users WHERE email = ? AND status = 'active' LIMIT 1",
+      [email]
+    )
+    const localUser = localRows[0] || null
+    const isLocalStaff = localUser && ['admin', 'superadmin', 'teacher'].includes(localUser.role)
+
+    if (isLocalStaff) {
+      // SCHULE-owned staff bypasses b2c entirely
+      isActiveStudent = true
+      role = localUser.role
+      langPref = localUser.languagePreference
+    } else if (b2c.isConfigured()) {
+      // Step 2: ask b2c
       try {
         const result = await b2c.verifyEmailCached(email)
         isActiveStudent = !!result.isActiveStudent
@@ -559,34 +577,22 @@ app.post('/api/auth/magic-link', loginRateLimit, async (req, res) => {
         langPref = result.raw?.language_preference || null
       } catch (err) {
         if (err.code === 'B2C_AUTH') {
-          // Misconfigured key → fail closed, don't issue links blindly
           console.error('[magic-link] b2c auth failed:', err.message)
           return res.status(503).json({ error: 'Servicio temporalmente no disponible.' })
         }
-        // 5xx / timeout → fail open: still issue link, user gets through
+        // 5xx / timeout → fail open: if user exists locally + active, let in
         console.warn('[magic-link] b2c unavailable, fail-open:', err.message)
-        // Look up locally to see if user already exists with status=active
-        const [rows] = await pool.query(
-          "SELECT id, role, languagePreference FROM users WHERE email = ? AND status = 'active' LIMIT 1",
-          [email]
-        )
-        if (rows.length > 0) {
+        if (localUser) {
           isActiveStudent = true
-          role = rows[0].role
-          langPref = rows[0].languagePreference
+          role = localUser.role
+          langPref = localUser.languagePreference
         }
       }
-    } else {
-      // No b2c configured → only allow magic-links for users that exist locally + active
-      const [rows] = await pool.query(
-        "SELECT id, role, languagePreference FROM users WHERE email = ? AND status = 'active' LIMIT 1",
-        [email]
-      )
-      if (rows.length > 0) {
-        isActiveStudent = true
-        role = rows[0].role
-        langPref = rows[0].languagePreference
-      }
+    } else if (localUser) {
+      // No b2c configured at all → fall back to local existence
+      isActiveStudent = true
+      role = localUser.role
+      langPref = localUser.languagePreference
     }
 
     if (!isActiveStudent) {
