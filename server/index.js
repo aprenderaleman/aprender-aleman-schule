@@ -1870,6 +1870,261 @@ app.get('/api/health/full', async (req, res) => {
   })
 })
 
+// ─── LEVEL TEST ──────────────────────────────────────────────────────
+// Public endpoints — no auth required so the test acts as a marketing
+// funnel for new users. Rate-limited to prevent abuse.
+
+const levelTestAttempts = new Map()
+function levelTestRateLimit(req, res, next) {
+  const ip = req.ip
+  const now = Date.now()
+  const window = 60 * 60 * 1000 // 1h
+  const max = 30 // up to 30 submissions per hour per IP
+  const attempts = levelTestAttempts.get(ip) || []
+  const recent = attempts.filter(t => now - t < window)
+  if (recent.length >= max) {
+    return res.status(429).json({ error: 'Demasiados intentos. Espera un poco.' })
+  }
+  recent.push(now)
+  levelTestAttempts.set(ip, recent)
+  next()
+}
+
+// Get the question bank. Imports the JS module dynamically so the same
+// curated bank is the source of truth on both ends.
+async function loadLevelTestBank() {
+  // Dynamic import — bank file is in src/data which is bundled for the
+  // frontend, but Node can also import it directly since it's pure ESM.
+  try {
+    const mod = await import(new URL('../src/data/level-test-questions.js', import.meta.url))
+    return { questions: mod.LEVEL_TEST_QUESTIONS, computeLevel: mod.computeLevel }
+  } catch (err) {
+    console.error('[level-test] bank load failed:', err.message)
+    return null
+  }
+}
+
+// Public: returns the bank stripped of correct answers (only the prompt + options).
+app.get('/api/level-test/questions', async (req, res) => {
+  const bank = await loadLevelTestBank()
+  if (!bank) return res.status(500).json({ error: 'Banco no disponible.' })
+  const safe = bank.questions.map(q => ({
+    id: q.id,
+    level: q.level,
+    type: q.type,
+    prompt: q.prompt,
+    options: q.options,                    // for MC
+    audioPrompt: q.audioPrompt || null,    // listening — text gets TTS'd client-side or via /api/level-test/audio
+    passage: q.passage || null,            // reading
+    minWords: q.minWords || null,          // writing
+    maxWords: q.maxWords || null,
+    minSeconds: q.minSeconds || null,      // speaking
+    maxSeconds: q.maxSeconds || null,
+  }))
+  res.json({ questions: safe, total: safe.length })
+})
+
+// Public: TTS for listening questions. Uses OpenAI tts-1.
+// Cached aggressively (questions never change) so re-fetches are free.
+const levelTestAudioCache = new Map()
+app.get('/api/level-test/audio/:questionId', async (req, res) => {
+  const { questionId } = req.params
+  if (!OPENAI_API_KEY) return res.status(503).json({ error: 'TTS no disponible.' })
+
+  // Check cache first
+  if (levelTestAudioCache.has(questionId)) {
+    const cached = levelTestAudioCache.get(questionId)
+    res.set('Content-Type', 'audio/mpeg')
+    res.set('Cache-Control', 'public, max-age=31536000, immutable')
+    return res.send(cached)
+  }
+
+  const bank = await loadLevelTestBank()
+  if (!bank) return res.status(500).end()
+  const q = bank.questions.find(x => x.id === questionId)
+  if (!q || !q.audioPrompt) return res.status(404).json({ error: 'Sin audio.' })
+
+  try {
+    const ttsRes = await fetch('https://api.openai.com/v1/audio/speech', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${OPENAI_API_KEY}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        model: 'tts-1',
+        input: q.audioPrompt,
+        voice: 'alloy',
+        response_format: 'mp3',
+        speed: 0.95,
+      }),
+    })
+    if (!ttsRes.ok) {
+      console.error('[level-test] TTS failed', ttsRes.status)
+      return res.status(503).json({ error: 'Audio no disponible.' })
+    }
+    const buf = Buffer.from(await ttsRes.arrayBuffer())
+    levelTestAudioCache.set(questionId, buf)
+    res.set('Content-Type', 'audio/mpeg')
+    res.set('Cache-Control', 'public, max-age=31536000, immutable')
+    res.send(buf)
+  } catch (err) {
+    console.error('[level-test] audio error:', err.message)
+    res.status(500).json({ error: 'Error generando audio.' })
+  }
+})
+
+// Public: submit answers, evaluate AI portions if needed, save, return level.
+app.post('/api/level-test/submit', levelTestRateLimit, async (req, res) => {
+  try {
+    const { answers = {}, openResponses = {}, email = null, durationSeconds = 0, source = 'app' } = req.body
+    const bank = await loadLevelTestBank()
+    if (!bank) return res.status(500).json({ error: 'Banco no disponible.' })
+
+    // Score writing/speaking with AI in parallel
+    const aiScores = {}
+    const aiPromises = []
+    for (const q of bank.questions) {
+      if (q.type !== 'writing' && q.type !== 'speaking') continue
+      const response = openResponses[q.id]
+      if (!response) continue
+      aiPromises.push(scoreOpenResponse(q, response).then(score => { aiScores[q.id] = score }))
+    }
+    await Promise.allSettled(aiPromises)
+
+    const { level, breakdown } = bank.computeLevel({ answers, aiScores })
+
+    // Resolve userId from JWT if present (optional auth)
+    let userId = null
+    try {
+      const auth = req.headers.authorization
+      if (auth && auth.startsWith('Bearer ')) {
+        const decoded = jwt.verify(auth.slice(7), JWT_SECRET)
+        userId = decoded.id || null
+      }
+    } catch { /* anonymous */ }
+
+    // Save the test
+    await pool.query(
+      `INSERT INTO schule_level_tests
+         (userId, email, answers, aiScores, scoreByLevel, resultLevel, durationSeconds, source, ip, userAgent)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      [
+        userId,
+        email ? String(email).trim().toLowerCase().slice(0, 255) : null,
+        JSON.stringify(answers),
+        JSON.stringify(aiScores),
+        JSON.stringify(breakdown),
+        level,
+        parseInt(durationSeconds) || 0,
+        String(source).slice(0, 32),
+        req.ip,
+        String(req.headers['user-agent'] || '').slice(0, 512),
+      ]
+    )
+
+    // If logged in: also bump the user's level if our test result is higher than current
+    if (userId) {
+      try {
+        const [u] = await pool.query('SELECT studentId FROM users WHERE id = ?', [userId])
+        const sId = u[0]?.studentId
+        if (sId) {
+          await pool.query(
+            'UPDATE students SET level = ? WHERE id = ? AND (level IS NULL OR level = "a1" OR ? IN ("b1","b2","c1"))',
+            [level.toLowerCase(), sId, level.toLowerCase()]
+          )
+        } else {
+          // Create a students record so the level sticks
+          const newSid = crypto.randomUUID()
+          await pool.query('SET FOREIGN_KEY_CHECKS=0')
+          await pool.query(
+            'INSERT INTO students (id, level, userId, classType) VALUES (?, ?, ?, ?)',
+            [newSid, level.toLowerCase(), userId, null]
+          )
+          await pool.query('UPDATE users SET studentId = ? WHERE id = ?', [newSid, userId])
+          await pool.query('SET FOREIGN_KEY_CHECKS=1')
+        }
+      } catch (e) {
+        console.warn('[level-test] could not update user level:', e.message)
+      }
+    }
+
+    res.json({
+      level,
+      breakdown,
+      aiScores,
+      durationSeconds,
+      saved: true,
+    })
+  } catch (err) {
+    console.error('[level-test/submit] error:', err)
+    res.status(500).json({ error: 'No se pudo procesar el test.' })
+  }
+})
+
+// AI scoring helper for writing/speaking responses.
+// Returns 0..1 (0 = nothing, 1 = perfect for that level).
+async function scoreOpenResponse(question, response) {
+  if (!OPENAI_API_KEY && !ANTHROPIC_API_KEY) return 0.5  // can't score, give midpoint
+
+  const systemPrompt = `Du bewertest eine ${question.type === 'writing' ? 'schriftliche' : 'mündliche'} Antwort eines Deutschschülers auf Niveau ${question.level}. Vergib einen Wert zwischen 0 und 1 (Dezimal). Antworte AUSSCHLIESSLICH mit einer Zahl, ohne Text, ohne Erklärung.
+
+Bewertungskriterien:
+- 1.0 = perfekt für ${question.level}
+- 0.7 = solide, erreicht das Niveau
+- 0.5 = grenzwertig
+- 0.3 = unter dem Niveau
+- 0.0 = leer oder völlig falsch`
+
+  const userPrompt = `Aufgabe: ${question.prompt}\n\nAntwort des Schülers:\n"""\n${String(response).slice(0, 1500)}\n"""\n\nWert (nur Zahl):`
+
+  try {
+    if (ANTHROPIC_API_KEY) {
+      const res = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: {
+          'x-api-key': ANTHROPIC_API_KEY,
+          'anthropic-version': '2023-06-01',
+          'content-type': 'application/json',
+        },
+        body: JSON.stringify({
+          model: 'claude-haiku-4-5',
+          max_tokens: 16,
+          system: systemPrompt,
+          messages: [{ role: 'user', content: userPrompt }],
+        }),
+      })
+      const json = await res.json()
+      const text = json?.content?.[0]?.text || ''
+      const score = parseFloat(text.match(/[0-9]\.?[0-9]*/)?.[0] || '0.5')
+      return Math.min(1, Math.max(0, score))
+    }
+    // OpenAI fallback
+    const res = await fetch('https://api.openai.com/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${OPENAI_API_KEY}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        model: 'gpt-4o-mini',
+        max_tokens: 16,
+        messages: [
+          { role: 'system', content: systemPrompt },
+          { role: 'user', content: userPrompt },
+        ],
+      }),
+    })
+    const json = await res.json()
+    const text = json?.choices?.[0]?.message?.content || ''
+    const score = parseFloat(text.match(/[0-9]\.?[0-9]*/)?.[0] || '0.5')
+    return Math.min(1, Math.max(0, score))
+  } catch (err) {
+    console.error('[level-test] AI score failed:', err.message)
+    return 0.5
+  }
+}
+
 // ─── AUTO-CREATE FINANCIAL TRACKING TABLES ──────────
 ;(async () => {
   try {
@@ -3778,6 +4033,34 @@ app.get('/{*splat}', (req, res, next) => {
   }
 
   console.log('[b2c-migration] schema ready')
+})()
+
+// ─── AUTO-MIGRATION: Level test ──────────────────────────────────────
+;(async () => {
+  try {
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS schule_level_tests (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        userId VARCHAR(191) NULL,
+        email VARCHAR(255) NULL,
+        answers JSON NOT NULL,
+        aiScores JSON NULL,
+        scoreByLevel JSON NOT NULL,
+        resultLevel VARCHAR(8) NOT NULL,
+        completedAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+        durationSeconds INT DEFAULT 0,
+        source VARCHAR(32) DEFAULT 'app',
+        ip VARCHAR(64) NULL,
+        userAgent VARCHAR(512) NULL,
+        INDEX idx_userId (userId),
+        INDEX idx_email (email),
+        INDEX idx_completedAt (completedAt)
+      ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+    `)
+    console.log('[level-test] table ready')
+  } catch (err) {
+    console.error('[level-test] migration failed:', err.message)
+  }
 })()
 
 // ─── B2C SYNC ────────────────────────────────────────────────────────
