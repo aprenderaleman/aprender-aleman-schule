@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import {
   Clock, BookOpen, Headphones, MessageCircle, Pencil, GraduationCap,
   Mic, Square, Volume2, ArrowRight, Sparkles, CheckCircle, Trophy,
-  Loader2, Send, Mail,
+  Loader2, Send, Mail, Flag, X,
 } from 'lucide-react'
 import { useAuth } from '../context/AuthContext'
 import Button from '../components/UI/Button'
@@ -31,6 +31,11 @@ const LEVEL_DESCRIPTIONS = {
 
 const NEXT_LEVEL = { A1: 'A2', A2: 'B1', B1: 'B2', B2: 'C1', C1: 'C1' }
 
+// Minimum answers required before the "Aufgeben" button appears.
+// 5 ensures the user has completed all A1 questions, so we have a meaningful
+// result floor.
+const MIN_ANSWERS_TO_SUBMIT_EARLY = 5
+
 export default function LevelTest() {
   const { user, ssoLogin } = useAuth()
   const navigate = useNavigate()
@@ -44,7 +49,13 @@ export default function LevelTest() {
   const [result, setResult] = useState(null)
   const [email, setEmail] = useState(user?.email || '')
   const [error, setError] = useState('')
+  const [showGiveUp, setShowGiveUp] = useState(false)
   const startTimeRef = useRef(null)
+
+  // Count actual answers given (multiple choice + open responses)
+  const answeredCount = Object.keys(answers).length +
+    Object.values(openResponses).filter(v => v && v !== '__SKIPPED__').length
+  const canSubmitEarly = answeredCount >= MIN_ANSWERS_TO_SUBMIT_EARLY
 
   // Load questions on mount
   useEffect(() => {
@@ -140,7 +151,13 @@ export default function LevelTest() {
 
   return (
     <div className="min-h-screen-d bg-gradient-to-br from-orange-50 via-white to-amber-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
-      <ProgressHeader current={currentIdx + 1} total={questions.length} startTime={startTimeRef.current} />
+      <ProgressHeader
+        current={currentIdx + 1}
+        total={questions.length}
+        startTime={startTimeRef.current}
+        canSubmitEarly={canSubmitEarly}
+        onGiveUp={() => setShowGiveUp(true)}
+      />
 
       <main className="max-w-2xl mx-auto px-4 py-6 sm:py-10">
         <AnimatePresence mode="wait">
@@ -156,6 +173,19 @@ export default function LevelTest() {
           />
         </AnimatePresence>
       </main>
+
+      {/* Give-up confirmation modal */}
+      <GiveUpModal
+        open={showGiveUp}
+        answeredCount={answeredCount}
+        totalCount={questions.length}
+        onCancel={() => setShowGiveUp(false)}
+        onConfirm={() => {
+          setShowGiveUp(false)
+          if (user?.email) submitTest(user.email)
+          else setPhase('email')
+        }}
+      />
     </div>
   )
 }
@@ -224,7 +254,7 @@ function Detail({ icon: Icon, text }) {
   )
 }
 
-function ProgressHeader({ current, total, startTime }) {
+function ProgressHeader({ current, total, startTime, canSubmitEarly, onGiveUp }) {
   const [elapsed, setElapsed] = useState(0)
   useEffect(() => {
     if (!startTime) return
@@ -237,11 +267,11 @@ function ProgressHeader({ current, total, startTime }) {
 
   return (
     <header className="sticky top-0 z-10 bg-card/90 backdrop-blur-md border-b border-border">
-      <div className="max-w-2xl mx-auto px-4 py-3 flex items-center gap-4">
+      <div className="max-w-2xl mx-auto px-4 py-3 flex items-center gap-3 sm:gap-4">
         <Link to="/" className="shrink-0">
           <img src="/logo.svg" alt="Schule" className="w-8 h-8" />
         </Link>
-        <div className="flex-1">
+        <div className="flex-1 min-w-0">
           <div className="flex items-center justify-between mb-1.5">
             <span className="text-xs font-semibold text-gray-600 dark:text-gray-300">
               Frage {current} / {total}
@@ -259,8 +289,86 @@ function ProgressHeader({ current, total, startTime }) {
             />
           </div>
         </div>
+        {/* Give up button — visible once enough answers have been given */}
+        <AnimatePresence>
+          {canSubmitEarly && (
+            <motion.button
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.8 }}
+              type="button"
+              onClick={onGiveUp}
+              aria-label="Test früher beenden"
+              className="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+            >
+              <Flag size={12} />
+              <span className="hidden sm:inline">Beenden</span>
+            </motion.button>
+          )}
+        </AnimatePresence>
       </div>
     </header>
+  )
+}
+
+function GiveUpModal({ open, answeredCount, totalCount, onCancel, onConfirm }) {
+  return (
+    <AnimatePresence>
+      {open && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          onClick={onCancel}
+          className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-end sm:items-center justify-center p-4"
+        >
+          <motion.div
+            initial={{ y: 30, scale: 0.95 }}
+            animate={{ y: 0, scale: 1 }}
+            exit={{ y: 30, scale: 0.95 }}
+            transition={{ type: 'spring', damping: 25, stiffness: 320 }}
+            onClick={e => e.stopPropagation()}
+            className="bg-card border border-border rounded-2xl shadow-2xl max-w-md w-full p-6"
+          >
+            <div className="flex items-start gap-3 mb-4">
+              <div className="w-10 h-10 rounded-xl bg-warm/15 flex items-center justify-center shrink-0">
+                <Flag size={20} className="text-warm" />
+              </div>
+              <div className="flex-1">
+                <h3 className="font-extrabold text-lg text-foreground mb-1">Test jetzt beenden?</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  Du hast <strong className="text-foreground">{answeredCount} von {totalCount}</strong> Fragen beantwortet.
+                  Wir werten dein Niveau mit den bisherigen Antworten aus.
+                </p>
+              </div>
+              <button
+                onClick={onCancel}
+                aria-label="Schließen"
+                className="text-muted-foreground hover:text-foreground p-1 -m-1"
+              >
+                <X size={18} />
+              </button>
+            </div>
+            <div className="flex flex-col-reverse sm:flex-row gap-2">
+              <button
+                type="button"
+                onClick={onCancel}
+                className="flex-1 px-4 py-2.5 rounded-xl border border-border text-foreground text-sm font-semibold hover:bg-muted transition-colors"
+              >
+                Weitermachen
+              </button>
+              <button
+                type="button"
+                onClick={onConfirm}
+                className="flex-1 px-4 py-2.5 rounded-xl bg-warm text-warm-foreground text-sm font-bold hover:opacity-90 transition-opacity inline-flex items-center justify-center gap-1.5"
+              >
+                <Flag size={14} /> Beenden &amp; Niveau ansehen
+              </button>
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   )
 }
 
