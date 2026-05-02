@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { Zap, Play, Trophy, Flame, Layers, MessageCircle, Mic, Sparkles, Clock, ArrowRight, Video, Users, ExternalLink } from 'lucide-react'
+import { Zap, Play, Trophy, Flame, Video, Users, ExternalLink } from 'lucide-react'
 import { useAuth } from '../context/AuthContext'
 import { useProgress } from '../context/ProgressContext'
 import Navbar from '../components/Layout/Navbar'
@@ -12,20 +12,15 @@ import RecentBadges from '../components/Dashboard/RecentBadges'
 import ExplorerChallenge from '../components/Dashboard/ExplorerChallenge'
 import ReviewPrompt from '../components/UI/ReviewPrompt'
 import AnimatedNumber from '../components/UI/AnimatedNumber'
-import ProgressBar from '../components/UI/ProgressBar'
 import Toast from '../components/UI/Toast'
 import { EXERCISES } from '../utils/exercises'
 
-const LEVEL_XP = { A1: 500, A2: 1000, B1: 2000, B2: 3500, C1: 5000 }
 const SKILLS = ['grammar', 'reading', 'listening', 'writing', 'speaking']
 
 export default function Dashboard() {
   const { user, toast } = useAuth()
   const { progress } = useProgress()
   const navigate = useNavigate()
-
-  const levelXP = LEVEL_XP[user?.level] || 500
-  const levelProgress = Math.min(100, Math.round((progress.xp / levelXP) * 100))
 
   const lastExercise = useMemo(() => {
     if (!progress.exerciseHistory?.length) return null
@@ -56,26 +51,8 @@ export default function Dashboard() {
           </p>
         </motion.div>
 
-        {/* Top stats row */}
-        <motion.div variants={container} initial="hidden" animate="show" className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-          {/* XP + Level Progress */}
-          <motion.div variants={item} className="card md:col-span-2">
-            <div className="flex items-center justify-between mb-3">
-              <div className="flex items-center gap-2">
-                <Zap size={20} className="text-orange-500" />
-                <span className="font-bold text-gray-800 dark:text-gray-100">Niveau-Fortschritt</span>
-              </div>
-              <span className="text-sm font-semibold text-orange-500 bg-orange-50 dark:bg-orange-900/30 px-2 py-1 rounded-full">
-                <AnimatedNumber value={progress.xp || 0} /> XP
-              </span>
-            </div>
-            <ProgressBar value={levelProgress} color="orange" showPercent />
-            <p className="text-xs text-gray-400 mt-2">
-              {progress.xp} / {levelXP} XP zum Abschluss von Niveau {user?.level}
-            </p>
-          </motion.div>
-
-          {/* Streak */}
+        {/* Streak */}
+        <motion.div variants={container} initial="hidden" animate="show" className="mb-8">
           <motion.div variants={item}>
             <StreakCounter streak={progress.streak} />
           </motion.div>
@@ -104,25 +81,6 @@ export default function Dashboard() {
 
         {/* Explorer Challenge (trial users only) */}
         <ExplorerChallenge />
-
-        {/* Level test CTA */}
-        <Link
-          to="/test-de-nivel"
-          className="block mb-6 group rounded-2xl border-2 border-dashed border-warm/40 bg-warm/5 hover:bg-warm/10 transition-colors p-4"
-        >
-          <div className="flex items-center gap-4">
-            <div className="w-11 h-11 rounded-xl bg-warm/15 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
-              <span className="text-xl">🎯</span>
-            </div>
-            <div className="flex-1">
-              <p className="font-bold text-foreground text-sm">Wie ist dein echtes Niveau?</p>
-              <p className="text-xs text-muted-foreground mt-0.5">
-                Kostenloser Test (12 Min) · CEFR A1-C1 · Persönlicher Plan
-              </p>
-            </div>
-            <ArrowRight size={18} className="text-warm group-hover:translate-x-1 transition-transform" />
-          </div>
-        </Link>
 
         {/* Skills grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 mb-8">
@@ -174,33 +132,6 @@ export default function Dashboard() {
             <RecentBadges earnedIds={progress.achievements || []} />
           </motion.div>
         </div>
-
-        {/* Flashcards */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.45 }}
-          className="mt-6"
-        >
-          <Link
-            to="/flashcards"
-            className="block bg-gradient-to-r from-orange-500 to-amber-500 rounded-2xl p-5 hover:shadow-xl transition-all group"
-          >
-            <div className="flex items-center gap-4">
-              <div className="bg-white/20 rounded-xl p-3 shrink-0">
-                <Layers size={28} className="text-white" />
-              </div>
-              <div className="flex-1">
-                <h3 className="text-white font-bold text-lg group-hover:text-yellow-200 transition-colors">
-                  Karteikarten 🇩🇪
-                </h3>
-                <p className="text-white/80 text-sm mt-1">
-                  Lerne Vokabeln mit verteilter Wiederholung im Anki-Stil. Themen nach Niveau: Essen, Arbeit, Reisen und mehr.
-                </p>
-              </div>
-            </div>
-          </Link>
-        </motion.div>
 
         {/* Hans CTA — temporarily disabled (out of service) */}
 

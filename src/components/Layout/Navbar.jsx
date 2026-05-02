@@ -7,6 +7,8 @@ import { useProgress } from '../../context/ProgressContext'
 import { useSidebar } from '../../context/SidebarContext'
 import Tooltip from '../UI/Tooltip'
 
+const LEVEL_XP = { A1: 500, A2: 1000, B1: 2000, B2: 3500, C1: 5000 }
+
 /**
  * Top bar — slim header used together with AppSidebar.
  *
@@ -21,6 +23,11 @@ export default function Navbar() {
   const { toggle: toggleSidebar } = useSidebar()
 
   if (!user) return null
+
+  const xp = progress.xp || 0
+  const level = user.level || 'A1'
+  const levelXP = LEVEL_XP[level] || 500
+  const levelPct = Math.min(100, Math.round((xp / levelXP) * 100))
 
   return (
     <nav className="sticky top-0 z-30 bg-card/95 backdrop-blur-md border-b border-border shadow-sm pt-safe md:pl-60">
@@ -43,8 +50,23 @@ export default function Navbar() {
             </Link>
           </div>
 
-          {/* Spacer on desktop — sidebar has the logo, so we need empty space */}
-          <div className="hidden md:block flex-1" />
+          {/* Level progress (desktop) */}
+          <Tooltip content={`${xp} / ${levelXP} XP zum Abschluss von Niveau ${level}`} side="bottom">
+            <div className="hidden md:flex items-center gap-3 flex-1 max-w-md mx-6">
+              <span className="shrink-0 px-2 py-0.5 rounded-md bg-warm/15 text-warm text-xs font-extrabold tracking-wide">
+                {level}
+              </span>
+              <div className="flex-1 h-2 rounded-full bg-muted overflow-hidden">
+                <div
+                  className="h-full bg-gradient-to-r from-warm to-orange-600 rounded-full transition-all"
+                  style={{ width: `${levelPct}%` }}
+                />
+              </div>
+              <span className="shrink-0 text-xs font-semibold text-muted-foreground tabular-nums">
+                {xp} / {levelXP}
+              </span>
+            </div>
+          </Tooltip>
 
           {/* Right: utilities */}
           <div className="flex items-center gap-2">
