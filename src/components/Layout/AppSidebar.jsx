@@ -35,8 +35,13 @@ const SECONDARY_ITEMS = [
  *
  * Hidden for:
  *  - Logged-out users
- *  - Admins/superadmins (they use AdminLayout's own sidebar)
- *  - Full-screen routes (exercise/exam player, auto-login)
+ *  - Routes inside /admin/* (AdminLayout owns those with its own sidebar)
+ *  - Public routes (landing, login, register, pricing, auto-login, level test)
+ *  - Full-screen routes (exercise/exam player)
+ *
+ * Admins/superadmins SEE this sidebar when they navigate to student pages
+ * (e.g. /dashboard, /ejercicios) — only the actual /admin/* routes use the
+ * separate AdminLayout chrome.
  */
 export default function AppSidebar() {
   const { user, logout } = useAuth()
@@ -46,14 +51,17 @@ export default function AppSidebar() {
   const navigate = useNavigate()
 
   if (!user) return null
-  if (user.role === 'admin' || user.role === 'superadmin') return null
 
   const path = location.pathname
   const hidden = (
     path === '/' ||
     path === '/login' ||
     path === '/registro' ||
+    path === '/pricing' ||
     path === '/auto-login' ||
+    path === '/test-de-nivel' ||
+    path === '/niveau-test' ||
+    /^\/admin(\/|$)/.test(path) ||
     /^\/ejercicio\//.test(path) ||
     /^\/pruefung\//.test(path)
   )
