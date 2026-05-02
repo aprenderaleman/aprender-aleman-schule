@@ -12,6 +12,7 @@ import cron from 'node-cron'
 import * as b2c from './b2cClient.js'
 import { createMagicLink, consumeMagicLink, purgeOld as purgeMagicLinks, TTL_MS as MAGIC_LINK_TTL_MS } from './magicLink.js'
 import { sendEmail, magicLinkTemplate } from './emailSender.js'
+import { LEVEL_TEST_QUESTIONS, computeLevel as computeLevelTestLevel } from './level-test-bank.js'
 
 dotenv.config()
 
@@ -1890,18 +1891,10 @@ function levelTestRateLimit(req, res, next) {
   next()
 }
 
-// Get the question bank. Imports the JS module dynamically so the same
-// curated bank is the source of truth on both ends.
-async function loadLevelTestBank() {
-  // Dynamic import — bank file is in src/data which is bundled for the
-  // frontend, but Node can also import it directly since it's pure ESM.
-  try {
-    const mod = await import(new URL('../src/data/level-test-questions.js', import.meta.url))
-    return { questions: mod.LEVEL_TEST_QUESTIONS, computeLevel: mod.computeLevel }
-  } catch (err) {
-    console.error('[level-test] bank load failed:', err.message)
-    return null
-  }
+// Question bank: imported statically from server/level-test-bank.js so it
+// ships with the backend container regardless of whether src/ is bundled.
+function loadLevelTestBank() {
+  return { questions: LEVEL_TEST_QUESTIONS, computeLevel: computeLevelTestLevel }
 }
 
 // Public: returns the bank stripped of correct answers (only the prompt + options).
