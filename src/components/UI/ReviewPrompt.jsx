@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Star, X, Send, Heart } from 'lucide-react'
+import { Star, X, Send, Heart, Gift } from 'lucide-react'
 import { useAuth } from '../../context/AuthContext'
 
 const API_URL = import.meta.env.VITE_API_URL || ''
@@ -21,7 +21,7 @@ function getAuthHeaders() {
  *  - exerciseHistory: array from ProgressContext (used to check threshold)
  */
 export default function ReviewPrompt({ exerciseHistory = [] }) {
-  const { user, showToast } = useAuth()
+  const { user, showToast, refreshUser } = useAuth()
   const [open, setOpen] = useState(false)
   const [rating, setRating] = useState(0)
   const [hovered, setHovered] = useState(0)
@@ -54,6 +54,13 @@ export default function ReviewPrompt({ exerciseHistory = [] }) {
     return () => { cancelled = true }
   }, [user?.id, exerciseHistory.length])
 
+  // Allow other components (e.g. ReviewChallenge dashboard card) to open the modal directly
+  useEffect(() => {
+    const handler = () => setOpen(true)
+    window.addEventListener('open-review-prompt', handler)
+    return () => window.removeEventListener('open-review-prompt', handler)
+  }, [])
+
   const dismiss = () => {
     if (user?.id) localStorage.setItem(`review_prompt_${user.id}`, '1')
     setOpen(false)
@@ -70,9 +77,16 @@ export default function ReviewPrompt({ exerciseHistory = [] }) {
       })
       if (res.ok) {
         if (user?.id) localStorage.setItem(`review_prompt_${user.id}`, '1')
+        const j = await res.json().catch(() => ({}))
         setDone(true)
-        showToast?.('Danke für dein Feedback! 🙌', 'success')
-        setTimeout(() => setOpen(false), 2000)
+        if (j?.bonusAwarded && j?.bonusXP) {
+          showToast?.(`🎁 Danke! +${j.bonusXP.toLocaleString('de-DE')} XP gratis freigeschaltet!`, 'success')
+        } else {
+          showToast?.('Danke für dein Feedback! 🙌', 'success')
+        }
+        // Refresh subscription so the new free-XP limit shows up immediately
+        refreshUser?.()
+        setTimeout(() => setOpen(false), 2500)
       } else {
         const j = await res.json().catch(() => ({}))
         showToast?.(j.error || 'Fehler beim Senden.', 'error')
@@ -124,6 +138,9 @@ export default function ReviewPrompt({ exerciseHistory = [] }) {
                   <div className="text-3xl mb-2">⭐</div>
                   <h3 className="font-extrabold text-lg text-foreground mb-1">Wie findest du Schule?</h3>
                   <p className="text-sm text-muted-foreground">Deine Meinung hilft uns, die App zu verbessern.</p>
+                  <div className="inline-flex items-center gap-1.5 mt-3 px-3 py-1 rounded-full bg-warm/15 text-warm text-xs font-bold">
+                    <Gift size={12} /> +2.000 XP gratis als Dankeschön
+                  </div>
                 </div>
 
                 {/* Stars */}

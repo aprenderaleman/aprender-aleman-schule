@@ -9,7 +9,7 @@ import Footer from '../components/Layout/Footer'
 import SkillCard from '../components/Dashboard/SkillCard'
 import StreakCounter from '../components/Dashboard/StreakCounter'
 import RecentBadges from '../components/Dashboard/RecentBadges'
-import ExplorerChallenge from '../components/Dashboard/ExplorerChallenge'
+import ReviewChallenge from '../components/Dashboard/ReviewChallenge'
 import ReviewPrompt from '../components/UI/ReviewPrompt'
 import AnimatedNumber from '../components/UI/AnimatedNumber'
 import Toast from '../components/UI/Toast'
@@ -79,8 +79,8 @@ export default function Dashboard() {
           </motion.div>
         )}
 
-        {/* Explorer Challenge (trial users only) */}
-        <ExplorerChallenge />
+        {/* Review challenge — earn +2000 XP for trial users (only shown if not yet reviewed) */}
+        <ReviewChallenge />
 
         {/* Skills grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 mb-8">

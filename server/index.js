@@ -203,10 +203,26 @@ const stripe = STRIPE_SECRET_KEY ? new Stripe(STRIPE_SECRET_KEY) : null
 // Free trial threshold — XP based. Users keep free access until they reach
 // this amount of total XP (across all exercises + exams).
 const FREE_XP_LIMIT = 10000
-// Bonus XP awarded when the user completes the Explorer Challenge
-// (≥1 exercise in each of the 5 skill types)
+// Bonus XP awarded when the user submits a review (any rating).
+// This replaces the legacy Explorer Challenge bonus.
+const REVIEW_BONUS_XP = 2000
+// (Legacy — kept so admin endpoints don't break, no longer awarded.)
 const EXPLORER_CHALLENGE_ID = 'explorer_challenge'
 const EXPLORER_CHALLENGE_BONUS_XP = 2000
+
+// Helper: has the user submitted a review? Used to grant the +2000 XP bonus.
+async function hasReviewBonus(userId) {
+  try {
+    const [rows] = await pool.query(
+      'SELECT 1 FROM schule_reviews WHERE userId = ? LIMIT 1',
+      [userId]
+    )
+    return rows.length > 0
+  } catch (e) {
+    console.error('hasReviewBonus error:', e.message)
+    return false
+  }
+}
 
 // Helper: get the list of distinct skill types the user has completed at least one exercise in
 async function getExplorerSkills(userId) {
@@ -257,8 +273,8 @@ async function getSubscriptionInfo(userId) {
 
   // XP earned (only relevant if not paid/SSO)
   const xpEarned = (paid || isSso) ? 0 : await getUserXP(userId)
-  // Explorer Challenge bonus: +2000 XP to the limit once the user claims it
-  const bonusXP = (paid || isSso) ? 0 : ((await hasExplorerBonus(userId)) ? EXPLORER_CHALLENGE_BONUS_XP : 0)
+  // Review bonus: +2000 XP to the limit once the user has left a review
+  const bonusXP = (paid || isSso) ? 0 : ((await hasReviewBonus(userId)) ? REVIEW_BONUS_XP : 0)
   const effectiveLimit = FREE_XP_LIMIT + bonusXP
   const xpRemaining = Math.max(0, effectiveLimit - xpEarned)
   const freeAccess = !paid && !isSso && xpEarned < effectiveLimit
@@ -1276,6 +1292,12 @@ app.post('/api/reviews', authMiddleware, async (req, res) => {
     if (!r || r < 1 || r > 5) return res.status(400).json({ error: 'Bewertung muss zwischen 1 und 5 liegen.' })
     const text = String(comment || '').trim().slice(0, 1000)
     const autoPublish = r >= 4 ? 1 : 0
+    // Detect first-time review so we can award the +2000 XP bonus once.
+    const [existing] = await pool.query(
+      'SELECT 1 FROM schule_reviews WHERE userId = ? LIMIT 1',
+      [req.user.id]
+    )
+    const firstReview = existing.length === 0
     await pool.query(
       `INSERT INTO schule_reviews (userId, rating, comment, published)
        VALUES (?, ?, ?, ?)
@@ -1283,7 +1305,12 @@ app.post('/api/reviews', authMiddleware, async (req, res) => {
          published = VALUES(published), createdAt = NOW()`,
       [req.user.id, r, text, autoPublish]
     )
-    res.json({ ok: true, published: !!autoPublish })
+    res.json({
+      ok: true,
+      published: !!autoPublish,
+      bonusAwarded: firstReview,
+      bonusXP: firstReview ? REVIEW_BONUS_XP : 0,
+    })
   } catch (err) {
     console.error('Submit review error:', err)
     res.status(500).json({ error: 'Error al guardar reseña.' })
@@ -3490,8 +3517,8 @@ PLATTFORM-INFORMATIONEN:
 - Die Goethe-Prüfungen simulieren das offizielle Format mit 4 Modulen: Lesen, Hören, Schreiben und Sprechen
 - Zum Bestehen braucht man ≥60% in jedem Modul
 - Das Abonnement kostet 15€/Monat und beinhaltet unbegrenzten Zugang
-- Neue Nutzer haben 5 Tage kostenlose Testphase
-- Die ersten 10 Lektionen mit ≥70% sind gratis
+- Die kostenlose Testphase endet, wenn der Nutzer 10.000 XP erreicht hat
+- Wer eine Bewertung abgibt, bekommt 2.000 XP geschenkt (also bis zu 12.000 XP gratis)
 - Die Karteikarten nutzen Spaced Repetition zum Vokabellernen
 - Der Fortschritt wird automatisch gespeichert
 - Die App funktioniert im Browser (Desktop und Mobil)

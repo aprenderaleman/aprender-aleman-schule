@@ -133,8 +133,25 @@ export function AuthProvider({ children }) {
     return localStorage.getItem('auth_token')
   }, [])
 
+  // Re-fetch the current user from the server (e.g. after a review awards bonus XP)
+  const refreshUser = useCallback(async () => {
+    const token = localStorage.getItem('auth_token')
+    if (!token) return
+    try {
+      const res = await fetch(`${API_URL}/api/auth/me`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      if (!res.ok) return
+      const userData = await res.json()
+      storeAuth(token, userData)
+      setUser(userData)
+    } catch {
+      /* ignore */
+    }
+  }, [])
+
   return (
-    <AuthContext.Provider value={{ user, loading, toast, login, register, ssoLogin, logout, updateProfile, showToast, getToken }}>
+    <AuthContext.Provider value={{ user, loading, toast, login, register, ssoLogin, logout, updateProfile, showToast, getToken, refreshUser }}>
       {!loading && children}
     </AuthContext.Provider>
   )
