@@ -23,8 +23,8 @@ export default function Navbar() {
   if (!user) return null
 
   return (
-    <nav className="sticky top-0 z-30 bg-card/95 backdrop-blur-md border-b border-border shadow-sm pt-safe">
-      <div className="px-4 sm:px-6">
+    <nav className="sticky top-0 z-30 bg-card/95 backdrop-blur-md border-b border-border shadow-sm pt-safe md:pl-60">
+      <div className="px-4 sm:px-6 md:pl-6">
         <div className="flex items-center justify-between h-14 md:h-16">
 
           {/* Left: hamburger (mobile only) + logo (mobile only) */}

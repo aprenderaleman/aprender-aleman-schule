@@ -414,7 +414,7 @@ export default function Flashcards() {
       <Navbar />
       <Toast toast={toast} />
 
-      <main id="main" className="max-w-7xl md:pl-60 mx-auto px-4 sm:px-6 py-8">
+      <main id="main" className="max-w-7xl md:pl-72 mx-auto px-4 sm:px-6 py-8">
         <AnimatePresence mode="wait">
           {selectedTopic ? (
             <motion.div key="study" initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -30 }}>
