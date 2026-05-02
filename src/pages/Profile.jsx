@@ -33,7 +33,7 @@ export default function Profile() {
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <Navbar />
       <Toast toast={toast} />
-      <main id="main" className="max-w-3xl xl:pl-20 mx-auto px-4 sm:px-6 py-8">
+      <main id="main" className="max-w-3xl md:pl-60 mx-auto px-4 sm:px-6 py-8">
         <div className="mb-8">
           <h1 className="text-3xl font-extrabold text-gray-800 dark:text-gray-100">Mein Profil</h1>
           <p className="text-gray-500 dark:text-gray-400 mt-1">Verwalte dein Konto, {user?.name}.</p>

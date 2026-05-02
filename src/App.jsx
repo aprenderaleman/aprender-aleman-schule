@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { AuthProvider, useAuth } from './context/AuthContext'
 import { ProgressProvider } from './context/ProgressContext'
 import { ThemeProvider } from './context/ThemeContext'
+import { SidebarProvider } from './context/SidebarContext'
 
 import ErrorBoundary from './components/ErrorBoundary'
 import Landing from './pages/Landing'
@@ -24,8 +25,7 @@ import AdminLayout from './components/Layout/AdminLayout'
 import Paywall from './components/UI/Paywall'
 import TrialBanner from './components/UI/TrialBanner'
 import Navbar from './components/Layout/Navbar'
-import MobileTabBar from './components/Layout/MobileTabBar'
-import DesktopRail from './components/Layout/DesktopRail'
+import AppSidebar from './components/Layout/AppSidebar'
 import NetworkStatus from './components/UI/NetworkStatus'
 import InstallPrompt from './components/UI/InstallPrompt'
 import CommandPalette from './components/UI/CommandPalette'
@@ -146,14 +146,15 @@ export default function App() {
           <ThemeProvider>
             <AuthProvider>
               <ProgressProvider>
-                <SkipLink />
-                <NetworkStatus />
-                <DesktopRail />
-                <AppRoutes />
-                <MobileTabBar />
-                <CommandPalette />
-                <InstallPrompt />
-                {/* <ChatBot /> — Hans temporarily out of service */}
+                <SidebarProvider>
+                  <SkipLink />
+                  <NetworkStatus />
+                  <AppSidebar />
+                  <AppRoutes />
+                  <CommandPalette />
+                  <InstallPrompt />
+                  {/* <ChatBot /> — Hans temporarily out of service */}
+                </SidebarProvider>
               </ProgressProvider>
             </AuthProvider>
           </ThemeProvider>
