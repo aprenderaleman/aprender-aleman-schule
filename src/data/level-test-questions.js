@@ -1,22 +1,20 @@
 // ─────────────────────────────────────────────────────────────────────
 // Banco curado para el Test de Nivel SCHULE.
 //
-// Distribución (linear, no adaptativo) — preguntas más rigurosas:
-//   A1: 9 preguntas — gramática + vocab + lectura + listening + plurales/posesivos
-//   A2: 9 preguntas — Perfekt + reflexivos + adjetivos + Wechselpräpositionen
-//   B1: 8 preguntas — Konjunktiv II + relativos + conectores + writing
-//   B2: 7 preguntas — pasiva + Konjunktiv I + idioms + speaking
-//   C1: 5 preguntas — gramática avanzada + nominalisación + idioms
-//   ───
-//   38 preguntas, ~16-18 min
+// 50 preguntas (10 por nivel, ~30 min):
+//   A1: 10 — gramática + vocab + lectura + listening + plurales/posesivos/Zahlen
+//   A2: 10 — Perfekt + reflexivos + adjetivos + Wechselpräpositionen + Komparativ
+//   B1: 10 — Konjunktiv II + relativos + conectores + writing + passiv
+//   B2: 10 — pasiva + Konjunktiv I/II Vergangenheit + idioms + speaking + Genitiv
+//   C1: 10 — gramática avanzada + nominalisación + Funktionsverbgefüge + idioms
 //
 // Nivel resultante = el nivel más alto donde el usuario acertó >= 70%.
-// Las preguntas writing/speaking se evalúan vía AI (0..1) y suman a su nivel.
+// Las preguntas writing/speaking se evalúan vía AI (0..1).
 // ─────────────────────────────────────────────────────────────────────
 
 export const LEVEL_TEST_QUESTIONS = [
 
-  // ═══════════════ A1 ═══════════════
+  // ═══════════════ A1 (10) ═══════════════
   {
     id: 'a1-g-001', level: 'A1', type: 'grammar',
     prompt: 'Wie alt ___ du?',
@@ -53,6 +51,13 @@ export const LEVEL_TEST_QUESTIONS = [
     explanation: 'Monate verwenden "im": im Mai, im Juni, etc.',
   },
   {
+    id: 'a1-g-006', level: 'A1', type: 'grammar',
+    prompt: 'Wo wohnst du? — Ich wohne ___ Berlin.',
+    options: ['nach', 'in', 'auf', 'zu'],
+    correctAnswer: 'in',
+    explanation: 'Bei Städten und Ländern (ohne Artikel) → "in".',
+  },
+  {
     id: 'a1-v-001', level: 'A1', type: 'vocabulary',
     prompt: 'Welches Wort passt: "Ich trinke ___."',
     options: ['Wasser', 'Brot', 'Stuhl', 'Buch'],
@@ -82,7 +87,7 @@ export const LEVEL_TEST_QUESTIONS = [
     correctAnswer: '073482',
   },
 
-  // ═══════════════ A2 ═══════════════
+  // ═══════════════ A2 (10) ═══════════════
   {
     id: 'a2-g-001', level: 'A2', type: 'grammar',
     prompt: 'Gestern ___ ich ins Kino gegangen.',
@@ -119,6 +124,13 @@ export const LEVEL_TEST_QUESTIONS = [
     explanation: 'Wechselpräposition + statisch (wo?) → Dativ. Tisch (m) → "auf dem".',
   },
   {
+    id: 'a2-g-006', level: 'A2', type: 'grammar',
+    prompt: 'Berlin ist ___ als München.',
+    options: ['groß', 'großer', 'größer', 'mehr groß'],
+    correctAnswer: 'größer',
+    explanation: 'Komparativ von "groß" → "größer" (Umlaut + -er).',
+  },
+  {
     id: 'a2-v-001', level: 'A2', type: 'vocabulary',
     prompt: 'Was ist das Gegenteil von "billig"?',
     options: ['teuer', 'klein', 'groß', 'kalt'],
@@ -148,7 +160,7 @@ export const LEVEL_TEST_QUESTIONS = [
     explanation: '"halb drei" bedeutet 14:30 Uhr.',
   },
 
-  // ═══════════════ B1 ═══════════════
+  // ═══════════════ B1 (10) ═══════════════
   {
     id: 'b1-g-001', level: 'B1', type: 'grammar',
     prompt: 'Wenn ich Zeit ___, würde ich öfter ins Theater gehen.',
@@ -176,6 +188,20 @@ export const LEVEL_TEST_QUESTIONS = [
     options: ['nach', 'zu', 'in', 'bei'],
     correctAnswer: 'zu',
     explanation: '"zu Hause bleiben" — Idiom mit "zu".',
+  },
+  {
+    id: 'b1-g-005', level: 'B1', type: 'grammar',
+    prompt: 'Es regnet stark. ___ nehme ich einen Schirm mit.',
+    options: ['Weil', 'Deshalb', 'Obwohl', 'Damit'],
+    correctAnswer: 'Deshalb',
+    explanation: '"Deshalb" = darum/aus diesem Grund (Konsequenz, Position 1 im Hauptsatz).',
+  },
+  {
+    id: 'b1-g-006', level: 'B1', type: 'grammar',
+    prompt: 'Hier ___ jeden Morgen frische Brötchen verkauft.',
+    options: ['werden', 'sind', 'haben', 'wurden'],
+    correctAnswer: 'werden',
+    explanation: 'Vorgangspassiv im Präsens: "werden + Partizip II".',
   },
   {
     id: 'b1-v-001', level: 'B1', type: 'vocabulary',
@@ -216,7 +242,7 @@ export const LEVEL_TEST_QUESTIONS = [
     explanation: 'Wird von der KI bewertet: Grammatik (50%), Wortschatz (30%), Kohärenz (20%).',
   },
 
-  // ═══════════════ B2 ═══════════════
+  // ═══════════════ B2 (10) ═══════════════
   {
     id: 'b2-g-001', level: 'B2', type: 'grammar',
     prompt: 'Das Haus ___ letztes Jahr renoviert.',
@@ -239,6 +265,20 @@ export const LEVEL_TEST_QUESTIONS = [
     explanation: 'Indirekte Rede → Konjunktiv I: "sie habe".',
   },
   {
+    id: 'b2-g-004', level: 'B2', type: 'grammar',
+    prompt: 'Wenn ich das gewusst ___, ___ ich nicht gekommen.',
+    options: ['hatte / war', 'hätte / wäre', 'habe / bin', 'hätte / hätte'],
+    correctAnswer: 'hätte / wäre',
+    explanation: 'Konjunktiv II Vergangenheit: "hätte + Partizip II" für Vermutungen über die Vergangenheit; "wäre gekommen" weil "kommen" Bewegungsverb ist.',
+  },
+  {
+    id: 'b2-g-005', level: 'B2', type: 'grammar',
+    prompt: 'Ich freue mich ___ das Geschenk.',
+    options: ['auf', 'über', 'an', 'von'],
+    correctAnswer: 'über',
+    explanation: '"sich freuen über" = etwas Aktuelles. "sich freuen auf" = etwas Zukünftiges.',
+  },
+  {
     id: 'b2-v-001', level: 'B2', type: 'vocabulary',
     prompt: 'Was bedeutet die Redewendung "Tomaten auf den Augen haben"?',
     options: [
@@ -248,6 +288,13 @@ export const LEVEL_TEST_QUESTIONS = [
       'Eine Allergie haben',
     ],
     correctAnswer: 'Etwas Offensichtliches nicht sehen',
+  },
+  {
+    id: 'b2-v-002', level: 'B2', type: 'vocabulary',
+    prompt: 'Welches Wort bedeutet "trotzdem"?',
+    options: ['dennoch', 'deswegen', 'allerdings', 'außerdem'],
+    correctAnswer: 'dennoch',
+    explanation: '"dennoch" = trotzdem (Konzessiv). "Deswegen" = darum, "allerdings" = jedoch (mild), "außerdem" = zusätzlich.',
   },
   {
     id: 'b2-r-001', level: 'B2', type: 'reading',
@@ -281,7 +328,7 @@ export const LEVEL_TEST_QUESTIONS = [
     explanation: 'Wird von der KI bewertet: Aussprache (geschätzt), Flüssigkeit, Wortschatz, Grammatik.',
   },
 
-  // ═══════════════ C1 ═══════════════
+  // ═══════════════ C1 (10) ═══════════════
   {
     id: 'c1-g-001', level: 'C1', type: 'grammar',
     prompt: 'Er behauptete, ___ den ganzen Tag gearbeitet ___.',
@@ -309,16 +356,30 @@ export const LEVEL_TEST_QUESTIONS = [
     explanation: 'Substantivierter Infinitiv mit dekliniertem Adjektiv im Nominativ Neutrum: "das frühe Aufstehen".',
   },
   {
-    id: 'c1-r-001', level: 'C1', type: 'reading',
-    passage: 'Die zunehmende Polarisierung in den sozialen Netzwerken stellt eine Herausforderung für demokratische Diskurse dar. Algorithmen, die auf Engagement optimiert sind, fördern emotional aufgeladene Inhalte und schaffen Filterblasen, in denen Nutzer überwiegend mit Meinungen konfrontiert werden, die ihre eigenen verstärken — ein Phänomen, das langfristig zu einer Erosion gemeinsamer Realitätsauffassungen führen kann.',
-    prompt: 'Welche Folge nennt der Text bezüglich der "Filterblasen"?',
+    id: 'c1-g-004', level: 'C1', type: 'grammar',
+    prompt: 'Trotz ___ schwierig___ Wetter___ haben wir die Wanderung gemacht.',
+    options: ['das / e / s', 'des / en / s', 'dem / en / —', 'der / en / s'],
+    correctAnswer: 'des / en / s',
+    explanation: 'Genitiv Neutrum: "des schwierigen Wetters". Adjektivendung -en + Substantiv -s.',
+  },
+  {
+    id: 'c1-g-005', level: 'C1', type: 'grammar',
+    prompt: 'Welcher Satz ist stilistisch am besten in einem formellen Brief?',
     options: [
-      'Sie steigern die Meinungsvielfalt',
-      'Sie verbessern die demokratische Debatte',
-      'Sie können langfristig gemeinsame Realitätsauffassungen erodieren',
-      'Sie betreffen nur junge Nutzer',
+      'Ich will Sie bitten, mir zu helfen.',
+      'Ich möchte Sie bitten, mir zu helfen.',
+      'Ich würde mich freuen, wenn Sie mir helfen könnten.',
+      'Hilf mir bitte.',
     ],
-    correctAnswer: 'Sie können langfristig gemeinsame Realitätsauffassungen erodieren',
+    correctAnswer: 'Ich würde mich freuen, wenn Sie mir helfen könnten.',
+    explanation: 'Höflichste Form mit Konjunktiv II "würde + freuen" und "könnten" — Standard für formelle Korrespondenz.',
+  },
+  {
+    id: 'c1-g-006', level: 'C1', type: 'grammar',
+    prompt: 'Sie erfreut sich ___ Gesundheit.',
+    options: ['gute', 'einer guten', 'beste', 'die beste'],
+    correctAnswer: 'einer guten',
+    explanation: '"Sich erfreuen" verlangt Genitiv: "einer guten Gesundheit".',
   },
   {
     id: 'c1-v-001', level: 'C1', type: 'vocabulary',
@@ -330,6 +391,42 @@ export const LEVEL_TEST_QUESTIONS = [
       'Etwas schnell erledigen',
     ],
     correctAnswer: 'Etwas aufschieben / verzögern',
+  },
+  {
+    id: 'c1-v-002', level: 'C1', type: 'vocabulary',
+    prompt: 'Was bedeutet "etwas durch die Blume sagen"?',
+    options: [
+      'Etwas mit Blumen schmücken',
+      'Etwas indirekt / vorsichtig sagen',
+      'Sehr direkt sprechen',
+      'Etwas vergessen',
+    ],
+    correctAnswer: 'Etwas indirekt / vorsichtig sagen',
+    explanation: '"Durch die Blume sagen" = nicht direkt, sondern höflich verpackt.',
+  },
+  {
+    id: 'c1-v-003', level: 'C1', type: 'vocabulary',
+    prompt: 'Welche Funktionsverbgefüge ist korrekt?',
+    options: [
+      'eine Frage erstellen',
+      'eine Frage stellen',
+      'eine Frage machen',
+      'eine Frage tun',
+    ],
+    correctAnswer: 'eine Frage stellen',
+    explanation: 'Festes Funktionsverbgefüge: "eine Frage stellen" (nicht machen oder tun).',
+  },
+  {
+    id: 'c1-r-001', level: 'C1', type: 'reading',
+    passage: 'Die zunehmende Polarisierung in den sozialen Netzwerken stellt eine Herausforderung für demokratische Diskurse dar. Algorithmen, die auf Engagement optimiert sind, fördern emotional aufgeladene Inhalte und schaffen Filterblasen, in denen Nutzer überwiegend mit Meinungen konfrontiert werden, die ihre eigenen verstärken — ein Phänomen, das langfristig zu einer Erosion gemeinsamer Realitätsauffassungen führen kann.',
+    prompt: 'Welche Folge nennt der Text bezüglich der "Filterblasen"?',
+    options: [
+      'Sie steigern die Meinungsvielfalt',
+      'Sie verbessern die demokratische Debatte',
+      'Sie können langfristig gemeinsame Realitätsauffassungen erodieren',
+      'Sie betreffen nur junge Nutzer',
+    ],
+    correctAnswer: 'Sie können langfristig gemeinsame Realitätsauffassungen erodieren',
   },
 ]
 
