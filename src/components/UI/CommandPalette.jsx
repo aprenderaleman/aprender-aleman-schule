@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
 import {
   Search, Home, BookOpen, Layers, GraduationCap, BarChart2, User,
-  Sun, Moon, LogOut, CreditCard, Trophy, Sparkles,
+  MessageCircle, Sun, Moon, LogOut, CreditCard, Trophy, Sparkles,
   Star,
 } from 'lucide-react'
 import { useAuth } from '../../context/AuthContext'
@@ -102,7 +102,10 @@ export default function CommandPalette() {
 
                 {user && (
                   <Command.Group heading="Aktionen" className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground px-2 py-1.5 mt-1">
-                    {/* Hans option temporarily removed — service offline */}
+                    <Item icon={MessageCircle} label="Hans öffnen" shortcut="⌘ /" onSelect={() => run(() => {
+                      // Open the chatbot — find its floating button and click it
+                      document.querySelector('[aria-label="Chat öffnen"]')?.click()
+                    })} />
                     <Item icon={Sparkles}      label="Zufallsübung starten" onSelect={() => run(() => navigate('/ejercicios'))} />
                     <Item icon={CreditCard}    label="Abonnement / Pricing" onSelect={() => run(() => navigate('/pricing'))} />
                   </Command.Group>

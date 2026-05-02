@@ -31,8 +31,7 @@ import InstallPrompt from './components/UI/InstallPrompt'
 import CommandPalette from './components/UI/CommandPalette'
 import SkipLink from './components/UI/SkipLink'
 import MaintenanceGate from './components/MaintenanceGate'
-// Hans is temporarily out of service — disabled until further notice
-// import ChatBot from './components/ChatBot/ChatBot'
+import ChatBot from './components/ChatBot/ChatBot'
 import { useGlobalShortcuts } from './hooks/useGlobalShortcuts'
 
 // Lazy load admin pages
@@ -153,7 +152,7 @@ export default function App() {
                   <AppRoutes />
                   <CommandPalette />
                   <InstallPrompt />
-                  {/* <ChatBot /> — Hans temporarily out of service */}
+                  <ChatBot />
                 </SidebarProvider>
               </ProgressProvider>
             </AuthProvider>

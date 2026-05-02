@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { Zap, Play, Trophy, Flame, Video, Users, ExternalLink } from 'lucide-react'
+import { Zap, Play, Trophy, Flame, Video, Users, ExternalLink, MessageCircle, Mic, Sparkles, Clock, ArrowRight } from 'lucide-react'
 import { useAuth } from '../context/AuthContext'
 import { useProgress } from '../context/ProgressContext'
 import Navbar from '../components/Layout/Navbar'
@@ -133,7 +133,76 @@ export default function Dashboard() {
           </motion.div>
         </div>
 
-        {/* Hans CTA — temporarily disabled (out of service) */}
+        {/* Hans - Virtual Teacher CTA (HERO) */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5 }}
+          className="mt-8"
+        >
+          <button
+            type="button"
+            onClick={() => document.querySelector('[aria-label="Chat öffnen"]')?.click()}
+            className="block w-full text-left relative overflow-hidden bg-gradient-to-br from-indigo-700 via-purple-700 to-pink-600 rounded-3xl p-8 md:p-10 hover:shadow-2xl hover:scale-[1.005] transition-all group border-2 border-white/10"
+          >
+            <div className="absolute -top-20 -right-20 w-64 h-64 bg-gradient-to-br from-pink-400/30 to-purple-500/20 rounded-full blur-3xl" />
+            <div className="absolute -bottom-20 -left-20 w-72 h-72 bg-gradient-to-br from-blue-400/30 to-indigo-500/20 rounded-full blur-3xl" />
+            <div className="absolute top-1/2 left-1/2 w-40 h-40 bg-yellow-400/10 rounded-full blur-2xl animate-pulse" />
+
+            <div className="absolute top-5 right-5 md:top-7 md:right-7 flex items-center gap-1.5 bg-yellow-400 text-yellow-900 text-[10px] md:text-xs font-extrabold px-3 py-1.5 rounded-full uppercase tracking-widest shadow-lg animate-pulse">
+              <Sparkles size={12} /> KI 24/7
+            </div>
+
+            <div className="relative flex flex-col md:flex-row items-center gap-6 md:gap-8">
+              <div className="relative shrink-0">
+                <div className="absolute inset-0 bg-white/20 rounded-full blur-2xl scale-110 group-hover:scale-125 transition-transform" />
+                <div className="relative w-28 h-28 md:w-36 md:h-36 bg-gradient-to-br from-white/30 to-white/10 backdrop-blur-sm rounded-full flex items-center justify-center text-7xl md:text-8xl border-2 border-white/20 shadow-2xl group-hover:scale-110 transition-transform">
+                  🤖
+                </div>
+                <div className="absolute bottom-2 right-2 w-5 h-5 md:w-6 md:h-6 bg-green-400 rounded-full border-4 border-white shadow-lg">
+                  <span className="absolute inset-0 rounded-full bg-green-400 animate-ping opacity-75" />
+                </div>
+              </div>
+
+              <div className="flex-1 text-center md:text-left">
+                <div className="inline-flex items-center gap-2 bg-white/15 backdrop-blur-sm rounded-full px-3 py-1 mb-3 border border-white/20">
+                  <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
+                  <span className="text-white/90 text-xs font-semibold uppercase tracking-wider">Jetzt online</span>
+                </div>
+                <h2 className="text-white font-extrabold text-3xl md:text-4xl leading-tight mb-2">
+                  Triff <span className="text-yellow-300">Hans</span> 👋
+                </h2>
+                <p className="text-white/90 text-lg md:text-xl font-semibold mb-2">
+                  Dein virtueller Deutschlehrer — rund um die Uhr verfügbar
+                </p>
+                <p className="text-white/75 text-sm md:text-base leading-relaxed mb-5 max-w-2xl">
+                  Unterhalte dich mit Hans per <strong className="text-white">Text oder Sprache</strong>. Er korrigiert deine Aussprache, erklärt Grammatik, beantwortet Fragen und hilft dir beim Üben natürlicher Konversationen — wann immer du willst.
+                </p>
+
+                <div className="flex flex-wrap justify-center md:justify-start gap-2 mb-5">
+                  <div className="inline-flex items-center gap-1.5 bg-white/15 backdrop-blur-sm text-white text-xs md:text-sm font-semibold px-3 py-1.5 rounded-full border border-white/20">
+                    <MessageCircle size={14} /> Textchat
+                  </div>
+                  <div className="inline-flex items-center gap-1.5 bg-white/15 backdrop-blur-sm text-white text-xs md:text-sm font-semibold px-3 py-1.5 rounded-full border border-white/20">
+                    <Mic size={14} /> Sprachchat
+                  </div>
+                  <div className="inline-flex items-center gap-1.5 bg-white/15 backdrop-blur-sm text-white text-xs md:text-sm font-semibold px-3 py-1.5 rounded-full border border-white/20">
+                    <Clock size={14} /> 24/7 verfügbar
+                  </div>
+                  <div className="inline-flex items-center gap-1.5 bg-white/15 backdrop-blur-sm text-white text-xs md:text-sm font-semibold px-3 py-1.5 rounded-full border border-white/20">
+                    <Sparkles size={14} /> KI-gestützt
+                  </div>
+                </div>
+
+                <span className="inline-flex items-center gap-2 bg-white text-purple-700 text-base md:text-lg font-extrabold px-6 py-3 rounded-2xl shadow-xl group-hover:shadow-2xl group-hover:scale-105 transition-all">
+                  <MessageCircle size={20} />
+                  Jetzt mit Hans sprechen
+                  <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+                </span>
+              </div>
+            </div>
+          </button>
+        </motion.div>
 
         {/* CTA: Live classes */}
         <motion.div
