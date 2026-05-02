@@ -89,7 +89,7 @@ export default function AdminUserDetail() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
+      <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="flex flex-col items-center gap-4">
           <div className="w-12 h-12 border-4 border-orange-500 border-t-transparent rounded-full animate-spin" />
           <p className="text-gray-400 text-lg">Schülerdaten werden geladen...</p>
@@ -100,7 +100,7 @@ export default function AdminUserDetail() {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
+      <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center space-y-4">
           <p className="text-red-400 text-xl font-semibold">{error}</p>
           <Link

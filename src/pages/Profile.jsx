@@ -30,7 +30,7 @@ export default function Profile() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen bg-background">
       <Navbar />
       <Toast toast={toast} />
       <main id="main" className="max-w-3xl md:pl-72 mx-auto px-4 sm:px-6 py-8">

@@ -16,7 +16,7 @@ export default function Achievements() {
   const item = { hidden: { opacity: 0, scale: 0.8 }, show: { opacity: 1, scale: 1 } }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen bg-background">
       <Navbar />
       <main id="main" className="max-w-5xl md:pl-72 mx-auto px-4 sm:px-6 py-8">
         <div className="mb-8">

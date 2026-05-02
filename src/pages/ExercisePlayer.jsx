@@ -66,7 +66,7 @@ export default function ExercisePlayer() {
 
   if (!exercise) {
     return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
+      <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center">
           <p className="text-2xl text-gray-500">Übung nicht gefunden.</p>
           <Button onClick={() => navigate('/ejercicios')} className="mt-4">Zurück zu den Übungen</Button>
@@ -131,7 +131,7 @@ export default function ExercisePlayer() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen bg-background">
       <Navbar />
       {confetti && <Confetti active={true} onDone={() => setConfetti(false)} />}
 

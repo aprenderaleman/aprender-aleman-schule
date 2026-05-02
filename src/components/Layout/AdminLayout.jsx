@@ -116,7 +116,7 @@ export default function AdminLayout({ children }) {
   )
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex">
+    <div className="min-h-screen bg-background flex">
       {/* Desktop sidebar */}
       <aside className={`hidden lg:flex flex-col ${collapsed ? 'w-[72px]' : 'w-64'} bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 transition-all duration-300 fixed top-0 left-0 h-screen z-30`}>
         <SidebarContent />

@@ -178,7 +178,7 @@ export default function AdminDashboard() {
   ]
 
   return (
-    <div className="bg-gray-50 dark:bg-gray-900 min-h-screen p-6 md:p-8">
+    <div className="bg-background min-h-screen p-6 md:p-8">
       <motion.div
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}

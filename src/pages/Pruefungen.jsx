@@ -86,7 +86,7 @@ export default function Pruefungen() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex flex-col">
+      <div className="min-h-screen bg-background flex flex-col">
         <Navbar />
         <div className="flex-1 flex items-center justify-center">
           <Loader2 size={32} className="animate-spin text-indigo-500" />
@@ -118,7 +118,7 @@ function PruefungsWizard({ onComplete, initialError }) {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex flex-col">
+    <div className="min-h-screen bg-background flex flex-col">
       <Navbar />
       <main id="main" className="flex-1 max-w-5xl md:pl-72 w-full mx-auto px-4 sm:px-6 py-8 md:py-12">
         <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="mb-8 text-center">
@@ -309,7 +309,7 @@ function PruefungsDashboard({ plan, onReset, onRefresh }) {
     : null
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex flex-col">
+    <div className="min-h-screen bg-background flex flex-col">
       <Navbar />
       <main id="main" className="flex-1 max-w-7xl md:pl-72 w-full mx-auto px-4 sm:px-6 py-8">
         <div className="mb-8">

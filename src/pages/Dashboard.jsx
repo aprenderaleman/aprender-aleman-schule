@@ -35,7 +35,7 @@ export default function Dashboard() {
   const item = { hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0 } }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex flex-col">
+    <div className="min-h-screen bg-background flex flex-col">
       <Navbar />
       <Toast toast={toast} />
       <ReviewPrompt exerciseHistory={progress.exerciseHistory || []} />

@@ -556,7 +556,7 @@ export default function AdminFinances() {
               { label: 'LTV (Ø)', value: `€${(overview?.avgLtv || 0).toFixed(2)}`, color: COLORS.orange },
               { label: 'Zahlende Nutzer', value: overview?.payingUsers || 0, color: COLORS.teal },
             ].map((item, i) => (
-              <div key={i} className="bg-gray-50 dark:bg-gray-900/50 rounded-xl p-4 text-center">
+              <div key={i} className="bg-background/50 rounded-xl p-4 text-center">
                 <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">{item.label}</p>
                 <p className="text-lg font-bold" style={{ color: item.color }}>{item.value}</p>
               </div>

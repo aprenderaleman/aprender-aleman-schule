@@ -93,7 +93,7 @@ export default function PruefungPlayer() {
 
   if (!exam) {
     return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+      <div className="min-h-screen bg-background">
         <Navbar />
         <div className="max-w-2xl mx-auto px-4 py-20 text-center">
           <AlertTriangle size={48} className="text-orange-500 mx-auto mb-4" />
@@ -391,7 +391,7 @@ export default function PruefungPlayer() {
   /* ───── INTRO PHASE ───── */
   if (phase === 'intro') {
     return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+      <div className="min-h-screen bg-background">
         <Navbar />
         <main className="max-w-3xl mx-auto px-4 py-10">
           <Link to="/pruefungen" className="inline-flex items-center gap-1 text-sm text-gray-500 hover:text-indigo-600 mb-6">
@@ -439,7 +439,7 @@ export default function PruefungPlayer() {
   /* ───── RESULTS PHASE ───── */
   if (phase === 'results' && result) {
     return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+      <div className="min-h-screen bg-background">
         <Navbar />
         <main className="max-w-3xl mx-auto px-4 py-10">
           <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className={`rounded-2xl p-8 mb-6 text-white ${result.passed ? 'bg-gradient-to-br from-green-500 to-emerald-600' : 'bg-gradient-to-br from-orange-500 to-red-600'}`}>
@@ -521,7 +521,7 @@ export default function PruefungPlayer() {
   /* ───── RUNNING PHASE ───── */
   const part = exam.parts[partIdx]
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen bg-background">
       {/* Sticky header with timer + progress */}
       <header className="sticky top-0 z-30 bg-white/95 dark:bg-gray-900/95 backdrop-blur border-b border-gray-200 dark:border-gray-700">
         <div className="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between gap-4">

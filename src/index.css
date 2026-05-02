@@ -5,14 +5,14 @@
 /* ───────── Design tokens (semantic) ───────── */
 @layer base {
   :root {
-    /* Light theme */
-    --background:        248 249 251; /* #F8F9FB */
-    --foreground:         26  29  41; /* #1A1D29 */
-    --card:              255 255 255; /* #FFFFFF */
-    --muted:             241 242 246; /* #F1F2F6 */
-    --muted-foreground:  100 116 139; /* #64748B */
-    --border:            226 232 240; /* #E2E8F0 */
-    --section-muted:     245 246 250; /* #F5F6FA */
+    /* Light theme — warm, easy on the eyes */
+    --background:        250 244 234; /* #FAF4EA — warm cream */
+    --foreground:         34  38  51; /* #222633 — soft black */
+    --card:              255 251 244; /* #FFFBF4 — off-white, slight warmth */
+    --muted:             243 235 222; /* #F3EBDE — warm beige */
+    --muted-foreground:  107 100  88; /* #6B6458 — warm slate */
+    --border:            230 218 197; /* #E6DAC5 — warm border */
+    --section-muted:     246 239 227; /* #F6EFE3 */
   }
   .dark {
     /* Dark theme — navy-based */
