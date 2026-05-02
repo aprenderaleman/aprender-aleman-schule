@@ -29,6 +29,8 @@ const LEVEL_DESCRIPTIONS = {
   C1: 'Fortgeschritten — Du sprichst fließend in komplexen Themen.',
 }
 
+const NEXT_LEVEL = { A1: 'A2', A2: 'B1', B1: 'B2', B2: 'C1', C1: 'C1' }
+
 export default function LevelTest() {
   const { user, ssoLogin } = useAuth()
   const navigate = useNavigate()
@@ -49,7 +51,7 @@ export default function LevelTest() {
     fetch(`${API_URL}/api/level-test/questions`)
       .then(r => r.json())
       .then(data => setQuestions(data.questions || []))
-      .catch(() => setError('No se pudo cargar el test. Probá recargar.'))
+      .catch(() => setError('Der Test konnte nicht geladen werden. Bitte später erneut versuchen.'))
   }, [])
 
   const startTest = () => {
@@ -174,21 +176,21 @@ function IntroScreen({ total, onStart, loading }) {
           </Link>
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-warm/15 mb-4">
             <Sparkles size={14} className="text-warm" />
-            <span className="text-xs font-bold text-warm uppercase tracking-wider">Test gratuito</span>
+            <span className="text-xs font-bold text-warm uppercase tracking-wider">Kostenloser Test</span>
           </div>
           <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-800 dark:text-gray-100 mb-3">
             Wie gut ist dein Deutsch?
           </h1>
           <p className="text-gray-600 dark:text-gray-400">
-            Findá tu nivel oficial CEFR (A1 – C1) en 12 minutos.
+            Finde dein offizielles CEFR-Niveau (A1 – C1) in 12 Minuten.
           </p>
         </div>
 
         <div className="card mb-6 space-y-3">
-          <Detail icon={Clock}     text="12-15 minutos" />
-          <Detail icon={BookOpen}  text={`${total || '~26'} preguntas progresivas`} />
-          <Detail icon={Headphones} text="Gramática, vocab, lectura y audio" />
-          <Detail icon={Trophy}    text="Resultado oficial CEFR + recomendación" />
+          <Detail icon={Clock}     text="12-15 Minuten" />
+          <Detail icon={BookOpen}  text={`${total || '~26'} progressive Fragen`} />
+          <Detail icon={Headphones} text="Grammatik, Vokabular, Lesen und Hören" />
+          <Detail icon={Trophy}    text="Offizielles CEFR-Ergebnis + Empfehlung" />
         </div>
 
         <Button
@@ -204,7 +206,7 @@ function IntroScreen({ total, onStart, loading }) {
         </Button>
 
         <p className="text-center text-xs text-gray-400 mt-4">
-          Sin compromiso · No hace falta crear cuenta para empezar
+          Unverbindlich · Kein Konto nötig
         </p>
       </motion.div>
     </div>
@@ -399,7 +401,7 @@ function WritingArea({ value, onChange, minWords = 25, maxWords = 80 }) {
       />
       <div className="flex items-center justify-between mt-2 text-xs">
         <span className={wordCount >= minWords ? 'text-success' : 'text-muted-foreground'}>
-          {wordCount} / {minWords}-{maxWords} palabras
+          {wordCount} / {minWords}-{maxWords} Wörter
         </span>
         <div className="w-32 h-1 bg-muted rounded-full overflow-hidden">
           <div className="h-full bg-warm transition-all" style={{ width: `${progress}%` }} />
@@ -441,7 +443,7 @@ function SpeakingArea({ response, onChange, minSeconds = 20, maxSeconds = 90 }) 
         })
       }, 1000)
     } catch (err) {
-      alert('No se pudo acceder al micrófono. Verificá los permisos.')
+      alert('Mikrofon-Zugriff verweigert. Bitte Berechtigungen prüfen.')
     }
   }
 
@@ -565,10 +567,10 @@ function EmailCaptureScreen({ defaultEmail, error, onSubmit, onSkip }) {
           <Mail size={28} className="text-warm" />
         </div>
         <h1 className="text-2xl font-extrabold text-gray-800 dark:text-gray-100 mb-2">
-          Casi listo
+          Fast geschafft
         </h1>
         <p className="text-sm text-gray-600 dark:text-gray-400 mb-6">
-          Dejá tu email y te enviamos tu nivel + un plan de estudio personalizado.
+          Lass uns deine E-Mail — wir schicken dir dein Niveau und einen persönlichen Lernplan.
         </p>
 
         {error && (
@@ -582,14 +584,14 @@ function EmailCaptureScreen({ defaultEmail, error, onSubmit, onSkip }) {
             type="email"
             value={email}
             onChange={e => setEmail(e.target.value)}
-            placeholder="tu@email.com"
+            placeholder="du@beispiel.de"
             autoFocus
             inputMode="email"
             autoComplete="email"
             className="input-field w-full mb-3"
           />
           <Button type="submit" disabled={!valid} variant="primary" size="lg" className="w-full">
-            <Send size={16} className="mr-2" /> Resultado anzeigen
+            <Send size={16} className="mr-2" /> Ergebnis ansehen
           </Button>
         </form>
 
@@ -617,7 +619,7 @@ function SubmittingScreen() {
           Wir werten deine Antworten aus…
         </h2>
         <p className="text-sm text-gray-500 dark:text-gray-400">
-          La IA está revisando las respuestas abiertas.
+          Die KI prüft deine offenen Antworten.
         </p>
       </motion.div>
     </div>
@@ -642,7 +644,7 @@ function ResultScreen({ result, loggedIn, onContinue }) {
               <Trophy size={42} className="text-warm-foreground" />
             </div>
           </motion.div>
-          <p className="text-xs font-bold uppercase tracking-widest text-warm mb-2">Tu nivel</p>
+          <p className="text-xs font-bold uppercase tracking-widest text-warm mb-2">Dein Niveau</p>
           <h1 className="text-6xl font-extrabold text-gray-800 dark:text-gray-100 mb-3">
             {level}
           </h1>
@@ -654,7 +656,7 @@ function ResultScreen({ result, loggedIn, onContinue }) {
         {/* Breakdown */}
         <div className="card mb-6">
           <h3 className="font-bold text-gray-800 dark:text-gray-100 text-sm mb-3 uppercase tracking-wider">
-            Desglose por nivel
+            Aufschlüsselung nach Niveau
           </h3>
           <div className="space-y-2.5">
             {breakdown && Object.entries(breakdown).map(([lvl, score]) => {
@@ -683,15 +685,15 @@ function ResultScreen({ result, loggedIn, onContinue }) {
         {/* CTA */}
         {loggedIn ? (
           <Button onClick={onContinue} variant="primary" size="lg" className="w-full">
-            Empezá tus ejercicios <ArrowRight size={18} className="ml-2" />
+            Starte deine Übungen <ArrowRight size={18} className="ml-2" />
           </Button>
         ) : (
           <>
             <Button onClick={onContinue} variant="primary" size="lg" className="w-full">
-              Probar gratis 10.000 XP <ArrowRight size={18} className="ml-2" />
+              Kostenlos 10.000 XP testen <ArrowRight size={18} className="ml-2" />
             </Button>
             <p className="text-center text-xs text-muted-foreground mt-3">
-              Plan personalizado para subir de {level} al siguiente nivel.
+              Persönlicher Plan, um von {level} auf {NEXT_LEVEL[level]} zu kommen.
             </p>
           </>
         )}
@@ -706,7 +708,7 @@ function ErrorScreen({ message, onRetry }) {
       <div className="text-center max-w-md">
         <div className="text-5xl mb-4">😕</div>
         <h1 className="text-xl font-bold mb-2">{message}</h1>
-        <Button onClick={onRetry} variant="primary">Recargar</Button>
+        <Button onClick={onRetry} variant="primary">Neu laden</Button>
       </div>
     </div>
   )

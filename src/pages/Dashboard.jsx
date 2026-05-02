@@ -115,9 +115,9 @@ export default function Dashboard() {
               <span className="text-xl">🎯</span>
             </div>
             <div className="flex-1">
-              <p className="font-bold text-foreground text-sm">¿Cuál es tu nivel real?</p>
+              <p className="font-bold text-foreground text-sm">Wie ist dein echtes Niveau?</p>
               <p className="text-xs text-muted-foreground mt-0.5">
-                Test gratuito de 12 minutos · CEFR A1-C1 · Plan personalizado
+                Kostenloser Test (12 Min) · CEFR A1-C1 · Persönlicher Plan
               </p>
             </div>
             <ArrowRight size={18} className="text-warm group-hover:translate-x-1 transition-transform" />

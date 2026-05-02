@@ -88,11 +88,11 @@ export default function Landing() {
             </Link>
             <Link to="/test-de-nivel">
               <Button variant="secondary" size="lg" className="w-full sm:w-auto">
-                🎯 Test de nivel gratuito
+                🎯 Kostenloser Niveau-Test
               </Button>
             </Link>
           </div>
-          <p className="text-sm text-gray-400 mt-4">10.000 XP gratis · Test de nivel sin compromiso · 15&euro;/Monat sin bindung</p>
+          <p className="text-sm text-gray-400 mt-4">10.000 XP gratis · Niveau-Test unverbindlich · 15&euro;/Monat, jederzeit kündbar</p>
         </motion.div>
 
         {/* Hero illustration */}
