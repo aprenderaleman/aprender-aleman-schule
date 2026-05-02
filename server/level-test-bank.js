@@ -1,29 +1,17 @@
 // ─────────────────────────────────────────────────────────────────────
 // Banco curado para el Test de Nivel SCHULE.
 //
-// Distribución (linear, no adaptativo):
-//   A1: 5 preguntas — gramática + vocab + lectura corta + listening básico
-//   A2: 5 preguntas — pasados + reading mediano + listening
-//   B1: 6 preguntas — Konjunktiv II + reading + listening + 1 writing
-//   B2: 6 preguntas — pasiva + idioms + reading + listening + 1 speaking
-//   C1: 4 preguntas — gramática avanzada + reading complejo
+// Distribución (linear, no adaptativo) — preguntas más rigurosas:
+//   A1: 9 preguntas — gramática + vocab + lectura + listening + plurales/posesivos
+//   A2: 9 preguntas — Perfekt + reflexivos + adjetivos + Wechselpräpositionen
+//   B1: 8 preguntas — Konjunktiv II + relativos + conectores + writing
+//   B2: 7 preguntas — pasiva + Konjunktiv I + idioms + speaking
+//   C1: 5 preguntas — gramática avanzada + nominalisación + idioms
 //   ───
-//   26 preguntas, ~12-15 min
+//   38 preguntas, ~16-18 min
 //
-// Algoritmo de scoring (linear):
-//   El nivel resultante = el nivel más alto donde el usuario acertó >= 70%.
-//   Las preguntas writing/speaking se evalúan vía AI (1-5) y suman a su nivel.
-//
-// Cada pregunta tiene:
-//   id          — único, prefijo por nivel
-//   level       — A1 | A2 | B1 | B2 | C1
-//   type        — grammar | vocabulary | reading | listening | writing | speaking
-//   prompt      — la pregunta visible
-//   options     — para multiple choice
-//   correctAnswer — para MC y fill-blank
-//   audioPrompt — texto para TTS (solo listening)
-//   passage     — texto a leer (solo reading)
-//   explanation — feedback breve (mostrado solo después del test si quieren ver detalles)
+// Nivel resultante = el nivel más alto donde el usuario acertó >= 70%.
+// Las preguntas writing/speaking se evalúan vía AI (0..1) y suman a su nivel.
 // ─────────────────────────────────────────────────────────────────────
 
 export const LEVEL_TEST_QUESTIONS = [
@@ -31,10 +19,38 @@ export const LEVEL_TEST_QUESTIONS = [
   // ═══════════════ A1 ═══════════════
   {
     id: 'a1-g-001', level: 'A1', type: 'grammar',
-    prompt: 'Ich ___ Schüler.',
+    prompt: 'Wie alt ___ du?',
     options: ['bin', 'bist', 'ist', 'sind'],
-    correctAnswer: 'bin',
-    explanation: 'Bei "ich" → Verbform "bin".',
+    correctAnswer: 'bist',
+    explanation: 'Bei "du" → Verbform "bist".',
+  },
+  {
+    id: 'a1-g-002', level: 'A1', type: 'grammar',
+    prompt: 'Welcher Artikel? ___ Mädchen ist klein.',
+    options: ['Der', 'Die', 'Das', 'Den'],
+    correctAnswer: 'Das',
+    explanation: '"Mädchen" ist neutrum (Diminutiv -chen) → "das".',
+  },
+  {
+    id: 'a1-g-003', level: 'A1', type: 'grammar',
+    prompt: 'Was ist der Plural von "Mann"?',
+    options: ['Manns', 'Männe', 'Männer', 'Manen'],
+    correctAnswer: 'Männer',
+    explanation: 'Mann → Männer (Umlaut + -er).',
+  },
+  {
+    id: 'a1-g-004', level: 'A1', type: 'grammar',
+    prompt: '___ Bruder heißt Tom.',
+    options: ['Mein', 'Meine', 'Meinen', 'Meiner'],
+    correctAnswer: 'Mein',
+    explanation: 'Possessivartikel im Nominativ, "Bruder" ist maskulin → "mein".',
+  },
+  {
+    id: 'a1-g-005', level: 'A1', type: 'grammar',
+    prompt: 'Wann hast du Geburtstag? — ___ Mai.',
+    options: ['In', 'Am', 'Im', 'Auf'],
+    correctAnswer: 'Im',
+    explanation: 'Monate verwenden "im": im Mai, im Juni, etc.',
   },
   {
     id: 'a1-v-001', level: 'A1', type: 'vocabulary',
@@ -44,11 +60,11 @@ export const LEVEL_TEST_QUESTIONS = [
     explanation: '"Trinken" geht nur mit Flüssigkeiten — "Wasser".',
   },
   {
-    id: 'a1-g-002', level: 'A1', type: 'grammar',
-    prompt: '___ Hund ist groß. (Wähle den richtigen Artikel)',
-    options: ['Der', 'Die', 'Das', 'Den'],
-    correctAnswer: 'Der',
-    explanation: '"Hund" ist maskulin → "der Hund".',
+    id: 'a1-v-002', level: 'A1', type: 'vocabulary',
+    prompt: '"Heute ist Mittwoch. Morgen ist ___?"',
+    options: ['Dienstag', 'Donnerstag', 'Freitag', 'Sonntag'],
+    correctAnswer: 'Donnerstag',
+    explanation: 'Mittwoch → Donnerstag.',
   },
   {
     id: 'a1-r-001', level: 'A1', type: 'reading',
@@ -75,6 +91,34 @@ export const LEVEL_TEST_QUESTIONS = [
     explanation: 'Perfekt mit "gehen" (Bewegungsverb) → Hilfsverb "sein" → "bin".',
   },
   {
+    id: 'a2-g-002', level: 'A2', type: 'grammar',
+    prompt: 'Ich gebe ___ Buch.',
+    options: ['mein Freund das', 'meinem Freund das', 'meinen Freund das', 'meinem Freund den'],
+    correctAnswer: 'meinem Freund das',
+    explanation: 'Dativ (wem) + Akkusativ (was): "meinem Freund" + "das Buch".',
+  },
+  {
+    id: 'a2-g-003', level: 'A2', type: 'grammar',
+    prompt: 'Wie ___ du heute?',
+    options: ['fühlst', 'fühlst dich', 'fühl', 'fühle dich'],
+    correctAnswer: 'fühlst dich',
+    explanation: '"Sich fühlen" ist reflexiv → "du fühlst dich".',
+  },
+  {
+    id: 'a2-g-004', level: 'A2', type: 'grammar',
+    prompt: 'Ich ___ jeden Morgen um 7 Uhr ___.',
+    options: ['stehe / aus', 'aufstehe / —', 'stehe / auf', 'auf / stehe'],
+    correctAnswer: 'stehe / auf',
+    explanation: 'Trennbares Verb "aufstehen" — Präfix wandert ans Satzende.',
+  },
+  {
+    id: 'a2-g-005', level: 'A2', type: 'grammar',
+    prompt: 'Wo liegt das Buch? — Es liegt ___ Tisch.',
+    options: ['auf dem', 'auf den', 'auf der', 'auf das'],
+    correctAnswer: 'auf dem',
+    explanation: 'Wechselpräposition + statisch (wo?) → Dativ. Tisch (m) → "auf dem".',
+  },
+  {
     id: 'a2-v-001', level: 'A2', type: 'vocabulary',
     prompt: 'Was ist das Gegenteil von "billig"?',
     options: ['teuer', 'klein', 'groß', 'kalt'],
@@ -82,11 +126,11 @@ export const LEVEL_TEST_QUESTIONS = [
     explanation: 'billig (günstig) ↔ teuer.',
   },
   {
-    id: 'a2-g-002', level: 'A2', type: 'grammar',
-    prompt: 'Ich gebe ___ Buch. (a mi amigo)',
-    options: ['mein Freund das', 'meinem Freund das', 'meinen Freund das', 'meinem Freund den'],
-    correctAnswer: 'meinem Freund das',
-    explanation: 'Dativ (wem) + Akkusativ (was): "meinem Freund" + "das Buch".',
+    id: 'a2-v-002', level: 'A2', type: 'vocabulary',
+    prompt: 'Welches Wort passt nicht: "Der Schauspieler ___ den Preis."',
+    options: ['gewinnt', 'bekommt', 'erhält', 'verliert'],
+    correctAnswer: 'verliert',
+    explanation: 'Die anderen drei sind Synonyme für "kriegen". "Verliert" ist das Gegenteil.',
   },
   {
     id: 'a2-r-001', level: 'A2', type: 'reading',
@@ -118,6 +162,20 @@ export const LEVEL_TEST_QUESTIONS = [
     options: ['der', 'die', 'das', 'den'],
     correctAnswer: 'das',
     explanation: 'Relativpronomen im Akkusativ, bezieht sich auf "Buch" (neutrum) → "das".',
+  },
+  {
+    id: 'b1-g-003', level: 'B1', type: 'grammar',
+    prompt: 'Ich gehe nicht zur Party, ___ ich krank bin.',
+    options: ['weil', 'denn', 'aber', 'obwohl'],
+    correctAnswer: 'weil',
+    explanation: 'Beide "weil" und "denn" begründen, aber "denn" benötigt Hauptsatz-Wortstellung ("denn ich bin krank").',
+  },
+  {
+    id: 'b1-g-004', level: 'B1', type: 'grammar',
+    prompt: 'Anstatt ___ Hause zu bleiben, ging er ins Restaurant.',
+    options: ['nach', 'zu', 'in', 'bei'],
+    correctAnswer: 'zu',
+    explanation: '"zu Hause bleiben" — Idiom mit "zu".',
   },
   {
     id: 'b1-v-001', level: 'B1', type: 'vocabulary',
@@ -174,6 +232,13 @@ export const LEVEL_TEST_QUESTIONS = [
     explanation: '"Obwohl" leitet einen Konzessivsatz ein.',
   },
   {
+    id: 'b2-g-003', level: 'B2', type: 'grammar',
+    prompt: 'Sie sagte, sie ___ keine Zeit.',
+    options: ['hat', 'habe', 'hätte', 'hatte'],
+    correctAnswer: 'habe',
+    explanation: 'Indirekte Rede → Konjunktiv I: "sie habe".',
+  },
+  {
     id: 'b2-v-001', level: 'B2', type: 'vocabulary',
     prompt: 'Was bedeutet die Redewendung "Tomaten auf den Augen haben"?',
     options: [
@@ -222,7 +287,26 @@ export const LEVEL_TEST_QUESTIONS = [
     prompt: 'Er behauptete, ___ den ganzen Tag gearbeitet ___.',
     options: ['er hat ... gehabt', 'er habe ... gehabt', 'er hätte ... gehabt', 'er hat ... haben'],
     correctAnswer: 'er habe ... gehabt',
-    explanation: 'Konjunktiv I para discurso indirecto: "er habe gearbeitet gehabt" (Plusquamperfekt en KI).',
+    explanation: 'Konjunktiv I für indirekte Rede mit Plusquamperfekt: "er habe gearbeitet gehabt".',
+  },
+  {
+    id: 'c1-g-002', level: 'C1', type: 'grammar',
+    prompt: '___ größer die Stadt, ___ höher die Mietpreise.',
+    options: ['Je / desto', 'Je / je', 'Desto / je', 'Wie / so'],
+    correctAnswer: 'Je / desto',
+    explanation: 'Komparative Satzstruktur: "je ... desto ..."',
+  },
+  {
+    id: 'c1-g-003', level: 'C1', type: 'grammar',
+    prompt: 'Welcher Satz ist eine korrekte Nominalisierung von "Es ist wichtig, früh aufzustehen"?',
+    options: [
+      'Das früh Aufstehen ist wichtig.',
+      'Das frühe Aufstehen ist wichtig.',
+      'Das Frühaufstehen ist wichtig.',
+      'Frühes aufstehen ist wichtig.',
+    ],
+    correctAnswer: 'Das frühe Aufstehen ist wichtig.',
+    explanation: 'Substantivierter Infinitiv mit dekliniertem Adjektiv im Nominativ Neutrum: "das frühe Aufstehen".',
   },
   {
     id: 'c1-r-001', level: 'C1', type: 'reading',
@@ -247,13 +331,6 @@ export const LEVEL_TEST_QUESTIONS = [
     ],
     correctAnswer: 'Etwas aufschieben / verzögern',
   },
-  {
-    id: 'c1-g-002', level: 'C1', type: 'grammar',
-    prompt: '___ größer die Stadt, ___ höher die Mietpreise.',
-    options: ['Je / desto', 'Je / je', 'Desto / je', 'Wie / so'],
-    correctAnswer: 'Je / desto',
-    explanation: 'Komparative Satzstruktur: "je ... desto ..."',
-  },
 ]
 
 // ─── Helpers ───────────────────────────────────────────────────────
@@ -274,12 +351,6 @@ export function totalQuestions() {
  *
  * Open-ended responses (writing/speaking) get scored 0..1 separately by the
  * server-side AI evaluator; that score is passed in `aiScores` map.
- *
- *   const result = computeLevel({
- *     answers: { 'a1-g-001': 'bin', ... },
- *     aiScores: { 'b1-w-001': 0.8, 'b2-s-001': 0.6 },
- *   })
- *   // → { level: 'B1', breakdown: { A1: 1.0, A2: 1.0, B1: 0.83, B2: 0.5, C1: 0.25 } }
  */
 export function computeLevel({ answers = {}, aiScores = {} }) {
   const breakdown = {}
@@ -289,10 +360,8 @@ export function computeLevel({ answers = {}, aiScores = {} }) {
     let correct = 0
     for (const q of qs) {
       if (q.type === 'writing' || q.type === 'speaking') {
-        // AI score is 0..1; >= 0.6 counts as "correct" for level discrimination
         const ai = aiScores[q.id]
         if (typeof ai === 'number' && ai >= 0.6) correct++
-        // If user skipped (no AI score), counts as 0
       } else {
         if (answers[q.id] === q.correctAnswer) correct++
       }
@@ -306,7 +375,6 @@ export function computeLevel({ answers = {}, aiScores = {} }) {
     if (breakdown[lvl] >= 0.7) level = lvl
     else break
   }
-  // If user didn't even pass A1, they're "pre-A1" — recommend starting at A1
   if (!level) level = 'A1'
 
   return { level, breakdown }

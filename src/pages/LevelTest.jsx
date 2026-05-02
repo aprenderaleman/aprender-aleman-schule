@@ -172,6 +172,33 @@ export default function LevelTest() {
             isLast={currentIdx === questions.length - 1}
           />
         </AnimatePresence>
+
+        {/* Contextual hint banner — appears once user is in B1+ territory.
+            Lets them gracefully bail out without penalty. */}
+        <AnimatePresence>
+          {canSubmitEarly && question.level !== 'A1' && question.level !== 'A2' && (
+            <motion.button
+              type="button"
+              onClick={() => setShowGiveUp(true)}
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0 }}
+              transition={{ delay: 0.4 }}
+              className="mt-4 w-full text-left rounded-xl border-2 border-dashed border-warm/40 bg-warm/5 hover:bg-warm/10 transition-colors px-4 py-3 flex items-center gap-3 group"
+            >
+              <Flag size={16} className="text-warm shrink-0" />
+              <div className="flex-1 min-w-0">
+                <p className="text-sm font-semibold text-foreground">
+                  Zu schwer? Du kannst jetzt beenden
+                </p>
+                <p className="text-xs text-muted-foreground mt-0.5">
+                  Wir werten dein Niveau mit den bisherigen Antworten aus.
+                </p>
+              </div>
+              <ArrowRight size={16} className="text-warm shrink-0 group-hover:translate-x-1 transition-transform" />
+            </motion.button>
+          )}
+        </AnimatePresence>
       </main>
 
       {/* Give-up confirmation modal */}
@@ -293,16 +320,19 @@ function ProgressHeader({ current, total, startTime, canSubmitEarly, onGiveUp })
         <AnimatePresence>
           {canSubmitEarly && (
             <motion.button
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 0, scale: 0.8, y: -4 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.8 }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.96 }}
               type="button"
               onClick={onGiveUp}
-              aria-label="Test früher beenden"
-              className="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+              aria-label="Test früher beenden und Niveau ansehen"
+              className="shrink-0 inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold bg-warm text-warm-foreground shadow-md hover:shadow-lg transition-shadow"
             >
-              <Flag size={12} />
-              <span className="hidden sm:inline">Beenden</span>
+              <Flag size={13} />
+              <span>Beenden</span>
+              <ArrowRight size={12} className="hidden sm:inline" />
             </motion.button>
           )}
         </AnimatePresence>
