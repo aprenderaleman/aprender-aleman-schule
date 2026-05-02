@@ -140,10 +140,11 @@ export default function Dashboard() {
           transition={{ delay: 0.5 }}
           className="mt-8"
         >
-          <button
-            type="button"
-            onClick={() => document.querySelector('[aria-label="Chat öffnen"]')?.click()}
-            className="block w-full text-left relative overflow-hidden bg-gradient-to-br from-indigo-700 via-purple-700 to-pink-600 rounded-3xl p-8 md:p-10 hover:shadow-2xl hover:scale-[1.005] transition-all group border-2 border-white/10"
+          <a
+            href="https://hans.aprender-aleman.de"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block relative overflow-hidden bg-gradient-to-br from-indigo-700 via-purple-700 to-pink-600 rounded-3xl p-8 md:p-10 hover:shadow-2xl hover:scale-[1.005] transition-all group border-2 border-white/10"
           >
             <div className="absolute -top-20 -right-20 w-64 h-64 bg-gradient-to-br from-pink-400/30 to-purple-500/20 rounded-full blur-3xl" />
             <div className="absolute -bottom-20 -left-20 w-72 h-72 bg-gradient-to-br from-blue-400/30 to-indigo-500/20 rounded-full blur-3xl" />
@@ -201,7 +202,7 @@ export default function Dashboard() {
                 </span>
               </div>
             </div>
-          </button>
+          </a>
         </motion.div>
 
         {/* CTA: Live classes */}
