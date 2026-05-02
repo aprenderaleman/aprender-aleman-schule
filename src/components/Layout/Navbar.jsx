@@ -30,29 +30,32 @@ export default function Navbar() {
   const levelPct = Math.min(100, Math.round((xp / levelXP) * 100))
 
   return (
-    <nav className="sticky top-0 z-30 bg-card/95 backdrop-blur-md border-b border-border shadow-sm pt-safe md:pl-60">
-      <div className="px-4 sm:px-6 md:pl-6">
-        <div className="flex items-center justify-between h-14 md:h-16">
+    <nav className="sticky top-0 z-40 bg-card/95 backdrop-blur-md border-b border-border shadow-sm pt-safe">
+      <div className="px-4 sm:px-6">
+        <div className="flex items-center gap-3 md:gap-6 h-14 md:h-16">
 
-          {/* Left: hamburger (mobile only) + logo (mobile only) */}
-          <div className="flex items-center gap-2 md:hidden">
-            <button
-              type="button"
-              onClick={toggleSidebar}
-              aria-label="Menü öffnen"
-              className="p-2 -ml-1 rounded-lg hover:bg-muted text-muted-foreground hover:text-foreground transition-colors focus-visible:ring-2 focus-visible:ring-warm focus-visible:outline-none"
-            >
-              <Menu size={22} />
-            </button>
-            <Link to="/dashboard" className="flex items-center gap-2">
-              <img src="/logo.svg" alt="Schule" className="w-8 h-8" />
-              <span className="font-extrabold text-warm text-lg">Schule</span>
-            </Link>
-          </div>
+          {/* Left: hamburger (mobile) + brand */}
+          <button
+            type="button"
+            onClick={toggleSidebar}
+            aria-label="Menü öffnen"
+            className="md:hidden p-2 -ml-1 rounded-lg hover:bg-muted text-muted-foreground hover:text-foreground transition-colors focus-visible:ring-2 focus-visible:ring-warm focus-visible:outline-none"
+          >
+            <Menu size={22} />
+          </button>
+          <Link to="/dashboard" className="flex items-center gap-2 shrink-0">
+            <img src="/logo.svg" alt="Schule" className="w-8 h-8 md:w-9 md:h-9" />
+            <span className="font-extrabold text-warm text-lg md:text-xl leading-tight">
+              SCHULE
+              <span className="hidden lg:inline text-foreground/70 font-semibold text-xs ml-2">
+                — Dein Online-Klassenraum
+              </span>
+            </span>
+          </Link>
 
           {/* Level progress (desktop) */}
           <Tooltip content={`${xp} / ${levelXP} XP zum Abschluss von Niveau ${level}`} side="bottom">
-            <div className="hidden md:flex items-center gap-3 flex-1 max-w-md mx-6">
+            <div className="hidden md:flex items-center gap-3 flex-1 max-w-md">
               <span className="shrink-0 px-2 py-0.5 rounded-md bg-warm/15 text-warm text-xs font-extrabold tracking-wide">
                 {level}
               </span>
@@ -69,7 +72,7 @@ export default function Navbar() {
           </Tooltip>
 
           {/* Right: utilities */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 ml-auto">
             {/* Cmd+K trigger — desktop only */}
             <Tooltip content="Befehl ausführen" shortcut="⌘ K">
               <button

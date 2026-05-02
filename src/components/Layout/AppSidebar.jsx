@@ -81,13 +81,13 @@ export default function AppSidebar() {
   // ─── Sidebar content (shared between desktop + mobile drawer) ──────
   const SidebarBody = ({ inDrawer = false }) => (
     <div className="h-full flex flex-col">
-      {/* Header */}
-      <div className="px-5 pt-5 pb-4 flex items-center justify-between">
-        <Link to="/dashboard" onClick={handleNavClick} className="flex items-center gap-2">
-          <img src="/logo.svg" alt="Schule" className="w-9 h-9" />
-          <span className="font-extrabold text-warm text-xl tracking-tight">Schule</span>
-        </Link>
-        {inDrawer && (
+      {/* Drawer header (mobile only) */}
+      {inDrawer && (
+        <div className="px-5 pt-5 pb-3 flex items-center justify-between">
+          <Link to="/dashboard" onClick={handleNavClick} className="flex items-center gap-2">
+            <img src="/logo.svg" alt="Schule" className="w-9 h-9" />
+            <span className="font-extrabold text-warm text-xl tracking-tight">Schule</span>
+          </Link>
           <button
             onClick={close}
             aria-label="Menü schließen"
@@ -95,8 +95,8 @@ export default function AppSidebar() {
           >
             <X size={18} />
           </button>
-        )}
-      </div>
+        </div>
+      )}
 
       {/* User card */}
       <div className="mx-3 mb-3 rounded-xl border border-border bg-muted/30 p-3 flex items-center gap-3">
@@ -184,7 +184,7 @@ export default function AppSidebar() {
     <>
       {/* Desktop: fixed left rail, 240px */}
       <aside
-        className="hidden md:flex fixed left-0 top-0 bottom-0 w-60 z-30 flex-col bg-card border-r border-border pt-safe"
+        className="hidden md:flex fixed left-0 top-16 bottom-0 w-60 z-30 flex-col bg-card border-r border-border pt-3"
         aria-label="Hauptnavigation"
       >
         <SidebarBody />
