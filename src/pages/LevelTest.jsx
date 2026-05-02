@@ -170,35 +170,11 @@ export default function LevelTest() {
             onOpenResponse={handleOpenResponse}
             onNext={next}
             isLast={currentIdx === questions.length - 1}
+            canSubmitEarly={canSubmitEarly}
+            onGiveUp={() => setShowGiveUp(true)}
           />
         </AnimatePresence>
 
-        {/* Contextual hint banner — appears once user is in B1+ territory.
-            Lets them gracefully bail out without penalty. */}
-        <AnimatePresence>
-          {canSubmitEarly && question.level !== 'A1' && question.level !== 'A2' && (
-            <motion.button
-              type="button"
-              onClick={() => setShowGiveUp(true)}
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0 }}
-              transition={{ delay: 0.4 }}
-              className="mt-4 w-full text-left rounded-xl border-2 border-dashed border-warm/40 bg-warm/5 hover:bg-warm/10 transition-colors px-4 py-3 flex items-center gap-3 group"
-            >
-              <Flag size={16} className="text-warm shrink-0" />
-              <div className="flex-1 min-w-0">
-                <p className="text-sm font-semibold text-foreground">
-                  Zu schwer? Du kannst jetzt beenden
-                </p>
-                <p className="text-xs text-muted-foreground mt-0.5">
-                  Wir werten dein Niveau mit den bisherigen Antworten aus.
-                </p>
-              </div>
-              <ArrowRight size={16} className="text-warm shrink-0 group-hover:translate-x-1 transition-transform" />
-            </motion.button>
-          )}
-        </AnimatePresence>
       </main>
 
       {/* Give-up confirmation modal */}
@@ -402,7 +378,7 @@ function GiveUpModal({ open, answeredCount, totalCount, onCancel, onConfirm }) {
   )
 }
 
-function QuestionCard({ question, answer, openResponse, onAnswer, onOpenResponse, onNext, isLast }) {
+function QuestionCard({ question, answer, openResponse, onAnswer, onOpenResponse, onNext, isLast, canSubmitEarly, onGiveUp }) {
   const meta = TYPE_META[question.type] || TYPE_META.grammar
   const Icon = meta.icon
 
@@ -468,7 +444,7 @@ function QuestionCard({ question, answer, openResponse, onAnswer, onOpenResponse
         />
       ) : null}
 
-      {/* Next button */}
+      {/* Next button + early-submit option */}
       <div className="mt-6">
         <Button
           onClick={onNext}
@@ -480,6 +456,27 @@ function QuestionCard({ question, answer, openResponse, onAnswer, onOpenResponse
           {isLast ? 'Test beenden' : 'Weiter'}
           {!isLast && <ArrowRight size={18} className="ml-2" />}
         </Button>
+
+        {/* Beenden & Niveau ansehen — directly below Weiter so users can't
+            miss it once they hit their ceiling. Visible only after the
+            5-answer minimum so the result is meaningful. */}
+        <AnimatePresence>
+          {canSubmitEarly && !isLast && (
+            <motion.button
+              type="button"
+              onClick={onGiveUp}
+              initial={{ opacity: 0, y: -4, height: 0 }}
+              animate={{ opacity: 1, y: 0, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.2 }}
+              className="w-full mt-3 px-4 py-3 rounded-xl border-2 border-warm/40 bg-warm/5 hover:bg-warm/15 hover:border-warm/60 transition-colors flex items-center justify-center gap-2 text-sm font-bold text-warm"
+            >
+              <Flag size={15} />
+              Beenden &amp; mein Niveau ansehen
+            </motion.button>
+          )}
+        </AnimatePresence>
+
         {['writing', 'speaking'].includes(question.type) && (
           <button
             type="button"
