@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
   Home, BookOpen, Layers, GraduationCap, BarChart2, Trophy, User,
-  Target, CreditCard, LogOut, X, Zap,
+  Target, CreditCard, LogOut, X, Zap, Bot, ExternalLink,
 } from 'lucide-react'
 import { useAuth } from '../../context/AuthContext'
 import { useProgress } from '../../context/ProgressContext'
@@ -18,6 +18,7 @@ const NAV_ITEMS = [
   { to: '/test-de-nivel', icon: Target,         label: 'Niveau-Test' },
   { to: '/progreso',      icon: BarChart2,      label: 'Fortschritt' },
   { to: '/logros',        icon: Trophy,         label: 'Erfolge' },
+  { href: 'https://hans.aprender-aleman.de', icon: Bot, label: 'Hans (KI-Lehrer)', external: true },
 ]
 
 const SECONDARY_ITEMS = [
@@ -114,20 +115,38 @@ export default function AppSidebar() {
 
       {/* Main nav */}
       <nav className="flex-1 overflow-y-auto px-3 space-y-0.5" aria-label="Hauptnavigation">
-        {NAV_ITEMS.map(({ to, icon: Icon, label }) => {
-          const active = path === to || path.startsWith(to + '/')
+        {NAV_ITEMS.map(({ to, href, icon: Icon, label, external }) => {
+          const active = !external && (path === to || path.startsWith(to + '/'))
+          const className =
+            'relative flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-colors ' +
+            (active
+              ? 'bg-warm/15 text-warm font-bold'
+              : 'text-muted-foreground hover:bg-muted hover:text-foreground')
+
+          if (external) {
+            return (
+              <a
+                key={href}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={handleNavClick}
+                className={className}
+              >
+                <Icon size={18} strokeWidth={2} className="shrink-0" />
+                <span className="flex-1">{label}</span>
+                <ExternalLink size={12} className="opacity-60 shrink-0" />
+              </a>
+            )
+          }
+
           return (
             <Link
               key={to}
               to={to}
               onClick={handleNavClick}
               aria-current={active ? 'page' : undefined}
-              className={
-                'relative flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-colors ' +
-                (active
-                  ? 'bg-warm/15 text-warm font-bold'
-                  : 'text-muted-foreground hover:bg-muted hover:text-foreground')
-              }
+              className={className}
             >
               {active && (
                 <motion.span
