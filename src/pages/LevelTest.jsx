@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import {
   Clock, BookOpen, Headphones, MessageCircle, Pencil, GraduationCap,
   Mic, Square, Volume2, ArrowRight, Sparkles, CheckCircle, Trophy,
-  Loader2, Send, Mail, Flag, X,
+  Loader2, Send, Mail, Flag, X, Video, Users, ExternalLink,
 } from 'lucide-react'
 import { useAuth } from '../context/AuthContext'
 import Button from '../components/UI/Button'
@@ -832,6 +832,35 @@ function ResultScreen({ result, loggedIn, onContinue }) {
             </p>
           </>
         )}
+
+        {/* Secondary CTA: live classes with native teachers */}
+        <a
+          href="https://b2c.aprender-aleman.de/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group block relative overflow-hidden rounded-2xl bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-600 p-5 mt-5 shadow-lg hover:shadow-xl transition-all"
+        >
+          <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2" />
+          <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/2" />
+
+          <div className="relative flex items-center gap-4">
+            <div className="w-12 h-12 bg-white/15 backdrop-blur-sm rounded-xl flex items-center justify-center shrink-0 border border-white/20 group-hover:scale-110 transition-transform">
+              <Video size={22} className="text-white" />
+            </div>
+            <div className="flex-1 min-w-0">
+              <div className="inline-flex items-center gap-1.5 bg-white/15 text-white/90 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider mb-1.5">
+                <Users size={11} /> Live-Unterricht
+              </div>
+              <h3 className="text-white font-extrabold text-base leading-tight">
+                Lerne mit muttersprachlichen Lehrern, die <span className="text-yellow-200">Spanisch sprechen</span>
+              </h3>
+              <p className="text-white/85 text-xs mt-1 leading-relaxed">
+                Reserviere eine <strong>kostenlose Probestunde</strong> und finde heraus, wie schnell du dein Niveau verbesserst.
+              </p>
+            </div>
+            <ExternalLink size={16} className="text-white/80 shrink-0 group-hover:translate-x-0.5 transition-transform" />
+          </div>
+        </a>
       </motion.div>
     </div>
   )
