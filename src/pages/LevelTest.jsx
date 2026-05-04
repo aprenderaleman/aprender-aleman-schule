@@ -849,13 +849,13 @@ function ResultScreen({ result, loggedIn, onContinue }) {
             </div>
             <div className="flex-1 min-w-0">
               <div className="inline-flex items-center gap-1.5 bg-white/15 text-white/90 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider mb-1.5">
-                <Users size={11} /> Live-Unterricht
+                <Users size={11} /> Clases en vivo
               </div>
               <h3 className="text-white font-extrabold text-base leading-tight">
-                Lerne mit muttersprachlichen Lehrern, die <span className="text-yellow-200">Spanisch sprechen</span>
+                Aprende alemán con <span className="text-yellow-200">profesores nativos alemanes que hablan español</span>
               </h3>
               <p className="text-white/85 text-xs mt-1 leading-relaxed">
-                Reserviere eine <strong>kostenlose Probestunde</strong> und finde heraus, wie schnell du dein Niveau verbesserst.
+                Agenda una <strong>Clase de Prueba Gratis</strong> y descubre lo rápido que puedes avanzar.
               </p>
             </div>
             <ExternalLink size={16} className="text-white/80 shrink-0 group-hover:translate-x-0.5 transition-transform" />
