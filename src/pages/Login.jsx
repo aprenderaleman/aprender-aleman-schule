@@ -5,6 +5,7 @@ import { Mail, Send, CheckCircle, ArrowLeft } from 'lucide-react'
 import { useAuth } from '../context/AuthContext'
 import Button from '../components/UI/Button'
 import Toast from '../components/UI/Toast'
+import Logo from '../components/UI/Logo'
 
 const API_URL = import.meta.env.VITE_API_URL || ''
 
@@ -65,7 +66,7 @@ export default function Login() {
       >
         <div className="text-center mb-8">
           <Link to="/" className="inline-flex items-center gap-2 mb-4">
-            <img src="/logo.svg" alt="Schule Logo" className="w-10 h-10" />
+            <Logo size={36} />
             <span className="font-extrabold text-warm text-2xl">Schule</span>
           </Link>
           <h1 className="text-2xl font-bold text-gray-800 dark:text-gray-100">Willkommen zurück</h1>

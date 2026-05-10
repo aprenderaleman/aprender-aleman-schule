@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import { Home, BookOpen, Layers, GraduationCap, BarChart2, User } from 'lucide-react'
 import { useAuth } from '../../context/AuthContext'
 import Tooltip from '../UI/Tooltip'
+import Logo from '../UI/Logo'
 
 const items = [
   { to: '/dashboard',  icon: Home,           label: 'Dashboard',     shortcut: 'g d' },
@@ -49,7 +50,7 @@ export default function DesktopRail() {
       aria-label="Schnellnavigation"
     >
       <Link to="/dashboard" className="mb-3" aria-label="Schule home">
-        <img src="/logo.svg" alt="" className="w-9 h-9" aria-hidden="true" />
+        <Logo size={32} alt="" />
       </Link>
 
       <nav className="flex flex-col gap-1 flex-1">

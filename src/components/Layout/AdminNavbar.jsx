@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Moon, Sun, Menu, X, LayoutDashboard, Users, LogOut, BookOpen } from 'lucide-react'
 import { useAuth } from '../../context/AuthContext'
 import { useTheme } from '../../context/ThemeContext'
+import Logo from '../UI/Logo'
 
 const adminLinks = [
   { to: '/admin', icon: <LayoutDashboard size={18} />, label: 'Übersicht', exact: true },
@@ -27,7 +28,7 @@ export default function AdminNavbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="flex items-center justify-between h-16">
           <Link to="/admin" className="flex items-center gap-2 group">
-            <img src="/logo.svg" alt="Logo" className="w-9 h-9" />
+            <Logo size={32} />
             <div className="hidden sm:block">
               <span className="font-extrabold text-orange-500 text-lg group-hover:text-orange-600 transition-colors">Admin</span>
               <span className="text-xs text-gray-400 ml-2">Schule</span>

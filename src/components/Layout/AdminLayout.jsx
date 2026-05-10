@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { Moon, Sun, Menu, X, LayoutDashboard, Users, LogOut, BookOpen, ChevronLeft, Settings, DollarSign, Star } from 'lucide-react'
 import { useAuth } from '../../context/AuthContext'
 import { useTheme } from '../../context/ThemeContext'
+import Logo from '../UI/Logo'
 
 const sidebarLinks = [
   { to: '/admin', icon: LayoutDashboard, label: 'Dashboard', exact: true },
@@ -32,7 +33,7 @@ export default function AdminLayout({ children }) {
     <div className="flex flex-col h-full">
       {/* Logo */}
       <div className={`flex items-center ${collapsed && !mobile ? 'justify-center' : 'gap-3'} px-4 h-16 border-b border-gray-200 dark:border-gray-700 shrink-0`}>
-        <img src="/logo.svg" alt="Logo" className="w-9 h-9 shrink-0" />
+        <Logo size={32} />
         {(!collapsed || mobile) && (
           <div>
             <p className="font-extrabold text-orange-500 text-sm leading-tight">Schule</p>

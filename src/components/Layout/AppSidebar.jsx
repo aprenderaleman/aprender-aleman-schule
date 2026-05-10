@@ -9,6 +9,7 @@ import { useAuth } from '../../context/AuthContext'
 import { useProgress } from '../../context/ProgressContext'
 import { useSidebar } from '../../context/SidebarContext'
 import { haptics } from '../../utils/haptics'
+import Logo from '../UI/Logo'
 
 const NAV_ITEMS = [
   { to: '/dashboard',     icon: Home,           label: 'Dashboard' },
@@ -86,7 +87,7 @@ export default function AppSidebar() {
       {inDrawer && (
         <div className="px-5 pt-5 pb-3 flex items-center justify-between">
           <Link to="/dashboard" onClick={handleNavClick} className="flex items-center gap-2">
-            <img src="/logo.svg" alt="Schule" className="w-9 h-9" />
+            <Logo size={32} />
             <span className="font-extrabold text-warm text-xl tracking-tight">Schule</span>
           </Link>
           <button

@@ -8,6 +8,7 @@ import {
 } from 'lucide-react'
 import { useAuth } from '../context/AuthContext'
 import Button from '../components/UI/Button'
+import Logo from '../components/UI/Logo'
 import { haptics } from '../utils/haptics'
 
 const API_URL = import.meta.env.VITE_API_URL || ''
@@ -204,7 +205,7 @@ function IntroScreen({ total, onStart, loading }) {
       >
         <div className="text-center mb-8">
           <Link to="/" className="inline-flex items-center gap-2 mb-6">
-            <img src="/logo.svg" alt="Schule" className="w-10 h-10" />
+            <Logo size={36} />
             <span className="font-extrabold text-warm text-2xl">Schule</span>
           </Link>
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-warm/15 mb-4">
@@ -272,7 +273,7 @@ function ProgressHeader({ current, total, startTime, canSubmitEarly, onGiveUp })
     <header className="sticky top-0 z-10 bg-card/90 backdrop-blur-md border-b border-border">
       <div className="max-w-2xl mx-auto px-4 py-3 flex items-center gap-3 sm:gap-4">
         <Link to="/" className="shrink-0">
-          <img src="/logo.svg" alt="Schule" className="w-8 h-8" />
+          <Logo size={28} />
         </Link>
         <div className="flex-1 min-w-0">
           <div className="flex items-center justify-between mb-1.5">
