@@ -40,7 +40,7 @@ function useIsDark() {
 export default function Logo({
   size = 32,
   variant = 'auto',
-  rounded = 'rounded-xl',
+  rounded = 'rounded-full',
   className = '',
   alt = 'Schule',
 }) {
@@ -50,9 +50,11 @@ export default function Logo({
   const src = useDark ? '/icons/logooscuro.png' : '/icons/logoclaro.png'
   const bgCls = useDark ? 'bg-navy' : 'bg-white'
 
-  // Padding sized to the image so logo is never crammed against the edge
-  const padPx = Math.max(2, Math.round(size * 0.12))
-  const wrapperPx = size + padPx * 2
+  // Scale up 15% so the brand reads more prominently in chrome
+  const scaledSize = Math.round(size * 1.15)
+  // Padding sized to the image so the logo isn't crammed against the edge
+  const padPx = Math.max(2, Math.round(scaledSize * 0.12))
+  const wrapperPx = scaledSize + padPx * 2
 
   return (
     <span
