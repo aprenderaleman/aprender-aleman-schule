@@ -1,5 +1,6 @@
 import React from 'react'
 import { Mail, Instagram, Youtube, ExternalLink } from 'lucide-react'
+import Logo from '../UI/Logo'
 
 // TikTok icon (not in lucide-react)
 function TikTokIcon({ size = 20, className = '' }) {
@@ -28,7 +29,7 @@ export default function Footer() {
           {/* Brand */}
           <div>
             <div className="flex items-center gap-2 mb-3">
-              <img src="/logo.svg" alt="Schule Logo" className="w-10 h-10" />
+              <Logo size={36} variant="dark" />
               <span className="font-extrabold text-orange-400 text-lg">Schule</span>
             </div>
             <p className="text-sm text-gray-400 leading-relaxed">

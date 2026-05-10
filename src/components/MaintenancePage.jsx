@@ -1,6 +1,7 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import { Wrench } from 'lucide-react'
+import Logo from './UI/Logo'
 
 /**
  * Standalone maintenance page. Renders without backend, no router context
@@ -17,7 +18,7 @@ export default function MaintenancePage({ retrying = false, onRetry }) {
         className="max-w-md text-center"
       >
         <div className="inline-flex items-center gap-2 mb-8">
-          <img src="/logo.svg" alt="Schule" className="w-12 h-12" />
+          <Logo size={42} />
           <span className="font-extrabold text-orange-500 text-3xl">Schule</span>
         </div>
 

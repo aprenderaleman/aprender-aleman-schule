@@ -10,6 +10,8 @@ import SkillCard from '../components/Dashboard/SkillCard'
 import StreakCounter from '../components/Dashboard/StreakCounter'
 import RecentBadges from '../components/Dashboard/RecentBadges'
 import ReviewChallenge from '../components/Dashboard/ReviewChallenge'
+import LearningRoadmap from '../components/Dashboard/LearningRoadmap'
+import NextExerciseCard from '../components/Dashboard/NextExerciseCard'
 import ReviewPrompt from '../components/UI/ReviewPrompt'
 import AnimatedNumber from '../components/UI/AnimatedNumber'
 import Toast from '../components/UI/Toast'
@@ -58,31 +60,16 @@ export default function Dashboard() {
           </motion.div>
         </motion.div>
 
-        {/* Continue button */}
-        {lastExercise && (
-          <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="mb-6">
-            <div className="bg-gradient-to-r from-orange-500 to-amber-500 rounded-2xl p-5 flex items-center justify-between shadow-lg">
-              <div>
-                <p className="text-white/80 text-sm font-medium">Mach dort weiter, wo du aufgehört hast</p>
-                <p className="text-white font-bold text-lg mt-0.5">{lastExercise.title}</p>
-                <p className="text-white/70 text-xs mt-0.5 capitalize">{lastExercise.type} · Niveau {lastExercise.level}</p>
-              </div>
-              <button
-                onClick={() => navigate(`/ejercicio/${lastExercise.id}`)}
-                aria-label="Letzte Übung fortsetzen"
-                className="bg-white text-orange-500 font-bold px-5 py-2.5 rounded-xl hover:bg-orange-50 transition-colors flex items-center gap-2 shadow"
-              >
-                <Play size={16} />
-                Weiter
-              </button>
-            </div>
-          </motion.div>
-        )}
+        {/* Next exercise CTA — drives the learning path */}
+        <NextExerciseCard />
 
         {/* Review challenge — earn +2000 XP for trial users (only shown if not yet reviewed) */}
         <ReviewChallenge />
 
-        {/* Skills grid */}
+        {/* Visual roadmap of the user's level */}
+        <LearningRoadmap />
+
+        {/* Skills grid — historical scores, kept as a secondary stat */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 mb-8">
           {SKILLS.map((skill, idx) => (
             <SkillCard

@@ -6,6 +6,7 @@ import { useTheme } from '../../context/ThemeContext'
 import { useProgress } from '../../context/ProgressContext'
 import { useSidebar } from '../../context/SidebarContext'
 import Tooltip from '../UI/Tooltip'
+import Logo from '../UI/Logo'
 
 const LEVEL_XP = { A1: 500, A2: 1000, B1: 2000, B2: 3500, C1: 5000 }
 
@@ -44,7 +45,8 @@ export default function Navbar() {
             <Menu size={22} />
           </button>
           <Link to="/dashboard" className="flex items-center gap-2 shrink-0">
-            <img src="/logo.svg" alt="Schule" className="w-8 h-8 md:w-9 md:h-9" />
+            <Logo size={28} className="md:hidden" />
+            <Logo size={32} className="hidden md:inline-flex" />
             <span className="font-extrabold text-warm text-lg md:text-xl leading-tight">
               SCHULE
               <span className="hidden lg:inline text-foreground/70 font-semibold text-xs ml-2">

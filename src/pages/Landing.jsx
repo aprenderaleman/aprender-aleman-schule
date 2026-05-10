@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import { CheckCircle, Zap, BookOpen, Trophy, ChevronRight, Star } from 'lucide-react'
 import Button from '../components/UI/Button'
 import Footer from '../components/Layout/Footer'
+import Logo from '../components/UI/Logo'
 import { useTheme } from '../context/ThemeContext'
 import { Moon, Sun } from 'lucide-react'
 
@@ -50,7 +51,7 @@ export default function Landing() {
       <nav className="sticky top-0 z-40 bg-white/95 dark:bg-gray-900/95 backdrop-blur border-b border-gray-200 dark:border-gray-700">
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <img src="/logo.svg" alt="Schule Logo" className="w-9 h-9" />
+            <Logo size={32} />
             <span className="font-extrabold text-orange-500 text-lg">Schule</span>
           </div>
           <div className="flex items-center gap-3">

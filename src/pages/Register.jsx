@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import { Eye, EyeOff, Shield, ExternalLink, Sparkles, Check } from 'lucide-react'
 import { useAuth } from '../context/AuthContext'
 import Button from '../components/UI/Button'
+import Logo from '../components/UI/Logo'
 
 export default function Register() {
   const { register } = useAuth()
@@ -40,7 +41,7 @@ export default function Register() {
       <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} className="w-full max-w-md">
         <div className="text-center mb-8">
           <Link to="/" className="inline-flex items-center gap-2 mb-4">
-            <img src="/logo.svg" alt="Logo" className="w-10 h-10" />
+            <Logo size={36} />
             <span className="font-extrabold text-orange-500 text-2xl">Schule</span>
           </Link>
           <h1 className="text-2xl font-bold text-gray-800 dark:text-gray-100">Jetzt kostenlos starten</h1>
