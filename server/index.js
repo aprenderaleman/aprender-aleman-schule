@@ -1341,6 +1341,65 @@ app.get('/api/reviews/public', async (req, res) => {
   }
 })
 
+// ─── AUTH DEBUG (admin only) ──────────────────────────
+// Quick triage tool: tells the admin exactly why a given email can't log in.
+// Returns local-user state, b2c verdict and the last 5 magic-link rows.
+app.get('/api/admin/auth-debug', authMiddleware, async (req, res) => {
+  if (req.user?.role !== 'admin' && req.user?.role !== 'superadmin') {
+    return res.status(403).json({ error: 'Acceso denegado.' })
+  }
+  const email = String(req.query?.email || '').trim().toLowerCase()
+  if (!email || !email.includes('@')) {
+    return res.status(400).json({ error: 'Email requerido.' })
+  }
+
+  const out = { email, local: null, b2c: null, magicLinks: [] }
+
+  // 1. Local user
+  try {
+    const [rows] = await pool.query(
+      'SELECT id, fullName, email, role, status, b2cRole, studentId, languagePreference, createdAt FROM users WHERE email = ? LIMIT 1',
+      [email]
+    )
+    out.local = rows[0] || null
+  } catch (e) {
+    out.local = { error: e.message }
+  }
+
+  // 2. b2c
+  if (b2c.isConfigured()) {
+    try {
+      const verdict = await b2c.verifyEmailCached(email)
+      out.b2c = {
+        isActiveStudent: !!verdict.isActiveStudent,
+        role: verdict.role || null,
+        raw: verdict.raw || null,
+      }
+    } catch (e) {
+      out.b2c = { error: e.message, code: e.code }
+    }
+  } else {
+    out.b2c = { configured: false }
+  }
+
+  // 3. Recent magic links for this email
+  try {
+    const [rows] = await pool.query(
+      `SELECT id, expiresAt, usedAt, requesterIp, createdAt
+         FROM schule_magic_links
+        WHERE email = ?
+        ORDER BY createdAt DESC
+        LIMIT 5`,
+      [email]
+    )
+    out.magicLinks = rows
+  } catch (e) {
+    out.magicLinks = { error: e.message }
+  }
+
+  res.json(out)
+})
+
 // ─── ADMIN MIDDLEWARE ─────────────────────────────────
 function adminMiddleware(req, res, next) {
   if (req.user?.role !== 'superadmin' && req.user?.role !== 'admin') {
