@@ -23,15 +23,19 @@ function generateRawToken() {
 async function createMagicLink(pool, { email, ip = null, userAgent = null }) {
   const rawToken = generateRawToken()
   const tokenHash = hashToken(rawToken)
-  const expiresAt = new Date(Date.now() + TTL_MS)
+  const ttlMinutes = Math.round(TTL_MS / 60000)
 
+  // Compute expiresAt server-side via DATE_ADD(NOW(), INTERVAL N MINUTE).
+  // This avoids any timezone mismatch between Node and MySQL — previously,
+  // a Node-side `new Date(...)` was being serialised with the wrong TZ
+  // offset and stored in the past, so links were dead on arrival.
   await pool.query(
     `INSERT INTO schule_magic_links (email, tokenHash, expiresAt, requesterIp, userAgent)
-     VALUES (?, ?, ?, ?, ?)`,
-    [email.trim().toLowerCase(), tokenHash, expiresAt, ip, userAgent]
+     VALUES (?, ?, DATE_ADD(NOW(), INTERVAL ? MINUTE), ?, ?)`,
+    [email.trim().toLowerCase(), tokenHash, ttlMinutes, ip, userAgent]
   )
 
-  return { token: rawToken, expiresAt }
+  return { token: rawToken, ttlMinutes }
 }
 
 /**
@@ -44,18 +48,19 @@ async function consumeMagicLink(pool, rawToken) {
   if (!rawToken || rawToken.length < 32) return null
   const tokenHash = hashToken(rawToken)
 
+  // Look the row up with the expiry / used checks fully server-side so
+  // there's no JS↔MySQL timezone arithmetic in the validity decision.
   const [rows] = await pool.query(
-    `SELECT id, email, expiresAt, usedAt
-     FROM schule_magic_links
-     WHERE tokenHash = ?
-     LIMIT 1`,
+    `SELECT id, email
+       FROM schule_magic_links
+      WHERE tokenHash = ?
+        AND usedAt IS NULL
+        AND expiresAt > NOW()
+      LIMIT 1`,
     [tokenHash]
   )
   if (rows.length === 0) return null
   const row = rows[0]
-
-  if (row.usedAt) return null  // already used
-  if (new Date() > new Date(row.expiresAt)) return null  // expired
 
   // Mark as used atomically (CAS-style: only succeeds if usedAt is still null)
   const [result] = await pool.query(
