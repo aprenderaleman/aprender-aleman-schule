@@ -104,6 +104,12 @@ const pool = mysql.createPool({
   database: process.env.DB_NAME,
   waitForConnections: true,
   connectionLimit: 10,
+  // Force UTC for all Date↔string conversions so a Node-vs-MySQL TZ
+  // mismatch can never silently shift timestamps again (see the
+  // magic-link "born expired" bug fixed in 1435861).
+  // Anything time-sensitive should additionally use server-side
+  // NOW()/DATE_ADD() so the value never even round-trips through JS.
+  timezone: 'Z',
 })
 
 // ─── STRIPE SETUP ────────────────────────────────────
@@ -1055,11 +1061,12 @@ app.post('/api/auth/register', loginRateLimit, async (req, res) => {
         [userId]
       )
 
-      // Create subscription (free trial, not SSO)
-      const trialEndsAt2 = new Date(Date.now() + 5 * 24 * 60 * 60 * 1000)
+      // Create subscription (free trial, not SSO).
+      // Compute trialEndsAt server-side to avoid any TZ skew.
       await conn.query(
-        'INSERT INTO schule_subscriptions (userId, trialEndsAt, subscriptionStatus, ssoUser) VALUES (?, ?, ?, ?)',
-        [userId, trialEndsAt2, 'trialing', 0]
+        `INSERT INTO schule_subscriptions (userId, trialEndsAt, subscriptionStatus, ssoUser)
+         VALUES (?, DATE_ADD(NOW(), INTERVAL 5 DAY), 'trialing', 0)`,
+        [userId]
       )
 
       await conn.commit()
@@ -1070,14 +1077,16 @@ app.post('/api/auth/register', loginRateLimit, async (req, res) => {
       throw txErr
     }
 
-    const trialEndsAt = new Date(Date.now() + 5 * 24 * 60 * 60 * 1000)
-
     // Generate JWT — note: studentId is null, level defaults to A1
     const token = jwt.sign(
       { id: userId, email: email.trim().toLowerCase(), fullName: fullName.trim(), role: 'schule_student', studentId: null, level: 'A1' },
       JWT_SECRET,
       { expiresIn: '30d' }
     )
+
+    // Display-only echo of the trial end (DB value was set server-side above).
+    // Safe to compute in JS now that the pool runs in UTC.
+    const trialEndsAt = new Date(Date.now() + 5 * 24 * 60 * 60 * 1000)
 
     res.status(201).json({
       token,
@@ -1719,10 +1728,12 @@ app.post('/api/admin/users', authMiddleware, adminMiddleware, async (req, res) =
     await pool.query('SET FOREIGN_KEY_CHECKS=1')
     await pool.query('INSERT INTO schule_progress (userId) VALUES (?)', [userId])
 
-    // Create subscription (trial)
-    const trialEndsAt = new Date(Date.now() + 5 * 24 * 60 * 60 * 1000)
-    await pool.query('INSERT INTO schule_subscriptions (userId, trialEndsAt, subscriptionStatus, ssoUser) VALUES (?, ?, ?, ?)',
-      [userId, trialEndsAt, 'trialing', 0])
+    // Create subscription (trial) — compute trialEndsAt server-side
+    await pool.query(
+      `INSERT INTO schule_subscriptions (userId, trialEndsAt, subscriptionStatus, ssoUser)
+       VALUES (?, DATE_ADD(NOW(), INTERVAL 5 DAY), 'trialing', 0)`,
+      [userId]
+    )
 
     // If admin set a level other than A1, create a students record to persist it
     if (level && level.toLowerCase() !== 'a1') {
