@@ -6,13 +6,14 @@ import { C1_EXERCISES } from '../data/c1.js'
 import { A1_EXTRA_EXERCISES, A2_EXTRA_EXERCISES } from '../data/extra-reading-listening-writing.js'
 import { B1_EXTRA_EXERCISES, B2_EXTRA_EXERCISES } from '../data/extra-b1b2.js'
 import { C1_EXTRA_EXERCISES } from '../data/extra-c1.js'
+import { B1_PATH_EXTRA, B2_PATH_EXTRA, C1_PATH_EXTRA } from '../data/extra-path.js'
 
 export const EXERCISES = [
   ...A1_EXERCISES, ...A1_EXTRA_EXERCISES,
   ...A2_EXERCISES, ...A2_EXTRA_EXERCISES,
-  ...B1_EXERCISES, ...B1_EXTRA_EXERCISES,
-  ...B2_EXERCISES, ...B2_EXTRA_EXERCISES,
-  ...C1_EXERCISES, ...C1_EXTRA_EXERCISES,
+  ...B1_EXERCISES, ...B1_EXTRA_EXERCISES, ...B1_PATH_EXTRA,
+  ...B2_EXERCISES, ...B2_EXTRA_EXERCISES, ...B2_PATH_EXTRA,
+  ...C1_EXERCISES, ...C1_EXTRA_EXERCISES, ...C1_PATH_EXTRA,
 ]
 
 export function getExercisesByLevel(level) {
