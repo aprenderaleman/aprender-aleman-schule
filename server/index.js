@@ -206,6 +206,124 @@ const stripe = STRIPE_SECRET_KEY ? new Stripe(STRIPE_SECRET_KEY) : null
   }
 })()
 
+// ─── AI USAGE TRACKING + EVAL CACHE ─────────────────
+// schule_ai_usage:        per-call token counter (for visibility + daily cap)
+// schule_ai_eval_cache:   memoised AI evaluations so identical re-submissions
+//                         don't burn another Anthropic credit.
+;(async () => {
+  try {
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS schule_ai_usage (
+        id BIGINT AUTO_INCREMENT PRIMARY KEY,
+        userId VARCHAR(191) NOT NULL,
+        endpoint VARCHAR(64) NOT NULL,
+        model VARCHAR(64) NOT NULL,
+        inputTokens INT NOT NULL DEFAULT 0,
+        outputTokens INT NOT NULL DEFAULT 0,
+        cacheKey VARCHAR(64) DEFAULT NULL,
+        cacheHit TINYINT(1) NOT NULL DEFAULT 0,
+        createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+        INDEX idx_user_created (userId, createdAt),
+        INDEX idx_endpoint_created (endpoint, createdAt)
+      )
+    `)
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS schule_ai_eval_cache (
+        cacheKey VARCHAR(64) PRIMARY KEY,
+        endpoint VARCHAR(64) NOT NULL,
+        result MEDIUMTEXT NOT NULL,
+        hits INT NOT NULL DEFAULT 0,
+        createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+        lastHitAt DATETIME DEFAULT NULL,
+        INDEX idx_endpoint_created (endpoint, createdAt)
+      )
+    `)
+  } catch (err) {
+    console.error('Failed to create AI usage/cache tables:', err.message)
+  }
+})()
+
+// Daily per-user cap on Anthropic-billed calls. Cache hits don't count.
+const AI_DAILY_CAP_PER_USER = 50
+
+async function recordAIUsage({ userId, endpoint, model, inputTokens = 0, outputTokens = 0, cacheKey = null, cacheHit = 0 }) {
+  try {
+    await pool.query(
+      `INSERT INTO schule_ai_usage (userId, endpoint, model, inputTokens, outputTokens, cacheKey, cacheHit)
+       VALUES (?, ?, ?, ?, ?, ?, ?)`,
+      [userId || 'anonymous', endpoint, model, inputTokens, outputTokens, cacheKey, cacheHit ? 1 : 0]
+    )
+  } catch (e) {
+    console.warn('[ai-usage] insert failed:', e.message)
+  }
+}
+
+// Lookup memoised evaluation by hash; returns parsed result or null.
+async function getCachedEvaluation(cacheKey) {
+  if (!cacheKey) return null
+  try {
+    const [rows] = await pool.query(
+      'SELECT result FROM schule_ai_eval_cache WHERE cacheKey = ? LIMIT 1',
+      [cacheKey]
+    )
+    if (rows.length === 0) return null
+    // Bump hit counter best-effort
+    pool.query(
+      'UPDATE schule_ai_eval_cache SET hits = hits + 1, lastHitAt = NOW() WHERE cacheKey = ?',
+      [cacheKey]
+    ).catch(() => {})
+    return JSON.parse(rows[0].result)
+  } catch (e) {
+    console.warn('[ai-cache] lookup failed:', e.message)
+    return null
+  }
+}
+
+async function putCachedEvaluation(cacheKey, endpoint, result) {
+  if (!cacheKey) return
+  try {
+    await pool.query(
+      `INSERT IGNORE INTO schule_ai_eval_cache (cacheKey, endpoint, result) VALUES (?, ?, ?)`,
+      [cacheKey, endpoint, JSON.stringify(result)]
+    )
+  } catch (e) {
+    console.warn('[ai-cache] insert failed:', e.message)
+  }
+}
+
+function evalCacheKey(endpoint, parts) {
+  const raw = endpoint + '|' + parts.map(p => String(p ?? '').trim()).join('||')
+  return crypto.createHash('sha256').update(raw).digest('hex')
+}
+
+// Middleware: per-user daily cap on AI evaluations (Anthropic-billed only).
+// Staff (admin/superadmin/teacher) bypasses the cap. Cache hits don't count.
+async function aiDailyCap(req, res, next) {
+  try {
+    const userId = req.user?.id
+    if (!userId) return next()
+    if (['admin', 'superadmin', 'teacher'].includes(req.user?.role)) return next()
+    const [rows] = await pool.query(
+      `SELECT COUNT(*) AS n FROM schule_ai_usage
+       WHERE userId = ?
+         AND cacheHit = 0
+         AND createdAt >= DATE_SUB(NOW(), INTERVAL 24 HOUR)`,
+      [userId]
+    )
+    if ((rows[0]?.n || 0) >= AI_DAILY_CAP_PER_USER) {
+      return res.status(429).json({
+        error: 'Du hast heute dein Tageslimit für KI-Bewertungen erreicht. Versuche es morgen wieder.',
+        code: 'ai_daily_cap_reached',
+      })
+    }
+    next()
+  } catch (e) {
+    // Fail open — never block users on a counter error
+    console.warn('[aiDailyCap] error:', e.message)
+    next()
+  }
+}
+
 // Free trial threshold — XP based. Users keep free access until they reach
 // this amount of total XP (across all exercises + exams).
 const FREE_XP_LIMIT = 10000
@@ -1409,6 +1527,86 @@ app.get('/api/admin/auth-debug', authMiddleware, async (req, res) => {
   res.json(out)
 })
 
+// ─── ADMIN: AI USAGE / COST OVERVIEW ──────────────────
+// Summary of Anthropic spending over the last N days. Helps decide where
+// to optimise next. Cache hits are listed separately so you can see how
+// much the eval-cache is actually saving.
+app.get('/api/admin/ai-usage', authMiddleware, async (req, res) => {
+  if (req.user?.role !== 'admin' && req.user?.role !== 'superadmin') {
+    return res.status(403).json({ error: 'Acceso denegado.' })
+  }
+  const days = Math.min(90, Math.max(1, parseInt(req.query?.days) || 7))
+
+  try {
+    // Tokens + calls per endpoint (only billed calls — cacheHit=0)
+    const [perEndpoint] = await pool.query(
+      `SELECT endpoint,
+              model,
+              COUNT(*) AS calls,
+              SUM(inputTokens) AS inputTokens,
+              SUM(outputTokens) AS outputTokens
+         FROM schule_ai_usage
+        WHERE createdAt >= DATE_SUB(NOW(), INTERVAL ? DAY)
+          AND cacheHit = 0
+        GROUP BY endpoint, model
+        ORDER BY (SUM(inputTokens) + SUM(outputTokens)) DESC`,
+      [days]
+    )
+
+    // Cache savings summary
+    const [cacheSummary] = await pool.query(
+      `SELECT endpoint, COUNT(*) AS hits
+         FROM schule_ai_usage
+        WHERE createdAt >= DATE_SUB(NOW(), INTERVAL ? DAY)
+          AND cacheHit = 1
+        GROUP BY endpoint
+        ORDER BY hits DESC`,
+      [days]
+    )
+
+    // Top 10 heaviest users
+    const [topUsers] = await pool.query(
+      `SELECT u.id, u.email, u.fullName,
+              COUNT(*) AS calls,
+              SUM(a.inputTokens + a.outputTokens) AS totalTokens
+         FROM schule_ai_usage a
+         LEFT JOIN users u ON u.id = a.userId
+        WHERE a.createdAt >= DATE_SUB(NOW(), INTERVAL ? DAY)
+          AND a.cacheHit = 0
+        GROUP BY a.userId
+        ORDER BY totalTokens DESC
+        LIMIT 10`,
+      [days]
+    )
+
+    // Rough cost estimate (Haiku 4.5 pricing: $1/M in, $5/M out;
+    //                     Sonnet 4 pricing:   $3/M in, $15/M out)
+    const PRICE = {
+      'claude-haiku-4-5':         { in: 1.0,  out: 5.0  },
+      'claude-sonnet-4-20250514': { in: 3.0,  out: 15.0 },
+    }
+    let estimatedUsd = 0
+    for (const row of perEndpoint) {
+      const p = PRICE[row.model]
+      if (!p) continue
+      estimatedUsd += (Number(row.inputTokens) / 1_000_000) * p.in
+      estimatedUsd += (Number(row.outputTokens) / 1_000_000) * p.out
+    }
+
+    res.json({
+      days,
+      perEndpoint,
+      cacheSummary,
+      topUsers,
+      estimatedUsd: Number(estimatedUsd.toFixed(4)),
+      dailyCapPerUser: AI_DAILY_CAP_PER_USER,
+    })
+  } catch (e) {
+    console.error('[ai-usage] error:', e.message)
+    res.status(500).json({ error: 'Error al obtener uso de IA.' })
+  }
+})
+
 // ─── ADMIN MIDDLEWARE ─────────────────────────────────
 function adminMiddleware(req, res, next) {
   if (req.user?.role !== 'superadmin' && req.user?.role !== 'admin') {
@@ -2453,7 +2651,12 @@ WICHTIGE SPRACHREGELN:
 - Passe die Sprache dem Niveau ${userLevel} an — einfaches Deutsch für A1/A2, komplexeres für B1/B2/C1`
 }
 
-async function callAnthropicRaw(model, system, messages, maxTokens = 1024) {
+// Default model for routine grading/explanations. Haiku 4.5 is ~3× cheaper
+// than Sonnet for these JSON-rubric tasks and matches the quality we need.
+// Override via the `model` arg if a specific endpoint genuinely needs Sonnet.
+const DEFAULT_ANTHROPIC_MODEL = 'claude-haiku-4-5'
+
+async function callAnthropicRaw(model, system, messages, maxTokens = 1024, recordCtx = null) {
   if (!ANTHROPIC_API_KEY) throw new Error('ANTHROPIC_API_KEY not configured')
 
   const maxRetries = 3
@@ -2470,6 +2673,18 @@ async function callAnthropicRaw(model, system, messages, maxTokens = 1024) {
 
     if (response.ok) {
       const data = await response.json()
+      if (recordCtx?.userId && recordCtx?.endpoint) {
+        // Fire-and-forget — token tracking shouldn't block the response
+        recordAIUsage({
+          userId: recordCtx.userId,
+          endpoint: recordCtx.endpoint,
+          model,
+          inputTokens: data.usage?.input_tokens || 0,
+          outputTokens: data.usage?.output_tokens || 0,
+          cacheKey: recordCtx.cacheKey || null,
+          cacheHit: 0,
+        }).catch(() => {})
+      }
       return data.content[0].text
     }
 
@@ -2486,17 +2701,26 @@ async function callAnthropicRaw(model, system, messages, maxTokens = 1024) {
   }
 }
 
-async function callAnthropic(messages, userName, userLevel, maxTokens = 1024) {
-  return callAnthropicRaw('claude-sonnet-4-20250514', getSystemPrompt(userName, userLevel), messages, maxTokens)
+async function callAnthropic(messages, userName, userLevel, maxTokens = 1024, recordCtx = null, model = DEFAULT_ANTHROPIC_MODEL) {
+  return callAnthropicRaw(model, getSystemPrompt(userName, userLevel), messages, maxTokens, recordCtx)
 }
 
 // Evaluate writing exercise
-app.post('/api/ai/evaluate-writing', authMiddleware, aiRateLimit, async (req, res) => {
+app.post('/api/ai/evaluate-writing', authMiddleware, aiRateLimit, aiDailyCap, async (req, res) => {
   try {
     if (!ANTHROPIC_API_KEY) return res.status(503).json({ error: 'Servicio de IA no disponible.' })
 
     const { prompt: taskPrompt, submission, userName, userLevel } = req.body
     if (!taskPrompt || !submission) return res.status(400).json({ error: 'Faltan datos.' })
+
+    // Cache by user-level + task + submitted text. Identical re-submissions
+    // hit the cache and don't spend an Anthropic credit.
+    const cacheKey = evalCacheKey('evaluate-writing', [userLevel || 'A1', taskPrompt, submission])
+    const cached = await getCachedEvaluation(cacheKey)
+    if (cached) {
+      recordAIUsage({ userId: req.user.id, endpoint: 'evaluate-writing', model: 'CACHE', cacheKey, cacheHit: 1 }).catch(() => {})
+      return res.json(cached)
+    }
 
     const message = `Bewerte diesen deutschen Schreibaufsatz von ${userName || 'Student'} (Niveau ${userLevel || 'A1'}).
 
@@ -2514,10 +2738,17 @@ Gib detailliertes, konstruktives Feedback. Antworte NUR mit gültigem JSON:
 }
 Bewertung von 0-10. Kein Text außerhalb des JSONs.`
 
-    const text = await callAnthropic([{ role: 'user', content: message }], userName || 'Student', userLevel || 'A1', 1500)
+    const text = await callAnthropic(
+      [{ role: 'user', content: message }],
+      userName || 'Student',
+      userLevel || 'A1',
+      1000,
+      { userId: req.user.id, endpoint: 'evaluate-writing', cacheKey }
+    )
     const jsonMatch = text.match(/\{[\s\S]*\}/)
     const result = jsonMatch ? JSON.parse(jsonMatch[0]) : null
     if (!result) return res.status(500).json({ error: 'Error al procesar respuesta de IA.' })
+    putCachedEvaluation(cacheKey, 'evaluate-writing', result).catch(() => {})
     res.json(result)
   } catch (err) {
     console.error('AI evaluate error:', err.message)
@@ -2526,18 +2757,35 @@ Bewertung von 0-10. Kein Text außerhalb des JSONs.`
 })
 
 // Grammar explanation
-app.post('/api/ai/grammar-explanation', authMiddleware, aiRateLimit, async (req, res) => {
+app.post('/api/ai/grammar-explanation', authMiddleware, aiRateLimit, aiDailyCap, async (req, res) => {
   try {
     if (!ANTHROPIC_API_KEY) return res.status(503).json({ error: 'Servicio de IA no disponible.' })
 
     const { topic, userName, userLevel } = req.body
     if (!topic) return res.status(400).json({ error: 'Falta el tema.' })
 
+    // Cache by (level, topic) — most students ask about the same handful of
+    // grammar topics, so this is a massive saving over time.
+    const cacheKey = evalCacheKey('grammar-explanation', [userLevel || 'A1', topic.toLowerCase().trim()])
+    const cached = await getCachedEvaluation(cacheKey)
+    if (cached) {
+      recordAIUsage({ userId: req.user.id, endpoint: 'grammar-explanation', model: 'CACHE', cacheKey, cacheHit: 1 }).catch(() => {})
+      return res.json(cached)
+    }
+
     const prompt = `Erkläre dieses deutsche Grammatikthema für ${userName || 'Student'} (Niveau ${userLevel || 'A1'}): "${topic}".
 Schreibe auf Deutsch. Gib 2-3 Beispiele auf Deutsch. Schwierige Grammatikbegriffe kannst du kurz auf Spanisch in Klammern erklären. Maximal 150 Wörter.`
 
-    const text = await callAnthropic([{ role: 'user', content: prompt }], userName || 'Student', userLevel || 'A1', 400)
-    res.json({ explanation: text })
+    const text = await callAnthropic(
+      [{ role: 'user', content: prompt }],
+      userName || 'Student',
+      userLevel || 'A1',
+      300,
+      { userId: req.user.id, endpoint: 'grammar-explanation', cacheKey }
+    )
+    const result = { explanation: text }
+    putCachedEvaluation(cacheKey, 'grammar-explanation', result).catch(() => {})
+    res.json(result)
   } catch (err) {
     console.error('AI grammar error:', err.message)
     res.status(500).json({ error: 'Error al generar explicación.' })
@@ -3392,7 +3640,7 @@ app.get('/api/pruefungen/attempts', authMiddleware, subscriptionMiddleware, asyn
 })
 
 // GRADE Schreiben submission with Claude using Goethe rubric
-app.post('/api/pruefungen/grade-schreiben', authMiddleware, subscriptionMiddleware, aiRateLimit, async (req, res) => {
+app.post('/api/pruefungen/grade-schreiben', authMiddleware, subscriptionMiddleware, aiRateLimit, aiDailyCap, async (req, res) => {
   try {
     if (!ANTHROPIC_API_KEY) return res.status(503).json({ error: 'Servicio de IA no disponible.' })
     const { level, taskType, taskPrompt, submission, minWords } = req.body
@@ -3402,6 +3650,14 @@ app.post('/api/pruefungen/grade-schreiben', authMiddleware, subscriptionMiddlewa
 
     const wordCount = submission.trim().split(/\s+/).filter(Boolean).length
     const userName = req.user.fullName || 'Student'
+
+    // Memoise by (level + task + submission). Same exam re-submitted → free.
+    const cacheKey = evalCacheKey('grade-schreiben', [level, taskPrompt, submission])
+    const cached = await getCachedEvaluation(cacheKey)
+    if (cached) {
+      recordAIUsage({ userId: req.user.id, endpoint: 'grade-schreiben', model: 'CACHE', cacheKey, cacheHit: 1 }).catch(() => {})
+      return res.json(cached)
+    }
 
     const message = `Du bist offizieller Prüfer für das Goethe-Zertifikat ${level}. Bewerte diesen Schreibteil nach der offiziellen Goethe-Bewertungsskala.
 
@@ -3442,10 +3698,17 @@ Antworte AUSSCHLIESSLICH mit gültigem JSON, ohne Markdown-Codeblock:
 
 passed = true wenn total >= 60.`
 
-    const text = await callAnthropic([{ role: 'user', content: message }], userName, level, 2500)
+    const text = await callAnthropic(
+      [{ role: 'user', content: message }],
+      userName,
+      level,
+      1500,
+      { userId: req.user.id, endpoint: 'grade-schreiben', cacheKey }
+    )
     const jsonMatch = text.match(/\{[\s\S]*\}/)
     if (!jsonMatch) return res.status(500).json({ error: 'Error al procesar respuesta de IA.' })
     const result = JSON.parse(jsonMatch[0])
+    putCachedEvaluation(cacheKey, 'grade-schreiben', result).catch(() => {})
     res.json(result)
   } catch (err) {
     console.error('Grade Schreiben error:', err.message)
@@ -3505,7 +3768,7 @@ app.post(
 )
 
 // GRADE Sprechen submission (transcript) with Claude using Goethe rubric
-app.post('/api/pruefungen/grade-sprechen', authMiddleware, subscriptionMiddleware, aiRateLimit, async (req, res) => {
+app.post('/api/pruefungen/grade-sprechen', authMiddleware, subscriptionMiddleware, aiRateLimit, aiDailyCap, async (req, res) => {
   try {
     if (!ANTHROPIC_API_KEY) return res.status(503).json({ error: 'Servicio de IA no disponible.' })
     const { level, taskType, taskPrompt, transcript, durationSeconds } = req.body
@@ -3515,6 +3778,14 @@ app.post('/api/pruefungen/grade-sprechen', authMiddleware, subscriptionMiddlewar
 
     const wordCount = String(transcript).trim().split(/\s+/).filter(Boolean).length
     const userName = req.user.fullName || 'Student'
+
+    // Memoise by (level + task + transcript). Same transcript → free re-grade.
+    const cacheKey = evalCacheKey('grade-sprechen', [level, taskPrompt, transcript])
+    const cached = await getCachedEvaluation(cacheKey)
+    if (cached) {
+      recordAIUsage({ userId: req.user.id, endpoint: 'grade-sprechen', model: 'CACHE', cacheKey, cacheHit: 1 }).catch(() => {})
+      return res.json(cached)
+    }
 
     const message = `Du bist offizieller Prüfer für das Goethe-Zertifikat ${level} Modul Sprechen. Du bewertest die TRANSKRIPTION einer mündlichen Antwort.
 
@@ -3557,10 +3828,17 @@ Antworte AUSSCHLIESSLICH mit gültigem JSON, ohne Markdown-Codeblock:
 
 passed = true wenn total >= 60.`
 
-    const text = await callAnthropic([{ role: 'user', content: message }], userName, level, 2500)
+    const text = await callAnthropic(
+      [{ role: 'user', content: message }],
+      userName,
+      level,
+      1500,
+      { userId: req.user.id, endpoint: 'grade-sprechen', cacheKey }
+    )
     const jsonMatch = text.match(/\{[\s\S]*\}/)
     if (!jsonMatch) return res.status(500).json({ error: 'Error al procesar respuesta de IA.' })
     const result = JSON.parse(jsonMatch[0])
+    putCachedEvaluation(cacheKey, 'grade-sprechen', result).catch(() => {})
     res.json(result)
   } catch (err) {
     console.error('Grade Sprechen error:', err.message)
