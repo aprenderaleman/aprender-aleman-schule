@@ -1070,10 +1070,14 @@ app.post('/api/b2c/sso-link', async (req, res) => {
       // Create a schule-only user with a random unguessable password.
       // They log in via SSO, so this password is never used — we use 48
       // hex chars of randomness + bcrypt at the default cost.
-      userId = (typeof crypto !== 'undefined' && crypto.randomUUID)
-        ? crypto.randomUUID()
-        : require('crypto').randomUUID()
-      const randomPassword = require('crypto').randomBytes(48).toString('hex')
+      //
+      // NOTE: this file is ESM ("type":"module") and uses the `crypto`
+      // import from the top. The old code had `require('crypto')` here
+      // which throws ReferenceError in ESM — every NEW b2c student going
+      // through this endpoint was failing with 500. Fixed by using the
+      // imported binding directly.
+      userId = crypto.randomUUID()
+      const randomPassword = crypto.randomBytes(48).toString('hex')
       const hashed = await bcrypt.hash(randomPassword, 10)
       const now = new Date()
 
