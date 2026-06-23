@@ -2760,6 +2760,65 @@ Bewertung von 0-10. Kein Text außerhalb des JSONs.`
   }
 })
 
+// Explain a wrong answer in Reading / Listening so students learn from it.
+// Cheap call (~$0.0005), and after the first request for a given
+// (exerciseId, qIndex, userAnswer, correctAnswer) it's served from cache
+// for free — typical wrong answers repeat across thousands of students.
+app.post('/api/ai/explain-mistake', authMiddleware, aiRateLimit, aiDailyCap, async (req, res) => {
+  try {
+    if (!ANTHROPIC_API_KEY) return res.status(503).json({ error: 'Servicio de IA no disponible.' })
+
+    const {
+      exerciseId, qIndex,
+      level, question, userAnswer, correctAnswer,
+      context, // optional reading text / audio transcript to ground the answer
+    } = req.body || {}
+
+    if (!question || !userAnswer || !correctAnswer) {
+      return res.status(400).json({ error: 'Faltan datos.' })
+    }
+
+    const cacheKey = evalCacheKey('explain-mistake', [
+      exerciseId, qIndex, level, question, userAnswer, correctAnswer,
+    ])
+    const cached = await getCachedEvaluation(cacheKey)
+    if (cached) {
+      recordAIUsage({ userId: req.user.id, endpoint: 'explain-mistake', model: 'CACHE', cacheKey, cacheHit: 1 }).catch(() => {})
+      return res.json(cached)
+    }
+
+    const system = `Du bist ein Deutschlehrer für Niveau ${level || 'A1'}. Ein Schüler hat eine Frage falsch beantwortet und du erklärst kurz, warum seine Antwort nicht stimmt und warum die richtige korrekt ist.
+
+REGELN:
+- Antwort auf Deutsch, MAXIMAL 2-3 kurze Sätze
+- Bei schweren Grammatikbegriffen kurze Übersetzung auf Spanisch in Klammern
+- Sei freundlich, klar und konkret — KEINE Floskeln wie "Gut gefragt!"
+- Falls hilfreich, ein zusätzliches Beispiel
+- KEIN JSON, kein Markdown, nur Fließtext`
+
+    const userPrompt = `${context ? `KONTEXT (Text/Transkript):\n"""\n${String(context).slice(0, 1500)}\n"""\n\n` : ''}FRAGE: ${question}
+ANTWORT DES SCHÜLERS: ${userAnswer}
+RICHTIGE ANTWORT: ${correctAnswer}
+
+Erkläre kurz, warum die Antwort des Schülers nicht stimmt und warum die richtige korrekt ist.`
+
+    const text = await callAnthropicRaw(
+      DEFAULT_ANTHROPIC_MODEL,
+      system,
+      [{ role: 'user', content: userPrompt }],
+      200,
+      { userId: req.user.id, endpoint: 'explain-mistake', cacheKey }
+    )
+
+    const result = { explanation: String(text || '').trim() }
+    putCachedEvaluation(cacheKey, 'explain-mistake', result).catch(() => {})
+    res.json(result)
+  } catch (err) {
+    console.error('AI explain-mistake error:', err.message)
+    res.status(500).json({ error: 'Error al generar explicación.' })
+  }
+})
+
 // Grammar explanation
 app.post('/api/ai/grammar-explanation', authMiddleware, aiRateLimit, aiDailyCap, async (req, res) => {
   try {

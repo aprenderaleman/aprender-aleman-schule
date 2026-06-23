@@ -2,6 +2,7 @@ import React, { useState, useCallback, useRef } from 'react'
 import { motion } from 'framer-motion'
 import Button from '../UI/Button'
 import { Volume2, Eye, EyeOff, CheckCircle, XCircle, Pause } from 'lucide-react'
+import MistakeExplanation from './MistakeExplanation'
 
 export default function ListeningExercise({ exercise, userName, onComplete }) {
   const [answers, setAnswers] = useState({})
@@ -180,9 +181,22 @@ export default function ListeningExercise({ exercise, userName, onComplete }) {
               })}
             </div>
             {submitted && (
-              <p className={`mt-2 text-xs font-semibold flex items-center gap-1 ${answers[qi] === q.answer ? 'text-green-600' : 'text-red-500'}`}>
-                {answers[qi] === q.answer ? <><CheckCircle size={14} /> Richtig!</> : <><XCircle size={14} /> Richtig: {q.answer}</>}
-              </p>
+              <>
+                <p className={`mt-2 text-xs font-semibold flex items-center gap-1 ${answers[qi] === q.answer ? 'text-green-600' : 'text-red-500'}`}>
+                  {answers[qi] === q.answer ? <><CheckCircle size={14} /> Richtig!</> : <><XCircle size={14} /> Richtig: {q.answer}</>}
+                </p>
+                {answers[qi] && answers[qi] !== q.answer && (
+                  <MistakeExplanation
+                    exerciseId={exercise.id}
+                    qIndex={qi}
+                    level={exercise.level}
+                    question={q.question}
+                    userAnswer={answers[qi]}
+                    correctAnswer={q.answer}
+                    context={exercise.audioText}
+                  />
+                )}
+              </>
             )}
           </div>
         ))}

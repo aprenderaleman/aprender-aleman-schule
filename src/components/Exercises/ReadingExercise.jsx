@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import Button from '../UI/Button'
 import { BookOpen, CheckCircle, XCircle } from 'lucide-react'
 import { translateWord } from '../../utils/ai'
+import MistakeExplanation from './MistakeExplanation'
 
 export default function ReadingExercise({ exercise, userName, onComplete }) {
   const [answers, setAnswers] = useState({})
@@ -124,9 +125,22 @@ export default function ReadingExercise({ exercise, userName, onComplete }) {
               })}
             </div>
             {submitted && (
-              <p className={`mt-2 text-xs font-semibold flex items-center gap-1 ${answers[qi] === q.answer ? 'text-green-600' : 'text-red-500'}`}>
-                {answers[qi] === q.answer ? <><CheckCircle size={14} /> Richtig!</> : <><XCircle size={14} /> Richtig: {q.answer}</>}
-              </p>
+              <>
+                <p className={`mt-2 text-xs font-semibold flex items-center gap-1 ${answers[qi] === q.answer ? 'text-green-600' : 'text-red-500'}`}>
+                  {answers[qi] === q.answer ? <><CheckCircle size={14} /> Richtig!</> : <><XCircle size={14} /> Richtig: {q.answer}</>}
+                </p>
+                {answers[qi] && answers[qi] !== q.answer && (
+                  <MistakeExplanation
+                    exerciseId={exercise.id}
+                    qIndex={qi}
+                    level={exercise.level}
+                    question={q.question}
+                    userAnswer={answers[qi]}
+                    correctAnswer={q.answer}
+                    context={exercise.text}
+                  />
+                )}
+              </>
             )}
           </div>
         ))}
