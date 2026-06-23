@@ -20,7 +20,14 @@ export default function GrammarExercise({ exercise, userName, onComplete }) {
 
     if (correct) haptics.success()
     else haptics.error()
+  }
 
+  // Fires only when the student has read the inline feedback and clicks
+  // "Weiter" — keeps the explanation on screen for as long as they need.
+  const handleContinue = () => {
+    const correct = exercise.subtype === 'reorder'
+      ? dragOrder.join(' ') === exercise.answer
+      : selected === exercise.answer
     onComplete({
       correct,
       selected: exercise.subtype === 'reorder' ? dragOrder.join(' ') : selected,
@@ -46,7 +53,8 @@ export default function GrammarExercise({ exercise, userName, onComplete }) {
       }
       if (e.key === 'Enter') {
         e.preventDefault()
-        handleSubmit()
+        if (submitted) handleContinue()
+        else handleSubmit()
       }
     }
     window.addEventListener('keydown', onKey)
@@ -82,7 +90,12 @@ export default function GrammarExercise({ exercise, userName, onComplete }) {
         )}
 
         {submitted && (
-          <FeedbackBlock correct={isCorrect} explanation={exercise.explanation} answer={exercise.answer} userName={userName} />
+          <>
+            <FeedbackBlock correct={isCorrect} explanation={exercise.explanation} answer={exercise.answer} userName={userName} />
+            <Button onClick={handleContinue} variant="primary" className="w-full">
+              Weiter →
+            </Button>
+          </>
         )}
       </div>
     )
@@ -130,12 +143,17 @@ export default function GrammarExercise({ exercise, userName, onComplete }) {
 
       <AnimatePresence>
         {submitted && (
-          <FeedbackBlock
-            correct={isCorrect}
-            explanation={exercise.explanation}
-            answer={exercise.answer}
-            userName={userName}
-          />
+          <>
+            <FeedbackBlock
+              correct={isCorrect}
+              explanation={exercise.explanation}
+              answer={exercise.answer}
+              userName={userName}
+            />
+            <Button onClick={handleContinue} variant="primary" className="w-full">
+              Weiter →
+            </Button>
+          </>
         )}
       </AnimatePresence>
     </div>

@@ -33,12 +33,18 @@ export default function ReadingExercise({ exercise, userName, onComplete }) {
   }, [exercise.vocabulary])
 
   const handleSubmit = () => {
+    setSubmitted(true)
+  }
+
+  // Called only when the student clicks "Weiter" after reviewing the
+  // per-question feedback (and any AI explanations) — so we don't switch
+  // them to the result screen before they had a chance to learn.
+  const handleContinue = () => {
     let correct = 0
     exercise.questions.forEach((q, i) => {
       if (answers[i] === q.answer) correct++
     })
     const score = Math.round((correct / exercise.questions.length) * 100)
-    setSubmitted(true)
     onComplete({ score, correct, total: exercise.questions.length })
   }
 
@@ -146,9 +152,13 @@ export default function ReadingExercise({ exercise, userName, onComplete }) {
         ))}
       </div>
 
-      {!submitted && (
+      {!submitted ? (
         <Button onClick={handleSubmit} disabled={!allAnswered} variant="primary" className="w-full">
           Antworten absenden
+        </Button>
+      ) : (
+        <Button onClick={handleContinue} variant="primary" className="w-full">
+          Weiter zur Auswertung →
         </Button>
       )}
     </div>

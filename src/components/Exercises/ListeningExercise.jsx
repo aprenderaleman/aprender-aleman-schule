@@ -80,12 +80,19 @@ export default function ListeningExercise({ exercise, userName, onComplete }) {
   }, [])
 
   const handleSubmit = () => {
+    setSubmitted(true)
+  }
+
+  // Two-step finish: "Antworten absenden" reveals the inline feedback
+  // (correct answers + AI explanations for mistakes), then a second
+  // "Weiter zur Auswertung" call lifts the result up to the parent so
+  // students actually have time to read why they got things wrong.
+  const handleContinue = () => {
     let correct = 0
     exercise.questions.forEach((q, i) => {
       if (answers[i] === q.answer) correct++
     })
     const score = Math.round((correct / exercise.questions.length) * 100)
-    setSubmitted(true)
     onComplete({ score, correct, total: exercise.questions.length })
   }
 
@@ -202,9 +209,13 @@ export default function ListeningExercise({ exercise, userName, onComplete }) {
         ))}
       </div>
 
-      {!submitted && (
+      {!submitted ? (
         <Button onClick={handleSubmit} disabled={!allAnswered} variant="primary" className="w-full">
           Antworten absenden
+        </Button>
+      ) : (
+        <Button onClick={handleContinue} variant="primary" className="w-full">
+          Weiter zur Auswertung →
         </Button>
       )}
     </div>
