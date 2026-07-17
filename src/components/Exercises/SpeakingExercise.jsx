@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import Button from '../UI/Button'
 import LoadingSpinner from '../UI/LoadingSpinner'
 import { AlertCircle, CheckCircle, Lightbulb, Mic, Square, Play, RotateCcw, ThumbsUp, Star, BookOpen } from 'lucide-react'
+import { isSpeechRecognitionSupported, startRecognition } from '../../utils/speech'
 
 const API_URL = import.meta.env.VITE_API_URL || ''
 
@@ -14,129 +15,80 @@ function getAuthHeaders() {
   }
 }
 
-function getSupportedMimeType() {
-  const types = ['audio/webm', 'audio/ogg', 'audio/mp4', 'audio/wav']
-  for (const type of types) {
-    if (typeof MediaRecorder !== 'undefined' && MediaRecorder.isTypeSupported(type)) return type
-  }
-  return 'audio/webm'
-}
-
 export default function SpeakingExercise({ exercise, userName, userLevel, onComplete }) {
-  const [phase, setPhase] = useState('idle') // idle | recording | recorded | transcribing | grading | done
-  const [audioBlob, setAudioBlob] = useState(null)
-  const [audioUrl, setAudioUrl] = useState(null)
+  const [phase, setPhase] = useState('idle') // idle | recording | recorded | grading | done
   const [transcript, setTranscript] = useState('')
+  const [interim, setInterim] = useState('')
   const [feedback, setFeedback] = useState(null)
   const [error, setError] = useState(null)
   const [recordingTime, setRecordingTime] = useState(0)
-  const recorderRef = useRef(null)
-  const chunksRef = useRef([])
+  const recognitionRef = useRef(null)
   const timerRef = useRef(null)
-  const streamRef = useRef(null)
 
   const minSeconds = exercise.minSeconds || 15
+  const speechSupported = isSpeechRecognitionSupported()
 
-  // Cleanup on unmount
   useEffect(() => {
     return () => {
       if (timerRef.current) clearInterval(timerRef.current)
-      if (streamRef.current) streamRef.current.getTracks().forEach(t => t.stop())
-      if (audioUrl) URL.revokeObjectURL(audioUrl)
-    }
-  }, [audioUrl])
-
-  const formatTime = (s) => `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`
-
-  const startRecording = useCallback(async () => {
-    try {
-      setError(null)
-      const stream = await navigator.mediaDevices.getUserMedia({ audio: true })
-      streamRef.current = stream
-      const mimeType = getSupportedMimeType()
-      const recorder = new MediaRecorder(stream, { mimeType })
-      chunksRef.current = []
-
-      recorder.ondataavailable = (e) => {
-        if (e.data.size > 0) chunksRef.current.push(e.data)
-      }
-
-      recorder.onstop = () => {
-        const blob = new Blob(chunksRef.current, { type: mimeType })
-        setAudioBlob(blob)
-        if (audioUrl) URL.revokeObjectURL(audioUrl)
-        setAudioUrl(URL.createObjectURL(blob))
-        setPhase('recorded')
-        stream.getTracks().forEach(t => t.stop())
-      }
-
-      recorderRef.current = recorder
-      recorder.start(200)
-      setRecordingTime(0)
-      setPhase('recording')
-      timerRef.current = setInterval(() => setRecordingTime(t => t + 1), 1000)
-    } catch (err) {
-      setError('Mikrofon nicht verfügbar. Bitte erlaube den Zugriff auf das Mikrofon.')
-    }
-  }, [audioUrl])
-
-  const stopRecording = useCallback(() => {
-    if (recorderRef.current && recorderRef.current.state === 'recording') {
-      recorderRef.current.stop()
-    }
-    if (timerRef.current) {
-      clearInterval(timerRef.current)
-      timerRef.current = null
+      if (recognitionRef.current) recognitionRef.current.abort()
     }
   }, [])
 
-  const resetRecording = useCallback(() => {
-    if (audioUrl) URL.revokeObjectURL(audioUrl)
-    setAudioBlob(null)
-    setAudioUrl(null)
+  const formatTime = (s) => `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`
+
+  const startRecording = useCallback(() => {
+    if (!speechSupported) {
+      setError('Dein Browser unterstützt keine Spracherkennung. Nutze bitte Chrome, Edge oder Safari.')
+      return
+    }
+    setError(null)
     setTranscript('')
+    setInterim('')
+    setRecordingTime(0)
+    setPhase('recording')
+    timerRef.current = setInterval(() => setRecordingTime(t => t + 1), 1000)
+
+    recognitionRef.current = startRecognition({
+      lang: 'de-DE',
+      onPartial: (text) => setInterim(text),
+    })
+  }, [speechSupported])
+
+  const stopRecording = useCallback(async () => {
+    if (timerRef.current) { clearInterval(timerRef.current); timerRef.current = null }
+    if (!recognitionRef.current) return
+    const { transcript: text } = await recognitionRef.current.stop()
+    recognitionRef.current = null
+    setTranscript(text)
+    setInterim('')
+    setPhase('recorded')
+  }, [])
+
+  const resetRecording = useCallback(() => {
+    if (recognitionRef.current) { recognitionRef.current.abort(); recognitionRef.current = null }
+    setTranscript('')
+    setInterim('')
     setFeedback(null)
     setError(null)
     setRecordingTime(0)
     setPhase('idle')
-  }, [audioUrl])
+  }, [])
 
   const submitRecording = useCallback(async () => {
-    if (!audioBlob) return
+    if (!transcript || transcript.trim().length < 3) {
+      setError('Keine Sprache erkannt. Bitte sprich deutlicher und versuche es erneut.')
+      return
+    }
     setError(null)
-
-    // Step 1: Transcribe
-    setPhase('transcribing')
+    setPhase('grading')
     try {
-      const token = localStorage.getItem('auth_token')
-      const arrayBuf = await audioBlob.arrayBuffer()
-      const transcribeRes = await fetch(`${API_URL}/api/ai/transcribe-speaking`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': audioBlob.type || 'audio/webm',
-          ...(token ? { Authorization: `Bearer ${token}` } : {}),
-        },
-        body: arrayBuf,
-      })
-      if (!transcribeRes.ok) throw new Error('Transkription fehlgeschlagen')
-      const { transcript: text } = await transcribeRes.json()
-
-      if (!text || text.trim().length < 3) {
-        setError('Keine Sprache erkannt. Bitte sprich deutlicher und versuche es erneut.')
-        setPhase('recorded')
-        return
-      }
-
-      setTranscript(text)
-
-      // Step 2: Grade
-      setPhase('grading')
       const gradeRes = await fetch(`${API_URL}/api/ai/evaluate-speaking`, {
         method: 'POST',
         headers: getAuthHeaders(),
         body: JSON.stringify({
           prompt: exercise.prompt,
-          transcript: text,
+          transcript,
           level: exercise.level,
           durationSeconds: recordingTime,
         }),
@@ -151,12 +103,11 @@ export default function SpeakingExercise({ exercise, userName, userLevel, onComp
     } catch (err) {
       console.error('Speaking submit error:', err)
       setError('Fehler bei der Bewertung. Bitte versuche es erneut.')
-      // Give fallback score based on duration
       const fallbackScore = Math.min(100, Math.round((recordingTime / (minSeconds * 2)) * 60))
       setPhase('done')
       onComplete({ score: fallbackScore, feedback: null })
     }
-  }, [audioBlob, exercise, recordingTime, minSeconds, onComplete])
+  }, [transcript, exercise, recordingTime, minSeconds, onComplete])
 
   const meetsMinimum = recordingTime >= minSeconds
 
@@ -266,26 +217,23 @@ export default function SpeakingExercise({ exercise, userName, userLevel, onComp
               )}
             </div>
 
-            {/* Playback */}
-            {audioUrl && phase === 'recorded' && (
-              <div className="w-full max-w-sm mt-2">
-                <p className="text-xs text-gray-400 text-center mb-2">Deine Aufnahme anhören:</p>
-                <audio controls src={audioUrl} className="w-full h-10" />
+            {/* Live transcript while recording */}
+            {phase === 'recording' && interim && (
+              <div className="w-full max-w-md mt-2 rounded-xl bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 p-3">
+                <p className="text-xs text-gray-400 mb-1">Erkanntes bisher</p>
+                <p className="text-sm text-gray-700 dark:text-gray-200 italic">„{interim}"</p>
               </div>
             )}
 
             {/* Idle hint */}
             {phase === 'idle' && (
-              <p className="text-xs text-gray-400 text-center">Drücke den Mikrofon-Button und sprich auf Deutsch</p>
+              <p className="text-xs text-gray-400 text-center">
+                {speechSupported
+                  ? 'Drücke den Mikrofon-Button und sprich auf Deutsch'
+                  : 'Dein Browser unterstützt keine Spracherkennung. Nutze bitte Chrome, Edge oder Safari.'}
+              </p>
             )}
           </div>
-        </div>
-      )}
-
-      {/* Loading states */}
-      {phase === 'transcribing' && (
-        <div className="flex flex-col items-center gap-3 py-6">
-          <LoadingSpinner message="Deine Sprache wird erkannt..." />
         </div>
       )}
 

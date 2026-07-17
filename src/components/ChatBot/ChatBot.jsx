@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react'
 import { MessageCircle, X, Send, Bot, User, Sparkles, HelpCircle, Loader2, Trash2, Mic, Square, Volume2, VolumeX } from 'lucide-react'
 import { useAuth } from '../../context/AuthContext'
+import { isSpeechRecognitionSupported, startRecognition, speak, stopSpeaking } from '../../utils/speech'
 
 const API_URL = import.meta.env.VITE_API_URL || ''
 
@@ -21,13 +22,6 @@ const MODES = {
   },
 }
 
-function pickMime() {
-  for (const m of ['audio/webm;codecs=opus', 'audio/webm', 'audio/ogg;codecs=opus', 'audio/mp4']) {
-    if (typeof MediaRecorder !== 'undefined' && MediaRecorder.isTypeSupported(m)) return m
-  }
-  return ''
-}
-
 export default function ChatBot() {
   const { user } = useAuth()
   const [open, setOpen] = useState(false)
@@ -43,11 +37,8 @@ export default function ChatBot() {
 
   const messagesEndRef = useRef(null)
   const inputRef = useRef(null)
-  const recorderRef = useRef(null)
-  const chunksRef = useRef([])
-  const streamRef = useRef(null)
+  const recognitionRef = useRef(null)
   const timerRef = useRef(null)
-  const audioRef = useRef(null)
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
@@ -64,8 +55,9 @@ export default function ChatBot() {
   // Cleanup on unmount
   useEffect(() => {
     return () => {
-      stopRecording()
-      if (audioRef.current) { audioRef.current.pause(); audioRef.current = null }
+      if (timerRef.current) { clearInterval(timerRef.current); timerRef.current = null }
+      if (recognitionRef.current) { recognitionRef.current.abort(); recognitionRef.current = null }
+      stopSpeaking()
     }
   }, [])
 
@@ -97,9 +89,9 @@ export default function ChatBot() {
       const assistantMsg = { role: 'assistant', content: data.reply }
       setMessages(prev => [...prev, assistantMsg])
 
-      // Auto-speak in voice mode
+      // Auto-speak in voice mode via browser SpeechSynthesis
       if (voiceMode && data.reply) {
-        speakText(data.reply)
+        speakText(data.reply, messages.length + 1)
       }
     } catch {
       setMessages(prev => [...prev, { role: 'assistant', content: '❌ Verbindungsfehler. Bitte versuche es erneut.' }])
@@ -108,134 +100,50 @@ export default function ChatBot() {
     }
   }
 
-  // ─── VOICE: RECORD ────────────────────────────────
-  const startRecording = async () => {
-    try {
-      const stream = await navigator.mediaDevices.getUserMedia({ audio: true })
-      streamRef.current = stream
-      const mime = pickMime()
-      const recorder = new MediaRecorder(stream, mime ? { mimeType: mime } : {})
-      recorderRef.current = recorder
-      chunksRef.current = []
-
-      recorder.ondataavailable = (e) => { if (e.data.size > 0) chunksRef.current.push(e.data) }
-      recorder.onstop = () => handleRecordingDone()
-      recorder.start(250)
-      setRecording(true)
-      setRecordingTime(0)
-      timerRef.current = setInterval(() => setRecordingTime(t => t + 1), 1000)
-    } catch (err) {
-      console.error('Mic error:', err)
-      setMessages(prev => [...prev, { role: 'assistant', content: '❌ Kein Zugriff auf das Mikrofon. Bitte überprüfe die Berechtigungen.' }])
+  // ─── VOICE INPUT (Web Speech Recognition) ─────────
+  const startRecording = () => {
+    if (!isSpeechRecognitionSupported()) {
+      setMessages(prev => [...prev, { role: 'assistant', content: 'Dein Browser unterstützt keine Spracherkennung. Nutze bitte Chrome, Edge oder Safari.' }])
+      return
     }
+    stopSpeaking()
+    setRecording(true)
+    setRecordingTime(0)
+    timerRef.current = setInterval(() => setRecordingTime(t => t + 1), 1000)
+    recognitionRef.current = startRecognition({
+      lang: 'de-DE',
+      onPartial: () => {},
+    })
   }
 
-  const stopRecording = useCallback(() => {
+  const stopRecording = useCallback(async () => {
     if (timerRef.current) { clearInterval(timerRef.current); timerRef.current = null }
-    if (recorderRef.current && recorderRef.current.state !== 'inactive') {
-      recorderRef.current.stop()
-    }
-    if (streamRef.current) {
-      streamRef.current.getTracks().forEach(t => t.stop())
-      streamRef.current = null
-    }
     setRecording(false)
+    if (!recognitionRef.current) return
+    const { transcript } = await recognitionRef.current.stop()
+    recognitionRef.current = null
+    if (!transcript || transcript.trim().length === 0) {
+      setMessages(prev => [...prev, { role: 'assistant', content: '🎙️ (kein Audio erkannt)' }])
+      return
+    }
+    // Send the recognized text through the normal text-chat path;
+    // the reply is auto-spoken in voiceMode.
+    sendMessage(transcript)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const handleRecordingDone = async () => {
-    const chunks = chunksRef.current
-    if (!chunks.length) return
-
-    const blob = new Blob(chunks, { type: chunks[0].type || 'audio/webm' })
-    chunksRef.current = []
-
-    // Show placeholder
-    setMessages(prev => [...prev, { role: 'user', content: '🎙️ ...' }])
-    setLoading(true)
-
-    try {
-      // Step 1: Transcribe
-      const transcriptRes = await fetch(`${API_URL}/api/chat/transcribe`, {
-        method: 'POST',
-        headers: authHeaders({ 'Content-Type': blob.type || 'audio/webm' }),
-        body: blob,
-      })
-      if (!transcriptRes.ok) throw new Error('Transcription failed')
-      const { transcript } = await transcriptRes.json()
-
-      if (!transcript || transcript.trim().length === 0) {
-        setMessages(prev => {
-          const copy = [...prev]
-          copy[copy.length - 1] = { role: 'user', content: '🎙️ (kein Audio erkannt)' }
-          return copy
-        })
-        setLoading(false)
-        return
-      }
-
-      // Update placeholder with actual text
-      setMessages(prev => {
-        const copy = [...prev]
-        copy[copy.length - 1] = { role: 'user', content: transcript }
-        return copy
-      })
-
-      // Step 2: Get Claude response + TTS
-      const chatRes = await fetch(`${API_URL}/api/chat/voice`, {
-        method: 'POST',
-        headers: authHeaders({ 'Content-Type': 'application/json' }),
-        body: JSON.stringify({
-          message: transcript,
-          mode,
-          history: [...messages, { role: 'user', content: transcript }].slice(-20),
-          voice: mode === 'support' ? 'nova' : 'onyx',
-        }),
-      })
-      if (!chatRes.ok) throw new Error('Voice response failed')
-      const { reply, audioBase64 } = await chatRes.json()
-
-      const assistantMsg = { role: 'assistant', content: reply, audioBase64 }
-      setMessages(prev => [...prev, assistantMsg])
-
-      // Auto-play response
-      if (audioBase64) {
-        playAudioBase64(audioBase64, messages.length + 1)
-      }
-    } catch (err) {
-      console.error('Voice chat error:', err)
-      setMessages(prev => [...prev, { role: 'assistant', content: '❌ Fehler beim Sprachgespräch. Bitte versuche es erneut.' }])
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  // ─── TTS: Speak text (for text-mode messages) ─────
-  const speakText = async (text) => {
-    try {
-      const res = await fetch(`${API_URL}/api/chat/tts`, {
-        method: 'POST',
-        headers: authHeaders({ 'Content-Type': 'application/json' }),
-        body: JSON.stringify({ text, voice: mode === 'support' ? 'nova' : 'onyx' }),
-      })
-      if (!res.ok) return
-      const { audioBase64 } = await res.json()
-      if (audioBase64) playAudioBase64(audioBase64)
-    } catch { /* silent fail */ }
-  }
-
-  // ─── AUDIO PLAYBACK ───────────────────────────────
-  const playAudioBase64 = (base64, msgIndex) => {
-    if (audioRef.current) { audioRef.current.pause(); audioRef.current = null }
-    const audio = new Audio(`data:audio/mp3;base64,${base64}`)
-    audioRef.current = audio
+  // ─── TTS: browser SpeechSynthesis ─────────────────
+  const speakText = async (text, msgIndex) => {
     setPlayingAudio(msgIndex ?? -1)
-    audio.onended = () => { setPlayingAudio(null); audioRef.current = null }
-    audio.onerror = () => { setPlayingAudio(null); audioRef.current = null }
-    audio.play().catch(() => setPlayingAudio(null))
+    await speak(text, {
+      lang: 'de-DE',
+      onEnd: () => setPlayingAudio(null),
+    })
+    setPlayingAudio(null)
   }
 
   const stopAudio = () => {
-    if (audioRef.current) { audioRef.current.pause(); audioRef.current = null }
+    stopSpeaking()
     setPlayingAudio(null)
   }
 
@@ -367,9 +275,8 @@ export default function ChatBot() {
                   {msg.role === 'assistant' && !msg.content.startsWith('❌') && (
                     <button
                       onClick={() => {
-                        if (playingAudio === i) { stopAudio() }
-                        else if (msg.audioBase64) { playAudioBase64(msg.audioBase64, i) }
-                        else { speakText(msg.content); setPlayingAudio(i) }
+                        if (playingAudio === i) stopAudio()
+                        else speakText(msg.content, i)
                       }}
                       className="mt-1.5 flex items-center gap-1.5 text-xs py-1 opacity-70 hover:opacity-100 transition-opacity"
                     >

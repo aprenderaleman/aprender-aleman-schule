@@ -10,6 +10,7 @@ import Navbar from '../components/Layout/Navbar'
 import { useAuth } from '../context/AuthContext'
 import { useWakeLock } from '../hooks/useWakeLock'
 import { getExamById, gradeObjectiveExam } from '../data/pruefungen'
+import { isSpeechRecognitionSupported, startRecognition, speak } from '../utils/speech'
 
 const API_URL = import.meta.env.VITE_API_URL || ''
 
@@ -63,7 +64,7 @@ function countAnswered(exam, responses) {
       if ((responses[part.id] || '').trim()) n++
     } else if (part.kind === 'speaking-task') {
       const v = responses[part.id]
-      if (v && (v.blob || v.transcript)) n++
+      if (v && v.transcript) n++
     }
   }
   return n
@@ -206,7 +207,7 @@ export default function PruefungPlayer() {
           const v = responses[part.id]
           const possible = part.maxScore || 25
           extraMax += possible
-          if (!v || !v.blob) {
+          if (!v || !v.transcript) {
             combinedDetail.push({
               partId: part.id,
               type: 'speaking-task',
@@ -217,20 +218,9 @@ export default function PruefungPlayer() {
             continue
           }
           try {
-            // Transcribe
-            const tRes = await fetch(`${API_URL}/api/pruefungen/transcribe-sprechen`, {
-              method: 'POST',
-              headers: {
-                'Content-Type': v.mimeType || 'audio/webm',
-                Authorization: `Bearer ${getToken()}`,
-              },
-              body: v.blob,
-            })
-            if (!tRes.ok) throw new Error('Transkription fehlgeschlagen')
-            const { transcript } = await tRes.json()
-
-            // Persist transcript on response (so it survives serialization)
-            v.transcript = transcript
+            // Transcript is captured live in the browser via Web Speech
+            // (see SpeakingTaskView) — no server-side transcription step.
+            const transcript = v.transcript
 
             if (!transcript || !transcript.trim()) {
               combinedDetail.push({
@@ -345,20 +335,9 @@ export default function PruefungPlayer() {
         writingFeedback,
       }
 
-      // Save to backend (strip Blobs from speaking-task responses)
-      const cleanResponses = {}
-      for (const k of Object.keys(responses)) {
-        const v = responses[k]
-        if (v && typeof v === 'object' && v.blob instanceof Blob) {
-          cleanResponses[k] = {
-            transcript: v.transcript || '',
-            durationSeconds: v.durationSeconds || 0,
-            mimeType: v.mimeType || null,
-          }
-        } else {
-          cleanResponses[k] = v
-        }
-      }
+      // Speaking-task responses are already { transcript, durationSeconds }
+      // — no Blobs to strip since we now transcribe in the browser.
+      const cleanResponses = { ...responses }
       if (attemptId) {
         await fetch(`${API_URL}/api/pruefungen/attempts/${attemptId}/finish`, {
           method: 'POST',
@@ -1030,48 +1009,23 @@ function WritingTaskResult({ part, detail }) {
 }
 
 /* ==========================
-   Sprechen: recorder + feedback
+   Sprechen: recorder (Web Speech) + feedback
    ========================== */
-function pickRecorderMime() {
-  if (typeof MediaRecorder === 'undefined') return ''
-  const candidates = [
-    'audio/webm;codecs=opus',
-    'audio/webm',
-    'audio/ogg;codecs=opus',
-    'audio/ogg',
-    'audio/mp4',
-  ]
-  for (const t of candidates) {
-    if (MediaRecorder.isTypeSupported(t)) return t
-  }
-  return ''
-}
-
 function SpeakingTaskView({ part, value, onChange }) {
   // Phases: idle | preparing | recording | recorded
-  const initialPhase = value && value.blob ? 'recorded' : 'idle'
+  const initialPhase = value && value.transcript ? 'recorded' : 'idle'
   const [phase, setPhase] = useState(initialPhase)
   const [secondsLeft, setSecondsLeft] = useState(0)
   const [error, setError] = useState(null)
-  const mediaRecorderRef = useRef(null)
-  const streamRef = useRef(null)
-  const chunksRef = useRef([])
+  const [interim, setInterim] = useState('')
+  const recognitionRef = useRef(null)
   const startedAtRef = useRef(0)
   const tickRef = useRef(null)
-  const audioUrl = useMemo(() => {
-    if (value && value.blob) return URL.createObjectURL(value.blob)
-    return null
-  }, [value && value.blob])
 
-  // Cleanup blob URL on unmount/change
-  useEffect(() => {
-    return () => { if (audioUrl) URL.revokeObjectURL(audioUrl) }
-  }, [audioUrl])
-
-  // Cleanup mic stream on unmount
+  // Cleanup on unmount
   useEffect(() => {
     return () => {
-      if (streamRef.current) streamRef.current.getTracks().forEach(t => t.stop())
+      if (recognitionRef.current) recognitionRef.current.abort()
       if (tickRef.current) clearInterval(tickRef.current)
     }
   }, [])
@@ -1099,67 +1053,53 @@ function SpeakingTaskView({ part, value, onChange }) {
     startRecording()
   }
 
-  const startRecording = async () => {
+  const startRecording = () => {
     setError(null)
-    try {
-      if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-        throw new Error('Dein Browser unterstützt keine Audioaufnahme.')
-      }
-      const stream = await navigator.mediaDevices.getUserMedia({ audio: true })
-      streamRef.current = stream
-      const mimeType = pickRecorderMime()
-      const mr = new MediaRecorder(stream, mimeType ? { mimeType } : undefined)
-      mediaRecorderRef.current = mr
-      chunksRef.current = []
-      mr.ondataavailable = (e) => { if (e.data && e.data.size > 0) chunksRef.current.push(e.data) }
-      mr.onstop = () => {
-        const blob = new Blob(chunksRef.current, { type: mimeType || 'audio/webm' })
-        const durationSeconds = Math.max(1, Math.round((Date.now() - startedAtRef.current) / 1000))
-        onChange({ blob, mimeType: mimeType || 'audio/webm', durationSeconds })
-        setPhase('recorded')
-        if (streamRef.current) {
-          streamRef.current.getTracks().forEach(t => t.stop())
-          streamRef.current = null
-        }
-      }
-      mr.start()
-      startedAtRef.current = Date.now()
-      setPhase('recording')
-      const limit = part.maxRecordSeconds || 120
-      setSecondsLeft(limit)
-      if (tickRef.current) clearInterval(tickRef.current)
-      tickRef.current = setInterval(() => {
-        setSecondsLeft(s => {
-          if (s <= 1) {
-            clearInterval(tickRef.current)
-            stopRecording()
-            return 0
-          }
-          return s - 1
-        })
-      }, 1000)
-    } catch (err) {
-      setError(err.message || 'Fehler beim Mikrofon-Zugriff.')
+    if (!isSpeechRecognitionSupported()) {
+      setError('Dein Browser unterstützt keine Spracherkennung. Nutze bitte Chrome, Edge oder Safari.')
       setPhase('idle')
+      return
     }
+    setInterim('')
+    recognitionRef.current = startRecognition({
+      lang: 'de-DE',
+      onPartial: (t) => setInterim(t),
+    })
+    startedAtRef.current = Date.now()
+    setPhase('recording')
+    const limit = part.maxRecordSeconds || 120
+    setSecondsLeft(limit)
+    if (tickRef.current) clearInterval(tickRef.current)
+    tickRef.current = setInterval(() => {
+      setSecondsLeft(s => {
+        if (s <= 1) {
+          clearInterval(tickRef.current)
+          stopRecording()
+          return 0
+        }
+        return s - 1
+      })
+    }, 1000)
   }
 
-  const stopRecording = () => {
+  const stopRecording = async () => {
     if (tickRef.current) clearInterval(tickRef.current)
-    const mr = mediaRecorderRef.current
-    if (mr && mr.state !== 'inactive') mr.stop()
+    if (!recognitionRef.current) return
+    const { transcript } = await recognitionRef.current.stop()
+    recognitionRef.current = null
+    const durationSeconds = Math.max(1, Math.round((Date.now() - startedAtRef.current) / 1000))
+    onChange({ transcript, durationSeconds })
+    setInterim('')
+    setPhase('recorded')
   }
 
   const reset = () => {
+    if (recognitionRef.current) { recognitionRef.current.abort(); recognitionRef.current = null }
     if (tickRef.current) clearInterval(tickRef.current)
-    if (streamRef.current) {
-      streamRef.current.getTracks().forEach(t => t.stop())
-      streamRef.current = null
-    }
+    setInterim('')
+    setError(null)
     onChange(null)
     setPhase('idle')
-    setSecondsLeft(0)
-    setError(null)
   }
 
   return (
@@ -1226,7 +1166,12 @@ function SpeakingTaskView({ part, value, onChange }) {
               <span className="w-2 h-2 bg-red-500 rounded-full" /> AUFNAHME LÄUFT
             </div>
             <p className="text-5xl font-extrabold text-red-600 dark:text-red-400 mb-3">{secondsLeft}s</p>
-            <p className="text-sm text-gray-600 dark:text-gray-300 mb-4">Sprich klar und deutlich auf Deutsch.</p>
+            <p className="text-sm text-gray-600 dark:text-gray-300 mb-2">Sprich klar und deutlich auf Deutsch.</p>
+            {interim && (
+              <p className="text-xs text-gray-600 dark:text-gray-300 italic bg-white/60 dark:bg-gray-900/40 rounded-lg p-2 mb-4 max-w-md mx-auto text-left">
+                „{interim}"
+              </p>
+            )}
             <button
               onClick={stopRecording}
               className="inline-flex items-center gap-2 bg-red-600 text-white font-bold px-6 py-3 rounded-xl hover:bg-red-700 transition shadow"
@@ -1249,16 +1194,14 @@ function SpeakingTaskView({ part, value, onChange }) {
                 <RotateCcw size={12} /> Neu aufnehmen
               </button>
             </div>
-            {audioUrl && (
-              <audio
-                src={audioUrl}
-                controls
-                controlsList="nodownload"
-                className="w-full"
-              />
+            {value.transcript && (
+              <div className="rounded-lg bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 p-3">
+                <p className="text-xs uppercase font-bold text-gray-500 dark:text-gray-400 mb-1">Transkript</p>
+                <p className="text-sm text-gray-700 dark:text-gray-200 italic">„{value.transcript}"</p>
+              </div>
             )}
             <p className="text-xs text-gray-500 dark:text-gray-400 italic">
-              Beim Abgeben wird die Aufnahme automatisch transkribiert und mit KI bewertet.
+              Deine gesprochene Antwort wurde im Browser transkribiert und wird von der KI bewertet.
               Aussprache kann nicht automatisch beurteilt werden.
             </p>
           </div>

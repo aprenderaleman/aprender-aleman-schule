@@ -31,12 +31,11 @@ app.use(cors({
   },
   credentials: true,
 }))
-// Parse JSON for all routes except Stripe webhook + Sprechen audio upload (need raw body)
+// Parse JSON for all routes except Stripe webhook (needs raw body).
+// Speech in/out is now done in the browser via the Web Speech API, so we
+// no longer have any raw-audio uploads to skip past the JSON parser.
 app.use((req, res, next) => {
   if (req.originalUrl === '/api/stripe/webhook') return next()
-  if (req.originalUrl === '/api/pruefungen/transcribe-sprechen') return next()
-  if (req.originalUrl === '/api/chat/transcribe') return next()
-  if (req.originalUrl === '/api/ai/transcribe-speaking') return next()
   // CSV upload can be large (thousands of ad rows)
   const limit = req.originalUrl === '/api/admin/ads-report/upload' ? '15mb' : '50kb'
   express.json({ limit })(req, res, next)
@@ -2216,54 +2215,17 @@ app.get('/api/level-test/questions', async (req, res) => {
   res.json({ questions: safe, total: safe.length })
 })
 
-// Public: TTS for listening questions. Uses OpenAI tts-1.
-// Cached aggressively (questions never change) so re-fetches are free.
-const levelTestAudioCache = new Map()
+// Return the raw audio prompt text for a listening question so the
+// frontend can synthesise it with the browser's SpeechSynthesis API.
+// (Formerly this hit OpenAI tts-1; we now do TTS in the browser for free.)
 app.get('/api/level-test/audio/:questionId', async (req, res) => {
   const { questionId } = req.params
-  if (!OPENAI_API_KEY) return res.status(503).json({ error: 'TTS no disponible.' })
-
-  // Check cache first
-  if (levelTestAudioCache.has(questionId)) {
-    const cached = levelTestAudioCache.get(questionId)
-    res.set('Content-Type', 'audio/mpeg')
-    res.set('Cache-Control', 'public, max-age=31536000, immutable')
-    return res.send(cached)
-  }
-
   const bank = await loadLevelTestBank()
-  if (!bank) return res.status(500).end()
+  if (!bank) return res.status(500).json({ error: 'Banco no disponible.' })
   const q = bank.questions.find(x => x.id === questionId)
   if (!q || !q.audioPrompt) return res.status(404).json({ error: 'Sin audio.' })
-
-  try {
-    const ttsRes = await fetch('https://api.openai.com/v1/audio/speech', {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${OPENAI_API_KEY}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        model: 'tts-1',
-        input: q.audioPrompt,
-        voice: 'alloy',
-        response_format: 'mp3',
-        speed: 0.95,
-      }),
-    })
-    if (!ttsRes.ok) {
-      console.error('[level-test] TTS failed', ttsRes.status)
-      return res.status(503).json({ error: 'Audio no disponible.' })
-    }
-    const buf = Buffer.from(await ttsRes.arrayBuffer())
-    levelTestAudioCache.set(questionId, buf)
-    res.set('Content-Type', 'audio/mpeg')
-    res.set('Cache-Control', 'public, max-age=31536000, immutable')
-    res.send(buf)
-  } catch (err) {
-    console.error('[level-test] audio error:', err.message)
-    res.status(500).json({ error: 'Error generando audio.' })
-  }
+  res.set('Cache-Control', 'public, max-age=31536000, immutable')
+  res.json({ text: q.audioPrompt, lang: 'de-DE' })
 })
 
 // Public: submit answers, evaluate AI portions if needed, save, return level.
@@ -2354,10 +2316,11 @@ app.post('/api/level-test/submit', levelTestRateLimit, async (req, res) => {
   }
 })
 
-// AI scoring helper for writing/speaking responses.
-// Returns 0..1 (0 = nothing, 1 = perfect for that level).
+// AI scoring helper for writing/speaking responses in the level test.
+// Returns 0..1 (0 = nothing, 1 = perfect for that level). Uses Haiku 4.5
+// with 16 output tokens — costs a fraction of a cent per response.
 async function scoreOpenResponse(question, response) {
-  if (!OPENAI_API_KEY && !ANTHROPIC_API_KEY) return 0.5  // can't score, give midpoint
+  if (!ANTHROPIC_API_KEY) return 0.5
 
   const systemPrompt = `Du bewertest eine ${question.type === 'writing' ? 'schriftliche' : 'mündliche'} Antwort eines Deutschschülers auf Niveau ${question.level}. Vergib einen Wert zwischen 0 und 1 (Dezimal). Antworte AUSSCHLIESSLICH mit einer Zahl, ohne Text, ohne Erklärung.
 
@@ -2371,45 +2334,8 @@ Bewertungskriterien:
   const userPrompt = `Aufgabe: ${question.prompt}\n\nAntwort des Schülers:\n"""\n${String(response).slice(0, 1500)}\n"""\n\nWert (nur Zahl):`
 
   try {
-    if (ANTHROPIC_API_KEY) {
-      const res = await fetch('https://api.anthropic.com/v1/messages', {
-        method: 'POST',
-        headers: {
-          'x-api-key': ANTHROPIC_API_KEY,
-          'anthropic-version': '2023-06-01',
-          'content-type': 'application/json',
-        },
-        body: JSON.stringify({
-          model: 'claude-haiku-4-5',
-          max_tokens: 16,
-          system: systemPrompt,
-          messages: [{ role: 'user', content: userPrompt }],
-        }),
-      })
-      const json = await res.json()
-      const text = json?.content?.[0]?.text || ''
-      const score = parseFloat(text.match(/[0-9]\.?[0-9]*/)?.[0] || '0.5')
-      return Math.min(1, Math.max(0, score))
-    }
-    // OpenAI fallback
-    const res = await fetch('https://api.openai.com/v1/chat/completions', {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${OPENAI_API_KEY}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        model: 'gpt-4o-mini',
-        max_tokens: 16,
-        messages: [
-          { role: 'system', content: systemPrompt },
-          { role: 'user', content: userPrompt },
-        ],
-      }),
-    })
-    const json = await res.json()
-    const text = json?.choices?.[0]?.message?.content || ''
-    const score = parseFloat(text.match(/[0-9]\.?[0-9]*/)?.[0] || '0.5')
+    const text = await callAnthropicRaw(DEFAULT_ANTHROPIC_MODEL, systemPrompt, [{ role: 'user', content: userPrompt }], 16)
+    const score = parseFloat(String(text || '').match(/[0-9]\.?[0-9]*/)?.[0] || '0.5')
     return Math.min(1, Math.max(0, score))
   } catch (err) {
     console.error('[level-test] AI score failed:', err.message)
@@ -2642,7 +2568,9 @@ function normalizeAdsRow(row) {
 
 // ─── AI PROXY ────────────────────────────────────────
 const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY
-const OPENAI_API_KEY = process.env.OPENAI_API_KEY
+// OPENAI_API_KEY was removed — all AI text now runs through Anthropic
+// (Haiku 4.5) and all audio (STT + TTS) is done in the browser via the
+// Web Speech API.
 
 function getSystemPrompt(userName, userLevel) {
   return `Du bist ein Deutschlehrer für spanischsprachige Studenten. Der Student heißt ${userName} und hat das Niveau ${userLevel}.
@@ -2855,66 +2783,29 @@ Schreibe auf Deutsch. Gib 2-3 Beispiele auf Deutsch. Schwierige Grammatikbegriff
   }
 })
 
-// ─── SPEAKING EXERCISE: TRANSCRIBE ──────────────────
-app.post(
-  '/api/ai/transcribe-speaking',
-  express.raw({ type: ['audio/*', 'application/octet-stream'], limit: '15mb' }),
-  authMiddleware,
-  subscriptionMiddleware,
-  aiRateLimit,
-  async (req, res) => {
-    try {
-      if (!OPENAI_API_KEY) return res.status(503).json({ error: 'Transkriptionsdienst nicht verfügbar.' })
-      if (!Buffer.isBuffer(req.body) || req.body.length === 0) {
-        return res.status(400).json({ error: 'Leere Audiodatei.' })
-      }
-
-      const contentType = req.headers['content-type'] || 'audio/webm'
-      const ext = contentType.includes('mp3') ? 'mp3'
-        : contentType.includes('wav') ? 'wav'
-        : contentType.includes('ogg') ? 'ogg'
-        : contentType.includes('mp4') || contentType.includes('m4a') ? 'm4a'
-        : 'webm'
-
-      const formData = new FormData()
-      formData.append('file', new Blob([req.body], { type: contentType }), `speaking.${ext}`)
-      formData.append('model', 'whisper-1')
-      formData.append('language', 'de')
-      formData.append('response_format', 'json')
-
-      const r = await fetch('https://api.openai.com/v1/audio/transcriptions', {
-        method: 'POST',
-        headers: { Authorization: `Bearer ${OPENAI_API_KEY}` },
-        body: formData,
-      })
-
-      if (!r.ok) {
-        const errText = await r.text()
-        console.error('Whisper speaking error:', r.status, errText)
-        return res.status(502).json({ error: 'Transkriptionsfehler.' })
-      }
-      const data = await r.json()
-      res.json({ transcript: data.text || '' })
-    } catch (err) {
-      console.error('Transcribe speaking error:', err.message)
-      res.status(500).json({ error: 'Fehler bei der Transkription.' })
-    }
-  }
-)
-
-// ─── SPEAKING EXERCISE: EVALUATE ────────────────────
-app.post('/api/ai/evaluate-speaking', authMiddleware, subscriptionMiddleware, aiRateLimit, async (req, res) => {
+// ─── SPEAKING EXERCISE: EVALUATE (Haiku 4.5 + eval cache) ─
+// The frontend transcribes audio locally with the Web Speech API and
+// hands us the transcript, so we no longer host a Whisper endpoint.
+app.post('/api/ai/evaluate-speaking', authMiddleware, subscriptionMiddleware, aiRateLimit, aiDailyCap, async (req, res) => {
   try {
-    if (!OPENAI_API_KEY) return res.status(503).json({ error: 'KI-Dienst nicht verfügbar.' })
+    if (!ANTHROPIC_API_KEY) return res.status(503).json({ error: 'Servicio de IA no disponible.' })
     const { prompt: taskPrompt, transcript, level, durationSeconds } = req.body
     if (!taskPrompt || !transcript) {
       return res.status(400).json({ error: 'Fehlende Daten.' })
     }
 
+    // Cache by (level + task + transcript). Same submission → free re-grade.
+    const cacheKey = evalCacheKey('evaluate-speaking', [level || 'A1', taskPrompt, transcript])
+    const cached = await getCachedEvaluation(cacheKey)
+    if (cached) {
+      recordAIUsage({ userId: req.user.id, endpoint: 'evaluate-speaking', model: 'CACHE', cacheKey, cacheHit: 1 }).catch(() => {})
+      return res.json(cached)
+    }
+
     const wordCount = String(transcript).trim().split(/\s+/).filter(Boolean).length
     const userName = req.user.fullName || req.user.name || 'Student'
 
-    const systemPrompt = `Du bist ein erfahrener Deutschlehrer, der mündliche Antworten von Schülern bewertet. Du arbeitest mit einem automatischen Transkript (Whisper) — du kannst Aussprache nicht direkt hören. Bewerte Inhalt, Wortschatz, Grammatik und Kohärenz. Sei ermutigend aber ehrlich. Antworte NUR mit gültigem JSON.`
+    const systemPrompt = `Du bist ein erfahrener Deutschlehrer, der mündliche Antworten von Schülern bewertet. Du arbeitest mit einem automatischen Transkript aus dem Browser — du kannst Aussprache nicht direkt hören. Bewerte Inhalt, Wortschatz, Grammatik und Kohärenz. Sei ermutigend aber ehrlich. Antworte NUR mit gültigem JSON.`
 
     const userMessage = `Bewerte diese mündliche Antwort von ${userName} (Niveau ${level || 'A1'}).
 
@@ -2939,10 +2830,17 @@ Antworte NUR mit gültigem JSON (kein Markdown, kein Codeblock):
 }
 Bewertung von 0-10. Kein Text außerhalb des JSONs.`
 
-    const reply = await callOpenAIChat(systemPrompt, [{ role: 'user', content: userMessage }], 1200)
+    const reply = await callAnthropicRaw(
+      DEFAULT_ANTHROPIC_MODEL,
+      systemPrompt,
+      [{ role: 'user', content: userMessage }],
+      1000,
+      { userId: req.user.id, endpoint: 'evaluate-speaking', cacheKey }
+    )
     const jsonMatch = reply.match(/\{[\s\S]*\}/)
     if (!jsonMatch) return res.status(500).json({ error: 'Fehler bei der KI-Antwort.' })
     const result = JSON.parse(jsonMatch[0])
+    putCachedEvaluation(cacheKey, 'evaluate-speaking', result).catch(() => {})
     res.json(result)
   } catch (err) {
     console.error('Evaluate speaking error:', err.message)
@@ -3269,7 +3167,7 @@ app.get('/api/admin/ads-agent/logs', authMiddleware, adminMiddleware, async (req
 // ─── ADMIN: RUN AI AD AGENT (CSV-based, propose only) ─
 app.post('/api/admin/ads-agent/run', authMiddleware, adminMiddleware, async (req, res) => {
   try {
-    if (!OPENAI_API_KEY) return res.status(503).json({ error: 'OpenAI nicht konfiguriert.' })
+    if (!ANTHROPIC_API_KEY) return res.status(503).json({ error: 'Anthropic nicht konfiguriert.' })
 
     // 1. Gather metrics from uploaded CSV data
     const today = new Date()
@@ -3380,7 +3278,12 @@ Antworte NUR mit gültigem JSON:
 
     const userMessage = `Hier sind die aktuellen Metriken aus dem hochgeladenen CSV-Bericht:\n\n${JSON.stringify(metrics, null, 2)}\n\nAnalysiere die Performance und schlage Optimierungen vor. Du kannst KEINE Änderungen direkt durchführen — schlage sie nur vor.`
 
-    const aiReply = await callOpenAIChat(systemPrompt, [{ role: 'user', content: userMessage }], 2000)
+    const aiReply = await callAnthropicRaw(
+      DEFAULT_ANTHROPIC_MODEL, systemPrompt,
+      [{ role: 'user', content: userMessage }],
+      1500,
+      { userId: req.user.id, endpoint: 'ads-agent' }
+    )
     const jsonMatch = aiReply.match(/\{[\s\S]*\}/)
     let agentResult = { summary: aiReply, proposedChanges: [], recommendations: [] }
 
@@ -3779,57 +3682,6 @@ passed = true wenn total >= 60.`
   }
 })
 
-// TRANSCRIBE Sprechen audio with OpenAI Whisper
-// Body: raw binary audio (webm/ogg/mp3/wav). Header: Content-Type: audio/<format>
-app.post(
-  '/api/pruefungen/transcribe-sprechen',
-  express.raw({ type: ['audio/*', 'application/octet-stream'], limit: '15mb' }),
-  authMiddleware,
-  subscriptionMiddleware,
-  aiRateLimit,
-  async (req, res) => {
-    try {
-      if (!OPENAI_API_KEY) return res.status(503).json({ error: 'Servicio de transcripción no disponible.' })
-      if (!Buffer.isBuffer(req.body) || req.body.length === 0) {
-        return res.status(400).json({ error: 'Audio vacío.' })
-      }
-      if (req.body.length > 15 * 1024 * 1024) {
-        return res.status(413).json({ error: 'Audio demasiado grande (máx 15 MB).' })
-      }
-
-      const contentType = req.headers['content-type'] || 'audio/webm'
-      const ext = contentType.includes('mp3') ? 'mp3'
-        : contentType.includes('wav') ? 'wav'
-        : contentType.includes('ogg') ? 'ogg'
-        : contentType.includes('mp4') || contentType.includes('m4a') ? 'm4a'
-        : 'webm'
-
-      const formData = new FormData()
-      formData.append('file', new Blob([req.body], { type: contentType }), `recording.${ext}`)
-      formData.append('model', 'whisper-1')
-      formData.append('language', 'de')
-      formData.append('response_format', 'json')
-
-      const r = await fetch('https://api.openai.com/v1/audio/transcriptions', {
-        method: 'POST',
-        headers: { Authorization: `Bearer ${OPENAI_API_KEY}` },
-        body: formData,
-      })
-
-      if (!r.ok) {
-        const errText = await r.text()
-        console.error('Whisper error:', r.status, errText)
-        return res.status(502).json({ error: 'Error de transcripción.' })
-      }
-      const data = await r.json()
-      res.json({ transcript: data.text || '' })
-    } catch (err) {
-      console.error('Transcribe error:', err.message)
-      res.status(500).json({ error: 'Error al transcribir el audio.' })
-    }
-  }
-)
-
 // GRADE Sprechen submission (transcript) with Claude using Goethe rubric
 app.post('/api/pruefungen/grade-sprechen', authMiddleware, subscriptionMiddleware, aiRateLimit, aiDailyCap, async (req, res) => {
   try {
@@ -3963,37 +3815,13 @@ REGELN:
 - Wenn der Schüler technische Fragen zur App stellt, empfehle den Modus "Soporte"`
 }
 
-async function callOpenAIChat(systemPrompt, messages, maxTokens = 512) {
-  if (!OPENAI_API_KEY) throw new Error('OPENAI_API_KEY not configured')
-
-  const response = await fetch('https://api.openai.com/v1/chat/completions', {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${OPENAI_API_KEY}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      model: 'gpt-4o-mini',
-      max_tokens: maxTokens,
-      messages: [
-        { role: 'system', content: systemPrompt },
-        ...messages,
-      ],
-    }),
-  })
-
-  if (!response.ok) {
-    const err = await response.text()
-    throw new Error(`OpenAI API error ${response.status}: ${err}`)
-  }
-
-  const data = await response.json()
-  return data.choices[0].message.content
-}
-
-app.post('/api/chat', authMiddleware, aiRateLimit, async (req, res) => {
+// ─── CHATBOT (Haiku 4.5) ───────────────────────────
+// Voice in/out lives entirely in the browser now (Web Speech API for
+// recognition, SpeechSynthesis for playback), so there are no
+// transcribe/voice/TTS endpoints here — just plain text chat.
+app.post('/api/chat', authMiddleware, aiRateLimit, aiDailyCap, async (req, res) => {
   try {
-    if (!OPENAI_API_KEY) return res.status(503).json({ error: 'Servicio de IA no disponible.' })
+    if (!ANTHROPIC_API_KEY) return res.status(503).json({ error: 'Servicio de IA no disponible.' })
 
     const { message, mode, history } = req.body
     if (!message) return res.status(400).json({ error: 'Mensaje vacío.' })
@@ -4014,142 +3842,17 @@ app.post('/api/chat', authMiddleware, aiRateLimit, async (req, res) => {
       chatMessages.push({ role: 'user', content: message })
     }
 
-    const reply = await callOpenAIChat(systemPrompt, chatMessages, 512)
+    const reply = await callAnthropicRaw(
+      DEFAULT_ANTHROPIC_MODEL,
+      systemPrompt,
+      chatMessages,
+      400,
+      { userId: req.user.id, endpoint: 'chat' }
+    )
     res.json({ reply })
   } catch (err) {
     console.error('Chat error:', err)
     res.status(500).json({ error: 'Error al procesar el mensaje.' })
-  }
-})
-
-// ─── CHATBOT: TRANSCRIBE (Whisper) ──────────────────
-app.post(
-  '/api/chat/transcribe',
-  express.raw({ type: ['audio/*', 'application/octet-stream'], limit: '10mb' }),
-  authMiddleware,
-  aiRateLimit,
-  async (req, res) => {
-    try {
-      if (!OPENAI_API_KEY) return res.status(503).json({ error: 'Servicio no disponible.' })
-      if (!Buffer.isBuffer(req.body) || req.body.length === 0) return res.status(400).json({ error: 'Audio vacío.' })
-
-      const contentType = req.headers['content-type'] || 'audio/webm'
-      const ext = contentType.includes('mp3') ? 'mp3' : contentType.includes('wav') ? 'wav' : contentType.includes('ogg') ? 'ogg' : 'webm'
-
-      const formData = new FormData()
-      formData.append('file', new Blob([req.body], { type: contentType }), `chat.${ext}`)
-      formData.append('model', 'whisper-1')
-      formData.append('language', 'de')
-      formData.append('response_format', 'json')
-
-      const r = await fetch('https://api.openai.com/v1/audio/transcriptions', {
-        method: 'POST',
-        headers: { Authorization: `Bearer ${OPENAI_API_KEY}` },
-        body: formData,
-      })
-      if (!r.ok) throw new Error(`Whisper ${r.status}`)
-      const data = await r.json()
-      res.json({ transcript: data.text || '' })
-    } catch (err) {
-      console.error('Chat transcribe error:', err.message)
-      res.status(500).json({ error: 'Error al transcribir.' })
-    }
-  }
-)
-
-// ─── CHATBOT: VOICE (Transcribe → GPT → TTS) ───────
-app.post('/api/chat/voice', authMiddleware, aiRateLimit, async (req, res) => {
-  try {
-    if (!OPENAI_API_KEY) return res.status(503).json({ error: 'Servicio no disponible.' })
-
-    const { message, mode, history, voice } = req.body
-    if (!message) return res.status(400).json({ error: 'Mensaje vacío.' })
-
-    const userName = req.user.fullName || req.user.name || 'Estudiante'
-    const userLevel = req.user.level || 'A1'
-
-    const systemPrompt = mode === 'support'
-      ? `Du bist der Support-Assistent von "Schule". Antworte IMMER auf Deutsch (kurz, 2-3 Sätze). Der Nutzer ist ${userName}, Niveau ${userLevel}. Wenn du seine Muttersprache erkennst, füge kurze Übersetzungen in Klammern hinzu. Themen: Übungen, Abo (15€/Monat, 5 Tage gratis), Goethe-Prüfungen A1-C2, Karteikarten, Fortschritt. Bei Problemen: info@aprender-aleman.de`
-      : `Du bist ein freundlicher Deutschlehrer. Der Schüler heißt ${userName}, Niveau ${userLevel}. WICHTIG: Antworte IMMER auf Deutsch, KURZ (2-3 Sätze) — das ist ein Sprachgespräch. Wenn du die Muttersprache des Schülers erkennst, füge kurze Übersetzungen in Klammern hinzu. Für A1/A2: einfaches Deutsch + mehr Übersetzungen. Für B1+: normales Deutsch. Korrigiere Fehler freundlich. Sei natürlich und gesprächig.`
-
-    const chatMessages = []
-    if (Array.isArray(history)) {
-      for (const msg of history.slice(-14)) {
-        if (msg.role === 'user' || msg.role === 'assistant') {
-          chatMessages.push({ role: msg.role, content: msg.content })
-        }
-      }
-    }
-    if (!chatMessages.length || chatMessages[chatMessages.length - 1].content !== message) {
-      chatMessages.push({ role: 'user', content: message })
-    }
-
-    const reply = await callOpenAIChat(systemPrompt, chatMessages, 256)
-
-    // Generate TTS with OpenAI
-    const ttsVoice = voice || 'onyx'
-    const ttsRes = await fetch('https://api.openai.com/v1/audio/speech', {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${OPENAI_API_KEY}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        model: 'tts-1',
-        input: reply,
-        voice: ttsVoice,
-        response_format: 'mp3',
-        speed: 1.0,
-      }),
-    })
-    if (!ttsRes.ok) {
-      // Return text even if TTS fails
-      console.error('TTS error:', ttsRes.status)
-      return res.json({ reply, audioBase64: null })
-    }
-
-    const audioBuffer = Buffer.from(await ttsRes.arrayBuffer())
-    const audioBase64 = audioBuffer.toString('base64')
-
-    res.json({ reply, audioBase64 })
-  } catch (err) {
-    console.error('Voice chat error:', err)
-    res.status(500).json({ error: 'Error en la conversación por voz.' })
-  }
-})
-
-// ─── CHATBOT: TTS ONLY ─────────────────────────────
-app.post('/api/chat/tts', authMiddleware, aiRateLimit, async (req, res) => {
-  try {
-    if (!OPENAI_API_KEY) return res.status(503).json({ error: 'TTS no disponible.' })
-
-    const { text, voice } = req.body
-    if (!text) return res.status(400).json({ error: 'Texto vacío.' })
-
-    // Limit to 500 chars to control cost
-    const truncated = text.slice(0, 500)
-
-    const ttsRes = await fetch('https://api.openai.com/v1/audio/speech', {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${OPENAI_API_KEY}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        model: 'tts-1',
-        input: truncated,
-        voice: voice || 'onyx',
-        response_format: 'mp3',
-        speed: 1.0,
-      }),
-    })
-    if (!ttsRes.ok) throw new Error(`TTS ${ttsRes.status}`)
-
-    const audioBuffer = Buffer.from(await ttsRes.arrayBuffer())
-    res.json({ audioBase64: audioBuffer.toString('base64') })
-  } catch (err) {
-    console.error('TTS error:', err)
-    res.status(500).json({ error: 'Error al generar audio.' })
   }
 })
 

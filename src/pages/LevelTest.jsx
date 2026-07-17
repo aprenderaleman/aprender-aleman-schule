@@ -10,6 +10,7 @@ import { useAuth } from '../context/AuthContext'
 import Button from '../components/UI/Button'
 import Logo from '../components/UI/Logo'
 import { haptics } from '../utils/haptics'
+import { speak, stopSpeaking } from '../utils/speech'
 
 const API_URL = import.meta.env.VITE_API_URL || ''
 
@@ -550,75 +551,67 @@ function WritingArea({ value, onChange, minWords = 25, maxWords = 80 }) {
 function SpeakingArea({ response, onChange, minSeconds = 20, maxSeconds = 90 }) {
   const [recording, setRecording] = useState(false)
   const [seconds, setSeconds] = useState(0)
-  const [audioBlob, setAudioBlob] = useState(null)
-  const [transcribing, setTranscribing] = useState(false)
-  const mediaRecorderRef = useRef(null)
-  const chunksRef = useRef([])
+  const [transcript, setTranscript] = useState(response && !response.startsWith('[') ? response : '')
+  const [interim, setInterim] = useState('')
+  const recognitionRef = useRef(null)
   const timerRef = useRef(null)
 
-  const start = async () => {
-    try {
-      const stream = await navigator.mediaDevices.getUserMedia({ audio: true })
-      const mr = new MediaRecorder(stream)
-      chunksRef.current = []
-      mr.ondataavailable = e => { if (e.data.size > 0) chunksRef.current.push(e.data) }
-      mr.onstop = async () => {
-        const blob = new Blob(chunksRef.current, { type: 'audio/webm' })
-        setAudioBlob(blob)
-        stream.getTracks().forEach(t => t.stop())
-        await transcribe(blob)
-      }
-      mr.start()
-      mediaRecorderRef.current = mr
-      setRecording(true)
-      setSeconds(0)
-      timerRef.current = setInterval(() => {
-        setSeconds(s => {
-          if (s + 1 >= maxSeconds) { stop(); return s + 1 }
-          return s + 1
-        })
-      }, 1000)
-    } catch (err) {
-      alert('Mikrofon-Zugriff verweigert. Bitte Berechtigungen prüfen.')
+  const start = () => {
+    // Feature-detect Web Speech Recognition without importing again
+    const SR = window.SpeechRecognition || window.webkitSpeechRecognition
+    if (!SR) {
+      alert('Dein Browser unterstützt keine Spracherkennung. Nutze bitte Chrome, Edge oder Safari.')
+      return
     }
+    const rec = new SR()
+    rec.lang = 'de-DE'
+    rec.continuous = true
+    rec.interimResults = true
+    let final = ''
+    rec.onresult = (e) => {
+      let live = ''
+      for (let i = e.resultIndex; i < e.results.length; i++) {
+        const r = e.results[i]
+        if (r.isFinal) final += r[0].transcript + ' '
+        else live += r[0].transcript
+      }
+      setInterim((final + ' ' + live).trim())
+    }
+    rec.onend = () => {
+      const clean = final.trim()
+      setTranscript(clean)
+      onChange(clean || `[Audio recorded · ${seconds}s]`)
+      setInterim('')
+    }
+    try { rec.start() } catch {}
+    recognitionRef.current = rec
+    setRecording(true)
+    setSeconds(0)
+    timerRef.current = setInterval(() => {
+      setSeconds(s => {
+        if (s + 1 >= maxSeconds) { stop(); return s + 1 }
+        return s + 1
+      })
+    }, 1000)
   }
 
   const stop = () => {
-    if (mediaRecorderRef.current?.state === 'recording') mediaRecorderRef.current.stop()
+    if (recognitionRef.current) { try { recognitionRef.current.stop() } catch {} }
     setRecording(false)
     clearInterval(timerRef.current)
   }
 
-  const transcribe = async (blob) => {
-    // Cheap path: just store the blob locally as base64 and send as text-equivalent
-    // (the AI scorer evaluates the transcript, not the raw audio).
-    setTranscribing(true)
-    try {
-      const fd = new FormData()
-      fd.append('audio', blob, 'speaking.webm')
-      // Use the existing transcribe endpoint (auth-required) OR a public one.
-      // For anonymous level test users, we just send the blob as a data-URL fallback.
-      // For now, use a simple Whisper-like approach via a backend endpoint we'll add if needed.
-      // FALLBACK: convert blob to text length placeholder and let AI evaluate that
-      // (less ideal but keeps the test simple). The proper fix is to add a public
-      // transcribe endpoint — TODO.
-      onChange(`[Audio recorded · ${seconds}s]`)
-    } catch {
-      onChange(`[Audio recorded · ${seconds}s]`)
-    }
-    setTranscribing(false)
-  }
-
-  if (audioBlob) {
+  if (transcript) {
     return (
       <div className="text-center py-4 space-y-3">
         <div className="inline-flex items-center gap-2 text-success">
           <CheckCircle size={20} />
           <span className="font-semibold">Aufnahme gespeichert ({seconds}s)</span>
         </div>
+        <p className="text-xs italic text-muted-foreground max-w-md mx-auto">„{transcript}"</p>
         <button
           type="button"
-          onClick={() => { setAudioBlob(null); setSeconds(0); onChange('') }}
+          onClick={() => { setTranscript(''); setSeconds(0); onChange('') }}
           className="block mx-auto text-xs text-muted-foreground hover:text-foreground underline"
         >
           Erneut aufnehmen
@@ -647,23 +640,30 @@ function SpeakingArea({ response, onChange, minSeconds = 20, maxSeconds = 90 }) 
           ? `${String(Math.floor(seconds / 60)).padStart(2, '0')}:${String(seconds % 60).padStart(2, '0')}`
           : 'Tippe zum Aufnehmen'}
       </p>
+      {recording && interim && (
+        <p className="mt-2 text-xs italic text-muted-foreground max-w-md mx-auto">„{interim}"</p>
+      )}
     </div>
   )
 }
 
 function ListeningPlayer({ questionId }) {
   const [playing, setPlaying] = useState(false)
-  const audioRef = useRef(null)
-  const url = `${API_URL}/api/level-test/audio/${questionId}`
+  const [audioText, setAudioText] = useState('')
+
+  useEffect(() => {
+    let cancelled = false
+    fetch(`${API_URL}/api/level-test/audio/${questionId}`)
+      .then(r => r.ok ? r.json() : null)
+      .then(data => { if (!cancelled && data?.text) setAudioText(data.text) })
+      .catch(() => {})
+    return () => { cancelled = true; stopSpeaking() }
+  }, [questionId])
 
   const play = () => {
-    if (!audioRef.current) {
-      audioRef.current = new Audio(url)
-      audioRef.current.onended = () => setPlaying(false)
-    }
-    audioRef.current.currentTime = 0
-    audioRef.current.play()
+    if (!audioText) return
     setPlaying(true)
+    speak(audioText, { lang: 'de-DE', onEnd: () => setPlaying(false) })
   }
 
   return (
