@@ -1,0 +1,2143 @@
+{
+  "goethe-a1-lesen-01": {
+    "id": "goethe-a1-lesen-01",
+    "level": "A1",
+    "module": "lesen",
+    "maxScore": 20,
+    "passScore": 12,
+    "durationMinutes": 25,
+    "parts": [
+      {
+        "id": "teil1",
+        "kind": "questions",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "true-false",
+            "correct": false,
+            "points": 1
+          },
+          {
+            "id": "q2",
+            "type": "true-false",
+            "correct": true,
+            "points": 1
+          },
+          {
+            "id": "q3",
+            "type": "true-false",
+            "correct": true,
+            "points": 1
+          },
+          {
+            "id": "q4",
+            "type": "true-false",
+            "correct": false,
+            "points": 1
+          },
+          {
+            "id": "q5",
+            "type": "true-false",
+            "correct": true,
+            "points": 1
+          }
+        ]
+      },
+      {
+        "id": "teil2",
+        "kind": "questions",
+        "questions": [
+          {
+            "id": "q6",
+            "type": "matching",
+            "correct": {
+              "p1": "b",
+              "p2": "e",
+              "p3": "a",
+              "p4": "c",
+              "p5": "f"
+            },
+            "pointsPerItem": 1
+          }
+        ]
+      },
+      {
+        "id": "teil3",
+        "kind": "questions",
+        "questions": [
+          {
+            "id": "q7",
+            "type": "true-false",
+            "correct": false,
+            "points": 1
+          },
+          {
+            "id": "q8",
+            "type": "true-false",
+            "correct": true,
+            "points": 1
+          },
+          {
+            "id": "q9",
+            "type": "true-false",
+            "correct": true,
+            "points": 1
+          },
+          {
+            "id": "q10",
+            "type": "true-false",
+            "correct": false,
+            "points": 1
+          },
+          {
+            "id": "q11",
+            "type": "true-false",
+            "correct": true,
+            "points": 1
+          }
+        ]
+      },
+      {
+        "id": "teil4",
+        "kind": "questions",
+        "questions": [
+          {
+            "id": "q12",
+            "type": "multiple-choice",
+            "correct": "b",
+            "points": 1
+          },
+          {
+            "id": "q13",
+            "type": "multiple-choice",
+            "correct": "b",
+            "points": 1
+          },
+          {
+            "id": "q14",
+            "type": "multiple-choice",
+            "correct": "b",
+            "points": 1
+          },
+          {
+            "id": "q15",
+            "type": "multiple-choice",
+            "correct": "a",
+            "points": 1
+          },
+          {
+            "id": "q16",
+            "type": "multiple-choice",
+            "correct": "b",
+            "points": 1
+          }
+        ]
+      }
+    ]
+  },
+  "goethe-a1-lesen-02": {
+    "id": "goethe-a1-lesen-02",
+    "level": "A1",
+    "module": "lesen",
+    "maxScore": 20,
+    "passScore": 12,
+    "durationMinutes": 25,
+    "parts": [
+      {
+        "id": "teil1",
+        "kind": "questions",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "true-false",
+            "correct": false,
+            "points": 1
+          },
+          {
+            "id": "q2",
+            "type": "true-false",
+            "correct": true,
+            "points": 1
+          },
+          {
+            "id": "q3",
+            "type": "true-false",
+            "correct": false,
+            "points": 1
+          },
+          {
+            "id": "q4",
+            "type": "true-false",
+            "correct": true,
+            "points": 1
+          },
+          {
+            "id": "q5",
+            "type": "true-false",
+            "correct": false,
+            "points": 1
+          }
+        ]
+      },
+      {
+        "id": "teil2",
+        "kind": "questions",
+        "questions": [
+          {
+            "id": "q6",
+            "type": "matching",
+            "correct": {
+              "p1": "c",
+              "p2": "f",
+              "p3": "b",
+              "p4": "a",
+              "p5": "e"
+            },
+            "pointsPerItem": 1
+          }
+        ]
+      },
+      {
+        "id": "teil3",
+        "kind": "questions",
+        "questions": [
+          {
+            "id": "q7",
+            "type": "true-false",
+            "correct": true,
+            "points": 1
+          },
+          {
+            "id": "q8",
+            "type": "true-false",
+            "correct": false,
+            "points": 1
+          },
+          {
+            "id": "q9",
+            "type": "true-false",
+            "correct": true,
+            "points": 1
+          },
+          {
+            "id": "q10",
+            "type": "true-false",
+            "correct": false,
+            "points": 1
+          },
+          {
+            "id": "q11",
+            "type": "true-false",
+            "correct": true,
+            "points": 1
+          }
+        ]
+      },
+      {
+        "id": "teil4",
+        "kind": "questions",
+        "questions": [
+          {
+            "id": "q12",
+            "type": "multiple-choice",
+            "correct": "b",
+            "points": 1
+          },
+          {
+            "id": "q13",
+            "type": "multiple-choice",
+            "correct": "b",
+            "points": 1
+          },
+          {
+            "id": "q14",
+            "type": "multiple-choice",
+            "correct": "b",
+            "points": 1
+          },
+          {
+            "id": "q15",
+            "type": "multiple-choice",
+            "correct": "a",
+            "points": 1
+          },
+          {
+            "id": "q16",
+            "type": "multiple-choice",
+            "correct": "c",
+            "points": 1
+          }
+        ]
+      }
+    ]
+  },
+  "goethe-a1-lesen-03": {
+    "id": "goethe-a1-lesen-03",
+    "level": "A1",
+    "module": "lesen",
+    "maxScore": 20,
+    "passScore": 12,
+    "durationMinutes": 25,
+    "parts": [
+      {
+        "id": "teil1",
+        "kind": "questions",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "true-false",
+            "correct": false,
+            "points": 1
+          },
+          {
+            "id": "q2",
+            "type": "true-false",
+            "correct": true,
+            "points": 1
+          },
+          {
+            "id": "q3",
+            "type": "true-false",
+            "correct": false,
+            "points": 1
+          },
+          {
+            "id": "q4",
+            "type": "true-false",
+            "correct": true,
+            "points": 1
+          },
+          {
+            "id": "q5",
+            "type": "true-false",
+            "correct": false,
+            "points": 1
+          }
+        ]
+      },
+      {
+        "id": "teil2",
+        "kind": "questions",
+        "questions": [
+          {
+            "id": "q6",
+            "type": "matching",
+            "correct": {
+              "p1": "c",
+              "p2": "f",
+              "p3": "b",
+              "p4": "a",
+              "p5": "e"
+            },
+            "pointsPerItem": 1
+          }
+        ]
+      },
+      {
+        "id": "teil3",
+        "kind": "questions",
+        "questions": [
+          {
+            "id": "q7",
+            "type": "true-false",
+            "correct": false,
+            "points": 1
+          },
+          {
+            "id": "q8",
+            "type": "true-false",
+            "correct": false,
+            "points": 1
+          },
+          {
+            "id": "q9",
+            "type": "true-false",
+            "correct": false,
+            "points": 1
+          },
+          {
+            "id": "q10",
+            "type": "true-false",
+            "correct": true,
+            "points": 1
+          },
+          {
+            "id": "q11",
+            "type": "true-false",
+            "correct": true,
+            "points": 1
+          }
+        ]
+      },
+      {
+        "id": "teil4",
+        "kind": "questions",
+        "questions": [
+          {
+            "id": "q12",
+            "type": "multiple-choice",
+            "correct": "b",
+            "points": 1
+          },
+          {
+            "id": "q13",
+            "type": "multiple-choice",
+            "correct": "b",
+            "points": 1
+          },
+          {
+            "id": "q14",
+            "type": "multiple-choice",
+            "correct": "b",
+            "points": 1
+          },
+          {
+            "id": "q15",
+            "type": "multiple-choice",
+            "correct": "c",
+            "points": 1
+          },
+          {
+            "id": "q16",
+            "type": "multiple-choice",
+            "correct": "a",
+            "points": 1
+          }
+        ]
+      }
+    ]
+  },
+  "goethe-a1-hoeren-modellsatz-1": {
+    "id": "goethe-a1-hoeren-modellsatz-1",
+    "level": "A1",
+    "module": "hoeren",
+    "maxScore": 15,
+    "passScore": 9,
+    "durationMinutes": 20,
+    "parts": [
+      {
+        "id": "teil-1",
+        "kind": "questions",
+        "questions": [
+          {
+            "id": "h1-1",
+            "type": "multiple-choice",
+            "correct": "b",
+            "points": 1
+          },
+          {
+            "id": "h1-2",
+            "type": "multiple-choice",
+            "correct": "c",
+            "points": 1
+          },
+          {
+            "id": "h1-3",
+            "type": "multiple-choice",
+            "correct": "b",
+            "points": 1
+          },
+          {
+            "id": "h1-4",
+            "type": "multiple-choice",
+            "correct": "c",
+            "points": 1
+          },
+          {
+            "id": "h1-5",
+            "type": "multiple-choice",
+            "correct": "b",
+            "points": 1
+          },
+          {
+            "id": "h1-6",
+            "type": "multiple-choice",
+            "correct": "c",
+            "points": 1
+          }
+        ]
+      },
+      {
+        "id": "teil-2",
+        "kind": "questions",
+        "questions": [
+          {
+            "id": "h2-1",
+            "type": "true-false",
+            "correct": true,
+            "points": 1
+          },
+          {
+            "id": "h2-2",
+            "type": "true-false",
+            "correct": false,
+            "points": 1
+          },
+          {
+            "id": "h2-3",
+            "type": "true-false",
+            "correct": true,
+            "points": 1
+          },
+          {
+            "id": "h2-4",
+            "type": "true-false",
+            "correct": false,
+            "points": 1
+          }
+        ]
+      },
+      {
+        "id": "teil-3",
+        "kind": "questions",
+        "questions": [
+          {
+            "id": "h3-1",
+            "type": "multiple-choice",
+            "correct": "b",
+            "points": 1
+          },
+          {
+            "id": "h3-2",
+            "type": "multiple-choice",
+            "correct": "b",
+            "points": 1
+          },
+          {
+            "id": "h3-3",
+            "type": "multiple-choice",
+            "correct": "b",
+            "points": 1
+          },
+          {
+            "id": "h3-4",
+            "type": "multiple-choice",
+            "correct": "b",
+            "points": 1
+          },
+          {
+            "id": "h3-5",
+            "type": "multiple-choice",
+            "correct": "b",
+            "points": 1
+          }
+        ]
+      }
+    ]
+  },
+  "goethe-a1-schreiben-modellsatz-1": {
+    "id": "goethe-a1-schreiben-modellsatz-1",
+    "level": "A1",
+    "module": "schreiben",
+    "maxScore": 25,
+    "passScore": 15,
+    "durationMinutes": 20,
+    "parts": [
+      {
+        "id": "teil-1",
+        "kind": "formular",
+        "fields": [
+          {
+            "id": "name",
+            "expected": [
+              "Schneider"
+            ],
+            "points": 2
+          },
+          {
+            "id": "geburtsdatum",
+            "expected": [
+              "12.03.1995",
+              "12.3.1995",
+              "12. März 1995"
+            ],
+            "points": 2
+          },
+          {
+            "id": "staatsangehoerigkeit",
+            "expected": [
+              "Österreich",
+              "österreichisch",
+              "Österreicherin"
+            ],
+            "points": 2
+          },
+          {
+            "id": "plz_ort",
+            "expected": [
+              "80336 München"
+            ],
+            "points": 2
+          },
+          {
+            "id": "beruf",
+            "expected": [
+              "Krankenschwester"
+            ],
+            "points": 2
+          }
+        ]
+      },
+      {
+        "id": "teil-2",
+        "kind": "writing-task",
+        "maxScore": 15,
+        "taskPrompt": "Schreiben Sie eine E-Mail an Ihre Deutschlehrerin Frau Wagner zu ihrem Geburtstag. Behandeln Sie alle drei Punkte."
+      }
+    ]
+  },
+  "goethe-a1-sprechen-modellsatz-1": {
+    "id": "goethe-a1-sprechen-modellsatz-1",
+    "level": "A1",
+    "module": "sprechen",
+    "maxScore": 25,
+    "passScore": 15,
+    "durationMinutes": 5,
+    "parts": [
+      {
+        "id": "teil-1",
+        "kind": "speaking-task",
+        "maxScore": 25,
+        "taskPrompt": "Stelle dich vor. Sprich über deinen Namen, dein Alter, dein Land, deine Sprachen, deinen Beruf und deine Hobbys."
+      }
+    ]
+  },
+  "goethe-a2-lesen-modellsatz-1": {
+    "id": "goethe-a2-lesen-modellsatz-1",
+    "level": "A2",
+    "module": "lesen",
+    "maxScore": 20,
+    "passScore": 12,
+    "durationMinutes": 30,
+    "parts": [
+      {
+        "id": "teil-1",
+        "kind": "questions",
+        "questions": [
+          {
+            "id": "a2l1-1",
+            "type": "multiple-choice",
+            "correct": "b",
+            "points": 1
+          },
+          {
+            "id": "a2l1-2",
+            "type": "multiple-choice",
+            "correct": "b",
+            "points": 1
+          },
+          {
+            "id": "a2l1-3",
+            "type": "multiple-choice",
+            "correct": "b",
+            "points": 1
+          },
+          {
+            "id": "a2l1-4",
+            "type": "multiple-choice",
+            "correct": "b",
+            "points": 1
+          },
+          {
+            "id": "a2l1-5",
+            "type": "multiple-choice",
+            "correct": "c",
+            "points": 1
+          }
+        ]
+      },
+      {
+        "id": "teil-2",
+        "kind": "questions",
+        "questions": [
+          {
+            "id": "a2l2",
+            "type": "matching",
+            "correct": {
+              "p1": "a",
+              "p2": "f",
+              "p3": "b",
+              "p4": "c",
+              "p5": "e"
+            },
+            "pointsPerItem": 1
+          }
+        ]
+      },
+      {
+        "id": "teil-3",
+        "kind": "questions",
+        "questions": [
+          {
+            "id": "a2l3-1",
+            "type": "true-false",
+            "correct": false,
+            "points": 1
+          },
+          {
+            "id": "a2l3-2",
+            "type": "true-false",
+            "correct": true,
+            "points": 1
+          },
+          {
+            "id": "a2l3-3",
+            "type": "true-false",
+            "correct": false,
+            "points": 1
+          },
+          {
+            "id": "a2l3-4",
+            "type": "true-false",
+            "correct": true,
+            "points": 1
+          },
+          {
+            "id": "a2l3-5",
+            "type": "true-false",
+            "correct": false,
+            "points": 1
+          }
+        ]
+      },
+      {
+        "id": "teil-4",
+        "kind": "questions",
+        "questions": [
+          {
+            "id": "a2l4-1",
+            "type": "multiple-choice",
+            "correct": "b",
+            "points": 1
+          },
+          {
+            "id": "a2l4-2",
+            "type": "multiple-choice",
+            "correct": "b",
+            "points": 1
+          },
+          {
+            "id": "a2l4-3",
+            "type": "multiple-choice",
+            "correct": "b",
+            "points": 1
+          },
+          {
+            "id": "a2l4-4",
+            "type": "multiple-choice",
+            "correct": "b",
+            "points": 1
+          },
+          {
+            "id": "a2l4-5",
+            "type": "multiple-choice",
+            "correct": "b",
+            "points": 1
+          }
+        ]
+      }
+    ]
+  },
+  "goethe-a2-hoeren-modellsatz-1": {
+    "id": "goethe-a2-hoeren-modellsatz-1",
+    "level": "A2",
+    "module": "hoeren",
+    "maxScore": 20,
+    "passScore": 12,
+    "durationMinutes": 30,
+    "parts": [
+      {
+        "id": "teil-1",
+        "kind": "questions",
+        "questions": [
+          {
+            "id": "a2h1-1",
+            "type": "multiple-choice",
+            "correct": "b",
+            "points": 1
+          },
+          {
+            "id": "a2h1-2",
+            "type": "multiple-choice",
+            "correct": "b",
+            "points": 1
+          },
+          {
+            "id": "a2h1-3",
+            "type": "multiple-choice",
+            "correct": "a",
+            "points": 1
+          },
+          {
+            "id": "a2h1-4",
+            "type": "multiple-choice",
+            "correct": "b",
+            "points": 1
+          },
+          {
+            "id": "a2h1-5",
+            "type": "multiple-choice",
+            "correct": "b",
+            "points": 1
+          }
+        ]
+      },
+      {
+        "id": "teil-2",
+        "kind": "questions",
+        "questions": [
+          {
+            "id": "a2h2-1",
+            "type": "true-false",
+            "correct": false,
+            "points": 1
+          },
+          {
+            "id": "a2h2-2",
+            "type": "true-false",
+            "correct": true,
+            "points": 1
+          },
+          {
+            "id": "a2h2-3",
+            "type": "true-false",
+            "correct": false,
+            "points": 1
+          },
+          {
+            "id": "a2h2-4",
+            "type": "true-false",
+            "correct": true,
+            "points": 1
+          },
+          {
+            "id": "a2h2-5",
+            "type": "true-false",
+            "correct": false,
+            "points": 1
+          }
+        ]
+      },
+      {
+        "id": "teil-3",
+        "kind": "questions",
+        "questions": [
+          {
+            "id": "a2h3-1",
+            "type": "multiple-choice",
+            "correct": "a",
+            "points": 1
+          },
+          {
+            "id": "a2h3-2",
+            "type": "multiple-choice",
+            "correct": "b",
+            "points": 1
+          },
+          {
+            "id": "a2h3-3",
+            "type": "multiple-choice",
+            "correct": "b",
+            "points": 1
+          },
+          {
+            "id": "a2h3-4",
+            "type": "multiple-choice",
+            "correct": "c",
+            "points": 1
+          },
+          {
+            "id": "a2h3-5",
+            "type": "multiple-choice",
+            "correct": "b",
+            "points": 1
+          }
+        ]
+      },
+      {
+        "id": "teil-4",
+        "kind": "questions",
+        "questions": [
+          {
+            "id": "a2h4-1",
+            "type": "true-false",
+            "correct": false,
+            "points": 1
+          },
+          {
+            "id": "a2h4-2",
+            "type": "true-false",
+            "correct": true,
+            "points": 1
+          },
+          {
+            "id": "a2h4-3",
+            "type": "true-false",
+            "correct": true,
+            "points": 1
+          },
+          {
+            "id": "a2h4-4",
+            "type": "true-false",
+            "correct": false,
+            "points": 1
+          },
+          {
+            "id": "a2h4-5",
+            "type": "true-false",
+            "correct": true,
+            "points": 1
+          }
+        ]
+      }
+    ]
+  },
+  "goethe-a2-schreiben-modellsatz-1": {
+    "id": "goethe-a2-schreiben-modellsatz-1",
+    "level": "A2",
+    "module": "schreiben",
+    "maxScore": 30,
+    "passScore": 18,
+    "durationMinutes": 30,
+    "parts": [
+      {
+        "id": "teil-1",
+        "kind": "writing-task",
+        "maxScore": 15,
+        "taskPrompt": "Schreibe Leon eine Nachricht über dein verpasstes Treffen. Behandle alle drei Punkte."
+      },
+      {
+        "id": "teil-2",
+        "kind": "writing-task",
+        "maxScore": 15,
+        "taskPrompt": "Du interessierst dich für das „FitClub München“. Schreibe eine formelle E-Mail an das Fitnessstudio und behandle alle drei Punkte."
+      }
+    ]
+  },
+  "goethe-a2-sprechen-modellsatz-1": {
+    "id": "goethe-a2-sprechen-modellsatz-1",
+    "level": "A2",
+    "module": "sprechen",
+    "maxScore": 50,
+    "passScore": 30,
+    "durationMinutes": 8,
+    "parts": [
+      {
+        "id": "teil-1",
+        "kind": "speaking-task",
+        "maxScore": 25,
+        "taskPrompt": "Beantworte die folgenden Fragen ausführlich:"
+      },
+      {
+        "id": "teil-2",
+        "kind": "speaking-task",
+        "maxScore": 25,
+        "taskPrompt": "Thema: „Mein letzter Urlaub\". Erzähle ausführlich darüber. Gehe dabei auf folgende Punkte ein:"
+      }
+    ]
+  },
+  "goethe-b1-lesen-modellsatz-1": {
+    "id": "goethe-b1-lesen-modellsatz-1",
+    "level": "B1",
+    "module": "lesen",
+    "maxScore": 25,
+    "passScore": 15,
+    "durationMinutes": 50,
+    "parts": [
+      {
+        "id": "teil-1",
+        "kind": "questions",
+        "questions": [
+          {
+            "id": "b1l1-1",
+            "type": "true-false",
+            "correct": true,
+            "points": 1
+          },
+          {
+            "id": "b1l1-2",
+            "type": "true-false",
+            "correct": false,
+            "points": 1
+          },
+          {
+            "id": "b1l1-3",
+            "type": "true-false",
+            "correct": false,
+            "points": 1
+          },
+          {
+            "id": "b1l1-4",
+            "type": "true-false",
+            "correct": true,
+            "points": 1
+          },
+          {
+            "id": "b1l1-5",
+            "type": "true-false",
+            "correct": false,
+            "points": 1
+          }
+        ]
+      },
+      {
+        "id": "teil-2",
+        "kind": "questions",
+        "questions": [
+          {
+            "id": "b1l2-1",
+            "type": "multiple-choice",
+            "correct": "b",
+            "points": 1
+          },
+          {
+            "id": "b1l2-2",
+            "type": "multiple-choice",
+            "correct": "b",
+            "points": 1
+          },
+          {
+            "id": "b1l2-3",
+            "type": "multiple-choice",
+            "correct": "a",
+            "points": 1
+          },
+          {
+            "id": "b1l2-4",
+            "type": "multiple-choice",
+            "correct": "b",
+            "points": 1
+          },
+          {
+            "id": "b1l2-5",
+            "type": "multiple-choice",
+            "correct": "b",
+            "points": 1
+          }
+        ]
+      },
+      {
+        "id": "teil-3",
+        "kind": "questions",
+        "questions": [
+          {
+            "id": "b1l3",
+            "type": "matching",
+            "correct": {
+              "p1": "c",
+              "p2": "a",
+              "p3": "e",
+              "p4": "b",
+              "p5": "f"
+            },
+            "pointsPerItem": 1
+          }
+        ]
+      },
+      {
+        "id": "teil-4",
+        "kind": "questions",
+        "questions": [
+          {
+            "id": "b1l4-1",
+            "type": "multiple-choice",
+            "correct": "b",
+            "points": 1
+          },
+          {
+            "id": "b1l4-2",
+            "type": "multiple-choice",
+            "correct": "a",
+            "points": 1
+          },
+          {
+            "id": "b1l4-3",
+            "type": "multiple-choice",
+            "correct": "b",
+            "points": 1
+          },
+          {
+            "id": "b1l4-4",
+            "type": "multiple-choice",
+            "correct": "a",
+            "points": 1
+          },
+          {
+            "id": "b1l4-5",
+            "type": "multiple-choice",
+            "correct": "a",
+            "points": 1
+          }
+        ]
+      },
+      {
+        "id": "teil-5",
+        "kind": "questions",
+        "questions": [
+          {
+            "id": "b1l5-1",
+            "type": "multiple-choice",
+            "correct": "b",
+            "points": 1
+          },
+          {
+            "id": "b1l5-2",
+            "type": "multiple-choice",
+            "correct": "b",
+            "points": 1
+          },
+          {
+            "id": "b1l5-3",
+            "type": "multiple-choice",
+            "correct": "b",
+            "points": 1
+          },
+          {
+            "id": "b1l5-4",
+            "type": "multiple-choice",
+            "correct": "b",
+            "points": 1
+          },
+          {
+            "id": "b1l5-5",
+            "type": "multiple-choice",
+            "correct": "b",
+            "points": 1
+          }
+        ]
+      }
+    ]
+  },
+  "goethe-b1-hoeren-modellsatz-1": {
+    "id": "goethe-b1-hoeren-modellsatz-1",
+    "level": "B1",
+    "module": "hoeren",
+    "maxScore": 20,
+    "passScore": 12,
+    "durationMinutes": 35,
+    "parts": [
+      {
+        "id": "teil-1",
+        "kind": "questions",
+        "questions": [
+          {
+            "id": "b1h1-1",
+            "type": "multiple-choice",
+            "correct": "b",
+            "points": 1
+          },
+          {
+            "id": "b1h1-2",
+            "type": "multiple-choice",
+            "correct": "b",
+            "points": 1
+          },
+          {
+            "id": "b1h1-3",
+            "type": "multiple-choice",
+            "correct": "b",
+            "points": 1
+          },
+          {
+            "id": "b1h1-4",
+            "type": "multiple-choice",
+            "correct": "b",
+            "points": 1
+          },
+          {
+            "id": "b1h1-5",
+            "type": "multiple-choice",
+            "correct": "b",
+            "points": 1
+          }
+        ]
+      },
+      {
+        "id": "teil-2",
+        "kind": "questions",
+        "questions": [
+          {
+            "id": "b1h2-1",
+            "type": "multiple-choice",
+            "correct": "b",
+            "points": 1
+          },
+          {
+            "id": "b1h2-2",
+            "type": "multiple-choice",
+            "correct": "c",
+            "points": 1
+          },
+          {
+            "id": "b1h2-3",
+            "type": "multiple-choice",
+            "correct": "a",
+            "points": 1
+          },
+          {
+            "id": "b1h2-4",
+            "type": "multiple-choice",
+            "correct": "c",
+            "points": 1
+          },
+          {
+            "id": "b1h2-5",
+            "type": "multiple-choice",
+            "correct": "c",
+            "points": 1
+          }
+        ]
+      },
+      {
+        "id": "teil-3",
+        "kind": "questions",
+        "questions": [
+          {
+            "id": "b1h3-1",
+            "type": "true-false",
+            "correct": true,
+            "points": 1
+          },
+          {
+            "id": "b1h3-2",
+            "type": "true-false",
+            "correct": false,
+            "points": 1
+          },
+          {
+            "id": "b1h3-3",
+            "type": "true-false",
+            "correct": true,
+            "points": 1
+          },
+          {
+            "id": "b1h3-4",
+            "type": "true-false",
+            "correct": false,
+            "points": 1
+          },
+          {
+            "id": "b1h3-5",
+            "type": "true-false",
+            "correct": true,
+            "points": 1
+          }
+        ]
+      },
+      {
+        "id": "teil-4",
+        "kind": "questions",
+        "questions": [
+          {
+            "id": "b1h4-1",
+            "type": "multiple-choice",
+            "correct": "b",
+            "points": 1
+          },
+          {
+            "id": "b1h4-2",
+            "type": "multiple-choice",
+            "correct": "m",
+            "points": 1
+          },
+          {
+            "id": "b1h4-3",
+            "type": "multiple-choice",
+            "correct": "m",
+            "points": 1
+          },
+          {
+            "id": "b1h4-4",
+            "type": "multiple-choice",
+            "correct": "a",
+            "points": 1
+          },
+          {
+            "id": "b1h4-5",
+            "type": "multiple-choice",
+            "correct": "b",
+            "points": 1
+          }
+        ]
+      }
+    ]
+  },
+  "goethe-b1-schreiben-modellsatz-1": {
+    "id": "goethe-b1-schreiben-modellsatz-1",
+    "level": "B1",
+    "module": "schreiben",
+    "maxScore": 60,
+    "passScore": 36,
+    "durationMinutes": 60,
+    "parts": [
+      {
+        "id": "teil-1",
+        "kind": "writing-task",
+        "maxScore": 25,
+        "taskPrompt": "Schreibe deiner Freundin Lisa eine E-Mail über ihre Einladung. Behandle alle drei Punkte ausführlich."
+      },
+      {
+        "id": "teil-2",
+        "kind": "writing-task",
+        "maxScore": 25,
+        "taskPrompt": "Schreibe einen Forumsbeitrag, in dem du deine Meinung zum Thema „Smartphones für Kinder erst ab 14 Jahren?“ äußerst. Behandle die folgenden Punkte."
+      },
+      {
+        "id": "teil-3",
+        "kind": "writing-task",
+        "maxScore": 10,
+        "taskPrompt": "Schreibe Frau Schmidt eine kurze E-Mail. Behandle die folgenden Punkte."
+      }
+    ]
+  },
+  "goethe-b1-sprechen-modellsatz-1": {
+    "id": "goethe-b1-sprechen-modellsatz-1",
+    "level": "B1",
+    "module": "sprechen",
+    "maxScore": 50,
+    "passScore": 30,
+    "durationMinutes": 10,
+    "parts": [
+      {
+        "id": "teil-1",
+        "kind": "speaking-task",
+        "maxScore": 25,
+        "taskPrompt": "Präsentation zum Thema „Soziale Medien im Alltag\". Strukturiere deinen Vortrag mit Einleitung, Hauptteil und Schluss. Gehe dabei auf folgende Punkte ein:"
+      },
+      {
+        "id": "teil-2",
+        "kind": "speaking-task",
+        "maxScore": 25,
+        "taskPrompt": "Vorschlag: „Schüler sollten im Unterricht keine Smartphones benutzen dürfen.\" Was hältst du davon? Begründe deine Meinung."
+      }
+    ]
+  },
+  "goethe-b2-lesen-modellsatz-1": {
+    "id": "goethe-b2-lesen-modellsatz-1",
+    "level": "B2",
+    "module": "lesen",
+    "maxScore": 20,
+    "passScore": 12,
+    "durationMinutes": 50,
+    "parts": [
+      {
+        "id": "teil-1",
+        "kind": "questions",
+        "questions": [
+          {
+            "id": "b2l1-1",
+            "type": "multiple-choice",
+            "correct": "b",
+            "points": 1
+          },
+          {
+            "id": "b2l1-2",
+            "type": "multiple-choice",
+            "correct": "b",
+            "points": 1
+          },
+          {
+            "id": "b2l1-3",
+            "type": "multiple-choice",
+            "correct": "b",
+            "points": 1
+          },
+          {
+            "id": "b2l1-4",
+            "type": "multiple-choice",
+            "correct": "b",
+            "points": 1
+          },
+          {
+            "id": "b2l1-5",
+            "type": "multiple-choice",
+            "correct": "b",
+            "points": 1
+          }
+        ]
+      },
+      {
+        "id": "teil-2",
+        "kind": "questions",
+        "questions": [
+          {
+            "id": "b2l2-1",
+            "type": "multiple-choice",
+            "correct": "b",
+            "points": 1
+          },
+          {
+            "id": "b2l2-2",
+            "type": "multiple-choice",
+            "correct": "a",
+            "points": 1
+          },
+          {
+            "id": "b2l2-3",
+            "type": "multiple-choice",
+            "correct": "b",
+            "points": 1
+          },
+          {
+            "id": "b2l2-4",
+            "type": "multiple-choice",
+            "correct": "a",
+            "points": 1
+          },
+          {
+            "id": "b2l2-5",
+            "type": "multiple-choice",
+            "correct": "b",
+            "points": 1
+          }
+        ]
+      },
+      {
+        "id": "teil-3",
+        "kind": "questions",
+        "questions": [
+          {
+            "id": "b2l3-1",
+            "type": "true-false",
+            "correct": true,
+            "points": 1
+          },
+          {
+            "id": "b2l3-2",
+            "type": "true-false",
+            "correct": false,
+            "points": 1
+          },
+          {
+            "id": "b2l3-3",
+            "type": "true-false",
+            "correct": false,
+            "points": 1
+          },
+          {
+            "id": "b2l3-4",
+            "type": "true-false",
+            "correct": true,
+            "points": 1
+          },
+          {
+            "id": "b2l3-5",
+            "type": "true-false",
+            "correct": false,
+            "points": 1
+          }
+        ]
+      },
+      {
+        "id": "teil-4",
+        "kind": "questions",
+        "questions": [
+          {
+            "id": "b2l4-1",
+            "type": "multiple-choice",
+            "correct": "b",
+            "points": 1
+          },
+          {
+            "id": "b2l4-2",
+            "type": "multiple-choice",
+            "correct": "c",
+            "points": 1
+          },
+          {
+            "id": "b2l4-3",
+            "type": "multiple-choice",
+            "correct": "b",
+            "points": 1
+          },
+          {
+            "id": "b2l4-4",
+            "type": "multiple-choice",
+            "correct": "b",
+            "points": 1
+          },
+          {
+            "id": "b2l4-5",
+            "type": "multiple-choice",
+            "correct": "c",
+            "points": 1
+          }
+        ]
+      }
+    ]
+  },
+  "goethe-b2-hoeren-modellsatz-1": {
+    "id": "goethe-b2-hoeren-modellsatz-1",
+    "level": "B2",
+    "module": "hoeren",
+    "maxScore": 20,
+    "passScore": 12,
+    "durationMinutes": 40,
+    "parts": [
+      {
+        "id": "teil-1",
+        "kind": "questions",
+        "questions": [
+          {
+            "id": "b2h1-1",
+            "type": "multiple-choice",
+            "correct": "b",
+            "points": 1
+          },
+          {
+            "id": "b2h1-2",
+            "type": "multiple-choice",
+            "correct": "b",
+            "points": 1
+          },
+          {
+            "id": "b2h1-3",
+            "type": "multiple-choice",
+            "correct": "b",
+            "points": 1
+          },
+          {
+            "id": "b2h1-4",
+            "type": "multiple-choice",
+            "correct": "b",
+            "points": 1
+          },
+          {
+            "id": "b2h1-5",
+            "type": "multiple-choice",
+            "correct": "b",
+            "points": 1
+          }
+        ]
+      },
+      {
+        "id": "teil-2",
+        "kind": "questions",
+        "questions": [
+          {
+            "id": "b2h2-1",
+            "type": "true-false",
+            "correct": true,
+            "points": 1
+          },
+          {
+            "id": "b2h2-2",
+            "type": "true-false",
+            "correct": false,
+            "points": 1
+          },
+          {
+            "id": "b2h2-3",
+            "type": "true-false",
+            "correct": false,
+            "points": 1
+          },
+          {
+            "id": "b2h2-4",
+            "type": "true-false",
+            "correct": true,
+            "points": 1
+          },
+          {
+            "id": "b2h2-5",
+            "type": "true-false",
+            "correct": false,
+            "points": 1
+          }
+        ]
+      },
+      {
+        "id": "teil-3",
+        "kind": "questions",
+        "questions": [
+          {
+            "id": "b2h3-1",
+            "type": "multiple-choice",
+            "correct": "b",
+            "points": 1
+          },
+          {
+            "id": "b2h3-2",
+            "type": "multiple-choice",
+            "correct": "b",
+            "points": 1
+          },
+          {
+            "id": "b2h3-3",
+            "type": "multiple-choice",
+            "correct": "b",
+            "points": 1
+          },
+          {
+            "id": "b2h3-4",
+            "type": "multiple-choice",
+            "correct": "a",
+            "points": 1
+          },
+          {
+            "id": "b2h3-5",
+            "type": "multiple-choice",
+            "correct": "b",
+            "points": 1
+          }
+        ]
+      },
+      {
+        "id": "teil-4",
+        "kind": "questions",
+        "questions": [
+          {
+            "id": "b2h4-1",
+            "type": "true-false",
+            "correct": true,
+            "points": 1
+          },
+          {
+            "id": "b2h4-2",
+            "type": "true-false",
+            "correct": false,
+            "points": 1
+          },
+          {
+            "id": "b2h4-3",
+            "type": "true-false",
+            "correct": true,
+            "points": 1
+          },
+          {
+            "id": "b2h4-4",
+            "type": "true-false",
+            "correct": false,
+            "points": 1
+          },
+          {
+            "id": "b2h4-5",
+            "type": "true-false",
+            "correct": false,
+            "points": 1
+          }
+        ]
+      }
+    ]
+  },
+  "goethe-b2-schreiben-modellsatz-1": {
+    "id": "goethe-b2-schreiben-modellsatz-1",
+    "level": "B2",
+    "module": "schreiben",
+    "maxScore": 50,
+    "passScore": 30,
+    "durationMinutes": 75,
+    "parts": [
+      {
+        "id": "teil-1",
+        "kind": "writing-task",
+        "maxScore": 25,
+        "taskPrompt": "Schreibe einen Beitrag für das Forum „Bildungspolitik aktuell“, in dem du Stellung zur Frage „Studiengebühren ja oder nein?“ nimmst. Behandle alle Punkte ausführlich."
+      },
+      {
+        "id": "teil-2",
+        "kind": "writing-task",
+        "maxScore": 25,
+        "taskPrompt": "Schreibe eine Beschwerde-E-Mail an den Kundendienst der TechShop GmbH. Behandle alle Punkte und achte auf einen formellen Stil."
+      }
+    ]
+  },
+  "goethe-b2-sprechen-modellsatz-1": {
+    "id": "goethe-b2-sprechen-modellsatz-1",
+    "level": "B2",
+    "module": "sprechen",
+    "maxScore": 50,
+    "passScore": 30,
+    "durationMinutes": 12,
+    "parts": [
+      {
+        "id": "teil-1",
+        "kind": "speaking-task",
+        "maxScore": 25,
+        "taskPrompt": "Vortrag zum Thema „Vor- und Nachteile des Lebens in der Großstadt\". Strukturiere deinen Vortrag klar (Einleitung, Hauptteil, Schluss). Behandle dabei folgende Punkte:"
+      },
+      {
+        "id": "teil-2",
+        "kind": "speaking-task",
+        "maxScore": 25,
+        "taskPrompt": "Diskussionspunkt: „Junge Menschen sollten nach der Schule erst ein Jahr arbeiten oder reisen, bevor sie studieren.\" Nimm Stellung und reagiere auf mögliche Gegenargumente."
+      }
+    ]
+  },
+  "goethe-c1-lesen-modellsatz-1": {
+    "id": "goethe-c1-lesen-modellsatz-1",
+    "level": "C1",
+    "module": "lesen",
+    "maxScore": 15,
+    "passScore": 9,
+    "durationMinutes": 50,
+    "parts": [
+      {
+        "id": "teil-1",
+        "kind": "questions",
+        "questions": [
+          {
+            "id": "c1l1-1",
+            "type": "multiple-choice",
+            "correct": "b",
+            "points": 1
+          },
+          {
+            "id": "c1l1-2",
+            "type": "multiple-choice",
+            "correct": "c",
+            "points": 1
+          },
+          {
+            "id": "c1l1-3",
+            "type": "multiple-choice",
+            "correct": "a",
+            "points": 1
+          },
+          {
+            "id": "c1l1-4",
+            "type": "multiple-choice",
+            "correct": "b",
+            "points": 1
+          },
+          {
+            "id": "c1l1-5",
+            "type": "multiple-choice",
+            "correct": "b",
+            "points": 1
+          }
+        ]
+      },
+      {
+        "id": "teil-2",
+        "kind": "questions",
+        "questions": [
+          {
+            "id": "c1l2-1",
+            "type": "true-false",
+            "correct": false,
+            "points": 1
+          },
+          {
+            "id": "c1l2-2",
+            "type": "true-false",
+            "correct": true,
+            "points": 1
+          },
+          {
+            "id": "c1l2-3",
+            "type": "true-false",
+            "correct": false,
+            "points": 1
+          },
+          {
+            "id": "c1l2-4",
+            "type": "true-false",
+            "correct": true,
+            "points": 1
+          },
+          {
+            "id": "c1l2-5",
+            "type": "true-false",
+            "correct": false,
+            "points": 1
+          }
+        ]
+      },
+      {
+        "id": "teil-3",
+        "kind": "questions",
+        "questions": [
+          {
+            "id": "c1l3-1",
+            "type": "multiple-choice",
+            "correct": "a",
+            "points": 1
+          },
+          {
+            "id": "c1l3-2",
+            "type": "multiple-choice",
+            "correct": "b",
+            "points": 1
+          },
+          {
+            "id": "c1l3-3",
+            "type": "multiple-choice",
+            "correct": "a",
+            "points": 1
+          },
+          {
+            "id": "c1l3-4",
+            "type": "multiple-choice",
+            "correct": "b",
+            "points": 1
+          },
+          {
+            "id": "c1l3-5",
+            "type": "multiple-choice",
+            "correct": "a",
+            "points": 1
+          }
+        ]
+      }
+    ]
+  },
+  "goethe-c1-hoeren-modellsatz-1": {
+    "id": "goethe-c1-hoeren-modellsatz-1",
+    "level": "C1",
+    "module": "hoeren",
+    "maxScore": 15,
+    "passScore": 9,
+    "durationMinutes": 40,
+    "parts": [
+      {
+        "id": "teil-1",
+        "kind": "questions",
+        "questions": [
+          {
+            "id": "c1h1-1",
+            "type": "true-false",
+            "correct": false,
+            "points": 1
+          },
+          {
+            "id": "c1h1-2",
+            "type": "true-false",
+            "correct": true,
+            "points": 1
+          },
+          {
+            "id": "c1h1-3",
+            "type": "true-false",
+            "correct": true,
+            "points": 1
+          },
+          {
+            "id": "c1h1-4",
+            "type": "true-false",
+            "correct": false,
+            "points": 1
+          },
+          {
+            "id": "c1h1-5",
+            "type": "true-false",
+            "correct": true,
+            "points": 1
+          }
+        ]
+      },
+      {
+        "id": "teil-2",
+        "kind": "questions",
+        "questions": [
+          {
+            "id": "c1h2-1",
+            "type": "multiple-choice",
+            "correct": "b",
+            "points": 1
+          },
+          {
+            "id": "c1h2-2",
+            "type": "multiple-choice",
+            "correct": "a",
+            "points": 1
+          },
+          {
+            "id": "c1h2-3",
+            "type": "multiple-choice",
+            "correct": "c",
+            "points": 1
+          },
+          {
+            "id": "c1h2-4",
+            "type": "multiple-choice",
+            "correct": "b",
+            "points": 1
+          },
+          {
+            "id": "c1h2-5",
+            "type": "multiple-choice",
+            "correct": "b",
+            "points": 1
+          }
+        ]
+      },
+      {
+        "id": "teil-3",
+        "kind": "questions",
+        "questions": [
+          {
+            "id": "c1h3-1",
+            "type": "true-false",
+            "correct": false,
+            "points": 1
+          },
+          {
+            "id": "c1h3-2",
+            "type": "true-false",
+            "correct": true,
+            "points": 1
+          },
+          {
+            "id": "c1h3-3",
+            "type": "true-false",
+            "correct": true,
+            "points": 1
+          },
+          {
+            "id": "c1h3-4",
+            "type": "true-false",
+            "correct": false,
+            "points": 1
+          },
+          {
+            "id": "c1h3-5",
+            "type": "true-false",
+            "correct": true,
+            "points": 1
+          }
+        ]
+      }
+    ]
+  },
+  "goethe-c1-schreiben-modellsatz-1": {
+    "id": "goethe-c1-schreiben-modellsatz-1",
+    "level": "C1",
+    "module": "schreiben",
+    "maxScore": 50,
+    "passScore": 30,
+    "durationMinutes": 75,
+    "parts": [
+      {
+        "id": "teil-1",
+        "kind": "writing-task",
+        "maxScore": 30,
+        "taskPrompt": "Verfasse einen gut strukturierten Aufsatz, der die folgenden Aspekte behandelt. Achte auf eine klare Einleitung, einen logisch aufgebauten Hauptteil und einen Schluss."
+      },
+      {
+        "id": "teil-2",
+        "kind": "writing-task",
+        "maxScore": 20,
+        "taskPrompt": "Verfasse ein formelles Bewerbungsschreiben an die HR-Leiterin Frau Dr. Schwarz, in dem du die folgenden Punkte ansprichst."
+      }
+    ]
+  },
+  "goethe-c1-sprechen-modellsatz-1": {
+    "id": "goethe-c1-sprechen-modellsatz-1",
+    "level": "C1",
+    "module": "sprechen",
+    "maxScore": 50,
+    "passScore": 30,
+    "durationMinutes": 15,
+    "parts": [
+      {
+        "id": "teil-1",
+        "kind": "speaking-task",
+        "maxScore": 25,
+        "taskPrompt": "Thema: „Lebenslanges Lernen — Chance oder Druck?\" Halte einen gut strukturierten Vortrag, in dem du verschiedene Perspektiven berücksichtigst und einen begründeten Standpunkt entwickelst."
+      },
+      {
+        "id": "teil-2",
+        "kind": "speaking-task",
+        "maxScore": 25,
+        "taskPrompt": "These: „Homeoffice ist langfristig schlecht für Karriere und Teamgeist.\" Nimm differenziert Stellung und reagiere auf mögliche Gegenargumente."
+      }
+    ]
+  },
+  "goethe-c2-lesen-modellsatz-1": {
+    "id": "goethe-c2-lesen-modellsatz-1",
+    "level": "C2",
+    "module": "lesen",
+    "maxScore": 10,
+    "passScore": 6,
+    "durationMinutes": 50,
+    "parts": [
+      {
+        "id": "teil-1",
+        "kind": "questions",
+        "questions": [
+          {
+            "id": "c2l1-1",
+            "type": "multiple-choice",
+            "correct": "b",
+            "points": 1
+          },
+          {
+            "id": "c2l1-2",
+            "type": "multiple-choice",
+            "correct": "b",
+            "points": 1
+          },
+          {
+            "id": "c2l1-3",
+            "type": "multiple-choice",
+            "correct": "b",
+            "points": 1
+          },
+          {
+            "id": "c2l1-4",
+            "type": "multiple-choice",
+            "correct": "b",
+            "points": 1
+          },
+          {
+            "id": "c2l1-5",
+            "type": "multiple-choice",
+            "correct": "a",
+            "points": 1
+          }
+        ]
+      },
+      {
+        "id": "teil-2",
+        "kind": "questions",
+        "questions": [
+          {
+            "id": "c2l2-1",
+            "type": "true-false",
+            "correct": true,
+            "points": 1
+          },
+          {
+            "id": "c2l2-2",
+            "type": "true-false",
+            "correct": false,
+            "points": 1
+          },
+          {
+            "id": "c2l2-3",
+            "type": "true-false",
+            "correct": false,
+            "points": 1
+          },
+          {
+            "id": "c2l2-4",
+            "type": "true-false",
+            "correct": false,
+            "points": 1
+          },
+          {
+            "id": "c2l2-5",
+            "type": "true-false",
+            "correct": true,
+            "points": 1
+          }
+        ]
+      }
+    ]
+  },
+  "goethe-c2-hoeren-modellsatz-1": {
+    "id": "goethe-c2-hoeren-modellsatz-1",
+    "level": "C2",
+    "module": "hoeren",
+    "maxScore": 10,
+    "passScore": 6,
+    "durationMinutes": 35,
+    "parts": [
+      {
+        "id": "teil-1",
+        "kind": "questions",
+        "questions": [
+          {
+            "id": "c2h1-1",
+            "type": "multiple-choice",
+            "correct": "b",
+            "points": 1
+          },
+          {
+            "id": "c2h1-2",
+            "type": "multiple-choice",
+            "correct": "b",
+            "points": 1
+          },
+          {
+            "id": "c2h1-3",
+            "type": "multiple-choice",
+            "correct": "b",
+            "points": 1
+          },
+          {
+            "id": "c2h1-4",
+            "type": "multiple-choice",
+            "correct": "b",
+            "points": 1
+          },
+          {
+            "id": "c2h1-5",
+            "type": "multiple-choice",
+            "correct": "b",
+            "points": 1
+          }
+        ]
+      },
+      {
+        "id": "teil-2",
+        "kind": "questions",
+        "questions": [
+          {
+            "id": "c2h2-1",
+            "type": "true-false",
+            "correct": true,
+            "points": 1
+          },
+          {
+            "id": "c2h2-2",
+            "type": "true-false",
+            "correct": true,
+            "points": 1
+          },
+          {
+            "id": "c2h2-3",
+            "type": "true-false",
+            "correct": false,
+            "points": 1
+          },
+          {
+            "id": "c2h2-4",
+            "type": "true-false",
+            "correct": true,
+            "points": 1
+          },
+          {
+            "id": "c2h2-5",
+            "type": "true-false",
+            "correct": false,
+            "points": 1
+          }
+        ]
+      }
+    ]
+  },
+  "goethe-c2-schreiben-modellsatz-1": {
+    "id": "goethe-c2-schreiben-modellsatz-1",
+    "level": "C2",
+    "module": "schreiben",
+    "maxScore": 50,
+    "passScore": 30,
+    "durationMinutes": 80,
+    "parts": [
+      {
+        "id": "teil-1",
+        "kind": "writing-task",
+        "maxScore": 50,
+        "taskPrompt": "Verfasse einen anspruchsvollen, gut strukturierten Beitrag, der die folgenden Aspekte behandelt. Achte auf Differenzierung, eine sprachlich präzise Argumentation und einen erkennbaren Aufbau (Einleitung, Hauptteil, Schluss)."
+      }
+    ]
+  },
+  "goethe-c2-sprechen-modellsatz-1": {
+    "id": "goethe-c2-sprechen-modellsatz-1",
+    "level": "C2",
+    "module": "sprechen",
+    "maxScore": 50,
+    "passScore": 30,
+    "durationMinutes": 15,
+    "parts": [
+      {
+        "id": "teil-1",
+        "kind": "speaking-task",
+        "maxScore": 50,
+        "taskPrompt": "Thema: „Künstliche Intelligenz und die Zukunft der Demokratie\". Halte einen analytisch anspruchsvollen Vortrag mit klar erkennbarer Struktur, präziser Sprache und einem differenzierten Standpunkt."
+      }
+    ]
+  }
+}

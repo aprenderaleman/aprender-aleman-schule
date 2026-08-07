@@ -83,6 +83,7 @@ export default function PruefungPlayer() {
   useWakeLock(!!exam)
 
   const [phase, setPhase] = useState('intro') // intro | running | results
+  const [examMode, setExamMode] = useState('simulation') // 'simulation' | 'real'
   const [responses, setResponses] = useState({})
   const [partIdx, setPartIdx] = useState(0)
   const [secondsLeft, setSecondsLeft] = useState(0)
@@ -144,7 +145,7 @@ export default function PruefungPlayer() {
           level: exam.level,
           module: exam.module,
           examId: exam.id,
-          mode: 'simulation',
+          mode: examMode,
         }),
       })
       if (!res.ok) {
@@ -389,6 +390,46 @@ export default function PruefungPlayer() {
               <Stat label="Bestanden ab" value={`${exam.passScore}/${exam.maxScore}`} />
             </div>
 
+            {/* Modus-Auswahl: Simulacro vs Examen real */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
+              <button
+                type="button"
+                onClick={() => setExamMode('simulation')}
+                className={
+                  'text-left rounded-xl p-4 border-2 transition ' +
+                  (examMode === 'simulation'
+                    ? 'border-indigo-500 bg-indigo-50 dark:bg-indigo-900/20'
+                    : 'border-gray-200 dark:border-gray-700 hover:border-indigo-300')
+                }
+              >
+                <div className="flex items-center gap-2 mb-1">
+                  <BookOpen size={14} className="text-indigo-500" />
+                  <span className="font-bold text-gray-800 dark:text-gray-100">Simulacro</span>
+                </div>
+                <p className="text-xs text-gray-600 dark:text-gray-300">
+                  Práctica ilimitada. No cuenta para el certificado. Sirve para prepararte.
+                </p>
+              </button>
+              <button
+                type="button"
+                onClick={() => setExamMode('real')}
+                className={
+                  'text-left rounded-xl p-4 border-2 transition ' +
+                  (examMode === 'real'
+                    ? 'border-purple-500 bg-purple-50 dark:bg-purple-900/20'
+                    : 'border-gray-200 dark:border-gray-700 hover:border-purple-300')
+                }
+              >
+                <div className="flex items-center gap-2 mb-1">
+                  <Trophy size={14} className="text-purple-500" />
+                  <span className="font-bold text-gray-800 dark:text-gray-100">Examen real</span>
+                </div>
+                <p className="text-xs text-gray-600 dark:text-gray-300">
+                  Cuenta para el certificado. 24 h de espera entre intentos, máx. 3.
+                </p>
+              </button>
+            </div>
+
             <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-xl p-4 mb-6">
               <p className="text-sm font-bold text-amber-700 dark:text-amber-300 mb-2 flex items-center gap-2">
                 <AlertTriangle size={14} /> Vor dem Start lesen
@@ -398,6 +439,9 @@ export default function PruefungPlayer() {
                 <li>Beantworte alle Aufgaben — falsche Antworten zählen 0 Punkte, nicht negativ.</li>
                 <li>Das Schließen des Tabs unterbricht die Prüfung NICHT.</li>
                 <li>Du kannst zwischen den Teilen frei wechseln, bevor du abgibst.</li>
+                {examMode === 'real' && (
+                  <li className="font-bold">Modo real: solo tu nivel actual, con cooldown 24 h y máx 3 intentos.</li>
+                )}
               </ul>
             </div>
 
@@ -405,9 +449,14 @@ export default function PruefungPlayer() {
 
             <button
               onClick={startExam}
-              className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-bold py-4 rounded-2xl text-lg hover:from-indigo-700 hover:to-purple-700 transition shadow-lg"
+              className={
+                'w-full flex items-center justify-center gap-2 text-white font-bold py-4 rounded-2xl text-lg transition shadow-lg ' +
+                (examMode === 'real'
+                  ? 'bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700'
+                  : 'bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700')
+              }
             >
-              <Play size={20} /> Prüfung starten
+              <Play size={20} /> {examMode === 'real' ? 'Examen real starten' : 'Simulacro starten'}
             </button>
           </motion.div>
         </main>

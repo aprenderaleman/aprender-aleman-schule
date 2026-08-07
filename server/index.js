@@ -12,6 +12,10 @@ import cron from 'node-cron'
 import * as b2c from './b2cClient.js'
 import { createMagicLink, consumeMagicLink, purgeOld as purgeMagicLinks, TTL_MS as MAGIC_LINK_TTL_MS } from './magicLink.js'
 import { sendEmail, magicLinkTemplate } from './emailSender.js'
+import {
+  assertCanStartRealAttempt, canonicalRealScore, withinTimeLimit,
+  examSpec, PRUEFUNG_PASS_PCT,
+} from './realExam.js'
 import { LEVEL_TEST_QUESTIONS, computeLevel as computeLevelTestLevel } from './level-test-bank.js'
 
 dotenv.config()
@@ -186,7 +190,7 @@ const stripe = STRIPE_SECRET_KEY ? new Stripe(STRIPE_SECRET_KEY) : null
         level VARCHAR(8) NOT NULL,
         module VARCHAR(16) NOT NULL,
         examId VARCHAR(64) NOT NULL,
-        mode ENUM('practice','simulation') NOT NULL DEFAULT 'simulation',
+        mode ENUM('practice','simulation','real') NOT NULL DEFAULT 'simulation',
         startedAt DATETIME DEFAULT CURRENT_TIMESTAMP,
         finishedAt DATETIME DEFAULT NULL,
         score DECIMAL(5,2) DEFAULT NULL,
@@ -195,9 +199,33 @@ const stripe = STRIPE_SECRET_KEY ? new Stripe(STRIPE_SECRET_KEY) : null
         durationSeconds INT DEFAULT NULL,
         responses JSON DEFAULT NULL,
         feedback JSON DEFAULT NULL,
+        frozenAt DATETIME DEFAULT NULL,
         INDEX idx_user_module (userId, module),
         INDEX idx_user_level (userId, level),
         INDEX idx_user_finished (userId, finishedAt)
+      )
+    `)
+    // Idempotent migration: existing installs need to widen the enum + gain frozenAt.
+    try {
+      await pool.query(`ALTER TABLE schule_pruefungen_attempts
+        MODIFY COLUMN mode ENUM('practice','simulation','real') NOT NULL DEFAULT 'simulation'`)
+    } catch (e) { /* already correct */ }
+    try {
+      await pool.query(`ALTER TABLE schule_pruefungen_attempts ADD COLUMN frozenAt DATETIME DEFAULT NULL`)
+    } catch (e) { /* already exists */ }
+
+    // Certificates: immutable snapshot of a level-guarantee issuance.
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS schule_certificates (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        userId VARCHAR(191) NOT NULL,
+        level VARCHAR(8) NOT NULL,
+        issuedAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+        attemptIds JSON NOT NULL,
+        scoreSnapshot JSON NOT NULL,
+        pathPctSnapshot INT NOT NULL,
+        issuedBy VARCHAR(191) DEFAULT NULL,
+        INDEX idx_user_level (userId, level)
       )
     `)
   } catch (err) {
@@ -1545,30 +1573,38 @@ app.get('/api/internal/student/progress', async (req, res) => {
     const total = LEVEL_EXERCISE_TOTALS[level] || 0
     const pathPct = total > 0 ? Math.round((100 * completed) / total) : 0
 
-    // 3. Prüfung: best result per module at the student's level
-    const [modRows] = await pool.query(
-      `SELECT module,
-              MAX(score / NULLIF(maxScore, 0) * 100) AS bestPct,
-              COUNT(*) AS attempts,
-              MAX(passed) AS everPassed,
-              MAX(finishedAt) AS lastAttemptAt
-         FROM schule_pruefungen_attempts
-        WHERE userId = ? AND level = ?
-          AND finishedAt IS NOT NULL AND maxScore > 0
-        GROUP BY module`,
-      [user.id, level]
-    )
-    const modules = {}
-    for (const m of PRUEFUNG_MODULES) modules[m] = null
-    for (const r of modRows) {
-      if (!PRUEFUNG_MODULES.includes(r.module)) continue
-      modules[r.module] = {
-        bestPct: Math.round(Number(r.bestPct) || 0),
-        attempts: Number(r.attempts) || 0,
-        passed: !!r.everPassed,
-        lastAttemptAt: r.lastAttemptAt,
+    // 3. Prüfung: best result per module at the student's level.
+    // ONLY real attempts count for the level-guarantee flag. Simulacros
+    // are broken out as a separate summary for the CRM's information.
+    async function bestPerModule(modeFilter) {
+      const [rows] = await pool.query(
+        `SELECT module,
+                MAX(score / NULLIF(maxScore, 0) * 100) AS bestPct,
+                COUNT(*) AS attempts,
+                MAX(passed) AS everPassed,
+                MAX(finishedAt) AS lastAttemptAt
+           FROM schule_pruefungen_attempts
+          WHERE userId = ? AND level = ? AND mode = ?
+            AND finishedAt IS NOT NULL AND maxScore > 0
+          GROUP BY module`,
+        [user.id, level, modeFilter]
+      )
+      const out = {}
+      for (const m of PRUEFUNG_MODULES) out[m] = null
+      for (const r of rows) {
+        if (!PRUEFUNG_MODULES.includes(r.module)) continue
+        out[r.module] = {
+          bestPct: Math.round(Number(r.bestPct) || 0),
+          attempts: Number(r.attempts) || 0,
+          passed: !!r.everPassed,
+          lastAttemptAt: r.lastAttemptAt,
+        }
       }
+      return out
     }
+
+    const modules = await bestPerModule('real')
+    const simulModules = await bestPerModule('simulation')
     const passedCount = PRUEFUNG_MODULES.filter(m => modules[m]?.passed).length
     const allPassed = passedCount === PRUEFUNG_MODULES.length
 
@@ -1589,7 +1625,8 @@ app.get('/api/internal/student/progress', async (req, res) => {
       },
       pruefung: {
         level,
-        modules,
+        modules,           // real-mode results (source of truth for certification)
+        simulacros: simulModules,
         passedCount,
         allPassed,
       },
@@ -1605,6 +1642,110 @@ app.get('/api/internal/student/progress', async (req, res) => {
   } catch (err) {
     console.error('[internal/student/progress] error:', err.message)
     res.status(500).json({ error: 'Error al consultar progreso.' })
+  }
+})
+
+// ─── INTERNAL: ISSUE LEVEL CERTIFICATE ────────────────
+// The CRM POSTs when the academy has decided to hand the certificate
+// over to the student. We double-check eligibility, snapshot the
+// current scores, and freeze the source attempts so they can't be
+// re-graded afterwards.
+//
+// Auth: X-Internal-Api-Key against B2C_SYNC_SECRET.
+app.post('/api/internal/certificate/issue', async (req, res) => {
+  const providedKey = req.headers['x-internal-api-key'] || ''
+  const expected = process.env.B2C_SYNC_SECRET
+  if (!expected || providedKey !== expected) {
+    return res.status(403).json({ error: 'Forbidden' })
+  }
+  const { email, level, issuedBy = 'crm' } = req.body || {}
+  if (!email || !level) return res.status(400).json({ error: 'email y level son obligatorios.' })
+
+  try {
+    const emailLc = String(email).trim().toLowerCase()
+    const lvl = String(level).toUpperCase()
+
+    const [users] = await pool.query('SELECT id FROM users WHERE email = ? LIMIT 1', [emailLc])
+    if (users.length === 0) return res.status(404).json({ error: 'Alumno no encontrado.' })
+    const userId = users[0].id
+
+    // Best real attempt per module (id + score) at this level
+    const [rows] = await pool.query(
+      `SELECT module,
+              (SELECT id FROM schule_pruefungen_attempts a2
+                WHERE a2.userId = a.userId AND a2.level = a.level AND a2.module = a.module
+                  AND a2.mode = 'real' AND a2.finishedAt IS NOT NULL AND a2.maxScore > 0
+                ORDER BY (a2.score / a2.maxScore) DESC, a2.finishedAt ASC LIMIT 1) AS attemptId,
+              MAX(score / NULLIF(maxScore, 0) * 100) AS bestPct,
+              MAX(passed) AS everPassed
+         FROM schule_pruefungen_attempts a
+        WHERE a.userId = ? AND a.level = ? AND a.mode = 'real'
+          AND a.finishedAt IS NOT NULL AND a.maxScore > 0
+        GROUP BY module`,
+      [userId, lvl]
+    )
+    const modules = {}
+    for (const m of PRUEFUNG_MODULES) modules[m] = null
+    const attemptIds = []
+    for (const r of rows) {
+      if (!PRUEFUNG_MODULES.includes(r.module)) continue
+      modules[r.module] = {
+        bestPct: Math.round(Number(r.bestPct) || 0),
+        passed: !!r.everPassed,
+        attemptId: r.attemptId,
+      }
+      if (r.attemptId) attemptIds.push(r.attemptId)
+    }
+    const allPassed = PRUEFUNG_MODULES.every(m => modules[m]?.passed)
+
+    // Path % (same rule as /api/internal/student/progress)
+    const levelSuffix = lvl.toLowerCase()
+    const [pathRows] = await pool.query(
+      `SELECT COUNT(DISTINCT exerciseId) AS n
+         FROM schule_exercise_results
+        WHERE userId = ? AND score >= ? AND exerciseId LIKE ?`,
+      [userId, PATH_PASS_THRESHOLD, `%-${levelSuffix}-%`]
+    )
+    const completed = Number(pathRows[0]?.n || 0)
+    const total = LEVEL_EXERCISE_TOTALS[lvl] || 0
+    const pathPct = total > 0 ? Math.round((100 * completed) / total) : 0
+
+    if (!allPassed && pathPct < GUARANTEE_PATH_THRESHOLD) {
+      return res.status(400).json({
+        error: 'El alumno no cumple los requisitos para certificar (necesita aprobar los 4 módulos reales O alcanzar 85% de la ruta).',
+        allPassed,
+        pathPct,
+      })
+    }
+
+    // Snapshot + issue
+    const [certResult] = await pool.query(
+      `INSERT INTO schule_certificates (userId, level, attemptIds, scoreSnapshot, pathPctSnapshot, issuedBy)
+       VALUES (?, ?, ?, ?, ?, ?)`,
+      [userId, lvl, JSON.stringify(attemptIds), JSON.stringify(modules), pathPct, issuedBy]
+    )
+
+    // Freeze the source attempts so their scores never change again
+    if (attemptIds.length > 0) {
+      await pool.query(
+        `UPDATE schule_pruefungen_attempts SET frozenAt = NOW()
+          WHERE id IN (${attemptIds.map(() => '?').join(',')}) AND frozenAt IS NULL`,
+        attemptIds
+      )
+    }
+
+    res.json({
+      certificateId: certResult.insertId,
+      userId,
+      level: lvl,
+      modules,
+      pathPct,
+      basedOn: allPassed ? 'pruefung_passed' : 'path_threshold_reached',
+      frozenAttemptIds: attemptIds,
+    })
+  } catch (err) {
+    console.error('[certificate/issue] error:', err.message)
+    res.status(500).json({ error: 'Error al emitir certificado.' })
   }
 })
 
@@ -3677,41 +3818,92 @@ app.post('/api/pruefungen/attempts', authMiddleware, subscriptionMiddleware, asy
     if (!level || !module || !examId) {
       return res.status(400).json({ error: 'Faltan datos.' })
     }
+    // Guardarraíles solo para exámenes reales; simulacros pasan libre.
+    if (mode === 'real') {
+      const spec = examSpec(examId)
+      if (!spec) return res.status(404).json({ error: 'Examen no encontrado en el manifest.' })
+
+      const gate = await assertCanStartRealAttempt({
+        pool,
+        userId: req.user.id,
+        level,
+        module,
+        userLevel: req.user.level || 'A1',
+      })
+      if (gate) return res.status(gate.status).json({ error: gate.error, code: gate.code })
+    }
+
     const [result] = await pool.query(
       `INSERT INTO schule_pruefungen_attempts (userId, provider, level, module, examId, mode)
        VALUES (?, ?, ?, ?, ?, ?)`,
       [req.user.id, provider, level, module, examId, mode]
     )
-    res.json({ attemptId: result.insertId, startedAt: new Date().toISOString() })
+    res.json({ attemptId: result.insertId, startedAt: new Date().toISOString(), mode })
   } catch (err) {
     console.error('Start attempt error:', err)
     res.status(500).json({ error: 'Error al iniciar el intento.' })
   }
 })
 
-// FINISH attempt — saves score, responses, feedback
+// FINISH attempt — saves score, responses, feedback.
+// For mode='real' the client-supplied score is discarded for Lesen/Hören
+// (recomputed server-side against the answer manifest) and clamped for
+// Schreiben/Sprechen. Frozen attempts (used by a certificate) cannot be
+// re-graded.
 app.post('/api/pruefungen/attempts/:id/finish', authMiddleware, subscriptionMiddleware, async (req, res) => {
   try {
     const attemptId = parseInt(req.params.id)
     const { score, maxScore, responses, feedback } = req.body
-    if (typeof score !== 'number' || typeof maxScore !== 'number' || maxScore <= 0) {
-      return res.status(400).json({ error: 'Datos de puntuación inválidos.' })
-    }
-    // Verify ownership
-    const [rows] = await pool.query('SELECT userId, startedAt FROM schule_pruefungen_attempts WHERE id = ? LIMIT 1', [attemptId])
-    if (rows.length === 0) return res.status(404).json({ error: 'Intento no encontrado.' })
-    if (rows[0].userId !== req.user.id) return res.status(403).json({ error: 'No autorizado.' })
 
-    const durationSec = Math.round((Date.now() - new Date(rows[0].startedAt).getTime()) / 1000)
-    const passed = (score / maxScore) >= 0.6 ? 1 : 0 // Goethe: 60% to pass
+    const [rows] = await pool.query(
+      'SELECT id, userId, examId, mode, level, module, startedAt, frozenAt FROM schule_pruefungen_attempts WHERE id = ? LIMIT 1',
+      [attemptId]
+    )
+    if (rows.length === 0) return res.status(404).json({ error: 'Intento no encontrado.' })
+    const attempt = rows[0]
+    if (attempt.userId !== req.user.id) return res.status(403).json({ error: 'No autorizado.' })
+    if (attempt.frozenAt) return res.status(409).json({ error: 'Este examen ya fue usado para emitir un certificado y no puede volver a corregirse.' })
+
+    let finalScore, finalMax
+    if (attempt.mode === 'real') {
+      // Duration limit (client can't linger).
+      const spec = examSpec(attempt.examId)
+      if (spec && !withinTimeLimit(attempt, spec)) {
+        return res.status(400).json({
+          error: `Tiempo máximo del examen superado (${spec.durationMinutes} min).`,
+          code: 'duration_exceeded',
+        })
+      }
+      const canon = canonicalRealScore(attempt, { score, maxScore, responses })
+      if (!canon) return res.status(500).json({ error: 'No se pudo puntuar el examen (manifest ausente).' })
+      finalScore = canon.score
+      finalMax = canon.maxScore
+    } else {
+      // Simulacros keep the legacy behaviour (client-supplied score).
+      if (typeof score !== 'number' || typeof maxScore !== 'number' || maxScore <= 0) {
+        return res.status(400).json({ error: 'Datos de puntuación inválidos.' })
+      }
+      finalScore = score
+      finalMax = maxScore
+    }
+
+    const durationSec = Math.round((Date.now() - new Date(attempt.startedAt).getTime()) / 1000)
+    const passed = (finalScore / finalMax) >= (PRUEFUNG_PASS_PCT / 100) ? 1 : 0
 
     await pool.query(
       `UPDATE schule_pruefungen_attempts
        SET finishedAt = NOW(), score = ?, maxScore = ?, passed = ?, durationSeconds = ?, responses = ?, feedback = ?
        WHERE id = ?`,
-      [score, maxScore, passed, durationSec, JSON.stringify(responses || null), JSON.stringify(feedback || null), attemptId]
+      [finalScore, finalMax, passed, durationSec, JSON.stringify(responses || null), JSON.stringify(feedback || null), attemptId]
     )
-    res.json({ ok: true, score, maxScore, passed: !!passed, percentage: Math.round((score / maxScore) * 100) })
+    res.json({
+      ok: true,
+      score: finalScore,
+      maxScore: finalMax,
+      passed: !!passed,
+      percentage: Math.round((finalScore / finalMax) * 100),
+      mode: attempt.mode,
+    })
   } catch (err) {
     console.error('Finish attempt error:', err)
     res.status(500).json({ error: 'Error al finalizar el intento.' })

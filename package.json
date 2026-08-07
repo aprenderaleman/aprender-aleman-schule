@@ -7,6 +7,8 @@
     "dev": "vite",
     "server": "node server/index.js",
     "dev:all": "node server/index.js & vite",
+    "sync-pruefungen": "node scripts/build-pruefungen-answers.mjs",
+    "prebuild": "npm run sync-pruefungen",
     "build": "vite build",
     "start": "node server/index.js",
     "preview": "vite preview"
