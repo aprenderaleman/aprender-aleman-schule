@@ -10,6 +10,7 @@ import Navbar from '../components/Layout/Navbar'
 import Footer from '../components/Layout/Footer'
 import { useAuth } from '../context/AuthContext'
 import { getExamsFor, countsByModule } from '../data/pruefungen'
+import CertificateStatus from '../components/Pruefungen/CertificateStatus'
 
 const API_URL = import.meta.env.VITE_API_URL || ''
 
@@ -329,6 +330,9 @@ function PruefungsDashboard({ plan, onReset, onRefresh }) {
             </button>
           </div>
         </div>
+
+        {/* Camino al certificado (real-mode only) */}
+        <CertificateStatus />
 
         {/* Top stats */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">

@@ -3773,6 +3773,92 @@ app.get('/api/pruefungen/plan', authMiddleware, subscriptionMiddleware, async (r
   }
 })
 
+// Alumno-side: everything the UI needs to render the "camino al
+// certificado" panel — real-mode results per module plus cooldown
+// status so the frontend can disable the "start real exam" button when
+// the student is in the 24h window.
+app.get('/api/pruefungen/cert-status', authMiddleware, subscriptionMiddleware, async (req, res) => {
+  try {
+    const level = String(req.user.level || 'A1').toUpperCase()
+    const modules = { lesen: null, hoeren: null, schreiben: null, sprechen: null }
+
+    // Best real attempt per module + total finished real attempts
+    const [rows] = await pool.query(
+      `SELECT module,
+              MAX(score / NULLIF(maxScore, 0) * 100) AS bestPct,
+              SUM(CASE WHEN finishedAt IS NOT NULL THEN 1 ELSE 0 END) AS finishedAttempts,
+              MAX(passed) AS everPassed,
+              MAX(finishedAt) AS lastFinishedAt
+         FROM schule_pruefungen_attempts
+        WHERE userId = ? AND level = ? AND mode = 'real'
+        GROUP BY module`,
+      [req.user.id, level]
+    )
+
+    // Cooldown lookup — most recent start (finished OR in-flight) per module
+    const [cool] = await pool.query(
+      `SELECT module, MAX(startedAt) AS lastStartedAt
+         FROM schule_pruefungen_attempts
+        WHERE userId = ? AND level = ? AND mode = 'real'
+        GROUP BY module`,
+      [req.user.id, level]
+    )
+    const lastStartedByModule = Object.fromEntries(cool.map(r => [r.module, r.lastStartedAt]))
+
+    for (const r of rows) {
+      const finished = Number(r.finishedAttempts) || 0
+      const lastStart = lastStartedByModule[r.module]
+      const nextAvailableAt = lastStart
+        ? new Date(new Date(lastStart).getTime() + 24 * 60 * 60 * 1000)
+        : null
+      const inCooldown = nextAvailableAt && nextAvailableAt.getTime() > Date.now()
+      modules[r.module] = {
+        bestPct: r.bestPct != null ? Math.round(Number(r.bestPct)) : null,
+        passed: !!r.everPassed,
+        attempts: finished,
+        attemptsLeft: Math.max(0, 3 - finished),
+        lastFinishedAt: r.lastFinishedAt,
+        nextAvailableAt: inCooldown ? nextAvailableAt.toISOString() : null,
+        canStartRealNow: !inCooldown && finished < 3,
+      }
+    }
+    // Modules never attempted
+    for (const m of ['lesen', 'hoeren', 'schreiben', 'sprechen']) {
+      if (!modules[m]) modules[m] = {
+        bestPct: null, passed: false, attempts: 0, attemptsLeft: 3,
+        lastFinishedAt: null, nextAvailableAt: null, canStartRealNow: true,
+      }
+    }
+
+    // Path % (same rule as internal endpoints)
+    const levelSuffix = level.toLowerCase()
+    const [pathRows] = await pool.query(
+      `SELECT COUNT(DISTINCT exerciseId) AS n
+         FROM schule_exercise_results
+        WHERE userId = ? AND score >= ? AND exerciseId LIKE ?`,
+      [req.user.id, PATH_PASS_THRESHOLD, `%-${levelSuffix}-%`]
+    )
+    const completed = Number(pathRows[0]?.n || 0)
+    const total = LEVEL_EXERCISE_TOTALS[level] || 0
+    const pathPct = total > 0 ? Math.round((100 * completed) / total) : 0
+
+    const passedCount = ['lesen', 'hoeren', 'schreiben', 'sprechen'].filter(m => modules[m].passed).length
+    const allPassed = passedCount === 4
+
+    res.json({
+      level,
+      modules,
+      passedCount,
+      allPassed,
+      path: { completed, total, pct: pathPct, threshold: GUARANTEE_PATH_THRESHOLD },
+      eligibleForCertificate: allPassed || pathPct >= GUARANTEE_PATH_THRESHOLD,
+    })
+  } catch (err) {
+    console.error('cert-status error:', err.message)
+    res.status(500).json({ error: 'Error al consultar estado.' })
+  }
+})
+
 // CREATE/UPDATE exam plan
 app.post('/api/pruefungen/plan', authMiddleware, subscriptionMiddleware, async (req, res) => {
   try {

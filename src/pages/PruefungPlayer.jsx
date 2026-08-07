@@ -11,6 +11,7 @@ import { useAuth } from '../context/AuthContext'
 import { useWakeLock } from '../hooks/useWakeLock'
 import { getExamById, gradeObjectiveExam } from '../data/pruefungen'
 import { isSpeechRecognitionSupported, startRecognition, speak } from '../utils/speech'
+import { ModuleStatus } from '../components/Pruefungen/CertificateStatus'
 
 const API_URL = import.meta.env.VITE_API_URL || ''
 
@@ -430,6 +431,12 @@ export default function PruefungPlayer() {
               </button>
             </div>
 
+            {examMode === 'real' && (
+              <div className="mb-4">
+                <ModuleStatus level={exam.level} module={exam.module} />
+              </div>
+            )}
+
             <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-xl p-4 mb-6">
               <p className="text-sm font-bold text-amber-700 dark:text-amber-300 mb-2 flex items-center gap-2">
                 <AlertTriangle size={14} /> Vor dem Start lesen
@@ -473,8 +480,18 @@ export default function PruefungPlayer() {
           <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className={`rounded-2xl p-8 mb-6 text-white ${result.passed ? 'bg-gradient-to-br from-green-500 to-emerald-600' : 'bg-gradient-to-br from-orange-500 to-red-600'}`}>
             <div className="flex items-start justify-between mb-4">
               <div>
-                <p className="text-sm font-bold uppercase tracking-wide opacity-90">Ergebnis</p>
+                <p className="text-sm font-bold uppercase tracking-wide opacity-90 flex items-center gap-2">
+                  {examMode === 'real' ? <><Trophy size={12} /> Examen real</> : 'Simulacro'} · Ergebnis
+                </p>
                 <h1 className="text-3xl md:text-4xl font-extrabold">{result.passed ? 'Bestanden!' : 'Nicht bestanden'}</h1>
+                {examMode === 'real' && result.passed && (
+                  <p className="text-sm opacity-90 mt-2">✓ Zählt für dein {exam.level}-Zertifikat.</p>
+                )}
+                {examMode === 'real' && !result.passed && (
+                  <p className="text-sm opacity-90 mt-2">
+                    Der Versuch zählt aber du kannst in 24 h wieder antreten (bis zu 3× pro Modul).
+                  </p>
+                )}
               </div>
               {result.passed ? <Trophy size={48} className="opacity-90" /> : <AlertTriangle size={48} className="opacity-90" />}
             </div>
