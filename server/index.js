@@ -1471,6 +1471,143 @@ app.get('/api/reviews/public', async (req, res) => {
   }
 })
 
+// ─── INTERNAL: STUDENT PROGRESS (for b2c / CRM) ───────
+// Consumed by b2c when a student's `clases_restantes` reaches 0 (or
+// whenever the academy wants to check level-guarantee eligibility). Also
+// used to populate certificates with real numbers instead of estimates.
+//
+// Auth: header `X-Internal-Api-Key` matching env B2C_SYNC_SECRET.
+//       (Same shared secret used by /api/b2c/sso-link, so no new env var
+//       to distribute.)
+//
+// Returns per-level:
+//   • path.pct  — % of that level's exercises the student has completed
+//                 with score >= PATH_PASS_THRESHOLD.
+//   • pruefung  — best result per Goethe module (Lesen/Hören/Schreiben/
+//                 Sprechen) for the student's current level.
+//   • guarantee — flags the CRM can act on directly, e.g. eligibility
+//                 for the level-guarantee refund.
+//
+// Denominators are hardcoded (LEVEL_EXERCISE_TOTALS) because the
+// exercise catalogue is versioned in the frontend and Coolify's server
+// container doesn't ship the src/ tree. Update these constants when
+// content is added — a grep of the source is enough:
+//   for lvl in a1 a2 b1 b2 c1; do
+//     grep -hoE "id:'[grlws]-${lvl}-[0-9]+'" src/data/*.js | sort -u | wc -l
+//   done
+const LEVEL_EXERCISE_TOTALS = { A1: 132, A2: 129, B1: 128, B2: 128, C1: 128 }
+const PATH_PASS_THRESHOLD = 70        // % score needed to count an exercise as "done"
+const GUARANTEE_PATH_THRESHOLD = 85   // % of the path needed for the level-guarantee flag
+const PRUEFUNG_MODULES = ['lesen', 'hoeren', 'schreiben', 'sprechen']
+
+app.get('/api/internal/student/progress', async (req, res) => {
+  const providedKey = req.headers['x-internal-api-key'] || ''
+  const expected = process.env.B2C_SYNC_SECRET
+  if (!expected || providedKey !== expected) {
+    return res.status(403).json({ error: 'Forbidden' })
+  }
+
+  const email = String(req.query?.email || '').trim().toLowerCase()
+  if (!email || !email.includes('@')) {
+    return res.status(400).json({ error: 'Email requerido.' })
+  }
+
+  try {
+    // 1. Find user + effective level + last activity
+    const [users] = await pool.query(
+      `SELECT u.id, u.email, u.fullName, u.role, u.status, u.studentId,
+              s.level AS studentLevel,
+              sp.lastActivityDate, sp.xp
+         FROM users u
+         LEFT JOIN students s ON u.studentId = s.id
+         LEFT JOIN schule_progress sp ON sp.userId = u.id
+        WHERE u.email = ? LIMIT 1`,
+      [email]
+    )
+    if (users.length === 0) {
+      return res.json({ found: false, email })
+    }
+    const user = users[0]
+    const level = String(user.studentLevel || 'A1').toUpperCase()
+
+    // 2. Path progress: unique exerciseIds with score >= threshold whose
+    //    ID prefix matches the level (e.g. 'g-b2-…', 'r-b2-…').
+    const levelSuffix = level.toLowerCase()
+    const [rows] = await pool.query(
+      `SELECT COUNT(DISTINCT exerciseId) AS n
+         FROM schule_exercise_results
+        WHERE userId = ?
+          AND score >= ?
+          AND exerciseId LIKE ?`,
+      [user.id, PATH_PASS_THRESHOLD, `%-${levelSuffix}-%`]
+    )
+    const completed = Number(rows[0]?.n || 0)
+    const total = LEVEL_EXERCISE_TOTALS[level] || 0
+    const pathPct = total > 0 ? Math.round((100 * completed) / total) : 0
+
+    // 3. Prüfung: best result per module at the student's level
+    const [modRows] = await pool.query(
+      `SELECT module,
+              MAX(score / NULLIF(maxScore, 0) * 100) AS bestPct,
+              COUNT(*) AS attempts,
+              MAX(passed) AS everPassed,
+              MAX(finishedAt) AS lastAttemptAt
+         FROM schule_pruefungen_attempts
+        WHERE userId = ? AND level = ?
+          AND finishedAt IS NOT NULL AND maxScore > 0
+        GROUP BY module`,
+      [user.id, level]
+    )
+    const modules = {}
+    for (const m of PRUEFUNG_MODULES) modules[m] = null
+    for (const r of modRows) {
+      if (!PRUEFUNG_MODULES.includes(r.module)) continue
+      modules[r.module] = {
+        bestPct: Math.round(Number(r.bestPct) || 0),
+        attempts: Number(r.attempts) || 0,
+        passed: !!r.everPassed,
+        lastAttemptAt: r.lastAttemptAt,
+      }
+    }
+    const passedCount = PRUEFUNG_MODULES.filter(m => modules[m]?.passed).length
+    const allPassed = passedCount === PRUEFUNG_MODULES.length
+
+    res.json({
+      found: true,
+      email: user.email,
+      name: user.fullName,
+      role: user.role,
+      status: user.status,
+      level,
+      xp: Number(user.xp || 0),
+      lastActivityDate: user.lastActivityDate,
+      path: {
+        completed,
+        total,
+        pct: pathPct,
+        passThreshold: PATH_PASS_THRESHOLD,
+      },
+      pruefung: {
+        level,
+        modules,
+        passedCount,
+        allPassed,
+      },
+      guarantee: {
+        pathThreshold: GUARANTEE_PATH_THRESHOLD,
+        meetsPathThreshold: pathPct >= GUARANTEE_PATH_THRESHOLD,
+        passedPruefung: allPassed,
+        // Suggested combined flag for a level certificate. The CRM can
+        // still pick its own combination — both signals are exposed above.
+        eligibleForLevelCertificate: allPassed || pathPct >= GUARANTEE_PATH_THRESHOLD,
+      },
+    })
+  } catch (err) {
+    console.error('[internal/student/progress] error:', err.message)
+    res.status(500).json({ error: 'Error al consultar progreso.' })
+  }
+})
+
 // ─── AUTH DEBUG (admin only) ──────────────────────────
 // Quick triage tool: tells the admin exactly why a given email can't log in.
 // Returns local-user state, b2c verdict and the last 5 magic-link rows.
