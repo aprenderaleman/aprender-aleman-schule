@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo, useRef } from 'react'
-import { useParams, useNavigate, Link } from 'react-router-dom'
+import { useParams, useNavigate, Link, useSearchParams } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
   Clock, ArrowLeft, ArrowRight, CheckCircle2, XCircle, Trophy,
@@ -83,8 +83,12 @@ export default function PruefungPlayer() {
   // Keep the screen awake during the exam
   useWakeLock(!!exam)
 
+  const [searchParams] = useSearchParams()
   const [phase, setPhase] = useState('intro') // intro | running | results
-  const [examMode, setExamMode] = useState('simulation') // 'simulation' | 'real'
+  // Modo pre-seleccionado desde el link de la lista (?mode=real). Default simulacro.
+  const [examMode, setExamMode] = useState(
+    searchParams.get('mode') === 'real' ? 'real' : 'simulation'
+  )
   const [responses, setResponses] = useState({})
   const [partIdx, setPartIdx] = useState(0)
   const [secondsLeft, setSecondsLeft] = useState(0)

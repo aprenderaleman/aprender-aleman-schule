@@ -122,6 +122,9 @@ function PruefungsWizard({ onComplete, initialError }) {
     <div className="min-h-screen bg-background flex flex-col">
       <Navbar />
       <main id="main" className="flex-1 max-w-5xl md:pl-72 w-full mx-auto px-4 sm:px-6 py-8 md:py-12">
+        {/* Panel de certificación — se muestra siempre para que el alumno vea su estado */}
+        <CertificateStatus />
+
         <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="mb-8 text-center">
           <div className="inline-flex items-center gap-2 bg-indigo-100 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300 px-4 py-1.5 rounded-full text-sm font-bold mb-4">
             <Sparkles size={14} /> NEU · Prüfungsvorbereitung
@@ -414,23 +417,33 @@ function PruefungsDashboard({ plan, onReset, onRefresh }) {
                 </div>
                 <p className="text-xs text-gray-400 mb-3">{score}% bereit</p>
 
-                {/* Exam list */}
+                {/* Exam list — dos botones por examen para elegir modo sin abrir intro */}
                 {hasContent && (
                   <div className="space-y-2 pt-2 border-t border-gray-100 dark:border-gray-700">
                     {exams.map(ex => (
-                      <Link
-                        key={ex.id}
-                        to={`/pruefungen/${ex.id}`}
-                        className="flex items-center justify-between gap-2 p-2.5 rounded-xl bg-gray-50 dark:bg-gray-700/50 hover:bg-indigo-50 dark:hover:bg-indigo-900/20 group transition"
-                      >
-                        <div className="min-w-0">
+                      <div key={ex.id} className="rounded-xl bg-gray-50 dark:bg-gray-700/50 p-2.5">
+                        <div className="mb-2 min-w-0">
                           <p className="text-sm font-semibold text-gray-800 dark:text-gray-100 truncate">{ex.title}</p>
                           <p className="text-xs text-gray-500 dark:text-gray-400">
                             {ex.durationMinutes} min · {ex.maxScore} Punkte
                           </p>
                         </div>
-                        <Play size={14} className="text-indigo-500 shrink-0 group-hover:translate-x-0.5 transition-transform" />
-                      </Link>
+                        <div className="flex gap-2">
+                          <Link
+                            to={`/pruefungen/${ex.id}?mode=simulation`}
+                            className="flex-1 inline-flex items-center justify-center gap-1 text-xs font-bold py-1.5 px-2 rounded-lg bg-indigo-100 dark:bg-indigo-900/40 text-indigo-700 dark:text-indigo-300 hover:bg-indigo-200 transition"
+                          >
+                            <Play size={12} /> Simulacro
+                          </Link>
+                          <Link
+                            to={`/pruefungen/${ex.id}?mode=real`}
+                            className="flex-1 inline-flex items-center justify-center gap-1 text-xs font-bold py-1.5 px-2 rounded-lg bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:from-purple-700 hover:to-pink-700 transition shadow-sm"
+                            title="Cuenta para el certificado. 24 h entre intentos, máx 3."
+                          >
+                            <Trophy size={12} /> Real
+                          </Link>
+                        </div>
+                      </div>
                     ))}
                   </div>
                 )}
