@@ -147,10 +147,41 @@ async function verifyEmailCached(email) {
   return fresh
 }
 
+// ─── Referral (proxied to b2c) ──────────────────────────────────────
+// b2c contract: GET /api/internal/student/referral?email=X
+//   → { code, link, invited_count, classes_earned }  (or nested in .data)
+// b2c owns the whole referral system; Schule only surfaces it in the UI.
+const referralCache = new Map()
+
+async function fetchReferralFor(email) {
+  const trimmed = String(email || '').trim().toLowerCase()
+  if (!trimmed) return null
+  const url = `/api/internal/student/referral?email=${encodeURIComponent(trimmed)}`
+  const json = await call(url)
+  const d = json?.data || json || {}
+  return {
+    code: d.code || null,
+    link: d.link || null,
+    invited_count: Number(d.invited_count || 0),
+    classes_earned: Number(d.classes_earned || 0),
+  }
+}
+
+async function fetchReferralCached(email) {
+  const key = String(email || '').trim().toLowerCase()
+  if (!key) return null
+  const hit = referralCache.get(key)
+  if (hit && hit.expiresAt > Date.now()) return hit.value
+  const fresh = await fetchReferralFor(key)
+  referralCache.set(key, { value: fresh, expiresAt: Date.now() + CACHE_TTL_MS })
+  return fresh
+}
+
 export {
   isConfigured,
   fetchActiveStudents,
   verifyEmail,
   verifyEmailCached,
+  fetchReferralCached,
   cacheInvalidate,
 }

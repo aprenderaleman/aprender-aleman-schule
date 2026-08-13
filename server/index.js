@@ -1499,6 +1499,55 @@ app.get('/api/reviews/public', async (req, res) => {
   }
 })
 
+// ─── REFERRAL (proxy a b2c, fail-silent) ──────────────
+// b2c owns el sistema de referidos. Schule solo lo muestra si el alumno
+// viene de la academia (ssoUser=1 o b2c dice isActiveStudent). Cualquier
+// error o alumno no-academia → 404, así el frontend esconde el botón sin
+// mostrar mensajes de error.
+app.get('/api/referral', authMiddleware, async (req, res) => {
+  const HIDE = () => res.status(404).json({ available: false })
+  try {
+    if (!b2c.isConfigured()) return HIDE()
+
+    // Solo alumnos de la academia. Bypass staff explícito (no ven referidos).
+    if (['admin', 'superadmin', 'teacher'].includes(req.user?.role)) return HIDE()
+
+    // ssoUser=1 en la subscription → creado vía b2c SSO
+    let isAcademy = false
+    try {
+      const sub = await getSubscriptionInfo(req.user.id)
+      if (sub?.ssoUser) isAcademy = true
+    } catch {}
+
+    // Doble check contra b2c si el flag local no lo dice
+    if (!isAcademy) {
+      try {
+        const verdict = await b2c.verifyEmailCached(req.user.email)
+        if (verdict?.isActiveStudent) isAcademy = true
+      } catch {
+        // b2c caído → no exponemos referidos
+        return HIDE()
+      }
+    }
+    if (!isAcademy) return HIDE()
+
+    const data = await b2c.fetchReferralCached(req.user.email)
+    if (!data || !data.code) return HIDE()
+
+    res.json({
+      available: true,
+      code: data.code,
+      link: data.link,
+      invited_count: data.invited_count,
+      classes_earned: data.classes_earned,
+    })
+  } catch (err) {
+    // Fail-silent — nunca romper la app por el referral
+    console.warn('[referral] hidden:', err.message)
+    HIDE()
+  }
+})
+
 // ─── INTERNAL: STUDENT PROGRESS (for b2c / CRM) ───────
 // Consumed by b2c when a student's `clases_restantes` reaches 0 (or
 // whenever the academy wants to check level-guarantee eligibility). Also

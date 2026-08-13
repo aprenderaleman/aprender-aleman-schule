@@ -7,6 +7,7 @@ import { useProgress } from '../../context/ProgressContext'
 import { useSidebar } from '../../context/SidebarContext'
 import Tooltip from '../UI/Tooltip'
 import Logo from '../UI/Logo'
+import ReferralButton from '../Referral/ReferralButton'
 
 const LEVEL_XP = { A1: 500, A2: 1000, B1: 2000, B2: 3500, C1: 5000 }
 
@@ -75,6 +76,7 @@ export default function Navbar() {
 
           {/* Right: utilities */}
           <div className="flex items-center gap-2 ml-auto">
+            <ReferralButton />
             {/* Cmd+K trigger — desktop only */}
             <Tooltip content="Befehl ausführen" shortcut="⌘ K">
               <button

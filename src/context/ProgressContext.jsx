@@ -159,6 +159,12 @@ export function ProgressProvider({ children }) {
             body: JSON.stringify({ achievementId: a.id }),
           }).catch(() => {})
         })
+        // Referral popup listens for this; frequency cap lives in the button.
+        try {
+          window.dispatchEvent(new CustomEvent('referral-victory', {
+            detail: { label: earned[0]?.title || earned[0]?.label || 'Nuevo logro' },
+          }))
+        } catch {}
       }
 
       // Sync exercise result to backend, then notify other tabs
