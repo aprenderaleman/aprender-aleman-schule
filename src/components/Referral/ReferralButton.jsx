@@ -3,23 +3,17 @@ import { Gift } from 'lucide-react'
 import useReferral from './useReferral'
 import ReferralModal from './ReferralModal'
 
-const LAST_POPUP_KEY = 'schule_referral_popup_at'
-const MONTH_MS = 30 * 24 * 60 * 60 * 1000
+// Una vez que el alumno cierra el popup de referidos con la X, no le
+// aparece nunca más automáticamente. Si quiere reabrirlo lo hace desde
+// el botón del header (que siempre funciona).
+const DISMISSED_KEY = 'schule_referral_popup_dismissed'
 
-function canAutoPopup() {
-  try {
-    const raw = localStorage.getItem(LAST_POPUP_KEY)
-    if (!raw) return true
-    const last = parseInt(raw, 10)
-    if (!last) return true
-    return Date.now() - last > MONTH_MS
-  } catch {
-    return true
-  }
+function isDismissed() {
+  try { return localStorage.getItem(DISMISSED_KEY) === '1' } catch { return false }
 }
 
-function markPopupShown() {
-  try { localStorage.setItem(LAST_POPUP_KEY, String(Date.now())) } catch {}
+function markDismissed() {
+  try { localStorage.setItem(DISMISSED_KEY, '1') } catch {}
 }
 
 /**
@@ -37,22 +31,30 @@ export default function ReferralButton() {
   const [open, setOpen] = useState(false)
   const [source, setSource] = useState('button') // 'button' | { title, subtitle }
 
-  // Listen for victory events — one popup per month, closes reset the timer
+  // Auto-popup en victorias — pero SOLO si el alumno nunca lo cerró.
   useEffect(() => {
     const onVictory = (e) => {
       if (!referral) return
-      if (!canAutoPopup()) return
+      if (isDismissed()) return
       const label = e?.detail?.label || 'Nuevo logro'
       setSource({
         title: `🎉 ¡${label}!`,
         subtitle: '¿Conoces a alguien que también quiera lograrlo? Regálale una clase 👇',
       })
       setOpen(true)
-      markPopupShown()
     }
     window.addEventListener('referral-victory', onVictory)
     return () => window.removeEventListener('referral-victory', onVictory)
   }, [referral])
+
+  // Cerrar con la X marca el flag permanente — no reaparece hasta que el
+  // alumno lo abra manualmente desde el header.
+  const handleClose = (fromAutoPopup) => {
+    setOpen(false)
+    // Solo marcamos dismissed si venía del auto-popup (source es objeto).
+    // Si cerró el modal que él mismo abrió con el botón, no lo marcamos.
+    if (typeof source === 'object') markDismissed()
+  }
 
   if (!referral) return null // fail-silent: sin referidos, sin rastro
 
@@ -85,7 +87,7 @@ export default function ReferralButton() {
 
       <ReferralModal
         open={open}
-        onClose={() => setOpen(false)}
+        onClose={handleClose}
         data={referral}
         title={typeof source === 'object' ? source.title : undefined}
         subtitle={typeof source === 'object' ? source.subtitle : undefined}
