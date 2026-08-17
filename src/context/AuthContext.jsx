@@ -16,11 +16,19 @@ function getStoredAuth() {
 function storeAuth(token, user) {
   localStorage.setItem('auth_token', token)
   localStorage.setItem('auth_user', JSON.stringify(user))
+  // Wire native side effects: register push token + offer biometric unlock.
+  // No-op on web. Fire-and-forget so login isn't blocked by permission UI.
+  Promise.all([
+    import('../utils/pushNotifications').then(m => m.initPushNotifications()).catch(() => {}),
+    import('../utils/biometric').then(m => m.offerToEnable(token)).catch(() => {}),
+  ])
 }
 
 function clearAuth() {
   localStorage.removeItem('auth_token')
   localStorage.removeItem('auth_user')
+  // Also purge the biometric-stored JWT so a logout truly logs out.
+  import('../utils/biometric').then(m => m.disableBiometricUnlock()).catch(() => {})
 }
 
 export function AuthProvider({ children }) {

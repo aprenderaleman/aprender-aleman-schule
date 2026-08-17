@@ -330,3 +330,382 @@ Nota: en `l-b1-001` (l. 69) sí está bien resuelto —
     Como sustantivo va en mayúscula (`ist ein Neutrum`); como adjetivo se dice
     `neutral`/`sächlich`. Además `a1.js` usa `neutral` y este archivo `neutrum`:
     **unificar la terminología en toda la app.**
+
+---
+
+## src/data/exercises-part1.js
+
+### [A] El prefijo separable se duplica al insertar la respuesta
+
+41. `grammar-a1-014` (l. 432) â€” `question:'Ihr ___ um 7 Uhr auf. (aufstehen)'`,
+    `answer:'steht auf'` (y las cuatro opciones llevan `auf`).
+    Resultado: **`Ihr steht auf um 7 Uhr auf.`** â€” `auf` duplicado.
+    â†’ O bien opciones sin prefijo (`stehe / stehst / steht / stehen`) manteniendo el `auf`
+    del enunciado, o bien plantilla `Ihr ___ um 7 Uhr ___.` con `steht / auf`
+    (asÃ­ lo hace bien `grammar-a2-004`).
+
+### [A] La pista revela la respuesta
+
+42. `grammar-a2-013` (l. 988) â€” `Ich wohne ___ meiner Schwester. (bei)`, `answer:'bei'`.
+    Mismo patrÃ³n que `g-a2-014`. Quitar la pista o poner la glosa espaÃ±ola.
+    (En cambio `grammar-a2-014`, l. 1001, usa `(der Tisch)` â€” eso sÃ­ es correcto: da el
+    lema, no la soluciÃ³n.)
+
+### [B] Detalles
+
+43. `listening-a2-005` (l. 1087) â€” `Ja, der Balkon ist **im** Schlafzimmer.`
+    Un balcÃ³n no estÃ¡ *dentro* del dormitorio. â†’ `Der Balkon liegt **am** Schlafzimmer`
+    o `Der Balkon geht vom Schlafzimmer ab`.
+44. `reading-a2-005` (l. 1029) â€” `Die Miete ist 750 Euro im Monat, **mit** Nebenkosten.`
+    El tÃ©rmino del sector es **`inklusive Nebenkosten`** (o `warm`).
+45. `grammar-b1-012` (l. 1556) â€” `___ dem Studium hat sie sofort eine Stelle gefunden.`
+    Mismo problema de doble soluciÃ³n que `g-b1-012` (`Vor` tambiÃ©n es vÃ¡lido), aunque aquÃ­
+    el `sofort` y la explicaciÃ³n sÃ­ orientan. Prioridad menor.
+
+### Nota de contenido (no gramatical)
+
+Varios Ã­tems estÃ¡n **duplicados** entre `exercises-part1.js` y `a1.js`/`a2.js`/`b1.js`:
+`Ich ___ mÃ¼de.`, `Ich sehe ___ Mann.`, `Das Problem ___ sofort gelÃ¶st werden.`
+Este Ãºltimo con **respuestas distintas**: `grammar-b1-007` = `muss`, `g-b2-002` =
+`Alle sind mÃ¶glich`. Conviene decidir cuÃ¡l es la fuente Ãºnica.
+
+---
+
+## src/data/extra-path.js
+
+Nota positiva: **este archivo sÃ­ trae las traducciones en espaÃ±ol**
+(`{word:'aufstehen', translation:'levantarse'}`), a diferencia de `a1.js`, `a2.js`, `b1.js`,
+`b2.js`, `c1.js` y `exercises-part1.js`, que glosan en alemÃ¡n. Este es el formato correcto.
+
+### [A] Errores de gÃ©nero y concordancia
+
+46. `w-a1-022` (l. 228) â€” `Du hast **eine** T-Shirt online gekauft.`
+    â†’ **`ein T-Shirt`** (`das T-Shirt`). La propia pista de la lÃ­nea siguiente ya dice
+    `ich habe ein T-Shirt bei Ihnen gekauft` â€” el ejercicio se contradice a sÃ­ mismo.
+
+47. `r-a2-019` (l. 328) â€” `ein Praktikum in **einer** Kindergarten in MÃ¼nchen gemacht`
+    â†’ **`in einem Kindergarten`** (`der Kindergarten`, dativo masculino).
+
+48. `r-a2-018` (l. 320) â€” `Im Sommer **kommt** Tante Eva und ich gerne zu Besuch.`
+    Sujeto compuesto con `ich` â†’ 1.Âª persona del plural.
+    â†’ **`Im Sommer kommen Tante Eva und ich gerne zu Besuch.`**
+
+49. `g-b1-016` (l. 534) â€” explicaciÃ³n: `**Der** Relativpronomen steht im Nominativâ€¦`
+    â†’ **`Das Relativpronomen`** (neutro).
+    (En `exercises-part1.js` l. 1585 estÃ¡ bien: `Das Relativpronomen stimmtâ€¦`)
+
+50. `l-c1-020` (l. 1199) â€” `**Stadtplaner** Dr. Lehmann ist zu Gast. **Frau Doktor**, â€¦`
+    ContradicciÃ³n de gÃ©nero dentro del mismo audio.
+    â†’ **`Stadtplanerin Dr. Lehmann ist zu Gast.`**
+    (Mismo problema de tratamiento femenino que `Frau Professor` en `c1.js`.)
+
+### [A] TÃ­tulos y opciones rotas
+
+51. `s-b2-027` (l. 1043) â€” `title:'Lebenslange Lernens'` â†’ **`Lebenslanges Lernen`**.
+52. `l-b1-020` (l. 679) â€” opciÃ³n `'Ãœber das Essen war kalt'`: mezcla preposiciÃ³n y oraciÃ³n
+    completa. â†’ `'Das Essen war kalt'`.
+53. `l-c1-023` (l. 1222) â€” respuesta `'Strukturellen Kollaps'` en acusativo, mientras la
+    pregunta es `Welcher Begriff â€¦?` (nominativo) y los otros distractores van en nominativo.
+    â†’ **`Struktureller Kollaps`**.
+
+### [A] Pregunta que no es alemÃ¡n
+
+54. `l-b1-025` (l. 714) â€” `**Wohin empfiehlt** der ReisebÃ¼ro-Mitarbeiter?`
+    `empfehlen` no admite `wohin`. â†’ **`Was empfiehlt der ReisebÃ¼ro-Mitarbeiter?`**
+    o `Wohin soll die Familie laut dem Mitarbeiter fahren?`
+
+### [A] La respuesta marcada produce una frase incorrecta
+
+55. `g-c1-019` (l. 1066-1068) â€” `___ hatte sie alle Vorbereitungen erledigt.`
+    `answer:'Aufgestanden'` â†’ **`Aufgestanden hatte sie alle Vorbereitungen erledigt.`**
+    no es alemÃ¡n: la construcciÃ³n de participio absoluto exige coma **y** un complemento
+    (`FrÃ¼h aufgestanden, hatte sie â€¦`). La propia explicaciÃ³n escribe la coma que falta en
+    el enunciado. Y el distractor `Beim Aufstehen` sÃ­ da una frase gramatical.
+    â†’ Reformular: `___ , hatte sie alle Vorbereitungen erledigt.` con `FrÃ¼h aufgestanden`.
+
+56. `g-b2-017` (l. 797-799) â€” `Das ___ Kind weinte laut.` `answer:'fallende'`.
+    Dos problemas: (a) **falta el verbo de referencia** entre parÃ©ntesis, que sÃ­ tienen los
+    Ã­tems paralelos (`g-b2-008` pone `(lachen)`), asÃ­ que el alumno no puede deducir
+    `fallen`; (b) `Das fallende Kind weinte laut` no es una frase alemana sensata.
+    â†’ `Das ___ Kind lief zu seiner Mutter. (weinen)` â†’ `weinende`.
+
+### [A] Ãtems sin soluciÃ³n Ãºnica (patrÃ³n recurrente en C1)
+
+57. `g-c1-022` (l. 1078) â€” `Sie ___ sich der Verantwortung stets bewusst.` `answer:'war'`.
+    **`ist` es igualmente correcto** (y `sind` si `Sie` es plural o cortesÃ­a): nada en la
+    frase fija el tiempo. La explicaciÃ³n dice `hier PrÃ¤teritum` sin ningÃºn indicio que lo
+    motive. â†’ AÃ±adir marcador temporal: `Damals ___ sie sich der Verantwortung stets bewusst.`
+    AdemÃ¡s la explicaciÃ³n llama a `sich â€¦ bewusst sein` **verbo reflexivo**: no lo es.
+    Es `bewusst` (adjetivo) + pronombre reflexivo en **dativo** + objeto en genitivo.
+
+58. `g-c1-025` (l. 1090) â€” `Der LÃ¤rm war ___ laut, dass niemand schlafen konnte.`
+    `answer:'derart'`. **`so` es la construcciÃ³n consecutiva estÃ¡ndar** y queda marcada
+    como error â€” la propia explicaciÃ³n reconoce que `derart` es solo una variante mÃ¡s
+    enfÃ¡tica de `so â€¦ dass`. â†’ Quitar `so` de las opciones o pedir explÃ­citamente el
+    registro elevado.
+
+59. Mismo patrÃ³n, prioridad media:
+    - `g-c1-016` (l. 1054) `Sie ___ uns einen Bericht zur VerfÃ¼gung gestellt.` `answer:'hat'`:
+      con `Sie` de cortesÃ­a o plural, `haben` es correcto.
+    - `g-c1-021` (l. 1074) `___ der aktuellen Lage mÃ¼ssen wir umdenken.` `answer:'Angesichts'`:
+      `Wegen` y `Trotz` dan frases igualmente gramaticales.
+    - `g-b2-022` (l. 817) `Ich habe ihn nicht kommen ___.` `answer:'sehen'`: con `sehen`/`hÃ¶ren`
+      el Duden admite **tambiÃ©n** el participio (`kommen gesehen`), asÃ­ que el distractor
+      `gesehen` no es un error.
+
+### [A] Orden de palabras tras `jedoch`
+
+60. `r-c1-020` (l. 1120) â€” `â€¦hat das Wirtschaftswachstum jahrzehntelang befeuert,
+    **jedoch ihre AnfÃ¤lligkeit ist** mit jeder Krise sichtbarer geworden.`
+    `jedoch` en primera posiciÃ³n exige el verbo en segunda.
+    â†’ **`jedoch ist ihre AnfÃ¤lligkeit mit jeder Krise sichtbarer geworden`**
+    (o `ihre AnfÃ¤lligkeit ist jedoch â€¦`).
+
+### [B] LÃ©xico y colocaciones
+
+61. `s-c1-020` (l. 1286) â€” hint `**Verstehbar** ist auch die Gegenposition, jedoch â€¦`
+    â†’ **`VerstÃ¤ndlich ist auch die Gegenposition`**. `verstehbar` no es idiomÃ¡tico.
+62. `l-b1-019` (l. 669) â€” tÃ­tulo `**Auf** der Volkshochschule` â†’ **`An der Volkshochschule`**
+    (como `an der UniversitÃ¤t`).
+63. `s-b1-022` (l. 769) â€” hint `Falls ich noch einmal **hingehen** kÃ¶nnteâ€¦` en un ejercicio
+    sobre un viaje en el que se `fÃ¤hrt` â†’ **`hinfahren`**.
+64. `s-a2-028` (l. 525) â€” `die Vor- und Nachteile **von einem Leben** in einer groÃŸen Stadt`
+    â†’ **`eines Lebens in einer groÃŸen Stadt`** (genitivo).
+65. `s-a2-023` (l. 511) â€” hint `Das Foto **ist** im â€¦ gemacht.`
+    â†’ `Das Foto **wurde** im â€¦ **aufgenommen**.`
+66. `l-a1-020` (l. 156) â€” `**Wie viel** Tomaten kauft die Person?` â†’ **`Wie viele Tomaten`**
+    (mismo error que `r-b1-005` en `b1.js`).
+
+### [C] PrecisiÃ³n de contenido
+
+67. `r-b1-025` (l. 638) â€” `Romanisch in der Schweiz`: el nombre estÃ¡ndar en alemÃ¡n es
+    **`RÃ¤toromanisch`**. Y decir que estas lenguas las hablan `nur noch wenige tausend
+    Menschen` subestima las cifras (romanche â‰ˆ 40 000â€“60 000; sorabo â‰ˆ 20 000â€“30 000).
+68. `g-b2-020` (l. 809) â€” junto a `Da er krank war, konnte er nicht kommen` (marcada),
+    la opciÃ³n `Er war krank, also kam er nicht` tambiÃ©n es una conversiÃ³n vÃ¡lida al estilo
+    verbal. Sustituir ese distractor.
+
+
+---
+
+## src/data/extra-reading-listening-writing.js
+
+### [A] ColocaciÃ³n imposible: no se "gana" un segundo puesto
+
+69. `r-a2-015` (l. 300) â€” `Letztes Jahr haben sie den zweiten Platz in der Meisterschaft
+    **gewonnen**.` y la pregunta correspondiente (l. 305)
+    `Welchen Platz hat die Mannschaft **gewonnen**?`
+    En alemÃ¡n un puesto se **`belegt`** o se **`erreicht`**; solo se *gana* el primer puesto
+    o un premio.
+    â†’ `â€¦haben sie den zweiten Platz **belegt**` / `Welchen Platz hat die Mannschaft
+    **belegt**?`
+    Nota: en `extra-b1b2.js` (l. 133) el mismo contenido estÃ¡ bien resuelto:
+    `ich habe den dritten Platz **bekommen** und ein neues Objektiv als Preis **gewonnen**`.
+
+### [A] Pleonasmo
+
+70. `r-a2-016` (l. 309) â€” `Bitte machen Sie **keinen lauten LÃ¤rm** nach dieser Zeit.`
+    `LÃ¤rm` ya significa ruido molesto: `lauter LÃ¤rm` es redundante y suena mal.
+    â†’ `Bitte machen Sie nach dieser Zeit **keinen LÃ¤rm**.`
+
+### [B] `in der NÃ¤he` rige genitivo
+
+71. `r-a2-008` (l. 235) â€” `ganz in der NÃ¤he **von einem Park**`
+    â†’ **`ganz in der NÃ¤he eines Parks`**.
+
+---
+
+## src/data/extra-b1b2.js
+
+Los textos son de muy buena calidad. Dos puntos:
+
+### [A] GÃ©nero
+
+72. `l-b1-008` (l. 105) â€” `**Der neue Abflugzeit** ist 16:30 Uhr.`
+    `die Abflugzeit` es femenino â†’ **`Die neue Abflugzeit ist 16:30 Uhr.`**
+
+### [B] `wegen` + dativo en los distractores
+
+73. `l-b1-008` (l. 107) â€” opciones `'Wegen schlechtem Wetter'` y `'Wegen zu vielen Passagieren'`.
+    `wegen` rige **genitivo**: `wegen schlechten Wetters`, `wegen zu vieler Passagiere`.
+    Llamativo porque la respuesta correcta del mismo Ã­tem â€”
+    `'Wegen technischer Probleme'` â€” **sÃ­** estÃ¡ en genitivo. Los distractores modelan
+    alemÃ¡n incorrecto.
+
+74. `l-b1-013` (l. 140) â€” `dass in den Wagen 1 bis 3 Ruhebereich ist`
+    â†’ `dass die Wagen 1 bis 3 Ruhebereich **sind**` o
+    `dass **sich** in den Wagen 1 bis 3 **der** Ruhebereich **befindet**`.
+
+---
+
+## src/data/extra-c1.js
+
+Los textos de lectura y audiciÃ³n son alemÃ¡n acadÃ©mico C1 genuinamente bueno. Solo:
+
+### [A] Anglicismo sintÃ¡ctico en el enunciado
+
+75. `r-c1-014`, primera pregunta (l. 72) â€”
+    `**Was** betrachten absolute Straftheorien die Strafe **als**?`
+    Calco del inglÃ©s *"What do they regard punishment as?"*. El `als` no puede quedar suelto
+    al final.
+    â†’ **`Als was betrachten absolute Straftheorien die Strafe?`**
+    o `Wie betrachten absolute Straftheorien die Strafe?`
+
+---
+
+## src/data/flashcards.js
+
+El alemÃ¡n de las 456 tarjetas es de calidad alta. Hallazgos:
+
+### [A] Elipsis imposible del verbo
+
+76. Tarjeta `einerseits â€¦ andererseits` (tema `c1-connectors`) â€” ejemplo:
+    `Einerseits ist es gÃ¼nstig, andererseits die QualitÃ¤t schlecht.`
+    En la segunda oraciÃ³n falta el verbo y no se puede elidir aquÃ­.
+    â†’ **`Einerseits ist es gÃ¼nstig, andererseits ist die QualitÃ¤t schlecht.`**
+
+### [B] Ejemplos que no encajan con la entrada
+
+77. `{ de:'der zweite', example:'Das zweite Haus links.' }` â€” la entrada es masculina,
+    el ejemplo neutro. â†’ `Der zweite Versuch war erfolgreich.`
+78. `{ de:'der Schmerz', example:'Ich habe Kopfschmerzen.' }` â€” el ejemplo no contiene la
+    palabra de la tarjeta en singular. â†’ `Der Schmerz lÃ¤sst langsam nach.`
+79. `{ de:'eins', example:'Ich habe eins bekommen.' }` â€” ambiguo (suena a "saquÃ© un uno" de
+    nota). â†’ `Eins plus eins ist zwei.`
+80. `{ de:'die Begebenheit', example:'Eine seltsame Begebenheit hat sich ereignet.' }` â€”
+    `Begebenheit` + `sich ereignen` es tautolÃ³gico.
+    â†’ `Er erzÃ¤hlte eine seltsame Begebenheit aus seiner Kindheit.`
+
+---
+
+## src/data/pruefungen/ (simulacros Goethe)
+
+Es la parte mejor escrita de la app: alemÃ¡n correcto, comillas alemanas bien puestas en la
+mayorÃ­a de los archivos, estructuras conformes al formato oficial. Dos cosas:
+
+### [A] Forma inexistente en el modelo B1 de lectura
+
+81. `goethe-b1-lesen.js` (l. 44) â€” `Die Vorlesungen sind anders als in Deutschland â€”
+    viel **diskutierender** und freier.`
+    **`diskutierender` no existe**: no se puede formar un comparativo del participio I
+    `diskutierend`.
+    â†’ `â€¦viel **diskussionsorientierter** und freier` o, mejor para B1,
+    `â€¦dort wird viel mehr diskutiert, und es ist freier`.
+
+### [A] `ErzÃ¤hle Ã¼ber` en un enunciado de examen
+
+82. `goethe-a2-sprechen.js` (l. 49) â€” `**ErzÃ¤hle Ã¼ber** das vorgegebene Thema.`
+    La formulaciÃ³n estÃ¡ndar del Goethe es **`Sprich Ã¼ber â€¦`**.
+    â†’ `**Sprich Ã¼ber** das vorgegebene Thema.`
+    (En la lÃ­nea 52 del mismo archivo ya estÃ¡ bien: `ErzÃ¤hle ausfÃ¼hrlich **darÃ¼ber**.`)
+
+---
+
+## Texto de interfaz (componentes .jsx)
+
+El alemÃ¡n de la UI estÃ¡ casi todo correcto. Tres correcciones:
+
+### [A] ColocaciÃ³n
+
+83. `Fortgeschritten â€” Du sprichst flieÃŸend **in** komplexen Themen.`
+    (descripciÃ³n de nivel C1) â†’ **`Du sprichst flieÃŸend Ã¼ber komplexe Themen.`**
+
+### [A] Frase incompleta
+
+84. `Neues Passwort (leer lassen, um nicht zu Ã¤ndern)` â€” falta el objeto de `Ã¤ndern`.
+    â†’ `Neues Passwort (leer lassen, um **es** nicht zu Ã¤ndern)`
+    o `(leer lassen, wenn das Passwort unverÃ¤ndert bleiben soll)`.
+
+### [B] Imperativos abreviados y colocaciÃ³n
+
+85. `Probier eine GrammatikÃ¼bung` (y las variantes HÃ¶r-/Lese-/Schreib-/SprechÃ¼bung).
+    EstÃ¡ndar: **`Probiere eine GrammatikÃ¼bung aus`** (`ausprobieren`), o simplemente
+    `Mach eine GrammatikÃ¼bung`.
+86. `Klick zum AnhÃ¶ren (du kannst es mehrmals abspielen)` â†’ `**Klicke** zum AnhÃ¶ren
+    (du kannst **die Aufnahme** mehrmals abspielen)` â€” `es` no tiene antecedente claro.
+
+---
+
+# Problemas transversales (resolver de una vez en toda la app)
+
+### T1. [A] El campo espaÃ±ol contiene alemÃ¡n â€” inconsistencia estructural
+
+- `flashcards.js` usa `es:` y `nameEs:`, pero el contenido estÃ¡ **en alemÃ¡n**
+  (`{ de:'Hallo', es:'informelle BegrÃ¼ÃŸung' }`).
+- `a1.js`, `a2.js`, `b1.js`, `b2.js`, `c1.js`, `exercises-part1.js`, `extra-b1b2.js`,
+  `extra-c1.js`, `extra-reading-listening-writing.js`: el campo `translation` da
+  **parÃ¡frasis alemanas**.
+- `extra-path.js` **sÃ­** estÃ¡ en espaÃ±ol (`{word:'aufstehen', translation:'levantarse'}`).
+
+Para un alumno A1 hispanohablante, glosar `heiÃŸe` como `ich trage den Namen` es inservible.
+Hay que decidir un criterio Ãºnico y aplicarlo. Si la definiciÃ³n monolingÃ¼e se quiere
+conservar para niveles altos, conviene un campo aparte (`de_def` + `es`) en lugar de meter
+alemÃ¡n en un campo llamado `es`.
+
+### T2. [B] `erzÃ¤hlen Ã¼ber` â€” 15 apariciones
+
+`a1.js` (l. 136, 148, 166, 169, 178), `a2.js` (l. 132, 138, 141, 144, 156),
+`b1.js` (l. 130, 139, 145, 163), `pruefungen/goethe-a2-sprechen.js` (l. 49).
+
+En alemÃ¡n estÃ¡ndar: **`ErzÃ¤hle von â€¦`** o **`ErzÃ¤hle etwas Ã¼ber â€¦`**; para consignas de
+examen, **`Sprich Ã¼ber â€¦`**. El patrÃ³n correcto ya existe en la app:
+`b1.js` l. 69 `Bitte erzÃ¤hlen Sie uns **etwas Ã¼ber** sich.`
+
+### T3. [C] TerminologÃ­a del gÃ©nero gramatical â€” tres variantes en paralelo
+
+- `neutral` â†’ `a1.js` (l. 12, 14), `b1.js` (l. 13), `b2.js` (l. 10)
+- `neutrum` (minÃºscula, como adjetivo) â†’ `level-test-questions.js` (l. 30, 176),
+  `exercises-part1.js` (l. 422), `extra-path.js` (l. 39)
+- `Neutrum` (correcto, sustantivo) â†’ `exercises-part1.js` (l. 207)
+
+Unificar en **`Neutrum`** (sustantivo) o **`sÃ¤chlich`** (adjetivo). `neutral` no es el
+nombre del gÃ©nero.
+
+### T4. [C] Comillas alemanas mal cerradas
+
+Se abre con `â€ž` y se cierra con la comilla recta `"` en lugar de `"`:
+`goethe-b2-hoeren.js` (22Ã—), `goethe-c1-hoeren.js` (9Ã—), `goethe-c2-hoeren.js` (8Ã—),
+`extra-c1.js` (10Ã—), `extra-b1b2.js`, `goethe-a1/a2/b1/b2/c1-sprechen.js`.
+El par alemÃ¡n es **`â€žâ€¦"`**. Es visible para el usuario en pantalla.
+
+### T5. [A] PatrÃ³n de diseÃ±o: Ã­tems de opciÃ³n mÃºltiple sin soluciÃ³n Ãºnica
+
+No es un error de alemÃ¡n, sino de construcciÃ³n, y afecta a la fiabilidad del test:
+`g-b1-012`, `grammar-b1-012`, `g-c1-005`, `g-c1-016`, `g-c1-021`, `g-c1-022`, `g-c1-025`,
+`g-b2-022`, `g-b2-020`, `b1-g-006`, `c1-g-003`.
+En todos, un distractor produce una frase alemana igual de correcta que la marcada. Un
+alumno que sepa alemÃ¡n es penalizado. RecomendaciÃ³n: aÃ±adir al enunciado el marcador que
+fije la respuesta (temporal, de registro o de sentido), o sustituir el distractor.
+
+### T6. [A] PatrÃ³n: la pista entre parÃ©ntesis revela la respuesta
+
+`g-a2-014` (`(ihm)`), `g-a2-015` (`(unterhalb)`), `grammar-a2-013` (`(bei)`).
+Vienen de glosas espaÃ±olas traducidas al alemÃ¡n por error. Uso correcto del parÃ©ntesis
+â€”dar el lema, no la soluciÃ³nâ€” en `grammar-a2-014` (`(der Tisch)`) y `g-a1-011` (`(lernen)`).
+
+### T7. [A] PatrÃ³n: la respuesta insertada rompe la frase
+
+`grammar-a1-014` (prefijo `auf` duplicado), `a2-g-003` (`Wie fÃ¼hlst dich du heute?`),
+`g-c1-012` (`WorÃ¼berÃ¼ber`), `g-b2-015` (huecos mal colocados), `c1-g-001`
+(fuerza el `gehabt` del doppeltes Perfekt), `g-c1-019` (falta la coma).
+Conviene una comprobaciÃ³n automÃ¡tica: para cada Ã­tem `fill_blank`/`multiple_choice`,
+insertar la respuesta en el hueco y revisar la frase resultante.
+
+---
+
+# Prioridades sugeridas
+
+**Bloque 1 â€” corregir ya (visible y evaluado):**
+`level-test-questions.js` completo (nÂº 33-40): es el test de nivel y decide el itinerario
+del alumno. En especial `c1-g-001` (doppeltes Perfekt como respuesta correcta),
+`c1-v-003` (`Welche FunktionsverbgefÃ¼ge`) y `a2-g-003` (orden de palabras imposible).
+
+**Bloque 2 â€” errores duros de alemÃ¡n:**
+nÂº 16, 17, 18, 19, 20, 25, 26, 27, 28, 41, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57,
+58, 60, 69, 70, 72, 75, 76, 81, 82, 83, 84.
+
+**Bloque 3 â€” transversales:** T1 (campo `es`/`translation`), T2 (`erzÃ¤hlen Ã¼ber`),
+T3 (`Neutrum`), T4 (comillas).
+
+**Bloque 4 â€” rediseÃ±o de Ã­tems:** T5, T6, T7 y los puntos [B]/[C] restantes.
+

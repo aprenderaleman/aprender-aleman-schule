@@ -1499,6 +1499,54 @@ app.get('/api/reviews/public', async (req, res) => {
   }
 })
 
+// ─── PUSH NOTIFICATIONS: register device token ────────
+// Called by the Capacitor shell after FCM/APNs hands back a token.
+// The backend later uses this to target the alumno with server-initiated
+// pushes (streak reminders, exam-real cooldown expired, new content).
+//
+// Table is auto-created below. Upsert by (userId, platform, token) so
+// re-registering the same device is idempotent.
+;(async () => {
+  try {
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS schule_device_tokens (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        userId VARCHAR(191) NOT NULL,
+        platform VARCHAR(16) NOT NULL,
+        token VARCHAR(512) NOT NULL,
+        createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+        updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+        UNIQUE KEY uniq_token (token(191)),
+        INDEX idx_user (userId)
+      )
+    `)
+  } catch (err) {
+    console.error('Failed to create schule_device_tokens:', err.message)
+  }
+})()
+
+app.post('/api/notifications/register-token', authMiddleware, async (req, res) => {
+  try {
+    const { token, platform } = req.body || {}
+    if (!token || typeof token !== 'string' || token.length < 20) {
+      return res.status(400).json({ error: 'Token inválido.' })
+    }
+    if (!['ios', 'android'].includes(platform)) {
+      return res.status(400).json({ error: 'Plataforma inválida.' })
+    }
+    await pool.query(
+      `INSERT INTO schule_device_tokens (userId, platform, token)
+       VALUES (?, ?, ?)
+       ON DUPLICATE KEY UPDATE userId = VALUES(userId), platform = VALUES(platform), updatedAt = NOW()`,
+      [req.user.id, platform, token]
+    )
+    res.json({ ok: true })
+  } catch (err) {
+    console.error('register-token error:', err.message)
+    res.status(500).json({ error: 'Error al registrar dispositivo.' })
+  }
+})
+
 // ─── REFERRAL (proxy a b2c, fail-silent) ──────────────
 // b2c owns el sistema de referidos. Schule solo lo muestra si el alumno
 // viene de la academia (ssoUser=1 o b2c dice isActiveStudent). Cualquier

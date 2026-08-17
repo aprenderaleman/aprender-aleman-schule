@@ -98,4 +98,12 @@ export async function initNativeBridge() {
     wireStatusBar(),
     hideSplashWhenReady(),
   ])
+  // Push notifications: only try to register if we already have a JWT.
+  // Fresh users trigger it later from AuthContext once they log in.
+  if (localStorage.getItem('auth_token')) {
+    try {
+      const { initPushNotifications } = await import('./pushNotifications')
+      initPushNotifications()
+    } catch {}
+  }
 }
