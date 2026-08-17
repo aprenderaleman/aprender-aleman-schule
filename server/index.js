@@ -4274,7 +4274,63 @@ passed = true wenn total >= 60.`
 })
 
 // ─── CHATBOT (OpenAI GPT-4o-mini) ───────────────────
-function getChatSystemPrompt(mode, userName, userLevel) {
+// Reads recent progress data so Hans can talk to the alumno with
+// context (last errors, streak, path progress). Falls back to empty
+// context on any query failure — the chat still works.
+async function getStudentContext(userId, userLevel) {
+  try {
+    const [xpRows] = await pool.query(
+      'SELECT xp, streak, perfectStreak, lastActivityDate FROM schule_progress WHERE userId = ? LIMIT 1',
+      [userId]
+    )
+    const xpRow = xpRows[0] || null
+    const lvl = String(userLevel || 'A1').toUpperCase()
+    const suffix = lvl.toLowerCase()
+
+    const [pathRows] = await pool.query(
+      `SELECT COUNT(DISTINCT exerciseId) AS n FROM schule_exercise_results
+        WHERE userId = ? AND score >= 70 AND exerciseId LIKE ?`,
+      [userId, `%-${suffix}-%`]
+    )
+    const [recentErrRows] = await pool.query(
+      `SELECT exerciseId, exerciseType, score
+         FROM schule_exercise_results
+        WHERE userId = ? AND score < 70
+        ORDER BY completedAt DESC LIMIT 5`,
+      [userId]
+    )
+    const [pruefRows] = await pool.query(
+      `SELECT module, MAX(passed) AS passed, MAX(score/NULLIF(maxScore,0)*100) AS pct
+         FROM schule_pruefungen_attempts
+        WHERE userId = ? AND level = ? AND mode = 'real' AND finishedAt IS NOT NULL
+        GROUP BY module`,
+      [userId, lvl]
+    )
+
+    const completed = Number(pathRows[0]?.n || 0)
+    const total = LEVEL_EXERCISE_TOTALS[lvl] || 0
+    const pathPct = total > 0 ? Math.round((100 * completed) / total) : 0
+
+    return {
+      xp: Number(xpRow?.xp || 0),
+      streak: Number(xpRow?.streak || 0),
+      pathPct,
+      completed,
+      total,
+      recentErrors: recentErrRows.slice(0, 5).map(r => ({
+        type: r.exerciseType, id: r.exerciseId, score: r.score,
+      })),
+      pruefungen: pruefRows.reduce((acc, r) => {
+        acc[r.module] = { passed: !!r.passed, pct: Math.round(Number(r.pct) || 0) }
+        return acc
+      }, {}),
+    }
+  } catch {
+    return null
+  }
+}
+
+function getChatSystemPrompt(mode, userName, userLevel, context = null) {
   if (mode === 'support') {
     return `Du bist der Support-Assistent von "Schule – Aprender Alemán", einer Plattform zum Deutschlernen.
 
@@ -4305,26 +4361,43 @@ REGELN:
 - Sei kurz: maximal 3-4 Sätze pro Antwort
 - Wenn nach Deutsch-Grammatik/Vokabeln gefragt wird, empfehle den "Deutsch-Tutor"-Modus`
   }
-  return `Du bist ein freundlicher und geduldiger Deutschlehrer auf der Plattform "Schule – Aprender Alemán". Deine Schüler kommen aus der ganzen Welt.
+  // Contextual snapshot the model can reference. Hans "conoce" al alumno.
+  const ctxBlock = context ? `
 
-Der Schüler heißt ${userName} und hat das Niveau ${userLevel}.
+WAS ICH ÜBER ${userName.toUpperCase()} WEISS (nutze das nur, wenn es hilft — nicht immer erwähnen):
+- Aktuelles Niveau: ${userLevel}
+- Fortschritt der Lernroute ${userLevel}: ${context.completed} / ${context.total} Übungen (${context.pathPct}%)
+- Serie: ${context.streak} Tage · Gesamt-XP: ${context.xp}
+${context.recentErrors.length > 0
+  ? `- Letzte Fehler (Übung / Punktzahl): ${context.recentErrors.map(e => `${e.type} ${e.id} (${e.score}%)`).join(', ')}`
+  : '- Keine Fehler in den letzten Übungen'}
+${Object.keys(context.pruefungen).length > 0
+  ? `- Prüfungen (echter Modus) für ${userLevel}: ${Object.entries(context.pruefungen)
+      .map(([m, v]) => `${m} ${v.pct}%${v.passed ? ' ✓' : ''}`).join(', ')}`
+  : `- Noch keine echte Prüfung für ${userLevel} gemacht`}` : ''
+
+  return `Du heißt HANS und bist der persönliche KI-Deutschlehrer von ${userName} innerhalb der App SCHULE. Anders als andere Chatbots kennst du den Fortschritt und die Fehler deines Schülers.
 
 SPRACHREGELN:
-- Antworte IMMER auf Deutsch. Du bist ein Deutschlehrer — deine Aufgabe ist es, Deutsch zu lehren.
-- Wenn der Schüler in einer anderen Sprache schreibt (z.B. Spanisch, Englisch, Französisch, Türkisch, Arabisch...), erkenne seine Muttersprache und füge KURZE Übersetzungen schwieriger Begriffe in Klammern in seiner Sprache hinzu.
-- Für A1/A2: einfaches Deutsch + mehr Übersetzungen in der Muttersprache des Schülers
-- Für B1/B2: normales Deutsch + wenige Übersetzungen
-- Für C1/C2: fast nur Deutsch, kaum Übersetzungen
+- Antworte IMMER auf Deutsch — du unterrichtest Deutsch.
+- Wenn ${userName} in einer anderen Sprache schreibt, erkenne die Muttersprache und füge kurze Übersetzungen der schwierigen Begriffe in Klammern hinzu.
+- Für A1/A2: einfaches Deutsch + más traducciones.
+- Für B1/B2: normales Deutsch + pocas traducciones.
+- Für C1/C2: fast nur Deutsch.
+
+PERSÖNLICHKEIT VON HANS:
+- Freundlich, geduldig, direkt. Redet Klartext, ohne Floskeln.
+- Duzt ${userName} immer mit dem Namen.
+- Konkret: Beispiele statt langer Theorie.
+- Ermutigend nach Fehlern — nicht sarkastisch.
+- Selbstsicher: wenn du etwas nicht weißt, sag es direkt.
 
 REGELN:
-- Erkläre Grammatik klar und mit Beispielen
-- Korrigiere Fehler freundlich und erkläre warum
-- Verwende Tabellen für Konjugationen und Deklinationen wenn nötig
-- Gib Übungsbeispiele wenn der Schüler fragt
-- Du kannst über alle Themen der deutschen Sprache sprechen: Grammatik, Wortschatz, Aussprache, Kultur, Redewendungen, Prüfungsvorbereitung
-- Halte Antworten kompakt: maximal 6-8 Sätze, außer bei Tabellen oder Erklärungen
-- Sei ermutigend und motivierend
-- Wenn der Schüler technische Fragen zur App stellt, empfehle den Modus "Soporte"`
+- Erkläre Grammatik klar mit Tabellen und Beispielen.
+- Korrigiere Fehler mit Warum + Merksatz zum Behalten.
+- Nutze den Kontext oben: wenn der Schüler zuletzt schlecht abgeschnitten hat, biete Übungshilfe zu genau dem Thema an.
+- Halte Antworten kompakt (3-6 Sätze), außer bei Tabellen oder detaillierten Erklärungen.
+- Bei technischen Fragen zur App → schlag den Modus "Support" vor.${ctxBlock}`
 }
 
 // ─── CHATBOT (Haiku 4.5) ───────────────────────────
@@ -4340,7 +4413,12 @@ app.post('/api/chat', authMiddleware, aiRateLimit, aiDailyCap, async (req, res) 
 
     const userName = req.user.fullName || req.user.name || 'Estudiante'
     const userLevel = req.user.level || 'A1'
-    const systemPrompt = getChatSystemPrompt(mode, userName, userLevel)
+    // Fetch progress context for tutor mode so Hans habla como "el que te conoce".
+    // Support mode no lo necesita — es una FAQ, no un profesor.
+    const context = (mode === 'support')
+      ? null
+      : await getStudentContext(req.user.id, userLevel).catch(() => null)
+    const systemPrompt = getChatSystemPrompt(mode, userName, userLevel, context)
 
     const chatMessages = []
     if (Array.isArray(history)) {

@@ -7,20 +7,29 @@ const API_URL = import.meta.env.VITE_API_URL || ''
 
 const MODES = {
   tutor: {
-    label: 'Deutsch-Tutor',
+    label: 'Hans · KI-Lehrer',
     icon: Sparkles,
     color: 'from-orange-500 to-amber-500',
-    placeholder: 'Schreib mir auf Deutsch...',
-    description: 'Dein persönlicher Deutsch-Tutor',
+    placeholder: 'Frag Hans auf Deutsch oder Spanisch...',
+    description: 'Tu profesor personal que conoce tu progreso',
   },
   support: {
-    label: 'Hilfe',
+    label: 'Support',
     icon: HelpCircle,
     color: 'from-blue-500 to-indigo-500',
     placeholder: 'Wie funktioniert...?',
-    description: 'Technische Hilfe zur Plattform',
+    description: 'Ayuda técnica sobre la plataforma',
   },
 }
+
+// Contextual quick prompts that Hans understands — visible when the
+// chat is empty. Alumno da un click en vez de escribir.
+const QUICK_PROMPTS = [
+  '¿Cuál fue mi último error? Ayúdame a repasarlo.',
+  '¿En qué tema debería enfocarme para llegar a mi próximo nivel?',
+  'Hazme una pregunta rápida de gramática para practicar.',
+  'Explica la Adjektivdeklination con un ejemplo.',
+]
 
 export default function ChatBot() {
   const { user } = useAuth()
@@ -242,12 +251,12 @@ export default function ChatBot() {
                 ) : (
                   <div className="space-y-1.5 w-full">
                     {(mode === 'tutor'
-                      ? ['Was bedeutet „Konjunktiv II"?', 'Wie benutzt man die Fälle?', 'Erkläre mir die Wechselpräpositionen']
+                      ? QUICK_PROMPTS
                       : ['Wie funktionieren die Übungen?', 'Was beinhaltet das Abo?', 'Wie übe ich für die Goethe-Prüfung?']
                     ).map((q) => (
                       <button
                         key={q}
-                        onClick={() => { setInput(q); inputRef.current?.focus() }}
+                        onClick={() => { sendMessage(q) }}
                         className={`w-full text-left text-sm sm:text-xs px-3 py-3 sm:py-2 rounded-xl sm:rounded-lg bg-gray-50 dark:bg-gray-800 ${mode === 'tutor' ? 'hover:bg-orange-50' : 'hover:bg-blue-50'} dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300 transition-colors`}
                       >
                         {q}
