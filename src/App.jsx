@@ -1,9 +1,10 @@
-import React, { lazy, Suspense } from 'react'
+import React, { lazy, Suspense, useEffect } from 'react'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { AuthProvider, useAuth } from './context/AuthContext'
 import { ProgressProvider } from './context/ProgressContext'
 import { ThemeProvider } from './context/ThemeContext'
 import { SidebarProvider } from './context/SidebarContext'
+import { initNativeBridge } from './utils/nativeBridge'
 
 import ErrorBoundary from './components/ErrorBoundary'
 import Landing from './pages/Landing'
@@ -138,6 +139,10 @@ function AppRoutes() {
 }
 
 export default function App() {
+  // Wire hardware back button, deep links, status bar, splash hide.
+  // No-op on web. Only runs once on mount.
+  useEffect(() => { initNativeBridge() }, [])
+
   return (
     <ErrorBoundary>
       <MaintenanceGate>

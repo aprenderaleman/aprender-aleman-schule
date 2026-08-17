@@ -8,6 +8,7 @@ import { Moon, Sun } from 'lucide-react'
 import Navbar from '../components/Layout/Navbar'
 import Toast from '../components/UI/Toast'
 import Logo from '../components/UI/Logo'
+import { isIOS } from '../utils/platform'
 
 const API_URL = import.meta.env.VITE_API_URL || ''
 // Stripe Payment Links (German locale)
@@ -104,6 +105,24 @@ function PricingContent({ subscription, onSubscribe, loading, paymentCanceled, l
   const freeRemaining = subscription?.xpRemaining ?? subscription?.freeLessonsRemaining ?? freeLimit
   const xpEarned = subscription?.xpEarned ?? subscription?.lessonsPassed ?? 0
   const inFreePhase = !!subscription?.trialActive && freeRemaining > 0
+
+  // App Store guideline compliance: no external-payment CTAs on iOS.
+  // Show a soft explainer instead so the alumno knows they can subscribe
+  // from the browser at schule.aprender-aleman.de.
+  if (isIOS()) {
+    return (
+      <div className="text-center py-10 max-w-md mx-auto">
+        <div className="inline-flex w-14 h-14 rounded-full bg-warm/15 items-center justify-center mb-4">
+          <Shield size={24} className="text-warm" />
+        </div>
+        <h1 className="text-2xl font-extrabold text-gray-800 dark:text-gray-100 mb-2">Abonnement verwalten</h1>
+        <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+          Dein Zugang zu Schule wird über die Webseite verwaltet.
+          Besuche <strong>schule.aprender-aleman.de</strong> im Browser, um dein Abonnement zu ändern oder abzuschließen.
+        </p>
+      </div>
+    )
+  }
 
   return (
     <div>
