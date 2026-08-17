@@ -6,7 +6,12 @@ export default defineConfig({
   plugins: [
     react(),
     VitePWA({
-      registerType: 'autoUpdate',
+      // 'prompt' lets us decide when/whether to register — main.jsx skips
+      // SW registration when the app is running inside the Capacitor
+      // WebView (the native shell has its own caching + a stale SW
+      // interferes with app updates and push notifications).
+      registerType: 'prompt',
+      injectRegister: null,
       includeAssets: ['logo.svg', 'icons/*.png', 'icons/*.svg'],
       manifest: {
         name: 'Schule — Aprender Alemán',
