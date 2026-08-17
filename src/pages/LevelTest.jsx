@@ -28,7 +28,7 @@ const LEVEL_DESCRIPTIONS = {
   A2: 'Grundlegende Kenntnisse — Du verstehst alltägliche Themen.',
   B1: 'Mittelstufe — Du kommst in den meisten Situationen zurecht.',
   B2: 'Obere Mittelstufe — Du kommunizierst klar und detailliert.',
-  C1: 'Fortgeschritten — Du sprichst fließend in komplexen Themen.',
+  C1: 'Fortgeschritten — Du sprichst fließend über komplexe Themen.',
 }
 
 const NEXT_LEVEL = { A1: 'A2', A2: 'B1', B1: 'B2', B2: 'C1', C1: 'C1' }
@@ -682,7 +682,7 @@ function ListeningPlayer({ questionId }) {
       <div className="flex-1 text-left">
         <div className="font-bold text-pink-700 dark:text-pink-300 text-sm">Audio abspielen</div>
         <div className="text-xs text-pink-600/70 dark:text-pink-400/70">
-          {playing ? 'Spielt gerade ab…' : 'Klick zum Anhören (du kannst es mehrmals abspielen)'}
+          {playing ? 'Spielt gerade ab…' : 'Klicke zum Anhören (du kannst die Aufnahme mehrmals abspielen)'}
         </div>
       </div>
     </button>

@@ -28,7 +28,7 @@ export const goetheB2SprechenExams = [
           'Halte einen strukturierten Vortrag zum Thema. Du hast 90 Sekunden Vorbereitungszeit und bis zu 4 Minuten zum Sprechen.',
         taskType: 'Monolog: Vortrag',
         taskPrompt:
-          'Vortrag zum Thema „Vor- und Nachteile des Lebens in der Großstadt". Strukturiere deinen Vortrag klar (Einleitung, Hauptteil, Schluss). Behandle dabei folgende Punkte:',
+          'Vortrag zum Thema „Vor- und Nachteile des Lebens in der Großstadt“. Strukturiere deinen Vortrag klar (Einleitung, Hauptteil, Schluss). Behandle dabei folgende Punkte:',
         bullets: [
           'Führe in das Thema ein und erkläre seine Relevanz.',
           'Stelle mindestens zwei Vorteile mit Beispielen vor.',
@@ -48,7 +48,7 @@ export const goetheB2SprechenExams = [
           'Reagiere auf den folgenden Diskussionspunkt. Du hast 60 Sekunden Vorbereitungszeit und bis zu 2,5 Minuten zum Sprechen.',
         taskType: 'Monolog: Diskussionsbeitrag',
         taskPrompt:
-          'Diskussionspunkt: „Junge Menschen sollten nach der Schule erst ein Jahr arbeiten oder reisen, bevor sie studieren." Nimm Stellung und reagiere auf mögliche Gegenargumente.',
+          'Diskussionspunkt: „Junge Menschen sollten nach der Schule erst ein Jahr arbeiten oder reisen, bevor sie studieren.“ Nimm Stellung und reagiere auf mögliche Gegenargumente.',
         bullets: [
           'Erkläre kurz deinen Standpunkt.',
           'Nenne zwei starke Argumente.',

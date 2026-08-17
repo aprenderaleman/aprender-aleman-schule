@@ -55,30 +55,30 @@ Bitte rufen Sie mich kurz zurück, am besten morgen Vormittag, um die letzten De
       {
         id: 'teil-2',
         title: 'Teil 2 — Podiumsdiskussion',
-        instructions: 'Du hörst eine Podiumsdiskussion zum Thema „Studiengebühren in Deutschland". Du hörst die Diskussion zweimal. Wähle die richtige Lösung a, b oder c.',
+        instructions: 'Du hörst eine Podiumsdiskussion zum Thema „Studiengebühren in Deutschland“. Du hörst die Diskussion zweimal. Wähle die richtige Lösung a, b oder c.',
         context: {
           type: 'audio',
           allowedPlays: 2,
           label: 'Podiumsdiskussion: Sollen Studiengebühren wieder eingeführt werden?',
           audioUrl: '/audio/pruefungen/goethe-c1-hoeren-modellsatz-1/teil-2.mp3',
           transcript:
-            `Moderatorin: „Willkommen zu unserer Diskussion. Die Frage ist hochaktuell: Sollen Studiengebühren in Deutschland wieder eingeführt werden? Auf dem Podium begrüße ich Prof. Dr. Karin Müller, Bildungsforscherin, Stefan Berger vom Studierendenrat und die CDU-Politikerin Dr. Anna Weiß. Frau Dr. Müller, Sie haben sich kürzlich für moderate Studiengebühren ausgesprochen. Warum?"
+            `Moderatorin: „Willkommen zu unserer Diskussion. Die Frage ist hochaktuell: Sollen Studiengebühren in Deutschland wieder eingeführt werden? Auf dem Podium begrüße ich Prof. Dr. Karin Müller, Bildungsforscherin, Stefan Berger vom Studierendenrat und die CDU-Politikerin Dr. Anna Weiß. Frau Dr. Müller, Sie haben sich kürzlich für moderate Studiengebühren ausgesprochen. Warum?“
 
-Prof. Dr. Müller: „Weil unsere Universitäten chronisch unterfinanziert sind. Die Lehrqualität leidet, Bibliotheken sind veraltet, viele Professorenstellen unbesetzt. Studiengebühren von 500 Euro pro Semester könnten hier wirklich helfen — vorausgesetzt, sie kommen direkt der Lehre zugute und es gibt großzügige Stipendien für Studierende aus einkommensschwachen Familien."
+Prof. Dr. Müller: „Weil unsere Universitäten chronisch unterfinanziert sind. Die Lehrqualität leidet, Bibliotheken sind veraltet, viele Professorenstellen unbesetzt. Studiengebühren von 500 Euro pro Semester könnten hier wirklich helfen — vorausgesetzt, sie kommen direkt der Lehre zugute und es gibt großzügige Stipendien für Studierende aus einkommensschwachen Familien.“
 
-Stefan Berger: „Das sehe ich völlig anders. Die Erfahrung in Bundesländern, die Gebühren einmal hatten, zeigt klar: Sie schrecken Studierende aus ärmeren Familien ab. Bildung ist ein Grundrecht und muss kostenlos bleiben. Stattdessen sollten wir die Hochschulen über Steuern besser finanzieren."
+Stefan Berger: „Das sehe ich völlig anders. Die Erfahrung in Bundesländern, die Gebühren einmal hatten, zeigt klar: Sie schrecken Studierende aus ärmeren Familien ab. Bildung ist ein Grundrecht und muss kostenlos bleiben. Stattdessen sollten wir die Hochschulen über Steuern besser finanzieren.“
 
-Dr. Weiß: „Beide Perspektiven haben ihre Berechtigung. Aus Sicht meiner Partei ist klar: Die Universitäten brauchen mehr Geld. Die Frage ist nur, woher. Wir sehen Studiengebühren nicht als ersten Schritt, aber sie sollten auch nicht tabuisiert werden, gerade für Langzeitstudierende oder Zweitstudien."
+Dr. Weiß: „Beide Perspektiven haben ihre Berechtigung. Aus Sicht meiner Partei ist klar: Die Universitäten brauchen mehr Geld. Die Frage ist nur, woher. Wir sehen Studiengebühren nicht als ersten Schritt, aber sie sollten auch nicht tabuisiert werden, gerade für Langzeitstudierende oder Zweitstudien.“
 
-Stefan Berger: „Aber genau diese 'differenzierten' Modelle sind doch nur ein Türöffner. Sobald einmal Gebühren da sind, werden sie schrittweise erhöht. Das war in England zu beobachten."
+Stefan Berger: „Aber genau diese 'differenzierten' Modelle sind doch nur ein Türöffner. Sobald einmal Gebühren da sind, werden sie schrittweise erhöht. Das war in England zu beobachten.“
 
-Prof. Dr. Müller: „England ist kein gutes Beispiel, weil dort die Gebühren extrem hoch sind. In den Niederlanden zum Beispiel funktioniert ein moderates System recht gut, mit hoher Akzeptanz."
+Prof. Dr. Müller: „England ist kein gutes Beispiel, weil dort die Gebühren extrem hoch sind. In den Niederlanden zum Beispiel funktioniert ein moderates System recht gut, mit hoher Akzeptanz.“
 
-Moderatorin: „Und was sagen die Studien zur sozialen Selektion?"
+Moderatorin: „Und was sagen die Studien zur sozialen Selektion?“
 
-Prof. Dr. Müller: „Die Studien sind tatsächlich uneinheitlich. Es gibt Belege für eine leichte Verschlechterung der Bildungsbeteiligung, aber auch Hinweise, dass Stipendienprogramme das ausgleichen können. Entscheidend ist die konkrete Ausgestaltung."
+Prof. Dr. Müller: „Die Studien sind tatsächlich uneinheitlich. Es gibt Belege für eine leichte Verschlechterung der Bildungsbeteiligung, aber auch Hinweise, dass Stipendienprogramme das ausgleichen können. Entscheidend ist die konkrete Ausgestaltung.“
 
-Dr. Weiß: „Wir müssen die Diskussion ehrlich führen. Wenn wir gleichzeitig fordern, dass Deutschland exzellente Universitäten hat, müssen wir auch über die Finanzierung reden — und alle Optionen prüfen."`,
+Dr. Weiß: „Wir müssen die Diskussion ehrlich führen. Wenn wir gleichzeitig fordern, dass Deutschland exzellente Universitäten hat, müssen wir auch über die Finanzierung reden — und alle Optionen prüfen.“`,
         },
         questions: [
           {
@@ -148,7 +148,7 @@ Dr. Weiß: „Wir müssen die Diskussion ehrlich führen. Wenn wir gleichzeitig 
       {
         id: 'teil-3',
         title: 'Teil 3 — Wissenschaftlicher Vortrag',
-        instructions: 'Du hörst einen kurzen wissenschaftlichen Vortrag über das Thema „Schlaf und Lernen". Du hörst den Vortrag einmal. Entscheide, ob die Aussagen richtig oder falsch sind.',
+        instructions: 'Du hörst einen kurzen wissenschaftlichen Vortrag über das Thema „Schlaf und Lernen“. Du hörst den Vortrag einmal. Entscheide, ob die Aussagen richtig oder falsch sind.',
         context: {
           type: 'audio',
           allowedPlays: 1,

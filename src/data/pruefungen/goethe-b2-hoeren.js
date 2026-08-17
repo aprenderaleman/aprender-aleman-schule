@@ -35,7 +35,7 @@ export const goetheB2HoerenExams = [
               allowedPlays: 1,
               label: 'Gespräch 1 — Im Büro',
               transcript:
-                'Frau: „Herr Becker, könnten Sie bitte das Protokoll der gestrigen Sitzung bis morgen Mittag fertigstellen? Frau Dr. Lange möchte es vor der Vorstandssitzung sehen." Mann: „Natürlich, aber ich habe heute Nachmittag noch zwei Kundentermine. Geht es auch bis 15 Uhr morgen?" Frau: „Hm, eigentlich brauche ich es lieber bis 12 Uhr. Vielleicht können Sie es heute Abend noch fertig machen?"',
+                'Frau: „Herr Becker, könnten Sie bitte das Protokoll der gestrigen Sitzung bis morgen Mittag fertigstellen? Frau Dr. Lange möchte es vor der Vorstandssitzung sehen.“ Mann: „Natürlich, aber ich habe heute Nachmittag noch zwei Kundentermine. Geht es auch bis 15 Uhr morgen?“ Frau: „Hm, eigentlich brauche ich es lieber bis 12 Uhr. Vielleicht können Sie es heute Abend noch fertig machen?“',
             },
             prompt: 'Wann soll Herr Becker das Protokoll spätestens abgeben?',
             options: [
@@ -54,7 +54,7 @@ export const goetheB2HoerenExams = [
               allowedPlays: 1,
               label: 'Gespräch 2 — Reisebüro',
               transcript:
-                'Kundin: „Wir möchten einen einwöchigen Urlaub in Italien buchen, am liebsten direkt am Meer, aber bezahlbar." Berater: „Gerne. Wir hätten ein schönes Hotel in der Toskana, etwa 15 Minuten zu Fuß zum Strand, ab 720 Euro pro Person." Kundin: „Das klingt gut. Allerdings hätten wir lieber etwas direkt am Strand, auch wenn es etwas teurer ist." Berater: „Dann empfehle ich Ihnen das Resort in Rimini, direkt am Meer, ab 950 Euro."',
+                'Kundin: „Wir möchten einen einwöchigen Urlaub in Italien buchen, am liebsten direkt am Meer, aber bezahlbar.“ Berater: „Gerne. Wir hätten ein schönes Hotel in der Toskana, etwa 15 Minuten zu Fuß zum Strand, ab 720 Euro pro Person.“ Kundin: „Das klingt gut. Allerdings hätten wir lieber etwas direkt am Strand, auch wenn es etwas teurer ist.“ Berater: „Dann empfehle ich Ihnen das Resort in Rimini, direkt am Meer, ab 950 Euro.“',
             },
             prompt: 'Wofür entscheidet sich die Kundin wahrscheinlich?',
             options: [
@@ -73,7 +73,7 @@ export const goetheB2HoerenExams = [
               allowedPlays: 1,
               label: 'Gespräch 3 — Im Restaurant',
               transcript:
-                'Mann: „Wir würden gerne bestellen. Ich nehme die Pasta mit Meeresfrüchten." Frau: „Und für mich bitte das vegetarische Risotto. Aber ohne Pilze, ich habe eine Allergie." Kellner: „Natürlich, kein Problem. Möchten Sie auch Getränke?" Frau: „Nur Wasser, bitte. Mein Mann nimmt ein Glas Weißwein."',
+                'Mann: „Wir würden gerne bestellen. Ich nehme die Pasta mit Meeresfrüchten.“ Frau: „Und für mich bitte das vegetarische Risotto. Aber ohne Pilze, ich habe eine Allergie.“ Kellner: „Natürlich, kein Problem. Möchten Sie auch Getränke?“ Frau: „Nur Wasser, bitte. Mein Mann nimmt ein Glas Weißwein.“',
             },
             prompt: 'Was bestellt die Frau?',
             options: [
@@ -92,7 +92,7 @@ export const goetheB2HoerenExams = [
               allowedPlays: 1,
               label: 'Gespräch 4 — Beim Arzt',
               transcript:
-                'Patient: „Frau Doktor, ich habe seit zwei Wochen ständig Kopfschmerzen und kann nicht gut schlafen." Ärztin: „Wie viele Stunden arbeiten Sie denn pro Tag?" Patient: „Im Moment etwa 11 Stunden, manchmal mehr. Wir haben ein großes Projekt." Ärztin: „Das ist eindeutig zu viel. Ich verschreibe Ihnen erstmal nichts. Versuchen Sie, weniger zu arbeiten und mehr zu schlafen. Wenn es in zwei Wochen nicht besser ist, kommen Sie wieder."',
+                'Patient: „Frau Doktor, ich habe seit zwei Wochen ständig Kopfschmerzen und kann nicht gut schlafen.“ Ärztin: „Wie viele Stunden arbeiten Sie denn pro Tag?“ Patient: „Im Moment etwa 11 Stunden, manchmal mehr. Wir haben ein großes Projekt.“ Ärztin: „Das ist eindeutig zu viel. Ich verschreibe Ihnen erstmal nichts. Versuchen Sie, weniger zu arbeiten und mehr zu schlafen. Wenn es in zwei Wochen nicht besser ist, kommen Sie wieder.“',
             },
             prompt: 'Was empfiehlt die Ärztin?',
             options: [
@@ -111,7 +111,7 @@ export const goetheB2HoerenExams = [
               allowedPlays: 1,
               label: 'Gespräch 5 — In der Universität',
               transcript:
-                'Studentin: „Entschuldigung, ich habe die Frist für die Anmeldung zur Klausur verpasst. Was kann ich tun?" Sekretärin: „Das ist schwierig. Eigentlich endete die Frist gestern um 18 Uhr. Aber Sie können einen schriftlichen Antrag auf Nachfrist beim Prüfungsamt stellen, mit Begründung." Studentin: „Bekomme ich dann sicher die Genehmigung?" Sekretärin: „Sicher nicht. Es hängt vom Grund ab. Wenn Sie z. B. krank waren und ein Attest haben, ist die Chance besser."',
+                'Studentin: „Entschuldigung, ich habe die Frist für die Anmeldung zur Klausur verpasst. Was kann ich tun?“ Sekretärin: „Das ist schwierig. Eigentlich endete die Frist gestern um 18 Uhr. Aber Sie können einen schriftlichen Antrag auf Nachfrist beim Prüfungsamt stellen, mit Begründung.“ Studentin: „Bekomme ich dann sicher die Genehmigung?“ Sekretärin: „Sicher nicht. Es hängt vom Grund ab. Wenn Sie z. B. krank waren und ein Attest haben, ist die Chance besser.“',
             },
             prompt: 'Was muss die Studentin tun, um doch noch teilzunehmen?',
             options: [
@@ -129,28 +129,28 @@ export const goetheB2HoerenExams = [
       {
         id: 'teil-2',
         title: 'Teil 2 — Radiosendung',
-        instructions: 'Du hörst eine Radiosendung über das Thema „Zero Waste". Du hörst die Sendung einmal. Entscheide, ob die Aussagen richtig oder falsch sind.',
+        instructions: 'Du hörst eine Radiosendung über das Thema „Zero Waste“. Du hörst die Sendung einmal. Entscheide, ob die Aussagen richtig oder falsch sind.',
         context: {
           type: 'audio',
           allowedPlays: 1,
           label: 'Radiosendung: Zero Waste — Leben ohne Müll',
           audioUrl: '/audio/pruefungen/goethe-b2-hoeren-modellsatz-1/teil-2.mp3',
           transcript:
-            `Moderator: „Willkommen zu unserer Sendung 'Umwelt heute'. Heute sprechen wir über die Zero-Waste-Bewegung. Unser Gast ist Lena Hofmann, die seit fünf Jahren versucht, möglichst keinen Müll zu produzieren. Frau Hofmann, wie kam es dazu?"
+            `Moderator: „Willkommen zu unserer Sendung 'Umwelt heute'. Heute sprechen wir über die Zero-Waste-Bewegung. Unser Gast ist Lena Hofmann, die seit fünf Jahren versucht, möglichst keinen Müll zu produzieren. Frau Hofmann, wie kam es dazu?“
 
-Lena Hofmann: „Es begann mit einem Dokumentarfilm über Plastik im Meer. Das hat mich so schockiert, dass ich beschloss, mein Leben zu ändern. Anfangs war es schwer, aber heute werfe ich pro Monat etwa nur ein kleines Glas voller Müll weg. Alles andere ist kompostierbar oder wiederverwendbar."
+Lena Hofmann: „Es begann mit einem Dokumentarfilm über Plastik im Meer. Das hat mich so schockiert, dass ich beschloss, mein Leben zu ändern. Anfangs war es schwer, aber heute werfe ich pro Monat etwa nur ein kleines Glas voller Müll weg. Alles andere ist kompostierbar oder wiederverwendbar.“
 
-Moderator: „Das klingt fast unmöglich. Wie machen Sie zum Beispiel beim Einkaufen?"
+Moderator: „Das klingt fast unmöglich. Wie machen Sie zum Beispiel beim Einkaufen?“
 
-Lena Hofmann: „Ich gehe immer mit eigenen Stoffbeuteln und Glasbehältern in den Unverpackt-Laden. Dort kaufe ich Reis, Nudeln, Müsli, sogar Olivenöl ohne jede Verpackung. Obst und Gemüse hole ich auf dem Wochenmarkt."
+Lena Hofmann: „Ich gehe immer mit eigenen Stoffbeuteln und Glasbehältern in den Unverpackt-Laden. Dort kaufe ich Reis, Nudeln, Müsli, sogar Olivenöl ohne jede Verpackung. Obst und Gemüse hole ich auf dem Wochenmarkt.“
 
-Moderator: „Aber ist das nicht teurer als im Supermarkt?"
+Moderator: „Aber ist das nicht teurer als im Supermarkt?“
 
-Lena Hofmann: „Das stimmt, einige Produkte sind etwas teurer. Aber ich spare auch viel Geld, weil ich weniger spontan kaufe und keine Convenience-Produkte mehr verwende. Insgesamt zahle ich weniger als früher."
+Lena Hofmann: „Das stimmt, einige Produkte sind etwas teurer. Aber ich spare auch viel Geld, weil ich weniger spontan kaufe und keine Convenience-Produkte mehr verwende. Insgesamt zahle ich weniger als früher.“
 
-Moderator: „Was würden Sie unseren Hörerinnen und Hörern empfehlen, die auch weniger Müll produzieren möchten?"
+Moderator: „Was würden Sie unseren Hörerinnen und Hörern empfehlen, die auch weniger Müll produzieren möchten?“
 
-Lena Hofmann: „Man muss nicht alles auf einmal ändern. Beginnt mit einer kleinen Sache: Kauft euch eine wiederverwendbare Trinkflasche, nehmt einen Stoffbeutel zum Einkaufen mit, lernt Brot selbst zu backen. Jeder kleine Schritt zählt — und plötzlich macht es richtig Spaß."`,
+Lena Hofmann: „Man muss nicht alles auf einmal ändern. Beginnt mit einer kleinen Sache: Kauft euch eine wiederverwendbare Trinkflasche, nehmt einen Stoffbeutel zum Einkaufen mit, lernt Brot selbst zu backen. Jeder kleine Schritt zählt — und plötzlich macht es richtig Spaß.“`,
         },
         questions: [
           { id: 'b2h2-1', type: 'true-false', statement: 'Lena Hofmann begann ihren Lebensstil wegen eines Dokumentarfilms.', correct: true, points: 1 },
@@ -172,25 +172,25 @@ Lena Hofmann: „Man muss nicht alles auf einmal ändern. Beginnt mit einer klei
           label: 'Interview: Nachhaltiges Bauen mit Klaus Berger',
           audioUrl: '/audio/pruefungen/goethe-b2-hoeren-modellsatz-1/teil-3.mp3',
           transcript:
-            `Interviewerin: „Herr Berger, was bedeutet eigentlich 'nachhaltiges Bauen'?"
+            `Interviewerin: „Herr Berger, was bedeutet eigentlich 'nachhaltiges Bauen'?“
 
-Klaus Berger: „Nachhaltiges Bauen heißt, Häuser so zu planen und zu bauen, dass sie möglichst wenig Energie und Ressourcen verbrauchen — sowohl beim Bau selbst als auch über die gesamte Lebensdauer. Es geht aber auch um Wohnqualität: gute Luft, viel Tageslicht, gesunde Materialien."
+Klaus Berger: „Nachhaltiges Bauen heißt, Häuser so zu planen und zu bauen, dass sie möglichst wenig Energie und Ressourcen verbrauchen — sowohl beim Bau selbst als auch über die gesamte Lebensdauer. Es geht aber auch um Wohnqualität: gute Luft, viel Tageslicht, gesunde Materialien.“
 
-Interviewerin: „Welche Materialien verwenden Sie am liebsten?"
+Interviewerin: „Welche Materialien verwenden Sie am liebsten?“
 
-Klaus Berger: „Holz ist mein absolutes Lieblingsmaterial, weil es nachwächst und CO2 speichert. Außerdem fühlen sich Holzhäuser sehr angenehm an. Lehm, Hanf und Schafwolle sind ebenfalls ausgezeichnete natürliche Baumaterialien."
+Klaus Berger: „Holz ist mein absolutes Lieblingsmaterial, weil es nachwächst und CO2 speichert. Außerdem fühlen sich Holzhäuser sehr angenehm an. Lehm, Hanf und Schafwolle sind ebenfalls ausgezeichnete natürliche Baumaterialien.“
 
-Interviewerin: „Sind solche Häuser nicht viel teurer als konventionelle?"
+Interviewerin: „Sind solche Häuser nicht viel teurer als konventionelle?“
 
-Klaus Berger: „Das ist ein hartnäckiger Mythos. Die Baukosten sind tatsächlich oft 5 bis 10 Prozent höher. Aber rechnet man die Energieeinsparungen über 20, 30 Jahre, sind nachhaltige Häuser deutlich günstiger. Außerdem gibt es staatliche Förderungen."
+Klaus Berger: „Das ist ein hartnäckiger Mythos. Die Baukosten sind tatsächlich oft 5 bis 10 Prozent höher. Aber rechnet man die Energieeinsparungen über 20, 30 Jahre, sind nachhaltige Häuser deutlich günstiger. Außerdem gibt es staatliche Förderungen.“
 
-Interviewerin: „Was ist die größte Herausforderung beim nachhaltigen Bauen?"
+Interviewerin: „Was ist die größte Herausforderung beim nachhaltigen Bauen?“
 
-Klaus Berger: „Die Bauunternehmen sind oft skeptisch und haben wenig Erfahrung mit den neuen Materialien. Wir brauchen mehr Fortbildung und vor allem mehr politischen Willen. In manchen Ländern wie Österreich oder der Schweiz ist man da viel weiter als in Deutschland."
+Klaus Berger: „Die Bauunternehmen sind oft skeptisch und haben wenig Erfahrung mit den neuen Materialien. Wir brauchen mehr Fortbildung und vor allem mehr politischen Willen. In manchen Ländern wie Österreich oder der Schweiz ist man da viel weiter als in Deutschland.“
 
-Interviewerin: „Was raten Sie jemandem, der ein Haus bauen möchte?"
+Interviewerin: „Was raten Sie jemandem, der ein Haus bauen möchte?“
 
-Klaus Berger: „Holt euch von Anfang an einen Architekten, der Erfahrung mit Nachhaltigkeit hat. Plant nicht zu groß — kleinere Häuser sparen automatisch Energie. Und investiert in gute Dämmung und Fenster. Das zahlt sich aus."`,
+Klaus Berger: „Holt euch von Anfang an einen Architekten, der Erfahrung mit Nachhaltigkeit hat. Plant nicht zu groß — kleinere Häuser sparen automatisch Energie. Und investiert in gute Dämmung und Fenster. Das zahlt sich aus.“`,
         },
         questions: [
           {
@@ -260,7 +260,7 @@ Klaus Berger: „Holt euch von Anfang an einen Architekten, der Erfahrung mit Na
       {
         id: 'teil-4',
         title: 'Teil 4 — Vortrag',
-        instructions: 'Du hörst einen Kurzvortrag über das Thema „Bedingungsloses Grundeinkommen". Du hörst den Vortrag einmal. Entscheide, ob die Aussagen richtig oder falsch sind.',
+        instructions: 'Du hörst einen Kurzvortrag über das Thema „Bedingungsloses Grundeinkommen“. Du hörst den Vortrag einmal. Entscheide, ob die Aussagen richtig oder falsch sind.',
         context: {
           type: 'audio',
           allowedPlays: 1,

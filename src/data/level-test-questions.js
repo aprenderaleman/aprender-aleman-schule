@@ -27,7 +27,7 @@ export const LEVEL_TEST_QUESTIONS = [
     prompt: 'Welcher Artikel? ___ Mädchen ist klein.',
     options: ['Der', 'Die', 'Das', 'Den'],
     correctAnswer: 'Das',
-    explanation: '"Mädchen" ist neutrum (Diminutiv -chen) → "das".',
+    explanation: '"Mädchen" ist ein Neutrum (Diminutiv auf -chen) → "das".',
   },
   {
     id: 'a1-g-003', level: 'A1', type: 'grammar',
@@ -104,10 +104,10 @@ export const LEVEL_TEST_QUESTIONS = [
   },
   {
     id: 'a2-g-003', level: 'A2', type: 'grammar',
-    prompt: 'Wie ___ du heute?',
-    options: ['fühlst', 'fühlst dich', 'fühl', 'fühle dich'],
-    correctAnswer: 'fühlst dich',
-    explanation: '"Sich fühlen" ist reflexiv → "du fühlst dich".',
+    prompt: 'Wie ___ du ___ heute?',
+    options: ['fühlst / dich', 'fühlst / sich', 'fühl / dich', 'fühle / dich'],
+    correctAnswer: 'fühlst / dich',
+    explanation: '"Sich fühlen" ist reflexiv. Das Reflexivpronomen steht nach dem Subjekt: Wie fühlst du dich heute?',
   },
   {
     id: 'a2-g-004', level: 'A2', type: 'grammar',
@@ -142,7 +142,7 @@ export const LEVEL_TEST_QUESTIONS = [
     prompt: 'Welches Wort passt nicht: "Der Schauspieler ___ den Preis."',
     options: ['gewinnt', 'bekommt', 'erhält', 'verliert'],
     correctAnswer: 'verliert',
-    explanation: 'Die anderen drei sind Synonyme für "kriegen". "Verliert" ist das Gegenteil.',
+    explanation: 'Die anderen drei bedeuten, dass er den Preis erhält. "Verliert" drückt das Gegenteil aus.',
   },
   {
     id: 'a2-r-001', level: 'A2', type: 'reading',
@@ -173,7 +173,7 @@ export const LEVEL_TEST_QUESTIONS = [
     prompt: 'Das Buch, ___ ich gestern gekauft habe, ist sehr interessant.',
     options: ['der', 'die', 'das', 'den'],
     correctAnswer: 'das',
-    explanation: 'Relativpronomen im Akkusativ, bezieht sich auf "Buch" (neutrum) → "das".',
+    explanation: 'Relativpronomen im Akkusativ, bezieht sich auf "Buch" (Neutrum) → "das".',
   },
   {
     id: 'b1-g-003', level: 'B1', type: 'grammar',
@@ -198,7 +198,7 @@ export const LEVEL_TEST_QUESTIONS = [
   },
   {
     id: 'b1-g-006', level: 'B1', type: 'grammar',
-    prompt: 'Hier ___ jeden Morgen frische Brötchen verkauft.',
+    prompt: 'Hier ___ auch heute frische Brötchen verkauft.',
     options: ['werden', 'sind', 'haben', 'wurden'],
     correctAnswer: 'werden',
     explanation: 'Vorgangspassiv im Präsens: "werden + Partizip II".',
@@ -269,7 +269,7 @@ export const LEVEL_TEST_QUESTIONS = [
     prompt: 'Wenn ich das gewusst ___, ___ ich nicht gekommen.',
     options: ['hatte / war', 'hätte / wäre', 'habe / bin', 'hätte / hätte'],
     correctAnswer: 'hätte / wäre',
-    explanation: 'Konjunktiv II Vergangenheit: "hätte + Partizip II" für Vermutungen über die Vergangenheit; "wäre gekommen" weil "kommen" Bewegungsverb ist.',
+    explanation: 'Konjunktiv II Vergangenheit: "hätte + Partizip II" für irreale Bedingungen in der Vergangenheit; "wäre gekommen", weil "kommen" ein Bewegungsverb ist.',
   },
   {
     id: 'b2-g-005', level: 'B2', type: 'grammar',
@@ -331,10 +331,10 @@ export const LEVEL_TEST_QUESTIONS = [
   // ═══════════════ C1 (10) ═══════════════
   {
     id: 'c1-g-001', level: 'C1', type: 'grammar',
-    prompt: 'Er behauptete, ___ den ganzen Tag gearbeitet ___.',
-    options: ['er hat ... gehabt', 'er habe ... gehabt', 'er hätte ... gehabt', 'er hat ... haben'],
-    correctAnswer: 'er habe ... gehabt',
-    explanation: 'Konjunktiv I für indirekte Rede mit Plusquamperfekt: "er habe gearbeitet gehabt".',
+    prompt: 'Er behauptete, ___ den ganzen Tag ___.',
+    options: ['er hat ... gearbeitet', 'er habe ... gearbeitet', 'er hätte ... arbeiten', 'er habe ... arbeiten'],
+    correctAnswer: 'er habe ... gearbeitet',
+    explanation: 'Indirekte Rede in der Vergangenheit → Konjunktiv I Perfekt: "er habe gearbeitet". Diese Form drückt die Vorzeitigkeit schon aus; ein zusätzliches "gehabt" (doppeltes Perfekt) gilt nicht als standardsprachlich.',
   },
   {
     id: 'c1-g-002', level: 'C1', type: 'grammar',
@@ -349,7 +349,7 @@ export const LEVEL_TEST_QUESTIONS = [
     options: [
       'Das früh Aufstehen ist wichtig.',
       'Das frühe Aufstehen ist wichtig.',
-      'Das Frühaufstehen ist wichtig.',
+      'Das Aufstehen früh ist wichtig.',
       'Frühes aufstehen ist wichtig.',
     ],
     correctAnswer: 'Das frühe Aufstehen ist wichtig.',
@@ -406,7 +406,7 @@ export const LEVEL_TEST_QUESTIONS = [
   },
   {
     id: 'c1-v-003', level: 'C1', type: 'vocabulary',
-    prompt: 'Welche Funktionsverbgefüge ist korrekt?',
+    prompt: 'Welches Funktionsverbgefüge ist korrekt?',
     options: [
       'eine Frage erstellen',
       'eine Frage stellen',

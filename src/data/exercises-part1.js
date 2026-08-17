@@ -67,7 +67,7 @@ export const EXERCISES_PART1 = [
     question: 'Welcher Satz ist richtig?',
     options: ['Sie ist eine Studentin.', 'Ist sie eine Studentin.', 'Eine Studentin sie ist.', 'Sie eine Studentin ist.'],
     answer: 'Sie ist eine Studentin.',
-    explanation: 'Im Deutschen ist die Grundstellung im Hauptsatz: Subjekt + Verb + Ergänzung. Das Verb steht immer an Position 2.',
+    explanation: 'Im Deutschen ist die Grundstellung im Hauptsatz: Subjekt + Verb + Ergänzung. Im Aussagesatz steht das konjugierte Verb immer an Position 2.',
     xp: 10,
   },
 
@@ -204,7 +204,7 @@ export const EXERCISES_PART1 = [
     question: '___ Buch ist interessant.',
     options: ['Der', 'Die', 'Das', 'Den'],
     answer: 'Das',
-    explanation: '"Buch" ist im Deutschen ein Neutrum und hat daher den Artikel "das". Die bestimmten Artikel sind: der (maskulin), die (feminin), das (neutrum).',
+    explanation: '"Buch" ist im Deutschen ein Neutrum und hat daher den Artikel "das". Die bestimmten Artikel sind: der (Maskulinum), die (Femininum), das (Neutrum).',
     xp: 10,
   },
   {
@@ -243,7 +243,7 @@ export const EXERCISES_PART1 = [
     question: 'Zwei ___ bitte!',
     options: ['Wasser', 'Wässer', 'Wassers', 'Wassern'],
     answer: 'Wasser',
-    explanation: 'Das Wort "Wasser" ändert sich im Plural nicht, wenn man es im Restaurant als Getränk bestellt. Beispiel: Zwei Wasser, bitte!',
+    explanation: 'Bei einer Bestellung bleibt "Wasser" unverändert: Zwei Wasser, bitte! (Die Form "Wässer" gibt es nur, wenn von verschiedenen Wassersorten die Rede ist.)',
     xp: 10,
   },
   {
@@ -419,7 +419,7 @@ export const EXERCISES_PART1 = [
     question: 'Ich habe ___ Auto.',
     options: ['nicht', 'kein', 'keine', 'nichts'],
     answer: 'kein',
-    explanation: '"Kein" verwendet man, um Nomen zu verneinen, die sonst den unbestimmten Artikel "ein" hätten. "Auto" ist neutrum (das Auto), deshalb verwendet man "kein".',
+    explanation: '"Kein" verwendet man, um Nomen zu verneinen, die sonst den unbestimmten Artikel "ein" hätten. "Auto" ist ein Neutrum (das Auto), deshalb verwendet man "kein".',
     xp: 10,
   },
   {
@@ -430,8 +430,8 @@ export const EXERCISES_PART1 = [
     unit: 3,
     title: 'Verben im Tagesablauf',
     question: 'Ihr ___ um 7 Uhr auf. (aufstehen)',
-    options: ['stehe auf', 'stehst auf', 'steht auf', 'stehen auf'],
-    answer: 'steht auf',
+    options: ['stehe', 'stehst', 'steht', 'stehen'],
+    answer: 'steht',
     explanation: '"Aufstehen" ist ein trennbares Verb. Mit "ihr" konjugiert man "steht ... auf". Das Präfix "auf" steht am Ende des Satzes.',
     xp: 10,
   },
@@ -985,7 +985,7 @@ export const EXERCISES_PART1 = [
     level: 'A2',
     unit: 3,
     title: 'Präpositionen mit Dativ',
-    question: 'Ich wohne ___ meiner Schwester. (bei)',
+    question: 'Ich wohne ___ meiner Schwester. (en casa de)',
     options: ['bei', 'mit', 'nach', 'von'],
     answer: 'bei',
     explanation: '"Bei" ist eine Präposition, die immer mit dem Dativ steht. "Bei meiner Schwester" bedeutet, dass man im Haus der Schwester wohnt. Weitere Präpositionen mit Dativ: mit, nach, von, zu, seit, aus, gegenüber.',
@@ -1026,7 +1026,7 @@ export const EXERCISES_PART1 = [
     level: 'A2',
     unit: 3,
     title: 'Meine Wohnung',
-    text: 'Ich wohne in einer Dreizimmerwohnung in der Stadtmitte. Die Wohnung hat ein Wohnzimmer, ein Schlafzimmer und ein Arbeitszimmer. Die Küche ist klein, aber modern. Im Wohnzimmer steht ein großes Sofa neben dem Fenster. An der Wand hängt ein Bild von meiner Familie. Das Schlafzimmer ist ruhig, weil es zum Hinterhof liegt. Die Miete ist 750 Euro im Monat, mit Nebenkosten.',
+    text: 'Ich wohne in einer Dreizimmerwohnung in der Stadtmitte. Die Wohnung hat ein Wohnzimmer, ein Schlafzimmer und ein Arbeitszimmer. Die Küche ist klein, aber modern. Im Wohnzimmer steht ein großes Sofa neben dem Fenster. An der Wand hängt ein Bild von meiner Familie. Das Schlafzimmer ist ruhig, weil es zum Hinterhof liegt. Die Miete ist 750 Euro im Monat, inklusive Nebenkosten.',
     vocabulary: [
       { word: 'die Wohnung', translation: 'Räume, in denen man wohnt' },
       { word: 'das Arbeitszimmer', translation: 'Zimmer, in dem man zu Hause arbeitet' },
@@ -1084,7 +1084,7 @@ export const EXERCISES_PART1 = [
     level: 'A2',
     unit: 3,
     title: 'Wohnungsbesichtigung',
-    audioText: 'Willkommen! Hier ist das Wohnzimmer. Es ist 25 Quadratmeter groß. Und wo ist die Küche? Die Küche ist hier links. Sie hat einen neuen Herd und einen Kühlschrank. Gibt es einen Balkon? Ja, der Balkon ist im Schlafzimmer. Er geht nach Süden, also haben Sie viel Sonne. Wie hoch ist die Miete? 600 Euro kalt, plus 150 Euro Nebenkosten.',
+    audioText: 'Willkommen! Hier ist das Wohnzimmer. Es ist 25 Quadratmeter groß. Und wo ist die Küche? Die Küche ist hier links. Sie hat einen neuen Herd und einen Kühlschrank. Gibt es einen Balkon? Ja, der Balkon liegt am Schlafzimmer. Er geht nach Süden, also haben Sie viel Sonne. Wie hoch ist die Miete? 600 Euro kalt, plus 150 Euro Nebenkosten.',
     questions: [
       {
         question: 'Wie groß ist das Wohnzimmer?',
@@ -1553,7 +1553,7 @@ export const EXERCISES_PART1 = [
     level: 'B1',
     unit: 3,
     title: 'Temporale Präpositionen - seit/vor/nach',
-    question: '___ dem Studium hat sie sofort eine Stelle gefunden.',
+    question: 'Sie hat 2019 ihr Studium beendet. ___ dem Studium hat sie sofort eine Stelle gefunden.',
     options: ['Seit', 'Vor', 'Nach', 'Während'],
     answer: 'Nach',
     explanation: '"Nach" + Dativ drückt ein späteres Ereignis aus. "Nach dem Studium" bedeutet: im Anschluss an das Studium. "Seit" drückt einen Zeitraum ab einem Punkt in der Vergangenheit aus, "vor" ein früheres Ereignis, "während" etwas Gleichzeitiges.',

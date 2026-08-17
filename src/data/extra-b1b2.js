@@ -102,9 +102,9 @@ export const B1_EXTRA_EXERCISES = [
     ], xp:20 },
 
   { id:'l-b1-008', type:'listening', subtype:'audio_questions', level:'B1', unit:1, title:'Am Flughafen',
-    audioText:'Achtung, eine wichtige Durchsage für alle Passagiere des Fluges LH 472 nach Barcelona. Der Abflug verzögert sich um etwa zwei Stunden wegen technischer Probleme. Der neue Abflugzeit ist 16:30 Uhr. Alle betroffenen Passagiere erhalten einen Gutschein für ein Getränk und einen Snack am Gate B12. Wir entschuldigen uns für die Unannehmlichkeiten. Bitte wenden Sie sich bei Fragen an den Serviceschalter.',
+    audioText:'Achtung, eine wichtige Durchsage für alle Passagiere des Fluges LH 472 nach Barcelona. Der Abflug verzögert sich um etwa zwei Stunden wegen technischer Probleme. Die neue Abflugzeit ist 16:30 Uhr. Alle betroffenen Passagiere erhalten einen Gutschein für ein Getränk und einen Snack am Gate B12. Wir entschuldigen uns für die Unannehmlichkeiten. Bitte wenden Sie sich bei Fragen an den Serviceschalter.',
     questions:[
-      {question:'Warum verzögert sich der Flug?', options:['Wegen schlechtem Wetter','Wegen technischer Probleme','Wegen eines Streiks','Wegen zu vielen Passagieren'], answer:'Wegen technischer Probleme'},
+      {question:'Warum verzögert sich der Flug?', options:['Wegen schlechten Wetters','Wegen technischer Probleme','Wegen eines Streiks','Wegen zu vieler Passagiere'], answer:'Wegen technischer Probleme'},
       {question:'Was bekommen die betroffenen Passagiere?', options:['Einen neuen Flug','Einen Gutschein für ein Getränk und einen Snack','Eine Rückerstattung','Ein Hotelzimmer'], answer:'Einen Gutschein für ein Getränk und einen Snack'},
     ], xp:20 },
 
@@ -137,7 +137,7 @@ export const B1_EXTRA_EXERCISES = [
     ], xp:20 },
 
   { id:'l-b1-013', type:'listening', subtype:'audio_questions', level:'B1', unit:3, title:'Zugdurchsage',
-    audioText:'Sehr geehrte Fahrgäste, willkommen im ICE 598 von Frankfurt nach Berlin. Unsere voraussichtliche Ankunftszeit in Berlin Hauptbahnhof ist 14:35 Uhr. Wir halten unterwegs in Kassel-Wilhelmshöhe und Wolfsburg. Das Bordbistro im Wagen 7 ist geöffnet und bietet warme und kalte Speisen an. Bitte beachten Sie, dass in den Wagen 1 bis 3 Ruhebereich ist. Wir wünschen Ihnen eine angenehme Fahrt.',
+    audioText:'Sehr geehrte Fahrgäste, willkommen im ICE 598 von Frankfurt nach Berlin. Unsere voraussichtliche Ankunftszeit in Berlin Hauptbahnhof ist 14:35 Uhr. Wir halten unterwegs in Kassel-Wilhelmshöhe und Wolfsburg. Das Bordbistro im Wagen 7 ist geöffnet und bietet warme und kalte Speisen an. Bitte beachten Sie, dass sich in den Wagen 1 bis 3 der Ruhebereich befindet. Wir wünschen Ihnen eine angenehme Fahrt.',
     questions:[
       {question:'Wann kommt der Zug voraussichtlich in Berlin an?', options:['Um 13:35 Uhr','Um 14:35 Uhr','Um 15:35 Uhr','Um 12:35 Uhr'], answer:'Um 14:35 Uhr'},
       {question:'Welche Wagen sind der Ruhebereich?', options:['Wagen 5 bis 7','Wagen 7 bis 9','Wagen 1 bis 3','Wagen 4 bis 6'], answer:'Wagen 1 bis 3'},
@@ -335,7 +335,7 @@ export const B2_EXTRA_EXERCISES = [
     ], xp:25 },
 
   { id:'l-b2-012', type:'listening', subtype:'audio_questions', level:'B2', unit:2, title:'Podcast über Minimalismus',
-    audioText:'Willkommen zum Podcast „Bewusst Leben". Heute sprechen wir über Minimalismus als Gegenbewegung zur Konsumgesellschaft. Immer mehr Menschen entscheiden sich bewusst dafür, weniger zu besitzen. Es geht dabei nicht nur darum, Dinge auszumisten, sondern um eine grundlegende Haltung gegenüber dem Konsum. Studien der Universität Hamburg haben ergeben, dass Menschen, die bewusst weniger konsumieren, eine höhere Lebenszufriedenheit berichten. Der Psychologe Dr. Meier erklärt das so: Wenn wir weniger Dinge besitzen, haben wir mehr Zeit und Energie für Beziehungen und Erlebnisse, die nachweislich stärker zum Wohlbefinden beitragen als materielle Güter.',
+    audioText:'Willkommen zum Podcast „Bewusst Leben“. Heute sprechen wir über Minimalismus als Gegenbewegung zur Konsumgesellschaft. Immer mehr Menschen entscheiden sich bewusst dafür, weniger zu besitzen. Es geht dabei nicht nur darum, Dinge auszumisten, sondern um eine grundlegende Haltung gegenüber dem Konsum. Studien der Universität Hamburg haben ergeben, dass Menschen, die bewusst weniger konsumieren, eine höhere Lebenszufriedenheit berichten. Der Psychologe Dr. Meier erklärt das so: Wenn wir weniger Dinge besitzen, haben wir mehr Zeit und Energie für Beziehungen und Erlebnisse, die nachweislich stärker zum Wohlbefinden beitragen als materielle Güter.',
     questions:[
       {question:'Was haben Studien der Universität Hamburg ergeben?', options:['Dass Konsum glücklich macht','Dass Menschen, die weniger konsumieren, eine höhere Lebenszufriedenheit berichten','Dass Minimalismus ungesund ist','Dass man mehr kaufen sollte'], answer:'Dass Menschen, die weniger konsumieren, eine höhere Lebenszufriedenheit berichten'},
       {question:'Was trägt laut Dr. Meier stärker zum Wohlbefinden bei als materielle Güter?', options:['Mehr Geld','Beziehungen und Erlebnisse','Ein großes Haus','Neue Technologien'], answer:'Beziehungen und Erlebnisse'},

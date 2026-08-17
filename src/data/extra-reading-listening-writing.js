@@ -232,7 +232,7 @@ export const A2_EXTRA_EXERCISES = [
     ], xp:15 },
 
   { id:'r-a2-008', type:'reading', subtype:'comprehension', level:'A2', unit:1, title:'Der Umzug',
-    text:'Wir ziehen nächste Woche in eine neue Wohnung um. Die neue Wohnung hat drei Zimmer, eine Küche und ein großes Bad. Sie liegt im Stadtzentrum, ganz in der Nähe von einem Park. Die Miete ist etwas teurer als vorher, aber die Lage ist viel besser. Meine Freunde helfen mir beim Umzug.',
+    text:'Wir ziehen nächste Woche in eine neue Wohnung um. Die neue Wohnung hat drei Zimmer, eine Küche und ein großes Bad. Sie liegt im Stadtzentrum, ganz in der Nähe eines Parks. Die Miete ist etwas teurer als vorher, aber die Lage ist viel besser. Meine Freunde helfen mir beim Umzug.',
     vocabulary:[{word:'umziehen',translation:'in eine neue Wohnung ziehen'},{word:'die Miete',translation:'Geld, das man monatlich für die Wohnung zahlt'},{word:'die Lage',translation:'der Ort, wo etwas liegt'},{word:'der Umzug',translation:'der Wechsel in eine andere Wohnung'}],
     questions:[
       {question:'Wie viele Zimmer hat die neue Wohnung?', options:['Zwei','Drei','Vier','Fünf'], answer:'Drei'},
@@ -297,16 +297,16 @@ export const A2_EXTRA_EXERCISES = [
     ], xp:15 },
 
   { id:'r-a2-015', type:'reading', subtype:'comprehension', level:'A2', unit:3, title:'Sport im Verein',
-    text:'In Deutschland sind Sportvereine sehr beliebt. Mein Bruder spielt seit fünf Jahren Handball im Verein. Das Training findet zweimal pro Woche statt, immer dienstags und freitags. Am Wochenende hat die Mannschaft oft Spiele gegen andere Vereine. Letztes Jahr haben sie den zweiten Platz in der Meisterschaft gewonnen.',
+    text:'In Deutschland sind Sportvereine sehr beliebt. Mein Bruder spielt seit fünf Jahren Handball im Verein. Das Training findet zweimal pro Woche statt, immer dienstags und freitags. Am Wochenende hat die Mannschaft oft Spiele gegen andere Vereine. Letztes Jahr haben sie den zweiten Platz in der Meisterschaft belegt.',
     vocabulary:[{word:'der Sportverein',translation:'Gruppe von Menschen, die zusammen Sport machen'},{word:'das Training',translation:'das Üben einer Sportart'},{word:'die Mannschaft',translation:'Gruppe von Spielern im Teamsport'},{word:'die Meisterschaft',translation:'großes Turnier um den besten Platz'}],
     questions:[
       {question:'Wie lange spielt der Bruder schon Handball?', options:['Seit drei Jahren','Seit vier Jahren','Seit fünf Jahren','Seit sechs Jahren'], answer:'Seit fünf Jahren'},
       {question:'Wann findet das Training statt?', options:['Montags und mittwochs','Dienstags und freitags','Mittwochs und samstags','Donnerstags und sonntags'], answer:'Dienstags und freitags'},
-      {question:'Welchen Platz hat die Mannschaft gewonnen?', options:['Den ersten Platz','Den zweiten Platz','Den dritten Platz','Keinen Platz'], answer:'Den zweiten Platz'},
+      {question:'Welchen Platz hat die Mannschaft belegt?', options:['Den ersten Platz','Den zweiten Platz','Den dritten Platz','Keinen Platz'], answer:'Den zweiten Platz'},
     ], xp:15 },
 
   { id:'r-a2-016', type:'reading', subtype:'comprehension', level:'A2', unit:3, title:'Ein Brief von der Vermieterin',
-    text:'Liebe Mieter, ab nächstem Monat gibt es neue Regeln im Haus. Bitte bringen Sie den Müll immer in die richtige Tonne. Die blaue Tonne ist für Papier, die gelbe für Plastik und die braune für Bioabfall. Außerdem ist es ab 22 Uhr Ruhezeit. Bitte machen Sie keinen lauten Lärm nach dieser Zeit. Vielen Dank für Ihr Verständnis.',
+    text:'Liebe Mieter, ab nächstem Monat gibt es neue Regeln im Haus. Bitte bringen Sie den Müll immer in die richtige Tonne. Die blaue Tonne ist für Papier, die gelbe für Plastik und die braune für Bioabfall. Außerdem ist es ab 22 Uhr Ruhezeit. Bitte machen Sie nach dieser Zeit keinen Lärm. Vielen Dank für Ihr Verständnis.',
     vocabulary:[{word:'die Vermieterin',translation:'Frau, der die Wohnung gehört'},{word:'der Müll',translation:'Dinge, die man wegwirft'},{word:'die Tonne',translation:'großer Behälter für Müll'},{word:'die Ruhezeit',translation:'Zeit, in der man leise sein muss'}],
     questions:[
       {question:'Wofür ist die blaue Tonne?', options:['Für Plastik','Für Glas','Für Papier','Für Bioabfall'], answer:'Für Papier'},

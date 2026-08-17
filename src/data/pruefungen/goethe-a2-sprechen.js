@@ -46,10 +46,10 @@ export const goetheA2SprechenExams = [
         title: 'Teil 2 — Aus dem Alltag erzählen',
         kind: 'speaking-task',
         instructions:
-          'Erzähle über das vorgegebene Thema. Du hast 45 Sekunden Vorbereitungszeit und bis zu 120 Sekunden zum Sprechen.',
+          'Sprich über das vorgegebene Thema. Du hast 45 Sekunden Vorbereitungszeit und bis zu 120 Sekunden zum Sprechen.',
         taskType: 'Monolog: Alltagsthema',
         taskPrompt:
-          'Thema: „Mein letzter Urlaub". Erzähle ausführlich darüber. Gehe dabei auf folgende Punkte ein:',
+          'Thema: „Mein letzter Urlaub“. Erzähle ausführlich darüber. Gehe dabei auf folgende Punkte ein:',
         bullets: [
           'Wohin bist du gefahren?',
           'Mit wem warst du dort?',

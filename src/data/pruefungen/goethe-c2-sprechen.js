@@ -28,7 +28,7 @@ export const goetheC2SprechenExams = [
           'Halte einen anspruchsvollen, gut strukturierten Vortrag. Du hast 3 Minuten Vorbereitungszeit und bis zu 6 Minuten zum Sprechen.',
         taskType: 'Monolog: Komplexer Vortrag (C2)',
         taskPrompt:
-          'Thema: „Künstliche Intelligenz und die Zukunft der Demokratie". Halte einen analytisch anspruchsvollen Vortrag mit klar erkennbarer Struktur, präziser Sprache und einem differenzierten Standpunkt.',
+          'Thema: „Künstliche Intelligenz und die Zukunft der Demokratie“. Halte einen analytisch anspruchsvollen Vortrag mit klar erkennbarer Struktur, präziser Sprache und einem differenzierten Standpunkt.',
         bullets: [
           'Skizziere die aktuelle Relevanz des Themas (z. B. Deepfakes, algorithmische Öffentlichkeit, Wahlbeeinflussung).',
           'Beleuchte mindestens zwei gegensätzliche Perspektiven differenziert.',

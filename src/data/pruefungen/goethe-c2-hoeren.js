@@ -23,32 +23,32 @@ export const goetheC2HoerenExams = [
       {
         id: 'teil-1',
         title: 'Teil 1 — Interview',
-        instructions: 'Du hörst ein Interview mit der Philosophin Prof. Dr. Hannah Lehmann über das Thema „Verantwortung im digitalen Zeitalter". Du hörst das Interview zweimal. Wähle die richtige Lösung a, b oder c.',
+        instructions: 'Du hörst ein Interview mit der Philosophin Prof. Dr. Hannah Lehmann über das Thema „Verantwortung im digitalen Zeitalter“. Du hörst das Interview zweimal. Wähle die richtige Lösung a, b oder c.',
         context: {
           type: 'audio',
           allowedPlays: 2,
           label: 'Interview: Verantwortung im digitalen Zeitalter',
           audioUrl: '/audio/pruefungen/goethe-c2-hoeren-modellsatz-1/teil-1.mp3',
           transcript:
-            `Interviewer: „Frau Professor Lehmann, Sie haben kürzlich ein vielbeachtetes Buch über Verantwortung im digitalen Zeitalter veröffentlicht. Was hat Sie zu diesem Thema gebracht?"
+            `Interviewer: „Frau Professor Lehmann, Sie haben kürzlich ein vielbeachtetes Buch über Verantwortung im digitalen Zeitalter veröffentlicht. Was hat Sie zu diesem Thema gebracht?“
 
-Prof. Dr. Lehmann: „Ausgangspunkt war ein Erlebnis, das mich nachdenklich gemacht hat. Eine Studentin erzählte mir, sie habe eine wichtige Hausarbeit zu großen Teilen von einer KI schreiben lassen — und fühlte sich dabei nicht im Geringsten verantwortlich für das Ergebnis. Diese Entkopplung von Handlung und Verantwortung ist meines Erachtens die zentrale ethische Herausforderung unserer Zeit."
+Prof. Dr. Lehmann: „Ausgangspunkt war ein Erlebnis, das mich nachdenklich gemacht hat. Eine Studentin erzählte mir, sie habe eine wichtige Hausarbeit zu großen Teilen von einer KI schreiben lassen — und fühlte sich dabei nicht im Geringsten verantwortlich für das Ergebnis. Diese Entkopplung von Handlung und Verantwortung ist meines Erachtens die zentrale ethische Herausforderung unserer Zeit.“
 
-Interviewer: „Aber ist das wirklich neu? Schon immer haben Menschen Werkzeuge benutzt, ohne sich für jedes Detail verantwortlich zu fühlen."
+Interviewer: „Aber ist das wirklich neu? Schon immer haben Menschen Werkzeuge benutzt, ohne sich für jedes Detail verantwortlich zu fühlen.“
 
-Prof. Dr. Lehmann: „Das ist ein berechtigter Einwand. Allerdings gibt es einen entscheidenden Unterschied: Frühere Werkzeuge waren passiv. Eine Schreibmaschine schreibt nicht selbst. Eine KI hingegen trifft eigenständige Entscheidungen, die wir oft gar nicht mehr nachvollziehen können. Sie ist ein Akteur, kein bloßes Instrument. Und genau deshalb verschwimmen die klassischen Kategorien von Handlung, Absicht und Schuld."
+Prof. Dr. Lehmann: „Das ist ein berechtigter Einwand. Allerdings gibt es einen entscheidenden Unterschied: Frühere Werkzeuge waren passiv. Eine Schreibmaschine schreibt nicht selbst. Eine KI hingegen trifft eigenständige Entscheidungen, die wir oft gar nicht mehr nachvollziehen können. Sie ist ein Akteur, kein bloßes Instrument. Und genau deshalb verschwimmen die klassischen Kategorien von Handlung, Absicht und Schuld.“
 
-Interviewer: „Sehen Sie eine Lösung?"
+Interviewer: „Sehen Sie eine Lösung?“
 
-Prof. Dr. Lehmann: „Eine einfache Lösung gibt es nicht. Was wir aber dringend brauchen, ist eine neue Verantwortungsethik, die diese Hybridität anerkennt. Es geht nicht mehr darum, einen einzelnen Schuldigen zu finden, sondern Verantwortlichkeiten innerhalb komplexer Mensch-Maschine-Systeme zu verteilen — und zwar in voller Transparenz."
+Prof. Dr. Lehmann: „Eine einfache Lösung gibt es nicht. Was wir aber dringend brauchen, ist eine neue Verantwortungsethik, die diese Hybridität anerkennt. Es geht nicht mehr darum, einen einzelnen Schuldigen zu finden, sondern Verantwortlichkeiten innerhalb komplexer Mensch-Maschine-Systeme zu verteilen — und zwar in voller Transparenz.“
 
-Interviewer: „Klingt theoretisch sehr anspruchsvoll. Was bedeutet das konkret?"
+Interviewer: „Klingt theoretisch sehr anspruchsvoll. Was bedeutet das konkret?“
 
-Prof. Dr. Lehmann: „Ganz konkret: Wer eine KI einsetzt, muss verstehen, was sie tut, und bereit sein, für ihre Ergebnisse einzustehen. Universitäten müssen neue Prüfungsformate entwickeln, die nicht nur Wissen abfragen, sondern den Umgang mit KI reflektieren. Und Unternehmen, die Algorithmen einsetzen — etwa bei Personalentscheidungen — müssen für deren Folgen haften, auch wenn sie das System nicht selbst programmiert haben."
+Prof. Dr. Lehmann: „Ganz konkret: Wer eine KI einsetzt, muss verstehen, was sie tut, und bereit sein, für ihre Ergebnisse einzustehen. Universitäten müssen neue Prüfungsformate entwickeln, die nicht nur Wissen abfragen, sondern den Umgang mit KI reflektieren. Und Unternehmen, die Algorithmen einsetzen — etwa bei Personalentscheidungen — müssen für deren Folgen haften, auch wenn sie das System nicht selbst programmiert haben.“
 
-Interviewer: „Sie fordern also eine Art kollektive Verantwortung?"
+Interviewer: „Sie fordern also eine Art kollektive Verantwortung?“
 
-Prof. Dr. Lehmann: „Eher eine verteilte Verantwortung. Nicht jeder ist gleich verantwortlich, aber alle Beteiligten — Entwickler, Anwender, Aufsichtsbehörden — tragen einen Teil der Last. Und genau hier versagt das aktuelle Recht: Es kennt nur klassische Schuldzuschreibungen und hinkt der Realität meilenweit hinterher."`,
+Prof. Dr. Lehmann: „Eher eine verteilte Verantwortung. Nicht jeder ist gleich verantwortlich, aber alle Beteiligten — Entwickler, Anwender, Aufsichtsbehörden — tragen einen Teil der Last. Und genau hier versagt das aktuelle Recht: Es kennt nur klassische Schuldzuschreibungen und hinkt der Realität meilenweit hinterher.“`,
         },
         questions: [
           {
@@ -118,7 +118,7 @@ Prof. Dr. Lehmann: „Eher eine verteilte Verantwortung. Nicht jeder ist gleich 
       {
         id: 'teil-2',
         title: 'Teil 2 — Akademischer Vortrag',
-        instructions: 'Du hörst einen akademischen Vortrag über das Thema „Mehrsprachigkeit im Gehirn". Du hörst den Vortrag einmal. Entscheide, ob die Aussagen richtig oder falsch sind.',
+        instructions: 'Du hörst einen akademischen Vortrag über das Thema „Mehrsprachigkeit im Gehirn“. Du hörst den Vortrag einmal. Entscheide, ob die Aussagen richtig oder falsch sind.',
         context: {
           type: 'audio',
           allowedPlays: 1,

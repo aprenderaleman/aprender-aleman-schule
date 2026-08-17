@@ -683,7 +683,7 @@ export default function AdminUsers() {
             }
           />
           <InputField
-            label="Neues Passwort (leer lassen, um nicht zu ändern)"
+            label="Neues Passwort (leer lassen, um es nicht zu ändern)"
             id="edit-password"
             type="password"
             value={editForm.password}

@@ -28,7 +28,7 @@ export const goetheC1SprechenExams = [
           'Halte einen strukturierten Vortrag zum Thema. Du hast 2 Minuten Vorbereitungszeit und bis zu 4 Minuten zum Sprechen.',
         taskType: 'Monolog: Vortrag (C1)',
         taskPrompt:
-          'Thema: „Lebenslanges Lernen — Chance oder Druck?" Halte einen gut strukturierten Vortrag, in dem du verschiedene Perspektiven berücksichtigst und einen begründeten Standpunkt entwickelst.',
+          'Thema: „Lebenslanges Lernen — Chance oder Druck?“ Halte einen gut strukturierten Vortrag, in dem du verschiedene Perspektiven berücksichtigst und einen begründeten Standpunkt entwickelst.',
         bullets: [
           'Führe das Thema ein und erläutere seine gesellschaftliche Relevanz.',
           'Beleuchte mindestens zwei kontrastierende Perspektiven (z. B. berufliche Notwendigkeit vs. persönliche Bereicherung).',
@@ -48,7 +48,7 @@ export const goetheC1SprechenExams = [
           'Reagiere differenziert auf die folgende These. Du hast 60 Sekunden Vorbereitungszeit und bis zu 3 Minuten zum Sprechen.',
         taskType: 'Monolog: Diskussionsbeitrag (C1)',
         taskPrompt:
-          'These: „Homeoffice ist langfristig schlecht für Karriere und Teamgeist." Nimm differenziert Stellung und reagiere auf mögliche Gegenargumente.',
+          'These: „Homeoffice ist langfristig schlecht für Karriere und Teamgeist.“ Nimm differenziert Stellung und reagiere auf mögliche Gegenargumente.',
         bullets: [
           'Formuliere deine Position klar und nuanciert.',
           'Nenne mindestens zwei begründete Argumente.',

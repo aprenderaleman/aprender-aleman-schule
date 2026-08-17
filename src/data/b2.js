@@ -7,7 +7,7 @@ export const B2_EXERCISES = [
   { id:'g-b2-005', type:'grammar', subtype:'fill_blank', level:'B2', unit:1, title:'Passiv Perfekt', question:'Der Brief ___ gestern geschrieben worden.', options:['ist','hat','wird','wurde'], answer:'ist', explanation:'Passiv im Perfekt: sein + Partizip II + worden. Ist geschrieben worden = vollendete passive Handlung.', xp:10 },
 
   // ══════ B2 GRAMMATIK — Einheit 2: Relativsätze Genitiv, Partizip als Adjektiv ══════
-  { id:'g-b2-006', type:'grammar', subtype:'multiple_choice', level:'B2', unit:2, title:'Relativsätze im Genitiv', question:'Der Mann, ___ Auto gestohlen wurde, ist wütend.', options:['der','dem','dessen','den'], answer:'dessen', explanation:'"Dessen" = Relativpronomen im Genitiv (maskulin/neutral). Für feminin/Plural: deren.', xp:10 },
+  { id:'g-b2-006', type:'grammar', subtype:'multiple_choice', level:'B2', unit:2, title:'Relativsätze im Genitiv', question:'Der Mann, ___ Auto gestohlen wurde, ist wütend.', options:['der','dem','dessen','den'], answer:'dessen', explanation:'"Dessen" = Relativpronomen im Genitiv (Maskulinum/Neutrum). Für Femininum und Plural: deren.', xp:10 },
   { id:'g-b2-007', type:'grammar', subtype:'multiple_choice', level:'B2', unit:2, title:'Verben mit festen Präpositionen', question:'Ich freue mich ___ deinen Besuch.', options:['auf','über','für','an'], answer:'auf', explanation:'"Sich freuen auf" + Akkusativ = Vorfreude auf etwas Zukünftiges. "Sich freuen über" = Freude über etwas bereits Geschehenes.', xp:10 },
   { id:'g-b2-008', type:'grammar', subtype:'multiple_choice', level:'B2', unit:2, title:'Partizip I als Adjektiv', question:'Die ___ Kinder spielen im Garten. (lachen)', options:['lachende','lachenden','gelachte','lachender'], answer:'lachenden', explanation:'Partizip I als Adjektiv: lachend + Deklination. Nach "die" im Plural: -en.', xp:10 },
   { id:'g-b2-009', type:'grammar', subtype:'fill_blank', level:'B2', unit:2, title:'Partizip II als Adjektiv', question:'Das ___ Buch liegt auf dem Tisch. (empfehlen)', options:['empfohlene','empfehlende','zu empfehlende','empfohlen'], answer:'empfohlene', explanation:'Partizip II als Adjektiv: empfohlen + Deklination. Das empfohlene Buch = Buch, das empfohlen wurde.', xp:10 },
@@ -15,15 +15,15 @@ export const B2_EXERCISES = [
 
   // ══════ B2 GRAMMATIK — Einheit 3: Nominalisierung, Konnektoren ══════
   { id:'g-b2-011', type:'grammar', subtype:'fill_blank', level:'B2', unit:3, title:'Konzessive Konnektoren', question:'___ des schlechten Wetters gingen wir spazieren.', options:['Trotz','Wegen','Während','Statt'], answer:'Trotz', explanation:'"Trotz" + Genitiv drückt eine Einräumung aus (Konzessiv).', xp:10 },
-  { id:'g-b2-012', type:'grammar', subtype:'multiple_choice', level:'B2', unit:3, title:'Nominalisierung', question:'___ des Vertrags dauerte drei Stunden. (unterschreiben)', options:['Die Unterschreibung','Das Unterschreiben','Die Unterschrift','Der Unterschrieb'], answer:'Die Unterschrift', explanation:'Die Nominalisierung von "unterschreiben" lautet "die Unterschrift". Nicht alle Verben folgen dem regelmäßigen Muster.', xp:10 },
+  { id:'g-b2-012', type:'grammar', subtype:'multiple_choice', level:'B2', unit:3, title:'Nominalisierung', question:'___ des Vertrags dauerte drei Stunden. (unterschreiben → Nomen für den Vorgang)', options:['Die Unterschreibung','Die Unterzeichnung','Die Unterschrift','Der Unterschrieb'], answer:'Die Unterzeichnung', explanation:'Für den Vorgang heißt die Nominalisierung "die Unterzeichnung" (auch: "das Unterschreiben"). "Die Unterschrift" bezeichnet dagegen nur den geschriebenen Namen, nicht die Handlung.', xp:10 },
   { id:'g-b2-013', type:'grammar', subtype:'multiple_choice', level:'B2', unit:3, title:'Kausale Präpositionen', question:'___ der Krankheit konnte er nicht kommen.', options:['Wegen','Trotz','Statt','Während'], answer:'Wegen', explanation:'"Wegen" + Genitiv gibt den Grund an (kausal).', xp:10 },
   { id:'g-b2-014', type:'grammar', subtype:'multiple_choice', level:'B2', unit:3, title:'n-Deklination', question:'Ich habe den ___ gefragt. (Herr → Akk.)', options:['Herr','Herrn','Herren','Herrens'], answer:'Herrn', explanation:'"Herr" folgt der n-Deklination: den Herrn, dem Herrn, des Herrn.', xp:10 },
-  { id:'g-b2-015', type:'grammar', subtype:'multiple_choice', level:'B2', unit:3, title:'Doppelkonjunktionen', question:'___ ... ___ regnet es, es ist sehr kalt. (steigernde Aufzählung)', options:['Nicht nur...sondern auch','Entweder...oder','Weder...noch','Sowohl...als auch'], answer:'Nicht nur...sondern auch', explanation:'"Nicht nur ... sondern auch" ist eine additive Doppelkonjunktion zur Steigerung.', xp:10 },
+  { id:'g-b2-015', type:'grammar', subtype:'multiple_choice', level:'B2', unit:3, title:'Doppelkonjunktionen', question:'___ regnet es, ___ es ist ___ sehr kalt. (steigernde Aufzählung)', options:['Nicht nur / sondern / auch','Entweder / oder / noch','Weder / noch / auch','Sowohl / als / auch'], answer:'Nicht nur / sondern / auch', explanation:'"Nicht nur ..., sondern auch ..." ist eine additive Doppelkonjunktion zur Steigerung: Nicht nur regnet es, sondern es ist auch sehr kalt. Achtung: "auch" steht im zweiten Satz nach dem Verb, nicht direkt hinter "sondern".', xp:10 },
 
   // ══════ B2 LESEN ══════
   { id:'r-b2-001', type:'reading', subtype:'comprehension', level:'B2', unit:1, title:'Digitalisierung und Arbeitswelt',
     text:'Die Digitalisierung verändert die Arbeitswelt grundlegend. Viele Unternehmen setzen auf Homeoffice und flexible Arbeitszeiten. Künstliche Intelligenz übernimmt zunehmend repetitive Aufgaben, was neue Berufsbilder schafft, aber auch traditionelle Arbeitsplätze gefährdet. Experten betonen, dass lebenslanges Lernen entscheidend für die Zukunft sei.',
-    vocabulary:[{word:'Digitalisierung',translation:'Umwandlung in digitale Form'},{word:'Künstliche Intelligenz',translation:'KI: maschinelles Denken'},{word:'Berufsbilder',translation:'Arten von Berufen'},{word:'gefährdet',translation:'in Gefahr bringt'}],
+    vocabulary:[{word:'Digitalisierung',translation:'Umwandlung in digitale Form'},{word:'Künstliche Intelligenz',translation:'KI: maschinelles Denken'},{word:'Berufsbilder',translation:'Arten von Berufen'},{word:'gefährden',translation:'in Gefahr bringen'}],
     questions:[
       {question:'Worauf setzen viele Unternehmen?', options:['Mehr Mitarbeiter','Homeoffice und flexible Arbeitszeiten','Weniger Technologie','Mehr Büros'], answer:'Homeoffice und flexible Arbeitszeiten'},
       {question:'Was halten Experten für entscheidend?', options:['Mehr Urlaub','Lebenslanges Lernen','Weniger Technologie','Mehr Steuern'], answer:'Lebenslanges Lernen'},
@@ -36,7 +36,7 @@ export const B2_EXERCISES = [
       {question:'Welche Branchen sind laut Kritikern problematisch?', options:['IT und Marketing','Gesundheitswesen und Gastronomie','Bildung und Forschung','Bankwesen und Versicherung'], answer:'Gesundheitswesen und Gastronomie'},
     ], xp:25 },
   { id:'r-b2-003', type:'reading', subtype:'comprehension', level:'B2', unit:2, title:'Migration in Deutschland',
-    text:'Deutschland ist eines der wichtigsten Einwanderungsländer Europas. Seit 2015 hat das Land über eine Million Flüchtlinge aufgenommen. Die Integration stellt Chancen und Herausforderungen dar. Einerseits profitiert die Wirtschaft von qualifizierten Arbeitskräften, andererseits gibt es Schwierigkeiten bei der sprachlichen Integration.',
+    text:'Deutschland ist eines der wichtigsten Einwanderungsländer Europas. Seit 2015 hat das Land über eine Million Flüchtlinge aufgenommen. Die Integration bringt Chancen und Herausforderungen mit sich. Einerseits profitiert die Wirtschaft von qualifizierten Arbeitskräften, andererseits gibt es Schwierigkeiten bei der sprachlichen Integration.',
     vocabulary:[{word:'Einwanderungsländer',translation:'Länder, in die Menschen einwandern'},{word:'Flüchtlinge',translation:'Menschen, die Schutz suchen'},{word:'Herausforderungen',translation:'schwierige Aufgaben'},{word:'Arbeitskräfte',translation:'berufstätige Personen'}],
     questions:[
       {question:'Wie viele Flüchtlinge hat Deutschland seit 2015 aufgenommen?', options:['500.000','750.000','Über eine Million','Zwei Millionen'], answer:'Über eine Million'},
@@ -124,7 +124,7 @@ export const B2_EXERCISES = [
     prompt:'Stelle dir eine Grafik vor, die zeigt, dass immer mehr junge Leute allein wohnen. Beschreibe den Trend, analysiere mögliche Ursachen und diskutiere die Folgen.',
     hints:['Die Grafik veranschaulicht, dass...','Auffällig ist der Anstieg von...','Dies lässt sich möglicherweise auf ... zurückführen.','Eine Folge davon könnte sein, dass...','Zusammenfassend lässt sich feststellen...'], minSeconds:40, xp:35 },
   { id:'s-b2-004', type:'speaking', subtype:'monologue', level:'B2', unit:2, title:'Konfliktlösung am Arbeitsplatz',
-    prompt:'Du hast einen Konflikt mit einem Kollegen, der regelmäßig zu spät kommt und du seine Arbeit übernehmen musst. Erkläre die Situation und schlage Lösungen vor.',
+    prompt:'Du hast einen Konflikt mit einem Kollegen, der regelmäßig zu spät kommt, sodass du seine Arbeit übernehmen musst. Erkläre die Situation und schlage Lösungen vor.',
     hints:['Ich möchte ein Problem ansprechen.','Seit einiger Zeit...','Das führt dazu, dass...','Ich schlage vor, dass wir...','Es wäre besser, wenn...'], minSeconds:35, xp:35 },
   { id:'s-b2-005', type:'speaking', subtype:'monologue', level:'B2', unit:3, title:'Erörterung: Künstliche Intelligenz im Bildungswesen',
     prompt:'Erörtere, ob Künstliche Intelligenz im Bildungswesen eingesetzt werden sollte. Berücksichtige Chancen, Risiken und ethische Aspekte.',
@@ -145,7 +145,7 @@ export const B2_EXERCISES = [
     prompt:'Beschreibe eine Statistik über den Internetkonsum in Deutschland: 90% nutzen das Internet täglich, Durchschnitt 3,5 Stunden, 60% über das Smartphone. Interpretiere die Daten und ziehe Schlussfolgerungen.',
     hints:['Wie die Statistik zeigt,...','Auffällig ist, dass...','Dies lässt sich darauf zurückführen, dass...','Im Vergleich zu früheren Jahren...','Daraus kann man schließen, dass...'], minSeconds:45, xp:35 },
   { id:'s-b2-011', type:'speaking', subtype:'monologue', level:'B2', unit:5, title:'Ethik der Tierversuche',
-    prompt:'Sollten Tierversuche für medizinische Forschung erlaubt sein? Argumentiere für und gegen diese Praxis und beziehe Stellung.',
+    prompt:'Sollten Tierversuche für die medizinische Forschung erlaubt sein? Argumentiere für und gegen diese Praxis und beziehe Stellung.',
     hints:['Tierversuche sind ein ethisch umstrittenes Thema.','Befürworter argumentieren, dass...','Gegner hingegen betonen, dass...','Aus meiner Sicht...','Mögliche Alternativen wären...'], minSeconds:45, xp:35 },
   { id:'s-b2-012', type:'speaking', subtype:'monologue', level:'B2', unit:5, title:'Generationenkonflikt',
     prompt:'Worin unterscheidet sich deine Generation von der Generation deiner Eltern? Sprich über Werte, Technologie und Lebenseinstellungen.',
@@ -154,7 +154,7 @@ export const B2_EXERCISES = [
     prompt:'Wie sollte die Stadt der Zukunft aussehen? Sprich über Mobilität, Grünflächen, Wohnen und Nachhaltigkeit.',
     hints:['Die Stadt der Zukunft sollte...','Was die Mobilität betrifft,...','Grünflächen spielen eine wichtige Rolle, weil...','Beim Thema Wohnen...','Nachhaltigkeit bedeutet in diesem Zusammenhang...'], minSeconds:45, xp:35 },
   { id:'s-b2-014', type:'speaking', subtype:'monologue', level:'B2', unit:6, title:'Kritische Filmrezension',
-    prompt:'Halte eine kritische Rezension über einen Film, den du kürzlich gesehen hast. Bewerte Handlung, Schauspiel, Regie und Musik.',
+    prompt:'Besprich kritisch einen Film, den du kürzlich gesehen hast. Bewerte Handlung, Schauspiel, Regie und Musik.',
     hints:['Der Film ... von Regisseur ... handelt von...','Die schauspielerische Leistung von ... war...','Besonders überzeugend fand ich...','Kritisch anmerken möchte ich, dass...','Insgesamt bewerte ich den Film mit...'], minSeconds:45, xp:35 },
   { id:'s-b2-015', type:'speaking', subtype:'monologue', level:'B2', unit:6, title:'Ehrenamtliches Engagement',
     prompt:'Warum ist ehrenamtliches Engagement wichtig? Welche Erfahrungen hast du damit gemacht oder würdest du gerne machen?',
@@ -165,7 +165,7 @@ export const B2_EXERCISES = [
   { id:'s-b2-017', type:'speaking', subtype:'monologue', level:'B2', unit:7, title:'Integration und Migration',
     prompt:'Was bedeutet gelungene Integration? Welche Herausforderungen gibt es und welche Maßnahmen könnten helfen?',
     hints:['Unter Integration verstehe ich...','Eine der größten Herausforderungen ist...','Sprachkenntnisse spielen eine zentrale Rolle, weil...','Sowohl die Gesellschaft als auch die Zuwanderer müssen...','Erfolgreiche Beispiele zeigen, dass...'], minSeconds:45, xp:35 },
-  { id:'s-b2-018', type:'speaking', subtype:'monologue', level:'B2', unit:7, title:'Konsumund Nachhaltigkeit',
+  { id:'s-b2-018', type:'speaking', subtype:'monologue', level:'B2', unit:7, title:'Konsum und Nachhaltigkeit',
     prompt:'Wie beeinflusst unser Konsumverhalten die Umwelt? Was könnte jeder Einzelne tun? Diskutiere auch die Rolle der Unternehmen.',
     hints:['Unser Konsumverhalten hat erhebliche Auswirkungen auf...','Besonders problematisch ist...','Als Einzelner kann man...','Unternehmen tragen eine besondere Verantwortung, indem...','Letztlich brauchen wir einen Wandel hin zu...'], minSeconds:45, xp:35 },
 ]

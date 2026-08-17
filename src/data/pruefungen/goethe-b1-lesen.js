@@ -41,7 +41,7 @@ Vor sechs Monaten bin ich für ein Auslandssemester nach Salamanca gegangen. Sal
 
 Am Anfang war alles sehr aufregend, aber auch ein bisschen schwierig. Mein Spanisch war damals noch nicht besonders gut, und in den ersten Wochen habe ich oft nicht verstanden, was die Leute zu mir sagten. Zum Glück habe ich schnell Freunde gefunden — vor allem in meiner WG, wo ich mit zwei Spanierinnen und einer Italienerin wohne. Wir reden zu Hause nur Spanisch, und das hat mir wirklich geholfen.
 
-An der Uni besuche ich vier Kurse: spanische Literatur, Geschichte Spaniens, Wirtschaftsspanisch und einen Sportkurs (Flamenco!). Die Vorlesungen sind anders als in Deutschland — viel diskutierender und freier. Anfangs war das ungewohnt, aber jetzt mag ich es sehr.
+An der Uni besuche ich vier Kurse: spanische Literatur, Geschichte Spaniens, Wirtschaftsspanisch und einen Sportkurs (Flamenco!). Die Vorlesungen sind anders als in Deutschland — dort wird viel mehr diskutiert, und alles ist freier. Anfangs war das ungewohnt, aber jetzt mag ich es sehr.
 
 Was ich nicht so mag, ist das Wetter im Winter. Viele Leute denken, dass es in Spanien immer warm ist, aber in Salamanca kann es im Januar wirklich kalt werden. Im Sommer ist es dann allerdings sehr heiß — über 35 Grad.
 

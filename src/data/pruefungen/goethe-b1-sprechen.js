@@ -29,7 +29,7 @@ export const goetheB1SprechenExams = [
           'Halte eine kleine Präsentation zu dem Thema. Du hast 60 Sekunden Vorbereitungszeit und bis zu 3 Minuten zum Sprechen.',
         taskType: 'Monolog: Präsentation',
         taskPrompt:
-          'Präsentation zum Thema „Soziale Medien im Alltag". Strukturiere deinen Vortrag mit Einleitung, Hauptteil und Schluss. Gehe dabei auf folgende Punkte ein:',
+          'Präsentation zum Thema „Soziale Medien im Alltag“. Strukturiere deinen Vortrag mit Einleitung, Hauptteil und Schluss. Gehe dabei auf folgende Punkte ein:',
         bullets: [
           'Stelle das Thema kurz vor.',
           'Erzähle von deinen persönlichen Erfahrungen mit sozialen Medien.',
@@ -49,7 +49,7 @@ export const goetheB1SprechenExams = [
           'Nimm zu dem folgenden Vorschlag Stellung. Du hast 45 Sekunden Vorbereitungszeit und bis zu 2 Minuten zum Sprechen.',
         taskType: 'Monolog: Stellungnahme',
         taskPrompt:
-          'Vorschlag: „Schüler sollten im Unterricht keine Smartphones benutzen dürfen." Was hältst du davon? Begründe deine Meinung.',
+          'Vorschlag: „Schüler sollten im Unterricht keine Smartphones benutzen dürfen.“ Was hältst du davon? Begründe deine Meinung.',
         bullets: [
           'Was denkst du über den Vorschlag?',
           'Nenne zwei Argumente dafür oder dagegen.',

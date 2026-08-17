@@ -6,7 +6,7 @@
  *   Teil 2: Informationen erfragen und geben
  *   Teil 3: Bitten formulieren und reagieren
  *
- * Unsere Version (kompakt, monologisch): 1 Aufgabe „Sich vorstellen".
+ * Unsere Version (kompakt, monologisch): 1 Aufgabe „Sich vorstellen“.
  * Weitere Aufgaben können später ergänzt werden.
  */
 
