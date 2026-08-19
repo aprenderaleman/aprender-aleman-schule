@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { WifiOff, CloudUpload } from 'lucide-react'
+import { WifiOff, UploadCloud } from 'lucide-react'
 import { useDevice } from '../../hooks/useDevice'
 import { queueSize } from '../../utils/offlineQueue'
 
@@ -64,7 +64,7 @@ export default function NetworkStatus() {
           role="status"
           aria-live="polite"
         >
-          <CloudUpload size={14} className="animate-pulse" />
+          <UploadCloud size={14} className="animate-pulse" />
           Sincronizando {pending} ejercicio{pending === 1 ? '' : 's'} pendiente{pending === 1 ? '' : 's'}…
         </motion.div>
       )}
