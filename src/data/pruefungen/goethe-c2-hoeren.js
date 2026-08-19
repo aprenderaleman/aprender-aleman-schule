@@ -30,7 +30,7 @@ export const goetheC2HoerenExams = [
           label: 'Interview: Verantwortung im digitalen Zeitalter',
           audioUrl: '/audio/pruefungen/goethe-c2-hoeren-modellsatz-1/teil-1.mp3',
           transcript:
-            `Interviewer: „Frau Professor Lehmann, Sie haben kürzlich ein vielbeachtetes Buch über Verantwortung im digitalen Zeitalter veröffentlicht. Was hat Sie zu diesem Thema gebracht?“
+            `Interviewer: „Frau Professorin Lehmann, Sie haben kürzlich ein vielbeachtetes Buch über Verantwortung im digitalen Zeitalter veröffentlicht. Was hat Sie zu diesem Thema gebracht?“
 
 Prof. Dr. Lehmann: „Ausgangspunkt war ein Erlebnis, das mich nachdenklich gemacht hat. Eine Studentin erzählte mir, sie habe eine wichtige Hausarbeit zu großen Teilen von einer KI schreiben lassen — und fühlte sich dabei nicht im Geringsten verantwortlich für das Ergebnis. Diese Entkopplung von Handlung und Verantwortung ist meines Erachtens die zentrale ethische Herausforderung unserer Zeit.“
 
@@ -135,7 +135,7 @@ Allerdings darf man die Vorteile nicht romantisieren. Mehrsprachigkeit allein ma
 
 Eine zweite wichtige Frage betrifft den Zeitpunkt des Spracherwerbs. Die berühmte 'kritische Periode' — also die These, dass Sprachen vor dem 12. Lebensjahr besonders gut erworben werden — ist heute differenzierter zu sehen. Aussprache und intuitives Grammatikgefühl scheinen tatsächlich von einem frühen Beginn zu profitieren. Wortschatz und Lesekompetenz hingegen lassen sich in jedem Alter erwerben, mit ausreichend Übung sogar sehr erfolgreich.
 
-Mein persönliches Fazit: Wer die Möglichkeit hat, Kinder mehrsprachig aufwachsen zu lassen, sollte das tun — nicht primär wegen vermeintlicher kognitiver 'Boni', sondern weil Sprachen Türen zu Kulturen und Menschen öffnen. Vielen Dank für Ihre Aufmerksamkeit."`,
+Mein persönliches Fazit: Wer die Möglichkeit hat, Kinder mehrsprachig aufwachsen zu lassen, sollte das tun — nicht primär wegen vermeintlicher kognitiver ‚Boni‘, sondern weil Sprachen Türen zu Kulturen und Menschen öffnen. Vielen Dank für Ihre Aufmerksamkeit.“`,
         },
         questions: [
           { id: 'c2h2-1', type: 'true-false', statement: 'Früher dachte man, mehrsprachige Kinder hätten einen Nachteil.', correct: true, points: 1 },

@@ -17,7 +17,11 @@ function storeAuth(token, user) {
   localStorage.setItem('auth_token', token)
   localStorage.setItem('auth_user', JSON.stringify(user))
   // Wire native side effects: register push token + offer biometric unlock.
-  // No-op on web. Fire-and-forget so login isn't blocked by permission UI.
+  // Excepción: sesiones de impersonación (teacher viendo como alumno)
+  // NO deben registrar push ni ofrecer biometría — el teacher no es el
+  // dueño del dispositivo/cuenta y no queremos que Face ID quede
+  // asociada al JWT del alumno.
+  if (user?.impersonating) return
   Promise.all([
     import('../utils/pushNotifications').then(m => m.initPushNotifications()).catch(() => {}),
     import('../utils/biometric').then(m => m.offerToEnable(token)).catch(() => {}),

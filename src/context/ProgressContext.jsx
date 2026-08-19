@@ -167,14 +167,15 @@ export function ProgressProvider({ children }) {
         } catch {}
       }
 
-      // Sync exercise result to backend, then notify other tabs
-      fetch(`${API_URL}/api/progress/exercise`, {
-        method: 'POST',
-        headers: getAuthHeaders(),
-        body: JSON.stringify({ exerciseId, exerciseType: type, score, perfect, xpEarned: finalXpEarned, timeSpent: timeSpent || 0 }),
-      })
-        .then(() => broadcast({ type: 'progress-updated', userId: user?.id }))
-        .catch(() => {})
+      // Sync exercise result to backend. Uses offline queue so a lost
+      // connection en el medio del ejercicio no descarta el resultado —
+      // se persiste en storage y se re-envía cuando vuelve la red.
+      import('../utils/offlineQueue').then(({ queuePost }) => {
+        queuePost('/api/progress/exercise', {
+          exerciseId, exerciseType: type, score, perfect,
+          xpEarned: finalXpEarned, timeSpent: timeSpent || 0,
+        }).then(() => broadcast({ type: 'progress-updated', userId: user?.id }))
+      }).catch(() => {})
 
       return updated
     })

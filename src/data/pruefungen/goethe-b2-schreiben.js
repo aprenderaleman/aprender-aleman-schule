@@ -30,7 +30,7 @@ export const goetheB2SchreibenExams = [
         bullets: [
           'Erkläre, welche Position du vertrittst (für oder gegen Studiengebühren).',
           'Nenne mindestens zwei Argumente, die deine Position stützen.',
-          'Gehe auf einen möglichen Gegenbar einwand ein und entkräfte ihn.',
+          'Gehe auf einen möglichen Gegeneinwand ein und entkräfte ihn.',
           'Schließe mit einem konstruktiven Vorschlag oder einer abschließenden These.',
         ],
         minWords: 150,

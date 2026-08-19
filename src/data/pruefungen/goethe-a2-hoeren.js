@@ -34,7 +34,7 @@ export const goetheA2HoerenExams = [
               allowedPlays: 2,
               label: 'Aufgabe 1',
               transcript:
-                'Anrufbeantworter: „Hallo Klaus, hier ist Martin. Wir treffen uns morgen nicht im Restaurant „Zum goldenen Hirsch“, sondern im italienischen Restaurant in der Hauptstraße. Bring bitte deine Schwester mit. Bis morgen um 19 Uhr!“',
+                'Anrufbeantworter: „Hallo Klaus, hier ist Martin. Wir treffen uns morgen nicht im Restaurant ‚Zum goldenen Hirsch‘, sondern im italienischen Restaurant in der Hauptstraße. Bring bitte deine Schwester mit. Bis morgen um 19 Uhr!“',
             },
             prompt: 'Wo treffen sich Klaus und Martin morgen?',
             options: [

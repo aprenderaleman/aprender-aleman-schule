@@ -106,4 +106,10 @@ export async function initNativeBridge() {
       initPushNotifications()
     } catch {}
   }
+  // Offline queue: register online + app-resume listeners so pending
+  // exercise results submit as soon as the network is back.
+  try {
+    const { initOfflineQueue } = await import('./offlineQueue')
+    initOfflineQueue()
+  } catch {}
 }

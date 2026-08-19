@@ -40,7 +40,7 @@ Drittens — und das ist das Wichtigste: Wir würden uns freuen, wenn Sie nach d
 
 Ach ja, und das Honorar haben wir auf 600 Euro angepasst, plus Reisekosten und ein Hotelzimmer für die Nacht von Donnerstag auf Freitag, falls Sie nicht direkt zurückreisen möchten.
 
-Bitte rufen Sie mich kurz zurück, am besten morgen Vormittag, um die letzten Details zu klären. Meine direkte Nummer haben Sie ja. Vielen Dank und bis bald!"`,
+Bitte rufen Sie mich kurz zurück, am besten morgen Vormittag, um die letzten Details zu klären. Meine direkte Nummer haben Sie ja. Vielen Dank und bis bald!“`,
         },
         questions: [
           { id: 'c1h1-1', type: 'true-false', statement: 'Der Vortrag wurde von 16 Uhr auf 14 Uhr vorverlegt.', correct: false, points: 1 },
@@ -70,7 +70,7 @@ Stefan Berger: „Das sehe ich völlig anders. Die Erfahrung in Bundesländern, 
 
 Dr. Weiß: „Beide Perspektiven haben ihre Berechtigung. Aus Sicht meiner Partei ist klar: Die Universitäten brauchen mehr Geld. Die Frage ist nur, woher. Wir sehen Studiengebühren nicht als ersten Schritt, aber sie sollten auch nicht tabuisiert werden, gerade für Langzeitstudierende oder Zweitstudien.“
 
-Stefan Berger: „Aber genau diese 'differenzierten' Modelle sind doch nur ein Türöffner. Sobald einmal Gebühren da sind, werden sie schrittweise erhöht. Das war in England zu beobachten.“
+Stefan Berger: „Aber genau diese ‚differenzierten‘ Modelle sind doch nur ein Türöffner. Sobald einmal Gebühren da sind, werden sie schrittweise erhöht. Das war in England zu beobachten.“
 
 Prof. Dr. Müller: „England ist kein gutes Beispiel, weil dort die Gebühren extrem hoch sind. In den Niederlanden zum Beispiel funktioniert ein moderates System recht gut, mit hoher Akzeptanz.“
 
@@ -167,7 +167,7 @@ Auch für komplexere Lerninhalte — etwa das Lösen mathematischer Probleme ode
 
 Was bedeutet das praktisch? Erstens: Wer eine Prüfung vorbereitet, sollte unbedingt ausreichend schlafen — sechs Stunden sind für die meisten Menschen zu wenig. Zweitens: Eine kurze Lerneinheit am Abend, gefolgt von einer Nacht mit gutem Schlaf, ist effektiver als langes Pauken bis spät in die Nacht. Und drittens: Auch ein kurzer Mittagsschlaf von 20 bis 30 Minuten kann das Gedächtnis messbar verbessern.
 
-Schlaf ist also keine verlorene Zeit, sondern ein aktiver Bestandteil des Lernprozesses. Vielen Dank für Ihre Aufmerksamkeit."`,
+Schlaf ist also keine verlorene Zeit, sondern ein aktiver Bestandteil des Lernprozesses. Vielen Dank für Ihre Aufmerksamkeit.“`,
         },
         questions: [
           { id: 'c1h3-1', type: 'true-false', statement: 'Heute weiß man, dass das Gehirn im Schlaf passiv ist.', correct: false, points: 1 },

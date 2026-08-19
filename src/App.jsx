@@ -27,8 +27,10 @@ import Paywall from './components/UI/Paywall'
 import TrialBanner from './components/UI/TrialBanner'
 import Navbar from './components/Layout/Navbar'
 import AppSidebar from './components/Layout/AppSidebar'
+import MobileTabBar from './components/Layout/MobileTabBar'
 import NetworkStatus from './components/UI/NetworkStatus'
 import InstallPrompt from './components/UI/InstallPrompt'
+import ImpersonationBanner from './components/UI/ImpersonationBanner'
 import CommandPalette from './components/UI/CommandPalette'
 import SkipLink from './components/UI/SkipLink'
 import MaintenanceGate from './components/MaintenanceGate'
@@ -141,7 +143,11 @@ function AppRoutes() {
 export default function App() {
   // Wire hardware back button, deep links, status bar, splash hide.
   // No-op on web. Only runs once on mount.
-  useEffect(() => { initNativeBridge() }, [])
+  useEffect(() => {
+    initNativeBridge()
+    // Offline queue works on web too (navigator.online events).
+    import('./utils/offlineQueue').then(({ initOfflineQueue }) => initOfflineQueue())
+  }, [])
 
   return (
     <ErrorBoundary>
@@ -152,9 +158,11 @@ export default function App() {
               <ProgressProvider>
                 <SidebarProvider>
                   <SkipLink />
+                  <ImpersonationBanner />
                   <NetworkStatus />
                   <AppSidebar />
                   <AppRoutes />
+                  <MobileTabBar />
                   <CommandPalette />
                   <InstallPrompt />
                   <ChatBot />

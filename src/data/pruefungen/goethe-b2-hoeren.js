@@ -277,7 +277,7 @@ Die Kritiker hingegen befürchten, dass ein BGE zu Arbeitslosigkeit führen wür
 
 Erste Pilotprojekte in Finnland, Kanada und einigen deutschen Städten zeigen jedoch ein anderes Bild: Die meisten Teilnehmer haben weiterhin gearbeitet, sogar mit höherer Zufriedenheit. Allerdings waren diese Studien zu klein und zu kurz, um endgültige Aussagen zu erlauben.
 
-Mein Fazit: Das bedingungslose Grundeinkommen ist eine faszinierende Idee, die noch viele offene Fragen aufwirft. Die Debatte wird uns sicherlich noch lange begleiten. Vielen Dank für Ihre Aufmerksamkeit!"`,
+Mein Fazit: Das bedingungslose Grundeinkommen ist eine faszinierende Idee, die noch viele offene Fragen aufwirft. Die Debatte wird uns sicherlich noch lange begleiten. Vielen Dank für Ihre Aufmerksamkeit!“`,
         },
         questions: [
           { id: 'b2h4-1', type: 'true-false', statement: 'Das bedingungslose Grundeinkommen wird ohne jede Bedingung gezahlt.', correct: true, points: 1 },

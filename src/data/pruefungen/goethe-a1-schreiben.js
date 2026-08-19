@@ -24,7 +24,7 @@ export const goetheA1SchreibenExams = [
         title: 'Teil 1 — Formular',
         kind: 'formular',
         instructions:
-          'Ihre Freundin Anna möchte im Sprachkurs „Deutsch für Anfänger“ in München teilnehmen. Sie hilft Anna beim Anmeldeformular. Schreiben Sie die fünf Informationen in das Formular.',
+          'Ihre Freundin Anna möchte am Sprachkurs „Deutsch für Anfänger“ in München teilnehmen. Sie helfen Anna beim Anmeldeformular. Schreiben Sie die fünf Informationen in das Formular.',
         sourceText:
           `Hallo!
 Mein Name ist Anna Schneider. Ich bin am 12. März 1995 in Wien geboren und ich bin Österreicherin. Ich wohne jetzt in München, Goethestraße 18, 80336 München. Meine Telefonnummer ist 0176 22334455 und meine E-Mail-Adresse ist anna.schneider@web.de. Ich arbeite als Krankenschwester im Krankenhaus.

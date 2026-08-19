@@ -1010,18 +1010,27 @@ app.get('/api/auth/sso-verify', async (req, res) => {
       [user.id]
     )
 
-    // Generate a long-lived session token for the new app
+    // Impersonation flags propagate from the short SSO token to the
+    // session token. Impersonated sessions get a SHORT life (2 h) so el
+    // teacher no queda logueado como el alumno indefinidamente.
+    const isImpersonating = !!decoded.impersonating
+    const sessionPayload = {
+      id: user.id,
+      email: user.email,
+      fullName: user.fullName,
+      role: user.role,
+      studentId: user.studentId,
+      level: user.level ? user.level.toUpperCase() : 'A1',
+    }
+    if (isImpersonating) {
+      sessionPayload.impersonating = true
+      sessionPayload.impersonatedBy = decoded.impersonatedBy || null
+      sessionPayload.readOnly = !!decoded.readOnly
+    }
     const sessionToken = jwt.sign(
-      {
-        id: user.id,
-        email: user.email,
-        fullName: user.fullName,
-        role: user.role,
-        studentId: user.studentId,
-        level: user.level ? user.level.toUpperCase() : 'A1',
-      },
+      sessionPayload,
       JWT_SECRET,
-      { expiresIn: '30d' }
+      { expiresIn: isImpersonating ? '2h' : '30d' }
     )
 
     res.json({
@@ -1035,6 +1044,9 @@ app.get('/api/auth/sso-verify', async (req, res) => {
         studentId: user.studentId,
         classType: user.classType,
         subscription: { status: 'active', trialActive: false, paid: false, ssoUser: true, hasAccess: true },
+        impersonating: isImpersonating || undefined,
+        impersonatedBy: sessionPayload.impersonatedBy || undefined,
+        readOnly: sessionPayload.readOnly || undefined,
       },
     })
   } catch (err) {
@@ -1062,7 +1074,15 @@ app.get('/api/auth/sso-verify', async (req, res) => {
 // Returns: { ssoToken, userId, redirectUrl }
 app.post('/api/b2c/sso-link', async (req, res) => {
   try {
-    const { email, full_name, phone, secret } = req.body || {}
+    const {
+      email, full_name, phone, secret,
+      // Impersonation: cuando un profesor de b2c aprieta "Ver como alumno",
+      // b2c manda estos dos campos. El teacher se loguea COMO el alumno
+      // pero SCHULE muestra un banner y bloquea las mutations para no
+      // ensuciar el progreso.
+      impersonatedBy = null,   // { id, email, fullName } del teacher
+      readOnly = false,        // true = solo lectura (recomendado para teachers)
+    } = req.body || {}
 
     const B2C_SYNC_SECRET = process.env.B2C_SYNC_SECRET
     if (!B2C_SYNC_SECRET) {
@@ -1138,12 +1158,24 @@ app.post('/api/b2c/sso-link', async (req, res) => {
       [userId]
     )
 
-    // 3. Generate the SSO token
-    const ssoToken = jwt.sign(
-      { userId, sso: true },
-      JWT_SECRET,
-      { expiresIn: '5m' }
-    )
+    // 3. Generate the SSO token — incluye info de impersonación si aplica
+    const jwtPayload = { userId, sso: true }
+    if (impersonatedBy && typeof impersonatedBy === 'object') {
+      jwtPayload.impersonating = true
+      jwtPayload.impersonatedBy = {
+        id: impersonatedBy.id || null,
+        email: impersonatedBy.email || null,
+        fullName: impersonatedBy.fullName || impersonatedBy.name || null,
+      }
+      jwtPayload.readOnly = !!readOnly
+      // Log de auditoría — quién vio como quién y cuándo.
+      pool.query(
+        `INSERT INTO schule_impersonation_log (teacherId, teacherEmail, studentUserId, studentEmail, readOnly)
+         VALUES (?, ?, ?, ?, ?)`,
+        [impersonatedBy.id, impersonatedBy.email, userId, normEmail, readOnly ? 1 : 0]
+      ).catch(() => {}) // fail-silent; sin log no bloquea la impersonación
+    }
+    const ssoToken = jwt.sign(jwtPayload, JWT_SECRET, { expiresIn: '5m' })
 
     // 4. Return the ready-to-use redirect URL. The /auto-login page is
     //    served by the FRONTEND (Vite on Vercel), NOT by this Express
@@ -1305,7 +1337,7 @@ app.get('/api/progress', authMiddleware, subscriptionMiddleware, async (req, res
 })
 
 // ─── PROGRESS: RECORD EXERCISE ───────────────────────
-app.post('/api/progress/exercise', authMiddleware, subscriptionMiddleware, async (req, res) => {
+app.post('/api/progress/exercise', authMiddleware, subscriptionMiddleware, blockIfReadOnly, async (req, res) => {
   try {
     const userId = req.user.id
     const { exerciseId, exerciseType, score, perfect, xpEarned, timeSpent } = req.body
@@ -1359,7 +1391,7 @@ app.post('/api/progress/exercise', authMiddleware, subscriptionMiddleware, async
 })
 
 // ─── PROGRESS: SAVE ACHIEVEMENT ──────────────────────
-app.post('/api/progress/achievement', authMiddleware, async (req, res) => {
+app.post('/api/progress/achievement', authMiddleware, blockIfReadOnly, async (req, res) => {
   try {
     const { achievementId } = req.body
     if (!achievementId) return res.status(400).json({ error: 'Falta achievementId.' })
@@ -1443,7 +1475,7 @@ app.get('/api/reviews/me', authMiddleware, async (req, res) => {
 })
 
 // Submit / update a review. Auto-publishes if rating >= 4.
-app.post('/api/reviews', authMiddleware, async (req, res) => {
+app.post('/api/reviews', authMiddleware, blockIfReadOnly, async (req, res) => {
   try {
     const { rating, comment } = req.body
     const r = parseInt(rating)
@@ -1498,6 +1530,47 @@ app.get('/api/reviews/public', async (req, res) => {
     res.json({ reviews: [] })
   }
 })
+
+// ─── IMPERSONATION log + read-only middleware ─────────
+// schule_impersonation_log: audit trail de cada vez que un teacher (o
+// admin) inicia sesión como un alumno. Se completa desde /api/b2c/sso-link
+// y desde /api/admin/impersonate.
+;(async () => {
+  try {
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS schule_impersonation_log (
+        id BIGINT AUTO_INCREMENT PRIMARY KEY,
+        teacherId VARCHAR(191),
+        teacherEmail VARCHAR(255),
+        studentUserId VARCHAR(191) NOT NULL,
+        studentEmail VARCHAR(255),
+        readOnly TINYINT(1) NOT NULL DEFAULT 1,
+        createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+        INDEX idx_teacher (teacherEmail, createdAt),
+        INDEX idx_student (studentUserId, createdAt)
+      )
+    `)
+  } catch (err) {
+    console.error('Failed to create schule_impersonation_log:', err.message)
+  }
+})()
+
+/**
+ * Middleware que bloquea mutations cuando el JWT viene con readOnly=true.
+ * Usar en todos los endpoints que modifiquen estado del alumno:
+ * /api/progress/*, /api/chat, /api/pruefungen/attempts, /api/reviews,
+ * /api/ai/*, etc. Los GET/HEAD nunca se bloquean.
+ */
+function blockIfReadOnly(req, res, next) {
+  if (['GET', 'HEAD', 'OPTIONS'].includes(req.method)) return next()
+  if (req.user?.readOnly) {
+    return res.status(403).json({
+      error: 'Estás viendo como alumno en modo solo lectura. No podés modificar su progreso.',
+      code: 'read_only_impersonation',
+    })
+  }
+  next()
+}
 
 // ─── PUSH NOTIFICATIONS: register device token ────────
 // Called by the Capacitor shell after FCM/APNs hands back a token.
@@ -3013,7 +3086,7 @@ async function callAnthropic(messages, userName, userLevel, maxTokens = 1024, re
 }
 
 // Evaluate writing exercise
-app.post('/api/ai/evaluate-writing', authMiddleware, aiRateLimit, aiDailyCap, async (req, res) => {
+app.post('/api/ai/evaluate-writing', authMiddleware, aiRateLimit, aiDailyCap, blockIfReadOnly, async (req, res) => {
   try {
     if (!ANTHROPIC_API_KEY) return res.status(503).json({ error: 'Servicio de IA no disponible.' })
 
@@ -3067,7 +3140,7 @@ Bewertung von 0-10. Kein Text außerhalb des JSONs.`
 // Cheap call (~$0.0005), and after the first request for a given
 // (exerciseId, qIndex, userAnswer, correctAnswer) it's served from cache
 // for free — typical wrong answers repeat across thousands of students.
-app.post('/api/ai/explain-mistake', authMiddleware, aiRateLimit, aiDailyCap, async (req, res) => {
+app.post('/api/ai/explain-mistake', authMiddleware, aiRateLimit, aiDailyCap, blockIfReadOnly, async (req, res) => {
   try {
     if (!ANTHROPIC_API_KEY) return res.status(503).json({ error: 'Servicio de IA no disponible.' })
 
@@ -3123,7 +3196,7 @@ Erkläre kurz, warum die Antwort des Schülers nicht stimmt und warum die richti
 })
 
 // Grammar explanation
-app.post('/api/ai/grammar-explanation', authMiddleware, aiRateLimit, aiDailyCap, async (req, res) => {
+app.post('/api/ai/grammar-explanation', authMiddleware, aiRateLimit, aiDailyCap, blockIfReadOnly, async (req, res) => {
   try {
     if (!ANTHROPIC_API_KEY) return res.status(503).json({ error: 'Servicio de IA no disponible.' })
 
@@ -3161,7 +3234,7 @@ Schreibe auf Deutsch. Gib 2-3 Beispiele auf Deutsch. Schwierige Grammatikbegriff
 // ─── SPEAKING EXERCISE: EVALUATE (Haiku 4.5 + eval cache) ─
 // The frontend transcribes audio locally with the Web Speech API and
 // hands us the transcript, so we no longer host a Whisper endpoint.
-app.post('/api/ai/evaluate-speaking', authMiddleware, subscriptionMiddleware, aiRateLimit, aiDailyCap, async (req, res) => {
+app.post('/api/ai/evaluate-speaking', authMiddleware, subscriptionMiddleware, aiRateLimit, aiDailyCap, blockIfReadOnly, async (req, res) => {
   try {
     if (!ANTHROPIC_API_KEY) return res.status(503).json({ error: 'Servicio de IA no disponible.' })
     const { prompt: taskPrompt, transcript, level, durationSeconds } = req.body
@@ -3957,7 +4030,7 @@ app.get('/api/pruefungen/cert-status', authMiddleware, subscriptionMiddleware, a
 })
 
 // CREATE/UPDATE exam plan
-app.post('/api/pruefungen/plan', authMiddleware, subscriptionMiddleware, async (req, res) => {
+app.post('/api/pruefungen/plan', authMiddleware, subscriptionMiddleware, blockIfReadOnly, async (req, res) => {
   try {
     const { provider = 'goethe', level, examDate } = req.body
     const ALLOWED_LEVELS = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2']
@@ -3995,7 +4068,7 @@ app.delete('/api/pruefungen/plan', authMiddleware, subscriptionMiddleware, async
 })
 
 // START a new attempt — returns attempt id and server-side timestamp for fair timing
-app.post('/api/pruefungen/attempts', authMiddleware, subscriptionMiddleware, async (req, res) => {
+app.post('/api/pruefungen/attempts', authMiddleware, subscriptionMiddleware, blockIfReadOnly, async (req, res) => {
   try {
     const { provider = 'goethe', level, module, examId, mode = 'simulation' } = req.body
     if (!level || !module || !examId) {
@@ -4033,7 +4106,7 @@ app.post('/api/pruefungen/attempts', authMiddleware, subscriptionMiddleware, asy
 // (recomputed server-side against the answer manifest) and clamped for
 // Schreiben/Sprechen. Frozen attempts (used by a certificate) cannot be
 // re-graded.
-app.post('/api/pruefungen/attempts/:id/finish', authMiddleware, subscriptionMiddleware, async (req, res) => {
+app.post('/api/pruefungen/attempts/:id/finish', authMiddleware, subscriptionMiddleware, blockIfReadOnly, async (req, res) => {
   try {
     const attemptId = parseInt(req.params.id)
     const { score, maxScore, responses, feedback } = req.body
@@ -4118,7 +4191,7 @@ app.get('/api/pruefungen/attempts', authMiddleware, subscriptionMiddleware, asyn
 })
 
 // GRADE Schreiben submission with Claude using Goethe rubric
-app.post('/api/pruefungen/grade-schreiben', authMiddleware, subscriptionMiddleware, aiRateLimit, aiDailyCap, async (req, res) => {
+app.post('/api/pruefungen/grade-schreiben', authMiddleware, subscriptionMiddleware, aiRateLimit, aiDailyCap, blockIfReadOnly, async (req, res) => {
   try {
     if (!ANTHROPIC_API_KEY) return res.status(503).json({ error: 'Servicio de IA no disponible.' })
     const { level, taskType, taskPrompt, submission, minWords } = req.body
@@ -4195,7 +4268,7 @@ passed = true wenn total >= 60.`
 })
 
 // GRADE Sprechen submission (transcript) with Claude using Goethe rubric
-app.post('/api/pruefungen/grade-sprechen', authMiddleware, subscriptionMiddleware, aiRateLimit, aiDailyCap, async (req, res) => {
+app.post('/api/pruefungen/grade-sprechen', authMiddleware, subscriptionMiddleware, aiRateLimit, aiDailyCap, blockIfReadOnly, async (req, res) => {
   try {
     if (!ANTHROPIC_API_KEY) return res.status(503).json({ error: 'Servicio de IA no disponible.' })
     const { level, taskType, taskPrompt, transcript, durationSeconds } = req.body
@@ -4404,7 +4477,7 @@ REGELN:
 // Voice in/out lives entirely in the browser now (Web Speech API for
 // recognition, SpeechSynthesis for playback), so there are no
 // transcribe/voice/TTS endpoints here — just plain text chat.
-app.post('/api/chat', authMiddleware, aiRateLimit, aiDailyCap, async (req, res) => {
+app.post('/api/chat', authMiddleware, aiRateLimit, aiDailyCap, blockIfReadOnly, async (req, res) => {
   try {
     if (!ANTHROPIC_API_KEY) return res.status(503).json({ error: 'Servicio de IA no disponible.' })
 

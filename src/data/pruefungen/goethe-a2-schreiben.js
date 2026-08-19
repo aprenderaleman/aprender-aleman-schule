@@ -42,7 +42,7 @@ export const goetheA2SchreibenExams = [
           'Du hast ein Fitnessstudio im Internet gefunden und möchtest mehr Informationen. Schreibe eine E-Mail an das Fitnessstudio. Behandle alle drei Punkte. Schreibe etwa 30 Wörter. Vergiss Anrede und Gruß nicht.',
         taskType: 'Formelle E-Mail an ein Fitnessstudio',
         taskPrompt:
-          'Du interessierst dich für das „FitClub München“. Schreibe eine formelle E-Mail an das Fitnessstudio und behandle alle drei Punkte.',
+          'Du interessierst dich für den „FitClub München“. Schreibe eine formelle E-Mail an das Fitnessstudio und behandle alle drei Punkte.',
         bullets: [
           'Frage nach den Öffnungszeiten am Wochenende.',
           'Frage, wie viel ein Monatsabonnement kostet.',

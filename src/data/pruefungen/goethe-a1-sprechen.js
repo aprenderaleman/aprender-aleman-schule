@@ -27,7 +27,7 @@ export const goetheA1SprechenExams = [
         title: 'Teil 1 — Sich vorstellen',
         kind: 'speaking-task',
         instructions:
-          'Stelle dich auf Deutsch vor. Sprich frei und vollständige Sätze. Du hast 30 Sekunden Vorbereitungszeit und bis zu 90 Sekunden zum Sprechen.',
+          'Stelle dich auf Deutsch vor. Sprich frei und in vollständigen Sätzen. Du hast 30 Sekunden Vorbereitungszeit und bis zu 90 Sekunden zum Sprechen.',
         taskType: 'Monolog: Selbstvorstellung',
         taskPrompt:
           'Stelle dich vor. Sprich über deinen Namen, dein Alter, dein Land, deine Sprachen, deinen Beruf und deine Hobbys.',
