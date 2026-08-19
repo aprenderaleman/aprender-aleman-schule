@@ -910,7 +910,7 @@
         "id": "teil-2",
         "kind": "writing-task",
         "maxScore": 15,
-        "taskPrompt": "Du interessierst dich für das „FitClub München“. Schreibe eine formelle E-Mail an das Fitnessstudio und behandle alle drei Punkte."
+        "taskPrompt": "Du interessierst dich für den „FitClub München“. Schreibe eine formelle E-Mail an das Fitnessstudio und behandle alle drei Punkte."
       }
     ]
   },
@@ -932,7 +932,7 @@
         "id": "teil-2",
         "kind": "speaking-task",
         "maxScore": 25,
-        "taskPrompt": "Thema: „Mein letzter Urlaub\". Erzähle ausführlich darüber. Gehe dabei auf folgende Punkte ein:"
+        "taskPrompt": "Thema: „Mein letzter Urlaub“. Erzähle ausführlich darüber. Gehe dabei auf folgende Punkte ein:"
       }
     ]
   },
@@ -1302,13 +1302,13 @@
         "id": "teil-1",
         "kind": "speaking-task",
         "maxScore": 25,
-        "taskPrompt": "Präsentation zum Thema „Soziale Medien im Alltag\". Strukturiere deinen Vortrag mit Einleitung, Hauptteil und Schluss. Gehe dabei auf folgende Punkte ein:"
+        "taskPrompt": "Präsentation zum Thema „Soziale Medien im Alltag“. Strukturiere deinen Vortrag mit Einleitung, Hauptteil und Schluss. Gehe dabei auf folgende Punkte ein:"
       },
       {
         "id": "teil-2",
         "kind": "speaking-task",
         "maxScore": 25,
-        "taskPrompt": "Vorschlag: „Schüler sollten im Unterricht keine Smartphones benutzen dürfen.\" Was hältst du davon? Begründe deine Meinung."
+        "taskPrompt": "Vorschlag: „Schüler sollten im Unterricht keine Smartphones benutzen dürfen.“ Was hältst du davon? Begründe deine Meinung."
       }
     ]
   },
@@ -1654,13 +1654,13 @@
         "id": "teil-1",
         "kind": "speaking-task",
         "maxScore": 25,
-        "taskPrompt": "Vortrag zum Thema „Vor- und Nachteile des Lebens in der Großstadt\". Strukturiere deinen Vortrag klar (Einleitung, Hauptteil, Schluss). Behandle dabei folgende Punkte:"
+        "taskPrompt": "Vortrag zum Thema „Vor- und Nachteile des Lebens in der Großstadt“. Strukturiere deinen Vortrag klar (Einleitung, Hauptteil, Schluss). Behandle dabei folgende Punkte:"
       },
       {
         "id": "teil-2",
         "kind": "speaking-task",
         "maxScore": 25,
-        "taskPrompt": "Diskussionspunkt: „Junge Menschen sollten nach der Schule erst ein Jahr arbeiten oder reisen, bevor sie studieren.\" Nimm Stellung und reagiere auf mögliche Gegenargumente."
+        "taskPrompt": "Diskussionspunkt: „Junge Menschen sollten nach der Schule erst ein Jahr arbeiten oder reisen, bevor sie studieren.“ Nimm Stellung und reagiere auf mögliche Gegenargumente."
       }
     ]
   },
@@ -1934,13 +1934,13 @@
         "id": "teil-1",
         "kind": "speaking-task",
         "maxScore": 25,
-        "taskPrompt": "Thema: „Lebenslanges Lernen — Chance oder Druck?\" Halte einen gut strukturierten Vortrag, in dem du verschiedene Perspektiven berücksichtigst und einen begründeten Standpunkt entwickelst."
+        "taskPrompt": "Thema: „Lebenslanges Lernen — Chance oder Druck?“ Halte einen gut strukturierten Vortrag, in dem du verschiedene Perspektiven berücksichtigst und einen begründeten Standpunkt entwickelst."
       },
       {
         "id": "teil-2",
         "kind": "speaking-task",
         "maxScore": 25,
-        "taskPrompt": "These: „Homeoffice ist langfristig schlecht für Karriere und Teamgeist.\" Nimm differenziert Stellung und reagiere auf mögliche Gegenargumente."
+        "taskPrompt": "These: „Homeoffice ist langfristig schlecht für Karriere und Teamgeist.“ Nimm differenziert Stellung und reagiere auf mögliche Gegenargumente."
       }
     ]
   },
@@ -2136,7 +2136,7 @@
         "id": "teil-1",
         "kind": "speaking-task",
         "maxScore": 50,
-        "taskPrompt": "Thema: „Künstliche Intelligenz und die Zukunft der Demokratie\". Halte einen analytisch anspruchsvollen Vortrag mit klar erkennbarer Struktur, präziser Sprache und einem differenzierten Standpunkt."
+        "taskPrompt": "Thema: „Künstliche Intelligenz und die Zukunft der Demokratie“. Halte einen analytisch anspruchsvollen Vortrag mit klar erkennbarer Struktur, präziser Sprache und einem differenzierten Standpunkt."
       }
     ]
   }

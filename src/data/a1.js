@@ -27,7 +27,7 @@ export const A1_EXERCISES = [
   // ══════ A1 LESEN — Einheit 1 ══════
   { id:'r-a1-001', type:'reading', subtype:'comprehension', level:'A1', unit:1, title:'Meine Familie',
     text:'Ich heiße Anna. Ich bin 25 Jahre alt. Ich komme aus Spanien. Ich habe eine Schwester. Sie heißt Laura. Wir wohnen in Berlin.',
-    vocabulary:[{word:'heiße',translation:'ich trage den Namen'},{word:'Jahre alt',translation:'Altersangabe'},{word:'Schwester',translation:'weibliches Geschwisterkind'},{word:'wohnen',translation:'leben/sich aufhalten'}],
+    vocabulary:[{word:'heiße',translation:'me llamo',defDe:'ich trage den Namen'},{word:'Jahre alt',translation:'años (indicación de edad)',defDe:'Altersangabe'},{word:'Schwester',translation:'hermana',defDe:'weibliches Geschwisterkind'},{word:'wohnen',translation:'vivir, residir',defDe:'leben/sich aufhalten'}],
     questions:[
       {question:'Wie heißt die Person im Text?', options:['Maria','Anna','Laura','Emma'], answer:'Anna'},
       {question:'Woher kommt Anna?', options:['Deutschland','Österreich','Spanien','Schweiz'], answer:'Spanien'},
@@ -35,7 +35,7 @@ export const A1_EXERCISES = [
     ], xp:15 },
   { id:'r-a1-002', type:'reading', subtype:'comprehension', level:'A1', unit:1, title:'Mein Freund Peter',
     text:'Mein Freund heißt Peter. Er ist 30 Jahre alt und kommt aus Österreich. Er ist Ingenieur von Beruf. Er spricht Deutsch und Englisch. Er hat zwei Kinder, einen Sohn und eine Tochter.',
-    vocabulary:[{word:'Freund',translation:'Kamerad/Bekannter'},{word:'Beruf',translation:'berufliche Tätigkeit'},{word:'spricht',translation:'redet/äußert sich'},{word:'Sohn',translation:'männliches Kind'},{word:'Tochter',translation:'weibliches Kind'}],
+    vocabulary:[{word:'Freund',translation:'amigo',defDe:'Kamerad/Bekannter'},{word:'Beruf',translation:'profesión, oficio',defDe:'berufliche Tätigkeit'},{word:'spricht',translation:'habla',defDe:'redet/äußert sich'},{word:'Sohn',translation:'hijo',defDe:'männliches Kind'},{word:'Tochter',translation:'hija',defDe:'weibliches Kind'}],
     questions:[
       {question:'Woher kommt Peter?', options:['Deutschland','Schweiz','Österreich','Spanien'], answer:'Österreich'},
       {question:'Was ist Peter von Beruf?', options:['Lehrer','Arzt','Ingenieur','Koch'], answer:'Ingenieur'},
@@ -45,14 +45,14 @@ export const A1_EXERCISES = [
   // ══════ A1 LESEN — Einheit 2 ══════
   { id:'r-a1-003', type:'reading', subtype:'comprehension', level:'A1', unit:2, title:'Im Café',
     text:'Ich gehe ins Café. Ich trinke einen Kaffee. Der Kaffee kostet zwei Euro. Die Kellnerin ist sehr nett. Ich esse auch ein Stück Kuchen.',
-    vocabulary:[{word:'Kellnerin',translation:'Bedienung (weiblich)'},{word:'Kuchen',translation:'süßes Gebäck'},{word:'kostet',translation:'hat den Preis von'},{word:'Stück',translation:'Teil/Portion'}],
+    vocabulary:[{word:'Kellnerin',translation:'camarera',defDe:'Bedienung (weiblich)'},{word:'Kuchen',translation:'pastel, tarta',defDe:'süßes Gebäck'},{word:'kostet',translation:'cuesta',defDe:'hat den Preis von'},{word:'Stück',translation:'trozo, porción',defDe:'Teil/Portion'}],
     questions:[
       {question:'Wie viel kostet der Kaffee?', options:['Einen Euro','Zwei Euro','Drei Euro','Vier Euro'], answer:'Zwei Euro'},
       {question:'Was isst die Person?', options:['Ein Stück Kuchen','Ein Sandwich','Nichts','Ein Eis'], answer:'Ein Stück Kuchen'},
     ], xp:15 },
   { id:'r-a1-004', type:'reading', subtype:'comprehension', level:'A1', unit:2, title:'Im Supermarkt',
     text:'Ich gehe in den Supermarkt. Ich kaufe Brot, Milch und Äpfel. Das Brot kostet eins fünfzig. Die Milch kostet neunzig Cent. Die Äpfel kosten zwei Euro. Ich bezahle an der Kasse.',
-    vocabulary:[{word:'kaufe',translation:'erwerbe etwas gegen Geld'},{word:'Brot',translation:'Backware aus Mehl'},{word:'Äpfel',translation:'Plural von Apfel (Obst)'},{word:'bezahle',translation:'gebe Geld für etwas'},{word:'Kasse',translation:'Bezahlstelle im Geschäft'}],
+    vocabulary:[{word:'kaufe',translation:'compro',defDe:'erwerbe etwas gegen Geld'},{word:'Brot',translation:'pan',defDe:'Backware aus Mehl'},{word:'Äpfel',translation:'manzanas (plural de Apfel)',defDe:'Plural von Apfel (Obst)'},{word:'bezahle',translation:'pago',defDe:'gebe Geld für etwas'},{word:'Kasse',translation:'caja (donde se paga)',defDe:'Bezahlstelle im Geschäft'}],
     questions:[
       {question:'Was kostet die Milch?', options:['50 Cent','90 Cent','1 Euro','1,50 Euro'], answer:'90 Cent'},
       {question:'Wo bezahlt die Person?', options:['Am Eingang','An der Kasse','Draußen','Online'], answer:'An der Kasse'},
@@ -61,14 +61,14 @@ export const A1_EXERCISES = [
   // ══════ A1 LESEN — Einheit 3 ══════
   { id:'r-a1-005', type:'reading', subtype:'comprehension', level:'A1', unit:3, title:'Das Wetter',
     text:'Heute ist das Wetter sehr schön. Die Sonne scheint. Es ist warm, 22 Grad. Ich gehe in den Park. Ich spiele mit meinem Hund.',
-    vocabulary:[{word:'Wetter',translation:'atmosphärische Bedingungen'},{word:'Sonne',translation:'Himmelskörper, der Licht spendet'},{word:'scheint',translation:'leuchtet/strahlt'},{word:'warm',translation:'angenehm temperiert'}],
+    vocabulary:[{word:'Wetter',translation:'tiempo (meteorológico)',defDe:'atmosphärische Bedingungen'},{word:'Sonne',translation:'sol',defDe:'Himmelskörper, der Licht spendet'},{word:'scheint',translation:'brilla',defDe:'leuchtet/strahlt'},{word:'warm',translation:'cálido, templado',defDe:'angenehm temperiert'}],
     questions:[
       {question:'Wie ist das Wetter heute?', options:['Regnerisch','Sehr kalt','Sehr schön','Bewölkt'], answer:'Sehr schön'},
       {question:'Wie viel Grad sind es?', options:['12','18','22','28'], answer:'22'},
     ], xp:15 },
   { id:'r-a1-006', type:'reading', subtype:'comprehension', level:'A1', unit:3, title:'Mein Tag',
     text:'Ich stehe um sieben Uhr auf. Ich frühstücke um halb acht. Ich trinke Kaffee und esse Brot mit Käse. Dann gehe ich zur Arbeit. Ich arbeite von neun bis fünf. Am Abend sehe ich fern.',
-    vocabulary:[{word:'aufstehen',translation:'aus dem Bett steigen'},{word:'frühstücke',translation:'nehme das Frühstück zu mir'},{word:'Käse',translation:'Milchprodukt'},{word:'Arbeit',translation:'berufliche Tätigkeit'},{word:'fernsehen',translation:'Fernsehprogramme anschauen'}],
+    vocabulary:[{word:'aufstehen',translation:'levantarse',defDe:'aus dem Bett steigen'},{word:'frühstücke',translation:'desayuno',defDe:'nehme das Frühstück zu mir'},{word:'Käse',translation:'queso',defDe:'Milchprodukt'},{word:'Arbeit',translation:'trabajo',defDe:'berufliche Tätigkeit'},{word:'fernsehen',translation:'ver la televisión',defDe:'Fernsehprogramme anschauen'}],
     questions:[
       {question:'Wann steht die Person auf?', options:['Um 6 Uhr','Um 7 Uhr','Um 8 Uhr','Um 9 Uhr'], answer:'Um 7 Uhr'},
       {question:'Was macht die Person am Abend?', options:['Sport','Lesen','Fernsehen','Kochen'], answer:'Fernsehen'},

@@ -1,3 +1,12 @@
+// ⚠️ ARCHIVO NO USADO — no lo importa nadie.
+//
+// src/utils/exercises.js NO incluye este banco, así que estos 90 ejercicios
+// nunca llegan al usuario. Sus ítems duplican contenido que sí está vivo en
+// a1.js / a2.js / b1.js (p. ej. "Ich ___ müde.", "Ich sehe ___ Mann.").
+//
+// Antes de conectarlo a exercises.js hay que resolver ~8 duplicados con los
+// bancos vivos y revisar su alemán: la revisión gramatical de REVISION-GRAMATICAL.md
+// solo corrigió los archivos que se muestran al alumno.
 export const EXERCISES_PART1 = [
 
   // ============================================================

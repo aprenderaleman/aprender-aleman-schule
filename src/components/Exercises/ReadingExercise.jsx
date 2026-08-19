@@ -16,7 +16,7 @@ export default function ReadingExercise({ exercise, userName, onComplete }) {
     const vocabEntry = exercise.vocabulary?.find(v => v.word.toLowerCase() === clean.toLowerCase())
 
     if (vocabEntry) {
-      setTooltip({ word: clean, translation: vocabEntry.translation, visible: true })
+      setTooltip({ word: clean, translation: vocabEntry.translation, defDe: vocabEntry.defDe, visible: true })
       setTimeout(() => setTooltip(t => ({ ...t, visible: false })), 3000)
       return
     }
@@ -83,6 +83,7 @@ export default function ReadingExercise({ exercise, userName, onComplete }) {
             className="fixed top-20 left-1/2 -translate-x-1/2 z-50 bg-gray-900 text-white px-4 py-2 rounded-xl shadow-xl text-sm"
           >
             <strong>{tooltip.word}</strong> = {tooltip.translation}
+            {tooltip.defDe && <span className="block text-xs text-gray-300 mt-0.5">{tooltip.defDe}</span>}
           </motion.div>
         )}
       </AnimatePresence>
@@ -95,6 +96,7 @@ export default function ReadingExercise({ exercise, userName, onComplete }) {
             {exercise.vocabulary.map((v, i) => (
               <span key={i} className="text-xs bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 px-2 py-1 rounded-lg">
                 <strong>{v.word}</strong> → {v.translation}
+                {v.defDe && <span className="block text-[11px] opacity-70">{v.defDe}</span>}
               </span>
             ))}
           </div>

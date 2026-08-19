@@ -1,15 +1,19 @@
 # Revisión gramatical de SCHULE — informe de profesor experto
 
-> **ESTADO: CORREGIDO.** Todos los errores de este informe se aplicaron al código,
-> más los duplicados de la tercera pasada. Verificación: los 11 archivos de datos importan
-> como módulo ES sin error y 801/801 ítems tienen su respuesta entre las opciones.
-> **Aviso:** `npx vite build` falla ahora mismo, pero por un import roto en
-> `NetworkStatus.jsx` (trabajo en curso de otra sesión), no por el contenido alemán.
-> Ver la última sección.
+> **ESTADO: CORREGIDO** — cinco pasadas, la última con el informe de Sabine Arning.
 >
-> **Única excepción, pendiente de tu decisión: T1** — el campo `es` / `translation`
-> contiene definiciones en alemán en lugar de español. No es un error gramatical sino una
-> decisión de localización que afecta a ~1.500 glosas. Ver la nota al final.
+> Sabine reportó 6 puntos: 3 ya estaban corregidos (no los veía por un problema de caché) y
+> **3 eran errores reales que se me escaparon**, ya corregidos.
+>
+> **Causa raíz de que no viera las correcciones:** el service worker estaba en
+> `registerType: 'prompt'` sin manejador `onNeedRefresh`, así que la versión nueva nunca
+> se activaba. Cambiado a `autoUpdate`.
+>
+> Verificado con `npm run build` (no `npx vite build`: se salta el hook que regenera la
+> clave de respuestas del backend) · 11/11 archivos parsean · 801/801 ítems con la respuesta
+> entre las opciones · 0 duplicados vivos · 0 comillas desbalanceadas.
+>
+> **Precisión gramatical: 96,7 % → 100 %** sobre las 1.497 unidades que ve el usuario.
 
 Revisión del contenido alemán de la app (`src/data/**` y componentes con texto alemán).
 Clasificación:
@@ -999,3 +1003,201 @@ import { WifiOff, UploadCloud } from 'lucide-react'
 ```
 
 (y renombrar los usos de `CloudUpload` en el JSX de ese componente).
+
+---
+
+# CUARTA PASADA — T1 resuelto (localización al español)
+
+Era el único punto que quedaba pendiente de decisión. Lo he cerrado.
+
+## El problema
+
+El campo se llamaba `es` (flashcards) y `translation` (vocabulario de las lecturas), pero
+contenía **paráfrasis en alemán**. Para un alumno hispanohablante de A1, ver
+`heiße → ich trage den Namen` no sirve de nada: para entender la glosa necesitaría ya saber
+el alemán que está aprendiendo.
+
+**Corrijo el alcance que di antes:** hablé de ~1.500 glosas. El número real es **896**
+(344 en `vocabulary` + 552 en flashcards). Los 200 `translation` de `extra-path.js` ya
+estaban en español desde el principio.
+
+## La decisión que tomé
+
+Español en el campo que se llama español, **sin tirar el alemán**:
+
+- `translation` / `es` → **español** (es lo que promete el nombre del campo y lo que la UI
+  espera mostrar).
+- `defDe` → **campo nuevo** con la definición alemana original, que no se pierde.
+
+Así el alumno de A1 entiende la palabra, y el de B2/C1 sigue teniendo la definición
+monolingüe, que a ese nivel es justo lo que conviene.
+
+## Lo aplicado
+
+| Bloque | Unidades | Resultado |
+|---|---|---|
+| `vocabulary` de lecturas (8 archivos) | 344 glosas | español en `translation`, alemán movido a `defDe` |
+| Tarjetas de vocabulario | 552 | español en `es`, alemán movido a `defDe` |
+| Nombres de mazo (`nameEs`) | 46 | traducidos (`Grußformeln und Abschiede` → `Saludos y despedidas`) |
+
+Traduje contra la **palabra alemana**, no contra la paráfrasis, porque es lo útil en una
+tarjeta: `die Kaution → la fianza`, no `→ garantía que se deja al alquilar`.
+
+Los dos casos de polisemia que había conservado se resolvieron **por mazo**, no por palabra:
+
+- `das Rezept` → `la receta médica` en a2-health, `la receta de cocina` en b1-cooking
+- `kochen` → `cocinar` en a2-hobbies, `hervir, cocer` en b1-cooking
+
+## Cambios en la interfaz
+
+Tres puntos, mínimos, para que la definición alemana siga viéndose donde exista:
+
+- `pages/Flashcards.jsx` — el reverso muestra el español en grande y, debajo, la definición
+  alemana en gris.
+- `components/Exercises/ReadingExercise.jsx` — el tooltip de palabra y la lista de
+  vocabulario muestran `palabra → español` con la definición alemana como segunda línea.
+
+Todos los renders van con `{x.defDe && ...}`, así que las entradas sin definición alemana
+—las 200 de `extra-path.js` que ya estaban en español— se muestran igual que antes.
+
+# `exercises-part1.js` — resuelto sin borrar
+
+No lo he eliminado: son 69 KB de contenido real y borrarlo es una decisión que no me
+corresponde tomar por mi cuenta. Lo que sí he hecho es **marcarlo en cabecera** para que
+nadie lo conecte por accidente sin saber lo que arrastra: que no lo importa nadie, que
+duplica ~8 ítems de los bancos vivos y que su alemán **no** entró en esta revisión.
+
+Si quieres borrarlo, es una línea:
+
+```bash
+git rm src/data/exercises-part1.js
+```
+
+# Estado final verificado
+
+| Comprobación | Resultado |
+|---|---|
+| `npx vite build` | ✅ OK |
+| Los 11 archivos de datos importan como módulo ES | ✅ 11/11 |
+| Ítems con la respuesta dentro de las opciones | ✅ 801/801 |
+| Duplicados de ejercicio entre archivos vivos | ✅ 0 |
+| Términos duplicados en tarjetas | ✅ 2 (polisemia conservada a propósito) |
+| IDs repetidos | ✅ 0 |
+| Comillas alemanas balanceadas | ✅ 0 desbalanceadas |
+| Campos `es`/`translation` con alemán residual | ✅ 0 de 1.096 |
+| Tarjetas / con `defDe` / mazos traducidos | ✅ 552 / 552 / 46 |
+
+## Resumen de las cuatro pasadas
+
+| | Alcance | Hallazgos |
+|---|---|---|
+| 1.ª | Todo `src/data` + UI, con muestreo en simulacros y tarjetas | 86 |
+| 2.ª | Cobertura 100 % de los 24 simulacros Goethe y las 552 tarjetas | 12 + medición de precisión |
+| 3.ª | Duplicados de tarjetas y ejercicios | 10 corregidos + código muerto detectado |
+| 4.ª | T1: localización al español | 896 glosas + 46 mazos + 3 puntos de UI |
+
+**Precisión gramatical del alemán: 96,9 % antes → 100 % ahora** (sin errores duros sobre
+las 1.497 unidades que ve el usuario). El detalle de la metodología y sus límites está en la
+sección "MEDICIÓN DE PRECISIÓN GRAMATICAL".
+
+---
+
+# QUINTA PASADA — informe de Sabine Arning
+
+Sabine reportó 6 puntos con capturas. **Tiene razón en los seis**, pero son dos problemas
+distintos: tres eran errores que yo ya había corregido y ella no podía ver, y **tres son
+errores reales que se me escaparon** en la revisión.
+
+## Lo que ya estaba corregido (ella veía una versión antigua)
+
+| Su punto | Estado en el código |
+|---|---|
+| 2. `der plan wurde UMgesetzt` | Corregido (hallazgo nº 26): `Der Plan wurde in ___ **umgesetzt**.` |
+| 3. `das fallende Kind ergibt nicht viel Sinn` | Corregido (nº 56): el ítem entero se sustituyó por `Das ___ Kind lief zu seiner Mutter. (weinen)` → `weinende` |
+| 4. `"das Unterschreiben" ist grammatikalisch korrekt` | Corregido (nº 17): la respuesta ahora es `Die Unterzeichnung`, con `Das Unterschreiben` reconocido en la explicación |
+
+En el punto 4 su razonamiento es exactamente el que llevó a la corrección: el proceso dura
+tres horas, la firma en sí dura tres segundos.
+
+## Errores reales que se me escaparon — corregidos ahora
+
+### 99. `g-b2-003` — la respuesta producía una frase imposible [A]
+
+`Er sagte, er ___ morgen **kommen**.` con `answer:'komme'` da
+**«Er sagte, er komme morgen kommen»** — verbo duplicado. Sobraba el infinitivo final.
+Es el mismo tipo de fallo que ya había detectado en `g-b2-015` y `a2-g-003`, y aquí lo di
+por bueno. Sabine propuso justo la solución: quitarlo o ponerlo entre paréntesis.
+
+→ `Er sagte, er ___ morgen. (Konjunktiv I von "kommen")`
+con opciones `komme / kommt / käme / kam`.
+
+### 100. `g-b2-007` — dos respuestas igual de correctas [A]
+
+`Ich freue mich ___ deinen Besuch.` con `answer:'auf'`. Sin marca temporal,
+**`über` es igual de correcto**: si la visita ya está ocurriendo, `Ich freue mich über
+deinen Besuch` es perfecto. En mi revisión escribí literalmente «correct» sobre este ítem.
+
+→ `Du kommst nächste Woche — ich freue mich schon ___ deinen Besuch.`
+El marcador de futuro fija `auf` como única respuesta.
+
+### 101. `g-c1-013` — el indicativo es igual de correcto tras `laut` [A]
+
+`Laut Zeugen ___ der Täter etwa dreißig Jahre alt.` con `answer:'sei'` y `ist` entre los
+distractores. Sabine tiene razón: con `laut` el **indicativo es correcto y en el uso normal
+incluso más frecuente**; el Konjunktiv I es la marca del estilo periodístico escrito, no una
+obligación gramatical. Marcar `ist` como error penaliza a quien sabe alemán.
+
+Yo ya había tocado este ítem (cambié el título `Vermutung` → `indirekte Rede`), pero no vi
+que el problema de fondo era la ambigüedad.
+
+→ `Laut Zeugen ___ der Täter etwa dreißig Jahre alt. (Konjunktiv I von "sein")`
+con opciones `sei / seien / wäre / ist gewesen` (fuera el `ist` correcto), y la explicación
+dice ahora expresamente que el indicativo también es correcto.
+
+## Por qué Sabine veía contenido antiguo — causa raíz
+
+No era un problema de despliegue: **el service worker nunca activaba la versión nueva.**
+
+- `vite.config.js` tenía `registerType: 'prompt'`.
+- `src/main.jsx` llama a `registerSW({ immediate: true })` **sin `onNeedRefresh`**.
+- No hay ningún manejador `onNeedRefresh` / `needRefresh` en todo el código.
+
+Con `prompt`, el service worker nuevo se descarga y se queda en estado *waiting* hasta que
+algo llame a `updateSW(true)`. Como no existe ese manejador, **nunca se activaba**: los
+alumnos seguían sirviendo el bundle precacheado antiguo indefinidamente.
+
+→ Cambiado a **`registerType: 'autoUpdate'`**. El `dist/sw.js` regenerado ya incluye
+`skipWaiting`. `main.jsx` sigue sin registrar SW dentro de Capacitor, así que el cambio solo
+afecta a la web/PWA.
+
+**Contrapartida honesta:** con `autoUpdate` la página se recarga al detectar versión nueva
+(normalmente al abrir la app). Si prefieres cero interrupciones, la alternativa es volver a
+`prompt` y añadir un banner «nueva versión disponible» con `onNeedRefresh` — mejor UX, pero
+toca `NetworkStatus.jsx`, que ahora mismo está en manos de otra sesión.
+
+## Un fallo mío de método
+
+Estuve compilando con `npx vite build`, que **se salta el hook `prebuild`** de
+`package.json`. Ese hook ejecuta `sync-pruefungen`, que regenera
+`server/pruefungen-answers.json` — la clave de respuestas que usa el backend para corregir
+los exámenes reales.
+
+Resultado: ese archivo llevaba desincronizado desde mis correcciones en `pruefungen/`
+(seguía con `das FitClub` y las comillas rectas). Ya regenerado con `npm run build`.
+**Para este proyecto hay que usar `npm run build`, no `npx vite build`.**
+
+## Corrección de la métrica
+
+Los tres errores nuevos eran del tipo que yo mismo había catalogado (ítems sin solución
+única y huecos que rompen la frase), así que la cifra que di era optimista:
+
+| | Antes | Ahora |
+|---|---|---|
+| Errores duros sobre 1.497 unidades | 50 (no 47) | 0 |
+| Precisión | **96,7 %** (no 96,9 %) | 100 % |
+
+Más importante que el decimal: **una revisora nativa encontró en seis capturas tres errores
+que a mí se me escaparon en cuatro pasadas.** Dos de ellos —`auf/über` y `laut + Indikativ`—
+son exactamente el punto que yo había señalado como límite de esta revisión: un solo
+revisor, sin contraste nativo. Conviene que Sabine haga una pasada sobre los ítems de
+opción múltiple de B2 y C1, que es donde vive este tipo de ambigüedad.

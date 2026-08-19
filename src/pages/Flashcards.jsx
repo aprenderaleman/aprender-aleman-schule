@@ -320,9 +320,14 @@ function FlashcardStudy({ topic, onBack }) {
                 style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}
               >
                 <span className="text-xs font-bold text-blue-400 uppercase tracking-wider mb-4">Übersetzung</span>
-                <p className="text-3xl font-extrabold text-gray-800 dark:text-gray-100 text-center mb-4">
+                <p className="text-3xl font-extrabold text-gray-800 dark:text-gray-100 text-center mb-2">
                   {currentCard.es}
                 </p>
+                {currentCard.defDe && (
+                  <p className="text-sm text-gray-500 dark:text-gray-400 text-center mb-4">
+                    {currentCard.defDe}
+                  </p>
+                )}
                 <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-3 w-full">
                   <p className="text-sm text-gray-500 dark:text-gray-400 text-center italic">
                     „{currentCard.example}"

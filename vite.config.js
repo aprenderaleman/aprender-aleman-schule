@@ -6,11 +6,13 @@ export default defineConfig({
   plugins: [
     react(),
     VitePWA({
-      // 'prompt' lets us decide when/whether to register — main.jsx skips
-      // SW registration when the app is running inside the Capacitor
-      // WebView (the native shell has its own caching + a stale SW
-      // interferes with app updates and push notifications).
-      registerType: 'prompt',
+      // 'autoUpdate': el service worker nuevo se activa en la siguiente carga.
+      // Antes estaba en 'prompt', pero main.jsx llama a registerSW() sin
+      // onNeedRefresh, así que la versión nueva se quedaba en "waiting" para
+      // siempre y los alumnos seguían viendo contenido corregido hace semanas.
+      // main.jsx sigue sin registrar SW dentro de Capacitor (el shell nativo
+      // tiene su propio caché), así que esto solo afecta a la web/PWA.
+      registerType: 'autoUpdate',
       injectRegister: null,
       includeAssets: ['logo.svg', 'icons/*.png', 'icons/*.svg'],
       manifest: {
