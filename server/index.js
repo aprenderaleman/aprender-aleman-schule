@@ -17,6 +17,7 @@ import {
   examSpec, PRUEFUNG_PASS_PCT,
 } from './realExam.js'
 import { LEVEL_TEST_QUESTIONS, computeLevel as computeLevelTestLevel } from './level-test-bank.js'
+import { getCourseIndex as getC1Index, getLesson as getC1Lesson } from './deutschc1/index.js'
 
 dotenv.config()
 
@@ -4623,6 +4624,38 @@ app.post('/api/stripe/webhook', express.raw({ type: 'application/json' }), async
   }
 
   res.json({ received: true })
+})
+
+// ─── GOETHE C1 (curso /deutschc1) ────────────────────
+//
+// El contenido del curso vive en server/deutschc1/ y NO se compila en el
+// bundle de Vite. Estas dos rutas son el único camino hacia él, y ambas
+// exigen sesión + rol permitido + estudiante activo. La guardia de React
+// en App.jsx es solo UX; la de verdad es esta.
+
+// Roles con acceso al curso: alumnos (academia y schule), profesores y admin.
+const DEUTSCHC1_ROLES = ['superadmin', 'admin', 'teacher', 'student', 'schule_student']
+
+function deutschC1RoleGate(req, res, next) {
+  if (!DEUTSCHC1_ROLES.includes(req.user?.role)) {
+    return res.status(403).json({
+      error: 'forbidden',
+      message: 'Este curso está reservado a los alumnos y profesores de la academia.',
+    })
+  }
+  next()
+}
+
+// Índice del curso: 40 títulos + bloques. Sin contenido de lecciones.
+app.get('/api/deutschc1/index', authMiddleware, deutschC1RoleGate, subscriptionMiddleware, (req, res) => {
+  res.json(getC1Index())
+})
+
+// Una lección. Devuelve el contenido completo o ready:false si aún no existe.
+app.get('/api/deutschc1/lessons/:id', authMiddleware, deutschC1RoleGate, subscriptionMiddleware, (req, res) => {
+  const lesson = getC1Lesson(Number(req.params.id))
+  if (!lesson) return res.status(404).json({ error: 'not_found', message: 'Lektion nicht gefunden.' })
+  res.json(lesson)
 })
 
 // ─── SERVE FRONTEND IN PRODUCTION ────────────────────

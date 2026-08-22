@@ -44,6 +44,9 @@ const AdminUserDetail = lazy(() => import('./pages/admin/AdminUserDetail'))
 const AdminFinances = lazy(() => import('./pages/admin/AdminFinances'))
 const AdminReviews = lazy(() => import('./pages/admin/AdminReviews'))
 
+// Curso Goethe C1 — chunk propio, solo se descarga al entrar en /deutschc1
+const DeutschC1 = lazy(() => import('./pages/DeutschC1'))
+
 function ProtectedRoute({ children }) {
   const { user } = useAuth()
   if (!user) return <Navigate to="/login" replace />
@@ -89,6 +92,30 @@ function AdminRoute({ children }) {
   )
 }
 
+// Curso Goethe C1: alumnos activos, profesores y admin. Nadie más.
+// Ojo: esto es solo UX. El gate de verdad está en el servidor — el contenido
+// del curso vive en server/deutschc1/ y solo sale por /api/deutschc1/*, que
+// exige el mismo rol y el mismo subscriptionMiddleware.
+const C1_ROLES = ['superadmin', 'admin', 'teacher', 'student', 'schule_student']
+
+function C1Route({ children }) {
+  const { user } = useAuth()
+  if (!user) return <Navigate to="/login" replace />
+  if (!C1_ROLES.includes(user.role)) return <Navigate to="/dashboard" replace />
+  // Alumnos necesitan además suscripción activa; PaidRoute deja pasar al staff.
+  return (
+    <PaidRoute>
+      <Suspense fallback={
+        <div className="min-h-screen flex items-center justify-center bg-background">
+          <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-orange-500" />
+        </div>
+      }>
+        {children}
+      </Suspense>
+    </PaidRoute>
+  )
+}
+
 function PublicRoute({ children }) {
   const { user } = useAuth()
   if (user) {
@@ -128,6 +155,9 @@ function AppRoutes() {
         <Route path="/flashcards" element={<PaidRoute><Flashcards /></PaidRoute>} />
         <Route path="/pruefungen" element={<PaidRoute><Pruefungen /></PaidRoute>} />
         <Route path="/pruefungen/:examId" element={<PaidRoute><PruefungPlayer /></PaidRoute>} />
+        {/* Goethe-Zertifikat C1 — curso restringido */}
+        <Route path="/deutschc1" element={<C1Route><DeutschC1 /></C1Route>} />
+        <Route path="/deutschc1/:id" element={<C1Route><DeutschC1 /></C1Route>} />
         {/* Admin routes */}
         <Route path="/admin" element={<AdminRoute><AdminDashboard /></AdminRoute>} />
         <Route path="/admin/usuarios" element={<AdminRoute><AdminUsers /></AdminRoute>} />

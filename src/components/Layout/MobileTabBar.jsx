@@ -29,7 +29,8 @@ export default function MobileTabBar() {
   const hidden = (
     /^\/ejercicio\//.test(location.pathname) ||
     /^\/pruefung\//.test(location.pathname) ||
-    /^\/auto-login/.test(location.pathname)
+    /^\/auto-login/.test(location.pathname) ||
+    /^\/deutschc1(\/|$)/.test(location.pathname)
   )
   if (hidden) return null
 

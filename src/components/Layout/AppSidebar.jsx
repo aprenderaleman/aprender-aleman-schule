@@ -65,7 +65,8 @@ export default function AppSidebar() {
     path === '/niveau-test' ||
     /^\/admin(\/|$)/.test(path) ||
     /^\/ejercicio\//.test(path) ||
-    /^\/pruefung\//.test(path)
+    /^\/pruefung\//.test(path) ||
+    /^\/deutschc1(\/|$)/.test(path)
   )
   if (hidden) return null
 
