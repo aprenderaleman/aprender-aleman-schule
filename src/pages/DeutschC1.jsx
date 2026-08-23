@@ -9,8 +9,8 @@ import '../components/DeutschC1/deutschc1.css'
 const API_URL = import.meta.env.VITE_API_URL || ''
 const pad = n => String(n).padStart(2, '0')
 
-// La lección desarrollada. /deutschc1 aterriza aquí.
-export const C1_DEFAULT_LESSON = 24
+// Primera lección con contenido. /deutschc1 aterriza aquí.
+export const C1_DEFAULT_LESSON = 3
 
 function State({ kicker, titel, children }) {
   return (

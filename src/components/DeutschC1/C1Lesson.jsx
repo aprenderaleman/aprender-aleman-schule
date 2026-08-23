@@ -71,9 +71,7 @@ export default function C1Lesson({ lesson }) {
             Diese Lektion wird nach demselben Aufbau erstellt: Lernziele, Kernteil,
             Anwendung mit Lösung und Prüfungsbezug — durchgehend auf Deutsch.
           </p>
-          <span className="c1-badge">
-            Inhalt in Vorbereitung · Musterlektion: 24 · Schreiben Teil 1
-          </span>
+          <span className="c1-badge">Inhalt in Vorbereitung</span>
         </div>
       )}
 

@@ -11,34 +11,47 @@ import React from 'react'
  *   *texto*     cursiva
  *   ==texto==   resaltado dorado (mark)
  *   ~texto~     texto atenuado (glosa en español, aclaraciones)
- *   __texto__   término alemán destacado dentro de un paso
+ *   __texto__   término alemán destacado
  *
- * No anidan. Si necesitas algo más rico, añade un tipo de bloque nuevo en
- * C1LessonBody en vez de complicar esto.
+ * Las marcas anidan: `__Das Haus **wird gebaut**.__` funciona.
+ * Un salto de línea (\n) se convierte en <br>.
  */
 
 const TOKEN = /(\*\*.+?\*\*|__.+?__|==.+?==|~.+?~|\*.+?\*)/g
 
+function renderSegment(text, keyPrefix) {
+  return text.split(TOKEN).map((part, i) => {
+    if (!part) return null
+    const key = `${keyPrefix}-${i}`
+    const inner = (open, close) => renderSegment(part.slice(open, close), key)
+
+    if (part.length > 4 && part.startsWith('**') && part.endsWith('**')) {
+      return <strong key={key}>{inner(2, -2)}</strong>
+    }
+    if (part.length > 4 && part.startsWith('__') && part.endsWith('__')) {
+      return <span className="c1-de" key={key}>{inner(2, -2)}</span>
+    }
+    if (part.length > 4 && part.startsWith('==') && part.endsWith('==')) {
+      return <mark key={key}>{inner(2, -2)}</mark>
+    }
+    if (part.length > 2 && part.startsWith('~') && part.endsWith('~')) {
+      return <span className="c1-muted" key={key}>{inner(1, -1)}</span>
+    }
+    if (part.length > 2 && part.startsWith('*') && part.endsWith('*')) {
+      return <em key={key}>{inner(1, -1)}</em>
+    }
+    return <React.Fragment key={key}>{part}</React.Fragment>
+  })
+}
+
 export function renderInline(text) {
   if (typeof text !== 'string') return text
 
-  return text.split(TOKEN).map((part, i) => {
-    if (!part) return null
-    if (part.length > 4 && part.startsWith('**') && part.endsWith('**')) {
-      return <strong key={i}>{part.slice(2, -2)}</strong>
-    }
-    if (part.length > 4 && part.startsWith('__') && part.endsWith('__')) {
-      return <span className="c1-de" key={i}>{part.slice(2, -2)}</span>
-    }
-    if (part.length > 4 && part.startsWith('==') && part.endsWith('==')) {
-      return <mark key={i}>{part.slice(2, -2)}</mark>
-    }
-    if (part.length > 2 && part.startsWith('~') && part.endsWith('~')) {
-      return <span className="c1-muted" key={i}>{part.slice(1, -1)}</span>
-    }
-    if (part.length > 2 && part.startsWith('*') && part.endsWith('*')) {
-      return <em key={i}>{part.slice(1, -1)}</em>
-    }
-    return <React.Fragment key={i}>{part}</React.Fragment>
-  })
+  const lines = text.split('\n')
+  return lines.map((line, i) => (
+    <React.Fragment key={`l${i}`}>
+      {i > 0 && <br />}
+      {renderSegment(line, `l${i}`)}
+    </React.Fragment>
+  ))
 }

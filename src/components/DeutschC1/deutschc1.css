@@ -186,6 +186,56 @@
 .c1 .c1-muted { color: var(--c1-muted); }
 .c1 mark { background: var(--c1-gold-soft); color: inherit; padding: .05em .15em; border-radius: 3px; }
 
+/* Título de card con chip de categoría (konzessiv, folgernd…) */
+.c1-cardt {
+  margin: 0 0 12px; font-family: var(--c1-serif); font-weight: 600;
+  font-size: 18px; color: var(--c1-heading); letter-spacing: 0;
+}
+.c1-cardt .c1-k {
+  font-family: var(--c1-mono); font-size: 12px; color: var(--c1-gold);
+  background: var(--c1-gold-soft); border: 1px solid var(--c1-gold-line);
+  border-radius: 6px; padding: 2px 8px; margin-right: 8px; vertical-align: 1px;
+  text-transform: uppercase; letter-spacing: .04em;
+}
+
+/* Lista de ejemplos — marcador › dorado, glosa gris */
+.c1-ex { list-style: none; padding: 0; margin: 0; display: grid; gap: 9px; }
+.c1-ex li { font-size: 15.5px; padding-left: 18px; position: relative; line-height: 1.5; }
+.c1-ex li::before { content: "›"; position: absolute; left: 0; color: var(--c1-gold); font-weight: 700; }
+.c1-ex li strong { color: var(--c1-heading); }
+.c1-ex li .c1-gl { color: var(--c1-muted); font-size: 13.5px; }
+
+/* Tabla de referencia — cabecera navy, primera columna en mono dorado */
+.c1-tablewrap {
+  border: 1px solid var(--c1-line); border-radius: 12px; overflow: hidden;
+  background: var(--c1-surface); margin: 14px 0; overflow-x: auto;
+}
+.c1-ktable { width: 100%; border-collapse: collapse; font-size: 14.5px; }
+.c1-ktable th, .c1-ktable td {
+  text-align: left; padding: 11px 16px; border-bottom: 1px solid var(--c1-line); vertical-align: top;
+}
+.c1-ktable thead th {
+  background: var(--c1-ink); color: #DCE3EF; font-family: var(--c1-mono);
+  font-size: 10.5px; letter-spacing: .06em; text-transform: uppercase; font-weight: 600;
+}
+.c1-ktable tr:last-child td { border-bottom: 0; }
+.c1-ktable td.c1-k { font-family: var(--c1-mono); color: var(--c1-gold); font-weight: 600; white-space: nowrap; }
+
+/* Comparativa — una afirmación, varias formas */
+.c1-vergleich { background: var(--c1-ink); color: #E8ECF3; border-radius: 14px; padding: 22px 24px; margin: 14px 0; }
+.c1-vergleich .c1-vt {
+  font-family: var(--c1-mono); font-size: 11px; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--c1-gold); margin-bottom: 12px;
+}
+.dark .c1-vergleich .c1-vt { color: #D3A33F; }
+.c1-vergleich .c1-row { padding: 9px 0; border-bottom: 1px solid rgb(255 255 255 / 0.1); font-size: 15px; }
+.c1-vergleich .c1-row:last-child { border-bottom: 0; }
+.c1-vergleich .c1-row b { color: #fff; }
+.c1-vergleich .c1-row .c1-t {
+  font-family: var(--c1-mono); font-size: 10.5px; color: #93A2BD; text-transform: uppercase;
+  letter-spacing: .05em; display: block; margin-top: 2px;
+}
+
 /* Lernziele */
 .c1-ziele { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
 .c1-ziele li { display: flex; gap: 12px; align-items: flex-start; font-size: 15.5px; }
@@ -208,12 +258,23 @@
   border: 1.5px solid var(--c1-gold-line); background: var(--c1-gold-soft); border-radius: 8px;
   width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; flex: 0 0 30px;
 }
+/* Variante con etiqueta de texto en vez del número (Vorgang, Zustand, …) */
+.c1-step .c1-badge {
+  font-family: var(--c1-mono); font-size: 11px; font-weight: 600; color: var(--c1-gold);
+  border: 1.5px solid var(--c1-gold-line); background: var(--c1-gold-soft); border-radius: 8px;
+  padding: 5px 9px; height: fit-content; white-space: nowrap; flex: 0 0 auto;
+  letter-spacing: .04em; text-transform: uppercase;
+}
 .c1-step h4 {
-  margin: 2px 0 3px; font-size: 16px; font-family: var(--c1-serif);
+  margin: 1px 0 4px; font-size: 16px; font-family: var(--c1-serif);
   font-weight: 600; color: var(--c1-heading); letter-spacing: 0;
 }
 .c1-step p { margin: 0; font-size: 14.5px; color: var(--c1-muted); }
 .c1-step .c1-de { color: var(--c1-text); font-weight: 500; }
+.c1-step code {
+  font-family: var(--c1-mono); font-size: 13px; background: rgb(var(--muted));
+  padding: 1px 6px; border-radius: 5px; color: var(--c1-heading);
+}
 
 /* Redemittel */
 .c1-rm-grid { display: grid; gap: 12px; }
@@ -268,6 +329,7 @@
 }
 .c1-impuls .c1-q { font-family: var(--c1-serif); font-weight: 600; color: var(--c1-heading); margin: 0; }
 .c1-impuls .c1-aufgabe { margin: .6em 0 0; color: var(--c1-muted); }
+.c1-impuls ol { margin: 8px 0 0; padding-left: 20px; display: grid; gap: 7px; }
 
 .c1-ueb {
   background: var(--c1-surface); border: 1px solid var(--c1-line);
@@ -284,6 +346,8 @@
 .c1-ueb .c1-sol {
   padding: 14px 20px 18px; font-size: 15px; border-top: 1px solid var(--c1-line);
 }
+.c1-ueb .c1-sol ol { margin: 0; padding-left: 20px; display: grid; gap: 7px; }
+.c1-ueb .c1-sol strong { color: var(--c1-heading); }
 
 /* Lección sin contenido todavía */
 .c1-placeholder { max-width: 640px; margin: 12vh auto 0; text-align: left; }
