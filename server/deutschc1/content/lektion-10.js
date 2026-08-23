@@ -54,7 +54,7 @@ export default {
       type: 'prose',
       card: true,
       absaetze: [
-        'Gehobene konzessive Struktur: **„So überzeugend das Argument auch sein mag, …“** ~(por muy convincente que sea el argumento, …)~',
+        'Gehobene konzessive Struktur: **„So überzeugend das Argument auch sein mag, …“** ~~(por muy convincente que sea el argumento, …)~~',
       ],
     },
 
@@ -71,9 +71,9 @@ export default {
       eyebrow: 'Übung',
       frage: 'Setze einen passenden schriftsprachlichen Konnektor ein.',
       aufgaben: [
-        'Das Projekt ist teuer. ____ wird es fortgesetzt. ~(konzessiv)~',
-        'Die Nachfrage sinkt, ____ müssen wir reagieren. ~(folgernd)~',
-        'Ich stimme zu, ____ die Frist verlängert wird. ~(konditional)~',
+        'Das Projekt ist teuer. ____ wird es fortgesetzt. ~~(konzessiv)~~',
+        'Die Nachfrage sinkt, ____ müssen wir reagieren. ~~(folgernd)~~',
+        'Ich stimme zu, ____ die Frist verlängert wird. ~~(konditional)~~',
       ],
       loesungen: [
         '**Dennoch / Gleichwohl** wird es fortgesetzt.',

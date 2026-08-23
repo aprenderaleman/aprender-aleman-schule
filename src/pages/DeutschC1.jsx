@@ -10,7 +10,7 @@ const API_URL = import.meta.env.VITE_API_URL || ''
 const pad = n => String(n).padStart(2, '0')
 
 // Primera lección con contenido. /deutschc1 aterriza aquí.
-export const C1_DEFAULT_LESSON = 3
+export const C1_DEFAULT_LESSON = 1
 
 function State({ kicker, titel, children }) {
   return (

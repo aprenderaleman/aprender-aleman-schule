@@ -211,7 +211,7 @@ function Uebung({ block }) {
       </div>
       {(block.loesung || block.loesungen?.length > 0) && (
         <details className="c1-ueb">
-          <summary>Musterlösung</summary>
+          <summary>{block.loesungLabel || 'Musterlösung'}</summary>
           <div className="c1-sol c1-prose">
             {block.loesung && <p>{renderInline(block.loesung)}</p>}
             {block.loesungen?.length > 0 && (

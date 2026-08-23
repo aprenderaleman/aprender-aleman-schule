@@ -4646,6 +4646,19 @@ function deutschC1RoleGate(req, res, next) {
   next()
 }
 
+// Señal de despliegue. SIN autenticación a propósito: solo devuelve cuántas
+// lecciones tienen contenido y cuáles, nunca títulos ni texto del curso.
+//
+// Existe porque frontend y backend son dos servicios distintos en Coolify y
+// se despliegan por separado: cuando solo sale uno, el curso no da error, se
+// ve vacío. Esto permite distinguir "el backend va con código viejo" de
+// "esa lección aún no está escrita" sin necesidad de iniciar sesión.
+app.get('/api/deutschc1/health', (req, res) => {
+  const { lessons } = getC1Index()
+  const published = lessons.filter(l => l.ready).map(l => l.id)
+  res.json({ ok: true, total: lessons.length, published: published.length, ids: published })
+})
+
 // Índice del curso: 40 títulos + bloques. Sin contenido de lecciones.
 app.get('/api/deutschc1/index', authMiddleware, deutschC1RoleGate, subscriptionMiddleware, (req, res) => {
   res.json(getC1Index())

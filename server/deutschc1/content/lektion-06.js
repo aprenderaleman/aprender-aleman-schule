@@ -54,7 +54,7 @@ export default {
       aufgaben: [
         'Wenn ich Zeit (haben), (kommen) ich.',
         'Er spricht, als ob er ein Experte (sein).',
-        'Wenn du mich gefragt (haben), (helfen) ich dir. ~(Vergangenheit)~',
+        'Wenn du mich gefragt (haben), (helfen) ich dir. ~~(Vergangenheit)~~',
       ],
       loesungen: [
         'Wenn ich Zeit **hätte**, **käme** ich / **würde** ich **kommen**.',

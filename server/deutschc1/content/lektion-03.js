@@ -1,6 +1,6 @@
 // Lektion 03 · Nominalstil vs. Verbalstil
 //
-// Marcado inline: **negrita**  *cursiva*  ==resaltado==  ~atenuado~  __término__
+// Marcado inline: **negrita**  *cursiva*  ==resaltado==  ~~atenuado~~  __término__
 
 export default {
   spec: ['Bloque 1', 'Sprachliche Konsolidierung', 'C1', 'Prüfungsrelevanz: Lesen · Schreiben'],
@@ -55,7 +55,7 @@ export default {
     {
       type: 'tipp',
       label: 'Prüfungstipp',
-      text: 'Im **Lesen-Lückentext** werden Nominalisierungen und ihre Präpositionen gezielt getestet. Im **Schreiben** hebt ein angemessener Nominalstil das Kriterium „Strukturen“ — aber *zu viel* Nominalstil wirkt schwerfällig. ~Busca el equilibrio, no la sobrecarga.~',
+      text: 'Im **Lesen-Lückentext** werden Nominalisierungen und ihre Präpositionen gezielt getestet. Im **Schreiben** hebt ein angemessener Nominalstil das Kriterium „Strukturen“ — aber *zu viel* Nominalstil wirkt schwerfällig. ~~Busca el equilibrio, no la sobrecarga.~~',
     },
 
     { type: 'rule' },

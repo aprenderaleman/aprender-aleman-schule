@@ -10,14 +10,17 @@ import React from 'react'
  *   **texto**   negrita (color de titular)
  *   *texto*     cursiva
  *   ==texto==   resaltado dorado (mark)
- *   ~texto~     texto atenuado (glosa en español, aclaraciones)
+ *   ~~texto~~   texto atenuado (glosa en español, aclaraciones)
  *   __texto__   término alemán destacado
+ *
+ * El atenuado usa DOS tildes a propósito: el contenido lleva cosas como
+ * "(~230 Wörter)" y un solo tilde debe quedarse literal.
  *
  * Las marcas anidan: `__Das Haus **wird gebaut**.__` funciona.
  * Un salto de línea (\n) se convierte en <br>.
  */
 
-const TOKEN = /(\*\*.+?\*\*|__.+?__|==.+?==|~.+?~|\*.+?\*)/g
+const TOKEN = /(\*\*.+?\*\*|__.+?__|==.+?==|~~.+?~~|\*.+?\*)/g
 
 function renderSegment(text, keyPrefix) {
   return text.split(TOKEN).map((part, i) => {
@@ -34,8 +37,8 @@ function renderSegment(text, keyPrefix) {
     if (part.length > 4 && part.startsWith('==') && part.endsWith('==')) {
       return <mark key={key}>{inner(2, -2)}</mark>
     }
-    if (part.length > 2 && part.startsWith('~') && part.endsWith('~')) {
-      return <span className="c1-muted" key={key}>{inner(1, -1)}</span>
+    if (part.length > 4 && part.startsWith('~~') && part.endsWith('~~')) {
+      return <span className="c1-muted" key={key}>{inner(2, -2)}</span>
     }
     if (part.length > 2 && part.startsWith('*') && part.endsWith('*')) {
       return <em key={key}>{inner(1, -1)}</em>

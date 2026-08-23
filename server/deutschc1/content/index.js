@@ -5,6 +5,7 @@
 //   2. impórtala aquí y añádela al objeto CONTENT con su id numérico
 // Nada más. El sidebar, el marcador dorado, el pager y la API se actualizan solos.
 
+import lektion01 from './lektion-01.js'
 import lektion03 from './lektion-03.js'
 import lektion04 from './lektion-04.js'
 import lektion05 from './lektion-05.js'
@@ -14,6 +15,7 @@ import lektion24 from './lektion-24.js'
 import lektion25 from './lektion-25.js'
 
 export const CONTENT = {
+  1: lektion01,
   3: lektion03,
   4: lektion04,
   5: lektion05,
