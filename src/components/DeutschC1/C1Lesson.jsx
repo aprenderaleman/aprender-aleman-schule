@@ -23,11 +23,11 @@ function ExamStamp({ spec }) {
   )
 }
 
-function Pager({ prev, next }) {
+function Pager({ prev, next, base }) {
   return (
     <nav className="c1-pager" aria-label="Lektionen">
       {prev ? (
-        <Link to={`/deutschc1/${prev.id}`} className="c1-prev">
+        <Link to={`${base}/${prev.id}`} className="c1-prev">
           <span className="c1-dir">‹ Vorherige Lektion</span>
           <span className="c1-lt">{pad(prev.id)} · {prev.titel}</span>
         </Link>
@@ -38,7 +38,7 @@ function Pager({ prev, next }) {
         </span>
       )}
       {next ? (
-        <Link to={`/deutschc1/${next.id}`} className="c1-next">
+        <Link to={`${base}/${next.id}`} className="c1-next">
           <span className="c1-dir">Nächste Lektion ›</span>
           <span className="c1-lt">{pad(next.id)} · {next.titel}</span>
         </Link>
@@ -52,7 +52,7 @@ function Pager({ prev, next }) {
   )
 }
 
-export default function C1Lesson({ lesson }) {
+export default function C1Lesson({ lesson, kurs }) {
   return (
     <div className="c1-wrap">
       {lesson.ready ? (
@@ -60,7 +60,7 @@ export default function C1Lesson({ lesson }) {
           {lesson.blockStart && (
             <img
               className="c1-block-art"
-              src={`/deutschc1/block-${lesson.block}.svg`}
+              src={`${kurs.artBase}/block-${lesson.block}.svg`}
               alt=""
               loading="lazy"
             />
@@ -69,7 +69,7 @@ export default function C1Lesson({ lesson }) {
           <h2 className="c1-title">{lesson.h1 || lesson.titel}</h2>
           {lesson.lead && <p className="c1-lead">{lesson.lead}</p>}
           <hr className="c1-rule" />
-          <C1LessonBody content={lesson.content || []} next={lesson.next} />
+          <C1LessonBody content={lesson.content || []} next={lesson.next} base={kurs.base} />
         </>
       ) : (
         <div className="c1-placeholder">
@@ -83,7 +83,7 @@ export default function C1Lesson({ lesson }) {
         </div>
       )}
 
-      <Pager prev={lesson.prev} next={lesson.next} />
+      <Pager prev={lesson.prev} next={lesson.next} base={kurs.base} />
     </div>
   )
 }

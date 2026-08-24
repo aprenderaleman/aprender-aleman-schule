@@ -10,7 +10,7 @@ const pad = n => String(n).padStart(2, '0')
  * desde la topbar (la transición vive en deutschc1.css, que respeta
  * prefers-reduced-motion).
  */
-export default function C1Sidebar({ blocks, lessons, activeId, onNavigate, panelRef }) {
+export default function C1Sidebar({ kurs, blocks, lessons, activeId, onNavigate, panelRef }) {
   const activeRef = useRef(null)
 
   // Mantener la lección activa a la vista al saltar de una a otra.
@@ -22,8 +22,8 @@ export default function C1Sidebar({ blocks, lessons, activeId, onNavigate, panel
     <aside className="c1-sidebar" id="c1-sidebar" aria-label="Kursnavigation" ref={panelRef}>
       <div className="c1-brand">
         <div className="c1-kicker">Aprender-Aleman.de</div>
-        <h1>Goethe-Zertifikat C1</h1>
-        <div className="c1-sub">Kompletter Vorbereitungskurs · {lessons.length} Lektionen</div>
+        <h1>{kurs.name}</h1>
+        <div className="c1-sub">{kurs.sub || `Kompletter Vorbereitungskurs · ${lessons.length} Lektionen`}</div>
         <Link to="/dashboard" className="c1-back">‹ Dashboard</Link>
       </div>
 
@@ -40,7 +40,7 @@ export default function C1Sidebar({ blocks, lessons, activeId, onNavigate, panel
                 return (
                   <Link
                     key={l.id}
-                    to={`/deutschc1/${l.id}`}
+                    to={`${kurs.base}/${l.id}`}
                     ref={active ? activeRef : null}
                     onClick={onNavigate}
                     aria-current={active ? 'page' : undefined}

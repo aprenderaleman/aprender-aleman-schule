@@ -44,8 +44,9 @@ const AdminUserDetail = lazy(() => import('./pages/admin/AdminUserDetail'))
 const AdminFinances = lazy(() => import('./pages/admin/AdminFinances'))
 const AdminReviews = lazy(() => import('./pages/admin/AdminReviews'))
 
-// Curso Goethe C1 — chunk propio, solo se descarga al entrar en /deutschc1
+// Cursos por nivel — chunk propio, solo se descargan al entrar
 const DeutschC1 = lazy(() => import('./pages/DeutschC1'))
+const DeutschB2 = lazy(() => import('./pages/DeutschB2'))
 
 function ProtectedRoute({ children }) {
   const { user } = useAuth()
@@ -158,6 +159,8 @@ function AppRoutes() {
         {/* Goethe-Zertifikat C1 — curso restringido */}
         <Route path="/deutschc1" element={<C1Route><DeutschC1 /></C1Route>} />
         <Route path="/deutschc1/:id" element={<C1Route><DeutschC1 /></C1Route>} />
+        <Route path="/deutschb2" element={<C1Route><DeutschB2 /></C1Route>} />
+        <Route path="/deutschb2/:id" element={<C1Route><DeutschB2 /></C1Route>} />
         {/* Admin routes */}
         <Route path="/admin" element={<AdminRoute><AdminDashboard /></AdminRoute>} />
         <Route path="/admin/usuarios" element={<AdminRoute><AdminUsers /></AdminRoute>} />

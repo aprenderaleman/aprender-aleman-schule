@@ -336,14 +336,14 @@ function Selbstcheck({ block }) {
 }
 
 // Ausblick — cómo enlaza con la lección siguiente
-function Ausblick({ block, next }) {
+function Ausblick({ block, next, base }) {
   return (
     <>
       <Eyebrow>{block.eyebrow || 'Ausblick'}</Eyebrow>
       <div className="c1-ausblick">
         <p>{renderInline(block.text)}</p>
         {next && (
-          <Link to={`/deutschc1/${next.id}`} className="c1-ausblick-link">
+          <Link to={`${base}/${next.id}`} className="c1-ausblick-link">
             Weiter zu {pad(next.id)} · {next.titel} ›
           </Link>
         )}
@@ -352,7 +352,7 @@ function Ausblick({ block, next }) {
   )
 }
 
-export default function C1LessonBody({ content, next }) {
+export default function C1LessonBody({ content, next, base }) {
   return (
     <>
       {content.map((block, i) => {
@@ -360,7 +360,7 @@ export default function C1LessonBody({ content, next }) {
           case 'wortschatz':       return <Wortschatz       block={block} key={i} />
           case 'pruefungsaufgabe': return <Pruefungsaufgabe block={block} key={i} />
           case 'selbstcheck':      return <Selbstcheck      block={block} key={i} />
-          case 'ausblick':         return <Ausblick         block={block} next={next} key={i} />
+          case 'ausblick':         return <Ausblick         block={block} next={next} base={base} key={i} />
           case 'rule':       return <hr className="c1-rule" key={i} />
           case 'lernziele':  return <Lernziele  block={block} key={i} />
           case 'prose':      return <Prose      block={block} key={i} />

@@ -18,7 +18,19 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const ROOT = path.resolve(__dirname, '..')
 
 let args = process.argv.slice(2)
-let out = path.join(ROOT, 'docs', 'deutschc1', 'Kurs-C1.html')
+
+// --kurs c1|b2 (por defecto c1)
+let kurs = 'c1'
+const ki = args.indexOf('--kurs')
+if (ki !== -1) { kurs = args[ki + 1]; args.splice(ki, 2) }
+const KURSE = {
+  c1: { dir: 'deutschc1', name: 'Deutsch C1' },
+  b2: { dir: 'deutschb2', name: 'Deutsch B2' },
+}
+if (!KURSE[kurs]) { console.error(`kurs desconocido: ${kurs}`); process.exit(1) }
+const K = KURSE[kurs]
+
+let out = path.join(ROOT, 'docs', K.dir, `Kurs-${kurs.toUpperCase()}.html`)
 const oi = args.indexOf('--out')
 if (oi !== -1) { out = path.resolve(args[oi + 1]); args.splice(oi, 2) }
 const onlyIds = args.map(Number).filter(Number.isInteger)
@@ -34,9 +46,9 @@ await build({
       import { renderToStaticMarkup } from 'react-dom/server'
       import { MemoryRouter } from 'react-router-dom'
       import C1Lesson from './src/components/DeutschC1/C1Lesson.jsx'
-      export function render(lesson) {
+      export function render(lesson, kurs) {
         return renderToStaticMarkup(
-          React.createElement(MemoryRouter, null, React.createElement(C1Lesson, { lesson }))
+          React.createElement(MemoryRouter, null, React.createElement(C1Lesson, { lesson, kurs }))
         )
       }
     `,
@@ -58,7 +70,7 @@ const origError = console.error
 console.error = (...a) => { if (!String(a[0]).includes('useLayoutEffect')) origError(...a) }
 
 const { render } = await import(pathToFileURL(tmp).href)
-const { getCourseIndex, getLesson } = await import(pathToFileURL(path.join(ROOT, 'server/deutschc1/index.js')).href)
+const { getCourseIndex, getLesson } = await import(pathToFileURL(path.join(ROOT, 'server', K.dir, 'index.js')).href)
 
 // 2. Qué lecciones exportar
 const index = getCourseIndex()
@@ -84,17 +96,17 @@ const pad = n => String(n).padStart(2, '0')
 const wordCount = html => html.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().split(' ').length
 
 const body = lessons.map(l => {
-  const html = render(l)
+  const html = render(l, { base: `/${K.dir}`, artBase: '/deutschc1', name: K.name })
   return `<div class="x-sep" id="l${l.id}"></div><div class="x-wc">Lektion ${pad(l.id)} · ${wordCount(html)} Wörter</div>${html}`
 }).join('\n')
 
-const toc = `<div class="x-toc"><h1>Goethe-Zertifikat C1 — Kurs</h1>
+const toc = `<div class="x-toc"><h1>${K.name} — Aprender-Aleman.de</h1>
 <p>${lessons.length} von ${index.lessons.length} Lektionen · exportiert zur Durchsicht</p>
 <ol>${lessons.map(l => `<li value="${l.id}"><a href="#l${l.id}">${l.titel}</a></li>`).join('')}</ol></div>`
 
 const doc = `<!DOCTYPE html><html lang="de"><head><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Goethe C1 — Kurs (Export)</title>
+<title>${K.name} — Kurs (Export)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
 <style>${tokens}\n${courseCss}</style></head>
