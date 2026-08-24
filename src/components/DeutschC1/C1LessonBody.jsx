@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { renderInline } from './inline'
 
 const pad = n => String(n).padStart(2, '0')
@@ -10,9 +11,38 @@ const pad = n => String(n).padStart(2, '0')
  * componente. Añadir un tipo nuevo = añadir un `case`. Nunca se inyecta HTML.
  */
 
+// Icono fijo por sección. Se decide aquí, centralizado, y no en cada
+// lección: así las 40 quedan uniformes y cambiar un icono es una línea.
+const SECTION_ICONS = [
+  ['lernziele', '🎯'],
+  ['kernwortschatz', '📖'],
+  ['wortschatz', '📖'],
+  ['erklärung', '💡'],
+  ['beispiele', '🔍'],
+  ['anwendung', '✍️'],
+  ['übung', '✍️'],
+  ['prüfungsbezug', '🎓'],
+  ['prüfungsaufgabe', '🎓'],
+  ['zusammenfassung', '📌'],
+  ['selbstcheck', '✅'],
+  ['ausblick', '➡️'],
+]
+
+function iconFor(text) {
+  const t = String(text || '').toLowerCase()
+  const hit = SECTION_ICONS.find(([k]) => t.startsWith(k))
+  return hit ? hit[1] : null
+}
+
 function Eyebrow({ children }) {
   if (!children) return null
-  return <p className="c1-eyebrow">{children}</p>
+  const icon = iconFor(children)
+  return (
+    <p className="c1-eyebrow">
+      {icon && <span className="c1-ico" aria-hidden="true">{icon}</span>}
+      {children}
+    </p>
+  )
 }
 
 // Título de card con chip de categoría — .cardt / .k del HTML de referencia
@@ -224,11 +254,113 @@ function Uebung({ block }) {
   )
 }
 
-export default function C1LessonBody({ content }) {
+// Kernwortschatz — palabra con artículo, colocación típica, significado
+function Wortschatz({ block }) {
+  return (
+    <>
+      <Eyebrow>{block.eyebrow || 'Kernwortschatz'}</Eyebrow>
+      <div className="c1-tablewrap">
+        <table className="c1-ktable c1-ws">
+          <thead>
+            <tr><th>Wort</th><th>Kollokation</th><th>Bedeutung</th></tr>
+          </thead>
+          <tbody>
+            {block.items.map((w, i) => (
+              <tr key={i}>
+                <td className="c1-k">{w.wort}</td>
+                <td>{renderInline(w.kollokation)}</td>
+                <td className="c1-ws-es">{w.es}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      {block.hinweis && <p className="c1-ws-hinweis">{renderInline(block.hinweis)}</p>}
+    </>
+  )
+}
+
+// Prüfungsbezug — mini-tarea con el formato real del examen.
+// `text` admite huecos numerados con {1}, {2}… (ver inline.jsx).
+function Pruefungsaufgabe({ block }) {
+  return (
+    <>
+      <Eyebrow>{block.eyebrow || 'Prüfungsbezug'}</Eyebrow>
+      <div className="c1-modell c1-pa">
+        <div className="c1-mhead">
+          <span>{block.modul}</span>
+          <span className="c1-wc">{block.titel}</span>
+        </div>
+        <div className="c1-mbody">
+          {block.anweisung && <p className="c1-pa-anweisung">{renderInline(block.anweisung)}</p>}
+          {block.absaetze?.map((p, i) => <p key={i}>{renderInline(p)}</p>)}
+          {block.optionen?.length > 0 && (
+            <ul className="c1-pa-optionen">
+              {block.optionen.map((o, i) => <li key={i}>{renderInline(o)}</li>)}
+            </ul>
+          )}
+        </div>
+      </div>
+      {block.loesungen?.length > 0 && (
+        <details className="c1-ueb">
+          <summary>{block.loesungLabel || 'Lösung'}</summary>
+          <div className="c1-sol c1-prose">
+            <ol>{block.loesungen.map((l, i) => <li key={i}>{renderInline(l)}</li>)}</ol>
+            {block.kommentar && <p className="c1-pa-kommentar">{renderInline(block.kommentar)}</p>}
+          </div>
+        </details>
+      )}
+    </>
+  )
+}
+
+// Selbstcheck — casillas "Kann ich schon…?". Estado solo en memoria.
+function Selbstcheck({ block }) {
+  const [done, setDone] = useState(() => block.items.map(() => false))
+  const toggle = i => setDone(d => d.map((v, j) => (j === i ? !v : v)))
+  return (
+    <>
+      <Eyebrow>{block.eyebrow || 'Selbstcheck'}</Eyebrow>
+      <ul className="c1-check">
+        {block.items.map((it, i) => (
+          <li key={i} className={done[i] ? 'is-done' : undefined}>
+            <label>
+              <input type="checkbox" checked={done[i]} onChange={() => toggle(i)} />
+              <span>{renderInline(it)}</span>
+            </label>
+          </li>
+        ))}
+      </ul>
+    </>
+  )
+}
+
+// Ausblick — cómo enlaza con la lección siguiente
+function Ausblick({ block, next }) {
+  return (
+    <>
+      <Eyebrow>{block.eyebrow || 'Ausblick'}</Eyebrow>
+      <div className="c1-ausblick">
+        <p>{renderInline(block.text)}</p>
+        {next && (
+          <Link to={`/deutschc1/${next.id}`} className="c1-ausblick-link">
+            Weiter zu {pad(next.id)} · {next.titel} ›
+          </Link>
+        )}
+      </div>
+    </>
+  )
+}
+
+export default function C1LessonBody({ content, next }) {
   return (
     <>
       {content.map((block, i) => {
         switch (block.type) {
+          case 'wortschatz':       return <Wortschatz       block={block} key={i} />
+          case 'pruefungsaufgabe': return <Pruefungsaufgabe block={block} key={i} />
+          case 'selbstcheck':      return <Selbstcheck      block={block} key={i} />
+          case 'ausblick':         return <Ausblick         block={block} next={next} key={i} />
           case 'rule':       return <hr className="c1-rule" key={i} />
           case 'lernziele':  return <Lernziele  block={block} key={i} />
           case 'prose':      return <Prose      block={block} key={i} />

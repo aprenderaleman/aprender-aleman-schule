@@ -41,6 +41,8 @@ export function getLesson(id) {
     titel: C1_TITLES[id - 1],
     block: b ? b.n : null,
     blockName: b ? b.name : null,
+    // Primera lección de su bloque → el cliente muestra la ilustración de portada
+    blockStart: b ? id === b.range[0] : false,
     prev: id > 1 ? { id: id - 1, titel: C1_TITLES[id - 2] } : null,
     next: id < C1_LESSON_COUNT ? { id: id + 1, titel: C1_TITLES[id] } : null,
   }

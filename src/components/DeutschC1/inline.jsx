@@ -20,13 +20,18 @@ import React from 'react'
  * Un salto de línea (\n) se convierte en <br>.
  */
 
-const TOKEN = /(\*\*.+?\*\*|__.+?__|==.+?==|~~.+?~~|\*.+?\*)/g
+//   {1} {2} …   hueco numerado de Lückentext (se pinta como casilla)
+const TOKEN = /(\*\*.+?\*\*|__.+?__|==.+?==|~~.+?~~|\*.+?\*|\{\d{1,2}\})/g
 
 function renderSegment(text, keyPrefix) {
   return text.split(TOKEN).map((part, i) => {
     if (!part) return null
     const key = `${keyPrefix}-${i}`
     const inner = (open, close) => renderSegment(part.slice(open, close), key)
+
+    if (/^\{\d{1,2}\}$/.test(part)) {
+      return <span className="c1-gap" key={key}>{part.slice(1, -1)}</span>
+    }
 
     if (part.length > 4 && part.startsWith('**') && part.endsWith('**')) {
       return <strong key={key}>{inner(2, -2)}</strong>

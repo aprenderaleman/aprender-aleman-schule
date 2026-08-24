@@ -1,0 +1,505 @@
+<!DOCTYPE html><html lang="de"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Goethe C1 — Kurs (Export)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root { --background: 250 244 234; --foreground: 34 38 51; --card: 255 251 244;
+          --muted: 243 235 222; --muted-foreground: 107 100 88; --border: 230 218 197; }
+  * { box-sizing: border-box; } body { margin: 0; }
+  .x-toc { max-width: 760px; margin: 0 auto; padding: 48px 40px 0; }
+  .x-toc h1 { font-family: var(--c1-serif); font-weight: 500; font-size: 30px; color: var(--c1-heading); margin: 0 0 6px; }
+  .x-toc p { color: var(--c1-muted); margin: 0 0 18px; font-size: 14px; }
+  .x-toc ol { margin: 0; padding-left: 22px; columns: 2; gap: 32px; font-size: 14.5px; }
+  .x-toc a { color: var(--c1-heading); text-decoration: none; } .x-toc a:hover { text-decoration: underline; }
+  .x-sep { height: 6px; background: var(--c1-ink); margin: 64px 0 0; }
+  .x-wc { font-family: var(--c1-mono); font-size: 11px; color: var(--c1-muted); letter-spacing: .08em; text-transform: uppercase; max-width: 760px; margin: 12px auto 0; padding: 0 40px; }
+
+/* ───────────────────────────────────────────────────────────────
+   Goethe-Zertifikat C1 — estilos del curso.
+
+   Todo vive bajo el scope `.c1` para no tocar nada del resto de la app.
+   Los grises/superficies se derivan de los tokens semánticos de
+   src/index.css (--background, --card, --border, …), así el curso
+   respeta el dark mode existente sin código extra.
+
+   El dorado es el acento de "documento de examen": sello de coordenadas,
+   eyebrows, numeración y callouts. La interacción (foco, lección activa)
+   usa el naranja de marca #F4A261.
+   ─────────────────────────────────────────────────────────────── */
+
+.c1 {
+  --c1-ink: #0F2847;          /* navy de marca */
+  --c1-ink-2: #1E3A66;
+  --c1-heading: #0F2847;
+  --c1-paper: rgb(var(--background));
+  --c1-surface: rgb(var(--card));
+  --c1-line: rgb(var(--border));
+  --c1-line-strong: rgb(var(--muted-foreground) / 0.45);
+  --c1-muted: rgb(var(--muted-foreground));
+  --c1-text: rgb(var(--foreground));
+
+  --c1-gold: #B0821F;
+  --c1-gold-soft: #F6EFDD;
+  --c1-gold-line: #E6D6AC;
+
+  --c1-accent: #F4A261;       /* naranja de marca — foco e interacción */
+  --c1-sidebar-w: 320px;
+
+  --c1-serif: 'Newsreader', Georgia, 'Times New Roman', serif;
+  --c1-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --c1-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  background: var(--c1-paper);
+  color: var(--c1-text);
+  font-family: var(--c1-sans);
+  font-size: 16px;
+  line-height: 1.6;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+.dark .c1 {
+  --c1-heading: #EAF0F8;
+  --c1-gold: #D3A33F;         /* sube el contraste sobre fondo navy */
+  --c1-gold-soft: rgb(176 130 31 / 0.14);
+  --c1-gold-line: rgb(176 130 31 / 0.38);
+  --c1-line-strong: rgb(var(--muted-foreground) / 0.55);
+}
+
+.c1 ::selection { background: var(--c1-gold-soft); }
+
+/* El curso ocupa la pantalla: el chrome global (Navbar/AppSidebar/TabBar)
+   se oculta en esta ruta, así que reseteamos márgenes heredados. */
+.c1-app { display: flex; min-height: 100vh; min-height: 100dvh; }
+
+/* ---------- Sidebar ---------- */
+.c1-sidebar {
+  width: var(--c1-sidebar-w);
+  flex: 0 0 var(--c1-sidebar-w);
+  background: var(--c1-ink);
+  color: #E8ECF3;
+  position: fixed;
+  inset: 0 auto 0 0;
+  height: 100vh;
+  height: 100dvh;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  z-index: 40;
+  border-right: 1px solid #0d1626;
+  padding-top: env(safe-area-inset-top);
+}
+.c1-main { margin-left: var(--c1-sidebar-w); flex: 1 1 auto; min-width: 0; }
+
+.c1-brand { padding: 26px 24px 20px; border-bottom: 1px solid rgb(255 255 255 / 0.08); }
+.c1-brand .c1-kicker {
+  font-family: var(--c1-mono); font-size: 11px; letter-spacing: .16em;
+  text-transform: uppercase; color: #8FA0BC;
+}
+.c1-brand h1 {
+  font-family: var(--c1-serif); font-weight: 500; font-size: 22px; line-height: 1.2;
+  margin: 8px 0 2px; color: #fff; letter-spacing: 0;
+}
+.c1-brand .c1-sub { font-size: 12.5px; color: #93A2BD; }
+.c1-back {
+  display: inline-flex; align-items: center; gap: 7px; margin-top: 14px;
+  font-family: var(--c1-mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase;
+  color: #93A2BD; text-decoration: none; border: 1px solid rgb(255 255 255 / 0.18);
+  border-radius: 8px; padding: 6px 11px; transition: color .15s, border-color .15s;
+}
+.c1-back:hover { color: #fff; border-color: rgb(255 255 255 / 0.4); }
+
+.c1-nav { padding: 12px 0 40px; }
+.c1-group { margin-top: 14px; }
+.c1-group-label {
+  font-family: var(--c1-mono); font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase;
+  color: #7E8FAC; padding: 10px 24px 6px; display: flex; gap: 8px; align-items: baseline;
+}
+.c1-group-label b { color: #AEBBD2; font-weight: 600; }
+
+.c1-link {
+  display: flex; gap: 12px; align-items: flex-start;
+  padding: 8px 24px 8px 22px; color: #C6D0E0; text-decoration: none;
+  border-left: 3px solid transparent; font-size: 14px; line-height: 1.35;
+  transition: background .15s, color .15s, border-color .15s;
+}
+.c1-link .c1-num {
+  font-family: var(--c1-mono); font-size: 12px; color: #7E8FAC;
+  padding-top: 1px; min-width: 20px;
+}
+.c1-link:hover { background: rgb(255 255 255 / 0.05); color: #fff; }
+.c1-link.is-active {
+  background: linear-gradient(90deg, rgb(244 162 97 / 0.18), rgb(244 162 97 / 0));
+  border-left-color: var(--c1-accent); color: #fff; font-weight: 500;
+}
+.c1-link.is-active .c1-num { color: var(--c1-accent); }
+/* Punto dorado = lección con contenido publicado */
+.c1-link.is-ready .c1-num::after { content: "·"; color: var(--c1-gold); margin-left: 5px; }
+
+/* ---------- Topbar (móvil) ---------- */
+.c1-topbar {
+  display: none; position: sticky; top: 0; z-index: 30;
+  background: var(--c1-ink); color: #fff; align-items: center; gap: 14px;
+  padding: 12px 16px; border-bottom: 1px solid #0d1626;
+  padding-top: calc(12px + env(safe-area-inset-top));
+}
+.c1-topbar .c1-t-title {
+  font-family: var(--c1-serif); font-size: 16px; font-weight: 500;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.c1-menu-btn {
+  background: transparent; border: 1px solid rgb(255 255 255 / 0.25); color: #fff;
+  border-radius: 8px; padding: 7px 10px; font-family: var(--c1-mono); font-size: 12px;
+  letter-spacing: .05em; cursor: pointer; display: inline-flex; gap: 7px; align-items: center;
+  flex: 0 0 auto;
+}
+.c1-scrim { display: none; position: fixed; inset: 0; background: rgb(10 16 28 / 0.5); z-index: 35; }
+
+/* Foco visible en todo el curso — naranja de marca */
+.c1 a:focus-visible,
+.c1 button:focus-visible,
+.c1 summary:focus-visible {
+  outline: 2px solid var(--c1-accent);
+  outline-offset: 2px;
+}
+.c1-link:focus-visible { outline-offset: -2px; }
+
+/* ---------- Lección ---------- */
+.c1-wrap { max-width: 760px; margin: 0 auto; padding: 48px 40px 96px; }
+
+.c1-spec {
+  font-family: var(--c1-mono); font-size: 11.5px; letter-spacing: .06em; text-transform: uppercase;
+  color: var(--c1-ink-2); display: flex; flex-wrap: wrap; gap: 0 4px; align-items: center;
+  margin-bottom: 18px;
+}
+.dark .c1-spec { color: rgb(var(--muted-foreground)); }
+.c1-spec span { white-space: nowrap; }
+.c1-spec .c1-sep { color: var(--c1-line-strong); }
+.c1-spec .c1-mod { color: var(--c1-gold); font-weight: 600; }
+
+.c1-title {
+  font-family: var(--c1-serif); font-weight: 500; font-size: 40px; line-height: 1.08;
+  letter-spacing: -.01em; margin: 0 0 8px; color: var(--c1-heading);
+  user-select: text; -webkit-user-select: text;
+}
+.c1-lead { font-size: 17px; color: var(--c1-muted); margin: 0 0 8px; max-width: 60ch; }
+
+.c1-rule { height: 1px; background: var(--c1-line); border: 0; margin: 34px 0; }
+
+.c1-eyebrow {
+  font-family: var(--c1-mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--c1-gold); margin: 0 0 12px; display: flex; align-items: center; gap: 10px;
+}
+.c1-eyebrow::before { content: ""; width: 22px; height: 1.5px; background: var(--c1-gold); flex: 0 0 22px; }
+
+.c1-card {
+  background: var(--c1-surface); border: 1px solid var(--c1-line);
+  border-radius: 14px; padding: 22px 24px; margin: 14px 0;
+}
+
+.c1-prose p { font-size: 15.5px; margin: 0 0 12px; }
+.c1-prose p:last-child { margin-bottom: 0; }
+.c1-prose strong { color: var(--c1-heading); }
+.c1 .c1-muted { color: var(--c1-muted); }
+.c1 mark { background: var(--c1-gold-soft); color: inherit; padding: .05em .15em; border-radius: 3px; }
+
+/* Título de card con chip de categoría (konzessiv, folgernd…) */
+.c1-cardt {
+  margin: 0 0 12px; font-family: var(--c1-serif); font-weight: 600;
+  font-size: 18px; color: var(--c1-heading); letter-spacing: 0;
+}
+.c1-cardt .c1-k {
+  font-family: var(--c1-mono); font-size: 12px; color: var(--c1-gold);
+  background: var(--c1-gold-soft); border: 1px solid var(--c1-gold-line);
+  border-radius: 6px; padding: 2px 8px; margin-right: 8px; vertical-align: 1px;
+  text-transform: uppercase; letter-spacing: .04em;
+}
+
+/* Lista de ejemplos — marcador › dorado, glosa gris */
+.c1-ex { list-style: none; padding: 0; margin: 0; display: grid; gap: 9px; }
+.c1-ex li { font-size: 15.5px; padding-left: 18px; position: relative; line-height: 1.5; }
+.c1-ex li::before { content: "›"; position: absolute; left: 0; color: var(--c1-gold); font-weight: 700; }
+.c1-ex li strong { color: var(--c1-heading); }
+.c1-ex li .c1-gl { color: var(--c1-muted); font-size: 13.5px; }
+
+/* Tabla de referencia — cabecera navy, primera columna en mono dorado */
+.c1-tablewrap {
+  border: 1px solid var(--c1-line); border-radius: 12px; overflow: hidden;
+  background: var(--c1-surface); margin: 14px 0; overflow-x: auto;
+}
+.c1-ktable { width: 100%; border-collapse: collapse; font-size: 14.5px; }
+.c1-ktable th, .c1-ktable td {
+  text-align: left; padding: 11px 16px; border-bottom: 1px solid var(--c1-line); vertical-align: top;
+}
+.c1-ktable thead th {
+  background: var(--c1-ink); color: #DCE3EF; font-family: var(--c1-mono);
+  font-size: 10.5px; letter-spacing: .06em; text-transform: uppercase; font-weight: 600;
+}
+.c1-ktable tr:last-child td { border-bottom: 0; }
+.c1-ktable td.c1-k { font-family: var(--c1-mono); color: var(--c1-gold); font-weight: 600; white-space: nowrap; }
+
+/* Comparativa — una afirmación, varias formas */
+.c1-vergleich { background: var(--c1-ink); color: #E8ECF3; border-radius: 14px; padding: 22px 24px; margin: 14px 0; }
+.c1-vergleich .c1-vt {
+  font-family: var(--c1-mono); font-size: 11px; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--c1-gold); margin-bottom: 12px;
+}
+.dark .c1-vergleich .c1-vt { color: #D3A33F; }
+.c1-vergleich .c1-row { padding: 9px 0; border-bottom: 1px solid rgb(255 255 255 / 0.1); font-size: 15px; }
+.c1-vergleich .c1-row:last-child { border-bottom: 0; }
+.c1-vergleich .c1-row b { color: #fff; }
+.c1-vergleich .c1-row .c1-t {
+  font-family: var(--c1-mono); font-size: 10.5px; color: #93A2BD; text-transform: uppercase;
+  letter-spacing: .05em; display: block; margin-top: 2px;
+}
+
+/* Lernziele */
+.c1-ziele { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+.c1-ziele li { display: flex; gap: 12px; align-items: flex-start; font-size: 15.5px; }
+.c1-ziele li::before {
+  content: "✓"; color: var(--c1-gold); font-weight: 700; font-family: var(--c1-sans);
+  background: var(--c1-gold-soft); border-radius: 6px; width: 24px; height: 24px;
+  display: inline-flex; align-items: center; justify-content: center;
+  flex: 0 0 24px; font-size: 13px; margin-top: 1px;
+}
+
+/* Steps */
+.c1-steps {
+  display: grid; gap: 0; border: 1px solid var(--c1-line); border-radius: 14px;
+  overflow: hidden; background: var(--c1-surface);
+}
+.c1-step { display: flex; gap: 16px; padding: 18px 22px; border-bottom: 1px solid var(--c1-line); }
+.c1-step:last-child { border-bottom: 0; }
+.c1-step .c1-idx {
+  font-family: var(--c1-mono); font-size: 13px; font-weight: 600; color: var(--c1-gold);
+  border: 1.5px solid var(--c1-gold-line); background: var(--c1-gold-soft); border-radius: 8px;
+  width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; flex: 0 0 30px;
+}
+/* Variante con etiqueta de texto en vez del número (Vorgang, Zustand, …) */
+.c1-step .c1-badge {
+  font-family: var(--c1-mono); font-size: 11px; font-weight: 600; color: var(--c1-gold);
+  border: 1.5px solid var(--c1-gold-line); background: var(--c1-gold-soft); border-radius: 8px;
+  padding: 5px 9px; height: fit-content; white-space: nowrap; flex: 0 0 auto;
+  letter-spacing: .04em; text-transform: uppercase;
+}
+.c1-step h4 {
+  margin: 1px 0 4px; font-size: 16px; font-family: var(--c1-serif);
+  font-weight: 600; color: var(--c1-heading); letter-spacing: 0;
+}
+.c1-step p { margin: 0; font-size: 14.5px; color: var(--c1-muted); }
+.c1-step .c1-de { color: var(--c1-text); font-weight: 500; }
+.c1-step code {
+  font-family: var(--c1-mono); font-size: 13px; background: rgb(var(--muted));
+  padding: 1px 6px; border-radius: 5px; color: var(--c1-heading);
+}
+
+/* Redemittel */
+.c1-rm-grid { display: grid; gap: 12px; }
+.c1-rm { background: var(--c1-surface); border: 1px solid var(--c1-line); border-radius: 12px; padding: 14px 18px; }
+.c1-rm .c1-fn {
+  font-family: var(--c1-mono); font-size: 11px; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--c1-ink-2); margin-bottom: 8px;
+}
+.dark .c1-rm .c1-fn { color: rgb(var(--muted-foreground)); }
+.c1-rm ul { margin: 0; padding-left: 0; list-style: none; display: grid; gap: 6px; }
+.c1-rm li { font-size: 15px; padding-left: 16px; position: relative; }
+.c1-rm li::before { content: "„"; position: absolute; left: 0; color: var(--c1-gold); font-weight: 700; }
+.c1-rm li em { font-style: italic; color: var(--c1-heading); }
+.c1-rm li .c1-gl { color: var(--c1-muted); font-style: normal; font-size: 13px; }
+
+/* Modelltext */
+.c1-modell { background: var(--c1-surface); border: 1px solid var(--c1-line); border-radius: 14px; overflow: hidden; }
+.c1-modell .c1-mhead {
+  background: var(--c1-ink); color: #DCE3EF; padding: 12px 22px; font-family: var(--c1-mono);
+  font-size: 11.5px; letter-spacing: .06em; text-transform: uppercase;
+  display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+}
+.c1-modell .c1-wc { color: #9FB0CC; }
+.c1-modell .c1-mbody { padding: 22px 24px; font-size: 15.5px; line-height: 1.72; }
+.c1-modell .c1-mbody p { margin: 0 0 14px; }
+.c1-modell .c1-mbody p:last-child { margin-bottom: 0; }
+
+.c1-annot { display: grid; gap: 8px; margin-top: 14px; }
+.c1-annot .c1-a { display: flex; gap: 12px; font-size: 14px; }
+.c1-annot .c1-tag {
+  font-family: var(--c1-mono); font-size: 10.5px; letter-spacing: .06em; text-transform: uppercase;
+  color: var(--c1-gold); border: 1px solid var(--c1-gold-line); background: var(--c1-gold-soft);
+  border-radius: 6px; padding: 2px 8px; height: fit-content; white-space: nowrap; flex: 0 0 auto;
+}
+.c1-annot .c1-a p { margin: 2px 0; color: var(--c1-muted); }
+
+/* Prüfungstipp */
+.c1-tipp {
+  background: var(--c1-gold-soft); border: 1px solid var(--c1-gold-line);
+  border-left: 4px solid var(--c1-gold); border-radius: 12px; padding: 18px 22px; margin: 14px 0;
+}
+.c1-tipp .c1-lab {
+  font-family: var(--c1-mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--c1-gold); font-weight: 600; margin-bottom: 6px;
+}
+.c1-tipp p { margin: 0; font-size: 15px; color: var(--c1-text); }
+
+/* Übung */
+.c1-impuls {
+  background: var(--c1-surface); border: 1px dashed var(--c1-line-strong);
+  border-radius: 12px; padding: 16px 20px; font-size: 15.5px;
+}
+.c1-impuls .c1-q { font-family: var(--c1-serif); font-weight: 600; color: var(--c1-heading); margin: 0; }
+.c1-impuls .c1-aufgabe { margin: .6em 0 0; color: var(--c1-muted); }
+.c1-impuls ol { margin: 8px 0 0; padding-left: 20px; display: grid; gap: 7px; }
+
+.c1-ueb {
+  background: var(--c1-surface); border: 1px solid var(--c1-line);
+  border-radius: 12px; padding: 0; margin-top: 12px; overflow: hidden;
+}
+.c1-ueb > summary {
+  cursor: pointer; padding: 14px 20px; font-family: var(--c1-mono); font-size: 12px;
+  letter-spacing: .06em; text-transform: uppercase; color: var(--c1-heading);
+  list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 12px;
+}
+.c1-ueb > summary::-webkit-details-marker { display: none; }
+.c1-ueb > summary::after { content: "Lösung anzeigen"; color: var(--c1-gold); font-size: 11px; }
+.c1-ueb[open] > summary::after { content: "Lösung ausblenden"; }
+.c1-ueb .c1-sol {
+  padding: 14px 20px 18px; font-size: 15px; border-top: 1px solid var(--c1-line);
+}
+.c1-ueb .c1-sol ol { margin: 0; padding-left: 20px; display: grid; gap: 7px; }
+.c1-ueb .c1-sol strong { color: var(--c1-heading); }
+
+/* Lección sin contenido todavía */
+.c1-placeholder { max-width: 640px; margin: 12vh auto 0; text-align: left; }
+.c1-placeholder .c1-pk {
+  font-family: var(--c1-mono); font-size: 11px; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--c1-gold);
+}
+.c1-placeholder h2 {
+  font-family: var(--c1-serif); font-weight: 500; font-size: 34px; color: var(--c1-heading);
+  margin: 10px 0 12px; line-height: 1.1; letter-spacing: 0;
+  user-select: text; -webkit-user-select: text;
+}
+.c1-placeholder p { color: var(--c1-muted); font-size: 16px; }
+.c1-placeholder .c1-badge {
+  display: inline-block; margin-top: 18px; font-family: var(--c1-mono); font-size: 12px;
+  color: var(--c1-ink-2); border: 1px solid var(--c1-line); background: var(--c1-surface);
+  border-radius: 999px; padding: 7px 14px;
+}
+.dark .c1-placeholder .c1-badge { color: rgb(var(--muted-foreground)); }
+
+/* Pager */
+.c1-pager {
+  display: flex; justify-content: space-between; gap: 16px; margin-top: 44px;
+  border-top: 1px solid var(--c1-line); padding-top: 20px;
+}
+.c1-pager a, .c1-pager .c1-disabled {
+  text-decoration: none; flex: 1 1 0; min-width: 0; padding: 14px 18px;
+  border: 1px solid var(--c1-line); border-radius: 12px; background: var(--c1-surface);
+  transition: border-color .15s, transform .15s;
+}
+.c1-pager a:hover { border-color: var(--c1-gold-line); transform: translateY(-1px); }
+.c1-pager .c1-dir {
+  font-family: var(--c1-mono); font-size: 11px; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--c1-muted);
+}
+.c1-pager .c1-lt {
+  display: block; font-size: 14.5px; color: var(--c1-heading); font-weight: 500; margin-top: 3px;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.c1-pager .c1-next { text-align: right; }
+.c1-pager .c1-disabled { opacity: .4; pointer-events: none; }
+
+/* Estados de carga / error */
+.c1-state { max-width: 640px; margin: 14vh auto 0; text-align: left; }
+.c1-state .c1-pk {
+  font-family: var(--c1-mono); font-size: 11px; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--c1-gold);
+}
+.c1-state h2 {
+  font-family: var(--c1-serif); font-weight: 500; font-size: 30px;
+  color: var(--c1-heading); margin: 10px 0 12px; letter-spacing: 0;
+}
+.c1-state p { color: var(--c1-muted); }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 860px) {
+  .c1 { --c1-sidebar-w: 300px; }
+  .c1-sidebar { transform: translateX(-100%); transition: transform .25s ease; }
+  .c1-app.is-nav-open .c1-sidebar { transform: translateX(0); }
+  .c1-app.is-nav-open .c1-scrim { display: block; }
+  .c1-main { margin-left: 0; }
+  .c1-topbar { display: flex; }
+  .c1-wrap { padding: 30px 22px 80px; }
+  .c1-title { font-size: 32px; }
+  .c1-placeholder { margin-top: 8vh; }
+  .c1-pager { flex-direction: column; }
+  .c1-pager .c1-next { text-align: left; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .c1 *, .c1 *::before, .c1 *::after {
+    transition: none !important;
+    animation: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ───────── Estándar de 8 secciones (Fase 0) ───────── */
+
+/* Icono de sección en el eyebrow */
+.c1-eyebrow .c1-ico { font-size: 14px; line-height: 1; margin-right: 2px; }
+
+/* Kernwortschatz */
+.c1-ws td.c1-k { white-space: normal; }
+.c1-ws .c1-ws-es { color: var(--c1-muted); font-size: 13.5px; }
+.c1-ws-hinweis { font-size: 14px; color: var(--c1-muted); margin: -4px 0 0 4px; }
+
+/* Hueco numerado de Lückentext */
+.c1-gap {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-width: 58px; height: 22px; margin: 0 2px; padding: 0 6px;
+  font-family: var(--c1-mono); font-size: 11px; font-weight: 600; color: var(--c1-gold);
+  background: var(--c1-gold-soft); border: 1px dashed var(--c1-gold);
+  border-radius: 6px; vertical-align: -4px;
+}
+
+/* Prüfungsaufgabe */
+.c1-pa .c1-pa-anweisung {
+  font-family: var(--c1-mono); font-size: 12px; color: var(--c1-muted);
+  letter-spacing: .03em; margin-bottom: 14px !important;
+}
+.c1-pa-optionen {
+  list-style: none; padding: 0; margin: 14px 0 0; display: flex; flex-wrap: wrap; gap: 8px;
+}
+.c1-pa-optionen li {
+  font-size: 14px; padding: 5px 12px; border: 1px solid var(--c1-line);
+  border-radius: 999px; background: var(--c1-paper);
+}
+.c1-pa-kommentar { margin: 12px 0 0; font-size: 14px; color: var(--c1-muted); }
+
+/* Selbstcheck */
+.c1-check { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+.c1-check li label {
+  display: flex; gap: 12px; align-items: flex-start; cursor: pointer; font-size: 15.5px;
+  padding: 12px 16px; background: var(--c1-surface); border: 1px solid var(--c1-line);
+  border-radius: 12px; transition: border-color .15s, background .15s;
+}
+.c1-check li label:hover { border-color: var(--c1-gold-line); }
+.c1-check li.is-done label { background: var(--c1-gold-soft); border-color: var(--c1-gold-line); }
+.c1-check li.is-done span { color: var(--c1-muted); text-decoration: line-through; }
+.c1-check input { margin-top: 4px; accent-color: var(--c1-gold); flex: 0 0 auto; }
+
+/* Ausblick */
+.c1-ausblick {
+  background: var(--c1-ink); color: #E8ECF3; border-radius: 14px; padding: 20px 24px; margin: 14px 0;
+}
+.c1-ausblick p { margin: 0 0 14px; font-size: 15.5px; }
+.c1-ausblick-link {
+  display: inline-block; font-family: var(--c1-mono); font-size: 12px; letter-spacing: .06em;
+  text-transform: uppercase; color: #fff; text-decoration: none;
+  border: 1px solid rgb(255 255 255 / 0.3); border-radius: 8px; padding: 8px 14px;
+  transition: border-color .15s, background .15s;
+}
+.c1-ausblick-link:hover { border-color: var(--c1-gold); background: rgb(176 130 31 / 0.18); }
+</style></head>
+<body class="c1"><div class="x-toc"><h1>Goethe-Zertifikat C1 — Kurs</h1>
+<p>1 von 40 Lektionen · exportiert zur Durchsicht</p>
+<ol><li value="3"><a href="#l3">Nominalstil vs. Verbalstil</a></li></ol></div><div class="x-sep" id="l3"></div><div class="x-wc">Lektion 03 · 2054 Wörter</div><div class="c1-wrap"><div class="c1-spec"><span class="c1-mod">Bloque 1</span><span class="c1-sep" aria-hidden="true">/</span><span>Sprachliche Konsolidierung</span><span class="c1-sep" aria-hidden="true">/</span><span>Niveau C1</span><span class="c1-sep" aria-hidden="true">/</span><span>Prüfungsrelevanz: Lesen Teil 2 · Schreiben</span></div><h2 class="c1-title">Nominalstil vs. Verbalstil</h2><p class="c1-lead">Vom Verb zum Substantiv: die Verdichtung, die geschriebenes C1-Deutsch von gesprochenem unterscheidet — und die der Lückentext gezielt abfragt.</p><hr class="c1-rule"/><p class="c1-eyebrow"><span class="c1-ico" aria-hidden="true">🎯</span>Lernziele</p><ul class="c1-ziele"><li>Am Ende kannst du verbale Nebensätze in nominale Präpositionalphrasen umformen — und umgekehrt.</li><li>Du erkennst die fünf Grundmuster der Nominalisierung (Infinitiv, -ung, -heit/-keit, Partizip, Adjektiv) und bildest sie sicher.</li><li>Du wählst die richtige Präposition zur Bedeutung (kausal, temporal, konditional, modal, konzessiv, final).</li><li>Du setzt den Nominalstil im Schreiben bewusst und dosiert ein, ohne den Text zu überladen.</li></ul><hr class="c1-rule"/><p class="c1-eyebrow"><span class="c1-ico" aria-hidden="true">📖</span>Kernwortschatz</p><div class="c1-tablewrap"><table class="c1-ktable c1-ws"><thead><tr><th>Wort</th><th>Kollokation</th><th>Bedeutung</th></tr></thead><tbody><tr><td class="c1-k">die Verdichtung</td><td>die Verdichtung von Informationen</td><td class="c1-ws-es">condensación</td></tr><tr><td class="c1-k">die Nominalisierung</td><td>eine Nominalisierung bilden</td><td class="c1-ws-es">nominalización</td></tr><tr><td class="c1-k">die Umformung</td><td>eine Umformung vornehmen</td><td class="c1-ws-es">transformación</td></tr><tr><td class="c1-k">die Durchführung</td><td>die Durchführung eines Projekts</td><td class="c1-ws-es">realización, ejecución</td></tr><tr><td class="c1-k">die Einführung</td><td>die Einführung neuer Regeln</td><td class="c1-ws-es">introducción</td></tr><tr><td class="c1-k">die Zunahme</td><td>die Zunahme der Nachfrage</td><td class="c1-ws-es">aumento</td></tr><tr><td class="c1-k">der Rückgang</td><td>der Rückgang der Verkaufszahlen</td><td class="c1-ws-es">descenso, retroceso</td></tr><tr><td class="c1-k">die Prüfung</td><td>nach Prüfung des Antrags</td><td class="c1-ws-es">examen, revisión</td></tr><tr><td class="c1-k">die Beendigung</td><td>nach Beendigung der Sitzung</td><td class="c1-ws-es">finalización</td></tr><tr><td class="c1-k">die Ankunft</td><td>bei Ihrer Ankunft</td><td class="c1-ws-es">llegada</td></tr><tr><td class="c1-k">die Teilnahme</td><td>die Teilnahme an einer Konferenz</td><td class="c1-ws-es">participación</td></tr><tr><td class="c1-k">das Vorliegen</td><td>bei Vorliegen aller Unterlagen</td><td class="c1-ws-es">existencia, disponibilidad</td></tr><tr><td class="c1-k">die Inanspruchnahme</td><td>die Inanspruchnahme einer Leistung</td><td class="c1-ws-es">uso, recurso a (un servicio)</td></tr><tr><td class="c1-k">ungeachtet</td><td>ungeachtet aller Warnungen</td><td class="c1-ws-es">a pesar de (registro elevado)</td></tr></tbody></table></div><p class="c1-ws-hinweis">Nominalisierungen auf <strong>-ung</strong> sind immer feminin; substantivierte Infinitive (<strong>das Schreiben</strong>) immer neutral. Merke dir jedes Wort <strong>mit seiner Präposition</strong>: <em>die Teilnahme </em><em>an</em><strong>, *der Rückgang </strong>der<em>* Zahlen</em>.</p><hr class="c1-rule"/><p class="c1-eyebrow"><span class="c1-ico" aria-hidden="true">💡</span>Erklärung</p><div class="c1-card"><div class="c1-prose"><h4 class="c1-cardt">Was ist Nominalstil — und wozu?</h4><p>Der <strong>Verbalstil</strong> trägt die Information im Verb: <em>Weil die Preise steigen, kaufen die Leute weniger.</em> Der <strong>Nominalstil</strong> verlagert sie ins Substantiv: <em>Aufgrund steigender Preise kaufen die Leute weniger.</em> Ein ganzer Nebensatz wird zu einer <strong>Präpositionalphrase</strong> — kürzer, dichter, unpersönlicher.</p><p>Genau diese Verdichtung kennzeichnet Fachtexte, Berichte, Verwaltungssprache und Zeitungskommentare. Auf C1 musst du sie in beide Richtungen beherrschen: <strong>lesen</strong> (den Nebensatz hinter der Phrase erkennen) und <strong>schreiben</strong> (gezielt verdichten, wo es den Text hebt). <span class="c1-muted">Es el registro que separa un B2 sólido de un C1 real.</span></p></div></div><p class="c1-eyebrow"><span class="c1-ico" aria-hidden="true">💡</span>Erklärung — Die fünf Bildungsmuster</p><div class="c1-steps"><div class="c1-step"><span class="c1-badge">Infinitiv</span><div><h4>Substantivierter Infinitiv → das …</h4><p>Immer Neutrum, meist ohne Artikel in der Phrase. <span class="c1-de">lesen → das Lesen</span>, <span class="c1-de">ankommen → das Ankommen</span>. Bezeichnet den Vorgang als Ganzes.</p></div></div><div class="c1-step"><span class="c1-badge">-ung</span><div><h4>Verbstamm + -ung → die …</h4><p>Das häufigste Muster, immer feminin. <span class="c1-de">prüfen → die Prüfung</span>, <span class="c1-de">einführen → die Einführung</span>, <span class="c1-de">durchführen → die Durchführung</span>.</p></div></div><div class="c1-step"><span class="c1-badge">-heit / -keit</span><div><h4>Adjektiv + -heit/-keit → die …</h4><p>Aus Eigenschaften werden Zustände. <span class="c1-de">sicher → die Sicherheit</span>, <span class="c1-de">möglich → die Möglichkeit</span>, <span class="c1-de">abhängig → die Abhängigkeit</span>.</p></div></div><div class="c1-step"><span class="c1-badge">Ablaut</span><div><h4>Eigene Nomen ohne Suffix</h4><p>Viele starke Verben haben ein eigenes Nomen. <span class="c1-de">zunehmen → die Zunahme</span>, <span class="c1-de">zurückgehen → der Rückgang</span>, <span class="c1-de">ankommen → die Ankunft</span>, <span class="c1-de">teilnehmen → die Teilnahme</span>. Diese musst du <strong>lernen</strong>, nicht ableiten.</p></div></div><div class="c1-step"><span class="c1-badge">Partizip</span><div><h4>Partizip/Adjektiv als Nomen → der/die/das …</h4><p>Personen und Abstrakta: <span class="c1-de">angestellt → der/die Angestellte</span>, <span class="c1-de">neu → das Neue</span>, <span class="c1-de">wesentlich → das Wesentliche</span>. Dekliniert wie ein Adjektiv.</p></div></div></div><div class="c1-card"><div class="c1-prose"><h4 class="c1-cardt">Was passiert mit Subjekt und Objekt?</h4><p>Beim Verdichten verschwinden die Satzglieder nicht — sie <strong>wandern in den Genitiv oder in eine Präposition</strong>.</p><p><strong>Das Objekt wird zum Genitiv:</strong> <em>Man prüft </em><em>den Antrag</em><strong> → *die Prüfung </strong>des Antrags<strong>*. </strong>Das Subjekt wird zum Genitiv oder zu „durch“:<strong> <em>Die Preise steigen</em> → *das Steigen </strong>der Preise<strong><em>; </em>Der Staat greift ein<em> → </em>der Eingriff </strong>des Staates<strong><em> / </em>ein Eingriff </strong>durch den Staat<strong>*. </strong>Adverbien werden zu Adjektiven:<strong> <em>stark steigen</em> → *ein </strong>starker<strong> Anstieg*. </strong>Verb-Präpositionen bleiben erhalten:<strong> <em>an etwas teilnehmen</em> → *die Teilnahme </strong>an<em>* etwas</em>.</p></div></div><p class="c1-eyebrow"><span class="c1-ico" aria-hidden="true">💡</span>Erklärung — Präposition nach Bedeutung</p><div class="c1-tablewrap"><table class="c1-ktable"><thead><tr><th>Bedeutung</th><th>Nebensatz (verbal)</th><th>Präposition (nominal)</th></tr></thead><tbody><tr><td class="c1-k">kausal</td><td>weil, da</td><td>wegen · aufgrund · infolge + Gen. · dank + Dat./Gen.</td></tr><tr><td class="c1-k">temporal (nach)</td><td>nachdem</td><td>nach + Dat.</td></tr><tr><td class="c1-k">temporal (vor)</td><td>bevor, ehe</td><td>vor + Dat.</td></tr><tr><td class="c1-k">temporal (gleichzeitig)</td><td>während, als</td><td>während + Gen. · bei + Dat.</td></tr><tr><td class="c1-k">temporal (seit)</td><td>seit(dem)</td><td>seit + Dat.</td></tr><tr><td class="c1-k">konditional</td><td>wenn, falls</td><td>bei + Dat. · im Falle + Gen.</td></tr><tr><td class="c1-k">modal (Mittel)</td><td>indem, dadurch dass</td><td>durch + Akk. · mittels + Gen.</td></tr><tr><td class="c1-k">modal (ohne)</td><td>ohne dass</td><td>ohne + Akk.</td></tr><tr><td class="c1-k">konzessiv</td><td>obwohl, obgleich</td><td>trotz + Gen. · ungeachtet + Gen.</td></tr><tr><td class="c1-k">final</td><td>damit, um … zu</td><td>zu + Dat. · zwecks + Gen. · für + Akk.</td></tr><tr><td class="c1-k">adversativ</td><td>anstatt dass</td><td>anstelle + Gen. · statt + Gen.</td></tr></tbody></table></div><div class="c1-card"><div class="c1-prose"><h4 class="c1-cardt">Wann ist Nominalstil richtig — und wann falsch?</h4><p><strong>Richtig:</strong> in Berichten, Zusammenfassungen, Anträgen, formellen Nachrichten, im Hauptteil eines Diskussionsbeitrags, wenn zwei Gedanken elegant verbunden werden sollen. <strong>Falsch:</strong> in Dialogen, in persönlichen Beispielen, in der Einleitung und im Fazit, wo Klarheit zählt — und überall dort, wo drei Genitive hintereinander stehen würden (<em>die Prüfung der Durchführung der Maßnahmen</em>).</p><p>Faustregel für die Prüfung: <strong>ein bis zwei Nominalphrasen pro Absatz</strong>, nie mehr. Der Nominalstil ist ein Gewürz, kein Hauptgericht. <span class="c1-muted">Una por párrafo eleva el registro; tres lo hacen ilegible.</span></p></div></div><hr class="c1-rule"/><p class="c1-eyebrow"><span class="c1-ico" aria-hidden="true">🔍</span>Beispiele — nach Funktion</p><div class="c1-card"><h4 class="c1-cardt"><span class="c1-k">kausal</span>Grund</h4><ul class="c1-ex"><li><strong>Weil die Preise steigen</strong>, sinkt der Konsum. → <strong>Aufgrund steigender Preise</strong> sinkt der Konsum. <span class="c1-gl">— weil → aufgrund + Gen.; Adverbiale → Adjektiv</span></li><li><strong>Da viele Mitarbeiter krank waren</strong>, fiel die Sitzung aus. → <strong>Wegen zahlreicher Krankheitsfälle</strong> fiel die Sitzung aus. <span class="c1-gl">— hier muss der Inhalt neu gefasst werden: <em>krank sein</em> → <em>Krankheitsfall</em></span></li><li><strong>Weil es stark geregnet hatte</strong>, wurde die Straße gesperrt. → <strong>Infolge starker Regenfälle</strong> wurde die Straße gesperrt. <span class="c1-gl">— <em>infolge</em> betont die Folge, typisch für Berichte</span></li></ul></div><div class="c1-card"><h4 class="c1-cardt"><span class="c1-k">temporal</span>Zeit</h4><ul class="c1-ex"><li><strong>Nachdem man den Antrag geprüft hat</strong>, wird entschieden. → <strong>Nach Prüfung des Antrags</strong> wird entschieden. <span class="c1-gl">— nachdem → nach; Objekt → Genitiv</span></li><li><strong>Bevor das Projekt beginnt</strong>, wird ein Plan erstellt. → <strong>Vor Projektbeginn</strong> wird ein Plan erstellt. <span class="c1-gl">— oft als Kompositum: <em>Projektbeginn</em></span></li><li><strong>Während die Verhandlungen liefen</strong>, schwiegen beide Seiten. → <strong>Während der Verhandlungen</strong> schwiegen beide Seiten. <span class="c1-gl">— <em>während</em> bleibt, wird aber zur Präposition + Gen.</span></li><li><strong>Seit die Regel eingeführt wurde</strong>, gibt es weniger Unfälle. → <strong>Seit Einführung der Regel</strong> gibt es weniger Unfälle.</li></ul></div><div class="c1-card"><h4 class="c1-cardt"><span class="c1-k">konditional</span>Bedingung</h4><ul class="c1-ex"><li><strong>Wenn Sie ankommen</strong>, melden Sie sich bitte. → <strong>Bei Ihrer Ankunft</strong> melden Sie sich bitte. <span class="c1-gl">— wenn → bei + Dat.</span></li><li><strong>Falls alle Unterlagen vorliegen</strong>, wird der Antrag bearbeitet. → <strong>Bei Vorliegen aller Unterlagen</strong> wird der Antrag bearbeitet. <span class="c1-gl">— Verwaltungsdeutsch in Reinform</span></li><li><strong>Wenn es zu einem Unfall kommt</strong>, rufen Sie diese Nummer. → <strong>Im Falle eines Unfalls</strong> rufen Sie diese Nummer.</li></ul></div><div class="c1-card"><h4 class="c1-cardt"><span class="c1-k">modal</span>Art und Weise, Mittel</h4><ul class="c1-ex"><li><strong>Indem man den Prozess optimiert</strong>, spart man Kosten. → <strong>Durch die Optimierung des Prozesses</strong> spart man Kosten. <span class="c1-gl">— indem → durch + Akk.</span></li><li>Er ging, <strong>ohne dass er sich verabschiedete</strong>. → Er ging <strong>ohne Verabschiedung</strong>.</li><li><strong>Dadurch, dass man Solarzellen installiert</strong>, sinkt die Stromrechnung. → <strong>Mittels Installation von Solarzellen</strong> sinkt die Stromrechnung. <span class="c1-gl">— <em>mittels</em> + Gen. (oder <em>von</em> + Dat. im Plural ohne Artikel)</span></li></ul></div><div class="c1-card"><h4 class="c1-cardt"><span class="c1-k">konzessiv · final</span>Einräumung und Zweck</h4><ul class="c1-ex"><li><strong>Obwohl man gewarnt hatte</strong>, fuhr er los. → <strong>Trotz aller Warnungen</strong> fuhr er los. <span class="c1-gl">— obwohl → trotz + Gen.</span></li><li><strong>Obgleich die Lage kritisch war</strong>, blieb sie ruhig. → <strong>Ungeachtet der kritischen Lage</strong> blieb sie ruhig. <span class="c1-gl">— <em>ungeachtet</em>: gehobener als <em>trotz</em></span></li><li><strong>Damit die Qualität verbessert wird</strong>, führen wir Tests ein. → <strong>Zur Verbesserung der Qualität</strong> führen wir Tests ein. <span class="c1-gl">— damit → zu + Dat. (zur = zu der)</span></li><li>Wir schreiben, <strong>um den Termin zu bestätigen</strong>. → Wir schreiben <strong>zwecks Terminbestätigung</strong>. <span class="c1-gl">— <em>zwecks</em> + Gen.: sehr formell, nur in Nachrichten</span></li></ul></div><hr class="c1-rule"/><p class="c1-eyebrow"><span class="c1-ico" aria-hidden="true">✍️</span>Anwendung — Übung 1 · Erkennen</p><div class="c1-impuls"><p class="c1-q">Welche Sätze stehen im Nominalstil? Markiere die Nominalphrase und nenne den Nebensatz, der dahintersteckt.</p><ol><li>Nach Abschluss der Verhandlungen wurde der Vertrag unterzeichnet.</li><li>Obwohl das Wetter schlecht war, fand das Konzert statt.</li><li>Bei Nichteinhaltung der Frist verfällt der Anspruch.</li><li>Die Regierung hat beschlossen, die Steuern zu senken.</li><li>Durch den Einsatz moderner Technik konnten die Kosten gesenkt werden.</li></ol></div><details class="c1-ueb"><summary>Musterlösung</summary><div class="c1-sol c1-prose"><ol><li><strong>Nominal</strong> — <em>Nach Abschluss der Verhandlungen</em> = <em>Nachdem die Verhandlungen abgeschlossen worden waren</em>.</li><li><strong>Verbal</strong> — Nebensatz mit <em>obwohl</em>. Nominal wäre: <em>Trotz des schlechten Wetters</em>.</li><li><strong>Nominal</strong> — <em>Bei Nichteinhaltung der Frist</em> = <em>Wenn die Frist nicht eingehalten wird</em>. <span class="c1-muted">Nota la negación incorporada al sustantivo: <em>Nicht-einhaltung</em>.</span></li><li><strong>Verbal</strong> — Infinitivsatz. Nominal wäre: <em>Die Regierung hat die Senkung der Steuern beschlossen</em>.</li><li><strong>Nominal</strong> — <em>Durch den Einsatz moderner Technik</em> = <em>Indem man moderne Technik einsetzte</em>.</li></ol></div></details><p class="c1-eyebrow"><span class="c1-ico" aria-hidden="true">✍️</span>Übung 2 · Umformen</p><div class="c1-impuls"><p class="c1-q">Forme den Nebensatz in eine Nominalphrase um. Achte auf Präposition, Kasus und Genitiv.</p><ol><li>Weil das Wetter schlecht war, wurde das Spiel abgesagt.</li><li>Nachdem die Sitzung beendet war, gingen alle nach Hause.</li><li>Wenn Sie Fragen haben, wenden Sie sich an die Rezeption.</li><li>Obwohl die Kosten hoch sind, wird das Projekt fortgesetzt.</li><li>Indem man die Abläufe digitalisiert, spart die Firma Zeit.</li><li>Damit die Mitarbeiter geschult werden, wurde ein Kurs eingerichtet.</li></ol></div><details class="c1-ueb"><summary>Musterlösung</summary><div class="c1-sol c1-prose"><ol><li><strong>Wegen des schlechten Wetters</strong> wurde das Spiel abgesagt.</li><li><strong>Nach Beendigung der Sitzung</strong> gingen alle nach Hause.</li><li><strong>Bei Fragen</strong> wenden Sie sich an die Rezeption. <span class="c1-muted">Observa cuánto se acorta: todo el Nebensatz cabe en dos palabras.</span></li><li><strong>Trotz der hohen Kosten</strong> wird das Projekt fortgesetzt.</li><li><strong>Durch die Digitalisierung der Abläufe</strong> spart die Firma Zeit.</li><li><strong>Zur Schulung der Mitarbeiter</strong> wurde ein Kurs eingerichtet.</li></ol></div></details><p class="c1-eyebrow"><span class="c1-ico" aria-hidden="true">✍️</span>Übung 3 · Produzieren</p><div class="c1-impuls"><p class="c1-q">Schreibe den folgenden Absatz so um, dass er <strong>genau zwei</strong> Nominalphrasen enthält — nicht mehr. Entscheide selbst, welche Stellen sich eignen.</p><p class="c1-aufgabe"><em>Nachdem die Stadt ein neues Verkehrskonzept eingeführt hatte, nahm der Autoverkehr im Zentrum deutlich ab. Obwohl einige Händler protestierten, blieb die Stadtverwaltung bei ihrer Entscheidung. Indem sie die Parkgebühren erhöhte, finanzierte sie zusätzliche Buslinien.</em></p></div><details class="c1-ueb"><summary>Musterlösung</summary><div class="c1-sol c1-prose"><p><strong>Mögliche Lösung</strong> (andere Kombinationen sind richtig, solange es genau zwei Nominalphrasen sind):<br/><em>Nach der Einführung eines neuen Verkehrskonzepts nahm der Autoverkehr im Zentrum deutlich ab. Obwohl einige Händler protestierten, blieb die Stadtverwaltung bei ihrer Entscheidung. Durch die Erhöhung der Parkgebühren finanzierte sie zusätzliche Buslinien.</em><br/><span class="c1-muted">El segundo Satz se queda verbal a propósito: tres nominalizaciones seguidas serían pesadas. Esa dosificación es exactamente lo que evalúa el criterio „Strukturen“.</span></p></div></details><hr class="c1-rule"/><p class="c1-eyebrow"><span class="c1-ico" aria-hidden="true">🎓</span>Prüfungsbezug</p><div class="c1-modell c1-pa"><div class="c1-mhead"><span>Lesen · Teil 2 · Lückentext</span><span class="c1-wc">Mini-Aufgabe · 6 Lücken</span></div><div class="c1-mbody"><p class="c1-pa-anweisung">Im echten Teil 2 fehlen in einem Text Wörter, die du aus einer Liste einsetzt. Genau hier werden Nominalisierungen und ihre Präpositionen getestet. Wähle für jede Lücke das passende Wort aus der Liste.</p><p>Die Stadt Freiburg gilt <span class="c1-gap">1</span> ihrer konsequenten Verkehrspolitik als Vorbild. Seit der <span class="c1-gap">2</span> einer autofreien Innenstadt im Jahr 1973 ist der Anteil des Radverkehrs stetig gestiegen. <span class="c1-gap">3</span> der Planung wurden Anwohner und Händler eingebunden, <span class="c1-gap">4</span> anfänglicher Widerstände. <span class="c1-gap">5</span> den Ausbau des Straßenbahnnetzes konnte der Autoverkehr weiter reduziert werden. Bei <span class="c1-gap">6</span> des Konzepts auf andere Städte zeigen sich jedoch Grenzen.</p><ul class="c1-pa-optionen"><li>Übertragung</li><li>ungeachtet</li><li>Einführung</li><li>wegen</li><li>Durch</li><li>Während</li></ul></div></div><details class="c1-ueb"><summary>Lösung</summary><div class="c1-sol c1-prose"><ol><li><span class="c1-gap">1</span> <strong>wegen</strong> — kausal + Genitiv (<em>ihrer Verkehrspolitik</em>)</li><li><span class="c1-gap">2</span> <strong>Einführung</strong> — <em>die Einführung</em> + Genitiv, nach <em>seit der</em></li><li><span class="c1-gap">3</span> <strong>Während</strong> — temporal + Genitiv (<em>der Planung</em>)</li><li><span class="c1-gap">4</span> <strong>ungeachtet</strong> — konzessiv + Genitiv (<em>anfänglicher Widerstände</em>)</li><li><span class="c1-gap">5</span> <strong>Durch</strong> — modal + Akkusativ (<em>den Ausbau</em>)</li><li><span class="c1-gap">6</span> <strong>Übertragung</strong> — <em>bei</em> + Nominalisierung + Genitiv (<em>des Konzepts</em>)</li></ol><p class="c1-pa-kommentar">Strategie: Schau zuerst auf den <strong>Kasus des folgenden Nomens</strong>. Ein Genitiv nach der Lücke (<em>ihrer, der, anfänglicher, des</em>) verrät fast immer eine Genitivpräposition oder eine Nominalisierung.</p></div></details><div class="c1-tipp"><div class="c1-lab">Prüfungstipp</div><p>Im <strong>Lesen</strong> lies jede Nominalphrase als versteckten Nebensatz — dann verstehst du auch dichte Fachtexte. Im <strong>Schreiben</strong> hebt der Nominalstil das Kriterium „Strukturen“, aber nur dosiert: <strong>eine Phrase pro Absatz</strong> zeigt Können, drei zeigen Unsicherheit. Und prüfe nach jedem Genitiv, ob er wirklich Genitiv ist — <em>wegen dem</em> kostet Punkte.</p></div><hr class="c1-rule"/><p class="c1-eyebrow"><span class="c1-ico" aria-hidden="true">📌</span>Zusammenfassung</p><div class="c1-tablewrap"><table class="c1-ktable"><thead><tr><th>Das bleibt</th><th>Beispiel</th></tr></thead><tbody><tr><td class="c1-k">Nebensatz → Präposition + Nominalisierung</td><td>weil die Preise steigen → aufgrund steigender Preise</td></tr><tr><td class="c1-k">Objekt/Subjekt → Genitiv</td><td>den Antrag prüfen → die Prüfung des Antrags</td></tr><tr><td class="c1-k">Adverb → Adjektiv</td><td>stark steigen → ein starker Anstieg</td></tr><tr><td class="c1-k">-ung = feminin · Infinitiv = neutral</td><td>die Einführung · das Lesen</td></tr><tr><td class="c1-k">Dosis: 1-2 pro Absatz</td><td>Gewürz, kein Hauptgericht</td></tr></tbody></table></div><p class="c1-eyebrow"><span class="c1-ico" aria-hidden="true">✅</span>Selbstcheck</p><ul class="c1-check"><li><label><input type="checkbox"/><span>Ich kann einen <em>weil-</em>, <em>nachdem-</em>, <em>wenn-</em>, <em>indem-</em> oder <em>obwohl-</em>Satz in eine Nominalphrase umformen.</span></label></li><li><label><input type="checkbox"/><span>Ich weiß, welche Präposition zu welcher Bedeutung gehört, und welchen Kasus sie verlangt.</span></label></li><li><label><input type="checkbox"/><span>Ich erkenne in einem Lesetext die Nominalphrase und kann sie gedanklich „zurückübersetzen“.</span></label></li><li><label><input type="checkbox"/><span>Ich setze in meinem eigenen Text höchstens ein bis zwei Nominalphrasen pro Absatz ein.</span></label></li></ul><p class="c1-eyebrow"><span class="c1-ico" aria-hidden="true">➡️</span>Ausblick</p><div class="c1-ausblick"><p>Der Nominalstil rückt das <strong>Was</strong> in den Vordergrund und lässt das <strong>Wer</strong> verschwinden. Genau dasselbe leistet das <strong>Passiv</strong> — nur mit Verben statt Substantiven. In der nächsten Lektion lernst du das Passiv und seine Ersatzformen als zweites großes Werkzeug der unpersönlichen, sachlichen Sprache kennen.</p><a class="c1-ausblick-link" href="/deutschc1/4">Weiter zu 04 · Das Passiv &amp; Passiversatzformen ›</a></div><nav class="c1-pager" aria-label="Lektionen"><a class="c1-prev" href="/deutschc1/2"><span class="c1-dir">‹ Vorherige Lektion</span><span class="c1-lt">02 · Diagnose C1 — Standortbestimmung</span></a><a class="c1-next" href="/deutschc1/4"><span class="c1-dir">Nächste Lektion ›</span><span class="c1-lt">04 · Das Passiv &amp; Passiversatzformen</span></a></nav></div></body></html>

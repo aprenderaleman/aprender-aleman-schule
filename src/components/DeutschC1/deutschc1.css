@@ -424,3 +424,69 @@
     scroll-behavior: auto !important;
   }
 }
+
+/* ───────── Estándar de 8 secciones (Fase 0) ───────── */
+
+/* Icono de sección en el eyebrow */
+.c1-eyebrow .c1-ico { font-size: 14px; line-height: 1; margin-right: 2px; }
+
+/* Kernwortschatz */
+.c1-ws td.c1-k { white-space: normal; }
+.c1-ws .c1-ws-es { color: var(--c1-muted); font-size: 13.5px; }
+.c1-ws-hinweis { font-size: 14px; color: var(--c1-muted); margin: -4px 0 0 4px; }
+
+/* Hueco numerado de Lückentext */
+.c1-gap {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-width: 58px; height: 22px; margin: 0 2px; padding: 0 6px;
+  font-family: var(--c1-mono); font-size: 11px; font-weight: 600; color: var(--c1-gold);
+  background: var(--c1-gold-soft); border: 1px dashed var(--c1-gold);
+  border-radius: 6px; vertical-align: -4px;
+}
+
+/* Prüfungsaufgabe */
+.c1-pa .c1-pa-anweisung {
+  font-family: var(--c1-mono); font-size: 12px; color: var(--c1-muted);
+  letter-spacing: .03em; margin-bottom: 14px !important;
+}
+.c1-pa-optionen {
+  list-style: none; padding: 0; margin: 14px 0 0; display: flex; flex-wrap: wrap; gap: 8px;
+}
+.c1-pa-optionen li {
+  font-size: 14px; padding: 5px 12px; border: 1px solid var(--c1-line);
+  border-radius: 999px; background: var(--c1-paper);
+}
+.c1-pa-kommentar { margin: 12px 0 0; font-size: 14px; color: var(--c1-muted); }
+
+/* Selbstcheck */
+.c1-check { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+.c1-check li label {
+  display: flex; gap: 12px; align-items: flex-start; cursor: pointer; font-size: 15.5px;
+  padding: 12px 16px; background: var(--c1-surface); border: 1px solid var(--c1-line);
+  border-radius: 12px; transition: border-color .15s, background .15s;
+}
+.c1-check li label:hover { border-color: var(--c1-gold-line); }
+.c1-check li.is-done label { background: var(--c1-gold-soft); border-color: var(--c1-gold-line); }
+.c1-check li.is-done span { color: var(--c1-muted); text-decoration: line-through; }
+.c1-check input { margin-top: 4px; accent-color: var(--c1-gold); flex: 0 0 auto; }
+
+/* Ausblick */
+.c1-ausblick {
+  background: var(--c1-ink); color: #E8ECF3; border-radius: 14px; padding: 20px 24px; margin: 14px 0;
+}
+.c1-ausblick p { margin: 0 0 14px; font-size: 15.5px; }
+.c1-ausblick-link {
+  display: inline-block; font-family: var(--c1-mono); font-size: 12px; letter-spacing: .06em;
+  text-transform: uppercase; color: #fff; text-decoration: none;
+  border: 1px solid rgb(255 255 255 / 0.3); border-radius: 8px; padding: 8px 14px;
+  transition: border-color .15s, background .15s;
+}
+.c1-ausblick-link:hover { border-color: var(--c1-gold); background: rgb(176 130 31 / 0.18); }
+
+/* Ilustración de portada de bloque — solo en la primera lección de cada bloque */
+.c1-block-art {
+  display: block; width: 100%; max-height: 220px; object-fit: cover;
+  border-radius: 14px; border: 1px solid var(--c1-line);
+  margin: 0 0 26px; background: var(--c1-ink);
+}
+@media (max-width: 860px) { .c1-block-art { max-height: 150px; } }

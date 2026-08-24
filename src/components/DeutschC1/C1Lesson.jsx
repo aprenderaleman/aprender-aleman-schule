@@ -57,11 +57,19 @@ export default function C1Lesson({ lesson }) {
     <div className="c1-wrap">
       {lesson.ready ? (
         <>
+          {lesson.blockStart && (
+            <img
+              className="c1-block-art"
+              src={`/deutschc1/block-${lesson.block}.svg`}
+              alt=""
+              loading="lazy"
+            />
+          )}
           <ExamStamp spec={lesson.spec} />
           <h2 className="c1-title">{lesson.h1 || lesson.titel}</h2>
           {lesson.lead && <p className="c1-lead">{lesson.lead}</p>}
           <hr className="c1-rule" />
-          <C1LessonBody content={lesson.content || []} />
+          <C1LessonBody content={lesson.content || []} next={lesson.next} />
         </>
       ) : (
         <div className="c1-placeholder">
