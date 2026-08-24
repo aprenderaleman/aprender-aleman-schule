@@ -156,7 +156,13 @@ export default function ExercisePlayer() {
   }
 
   const renderExercise = () => {
+    // key={exercise.id} es imprescindible: al encadenar ejercicios el
+    // componente ya no se desmonta entre uno y otro, así que sin key React
+    // reutiliza la instancia y arrastra su estado interno (selected,
+    // submitted...) al ejercicio siguiente. Eso hacía que el alumno llegara a
+    // la pregunta con la corrección del ejercicio anterior ya en pantalla.
     const props = {
+      key: exercise.id,
       exercise,
       userName: user?.name,
       userLevel: user?.level,
