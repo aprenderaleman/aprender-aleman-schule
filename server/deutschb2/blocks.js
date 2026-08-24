@@ -1,62 +1,63 @@
-// Deutsch B2 — Kursgerüst (Goethe-Zertifikat B2).
+// Deutsch B2 — Kursgerüst (preparación del Goethe-Zertifikat B2).
 //
-// TEMARIO PROPUESTO, editable: cambiar un título aquí basta, ninguna lección
-// lo referencia por texto. Misma estructura probada del C1: 5 bloques,
-// 40 lecciones, estándar de 8 secciones (docs/deutschc1/FORMAT.md).
+// Estructura definida por Gelfis en curso-b2.html (2026-08-24): 42 lecciones
+// en 5 bloques. La lección modelo es la 04 (Konnektoren I).
 //
-// ⚠ Antes de redactar el bloque 2 (Prüfungsstrategie): verificar los datos
-// del formato del examen B2 contra el Modellsatz oficial del Goethe-Institut
-// y fijar el canon (Teile, tiempos, recuentos de palabras) en la lección 1,
-// como se hizo en el C1.
+// Formato del examen implícito en los títulos del bloque 2 — al redactarlo,
+// verificar contra el Modellsatz oficial y fijar el canon en la lección 1:
+// Lesen 5 Teile · Hören 4 Teile · Schreiben 2 Teile (Forumsbeitrag +
+// formelle Nachricht) · Sprechen 2 Teile (Vortrag + Diskussion) · CBT.
 
 export const B2_BLOCKS = [
-  { n: '0', name: 'Einführung',                 range: [1, 2] },
-  { n: '1', name: 'Sprachliche Konsolidierung', range: [3, 15] },
-  { n: '2', name: 'Prüfungsstrategie',          range: [16, 28] },
-  { n: '3', name: 'Themenfelder',               range: [29, 38] },
-  { n: '4', name: 'Prüfungssimulation',         range: [39, 40] },
+  { n: '0', name: 'Einführung',               range: [1, 3] },
+  { n: '1', name: 'Grammatik & Struktur',     range: [4, 17] },
+  { n: '2', name: 'Prüfungsstrategie',        range: [18, 32] },
+  { n: '3', name: 'Themenfelder & Wortschatz', range: [33, 40] },
+  { n: '4', name: 'Prüfungssimulation',       range: [41, 42] },
 ]
 
 // Índice 0 = lección 1. El orden ES el id.
 export const B2_TITLES = [
   'Das Goethe-Zertifikat B2 im Überblick',
+  'Das digitale Prüfungsformat (CBT)',
   'Diagnose B2 — Standortbestimmung',
-  'Satzbau & Verbstellung im Überblick',
-  'Das Passiv in allen Zeiten',
-  'Konjunktiv II — höflich und irreal',
-  'Indirekte Rede im Alltag',
-  'Relativsätze sicher bilden',
-  'Infinitiv mit zu & Verbergänzungen',
-  'Verben mit Präpositionen',
-  'Konnektoren: Grund, Folge, Gegensatz',
+  'Konnektoren I — Grund, Einräumung, Folge',
+  'Konnektoren II — final, temporal, konditional',
   'Zweiteilige Konnektoren',
-  'Adjektivdeklination kompakt',
-  'Partizipien als Adjektive',
-  'Nomen-Verb-Verbindungen — Einstieg',
-  'Wortbildung & Wortfamilien',
+  'Konjunktiv II — irreale Bedingungen & Wünsche',
+  'Konjunktiv II der Vergangenheit',
+  'Konjunktiv I — indirekte Rede',
+  'Vorgangs- & Zustandspassiv',
+  'Passiv mit Modalverben & Passiversatzformen',
+  'Relativsätze komplex',
+  'Adjektivdeklination & Partizip als Attribut',
+  'Infinitivsätze mit zu',
+  'Verben mit Präpositionen & Präpositionaladverbien',
+  'Nominalisierung ↔ Verbalisierung',
+  'Präpositionen mit Genitiv',
   'Modul Lesen — Überblick',
-  'Lesen: Meinungen zuordnen',
-  'Lesen: Detailverstehen',
-  'Lesen: Anzeigen & Alltagstexte',
+  'Lesen: Artikel & Detailverständnis (Teil 1–2)',
+  'Lesen: Meinungen zuordnen (Teil 3)',
+  'Lesen: Kommentar & Standpunkt (Teil 4)',
+  'Lesen: formeller Regeltext (Teil 5)',
   'Modul Hören — Überblick',
-  'Hören: Gespräche & Interviews',
-  'Hören: Vorträge & Diskussionen',
-  'Modul Schreiben — Überblick',
+  'Hören: Gespräche & Ansagen (Teil 1)',
+  'Hören: Interview & Diskussion (Teil 2–3)',
+  'Hören: Vortrag (Teil 4)',
+  'Modul Schreiben — Überblick & Bewertung',
   'Schreiben Teil 1 — Forumsbeitrag',
   'Schreiben Teil 2 — Formelle Nachricht',
-  'Modul Sprechen — Überblick',
-  'Sprechen Teil 1 — Der Vortrag',
-  'Sprechen Teil 2 — Die Diskussion',
-  'Wohnen & Zusammenleben',
-  'Reisen & Mobilität',
-  'Konsum & Werbung',
+  'Modul Sprechen — Überblick & Bewertung',
+  'Sprechen Teil 1 — Vortrag + Nachfragen',
+  'Sprechen Teil 2 — Diskussion mit dem Partner',
   'Arbeit & Beruf',
-  'Lernen & Weiterbildung',
-  'Gesundheit & Sport',
-  'Digitale Welt & Medien',
+  'Bildung & Studium',
   'Umwelt & Nachhaltigkeit',
-  'Kultur & Freizeit',
-  'Gesellschaft & Ehrenamt',
+  'Gesundheit & Ernährung',
+  'Medien & Digitalisierung',
+  'Wohnen & Zusammenleben',
+  'Konsum & Geld',
+  'Reisen & Mobilität',
   'Prüfungssimulation 1 + Korrektur',
   'Prüfungssimulation 2 + Strategien',
 ]

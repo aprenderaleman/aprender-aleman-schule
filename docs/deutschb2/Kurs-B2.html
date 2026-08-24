@@ -1,0 +1,513 @@
+<!DOCTYPE html><html lang="de"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Deutsch B2 — Kurs (Export)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root { --background: 250 244 234; --foreground: 34 38 51; --card: 255 251 244;
+          --muted: 243 235 222; --muted-foreground: 107 100 88; --border: 230 218 197; }
+  * { box-sizing: border-box; } body { margin: 0; }
+  .x-toc { max-width: 760px; margin: 0 auto; padding: 48px 40px 0; }
+  .x-toc h1 { font-family: var(--c1-serif); font-weight: 500; font-size: 30px; color: var(--c1-heading); margin: 0 0 6px; }
+  .x-toc p { color: var(--c1-muted); margin: 0 0 18px; font-size: 14px; }
+  .x-toc ol { margin: 0; padding-left: 22px; columns: 2; gap: 32px; font-size: 14.5px; }
+  .x-toc a { color: var(--c1-heading); text-decoration: none; } .x-toc a:hover { text-decoration: underline; }
+  .x-sep { height: 6px; background: var(--c1-ink); margin: 64px 0 0; }
+  .x-wc { font-family: var(--c1-mono); font-size: 11px; color: var(--c1-muted); letter-spacing: .08em; text-transform: uppercase; max-width: 760px; margin: 12px auto 0; padding: 0 40px; }
+
+/* ───────────────────────────────────────────────────────────────
+   Goethe-Zertifikat C1 — estilos del curso.
+
+   Todo vive bajo el scope `.c1` para no tocar nada del resto de la app.
+   Los grises/superficies se derivan de los tokens semánticos de
+   src/index.css (--background, --card, --border, …), así el curso
+   respeta el dark mode existente sin código extra.
+
+   El dorado es el acento de "documento de examen": sello de coordenadas,
+   eyebrows, numeración y callouts. La interacción (foco, lección activa)
+   usa el naranja de marca #F4A261.
+   ─────────────────────────────────────────────────────────────── */
+
+.c1 {
+  --c1-ink: #0F2847;          /* navy de marca */
+  --c1-ink-2: #1E3A66;
+  --c1-heading: #0F2847;
+  --c1-paper: rgb(var(--background));
+  --c1-surface: rgb(var(--card));
+  --c1-line: rgb(var(--border));
+  --c1-line-strong: rgb(var(--muted-foreground) / 0.45);
+  --c1-muted: rgb(var(--muted-foreground));
+  --c1-text: rgb(var(--foreground));
+
+  --c1-gold: #B0821F;
+  --c1-gold-soft: #F6EFDD;
+  --c1-gold-line: #E6D6AC;
+
+  --c1-accent: #F4A261;       /* naranja de marca — foco e interacción */
+  --c1-sidebar-w: 320px;
+
+  --c1-serif: 'Newsreader', Georgia, 'Times New Roman', serif;
+  --c1-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --c1-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  background: var(--c1-paper);
+  color: var(--c1-text);
+  font-family: var(--c1-sans);
+  font-size: 16px;
+  line-height: 1.6;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+.dark .c1 {
+  --c1-heading: #EAF0F8;
+  --c1-gold: #D3A33F;         /* sube el contraste sobre fondo navy */
+  --c1-gold-soft: rgb(176 130 31 / 0.14);
+  --c1-gold-line: rgb(176 130 31 / 0.38);
+  --c1-line-strong: rgb(var(--muted-foreground) / 0.55);
+}
+
+.c1 ::selection { background: var(--c1-gold-soft); }
+
+/* El curso ocupa la pantalla: el chrome global (Navbar/AppSidebar/TabBar)
+   se oculta en esta ruta, así que reseteamos márgenes heredados. */
+.c1-app { display: flex; min-height: 100vh; min-height: 100dvh; }
+
+/* ---------- Sidebar ---------- */
+.c1-sidebar {
+  width: var(--c1-sidebar-w);
+  flex: 0 0 var(--c1-sidebar-w);
+  background: var(--c1-ink);
+  color: #E8ECF3;
+  position: fixed;
+  inset: 0 auto 0 0;
+  height: 100vh;
+  height: 100dvh;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  z-index: 40;
+  border-right: 1px solid #0d1626;
+  padding-top: env(safe-area-inset-top);
+}
+.c1-main { margin-left: var(--c1-sidebar-w); flex: 1 1 auto; min-width: 0; }
+
+.c1-brand { padding: 26px 24px 20px; border-bottom: 1px solid rgb(255 255 255 / 0.08); }
+.c1-brand .c1-kicker {
+  font-family: var(--c1-mono); font-size: 11px; letter-spacing: .16em;
+  text-transform: uppercase; color: #8FA0BC;
+}
+.c1-brand h1 {
+  font-family: var(--c1-serif); font-weight: 500; font-size: 22px; line-height: 1.2;
+  margin: 8px 0 2px; color: #fff; letter-spacing: 0;
+}
+.c1-brand .c1-sub { font-size: 12.5px; color: #93A2BD; }
+.c1-back {
+  display: inline-flex; align-items: center; gap: 7px; margin-top: 14px;
+  font-family: var(--c1-mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase;
+  color: #93A2BD; text-decoration: none; border: 1px solid rgb(255 255 255 / 0.18);
+  border-radius: 8px; padding: 6px 11px; transition: color .15s, border-color .15s;
+}
+.c1-back:hover { color: #fff; border-color: rgb(255 255 255 / 0.4); }
+
+.c1-nav { padding: 12px 0 40px; }
+.c1-group { margin-top: 14px; }
+.c1-group-label {
+  font-family: var(--c1-mono); font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase;
+  color: #7E8FAC; padding: 10px 24px 6px; display: flex; gap: 8px; align-items: baseline;
+}
+.c1-group-label b { color: #AEBBD2; font-weight: 600; }
+
+.c1-link {
+  display: flex; gap: 12px; align-items: flex-start;
+  padding: 8px 24px 8px 22px; color: #C6D0E0; text-decoration: none;
+  border-left: 3px solid transparent; font-size: 14px; line-height: 1.35;
+  transition: background .15s, color .15s, border-color .15s;
+}
+.c1-link .c1-num {
+  font-family: var(--c1-mono); font-size: 12px; color: #7E8FAC;
+  padding-top: 1px; min-width: 20px;
+}
+.c1-link:hover { background: rgb(255 255 255 / 0.05); color: #fff; }
+.c1-link.is-active {
+  background: linear-gradient(90deg, rgb(244 162 97 / 0.18), rgb(244 162 97 / 0));
+  border-left-color: var(--c1-accent); color: #fff; font-weight: 500;
+}
+.c1-link.is-active .c1-num { color: var(--c1-accent); }
+/* Punto dorado = lección con contenido publicado */
+.c1-link.is-ready .c1-num::after { content: "·"; color: var(--c1-gold); margin-left: 5px; }
+
+/* ---------- Topbar (móvil) ---------- */
+.c1-topbar {
+  display: none; position: sticky; top: 0; z-index: 30;
+  background: var(--c1-ink); color: #fff; align-items: center; gap: 14px;
+  padding: 12px 16px; border-bottom: 1px solid #0d1626;
+  padding-top: calc(12px + env(safe-area-inset-top));
+}
+.c1-topbar .c1-t-title {
+  font-family: var(--c1-serif); font-size: 16px; font-weight: 500;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.c1-menu-btn {
+  background: transparent; border: 1px solid rgb(255 255 255 / 0.25); color: #fff;
+  border-radius: 8px; padding: 7px 10px; font-family: var(--c1-mono); font-size: 12px;
+  letter-spacing: .05em; cursor: pointer; display: inline-flex; gap: 7px; align-items: center;
+  flex: 0 0 auto;
+}
+.c1-scrim { display: none; position: fixed; inset: 0; background: rgb(10 16 28 / 0.5); z-index: 35; }
+
+/* Foco visible en todo el curso — naranja de marca */
+.c1 a:focus-visible,
+.c1 button:focus-visible,
+.c1 summary:focus-visible {
+  outline: 2px solid var(--c1-accent);
+  outline-offset: 2px;
+}
+.c1-link:focus-visible { outline-offset: -2px; }
+
+/* ---------- Lección ---------- */
+.c1-wrap { max-width: 760px; margin: 0 auto; padding: 48px 40px 96px; }
+
+.c1-spec {
+  font-family: var(--c1-mono); font-size: 11.5px; letter-spacing: .06em; text-transform: uppercase;
+  color: var(--c1-ink-2); display: flex; flex-wrap: wrap; gap: 0 4px; align-items: center;
+  margin-bottom: 18px;
+}
+.dark .c1-spec { color: rgb(var(--muted-foreground)); }
+.c1-spec span { white-space: nowrap; }
+.c1-spec .c1-sep { color: var(--c1-line-strong); }
+.c1-spec .c1-mod { color: var(--c1-gold); font-weight: 600; }
+
+.c1-title {
+  font-family: var(--c1-serif); font-weight: 500; font-size: 40px; line-height: 1.08;
+  letter-spacing: -.01em; margin: 0 0 8px; color: var(--c1-heading);
+  user-select: text; -webkit-user-select: text;
+}
+.c1-lead { font-size: 17px; color: var(--c1-muted); margin: 0 0 8px; max-width: 60ch; }
+
+.c1-rule { height: 1px; background: var(--c1-line); border: 0; margin: 34px 0; }
+
+.c1-eyebrow {
+  font-family: var(--c1-mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--c1-gold); margin: 0 0 12px; display: flex; align-items: center; gap: 10px;
+}
+.c1-eyebrow::before { content: ""; width: 22px; height: 1.5px; background: var(--c1-gold); flex: 0 0 22px; }
+
+.c1-card {
+  background: var(--c1-surface); border: 1px solid var(--c1-line);
+  border-radius: 14px; padding: 22px 24px; margin: 14px 0;
+}
+
+.c1-prose p { font-size: 15.5px; margin: 0 0 12px; }
+.c1-prose p:last-child { margin-bottom: 0; }
+.c1-prose strong { color: var(--c1-heading); }
+.c1 .c1-muted { color: var(--c1-muted); }
+.c1 mark { background: var(--c1-gold-soft); color: inherit; padding: .05em .15em; border-radius: 3px; }
+
+/* Título de card con chip de categoría (konzessiv, folgernd…) */
+.c1-cardt {
+  margin: 0 0 12px; font-family: var(--c1-serif); font-weight: 600;
+  font-size: 18px; color: var(--c1-heading); letter-spacing: 0;
+}
+.c1-cardt .c1-k {
+  font-family: var(--c1-mono); font-size: 12px; color: var(--c1-gold);
+  background: var(--c1-gold-soft); border: 1px solid var(--c1-gold-line);
+  border-radius: 6px; padding: 2px 8px; margin-right: 8px; vertical-align: 1px;
+  text-transform: uppercase; letter-spacing: .04em;
+}
+
+/* Lista de ejemplos — marcador › dorado, glosa gris */
+.c1-ex { list-style: none; padding: 0; margin: 0; display: grid; gap: 9px; }
+.c1-ex li { font-size: 15.5px; padding-left: 18px; position: relative; line-height: 1.5; }
+.c1-ex li::before { content: "›"; position: absolute; left: 0; color: var(--c1-gold); font-weight: 700; }
+.c1-ex li strong { color: var(--c1-heading); }
+.c1-ex li .c1-gl { color: var(--c1-muted); font-size: 13.5px; }
+
+/* Tabla de referencia — cabecera navy, primera columna en mono dorado */
+.c1-tablewrap {
+  border: 1px solid var(--c1-line); border-radius: 12px; overflow: hidden;
+  background: var(--c1-surface); margin: 14px 0; overflow-x: auto;
+}
+.c1-ktable { width: 100%; border-collapse: collapse; font-size: 14.5px; }
+.c1-ktable th, .c1-ktable td {
+  text-align: left; padding: 11px 16px; border-bottom: 1px solid var(--c1-line); vertical-align: top;
+}
+.c1-ktable thead th {
+  background: var(--c1-ink); color: #DCE3EF; font-family: var(--c1-mono);
+  font-size: 10.5px; letter-spacing: .06em; text-transform: uppercase; font-weight: 600;
+}
+.c1-ktable tr:last-child td { border-bottom: 0; }
+.c1-ktable td.c1-k { font-family: var(--c1-mono); color: var(--c1-gold); font-weight: 600; white-space: nowrap; }
+
+/* Comparativa — una afirmación, varias formas */
+.c1-vergleich { background: var(--c1-ink); color: #E8ECF3; border-radius: 14px; padding: 22px 24px; margin: 14px 0; }
+.c1-vergleich .c1-vt {
+  font-family: var(--c1-mono); font-size: 11px; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--c1-gold); margin-bottom: 12px;
+}
+.dark .c1-vergleich .c1-vt { color: #D3A33F; }
+.c1-vergleich .c1-row { padding: 9px 0; border-bottom: 1px solid rgb(255 255 255 / 0.1); font-size: 15px; }
+.c1-vergleich .c1-row:last-child { border-bottom: 0; }
+.c1-vergleich .c1-row b { color: #fff; }
+.c1-vergleich .c1-row .c1-t {
+  font-family: var(--c1-mono); font-size: 10.5px; color: #93A2BD; text-transform: uppercase;
+  letter-spacing: .05em; display: block; margin-top: 2px;
+}
+
+/* Lernziele */
+.c1-ziele { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+.c1-ziele li { display: flex; gap: 12px; align-items: flex-start; font-size: 15.5px; }
+.c1-ziele li::before {
+  content: "✓"; color: var(--c1-gold); font-weight: 700; font-family: var(--c1-sans);
+  background: var(--c1-gold-soft); border-radius: 6px; width: 24px; height: 24px;
+  display: inline-flex; align-items: center; justify-content: center;
+  flex: 0 0 24px; font-size: 13px; margin-top: 1px;
+}
+
+/* Steps */
+.c1-steps {
+  display: grid; gap: 0; border: 1px solid var(--c1-line); border-radius: 14px;
+  overflow: hidden; background: var(--c1-surface);
+}
+.c1-step { display: flex; gap: 16px; padding: 18px 22px; border-bottom: 1px solid var(--c1-line); }
+.c1-step:last-child { border-bottom: 0; }
+.c1-step .c1-idx {
+  font-family: var(--c1-mono); font-size: 13px; font-weight: 600; color: var(--c1-gold);
+  border: 1.5px solid var(--c1-gold-line); background: var(--c1-gold-soft); border-radius: 8px;
+  width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; flex: 0 0 30px;
+}
+/* Variante con etiqueta de texto en vez del número (Vorgang, Zustand, …) */
+.c1-step .c1-badge {
+  font-family: var(--c1-mono); font-size: 11px; font-weight: 600; color: var(--c1-gold);
+  border: 1.5px solid var(--c1-gold-line); background: var(--c1-gold-soft); border-radius: 8px;
+  padding: 5px 9px; height: fit-content; white-space: nowrap; flex: 0 0 auto;
+  letter-spacing: .04em; text-transform: uppercase;
+}
+.c1-step h4 {
+  margin: 1px 0 4px; font-size: 16px; font-family: var(--c1-serif);
+  font-weight: 600; color: var(--c1-heading); letter-spacing: 0;
+}
+.c1-step p { margin: 0; font-size: 14.5px; color: var(--c1-muted); }
+.c1-step .c1-de { color: var(--c1-text); font-weight: 500; }
+.c1-step code {
+  font-family: var(--c1-mono); font-size: 13px; background: rgb(var(--muted));
+  padding: 1px 6px; border-radius: 5px; color: var(--c1-heading);
+}
+
+/* Redemittel */
+.c1-rm-grid { display: grid; gap: 12px; }
+.c1-rm { background: var(--c1-surface); border: 1px solid var(--c1-line); border-radius: 12px; padding: 14px 18px; }
+.c1-rm .c1-fn {
+  font-family: var(--c1-mono); font-size: 11px; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--c1-ink-2); margin-bottom: 8px;
+}
+.dark .c1-rm .c1-fn { color: rgb(var(--muted-foreground)); }
+.c1-rm ul { margin: 0; padding-left: 0; list-style: none; display: grid; gap: 6px; }
+.c1-rm li { font-size: 15px; padding-left: 16px; position: relative; }
+.c1-rm li::before { content: "„"; position: absolute; left: 0; color: var(--c1-gold); font-weight: 700; }
+.c1-rm li em { font-style: italic; color: var(--c1-heading); }
+.c1-rm li .c1-gl { color: var(--c1-muted); font-style: normal; font-size: 13px; }
+
+/* Modelltext */
+.c1-modell { background: var(--c1-surface); border: 1px solid var(--c1-line); border-radius: 14px; overflow: hidden; }
+.c1-modell .c1-mhead {
+  background: var(--c1-ink); color: #DCE3EF; padding: 12px 22px; font-family: var(--c1-mono);
+  font-size: 11.5px; letter-spacing: .06em; text-transform: uppercase;
+  display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+}
+.c1-modell .c1-wc { color: #9FB0CC; }
+.c1-modell .c1-mbody { padding: 22px 24px; font-size: 15.5px; line-height: 1.72; }
+.c1-modell .c1-mbody p { margin: 0 0 14px; }
+.c1-modell .c1-mbody p:last-child { margin-bottom: 0; }
+
+.c1-annot { display: grid; gap: 8px; margin-top: 14px; }
+.c1-annot .c1-a { display: flex; gap: 12px; font-size: 14px; }
+.c1-annot .c1-tag {
+  font-family: var(--c1-mono); font-size: 10.5px; letter-spacing: .06em; text-transform: uppercase;
+  color: var(--c1-gold); border: 1px solid var(--c1-gold-line); background: var(--c1-gold-soft);
+  border-radius: 6px; padding: 2px 8px; height: fit-content; white-space: nowrap; flex: 0 0 auto;
+}
+.c1-annot .c1-a p { margin: 2px 0; color: var(--c1-muted); }
+
+/* Prüfungstipp */
+.c1-tipp {
+  background: var(--c1-gold-soft); border: 1px solid var(--c1-gold-line);
+  border-left: 4px solid var(--c1-gold); border-radius: 12px; padding: 18px 22px; margin: 14px 0;
+}
+.c1-tipp .c1-lab {
+  font-family: var(--c1-mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--c1-gold); font-weight: 600; margin-bottom: 6px;
+}
+.c1-tipp p { margin: 0; font-size: 15px; color: var(--c1-text); }
+
+/* Übung */
+.c1-impuls {
+  background: var(--c1-surface); border: 1px dashed var(--c1-line-strong);
+  border-radius: 12px; padding: 16px 20px; font-size: 15.5px;
+}
+.c1-impuls .c1-q { font-family: var(--c1-serif); font-weight: 600; color: var(--c1-heading); margin: 0; }
+.c1-impuls .c1-aufgabe { margin: .6em 0 0; color: var(--c1-muted); }
+.c1-impuls ol { margin: 8px 0 0; padding-left: 20px; display: grid; gap: 7px; }
+
+.c1-ueb {
+  background: var(--c1-surface); border: 1px solid var(--c1-line);
+  border-radius: 12px; padding: 0; margin-top: 12px; overflow: hidden;
+}
+.c1-ueb > summary {
+  cursor: pointer; padding: 14px 20px; font-family: var(--c1-mono); font-size: 12px;
+  letter-spacing: .06em; text-transform: uppercase; color: var(--c1-heading);
+  list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 12px;
+}
+.c1-ueb > summary::-webkit-details-marker { display: none; }
+.c1-ueb > summary::after { content: "Lösung anzeigen"; color: var(--c1-gold); font-size: 11px; }
+.c1-ueb[open] > summary::after { content: "Lösung ausblenden"; }
+.c1-ueb .c1-sol {
+  padding: 14px 20px 18px; font-size: 15px; border-top: 1px solid var(--c1-line);
+}
+.c1-ueb .c1-sol ol { margin: 0; padding-left: 20px; display: grid; gap: 7px; }
+.c1-ueb .c1-sol strong { color: var(--c1-heading); }
+
+/* Lección sin contenido todavía */
+.c1-placeholder { max-width: 640px; margin: 12vh auto 0; text-align: left; }
+.c1-placeholder .c1-pk {
+  font-family: var(--c1-mono); font-size: 11px; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--c1-gold);
+}
+.c1-placeholder h2 {
+  font-family: var(--c1-serif); font-weight: 500; font-size: 34px; color: var(--c1-heading);
+  margin: 10px 0 12px; line-height: 1.1; letter-spacing: 0;
+  user-select: text; -webkit-user-select: text;
+}
+.c1-placeholder p { color: var(--c1-muted); font-size: 16px; }
+.c1-placeholder .c1-badge {
+  display: inline-block; margin-top: 18px; font-family: var(--c1-mono); font-size: 12px;
+  color: var(--c1-ink-2); border: 1px solid var(--c1-line); background: var(--c1-surface);
+  border-radius: 999px; padding: 7px 14px;
+}
+.dark .c1-placeholder .c1-badge { color: rgb(var(--muted-foreground)); }
+
+/* Pager */
+.c1-pager {
+  display: flex; justify-content: space-between; gap: 16px; margin-top: 44px;
+  border-top: 1px solid var(--c1-line); padding-top: 20px;
+}
+.c1-pager a, .c1-pager .c1-disabled {
+  text-decoration: none; flex: 1 1 0; min-width: 0; padding: 14px 18px;
+  border: 1px solid var(--c1-line); border-radius: 12px; background: var(--c1-surface);
+  transition: border-color .15s, transform .15s;
+}
+.c1-pager a:hover { border-color: var(--c1-gold-line); transform: translateY(-1px); }
+.c1-pager .c1-dir {
+  font-family: var(--c1-mono); font-size: 11px; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--c1-muted);
+}
+.c1-pager .c1-lt {
+  display: block; font-size: 14.5px; color: var(--c1-heading); font-weight: 500; margin-top: 3px;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.c1-pager .c1-next { text-align: right; }
+.c1-pager .c1-disabled { opacity: .4; pointer-events: none; }
+
+/* Estados de carga / error */
+.c1-state { max-width: 640px; margin: 14vh auto 0; text-align: left; }
+.c1-state .c1-pk {
+  font-family: var(--c1-mono); font-size: 11px; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--c1-gold);
+}
+.c1-state h2 {
+  font-family: var(--c1-serif); font-weight: 500; font-size: 30px;
+  color: var(--c1-heading); margin: 10px 0 12px; letter-spacing: 0;
+}
+.c1-state p { color: var(--c1-muted); }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 860px) {
+  .c1 { --c1-sidebar-w: 300px; }
+  .c1-sidebar { transform: translateX(-100%); transition: transform .25s ease; }
+  .c1-app.is-nav-open .c1-sidebar { transform: translateX(0); }
+  .c1-app.is-nav-open .c1-scrim { display: block; }
+  .c1-main { margin-left: 0; }
+  .c1-topbar { display: flex; }
+  .c1-wrap { padding: 30px 22px 80px; }
+  .c1-title { font-size: 32px; }
+  .c1-placeholder { margin-top: 8vh; }
+  .c1-pager { flex-direction: column; }
+  .c1-pager .c1-next { text-align: left; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .c1 *, .c1 *::before, .c1 *::after {
+    transition: none !important;
+    animation: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ───────── Estándar de 8 secciones (Fase 0) ───────── */
+
+/* Icono de sección en el eyebrow */
+.c1-eyebrow .c1-ico { font-size: 14px; line-height: 1; margin-right: 2px; }
+
+/* Kernwortschatz */
+.c1-ws td.c1-k { white-space: normal; }
+.c1-ws .c1-ws-es { color: var(--c1-muted); font-size: 13.5px; }
+.c1-ws-hinweis { font-size: 14px; color: var(--c1-muted); margin: -4px 0 0 4px; }
+
+/* Hueco numerado de Lückentext */
+.c1-gap {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-width: 58px; height: 22px; margin: 0 2px; padding: 0 6px;
+  font-family: var(--c1-mono); font-size: 11px; font-weight: 600; color: var(--c1-gold);
+  background: var(--c1-gold-soft); border: 1px dashed var(--c1-gold);
+  border-radius: 6px; vertical-align: -4px;
+}
+
+/* Prüfungsaufgabe */
+.c1-pa .c1-pa-anweisung {
+  font-family: var(--c1-mono); font-size: 12px; color: var(--c1-muted);
+  letter-spacing: .03em; margin-bottom: 14px !important;
+}
+.c1-pa-optionen {
+  list-style: none; padding: 0; margin: 14px 0 0; display: flex; flex-wrap: wrap; gap: 8px;
+}
+.c1-pa-optionen li {
+  font-size: 14px; padding: 5px 12px; border: 1px solid var(--c1-line);
+  border-radius: 999px; background: var(--c1-paper);
+}
+.c1-pa-kommentar { margin: 12px 0 0; font-size: 14px; color: var(--c1-muted); }
+
+/* Selbstcheck */
+.c1-check { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+.c1-check li label {
+  display: flex; gap: 12px; align-items: flex-start; cursor: pointer; font-size: 15.5px;
+  padding: 12px 16px; background: var(--c1-surface); border: 1px solid var(--c1-line);
+  border-radius: 12px; transition: border-color .15s, background .15s;
+}
+.c1-check li label:hover { border-color: var(--c1-gold-line); }
+.c1-check li.is-done label { background: var(--c1-gold-soft); border-color: var(--c1-gold-line); }
+.c1-check li.is-done span { color: var(--c1-muted); text-decoration: line-through; }
+.c1-check input { margin-top: 4px; accent-color: var(--c1-gold); flex: 0 0 auto; }
+
+/* Ausblick */
+.c1-ausblick {
+  background: var(--c1-ink); color: #E8ECF3; border-radius: 14px; padding: 20px 24px; margin: 14px 0;
+}
+.c1-ausblick p { margin: 0 0 14px; font-size: 15.5px; }
+.c1-ausblick-link {
+  display: inline-block; font-family: var(--c1-mono); font-size: 12px; letter-spacing: .06em;
+  text-transform: uppercase; color: #fff; text-decoration: none;
+  border: 1px solid rgb(255 255 255 / 0.3); border-radius: 8px; padding: 8px 14px;
+  transition: border-color .15s, background .15s;
+}
+.c1-ausblick-link:hover { border-color: var(--c1-gold); background: rgb(176 130 31 / 0.18); }
+
+/* Ilustración de portada de bloque — solo en la primera lección de cada bloque */
+.c1-block-art {
+  display: block; width: 100%; max-height: 220px; object-fit: cover;
+  border-radius: 14px; border: 1px solid var(--c1-line);
+  margin: 0 0 26px; background: var(--c1-ink);
+}
+@media (max-width: 860px) { .c1-block-art { max-height: 150px; } }
+</style></head>
+<body class="c1"><div class="x-toc"><h1>Deutsch B2 — Aprender-Aleman.de</h1>
+<p>1 von 42 Lektionen · exportiert zur Durchsicht</p>
+<ol><li value="4"><a href="#l4">Konnektoren I — Grund, Einräumung, Folge</a></li></ol></div><div class="x-sep" id="l4"></div><div class="x-wc">Lektion 04 · 847 Wörter</div><div class="c1-wrap"><img class="c1-block-art" src="/deutschc1/block-1.svg" alt="" loading="lazy"/><div class="c1-spec"><span class="c1-mod">Bloque 1</span><span class="c1-sep" aria-hidden="true">/</span><span>Grammatik &amp; Struktur</span><span class="c1-sep" aria-hidden="true">/</span><span>Niveau B2</span><span class="c1-sep" aria-hidden="true">/</span><span>Prüfungsrelevanz: alle Module</span></div><h2 class="c1-title">Konnektoren I</h2><p class="c1-lead">Sätze logisch verbinden: Grund (kausal), Einräumung (konzessiv) und Folge (konsekutiv) — und den Konnektor an die richtige Verbstellung koppeln.</p><hr class="c1-rule"/><p class="c1-eyebrow"><span class="c1-ico" aria-hidden="true">🎯</span>Lernziele</p><ul class="c1-ziele"><li>kausale, konzessive und konsekutive Sätze sicher bilden</li><li>Konjunktion, Subjunktion und Verbindungsadverb an der Verbstellung erkennen</li><li>den passenden Konnektor auswählen und korrekt interpungieren</li></ul><hr class="c1-rule"/><p class="c1-eyebrow"><span class="c1-ico" aria-hidden="true">📖</span>Kernwortschatz</p><div class="c1-tablewrap"><table class="c1-ktable"><thead><tr><th>Konnektor</th><th>Bedeutung</th><th>Typ &amp; Verbstellung</th></tr></thead><tbody><tr><td class="c1-k">weil / da</td><td>porque / dado que</td><td>Subjunktion → Verb ans Ende</td></tr><tr><td class="c1-k">denn</td><td>porque (pues)</td><td>Konjunktion → Verb Position 2</td></tr><tr><td class="c1-k">deshalb / daher</td><td>por eso</td><td>Adverb → Inversion</td></tr><tr><td class="c1-k">obwohl</td><td>aunque</td><td>Subjunktion → Verb ans Ende</td></tr><tr><td class="c1-k">trotzdem / dennoch</td><td>aun así / sin embargo</td><td>Adverb → Inversion</td></tr><tr><td class="c1-k">sodass / so … dass</td><td>de modo que</td><td>Subjunktion → Verb ans Ende</td></tr><tr><td class="c1-k">folglich</td><td>por consiguiente</td><td>Adverb → Inversion</td></tr></tbody></table></div><hr class="c1-rule"/><p class="c1-eyebrow"><span class="c1-ico" aria-hidden="true">💡</span>Erklärung — die drei Typen</p><div class="c1-prose"><p>Ein Konnektor verbindet nicht nur Bedeutungen, er <strong>bestimmt auch die Wortstellung</strong>. <span class="c1-muted">La clave del B2: cada tipo coloca el verbo en un sitio distinto.</span></p></div><div class="c1-steps"><div class="c1-step"><span class="c1-badge">Verb 2</span><div><h4>Konjunktion (Position 0)</h4><p>Verbindet zwei Hauptsätze; das Verb bleibt an <span class="c1-de">Position 2</span>. Typisch: <strong>denn</strong>.<br/><span class="c1-de">Ich bleibe zu Hause, denn ich bin krank.</span></p></div></div><div class="c1-step"><span class="c1-badge">Verb Ende</span><div><h4>Subjunktion (Nebensatz)</h4><p>Leitet einen Nebensatz ein; das Verb rutscht <span class="c1-de">ans Ende</span>. Typisch: <strong>weil, da, obwohl, sodass</strong>.<br/><span class="c1-de">Ich bleibe zu Hause, weil ich krank bin.</span></p></div></div><div class="c1-step"><span class="c1-badge">Inversion</span><div><h4>Verbindungsadverb (Position 1)</h4><p>Steht auf Position 1 → <span class="c1-de">Verb vor Subjekt</span>. Typisch: <strong>deshalb, trotzdem, folglich</strong>.<br/><span class="c1-de">Ich bin krank, deshalb bleibe ich zu Hause.</span></p></div></div></div><hr class="c1-rule"/><p class="c1-eyebrow"><span class="c1-ico" aria-hidden="true">🔍</span>Beispiele — Die drei Bedeutungen</p><div class="c1-card"><h4 class="c1-cardt"><span class="c1-k">kausal</span>Grund — „¿por qué?“</h4><ul class="c1-ex"><li>Ich lerne Deutsch, <strong>weil</strong> ich in Wien studieren <strong>möchte</strong>. <span class="c1-gl">— Nebensatz, verbo al final</span></li><li>Ich lerne Deutsch, <strong>denn</strong> ich <strong>möchte</strong> in Wien studieren. <span class="c1-gl">— Hauptsatz, verbo 2º</span></li><li>Ich möchte in Wien studieren, <strong>deshalb lerne</strong> ich Deutsch. <span class="c1-gl">— adverbio, inversión</span></li></ul></div><div class="c1-card"><h4 class="c1-cardt"><span class="c1-k">konzessiv</span>Einräumung — „aunque / a pesar de“</h4><ul class="c1-ex"><li>Ich gehe joggen, <strong>obwohl</strong> es <strong>regnet</strong>. <span class="c1-gl">— Nebensatz, verbo al final</span></li><li>Es regnet. <strong>Trotzdem gehe</strong> ich joggen. <span class="c1-gl">— adverbio, inversión</span></li><li><strong>Trotz</strong> des Regens gehe ich joggen. <span class="c1-gl">— Präposition + Genitiv</span></li></ul></div><div class="c1-card"><h4 class="c1-cardt"><span class="c1-k">konsekutiv</span>Folge — „así que / de modo que“</h4><ul class="c1-ex"><li>Es regnete stark, <strong>sodass</strong> wir zu Hause <strong>blieben</strong>. <span class="c1-gl">— Nebensatz, verbo al final</span></li><li>Es war <strong>so</strong> kalt, <strong>dass</strong> wir zu Hause <strong>blieben</strong>. <span class="c1-gl">— so + Adjektiv … dass</span></li></ul></div><div class="c1-vergleich"><div class="c1-vt">Der große Vergleich — misma idea, tres estructuras</div><div class="c1-row"><b>Ich bleibe zu Hause, weil ich krank bin.</b><span class="c1-t">Subjunktion → Verb ans Ende</span></div><div class="c1-row"><b>Ich bleibe zu Hause, denn ich bin krank.</b><span class="c1-t">Konjunktion → Verb Position 2</span></div><div class="c1-row"><b>Ich bin krank, deshalb bleibe ich zu Hause.</b><span class="c1-t">Adverb → Inversion</span></div></div><hr class="c1-rule"/><p class="c1-eyebrow"><span class="c1-ico" aria-hidden="true">✍️</span>Anwendung — Übung 1 · Erkennen</p><div class="c1-impuls"><p class="c1-q">Bestimme den Typ: kausal, konzessiv oder konsekutiv.</p><ol><li>Ich bleibe zu Hause, weil ich müde bin.</li><li>Es war so kalt, dass wir umkehrten.</li><li>Obwohl er wenig lernt, besteht er die Prüfung.</li><li>Es regnet. Trotzdem gehen wir spazieren.</li></ol></div><details class="c1-ueb"><summary>Lösung</summary><div class="c1-sol c1-prose"><ol><li><strong>kausal</strong> (weil)</li><li><strong>konsekutiv</strong> (so … dass)</li><li><strong>konzessiv</strong> (obwohl)</li><li><strong>konzessiv</strong> (trotzdem)</li></ol></div></details><p class="c1-eyebrow"><span class="c1-ico" aria-hidden="true">✍️</span>Übung 2 · Verbinden</p><div class="c1-impuls"><p class="c1-q">Nutze den passenden Konnektor.</p><ol><li>Er ging zur Arbeit. Er war krank. <span class="c1-muted">(Einräumung)</span></li><li>Es schneite die ganze Nacht. Die Straßen waren gesperrt. <span class="c1-muted">(Folge)</span></li><li>Es war spät. Wir gingen nach Hause. <span class="c1-muted">(Adverb)</span></li></ol></div><details class="c1-ueb"><summary>Lösung</summary><div class="c1-sol c1-prose"><ol><li>Er ging zur Arbeit, <strong>obwohl</strong> er krank <strong>war</strong>.</li><li>Es schneite die ganze Nacht, <strong>sodass</strong> die Straßen gesperrt <strong>waren</strong>.</li><li>Es war spät, <strong>deshalb gingen</strong> wir nach Hause.</li></ol></div></details><p class="c1-eyebrow"><span class="c1-ico" aria-hidden="true">✍️</span>Übung 3 · Umformen</p><div class="c1-impuls"><p class="c1-q">Von der Präposition zum Nebensatz.</p><ol><li>Wegen des Staus kam ich zu spät. → <span class="c1-muted">(weil …)</span></li><li>Trotz der Kälte gingen wir spazieren. → <span class="c1-muted">(obwohl …)</span></li></ol></div><details class="c1-ueb"><summary>Lösung</summary><div class="c1-sol c1-prose"><ol><li><strong>Weil</strong> es einen Stau <strong>gab</strong>, kam ich zu spät.</li><li><strong>Obwohl</strong> es kalt <strong>war</strong>, gingen wir spazieren.</li></ol></div></details><hr class="c1-rule"/><p class="c1-eyebrow"><span class="c1-ico" aria-hidden="true">🎓</span>Prüfungsbezug</p><div class="c1-modell c1-pa"><div class="c1-mhead"><span>Prüfungsformat · Auswahlaufgabe</span><span class="c1-wc">3 Lücken</span></div><div class="c1-mbody"><p class="c1-pa-anweisung">So sieht das im Prüfungsformat aus: den passenden Konnektor einsetzen (Auswahl).</p><p>Viele Studierende arbeiten neben dem Studium, <span class="c1-gap">1</span> sie ihren Lebensunterhalt finanzieren müssen. <span class="c1-gap">2</span> bleibt oft wenig Zeit zum Lernen. Ein Nebenjob ist <span class="c1-gap">3</span> nützlich, weil er praktische Erfahrung bringt.</p><ul class="c1-pa-optionen"><li>(1) a) weil · b) obwohl · c) trotzdem</li><li>(2) a) Weil · b) Deshalb · c) Obwohl</li><li>(3) a) sodass · b) trotzdem · c) folglich</li></ul></div></div><details class="c1-ueb"><summary>Lösung</summary><div class="c1-sol c1-prose"><ol><li><span class="c1-gap">1</span> <strong>a) weil</strong> — Grund, Verb ans Ende (… finanzieren müssen).</li><li><span class="c1-gap">2</span> <strong>b) Deshalb</strong> — Folge, Inversion (Deshalb bleibt …).</li><li><span class="c1-gap">3</span> <strong>b) trotzdem</strong> — Einräumung (… ist trotzdem nützlich).</li></ol></div></details><div class="c1-tipp"><div class="c1-lab">Prüfungstipp</div><p>Im <strong>Schreiben</strong> (Forumsbeitrag) und im <strong>Sprechen</strong> heben <em>obwohl, trotzdem, deshalb</em> das Kriterium „Strukturen“. Häufigster Fehler: die Verbstellung — nach <em>weil/obwohl</em> das Verb ans Ende, nach <em>deshalb/trotzdem</em> Inversion. <span class="c1-muted">No calques el orden del español.</span></p></div><hr class="c1-rule"/><p class="c1-eyebrow"><span class="c1-ico" aria-hidden="true">📌</span>Zusammenfassung</p><div class="c1-tablewrap"><table class="c1-ktable"><thead><tr><th>Bedeutung</th><th>Nebensatz (Verb Ende)</th><th>Adverb (Inversion)</th><th>Präposition</th></tr></thead><tbody><tr><td class="c1-k">kausal</td><td>weil, da</td><td>deshalb, daher</td><td>wegen + Gen.</td></tr><tr><td class="c1-k">konzessiv</td><td>obwohl</td><td>trotzdem, dennoch</td><td>trotz + Gen.</td></tr><tr><td class="c1-k">konsekutiv</td><td>sodass, so … dass</td><td>folglich, also</td><td>—</td></tr></tbody></table></div><p class="c1-eyebrow"><span class="c1-ico" aria-hidden="true">✅</span>Selbstcheck</p><ul class="c1-check"><li><label><input type="checkbox"/><span>Ich wähle den passenden Konnektor nach der Bedeutung (Grund / Einräumung / Folge).</span></label></li><li><label><input type="checkbox"/><span>Nach <em>weil</em> und <em>obwohl</em> setze ich das Verb ans Ende.</span></label></li><li><label><input type="checkbox"/><span>Nach <em>deshalb</em> und <em>trotzdem</em> beachte ich die Inversion.</span></label></li></ul><p class="c1-eyebrow"><span class="c1-ico" aria-hidden="true">➡️</span>Ausblick</p><div class="c1-ausblick"><p>Grund, Einräumung und Folge sind die Basis der Argumentation. In der nächsten Lektion kommen die übrigen Bedeutungen dazu: <strong>final</strong> (Zweck), <strong>temporal</strong> (Zeit) und <strong>konditional</strong> (Bedingung) — mit denselben drei Verbstellungsregeln.</p><a class="c1-ausblick-link" href="/deutschb2/5">Weiter zu 05 · Konnektoren II — final, temporal, konditional ›</a></div><nav class="c1-pager" aria-label="Lektionen"><a class="c1-prev" href="/deutschb2/3"><span class="c1-dir">‹ Vorherige Lektion</span><span class="c1-lt">03 · Diagnose B2 — Standortbestimmung</span></a><a class="c1-next" href="/deutschb2/5"><span class="c1-dir">Nächste Lektion ›</span><span class="c1-lt">05 · Konnektoren II — final, temporal, konditional</span></a></nav></div></body></html>

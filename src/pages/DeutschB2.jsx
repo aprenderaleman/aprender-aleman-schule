@@ -7,11 +7,11 @@ import KursSeite from '../components/DeutschC1/KursSeite'
 // del C1 (son genéricas por bloque, no por nivel).
 const KURS_B2 = {
   name: 'Deutsch B2',
-  sub: 'Kompletter Vorbereitungskurs · 40 Lektionen',
+  sub: 'Kurs & Lehrbuch · 42 Lektionen',
   base: '/deutschb2',
   api: '/api/deutschb2',
-  total: 40,
-  defaultLesson: 1,
+  total: 42,
+  defaultLesson: 4,
   artBase: '/deutschc1',
 }
 

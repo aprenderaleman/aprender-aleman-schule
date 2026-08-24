@@ -5,4 +5,8 @@
 // docs/deutschc1/FORMAT.md (mismo estándar de 8 secciones que el C1,
 // con server/deutschc1/content/lektion-03.js como modelo) y regístrala aquí.
 
-export const CONTENT = {}
+import lektion04 from './lektion-04.js'
+
+export const CONTENT = {
+  4: lektion04,
+}
