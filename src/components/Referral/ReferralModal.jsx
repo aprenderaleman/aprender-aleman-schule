@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, Gift, Copy, Check, MessageCircle } from 'lucide-react'
 
@@ -37,14 +38,14 @@ export default function ReferralModal({ open, onClose, data, title, subtitle }) 
   const waMessage = `¡Estoy aprendiendo alemán en Aprender-Alemán! 😊 Si te inscribes con mi enlace te regalan una clase: ${link}`
   const waHref = `https://wa.me/?text=${encodeURIComponent(waMessage)}`
 
-  return (
+  return createPortal(
     <AnimatePresence>
       {open && (
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 z-[60] bg-black/60 backdrop-blur-sm flex items-end sm:items-center justify-center p-3 sm:p-4"
+          className="fixed inset-0 z-[60] bg-black/60 backdrop-blur-sm flex items-end sm:items-start justify-center p-3 sm:p-4 overflow-y-auto"
           onClick={onClose}
         >
           <motion.div
@@ -53,7 +54,7 @@ export default function ReferralModal({ open, onClose, data, title, subtitle }) 
             exit={{ y: 40, opacity: 0 }}
             transition={{ type: 'spring', damping: 25 }}
             onClick={e => e.stopPropagation()}
-            className="relative bg-white dark:bg-gray-900 rounded-2xl shadow-2xl border border-gray-200 dark:border-gray-700 w-full max-w-md p-6"
+            className="relative bg-white dark:bg-gray-900 rounded-2xl shadow-2xl border border-gray-200 dark:border-gray-700 w-full max-w-md p-6 sm:my-auto"
           >
             <button
               onClick={onClose}
@@ -126,6 +127,7 @@ export default function ReferralModal({ open, onClose, data, title, subtitle }) 
           </motion.div>
         </motion.div>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body,
   )
 }
