@@ -18,6 +18,24 @@ import ProgressBar from '../components/UI/ProgressBar'
 import Button from '../components/UI/Button'
 import { EXERCISES } from '../utils/exercises'
 
+// Cada cuántos ejercicios se muestra el resumen. El feedback por ejercicio ya
+// lo da el bloque de explicación dentro de la propia pregunta; esta pantalla
+// solo aparece al cerrar un bloque.
+const BLOCK_SIZE = 10
+
+const countKey = (uid) => `exerciseCount_${uid || 'anon'}`
+
+function readCompletedCount(uid) {
+  const n = parseInt(localStorage.getItem(countKey(uid)) || '0', 10)
+  return Number.isFinite(n) ? n : 0
+}
+
+function bumpCompletedCount(uid) {
+  const next = readCompletedCount(uid) + 1
+  try { localStorage.setItem(countKey(uid), String(next)) } catch { /* modo privado */ }
+  return next
+}
+
 export default function ExercisePlayer() {
   const { id } = useParams()
   const { user } = useAuth()
@@ -29,7 +47,6 @@ export default function ExercisePlayer() {
   // Keep the screen awake during the exercise
   useWakeLock(!!exercise)
 
-  const [score, setScore] = useState(null)
   const [showResult, setShowResult] = useState(false)
   const [confetti, setConfetti] = useState(false)
   const [timerOn, setTimerOn] = useState(false)
@@ -37,13 +54,17 @@ export default function ExercisePlayer() {
   const [showAchievement, setShowAchievement] = useState(false)
   // Reset state when id changes
   useEffect(() => {
-    setScore(null)
     setShowResult(false)
     setConfetti(false)
     setSeconds(0)
     setTimerOn(true)
-    setShowAchievement(false)
   }, [id])
+
+  // El toast de logros ya no se pierde al avanzar automáticamente: se muestra
+  // en cuanto hay un logro nuevo, en el ejercicio que toque.
+  useEffect(() => {
+    if (newAchievements?.length > 0) setShowAchievement(true)
+  }, [newAchievements])
   // Timer
   useEffect(() => {
     if (!timerOn) return
@@ -57,12 +78,25 @@ export default function ExercisePlayer() {
   // Next exercise of the same type
   const nextExercise = useMemo(() => {
     if (!exercise) return null
-    const sameType = EXERCISES.filter(e => e.type === exercise.type)
-    const currentIndex = sameType.findIndex(e => e.id === id)
+    // Mismo tipo Y mismo nivel: al encadenar ejercicios automáticamente no
+    // queremos empujar a un alumno de A1 hacia B1 sin que lo note.
+    const sameTrack = EXERCISES.filter(e => e.type === exercise.type && e.level === exercise.level)
+    const currentIndex = sameTrack.findIndex(e => e.id === id)
     if (currentIndex === -1) return null
-    // Try next in same type, wrapping is not needed - just go forward
-    return sameType[currentIndex + 1] || null
+    return sameTrack[currentIndex + 1] || null
   }, [exercise, id])
+
+  // Estadísticas del bloque que se acaba de cerrar
+  const blockStats = useMemo(() => {
+    const last = (progress.exerciseHistory || []).slice(0, BLOCK_SIZE)
+    if (last.length === 0) return null
+    return {
+      count: last.length,
+      avg: Math.round(last.reduce((a, e) => a + (e.score || 0), 0) / last.length),
+      perfect: last.filter(e => e.perfect).length,
+      xp: last.reduce((a, e) => a + (e.xpEarned || 0), 0),
+    }
+  }, [progress.exerciseHistory])
 
   if (!exercise) {
     return (
@@ -88,7 +122,6 @@ export default function ExercisePlayer() {
     setTimerOn(false)
     const perfect = finalScore >= 100
     const xpEarned = Math.round((finalScore / 100) * (exercise.xp || 10))
-    setScore(finalScore)
     recordExerciseResult({
       exerciseId: exercise.id,
       type: exercise.type,
@@ -96,14 +129,23 @@ export default function ExercisePlayer() {
       perfect,
       xpEarned,
     })
-    if (perfect) setConfetti(true)
-    setShowResult(true)
-    if (newAchievements?.length > 0) setShowAchievement(true)
+    // El alumno ya leyó la explicación dentro del ejercicio. En vez de otra
+    // pantalla de "gut gemacht" por cada pregunta, encadenamos ejercicios y
+    // solo paramos al cerrar un bloque de BLOCK_SIZE.
+    const done = bumpCompletedCount(user?.id)
+    if (done % BLOCK_SIZE === 0) {
+      setConfetti(true)
+      setShowResult(true)
+    } else if (nextExercise) {
+      navigate(`/ejercicio/${nextExercise.id}`)
+    } else {
+      navigate(`/ejercicios?tipo=${exercise.type}`)
+    }
   }
 
-  const getMotivationalMessage = (s) => {
-    if (s < 50) return `Lass dich nicht entmutigen, ${user?.name}. Übe weiter und versuche es nochmal!`
-    if (s < 80) return `Gut gemacht, ${user?.name}. Du hast es fast geschafft!`
+  const getBlockMessage = (avg) => {
+    if (avg < 50) return `Dranbleiben, ${user?.name}. Wiederhole die Erklärungen und mach in Ruhe weiter.`
+    if (avg < 80) return `Gut gemacht, ${user?.name}. Du bist auf einem guten Weg!`
     return `Ausgezeichnet, ${user?.name}! Das ist echtes Deutsch!`
   }
 
@@ -202,33 +244,54 @@ export default function ExercisePlayer() {
               className="card text-center py-10"
             >
               <div className="text-7xl font-extrabold mb-3">
-                {score >= 80 ? '🎉' : score >= 50 ? '💪' : '📚'}
+                {blockStats && blockStats.avg >= 80 ? '🎉' : blockStats && blockStats.avg >= 50 ? '💪' : '📚'}
               </div>
               <h2 className="text-3xl font-extrabold text-gray-800 dark:text-gray-100 mb-1">
-                <span className={getScoreColor(score)}>{score}%</span>
+                {blockStats?.count || BLOCK_SIZE} Übungen geschafft!
               </h2>
-              <p className="text-gray-500 dark:text-gray-400 mb-2">Endpunktzahl</p>
-              <p className="text-gray-700 dark:text-gray-200 font-medium text-lg mb-6 max-w-sm mx-auto">
-                {getMotivationalMessage(score)}
-              </p>
+              <p className="text-gray-500 dark:text-gray-400 mb-4">Dein Zwischenstand</p>
 
-              <div className="w-full max-w-xs mx-auto mb-6">
-                <ProgressBar value={score} color={score >= 80 ? 'green' : score >= 50 ? 'yellow' : 'red'} showPercent />
-              </div>
+              {blockStats && (
+                <>
+                  <div className="flex justify-center gap-6 sm:gap-10 mb-6">
+                    <div>
+                      <p className={`text-2xl font-extrabold ${getScoreColor(blockStats.avg)}`}>{blockStats.avg}%</p>
+                      <p className="text-xs text-gray-400 mt-0.5">Durchschnitt</p>
+                    </div>
+                    <div>
+                      <p className="text-2xl font-extrabold text-gray-800 dark:text-gray-100">{blockStats.perfect}</p>
+                      <p className="text-xs text-gray-400 mt-0.5">fehlerfrei</p>
+                    </div>
+                    <div>
+                      <p className="text-2xl font-extrabold text-orange-500">+{blockStats.xp}</p>
+                      <p className="text-xs text-gray-400 mt-0.5">XP</p>
+                    </div>
+                  </div>
+
+                  <p className="text-gray-700 dark:text-gray-200 font-medium text-lg mb-6 max-w-sm mx-auto">
+                    {getBlockMessage(blockStats.avg)}
+                  </p>
+
+                  <div className="w-full max-w-xs mx-auto mb-6">
+                    <ProgressBar
+                      value={blockStats.avg}
+                      color={blockStats.avg >= 80 ? 'green' : blockStats.avg >= 50 ? 'yellow' : 'red'}
+                      showPercent
+                    />
+                  </div>
+                </>
+              )}
 
               <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                <Button
-                  onClick={() => { setShowResult(false); setScore(null); setSeconds(0); setTimerOn(true) }}
-                  variant="secondary"
-                >
-                  Übung wiederholen
+                <Button onClick={() => navigate(`/ejercicios?tipo=${exercise.type}`)} variant="secondary">
+                  Pause machen
                 </Button>
                 {nextExercise ? (
                   <Button
                     onClick={() => navigate(`/ejercicio/${nextExercise.id}`)}
                     variant="primary"
                   >
-                    Nächste Übung →
+                    Weiter üben →
                   </Button>
                 ) : (
                   <Button onClick={() => navigate(`/ejercicios?tipo=${exercise.type}`)} variant="primary">
