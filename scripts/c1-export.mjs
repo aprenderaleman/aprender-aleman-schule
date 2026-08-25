@@ -26,6 +26,7 @@ if (ki !== -1) { kurs = args[ki + 1]; args.splice(ki, 2) }
 const KURSE = {
   c1: { dir: 'deutschc1', name: 'Deutsch C1' },
   b2: { dir: 'deutschb2', name: 'Deutsch B2' },
+  b1: { dir: 'deutschb1', name: 'Deutsch B1' },
 }
 if (!KURSE[kurs]) { console.error(`kurs desconocido: ${kurs}`); process.exit(1) }
 const K = KURSE[kurs]

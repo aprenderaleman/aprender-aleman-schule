@@ -19,6 +19,7 @@ import {
 import { LEVEL_TEST_QUESTIONS, computeLevel as computeLevelTestLevel } from './level-test-bank.js'
 import { getCourseIndex as getC1Index, getLesson as getC1Lesson } from './deutschc1/index.js'
 import { getCourseIndex as getB2Index, getLesson as getB2Lesson } from './deutschb2/index.js'
+import { getCourseIndex as getB1Index, getLesson as getB1Lesson } from './deutschb1/index.js'
 
 dotenv.config()
 
@@ -4685,6 +4686,23 @@ app.get('/api/deutschb2/index', authMiddleware, deutschC1RoleGate, subscriptionM
 
 app.get('/api/deutschb2/lessons/:id', authMiddleware, deutschC1RoleGate, subscriptionMiddleware, (req, res) => {
   const lesson = getB2Lesson(Number(req.params.id))
+  if (!lesson) return res.status(404).json({ error: 'not_found', message: 'Lektion nicht gefunden.' })
+  res.json(lesson)
+})
+
+// ─── DEUTSCH B1 (curso /deutschb1) — misma arquitectura y mismo gate ──
+app.get('/api/deutschb1/health', (req, res) => {
+  const { lessons } = getB1Index()
+  const published = lessons.filter(l => l.ready).map(l => l.id)
+  res.json({ ok: true, total: lessons.length, published: published.length, ids: published })
+})
+
+app.get('/api/deutschb1/index', authMiddleware, deutschC1RoleGate, subscriptionMiddleware, (req, res) => {
+  res.json(getB1Index())
+})
+
+app.get('/api/deutschb1/lessons/:id', authMiddleware, deutschC1RoleGate, subscriptionMiddleware, (req, res) => {
+  const lesson = getB1Lesson(Number(req.params.id))
   if (!lesson) return res.status(404).json({ error: 'not_found', message: 'Lektion nicht gefunden.' })
   res.json(lesson)
 })
