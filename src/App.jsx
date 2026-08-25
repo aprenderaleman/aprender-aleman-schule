@@ -50,6 +50,15 @@ const DeutschB2 = lazy(() => import('./pages/DeutschB2'))
 const DeutschB1 = lazy(() => import('./pages/DeutschB1'))
 const DeutschA2 = lazy(() => import('./pages/DeutschA2'))
 
+// Quién cuenta como staff. El servidor ya aplica esta misma regla en
+// subscriptionMiddleware y en la sincronización con b2c: todo rol que no sea de
+// alumno entra sin suscripción ("SCHULE access for staff is unconditional").
+// Se replica aquí para que las dos capas no vuelvan a divergir — los profes no
+// tienen fila en schule_subscriptions, así que cualquier comprobación de
+// subscription.hasAccess los dejaba fuera aunque el backend sí los aceptara.
+const STUDENT_ROLES = ['student', 'schule_student']
+const isStaff = (role) => !!role && !STUDENT_ROLES.includes(role)
+
 function ProtectedRoute({ children }) {
   const { user } = useAuth()
   if (!user) return <Navigate to="/login" replace />
@@ -61,8 +70,8 @@ function PaidRoute({ children }) {
   const { user } = useAuth()
   if (!user) return <Navigate to="/login" replace />
 
-  // Admins always pass
-  if (user.role === 'superadmin' || user.role === 'admin') return children
+  // Staff (admin, superadmin, teacher…) entra siempre: no compra suscripción.
+  if (isStaff(user.role)) return children
 
   // Check subscription
   const sub = user.subscription
