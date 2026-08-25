@@ -1,5 +1,5 @@
 /**
- * Goethe-Zertifikat B2 — Lesen (kompakte Version)
+ * Zertifikat B2 — Lesen (kompakte Version)
  *
  * Offiziell: 5 Teile, 30 Items, 65 min, pass = 60%.
  * Wir verwenden eine kompakte Version mit 4 Teilen, 20 Items, pass bei 12.
@@ -11,7 +11,7 @@ export const goetheB2LesenExams = [
     provider: 'goethe',
     level: 'B2',
     module: 'lesen',
-    title: 'Goethe B2 — Lesen · Modellsatz 1',
+    title: 'Deutsch B2 — Lesen · Modellsatz 1',
     description: 'Kompakter B2-Lesetest mit Sachtexten und Meinungsforum.',
     durationMinutes: 50,
     maxScore: 20,
@@ -184,7 +184,7 @@ Der Antragsteller muss zum Bewerbungszeitpunkt an einer Hochschule eingeschriebe
 - Lebenslauf (max. 2 Seiten)
 - Motivationsschreiben (mind. 1 Seite)
 - Aktuelles Notenblatt
-- Sprachnachweis (z. B. Goethe-Zertifikat)
+- Sprachnachweis (z. B. Zertifikat B2)
 - Zwei Empfehlungsschreiben (eines davon vom Hauptbetreuer)
 
 4. Auswahlverfahren

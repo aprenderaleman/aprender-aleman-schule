@@ -1,5 +1,5 @@
 /**
- * Goethe-Zertifikat A2 — Sprechen
+ * Zertifikat A2 — Sprechen
  *
  * Offiziell: 3 Teile, ~15 min, Paarprüfung.
  *   Teil 1: Über sich sprechen (Fragen beantworten)
@@ -15,7 +15,7 @@ export const goetheA2SprechenExams = [
     provider: 'goethe',
     level: 'A2',
     module: 'sprechen',
-    title: 'Goethe A2 — Sprechen · Modellsatz 1',
+    title: 'Deutsch A2 — Sprechen · Modellsatz 1',
     description: 'Über sich sprechen und aus dem Alltag erzählen.',
     durationMinutes: 8,
     maxScore: 50,

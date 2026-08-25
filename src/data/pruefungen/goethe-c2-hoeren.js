@@ -1,5 +1,5 @@
 /**
- * Goethe-Zertifikat C2 — Hören
+ * Zertifikat C2 — Hören
  *
  * Offiziell: 4 Teile, ~28 Items, 35 min, pass = 60%.
  * Kompakte Version: 2 Teile, 10 Items, pass bei 6.
@@ -13,7 +13,7 @@ export const goetheC2HoerenExams = [
     provider: 'goethe',
     level: 'C2',
     module: 'hoeren',
-    title: 'Goethe C2 — Hören · Modellsatz 1',
+    title: 'Deutsch C2 — Hören · Modellsatz 1',
     description: 'Anspruchsvolles Hörverstehen mit Interview und akademischem Vortrag.',
     durationMinutes: 35,
     maxScore: 10,

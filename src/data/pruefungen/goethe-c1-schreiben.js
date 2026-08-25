@@ -1,5 +1,5 @@
 /**
- * Goethe-Zertifikat C1 — Schreiben
+ * Zertifikat C1 — Schreiben
  *
  * Offiziell: 2 Teile, 75 min, max 100 Punkte, pass = 60.
  *   Teil 1: Strukturierter Aufsatz / Stellungnahme (~250 Wörter)
@@ -12,7 +12,7 @@ export const goetheC1SchreibenExams = [
     provider: 'goethe',
     level: 'C1',
     module: 'schreiben',
-    title: 'Goethe C1 — Schreiben · Modellsatz 1',
+    title: 'Deutsch C1 — Schreiben · Modellsatz 1',
     description: 'Aufsatz und formelle Bewerbung im C1-Format mit anspruchsvollen Kriterien.',
     durationMinutes: 75,
     maxScore: 50,

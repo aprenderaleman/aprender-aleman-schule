@@ -1,5 +1,5 @@
 /**
- * Goethe-Zertifikat C2 — Schreiben
+ * Zertifikat C2 — Schreiben
  *
  * Offiziell: 80 min, max 100 Punkte, pass = 60.
  *   Aufsatz / Stellungnahme zu einem komplexen Thema (~350 Wörter).
@@ -11,7 +11,7 @@ export const goetheC2SchreibenExams = [
     provider: 'goethe',
     level: 'C2',
     module: 'schreiben',
-    title: 'Goethe C2 — Schreiben · Modellsatz 1',
+    title: 'Deutsch C2 — Schreiben · Modellsatz 1',
     description: 'Anspruchsvolle Stellungnahme zu einem gesellschaftlich relevanten Thema.',
     durationMinutes: 80,
     maxScore: 50,

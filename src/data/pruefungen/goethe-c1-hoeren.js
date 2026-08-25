@@ -1,5 +1,5 @@
 /**
- * Goethe-Zertifikat C1 — Hören
+ * Zertifikat C1 — Hören
  *
  * Offiziell: 2 Teile, ~22 Items, 40 min, pass = 60%.
  * Kompakte Version: 2 Teile, 15 Items, pass bei 9.
@@ -13,7 +13,7 @@ export const goetheC1HoerenExams = [
     provider: 'goethe',
     level: 'C1',
     module: 'hoeren',
-    title: 'Goethe C1 — Hören · Modellsatz 1',
+    title: 'Deutsch C1 — Hören · Modellsatz 1',
     description: 'Anspruchsvolles Hörverstehen mit Telefonnachricht und Diskussion.',
     durationMinutes: 40,
     maxScore: 15,

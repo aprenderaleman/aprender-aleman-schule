@@ -192,11 +192,11 @@ export const A1_PATH_EXTRA = [
       {question:'Wie kalt wird es in der Nacht?',options:['5 Grad','10 Grad','15 Grad','22 Grad'],answer:'5 Grad'},
     ], xp:15 },
   { id:'l-a1-026', type:'listening', subtype:'audio_questions', level:'A1', unit:5, title:'Einladung zum Kaffee',
-    audioText:'Hi Lisa, hier ist Eva. Hast du morgen Nachmittag Zeit? Ich möchte einen Kaffee mit dir trinken. Wir können uns um 16 Uhr im Café "Sonne" treffen. Das ist in der Goethestraße, nicht weit vom Bahnhof. Ruf mich bitte zurück.',
+    audioText:'Hi Lisa, hier ist Eva. Hast du morgen Nachmittag Zeit? Ich möchte einen Kaffee mit dir trinken. Wir können uns um 16 Uhr im Café "Sonne" treffen. Das ist in der Gartenstraße, nicht weit vom Bahnhof. Ruf mich bitte zurück.',
     questions:[
       {question:'Wer spricht?',options:['Lisa','Eva','Anna','Maria'],answer:'Eva'},
       {question:'Wann sollen sie sich treffen?',options:['Morgen Vormittag','Morgen Nachmittag um 16 Uhr','Heute Abend','Übermorgen'],answer:'Morgen Nachmittag um 16 Uhr'},
-      {question:'Wo ist das Café?',options:['In der Goethestraße','Neben der Schule','Am Marktplatz','Am Park'],answer:'In der Goethestraße'},
+      {question:'Wo ist das Café?',options:['In der Gartenstraße','Neben der Schule','Am Marktplatz','Am Park'],answer:'In der Gartenstraße'},
     ], xp:15 },
 
   // ─── A1 WRITING (w-a1-014 → w-a1-023) ───────────────────────────────

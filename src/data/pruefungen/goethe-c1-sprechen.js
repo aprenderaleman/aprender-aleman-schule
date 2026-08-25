@@ -1,5 +1,5 @@
 /**
- * Goethe-Zertifikat C1 — Sprechen
+ * Zertifikat C1 — Sprechen
  *
  * Offiziell: 2 Teile, ~15 min, Paarprüfung.
  *   Teil 1: Vortrag aus mehreren Quellen (~4 min)
@@ -14,7 +14,7 @@ export const goetheC1SprechenExams = [
     provider: 'goethe',
     level: 'C1',
     module: 'sprechen',
-    title: 'Goethe C1 — Sprechen · Modellsatz 1',
+    title: 'Deutsch C1 — Sprechen · Modellsatz 1',
     description: 'Anspruchsvoller Vortrag und Diskussionsbeitrag.',
     durationMinutes: 15,
     maxScore: 50,

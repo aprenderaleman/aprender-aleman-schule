@@ -384,7 +384,7 @@ export default function PruefungPlayer() {
           </Link>
           <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="bg-white dark:bg-gray-800 rounded-2xl border-2 border-indigo-200 dark:border-indigo-800 p-6 md:p-8">
             <div className="inline-flex items-center gap-2 bg-indigo-100 dark:bg-indigo-900/40 text-indigo-700 dark:text-indigo-300 px-3 py-1 rounded-full text-xs font-bold mb-3">
-              <BookOpen size={12} /> Goethe-Zertifikat {exam.level} · {moduleLabel(exam.module)}
+              <BookOpen size={12} /> Zertifikat {exam.level} · {moduleLabel(exam.module)}
             </div>
             <h1 className="text-2xl md:text-3xl font-extrabold text-gray-800 dark:text-gray-100 mb-2">{exam.title}</h1>
             {exam.description && <p className="text-gray-500 dark:text-gray-400 mb-6">{exam.description}</p>}

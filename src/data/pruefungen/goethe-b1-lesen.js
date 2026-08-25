@@ -1,5 +1,5 @@
 /**
- * Goethe-Zertifikat B1 — Lesen
+ * Zertifikat B1 — Lesen
  *
  * Official structure (5 Teile, 30 items, 65 min, pass = 60% = 18 / 30):
  *   Teil 1: 6 Aufgaben, R/F zu Blogeinträgen / E-Mails
@@ -18,7 +18,7 @@ export const goetheB1LesenExams = [
     provider: 'goethe',
     level: 'B1',
     module: 'lesen',
-    title: 'Goethe B1 — Lesen · Modellsatz 1',
+    title: 'Deutsch B1 — Lesen · Modellsatz 1',
     description: 'Vollständiger B1-Lesetest mit allen 5 Teilen.',
     durationMinutes: 50,
     maxScore: 25,

@@ -1,5 +1,5 @@
 /**
- * Goethe-Zertifikat B1 — Schreiben
+ * Zertifikat B1 — Schreiben
  *
  * Official structure (3 Teile, 60 min, max 100 Punkte, pass = 60):
  *   Teil 1: Persönliche E-Mail (~80 Wörter)
@@ -13,8 +13,8 @@ export const goetheB1SchreibenExams = [
     provider: 'goethe',
     level: 'B1',
     module: 'schreiben',
-    title: 'Goethe B1 — Schreiben · Modellsatz 1',
-    description: 'Drei Schreibaufgaben (privat, Meinung, halbformell) im offiziellen Goethe B1-Format.',
+    title: 'Deutsch B1 — Schreiben · Modellsatz 1',
+    description: 'Drei Schreibaufgaben (privat, Meinung, halbformell) im offiziellen B1-Prüfungsformat.',
     durationMinutes: 60,
     maxScore: 60,
     passScore: 36,

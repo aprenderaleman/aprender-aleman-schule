@@ -1,5 +1,5 @@
 /**
- * Goethe-Zertifikat B2 — Schreiben (kompakte Version)
+ * Zertifikat B2 — Schreiben (kompakte Version)
  *
  * Offiziell: 2 Teile, 75 min, max 100 Punkte, pass = 60.
  *   Teil 1: Forumsbeitrag oder Stellungnahme (~150 Wörter)
@@ -12,7 +12,7 @@ export const goetheB2SchreibenExams = [
     provider: 'goethe',
     level: 'B2',
     module: 'schreiben',
-    title: 'Goethe B2 — Schreiben · Modellsatz 1',
+    title: 'Deutsch B2 — Schreiben · Modellsatz 1',
     description: 'Stellungnahme + formelle Beschwerde-E-Mail im B2-Format.',
     durationMinutes: 75,
     maxScore: 50,

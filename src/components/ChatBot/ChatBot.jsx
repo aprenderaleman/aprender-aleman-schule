@@ -252,7 +252,7 @@ export default function ChatBot() {
                   <div className="space-y-1.5 w-full">
                     {(mode === 'tutor'
                       ? QUICK_PROMPTS
-                      : ['Wie funktionieren die Übungen?', 'Was beinhaltet das Abo?', 'Wie übe ich für die Goethe-Prüfung?']
+                      : ['Wie funktionieren die Übungen?', 'Was beinhaltet das Abo?', 'Wie übe ich für die Prüfung?']
                     ).map((q) => (
                       <button
                         key={q}

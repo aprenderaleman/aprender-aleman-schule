@@ -1,5 +1,5 @@
 /**
- * Goethe-Zertifikat A1 — Sprechen
+ * Zertifikat A1 — Sprechen
  *
  * Offiziell: 3 Teile, ~15 min, Paarprüfung.
  *   Teil 1: Sich vorstellen
@@ -16,7 +16,7 @@ export const goetheA1SprechenExams = [
     provider: 'goethe',
     level: 'A1',
     module: 'sprechen',
-    title: 'Goethe A1 — Sprechen · Modellsatz 1',
+    title: 'Deutsch A1 — Sprechen · Modellsatz 1',
     description: 'Stelle dich auf Deutsch vor — Aussprache nicht automatisch bewertet.',
     durationMinutes: 5,
     maxScore: 25,

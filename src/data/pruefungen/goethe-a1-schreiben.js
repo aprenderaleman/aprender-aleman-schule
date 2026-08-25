@@ -1,5 +1,5 @@
 /**
- * Goethe-Zertifikat A1 — Schreiben
+ * Zertifikat A1 — Schreiben
  *
  * Official structure (2 Teile, ~20 min, max 25 points, pass = 60% = 15):
  *   Teil 1: Formular ausfüllen — 5 Felder · 10 Punkte (deterministisch)
@@ -12,8 +12,8 @@ export const goetheA1SchreibenExams = [
     provider: 'goethe',
     level: 'A1',
     module: 'schreiben',
-    title: 'Goethe A1 — Schreiben · Modellsatz 1',
-    description: 'Formular und kurze Mitteilung im offiziellen Goethe A1-Format.',
+    title: 'Deutsch A1 — Schreiben · Modellsatz 1',
+    description: 'Formular und kurze Mitteilung im offiziellen A1-Prüfungsformat.',
     durationMinutes: 20,
     maxScore: 25,
     passScore: 15,
@@ -27,7 +27,7 @@ export const goetheA1SchreibenExams = [
           'Ihre Freundin Anna möchte am Sprachkurs „Deutsch für Anfänger“ in München teilnehmen. Sie helfen Anna beim Anmeldeformular. Schreiben Sie die fünf Informationen in das Formular.',
         sourceText:
           `Hallo!
-Mein Name ist Anna Schneider. Ich bin am 12. März 1995 in Wien geboren und ich bin Österreicherin. Ich wohne jetzt in München, Goethestraße 18, 80336 München. Meine Telefonnummer ist 0176 22334455 und meine E-Mail-Adresse ist anna.schneider@web.de. Ich arbeite als Krankenschwester im Krankenhaus.
+Mein Name ist Anna Schneider. Ich bin am 12. März 1995 in Wien geboren und ich bin Österreicherin. Ich wohne jetzt in München, Gartenstraße 18, 80336 München. Meine Telefonnummer ist 0176 22334455 und meine E-Mail-Adresse ist anna.schneider@web.de. Ich arbeite als Krankenschwester im Krankenhaus.
 Bis bald,
 Anna`,
         formTitle: 'Anmeldeformular — Sprachkurs „Deutsch für Anfänger“',

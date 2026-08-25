@@ -1,5 +1,5 @@
 /**
- * Goethe-Zertifikat B1 — Hören
+ * Zertifikat B1 — Hören
  *
  * Official structure (4 Teile, ~30 items, 40 min, pass = 60%):
  *   Teil 1: 10 Aufgaben — kurze Texte / Durchsagen, R/F + MC, 1x hören
@@ -16,7 +16,7 @@ export const goetheB1HoerenExams = [
     provider: 'goethe',
     level: 'B1',
     module: 'hoeren',
-    title: 'Goethe B1 — Hören · Modellsatz 1',
+    title: 'Deutsch B1 — Hören · Modellsatz 1',
     description: 'B1-Hörverstehen mit allen 4 Teilen.',
     durationMinutes: 35,
     maxScore: 20,

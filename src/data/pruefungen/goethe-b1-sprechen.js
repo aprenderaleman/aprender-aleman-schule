@@ -1,5 +1,5 @@
 /**
- * Goethe-Zertifikat B1 — Sprechen
+ * Zertifikat B1 — Sprechen
  *
  * Offiziell: 3 Teile, ~15 min, Paarprüfung.
  *   Teil 1: Gemeinsam etwas planen
@@ -15,7 +15,7 @@ export const goetheB1SprechenExams = [
     provider: 'goethe',
     level: 'B1',
     module: 'sprechen',
-    title: 'Goethe B1 — Sprechen · Modellsatz 1',
+    title: 'Deutsch B1 — Sprechen · Modellsatz 1',
     description: 'Präsentation eines Themas und Stellungnahme.',
     durationMinutes: 10,
     maxScore: 50,

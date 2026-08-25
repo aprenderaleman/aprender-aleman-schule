@@ -1,5 +1,5 @@
 /**
- * Goethe-Zertifikat B2 — Hören
+ * Zertifikat B2 — Hören
  *
  * Offiziell: 4 Teile, ~30 Items, 40 min, pass = 60%.
  * Kompakte Version: 4 Teile, 20 Items, pass bei 12.
@@ -15,7 +15,7 @@ export const goetheB2HoerenExams = [
     provider: 'goethe',
     level: 'B2',
     module: 'hoeren',
-    title: 'Goethe B2 — Hören · Modellsatz 1',
+    title: 'Deutsch B2 — Hören · Modellsatz 1',
     description: 'B2-Hörverstehen mit Kurzgesprächen, Radiosendung, Interview und Vortrag.',
     durationMinutes: 40,
     maxScore: 20,

@@ -1,8 +1,8 @@
 /**
- * SCHEMA: Goethe Prüfungen content
+ * SCHEMA: Prüfungen content
  *
  * An "exam" is one full simulation for a specific level + module.
- * Each exam has multiple "parts" (Teil 1, Teil 2, ...) following the official Goethe structure.
+ * Each exam has multiple "parts" (Teil 1, Teil 2, ...) following the official exam structure.
  * Each part has multiple "questions" of a given type.
  *
  * --- Common shapes ---
@@ -15,7 +15,7 @@
  *   title: string,               // shown in card list, e.g. "Modellsatz 1"
  *   description?: string,
  *   durationMinutes: number,     // official time limit
- *   maxScore: number,            // total points possible (Goethe usually 25 per module on A1, scaled)
+ *   maxScore: number,            // total points possible (usually 25 per module on A1, scaled)
  *   passScore: number,           // 60% of maxScore
  *   parts: Part[],
  * }

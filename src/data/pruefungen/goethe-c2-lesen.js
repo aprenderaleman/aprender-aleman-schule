@@ -1,5 +1,5 @@
 /**
- * Goethe-Zertifikat C2 — Lesen (kompakte Version)
+ * Zertifikat C2 — Lesen (kompakte Version)
  *
  * Offiziell: 4 Teile, 80 min, pass = 60%.
  * Wir verwenden eine kompakte Version mit 2 Teilen, 10 Items, pass bei 6.
@@ -11,7 +11,7 @@ export const goetheC2LesenExams = [
     provider: 'goethe',
     level: 'C2',
     module: 'lesen',
-    title: 'Goethe C2 — Lesen · Modellsatz 1',
+    title: 'Deutsch C2 — Lesen · Modellsatz 1',
     description: 'Anspruchsvolles Leseverstehen mit literarischem und essayistischem Text.',
     durationMinutes: 50,
     maxScore: 10,

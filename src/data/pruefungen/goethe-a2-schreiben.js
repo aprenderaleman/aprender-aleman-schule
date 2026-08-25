@@ -1,5 +1,5 @@
 /**
- * Goethe-Zertifikat A2 — Schreiben
+ * Zertifikat A2 — Schreiben
  *
  * Official structure (2 Teile, ~30 min, max 30 points, pass = 18 / 30):
  *   Teil 1: Kurze Mitteilung (~30 Wörter), informell
@@ -12,8 +12,8 @@ export const goetheA2SchreibenExams = [
     provider: 'goethe',
     level: 'A2',
     module: 'schreiben',
-    title: 'Goethe A2 — Schreiben · Modellsatz 1',
-    description: 'Zwei Schreibaufgaben (informell und formell) im offiziellen Goethe A2-Format.',
+    title: 'Deutsch A2 — Schreiben · Modellsatz 1',
+    description: 'Zwei Schreibaufgaben (informell und formell) im offiziellen A2-Prüfungsformat.',
     durationMinutes: 30,
     maxScore: 30,
     passScore: 18,

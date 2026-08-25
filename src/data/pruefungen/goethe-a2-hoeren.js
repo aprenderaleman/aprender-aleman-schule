@@ -1,5 +1,5 @@
 /**
- * Goethe-Zertifikat A2 — Hören
+ * Zertifikat A2 — Hören
  *
  * Official structure (4 Teile, 20 items, ~30 min, pass = 12 / 20):
  *   Teil 1: 5 kurze Hörtexte, MC, 2x hören
@@ -14,8 +14,8 @@ export const goetheA2HoerenExams = [
     provider: 'goethe',
     level: 'A2',
     module: 'hoeren',
-    title: 'Goethe A2 — Hören · Modellsatz 1',
-    description: 'Vollständiger Hörverstehen-Test im offiziellen Goethe A2-Format.',
+    title: 'Deutsch A2 — Hören · Modellsatz 1',
+    description: 'Vollständiger Hörverstehen-Test im offiziellen A2-Prüfungsformat.',
     durationMinutes: 30,
     maxScore: 20,
     passScore: 12,

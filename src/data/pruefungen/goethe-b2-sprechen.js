@@ -1,5 +1,5 @@
 /**
- * Goethe-Zertifikat B2 — Sprechen
+ * Zertifikat B2 — Sprechen
  *
  * Offiziell: 2 Teile, ~15 min, Paarprüfung.
  *   Teil 1: Vortrag (4 min)
@@ -14,7 +14,7 @@ export const goetheB2SprechenExams = [
     provider: 'goethe',
     level: 'B2',
     module: 'sprechen',
-    title: 'Goethe B2 — Sprechen · Modellsatz 1',
+    title: 'Deutsch B2 — Sprechen · Modellsatz 1',
     description: 'Vortrag und Diskussionsbeitrag zu einem aktuellen Thema.',
     durationMinutes: 12,
     maxScore: 50,

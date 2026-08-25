@@ -1,5 +1,5 @@
 /**
- * Goethe-Zertifikat A1 — Hören
+ * Zertifikat A1 — Hören
  *
  * Official structure (3 Teile, 15 items, 20 min, pass = 60% = 9 / 15):
  *   Teil 1: 6 kurze Hörtexte. Mehrfachauswahl (a/b/c). 2x hören.
@@ -16,8 +16,8 @@ export const goetheA1HoerenExams = [
     provider: 'goethe',
     level: 'A1',
     module: 'hoeren',
-    title: 'Goethe A1 — Hören · Modellsatz 1',
-    description: 'Vollständiger Hörverstehen-Test im offiziellen Goethe A1-Format.',
+    title: 'Deutsch A1 — Hören · Modellsatz 1',
+    description: 'Vollständiger Hörverstehen-Test im offiziellen A1-Prüfungsformat.',
     durationMinutes: 20,
     maxScore: 15,
     passScore: 9,

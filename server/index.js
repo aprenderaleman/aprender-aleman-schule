@@ -1686,7 +1686,7 @@ app.get('/api/referral', authMiddleware, async (req, res) => {
 // Returns per-level:
 //   • path.pct  — % of that level's exercises the student has completed
 //                 with score >= PATH_PASS_THRESHOLD.
-//   • pruefung  — best result per Goethe module (Lesen/Hören/Schreiben/
+//   • pruefung  — best result per exam module (Lesen/Hören/Schreiben/
 //                 Sprechen) for the student's current level.
 //   • guarantee — flags the CRM can act on directly, e.g. eligibility
 //                 for the level-guarantee refund.
@@ -4195,7 +4195,7 @@ app.get('/api/pruefungen/attempts', authMiddleware, subscriptionMiddleware, asyn
   }
 })
 
-// GRADE Schreiben submission with Claude using Goethe rubric
+// GRADE Schreiben submission with Claude using the official rubric
 app.post('/api/pruefungen/grade-schreiben', authMiddleware, subscriptionMiddleware, aiRateLimit, aiDailyCap, blockIfReadOnly, async (req, res) => {
   try {
     if (!ANTHROPIC_API_KEY) return res.status(503).json({ error: 'Servicio de IA no disponible.' })
@@ -4215,7 +4215,7 @@ app.post('/api/pruefungen/grade-schreiben', authMiddleware, subscriptionMiddlewa
       return res.json(cached)
     }
 
-    const message = `Du bist offizieller Prüfer für das Goethe-Zertifikat ${level}. Bewerte diesen Schreibteil nach der offiziellen Goethe-Bewertungsskala.
+    const message = `Du bist offizieller Prüfer für die Deutschprüfung ${level}. Bewerte diesen Schreibteil nach den offiziellen Bewertungskriterien.
 
 AUFGABE (${taskType || 'Schreibaufgabe'}):
 ${taskPrompt}
@@ -4227,7 +4227,7 @@ EINREICHUNG DES STUDENTEN:
 ${submission}
 """
 
-Bewerte nach den 4 offiziellen Goethe-Kriterien (jeweils 0-25 Punkte, Gesamt max. 100):
+Bewerte nach den 4 offiziellen Kriterien (jeweils 0-25 Punkte, Gesamt max. 100):
 1. Erfüllung der Aufgabe (Inhaltliche Vollständigkeit, Textsortenadäquatheit)
 2. Kohärenz (Textaufbau, Verknüpfung der Sätze)
 3. Wortschatz (Bandbreite und Korrektheit)
@@ -4272,7 +4272,7 @@ passed = true wenn total >= 60.`
   }
 })
 
-// GRADE Sprechen submission (transcript) with Claude using Goethe rubric
+// GRADE Sprechen submission (transcript) with Claude using the official rubric
 app.post('/api/pruefungen/grade-sprechen', authMiddleware, subscriptionMiddleware, aiRateLimit, aiDailyCap, blockIfReadOnly, async (req, res) => {
   try {
     if (!ANTHROPIC_API_KEY) return res.status(503).json({ error: 'Servicio de IA no disponible.' })
@@ -4292,7 +4292,7 @@ app.post('/api/pruefungen/grade-sprechen', authMiddleware, subscriptionMiddlewar
       return res.json(cached)
     }
 
-    const message = `Du bist offizieller Prüfer für das Goethe-Zertifikat ${level} Modul Sprechen. Du bewertest die TRANSKRIPTION einer mündlichen Antwort.
+    const message = `Du bist offizieller Prüfer für die Deutschprüfung ${level}, Modul Sprechen. Du bewertest die TRANSKRIPTION einer mündlichen Antwort.
 
 WICHTIG: Du kannst keine Aussprache, Intonation oder Sprechflüssigkeit direkt hören — du arbeitest nur mit dem Transkript. Bewerte deshalb NUR Inhalt, Wortschatz, Strukturen und Kohärenz. Erwähne im Kommentar, dass Aussprache nicht automatisch bewertet werden konnte.
 
@@ -4421,9 +4421,9 @@ SPRACHREGELN:
 Der Nutzer heißt ${userName} und hat das Niveau ${userLevel}.
 
 PLATTFORM-INFORMATIONEN:
-- Bereiche: Dashboard, Übungen (Grammatik, Lesen, Schreiben, Hören), Karteikarten, Prüfungen (Goethe A1-C2), Fortschritt, Erfolge
+- Bereiche: Dashboard, Übungen (Grammatik, Lesen, Schreiben, Hören), Karteikarten, Prüfungen (A1-C2), Fortschritt, Erfolge
 - Die Übungen haben 4 Typen: Grammatik, Lesen, Schreiben und Hören
-- Die Goethe-Prüfungen simulieren das offizielle Format mit 4 Modulen: Lesen, Hören, Schreiben und Sprechen
+- Die Prüfungen simulieren das offizielle Format mit 4 Modulen: Lesen, Hören, Schreiben und Sprechen
 - Zum Bestehen braucht man ≥60% in jedem Modul
 - Das Abonnement kostet 15€/Monat und beinhaltet unbegrenzten Zugang
 - Die kostenlose Testphase endet, wenn der Nutzer 10.000 XP erreicht hat

@@ -1,5 +1,5 @@
 /**
- * Goethe-Zertifikat C1 — Lesen (kompakte Version)
+ * Zertifikat C1 — Lesen (kompakte Version)
  *
  * Offiziell: 4 Teile, ~25 Items, 70 min, pass = 60%.
  * Wir verwenden eine kompakte Version mit 3 Teilen, 15 Items, pass bei 9.
@@ -11,7 +11,7 @@ export const goetheC1LesenExams = [
     provider: 'goethe',
     level: 'C1',
     module: 'lesen',
-    title: 'Goethe C1 — Lesen · Modellsatz 1',
+    title: 'Deutsch C1 — Lesen · Modellsatz 1',
     description: 'Anspruchsvolle Lesetexte mit MC, R/F und differenziertem Verstehen.',
     durationMinutes: 50,
     maxScore: 15,

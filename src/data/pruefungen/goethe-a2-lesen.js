@@ -1,5 +1,5 @@
 /**
- * Goethe-Zertifikat A2 — Lesen
+ * Zertifikat A2 — Lesen
  *
  * Official structure (4 Teile, 20 items, 30 min, pass = 12 / 20):
  *   Teil 1: 5 MC zu kurzen Texten (z. B. E-Mail / Brief)
@@ -14,8 +14,8 @@ export const goetheA2LesenExams = [
     provider: 'goethe',
     level: 'A2',
     module: 'lesen',
-    title: 'Goethe A2 — Lesen · Modellsatz 1',
-    description: 'Vollständiger Leseverstehen-Test im offiziellen Goethe A2-Format.',
+    title: 'Deutsch A2 — Lesen · Modellsatz 1',
+    description: 'Vollständiger Leseverstehen-Test im offiziellen A2-Prüfungsformat.',
     durationMinutes: 30,
     maxScore: 20,
     passScore: 12,

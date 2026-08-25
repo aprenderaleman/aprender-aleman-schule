@@ -1,5 +1,5 @@
 /**
- * Goethe-Zertifikat C2 — Sprechen
+ * Zertifikat C2 — Sprechen
  *
  * Offiziell: 2 Teile, ~15 min.
  *   Teil 1: Vortrag zu einem komplexen Thema (~5–7 min)
@@ -14,7 +14,7 @@ export const goetheC2SprechenExams = [
     provider: 'goethe',
     level: 'C2',
     module: 'sprechen',
-    title: 'Goethe C2 — Sprechen · Modellsatz 1',
+    title: 'Deutsch C2 — Sprechen · Modellsatz 1',
     description: 'Komplexer Vortrag zu einem gesellschaftlich relevanten Thema.',
     durationMinutes: 15,
     maxScore: 50,

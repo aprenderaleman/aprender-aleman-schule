@@ -1,5 +1,5 @@
 /**
- * Goethe-Zertifikat A1 — LESEN (Modellsätze)
+ * Zertifikat A1 — LESEN (Modellsätze)
  *
  * Official structure (Start Deutsch 1):
  *   Teil 1: Kurze Mitteilungen (5 questions, true/false)
@@ -21,7 +21,7 @@ export const goetheA1LesenExams = [
     level: 'A1',
     module: 'lesen',
     title: 'Modellsatz 1 — Lesen',
-    description: 'Kompletter Leseteil des Goethe A1. 20 Aufgaben in 25 Minuten.',
+    description: 'Kompletter Leseteil der A1-Prüfung. 20 Aufgaben in 25 Minuten.',
     durationMinutes: 25,
     maxScore: 20,
     passScore: 12,

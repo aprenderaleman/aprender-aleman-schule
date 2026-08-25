@@ -15,12 +15,12 @@ import CertificateStatus from '../components/Pruefungen/CertificateStatus'
 const API_URL = import.meta.env.VITE_API_URL || ''
 
 const LEVELS = [
-  { code: 'A1', title: 'Goethe-Zertifikat A1', subtitle: 'Start Deutsch 1', desc: 'Absoluter Anfänger. Du kannst dich vorstellen und einfache Fragen stellen.', color: 'from-green-500 to-emerald-500', border: 'border-green-300' },
-  { code: 'A2', title: 'Goethe-Zertifikat A2', subtitle: 'Start Deutsch 2', desc: 'Grundlegende Konversation. Alltagssituationen meistern.', color: 'from-teal-500 to-cyan-500', border: 'border-teal-300' },
-  { code: 'B1', title: 'Goethe-Zertifikat B1', subtitle: 'Zertifikat Deutsch', desc: 'Mittelstufe. Wichtig für Aufenthaltstitel und Einbürgerung in Deutschland.', color: 'from-blue-500 to-indigo-500', border: 'border-blue-300', popular: true },
-  { code: 'B2', title: 'Goethe-Zertifikat B2', subtitle: 'Mittelstufenprüfung', desc: 'Obere Mittelstufe. Zugang zu Studienkollegs und qualifizierten Berufen.', color: 'from-purple-500 to-fuchsia-500', border: 'border-purple-300' },
-  { code: 'C1', title: 'Goethe-Zertifikat C1', subtitle: 'Oberstufenprüfung', desc: 'Fortgeschritten. Voraussetzung für ein Studium an deutschen Universitäten.', color: 'from-orange-500 to-red-500', border: 'border-orange-300' },
-  { code: 'C2', title: 'Goethe-Zertifikat C2', subtitle: 'Großes Deutsches Sprachdiplom', desc: 'Höchstes Niveau. Annähernd muttersprachliche Kompetenz.', color: 'from-rose-500 to-pink-600', border: 'border-rose-300' },
+  { code: 'A1', title: 'Zertifikat A1', subtitle: 'Erste Stufe', desc: 'Absoluter Anfänger. Du kannst dich vorstellen und einfache Fragen stellen.', color: 'from-green-500 to-emerald-500', border: 'border-green-300' },
+  { code: 'A2', title: 'Zertifikat A2', subtitle: 'Grundstufe', desc: 'Grundlegende Konversation. Alltagssituationen meistern.', color: 'from-teal-500 to-cyan-500', border: 'border-teal-300' },
+  { code: 'B1', title: 'Zertifikat B1', subtitle: 'Mittelstufe', desc: 'Mittelstufe. Wichtig für Aufenthaltstitel und Einbürgerung in Deutschland.', color: 'from-blue-500 to-indigo-500', border: 'border-blue-300', popular: true },
+  { code: 'B2', title: 'Zertifikat B2', subtitle: 'Mittelstufenprüfung', desc: 'Obere Mittelstufe. Zugang zu Studienkollegs und qualifizierten Berufen.', color: 'from-purple-500 to-fuchsia-500', border: 'border-purple-300' },
+  { code: 'C1', title: 'Zertifikat C1', subtitle: 'Oberstufenprüfung', desc: 'Fortgeschritten. Voraussetzung für ein Studium an deutschen Universitäten.', color: 'from-orange-500 to-red-500', border: 'border-orange-300' },
+  { code: 'C2', title: 'Zertifikat C2', subtitle: 'Höchste Stufe', desc: 'Höchstes Niveau. Annähernd muttersprachliche Kompetenz.', color: 'from-rose-500 to-pink-600', border: 'border-rose-300' },
 ]
 const LEVEL_BY_CODE = Object.fromEntries(LEVELS.map(l => [l.code, l]))
 
@@ -130,7 +130,7 @@ function PruefungsWizard({ onComplete, initialError }) {
             <Sparkles size={14} /> NEU · Prüfungsvorbereitung
           </div>
           <h1 className="text-3xl md:text-5xl font-extrabold text-gray-800 dark:text-gray-100 mb-3">
-            Bereit für dein <span className="text-indigo-600">Goethe-Zertifikat</span>?
+            Bereit für dein <span className="text-indigo-600">Zertifikat</span>?
           </h1>
           <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
             In 3 Schritten erstellen wir deinen persönlichen Vorbereitungsplan — mit echten Simulationsprüfungen, KI-Korrektur und allen 4 Modulen.
@@ -256,7 +256,7 @@ function PruefungsWizard({ onComplete, initialError }) {
                     <ul className="text-sm text-gray-600 dark:text-gray-300 space-y-1.5">
                       <li className="flex items-center gap-2"><CheckCircle2 size={14} className="text-green-500" /> 4 Module: Lesen, Hören, Schreiben, Sprechen</li>
                       <li className="flex items-center gap-2"><CheckCircle2 size={14} className="text-green-500" /> Echte Simulationsprüfungen mit Zeitlimit</li>
-                      <li className="flex items-center gap-2"><CheckCircle2 size={14} className="text-green-500" /> KI-Korrektur nach offizieller Goethe-Skala</li>
+                      <li className="flex items-center gap-2"><CheckCircle2 size={14} className="text-green-500" /> KI-Korrektur nach offiziellen Prüfungskriterien</li>
                       <li className="flex items-center gap-2"><CheckCircle2 size={14} className="text-green-500" /> Persönlicher Lernplan</li>
                     </ul>
                   </div>
