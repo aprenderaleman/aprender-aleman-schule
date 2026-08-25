@@ -49,6 +49,7 @@ const DeutschC1 = lazy(() => import('./pages/DeutschC1'))
 const DeutschB2 = lazy(() => import('./pages/DeutschB2'))
 const DeutschB1 = lazy(() => import('./pages/DeutschB1'))
 const DeutschA2 = lazy(() => import('./pages/DeutschA2'))
+const DeutschA1 = lazy(() => import('./pages/DeutschA1'))
 
 // Quién cuenta como staff. El servidor ya aplica esta misma regla en
 // subscriptionMiddleware y en la sincronización con b2c: todo rol que no sea de
@@ -176,6 +177,8 @@ function AppRoutes() {
         <Route path="/deutschb1/:id" element={<C1Route><DeutschB1 /></C1Route>} />
         <Route path="/deutscha2" element={<C1Route><DeutschA2 /></C1Route>} />
         <Route path="/deutscha2/:id" element={<C1Route><DeutschA2 /></C1Route>} />
+        <Route path="/deutscha1" element={<C1Route><DeutschA1 /></C1Route>} />
+        <Route path="/deutscha1/:id" element={<C1Route><DeutschA1 /></C1Route>} />
         {/* Admin routes */}
         <Route path="/admin" element={<AdminRoute><AdminDashboard /></AdminRoute>} />
         <Route path="/admin/usuarios" element={<AdminRoute><AdminUsers /></AdminRoute>} />

@@ -66,7 +66,7 @@ export default function AppSidebar() {
     /^\/admin(\/|$)/.test(path) ||
     /^\/ejercicio\//.test(path) ||
     /^\/pruefung\//.test(path) ||
-    /^\/deutsch(c1|b2|b1|a2)(\/|$)/.test(path)
+    /^\/deutsch(c1|b2|b1|a2|a1)(\/|$)/.test(path)
   )
   if (hidden) return null
 

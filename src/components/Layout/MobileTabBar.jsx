@@ -30,7 +30,7 @@ export default function MobileTabBar() {
     /^\/ejercicio\//.test(location.pathname) ||
     /^\/pruefung\//.test(location.pathname) ||
     /^\/auto-login/.test(location.pathname) ||
-    /^\/deutsch(c1|b2|b1|a2)(\/|$)/.test(location.pathname)
+    /^\/deutsch(c1|b2|b1|a2|a1)(\/|$)/.test(location.pathname)
   )
   if (hidden) return null
 
