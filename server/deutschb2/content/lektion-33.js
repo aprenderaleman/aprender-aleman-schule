@@ -55,7 +55,7 @@ export default {
       card: true,
       titel: 'Arbeit als Prüfungsthema',
       absaetze: [
-        'Arbeit ist eines der häufigsten Themen im Goethe-Zertifikat B2: ein Forumsbeitrag über das Homeoffice, eine Diskussion über die Work-Life-Balance, ein Vortrag über den Traumjob. Du brauchst dafür keine Fachbegriffe, sondern **klare Alltagsargumente** — und die Debatte um das Homeoffice liefert sie dir.',
+        'Arbeit ist eines der häufigsten Themen im Zertifikat B2: ein Forumsbeitrag über das Homeoffice, eine Diskussion über die Work-Life-Balance, ein Vortrag über den Traumjob. Du brauchst dafür keine Fachbegriffe, sondern **klare Alltagsargumente** — und die Debatte um das Homeoffice liefert sie dir.',
       ],
     },
     {

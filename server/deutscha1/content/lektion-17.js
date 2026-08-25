@@ -5,7 +5,7 @@
 // Número exacto de Teile, ítems, veces de escucha y puntos → SIEMPRE
 // genérico + remisión al Modellsatz oficial.
 // Instala la METODOLOGÍA SIN AUDIO del curso: Transkripte que se leen una
-// sola vez (o alguien los lee en voz alta) + Modellsatz del Goethe-Institut
+// sola vez (o alguien los lee en voz alta) + Modellsatz del Prüfungszentrum
 // para practicar con audio real, gratis.
 
 export default {
@@ -78,7 +78,7 @@ export default {
       titel: 'Transkript statt Audio',
       absaetze: [
         'In diesem Kurs steht jeder Hörtext als **Transkript** ~~(el texto de lo que se oye)~~. Lies es __nur einmal__, in normalem Tempo, **ohne zurückzugehen** — oder jemand liest es dir **laut vor**. ~~Una sola pasada: así simulas la escucha.~~',
-        'Echtes Audio gibt es **gratis** im offiziellen **Modellsatz** vom Goethe-Institut ~~(examen de muestra en goethe.de, con soluciones)~~. Mach ihn einmal vor der Prüfung.',
+        'Echtes Audio gibt es **gratis** im offiziellen **Modellsatz** ~~(examen de muestra oficial, con soluciones)~~. Mach ihn einmal vor der Prüfung.',
       ],
     },
 
@@ -172,7 +172,7 @@ export default {
     {
       type: 'tipp',
       label: 'Prüfungstipp',
-      text: 'Wie oft du jeden Text hörst, sagt dir die **Anweisung** in der Prüfung. Übe das einmal real: Der **Modellsatz** vom Goethe-Institut ist gratis, mit echtem Audio.',
+      text: 'Wie oft du jeden Text hörst, sagt dir die **Anweisung** in der Prüfung. Übe das einmal real: Der **Modellsatz** vom Prüfungsanbieter ist gratis, mit echtem Audio.',
     },
 
     { type: 'rule' },

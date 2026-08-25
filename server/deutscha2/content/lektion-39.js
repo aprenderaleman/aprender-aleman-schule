@@ -50,7 +50,7 @@ export default {
       titel: 'Wie in der Prüfung — sonst hilft es nicht',
       absaetze: [
         'Heute lernst du nichts Neues — du testest, was du schon kannst. Die Bedingungen müssen **ehrlich** sein ~~(sin trucos, o la nota te engaña)~~: Timer sichtbar, kein Wörterbuch, kein Handy. Die Lösungen liest du erst am Ende.',
-        'Wichtig: Das Goethe-Zertifikat A2 ist **eine** Prüfung — nicht modular wie das B1. Du bestehst ab **60 Prozent von der ganzen Prüfung**. Ein schwacher Teil ist also kein Drama.',
+        'Wichtig: Das Zertifikat A2 ist **eine** Prüfung — nicht modular wie das B1. Du bestehst ab **60 Prozent von der ganzen Prüfung**. Ein schwacher Teil ist also kein Drama.',
       ],
     },
     {

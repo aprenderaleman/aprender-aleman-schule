@@ -309,7 +309,7 @@ export default {
     {
       type: 'ausblick',
       eyebrow: 'Ausblick — Zum Abschluss',
-      text: 'Hier endet der Kurs — **42 Lektionen, vier Module, ein Ziel: das Goethe-Zertifikat B2**. Herzlichen Glückwunsch, dass du bis hierher gekommen bist. Melde dich jetzt zur Prüfung an, solange alles frisch ist — Wartezeit ist der natürliche Feind der Vorbereitung. Und danach? Lass das Deutsche nicht wieder los: ein Podcast beim Frühstück, eine Serie auf Deutsch statt mit Untertiteln, ein Tandempartner — Immersion ist ab jetzt dein bester Lehrer. Wenn du weitergehen willst: Auf Aprender-Aleman.de wartet unser **Deutsch-C1-Kurs** (unter /deutschc1) mit demselben System auf dich. Das B2 öffnet dir Studium und Beruf im deutschsprachigen Raum — aber was du wirklich mitnimmst, ist eine Sprache, in der du inzwischen erzählen, argumentieren und überzeugen kannst. **Viel Erfolg am Prüfungstag — du bist bereit.**',
+      text: 'Hier endet der Kurs — **42 Lektionen, vier Module, ein Ziel: das Zertifikat B2**. Herzlichen Glückwunsch, dass du bis hierher gekommen bist. Melde dich jetzt zur Prüfung an, solange alles frisch ist — Wartezeit ist der natürliche Feind der Vorbereitung. Und danach? Lass das Deutsche nicht wieder los: ein Podcast beim Frühstück, eine Serie auf Deutsch statt mit Untertiteln, ein Tandempartner — Immersion ist ab jetzt dein bester Lehrer. Wenn du weitergehen willst: Auf Aprender-Aleman.de wartet unser **Deutsch-C1-Kurs** (unter /deutschc1) mit demselben System auf dich. Das B2 öffnet dir Studium und Beruf im deutschsprachigen Raum — aber was du wirklich mitnimmst, ist eine Sprache, in der du inzwischen erzählen, argumentieren und überzeugen kannst. **Viel Erfolg am Prüfungstag — du bist bereit.**',
     },
   ],
 }

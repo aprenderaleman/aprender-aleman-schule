@@ -52,7 +52,7 @@ export default {
       titel: 'Zwei Arten von Texten',
       absaetze: [
         'Das Modul Hören dauert **ca. 30 Minuten**. Du hörst kurze Texte aus dem Alltag: __Durchsagen__ ~~(megafonía)~~ am Bahnhof oder im Supermarkt, Nachrichten auf dem __Anrufbeantworter__, kurze Texte im Radio — und __Gespräche__ zwischen zwei Personen.',
-        'In der Regel gibt es also zwei große Gruppen: **kurze Texte & Durchsagen** und **Gespräche**. Wie viele Teile und Aufgaben es genau sind und wie oft du jeden Text hörst, siehst du im offiziellen **Modellsatz** des Goethe-Instituts.',
+        'In der Regel gibt es also zwei große Gruppen: **kurze Texte & Durchsagen** und **Gespräche**. Wie viele Teile und Aufgaben es genau sind und wie oft du jeden Text hörst, siehst du im offiziellen **Modellsatz** des Prüfungsanbieters.',
       ],
     },
     {
@@ -80,7 +80,7 @@ export default {
       titel: 'Die Methode in diesem Kurs',
       absaetze: [
         'Dieser Kurs hat kein Audio. Wir üben mit **Transkripten** ~~(el texto escrito de lo que se oye)~~. So geht es: Lies die Aufgaben. Dann lies das Transkript **nur einmal**, in normalem Tempo, ohne zurückzugehen — genau wie beim Hören. Noch besser: **Eine andere Person liest dir das Transkript vor.**',
-        'Für echtes Audio: Der **Modellsatz** des Goethe-Instituts ist kostenlos online — mit echten Prüfungsstimmen. Übe damit vor der Prüfung.',
+        'Für echtes Audio: Der offizielle **Modellsatz** ist kostenlos online — mit echten Prüfungsstimmen. Übe damit vor der Prüfung.',
       ],
     },
 
@@ -166,7 +166,7 @@ export default {
     {
       type: 'tipp',
       label: 'Prüfungstipp',
-      text: 'Lade den offiziellen **Modellsatz** des Goethe-Instituts herunter — kostenlos und mit echtem Audio. In der Regel hörst du jeden Text **ein- oder zweimal**; die Details siehst du dort. Übe **einmal komplett unter Prüfungsbedingungen**.',
+      text: 'Lade den offiziellen **Modellsatz** herunter — kostenlos und mit echtem Audio. In der Regel hörst du jeden Text **ein- oder zweimal**; die Details siehst du dort. Übe **einmal komplett unter Prüfungsbedingungen**.',
     },
 
     { type: 'rule' },

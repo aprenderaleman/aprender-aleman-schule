@@ -95,7 +95,7 @@ export default {
       titel: 'ä, ö, ü, ß — dein Tipptraining',
       absaetze: [
         'In der Prüfung tippst du auf einer **deutschen Tastatur (QWERTZ)**: __ä, ö, ü__ haben eigene Tasten rechts, __ß__ liegt rechts neben der Null — und __y__ und __z__ sind vertauscht. ~~Si escribes «strasse» en vez de «Straße» o buscas la ß desesperado, pierdes tiempo y nervios: entrénalo antes.~~',
-        'So trainierst du realistisch: **(1)** Stell zu Hause das deutsche Tastaturlayout ein und tippe täglich 10 Minuten deutsche Sätze. **(2)** Schreib deine Übungstexte (z. B. Forumsbeiträge) **am Computer mit Zeitlimit**, nicht auf Papier. **(3)** Arbeite den **digitalen Modellsatz** des Goethe-Instituts durch — dort siehst du die echte Prüfungsoberfläche.',
+        'So trainierst du realistisch: **(1)** Stell zu Hause das deutsche Tastaturlayout ein und tippe täglich 10 Minuten deutsche Sätze. **(2)** Schreib deine Übungstexte (z. B. Forumsbeiträge) **am Computer mit Zeitlimit**, nicht auf Papier. **(3)** Arbeite den **digitalen offiziellen Modellsatz** durch — dort siehst du die echte Prüfungsoberfläche.',
       ],
     },
 

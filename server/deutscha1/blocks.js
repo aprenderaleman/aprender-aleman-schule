@@ -1,4 +1,4 @@
-// Deutsch A1 — Kursgerüst (preparación del Goethe-Zertifikat A1 / Start Deutsch 1).
+// Deutsch A1 — Kursgerüst (preparación del examen A1).
 //
 // Estructura definida por Gelfis en curso-a1.html (2026-08-25): 37 lecciones
 // en 5 bloques. La lección modelo es la 04 (Personalpronomen & sein).
@@ -13,7 +13,7 @@ export const A1_BLOCKS = [
 
 // Índice 0 = lección 1. El orden ES el id.
 export const A1_TITLES = [
-  'Das Goethe-Zertifikat A1 im Überblick',
+  'Das Zertifikat A1 im Überblick',
   'Prüfungsformat & Antwortbogen',
   'Diagnose A1 — Standortbestimmung',
   'Personalpronomen & das Verb „sein“',

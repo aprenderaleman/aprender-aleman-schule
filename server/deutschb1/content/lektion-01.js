@@ -1,4 +1,4 @@
-// Lektion 01 · Das Goethe-Zertifikat B1 im Überblick
+// Lektion 01 · Das Zertifikat B1 im Überblick
 //
 // Bloque 0 «Einführung» — qué certifica el B1 (GER), los 4 módulos con el
 // canon del KANON, el sistema 100/60 modular y el camino de la Anmeldung
@@ -6,7 +6,7 @@
 
 export default {
   spec: ['Bloque 0', 'Einführung', 'Niveau B1', 'Prüfungsrelevanz: alle Module'],
-  h1: 'Das Goethe-Zertifikat B1 im Überblick',
+  h1: 'Das Zertifikat B1 im Überblick',
   lead: 'Vier Module, 100 Punkte pro Modul, bestanden ab 60 — dein Weg von der Anmeldung bis zum Zeugnis. ~~El examen completo, de un vistazo.~~',
 
   content: [
@@ -53,7 +53,7 @@ export default {
       eyebrow: 'Erklärung — was B1 bedeutet',
       absaetze: [
         'B1 ist eine Stufe des __Gemeinsamen Europäischen Referenzrahmens (GER)__ und heißt dort **„selbstständige Sprachverwendung“** ~~(usuario independiente)~~. Mit B1 verstehst du die **Hauptpunkte** klarer Alltagstexte, kommst auf Reisen zurecht, schreibst **einfache zusammenhängende Texte** und sprichst über Erfahrungen, Pläne und Meinungen.',
-        'Das Goethe-Zertifikat B1 wird international anerkannt. Viele Behörden verlangen es z. B. für **Aufenthaltstitel oder die Einbürgerung** — die Regeln sind aber **je nach Land und Behörde** unterschiedlich. Frag immer bei der zuständigen Behörde nach, welches Zertifikat sie akzeptiert.',
+        'Das Zertifikat B1 wird international anerkannt. Viele Behörden verlangen es z. B. für **Aufenthaltstitel oder die Einbürgerung** — die Regeln sind aber **je nach Land und Behörde** unterschiedlich. Frag immer bei der zuständigen Behörde nach, welches Zertifikat sie akzeptiert.',
       ],
     },
     {
@@ -81,7 +81,7 @@ export default {
       steps: [
         {
           titel: 'Prüfungszentrum und Termin finden',
-          text: 'Such ein __Prüfungszentrum__ (Goethe-Institut oder Partner) in deiner Nähe und schau dir die freien Termine an. Beliebte Termine sind schnell ausgebucht — plane **früh**.',
+          text: 'Such ein __Prüfungszentrum__ in deiner Nähe und schau dir die freien Termine an. Beliebte Termine sind schnell ausgebucht — plane **früh**.',
         },
         {
           titel: 'Anmeldung',
@@ -182,7 +182,7 @@ export default {
     {
       type: 'tipp',
       label: 'Prüfungstipp',
-      text: 'Lade dir den **offiziellen Modellsatz** des Goethe-Instituts herunter und schau ihn einmal komplett an — noch ohne zu üben. Wer das Format kennt, hat in der Prüfung **keine Überraschungen** und spart wertvolle Minuten.',
+      text: 'Lade dir den **offiziellen Modellsatz** herunter und schau ihn einmal komplett an — noch ohne zu üben. Wer das Format kennt, hat in der Prüfung **keine Überraschungen** und spart wertvolle Minuten.',
     },
 
     { type: 'rule' },

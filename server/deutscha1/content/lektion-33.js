@@ -41,7 +41,7 @@ export default {
         { wort: 'der Schrank', kollokation: 'im Schrank', es: 'el armario' },
         { wort: 'die Adresse', kollokation: 'die Adresse schreiben', es: 'la dirección' },
       ],
-      hinweis: 'Die Adresse = **die Straße** ~~(la calle)~~ + die Hausnummer + die Stadt: *Goethestraße 12, Berlin*. ~~Ojo: en alemán el número va DESPUÉS del nombre de la calle.~~',
+      hinweis: 'Die Adresse = **die Straße** ~~(la calle)~~ + die Hausnummer + die Stadt: *Gartenstraße 12, Berlin*. ~~Ojo: en alemán el número va DESPUÉS del nombre de la calle.~~',
     },
 
     { type: 'rule' },
@@ -72,7 +72,7 @@ export default {
       kicker: 'Situation 3',
       titel: 'Die Adresse',
       absaetze: [
-        'Ich wohne **in der Goethestraße 12**. · Meine Adresse **ist** Goethestraße 12, Berlin. ~~En el examen escribes la dirección tal cual: calle + número, luego la ciudad — sin «calle de».~~',
+        'Ich wohne **in der Gartenstraße 12**. · Meine Adresse **ist** Gartenstraße 12, Berlin. ~~En el examen escribes la dirección tal cual: calle + número, luego la ciudad — sin «calle de».~~',
       ],
     },
 
@@ -106,7 +106,7 @@ export default {
         {
           fn: 'Die Adresse',
           saetze: [
-            { satz: 'Meine Adresse ist Goethestraße 12, Berlin.', gloss: 'Mi dirección es …' },
+            { satz: 'Meine Adresse ist Gartenstraße 12, Berlin.', gloss: 'Mi dirección es …' },
             { satz: 'Ich wohne in Berlin.', gloss: 'Vivo en Berlín.' },
           ],
         },
@@ -199,7 +199,7 @@ export default {
         ['die Zimmer', 'die Küche · das Bad · das Schlafzimmer · das Wohnzimmer'],
         ['die Möbel', 'der Tisch · der Stuhl · das Bett · der Schrank'],
         ['die Wohnung', 'Meine Wohnung **hat** drei Zimmer.'],
-        ['die Adresse', 'Goethestraße 12, Berlin ~~(calle + número, luego ciudad)~~'],
+        ['die Adresse', 'Gartenstraße 12, Berlin ~~(calle + número, luego ciudad)~~'],
       ],
     },
     {

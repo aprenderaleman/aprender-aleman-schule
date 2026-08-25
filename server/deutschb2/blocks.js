@@ -1,4 +1,4 @@
-// Deutsch B2 — Kursgerüst (preparación del Goethe-Zertifikat B2).
+// Deutsch B2 — Kursgerüst (preparación del examen B2).
 //
 // Estructura definida por Gelfis en curso-b2.html (2026-08-24): 42 lecciones
 // en 5 bloques. La lección modelo es la 04 (Konnektoren I).
@@ -18,7 +18,7 @@ export const B2_BLOCKS = [
 
 // Índice 0 = lección 1. El orden ES el id.
 export const B2_TITLES = [
-  'Das Goethe-Zertifikat B2 im Überblick',
+  'Das Zertifikat B2 im Überblick',
   'Das digitale Prüfungsformat (CBT)',
   'Diagnose B2 — Standortbestimmung',
   'Konnektoren I — Grund, Einräumung, Folge',

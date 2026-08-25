@@ -234,7 +234,7 @@ export default {
       type: 'prose',
       eyebrow: 'Zusammenfassung — Block 2 komplett',
       absaetze: [
-        'Mit dieser Lektion kennst du **alle vier Module** des Goethe-Zertifikats B2: Format, Bewertung und Strategie. Jedes Modul bringt **100 Punkte, bestanden ab 60** — und jedes kann einzeln abgelegt und wiederholt werden. Die Tabelle ist deine Landkarte für die Vorbereitung:',
+        'Mit dieser Lektion kennst du **alle vier Module** des Zertifikats B2: Format, Bewertung und Strategie. Jedes Modul bringt **100 Punkte, bestanden ab 60** — und jedes kann einzeln abgelegt und wiederholt werden. Die Tabelle ist deine Landkarte für die Vorbereitung:',
       ],
     },
     {

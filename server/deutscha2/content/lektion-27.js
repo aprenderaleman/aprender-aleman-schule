@@ -196,7 +196,7 @@ export default {
     {
       type: 'tipp',
       label: 'Prüfungstipp',
-      text: 'Im Modellsatz auf der Goethe-Website siehst du die Prüfung **mit Video**. Schau ihn dir einmal ganz an — dann weißt du genau, was dich erwartet.',
+      text: 'Im offiziellen Modellsatz siehst du die Prüfung **mit Video**. Schau ihn dir einmal ganz an — dann weißt du genau, was dich erwartet.',
     },
 
     { type: 'rule' },

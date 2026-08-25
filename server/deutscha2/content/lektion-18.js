@@ -167,7 +167,7 @@ export default {
     {
       type: 'tipp',
       label: 'Prüfungstipp',
-      text: 'Lies **zuerst die Aufgaben, dann den Text**. So weißt du, welche Information du suchst — und sparst Zeit. Übe vorher mit dem offiziellen **Modellsatz** von goethe.de: Dann kennst du am Prüfungstag jede Aufgabe schon.',
+      text: 'Lies **zuerst die Aufgaben, dann den Text**. So weißt du, welche Information du suchst — und sparst Zeit. Übe vorher mit dem offiziellen **Modellsatz**: Dann kennst du am Prüfungstag jede Aufgabe schon.',
     },
 
     { type: 'rule' },

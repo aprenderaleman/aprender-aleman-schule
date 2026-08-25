@@ -53,7 +53,7 @@ export default {
       type: 'prose',
       eyebrow: 'Erklärung — das Modul im Überblick',
       absaetze: [
-        'Das Modul Lesen dauert **65 Minuten** und besteht aus **fünf Teilen** mit insgesamt 100 Punkten — bestanden hast du ab 60. Jeder Teil hat eine eigene Textsorte und misst eine andere Lesekompetenz. Die genaue Zahl der Items pro Teil prüfst du am besten im **offiziellen Modellsatz** des Goethe-Instituts; hier zählt zuerst das System dahinter.',
+        'Das Modul Lesen dauert **65 Minuten** und besteht aus **fünf Teilen** mit insgesamt 100 Punkten — bestanden hast du ab 60. Jeder Teil hat eine eigene Textsorte und misst eine andere Lesekompetenz. Die genaue Zahl der Items pro Teil prüfst du am besten im **offiziellen Modellsatz**; hier zählt zuerst das System dahinter.',
       ],
     },
     {

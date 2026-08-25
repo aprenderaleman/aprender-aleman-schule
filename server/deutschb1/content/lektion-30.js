@@ -62,7 +62,7 @@ export default {
       card: true,
       titel: 'Was wird bewertet?',
       absaetze: [
-        'Die Prüfer bewerten u. a., ob du **die Aufgabe erfüllst**, wie du **mit deinem Partner interagierst**, deinen **Wortschatz**, deine **Strukturen** — und deine **Aussprache**. Die genaue Punktverteilung siehst du im offiziellen Modellsatz des Goethe-Instituts.',
+        'Die Prüfer bewerten u. a., ob du **die Aufgabe erfüllst**, wie du **mit deinem Partner interagierst**, deinen **Wortschatz**, deine **Strukturen** — und deine **Aussprache**. Die genaue Punktverteilung siehst du im offiziellen Modellsatz des Prüfungsanbieters.',
         'Wichtig für B1: **Fehler sind normal.** Du musst nicht perfekt sprechen, sondern verständlich. ~~Comunicar vale más que la perfección: un error de gramática pesa menos que un silencio largo.~~',
       ],
     },

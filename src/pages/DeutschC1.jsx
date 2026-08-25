@@ -2,7 +2,7 @@ import React from 'react'
 import KursSeite from '../components/DeutschC1/KursSeite'
 
 // Curso C1. La marca visible es Aprender-Aleman.de (kicker del sidebar);
-// el examen que prepara (Goethe-Zertifikat C1) se nombra dentro de las
+// el examen que prepara (Zertifikat C1) se nombra dentro de las
 // lecciones como dato, no como marca del curso.
 const KURS_C1 = {
   name: 'Deutsch C1',

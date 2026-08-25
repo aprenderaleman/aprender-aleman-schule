@@ -41,7 +41,7 @@ export default {
         { wort: 'richtig / falsch', kollokation: 'richtig oder falsch ankreuzen', es: 'verdadero / falso' },
         { wort: 'der Sprecher, - / die Sprecherin, -nen', kollokation: 'Wie viele Sprecher hörst du?', es: 'hablante' },
         { wort: 'die Notiz, -en', kollokation: 'sich kurze Notizen machen', es: 'nota, apunte' },
-        { wort: 'der Modellsatz, -sätze', kollokation: 'den Modellsatz des Goethe-Instituts durcharbeiten', es: 'examen modelo' },
+        { wort: 'der Modellsatz, -sätze', kollokation: 'den offiziellen Modellsatz durcharbeiten', es: 'examen modelo' },
       ],
       hinweis: 'Vorsicht, ähnliche Wörter: die **Ansage** hörst du (megafonía), die **Aussage** liest du in der Aufgabe. ~~No confundas tampoco „ankreuzen“ (marcar) con „unterstreichen“ (subrayar).~~',
     },
@@ -95,7 +95,7 @@ export default {
       card: true,
       titel: 'Die Transkript-Methode',
       absaetze: [
-        'Dieser Kurs hat kein Audio — die Hörtexte stehen als **Transkripte** da, markiert mit ~~(en el examen: audio)~~. Drei Regeln, damit das Training echt bleibt: **(1)** Lies das Transkript nur **einmal**, in normalem Sprechtempo, ohne zurückzuspringen — oder lass es dir **vorlesen**. **(2)** Decke die Lösung ab, bis du geantwortet hast. **(3)** Ergänze regelmäßig die **Modellsätze des Goethe-Instituts** — kostenlos und mit echtem Audio. Transkript = Technik-Übung, Modellsatz = Generalprobe.',
+        'Dieser Kurs hat kein Audio — die Hörtexte stehen als **Transkripte** da, markiert mit ~~(en el examen: audio)~~. Drei Regeln, damit das Training echt bleibt: **(1)** Lies das Transkript nur **einmal**, in normalem Sprechtempo, ohne zurückzuspringen — oder lass es dir **vorlesen**. **(2)** Decke die Lösung ab, bis du geantwortet hast. **(3)** Ergänze regelmäßig die **offiziellen Modellsätze** — kostenlos und mit echtem Audio. Transkript = Technik-Übung, Modellsatz = Generalprobe.',
       ],
     },
 

@@ -3,7 +3,7 @@
 // Bloque 4 «Prüfungssimulation» — primer simulacro guiado y autocorregible.
 // Esqueleto de 8 secciones adaptado: las tres Übungen SON las partes del
 // simulacro (Lesen · Hören · Schreiben Teil 1); el Prüfungsbezug enseña a
-// corregirse con los 4 criterios del Goethe.
+// corregirse con los 4 criterios oficiales.
 
 export default {
   spec: ['Bloque 4', 'Prüfungssimulation', 'Niveau C1', 'Prüfungsrelevanz: Alle vier Module'],
@@ -18,7 +18,7 @@ export default {
       items: [
         'Am Ende kannst du eine Prüfungssimulation zu Hause unter realen Bedingungen durchführen — mit Timer, ohne Wörterbuch, in der richtigen Reihenfolge.',
         'Du bearbeitest je eine Originalaufgabe aus Lesen, Hören und Schreiben unter Zeitdruck.',
-        'Du bewertest deinen eigenen Text mit den vier Goethe-Kriterien und einer vereinfachten Rubrik.',
+        'Du bewertest deinen eigenen Text mit den vier offiziellen Kriterien und einer vereinfachten Rubrik.',
         'Du benennst deine typischen Fehler mit den passenden Fachbegriffen und legst eine Fehlerkartei an.',
       ],
     },

@@ -196,7 +196,7 @@ export default {
     {
       type: 'ausblick',
       eyebrow: 'Ausblick',
-      text: 'Damit ist der Themenblock komplett: Freizeit, Reisen, Gesundheit und dein Alltag — die vier großen Themen des Goethe-Zertifikats A2. In der nächsten Lektion testest du alles zusammen: die **Prüfungssimulation 1** wartet auf dich.',
+      text: 'Damit ist der Themenblock komplett: Freizeit, Reisen, Gesundheit und dein Alltag — die vier großen Themen des Zertifikats A2. In der nächsten Lektion testest du alles zusammen: die **Prüfungssimulation 1** wartet auf dich.',
     },
   ],
 }

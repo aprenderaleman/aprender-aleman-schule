@@ -1,11 +1,11 @@
-// Lektion 01 · Das Goethe-Zertifikat C1 im Überblick
+// Lektion 01 · Das Zertifikat C1 im Überblick
 //
 // Bloque 0 · Einführung — Orientierungslektion: Aufbau der Prüfung,
 // Bewertungssystem, Prüfungssprache und Vorbereitungsplanung.
 
 export default {
   spec: ['Bloque 0', 'Einführung', 'Niveau C1', 'Prüfungsrelevanz: Alle vier Module'],
-  h1: 'Das Goethe-Zertifikat C1 im Überblick',
+  h1: 'Das Zertifikat C1 im Überblick',
   lead: 'Bevor die Vorbereitung beginnt: Wie ist die Prüfung aufgebaut, wie wird bewertet, was verlangen die Aufgabenstellungen — und wie plant man den Weg zum Bestehen?',
 
   content: [
@@ -55,7 +55,7 @@ export default {
       card: true,
       titel: 'Was das Zertifikat nachweist',
       absaetze: [
-        'Das Goethe-Zertifikat C1 bescheinigt eine **selbstständige, souveräne Sprachverwendung** auf der Stufe C1 des Gemeinsamen Europäischen Referenzrahmens (GER): Du verstehst anspruchsvolle, längere Texte auch dort, wo Bedeutungen nur **implizit** mitschwingen, du drückst dich spontan und fließend aus, ohne erkennbar nach Worten suchen zu müssen, und du gebrauchst die Sprache **wirksam und flexibel** im gesellschaftlichen, beruflichen und akademischen Leben.',
+        'Das Zertifikat C1 bescheinigt eine **selbstständige, souveräne Sprachverwendung** auf der Stufe C1 des Gemeinsamen Europäischen Referenzrahmens (GER): Du verstehst anspruchsvolle, längere Texte auch dort, wo Bedeutungen nur **implizit** mitschwingen, du drückst dich spontan und fließend aus, ohne erkennbar nach Worten suchen zu müssen, und du gebrauchst die Sprache **wirksam und flexibel** im gesellschaftlichen, beruflichen und akademischen Leben.',
         'In der Praxis öffnet das Zertifikat vor allem zwei Türen: die **Zulassung zum Studium** an deutschsprachigen Hochschulen und den Nachweis qualifizierter Sprachkenntnisse im Beruf — etwa bei der Anerkennung medizinischer oder technischer Abschlüsse. Geprüft werden **vier Fertigkeiten getrennt**: Lesen, Hören, Schreiben und Sprechen. Jede Fertigkeit ist ein eigenes Modul mit eigener Bewertung und eigenem Ergebnis. ~~Cuatro exámenes independientes bajo un mismo techo — esa es la idea clave del sistema modular.~~',
       ],
     },
@@ -104,7 +104,7 @@ export default {
       card: true,
       titel: 'Von der Anmeldung bis zum Zeugnis',
       absaetze: [
-        'Die **Zulassung** setzt kein bestimmtes Vorzeugnis voraus — ein B2-Zertifikat musst du nicht nachweisen; empfohlen wird lediglich ein Mindestalter von 16 Jahren. Die **Anmeldung** erfolgt direkt bei einem Prüfungszentrum, also einem Goethe-Institut oder einem seiner Kooperationspartner. Achte auf die Fristen: Beliebte Prüfungstermine sind oft Wochen im Voraus ausgebucht.',
+        'Die **Zulassung** setzt kein bestimmtes Vorzeugnis voraus — ein B2-Zertifikat musst du nicht nachweisen; empfohlen wird lediglich ein Mindestalter von 16 Jahren. Die **Anmeldung** erfolgt direkt bei einem offiziellen Prüfungszentrum. Achte auf die Fristen: Beliebte Prüfungstermine sind oft Wochen im Voraus ausgebucht.',
         'Am Prüfungstag brauchst du ein **gültiges Ausweisdokument** — dasselbe, mit dem du dich angemeldet hast. Nach der Prüfung erhältst du für jedes Modul ein eigenes Ergebnis und auf Wunsch ein **Zeugnis**; nicht bestandene Module wiederholst du zu einem späteren Prüfungstermin, ohne die anderen erneut ablegen zu müssen.',
       ],
     },

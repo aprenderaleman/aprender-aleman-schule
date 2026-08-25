@@ -1,11 +1,11 @@
-// Lektion 01 · Das Goethe-Zertifikat A2 im Überblick
+// Lektion 01 · Das Zertifikat A2 im Überblick
 //
 // Bloque 0 «Einführung». Qué certifica el A2, las 4 partes (canon KANON.md),
 // examen único NO modular con aprobado al 60 %, de la Anmeldung al Zeugnis.
 
 export default {
   spec: ['Bloque 0', 'Einführung', 'Niveau A2', 'Prüfungsrelevanz: alle Teile'],
-  h1: 'Das Goethe-Zertifikat A2 im Überblick',
+  h1: 'Das Zertifikat A2 im Überblick',
   lead: '~~Tu primer mapa del examen:~~ **vier Teile, eine Prüfung, 60 %**. ~~Qué certifica el A2 y cómo funciona, de la inscripción al certificado.~~',
 
   content: [
@@ -14,7 +14,7 @@ export default {
       type: 'lernziele',
       eyebrow: 'Lernziele',
       items: [
-        'wissen, was das Goethe-Zertifikat A2 ist und was es zertifiziert',
+        'wissen, was das Zertifikat A2 ist und was es zertifiziert',
         'die vier Prüfungsteile kennen: Lesen, Hören, Schreiben, Sprechen',
         'den Weg von der Anmeldung bis zum Zeugnis verstehen',
       ],
@@ -49,7 +49,7 @@ export default {
       card: true,
       titel: 'Deutsch für den Alltag',
       absaetze: [
-        'Das Goethe-Zertifikat A2 ist ein offizielles Zertifikat vom **Goethe-Institut**. Es zeigt: Du verstehst und sprichst __einfaches Deutsch für den Alltag__ ~~(alemán sencillo para el día a día)~~ — einkaufen, nach dem Weg fragen, über Familie und Arbeit sprechen. Das Niveau A2 kommt aus dem **GER** ~~(el Marco Común Europeo de Referencia)~~.',
+        'Das Zertifikat A2 ist ein offizielles, international anerkanntes Zertifikat. Es zeigt: Du verstehst und sprichst __einfaches Deutsch für den Alltag__ ~~(alemán sencillo para el día a día)~~ — einkaufen, nach dem Weg fragen, über Familie und Arbeit sprechen. Das Niveau A2 kommt aus dem **GER** ~~(el Marco Común Europeo de Referencia)~~.',
         'Das Zertifikat ist international anerkannt. In einigen Ländern braucht man ein Deutsch-Zertifikat zum Beispiel für den **Familiennachzug** ~~(reagrupación familiar)~~ — die Regeln sind aber **je nach Land verschieden**. Informiere dich immer bei einer offiziellen Stelle.',
       ],
     },
@@ -77,7 +77,7 @@ export default {
       type: 'steps',
       eyebrow: 'Erklärung — Von der Anmeldung zum Zeugnis',
       steps: [
-        { titel: 'Anmeldung', text: 'Du meldest dich bei einem **Goethe-Institut** oder Prüfungszentrum an — meist online. ~~Reserva con tiempo: las plazas se agotan.~~' },
+        { titel: 'Anmeldung', text: 'Du meldest dich bei einem **Prüfungszentrum** an — meist online. ~~Reserva con tiempo: las plazas se agotan.~~' },
         { titel: 'Prüfungstag', text: 'Du kommst pünktlich und bringst deinen **Ausweis** mit ~~(tu documento de identidad)~~.' },
         { titel: 'Ergebnis', text: 'Nach einiger Zeit bekommst du dein **Ergebnis** — oft online.' },
         { titel: 'Zeugnis', text: 'Mit 60 % oder mehr bekommst du dein **Zeugnis**: dein offizielles A2-Zertifikat.' },
@@ -167,7 +167,7 @@ export default {
     {
       type: 'tipp',
       label: 'Prüfungstipp',
-      text: 'Lade den offiziellen **Modellsatz** vom Goethe-Institut herunter ~~(el examen de muestra gratuito)~~. Dort siehst du die Prüfung genau so, wie sie am Prüfungstag ist.',
+      text: 'Lade den offiziellen **Modellsatz** herunter ~~(el examen de muestra oficial gratuito)~~. Dort siehst du die Prüfung genau so, wie sie am Prüfungstag ist.',
     },
 
     { type: 'rule' },
@@ -189,7 +189,7 @@ export default {
       type: 'selbstcheck',
       eyebrow: 'Selbstcheck',
       items: [
-        'Ich weiß, was das Goethe-Zertifikat A2 zertifiziert.',
+        'Ich weiß, was das Zertifikat A2 zertifiziert.',
         'Ich kenne die vier Prüfungsteile und ihre Zeiten.',
         'Ich weiß: eine Prüfung, keine Module, bestanden ab 60 %.',
       ],

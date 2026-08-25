@@ -1,4 +1,4 @@
-// Goethe-Zertifikat C1 — Kursgerüst.
+// Zertifikat C1 — Kursgerüst.
 //
 // Los 5 bloques y los 40 títulos del curso. Este archivo es la ÚNICA fuente
 // de verdad del índice: el sidebar, el pager y el endpoint /api/deutschc1
@@ -17,7 +17,7 @@ export const C1_BLOCKS = [
 
 // Índice 0 = lección 1. El orden ES el id.
 export const C1_TITLES = [
-  'Das Goethe-Zertifikat C1 im Überblick',
+  'Das Zertifikat C1 im Überblick',
   'Diagnose C1 — Standortbestimmung',
   'Nominalstil vs. Verbalstil',
   'Das Passiv & Passiversatzformen',

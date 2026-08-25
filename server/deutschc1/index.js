@@ -1,4 +1,4 @@
-// Goethe C1 — capa de acceso al curso.
+// Deutsch C1 — capa de acceso al curso.
 //
 // El contenido vive AQUÍ, en el servidor, y nunca en el bundle de Vite:
 // este es el único gate real en un SPA. Sin sesión + rol válido no se

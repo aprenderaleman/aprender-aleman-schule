@@ -105,7 +105,7 @@ function AdminRoute({ children }) {
   )
 }
 
-// Curso Goethe C1: alumnos activos, profesores y admin. Nadie más.
+// Curso C1: alumnos activos, profesores y admin. Nadie más.
 // Ojo: esto es solo UX. El gate de verdad está en el servidor — el contenido
 // del curso vive en server/deutschc1/ y solo sale por /api/deutschc1/*, que
 // exige el mismo rol y el mismo subscriptionMiddleware.
@@ -168,7 +168,7 @@ function AppRoutes() {
         <Route path="/flashcards" element={<PaidRoute><Flashcards /></PaidRoute>} />
         <Route path="/pruefungen" element={<PaidRoute><Pruefungen /></PaidRoute>} />
         <Route path="/pruefungen/:examId" element={<PaidRoute><PruefungPlayer /></PaidRoute>} />
-        {/* Goethe-Zertifikat C1 — curso restringido */}
+        {/* Zertifikat C1 — curso restringido */}
         <Route path="/deutschc1" element={<C1Route><DeutschC1 /></C1Route>} />
         <Route path="/deutschc1/:id" element={<C1Route><DeutschC1 /></C1Route>} />
         <Route path="/deutschb2" element={<C1Route><DeutschB2 /></C1Route>} />

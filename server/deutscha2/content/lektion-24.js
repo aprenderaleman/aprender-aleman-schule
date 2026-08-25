@@ -1,6 +1,6 @@
 // Lektion 24 · Modul Schreiben — Überblick & Bewertung
 //
-// Bloque 2 (Prüfungstraining) — abre el módulo Schreiben del Goethe-Zertifikat A2.
+// Bloque 2 (Prüfungstraining) — abre el módulo Schreiben del Zertifikat A2.
 // Canon (docs/deutscha2/KANON.md): ca. 30 min, 2 Teile — T1 kurze Mitteilung
 // (~20-30 Wörter), T2 E-Mail/Einladung (~30-40 Wörter).
 

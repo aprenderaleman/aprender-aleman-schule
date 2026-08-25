@@ -194,7 +194,7 @@ export default {
     {
       type: 'tipp',
       label: 'Prüfungstipp',
-      text: 'Das Goethe-Zertifikat A1 ist **eine** Prüfung: Ein schwacher Teil ist kein Drama — die anderen Teile helfen dir. Du brauchst **60 Prozent, nicht die Perfektion**.',
+      text: 'Das Zertifikat A1 ist **eine** Prüfung: Ein schwacher Teil ist kein Drama — die anderen Teile helfen dir. Du brauchst **60 Prozent, nicht die Perfektion**.',
     },
 
     { type: 'rule' },
@@ -230,7 +230,7 @@ export default {
     {
       type: 'ausblick',
       eyebrow: 'Ausblick — zum Abschluss',
-      text: 'Hier endet der Kurs — **37 Lektionen, ein Ziel: das Goethe-Zertifikat A1**, dein **erstes Zertifikat auf Deutsch**. Herzlichen Glückwunsch! ~~¡Enhorabuena — tu primer certificado de alemán!~~ Vor ein paar Wochen konntest du kein Wort — heute stellst du dich vor, schreibst Nachrichten und verstehst Schilder. Melde dich jetzt zur Prüfung an, solange alles frisch ist. Der nächste Schritt ist das **Niveau A2** — mit Perfekt, Dativ und viel mehr Alltag. Auf Aprender-Aleman.de wartet unser **Deutsch-A2-Kurs** (unter /deutscha2) auf dich. **Viel Erfolg am Prüfungstag — du schaffst das!**',
+      text: 'Hier endet der Kurs — **37 Lektionen, ein Ziel: das Zertifikat A1**, dein **erstes Zertifikat auf Deutsch**. Herzlichen Glückwunsch! ~~¡Enhorabuena — tu primer certificado de alemán!~~ Vor ein paar Wochen konntest du kein Wort — heute stellst du dich vor, schreibst Nachrichten und verstehst Schilder. Melde dich jetzt zur Prüfung an, solange alles frisch ist. Der nächste Schritt ist das **Niveau A2** — mit Perfekt, Dativ und viel mehr Alltag. Auf Aprender-Aleman.de wartet unser **Deutsch-A2-Kurs** (unter /deutscha2) auf dich. **Viel Erfolg am Prüfungstag — du schaffst das!**',
     },
   ],
 }

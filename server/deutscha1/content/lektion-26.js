@@ -7,7 +7,7 @@
 export default {
   spec: ['Bloque 2', 'Prüfungsstrategie', 'Niveau A1', 'Prüfungsrelevanz: Sprechen'],
   h1: 'Modul Sprechen — Überblick',
-  lead: '~~La parte oral del~~ **Goethe-Zertifikat A1**~~: ca. 15 minutos, en grupo, 3 partes. Hoy la ves entera — y le pierdes el miedo.~~',
+  lead: '~~La parte oral del~~ **Zertifikat A1**~~: ca. 15 minutos, en grupo, 3 partes. Hoy la ves entera — y le pierdes el miedo.~~',
 
   content: [
     // ── Lernziele ─────────────────────────────────────────────────
@@ -173,7 +173,7 @@ export default {
         '{2} **Richtig.**',
         '{3} **Richtig.**',
       ],
-      kommentar: 'Wie viele Karten und Punkte genau? Das zeigt dir der **offizielle Modellsatz** vom Goethe-Institut. ~~Haz al menos un Modellsatz oficial antes del examen.~~',
+      kommentar: 'Wie viele Karten und Punkte genau? Das zeigt dir der **offizielle Modellsatz**. ~~Haz al menos un Modellsatz oficial antes del examen.~~',
     },
     {
       type: 'tipp',

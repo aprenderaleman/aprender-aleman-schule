@@ -3,7 +3,7 @@
 // Bloque 4 «Prüfungssimulation» — primer simulacro B2 autocorregible.
 // Esqueleto de 8 secciones adaptado: las tres «Übungen» SON el simulacro
 // (Lesen · Hören · Schreiben Teil 1); el Prüfungsbezug enseña a corregirse
-// con los 4 criterios del Goethe y un texto de alumno comentado.
+// con los 4 criterios oficiales y un texto de alumno comentado.
 
 export default {
   spec: ['Bloque 4', 'Prüfungssimulation', 'Niveau B2', 'Prüfungsrelevanz: alle vier Module'],
@@ -18,7 +18,7 @@ export default {
       items: [
         'Am Ende kannst du eine Prüfungssimulation zu Hause unter realen Bedingungen durchführen — mit Timer, ohne Wörterbuch, möglichst am Bildschirm wie im digitalen Format.',
         'Du bearbeitest je eine Aufgabe aus Lesen, Hören und Schreiben unter Zeitdruck.',
-        'Du bewertest deinen eigenen Forumsbeitrag mit den vier Goethe-Kriterien und einer vereinfachten Rubrik.',
+        'Du bewertest deinen eigenen Forumsbeitrag mit den vier offiziellen Kriterien und einer vereinfachten Rubrik.',
         'Du erkennst die typischen B2-Fehler spanischsprachiger Lernender und legst eine persönliche Fehlerliste an.',
       ],
     },

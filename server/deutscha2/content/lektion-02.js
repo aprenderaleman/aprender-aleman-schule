@@ -86,7 +86,7 @@ export default {
       card: true,
       titel: 'Vor der Prüfung',
       absaetze: [
-        'Auf der Website vom Goethe-Institut gibt es einen **digitalen Modellsatz** — eine Probe-Prüfung am Computer, gratis. Mach ihn mindestens einmal komplett. Und: Schreib deine Übungstexte **am Computer**, nicht nur auf Papier. ~~Así el día del examen nada te sorprende.~~',
+        'Auf der Website vom Prüfungsanbieter gibt es einen **digitalen Modellsatz** — eine Probe-Prüfung am Computer, gratis. Mach ihn mindestens einmal komplett. Und: Schreib deine Übungstexte **am Computer**, nicht nur auf Papier. ~~Así el día del examen nada te sorprende.~~',
       ],
     },
 

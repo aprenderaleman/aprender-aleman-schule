@@ -163,7 +163,7 @@ export default {
         '{1} **Gib mir bitte deinen Stift.** ~~(o „Können Sie mir bitte einen Stift geben?“)~~',
         '{2} **Ja, gern.** ~~(o „Kein Problem.“)~~',
       ],
-      kommentar: 'Wie viele Bildkarten genau? Das steht im **offiziellen Modellsatz** vom Goethe-Institut.',
+      kommentar: 'Wie viele Bildkarten genau? Das steht im **offiziellen Modellsatz** vom Prüfungsanbieter.',
     },
     {
       type: 'tipp',

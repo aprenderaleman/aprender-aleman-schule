@@ -157,7 +157,7 @@ export default {
         'a) **Richtig.** Im Text steht: „2 Zimmer“.',
         'b) **Falsch.** Im Text steht: „ab 1. Oktober“, nicht September.',
       ],
-      kommentar: 'So sehen die Aufgaben im Lesen aus: kurzer Text, Satz lesen, richtig oder falsch ankreuzen. ~~Practica el formato real con el Modellsatz oficial del Goethe-Zertifikat A1.~~',
+      kommentar: 'So sehen die Aufgaben im Lesen aus: kurzer Text, Satz lesen, richtig oder falsch ankreuzen. ~~Practica el formato real con el Modellsatz oficial del Zertifikat A1.~~',
     },
     {
       type: 'tipp',

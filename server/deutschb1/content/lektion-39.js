@@ -59,7 +59,7 @@ export default {
       kicker: 'Alltag 2',
       titel: 'Niveaus und Prüfungen',
       absaetze: [
-        'Sprachkurse sind in Niveaus organisiert: __A1 bis C2__. Nach dem Kurs kommt oft eine Prüfung, zum Beispiel das Goethe-Zertifikat B1. Wer besteht, bekommt ein Zertifikat — wichtig für Arbeit, Studium oder Einbürgerung.',
+        'Sprachkurse sind in Niveaus organisiert: __A1 bis C2__. Nach dem Kurs kommt oft eine Prüfung, zum Beispiel das Zertifikat B1. Wer besteht, bekommt ein Zertifikat — wichtig für Arbeit, Studium oder Einbürgerung.',
       ],
     },
     {
@@ -177,7 +177,7 @@ export default {
       frage: 'Schreib 60-80 Wörter: Wie lernst du Deutsch?',
       aufgabe: 'Seit wann lernst du? Wie oft übst du? Was findest du schwer? Was ist dein Ziel?',
       loesungLabel: 'Mögliche Lösung',
-      loesung: 'Ich lerne seit zwei Jahren Deutsch. Zweimal pro Woche besuche ich einen Kurs an der VHS, und zu Hause übe ich fast jeden Tag mit einer App. Die Grammatik finde ich schwer, und beim Sprechen mache ich noch Fehler. Aber meine Lehrerin sagt, das ist normal. Mein Ziel ist das Goethe-Zertifikat B1: Ich habe mich schon für die Prüfung im Juni angemeldet. ~~Cuenta tu caso real — es exactamente lo que te preguntarán en la Präsentation del examen.~~',
+      loesung: 'Ich lerne seit zwei Jahren Deutsch. Zweimal pro Woche besuche ich einen Kurs an der VHS, und zu Hause übe ich fast jeden Tag mit einer App. Die Grammatik finde ich schwer, und beim Sprechen mache ich noch Fehler. Aber meine Lehrerin sagt, das ist normal. Mein Ziel ist das Zertifikat B1: Ich habe mich schon für die Prüfung im Juni angemeldet. ~~Cuenta tu caso real — es exactamente lo que te preguntarán en la Präsentation del examen.~~',
     },
 
     { type: 'rule' },

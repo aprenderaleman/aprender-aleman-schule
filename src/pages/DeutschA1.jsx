@@ -4,7 +4,7 @@ import KursSeite from '../components/DeutschC1/KursSeite'
 // Curso A1 — misma arquitectura. Temario en server/deutscha1/blocks.js.
 const KURS_A1 = {
   name: 'Deutsch A1',
-  sub: 'Start Deutsch 1 · Kurs & Lehrbuch · 37 Lektionen',
+  sub: 'Prüfungsvorbereitung · Kurs & Lehrbuch · 37 Lektionen',
   base: '/deutscha1',
   api: '/api/deutscha1',
   total: 37,

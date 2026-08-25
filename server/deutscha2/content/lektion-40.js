@@ -191,7 +191,7 @@ export default {
     {
       type: 'tipp',
       label: 'Prüfungstipp',
-      text: 'Das Goethe-Zertifikat A2 ist **eine** Prüfung: Ein schwacher Teil ist kein Drama — die anderen Teile helfen dir. Du brauchst **60 Prozent, nicht die Perfektion**.',
+      text: 'Das Zertifikat A2 ist **eine** Prüfung: Ein schwacher Teil ist kein Drama — die anderen Teile helfen dir. Du brauchst **60 Prozent, nicht die Perfektion**.',
     },
 
     { type: 'rule' },
@@ -228,7 +228,7 @@ export default {
     {
       type: 'ausblick',
       eyebrow: 'Ausblick — zum Abschluss',
-      text: 'Hier endet der Kurs — **40 Lektionen, ein Ziel: das Goethe-Zertifikat A2**. Herzlichen Glückwunsch! ~~¡Enhorabuena por llegar hasta aquí!~~ Melde dich jetzt zur Prüfung an, solange alles frisch ist. Und danach? Bleib jeden Tag ein bisschen beim Deutschen: ein Lied, eine Serie mit Untertiteln, ein kurzes Video. Der nächste Schritt ist das **Niveau B1** — damit kannst du in Deutschland arbeiten und leben. Auf Aprender-Aleman.de wartet unser **Deutsch-B1-Kurs** (unter /deutschb1) auf dich. **Viel Erfolg am Prüfungstag — du schaffst das!**',
+      text: 'Hier endet der Kurs — **40 Lektionen, ein Ziel: das Zertifikat A2**. Herzlichen Glückwunsch! ~~¡Enhorabuena por llegar hasta aquí!~~ Melde dich jetzt zur Prüfung an, solange alles frisch ist. Und danach? Bleib jeden Tag ein bisschen beim Deutschen: ein Lied, eine Serie mit Untertiteln, ein kurzes Video. Der nächste Schritt ist das **Niveau B1** — damit kannst du in Deutschland arbeiten und leben. Auf Aprender-Aleman.de wartet unser **Deutsch-B1-Kurs** (unter /deutschb1) auf dich. **Viel Erfolg am Prüfungstag — du schaffst das!**',
     },
   ],
 }

@@ -289,7 +289,7 @@ export default {
     {
       type: 'ausblick',
       eyebrow: 'Ausblick — zum Abschluss',
-      text: 'Hier endet der Kurs — **43 Lektionen, vier Module, ein Ziel: das Goethe-Zertifikat B1**. Herzlichen Glückwunsch, dass du bis hierher gekommen bist! Melde dich jetzt zur Prüfung an, solange alles frisch ist — lange Wartezeit ist der Feind der Vorbereitung. Und lass das Deutsche danach nicht wieder los: ein Podcast beim Frühstück, eine Serie auf Deutsch mit Untertiteln, ein Tandempartner — **Immersion** ist ab jetzt dein bester Lehrer. Wenn du weitergehen willst: Auf Aprender-Aleman.de wartet unser **Deutsch-B2-Kurs** (unter /deutschb2) mit demselben System auf dich. Mit B1 kannst du in Deutschland leben, arbeiten und deinen Alltag auf Deutsch führen — **viel Erfolg am Prüfungstag, du schaffst das!**',
+      text: 'Hier endet der Kurs — **43 Lektionen, vier Module, ein Ziel: das Zertifikat B1**. Herzlichen Glückwunsch, dass du bis hierher gekommen bist! Melde dich jetzt zur Prüfung an, solange alles frisch ist — lange Wartezeit ist der Feind der Vorbereitung. Und lass das Deutsche danach nicht wieder los: ein Podcast beim Frühstück, eine Serie auf Deutsch mit Untertiteln, ein Tandempartner — **Immersion** ist ab jetzt dein bester Lehrer. Wenn du weitergehen willst: Auf Aprender-Aleman.de wartet unser **Deutsch-B2-Kurs** (unter /deutschb2) mit demselben System auf dich. Mit B1 kannst du in Deutschland leben, arbeiten und deinen Alltag auf Deutsch führen — **viel Erfolg am Prüfungstag, du schaffst das!**',
     },
   ],
 }

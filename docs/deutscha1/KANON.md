@@ -22,7 +22,7 @@ Complementa a `docs/deutschc1/FORMAT.md`. La lección modelo del A1 es
 
 ## Canon del examen (consistencia obligatoria)
 
-Goethe-Zertifikat A1: Start Deutsch 1. Como el A2, **NO es modular** —
+El examen A1: como el A2, **NO es modular** —
 examen único con parte escrita y oral, aprobado a partir del 60 % del total.
 
 | Parte | Tiempo | Estructura (canon del curso, según el temario) |
@@ -33,7 +33,7 @@ examen único con parte escrita y oral, aprobado a partir del 60 % del total.
 | Sprechen | ca. 15 min | **In der Gruppe** (varios candidatos juntos) — T1 sich vorstellen, T2 Fragen stellen & antworten (con tarjetas de palabra), T3 Bitten formulieren (con tarjetas de imagen) |
 
 Nota importante: el Sprechen del A1 es **en grupo**, no en pareja — es la
-única parte grupal de todo el catálogo Goethe de la plataforma; trátalo bien
+única parte grupal de todo el catálogo de exámenes de la plataforma; trátalo bien
 en las lecciones 26-29. El examen empieza por Hören (orden del temario).
 
 Regla de prudencia reforzada: número de Teile exacto, ítems, veces de
@@ -47,5 +47,5 @@ creciente.
 ## Branding
 
 Marca: **Aprender-Aleman.de / Deutsch A1**. El examen se llama
-Goethe-Zertifikat A1 (Start Deutsch 1) y se nombra como dato. Eyebrows sin
+el examen A1 y se nombra como dato. Eyebrows sin
 numerar.

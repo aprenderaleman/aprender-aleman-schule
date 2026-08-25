@@ -308,7 +308,7 @@ export default {
     {
       type: 'ausblick',
       eyebrow: 'Ausblick — Zum Abschluss',
-      text: 'Hier endet der Kurs — **40 Lektionen, vier Module, ein Ziel**. Du hast nicht nur Grammatik und Aufgabenformate gelernt, sondern das Wichtigste: dich selbst zu korrigieren. Melde dich jetzt zur Prüfung an, solange alles frisch ist — Wartezeit ist der natürliche Feind der Vorbereitung. Und danach? Lass das Deutsche nicht wieder los: ein Podcast beim Frühstück, ein Roman auf dem Nachttisch, ein Tandempartner, vielleicht der Schritt Richtung **Goethe-Zertifikat C2**. Das C1 öffnet dir Universitäten und Arbeitgeber im ganzen deutschsprachigen Raum — aber was du wirklich mitnimmst, ist eine Sprache, in der du inzwischen denken, streiten und überzeugen kannst. **Viel Erfolg am Prüfungstag — du bist bereit.**',
+      text: 'Hier endet der Kurs — **40 Lektionen, vier Module, ein Ziel**. Du hast nicht nur Grammatik und Aufgabenformate gelernt, sondern das Wichtigste: dich selbst zu korrigieren. Melde dich jetzt zur Prüfung an, solange alles frisch ist — Wartezeit ist der natürliche Feind der Vorbereitung. Und danach? Lass das Deutsche nicht wieder los: ein Podcast beim Frühstück, ein Roman auf dem Nachttisch, ein Tandempartner, vielleicht der Schritt Richtung **Zertifikat C2**. Das C1 öffnet dir Universitäten und Arbeitgeber im ganzen deutschsprachigen Raum — aber was du wirklich mitnimmst, ist eine Sprache, in der du inzwischen denken, streiten und überzeugen kannst. **Viel Erfolg am Prüfungstag — du bist bereit.**',
     },
   ],
 }

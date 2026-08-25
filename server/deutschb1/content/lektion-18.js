@@ -64,7 +64,7 @@ export default {
       type: 'prose',
       card: true,
       absaetze: [
-        'Der Zeitplan **10 · 15 · 15 · 15 · 10 = 65 Minuten** ist die Empfehlung dieses Kurses. Wie viele Aufgaben jeder Teil genau hat, siehst du im **offiziellen Modellsatz** des Goethe-Instituts.',
+        'Der Zeitplan **10 · 15 · 15 · 15 · 10 = 65 Minuten** ist die Empfehlung dieses Kurses. Wie viele Aufgaben jeder Teil genau hat, siehst du im **offiziellen Modellsatz**.',
       ],
     },
     {

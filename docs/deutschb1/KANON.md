@@ -24,7 +24,7 @@ Complementa a `docs/deutschc1/FORMAT.md` (tipos de bloque, marcado inline,
 
 ## Canon del examen (consistencia obligatoria en todo el curso)
 
-Goethe-Zertifikat B1 **modular**: 100 puntos por módulo, aprobado desde 60,
+Zertifikat B1 **modular**: 100 puntos por módulo, aprobado desde 60,
 módulos que se presentan y repiten por separado. Formato **digital (CBT)**
 cada vez más extendido (la lección 2 lo desarrolla).
 
@@ -38,10 +38,10 @@ cada vez más extendido (la lección 2 lo desarrolla).
 Regla de prudencia: donde el detalle fino del formato oficial no esté en esta
 tabla (número exacto de ítems, veces que se escucha un audio…), formula en
 genérico («in der Regel», «im offiziellen Modellsatz siehst du…») y remite al
-Modellsatz del Goethe-Institut — no inventes cifras. El redactor de la 18 fija
+Modellsatz del Prüfungszentrum — no inventes cifras. El redactor de la 18 fija
 el detalle interno de Lesen, el de la 23 el de Hören; los demás lo respetan.
 
 ## Branding
 
 Marca: **Aprender-Aleman.de / Deutsch B1** — el examen se llama
-Goethe-Zertifikat B1 y se nombra como dato. Eyebrows sin numerar.
+Zertifikat B1 y se nombra como dato. Eyebrows sin numerar.

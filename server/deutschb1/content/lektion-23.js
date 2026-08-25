@@ -41,7 +41,7 @@ export default {
         { wort: 'der Sprecher / die Sprecherin', kollokation: 'Wer sagt was?', es: 'el/la hablante' },
         { wort: 'die Meinung', kollokation: 'seine Meinung sagen', es: 'la opinión' },
         { wort: 'die Lösung', kollokation: 'nur eine Lösung ist richtig', es: 'la solución, la respuesta' },
-        { wort: 'der Modellsatz', kollokation: 'den Modellsatz vom Goethe-Institut üben', es: 'el examen modelo' },
+        { wort: 'der Modellsatz', kollokation: 'den Modellsatz vom Prüfungsanbieter üben', es: 'el examen modelo' },
       ],
       hinweis: 'Diese Wörter stehen in den **Anweisungen** der Prüfung. Wer sie kennt, verliert am Prüfungstag keine Zeit.',
     },
@@ -92,7 +92,7 @@ export default {
       titel: 'Die Transkript-Methode dieses Kurses',
       absaetze: [
         'In den Lektionen 24 und 25 übst du mit **Transkripten** ~~(en el examen: audio)~~. Die Regel: Lies das Transkript **nur einmal**, in normalem Tempo, ohne zurückzuspringen — oder lass es dir von jemandem vorlesen. Decke die Lösung ab, löse die Aufgaben, kontrolliere erst danach. ~~Leer una sola vez simula el audio; tapar la solución simula el examen.~~',
-        'Für echtes Audio: der kostenlose **Modellsatz** des Goethe-Instituts (goethe.de). Höre ihn unter Prüfungsbedingungen — jeder Text nur so oft, wie es die Anweisung erlaubt.',
+        'Für echtes Audio: der kostenlose offizielle **Modellsatz** Höre ihn unter Prüfungsbedingungen — jeder Text nur so oft, wie es die Anweisung erlaubt.',
       ],
     },
 

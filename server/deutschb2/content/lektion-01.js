@@ -1,11 +1,11 @@
-// Lektion 01 · Das Goethe-Zertifikat B2 im Überblick
+// Lektion 01 · Das Zertifikat B2 im Überblick
 //
 // Bloque 0 «Einführung» — qué certifica el B2, los 4 módulos,
 // el sistema modular 100/60 y el camino de la Anmeldung al Zeugnis.
 
 export default {
   spec: ['Bloque 0', 'Einführung', 'Niveau B2', 'Prüfungsrelevanz: alle Module'],
-  h1: 'Das Goethe-Zertifikat B2 im Überblick',
+  h1: 'Das Zertifikat B2 im Überblick',
   lead: 'Was das B2 zertifiziert, wie die vier Module aufgebaut sind und wie der Weg von der Anmeldung bis zum Zeugnis aussieht.',
 
   content: [
@@ -51,7 +51,7 @@ export default {
       type: 'prose',
       eyebrow: 'Erklärung — was das B2 zertifiziert',
       absaetze: [
-        'Das Goethe-Zertifikat B2 bestätigt das Niveau **B2 des GER** ~~(el Marco Común Europeo, MCER)~~: die __selbstständige Sprachverwendung__ auf fortgeschrittenem Niveau. Auf B2 verstehst du die Hauptinhalte komplexer Texte, diskutierst spontan mit Muttersprachlern und schreibst klare, detaillierte Texte, in denen du **einen Standpunkt begründest**.',
+        'Das Zertifikat B2 bestätigt das Niveau **B2 des GER** ~~(el Marco Común Europeo, MCER)~~: die __selbstständige Sprachverwendung__ auf fortgeschrittenem Niveau. Auf B2 verstehst du die Hauptinhalte komplexer Texte, diskutierst spontan mit Muttersprachlern und schreibst klare, detaillierte Texte, in denen du **einen Standpunkt begründest**.',
         'Das Zertifikat ist international anerkannt und **unbegrenzt gültig**. Man braucht es typischerweise für den **Beruf** (z. B. Berufsanerkennung im Gesundheitsbereich), für **Studium und Ausbildung** und in manchen Fällen für die **Einbürgerung** — je nach Land und Behörde.',
       ],
     },
@@ -80,9 +80,9 @@ export default {
       type: 'steps',
       eyebrow: 'Erklärung — von der Anmeldung zum Zeugnis',
       steps: [
-        { titel: 'Prüfungszentrum und Termin finden', text: 'Auf der Website des Goethe-Instituts (oder eines Partnerzentrums) die Termine prüfen — beliebte Termine sind schnell voll, also **früh planen**.' },
+        { titel: 'Prüfungszentrum und Termin finden', text: 'Auf der Website deines Prüfungszentrums die Termine prüfen — beliebte Termine sind schnell voll, also **früh planen**.' },
         { titel: 'Anmelden und Gebühr bezahlen', text: 'Die Anmeldung läuft meist online. Du wählst, **welche Module** du ablegst, und bezahlst die Prüfungsgebühr pro Modul oder für das Gesamtpaket.' },
-        { titel: 'Gezielt vorbereiten', text: 'Mit diesem Kurs — und mit dem **offiziellen Modellsatz** des Goethe-Instituts, damit du das Format vor dem Prüfungstag genau kennst.' },
+        { titel: 'Gezielt vorbereiten', text: 'Mit diesem Kurs — und mit dem **offiziellen Modellsatz**, damit du das Format vor dem Prüfungstag genau kennst.' },
         { titel: 'Prüfung ablegen', text: 'Am Prüfungstag brauchst du deinen **Ausweis**. Lesen, Hören und Schreiben laufen immer häufiger am Computer — das digitale Format ist das Thema der nächsten Lektion.' },
         { titel: 'Ergebnis und Zeugnis', text: 'Das Ergebnis rufst du in der Regel online ab; danach bekommst du das **Zeugnis** mit der Punktzahl und dem Prädikat für jedes bestandene Modul.' },
       ],
@@ -153,7 +153,7 @@ export default {
       eyebrow: 'Übung 3 · Produzieren',
       frage: 'Dein Ziel: Schreib 3–4 Sätze — warum machst du das B2, und bis wann willst du es schaffen? Nutze mindestens zwei Wörter aus dem Kernwortschatz.',
       loesungLabel: 'Mögliche Lösung',
-      loesung: 'Ich möchte das Goethe-Zertifikat B2 **ablegen**, weil ich mich in Deutschland um eine Stelle bewerben will. Mein Ziel ist es, alle vier Module beim ersten Versuch zu **bestehen**. Deshalb arbeite ich jeden Tag mit diesem Kurs und melde mich für einen Termin im Sommer an. ~~Vale cualquier variante con tu motivo real — lo importante: 2+ palabras del Kernwortschatz y verbos bien colocados.~~',
+      loesung: 'Ich möchte das Zertifikat B2 **ablegen**, weil ich mich in Deutschland um eine Stelle bewerben will. Mein Ziel ist es, alle vier Module beim ersten Versuch zu **bestehen**. Deshalb arbeite ich jeden Tag mit diesem Kurs und melde mich für einen Termin im Sommer an. ~~Vale cualquier variante con tu motivo real — lo importante: 2+ palabras del Kernwortschatz y verbos bien colocados.~~',
     },
 
     { type: 'rule' },
@@ -180,7 +180,7 @@ export default {
     {
       type: 'tipp',
       label: 'Prüfungstipp',
-      text: 'Lade dir schon **jetzt** den offiziellen Modellsatz vom Goethe-Institut herunter und schau ihn einmal komplett durch. Wer das Format kennt, verliert am Prüfungstag **keine Zeit mit den Anweisungen** — und genau diese Minuten fehlen sonst bei den schweren Aufgaben.',
+      text: 'Lade dir schon **jetzt** den offiziellen Modellsatz herunter und schau ihn einmal komplett durch. Wer das Format kennt, verliert am Prüfungstag **keine Zeit mit den Anweisungen** — und genau diese Minuten fehlen sonst bei den schweren Aufgaben.',
     },
 
     { type: 'rule' },

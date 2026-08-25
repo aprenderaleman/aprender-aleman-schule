@@ -57,7 +57,7 @@ export default {
       titel: 'Das Modul in Zahlen',
       absaetze: [
         'Das Modul Schreiben dauert **75 Minuten** und besteht aus **zwei Aufgaben**, die beide verpflichtend sind: In **Teil 1** schreibst du einen __Diskussionsbeitrag__ von etwa **230 Wörtern** für ein Online-Forum — du wägst Argumente ab und beziehst Position. In **Teil 2** verfasst du eine __formelle Nachricht__ von etwa **120 Wörtern** — eine Beschwerde, Anfrage, Bitte oder Entschuldigung in einer halboffiziellen Situation.',
-        'Beide Texte werden mit denselben **vier Kriterien** bewertet, jeweils auf einer Skala von **A (sehr gut) bis E (ungenügend)**. Insgesamt sind 100 Punkte möglich; bestanden hast du ab 60. Da das Goethe-Zertifikat C1 modular ist, kannst du das Modul Schreiben notfalls einzeln wiederholen — aber mit der richtigen Strategie brauchst du das nicht.',
+        'Beide Texte werden mit denselben **vier Kriterien** bewertet, jeweils auf einer Skala von **A (sehr gut) bis E (ungenügend)**. Insgesamt sind 100 Punkte möglich; bestanden hast du ab 60. Da das Zertifikat C1 modular ist, kannst du das Modul Schreiben notfalls einzeln wiederholen — aber mit der richtigen Strategie brauchst du das nicht.',
       ],
     },
 

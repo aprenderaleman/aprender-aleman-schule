@@ -1,11 +1,11 @@
-// Lektion 01 · Das Goethe-Zertifikat A1 im Überblick
+// Lektion 01 · Das Zertifikat A1 im Überblick
 //
 // Bloque 0 «Einführung» — qué certifica el A1, las 4 partes, el 60 %,
 // de la Anmeldung al Zeugnis. Canon: docs/deutscha1/KANON.md.
 
 export default {
   spec: ['Bloque 0', 'Einführung', 'Niveau A1', 'Prüfungsrelevanz: alle Teile'],
-  h1: 'Das Goethe-Zertifikat A1 im Überblick',
+  h1: 'Das Zertifikat A1 im Überblick',
   lead: '~~Tu primer examen de alemán: qué certifica, cómo son sus 4 partes y el camino de la~~ **Anmeldung** ~~(inscripción) al~~ **Zeugnis** ~~(diploma).~~',
 
   content: [
@@ -14,7 +14,7 @@ export default {
       type: 'lernziele',
       eyebrow: 'Lernziele',
       items: [
-        'wissen, was das Goethe-Zertifikat A1 ist',
+        'wissen, was das Zertifikat A1 ist',
         'die 4 Teile der Prüfung kennen (Hören, Lesen, Schreiben, Sprechen)',
         'den Weg kennen: Anmeldung → Prüfung → Zeugnis',
       ],
@@ -50,7 +50,7 @@ export default {
       card: true,
       titel: 'Was ist das A1?',
       absaetze: [
-        'Das **Goethe-Zertifikat A1 (Start Deutsch 1)** ist die **erste Stufe** ~~(el primer nivel oficial del MCER, el marco europeo)~~. Es zeigt: Du verstehst und benutzt **ganz einfache Sätze** — Name, Familie, Einkaufen, Arbeit.',
+        'Das **Zertifikat A1** ist die **erste Stufe** ~~(el primer nivel oficial del MCER, el marco europeo)~~. Es zeigt: Du verstehst und benutzt **ganz einfache Sätze** — Name, Familie, Einkaufen, Arbeit.',
         'Viele Menschen brauchen das A1 für das **Visum zum Familiennachzug** ~~(el visado de reagrupación familiar en Alemania)~~. **Achtung:** Die Regeln sind **je nach Land anders** — ~~pregunta siempre en la embajada alemana de tu país.~~',
       ],
     },
@@ -77,7 +77,7 @@ export default {
       steps: [
         {
           titel: 'Die Anmeldung',
-          text: 'Du meldest dich an — online oder im **Prüfungszentrum** ~~(Goethe-Institut o centro examinador de tu ciudad)~~. Melde dich **früh** an!',
+          text: 'Du meldest dich an — online oder im **Prüfungszentrum** ~~(el centro examinador de tu ciudad)~~. Melde dich **früh** an!',
         },
         {
           titel: 'Der Prüfungstag',
@@ -177,7 +177,7 @@ export default {
     {
       type: 'tipp',
       label: 'Prüfungstipp',
-      text: 'Lade den offiziellen **Modellsatz** vom Goethe-Institut herunter — er ist **gratis**. So siehst du die echte Prüfung. ~~En este curso practicamos cada parte paso a paso — hoy no necesitas entenderlo todo.~~',
+      text: 'Lade den offiziellen **Modellsatz** herunter — er ist **gratis**. So siehst du die echte Prüfung. ~~En este curso practicamos cada parte paso a paso — hoy no necesitas entenderlo todo.~~',
     },
 
     { type: 'rule' },
@@ -188,7 +188,7 @@ export default {
       eyebrow: 'Zusammenfassung',
       kopf: ['Frage', 'Antwort'],
       zeilen: [
-        ['Was ist das A1?', 'die **erste Stufe** ~~(primer nivel del MCER)~~ — Start Deutsch 1'],
+        ['Was ist das A1?', 'die **erste Stufe** ~~(primer nivel del MCER)~~'],
         ['Wie viele Teile?', '4: Hören · Lesen · Schreiben · Sprechen (**in der Gruppe**)'],
         ['Wann bestehst du?', 'mit **60 %** der Punkte — **eine** Prüfung, nicht modular'],
         ['Der Weg', 'Anmeldung → Prüfungstag → Ergebnis & Zeugnis'],
@@ -198,7 +198,7 @@ export default {
       type: 'selbstcheck',
       eyebrow: 'Selbstcheck',
       items: [
-        'Ich weiß, was das Goethe-Zertifikat A1 ist und wofür ich es brauche.',
+        'Ich weiß, was das Zertifikat A1 ist und wofür ich es brauche.',
         'Ich kenne die 4 Teile der Prüfung — und: Sprechen ist in der Gruppe.',
         'Ich kenne den Weg: Anmeldung → Prüfung → Zeugnis.',
       ],

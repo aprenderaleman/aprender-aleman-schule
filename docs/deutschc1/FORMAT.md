@@ -1,4 +1,4 @@
-# Curso Goethe C1 — especificación de lección (para redactores)
+# Curso (sin marca externa) C1 — especificación de lección (para redactores)
 
 Cada lección es UN archivo `server/deutschc1/content/lektion-NN.js` (NN con dos
 dígitos) que hace `export default { spec, h1, lead, content }`. Nada más: ni
@@ -82,7 +82,7 @@ Zusammenfassung, Selbstcheck, Ausblick) — de ahí sale el icono automático.
   Nada de contenido B2 estirado.
 - Anticipa el error típico del hispanohablante en el tema (interferencias
   del español) al menos una vez por lección.
-- Datos del examen (mantener consistencia en todo el curso): Goethe-Zertifikat
+- Datos del examen (mantener consistencia en todo el curso): Zertifikat
   C1 modular; Lesen 65 min/4 Teile; Hören ca. 40 min/4 Teile; Schreiben
   75 min/2 Aufgaben (Diskussionsbeitrag ~230 W. + formelle Nachricht ~120 W.);
   Sprechen ca. 15 min en pareja (Vortrag + Diskussion); 100 puntos por módulo,

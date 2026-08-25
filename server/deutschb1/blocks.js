@@ -1,4 +1,4 @@
-// Deutsch B1 — Kursgerüst (preparación del Goethe-Zertifikat B1).
+// Deutsch B1 — Kursgerüst (preparación del examen B1).
 //
 // Estructura definida por Gelfis en curso-b1.html (2026-08-25): 43 lecciones
 // en 5 bloques. La lección modelo es la 08 (Wechselpräpositionen).
@@ -13,7 +13,7 @@ export const B1_BLOCKS = [
 
 // Índice 0 = lección 1. El orden ES el id.
 export const B1_TITLES = [
-  'Das Goethe-Zertifikat B1 im Überblick',
+  'Das Zertifikat B1 im Überblick',
   'Das digitale Prüfungsformat (CBT)',
   'Diagnose B1 — Standortbestimmung',
   'Konnektoren I — weil, denn, deshalb',

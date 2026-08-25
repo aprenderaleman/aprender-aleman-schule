@@ -24,7 +24,7 @@ Complementa a `docs/deutschc1/FORMAT.md` (tipos de bloque, marcado inline,
 
 ## Canon del examen (consistencia obligatoria)
 
-Goethe-Zertifikat A2 ("Start Deutsch 2" sucesor): a diferencia de B1-C1,
+Zertifikat A2 ("Start Deutsch 2" sucesor): a diferencia de B1-C1,
 **NO es modular** — es un examen único con parte escrita y oral, aprobado a
 partir del 60 % del total. Formato digital (CBT) en expansión (la lección 2
 lo desarrolla).
@@ -45,4 +45,4 @@ interno de Lesen y el de la 21 el de Hören; los demás lo respetan.
 ## Branding
 
 Marca: **Aprender-Aleman.de / Deutsch A2**. El examen se llama
-Goethe-Zertifikat A2 y se nombra como dato. Eyebrows sin numerar.
+Zertifikat A2 y se nombra como dato. Eyebrows sin numerar.

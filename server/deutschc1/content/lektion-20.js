@@ -102,7 +102,7 @@ export default {
       titel: 'Training ohne Audio: die Transkript-Methode dieses Kurses',
       absaetze: [
         'Ein ehrliches Wort vorab: **Dieser Kurs enthält keine Audiodateien.** Die Hörübungen der Lektionen 20-22 arbeiten deshalb mit **Transkripten** — verschriftlichten Hörtexten, die ausdrücklich als solche gekennzeichnet sind. Das ist kein vollwertiger Ersatz, aber ein erstaunlich wirksames Werkzeug, wenn du drei Regeln einhältst: **Erstens:** Lies das Transkript __in Echtzeit__ — zügig, von oben nach unten, ohne zurückzuspringen; eine verpasste Zeile ist verpasst, wie im Audio. **Zweitens:** Decke die Lösungen __vollständig ab__, bis du geantwortet hast. **Drittens:** Beantworte die Aufgaben __während__ des Lesens, nicht danach.',
-        'So trainierst du genau die Fähigkeiten, die das Modul prüft: Erwartungen bilden, Signale erkennen, unter Zeitdruck entscheiden. Was das Transkript nicht liefert — Sprechtempo, Aussprache, Hintergrundgeräusche —, holst du dir zusätzlich: mit den **Modellsätzen des Goethe-Instituts** (mit echten Audios frei verfügbar) und mit deutschsprachigen Podcasts und Nachrichtenformaten. ~~La regla de oro: transcripción para la estrategia, audio real para el oído. Necesitas ambos.~~',
+        'So trainierst du genau die Fähigkeiten, die das Modul prüft: Erwartungen bilden, Signale erkennen, unter Zeitdruck entscheiden. Was das Transkript nicht liefert — Sprechtempo, Aussprache, Hintergrundgeräusche —, holst du dir zusätzlich: mit den **offiziellen Modellsätzen** (mit echten Audios frei verfügbar) und mit deutschsprachigen Podcasts und Nachrichtenformaten. ~~La regla de oro: transcripción para la estrategia, audio real para el oído. Necesitas ambos.~~',
       ],
     },
 

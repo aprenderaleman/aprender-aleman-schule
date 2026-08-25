@@ -1,4 +1,4 @@
-// Deutsch A2 — Kursgerüst (preparación del Goethe-Zertifikat A2).
+// Deutsch A2 — Kursgerüst (preparación del examen A2).
 //
 // Estructura definida por Gelfis en curso-a2.html (2026-08-25): 40 lecciones
 // en 5 bloques. La lección modelo es la 04 (Perfekt).
@@ -13,7 +13,7 @@ export const A2_BLOCKS = [
 
 // Índice 0 = lección 1. El orden ES el id.
 export const A2_TITLES = [
-  'Das Goethe-Zertifikat A2 im Überblick',
+  'Das Zertifikat A2 im Überblick',
   'Das digitale Prüfungsformat (CBT)',
   'Diagnose A2 — Standortbestimmung',
   'Perfekt — haben oder sein',

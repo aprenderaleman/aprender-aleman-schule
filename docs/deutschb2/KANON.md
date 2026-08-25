@@ -26,7 +26,7 @@ bloque, mismo marcado inline, mismas 8 secciones). La lección modelo del B2 es
 
 ## Canon del examen (consistencia obligatoria en todo el curso)
 
-Goethe-Zertifikat B2 **modular**: 100 puntos por módulo, aprobado desde 60,
+Zertifikat B2 **modular**: 100 puntos por módulo, aprobado desde 60,
 módulos que se presentan y repiten por separado. Formato **digital (CBT)**
 cada vez más extendido: Lesen/Hören con clic, Schreiben con teclado, Sprechen
 presencial en pareja (la lección 2 desarrolla el CBT).
@@ -41,14 +41,14 @@ presencial en pareja (la lección 2 desarrolla el CBT).
 Regla de prudencia: donde el detalle fino del formato oficial no esté en esta
 tabla (número exacto de ítems, veces que se escucha cada audio…), formula en
 genérico («in der Regel», «im offiziellen Modellsatz siehst du…») y recomienda
-el Modellsatz del Goethe-Institut — no inventes cifras. El redactor de la
+el Modellsatz del Prüfungszentrum — no inventes cifras. El redactor de la
 lección 18 (Lesen) y el de la 23 (Hören) fijan el detalle interno de su módulo
 y las demás lecciones lo respetan.
 
 ## Registro y branding
 
 La marca del curso es **Aprender-Aleman.de / Deutsch B2** — el examen se llama
-Goethe-Zertifikat B2 y se nombra como dato, no como marca. Los eyebrows sin
+Zertifikat B2 y se nombra como dato, no como marca. Los eyebrows sin
 numerar (Lernziele, Kernwortschatz, Erklärung, Beispiele, Anwendung/Übung,
 Prüfungsbezug, Zusammenfassung, Selbstcheck, Ausblick) — el icono lo pone la
 app.
