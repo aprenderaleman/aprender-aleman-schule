@@ -124,6 +124,7 @@ function Tabelle({ block }) {
           </tbody>
         </table>
       </div>
+      {block.hinweis && <p className="c1-ws-hinweis">{renderInline(block.hinweis)}</p>}
     </>
   )
 }

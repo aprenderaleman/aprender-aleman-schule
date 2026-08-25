@@ -27,6 +27,7 @@ const KURSE = {
   c1: { dir: 'deutschc1', name: 'Deutsch C1' },
   b2: { dir: 'deutschb2', name: 'Deutsch B2' },
   b1: { dir: 'deutschb1', name: 'Deutsch B1' },
+  a2: { dir: 'deutscha2', name: 'Deutsch A2' },
 }
 if (!KURSE[kurs]) { console.error(`kurs desconocido: ${kurs}`); process.exit(1) }
 const K = KURSE[kurs]
