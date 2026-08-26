@@ -113,7 +113,7 @@ const doc = `<!DOCTYPE html><html lang="de"><head><meta charset="UTF-8">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
 <style>${tokens}\n${courseCss}</style></head>
-<body class="c1">${toc}${body}</body></html>`
+<body class="c1" data-c1-theme="light">${toc}${body}</body></html>`
 
 fs.mkdirSync(path.dirname(out), { recursive: true })
 fs.writeFileSync(out, doc)

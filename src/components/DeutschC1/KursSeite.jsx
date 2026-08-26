@@ -42,6 +42,18 @@ export default function KursSeite({ kurs }) {
   const [error, setError] = useState(null)
   const [navOpen, setNavOpen] = useState(false)
 
+  // Tema propio del curso: oscuro por defecto; la preferencia se recuerda
+  // por navegador (solo el tema — el progreso sigue sin persistirse).
+  const [theme, setTheme] = useState(() => {
+    try { return localStorage.getItem('kurs-theme') === 'light' ? 'light' : 'dark' }
+    catch { return 'dark' }
+  })
+  const toggleTheme = () => setTheme(t => {
+    const next = t === 'dark' ? 'light' : 'dark'
+    try { localStorage.setItem('kurs-theme', next) } catch { /* modo privado */ }
+    return next
+  })
+
   const mainRef = useRef(null)
   const sidebarRef = useRef(null)
   useFocusTrap(sidebarRef, navOpen)
@@ -133,7 +145,7 @@ export default function KursSeite({ kurs }) {
   }
 
   return (
-    <div className="c1">
+    <div className="c1" data-c1-theme={theme}>
       <div className={'c1-app' + (navOpen ? ' is-nav-open' : '')}>
         {index && (
           <C1Sidebar
@@ -143,6 +155,8 @@ export default function KursSeite({ kurs }) {
             activeId={lessonId}
             onNavigate={closeNav}
             panelRef={sidebarRef}
+            theme={theme}
+            onToggleTheme={toggleTheme}
           />
         )}
 

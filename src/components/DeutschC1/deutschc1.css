@@ -2,29 +2,34 @@
    Zertifikat C1 — estilos del curso.
 
    Todo vive bajo el scope `.c1` para no tocar nada del resto de la app.
-   Los grises/superficies se derivan de los tokens semánticos de
-   src/index.css (--background, --card, --border, …), así el curso
-   respeta el dark mode existente sin código extra.
+   El curso trae su propio tema (oscuro por defecto, claro con el botón
+   del sidebar → [data-c1-theme="light"]), independiente del tema global.
 
    El dorado es el acento de "documento de examen": sello de coordenadas,
    eyebrows, numeración y callouts. La interacción (foco, lección activa)
    usa el naranja de marca #F4A261.
    ─────────────────────────────────────────────────────────────── */
 
+/* El curso lleva su PROPIO tema, independiente del tema global de la app:
+   oscuro por defecto, claro vía [data-c1-theme="light"] (botón en el sidebar).
+   El navy del sidebar y de los paneles de marca no cambia entre modos. */
 .c1 {
   --c1-ink: #0F2847;          /* navy de marca */
   --c1-ink-2: #1E3A66;
-  --c1-heading: #0F2847;
-  --c1-paper: rgb(var(--background));
-  --c1-surface: rgb(var(--card));
-  --c1-line: rgb(var(--border));
-  --c1-line-strong: rgb(var(--muted-foreground) / 0.45);
-  --c1-muted: rgb(var(--muted-foreground));
-  --c1-text: rgb(var(--foreground));
 
-  --c1-gold: #B0821F;
-  --c1-gold-soft: #F6EFDD;
-  --c1-gold-line: #E6D6AC;
+  /* Paleta oscura (predeterminada) */
+  --c1-paper: #0E1B2E;
+  --c1-surface: #15263F;
+  --c1-line: #28395A;
+  --c1-line-strong: rgb(143 163 188 / 0.55);
+  --c1-muted: #8FA3BC;
+  --c1-text: #F0F3F7;
+  --c1-heading: #EAF0F8;
+  --c1-gold: #D3A33F;         /* sube el contraste sobre fondo navy */
+  --c1-gold-soft: rgb(176 130 31 / 0.14);
+  --c1-gold-line: rgb(176 130 31 / 0.38);
+  --c1-spec-c: #8FA3BC;       /* sello/función/badge: gris en oscuro, navy en claro */
+  --c1-code-bg: #1B2D49;
 
   --c1-accent: #F4A261;       /* naranja de marca — foco e interacción */
   --c1-sidebar-w: 320px;
@@ -42,12 +47,20 @@
   min-height: 100dvh;
 }
 
-.dark .c1 {
-  --c1-heading: #EAF0F8;
-  --c1-gold: #D3A33F;         /* sube el contraste sobre fondo navy */
-  --c1-gold-soft: rgb(176 130 31 / 0.14);
-  --c1-gold-line: rgb(176 130 31 / 0.38);
-  --c1-line-strong: rgb(var(--muted-foreground) / 0.55);
+/* Modo claro — el papel crema del documento de examen original */
+.c1[data-c1-theme="light"] {
+  --c1-paper: #FAF4EA;
+  --c1-surface: #FFFBF4;
+  --c1-line: #E6DAC5;
+  --c1-line-strong: rgb(107 100 88 / 0.45);
+  --c1-muted: #6B6458;
+  --c1-text: #222633;
+  --c1-heading: #0F2847;
+  --c1-gold: #B0821F;
+  --c1-gold-soft: #F6EFDD;
+  --c1-gold-line: #E6D6AC;
+  --c1-spec-c: var(--c1-ink-2);
+  --c1-code-bg: #F3EBDE;
 }
 
 .c1 ::selection { background: var(--c1-gold-soft); }
@@ -91,6 +104,16 @@
   border-radius: 8px; padding: 6px 11px; transition: color .15s, border-color .15s;
 }
 .c1-back:hover { color: #fff; border-color: rgb(255 255 255 / 0.4); }
+
+/* Botón de modo claro/oscuro — mismo lenguaje visual que el enlace Dashboard */
+.c1-theme-btn {
+  display: inline-flex; align-items: center; gap: 7px; margin-top: 14px; margin-left: 8px;
+  font-family: var(--c1-mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase;
+  color: #93A2BD; background: transparent; cursor: pointer;
+  border: 1px solid rgb(255 255 255 / 0.18); border-radius: 8px; padding: 6px 11px;
+  transition: color .15s, border-color .15s;
+}
+.c1-theme-btn:hover { color: #fff; border-color: rgb(255 255 255 / 0.4); }
 
 .c1-nav { padding: 12px 0 40px; }
 .c1-group { margin-top: 14px; }
@@ -152,10 +175,9 @@
 
 .c1-spec {
   font-family: var(--c1-mono); font-size: 11.5px; letter-spacing: .06em; text-transform: uppercase;
-  color: var(--c1-ink-2); display: flex; flex-wrap: wrap; gap: 0 4px; align-items: center;
+  color: var(--c1-spec-c); display: flex; flex-wrap: wrap; gap: 0 4px; align-items: center;
   margin-bottom: 18px;
 }
-.dark .c1-spec { color: rgb(var(--muted-foreground)); }
 .c1-spec span { white-space: nowrap; }
 .c1-spec .c1-sep { color: var(--c1-line-strong); }
 .c1-spec .c1-mod { color: var(--c1-gold); font-weight: 600; }
@@ -225,9 +247,9 @@
 .c1-vergleich { background: var(--c1-ink); color: #E8ECF3; border-radius: 14px; padding: 22px 24px; margin: 14px 0; }
 .c1-vergleich .c1-vt {
   font-family: var(--c1-mono); font-size: 11px; letter-spacing: .12em;
-  text-transform: uppercase; color: var(--c1-gold); margin-bottom: 12px;
+  text-transform: uppercase; color: #D3A33F; margin-bottom: 12px;
+  /* el panel es navy en ambos modos: dorado claro fijo para el contraste */
 }
-.dark .c1-vergleich .c1-vt { color: #D3A33F; }
 .c1-vergleich .c1-row { padding: 9px 0; border-bottom: 1px solid rgb(255 255 255 / 0.1); font-size: 15px; }
 .c1-vergleich .c1-row:last-child { border-bottom: 0; }
 .c1-vergleich .c1-row b { color: #fff; }
@@ -272,7 +294,7 @@
 .c1-step p { margin: 0; font-size: 14.5px; color: var(--c1-muted); }
 .c1-step .c1-de { color: var(--c1-text); font-weight: 500; }
 .c1-step code {
-  font-family: var(--c1-mono); font-size: 13px; background: rgb(var(--muted));
+  font-family: var(--c1-mono); font-size: 13px; background: var(--c1-code-bg);
   padding: 1px 6px; border-radius: 5px; color: var(--c1-heading);
 }
 
@@ -281,9 +303,8 @@
 .c1-rm { background: var(--c1-surface); border: 1px solid var(--c1-line); border-radius: 12px; padding: 14px 18px; }
 .c1-rm .c1-fn {
   font-family: var(--c1-mono); font-size: 11px; letter-spacing: .08em;
-  text-transform: uppercase; color: var(--c1-ink-2); margin-bottom: 8px;
+  text-transform: uppercase; color: var(--c1-spec-c); margin-bottom: 8px;
 }
-.dark .c1-rm .c1-fn { color: rgb(var(--muted-foreground)); }
 .c1-rm ul { margin: 0; padding-left: 0; list-style: none; display: grid; gap: 6px; }
 .c1-rm li { font-size: 15px; padding-left: 16px; position: relative; }
 .c1-rm li::before { content: "„"; position: absolute; left: 0; color: var(--c1-gold); font-weight: 700; }
@@ -363,10 +384,9 @@
 .c1-placeholder p { color: var(--c1-muted); font-size: 16px; }
 .c1-placeholder .c1-badge {
   display: inline-block; margin-top: 18px; font-family: var(--c1-mono); font-size: 12px;
-  color: var(--c1-ink-2); border: 1px solid var(--c1-line); background: var(--c1-surface);
+  color: var(--c1-spec-c); border: 1px solid var(--c1-line); background: var(--c1-surface);
   border-radius: 999px; padding: 7px 14px;
 }
-.dark .c1-placeholder .c1-badge { color: rgb(var(--muted-foreground)); }
 
 /* Pager */
 .c1-pager {
