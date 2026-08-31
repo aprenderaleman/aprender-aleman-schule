@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
   Home, BookOpen, Layers, GraduationCap, BarChart2, Trophy, User,
-  Target, CreditCard, LogOut, X, Zap, Bot, ExternalLink, Library, Library,
+  Target, CreditCard, LogOut, X, Zap, Bot, ExternalLink, Library,
 } from 'lucide-react'
 import { useAuth } from '../../context/AuthContext'
 import { useProgress } from '../../context/ProgressContext'
