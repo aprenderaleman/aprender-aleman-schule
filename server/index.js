@@ -1090,6 +1090,10 @@ app.post('/api/b2c/sso-link', async (req, res) => {
   try {
     const {
       email, full_name, phone, secret,
+      // Rol a asignar si el usuario NO existe todavía en Schule.
+      // Alumnos: 'schule_student' (default). Teachers: 'teacher'. Admins: 'admin'.
+      // Si el usuario ya existe, su role local se respeta.
+      role: incomingRole = null,
       // Impersonation: cuando un profesor de b2c aprieta "Ver como alumno",
       // b2c manda estos dos campos. El teacher se loguea COMO el alumno
       // pero SCHULE muestra un banner y bloquea las mutations para no
@@ -1142,16 +1146,30 @@ app.post('/api/b2c/sso-link', async (req, res) => {
       const hashed = await bcrypt.hash(randomPassword, 10)
       const now = new Date()
 
+      // Rol a crear: si b2c pasa 'teacher'/'admin'/'superadmin' → staff.
+      // Sino, alumno (schule_student). Impersonation NUNCA cambia el
+      // role del target — el target es siempre el alumno.
+      const validStaffRoles = ['teacher', 'admin', 'superadmin']
+      const newRole = validStaffRoles.includes(incomingRole)
+        ? incomingRole
+        : 'schule_student'
+
       const conn = await pool.getConnection()
       await conn.beginTransaction()
       try {
         await conn.query('SET FOREIGN_KEY_CHECKS=0')
         await conn.query(
           'INSERT INTO users (id, fullName, email, password, role, status, studentId, createdAt, updatedAt) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
-          [userId, (full_name || 'Estudiante').trim(), normEmail, hashed, 'schule_student', 'active', null, now, now]
+          [userId, (full_name || (newRole === 'schule_student' ? 'Estudiante' : 'Profesor')).trim(),
+           normEmail, hashed, newRole, 'active', null, now, now]
         )
         await conn.query('SET FOREIGN_KEY_CHECKS=1')
-        await conn.query('INSERT INTO schule_progress (userId) VALUES (?)', [userId])
+        // Solo alumnos tienen progress + subscription. Los teachers no
+        // consumen XP/trial; usan la app para ver como alumno o para
+        // navegar el contenido.
+        if (newRole === 'schule_student') {
+          await conn.query('INSERT INTO schule_progress (userId) VALUES (?)', [userId])
+        }
         await conn.commit()
       } catch (txErr) {
         await conn.rollback()
@@ -1161,16 +1179,23 @@ app.post('/api/b2c/sso-link', async (req, res) => {
       }
     }
 
-    // 2. Upsert subscription: full access for 100 years (b2c re-asserts
-    //    this every call; if b2c stops calling → we can add a cleanup
-    //    job later, but for now SSO users never churn).
-    await pool.query(
-      `INSERT INTO schule_subscriptions (userId, trialEndsAt, subscriptionStatus, ssoUser)
-       VALUES (?, DATE_ADD(NOW(), INTERVAL 100 YEAR), 'active', 1)
-       ON DUPLICATE KEY UPDATE ssoUser = 1, subscriptionStatus = 'active',
-                               trialEndsAt = DATE_ADD(NOW(), INTERVAL 100 YEAR)`,
-      [userId]
+    // 2. Upsert subscription solo para alumnos (staff no consume trial).
+    //    Chequeamos el role FINAL en la DB porque puede ser un usuario
+    //    pre-existente con role distinto al que b2c mandó ahora.
+    const [roleRows] = await pool.query(
+      'SELECT role FROM users WHERE id = ? LIMIT 1', [userId]
     )
+    const currentRole = roleRows[0]?.role
+    const isStudent = !['teacher', 'admin', 'superadmin'].includes(currentRole)
+    if (isStudent) {
+      await pool.query(
+        `INSERT INTO schule_subscriptions (userId, trialEndsAt, subscriptionStatus, ssoUser)
+         VALUES (?, DATE_ADD(NOW(), INTERVAL 100 YEAR), 'active', 1)
+         ON DUPLICATE KEY UPDATE ssoUser = 1, subscriptionStatus = 'active',
+                                 trialEndsAt = DATE_ADD(NOW(), INTERVAL 100 YEAR)`,
+        [userId]
+      )
+    }
 
     // 3. Generate the SSO token — incluye info de impersonación si aplica
     const jwtPayload = { userId, sso: true }
