@@ -723,8 +723,9 @@ app.post('/api/auth/magic-link', loginRateLimit, async (req, res) => {
     // Resolve user state. Two sources:
     //   1. LOCAL DB — if user exists locally as staff (admin/superadmin/teacher)
     //      we let them in regardless of b2c. SCHULE-only admins live here.
-    //   2. b2c — for students, b2c is the source of truth for "is active".
-    let isActiveStudent = false
+    //   2. b2c — la fuente de verdad. Aceptamos tanto alumnos activos
+    //      como profesores/admins (para que puedan ver como alumno).
+    let canReceiveLink = false
     let langPref = null
     let role = null
 
@@ -738,15 +739,19 @@ app.post('/api/auth/magic-link', loginRateLimit, async (req, res) => {
 
     if (isLocalStaff) {
       // SCHULE-owned staff bypasses b2c entirely
-      isActiveStudent = true
+      canReceiveLink = true
       role = localUser.role
       langPref = localUser.languagePreference
     } else if (b2c.isConfigured()) {
       // Step 2: ask b2c
       try {
         const result = await b2c.verifyEmailCached(email)
-        isActiveStudent = !!result.isActiveStudent
-        role = result.role
+        // Alumnos activos → OK. Profesores/admins de b2c también reciben
+        // link porque necesitan poder loguearse (view-as-student, etc.).
+        const b2cRole = result.role || null
+        const isStaffRole = ['teacher', 'admin', 'superadmin'].includes(b2cRole)
+        canReceiveLink = !!result.isActiveStudent || isStaffRole
+        role = b2cRole
         langPref = result.raw?.language_preference || null
       } catch (err) {
         if (err.code === 'B2C_AUTH') {
@@ -756,19 +761,19 @@ app.post('/api/auth/magic-link', loginRateLimit, async (req, res) => {
         // 5xx / timeout → fail open: if user exists locally + active, let in
         console.warn('[magic-link] b2c unavailable, fail-open:', err.message)
         if (localUser) {
-          isActiveStudent = true
+          canReceiveLink = true
           role = localUser.role
           langPref = localUser.languagePreference
         }
       }
     } else if (localUser) {
       // No b2c configured at all → fall back to local existence
-      isActiveStudent = true
+      canReceiveLink = true
       role = localUser.role
       langPref = localUser.languagePreference
     }
 
-    if (!isActiveStudent) {
+    if (!canReceiveLink) {
       // Don't reveal whether the email exists. Always 200.
       return res.json({ ok: true })
     }
@@ -828,7 +833,11 @@ app.post('/api/auth/magic-link/consume', async (req, res) => {
       // Fetch from b2c on-demand and insert.
       try {
         const verified = await b2c.verifyEmailCached(consumed.email)
-        if (!verified.isActiveStudent) {
+        const b2cRole = verified.role || null
+        const isStaffRole = ['teacher', 'admin', 'superadmin'].includes(b2cRole)
+        // Aceptamos alumnos activos + staff (teacher/admin) — la fase
+        // request ya validó lo mismo, este check es defensa en profundidad.
+        if (!verified.isActiveStudent && !isStaffRole) {
           return res.status(403).json({ error: 'Cuenta no activa.' })
         }
         const newId = verified.userId || crypto.randomUUID()
