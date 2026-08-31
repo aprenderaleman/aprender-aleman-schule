@@ -23,6 +23,22 @@ export default function AutoLogin() {
   useEffect(() => {
     const ssoToken = searchParams.get('token')
     const magicToken = searchParams.get('magicToken')
+    // Deep-link opcional. b2c manda ?next=/deutschb1 en el redirectUrl que
+    // recibe de /api/b2c/sso-link para que el profe aterrice en el curso
+    // seleccionado en vez del dashboard. Validamos a path relativo para
+    // que no se pueda redirigir fuera del dominio.
+    const rawNext = searchParams.get('next')
+    const nextPath =
+      rawNext && /^\/[^/\\]/.test(rawNext) && !/^\/\//.test(rawNext)
+        ? rawNext
+        : null
+
+    const landFor = (role) => {
+      if (nextPath) return nextPath
+      if (role === 'admin' || role === 'superadmin') return '/admin'
+      if (role === 'teacher') return '/cursos'
+      return '/dashboard'
+    }
 
     if (magicToken) {
       // ── Magic link flow ─────────────────────────────
@@ -41,16 +57,7 @@ export default function AutoLogin() {
           ssoLogin(data.token, data.user)
           // Strip the token from the URL for safety
           window.history.replaceState({}, '', '/auto-login')
-          // Admin → admin dashboard, teacher → catálogo de cursos
-          // (el dashboard de student no tiene sentido para docentes),
-          // alumno → student dashboard.
-          if (data.user.role === 'admin' || data.user.role === 'superadmin') {
-            navigate('/admin', { replace: true })
-          } else if (data.user.role === 'teacher') {
-            navigate('/cursos', { replace: true })
-          } else {
-            navigate('/dashboard', { replace: true })
-          }
+          navigate(landFor(data.user.role), { replace: true })
         })
         .catch(() => {
           setError('Der Anmeldelink ist abgelaufen oder ungültig. Bitte fordere einen neuen Link an.')
@@ -68,14 +75,7 @@ export default function AutoLogin() {
         })
         .then(data => {
           ssoLogin(data.token, data.user)
-          // Teachers entran directo al catálogo de cursos.
-          if (data.user.role === 'admin' || data.user.role === 'superadmin') {
-            navigate('/admin', { replace: true })
-          } else if (data.user.role === 'teacher') {
-            navigate('/cursos', { replace: true })
-          } else {
-            navigate('/dashboard', { replace: true })
-          }
+          navigate(landFor(data.user.role), { replace: true })
         })
         .catch(() => {
           setError('Der Zugangslink ist abgelaufen oder ungültig. Kehre zu deinem Dashboard unter app.aprender-aleman.de zurück und versuche es erneut.')

@@ -1100,6 +1100,10 @@ app.post('/api/b2c/sso-link', async (req, res) => {
       // ensuciar el progreso.
       impersonatedBy = null,   // { id, email, fullName } del teacher
       readOnly = false,        // true = solo lectura (recomendado para teachers)
+      // Deep-link opcional. Si b2c manda `next` (ej. "/deutschb1"), tras
+      // el auto-login el usuario aterriza ahi en vez del dashboard default.
+      // Se valida a path relativo para evitar open-redirect a otros dominios.
+      next: nextPath = null,
     } = req.body || {}
 
     const B2C_SYNC_SECRET = process.env.B2C_SYNC_SECRET
@@ -1226,7 +1230,16 @@ app.post('/api/b2c/sso-link', async (req, res) => {
       const frontendHost = host.replace(/^api-/, '')
       frontendOrigin = `https://${frontendHost}`
     }
-    const redirectUrl = `${frontendOrigin.replace(/\/$/, '')}/auto-login?token=${ssoToken}`
+    // Validar `next` a path relativo (empieza con "/" pero NO con "//" ni
+    // esquema). Rechazar cualquier otra cosa para prevenir open-redirect.
+    let safeNext = null
+    if (typeof nextPath === 'string' && nextPath.length > 0 && nextPath.length < 500) {
+      if (/^\/[^/\\]/.test(nextPath) && !/^\/\//.test(nextPath)) {
+        safeNext = nextPath
+      }
+    }
+    const nextParam = safeNext ? `&next=${encodeURIComponent(safeNext)}` : ''
+    const redirectUrl = `${frontendOrigin.replace(/\/$/, '')}/auto-login?token=${ssoToken}${nextParam}`
 
     res.json({ ssoToken, userId, redirectUrl })
   } catch (err) {
