@@ -20,6 +20,7 @@ import Flashcards from './pages/Flashcards'
 import Pricing from './pages/Pricing'
 import AutoLogin from './pages/AutoLogin'
 import Pruefungen from './pages/Pruefungen'
+import Cursos from './pages/Cursos'
 import PruefungPlayer from './pages/PruefungPlayer'
 import LevelTest from './pages/LevelTest'
 import AdminLayout from './components/Layout/AdminLayout'
@@ -166,6 +167,8 @@ function AppRoutes() {
         <Route path="/perfil" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
         <Route path="/logros" element={<PaidRoute><Achievements /></PaidRoute>} />
         <Route path="/flashcards" element={<PaidRoute><Flashcards /></PaidRoute>} />
+        {/* Catálogo de los cursos por nivel (A1-C1) */}
+        <Route path="/cursos" element={<PaidRoute><Cursos /></PaidRoute>} />
         <Route path="/pruefungen" element={<PaidRoute><Pruefungen /></PaidRoute>} />
         <Route path="/pruefungen/:examId" element={<PaidRoute><PruefungPlayer /></PaidRoute>} />
         {/* Zertifikat C1 — curso restringido */}

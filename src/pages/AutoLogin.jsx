@@ -41,9 +41,13 @@ export default function AutoLogin() {
           ssoLogin(data.token, data.user)
           // Strip the token from the URL for safety
           window.history.replaceState({}, '', '/auto-login')
-          // Admin → admin dashboard, else → student dashboard
+          // Admin → admin dashboard, teacher → catálogo de cursos
+          // (el dashboard de student no tiene sentido para docentes),
+          // alumno → student dashboard.
           if (data.user.role === 'admin' || data.user.role === 'superadmin') {
             navigate('/admin', { replace: true })
+          } else if (data.user.role === 'teacher') {
+            navigate('/cursos', { replace: true })
           } else {
             navigate('/dashboard', { replace: true })
           }
@@ -64,7 +68,14 @@ export default function AutoLogin() {
         })
         .then(data => {
           ssoLogin(data.token, data.user)
-          navigate('/dashboard', { replace: true })
+          // Teachers entran directo al catálogo de cursos.
+          if (data.user.role === 'admin' || data.user.role === 'superadmin') {
+            navigate('/admin', { replace: true })
+          } else if (data.user.role === 'teacher') {
+            navigate('/cursos', { replace: true })
+          } else {
+            navigate('/dashboard', { replace: true })
+          }
         })
         .catch(() => {
           setError('Der Zugangslink ist abgelaufen oder ungültig. Kehre zu deinem Dashboard unter app.aprender-aleman.de zurück und versuche es erneut.')

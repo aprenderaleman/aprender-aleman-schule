@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
   Home, BookOpen, Layers, GraduationCap, BarChart2, Trophy, User,
-  Target, CreditCard, LogOut, X, Zap, Bot, ExternalLink,
+  Target, CreditCard, LogOut, X, Zap, Bot, ExternalLink, Library, Library,
 } from 'lucide-react'
 import { useAuth } from '../../context/AuthContext'
 import { useProgress } from '../../context/ProgressContext'
@@ -13,6 +13,7 @@ import Logo from '../UI/Logo'
 
 const NAV_ITEMS = [
   { to: '/dashboard',     icon: Home,           label: 'Dashboard' },
+  { to: '/cursos',        icon: Library,        label: 'Cursos' },
   { to: '/ejercicios',    icon: BookOpen,       label: 'Übungen' },
   { to: '/flashcards',    icon: Layers,         label: 'Karteikarten' },
   { to: '/pruefungen',    icon: GraduationCap,  label: 'Prüfungen' },
