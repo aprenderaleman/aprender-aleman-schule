@@ -36,7 +36,7 @@ export default {
         ['obwohl', 'aunque', 'Subjunktion → Verb ans Ende'],
         ['trotzdem / dennoch', 'aun así / sin embargo', 'Adverb → Inversion'],
         ['sodass / so … dass', 'de modo que', 'Subjunktion → Verb ans Ende'],
-        ['folglich', 'por consiguiente', 'Adverb → Inversion'],
+        ['somit', 'por lo tanto, así pues', 'Adverb → Inversion'],
       ],
     },
 
@@ -66,7 +66,7 @@ export default {
         {
           badge: 'Inversion',
           titel: 'Verbindungsadverb (Position 1)',
-          text: 'Steht auf Position 1 → __Verb vor Subjekt__. Typisch: **deshalb, trotzdem, folglich**.\n__Ich bin krank, deshalb bleibe ich zu Hause.__',
+          text: 'Steht auf Position 1 → __Verb vor Subjekt__. Typisch: **deshalb, trotzdem, somit**.\n__Ich bin krank, deshalb bleibe ich zu Hause.__',
         },
       ],
     },
@@ -181,7 +181,7 @@ export default {
       optionen: [
         '(1) a) weil · b) obwohl · c) trotzdem',
         '(2) a) Weil · b) Deshalb · c) Obwohl',
-        '(3) a) sodass · b) trotzdem · c) folglich',
+        '(3) a) sodass · b) trotzdem · c) somit',
       ],
       loesungLabel: 'Lösung',
       loesungen: [
@@ -193,7 +193,7 @@ export default {
     {
       type: 'tipp',
       label: 'Prüfungstipp',
-      text: 'Im **Schreiben** (Forumsbeitrag) und im **Sprechen** heben *obwohl, trotzdem, deshalb* das Kriterium „Strukturen“. Häufigster Fehler: die Verbstellung — nach *weil/obwohl* das Verb ans Ende, nach *deshalb/trotzdem* Inversion. ~~No calques el orden del español.~~',
+      text: 'Im **Schreiben** (Forumsbeitrag) und im **Sprechen** haben *obwohl, trotzdem, deshalb* großes Gewicht beim Kriterium „Strukturen“. Häufigster Fehler: die Verbstellung — nach *weil/obwohl* das Verb ans Ende, nach *deshalb/trotzdem* Inversion. ~~No calques el orden del español.~~',
     },
 
     { type: 'rule' },
@@ -206,7 +206,7 @@ export default {
       zeilen: [
         ['kausal', 'weil, da', 'deshalb, daher', 'wegen + Gen.'],
         ['konzessiv', 'obwohl', 'trotzdem, dennoch', 'trotz + Gen.'],
-        ['konsekutiv', 'sodass, so … dass', 'folglich, also', '—'],
+        ['konsekutiv', 'sodass, so … dass', 'somit, also', '—'],
       ],
     },
     {
