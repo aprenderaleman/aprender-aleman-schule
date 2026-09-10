@@ -44,6 +44,7 @@ const AdminUsers = lazy(() => import('./pages/admin/AdminUsers'))
 const AdminUserDetail = lazy(() => import('./pages/admin/AdminUserDetail'))
 const AdminFinances = lazy(() => import('./pages/admin/AdminFinances'))
 const AdminReviews = lazy(() => import('./pages/admin/AdminReviews'))
+const AdminSupervision = lazy(() => import('./pages/admin/AdminSupervision'))
 
 // Cursos por nivel — chunk propio, solo se descargan al entrar
 const DeutschC1 = lazy(() => import('./pages/DeutschC1'))
@@ -188,6 +189,7 @@ function AppRoutes() {
         <Route path="/admin/usuarios/:userId" element={<AdminRoute><AdminUserDetail /></AdminRoute>} />
         <Route path="/admin/finanzen" element={<AdminRoute><AdminFinances /></AdminRoute>} />
         <Route path="/admin/bewertungen" element={<AdminRoute><AdminReviews /></AdminRoute>} />
+        <Route path="/admin/supervision" element={<AdminRoute><AdminSupervision /></AdminRoute>} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </>

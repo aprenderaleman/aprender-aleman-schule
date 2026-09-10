@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import {
   Clock, ArrowLeft, ArrowRight, CheckCircle2, XCircle, Trophy,
   AlertTriangle, BookOpen, Play, RotateCcw, ChevronRight,
-  Headphones, Volume2, Eye, EyeOff, Mic, Square, Loader2, Pause
+  Headphones, Volume2, Eye, EyeOff, Mic, Square, Loader2, Pause, Video
 } from 'lucide-react'
 import Navbar from '../components/Layout/Navbar'
 import { useAuth } from '../context/AuthContext'
@@ -106,6 +106,118 @@ export default function PruefungPlayer() {
   // agotarse el tiempo entregaría el examen sin ninguna respuesta del alumno.
   const submitRef = useRef(() => {})
 
+  // ── Supervisión por cámara (solo examen real) ──────────────────────
+  // La cámara del alumno (manos visibles) se graba y se sube por trozos
+  // mientras dura el examen. Sin cámara activa + consentimiento no se
+  // puede iniciar un examen real.
+  const [camStream, setCamStream] = useState(null)
+  const [camError, setCamError] = useState(null)
+  const [consent, setConsent] = useState(false)
+  const [camLost, setCamLost] = useState(false)
+  const camPreviewRef = useRef(null)
+  const selfViewRef = useRef(null)
+  const recorderRef = useRef(null)
+  const uploadChainRef = useRef(Promise.resolve())
+  const supervisionRef = useRef([])
+  const camStreamRef = useRef(null)
+
+  useEffect(() => { camStreamRef.current = camStream }, [camStream])
+
+  // Conectar el stream a los <video> de previsualización/autovista.
+  useEffect(() => {
+    if (camPreviewRef.current && camStream) camPreviewRef.current.srcObject = camStream
+    if (selfViewRef.current && camStream) selfViewRef.current.srcObject = camStream
+  }, [camStream, phase])
+
+  // Al desmontar: soltar cámara y grabador pase lo que pase.
+  useEffect(() => () => {
+    try { recorderRef.current?.stop() } catch { /* ya parado */ }
+    camStreamRef.current?.getTracks().forEach(t => t.stop())
+  }, [])
+
+  const stopCamera = () => {
+    camStreamRef.current?.getTracks().forEach(t => t.stop())
+    setCamStream(null)
+    setCamLost(false)
+  }
+
+  const postSupervisionEvent = (type, aId) => {
+    supervisionRef.current.push({ type, at: new Date().toISOString() })
+    const id = aId || attemptId
+    if (!id) return
+    fetch(`${API_URL}/api/pruefungen/attempts/${id}/supervision-event`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${getToken()}` },
+      body: JSON.stringify({ type }),
+    }).catch(() => {})
+  }
+
+  const enableCamera = async () => {
+    setCamError(null)
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({
+        video: { width: { ideal: 640 }, height: { ideal: 360 }, frameRate: { ideal: 10, max: 15 } },
+        audio: false,
+      })
+      setCamStream(stream)
+    } catch (e) {
+      setCamError(
+        e?.name === 'NotFoundError'
+          ? 'No se encontró ninguna cámara. Conecta una e inténtalo de nuevo.'
+          : 'No se pudo acceder a la cámara. Permite el acceso en tu navegador e inténtalo de nuevo.'
+      )
+    }
+  }
+
+  const uploadChunk = async (aId, blob, retry = true) => {
+    try {
+      const res = await fetch(`${API_URL}/api/pruefungen/attempts/${aId}/recording`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'video/webm', Authorization: `Bearer ${getToken()}` },
+        body: blob,
+      })
+      if (!res.ok) throw new Error(`upload ${res.status}`)
+    } catch (e) {
+      if (retry) {
+        await new Promise(r => setTimeout(r, 3000))
+        return uploadChunk(aId, blob, false)
+      }
+      postSupervisionEvent('upload-failed', aId)
+    }
+  }
+
+  const startRecording = (aId) => {
+    const stream = camStreamRef.current
+    if (!stream || typeof MediaRecorder === 'undefined') return
+    const mime = ['video/webm;codecs=vp9', 'video/webm;codecs=vp8', 'video/webm']
+      .find(m => MediaRecorder.isTypeSupported?.(m))
+    const rec = new MediaRecorder(stream, { ...(mime ? { mimeType: mime } : {}), videoBitsPerSecond: 250_000 })
+    recorderRef.current = rec
+    // Encadenar las subidas conserva el orden de los trozos webm.
+    rec.ondataavailable = (e) => {
+      if (!e.data || !e.data.size) return
+      uploadChainRef.current = uploadChainRef.current.then(() => uploadChunk(aId, e.data)).catch(() => {})
+    }
+    rec.start(20_000) // un trozo cada 20 s: si algo casca, lo anterior ya está a salvo
+    const track = stream.getVideoTracks()[0]
+    track?.addEventListener('ended', () => {
+      setCamLost(true)
+      postSupervisionEvent('camera-lost', aId)
+    }, { once: true })
+  }
+
+  const stopRecordingAndFlush = async () => {
+    const rec = recorderRef.current
+    recorderRef.current = null
+    if (rec && rec.state !== 'inactive') {
+      await new Promise(resolve => {
+        rec.addEventListener('stop', resolve, { once: true })
+        try { rec.stop() } catch { resolve() }
+      })
+    }
+    await uploadChainRef.current
+  }
+
   if (!exam) {
     return (
       <div className="min-h-screen bg-background">
@@ -149,6 +261,17 @@ export default function PruefungPlayer() {
 
   const startExam = async () => {
     setError(null)
+    // Examen real: exige cámara activa + consentimiento antes de arrancar.
+    if (examMode === 'real') {
+      if (!camStreamRef.current || camStreamRef.current.getVideoTracks().every(t => t.readyState !== 'live')) {
+        setError('Activa tu cámara para poder iniciar el examen real.')
+        return
+      }
+      if (!consent) {
+        setError('Debes aceptar la grabación de la cámara para el examen real.')
+        return
+      }
+    }
     try {
       const res = await fetch(`${API_URL}/api/pruefungen/attempts`, {
         method: 'POST',
@@ -171,6 +294,9 @@ export default function PruefungPlayer() {
       setPhase('running')
       setPartIdx(0)
       setResponses({})
+      supervisionRef.current = []
+      setCamLost(false)
+      if (examMode === 'real') startRecording(data.attemptId)
       window.scrollTo(0, 0)
     } catch (err) {
       setError(err.message)
@@ -181,6 +307,9 @@ export default function PruefungPlayer() {
     if (timerRef.current) clearInterval(timerRef.current)
     setGrading(true)
     setError(null)
+    // Cerrar la grabación y esperar a que el último trozo esté subido
+    // antes de dar el intento por terminado.
+    try { await stopRecordingAndFlush() } catch { /* la nota no depende del vídeo */ }
     try {
       // Objective grading (Lesen / Hören questions)
       const objective = gradeObjectiveExam(exam, responses)
@@ -364,12 +493,19 @@ export default function PruefungPlayer() {
             score: finalResult.score,
             maxScore: finalResult.maxScore,
             responses: cleanResponses,
-            feedback: { detail: combinedDetail, writingFeedback },
+            feedback: {
+              detail: combinedDetail,
+              writingFeedback,
+              ...(examMode === 'real'
+                ? { supervision: { recorded: true, events: supervisionRef.current } }
+                : {}),
+            },
           }),
         })
       }
       setResult(finalResult)
       setPhase('results')
+      stopCamera()
       window.scrollTo(0, 0)
     } catch (err) {
       setError(err.message || 'Fehler beim Abgeben')
@@ -457,6 +593,60 @@ export default function PruefungPlayer() {
               </div>
             )}
 
+            {/* Supervisión por cámara — obligatoria en modo real */}
+            {examMode === 'real' && (
+              <div className="mb-6 bg-white dark:bg-gray-800 border-2 border-purple-200 dark:border-purple-800 rounded-2xl p-5">
+                <p className="text-sm font-bold text-purple-700 dark:text-purple-300 flex items-center gap-2 mb-2">
+                  <Video size={16} /> Supervisión por cámara
+                </p>
+                <p className="text-sm text-gray-700 dark:text-gray-200 mb-4">
+                  El examen real se graba con tu cámara. Colócala de forma que se vean
+                  claramente <strong>tus manos y tu teclado</strong> durante toda la prueba.
+                </p>
+
+                {camStream ? (
+                  <div className="flex items-start gap-4 mb-4">
+                    <video
+                      ref={camPreviewRef}
+                      autoPlay
+                      muted
+                      playsInline
+                      className="w-48 rounded-xl border-2 border-green-400 bg-black"
+                    />
+                    <p className="text-sm font-bold text-green-700 dark:text-green-400 flex items-center gap-1.5 mt-1">
+                      <CheckCircle2 size={15} /> Cámara activa
+                    </p>
+                  </div>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={enableCamera}
+                    className="mb-4 inline-flex items-center gap-2 bg-purple-600 text-white font-bold px-5 py-2.5 rounded-xl hover:bg-purple-700 transition"
+                  >
+                    <Video size={16} /> Activar cámara
+                  </button>
+                )}
+                {camError && (
+                  <div className="bg-red-50 border border-red-200 text-red-700 rounded-xl p-3 mb-4 text-sm">{camError}</div>
+                )}
+
+                <label className="flex items-start gap-2.5 text-xs text-gray-600 dark:text-gray-300 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={consent}
+                    onChange={e => setConsent(e.target.checked)}
+                    className="mt-0.5 accent-purple-600"
+                  />
+                  <span>
+                    Acepto que mi cámara grabe durante el examen real. La grabación se usa
+                    únicamente para verificar la integridad del examen, solo puede verla el
+                    equipo docente de Aprender-Aleman.de y se elimina automáticamente a los
+                    30 días. Puedo solicitar su borrado en cualquier momento.
+                  </span>
+                </label>
+              </div>
+            )}
+
             <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-xl p-4 mb-6">
               <p className="text-sm font-bold text-amber-700 dark:text-amber-300 mb-2 flex items-center gap-2">
                 <AlertTriangle size={14} /> Vor dem Start lesen
@@ -469,6 +659,9 @@ export default function PruefungPlayer() {
                 {examMode === 'real' && (
                   <li className="font-bold">Modo real: solo tu nivel actual, con cooldown 24 h y máx 3 intentos.</li>
                 )}
+                {examMode === 'real' && (
+                  <li className="font-bold">La cámara debe permanecer encendida todo el examen; si se apaga, el intento queda marcado.</li>
+                )}
               </ul>
             </div>
 
@@ -476,8 +669,9 @@ export default function PruefungPlayer() {
 
             <button
               onClick={startExam}
+              disabled={examMode === 'real' && (!camStream || !consent)}
               className={
-                'w-full flex items-center justify-center gap-2 text-white font-bold py-4 rounded-2xl text-lg transition shadow-lg ' +
+                'w-full flex items-center justify-center gap-2 text-white font-bold py-4 rounded-2xl text-lg transition shadow-lg disabled:opacity-50 disabled:cursor-not-allowed ' +
                 (examMode === 'real'
                   ? 'bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700'
                   : 'bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700')
@@ -602,7 +796,28 @@ export default function PruefungPlayer() {
         </div>
       </header>
 
+      {/* Autovista de la cámara — el alumno ve en todo momento qué se graba */}
+      {examMode === 'real' && camStream && (
+        <div className="fixed bottom-4 right-4 z-40 w-36">
+          <video
+            ref={selfViewRef}
+            autoPlay
+            muted
+            playsInline
+            className="w-full rounded-xl border-2 border-red-400 bg-black shadow-lg"
+          />
+          <span className="absolute top-1.5 left-1.5 inline-flex items-center gap-1 bg-red-600 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full">
+            <span className="w-1.5 h-1.5 bg-white rounded-full animate-pulse" /> REC
+          </span>
+        </div>
+      )}
+
       <main className="max-w-4xl mx-auto px-4 py-6">
+        {examMode === 'real' && camLost && (
+          <div className="bg-red-50 dark:bg-red-900/20 border-2 border-red-300 dark:border-red-800 text-red-700 dark:text-red-300 rounded-xl p-3 mb-4 text-sm font-bold flex items-center gap-2">
+            <AlertTriangle size={16} /> Kamera getrennt — dein Versuch wurde markiert. Aktiviere die Kamera erneut, wenn möglich.
+          </div>
+        )}
         {error && <div className="bg-red-50 border border-red-200 text-red-700 rounded-xl p-3 mb-4 text-sm">{error}</div>}
         {/* Part navigation pills */}
         <div className="flex flex-wrap gap-2 mb-6">

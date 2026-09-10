@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
-import { Moon, Sun, Menu, X, LayoutDashboard, Users, LogOut, BookOpen, ChevronLeft, Settings, DollarSign, Star } from 'lucide-react'
+import { Moon, Sun, Menu, X, LayoutDashboard, Users, LogOut, BookOpen, ChevronLeft, Settings, DollarSign, Star, Video } from 'lucide-react'
 import { useAuth } from '../../context/AuthContext'
 import { useTheme } from '../../context/ThemeContext'
 import Logo from '../UI/Logo'
@@ -11,6 +11,7 @@ const sidebarLinks = [
   { to: '/admin/usuarios', icon: Users, label: 'Schüler' },
   { to: '/admin/finanzen', icon: DollarSign, label: 'Finanzen' },
   { to: '/admin/bewertungen', icon: Star, label: 'Bewertungen' },
+  { to: '/admin/supervision', icon: Video, label: 'Supervisión' },
 ]
 
 const bottomLinks = [

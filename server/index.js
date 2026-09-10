@@ -6,6 +6,7 @@ import jwt from 'jsonwebtoken'
 import Stripe from 'stripe'
 import dotenv from 'dotenv'
 import path from 'path'
+import fs from 'fs'
 import { fileURLToPath } from 'url'
 import crypto from 'node:crypto'
 import cron from 'node-cron'
@@ -1347,9 +1348,11 @@ app.get('/api/progress', authMiddleware, subscriptionMiddleware, async (req, res
     }
     const p = rows[0]
 
-    // Get completed exercises
+    // Get completed exercises (feedback solo se devuelve para los ultimos
+    // 100 — writing/speaking almacenan JSON estructurado en esa columna;
+    // el resto es null).
     const [results] = await pool.query(
-      'SELECT exerciseId, exerciseType, score, perfect, xpEarned, completedAt FROM schule_exercise_results WHERE userId = ? ORDER BY completedAt DESC',
+      'SELECT exerciseId, exerciseType, score, perfect, xpEarned, feedback, completedAt FROM schule_exercise_results WHERE userId = ? ORDER BY completedAt DESC LIMIT 100',
       [userId]
     )
 
@@ -1372,14 +1375,25 @@ app.get('/api/progress', authMiddleware, subscriptionMiddleware, async (req, res
         speaking: p.skillSpeaking || 0,
       },
       completedExercises: [...new Set(results.map(r => r.exerciseId))],
-      exerciseHistory: results.map(r => ({
-        exerciseId: r.exerciseId,
-        type: r.exerciseType,
-        score: r.score,
-        perfect: !!r.perfect,
-        xpEarned: r.xpEarned,
-        completedAt: r.completedAt,
-      })),
+      exerciseHistory: results.map(r => {
+        let feedback = null
+        if (r.feedback) {
+          // mysql2 devuelve JSON como objeto ya parseado, pero por si acaso
+          // llega como string (driver antiguo) intentamos parsearlo tambien.
+          feedback = typeof r.feedback === 'string'
+            ? (() => { try { return JSON.parse(r.feedback) } catch { return null } })()
+            : r.feedback
+        }
+        return {
+          exerciseId: r.exerciseId,
+          type: r.exerciseType,
+          score: r.score,
+          perfect: !!r.perfect,
+          xpEarned: r.xpEarned,
+          completedAt: r.completedAt,
+          feedback,
+        }
+      }),
       achievements: achievements.map(a => a.achievementId),
     })
   } catch (err) {
@@ -1392,15 +1406,21 @@ app.get('/api/progress', authMiddleware, subscriptionMiddleware, async (req, res
 app.post('/api/progress/exercise', authMiddleware, subscriptionMiddleware, blockIfReadOnly, async (req, res) => {
   try {
     const userId = req.user.id
-    const { exerciseId, exerciseType, score, perfect, xpEarned, timeSpent } = req.body
+    const { exerciseId, exerciseType, score, perfect, xpEarned, timeSpent, feedback } = req.body
     if (!exerciseId || score === undefined) {
       return res.status(400).json({ error: 'Faltan datos del ejercicio.' })
     }
 
+    // Feedback JSON solo para writing/speaking (grammar/reading/listening
+    // no producen feedback estructurado). Se serializa aca; null si no viene.
+    const feedbackJson = feedback && typeof feedback === 'object'
+      ? JSON.stringify(feedback)
+      : null
+
     // Insert exercise result
     await pool.query(
-      'INSERT INTO schule_exercise_results (userId, exerciseId, exerciseType, score, perfect, xpEarned, timeSpent) VALUES (?, ?, ?, ?, ?, ?, ?)',
-      [userId, exerciseId, exerciseType || 'grammar', score, perfect ? 1 : 0, xpEarned || 0, timeSpent || 0]
+      'INSERT INTO schule_exercise_results (userId, exerciseId, exerciseType, score, perfect, xpEarned, timeSpent, feedback) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
+      [userId, exerciseId, exerciseType || 'grammar', score, perfect ? 1 : 0, xpEarned || 0, timeSpent || 0, feedbackJson]
     )
 
     // Update progress totals
@@ -4685,6 +4705,188 @@ app.post('/api/stripe/webhook', express.raw({ type: 'application/json' }), async
 // en App.jsx es solo UX; la de verdad es esta.
 
 // Roles con acceso al curso: alumnos (academia y schule), profesores y admin.
+// ─── Supervisión por cámara de exámenes reales ─────────────────────────
+// El alumno graba su cámara (manos visibles) durante el examen real; el
+// navegador sube trozos webm que aquí se van anexando a un archivo por
+// intento. Solo el equipo docente puede verlos y se borran a los N días.
+//
+// IMPORTANTE (Coolify): montar un volumen persistente en RECORDINGS_DIR
+// o las grabaciones se pierden en cada deploy del contenedor.
+const RECORDINGS_DIR = process.env.RECORDINGS_DIR || path.join(__dirname, 'recordings')
+const RECORDINGS_TTL_DAYS = Number(process.env.RECORDINGS_TTL_DAYS || 30)
+const RECORDING_MAX_BYTES = 400 * 1024 * 1024 // tope duro por intento
+try { fs.mkdirSync(RECORDINGS_DIR, { recursive: true }) } catch (e) { console.error('[supervision] mkdir:', e.message) }
+
+const recordingPath = id => path.join(RECORDINGS_DIR, `attempt-${id}.webm`)
+const eventsPath = id => path.join(RECORDINGS_DIR, `attempt-${id}.events.jsonl`)
+
+function staffOnly(req, res, next) {
+  if (!['superadmin', 'admin', 'teacher'].includes(req.user?.role)) {
+    return res.status(403).json({ error: 'forbidden' })
+  }
+  next()
+}
+
+// El intento debe existir, ser del alumno autenticado y ser modo real.
+async function loadOwnRealAttempt(req, res) {
+  const attemptId = parseInt(req.params.id)
+  if (!Number.isInteger(attemptId)) { res.status(400).json({ error: 'Intento inválido.' }); return null }
+  const [rows] = await pool.query(
+    'SELECT id, userId, mode, frozenAt FROM schule_pruefungen_attempts WHERE id = ? LIMIT 1', [attemptId]
+  )
+  if (rows.length === 0) { res.status(404).json({ error: 'Intento no encontrado.' }); return null }
+  const a = rows[0]
+  if (a.userId !== req.user.id) { res.status(403).json({ error: 'No autorizado.' }); return null }
+  if (a.mode !== 'real') { res.status(400).json({ error: 'Solo los exámenes reales se supervisan.' }); return null }
+  if (a.frozenAt) { res.status(409).json({ error: 'Intento congelado.' }); return null }
+  return a
+}
+
+// Recibir un trozo de vídeo (video/webm) y anexarlo.
+app.post('/api/pruefungen/attempts/:id/recording',
+  authMiddleware, subscriptionMiddleware, blockIfReadOnly,
+  express.raw({ type: ['video/webm', 'application/octet-stream'], limit: '16mb' }),
+  async (req, res) => {
+    try {
+      const attempt = await loadOwnRealAttempt(req, res)
+      if (!attempt) return
+      if (!Buffer.isBuffer(req.body) || req.body.length === 0) {
+        return res.status(400).json({ error: 'Trozo vacío.' })
+      }
+      const file = recordingPath(attempt.id)
+      const size = await fs.promises.stat(file).then(s => s.size).catch(() => 0)
+      if (size + req.body.length > RECORDING_MAX_BYTES) {
+        return res.status(413).json({ error: 'Grabación demasiado grande.' })
+      }
+      await fs.promises.appendFile(file, req.body)
+      res.json({ ok: true, bytes: size + req.body.length })
+    } catch (err) {
+      console.error('recording chunk error:', err)
+      res.status(500).json({ error: 'Error al guardar la grabación.' })
+    }
+  })
+
+// Eventos de supervisión (cámara perdida/recuperada, fallo de subida).
+app.post('/api/pruefungen/attempts/:id/supervision-event',
+  authMiddleware, subscriptionMiddleware, blockIfReadOnly,
+  async (req, res) => {
+    try {
+      const attempt = await loadOwnRealAttempt(req, res)
+      if (!attempt) return
+      const type = String(req.body?.type || '').slice(0, 40)
+      if (!['camera-lost', 'camera-restored', 'upload-failed'].includes(type)) {
+        return res.status(400).json({ error: 'Evento desconocido.' })
+      }
+      const line = JSON.stringify({ type, at: new Date().toISOString() }) + '\n'
+      await fs.promises.appendFile(eventsPath(attempt.id), line)
+      res.json({ ok: true })
+    } catch (err) {
+      console.error('supervision event error:', err)
+      res.status(500).json({ error: 'Error al registrar el evento.' })
+    }
+  })
+
+// Listado para el equipo docente: grabaciones existentes + datos del intento.
+app.get('/api/admin/pruefungen/recordings', authMiddleware, staffOnly, async (req, res) => {
+  try {
+    const files = await fs.promises.readdir(RECORDINGS_DIR).catch(() => [])
+    const ids = files
+      .map(f => f.match(/^attempt-(\d+)\.webm$/)?.[1])
+      .filter(Boolean).map(Number)
+    if (ids.length === 0) return res.json({ recordings: [] })
+
+    const [rows] = await pool.query(
+      `SELECT a.id, a.userId, a.level, a.module, a.examId, a.mode, a.startedAt, a.finishedAt,
+              a.score, a.maxScore, u.fullName, u.email
+         FROM schule_pruefungen_attempts a JOIN users u ON u.id = a.userId
+        WHERE a.id IN (?)`, [ids]
+    )
+    const byId = Object.fromEntries(rows.map(r => [r.id, r]))
+    const recordings = []
+    for (const id of ids.sort((x, y) => y - x)) {
+      const st = await fs.promises.stat(recordingPath(id)).catch(() => null)
+      if (!st) continue
+      const events = await fs.promises.readFile(eventsPath(id), 'utf8')
+        .then(t => t.trim().split('\n').filter(Boolean).map(l => JSON.parse(l)))
+        .catch(() => [])
+      const meta = byId[id] || null
+      // Token corto y con alcance limitado para poder usar <video src=…>
+      // (las etiquetas de vídeo no mandan cabecera Authorization).
+      const t = jwt.sign({ scope: 'rec', a: id }, JWT_SECRET, { expiresIn: '30m' })
+      recordings.push({
+        attemptId: id,
+        sizeBytes: st.size,
+        recordedAt: st.mtime,
+        events,
+        attempt: meta && {
+          user: { name: meta.fullName, email: meta.email },
+          level: meta.level, module: meta.module, examId: meta.examId,
+          startedAt: meta.startedAt, finishedAt: meta.finishedAt,
+          score: meta.score, maxScore: meta.maxScore,
+        },
+        streamPath: `/api/admin/pruefungen/recordings/${id}/video?t=${t}`,
+      })
+    }
+    res.json({ recordings, ttlDays: RECORDINGS_TTL_DAYS })
+  } catch (err) {
+    console.error('recordings list error:', err)
+    res.status(500).json({ error: 'Error al listar grabaciones.' })
+  }
+})
+
+// Stream del vídeo con soporte de rangos (seek). Autenticado por token
+// corto de alcance 'rec' en query (emitido por el listado de arriba).
+app.get('/api/admin/pruefungen/recordings/:id/video', async (req, res) => {
+  try {
+    let payload
+    try { payload = jwt.verify(String(req.query.t || ''), JWT_SECRET) } catch { payload = null }
+    const id = parseInt(req.params.id)
+    if (!payload || payload.scope !== 'rec' || payload.a !== id) {
+      return res.status(401).json({ error: 'No autorizado.' })
+    }
+    const file = recordingPath(id)
+    const st = await fs.promises.stat(file).catch(() => null)
+    if (!st) return res.status(404).json({ error: 'Grabación no encontrada.' })
+
+    const range = /^bytes=(\d*)-(\d*)$/.exec(req.headers.range || '')
+    if (range && (range[1] || range[2])) {
+      const start = range[1] ? parseInt(range[1]) : 0
+      const end = range[2] ? Math.min(parseInt(range[2]), st.size - 1) : st.size - 1
+      if (start >= st.size) return res.status(416).set('Content-Range', `bytes */${st.size}`).end()
+      res.status(206).set({
+        'Content-Range': `bytes ${start}-${end}/${st.size}`,
+        'Accept-Ranges': 'bytes',
+        'Content-Length': end - start + 1,
+        'Content-Type': 'video/webm',
+      })
+      fs.createReadStream(file, { start, end }).pipe(res)
+    } else {
+      res.set({ 'Content-Length': st.size, 'Content-Type': 'video/webm', 'Accept-Ranges': 'bytes' })
+      fs.createReadStream(file).pipe(res)
+    }
+  } catch (err) {
+    console.error('recording stream error:', err)
+    res.status(500).json({ error: 'Error al servir la grabación.' })
+  }
+})
+
+// Retención: borrar grabaciones y eventos con más de N días (diario, 04:15).
+async function purgeOldRecordings() {
+  try {
+    const files = await fs.promises.readdir(RECORDINGS_DIR).catch(() => [])
+    const cutoff = Date.now() - RECORDINGS_TTL_DAYS * 24 * 60 * 60 * 1000
+    let n = 0
+    for (const f of files) {
+      const p = path.join(RECORDINGS_DIR, f)
+      const st = await fs.promises.stat(p).catch(() => null)
+      if (st && st.mtime.getTime() < cutoff) { await fs.promises.unlink(p).catch(() => {}); n++ }
+    }
+    if (n) console.log(`[supervision] purgadas ${n} grabaciones de más de ${RECORDINGS_TTL_DAYS} días`)
+  } catch (e) { console.error('[supervision] purge:', e.message) }
+}
+cron.schedule('15 4 * * *', purgeOldRecordings)
+purgeOldRecordings()
+
 const DEUTSCHC1_ROLES = ['superadmin', 'admin', 'teacher', 'student', 'schule_student']
 
 function deutschC1RoleGate(req, res, next) {
@@ -4925,6 +5127,21 @@ app.get('/{*splat}', (req, res, next) => {
     // Column already exists — ignore
     if (!err.message.includes('Duplicate column')) {
       console.error('Migration warning:', err.message)
+    }
+  }
+})()
+
+// ─── AUTO-MIGRATION: Add feedback JSON column ────────────
+// Persistimos el feedback estructurado (score + errores + sugerencias) que
+// devuelve el evaluador de writing/speaking para que el alumno pueda
+// revisar sus fallos despues, en Fortschritt.
+;(async () => {
+  try {
+    await pool.query("ALTER TABLE schule_exercise_results ADD COLUMN feedback JSON NULL")
+    console.log('Added feedback column to schule_exercise_results')
+  } catch (err) {
+    if (!err.message.includes('Duplicate column')) {
+      console.error('Migration warning (feedback col):', err.message)
     }
   }
 })()
