@@ -25,3 +25,4 @@ ios/DerivedData/
 ios/.xcode.env.local
 ios/App/App.xcworkspace/xcuserdata/
 ios/App/App.xcodeproj/xcuserdata/
+.env.development.local

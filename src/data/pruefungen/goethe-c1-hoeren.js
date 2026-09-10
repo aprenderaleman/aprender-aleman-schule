@@ -2,9 +2,10 @@
  * Zertifikat C1 — Hören
  *
  * Offiziell: 2 Teile, ~22 Items, 40 min, pass = 60%.
- * Kompakte Version: 2 Teile, 15 Items, pass bei 9.
- *   Teil 1: Telefongespräch / Nachricht, Notizen ergänzen / R/F, 1x hören
- *   Teil 2: Diskussion oder Vortrag, MC, 2x hören
+ * Kompakte Version: 3 Teile, 15 Items, pass bei 9.
+ *   Teil 1: Telefonnachricht, R/F, 1x hören
+ *   Teil 2: Podiumsdiskussion, MC, 2x hören
+ *   Teil 3: Wissenschaftlicher Vortrag, R/F, 1x hören
  */
 
 export const goetheC1HoerenExams = [

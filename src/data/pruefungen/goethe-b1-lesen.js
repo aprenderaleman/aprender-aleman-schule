@@ -263,11 +263,11 @@ Bei Verstößen gegen die Hausordnung erfolgt zunächst eine schriftliche Verwar
             type: 'multiple-choice',
             prompt: 'Wer ist für die Sauberkeit der Küche verantwortlich?',
             options: [
-              { id: 'a', text: 'Die Putzfrau des Wohnheims.' },
-              { id: 'b', text: 'Die Bewohner nach jeder Benutzung.' },
+              { id: 'a', text: 'Die Bewohner nach jeder Benutzung.' },
+              { id: 'b', text: 'Die Putzfrau des Wohnheims.' },
               { id: 'c', text: 'Niemand, die Küche wird selten benutzt.' },
             ],
-            correct: 'b',
+            correct: 'a',
             points: 1,
           },
           {
@@ -287,11 +287,11 @@ Bei Verstößen gegen die Hausordnung erfolgt zunächst eine schriftliche Verwar
             type: 'multiple-choice',
             prompt: 'Welche Tiere sind im Wohnheim erlaubt?',
             options: [
-              { id: 'a', text: 'Kleine Katzen und Hunde.' },
-              { id: 'b', text: 'Blindenhunde mit ärztlichem Attest.' },
+              { id: 'a', text: 'Blindenhunde mit ärztlichem Attest.' },
+              { id: 'b', text: 'Kleine Katzen und Hunde.' },
               { id: 'c', text: 'Alle Haustiere.' },
             ],
-            correct: 'b',
+            correct: 'a',
             points: 1,
           },
           {
@@ -300,10 +300,10 @@ Bei Verstößen gegen die Hausordnung erfolgt zunächst eine schriftliche Verwar
             prompt: 'Was passiert nach drei Verwarnungen?',
             options: [
               { id: 'a', text: 'Der Mieter bekommt eine Geldstrafe.' },
-              { id: 'b', text: 'Der Mietvertrag kann gekündigt werden.' },
-              { id: 'c', text: 'Es passiert nichts.' },
+              { id: 'b', text: 'Es passiert nichts.' },
+              { id: 'c', text: 'Der Mietvertrag kann gekündigt werden.' },
             ],
-            correct: 'b',
+            correct: 'c',
             points: 1,
           },
         ],

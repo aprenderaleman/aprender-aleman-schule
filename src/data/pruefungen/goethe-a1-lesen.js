@@ -8,7 +8,7 @@
  *   Teil 4: Kurze Anzeigen (5 questions, multiple choice)
  *
  * Total: 20 items, 25 minutes
- * Each item = 1 point. Pass = 15/25 (60%).
+ * Each item = 1 point. Pass = 12/20 (60%).
  *
  * Content is original, modeled after public Modellsätze structure (no copyrighted text reuse).
  */
@@ -257,7 +257,7 @@ Peter`,
           ],
         },
         questions: [
-          { type: 'true-false', id: 'q7', statement: 'Im Juli ist nur das Innenbecken zu.', correct: true, points: 1 },
+          { type: 'true-false', id: 'q7', statement: 'Vom 1. bis 14. Juli ist nur das Innenbecken zu.', correct: true, points: 1 },
           { type: 'true-false', id: 'q8', statement: 'Im Bus darf man Wasser trinken.', correct: false, points: 1 },
           { type: 'true-false', id: 'q9', statement: 'Tickets müssen vor der Fahrt entwertet werden.', correct: true, points: 1 },
           { type: 'true-false', id: 'q10', statement: 'Für den Elternabend muss man sich anmelden.', correct: false, points: 1 },
@@ -371,7 +371,7 @@ Karin Müller`,
           { type: 'true-false', id: 'q1', statement: 'Lukas geht heute zur Schule.', correct: false, points: 1 },
           { type: 'true-false', id: 'q2', statement: 'Lukas muss zwei Tage zu Hause bleiben.', correct: true, points: 1 },
           { type: 'true-false', id: 'q3', statement: 'Frau Müller will Hausaufgaben für Englisch.', correct: false, points: 1 },
-          { type: 'true-false', id: 'q4', statement: 'Markus und Lisa treffen sich im Fitnessstudio.', correct: true, points: 1 },
+          { type: 'true-false', id: 'q4', statement: 'Markus und Lisa treffen sich um 19 Uhr vor dem Eingang.', correct: true, points: 1 },
           { type: 'true-false', id: 'q5', statement: 'Nach dem Training essen sie eine Pizza.', correct: false, points: 1 },
         ],
       },

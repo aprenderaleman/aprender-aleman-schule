@@ -50,7 +50,8 @@ function useCertStatus() {
  */
 export default function CertificateStatus() {
   const { data, loading } = useCertStatus()
-  if (loading || !data) return null
+  // Un 200 con forma inesperada no debe tumbar toda la página de Prüfungen.
+  if (loading || !data || !data.modules || !data.path) return null
 
   const { level, modules, passedCount, path, eligibleForCertificate } = data
 

@@ -17,7 +17,7 @@ export const goetheA1SprechenExams = [
     level: 'A1',
     module: 'sprechen',
     title: 'Deutsch A1 — Sprechen · Modellsatz 1',
-    description: 'Stelle dich auf Deutsch vor — Aussprache nicht automatisch bewertet.',
+    description: 'Stelle dich auf Deutsch vor — die Aussprache wird nicht automatisch bewertet.',
     durationMinutes: 5,
     maxScore: 25,
     passScore: 15,

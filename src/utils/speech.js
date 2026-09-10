@@ -29,12 +29,16 @@ export function isSpeechRecognitionSupported() {
  * Options:
  *   lang      — BCP-47 tag, default 'de-DE'
  *   onPartial — called on interim results with the current text
+ *   onError   — called once with an error code ('not-allowed',
+ *               'audio-capture', 'network', …) when recognition cannot
+ *               continue; without it a denied microphone looks like a
+ *               recording that simply hears nothing
  */
-export function startRecognition({ lang = 'de-DE', onPartial } = {}) {
-  return isNative() ? startNativeRecognition({ lang, onPartial }) : startWebRecognition({ lang, onPartial })
+export function startRecognition({ lang = 'de-DE', onPartial, onError } = {}) {
+  return isNative() ? startNativeRecognition({ lang, onPartial, onError }) : startWebRecognition({ lang, onPartial, onError })
 }
 
-function startWebRecognition({ lang, onPartial }) {
+function startWebRecognition({ lang, onPartial, onError }) {
   if (!SR) throw new Error('SpeechRecognition not supported')
 
   const rec = new SR()
@@ -64,9 +68,14 @@ function startWebRecognition({ lang, onPartial }) {
       durationSeconds: Math.round((Date.now() - startedAt) / 1000),
     })
   }
+  let errored = false
   rec.onerror = (e) => {
-    if (e?.error !== 'no-speech' && e?.error !== 'aborted') {
-      console.warn('[speech] recognition error:', e.error)
+    if (e?.error === 'no-speech' || e?.error === 'aborted') return
+    console.warn('[speech] recognition error:', e.error)
+    // Errores fatales: sin permiso de micro, sin micro, sin servicio.
+    if (!errored && onError && ['not-allowed', 'service-not-allowed', 'audio-capture', 'network'].includes(e?.error)) {
+      errored = true
+      onError(e.error)
     }
   }
 
@@ -82,7 +91,7 @@ function startWebRecognition({ lang, onPartial }) {
  * runtime permission request, streams partial results, and supports
  * the same {transcript, durationSeconds} return shape as the web path.
  */
-function startNativeRecognition({ lang, onPartial }) {
+function startNativeRecognition({ lang, onPartial, onError }) {
   const startedAt = Date.now()
   let finalTranscript = ''
   let listener = null
@@ -100,6 +109,7 @@ function startNativeRecognition({ lang, onPartial }) {
       if (!perm || perm.speechRecognition !== 'granted') {
         const req = await plugin.requestPermissions().catch(() => null)
         if (!req || req.speechRecognition !== 'granted') {
+          if (onError) onError('not-allowed')
           doneResolve({ transcript: '', durationSeconds: 0 })
           return
         }

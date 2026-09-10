@@ -110,7 +110,7 @@ export const goetheA2HoerenExams = [
               allowedPlays: 2,
               label: 'Aufgabe 5',
               transcript:
-                'Hotelrezeption: „Guten Tag. Ich hätte gerne ein Doppelzimmer für zwei Nächte, von Freitag bis Sonntag.“\nRezeptionistin: „Mit Frühstück oder ohne?“\n„Mit Frühstück, bitte.“\n„Das macht 180 Euro für die zwei Nächte.“',
+                'Gast: „Guten Tag. Ich hätte gerne ein Doppelzimmer für zwei Nächte, von Freitag bis Sonntag.“\nRezeptionistin: „Mit Frühstück oder ohne?“\nGast: „Mit Frühstück, bitte.“\nRezeptionistin: „Das macht 180 Euro für die zwei Nächte.“',
             },
             prompt: 'Wie viel kostet das Zimmer insgesamt?',
             options: [

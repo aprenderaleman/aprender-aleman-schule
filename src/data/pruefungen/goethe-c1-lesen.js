@@ -89,7 +89,7 @@ Was tun? Einige Städte experimentieren mit „Ruhezonen“ in Parks, Bibliothek
           {
             id: 'c1l1-5',
             type: 'multiple-choice',
-            prompt: 'Welcher Schluss zieht der Autor am Ende?',
+            prompt: 'Welchen Schluss zieht der Autor am Ende?',
             options: [
               { id: 'a', text: 'Stille zu schützen ist eine nostalgische Spielerei.' },
               { id: 'b', text: 'Stille zu schützen betrifft die öffentliche Gesundheit.' },
@@ -103,7 +103,7 @@ Was tun? Einige Städte experimentieren mit „Ruhezonen“ in Parks, Bibliothek
 
       {
         id: 'teil-2',
-        title: 'Teil 2 — Lückentext zum Verstehen',
+        title: 'Teil 2 — Aussagen zum Text (Richtig/Falsch)',
         instructions: 'Lies den Text und entscheide, ob die Aussagen richtig oder falsch sind.',
         context: {
           type: 'multi-text',

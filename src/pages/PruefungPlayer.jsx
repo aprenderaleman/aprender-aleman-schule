@@ -38,7 +38,11 @@ function flatQuestions(exam) {
 function countTotalItems(exam) {
   let n = 0
   for (const part of exam.parts) {
-    if (Array.isArray(part.questions)) n += part.questions.length
+    // matching cuenta por ítem, no por bloque — así "Aufgaben" y el progreso
+    // cuadran con la puntuación (p. ej. 25 Aufgaben ↔ 25 Punkte en B1 Lesen).
+    if (Array.isArray(part.questions)) {
+      for (const q of part.questions) n += q.type === 'matching' ? Object.keys(q.correct).length : 1
+    }
     else if (part.kind === 'formular') n += part.fields.length
     else if (part.kind === 'writing-task') n += 1
     else if (part.kind === 'speaking-task') n += 1
@@ -53,7 +57,7 @@ function countAnswered(exam, responses) {
       for (const q of part.questions) {
         const r = responses[q.id]
         if (q.type === 'matching') {
-          if (r && Object.keys(r).length === Object.keys(q.correct).length) n++
+          n += Object.keys(r || {}).filter(k => r[k] !== undefined && k in q.correct).length
         } else if (r !== undefined) {
           n++
         }
@@ -97,6 +101,10 @@ export default function PruefungPlayer() {
   const [result, setResult] = useState(null)
   const [error, setError] = useState(null)
   const timerRef = useRef(null)
+  // El intervalo del temporizador captura el closure del PRIMER render de la
+  // fase 'running' — con `responses` vacío. Sin este ref, el auto-envío al
+  // agotarse el tiempo entregaría el examen sin ninguna respuesta del alumno.
+  const submitRef = useRef(() => {})
 
   if (!exam) {
     return (
@@ -121,7 +129,7 @@ export default function PruefungPlayer() {
       setSecondsLeft(s => {
         if (s <= 1) {
           clearInterval(timerRef.current)
-          handleSubmit() // auto-submit when time runs out
+          submitRef.current() // auto-submit when time runs out (siempre la versión fresca)
           return 0
         }
         return s - 1
@@ -189,10 +197,14 @@ export default function PruefungPlayer() {
           let earned = 0
           const fieldDetails = []
           for (const f of part.fields) {
-            const userVal = (userVals[f.id] || '').trim().toLowerCase()
+            const userVal = (userVals[f.id] || '').trim().toLowerCase().replace(/\s+/g, ' ')
             const ok = (f.expected || []).some(exp => {
-              const e = String(exp).trim().toLowerCase()
-              return userVal === e || (userVal && e.includes(userVal)) || (userVal && userVal.includes(e))
+              const e = String(exp).trim().toLowerCase().replace(/\s+/g, ' ')
+              if (!userVal) return false
+              if (userVal === e) return true
+              // Tolerancia parcial solo con longitud suficiente: sin el mínimo,
+              // una sola letra contenida en el valor esperado puntuaba como correcta.
+              return userVal.length >= 4 && (e.includes(userVal) || userVal.includes(e))
             })
             if (ok) earned += f.points || 1
             fieldDetails.push({ id: f.id, label: f.label, user: userVals[f.id] || '', expected: f.expected, ok, points: f.points || 1 })
@@ -366,6 +378,10 @@ export default function PruefungPlayer() {
     }
   }
 
+  // Mantener siempre la versión más reciente de handleSubmit disponible
+  // para el intervalo del temporizador (ver submitRef arriba).
+  useEffect(() => { submitRef.current = handleSubmit })
+
   const setAnswer = (qid, value) => {
     setResponses(prev => ({ ...prev, [qid]: value }))
   }
@@ -448,7 +464,7 @@ export default function PruefungPlayer() {
               <ul className="text-sm text-amber-800 dark:text-amber-200 space-y-1 list-disc list-inside">
                 <li>Du hast {exam.durationMinutes} Minuten Zeit. Der Test endet automatisch.</li>
                 <li>Beantworte alle Aufgaben — falsche Antworten zählen 0 Punkte, nicht negativ.</li>
-                <li>Das Schließen des Tabs unterbricht die Prüfung NICHT.</li>
+                <li>Schließe den Tab während der Prüfung nicht — deine Antworten gehen sonst verloren.</li>
                 <li>Du kannst zwischen den Teilen frei wechseln, bevor du abgibst.</li>
                 {examMode === 'real' && (
                   <li className="font-bold">Modo real: solo tu nivel actual, con cooldown 24 h y máx 3 intentos.</li>
@@ -1134,6 +1150,21 @@ function SpeakingTaskView({ part, value, onChange }) {
     recognitionRef.current = startRecognition({
       lang: 'de-DE',
       onPartial: (t) => setInterim(t),
+      // Sin esto, un micrófono denegado parece una grabación que "no oye
+      // nada": el alumno habla minutos para acabar con 0 puntos.
+      onError: (code) => {
+        if (tickRef.current) clearInterval(tickRef.current)
+        if (recognitionRef.current) { recognitionRef.current.abort(); recognitionRef.current = null }
+        setInterim('')
+        setPhase('idle')
+        setError(
+          code === 'audio-capture'
+            ? 'Kein Mikrofon gefunden. Schließe ein Mikrofon an und versuche es erneut.'
+            : code === 'network'
+              ? 'Die Spracherkennung ist gerade nicht erreichbar. Prüfe deine Internetverbindung.'
+              : 'Kein Zugriff auf das Mikrofon. Erlaube den Mikrofonzugriff in deinem Browser und versuche es erneut.'
+        )
+      },
     })
     startedAtRef.current = Date.now()
     setPhase('recording')

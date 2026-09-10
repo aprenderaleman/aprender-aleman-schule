@@ -2,7 +2,7 @@
  * Zertifikat C1 — Schreiben
  *
  * Offiziell: 2 Teile, 75 min, max 100 Punkte, pass = 60.
- *   Teil 1: Strukturierter Aufsatz / Stellungnahme (~250 Wörter)
+ *   Teil 1: Strukturierter Aufsatz / Stellungnahme (~230 Wörter)
  *   Teil 2: Formelle E-Mail / Beschwerde / Bewerbung (~150 Wörter)
  */
 
@@ -23,7 +23,7 @@ export const goetheC1SchreibenExams = [
         title: 'Teil 1 — Strukturierter Aufsatz',
         kind: 'writing-task',
         instructions:
-          'Schreibe einen Aufsatz zum Thema „Künstliche Intelligenz im Alltag — Fluch oder Segen?“. Berücksichtige dabei verschiedene Perspektiven, formuliere eine eigene These und untermauere sie mit Argumenten. Schreibe etwa 250 Wörter.',
+          'Schreibe einen Aufsatz zum Thema „Künstliche Intelligenz im Alltag — Fluch oder Segen?“. Berücksichtige dabei verschiedene Perspektiven, formuliere eine eigene These und untermauere sie mit Argumenten. Schreibe etwa 230 Wörter.',
         taskType: 'Strukturierter Aufsatz',
         taskPrompt:
           'Verfasse einen gut strukturierten Aufsatz, der die folgenden Aspekte behandelt. Achte auf eine klare Einleitung, einen logisch aufgebauten Hauptteil und einen Schluss.',
@@ -34,7 +34,7 @@ export const goetheC1SchreibenExams = [
           'Formuliere eine eigene These und begründe sie ausführlich.',
           'Schließe mit einer Schlussfolgerung oder einer offenen Frage zur weiteren Diskussion.',
         ],
-        minWords: 250,
+        minWords: 230,
         maxScore: 30,
       },
       {

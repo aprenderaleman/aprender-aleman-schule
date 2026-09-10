@@ -55,11 +55,11 @@ Doch nicht alle sind überzeugt. Kritiker weisen darauf hin, dass die isländisc
             type: 'multiple-choice',
             prompt: 'Wie hat sich die Produktivität entwickelt?',
             options: [
-              { id: 'a', text: 'Sie ist deutlich gefallen.' },
-              { id: 'b', text: 'Sie blieb gleich oder hat sich leicht verbessert.' },
+              { id: 'a', text: 'Sie blieb gleich oder hat sich leicht verbessert.' },
+              { id: 'b', text: 'Sie ist deutlich gefallen.' },
               { id: 'c', text: 'Sie hat sich verdoppelt.' },
             ],
-            correct: 'b',
+            correct: 'a',
             points: 1,
           },
           {
@@ -80,10 +80,10 @@ Doch nicht alle sind überzeugt. Kritiker weisen darauf hin, dass die isländisc
             prompt: 'Was sagen die Kritiker?',
             options: [
               { id: 'a', text: 'In allen Branchen lässt sich das Modell genauso umsetzen.' },
-              { id: 'b', text: 'In produktionsorientierten Branchen ist es schwieriger.' },
-              { id: 'c', text: 'Das Modell funktioniert nirgendwo.' },
+              { id: 'b', text: 'Das Modell funktioniert nirgendwo.' },
+              { id: 'c', text: 'In produktionsorientierten Branchen ist es schwieriger.' },
             ],
-            correct: 'b',
+            correct: 'c',
             points: 1,
           },
           {

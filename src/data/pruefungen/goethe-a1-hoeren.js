@@ -17,7 +17,7 @@ export const goetheA1HoerenExams = [
     level: 'A1',
     module: 'hoeren',
     title: 'Deutsch A1 — Hören · Modellsatz 1',
-    description: 'Vollständiger Hörverstehen-Test im offiziellen A1-Prüfungsformat.',
+    description: 'Vollständiger Hörverstehens-Test im offiziellen A1-Prüfungsformat.',
     durationMinutes: 20,
     maxScore: 15,
     passScore: 9,
