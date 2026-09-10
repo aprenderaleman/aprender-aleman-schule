@@ -549,7 +549,9 @@
             "expected": [
               "12.03.1995",
               "12.3.1995",
-              "12. März 1995"
+              "12. März 1995",
+              "12.03.95",
+              "12.3.95"
             ],
             "points": 2
           },
@@ -558,14 +560,19 @@
             "expected": [
               "Österreich",
               "österreichisch",
-              "Österreicherin"
+              "Österreicherin",
+              "Oesterreich",
+              "oesterreichisch",
+              "Oesterreicherin"
             ],
             "points": 2
           },
           {
             "id": "plz_ort",
             "expected": [
-              "80336 München"
+              "80336 München",
+              "80336 Muenchen",
+              "München 80336"
             ],
             "points": 2
           },
@@ -1083,7 +1090,7 @@
           {
             "id": "b1l5-2",
             "type": "multiple-choice",
-            "correct": "b",
+            "correct": "a",
             "points": 1
           },
           {
@@ -1095,13 +1102,13 @@
           {
             "id": "b1l5-4",
             "type": "multiple-choice",
-            "correct": "b",
+            "correct": "a",
             "points": 1
           },
           {
             "id": "b1l5-5",
             "type": "multiple-choice",
-            "correct": "b",
+            "correct": "c",
             "points": 1
           }
         ]
@@ -1135,7 +1142,7 @@
           {
             "id": "b1h1-3",
             "type": "multiple-choice",
-            "correct": "b",
+            "correct": "a",
             "points": 1
           },
           {
@@ -1147,7 +1154,7 @@
           {
             "id": "b1h1-5",
             "type": "multiple-choice",
-            "correct": "b",
+            "correct": "c",
             "points": 1
           }
         ]
@@ -1243,7 +1250,7 @@
           {
             "id": "b1h4-3",
             "type": "multiple-choice",
-            "correct": "m",
+            "correct": "b",
             "points": 1
           },
           {
@@ -1333,7 +1340,7 @@
           {
             "id": "b2l1-2",
             "type": "multiple-choice",
-            "correct": "b",
+            "correct": "a",
             "points": 1
           },
           {
@@ -1345,7 +1352,7 @@
           {
             "id": "b2l1-4",
             "type": "multiple-choice",
-            "correct": "b",
+            "correct": "c",
             "points": 1
           },
           {
@@ -1493,7 +1500,7 @@
           {
             "id": "b2h1-3",
             "type": "multiple-choice",
-            "correct": "b",
+            "correct": "a",
             "points": 1
           },
           {
@@ -1505,7 +1512,7 @@
           {
             "id": "b2h1-5",
             "type": "multiple-choice",
-            "correct": "b",
+            "correct": "c",
             "points": 1
           }
         ]
@@ -1577,7 +1584,7 @@
           {
             "id": "b2h3-5",
             "type": "multiple-choice",
-            "correct": "b",
+            "correct": "c",
             "points": 1
           }
         ]
