@@ -281,9 +281,116 @@ function Wortschatz({ block }) {
   )
 }
 
+// Extrae la palabra correcta para cada hueco a partir de `loesungen`, que
+// vienen como strings tipo:  "{3} **Während** — temporal + Genitiv…"
+// Devuelve un mapa { 1: 'wegen', 2: 'Einführung', … }.
+//
+// Si el formato de una linea no encaja (autor uso otro estilo, o el bloque
+// no es de opciones), la lucha correspondiente queda sin correcta y el
+// alumno puede elegir pero no recibe verde/rojo — la Musterlösung sigue
+// visible como fallback.
+function parseGapAnswers(loesungen) {
+  const map = {}
+  if (!Array.isArray(loesungen)) return map
+  for (const line of loesungen) {
+    if (typeof line !== 'string') continue
+    // { N }  seguido opcionalmente por espacios y luego **palabra** o __palabra__
+    const m = line.match(/\{(\d{1,2})\}\s*(?:\*\*([^*]+?)\*\*|__([^_]+?)__|([A-Za-zÄÖÜäöüß][A-Za-zÄÖÜäöüß-]*))/)
+    if (m) {
+      const idx = parseInt(m[1], 10)
+      const word = (m[2] || m[3] || m[4] || '').trim()
+      if (word) map[idx] = word
+    }
+  }
+  return map
+}
+
+// Renderiza un párrafo del Lückentext reemplazando cada {N} por un <select>
+// con las opciones. Reusa la logica de marcas de `renderInline` para el
+// resto del texto, pero con nuestra propia función que intercepta {N}.
+function renderInteractiveParagraph(text, selects, keyPrefix) {
+  // Mismo TOKEN que inline.jsx, replicado aca para no filtrar componentes UI
+  // dentro del helper puro. Manejamos {N} nosotros; el resto lo delegamos.
+  const TOKEN = /(\*\*.+?\*\*|__.+?__|==.+?==|~~.+?~~|\*.+?\*|\{\d{1,2}\})/g
+  return text.split(TOKEN).map((part, i) => {
+    if (!part) return null
+    const key = `${keyPrefix}-${i}`
+    const gapMatch = /^\{(\d{1,2})\}$/.exec(part)
+    if (gapMatch) {
+      const idx = parseInt(gapMatch[1], 10)
+      return <React.Fragment key={key}>{selects(idx)}</React.Fragment>
+    }
+    // Delegamos al renderer estandar el resto de marcas — pasar el trozo
+    // como texto completo hace que renderInline aplique su propia lógica.
+    return <React.Fragment key={key}>{renderInline(part)}</React.Fragment>
+  })
+}
+
 // Prüfungsbezug — mini-tarea con el formato real del examen.
-// `text` admite huecos numerados con {1}, {2}… (ver inline.jsx).
+// Cuando hay opciones + soluciones parseables, los huecos {N} se vuelven
+// dropdowns interactivos con validación verde/rojo. Fallback: modo lectura.
 function Pruefungsaufgabe({ block }) {
+  const answers = React.useMemo(() => parseGapAnswers(block.loesungen), [block.loesungen])
+  const gapNumbers = React.useMemo(() => {
+    if (!block.absaetze) return []
+    const found = new Set()
+    for (const p of block.absaetze) {
+      const matches = String(p).matchAll(/\{(\d{1,2})\}/g)
+      for (const m of matches) found.add(parseInt(m[1], 10))
+    }
+    return [...found].sort((a, b) => a - b)
+  }, [block.absaetze])
+
+  const interactive = block.optionen?.length > 0 && gapNumbers.length > 0 && Object.keys(answers).length > 0
+
+  const [choices, setChoices] = useState({})   // { 1: 'wegen', 2: 'Einführung', … }
+  const [checked, setChecked] = useState(false)
+
+  const setChoice = (idx, val) => {
+    setChoices(prev => ({ ...prev, [idx]: val }))
+    if (checked) setChecked(false)  // el alumno cambia una respuesta → resetear estado
+  }
+
+  const results = React.useMemo(() => {
+    if (!checked) return {}
+    const r = {}
+    for (const n of gapNumbers) {
+      const correct = answers[n]
+      const chosen = choices[n]
+      if (correct && chosen) {
+        r[n] = chosen.trim().toLowerCase() === correct.trim().toLowerCase() ? 'ok' : 'bad'
+      } else {
+        r[n] = 'empty'
+      }
+    }
+    return r
+  }, [checked, choices, gapNumbers, answers])
+
+  const allAnswered = interactive && gapNumbers.every(n => choices[n])
+  const correctCount = React.useMemo(
+    () => gapNumbers.filter(n => results[n] === 'ok').length,
+    [gapNumbers, results]
+  )
+
+  const renderSelect = (idx) => {
+    const val = choices[idx] || ''
+    const state = results[idx]
+    const cls = 'c1-pa-select' + (state === 'ok' ? ' c1-pa-select--ok' : state === 'bad' ? ' c1-pa-select--bad' : '')
+    return (
+      <select
+        className={cls}
+        value={val}
+        onChange={e => setChoice(idx, e.target.value)}
+        aria-label={`Lücke ${idx}`}
+      >
+        <option value="">— {idx} —</option>
+        {block.optionen.map((o, i) => (
+          <option key={i} value={o}>{o}</option>
+        ))}
+      </select>
+    )
+  }
+
   return (
     <>
       <Eyebrow>{block.eyebrow || 'Prüfungsbezug'}</Eyebrow>
@@ -294,16 +401,47 @@ function Pruefungsaufgabe({ block }) {
         </div>
         <div className="c1-mbody">
           {block.anweisung && <p className="c1-pa-anweisung">{renderInline(block.anweisung)}</p>}
-          {block.absaetze?.map((p, i) => <p key={i}>{renderInline(p)}</p>)}
+          {block.absaetze?.map((p, i) => (
+            <p key={i}>
+              {interactive
+                ? renderInteractiveParagraph(p, renderSelect, `pa-${i}`)
+                : renderInline(p)}
+            </p>
+          ))}
           {block.optionen?.length > 0 && (
-            <ul className="c1-pa-optionen">
+            <ul className="c1-pa-optionen" aria-label="Verfügbare Optionen">
               {block.optionen.map((o, i) => <li key={i}>{renderInline(o)}</li>)}
             </ul>
+          )}
+
+          {interactive && (
+            <div className="c1-pa-actions">
+              <button
+                type="button"
+                className="c1-pa-btn c1-pa-btn--primary"
+                disabled={!allAnswered}
+                onClick={() => setChecked(true)}
+              >
+                Antworten prüfen
+              </button>
+              <button
+                type="button"
+                className="c1-pa-btn"
+                onClick={() => { setChoices({}); setChecked(false) }}
+              >
+                Zurücksetzen
+              </button>
+              {checked && (
+                <span className="c1-pa-score" aria-live="polite">
+                  {correctCount} / {gapNumbers.length} richtig
+                </span>
+              )}
+            </div>
           )}
         </div>
       </div>
       {block.loesungen?.length > 0 && (
-        <details className="c1-ueb">
+        <details className="c1-ueb" open={checked && interactive && correctCount < gapNumbers.length}>
           <summary>{block.loesungLabel || 'Lösung'}</summary>
           <div className="c1-sol c1-prose">
             <ol>{block.loesungen.map((l, i) => <li key={i}>{renderInline(l)}</li>)}</ol>
