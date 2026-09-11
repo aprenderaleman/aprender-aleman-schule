@@ -4795,13 +4795,18 @@ app.get('/api/admin/pruefungen/recordings', authMiddleware, staffOnly, async (re
       .filter(Boolean).map(Number)
     if (ids.length === 0) return res.json({ recordings: [] })
 
+    // Dos consultas en vez de un JOIN: users y schule_* pueden tener
+    // collations distintas (BD heredada) y el JOIN directo revienta.
     const [rows] = await pool.query(
-      `SELECT a.id, a.userId, a.level, a.module, a.examId, a.mode, a.startedAt, a.finishedAt,
-              a.score, a.maxScore, u.fullName, u.email
-         FROM schule_pruefungen_attempts a JOIN users u ON u.id = a.userId
-        WHERE a.id IN (?)`, [ids]
+      `SELECT id, userId, level, module, examId, mode, startedAt, finishedAt, score, maxScore
+         FROM schule_pruefungen_attempts WHERE id IN (?)`, [ids]
     )
-    const byId = Object.fromEntries(rows.map(r => [r.id, r]))
+    const userIds = [...new Set(rows.map(r => r.userId))]
+    const [userRows] = userIds.length
+      ? await pool.query('SELECT id, fullName, email FROM users WHERE id IN (?)', [userIds])
+      : [[]]
+    const userById = Object.fromEntries(userRows.map(u => [u.id, u]))
+    const byId = Object.fromEntries(rows.map(r => [r.id, { ...r, fullName: userById[r.userId]?.fullName, email: userById[r.userId]?.email }]))
     const recordings = []
     for (const id of ids.sort((x, y) => y - x)) {
       const st = await fs.promises.stat(recordingPath(id)).catch(() => null)
