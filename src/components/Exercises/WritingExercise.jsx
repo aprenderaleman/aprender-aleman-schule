@@ -15,28 +15,40 @@ export default function WritingExercise({ exercise, userName, userLevel, onCompl
   const wordCount = text.trim().split(/\s+/).filter(Boolean).length
   const meetsMinimum = wordCount >= (exercise.minWords || 20)
 
-  const handleSubmit = useCallback(async () => {
-    if (!meetsMinimum) return
+  // Un solo reintento automatico antes de rendirnos. Cuando la corrección
+  // falla, NO avanzamos al siguiente ejercicio con score 0 — el alumno se
+  // quedaba sin feedback y sin entender por que le puntuaron mal. En su
+  // lugar mostramos boton "Erneut prüfen" y solo llamamos a onComplete
+  // cuando el alumno explicitamente aprieta "Weiter" (asi lee el feedback).
+  const runEval = useCallback(async () => {
     setLoading(true)
     setError(null)
     try {
-      const result = await evaluateWriting(userName, userLevel, exercise.prompt, text)
+      let result = await evaluateWriting(userName, userLevel, exercise.prompt, text)
+      if (!result) {
+        // 1 retry — Haiku a veces devuelve JSON malformado en el primer intento
+        result = await evaluateWriting(userName, userLevel, exercise.prompt, text)
+      }
       if (result) {
         setFeedback(result)
         setSubmitted(true)
-        const score = Math.round((result.score / 10) * 100)
-        onComplete({ score, feedback: result })
       } else {
         throw new Error('No feedback returned')
       }
-    } catch (err) {
-      setError('Die Bewertung konnte nicht geladen werden. Bitte versuche es erneut.')
-      const fallbackScore = Math.min(100, Math.round((wordCount / (exercise.minWords * 1.5)) * 70))
-      setSubmitted(true)
-      onComplete({ score: fallbackScore, feedback: null })
+    } catch {
+      setError('Die Bewertung konnte nicht geladen werden. Versuche es erneut — deine Antwort ist gespeichert.')
     }
     setLoading(false)
-  }, [text, userName, userLevel, exercise, meetsMinimum, wordCount, onComplete])
+  }, [text, userName, userLevel, exercise])
+
+  const handleContinue = useCallback(() => {
+    // Recien aca reportamos el resultado hacia arriba. Adjuntamos feedback
+    // para que se persista en historial y el alumno pueda revisarlo en
+    // Fortschritt.
+    if (!feedback) return
+    const score = Math.round((feedback.score / 10) * 100)
+    onComplete({ score, feedback })
+  }, [feedback, onComplete])
 
   return (
     <div className="space-y-5">
@@ -98,14 +110,19 @@ export default function WritingExercise({ exercise, userName, userLevel, onCompl
       )}
 
       {error && (
-        <div className="bg-red-50 dark:bg-red-900/30 border border-red-300 rounded-xl p-4 flex items-start gap-3">
-          <AlertCircle size={18} className="text-red-500 shrink-0 mt-0.5" />
-          <p className="text-sm text-red-700 dark:text-red-300">{error}</p>
+        <div className="bg-red-50 dark:bg-red-900/30 border border-red-300 rounded-xl p-4 space-y-3">
+          <div className="flex items-start gap-3">
+            <AlertCircle size={18} className="text-red-500 shrink-0 mt-0.5" />
+            <p className="text-sm text-red-700 dark:text-red-300">{error}</p>
+          </div>
+          <Button onClick={runEval} variant="primary" className="w-full">
+            Erneut prüfen
+          </Button>
         </div>
       )}
 
-      {!submitted && !loading && (
-        <Button onClick={handleSubmit} disabled={!meetsMinimum} variant="primary" className="w-full">
+      {!submitted && !loading && !error && (
+        <Button onClick={runEval} disabled={!meetsMinimum} variant="primary" className="w-full">
           Zur KI-Bewertung senden
         </Button>
       )}
@@ -184,6 +201,10 @@ export default function WritingExercise({ exercise, userName, userLevel, onCompl
                 <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">{feedback.structure_feedback}</p>
               </div>
             )}
+
+            <Button onClick={handleContinue} variant="primary" className="w-full">
+              Weiter
+            </Button>
 
           </motion.div>
         )}

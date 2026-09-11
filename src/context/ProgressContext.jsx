@@ -91,7 +91,7 @@ export function ProgressProvider({ children }) {
     setProgress(prev => ({ ...prev, xp: prev.xp + amount }))
   }, [])
 
-  const recordExerciseResult = useCallback(({ exerciseId, type, score, perfect, xpEarned, timeSpent }) => {
+  const recordExerciseResult = useCallback(({ exerciseId, type, score, perfect, xpEarned, timeSpent, feedback }) => {
     setProgress(prev => {
       // Streak calculation
       const today = new Date().toDateString()
@@ -123,6 +123,7 @@ export function ProgressProvider({ children }) {
         exerciseId, type, score, perfect,
         date: new Date().toISOString(),
         xpEarned: finalXpEarned,
+        feedback: feedback || null,
       }
       const exerciseHistory = [historyEntry, ...(prev.exerciseHistory || [])].slice(0, 100)
 
@@ -168,6 +169,7 @@ export function ProgressProvider({ children }) {
         queuePost('/api/progress/exercise', {
           exerciseId, exerciseType: type, score, perfect,
           xpEarned: finalXpEarned, timeSpent: timeSpent || 0,
+          feedback: feedback || null,
         }).then(() => broadcast({ type: 'progress-updated', userId: user?.id }))
       }).catch(() => {})
 

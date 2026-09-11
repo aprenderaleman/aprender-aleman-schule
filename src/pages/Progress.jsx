@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Zap, Flame, Brain, BookOpen, Headphones, PenLine, Mic, Trophy, TrendingUp } from 'lucide-react'
+import { Zap, Flame, Brain, BookOpen, Headphones, PenLine, Mic, Trophy, TrendingUp, Eye } from 'lucide-react'
+import FeedbackModal from '../components/Exercises/FeedbackModal'
 import {
   RadialBarChart, RadialBar, ResponsiveContainer,
   BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid,
@@ -24,6 +25,10 @@ const LEVEL_XP = { A1: 500, A2: 1000, B1: 2000, B2: 3500, C1: 5000 }
 export default function Progress() {
   const { user }   = useAuth()
   const { progress } = useProgress()
+  // Feedback viewer: cuando el alumno abre un writing/speaking pasado,
+  // le mostramos los errores + correcciones + sugerencias que Haiku dio
+  // en su momento (persistido en schule_exercise_results.feedback).
+  const [selectedFeedback, setSelectedFeedback] = useState(null)
 
   const levelXP       = LEVEL_XP[user?.level] || 500
   const levelProgress = Math.min(100, Math.round((progress.xp / levelXP) * 100))
@@ -207,8 +212,9 @@ export default function Progress() {
               {progress.exerciseHistory.slice(0, 10).map((h, i) => {
                 const meta = SKILL_META[h.type]
                 const Icon = meta?.icon || Brain
-                return (
-                  <div key={i} className="flex items-center justify-between py-2 border-b border-gray-100 dark:border-gray-700 last:border-0">
+                const hasFeedback = !!h.feedback
+                const RowContent = (
+                  <>
                     <div className="flex items-center gap-3">
                       <div className="p-1.5 rounded-lg" style={{ backgroundColor: meta?.color + '20' }}>
                         <Icon size={14} style={{ color: meta?.color }} />
@@ -218,10 +224,30 @@ export default function Progress() {
                         <p className="text-xs text-gray-400 capitalize">{meta?.label || h.type}</p>
                       </div>
                     </div>
-                    <div className="text-right">
-                      <p className="text-sm font-bold text-gray-700 dark:text-gray-200">{h.score}%</p>
-                      <p className="text-xs text-orange-500">+{h.xpEarned} XP</p>
+                    <div className="flex items-center gap-3">
+                      {hasFeedback && (
+                        <span className="hidden sm:inline-flex items-center gap-1 text-xs text-orange-500 font-semibold">
+                          <Eye size={12} /> Feedback
+                        </span>
+                      )}
+                      <div className="text-right">
+                        <p className="text-sm font-bold text-gray-700 dark:text-gray-200">{h.score}%</p>
+                        <p className="text-xs text-orange-500">+{h.xpEarned} XP</p>
+                      </div>
                     </div>
+                  </>
+                )
+                return hasFeedback ? (
+                  <button
+                    key={i}
+                    onClick={() => setSelectedFeedback({ feedback: h.feedback, title: h.exerciseId })}
+                    className="w-full flex items-center justify-between py-2 border-b border-gray-100 dark:border-gray-700 last:border-0 hover:bg-gray-50 dark:hover:bg-gray-800/50 rounded-lg px-2 -mx-2 transition-colors text-left"
+                  >
+                    {RowContent}
+                  </button>
+                ) : (
+                  <div key={i} className="flex items-center justify-between py-2 border-b border-gray-100 dark:border-gray-700 last:border-0 px-2 -mx-2">
+                    {RowContent}
                   </div>
                 )
               })}
@@ -231,6 +257,13 @@ export default function Progress() {
           )}
         </motion.div>
       </main>
+
+      <FeedbackModal
+        open={!!selectedFeedback}
+        onClose={() => setSelectedFeedback(null)}
+        feedback={selectedFeedback?.feedback}
+        title={selectedFeedback?.title}
+      />
     </div>
   )
 }

@@ -75,6 +75,10 @@ export default function SpeakingExercise({ exercise, userName, userLevel, onComp
     setPhase('idle')
   }, [])
 
+  // 1 reintento automatico antes de rendirnos. Cuando la corrección falla,
+  // NO avanzamos con score 0 — el alumno perderia el feedback. Mostramos
+  // boton "Erneut prüfen" y solo llamamos onComplete cuando el alumno
+  // aprieta "Weiter" (asi lee sus fallos primero).
   const submitRecording = useCallback(async () => {
     if (!transcript || transcript.trim().length < 3) {
       setError('Keine Sprache erkannt. Bitte sprich deutlicher und versuche es erneut.')
@@ -82,7 +86,7 @@ export default function SpeakingExercise({ exercise, userName, userLevel, onComp
     }
     setError(null)
     setPhase('grading')
-    try {
+    const doCall = async () => {
       const gradeRes = await fetch(`${API_URL}/api/ai/evaluate-speaking`, {
         method: 'POST',
         headers: getAuthHeaders(),
@@ -94,20 +98,29 @@ export default function SpeakingExercise({ exercise, userName, userLevel, onComp
         }),
       })
       if (!gradeRes.ok) throw new Error('Bewertung fehlgeschlagen')
-      const result = await gradeRes.json()
-
+      return gradeRes.json()
+    }
+    try {
+      let result
+      try {
+        result = await doCall()
+      } catch {
+        result = await doCall() // 1 retry
+      }
       setFeedback(result)
       setPhase('done')
-      const score = Math.round((result.score / 10) * 100)
-      onComplete({ score, feedback: result })
     } catch (err) {
       console.error('Speaking submit error:', err)
-      setError('Fehler bei der Bewertung. Bitte versuche es erneut.')
-      const fallbackScore = Math.min(100, Math.round((recordingTime / (minSeconds * 2)) * 60))
-      setPhase('done')
-      onComplete({ score: fallbackScore, feedback: null })
+      setError('Die Bewertung konnte nicht geladen werden. Versuche es erneut — deine Aufnahme ist gespeichert.')
+      setPhase('recorded') // volver al estado con boton "Bewerten" activo
     }
-  }, [transcript, exercise, recordingTime, minSeconds, onComplete])
+  }, [transcript, exercise, recordingTime])
+
+  const handleContinue = useCallback(() => {
+    if (!feedback) return
+    const score = Math.round((feedback.score / 10) * 100)
+    onComplete({ score, feedback })
+  }, [feedback, onComplete])
 
   const meetsMinimum = recordingTime >= minSeconds
 
@@ -354,6 +367,10 @@ export default function SpeakingExercise({ exercise, userName, userLevel, onComp
                 <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">{feedback.fluency_feedback}</p>
               </div>
             )}
+
+            <Button onClick={handleContinue} variant="primary" className="w-full">
+              Weiter
+            </Button>
           </motion.div>
         )}
       </AnimatePresence>

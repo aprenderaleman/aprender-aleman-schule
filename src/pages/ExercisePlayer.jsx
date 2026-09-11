@@ -128,6 +128,8 @@ export default function ExercisePlayer() {
       score: finalScore,
       perfect,
       xpEarned,
+      // writing/speaking mandan feedback estructurado; los demas no lo tienen
+      feedback: (result && typeof result === 'object') ? result.feedback : null,
     })
     // El alumno ya leyó la explicación dentro del ejercicio. En vez de otra
     // pantalla de "gut gemacht" por cada pregunta, encadenamos ejercicios y
