@@ -45,6 +45,9 @@
   line-height: 1.6;
   min-height: 100vh;
   min-height: 100dvh;
+  /* Widgets nativos (popup de <select>, scrollbars) en oscuro — sin esto,
+     el desplegable sale con fondo blanco y texto heredado claro: ilegible. */
+  color-scheme: dark;
 }
 
 /* Modo claro — el papel crema del documento de examen original */
@@ -61,6 +64,7 @@
   --c1-gold-line: #E6D6AC;
   --c1-spec-c: var(--c1-ink-2);
   --c1-code-bg: #F3EBDE;
+  color-scheme: light;
 }
 
 .c1 ::selection { background: var(--c1-gold-soft); }
@@ -481,18 +485,18 @@
 /* Lückentext interactivo: dropdown en linea con validacion visual */
 .c1-pa-select {
   display: inline-block; min-width: 110px; margin: 0 3px; padding: 2px 6px;
-  font-family: inherit; font-size: 14px; color: var(--c1-fg, inherit);
+  font-family: inherit; font-size: 14px; color: var(--c1-text);
   background: var(--c1-gold-soft); border: 1px dashed var(--c1-gold);
   border-radius: 6px; vertical-align: -2px; cursor: pointer;
   transition: background 120ms, border-color 120ms;
 }
 .c1-pa-select:focus { outline: 2px solid var(--c1-gold); outline-offset: 1px; }
-.c1-pa-select--ok  { background: rgba(34,197,94,.15); border: 1px solid rgba(34,197,94,.7); color: #15803d; }
-.c1-pa-select--bad { background: rgba(239,68,68,.12); border: 1px solid rgba(239,68,68,.7); color: #b91c1c; }
-@media (prefers-color-scheme: dark) {
-  .c1-pa-select--ok  { color: #4ade80; }
-  .c1-pa-select--bad { color: #fca5a5; }
-}
+/* Verde/rojo según el TEMA DEL CURSO (data-c1-theme), no el del sistema:
+   base = oscuro (tonos claros), claro = tonos oscuros. */
+.c1-pa-select--ok  { background: rgba(34,197,94,.15); border: 1px solid rgba(34,197,94,.7); color: #4ade80; }
+.c1-pa-select--bad { background: rgba(239,68,68,.12); border: 1px solid rgba(239,68,68,.7); color: #fca5a5; }
+.c1[data-c1-theme="light"] .c1-pa-select--ok  { color: #15803d; }
+.c1[data-c1-theme="light"] .c1-pa-select--bad { color: #b91c1c; }
 
 .c1-pa-actions {
   display: flex; flex-wrap: wrap; gap: 10px; align-items: center;

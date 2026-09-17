@@ -341,7 +341,18 @@ function Pruefungsaufgabe({ block }) {
     return [...found].sort((a, b) => a - b)
   }, [block.absaetze])
 
-  const interactive = block.optionen?.length > 0 && gapNumbers.length > 0 && Object.keys(answers).length > 0
+  // Interactivo SOLO cuando `optionen` es un banco de palabras de verdad:
+  // entradas sin prefijo "(N)" (eso son pistas por hueco o formato de examen
+  // a)b)c)) y que contienen la respuesta correcta de CADA hueco. En cualquier
+  // otro caso, modo lectura — antes el dropdown ofrecía las pistas como si
+  // fueran respuestas y la validación nunca podía acertar.
+  const interactive = React.useMemo(() => {
+    if (!block.optionen?.length || !gapNumbers.length) return false
+    const opts = block.optionen.map(o => String(o).trim())
+    if (opts.some(o => /^\(\d{1,2}\)/.test(o))) return false
+    const bank = new Set(opts.map(o => o.toLowerCase()))
+    return gapNumbers.every(n => answers[n] && bank.has(answers[n].trim().toLowerCase()))
+  }, [block.optionen, gapNumbers, answers])
 
   const [choices, setChoices] = useState({})   // { 1: 'wegen', 2: 'Einführung', … }
   const [checked, setChecked] = useState(false)
