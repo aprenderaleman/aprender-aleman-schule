@@ -38,6 +38,11 @@ import lektion34 from './lektion-34.js'
 import lektion35 from './lektion-35.js'
 import lektion36 from './lektion-36.js'
 import lektion37 from './lektion-37.js'
+import lektion91 from './lektion-91.js'
+import lektion92 from './lektion-92.js'
+import lektion93 from './lektion-93.js'
+import lektion94 from './lektion-94.js'
+import lektion95 from './lektion-95.js'
 
 export const CONTENT = {
   1: lektion01,
@@ -77,4 +82,9 @@ export const CONTENT = {
   35: lektion35,
   36: lektion36,
   37: lektion37,
+  91: lektion91,
+  92: lektion92,
+  93: lektion93,
+  94: lektion94,
+  95: lektion95,
 }

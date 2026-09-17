@@ -80,6 +80,8 @@ export default {
         { text: '**Am Vormittag** arbeite ich, **am Nachmittag** lerne ich Deutsch.', gl: '' },
         { text: '**Am Samstag** kaufe ich **ein**.', gl: '' },
         { text: '**Im Juli** habe ich Urlaub.', gl: '— im + mes' },
+        { text: 'Wann **fängt** dein Kurs **an**? — Um **Viertel nach** neun.', gl: '— 9:15' },
+        { text: '**Von** Montag **bis** Freitag stehe ich früh auf, am Sonntag schlafe ich lange.', gl: '' },
       ],
     },
     {

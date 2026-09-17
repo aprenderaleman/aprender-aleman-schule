@@ -80,6 +80,8 @@ export default {
         { text: 'Mein Vater ist 58 Jahre alt und arbeitet noch.', gl: '' },
         { text: 'Meine Schwester ist verheiratet und hat ein Kind.', gl: '' },
         { text: 'Das ist Anna und das ist **ihr** Mann.', gl: '— «su» de ella → ihr' },
+        { text: 'Mein **Onkel** und meine **Tante** wohnen in Spanien.', gl: '' },
+        { text: 'Ich verstehe mich gut **mit meiner** Oma — wir telefonieren jeden Sonntag.', gl: '— mit + Dativ' },
       ],
     },
     {

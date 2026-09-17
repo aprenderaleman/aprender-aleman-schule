@@ -90,6 +90,8 @@ export default {
         { text: '**Darf** man hier **rauchen**?', gl: '— permiso, no habilidad' },
         { text: 'Wir **möchten** einen Tisch **reservieren**.', gl: '— forma cortés' },
         { text: 'Du **sollst** deine Oma **anrufen**.', gl: '— encargo: alguien lo pide' },
+        { text: 'Hier **darf** man nicht **parken**.', gl: '— prohibición: nicht dürfen' },
+        { text: '**Kannst** du mir bitte **helfen**?', gl: '— pregunta: modal en posición 1' },
       ],
     },
 

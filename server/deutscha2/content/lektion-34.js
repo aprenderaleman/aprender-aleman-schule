@@ -80,6 +80,8 @@ export default {
         { text: 'Ich arbeite bei einer kleinen Firma in Hamburg.', gl: '' },
         { text: 'Meine Kollegen sind sehr nett, aber der Chef ist streng.', gl: '— streng = estricto' },
         { text: 'Ich arbeite von Montag bis Freitag, am Wochenende habe ich frei.', gl: '' },
+        { text: 'Was **sind Sie von Beruf**? — Ich bin Ingenieur.', gl: '— pregunta típica' },
+        { text: 'Marta ist **arbeitslos** und sucht eine neue **Stelle**.', gl: '— Stelle = puesto' },
       ],
     },
     {

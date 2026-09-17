@@ -10,6 +10,7 @@ const KURS_C1 = {
   base: '/deutschc1',
   api: '/api/deutschc1',
   total: 40,
+  geschichten: 5,
   defaultLesson: 1,
   artBase: '/deutschc1',
 }

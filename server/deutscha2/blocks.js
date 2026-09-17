@@ -60,3 +60,14 @@ export const A2_LESSON_COUNT = A2_TITLES.length
 export function blockOf(id) {
   return A2_BLOCKS.find(b => id >= b.range[0] && id <= b.range[1]) || null
 }
+
+// Geschichten — lectura graduada (ids 91-95). La historia de María continúa
+// de curso en curso; cada capítulo usa solo el vocabulario y la gramática de
+// los bloques ya vistos (canon extraído de las lecciones).
+export const A2_GESCHICHTEN = [
+  { id: 91, titel: 'Geschichte 1 — Der erste Arbeitstag' },
+  { id: 92, titel: 'Geschichte 2 — Das Wochenende in Potsdam' },
+  { id: 93, titel: 'Geschichte 3 — Ein Termin beim Arzt' },
+  { id: 94, titel: 'Geschichte 4 — Der Deutschkurs' },
+  { id: 95, titel: 'Geschichte 5 — Überraschung für Paul' },
+]

@@ -91,6 +91,8 @@ export default {
         { text: 'Wir fahren **mit dem** Zug **nach** Berlin.', gl: '— mit + Dativ' },
         { text: 'Sie kommt **aus der** Schweiz und wohnt **bei einer** Freundin.', gl: '— aus / bei + Dativ' },
         { text: '**Seit einem** Jahr lerne ich Deutsch.', gl: '— seit + Dativ (desde hace)' },
+        { text: 'Der Kellner bringt **dem Gast** die Rechnung.', gl: '— objeto indirecto: ¿a quién?' },
+        { text: 'Nach der Arbeit gehe ich mit **meinen Kindern** in den Park.', gl: '— Dativ Plural: -n' },
       ],
     },
 

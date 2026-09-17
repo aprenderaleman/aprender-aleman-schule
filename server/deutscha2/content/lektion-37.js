@@ -80,6 +80,8 @@ export default {
         { text: 'Ich **bin erkältet** und bleibe im Bett.', gl: '— NO konstipiert' },
         { text: 'Ich möchte **einen Termin** für morgen.', gl: '' },
         { text: 'Haben Sie **etwas gegen** Kopfschmerzen?', gl: '— en la farmacia' },
+        { text: 'Meine Tochter hat **Bauchschmerzen** und kann nicht zur Schule gehen.', gl: '' },
+        { text: 'Sie **sollen** dreimal am Tag eine **Tablette** nehmen.', gl: '— el médico: sollen' },
       ],
     },
     {

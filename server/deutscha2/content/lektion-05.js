@@ -86,6 +86,8 @@ export default {
         { text: 'Ich **war** krank und **konnte** nicht arbeiten.', gl: '— podía → konnte' },
         { text: 'Als Kind **durfte** er nicht lange fernsehen.', gl: '— permiso → durfte' },
         { text: 'Mit 10 Jahren **war** ich sehr klein.', gl: '— «tenía 10 años» = *ich war 10* ¡con sein!' },
+        { text: '**Warst** du gestern im Büro? — Nein, ich **hatte** frei.', gl: '— pregunta: Warst du …?' },
+        { text: 'Wir **wollten** ins Kino gehen, aber wir **mussten** arbeiten.', gl: '— wollten / mussten' },
       ],
     },
 

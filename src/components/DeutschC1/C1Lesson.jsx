@@ -57,7 +57,7 @@ export default function C1Lesson({ lesson, kurs }) {
     <div className="c1-wrap">
       {lesson.ready ? (
         <>
-          {lesson.blockStart && (
+          {lesson.blockStart && lesson.block !== 'G' && (
             <img
               className="c1-block-art"
               src={`${kurs.artBase}/block-${lesson.block}.svg`}

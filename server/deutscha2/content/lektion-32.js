@@ -80,6 +80,8 @@ export default {
         { text: 'Der Schrank steht **neben dem** Bett.', gl: '' },
         { text: 'Mein Lieblingszimmer ist die Küche, weil wir dort zusammen essen.', gl: '— weil: verbo al final' },
         { text: 'Am Abend bin ich gern zu Hause.', gl: '' },
+        { text: 'Wie hoch ist die **Miete**? — 650 Euro plus Nebenkosten.', gl: '— Miete = alquiler' },
+        { text: 'Wir haben keinen **Garten**, aber einen großen **Balkon**.', gl: '— negación con kein' },
       ],
     },
     {

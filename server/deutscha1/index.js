@@ -1,14 +1,14 @@
 // Deutsch B2 — capa de acceso al curso. Misma arquitectura que deutschc1:
 // el contenido vive en el servidor y solo sale por la API autenticada.
 
-import { A1_BLOCKS, A1_TITLES, A1_LESSON_COUNT, blockOf } from './blocks.js'
+import { A1_BLOCKS, A1_TITLES, A1_LESSON_COUNT, A1_GESCHICHTEN, blockOf } from './blocks.js'
 import { CONTENT } from './content/index.js'
 
 export { A1_LESSON_COUNT }
 
 export function getCourseIndex() {
   return {
-    blocks: A1_BLOCKS,
+    blocks: [...A1_BLOCKS, { n: 'G', name: 'Geschichten', range: [91, 90 + A1_GESCHICHTEN.length] }],
     lessons: A1_TITLES.map((titel, i) => {
       const id = i + 1
       const b = blockOf(id)
@@ -19,23 +19,40 @@ export function getCourseIndex() {
         blockName: b ? b.name : null,
         ready: Boolean(CONTENT[id]),
       }
-    }),
+    }).concat(A1_GESCHICHTEN.map(g => ({
+      id: g.id,
+      titel: g.titel,
+      block: 'G',
+      blockName: 'Geschichten',
+      ready: Boolean(CONTENT[g.id]),
+    }))),
   }
 }
 
 export function getLesson(id) {
-  if (!Number.isInteger(id) || id < 1 || id > A1_LESSON_COUNT) return null
+  const gi = A1_GESCHICHTEN.findIndex(g => g.id === id)
+  if (!Number.isInteger(id) || (gi === -1 && (id < 1 || id > A1_LESSON_COUNT))) return null
 
-  const b = blockOf(id)
-  const base = {
-    id,
-    titel: A1_TITLES[id - 1],
-    block: b ? b.n : null,
-    blockName: b ? b.name : null,
-    blockStart: b ? id === b.range[0] : false,
-    prev: id > 1 ? { id: id - 1, titel: A1_TITLES[id - 2] } : null,
-    next: id < A1_LESSON_COUNT ? { id: id + 1, titel: A1_TITLES[id] } : null,
-  }
+  const b = gi === -1 ? blockOf(id) : null
+  const base = gi !== -1
+    ? {
+        id,
+        titel: A1_GESCHICHTEN[gi].titel,
+        block: 'G',
+        blockName: 'Geschichten',
+        blockStart: gi === 0,
+        prev: gi > 0 ? { id: A1_GESCHICHTEN[gi - 1].id, titel: A1_GESCHICHTEN[gi - 1].titel } : null,
+        next: gi < A1_GESCHICHTEN.length - 1 ? { id: A1_GESCHICHTEN[gi + 1].id, titel: A1_GESCHICHTEN[gi + 1].titel } : null,
+      }
+    : {
+        id,
+        titel: A1_TITLES[id - 1],
+        block: b ? b.n : null,
+        blockName: b ? b.name : null,
+        blockStart: b ? id === b.range[0] : false,
+        prev: id > 1 ? { id: id - 1, titel: A1_TITLES[id - 2] } : null,
+        next: id < A1_LESSON_COUNT ? { id: id + 1, titel: A1_TITLES[id] } : null,
+      }
 
   const full = CONTENT[id]
   if (!full) return { ...base, ready: false }

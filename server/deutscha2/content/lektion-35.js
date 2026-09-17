@@ -80,6 +80,8 @@ export default {
         { text: 'Am Wochenende **treffe** ich meine Freunde.', gl: '' },
         { text: '**Wollen wir** zusammen Fahrrad fahren?', gl: '— propuesta' },
         { text: 'Ich **bin** am Sonntag ins Schwimmbad **gegangen**.', gl: '— Perfekt' },
+        { text: 'Ich spiele **lieber** Gitarre als Klavier.', gl: '— gern → lieber' },
+        { text: 'Kommst du mit ins Kino? — Nein, ich habe leider **keine Zeit**.', gl: '— decir que no con cortesía' },
       ],
     },
     {

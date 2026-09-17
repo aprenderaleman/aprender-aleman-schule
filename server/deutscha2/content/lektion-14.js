@@ -82,6 +82,8 @@ export default {
         { text: 'Das Hotel ist schön, **aber** es ist teuer.', gl: '— pero' },
         { text: 'Wir nehmen den Bus, **denn** das Auto ist kaputt.', gl: '— porque (orden normal)' },
         { text: 'Das Auto ist kaputt, **deshalb** nehmen wir den Bus.', gl: '— por eso (¡verbo justo después!)' },
+        { text: 'Ich habe keine Zeit, **aber** ich helfe dir kurz.', gl: '— contraste con negación' },
+        { text: 'Sara ist müde, **denn** sie hat schlecht geschlafen.', gl: '— denn: el verbo no se mueve' },
       ],
     },
 

@@ -81,6 +81,8 @@ export default {
         { text: 'Ich **kann** heute nicht **mitkommen**.', gl: '— con modal: junto al final' },
         { text: 'Wir **haben** im Supermarkt **eingekauft**.', gl: '— Perfekt: ein-ge-kauft' },
         { text: 'Sie **ist** spät **zurückgekommen**.', gl: '— movimiento → sein (Lektion 4)' },
+        { text: 'Der Zug **kommt** um 9:15 Uhr in Köln **an**.', gl: '— ankommen: llega' },
+        { text: 'Ich **mache** das Fenster nicht **auf** — es ist zu kalt.', gl: '— negación: nicht antes del prefijo' },
       ],
     },
 

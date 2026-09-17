@@ -8,6 +8,7 @@ const KURS_B1 = {
   base: '/deutschb1',
   api: '/api/deutschb1',
   total: 43,
+  geschichten: 5,
   defaultLesson: 8,
   artBase: '/deutschc1',
 }

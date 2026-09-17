@@ -82,6 +82,8 @@ export default {
         { text: 'Das ist Peter und das ist **seine** Frau.', gl: '— Besitzer = er → sein' },
         { text: 'Das ist Anna und das ist **ihr** Mann.', gl: '— Besitzer = sie → ihr' },
         { text: 'Wie heißt **eure** Lehrerin? — **Unsere** Lehrerin heißt Frau Berg.', gl: '— euer → eure' },
+        { text: 'Ist das **dein** Handy? — Nein, das ist nicht **mein** Handy.', gl: '— pregunta y negación' },
+        { text: 'Die Kinder besuchen **ihre** Großeltern.', gl: '— Besitzer = sie (Plural) → ihr' },
       ],
     },
 

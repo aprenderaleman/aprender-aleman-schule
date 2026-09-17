@@ -35,7 +35,11 @@ export default function KursSeite({ kurs }) {
   const { getToken } = useAuth()
 
   const lessonId = Number(id)
-  const validId = Number.isInteger(lessonId) && lessonId >= 1 && lessonId <= kurs.total
+  // Ids 91-95 = Geschichten (lectura graduada), si el curso las declara.
+  const validId = Number.isInteger(lessonId) && (
+    (lessonId >= 1 && lessonId <= kurs.total) ||
+    (kurs.geschichten > 0 && lessonId >= 91 && lessonId <= 90 + kurs.geschichten)
+  )
 
   const [index, setIndex] = useState(null)
   const [lesson, setLesson] = useState(null)

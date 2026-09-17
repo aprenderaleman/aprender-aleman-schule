@@ -76,6 +76,9 @@ export default {
         { text: 'Sie **ist** um 7 Uhr **aufgestanden**.', gl: '— sein (levantarse = cambio de estado)' },
         { text: 'Ich **habe** einen Kaffee **getrunken**.', gl: '— haben' },
         { text: 'Er **ist** nach Hause **gekommen**.', gl: '— sein (movimiento)' },
+        { text: '**Hast** du das Buch schon **gelesen**? — Nein, noch nicht.', gl: '— pregunta: haben en posición 1' },
+        { text: 'Meine Eltern **sind** am Sonntag zu Hause **geblieben**.', gl: '— bleiben → siempre sein' },
+        { text: 'Ich **habe** heute nicht **gearbeitet**.', gl: '— negación: nicht antes del participio' },
       ],
     },
 

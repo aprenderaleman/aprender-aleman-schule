@@ -11,6 +11,7 @@ const KURS_B2 = {
   base: '/deutschb2',
   api: '/api/deutschb2',
   total: 42,
+  geschichten: 5,
   defaultLesson: 4,
   artBase: '/deutschc1',
 }

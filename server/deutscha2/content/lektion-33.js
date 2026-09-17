@@ -80,6 +80,8 @@ export default {
         { text: '**Ich hätte gern** einen Kaffee, bitte.', gl: '— Akkusativ: einen' },
         { text: 'Was kostet der Käse? — 3,20 Euro.', gl: '' },
         { text: 'Wir möchten bezahlen. Die Rechnung, bitte!', gl: '' },
+        { text: 'Ich esse **kein Fleisch** — ich bin Vegetarierin.', gl: '— negación con kein' },
+        { text: '**Schmeckt** dir die Suppe? — Ja, sehr gut!', gl: '— schmecken + Dativ' },
       ],
     },
     {

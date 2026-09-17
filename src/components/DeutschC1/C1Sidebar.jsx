@@ -42,7 +42,7 @@ export default function C1Sidebar({ kurs, blocks, lessons, activeId, onNavigate,
         {blocks.map(b => (
           <div className="c1-group" key={b.n}>
             <div className="c1-group-label">
-              <b>Bloque {b.n}</b> · {b.name}
+              {b.n === 'G' ? <b>📖 {b.name}</b> : <><b>Bloque {b.n}</b> · {b.name}</>}
             </div>
             {lessons
               .filter(l => l.id >= b.range[0] && l.id <= b.range[1])
@@ -59,7 +59,7 @@ export default function C1Sidebar({ kurs, blocks, lessons, activeId, onNavigate,
                       'c1-link' + (active ? ' is-active' : '') + (l.ready ? ' is-ready' : '')
                     }
                   >
-                    <span className="c1-num">{pad(l.id)}</span>
+                    <span className="c1-num">{l.id > 90 ? `G${l.id - 90}` : pad(l.id)}</span>
                     <span className="c1-lt">{l.titel}</span>
                   </Link>
                 )
