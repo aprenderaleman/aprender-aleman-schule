@@ -1,12 +1,15 @@
 // Lektion 33 · Essen & Einkaufen
 //
-// Bloque 3 (temático): alimentos, la compra, pedir en el café
-// (Ich hätte gern … / Die Rechnung, bitte), precios. «Tengo hambre» = Ich habe Hunger.
+// Bloque 3 (temático). Diferencia frente al A1 (Lektion 32 allí): «Hunger
+// haben» y «Was kostet das?» son solo repaso de una línea. Núcleo A2:
+// Mengen & Verpackungen (Packung, Dose, Flasche, Kilo), Preise vergleichen
+// mit Komparativ (→ Lektion 13), Tisch reservieren / Ich hätte gern,
+// reklamieren & umtauschen (stimmt so, Kassenbon).
 
 export default {
   spec: ['Bloque 3', 'Themenfelder & Wortschatz', 'Niveau A2', 'Prüfungsrelevanz: Sprechen & Schreiben'],
   h1: 'Essen & Einkaufen',
-  lead: '~~Comer, comprar y pedir en el café — con la frase estrella del examen:~~ **Ich hätte gern …** ~~(quisiera…)~~',
+  lead: '~~Comprar y comer en nivel A2: cantidades y envases, comparar precios, reservar mesa — y reclamar:~~ **„Ich möchte das umtauschen.“**',
 
   content: [
     // ── Lernziele ─────────────────────────────────────────────────
@@ -14,10 +17,15 @@ export default {
       type: 'lernziele',
       eyebrow: 'Lernziele',
       items: [
-        'Lebensmittel kennen und einkaufen ~~(los alimentos)~~',
-        'im Café bestellen: *Ich hätte gern einen Kaffee.*',
-        'nach Preisen fragen und Preise verstehen',
+        'mit Mengen und Verpackungen einkaufen: *eine Packung Nudeln, eine Dose Tomaten*',
+        'Preise und Produkte vergleichen: *billiger als, am liebsten*',
+        'im Restaurant: reservieren, bestellen, bezahlen: *Stimmt so!*',
+        'reklamieren und umtauschen: *Ich möchte das umtauschen.*',
       ],
+    },
+    {
+      type: 'prose',
+      absaetze: ['**Wiederholung aus dem A1:** *Ich habe Hunger / Durst* · *Was kostet das?* · die Lebensmittel *(Brot, Milch, Käse …)*. ~~Eso ya lo dominas — hoy toca la capa A2.~~'],
     },
 
     { type: 'rule' },
@@ -25,22 +33,22 @@ export default {
     // ── Kernwortschatz ────────────────────────────────────────────
     {
       type: 'wortschatz',
-      eyebrow: 'Kernwortschatz — Essen & Einkaufen',
+      eyebrow: 'Kernwortschatz — Einkaufen & Restaurant',
       items: [
-        { wort: 'das Brot', kollokation: 'frisches Brot kaufen', es: 'el pan' },
-        { wort: 'der Käse', kollokation: 'Brot mit Käse', es: 'el queso' },
-        { wort: 'das Obst', kollokation: 'Obst und Gemüse', es: 'la fruta' },
-        { wort: 'das Gemüse', kollokation: 'Gemüse ist gesund.', es: 'la verdura' },
-        { wort: 'das Fleisch', kollokation: 'Ich esse kein Fleisch.', es: 'la carne' },
-        { wort: 'die Milch', kollokation: 'ein Liter Milch', es: 'la leche' },
-        { wort: 'das Wasser', kollokation: 'ein Glas Wasser', es: 'el agua' },
-        { wort: 'der Kaffee', kollokation: 'eine Tasse Kaffee', es: 'el café' },
-        { wort: 'der Supermarkt', kollokation: 'im Supermarkt einkaufen', es: 'el supermercado' },
-        { wort: 'kosten', kollokation: 'Was kostet das?', es: 'costar' },
-        { wort: 'der Hunger', kollokation: 'Hunger haben', es: 'el hambre' },
-        { wort: 'die Rechnung', kollokation: 'Die Rechnung, bitte!', es: 'la cuenta' },
+        { wort: 'die Packung, -en', kollokation: 'eine Packung Nudeln', es: 'el paquete' },
+        { wort: 'die Dose, -n', kollokation: 'eine Dose Tomaten', es: 'la lata' },
+        { wort: 'die Flasche, -n', kollokation: 'eine Flasche Öl', es: 'la botella' },
+        { wort: 'das Kilo', kollokation: 'ein Kilo Kartoffeln', es: 'el kilo' },
+        { wort: 'billig ↔ teuer', kollokation: 'billiger als …', es: 'barato ↔ caro' },
+        { wort: 'das Angebot, -e', kollokation: 'Der Käse ist im Angebot.', es: 'la oferta' },
+        { wort: 'der Markt', kollokation: 'auf dem Markt einkaufen', es: 'el mercado' },
+        { wort: 'reservieren', kollokation: 'einen Tisch reservieren', es: 'reservar' },
+        { wort: 'bestellen', kollokation: 'Wir möchten bestellen.', es: 'pedir (en el restaurante)' },
+        { wort: 'die Rechnung, -en', kollokation: 'Die Rechnung, bitte — stimmt so!', es: 'la cuenta' },
+        { wort: 'umtauschen', kollokation: 'Ich möchte das umtauschen.', es: 'cambiar, devolver' },
+        { wort: 'der Kassenbon, -s', kollokation: 'Haben Sie den Kassenbon?', es: 'el tique de compra' },
       ],
-      hinweis: '~~einkaufen = hacer la compra (separable: Ich kaufe ein); kaufen = comprar una cosa concreta.~~',
+      hinweis: '~~umtauschen es separable: Ich tausche die Jacke um. Y «stimmt so» = «así está bien»: redondeas la cuenta y dejas propina.~~',
     },
 
     { type: 'rule' },
@@ -48,22 +56,27 @@ export default {
     // ── Erklärung ─────────────────────────────────────────────────
     {
       type: 'steps',
-      eyebrow: 'Erklärung — drei Situationen',
+      eyebrow: 'Erklärung — vier Situationen',
       steps: [
         {
-          badge: 'Hunger',
-          titel: 'Hunger und Durst — mit haben',
-          text: '~~Como en español «tener hambre»:~~ __Ich **habe** Hunger. Ich **habe** Durst.__ ~~(sed)~~ Nie mit sein: ~~no digas~~ *Ich bin Hunger*. Danach: __Ich möchte etwas essen / trinken.__',
+          badge: 'Mengen',
+          titel: 'Mengen und Verpackungen',
+          text: 'Menge + Nomen, ohne „von“: __eine **Packung** Nudeln__ · __eine **Dose** Tomaten__ · __eine **Flasche** Öl__ · __ein **Kilo** Kartoffeln__. ~~(un paquete DE pasta — en alemán sin «de»)~~',
         },
         {
-          badge: 'Café',
-          titel: 'Im Café oder Restaurant bestellen',
-          text: 'Die wichtigste Formel: __**Ich hätte gern** einen Kaffee und ein Wasser.__ ~~(quisiera — mucho más amable que „Ich will“)~~ Am Ende: __**Die Rechnung**, bitte!__ — __Zusammen oder getrennt?__ ~~(¿juntos o por separado?)~~',
+          badge: 'billiger',
+          titel: 'Preise vergleichen — mit dem Komparativ',
+          text: 'Mit dem __Komparativ__ ~~(Lektion 13)~~ vergleichst du: __Das Obst ist auf dem Markt **frischer**, aber im Supermarkt **billiger**.__ Dein Favorit: __**Am liebsten** kaufe ich auf dem Markt ein.__',
         },
         {
-          badge: '€',
-          titel: 'Preise fragen und sagen',
-          text: '__**Was kostet** das Brot?__ — __Es kostet **zwei Euro fünfzig** (2,50 €).__ Plural: __Was **kosten** die Tomaten?__ ~~El precio se dice seguido: zwei Euro fünfzig, sin «con».~~',
+          badge: 'Restaurant',
+          titel: 'Reservieren, bestellen, bezahlen',
+          text: '__Ich möchte einen Tisch für zwei Personen **reservieren**.__ Bestellen: __**Ich hätte gern** die Tomatensuppe.__ ~~(quisiera — la fórmula estrella)~~ Bezahlen: __Die Rechnung, bitte!__ — __Zwanzig Euro, **stimmt so**!__ ~~(quédese el cambio)~~',
+        },
+        {
+          badge: 'Reklamation',
+          titel: 'Reklamieren und umtauschen',
+          text: 'Etwas ist nicht okay? __Entschuldigung, **das ist zu viel**.__ · __Die Suppe ist **kalt**.__ Im Geschäft: __Ich möchte die Jacke **umtauschen**.__ — __Haben Sie den **Kassenbon**?__',
         },
       ],
     },
@@ -75,26 +88,31 @@ export default {
       type: 'beispiele',
       eyebrow: 'Beispiele',
       items: [
-        { text: 'Ich **habe** Hunger — wollen wir etwas essen?', gl: '— con haben' },
-        { text: 'Ich kaufe im Supermarkt Obst, Gemüse und Milch.', gl: '' },
-        { text: '**Ich hätte gern** einen Kaffee, bitte.', gl: '— Akkusativ: einen' },
-        { text: 'Was kostet der Käse? — 3,20 Euro.', gl: '' },
-        { text: 'Wir möchten bezahlen. Die Rechnung, bitte!', gl: '' },
-        { text: 'Ich esse **kein Fleisch** — ich bin Vegetarierin.', gl: '— negación con kein' },
-        { text: '**Schmeckt** dir die Suppe? — Ja, sehr gut!', gl: '— schmecken + Dativ' },
+        { text: 'Ich hätte gern eine **Packung** Nudeln und zwei **Dosen** Tomaten.', gl: '— Mengen ohne „de“' },
+        { text: 'Die Äpfel sind heute **im Angebot** — nur 1,99 Euro das Kilo.', gl: '' },
+        { text: 'Auf dem Markt ist das Gemüse **frischer als** im Supermarkt.', gl: '— Komparativ' },
+        { text: 'Ich möchte einen Tisch für vier Personen **reservieren** — für Samstag, 20 Uhr.', gl: '' },
+        { text: 'Das macht 18,50 Euro. — Zwanzig Euro, **stimmt so**!', gl: '— con propina' },
+        { text: 'Ich möchte diese Jacke **umtauschen**, sie ist **zu klein**.', gl: '' },
       ],
     },
     {
       type: 'redemittel',
-      eyebrow: 'Redemittel — im Café',
+      eyebrow: 'Redemittel — im Restaurant & im Geschäft',
       gruppen: [
         {
-          fn: 'Bestellen & bezahlen',
+          fn: 'Im Restaurant',
           saetze: [
-            { satz: 'Ich hätte gern einen Kaffee.', gloss: 'quisiera' },
-            { satz: 'Für mich ein Wasser, bitte.' },
-            { satz: 'Was kostet der Kuchen?' },
-            { satz: 'Die Rechnung, bitte! — Zusammen oder getrennt?', gloss: '¿juntos o por separado?' },
+            { satz: 'Ich möchte einen Tisch für zwei Personen reservieren.' },
+            { satz: 'Ich hätte gern das Schnitzel und ein Wasser.', gloss: 'quisiera' },
+            { satz: 'Die Rechnung, bitte! — Zwanzig Euro, stimmt so!', gloss: 'quédese el cambio' },
+          ],
+        },
+        {
+          fn: 'Reklamieren & umtauschen',
+          saetze: [
+            { satz: 'Entschuldigung, das ist zu viel. / Die Suppe ist kalt.', gloss: 'es demasiado' },
+            { satz: 'Ich möchte das umtauschen. Hier ist der Kassenbon.', gloss: 'quiero cambiarlo' },
           ],
         },
       ],
@@ -105,47 +123,47 @@ export default {
     // ── Übungen ───────────────────────────────────────────────────
     {
       type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Was passt nicht?',
-      frage: 'Ein Wort passt nicht. Welches?',
+      eyebrow: 'Anwendung — Übung 1 · Packung, Dose, Flasche oder Kilo?',
+      frage: 'Welche Menge passt?',
       loesungLabel: 'Lösung',
       aufgaben: [
-        'Obst – Gemüse – Brot – Rechnung',
-        'Kaffee – Milch – Käse – Wasser',
-        'Supermarkt – Café – Restaurant – Fleisch',
-        'kaufen – kosten – schlafen – bezahlen',
+        'eine ___ Nudeln',
+        'eine ___ Öl',
+        'eine ___ Thunfisch ~~(atún)~~',
+        'ein ___ Kartoffeln',
       ],
       loesungen: [
-        '**Rechnung** ~~(no es un alimento)~~',
-        '**Käse** ~~(los otros se beben)~~',
-        '**Fleisch** ~~(los otros son lugares)~~',
-        '**schlafen** ~~(no tiene que ver con comprar)~~',
+        'eine **Packung** Nudeln',
+        'eine **Flasche** Öl',
+        'eine **Dose** Thunfisch',
+        'ein **Kilo** Kartoffeln',
       ],
     },
     {
       type: 'uebung',
-      eyebrow: 'Übung 2 · Dialog im Café',
-      frage: 'Ergänze: hätte · kostet · Rechnung · habe.',
+      eyebrow: 'Übung 2 · Im Restaurant',
+      frage: 'Ergänze: reservieren · hätte · stimmt · umtauschen.',
       loesungLabel: 'Lösung',
       aufgaben: [
-        'Ich ___ Hunger. Gehen wir ins Café?',
-        'Ich ___ gern einen Kaffee und ein Stück Kuchen.',
-        'Was ___ der Kuchen? — 3 Euro.',
-        'Wir möchten bezahlen. Die ___, bitte!',
+        'Ich möchte einen Tisch für zwei Personen ___ .',
+        'Ich ___ gern die Tomatensuppe und ein Wasser.',
+        'Das macht 18,50 Euro. — Zwanzig Euro, ___ so!',
+        'Die Jacke ist zu klein. Ich möchte sie ___ .',
       ],
       loesungen: [
-        'Ich **habe** Hunger. Gehen wir ins Café?',
-        'Ich **hätte** gern einen Kaffee und ein Stück Kuchen.',
-        'Was **kostet** der Kuchen? — 3 Euro.',
-        'Wir möchten bezahlen. Die **Rechnung**, bitte!',
+        'Ich möchte einen Tisch für zwei Personen **reservieren**.',
+        'Ich **hätte** gern die Tomatensuppe und ein Wasser.',
+        'Das macht 18,50 Euro. — Zwanzig Euro, **stimmt** so!',
+        'Die Jacke ist zu klein. Ich möchte sie **umtauschen**.',
       ],
     },
     {
       type: 'uebung',
       eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Du gehst einkaufen. Schreib 4-5 Sätze (ca. 30 Wörter): Wo kaufst du ein? Was kaufst du? Was kostet etwas?',
+      frage: 'Vergleiche Markt und Supermarkt (4-5 Sätze, ca. 35 Wörter): Wo kaufst du ein? Was ist dort billiger oder frischer? Was kaufst du am liebsten?',
       loesungLabel: 'Mögliche Lösung',
       loesung:
-        'Am Samstag kaufe ich im Supermarkt ein. Ich kaufe Brot, Käse, Obst und zwei Liter Milch. Ein Kilo Äpfel kostet nur zwei Euro. Fleisch kaufe ich nicht, ich esse kein Fleisch. ~~(Vale cualquier texto con 3-4 alimentos y un precio.)~~',
+        'Ich kaufe **am liebsten** auf dem Markt ein. Das Obst ist dort **frischer als** im Supermarkt. Aber der Supermarkt ist **billiger**: Eine Packung Nudeln kostet nur 99 Cent. Käse kaufe ich nur im Angebot. ~~(Lo que mira el corrector: dos comparativos y una cantidad tipo Packung/Kilo.)~~',
     },
 
     { type: 'rule' },
@@ -156,20 +174,20 @@ export default {
       eyebrow: 'Prüfungsbezug',
       modul: 'Schreiben · Teil 1',
       titel: 'Kurze Mitteilung: der Einkauf',
-      anweisung: 'Dein Freund kommt heute zum Abendessen, aber du bist noch bei der Arbeit. Schreib ihm eine SMS (20-30 Wörter): Er soll einkaufen. Was braucht ihr? Wann kommst du?',
+      anweisung: 'Dein Freund kommt heute zum Abendessen, aber du bist noch bei der Arbeit. Schreib ihm eine SMS (20-30 Wörter): Er soll einkaufen — was genau (mit Mengen)? Wann kommst du?',
       absaetze: [
-        'Denk an: **alle drei Punkte** beantworten.',
+        'Denk an: **alle Punkte beantworten** — und benutze Mengenangaben.',
       ],
       loesungLabel: 'Mögliche Lösung',
       loesungen: [
-        'Hallo Tom, ich bin noch bei der Arbeit. Kaufst du bitte Brot, Käse und eine Flasche Wasser? Ich komme um sieben nach Hause. Bis später!',
+        'Hallo Tom, ich bin noch bei der Arbeit. Kaufst du bitte eine Packung Nudeln, eine Dose Tomaten und eine Flasche Öl? Ich komme um sieben. Bis später!',
       ],
-      kommentar: 'In Teil 1 zählt: **alle Punkte beantworten** und kurz bleiben. Du-Form und einfache Sätze sind perfekt.',
+      kommentar: 'Mengenangaben wie **eine Packung Nudeln** zeigen dem Korrektor sofort A2-Wortschatz.',
     },
     {
       type: 'tipp',
       label: 'Prüfungstipp',
-      text: 'Im **Hören** kommen oft Durchsagen im Supermarkt mit Preisen. Übe die Zahlen bis 100: *neunundneunzig Cent* — ~~los números al revés (neun-und-neunzig = 99) son la trampa típica.~~',
+      text: 'Im **Hören** kommen oft Supermarkt-Durchsagen: *„Heute im **Angebot**: Äpfel, das Kilo nur 1,99 Euro!“* Übe Preise und Mengen zusammen — ~~(los números van al revés: neun-und-neunzig = 99).~~',
     },
 
     { type: 'rule' },
@@ -180,19 +198,21 @@ export default {
       eyebrow: 'Zusammenfassung',
       kopf: ['Funktion', 'So sagst du es'],
       zeilen: [
-        ['tengo hambre / sed', 'Ich habe Hunger. / Ich habe Durst.'],
-        ['pedir', 'Ich hätte gern einen Kaffee.'],
-        ['preguntar el precio', 'Was kostet …? — Es kostet 2,50 Euro.'],
-        ['pagar', 'Die Rechnung, bitte! Zusammen oder getrennt?'],
+        ['Mengen & Verpackungen', 'eine Packung Nudeln · eine Dose Tomaten · ein Kilo Kartoffeln'],
+        ['vergleichen', 'billiger / frischer als … · Am liebsten kaufe ich …'],
+        ['Restaurant', 'einen Tisch reservieren · Ich hätte gern … · Stimmt so!'],
+        ['reklamieren & umtauschen', 'Das ist zu viel. · Ich möchte das umtauschen. (+ Kassenbon)'],
+        ['Wiederholung A1', 'Ich habe Hunger. · Was kostet das?'],
       ],
     },
     {
       type: 'selbstcheck',
       eyebrow: 'Selbstcheck',
       items: [
-        'Ich kaufe mit 10 Lebensmittel-Wörtern ein.',
-        'Ich bestelle im Café mit Ich hätte gern …',
-        'Ich frage nach dem Preis und verstehe die Antwort.',
+        'Ich kaufe mit Mengen ein: eine Packung, eine Dose, ein Kilo.',
+        'Ich vergleiche Preise und Produkte: billiger als, am liebsten.',
+        'Ich reserviere einen Tisch und bestelle mit Ich hätte gern …',
+        'Ich kann reklamieren und etwas umtauschen.',
       ],
     },
     {

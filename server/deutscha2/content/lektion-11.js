@@ -1,9 +1,14 @@
 // Lektion 11 · Possessivartikel
+//
+// Bloque 1 — Grammatik & Struktur. Diferencia frente al A1 (Lektion 11 allí):
+// el Nominativ es solo repaso compacto; el núcleo A2 es el DATIV
+// (meinem/meiner/meinen + n — coherente con Lektion 9) y el Akkusativ
+// bien desarrollado, más euer → eure. Prüfungsbezug: Schreiben Teil 2.
 
 export default {
   spec: ['Bloque 1', 'Grammatik & Struktur', 'Niveau A2', 'Prüfungsrelevanz: alle Module'],
   h1: 'Possessivartikel — mein, dein, sein …',
-  lead: '~~Los posesivos (mi, tu, su …):~~ **mein, dein, sein, ihr, unser, euer, Ihr** — ~~con las mismas terminaciones que~~ *ein*.',
+  lead: '~~Los posesivos ya los conoces del A1. Lo nuevo en A2 son sus terminaciones en~~ **Akkusativ** ~~y sobre todo en~~ **Dativ**: *mit meinem Bruder, bei meiner Familie*.',
 
   content: [
     // ── Lernziele ─────────────────────────────────────────────────
@@ -11,9 +16,10 @@ export default {
       type: 'lernziele',
       eyebrow: 'Lernziele',
       items: [
-        'alle Possessivartikel kennen: *mein, dein, sein, ihr, unser, euer, Ihr*',
-        'die richtigen Endungen benutzen: *meine Mutter, meinen Bruder*',
-        'den Unterschied *sein* / *ihr* verstehen ~~(los dos «su»)~~',
+        'die Possessivartikel im Nominativ wiederholen ~~(repaso del A1)~~',
+        'den Akkusativ sicher benutzen: *Ich besuche meinen Bruder.*',
+        'NEU: den Dativ benutzen: *mit meinem Bruder, bei meiner Familie*',
+        '*euer* richtig kürzen: *eure, euren, eurem*',
       ],
     },
 
@@ -22,22 +28,18 @@ export default {
     // ── Kernwortschatz ────────────────────────────────────────────
     {
       type: 'tabelle',
-      eyebrow: 'Kernwortschatz — die Possessivartikel',
+      eyebrow: 'Kernwortschatz — Wiederholung: die Possessivartikel',
       kopf: ['Person', 'Possessivartikel', 'Bedeutung'],
       zeilen: [
-        ['ich', 'mein', 'mi'],
-        ['du', 'dein', 'tu'],
-        ['er / es', '**sein**', 'su (de él)'],
-        ['sie', '**ihr**', 'su (de ella)'],
-        ['wir', 'unser', 'nuestro'],
-        ['ihr', 'euer', 'vuestro'],
-        ['sie (Plural)', 'ihr', 'su (de ellos)'],
-        ['Sie (formal)', 'Ihr', 'su (de usted)'],
+        ['ich / du', 'mein / dein', 'mi / tu'],
+        ['er, es / sie', '**sein** / **ihr**', 'su (de él) / su (de ella)'],
+        ['wir / ihr', 'unser / euer', 'nuestro / vuestro'],
+        ['sie (Plural) / Sie', 'ihr / Ihr', 'su (de ellos) / su (de usted)'],
       ],
     },
     {
       type: 'prose',
-      absaetze: ['~~«Su» tiene DOS traducciones: sein (de él) e ihr (de ella). ¡La trampa más típica del hispanohablante!~~'],
+      absaetze: ['~~Repaso del A1 — incluida la trampa~~ **sein** ~~(de él)~~ / **ihr** ~~(de ella): mira al dueño, no al sustantivo. Lo nuevo de hoy: las terminaciones según el caso.~~'],
     },
 
     { type: 'rule' },
@@ -45,28 +47,38 @@ export default {
     // ── Erklärung ─────────────────────────────────────────────────
     {
       type: 'steps',
-      eyebrow: 'Erklärung — die Endungen',
+      eyebrow: 'Erklärung — die Endungen nach Kasus',
       steps: [
         {
-          badge: 'wie ein',
-          titel: 'Gleiche Endungen wie ein',
-          text: 'Possessivartikel haben die __Endungen von ein__: *ein Bruder → **mein** Bruder*, *eine Mutter → **meine** Mutter*, *ein Auto → **mein** Auto*. Plural: **meine** Eltern.',
+          badge: 'Nom.',
+          titel: 'Wiederholung: wie ein',
+          text: 'Im Nominativ haben Possessivartikel die __Endungen von ein__: *mein Bruder, meine Mutter, mein Auto, meine Eltern*. ~~Igual que en el A1 — si dudas, ahí está la tabla completa.~~',
         },
         {
           badge: 'Akk.',
           titel: 'Akkusativ: -en beim Maskulinum',
-          text: 'Nur maskulin ändert sich: __meinen, deinen, seinen__ … ~~(como einen)~~\n__Ich besuche **meinen** Bruder und **meine** Schwester.__',
+          text: 'Nur maskulin ändert sich: __meinen, deinen, seinen, unseren__ … ~~(como einen)~~\n__Ich besuche **meinen** Bruder.__ · __Wir fragen **unseren** Lehrer.__ Feminin, neutral, Plural: wie im Nominativ.',
         },
-        {
-          badge: 'sein/ihr',
-          titel: 'Wer ist der Besitzer?',
-          text: 'Wichtig ist der __Besitzer__ ~~(el dueño)~~, nicht das Nomen: Peter → **sein** Auto, **seine** Mutter. Anna → **ihr** Auto, **ihre** Mutter. ~~En español los dos son «su coche» — en alemán primero pregunta: ¿de él o de ella?~~',
+          {
+          badge: 'Dat. NEU',
+          titel: 'Dativ: meinem, meiner, meinen + n',
+          text: 'Nach den Dativ-Präpositionen ~~(Lektion 9)~~ __mit, bei, von, zu__: maskulin/neutral → __mein**em**__, feminin → __mein**er**__, Plural → __mein**en**__ + **-n** am Nomen.\n__mit **meinem** Bruder__ · __bei **meiner** Familie__ · __von **unseren** Eltern__ · __mit **meinen** Freunde**n**__ ~~(ojo: en plural también el sustantivo añade -n)~~',
         },
         {
           badge: 'euer',
           titel: 'Achtung: euer → eure',
-          text: 'Mit Endung verliert *euer* das zweite e: __eure__ Mutter, __euren__ Bruder ~~(no *euere*)~~.',
+          text: 'Mit Endung verliert *euer* das zweite e: __eure__ Mutter, __euren__ Bruder (Akk.), __eurem__ Kind (Dat.) ~~(no *euere*)~~.',
         },
+      ],
+    },
+    {
+      type: 'tabelle',
+      eyebrow: 'Erklärung — die Endungen im Überblick',
+      kopf: ['Kasus', 'maskulin', 'feminin', 'neutral', 'Plural'],
+      zeilen: [
+        ['Nominativ', 'mein', 'meine', 'mein', 'meine'],
+        ['Akkusativ', '**meinen**', 'meine', 'mein', 'meine'],
+        ['Dativ', '**meinem**', '**meiner**', '**meinem**', '**meinen** + n'],
       ],
     },
 
@@ -77,13 +89,12 @@ export default {
       type: 'beispiele',
       eyebrow: 'Beispiele',
       items: [
-        { text: 'Das ist **meine** Familie: **mein** Vater, **meine** Mutter und **meine** zwei Brüder.', gl: '— wie ein/eine' },
+        { text: 'Das ist **meine** Schwester und das ist **ihr** Mann.', gl: '— Nominativ, wie im A1' },
         { text: 'Ich besuche am Sonntag **meinen** Opa.', gl: '— Akkusativ maskulin: -en' },
-        { text: 'Das ist Peter und das ist **seine** Frau.', gl: '— Besitzer = er → sein' },
-        { text: 'Das ist Anna und das ist **ihr** Mann.', gl: '— Besitzer = sie → ihr' },
-        { text: 'Wie heißt **eure** Lehrerin? — **Unsere** Lehrerin heißt Frau Berg.', gl: '— euer → eure' },
-        { text: 'Ist das **dein** Handy? — Nein, das ist nicht **mein** Handy.', gl: '— pregunta y negación' },
-        { text: 'Die Kinder besuchen **ihre** Großeltern.', gl: '— Besitzer = sie (Plural) → ihr' },
+        { text: 'Ich wohne noch bei **meiner** Familie.', gl: '— bei + Dativ, feminin' },
+        { text: 'Wir fahren mit **unserem** Auto nach Valencia.', gl: '— mit + Dativ, neutral' },
+        { text: 'Das Geschenk ist von **unseren** Eltern.', gl: '— von + Dativ, Plural' },
+        { text: 'Paul spielt mit **seinen** Kindern im Park.', gl: '— Plural + -n: Kindern' },
       ],
     },
 
@@ -110,36 +121,38 @@ export default {
     },
     {
       type: 'uebung',
-      eyebrow: 'Übung 2 · sein oder ihr?',
-      frage: 'Wer ist der Besitzer? Ergänze sein- oder ihr-.',
+      eyebrow: 'Übung 2 · Nominativ, Akkusativ oder Dativ?',
+      frage: 'Ergänze den Possessivartikel in der richtigen Form. ~~(Tras mit, bei, von: Dativ.)~~',
       loesungLabel: 'Lösung',
       aufgaben: [
-        'Das ist Maria. ___ Hund heißt Rex.',
-        'Das ist Jonas. ___ Schwester ist 12.',
-        'Anna sucht ___ Handy.',
-        'Herr Meier und ___ Frau kommen heute.',
+        'Ich wohne noch bei ___ Eltern. (mein-)',
+        'Kennst du ___ Bruder? (ihr-, de ella)',
+        'Wir fahren mit ___ Auto. (unser-)',
+        'Das ist ___ Lehrerin. (sein-)',
+        'Anna telefoniert oft mit ___ Oma. (ihr-)',
       ],
       loesungen: [
-        'Das ist Maria. **Ihr** Hund heißt Rex. ~~(de ella)~~',
-        'Das ist Jonas. **Seine** Schwester ist 12. ~~(de él)~~',
-        'Anna sucht **ihr** Handy.',
-        'Herr Meier und **seine** Frau kommen heute.',
+        'Ich wohne noch bei **meinen** Eltern. ~~(Dativ Plural)~~',
+        'Kennst du **ihren** Bruder? ~~(Akkusativ maskulin)~~',
+        'Wir fahren mit **unserem** Auto. ~~(Dativ neutral)~~',
+        'Das ist **seine** Lehrerin. ~~(Nominativ feminin)~~',
+        'Anna telefoniert oft mit **ihrer** Oma. ~~(Dativ feminin)~~',
       ],
     },
     {
       type: 'uebung',
       eyebrow: 'Übung 3 · Über die Familie schreiben',
-      frage: 'Schreibe drei Sätze über deine Familie. Benutze mein-.',
+      frage: 'Schreibe drei Sätze über deine Familie — mit Nominativ, Akkusativ und Dativ.',
       loesungLabel: 'Mögliche Lösung',
       aufgaben: [
-        '(dein Vater — Name?)',
-        '(deine Mutter — Beruf?)',
-        '(dein Bruder / deine Schwester — Alter?)',
+        '(Wer ist das? — Das ist …)',
+        '(Wen besuchst du oft? — Ich besuche …)',
+        '(Mit wem telefonierst du? — Ich telefoniere mit …)',
       ],
       loesungen: [
-        '**Mein** Vater heißt Carlos.',
-        '**Meine** Mutter ist Lehrerin.',
-        '**Mein** Bruder ist 15 Jahre alt. ~~También correcto: Meine Schwester ist … / Ich habe keinen Bruder.~~',
+        'Das ist **meine** Mutter.',
+        'Ich besuche oft **meinen** Opa. ~~(Akkusativ)~~',
+        'Ich telefoniere mit **meiner** Schwester. ~~(Dativ — también correcto: mit meinem Bruder, mit meinen Eltern.)~~',
       ],
     },
 
@@ -149,24 +162,22 @@ export default {
     {
       type: 'pruefungsaufgabe',
       eyebrow: 'Prüfungsbezug',
-      modul: 'Sprechen · Von sich erzählen',
-      titel: 'Thema Familie',
-      anweisung: 'In Teil 2 erzählst du oft von deiner Familie. Ergänze die Possessivartikel:',
+      modul: 'Schreiben · Teil 2',
+      titel: 'E-Mail: Einladung zum Familienfest',
+      anweisung: 'In Teil 2 schreibst du eine kurze E-Mail (ca. 30-40 Wörter). Aufgabe: Deine Familie macht am Samstag ein Fest. Lade deinen Freund Tom ein. Schreib: Wo ist das Fest? Wer kommt? Was soll Tom mitbringen?',
       absaetze: [
-        '„{1} Familie ist klein. {2} Mutter heißt Elena und {3} Bruder studiert in Sevilla.“',
+        'Denk an: **Anrede, alle drei Punkte, Gruß** — und auf die Possessivartikel achten!',
       ],
-      optionen: ['(1) ich → ?', '(2) ich → ?', '(3) ich → ?'],
-      loesungLabel: 'Lösung',
+      loesungLabel: 'Mögliche Lösung',
       loesungen: [
-        '{1} **Meine** Familie ist klein.',
-        '{2} **Meine** Mutter heißt Elena.',
-        '{3} **mein** Bruder studiert in Sevilla.',
+        'Lieber Tom, am Samstag machen wir ein Fest bei **meinen** Eltern. **Meine** Schwester kommt mit **ihrem** Mann und **ihren** Kindern. Kommst du auch? Bring bitte **deinen** Fußball mit! Viele Grüße, Ana',
       ],
+      kommentar: 'Drei Kasus in einer Mini-E-Mail: *bei meinen Eltern* (Dativ), *mit ihrem Mann* (Dativ), *deinen Fußball* (Akkusativ) — genau das zeigt dem Korrektor A2-Niveau.',
     },
     {
       type: 'tipp',
       label: 'Prüfungstipp',
-      text: 'Das Thema **Familie** kommt in der Prüfung fast sicher. Bereite **fünf Sätze mit mein-** vor. ~~Y memoriza la regla de oro: ¿de él? → sein. ¿De ella? → ihr. No mires el sustantivo, mira al dueño.~~',
+      text: 'Lern dir zwei **Anker-Sätze** auswendig: *Ich wohne bei **meinen** Eltern.* und *Ich fahre mit **meiner** Familie in den Urlaub.* ~~Con esas dos plantillas resuelves casi cualquier Dativ posesivo del Schreiben.~~',
     },
 
     { type: 'rule' },
@@ -177,25 +188,26 @@ export default {
       eyebrow: 'Zusammenfassung',
       kopf: ['Regel', 'Beispiel'],
       zeilen: [
-        ['Endungen wie ein/eine', 'mein Bruder, meine Mutter, mein Auto'],
+        ['Nominativ: wie ein/eine (A1)', 'mein Bruder, meine Mutter, mein Auto'],
         ['Akkusativ maskulin: -en', 'Ich besuche meinen Opa.'],
-        ['er → sein / sie → ihr', 'Peter: sein Auto · Anna: ihr Auto'],
-        ['euer + Endung = eur-', 'eure Mutter, euren Bruder'],
+        ['Dativ: -em / -er / -en + n', 'mit meinem Bruder · bei meiner Familie · von unseren Eltern'],
+        ['euer + Endung = eur-', 'eure Mutter, euren Bruder, eurem Kind'],
       ],
     },
     {
       type: 'selbstcheck',
       eyebrow: 'Selbstcheck',
       items: [
-        'Ich kenne alle Possessivartikel von mein bis Ihr.',
-        'Ich benutze die Endungen richtig: meine Mutter, meinen Bruder.',
-        'Ich unterscheide sein (de él) und ihr (de ella).',
+        'Ich kenne die Possessivartikel im Nominativ (Wiederholung aus dem A1).',
+        'Ich benutze den Akkusativ: Ich besuche meinen Bruder.',
+        'Ich benutze den Dativ: mit meinem Bruder, bei meiner Familie.',
+        'Ich weiß: Dativ Plural → meinen Eltern, meinen Freunden (+ -n).',
       ],
     },
     {
       type: 'ausblick',
       eyebrow: 'Ausblick',
-      text: 'Statt *mein Bruder* immer zu wiederholen, sagst du einfach **er** oder **ihn**. ~~Los pronombres personales («lo veo», «me ayuda»)~~ — **mich, dich, ihn, mir, dir, ihm** — sind das Thema der nächsten Lektion.',
+      text: 'Statt *mein Bruder* immer zu wiederholen, sagst du einfach **er**, **ihn** oder **ihm**. ~~Los pronombres personales («lo veo», «le ayudo»)~~ — **mich, dich, ihn, mir, dir, ihm** — sind das Thema der nächsten Lektion. Die Endungen **-em, -er, -en** von heute siehst du dort wieder.',
     },
   ],
 }

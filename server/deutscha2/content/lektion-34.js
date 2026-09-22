@@ -2,6 +2,8 @@
 //
 // Bloque 3 (temático): profesiones (masc./fem.), mi trabajo, horarios.
 // Error clave: Beruf SIN artículo (Ich bin Lehrer / Ich arbeite als Kellnerin).
+// Capa A2 frente al A1 (Lektion 35 allí): el Berufsweg im Perfekt
+// (Ausbildung gemacht, als … gearbeitet, eine Stelle gefunden → Lektion 4).
 
 export default {
   spec: ['Bloque 3', 'Themenfelder & Wortschatz', 'Niveau A2', 'Prüfungsrelevanz: Sprechen & Schreiben'],
@@ -39,6 +41,8 @@ export default {
         { wort: 'der Kellner / die Kellnerin', kollokation: 'Der Kellner bringt die Rechnung.', es: 'el camarero / la camarera' },
         { wort: 'der Koch / die Köchin', kollokation: 'Koch in einem Restaurant', es: 'el cocinero / la cocinera' },
         { wort: 'der Feierabend', kollokation: 'Um 17 Uhr habe ich Feierabend.', es: 'el fin de la jornada laboral' },
+        { wort: 'die Ausbildung', kollokation: 'eine Ausbildung machen', es: 'la formación profesional' },
+        { wort: 'die Stelle, -n', kollokation: 'eine neue Stelle suchen', es: 'el puesto de trabajo' },
       ],
       hinweis: '~~El femenino casi siempre es + -in (Lehrerin), a veces con Umlaut: Arzt → Ärztin, Koch → Köchin.~~',
     },
@@ -65,6 +69,11 @@ export default {
           titel: 'Arbeitszeiten',
           text: '__Ich arbeite **von** 9 **bis** 17 Uhr.__ __Am Wochenende habe ich **frei**.__ ~~(libro, no trabajo)~~ Und das schönste deutsche Wort: __**Feierabend**!__ — __Um 18 Uhr habe ich Feierabend.__',
         },
+        {
+          badge: 'Perfekt',
+          titel: 'Früher — dein Berufsweg im Perfekt',
+          text: 'Mit dem __Perfekt__ ~~(Lektion 4)~~ erzählst du deinen Weg: __Ich **habe** eine Ausbildung **gemacht**.__ · __Ich **habe** zwei Jahre als Kellnerin **gearbeitet**.__ · __Jetzt suche ich eine neue **Stelle**.__',
+        },
       ],
     },
 
@@ -77,10 +86,9 @@ export default {
       items: [
         { text: 'Ich bin **Verkäuferin** von Beruf.', gl: '— sin artículo' },
         { text: 'Mein Bruder arbeitet **als Koch** in einem Restaurant.', gl: '' },
-        { text: 'Ich arbeite bei einer kleinen Firma in Hamburg.', gl: '' },
         { text: 'Meine Kollegen sind sehr nett, aber der Chef ist streng.', gl: '— streng = estricto' },
         { text: 'Ich arbeite von Montag bis Freitag, am Wochenende habe ich frei.', gl: '' },
-        { text: 'Was **sind Sie von Beruf**? — Ich bin Ingenieur.', gl: '— pregunta típica' },
+        { text: 'Früher **habe** ich als Verkäufer **gearbeitet**, jetzt bin ich Koch.', gl: '— Perfekt' },
         { text: 'Marta ist **arbeitslos** und sucht eine neue **Stelle**.', gl: '— Stelle = puesto' },
       ],
     },
@@ -109,14 +117,14 @@ export default {
       frage: 'Wie heißt die feminine Form?',
       loesungLabel: 'Lösung',
       aufgaben: [
-        'der Lehrer → die ___',
-        'der Verkäufer → die ___',
+        'der Chef → die ___',
+        'der Kollege → die ___',
         'der Arzt → die ___',
         'der Koch → die ___',
       ],
       loesungen: [
-        'der Lehrer → die **Lehrerin**',
-        'der Verkäufer → die **Verkäuferin**',
+        'der Chef → die **Chefin**',
+        'der Kollege → die **Kollegin**',
         'der Arzt → die **Ärztin** ~~(¡con Umlaut!)~~',
         'der Koch → die **Köchin**',
       ],
@@ -124,28 +132,30 @@ export default {
     {
       type: 'uebung',
       eyebrow: 'Übung 2 · Sätze ergänzen',
-      frage: 'Ergänze: als · bei · von … bis · Feierabend.',
+      frage: 'Ergänze: als · bei · von … bis · Feierabend — und einmal das Perfekt.',
       loesungLabel: 'Lösung',
       aufgaben: [
         'Ich arbeite ___ Kellnerin.',
         'Er arbeitet ___ einer großen Firma.',
         'Wir arbeiten ___ 9 ___ 17 Uhr.',
         'Um 17 Uhr habe ich ___.',
+        'Früher ___ ich in einem Café ___ . (arbeiten, Perfekt)',
       ],
       loesungen: [
         'Ich arbeite **als** Kellnerin. ~~(sin artículo)~~',
         'Er arbeitet **bei** einer großen Firma.',
         'Wir arbeiten **von** 9 **bis** 17 Uhr.',
         'Um 17 Uhr habe ich **Feierabend**.',
+        'Früher **habe** ich in einem Café **gearbeitet**. ~~(haben + Partizip al final)~~',
       ],
     },
     {
       type: 'uebung',
       eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Schreib 4-5 Sätze über deine Arbeit (ca. 30 Wörter): Was bist du von Beruf? Wo arbeitest du? Wann? Wie findest du die Arbeit?',
+      frage: 'Schreib 5-6 Sätze über deine Arbeit (ca. 35 Wörter): Beruf? Was hast du früher gemacht? Wo und wann arbeitest du? Wie findest du sie?',
       loesungLabel: 'Mögliche Lösung',
       loesung:
-        'Ich bin Verkäufer von Beruf. Ich arbeite in einem Supermarkt in Valencia. Ich arbeite von Montag bis Samstag, von 9 bis 15 Uhr. Die Arbeit gefällt mir, weil meine Kollegen nett sind. ~~(Lo que mira el corrector: profesión sin artículo y el horario con von … bis.)~~',
+        'Ich bin Verkäufer von Beruf. Früher habe ich als Kellner gearbeitet. Jetzt arbeite ich in einem Supermarkt in Valencia, von Montag bis Samstag, von 9 bis 15 Uhr. Die Arbeit gefällt mir, weil meine Kollegen nett sind. ~~(Clave: profesión sin artículo, un Perfekt para el pasado y el horario con von … bis.)~~',
     },
 
     { type: 'rule' },
@@ -163,11 +173,11 @@ export default {
       loesungLabel: 'Mögliche Lösung',
       loesungen: [
         'Ich bin Lehrerin von Beruf und arbeite an einer Schule in Sevilla.',
+        'Ich habe in Spanien eine Ausbildung gemacht und zwei Jahre in Madrid gearbeitet.',
         'Ich arbeite von Montag bis Freitag, von 8 bis 14 Uhr.',
         'Meine Arbeit gefällt mir, weil die Kinder sehr lustig sind.',
-        'Am Wochenende habe ich frei.',
       ],
-      kommentar: '**Beruf ohne Artikel** + eine Arbeitszeit + ein Satz mit *weil* — damit zeigst du alles, was A2 verlangt.',
+      kommentar: '**Beruf ohne Artikel** + ein Satz im **Perfekt** über früher + ein Satz mit *weil* — damit zeigst du alles, was A2 verlangt.',
     },
     {
       type: 'tipp',
@@ -187,6 +197,7 @@ export default {
         ['als / bei', 'Ich arbeite als Köchin. / Ich arbeite bei Siemens.'],
         ['horario', 'von 9 bis 17 Uhr · am Wochenende frei'],
         ['fin de jornada', 'Um 17 Uhr habe ich Feierabend.'],
+        ['antes (Perfekt)', 'Ich habe als Kellner gearbeitet.'],
       ],
     },
     {
@@ -195,6 +206,7 @@ export default {
       items: [
         'Ich nenne meinen Beruf ohne Artikel.',
         'Ich sage, wo und wann ich arbeite.',
+        'Ich erzähle im Perfekt, was ich früher gemacht habe.',
         'Ich kenne 6 Berufe in beiden Formen (Lehrer / Lehrerin).',
       ],
     },
