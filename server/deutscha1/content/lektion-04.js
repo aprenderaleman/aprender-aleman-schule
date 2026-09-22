@@ -80,45 +80,29 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · sein konjugieren',
-      frage: 'Ergänze die richtige Form von sein.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Ich ___ Student.',
-        'Du ___ nett.',
-        'Wir ___ aus Spanien.',
-        'Er ___ 30 Jahre alt.',
-      ],
-      loesungen: [
-        'Ich **bin** Student.',
-        'Du **bist** nett.',
-        'Wir **sind** aus Spanien.',
-        'Er **ist** 30 Jahre alt.',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Fragen und Antworten mit sein',
+      items: [
+        { text: '**Bist** du aus Spanien? — Ja, ich **bin** aus Madrid.', gl: '— ¿Eres de España? — Sí, soy de Madrid.' },
+        { text: 'Wer **ist** das? — Das **ist** Herr Schmidt.', gl: '— ¿Quién es? — Es el Sr. Schmidt.' },
+        { text: 'Wie alt **bist** du? — Ich **bin** 30 Jahre alt.', gl: '— ¿Cuántos años tienes? — Tengo 30 años.' },
+        { text: '**Seid** ihr aus Chile? — Ja, wir **sind** aus Santiago.', gl: '— ¿Sois de Chile? — Sí, somos de Santiago.' },
+        { text: 'Sie **ist** Lehrerin.', gl: '— Ella es profesora. (¡sin artículo en alemán!)' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Frage und Antwort',
-      frage: 'Ergänze die Frage und die Antwort.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Woher ___ du? — Ich ___ aus Kolumbien.',
-        'Wie alt ___ ihr? — Wir ___ 20 Jahre alt.',
+      type: 'beispiele',
+      kicker: 'du oder Sie?',
+      titel: 'Informell und formell',
+      items: [
+        { text: 'Wer **bist** du?', gl: '— ¿Quién eres? (informal)' },
+        { text: 'Wer **sind** Sie?', gl: '— ¿Quién es usted? (formal)' },
+        { text: '**Sind** Sie aus Deutschland?', gl: '— ¿Es usted de Alemania?' },
+        { text: 'Du **bist** nett.', gl: '— Eres simpático/a.' },
       ],
-      loesungen: [
-        'Woher **bist** du? — Ich **bin** aus Kolumbien.',
-        'Wie alt **seid** ihr? — Wir **sind** 20 Jahre alt.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Stell dich vor',
-      frage: 'Schreibe 3 Sätze (Name, Herkunft, Alter).',
-      loesungLabel: 'Muster',
-      loesung: '*Ich bin María. Ich bin aus Peru. Ich bin 28 Jahre alt.*',
     },
 
     { type: 'rule' },

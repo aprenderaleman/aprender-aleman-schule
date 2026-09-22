@@ -4,6 +4,8 @@ import { useAuth } from '../../context/AuthContext'
 import { useFocusTrap } from '../../hooks/useFocusTrap'
 import C1Sidebar from './C1Sidebar'
 import C1Lesson from './C1Lesson'
+import HeftBody from './HeftBody'
+import { Link } from 'react-router-dom'
 import './deutschc1.css'
 
 const API_URL = import.meta.env.VITE_API_URL || ''
@@ -30,7 +32,7 @@ function State({ kicker, titel, children }) {
   )
 }
 
-export default function KursSeite({ kurs }) {
+export default function KursSeite({ kurs, heftMode = false }) {
   const { id } = useParams()
   const { getToken } = useAuth()
 
@@ -83,17 +85,18 @@ export default function KursSeite({ kurs }) {
     return () => { cancelled = true }
   }, [fetchJson, kurs.api])
 
-  // Lección actual.
+  // Lección actual — o su Übungsheft cuando la ruta es /:id/heft.
   useEffect(() => {
     if (!validId) return
     let cancelled = false
     setLesson(null)
     setError(null)   // un fallo puntual no debe dejar el curso bloqueado
-    fetchJson(`${kurs.api}/lessons/${lessonId}`)
+    const path = heftMode ? `${kurs.api}/heft/${lessonId}` : `${kurs.api}/lessons/${lessonId}`
+    fetchJson(path)
       .then(data => { if (!cancelled) setLesson(data) })
       .catch(err => { if (!cancelled) setError(err.status || 'network') })
     return () => { cancelled = true }
-  }, [fetchJson, kurs.api, lessonId, validId])
+  }, [fetchJson, kurs.api, lessonId, validId, heftMode])
 
   // Al cambiar de lección: cerrar el drawer, subir y mover el foco al contenido.
   useEffect(() => {
@@ -114,9 +117,11 @@ export default function KursSeite({ kurs }) {
   // Título del documento — ayuda al compartir y al historial.
   useEffect(() => {
     if (!lesson) return
-    document.title = `${pad(lesson.id)} · ${lesson.titel} — ${kurs.name} · Aprender-Aleman.de`
+    document.title = heftMode
+      ? `📝 ${lesson.titel} — ${kurs.name} · Aprender-Aleman.de`
+      : `${pad(lesson.id)} · ${lesson.titel} — ${kurs.name} · Aprender-Aleman.de`
     return () => { document.title = 'Schule - Dein Online-Klassenraum' }
-  }, [lesson, kurs.name])
+  }, [lesson, kurs.name, heftMode])
 
   if (!validId) return <Navigate to={`${kurs.base}/${kurs.defaultLesson}`} replace />
 
@@ -142,8 +147,21 @@ export default function KursSeite({ kurs }) {
         Bitte prüfe deine Verbindung und lade die Seite neu.
       </State>
     )
-  } else if (!lesson) {
+  } else if (!lesson || (heftMode ? !Array.isArray(lesson.teile) : Array.isArray(lesson.teile))) {
+    // La instancia sobrevive al cambio de ruta lección↔heft: el primer render
+    // tras navegar llega con los datos del modo anterior — mostrar carga.
     body = <State kicker={kurs.name} titel="Lektion wird geladen…">Einen Moment bitte.</State>
+  } else if (heftMode) {
+    body = (
+      <div className="c1-wrap">
+        <div className="c1-spec"><span className="c1-mod">Übungsheft</span><span className="c1-sep">·</span><span>Lektion {pad(lessonId)}</span></div>
+        <h1 className="c1-title">{lesson.titel}</h1>
+        <p className="c1-lead">Übe hier, was du in der Lektion gelernt hast. <span className="c1-gl">(Practica aquí lo que aprendiste en la lección.)</span></p>
+        <Link to={`${kurs.base}/${lessonId}`} className="c1-back" style={{ marginTop: 0 }}>‹ Zur Lektion</Link>
+        <hr className="c1-rule" />
+        <HeftBody heft={lesson} level={kurs.name.replace('Deutsch ', '')} />
+      </div>
+    )
   } else {
     body = <C1Lesson lesson={lesson} kurs={kurs} />
   }

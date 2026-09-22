@@ -544,6 +544,84 @@
 }
 .c1-ausblick-link:hover { border-color: var(--c1-gold); background: rgb(176 130 31 / 0.18); }
 
+/* ───────── Übungsheft (cuaderno interactivo por lección) ───────── */
+.c1-heft-anweisung { font-family: var(--c1-mono); font-size: 12.5px; color: var(--c1-muted); margin: 0 0 14px; }
+.c1-heft-item {
+  background: var(--c1-surface); border: 1px solid var(--c1-line);
+  border-radius: 12px; padding: 14px 18px; margin: 10px 0;
+}
+.c1-heft-frage { margin: 0 0 10px; font-size: 15.5px; }
+.c1-heft-frage .c1-gl, .c1-heft-item .c1-gl { color: var(--c1-muted); font-size: 13px; }
+.c1-heft-lueckentext { line-height: 2.1; }
+.c1-heft-opts { display: flex; flex-wrap: wrap; gap: 8px; }
+.c1-heft-opts-col { flex-direction: column; align-items: stretch; }
+.c1-heft-opt {
+  font: inherit; font-size: 14.5px; text-align: left; cursor: pointer;
+  padding: 8px 14px; border-radius: 10px;
+  border: 1.5px solid var(--c1-line); background: var(--c1-paper); color: var(--c1-text);
+  transition: border-color .12s, background .12s;
+}
+.c1-heft-opt:hover:not(:disabled) { border-color: var(--c1-gold-line); }
+.c1-heft-opt.is-sel { border-color: var(--c1-gold); background: var(--c1-gold-soft); }
+.c1-heft-opt.is-ok  { border-color: rgba(34,197,94,.8); background: rgba(34,197,94,.12); }
+.c1-heft-opt.is-bad { border-color: rgba(239,68,68,.8); background: rgba(239,68,68,.1); }
+.c1-heft-chip {
+  font: inherit; font-size: 14.5px; cursor: pointer; padding: 6px 12px;
+  border-radius: 999px; border: 1.5px solid var(--c1-line);
+  background: var(--c1-paper); color: var(--c1-text);
+}
+.c1-heft-chip.is-sel { border-color: var(--c1-gold); background: var(--c1-gold-soft); }
+.c1-heft-satz {
+  min-height: 44px; display: flex; flex-wrap: wrap; gap: 6px; align-items: center;
+  border: 1.5px dashed var(--c1-line-strong); border-radius: 10px;
+  padding: 8px 10px; margin-bottom: 10px;
+}
+.c1-heft-satz.is-ok  { border-color: rgba(34,197,94,.8); border-style: solid; }
+.c1-heft-satz.is-bad { border-color: rgba(239,68,68,.8); border-style: solid; }
+.c1-heft-satz-leer { color: var(--c1-muted); }
+.c1-heft-zuordnen { display: grid; gap: 8px; }
+.c1-heft-paar { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.c1-heft-paar > span:first-child { min-width: 110px; font-weight: 500; }
+.c1-heft-sol { margin: 8px 0 0; font-size: 13.5px; color: var(--c1-gold); }
+.c1-heft-lesetext { font-size: 15.5px; line-height: 1.7; white-space: pre-line; }
+.c1-heft-formular { display: grid; gap: 10px; margin-top: 12px; }
+.c1-heft-feld { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.c1-heft-feld > span { min-width: 130px; font-family: var(--c1-mono); font-size: 12px; text-transform: uppercase; letter-spacing: .05em; color: var(--c1-muted); }
+.c1-heft-input {
+  font: inherit; font-size: 14.5px; padding: 7px 12px; min-width: 220px;
+  border: 1.5px solid var(--c1-line); border-radius: 10px;
+  background: var(--c1-paper); color: var(--c1-text);
+}
+.c1-heft-input:focus { outline: none; border-color: var(--c1-gold); }
+.c1-heft-input.is-ok  { border-color: rgba(34,197,94,.8); }
+.c1-heft-input.is-bad { border-color: rgba(239,68,68,.8); }
+.c1-heft-textarea {
+  width: 100%; font: inherit; font-size: 15px; line-height: 1.6;
+  border: 1.5px solid var(--c1-line); border-radius: 12px;
+  background: var(--c1-surface); color: var(--c1-text);
+  padding: 12px 14px; margin-top: 12px; resize: vertical;
+}
+.c1-heft-textarea:focus { outline: none; border-color: var(--c1-gold); }
+.c1-heft-feedback { margin-top: 12px; }
+.c1-heft-fb-total { font-family: var(--c1-mono); font-size: 13px; color: var(--c1-gold); margin: 0 0 8px; }
+.c1-heft-fb-fehler { margin: 8px 0 0; padding-left: 18px; display: grid; gap: 6px; font-size: 14px; }
+.c1-heft-fb-fehler s { color: var(--c1-muted); }
+
+/* Tarjeta de acceso al final de la lección */
+.c1-heft-card {
+  display: block; text-decoration: none;
+  background: var(--c1-gold-soft); border: 1.5px solid var(--c1-gold-line);
+  border-radius: 14px; padding: 18px 22px; margin: 24px 0 0;
+  transition: border-color .15s, transform .15s;
+}
+.c1-heft-card:hover { border-color: var(--c1-gold); transform: translateY(-1px); }
+.c1-heft-card .c1-hc-k {
+  font-family: var(--c1-mono); font-size: 11px; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--c1-gold); margin-bottom: 4px;
+}
+.c1-heft-card .c1-hc-t { color: var(--c1-heading); font-family: var(--c1-serif); font-weight: 600; font-size: 17px; }
+.c1-heft-card .c1-hc-s { color: var(--c1-muted); font-size: 13.5px; margin-top: 2px; }
+
 /* Ilustración de portada de bloque — solo en la primera lección de cada bloque */
 .c1-block-art {
   display: block; width: 100%; max-height: 220px; object-fit: cover;

@@ -87,51 +87,30 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · der, die oder das?',
-      frage: 'Ergänze den Artikel.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        '___ Frau',
-        '___ Tisch',
-        '___ Kind',
-        '___ Lampe',
-        '___ Mädchen',
-      ],
-      loesungen: [
-        '**die** Frau',
-        '**der** Tisch ~~(¡aunque en español sea „la mesa“!)~~',
-        '**das** Kind',
-        '**die** Lampe ~~(termina en -e → casi siempre „die“)~~',
-        '**das** Mädchen',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'der, die, das im Satz',
+      items: [
+        { text: '**Der** Mann ist nett.', gl: '— El hombre es simpático.' },
+        { text: '**Die** Frau heißt Petra.', gl: '— La mujer se llama Petra.' },
+        { text: '**Das** Haus ist groß.', gl: '— La casa es grande.' },
+        { text: '**Das** Kind schläft.', gl: '— El niño duerme.' },
+        { text: 'Wo ist **die** Tür?', gl: '— ¿Dónde está la puerta?' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · ein oder eine?',
-      frage: 'Ergänze ein oder eine.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Ich habe ___ Frage.',
-        'Das ist ___ Haus.',
-        'Das ist ___ Lampe.',
-        'Das ist ___ Foto.',
+      type: 'beispiele',
+      kicker: 'ein / eine',
+      titel: 'Der unbestimmte Artikel im Satz',
+      items: [
+        { text: 'Das ist **ein** Mann und das ist **eine** Frau.', gl: '— Este es un hombre y esta es una mujer.' },
+        { text: 'Das ist **ein** Tisch.', gl: '— Esto es una mesa. (¡masculino en alemán!)' },
+        { text: 'Hast du **eine** Frage? — Ja, ich habe **eine** Frage.', gl: '— ¿Tienes una pregunta? — Sí, tengo una pregunta.' },
+        { text: 'Ist das **eine** Lampe? — Nein, das ist **ein** Foto.', gl: '— ¿Es una lámpara? — No, es una foto.' },
+        { text: 'Das ist **ein** Mädchen.', gl: '— Esta es una chica. (neutro: das Mädchen)' },
       ],
-      loesungen: [
-        'Ich habe **eine** Frage. (die Frage)',
-        'Das ist **ein** Haus. (das Haus)',
-        'Das ist **eine** Lampe. (die Lampe)',
-        'Das ist **ein** Foto. (das Foto)',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Dein Zimmer',
-      frage: 'Schreibe 3 Sätze mit „Das ist …“ + Artikel.',
-      loesungLabel: 'Muster',
-      loesung: '*Das ist ein Tisch. Das ist eine Lampe. Das ist die Tür.* ~~(vale cualquier sustantivo de la lección — con su artículo correcto)~~',
     },
 
     { type: 'rule' },

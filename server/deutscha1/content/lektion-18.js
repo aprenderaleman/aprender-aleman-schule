@@ -81,48 +81,27 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Das Gespräch',
-      frage: 'Lies das Transkript **nur einmal** ~~(en el examen: audio)~~. Wann treffen sie sich?',
-      aufgabe: 'Transkript: „— Hallo Tom! Gehen wir morgen ins Kino?\n— Ja, gern. Um sieben?\n— Hm, sieben ist zu früh. Lieber um acht.\n— Okay, um acht am Kino. Bis morgen!“',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Sie treffen sich … a) um 7 Uhr · b) um 8 Uhr · c) um 9 Uhr',
-      ],
-      loesungen: [
-        '**b) um 8 Uhr.** „Sieben ist zu früh. **Lieber um acht**.“ — Die Korrektur gewinnt. ~~La primera hora era el cebo.~~',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Die Korrektur in Aktion',
+      items: [
+        { text: '„Passt Montag? — Montag geht **leider** nicht. **Lieber** Dienstag.“', gl: '— La cita queda el martes: gana la corrección.' },
+        { text: '„Treffen wir uns im Café? — **Besser** am Bahnhof.“', gl: '— Quedan en la estación.' },
+        { text: '„Kostet das zehn Euro? — Nein, **neun** Euro.“', gl: '— Precio final: 9 euros.' },
+        { text: '„Um halb sieben? — Ja, **das passt gut**.“', gl: '— Aquí no hay corrección: vale la primera hora.' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Der Einkauf',
-      frage: 'Lies das Transkript **nur einmal**. Was kauft er?',
-      aufgabe: 'Transkript: „— Ich gehe in den Supermarkt. Brauchen wir etwas?\n— Ja, wir brauchen Milch und Brot.\n— Haben wir noch Käse?\n— Ja, Käse haben wir noch.\n— Gut, dann kaufe ich Milch und Brot.“',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Er kauft … a) Milch und Käse · b) Brot und Käse · c) Milch und Brot',
-      ],
-      loesungen: [
-        '**c) Milch und Brot.** Käse haben sie **noch** ~~(todavía tienen — no hay que comprarlo)~~. Drei Wörter im Text, nur zwei sind die Lösung.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Der Anrufbeantworter',
-      frage: 'Lies die Nachricht **nur einmal**. Dann antworte: Wer? Wann? Was tun?',
-      aufgabe: 'Transkript: „Hallo Frau Ruiz, hier ist die Zahnarztpraxis Doktor Wolf. Ihr Termin am Donnerstag um neun Uhr geht leider nicht. Können Sie am Freitag um elf Uhr kommen? Bitte rufen Sie uns zurück. Danke, auf Wiederhören!“',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Wer spricht?',
-        'Der neue Termin ist am Freitag um ___ Uhr.',
-        'Was soll Frau Ruiz tun?',
-      ],
-      loesungen: [
-        'Die **Zahnarztpraxis Doktor Wolf** ~~(se dice al principio)~~.',
-        'Um **11** Uhr. Donnerstag um 9 geht **leider nicht** — wieder die Korrektur!',
-        'Sie soll **zurückrufen**.',
+      type: 'beispiele',
+      kicker: 'Anrufbeantworter',
+      titel: 'Wer? Warum? Was tun?',
+      items: [
+        { text: '„Hallo, **hier ist** Lena.“', gl: '— ¿Quién habla? Lena.' },
+        { text: '„Der **Termin** geht leider nicht.“', gl: '— ¿Por qué llama? La cita no puede ser.' },
+        { text: '„**Ruf** mich bitte **zurück**!“', gl: '— ¿Qué hay que hacer? Devolver la llamada.' },
+        { text: '„Wir **brauchen** Milch und Brot.“', gl: '— Mensaje típico: la compra.' },
       ],
     },
 

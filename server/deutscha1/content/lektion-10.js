@@ -92,47 +92,30 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · nicht oder kein?',
-      frage: 'Wähle: nicht oder kein-? ~~(¿Hay un sustantivo? → kein. ¿No? → nicht.)~~',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Ich habe ___ Auto.',
-        'Ich wohne ___ in Madrid.',
-        'Er hat ___ Zeit.',
-        'Das Hotel ist ___ teuer.',
-      ],
-      loesungen: [
-        'Ich habe **kein** Auto. ~~(das Auto → sustantivo)~~',
-        'Ich wohne **nicht** in Madrid. ~~(niega el verbo/lugar)~~',
-        'Er hat **keine** Zeit.',
-        'Das Hotel ist **nicht** teuer. ~~(adjetivo)~~',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'kein im Alltag',
+      items: [
+        { text: 'Ich habe **kein** Geld.', gl: '— No tengo dinero.' },
+        { text: '**Leider** habe ich **keine** Zeit.', gl: '— Por desgracia no tengo tiempo.' },
+        { text: 'Er trinkt **keinen** Kaffee.', gl: '— Él no bebe café.' },
+        { text: 'Sie hat **keine** Katze.', gl: '— Ella no tiene gato.' },
+        { text: 'Nein, danke — ich esse **kein** Brot.', gl: '— No, gracias: no como pan.' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Antworte mit Nein',
-      frage: 'Antworte negativ. ~~(Responde en negativo, frase completa.)~~',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Hast du einen Hund? — Nein, …',
-        'Kommst du morgen? — Nein, …',
-        'Haben Sie Kinder? — Nein, …',
+      type: 'beispiele',
+      kicker: 'nicht',
+      titel: 'nicht im Alltag',
+      items: [
+        { text: 'Ich verstehe das **nicht**.', gl: '— No lo entiendo.' },
+        { text: 'Er kommt heute **nicht**.', gl: '— Él no viene hoy.' },
+        { text: 'Das Auto ist **nicht** neu.', gl: '— El coche no es nuevo.' },
+        { text: 'Ich wohne **nicht** in Berlin — ich wohne in Bonn.', gl: '— No vivo en Berlín, vivo en Bonn.' },
+        { text: 'Das Kind schläft **nicht**.', gl: '— El niño no duerme.' },
       ],
-      loesungen: [
-        'Nein, ich habe **keinen** Hund.',
-        'Nein, ich komme morgen **nicht**.',
-        'Nein, ich habe **keine** Kinder.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Schreibe über dich',
-      frage: 'Schreibe 3 negative Sätze über dich: 1× mit kein-, 1× mit nicht, 1× frei. ~~(3 frases negativas sobre ti.)~~',
-      loesungLabel: 'Muster',
-      loesung: '*Ich habe kein Auto. Ich arbeite nicht am Wochenende. Ich trinke keinen Kaffee.* ~~Cualquier variante vale si hay UNA sola negación por frase.~~',
     },
 
     { type: 'rule' },

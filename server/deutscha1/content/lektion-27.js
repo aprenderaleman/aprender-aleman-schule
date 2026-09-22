@@ -99,52 +99,28 @@ export default {
         },
       ],
     },
-
-    { type: 'rule' },
-
-    // ── Übungen ───────────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Das richtige Verb',
-      frage: 'Ergänze: bin, heiße, komme, wohne, spreche.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Ich ___ Pablo Ruiz.',
-        'Ich ___ aus Chile.',
-        'Ich ___ in Berlin.',
-        'Ich ___ Spanisch und Englisch.',
-        'Ich ___ 35 Jahre alt.',
-      ],
-      loesungen: [
-        'Ich **heiße** Pablo Ruiz.',
-        'Ich **komme** aus Chile.',
-        'Ich **wohne** in Berlin.',
-        'Ich **spreche** Spanisch und Englisch.',
-        'Ich **bin** 35 Jahre alt.',
+      type: 'beispiele',
+      kicker: 'Noch ein Modell',
+      titel: 'Pablos Vorstellung — Satz für Satz',
+      items: [
+        { text: 'Ich **heiße** Pablo Ruiz.', gl: '— el nombre: con „heißen“' },
+        { text: 'Ich **bin** 35 Jahre alt.', gl: '— la edad: con „sein“ + alt' },
+        { text: 'Ich **komme** aus Chile und **wohne** in Berlin.', gl: '— país con „aus“, ciudad con „in“' },
+        { text: 'Ich **spreche** Spanisch, Englisch und ein bisschen Deutsch.', gl: '— los idiomas, siempre con „ein bisschen Deutsch“' },
+        { text: 'Ich **bin** Koch von Beruf. Mein Hobby **ist** Fußball.', gl: '— profesión sin artículo + hobby' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Fehler korrigieren',
-      frage: 'Typische Fehler ~~de hispanohablantes~~ — korrigiere.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Ich habe 25 Jahre.',
-        'Ich bin eine Lehrerin.',
-        'Komme aus Peru.',
+      type: 'beispiele',
+      kicker: 'Vorsicht',
+      titel: 'Drei Fehler — so ist es richtig',
+      items: [
+        { text: '*Ich habe 25 Jahre.* → so nicht! Richtig: **Ich bin 25 Jahre alt.**', gl: '— «tengo 25 años» → con sein + alt' },
+        { text: '*Ich bin eine Lehrerin.* → so nicht! Richtig: **Ich bin Lehrerin.**', gl: '— profesión sin artículo' },
+        { text: '*Komme aus Peru.* → so nicht! Richtig: **Ich komme aus Peru.**', gl: '— el pronombre sujeto es obligatorio en alemán' },
+        { text: 'Deine Vorlage: *Ich heiße … Ich bin … Jahre alt. Ich komme aus … Ich wohne in … Ich spreche … Ich bin … von Beruf. Mein Hobby ist …*', gl: '— rellena con tus datos y memorízala: vale tal cual en el examen' },
       ],
-      loesungen: [
-        'Ich **bin** 25 Jahre **alt**. ~~(«tengo 25 años» → con sein + alt)~~',
-        'Ich bin Lehrerin. ~~(profesión sin artículo)~~',
-        '**Ich** komme aus Peru. ~~(el pronombre sujeto es obligatorio en alemán)~~',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren — Deine Vorstellung',
-      frage: 'Schreibe **deine** Vorstellung mit allen 7 Punkten. Dann: laut lesen und auswendig lernen! ~~Escríbela, léela en voz alta y memorízala.~~',
-      loesungLabel: 'Muster',
-      loesung: '*Ich heiße … Ich bin … Jahre alt. Ich komme aus … Ich wohne in … Ich spreche … und ein bisschen Deutsch. Ich bin … von Beruf. Mein Hobby ist …* ~~Rellena con tus datos — esta plantilla vale tal cual en el examen.~~',
     },
 
     { type: 'rule' },

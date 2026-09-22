@@ -86,49 +86,30 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Zahlen schreiben',
-      frage: 'Schreibe die Zahlen in Worten. ~~(Escribe los números en letras.)~~',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        '17 = ___',
-        '21 = ___',
-        '35 = ___',
-        '68 = ___',
-      ],
-      loesungen: [
-        '17 = **siebzehn**',
-        '21 = **einundzwanzig** ~~(uno-y-veinte)~~',
-        '35 = **fünfunddreißig**',
-        '68 = **achtundsechzig**',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Zahlen und Uhrzeiten im Alltag',
+      items: [
+        { text: 'Das kostet **dreiundzwanzig** Euro.', gl: '— Cuesta 23 euros. (tres-y-veinte)' },
+        { text: 'Meine Hausnummer ist **vierzehn**.', gl: '— Mi número de portal es el 14.' },
+        { text: 'Mein Bruder ist **sechsunddreißig** Jahre alt.', gl: '— Mi hermano tiene 36 años.' },
+        { text: 'Der Bus kommt um **Viertel vor acht**.', gl: '— El bus llega a las 7:45.' },
+        { text: 'Es ist **halb sieben** — der Kurs fängt an!', gl: '— Son las 6:30: ¡empieza el curso!' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Wie spät ist es?',
-      frage: 'Schreibe die Uhrzeit informell. ~~(Di la hora en forma informal.)~~',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        '9:30 = halb ___',
-        '7:15 = Viertel ___ sieben',
-        '10:45 = Viertel ___ elf',
-        '14:30 (informell) = ___',
+      type: 'beispiele',
+      kicker: 'am · im · um',
+      titel: 'Termine machen',
+      items: [
+        { text: '**Am Samstag** kaufe ich ein.', gl: '— El sábado hago la compra.' },
+        { text: '**Im Dezember** ist es kalt.', gl: '— En diciembre hace frío.' },
+        { text: 'Die Prüfung ist **am Freitag um neun Uhr**.', gl: '— El examen es el viernes a las nueve.' },
+        { text: '**Im Juni** habe ich Urlaub.', gl: '— En junio tengo vacaciones.' },
+        { text: 'Wann kommst du? — **Um halb acht**.', gl: '— ¿Cuándo vienes? — A las 7:30.' },
       ],
-      loesungen: [
-        '9:30 = **halb zehn** ~~(media hacia las 10)~~',
-        '7:15 = Viertel **nach** sieben',
-        '10:45 = Viertel **vor** elf',
-        '14:30 = **halb drei** ~~(informal se usa el formato de 12 horas)~~',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Deine Woche',
-      frage: 'Schreibe 3 Sätze mit am, im und um. ~~(Escribe 3 frases con am, im, um.)~~',
-      loesungLabel: 'Muster',
-      loesung: '*Am Dienstag habe ich Deutschkurs. Der Kurs beginnt um halb sieben. Im August mache ich die Prüfung.* ~~Vale cualquier día, hora y mes — revisa el trío am/im/um.~~',
     },
 
     { type: 'rule' },

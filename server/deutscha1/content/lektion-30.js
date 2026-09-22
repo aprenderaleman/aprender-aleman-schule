@@ -105,52 +105,29 @@ export default {
         },
       ],
     },
-
-    { type: 'rule' },
-
-    // ── Übungen ───────────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Wortschatz',
-      frage: 'Wie heißt das auf Deutsch? ~~(¿Cómo se dice en alemán? Con artículo.)~~',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'el apellido → ___',
-        'la dirección → ___',
-        'la fecha de nacimiento → ___',
-        'los padres → ___',
-      ],
-      loesungen: [
-        'el apellido → **der Familienname**',
-        'la dirección → **die Adresse**',
-        'la fecha de nacimiento → **das Geburtsdatum**',
-        'los padres → **die Eltern**',
+      type: 'beispiele',
+      kicker: 'mein / meine',
+      titel: 'Meine Familie — vier Sätze',
+      items: [
+        { text: '**Mein** Bruder heißt Luis.', gl: '— masculino → mein' },
+        { text: '**Meine** Schwester wohnt in Lima.', gl: '— femenino → meine' },
+        { text: '**Meine** Eltern sind aus Peru.', gl: '— plural → meine' },
+        { text: '**Mein** Kind ist drei Jahre alt.', gl: '— neutro → mein' },
+        { text: 'Mein Vater heißt Juan und meine Mutter heißt Rosa. Ich bin **ledig**.', gl: '— así presentas a tu familia en 2-3 frases' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · mein oder meine?',
-      frage: 'Ergänze mein oder meine.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        '___ Bruder heißt Luis.',
-        '___ Schwester wohnt in Lima.',
-        '___ Eltern sind aus Peru.',
-        '___ Kind ist drei Jahre alt.',
+      type: 'beispiele',
+      kicker: 'Im Gespräch',
+      titel: 'Fragen und Antworten zur Person',
+      items: [
+        { text: 'Wie ist Ihr **Familienname**? — Ortega.', gl: '— el apellido, no el nombre de pila' },
+        { text: 'Wie ist Ihre **Adresse**? — Bergstraße 7, Köln.', gl: '— calle + número, luego la ciudad' },
+        { text: 'Wie ist Ihr **Geburtsdatum**? — Der 12. Mai 1995.', gl: '— la fecha de nacimiento' },
+        { text: 'Wie ist Ihre **Telefonnummer**? — 0176 44 55 88.', gl: '— cifra por cifra' },
+        { text: 'Sind Sie **verheiratet**? — Ja. Ich habe zwei **Kinder**.', gl: '— estado civil e hijos: dos preguntas del examen' },
       ],
-      loesungen: [
-        '**Mein** Bruder heißt Luis. ~~(masculino)~~',
-        '**Meine** Schwester wohnt in Lima. ~~(femenino)~~',
-        '**Meine** Eltern sind aus Peru. ~~(plural)~~',
-        '**Mein** Kind ist drei Jahre alt. ~~(neutro)~~',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Meine Familie',
-      frage: 'Schreibe 4-5 Sätze über deine Familie (ca. 25 Wörter). ~~(Escribe 4-5 frases sobre tu familia.)~~',
-      loesungLabel: 'Mögliche Lösung',
-      loesung: '*Das ist meine Familie. Mein Vater heißt Juan und meine Mutter heißt Rosa. Ich habe eine Schwester. Sie wohnt in Bogotá. Ich bin ledig.* ~~(Vale cualquier texto con mein/meine + 2-3 datos: nombres, dónde viven, estado civil.)~~',
     },
 
     { type: 'rule' },

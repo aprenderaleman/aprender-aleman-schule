@@ -98,49 +98,19 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · W-Wörter',
-      frage: 'Welches W-Wort passt?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        '___ kommst du? — Aus Mexiko.',
-        '___ wohnst du? — In Sevilla.',
-        '___ alt bist du? — 30.',
-        '___ ist das? — Das ist Anna.',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Frage und Antwort im Paar',
+      items: [
+        { text: 'Wann **kommst** du? — Morgen.', gl: '— ¿Cuándo vienes? — Mañana.' },
+        { text: 'Wie viel **kostet** das? — 10 Euro.', gl: '— ¿Cuánto cuesta? — 10 euros.' },
+        { text: 'Woher **kommen** Sie? — Aus Argentinien.', gl: '— ¿De dónde es usted? — De Argentina.' },
+        { text: 'Wer **ist** das? — Das ist Herr Braun.', gl: '— ¿Quién es? — Es el Sr. Braun.' },
+        { text: '**Lernst** du Deutsch? — Ja, ich lerne Deutsch.', gl: '— ¿Aprendes alemán? — Sí, aprendo alemán.' },
+        { text: '**Bist** du aus Kuba? — Nein, ich bin aus Venezuela.', gl: '— ¿Eres de Cuba? — No, soy de Venezuela.' },
       ],
-      loesungen: [
-        '**Woher** kommst du? — Aus Mexiko.',
-        '**Wo** wohnst du? — In Sevilla.',
-        '**Wie** alt bist du? — 30.',
-        '**Wer** ist das? — Das ist Anna.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Ja/Nein-Fragen bilden',
-      frage: 'Mach eine Ja/Nein-Frage. ~~(el verbo primero)~~',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'du / kommen / aus Spanien',
-        'Sie / haben / Kinder',
-        'du / sprechen / Deutsch',
-        'ihr / wohnen / in Madrid',
-      ],
-      loesungen: [
-        '**Kommst** du aus Spanien?',
-        '**Haben** Sie Kinder?',
-        '**Sprichst** du Deutsch?',
-        '**Wohnt** ihr in Madrid?',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Deine Fragen',
-      frage: 'Schreibe 3 Fragen an eine neue Person im Kurs.',
-      loesungLabel: 'Muster',
-      loesung: '*Wie heißt du? Woher kommst du? Sprichst du Englisch?* ~~(valen todas las W-Fragen y Ja/Nein-Fragen correctas)~~',
     },
 
     { type: 'rule' },

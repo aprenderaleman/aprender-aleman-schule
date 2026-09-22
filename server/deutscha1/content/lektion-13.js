@@ -88,47 +88,30 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Das Präfix finden',
-      frage: 'Ergänze das Präfix am Ende. ~~(Completa el prefijo al final.)~~',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Ich stehe um 6 Uhr ___ . (aufstehen)',
-        'Wir kaufen im Supermarkt ___ . (einkaufen)',
-        'Er ruft seine Freundin ___ . (anrufen)',
-        'Der Kurs fängt um 9 Uhr ___ . (anfangen)',
-      ],
-      loesungen: [
-        'Ich stehe um 6 Uhr **auf**.',
-        'Wir kaufen im Supermarkt **ein**.',
-        'Er ruft seine Freundin **an**.',
-        'Der Kurs fängt um 9 Uhr **an**.',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Der Tag mit trennbaren Verben',
+      items: [
+        { text: 'Ich **stehe** am Sonntag spät **auf**.', gl: '— El domingo me levanto tarde.' },
+        { text: 'Meine Mutter **kauft** heute **ein**.', gl: '— Mi madre hace hoy la compra.' },
+        { text: 'Er **ruft** seinen Bruder **an**.', gl: '— Él llama a su hermano.' },
+        { text: 'Wir **sehen** am Abend **fern**.', gl: '— Por la noche vemos la tele.' },
+        { text: 'Ich **mache** das Fenster **auf** — sie **macht** die Tür **zu**.', gl: '— Yo abro la ventana; ella cierra la puerta.' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Sätze bauen',
-      frage: 'Bilde Sätze. ~~(Construye frases — verbo en posición 2, prefijo al final.)~~',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'ich – aufstehen – um 8 Uhr',
-        'du – mitkommen – ? (Frage)',
-        'ich – möchten – einkaufen – heute',
+      type: 'beispiele',
+      kicker: 'Fragen & möchten',
+      titel: 'Fragen und Wünsche',
+      items: [
+        { text: 'Wann **fängt** der Kurs **an**? — Um 9 Uhr.', gl: '— ¿Cuándo empieza el curso? — A las 9.' },
+        { text: '**Kommst** du **mit**? — Ja, gern!', gl: '— ¿Vienes? — ¡Sí, con gusto!' },
+        { text: '**Rufst** du mich morgen **an**?', gl: '— ¿Me llamas mañana?' },
+        { text: 'Ich **möchte** am Samstag **einkaufen**.', gl: '— Quiero hacer la compra el sábado.' },
+        { text: 'Er **möchte** heute nicht **fernsehen**.', gl: '— Él no quiere ver la tele hoy.' },
       ],
-      loesungen: [
-        'Ich **stehe** um 8 Uhr **auf**.',
-        '**Kommst** du **mit**?',
-        'Ich **möchte** heute **einkaufen**. ~~(con möchten: infinitivo entero al final)~~',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Dein Tag',
-      frage: 'Schreibe 3 Sätze über deinen Tag mit trennbaren Verben. ~~(Escribe 3 frases sobre tu día.)~~',
-      loesungLabel: 'Muster',
-      loesung: '*Ich stehe um 7 Uhr auf. Am Nachmittag kaufe ich ein. Am Abend sehe ich fern.* ~~También vale con otros verbos u horas — lo importante: prefijo al final.~~',
     },
 
     { type: 'rule' },

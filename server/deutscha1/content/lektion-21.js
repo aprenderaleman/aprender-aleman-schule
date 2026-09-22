@@ -80,71 +80,28 @@ export default {
         { text: '„Wir sind **im Café am Bahnhof**.“', gl: '— Estamos en el café de la estación. (Wo?)' },
       ],
     },
-
-    { type: 'rule' },
-
-    // ── Übungen ───────────────────────────────────────────────────
     {
-      type: 'prose',
-      eyebrow: 'Anwendung — Die Notiz',
-      card: true,
-      kicker: 'Text 1',
-      titel: 'Notiz in der Küche',
-      absaetze: [
-        '„Hallo Miguel, die Party bei Sara ist **am Samstag**, aber nicht um 19 Uhr — wir kommen erst um **20 Uhr**. Bring bitte Brot und Käse mit. Sara wohnt in der **Gartenstraße 12**. Bis dann! Lena“',
+      type: 'beispiele',
+      kicker: 'Modell',
+      titel: 'Eine Notiz komplett lesen',
+      items: [
+        { text: 'Notiz: „Hallo Miguel, die Party bei Sara ist **am Samstag**, aber nicht um 19 Uhr — wir kommen erst um **20 Uhr**. Bring bitte Brot und Käse mit. Sara wohnt in der **Gartenstraße 12**. Bis dann! Lena“', gl: '— la nota completa, como en el examen' },
+        { text: '*Wann ist die Party?* → am Samstag **um 20 Uhr** — nicht um 19 Uhr!', gl: '— dos horas en el texto: la primera es la trampa' },
+        { text: '*Wo ist die Party?* → bei Sara, **in der Gartenstraße 12**', gl: '— el lugar: nombre + calle' },
+        { text: '*Was soll Miguel mitbringen?* → **Brot und Käse**', gl: '— la señal es „Bring bitte … mit“' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 1 · Richtig oder falsch?',
-      frage: 'Lies die Notiz von Lena. Richtig oder falsch?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Die Party ist am Samstag.',
-        'Die Party ist um 19 Uhr.',
-        'Miguel soll Brot und Käse mitbringen.',
+      type: 'beispiele',
+      kicker: 'Modell',
+      titel: 'Zwei Anzeigen, vier Antworten',
+      items: [
+        { text: 'Anzeige A: „Fahrrad zu verkaufen! Fast neu, nur **80 Euro**. Bitte am Abend anrufen: 030 12 34 56“', gl: '— anuncio de venta: precio + teléfono' },
+        { text: 'Anzeige B: „Deutschkurs für Anfänger. **Dienstag und Donnerstag**, 18-20 Uhr. Der Kurs kostet **35 Euro pro Monat**.“', gl: '— anuncio de curso: días + precio' },
+        { text: '*Wie viel kostet das Fahrrad?* → **80 Euro** — das ist billig, und das Fahrrad ist fast neu.', gl: '— «nur» delante del precio = es una ganga' },
+        { text: '*Wann soll man anrufen?* → **am Abend** — die Telefonnummer ist 030 12 34 56.', gl: '— no por la mañana: el texto dice „am Abend“' },
+        { text: 'Aufgabe: „Der Deutschkurs ist am Montag.“ → **falsch** — im Text stehen Dienstag und Donnerstag.', gl: '— comprueba el día exacto antes de marcar' },
       ],
-      loesungen: [
-        '**Richtig.** Im Text steht: „die Party … ist am Samstag“.',
-        '**Falsch.** Im Text stehen zwei Zeiten: „nicht um 19 Uhr — wir kommen erst um **20 Uhr**“. ~~La primera hora es la trampa.~~',
-        '**Richtig.** Im Text steht: „Bring bitte Brot und Käse mit“.',
-      ],
-    },
-    {
-      type: 'prose',
-      eyebrow: 'Übung 2 · Die Anzeigen',
-      card: true,
-      kicker: 'Text 2 und Text 3',
-      titel: 'Zwei kleine Anzeigen',
-      absaetze: [
-        '**A)** „Fahrrad zu verkaufen! Fast neu, nur **80 Euro**. Bitte am Abend anrufen: 030 12 34 56“',
-        '**B)** „Deutschkurs für Anfänger. **Dienstag und Donnerstag**, 18-20 Uhr. Der Kurs kostet **35 Euro pro Monat**.“',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Richtig oder falsch?',
-      frage: 'Lies die Anzeigen A und B. Richtig oder falsch?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Das Fahrrad kostet 80 Euro.',
-        'Man soll am Morgen anrufen.',
-        'Der Deutschkurs ist am Montag.',
-        'Der Kurs kostet 35 Euro pro Monat.',
-      ],
-      loesungen: [
-        '**Richtig.** In Anzeige A steht: „nur 80 Euro“.',
-        '**Falsch.** In Anzeige A steht: „Bitte **am Abend** anrufen“.',
-        '**Falsch.** In Anzeige B steht: „Dienstag und Donnerstag“, nicht Montag.',
-        '**Richtig.** In Anzeige B steht: „35 Euro pro Monat“.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Schreib eine Notiz',
-      frage: 'Schreibe eine kleine Notiz (3 Sätze): Wann kommst du? Wo bist du? Was soll die Person mitbringen?',
-      loesungLabel: 'Muster',
-      loesung: '*Hallo Paula, ich komme um 17 Uhr. Ich bin im Café am Markt. Bring bitte das Buch mit!* ~~Vale cualquier hora, lugar y objeto — lo importante: Wann, Wo, Was.~~',
     },
 
     { type: 'rule' },

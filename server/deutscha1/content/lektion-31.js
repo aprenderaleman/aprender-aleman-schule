@@ -106,50 +106,28 @@ export default {
         },
       ],
     },
-
-    { type: 'rule' },
-
-    // ── Übungen ───────────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Uhrzeiten',
-      frage: 'Welche Uhrzeit ist das? Schreibe sie auf Deutsch. ~~(¿Qué hora es? Escríbela en alemán.)~~',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        '8:00 → ___',
-        '7:30 → ___',
-        '9:15 → ___',
-        '10:45 → ___',
-      ],
-      loesungen: [
-        '8:00 → **acht Uhr**',
-        '7:30 → **halb acht** ~~(¡media hora ANTES de las 8!)~~',
-        '9:15 → **Viertel nach neun** ~~(las 9 y cuarto)~~',
-        '10:45 → **Viertel vor elf** ~~(las 11 menos cuarto)~~',
+      type: 'beispiele',
+      kicker: 'Uhrzeiten',
+      titel: 'Vier Uhrzeiten auf Deutsch',
+      items: [
+        { text: '8:00 → **acht Uhr**', gl: '— la hora en punto' },
+        { text: '7:30 → **halb acht**', gl: '— ¡media hora ANTES de las 8!' },
+        { text: '9:15 → **Viertel nach neun**', gl: '— las 9 y cuarto' },
+        { text: '10:45 → **Viertel vor elf**', gl: '— las 11 menos cuarto' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Beim Arzt',
-      frage: 'Ergänze: Termin · Uhr · passt.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Guten Tag, ich möchte einen ___ , bitte.',
-        'Geht es am Dienstag um 11 ___ ?',
-        'Ja, das ___ . Vielen Dank!',
+      type: 'beispiele',
+      kicker: 'Modell',
+      titel: 'Der ganze Dialog am Telefon',
+      items: [
+        { text: '— **Praxis** Dr. Weber, guten Tag!', gl: '— así contesta la consulta' },
+        { text: '— Guten Tag, ich möchte einen **Termin**, bitte.', gl: '— tu primera frase, siempre igual' },
+        { text: '— Geht es **am Dienstag um 11 Uhr**?', gl: '— día con „am“, hora con „um“' },
+        { text: '— Ja, das **passt**. Vielen Dank!', gl: '— me viene bien; o: Nein, das geht nicht.' },
+        { text: '— Auf Wiederhören!', gl: '— la despedida al teléfono (¡no „auf Wiedersehen“!)' },
       ],
-      loesungen: [
-        'Guten Tag, ich möchte einen **Termin**, bitte.',
-        'Geht es am Dienstag um 11 **Uhr**?',
-        'Ja, das **passt**. Vielen Dank!',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Dein Termin',
-      frage: 'Schreibe einen Mini-Dialog beim Arzt (ca. 20-30 Wörter): Begrüßung, Termin, Tag + Uhrzeit. ~~(Escribe un minidiálogo pidiendo cita.)~~',
-      loesungLabel: 'Mögliche Lösung',
-      loesung: '*— Praxis Dr. Weber, guten Tag!\n— Guten Tag, ich möchte einen Termin, bitte.\n— Geht es am Montag um 9 Uhr?\n— Ja, das passt. Danke, auf Wiederhören!* ~~(Vale cualquier diálogo con Termin + día con „am“ + hora con „um“.)~~',
     },
 
     { type: 'rule' },

@@ -49,7 +49,7 @@ export default {
       steps: [
         {
           titel: 'Lies die 3 Punkte der Aufgabe',
-          text: 'Die Aufgabe gibt dir 3 Punkte. __Jeder Punkt = ein kurzer Satz.__ Fehlt einer, fehlen Punkte — ~~aunque tu alemán sea perfecto~~.',
+          text: 'Die Aufgabe gibt dir 3 Punkte. __Jeder Punkt = ein kurzer Satz.__ Ein Punkt fehlt? Dann fehlen Punkte — ~~aunque tu alemán sea perfecto~~.',
         },
         {
           titel: 'Anrede mit Komma',
@@ -120,47 +120,27 @@ export default {
         { tag: 'Gruß', text: '„Viele Grüße“ + Name — immer gleich.' },
       ],
     },
-
-    { type: 'rule' },
-
-    // ── Übungen ───────────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Die richtige Reihenfolge',
-      frage: 'Ordne die E-Mail. ~~(Ordena las partes.)~~ a) Viele Grüße – Paco — b) Liebe Anna, — c) ich komme am Samstag nach Madrid. Hast du Zeit?',
-      loesungLabel: 'Lösung',
-      loesung: '**b → c → a** — erst die Anrede, dann der Text, dann der Gruß.',
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Korrigiere',
-      frage: 'Jeder Satz hat einen Fehler vom ersten Tag. ~~(Cada línea tiene un error típico.)~~',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Liebe Anna: Ich komme am Samstag.',
-        'ich habe eine frage.',
-        'Viele grüße\nMarta',
-      ],
-      loesungen: [
-        'Liebe Anna**,** **i**ch komme am Samstag. ~~(coma tras el saludo y minúscula después)~~',
-        '**I**ch habe eine **F**rage. ~~(inicio de frase y sustantivo con mayúscula)~~',
-        'Viele **G**rüße\nMarta ~~(«Grüße» es sustantivo → mayúscula; y sin coma antes del nombre)~~',
+      type: 'beispiele',
+      eyebrow: 'Beispiele — Sätze für deinen Text',
+      items: [
+        { text: 'Ich kann **leider** nicht kommen. Ich bin **krank**.', gl: '— disculpa en dos frases: no voy + por qué' },
+        { text: 'Was sind die **Hausaufgaben**?', gl: '— la pregunta típica al profesor del curso' },
+        { text: 'Ich **lade** dich zu meiner Party **ein**. Kommst du?', gl: '— invitar + pregunta corta' },
+        { text: '**Besuchst** du mich am Wochenende?', gl: '— ¿me visitas el finde?' },
+        { text: 'Ich schreibe dir eine **Karte** aus Berlin.', gl: '— la postal del examen: siempre desde un lugar' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Anrede und Gruß',
-      frage: 'Ergänze Anrede und Gruß.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'E-Mail an deine Freundin Carla: ___ Carla, … ',
-        'E-Mail an deinen Freund Tom: ___ Tom, …',
-        'Am Ende: ___ ___ + dein Name',
-      ],
-      loesungen: [
-        '**Liebe** Carla, ~~(a una mujer: Liebe)~~',
-        '**Lieber** Tom, ~~(a un hombre: Lieber)~~',
-        '**Viele Grüße** + dein Name',
+      type: 'beispiele',
+      kicker: 'Vorsicht',
+      titel: 'Anrede & Gruß — so nicht, so richtig',
+      items: [
+        { text: '*Liebe Anna: Ich komme.* → so nicht! Richtig: **Liebe Anna, ich komme am Samstag.**', gl: '— coma tras el saludo y minúscula después' },
+        { text: '*ich habe eine frage.* → so nicht! Richtig: **Ich habe eine Frage.**', gl: '— inicio de frase y sustantivo con mayúscula' },
+        { text: '*Viele grüße* → so nicht! Richtig: **Viele Grüße** + Name', gl: '— «Grüße» es sustantivo → mayúscula; sin coma antes del nombre' },
+        { text: 'An eine Frau: **Liebe** Carla, · An einen Mann: **Lieber** Tom,', gl: '— Liebe / Lieber: según la persona' },
+        { text: 'Die Reihenfolge: **Anrede → Text → Gruß + Name**', gl: '— saludo, texto, despedida: siempre en este orden' },
       ],
     },
 

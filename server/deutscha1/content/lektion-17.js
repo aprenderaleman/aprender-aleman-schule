@@ -19,7 +19,7 @@ export default {
       type: 'lernziele',
       eyebrow: 'Lernziele',
       items: [
-        'wissen, was du im Hören hörst (Gespräche, Ansagen, Durchsagen)',
+        'wissen: Im Hören kommen Gespräche, Ansagen und Durchsagen',
         'die Strategie kennen: **zuerst die Aufgaben lesen**, dann hören',
         'Zahlen, Uhrzeiten und Namen im Text finden',
         'wissen: **immer ankreuzen** — am Ende auf den Antwortbogen',
@@ -97,52 +97,18 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Wo hörst du das?',
-      frage: 'Gespräch, Anrufbeantworter oder Durchsage?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        '„Achtung am Gleis 3: Der Zug hat 10 Minuten Verspätung.“',
-        '„Hallo Anna, hier ist Marta. Kommst du morgen? Ruf mich an!“',
-        '„— Was möchten Sie trinken? — Einen Kaffee, bitte.“',
-      ],
-      loesungen: [
-        '**Durchsage** ~~(megafonía, en la estación)~~.',
-        '**Anrufbeantworter** — eine Nachricht.',
-        '**Gespräch** — zwei Personen, im Café.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Was suchst du?',
-      frage: 'Lies die Aufgabe. Was musst du hören: eine **Zahl**, eine **Uhrzeit** oder einen **Namen**?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        '„Wann beginnt der Film?“',
-        '„Wie ist die Telefonnummer?“',
-        '„Wie heißt die Lehrerin?“',
-      ],
-      loesungen: [
-        'eine **Uhrzeit** ~~(wann? = ¿cuándo?)~~.',
-        'eine **Zahl** — die Telefonnummer.',
-        'einen **Namen** ~~(wie heißt…? = ¿cómo se llama?)~~.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Dein erstes Transkript',
-      frage: 'Lies das Transkript **nur einmal** ~~(en el examen: esto lo oyes, no lo lees)~~. Dann kreuze an.',
-      aufgabe: 'Transkript: „Hallo Herr Weber, hier ist die Praxis Doktor Klein. Ihr Termin ist am **Montag um 10 Uhr**. Bis Montag, auf Wiederhören!“',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Der Termin ist am Montag. — richtig oder falsch?',
-        'Der Termin ist um 11 Uhr. — richtig oder falsch?',
-      ],
-      loesungen: [
-        '**Richtig.** „Ihr Termin ist am **Montag** …“',
-        '**Falsch.** Um **10** Uhr, nicht um 11.',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Drei Textsorten, drei Orte',
+      items: [
+        { text: '„Der Supermarkt schließt heute um **20 Uhr**.“', gl: '— El súper cierra hoy a las 20 h. (Durchsage)' },
+        { text: '„Achtung am Gleis 3: Der Zug kommt **10 Minuten** später.“', gl: '— El tren llega 10 minutos tarde. (Durchsage)' },
+        { text: '„Hallo, hier ist Eva. Mein Zug kommt um **halb fünf**.“', gl: '— Llego a las 4:30. (Anrufbeantworter)' },
+        { text: '„— Was möchten Sie trinken? — Einen **Kaffee**, bitte.“', gl: '— En el café. (Gespräch)' },
+        { text: '„— Wann beginnt der Kurs? — Um **neun**.“', gl: '— ¿Cuándo? A las nueve. (Gespräch)' },
+        { text: '„Die Praxis ist ab **Montag** wieder geöffnet.“', gl: '— La consulta abre de nuevo el lunes. (Ansage am Telefon)' },
       ],
     },
 
@@ -194,7 +160,7 @@ export default {
       type: 'selbstcheck',
       eyebrow: 'Selbstcheck',
       items: [
-        'Ich weiß, was im Hören kommt: Gespräche, Ansagen, Durchsagen.',
+        'Ich weiß: Im Hören kommen Gespräche, Ansagen und Durchsagen.',
         'Ich lese zuerst die Aufgaben und suche dann die eine Information.',
         'Ich kreuze immer an und übertrage am Ende auf den Antwortbogen.',
       ],

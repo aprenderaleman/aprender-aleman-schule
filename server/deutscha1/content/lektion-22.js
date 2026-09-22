@@ -82,62 +82,28 @@ export default {
         { text: '„Rauchen **verboten**“', gl: '— Prohibido fumar.' },
       ],
     },
-
-    { type: 'rule' },
-
-    // ── Übungen ───────────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Was bedeutet das Schild?',
-      frage: 'Was ist die Botschaft? ~~(¿Qué te dice el letrero?)~~',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        '„Drücken“',
-        '„Heute geschlossen“',
-        '„Ausgang →“',
-        '„Eintritt frei“',
-      ],
-      loesungen: [
-        'Die Tür **drücken**, nicht ziehen. ~~(empuja)~~',
-        'Das Geschäft ist heute **zu** — komm an einem anderen Tag.',
-        'Hier geht es **nach draußen**. ~~(la salida está en esa dirección)~~',
-        'Der Eintritt kostet **nichts** — du musst nicht bezahlen. ~~„frei“ aquí = gratis, no „libre“.~~',
+      type: 'beispiele',
+      kicker: 'Botschaft',
+      titel: 'Das Schild und die Antwort',
+      items: [
+        { text: '„Drücken“ → Die Tür **drücken**, nicht ziehen.', gl: '— empuja, no tires' },
+        { text: '„Heute geschlossen“ → Das Geschäft ist heute **zu**. Komm an einem anderen Tag.', gl: '— hoy está cerrado' },
+        { text: '„Ausgang →“ → Hier geht es **nach draußen**.', gl: '— la salida está en esa dirección' },
+        { text: '„Eintritt frei“ → Der Eintritt kostet **nichts**.', gl: '— „frei“ aquí = gratis, no „libre“' },
+        { text: '„Fahrräder verboten“ → Hier fährt man **kein** Fahrrad.', gl: '— prohibido el paso a bicicletas' },
       ],
     },
     {
-      type: 'prose',
-      eyebrow: 'Übung 2 · Fünf Schilder',
-      card: true,
-      kicker: 'Texte A-E',
-      titel: 'Schilder im Supermarkt und am Bahnhof',
-      absaetze: [
-        '**A)** „Ziehen“ · **B)** „Supermarkt Mayer — Sonntag geschlossen“ · **C)** „Kein Eingang — bitte Eingang am Parkplatz benutzen“ · **D)** „Kasse 3 geöffnet“ · **E)** „Fahrräder verboten“',
+      type: 'beispiele',
+      kicker: 'Modell',
+      titel: 'Aushänge mit den Öffnungszeiten',
+      items: [
+        { text: '„Supermarkt Mayer — Sonntag geschlossen“ → Am Sonntag kauft man hier **nicht** ein.', gl: '— el domingo no se compra: geschlossen' },
+        { text: '„Kein Eingang — bitte Eingang am Parkplatz benutzen“ → Der Eingang ist **am Parkplatz**.', gl: '— «Eingang» aparece dos veces: solo uno vale' },
+        { text: '„Kasse 3 geöffnet“ → An Kasse 3 kann man **bezahlen**.', gl: '— esa caja está abierta' },
+        { text: '„Museum: Heute geschlossen — Mittwoch bis Sonntag geöffnet“ → Heute ist Montag. Ich komme **am Mittwoch** wieder.', gl: '— lee el horario y decide qué haces' },
       ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Richtig oder falsch?',
-      frage: 'Lies die Schilder A-E. Richtig oder falsch?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Man kann am Sonntag im Supermarkt Mayer einkaufen.',
-        'Man soll die Tür drücken.',
-        'An Kasse 3 kann man bezahlen.',
-        'Der Eingang ist am Parkplatz.',
-      ],
-      loesungen: [
-        '**Falsch.** Schild B: „Sonntag **geschlossen**“ — am Sonntag ist der Supermarkt zu.',
-        '**Falsch.** Schild A sagt „**Ziehen**“, nicht Drücken. ~~Justo lo contrario.~~',
-        '**Richtig.** Schild D: „Kasse 3 **geöffnet**“.',
-        '**Richtig.** Schild C: „bitte Eingang **am Parkplatz** benutzen“.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Was machst du?',
-      frage: 'Antworte mit einem Satz: Du bist am Museum. Auf dem Schild steht „Heute geschlossen — Mittwoch bis Sonntag geöffnet“. Heute ist Montag. Was machst du?',
-      loesungLabel: 'Muster',
-      loesung: '*Ich komme am Mittwoch wieder.* ~~También vale: „Ich gehe nach Hause“ o „Ich komme am Samstag“ — cualquier día de miércoles a domingo.~~',
     },
 
     { type: 'rule' },

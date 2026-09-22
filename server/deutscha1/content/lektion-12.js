@@ -94,47 +94,30 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Konjugation',
-      frage: 'Ergänze die richtige Form.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Ich ___ Spanisch und Englisch. (können)',
-        'Er ___ heute arbeiten. (müssen)',
-        '___ du einen Tee? (möchten)',
-        'Wir ___ am Samstag kommen. (können)',
-      ],
-      loesungen: [
-        'Ich **kann** Spanisch und Englisch.',
-        'Er **muss** heute arbeiten. ~~(sin -t)~~',
-        '**Möchtest** du einen Tee?',
-        'Wir **können** am Samstag kommen.',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Im Café — höflich mit möchten',
+      items: [
+        { text: 'Ich **möchte bestellen**, bitte.', gl: '— Querría pedir, por favor.' },
+        { text: '**Möchtest** du einen Tee oder einen Kaffee?', gl: '— ¿Quieres un té o un café?' },
+        { text: 'Wir **möchten** bitte **bezahlen**.', gl: '— Querríamos pagar, por favor.' },
+        { text: 'Er **möchte** ein Brötchen **essen**.', gl: '— Él quiere comer un panecillo.' },
+        { text: 'Ein Wasser, **bitte**!', gl: '— ¡Un agua, por favor!' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Der Infinitiv ans Ende',
-      frage: 'Bilde den Satz. Der Infinitiv geht ans Ende. ~~(Ordena la frase.)~~',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'ich / möchten / trinken / einen Kaffee',
-        'du / können / helfen / mir / ?',
-        'wir / müssen / lernen / Deutsch',
+      type: 'beispiele',
+      kicker: 'können & müssen',
+      titel: 'Was kannst du? Was musst du?',
+      items: [
+        { text: 'Sie **kann** gut **kochen**.', gl: '— Ella sabe cocinar bien.' },
+        { text: '**Kannst** du morgen **kommen**? — Nein, ich **muss arbeiten**.', gl: '— ¿Puedes venir mañana? — No, tengo que trabajar.' },
+        { text: 'Ich **muss** Deutsch **lernen**.', gl: '— Tengo que aprender alemán.' },
+        { text: 'Ihr **könnt** jetzt **gehen**.', gl: '— Ya podéis iros.' },
+        { text: '**Müssen** Sie heute **arbeiten**?', gl: '— ¿Tiene usted que trabajar hoy?' },
       ],
-      loesungen: [
-        'Ich **möchte** einen Kaffee **trinken**.',
-        '**Kannst** du mir **helfen**?',
-        'Wir **müssen** Deutsch **lernen**.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Höflich bitten',
-      frage: 'Schreibe 3 höfliche Sätze mit möchten oder können + bitte. ~~(3 peticiones corteses.)~~',
-      loesungLabel: 'Muster',
-      loesung: '*Ich möchte ein Wasser, bitte. Können Sie das bitte wiederholen? Ich möchte bitte bezahlen.* ~~Cualquier petición vale — con «bitte» y el infinitivo al final.~~',
     },
 
     { type: 'rule' },

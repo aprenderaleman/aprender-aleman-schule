@@ -101,48 +101,27 @@ export default {
         { text: 'Bild „Handy“ — Kannst du mir bitte dein Handy geben? — Tut mir leid, mein Handy ist zu Hause.', gl: '— ¿Me dejas tu móvil? — Lo siento, está en casa.' },
       ],
     },
-
-    { type: 'rule' },
-
-    // ── Übungen ───────────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Reaktion zuordnen',
-      frage: 'Welche Reaktion passt? ~~Empareja: a) Hier bitte. b) Ja, gern. c) Tut mir leid, ich habe keinen Kuli.~~',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Gib mir bitte das Buch.',
-        'Können Sie bitte das Fenster öffnen?',
-        'Hast du einen Kuli für mich?',
-      ],
-      loesungen: [
-        'Gib mir bitte das Buch. — **a) Hier bitte.**',
-        'Können Sie bitte das Fenster öffnen? — **b) Ja, gern.**',
-        'Hast du einen Kuli für mich? — **c) Tut mir leid, ich habe keinen Kuli.**',
+      type: 'beispiele',
+      kicker: 'Die drei Wege',
+      titel: 'Ein Bild, drei mögliche Bitten',
+      items: [
+        { text: 'Bild „Buch“ — Weg 1: **Können Sie** mir bitte das Buch geben?', gl: '— formal, con Sie' },
+        { text: 'Bild „Kaffee“ — Weg 2: **Ich möchte** bitte einen Kaffee.', gl: '— con möchten, siempre correcto' },
+        { text: 'Bild „Tür“ — Weg 3: **Öffne** bitte die Tür!', gl: '— imperativo con du, a otro candidato' },
+        { text: 'Bild „Wasser“ — Bitte: *Ich möchte bitte ein Glas Wasser.* — Reaktion: *Hier bitte!*', gl: '— el minidiálogo completo: petición + reacción' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Bitten bilden',
-      frage: 'Formuliere eine Bitte zum Bild. ~~Usa el patrón indicado.~~',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Bild „Buch“ — mit *Können Sie …*',
-        'Bild „Kaffee“ — mit *Ich möchte …*',
-        'Bild „Tür“ — mit Imperativ (du)',
+      type: 'beispiele',
+      kicker: 'Reaktionen',
+      titel: 'Jede Bitte bekommt eine Antwort',
+      items: [
+        { text: 'Gib mir bitte das Buch. — **Hier bitte.**', gl: '— das algo → «aquí tienes»' },
+        { text: 'Können Sie bitte das Fenster öffnen? — **Ja, gern.**', gl: '— haces algo → «sí, claro»' },
+        { text: 'Hast du einen Kuli für mich? — **Tut mir leid, ich habe keinen Kuli.**', gl: '— no puedes → «lo siento» + kein' },
+        { text: 'Hilf mir bitte! — **Kein Problem.**', gl: '— reacciona SIEMPRE: una palabra ya puntúa' },
       ],
-      loesungen: [
-        '**Können Sie** mir bitte das Buch **geben**?',
-        '**Ich möchte** bitte einen Kaffee.',
-        '**Öffne** bitte die Tür! ~~(o: Schließ bitte die Tür — según la situación)~~',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren — Mini-Dialog',
-      frage: 'Bild „Wasser“. Schreibe die Bitte **und** die Reaktion. ~~Las dos líneas del diálogo.~~',
-      loesungLabel: 'Mögliche Lösung',
-      loesung: '*— Ich möchte bitte ein Glas Wasser. — Hier bitte!* ~~También valen: „Können Sie mir bitte ein Wasser geben?“ o „Gib mir bitte das Wasser.“ — cualquier petición correcta con „bitte“.~~',
     },
 
     { type: 'rule' },

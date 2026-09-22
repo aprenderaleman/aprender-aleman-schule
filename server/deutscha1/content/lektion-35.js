@@ -116,52 +116,29 @@ export default {
         },
       ],
     },
-
-    { type: 'rule' },
-
-    // ── Übungen ───────────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Die feminine Form',
-      frage: 'Wie heißt die Frau? ~~(Forma el femenino.)~~',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'der Lehrer → die ___',
-        'der Verkäufer → die ___',
-        'der Arzt → die ___',
-        'der Student → die ___',
-      ],
-      loesungen: [
-        'der Lehrer → die **Lehrerin**',
-        'der Verkäufer → die **Verkäuferin**',
-        'der Arzt → die **Ärztin** ~~(¡con Umlaut!)~~',
-        'der Student → die **Studentin**',
+      type: 'beispiele',
+      kicker: 'maskulin → feminin',
+      titel: 'Der Beruf und die -in-Form',
+      items: [
+        { text: 'der Lehrer → die **Lehrerin**', gl: '— profesor → profesora' },
+        { text: 'der Verkäufer → die **Verkäuferin**', gl: '— dependiente → dependienta' },
+        { text: 'der Arzt → die **Ärztin**', gl: '— ¡con Umlaut!' },
+        { text: 'der Student → die **Studentin**', gl: '— estudiante (m/f)' },
+        { text: 'der Kellner → die **Kellnerin**', gl: '— camarero → camarera' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Sätze ergänzen',
-      frage: 'Ergänze das Wort. ~~(Completa la palabra.)~~',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Ich ___ Kellnerin. (sein)',
-        'Ich arbeite ___ Verkäufer. (als / von)',
-        'Er arbeitet ___ Büro. (im / am)',
-        'Was sind Sie von ___?',
+      type: 'beispiele',
+      kicker: 'Wer arbeitet wo?',
+      titel: 'Fünf Berufe, fünf Orte',
+      items: [
+        { text: 'Die **Ärztin** arbeitet im Krankenhaus.', gl: '— la médica, en el hospital' },
+        { text: 'Der **Kellner** arbeitet in einem Restaurant.', gl: '— el camarero, en un restaurante' },
+        { text: 'Die **Verkäuferin** arbeitet im **Geschäft**.', gl: '— la dependienta, en la tienda' },
+        { text: 'Der **Ingenieur** arbeitet **bei** einer Firma.', gl: '— «bei» + empresa' },
+        { text: 'Die **Studentin** studiert an der Universität.', gl: '— la estudiante, en la universidad' },
       ],
-      loesungen: [
-        'Ich **bin** Kellnerin. ~~(sin artículo)~~',
-        'Ich arbeite **als** Verkäufer.',
-        'Er arbeitet **im** Büro.',
-        'Was sind Sie von **Beruf**?',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Deine komplette Vorstellung',
-      frage: 'Schreibe deine Vorstellung: Name, Land, Wohnort, Beruf, Hobby (4-5 Sätze, ca. 25 Wörter).',
-      loesungLabel: 'Mögliche Lösung',
-      loesung: '*Ich heiße Pablo. Ich komme aus Chile und wohne in Hamburg. Ich bin Ingenieur und arbeite im Büro. Am Abend höre ich gern Musik.* ~~Con tus datos reales — esta es exactamente la presentación del examen.~~',
     },
 
     { type: 'rule' },

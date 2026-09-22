@@ -15,7 +15,7 @@ export default {
       type: 'lernziele',
       eyebrow: 'Lernziele',
       items: [
-        'wissen, was du schon kannst — und was noch nicht',
+        'wissen: Das kann ich schon — das lerne ich noch',
         'den Kursplan kennen: 5 Blöcke, 37 Lektionen',
         'einen Lernplan haben: jeden Tag ein bisschen',
       ],
@@ -104,47 +104,18 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen (la Diagnose) ─────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Diagnose Teil 1 · Verben',
-      frage: 'Kennst du die Antwort? ~~Si no, no pasa nada: la solución te dice en qué lección se aprende.~~',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Ich ___ Ana. (sein)',
-        'Ich ___ eine Frage. (haben)',
-      ],
-      loesungen: [
-        'Ich **bin** Ana. ~~¿No lo sabes aún? → Lektion 4 (Personalpronomen & „sein“). Es normal.~~',
-        'Ich **habe** eine Frage. ~~→ Lektion 5 („haben“ & Präsens).~~',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Diagnose Teil 2 · Artikel & Fragen',
-      frage: 'Weiter geht es. ~~Recuerda: esto es un mapa, no una nota.~~',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Der, die oder das? — ___ Haus',
-        '___ wohnst du? — In Madrid.',
-      ],
-      loesungen: [
-        '**das** Haus ~~→ Lektion 8 (Artikel & Genus).~~',
-        '**Wo** wohnst du? ~~→ Lektion 7 (W-Fragen).~~',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Diagnose Teil 3 · Alltag',
-      frage: 'Die letzten zwei. ~~Últimas dos preguntas del test.~~',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Wie heißt die Zahl 20 auf Deutsch?',
-        'Was möchtest du? — Ich ___ einen Kaffee.',
-      ],
-      loesungen: [
-        '20 = **zwanzig** ~~→ Lektion 16 (Zahlen, Uhrzeit & Datum).~~',
-        'Ich **möchte** einen Kaffee. ~~→ Lektion 12 (Modalverben).~~',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'So sprichst du über das Lernen',
+      items: [
+        { text: 'Ich mache heute einen **Test**.', gl: '— Hoy hago un test.' },
+        { text: 'Ich **übe** 20 Minuten.', gl: '— Practico 20 minutos.' },
+        { text: 'Mein **Plan**: jeden Tag **ein bisschen**.', gl: '— Mi plan: cada día un poco.' },
+        { text: '**Block** 1 ist Grammatik.', gl: '— El bloque 1 es gramática.' },
+        { text: 'Ich **verstehe** die Lektion gut.', gl: '— Entiendo bien la lección.' },
+        { text: 'Ich **wiederhole** Lektion 1 und 2.', gl: '— Repaso las lecciones 1 y 2.' },
       ],
     },
 
@@ -190,7 +161,7 @@ export default {
       type: 'selbstcheck',
       eyebrow: 'Selbstcheck',
       items: [
-        'Ich weiß, was ich schon kann — und was noch nicht.',
+        'Ich weiß: Das kann ich schon — das lerne ich noch.',
         'Ich kenne den Kursplan: 5 Blöcke, 37 Lektionen.',
         'Ich habe einen Lernplan: jeden Tag ein bisschen.',
       ],

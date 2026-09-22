@@ -58,7 +58,7 @@ export default {
         },
         {
           titel: 'Such die Daten im Text',
-          text: 'Jede Antwort **steht im Text**. Steht sie nicht da, liest du noch einmal — ==du erfindest nie etwas==. ~~(Si inventas un dato, la casilla cuenta como error.)~~',
+          text: 'Jede Antwort **steht im Text**. Du findest sie nicht? Dann lies noch einmal — ==du erfindest nie etwas==. ~~(Si inventas un dato, la casilla cuenta como error.)~~',
         },
         {
           titel: 'Schreib genau und komplett',
@@ -92,48 +92,28 @@ export default {
         { text: '„Sie möchte ein Einzelzimmer.“ → Zimmer: **Einzelzimmer**', gl: '— quiere una individual' },
       ],
     },
-
-    { type: 'rule' },
-
-    // ── Übungen ───────────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Welches Feld?',
-      frage: 'In welches Feld passt die Information? ~~(¿A qué casilla va?)~~',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        '„Ich komme aus Portugal.“ → Feld: ___',
-        '„Meine Nummer ist 0176 5533218.“ → Feld: ___',
-        '„Ich bin am 15.08.1995 geboren.“ → Feld: ___',
-      ],
-      loesungen: [
-        'Feld: **Land** (Portugal)',
-        'Feld: **Telefonnummer** (0176 5533218)',
-        'Feld: **Geburtsdatum** (15.08.1995)',
+      type: 'beispiele',
+      kicker: 'Modell',
+      titel: 'Noch mehr Daten, noch mehr Felder',
+      items: [
+        { text: '„Ich komme aus Portugal.“ → Land: **Portugal**', gl: '— el país va en «Land»' },
+        { text: '„Meine Nummer ist 0176 5533218.“ → Telefonnummer: **0176 5533218**', gl: '— copia el número completo' },
+        { text: '„Ich bin am 15.08.1995 geboren.“ → Geburtsdatum: **15.08.1995**', gl: '— «geboren» es la señal de la fecha de nacimiento' },
+        { text: '„Ankunft am 12.10., Abreise am 15.10.“ → Ankunft: **12.10.** · Abreise: **15.10.**', gl: '— llegada y salida: dos fechas, dos casillas' },
+        { text: '„Ein Doppelzimmer mit Bad, bitte.“ → Zimmer: **Doppelzimmer**', gl: '— copia la palabra del texto, con mayúscula' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Was ist falsch?',
-      frage: 'Korrigiere das Format. ~~(Corrige el formato.)~~',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Geburtsdatum: 3/5/1998',
-        'PLZ: Hamburg',
-        'Zimmer: einzelzimmer',
+      type: 'beispiele',
+      kicker: 'Vorsicht',
+      titel: 'So nicht — so richtig',
+      items: [
+        { text: 'Geburtsdatum: *3/5/1998* → so nicht! Richtig: **03.05.1998**', gl: '— con puntos, formato día.mes.año' },
+        { text: 'PLZ: *Hamburg* → so nicht! Richtig: **20095**', gl: '— en «PLZ» va el número; la ciudad va en «Wohnort»' },
+        { text: 'Zimmer: *einzelzimmer* → so nicht! Richtig: **Einzelzimmer**', gl: '— sustantivo → mayúscula' },
+        { text: 'Straße: *Calle Mayor* → fast! Richtig: **Calle Mayor 12** — mit Hausnummer.', gl: '— calle Y número, juntos en la casilla' },
       ],
-      loesungen: [
-        'Geburtsdatum: **03.05.1998** ~~(con puntos, formato día.mes.año)~~',
-        'PLZ: **20095** — ~~en «PLZ» va el número; la ciudad va en «Wohnort»~~',
-        'Zimmer: **Einzelzimmer** ~~(sustantivo → mayúscula)~~',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Dein Mini-Formular',
-      frage: 'Fülle aus mit deinen Daten: Name, Straße + Hausnummer, PLZ + Wohnort, Geburtsdatum.',
-      loesungLabel: 'Muster',
-      loesung: '*Name: Carlos Ruiz · Straße: Avenida Sur 4 · PLZ, Wohnort: 41001 Sevilla · Geburtsdatum: 21.03.2000*',
     },
 
     { type: 'rule' },

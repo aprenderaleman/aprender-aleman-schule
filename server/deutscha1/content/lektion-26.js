@@ -16,7 +16,7 @@ export default {
       eyebrow: 'Lernziele',
       items: [
         'das Format kennen: ca. 15 Minuten, **in der Gruppe**, 3 Teile',
-        'wissen, was du in Teil 1, 2 und 3 machst',
+        'die 3 Teile kennen: vorstellen, fragen, bitten',
         'Notfallsätze benutzen: *Wie bitte? Noch einmal, bitte.*',
         'W, Z, „ei“ und „ie“ richtig aussprechen',
       ],
@@ -107,50 +107,28 @@ export default {
         { text: 'Wie bitte? Noch einmal, bitte.', gl: '— ¿Cómo? Otra vez, por favor. ~~Tu frase salvavidas.~~' },
       ],
     },
-
-    { type: 'rule' },
-
-    // ── Übungen ───────────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Welcher Teil?',
-      frage: 'Teil 1, 2 oder 3? ~~¿A qué parte pertenece cada frase?~~',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        '„Ich heiße Ana und komme aus Peru.“',
-        '„Was isst du zum Frühstück?“',
-        '„Gib mir bitte den Stift.“',
-      ],
-      loesungen: [
-        '**Teil 1** — sich vorstellen',
-        '**Teil 2** — Fragen stellen',
-        '**Teil 3** — Bitten formulieren',
+      type: 'beispiele',
+      kicker: 'Die 3 Teile',
+      titel: 'Ein Satz, ein Teil',
+      items: [
+        { text: '„Ich heiße Ana und komme aus Peru.“ → **Teil 1**: sich vorstellen', gl: '— la presentación abre el examen' },
+        { text: '„Was isst du zum Frühstück?“ → **Teil 2**: eine Frage stellen', gl: '— con la tarjeta de palabra haces una pregunta' },
+        { text: '„Ich esse Brot und trinke Kaffee.“ → **Teil 2**: eine Antwort geben', gl: '— y respondes a la pregunta de otro candidato' },
+        { text: '„Gib mir bitte den Stift.“ → **Teil 3**: eine Bitte formulieren', gl: '— con la tarjeta de imagen pides algo' },
+        { text: '„Wie bitte? Langsamer, bitte.“ → geht in **jedem** Teil', gl: '— las frases de emergencia valen siempre' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Aussprache',
-      frage: 'Wie klingt das? ~~Elige: v, ts, ai o i larga.~~',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        '**w**ir',
-        '**z**ehn',
-        'm**ei**n Name',
-        'v**ie**r',
+      type: 'beispiele',
+      kicker: 'Aussprache',
+      titel: 'Vier Wörter, vier Laute',
+      items: [
+        { text: '**w**ir → klingt wie /v/: „vir“', gl: '— nosotros' },
+        { text: '**z**ehn → klingt wie /ts/: „tsen“', gl: '— diez; nunca como la z española' },
+        { text: 'm**ei**n Name → klingt wie „main“', gl: '— «ei» siempre suena «ai»' },
+        { text: 'v**ie**r → klingt wie „fíir“', gl: '— «ie» es una i larga' },
       ],
-      loesungen: [
-        'wir — **/v/** ~~(«vir»)~~',
-        'zehn — **/ts/** ~~(«tsen»)~~',
-        'mein — **«ai»** ~~(«main»)~~',
-        'vier — **«i» larga** ~~(«fíir»)~~',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren — Notfallsätze',
-      frage: 'Was sagst du? ~~¿Qué dices en cada situación?~~ (a) Du verstehst die Frage nicht. (b) Der Prüfer spricht sehr schnell.',
-      loesungLabel: 'Mögliche Lösung',
-      loesung: '(a) *Wie bitte?* / *Noch einmal, bitte.* — (b) *Langsamer, bitte.* ~~Cualquier frase de emergencia correcta vale — lo importante es no quedarte callado.~~',
     },
 
     { type: 'rule' },
@@ -201,7 +179,7 @@ export default {
       eyebrow: 'Selbstcheck',
       items: [
         'Ich kenne das Format: ca. 15 Minuten, in der Gruppe, 3 Teile.',
-        'Ich weiß, was ich in Teil 1, 2 und 3 mache.',
+        'Ich kenne die 3 Teile: vorstellen, fragen, bitten.',
         'Ich kenne die Notfallsätze und die Aussprache von W, Z, „ei“ und „ie“.',
       ],
     },

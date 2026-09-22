@@ -113,52 +113,28 @@ export default {
         },
       ],
     },
-
-    { type: 'rule' },
-
-    // ── Übungen ───────────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Welches Verb?',
-      frage: 'Wie heißt das auf Deutsch? ~~(¿Cómo se dice en alemán?)~~',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'levantarse = ___',
-        'desayunar = ___',
-        'hacer la compra = ___',
-        'ver la tele = ___',
-      ],
-      loesungen: [
-        'levantarse = **aufstehen**',
-        'desayunar = **frühstücken**',
-        'hacer la compra = **einkaufen**',
-        'ver la tele = **fernsehen**',
+      type: 'beispiele',
+      kicker: 'Noch ein Tag',
+      titel: 'Marias Tag — in der 3. Person',
+      items: [
+        { text: 'Um 6 Uhr **steht** Maria **auf**.', gl: '— ella se levanta: steht … auf' },
+        { text: 'Um 7 Uhr **frühstückt** sie.', gl: '— desayuna a las 7' },
+        { text: 'Von 8 bis 16 Uhr **arbeitet** sie.', gl: '— trabaja de 8 a 16' },
+        { text: 'Am Nachmittag **kauft** sie im Supermarkt **ein**.', gl: '— por la tarde hace la compra' },
+        { text: 'Am Abend **kocht** sie und **sieht fern**.', gl: '— cocina y ve la tele' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Sätze ergänzen',
-      frage: 'Ergänze das trennbare Verb — Präfix ans Ende! ~~(el prefijo al final)~~',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Ich ___ um 7 Uhr ___. (aufstehen)',
-        'Um 10 Uhr ___ ich im Supermarkt ___. (einkaufen)',
-        'Am Abend ___ ich ___. (fernsehen)',
-        'Ich spiele ___ Fußball. (gern)',
+      type: 'beispiele',
+      kicker: 'gern',
+      titel: 'Hobbys — immer mit gern',
+      items: [
+        { text: 'Ich **schwimme gern** im Sommer.', gl: '— me gusta nadar en verano' },
+        { text: 'Ich **lese gern** Bücher.', gl: '— me gusta leer libros' },
+        { text: 'Ich **spiele gern** Fußball. Mein Hobby ist Fußball.', gl: '— dos formas de decir tu hobby' },
+        { text: 'Am Abend **höre** ich **gern** Musik.', gl: '— gern va después del verbo' },
       ],
-      loesungen: [
-        'Ich **stehe** um 7 Uhr **auf**.',
-        'Um 10 Uhr **kaufe** ich im Supermarkt **ein**.',
-        'Am Abend **sehe** ich **fern**.',
-        'Ich spiele **gern** Fußball.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Dein Tag',
-      frage: 'Schreibe deinen Tag: 3-4 Sätze mit Uhrzeit (ca. 25 Wörter). Benutze *aufstehen* und ein Hobby mit *gern*.',
-      loesungLabel: 'Mögliche Lösung',
-      loesung: '*Ich stehe um 7 Uhr auf. Um 8 Uhr frühstücke ich. Von 9 bis 17 Uhr arbeite ich. Am Abend höre ich gern Musik.* ~~Valen otras horas y otros hobbys — lo importante: verbo en 2ª posición y prefijo al final.~~',
     },
 
     { type: 'rule' },

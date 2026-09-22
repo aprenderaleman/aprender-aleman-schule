@@ -48,8 +48,8 @@ export default {
       card: true,
       titel: 'Wie in der Prüfung — sonst hilft es nicht',
       absaetze: [
-        'Heute lernst du nichts Neues — du testest, was du schon kannst. Die Bedingungen: **ehrlich** ~~(sin trucos, o la nota te engaña)~~ — Timer sichtbar, kein Wörterbuch, kein Handy. Die Lösungen liest du erst am Ende.',
-        'Und denk an Lektion 2: Nur der **Antwortbogen** zählt ~~(solo cuenta la hoja de respuestas)~~. Übertrage deine Antworten **rechtzeitig**. Die genaue Zahl der Aufgaben zeigt dir der offizielle Modellsatz.',
+        'Heute lernst du nichts Neues — heute testest du dein Deutsch. Die Bedingungen: **ehrlich** ~~(sin trucos, o la nota te engaña)~~ — Timer sichtbar, kein Wörterbuch, kein Handy. Die Lösungen liest du erst am Ende.',
+        'Und denk an Lektion 2: Nur der **Antwortbogen** zählt ~~(solo cuenta la hoja de respuestas)~~. Übertrage deine Antworten **rechtzeitig**. Wie viele Aufgaben genau? Das zeigt dir der offizielle Modellsatz.',
       ],
     },
     {

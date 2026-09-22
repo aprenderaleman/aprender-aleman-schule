@@ -183,6 +183,7 @@ function AppRoutes() {
         <Route path="/deutscha2/:id" element={<C1Route><DeutschA2 /></C1Route>} />
         <Route path="/deutscha1" element={<C1Route><DeutschA1 /></C1Route>} />
         <Route path="/deutscha1/:id" element={<C1Route><DeutschA1 /></C1Route>} />
+        <Route path="/deutscha1/:id/heft" element={<C1Route><DeutschA1 heft /></C1Route>} />
         {/* Admin routes */}
         <Route path="/admin" element={<AdminRoute><AdminDashboard /></AdminRoute>} />
         <Route path="/admin/usuarios" element={<AdminRoute><AdminUsers /></AdminRoute>} />

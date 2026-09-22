@@ -98,49 +98,30 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · mein oder meine?',
-      frage: 'Ergänze die Endung: mit oder ohne -e? ~~(die-Wort o plural → -e)~~',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'mein___ Vater (der Vater)',
-        'mein___ Schwester (die Schwester)',
-        'dein___ Auto (das Auto)',
-        'unser___ Eltern (Plural)',
-      ],
-      loesungen: [
-        '**mein** Vater',
-        '**meine** Schwester',
-        '**dein** Auto',
-        '**unsere** Eltern',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Meine Familie',
+      items: [
+        { text: '**Meine** Familie ist groß.', gl: '— Mi familia es grande.' },
+        { text: '**Mein** Vater arbeitet in Quito.', gl: '— Mi padre trabaja en Quito.' },
+        { text: '**Meine** Schwester lernt auch Deutsch.', gl: '— Mi hermana también aprende alemán.' },
+        { text: '**Meine** Eltern haben ein Haus.', gl: '— Mis padres tienen una casa.' },
+        { text: 'Wie heißt **deine** Mutter? — **Meine** Mutter heißt Rosa.', gl: '— ¿Cómo se llama tu madre? — Mi madre se llama Rosa.' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · sein oder ihr?',
-      frage: 'Wer ist der Besitzer? ~~(¿Quién es el dueño? él → sein, ella → ihr)~~ Ergänze.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Das ist Marco. ___ Frau heißt Julia.',
-        'Das ist Sofia. ___ Bruder wohnt in Lima.',
-        'Das ist Herr Braun. ___ Kinder sind groß.',
-        'Das ist Frau Klein. ___ Auto ist rot.',
+      type: 'beispiele',
+      kicker: 'sein oder ihr?',
+      titel: 'Der Besitzer entscheidet',
+      items: [
+        { text: 'Das ist Marco. **Seine** Frau heißt Julia.', gl: '— Su mujer (de él) se llama Julia.' },
+        { text: 'Das ist Sofia. **Ihr** Bruder wohnt in Lima.', gl: '— Su hermano (de ella) vive en Lima.' },
+        { text: 'Herr Braun und **seine** Kinder wohnen hier.', gl: '— El Sr. Braun y sus hijos viven aquí.' },
+        { text: 'Frau Klein sucht **ihr** Auto.', gl: '— La Sra. Klein busca su coche.' },
+        { text: '**Unser** Kind und **euer** Kind sind Freunde.', gl: '— Nuestro hijo y vuestro hijo son amigos.' },
       ],
-      loesungen: [
-        'Das ist Marco. **Seine** Frau heißt Julia. ~~(de él + die Frau → -e)~~',
-        'Das ist Sofia. **Ihr** Bruder wohnt in Lima. ~~(de ella + der Bruder → sin -e)~~',
-        'Das ist Herr Braun. **Seine** Kinder sind groß.',
-        'Das ist Frau Klein. **Ihr** Auto ist rot.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Deine Familie',
-      frage: 'Schreibe 3 Sätze über deine Familie. ~~(3 frases sobre tu familia con mein/meine.)~~',
-      loesungLabel: 'Muster',
-      loesung: '*Meine Mutter heißt Carmen. Mein Bruder ist 20 Jahre alt. Meine Eltern wohnen in Bogotá.* ~~Vale cualquier familiar — revisa solo la -e en femenino y plural.~~',
     },
 
     { type: 'rule' },

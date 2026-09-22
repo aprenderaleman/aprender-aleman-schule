@@ -22,7 +22,7 @@ export default {
         'die zweite Simulation machen: Schilder, Sprechen, Formular',
         'deine Vorstellung komplett vorbereiten — mit einem Modelltext von 40 Wörtern',
         'die letzten sieben Tage vor der Prüfung planen',
-        'wissen, welche Lektion du bei welchem Fehler wiederholst',
+        'den Reparatur-Plan kennen: dein Fehler → deine Lektion',
       ],
     },
 
@@ -203,7 +203,7 @@ export default {
     {
       type: 'tabelle',
       eyebrow: 'Zusammenfassung — dein Reparatur-Plan',
-      kopf: ['Wenn dieser Fehler bleibt …', 'dann wiederhole …'],
+      kopf: ['Dieser Fehler bleibt?', 'Dann wiederhole …'],
       zeilen: [
         ['sein, haben, Verben im Präsens · Fragen stellen', 'Lektionen 4–7'],
         ['der/die/das · den/einen · nicht/kein · mein/dein', 'Lektionen 8–11'],
@@ -224,13 +224,13 @@ export default {
         'Lesen: Ich verstehe Notizen, Anzeigen und Schilder.',
         'Schreiben: Ich fülle ein Formular aus und schreibe einen kurzen Text (~30 Wörter) mit Anrede und Gruß.',
         'Sprechen: Ich stelle mich vor, stelle Fragen und formuliere Bitten — in der Gruppe.',
-        'Ich weiß, welche Lektion ich bei welchem Fehler wiederhole.',
+        'Ich kenne meinen Reparatur-Plan: mein Fehler → meine Lektion.',
       ],
     },
     {
       type: 'ausblick',
       eyebrow: 'Ausblick — zum Abschluss',
-      text: 'Hier endet der Kurs — **37 Lektionen, ein Ziel: das Zertifikat A1**, dein **erstes Zertifikat auf Deutsch**. Herzlichen Glückwunsch! ~~¡Enhorabuena — tu primer certificado de alemán!~~ Vor ein paar Wochen konntest du kein Wort — heute stellst du dich vor, schreibst Nachrichten und verstehst Schilder. Melde dich jetzt zur Prüfung an, solange alles frisch ist. Der nächste Schritt ist das **Niveau A2** — mit Perfekt, Dativ und viel mehr Alltag. Auf Aprender-Aleman.de wartet unser **Deutsch-A2-Kurs** (unter /deutscha2) auf dich. **Viel Erfolg am Prüfungstag — du schaffst das!**',
+      text: 'Hier endet der Kurs — **37 Lektionen, ein Ziel: das Zertifikat A1**, dein **erstes Zertifikat auf Deutsch**. Herzlichen Glückwunsch! ~~¡Enhorabuena — tu primer certificado de alemán!~~ Vor ein paar Wochen konntest du kein Wort — heute stellst du dich vor, schreibst Nachrichten und verstehst Schilder. Melde dich jetzt zur Prüfung an — alles ist noch frisch. Der nächste Schritt ist das **Niveau A2** — mit Perfekt, Dativ und viel mehr Alltag. Auf Aprender-Aleman.de wartet unser **Deutsch-A2-Kurs** (unter /deutscha2) auf dich. **Viel Erfolg am Prüfungstag — du schaffst das!**',
     },
   ],
 }

@@ -106,52 +106,29 @@ export default {
         },
       ],
     },
-
-    { type: 'rule' },
-
-    // ── Übungen ───────────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Wortschatz',
-      frage: 'Wie heißt das auf Deutsch? ~~(Con artículo.)~~',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'el pan → ___',
-        'la leche → ___',
-        'el queso → ___',
-        'la cuenta → ___',
-      ],
-      loesungen: [
-        'el pan → **das Brot**',
-        'la leche → **die Milch**',
-        'el queso → **der Käse**',
-        'la cuenta → **die Rechnung**',
+      type: 'beispiele',
+      kicker: 'Im Supermarkt',
+      titel: 'Der Einkauf — Satz für Satz',
+      items: [
+        { text: 'Ich **kaufe** heute im **Supermarkt ein**.', gl: '— hago la compra: einkaufen es separable' },
+        { text: 'Ich brauche **Brot**, **Milch** und **Äpfel**.', gl: '— la lista de la compra básica' },
+        { text: 'Wo ist der **Käse**? — Da hinten.', gl: '— ¿dónde está…? — allí al fondo' },
+        { text: 'Ich nehme **100 Gramm Käse** und **eine Flasche Wasser**.', gl: '— cantidades directas, sin „de“' },
+        { text: 'Der **Apfel** kostet 50 Cent. Das ist **billig**.', gl: '— barato; lo contrario: teuer' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Ergänzen',
-      frage: 'Ergänze: Hunger · Durst · möchte · kostet.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Ich habe ___ . Ich esse eine Pizza.',
-        'Ich habe ___ . Ich trinke ein Wasser.',
-        'Ich ___ einen Kaffee, bitte.',
-        'Was ___ das Brot?',
+      type: 'beispiele',
+      kicker: 'Modell',
+      titel: 'Der ganze Dialog im Café',
+      items: [
+        { text: '— Guten Tag! Ich **möchte** einen Kaffee und ein Wasser, **bitte**.', gl: '— así pides: möchte + bitte' },
+        { text: '— Gern. Noch etwas?', gl: '— ¿algo más?' },
+        { text: '— Nein, danke. **Was kostet** das?', gl: '— la pregunta del precio' },
+        { text: '— Das macht 5 Euro 20.', gl: '— «das macht» = son (el total)' },
+        { text: '— **Die Rechnung, bitte!**', gl: '— o simplemente: Zahlen, bitte!' },
       ],
-      loesungen: [
-        'Ich habe **Hunger**. Ich esse eine Pizza.',
-        'Ich habe **Durst**. Ich trinke ein Wasser.',
-        'Ich **möchte** einen Kaffee, bitte.',
-        'Was **kostet** das Brot?',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Im Café',
-      frage: 'Schreibe einen Mini-Dialog im Café (ca. 20-30 Wörter): bestellen, Preis, Rechnung. ~~(Pide algo, pregunta el precio, pide la cuenta.)~~',
-      loesungLabel: 'Mögliche Lösung',
-      loesung: '*— Guten Tag! Ich möchte einen Kaffee und ein Wasser, bitte.\n— Gern. Noch etwas?\n— Nein, danke. Was kostet das?\n— Das macht 5 Euro 20.\n— Die Rechnung, bitte!* ~~(Vale cualquier diálogo con „Ich möchte …, bitte“ + una pregunta de precio.)~~',
     },
 
     { type: 'rule' },

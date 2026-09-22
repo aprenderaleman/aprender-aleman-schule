@@ -16,7 +16,7 @@ export default {
       items: [
         'das Verb *haben* konjugieren',
         'regelmäßige Verben im Präsens bilden (wohnen, machen, lernen, kommen)',
-        'sagen, wo du wohnst und was du machst',
+        'antworten: Wo wohnst du? Was machst du?',
       ],
     },
 
@@ -98,49 +98,30 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · haben konjugieren',
-      frage: 'Ergänze die richtige Form von haben.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Ich ___ eine Frage.',
-        'Du ___ Zeit.',
-        'Er ___ Hunger.',
-        'Ihr ___ ein Auto.',
-      ],
-      loesungen: [
-        'Ich **habe** eine Frage.',
-        'Du **hast** Zeit.',
-        'Er **hat** Hunger.',
-        'Ihr **habt** ein Auto.',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'haben im Alltag',
+      items: [
+        { text: '**Hast** du Zeit?', gl: '— ¿Tienes tiempo?' },
+        { text: 'Er **hat** ein Auto.', gl: '— Él tiene un coche.' },
+        { text: 'Wir **haben** heute Deutschkurs.', gl: '— Hoy tenemos clase de alemán.' },
+        { text: 'Ihr **habt** viele Fragen.', gl: '— Tenéis muchas preguntas.' },
+        { text: '**Haben** Sie Kinder? — Ja, ich **habe** zwei Kinder.', gl: '— ¿Tiene usted hijos? — Sí, tengo dos.' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Regelmäßige Verben',
-      frage: 'Ergänze das Verb in der richtigen Form.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Ich ___ in Berlin. (wohnen)',
-        'Du ___ Deutsch. (lernen)',
-        'Er ___ aus Chile. (kommen)',
-        'Wir ___ Sport. (machen)',
+      type: 'beispiele',
+      kicker: 'Stamm + Endung',
+      titel: 'Regelmäßige Verben in Aktion',
+      items: [
+        { text: 'Wo **wohnst** du? — Ich **wohne** in Sevilla.', gl: '— ¿Dónde vives? — Vivo en Sevilla.' },
+        { text: 'Sie **lernt** Deutsch.', gl: '— Ella aprende alemán. (¡con -t!)' },
+        { text: 'Wir **kommen** aus Peru.', gl: '— Venimos de Perú.' },
+        { text: 'Was **macht** ihr? — Wir **machen** Sport.', gl: '— ¿Qué hacéis? — Hacemos deporte.' },
+        { text: 'Er **wohnt** in Berlin und **lernt** Englisch.', gl: '— Él vive en Berlín y aprende inglés.' },
       ],
-      loesungen: [
-        'Ich **wohne** in Berlin.',
-        'Du **lernst** Deutsch.',
-        'Er **kommt** aus Chile. ~~(¡con -t!)~~',
-        'Wir **machen** Sport.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Über dich',
-      frage: 'Schreibe 3 Sätze: Wo wohnst du? Was lernst du? Was hast du?',
-      loesungLabel: 'Muster',
-      loesung: '*Ich wohne in Bogotá. Ich lerne Deutsch. Ich habe zwei Kinder.*',
     },
 
     { type: 'rule' },
@@ -151,7 +132,7 @@ export default {
       eyebrow: 'Prüfungsbezug',
       modul: 'Sprechen · Teil 1',
       titel: 'Sich vorstellen — mehr sagen',
-      anweisung: 'Nach „Ich bin …“ sagst du im Sprechen Teil 1 auch, wo du wohnst und was du machst. Ergänze:',
+      anweisung: 'Im Sprechen Teil 1 sagst du mehr: Wo wohnst du? Was machst du? Ergänze:',
       absaetze: [
         '„Ich {1} in Lima. Ich {2} Deutsch. Ich {3} zwei Kinder.“',
       ],

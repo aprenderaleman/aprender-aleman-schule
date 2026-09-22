@@ -85,49 +85,27 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Am Bahnhof',
-      frage: 'Lies die Durchsage **nur einmal** ~~(en el examen: audio)~~. Dann kreuze an.',
-      aufgabe: 'Transkript: „Achtung am Gleis 3: Der Zug nach München, Abfahrt zehn Uhr fünfzehn, hat heute circa zwanzig Minuten Verspätung. Der Zug fährt heute von Gleis 5 ab. Wir bitten um Entschuldigung.“',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Der Zug nach München fährt heute von … a) Gleis 3 · b) Gleis 5',
-        'Der Zug hat … Minuten Verspätung. a) 15 · b) 20',
-      ],
-      loesungen: [
-        '**b) Gleis 5.** „Der Zug fährt **heute von Gleis 5** ab.“ ~~También aquí gana la información nueva.~~',
-        '**b) 20 Minuten.** „Zehn Uhr fünfzehn“ ist die Abfahrtszeit — zwei Zahlen, nur eine ist die Lösung.',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      kicker: 'Bahnhof',
+      titel: 'Durchsagen am Bahnhof',
+      items: [
+        { text: '„Der Zug nach Köln **fährt** um **halb elf ab**.“', gl: '— El tren a Colonia sale a las 10:30 (¡no a las 11:30!).' },
+        { text: '„Der Zug fährt heute von **Gleis 2** ab — nicht von Gleis 4.“', gl: '— También en megafonía gana la información nueva.' },
+        { text: '„Der Bus nach Potsdam hat **fünfzehn Minuten Verspätung**.“', gl: '— El bus lleva 15 minutos de retraso.' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Im Supermarkt',
-      frage: 'Lies die Durchsage **nur einmal**. Was kostet ein Kilo Äpfel?',
-      aufgabe: 'Transkript: „Liebe Kundinnen und Kunden, heute im Angebot: Äpfel, das Kilo nur zwei Euro fünfundvierzig. Und an der Kasse: Schokolade für einen Euro. Wir haben heute bis zwanzig Uhr geöffnet.“',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Ein Kilo Äpfel kostet … a) 2,45 € · b) 2,54 € · c) 1,00 €',
-      ],
-      loesungen: [
-        '**a) 2,45 €.** „Fünfundvierzig“ = 45 ~~(cinco-y-cuarenta, no 54)~~. Der eine Euro ist die Schokolade — falsche Zahl für diese Aufgabe.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Uhrzeiten-Training',
-      frage: 'Schreibe die Uhrzeit in Zahlen. ~~(Escribe la hora en cifras.)~~',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'halb acht',
-        'vierzehn Uhr dreißig',
-        'einundzwanzig Uhr',
-      ],
-      loesungen: [
-        '**7.30 Uhr** — eine halbe Stunde vor acht.',
-        '**14.30 Uhr** ~~(las 2:30 de la tarde)~~.',
-        '**21.00 Uhr** — einundzwanzig = 21.',
+      type: 'beispiele',
+      kicker: 'Supermarkt',
+      titel: 'Durchsagen im Supermarkt',
+      items: [
+        { text: '„Heute im **Angebot**: Bananen, das Kilo nur **ein Euro zwanzig**.“', gl: '— Plátanos en oferta: 1,20 € el kilo.' },
+        { text: '„Wir haben bis **einundzwanzig Uhr geöffnet**.“', gl: '— Abierto hasta las 21 h (einundzwanzig = 21).' },
+        { text: '„Bitte kommen Sie zur **Kasse** drei.“', gl: '— Pasen a la caja 3.' },
+        { text: '„Ein guter **Preis**: zwei Euro **fünfundsechzig**.“', gl: '— 2,65 € (cinco-y-sesenta = 65, ¡no 56!).' },
       ],
     },
 

@@ -93,49 +93,29 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · den oder der?',
-      frage: 'Wähle die richtige Form. ~~(Elige la forma correcta.)~~',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Ich kaufe der/den Apfel.',
-        'Das ist der/den Lehrer.',
-        'Ich suche der/den Bahnhof.',
-        'Sie trinkt die/den Milch.',
-      ],
-      loesungen: [
-        'Ich kaufe **den** Apfel. ~~(después de kaufen)~~',
-        'Das ist **der** Lehrer. ~~(con sein no hay cambio)~~',
-        'Ich suche **den** Bahnhof.',
-        'Sie trinkt **die** Milch. ~~(femenino: igual)~~',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Einkaufen mit den/einen',
+      items: [
+        { text: 'Ich brauche **einen** Stift.', gl: '— Necesito un bolígrafo.' },
+        { text: 'Wir suchen **einen** Supermarkt.', gl: '— Buscamos un supermercado.' },
+        { text: 'Er kauft **einen** Apfel und **eine** Banane.', gl: '— Él compra una manzana y un plátano.' },
+        { text: 'Ich trinke **einen** Tee.', gl: '— Bebo un té.' },
+        { text: 'Sie isst **einen** Salat.', gl: '— Ella come una ensalada.' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · ein, eine oder einen?',
-      frage: 'Ergänze ein, eine oder einen.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Ich habe ___ Hund. (der Hund)',
-        'Ich brauche ___ Lampe. (die Lampe)',
-        'Er kauft ___ Auto. (das Auto)',
-        'Es gibt hier ___ Supermarkt. (der Supermarkt)',
+      type: 'beispiele',
+      kicker: 'es gibt',
+      titel: 'Was gibt es hier?',
+      items: [
+        { text: 'Hier gibt es **einen** Park.', gl: '— Aquí hay un parque.' },
+        { text: 'Es gibt **eine** Bäckerei.', gl: '— Hay una panadería.' },
+        { text: 'Es gibt **ein** Café.', gl: '— Hay un café.' },
+        { text: 'Gibt es hier **einen** Bahnhof? — Ja, da.', gl: '— ¿Hay aquí una estación? — Sí, ahí.' },
       ],
-      loesungen: [
-        'Ich habe **einen** Hund.',
-        'Ich brauche **eine** Lampe.',
-        'Er kauft **ein** Auto.',
-        'Es gibt hier **einen** Supermarkt.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Was kaufst du?',
-      frage: 'Schreibe 3 Sätze: Was kaufst, trinkst und isst du? ~~(¿Qué compras, bebes y comes?)~~',
-      loesungLabel: 'Muster',
-      loesung: '*Ich kaufe einen Apfel und eine Banane. Ich trinke einen Tee. Ich esse ein Brötchen.* ~~Vale cualquier comida — revisa solo el masculino: ¿einen?~~',
     },
 
     { type: 'rule' },

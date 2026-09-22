@@ -79,51 +79,29 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Plural erkennen',
-      frage: 'Singular oder Plural? ~~(¿Singular o plural?)~~',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'die Bücher',
-        'die Lampe',
-        'die Kinder',
-        'die Frau',
-      ],
-      loesungen: [
-        'die Bücher — **Plural** ~~(das Buch → die Bücher)~~',
-        'die Lampe — **Singular** ~~(el plural es „die Lampen“)~~',
-        'die Kinder — **Plural** ~~(das Kind → die Kinder)~~',
-        'die Frau — **Singular** ~~(el plural es „die Frauen“)~~',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Plural im Alltag',
+      items: [
+        { text: 'Die **Autos** sind neu.', gl: '— Los coches son nuevos.' },
+        { text: 'Ich habe zwei **Handys**.', gl: '— Tengo dos móviles.' },
+        { text: 'Die **Lampen** kosten 15 Euro.', gl: '— Las lámparas cuestan 15 euros.' },
+        { text: 'Die **Tische** und die **Stühle** sind alt.', gl: '— Las mesas y las sillas son viejas.' },
+        { text: 'Wo sind die **Kinder**? — Im Park.', gl: '— ¿Dónde están los niños? — En el parque.' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Plural bilden',
-      frage: 'Wie heißt der Plural? ~~(Escribe el plural con „die“.)~~',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'der Tisch → ___',
-        'das Auto → ___',
-        'der Apfel → ___',
-        'die Frau → ___',
-        'das Kind → ___',
+      type: 'beispiele',
+      kicker: 'Singular → Plural',
+      titel: 'Eins oder viele?',
+      items: [
+        { text: 'Ich habe ein Buch. Du hast drei **Bücher**.', gl: '— Yo tengo un libro. Tú tienes tres libros.' },
+        { text: 'Hier ist ein Apfel. Da sind fünf **Äpfel**.', gl: '— Aquí hay una manzana. Ahí hay cinco manzanas.' },
+        { text: 'Eine Frau wartet. Zwei **Frauen** kommen.', gl: '— Una mujer espera. Dos mujeres vienen.' },
+        { text: 'Das Kind spielt. Die **Kinder** spielen.', gl: '— El niño juega. Los niños juegan.' },
       ],
-      loesungen: [
-        'der Tisch → **die Tische**',
-        'das Auto → **die Autos**',
-        'der Apfel → **die Äpfel**',
-        'die Frau → **die Frauen**',
-        'das Kind → **die Kinder**',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Deine Einkaufsliste',
-      frage: 'Schreibe eine Einkaufsliste mit 3 Sachen im Plural. ~~(Escribe una lista de la compra con 3 cosas en plural.)~~',
-      loesungLabel: 'Muster',
-      loesung: '*Ich kaufe: sechs Äpfel, zwei Lampen und drei Bücher.* ~~Vale cualquier lista — lo importante: los plurales correctos.~~',
     },
 
     { type: 'rule' },

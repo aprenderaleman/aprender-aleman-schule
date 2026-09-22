@@ -100,47 +100,19 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · du-Form',
-      frage: 'Bilde den Imperativ mit du. ~~(Forma el imperativo informal.)~~',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'du kommst → ___ !',
-        'du wartest → ___ !',
-        'du schreibst → ___ !',
-        'du stehst auf → ___ !',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Imperativ in Aktion',
+      items: [
+        { text: '**Warte** hier, bitte!', gl: '— ¡Espera aquí, por favor!' },
+        { text: '**Lies** den Text laut!', gl: '— ¡Lee el texto en voz alta!' },
+        { text: '**Schreib** deinen Namen!', gl: '— ¡Escribe tu nombre!' },
+        { text: '**Kreuzen Sie** bitte **an**!', gl: '— Marque con una cruz, por favor. (prefijo al final)' },
+        { text: '**Machen Sie** bitte die Tür **zu**!', gl: '— Cierre la puerta, por favor.' },
+        { text: '**Steh auf**! Der Kurs **fängt an**!', gl: '— ¡Levántate! ¡El curso empieza!' },
       ],
-      loesungen: [
-        '**Komm!**',
-        '**Warte!**',
-        '**Schreib!**',
-        '**Steh auf!** ~~(prefijo al final)~~',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Sie-Form',
-      frage: 'Bilde den Imperativ mit Sie und bitte. ~~(Forma el imperativo formal con „bitte“.)~~',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'kommen → ___ !',
-        'warten → ___ !',
-        'helfen (mir) → ___ !',
-      ],
-      loesungen: [
-        '**Kommen Sie bitte!**',
-        '**Warten Sie bitte!**',
-        '**Helfen Sie mir bitte!**',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Höfliche Bitten',
-      frage: 'Situation: Du bist neu in der Stadt. Schreibe 2 höfliche Bitten mit Sie. ~~(Escribe 2 peticiones corteses.)~~',
-      loesungLabel: 'Muster',
-      loesung: '*Entschuldigen Sie, helfen Sie mir bitte! · Warten Sie bitte einen Moment!* ~~Cualquier petición con „Verb + Sie + bitte“ es correcta.~~',
     },
 
     { type: 'rule' },

@@ -15,7 +15,7 @@ export default {
       eyebrow: 'Lernziele',
       items: [
         'die 2 Teile vom Schreiben kennen: Formular + kurzer Text',
-        'wissen, was zählt: ==Versteht man den Text? Sind alle Daten da?==',
+        'die zwei Prüfer-Fragen kennen: ==Versteht man den Text? Sind alle Daten da?==',
         'die Wörter der deutschen Formulare verstehen (Vorname, PLZ, Unterschrift …)',
       ],
     },
@@ -70,7 +70,7 @@ export default {
         {
           badge: 'Teil 1',
           titel: 'Formular = Wörter kennen',
-          text: 'In Teil 1 liest du eine kurze Situation und ergänzt die Daten, die im Formular fehlen. __Wer die Formular-Wörter kennt, hat die halbe Aufgabe.__ ~~(el léxico de arriba ES media tarea)~~',
+          text: 'In Teil 1 liest du eine kurze Situation. Dann ergänzt du die Daten im Formular. __Lern die Formular-Wörter — sie sind die halbe Aufgabe.__ ~~(el léxico de arriba ES media tarea)~~',
         },
         {
           badge: 'Teil 2',
@@ -94,50 +94,28 @@ export default {
         { text: 'Unterschrift: *Ana López*', gl: '— la firma, escrita a mano' },
       ],
     },
-
-    { type: 'rule' },
-
-    // ── Übungen ───────────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Welches Wort passt?',
-      frage: 'Vorname, PLZ, Wohnort oder Land? ~~(¿Qué casilla es?)~~',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        '___ : 28001',
-        '___ : Madrid',
-        '___ : Pablo',
-        '___ : Spanien',
-      ],
-      loesungen: [
-        '**PLZ**: 28001',
-        '**Wohnort**: Madrid',
-        '**Vorname**: Pablo',
-        '**Land**: Spanien',
+      type: 'beispiele',
+      kicker: 'Modell',
+      titel: 'Noch ein Formular — aus Madrid',
+      items: [
+        { text: 'Vorname: **Pablo** · Familienname: **Ortega**', gl: '— nombre y apellido, cada uno en su casilla' },
+        { text: 'Wohnort: **Madrid** · Land: **Spanien**', gl: '— ciudad y país, dos casillas distintas' },
+        { text: 'PLZ: **28001**', gl: '— en «PLZ» va el número, nunca la ciudad' },
+        { text: 'Bitte ankreuzen: Kurs am Abend? **[X] ja** · [ ] nein', gl: '— «ankreuzen» = marcar la casilla con una cruz' },
+        { text: 'Unterschrift: *Pablo Ortega*', gl: '— sin firma el formulario no está completo' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Richtig oder falsch?',
-      frage: 'Was stimmt über das Schreiben? ~~(¿Verdadero o falso?)~~',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Das Schreiben hat 2 Teile.',
-        'Du hast ca. 60 Minuten Zeit.',
-        'In Teil 2 schreibst du ca. 100 Wörter.',
+      type: 'beispiele',
+      kicker: 'Merken',
+      titel: 'Das Schreiben in vier Sätzen',
+      items: [
+        { text: 'Das Schreiben hat **2 Teile**.', gl: '— dos tareas, no más' },
+        { text: 'In Teil 1 füllst du ein **Formular** aus.', gl: '— completas los datos que faltan' },
+        { text: 'In Teil 2 schreibst du einen Text mit **ca. 30 Wörtern** — nicht 100!', gl: '— un texto muy breve' },
+        { text: 'Du hast **ca. 20 Minuten** Zeit — für beide Teile zusammen.', gl: '— 20 minutos en total' },
       ],
-      loesungen: [
-        '**Richtig** — Teil 1 Formular, Teil 2 kurzer Text.',
-        '**Falsch** — du hast ca. **20 Minuten**.',
-        '**Falsch** — nur ca. **30 Wörter**.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Dein Formular',
-      frage: 'Fülle aus mit deinen Daten: Vorname, Familienname, Wohnort, Land.',
-      loesungLabel: 'Muster',
-      loesung: '*Vorname: María · Familienname: García · Wohnort: Lima · Land: Peru*',
     },
 
     { type: 'rule' },
@@ -187,7 +165,7 @@ export default {
       eyebrow: 'Selbstcheck',
       items: [
         'Ich kenne die 2 Teile vom Schreiben und die Zeit (ca. 20 Minuten).',
-        'Ich weiß, was bewertet wird: verständlich + komplett.',
+        'Ich kenne die zwei Prüfer-Fragen: verständlich + komplett.',
         'Ich verstehe die Wörter eines deutschen Formulars.',
       ],
     },

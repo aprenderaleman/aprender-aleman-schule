@@ -15,7 +15,7 @@ export default {
       type: 'lernziele',
       eyebrow: 'Lernziele',
       items: [
-        'wissen, welche Texte im Lesen kommen (Notizen, E-Mails, Anzeigen, Schilder)',
+        'die Texte im Lesen kennen: Notizen, E-Mails, Anzeigen, Schilder',
         'die Strategie kennen: nicht alles verstehen — **die Information suchen**',
         '*richtig* oder *falsch* ankreuzen und den Antwortbogen benutzen',
       ],
@@ -94,46 +94,28 @@ export default {
         { text: 'Aufgabe: „Der Kurs ist im Raum 5.“ → **falsch**', gl: '— El texto dice „nicht im Raum 5“.' },
       ],
     },
-
-    { type: 'rule' },
-
-    // ── Übungen ───────────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Welcher Text ist das?',
-      frage: 'Notiz, Anzeige oder Schild? ~~(¿Qué tipo de texto es?)~~',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        '„Zu verkaufen: Fahrrad, nur 50 Euro. Tel. 030 44 55 66“',
-        '„Heute geschlossen“',
-        '„Hallo Lisa, ich komme um 8 Uhr. Bis morgen!“',
-      ],
-      loesungen: [
-        'Das ist eine **Anzeige**. ~~(un anuncio: algo se vende)~~',
-        'Das ist ein **Schild**. ~~(un letrero en una puerta)~~',
-        'Das ist eine **Notiz**. ~~(una nota personal)~~',
+      type: 'beispiele',
+      kicker: 'Textsorten',
+      titel: 'Welcher Text ist das?',
+      items: [
+        { text: '„Zu verkaufen: Fahrrad, nur 50 Euro. Tel. 030 44 55 66“ → Das ist eine **Anzeige**.', gl: '— un anuncio: algo se vende' },
+        { text: '„Heute geschlossen“ → Das ist ein **Schild**.', gl: '— un letrero en una puerta' },
+        { text: '„Hallo Lisa, ich komme um 8 Uhr. Bis morgen!“ → Das ist eine **Notiz**.', gl: '— una nota personal' },
+        { text: '„Am Montag kein Wasser im Haus.“ → Das ist ein **Aushang**.', gl: '— un aviso colgado en el portal' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Richtig oder falsch?',
-      frage: 'Lies noch einmal die Notiz von Ana. Richtig oder falsch?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Ana kommt um 18 Uhr.',
-        'Der Kurs ist im Raum 5.',
+      type: 'beispiele',
+      kicker: 'Modell',
+      titel: 'Eine Anzeige, zwei Informationen',
+      items: [
+        { text: 'Anzeige: „Deutschkurs am Abend, montags 19-21 Uhr, 40 Euro pro Monat.“', gl: '— el anuncio completo: 20 palabras' },
+        { text: 'Frage: *Wie viel kostet der Kurs?* → **40 Euro pro Monat**', gl: '— busca el precio: el número con „Euro“' },
+        { text: 'Frage: *Wann ist der Kurs?* → **montags von 19 bis 21 Uhr**', gl: '— busca el día y la hora' },
+        { text: 'Aufgabe: „Der Kurs ist am Morgen.“ → **falsch** — im Text steht „am Abend“.', gl: '— la palabra «Kurs» está, pero la frase es falsa' },
+        { text: 'Am Ende: die Lösung auf dem **Antwortbogen** ankreuzen.', gl: '— y pasa tu cruz a la hoja de respuestas' },
       ],
-      loesungen: [
-        '**Richtig.** Im Text steht: „ich komme heute um 18 Uhr“.',
-        '**Falsch.** Im Text steht: „im Raum 2, **nicht** im Raum 5“.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Die Information suchen',
-      frage: 'Lies die Anzeige: „Deutschkurs am Abend, montags 19-21 Uhr, 40 Euro pro Monat.“ — Wie viel kostet der Kurs? Wann ist der Kurs?',
-      loesungLabel: 'Lösung',
-      loesung: 'Der Kurs kostet **40 Euro pro Monat**. Er ist **montags von 19 bis 21 Uhr**. ~~Dos datos, dos números — los encuentras sin entender cada palabra.~~',
     },
 
     { type: 'rule' },
@@ -183,7 +165,7 @@ export default {
       type: 'selbstcheck',
       eyebrow: 'Selbstcheck',
       items: [
-        'Ich weiß, welche Texte im Lesen kommen (ca. 25 Minuten, sehr kurze Texte).',
+        'Ich kenne die Texte im Lesen: sehr kurze Texte, ca. 25 Minuten.',
         'Ich suche die Information — ich muss nicht jedes Wort verstehen.',
         'Ich kreuze richtig/falsch an und übertrage alles auf den Antwortbogen.',
       ],

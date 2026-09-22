@@ -109,50 +109,27 @@ export default {
         { text: 'Karte „Freizeit: Hobby“ — **Hast** du ein Hobby? — Ja, ich schwimme gern.', gl: '— ¿Tienes un hobby? — Sí, me gusta nadar.' },
       ],
     },
-
-    { type: 'rule' },
-
-    // ── Übungen ───────────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Fragetyp erkennen',
-      frage: 'W-Frage oder Ja/Nein-Frage?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Wo arbeitest du?',
-        'Trinkst du Tee?',
-        'Wann isst du zu Mittag?',
-        'Hast du Kinder?',
-      ],
-      loesungen: [
-        'Wo arbeitest du? — **W-Frage**',
-        'Trinkst du Tee? — **Ja/Nein-Frage** ~~(verbo primero)~~',
-        'Wann isst du zu Mittag? — **W-Frage**',
-        'Hast du Kinder? — **Ja/Nein-Frage**',
+      type: 'beispiele',
+      kicker: 'Die zwei Muster',
+      titel: 'W-Frage oder Ja/Nein-Frage?',
+      items: [
+        { text: '**Wo** arbeitest du? → W-Frage', gl: '— empieza con palabra W' },
+        { text: '**Trinkst** du Tee? → Ja/Nein-Frage', gl: '— el verbo va primero' },
+        { text: '**Wann** isst du zu Mittag? → W-Frage', gl: '— pregunta por la hora' },
+        { text: '**Hast** du Kinder? → Ja/Nein-Frage', gl: '— respuesta: Ja, … / Nein, …' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Fragen aus Karten bilden',
-      frage: 'Bilde eine Frage mit der Karte. ~~Haz una pregunta con cada tarjeta.~~',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Karte „Essen: Pizza“ (Ja/Nein-Frage)',
-        'Karte „Wohnen: Wohnung“ (W-Frage mit *wo*)',
-        'Karte „Tagesablauf: Arbeit“ (W-Frage mit *wann*)',
+      type: 'beispiele',
+      kicker: 'Noch drei Karten',
+      titel: 'Frage und Antwort — Modelle',
+      items: [
+        { text: 'Karte „Essen: Pizza“ — **Isst** du gern Pizza? — Ja, sehr gern!', gl: '— también vale: Magst du Pizza?' },
+        { text: 'Karte „Wohnen: Wohnung“ — **Wo** ist deine Wohnung? — Im Zentrum.', gl: '— o: Wie ist deine Wohnung?' },
+        { text: 'Karte „Tagesablauf: Arbeit“ — **Wann** gehst du zur Arbeit? — Um 8 Uhr.', gl: '— o: Wann arbeitest du?' },
+        { text: 'Karte „Freizeit: Musik“ — **Hörst** du gern Musik? — Ja, ich höre gern Musik.', gl: '— cualquier pregunta correcta con la palabra de la tarjeta vale' },
       ],
-      loesungen: [
-        '**Isst** du gern Pizza? ~~(también vale: Magst du Pizza?)~~',
-        '**Wo** ist deine Wohnung? ~~(o: Wie ist deine Wohnung?)~~',
-        '**Wann** gehst du zur Arbeit? ~~(o: Wann arbeitest du?)~~',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren — Frage UND Antwort',
-      frage: 'Karte „Freizeit: Musik“. Schreibe eine Frage **und** eine Antwort. ~~En el examen haces las dos cosas: preguntar y responder.~~',
-      loesungLabel: 'Mögliche Lösung',
-      loesung: '*— Hörst du gern Musik? — Ja, ich höre gern Musik.* ~~También valen: „Was für Musik hörst du?“, „Machst du Musik?“ — cualquier pregunta correcta con la palabra de la tarjeta.~~',
     },
 
     { type: 'rule' },

@@ -16,7 +16,7 @@ export default {
       items: [
         'wissen: Nur der **Antwortbogen** zählt',
         'richtig ankreuzen und korrigieren',
-        'wissen, was du am Prüfungstag mitbringst',
+        'die Checkliste für den Prüfungstag kennen',
       ],
     },
 
@@ -51,7 +51,7 @@ export default {
       titel: 'Papier + Antwortbogen',
       absaetze: [
         'Die A1-Prüfung ist meistens eine **Papierprüfung**. Du bekommst **Aufgabenblätter** ~~(cuadernillos con las tareas)~~ und einen **Antwortbogen**. **Wichtig: Nur der Antwortbogen wird korrigiert!** ~~Lo que escribas en el cuadernillo no cuenta para la nota.~~',
-        'An manchen Zentren gibt es die Prüfung auch **digital** am Computer — ~~una posibilidad cada vez más frecuente~~. Frag dein **Prüfungszentrum**, welches Format du hast.',
+        'An manchen Zentren gibt es die Prüfung auch **digital** am Computer — ~~una posibilidad cada vez más frecuente~~. Frag dein **Prüfungszentrum**: Papier oder Computer?',
       ],
     },
     {
@@ -103,49 +103,19 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Wörter erkennen',
-      frage: 'Ordne zu: Deutsch → Spanisch. ~~(Une cada palabra con su traducción.)~~',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'ankreuzen → ?',
-        'übertragen → ?',
-        'der Antwortbogen → ?',
-        'der Radiergummi → ?',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Am Prüfungstag',
+      items: [
+        { text: 'Hier ist mein **Ausweis**.', gl: '— Aquí está mi documento.' },
+        { text: 'Ich habe einen **Bleistift** und einen **Radiergummi**.', gl: '— Tengo un lápiz y una goma.' },
+        { text: 'Ich schreibe mit dem **Kugelschreiber**.', gl: '— Escribo con el bolígrafo.' },
+        { text: 'Das **Aufgabenblatt** zählt nicht.', gl: '— El cuadernillo no cuenta.' },
+        { text: 'Ich **korrigiere** den Fehler.', gl: '— Corrijo el error.' },
+        { text: 'Die **Zeit** ist um — ich kontrolliere den **Antwortbogen**.', gl: '— Se acaba el tiempo: reviso la hoja de respuestas.' },
       ],
-      loesungen: [
-        'ankreuzen → **marcar con una cruz**',
-        'übertragen → **pasar, transferir**',
-        'der Antwortbogen → **la hoja de respuestas**',
-        'der Radiergummi → **la goma de borrar**',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Richtig oder falsch?',
-      frage: 'Richtig (R) oder falsch (F)? ~~(¿Verdadero o falso?)~~',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Nur der Antwortbogen zählt.',
-        'Ich übertrage alles in der letzten Minute.',
-        'Ein Wörterbuch ist in der Prüfung okay.',
-        'Ich kann einen Fehler korrigieren.',
-      ],
-      loesungen: [
-        '**Richtig** — das Aufgabenblatt zählt nicht.',
-        '**Falsch** — übertrage **sofort**, Teil für Teil.',
-        '**Falsch** — kein Wörterbuch, kein Handy.',
-        '**Richtig** — falsches Feld ausmalen, neu ankreuzen.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Deine Checkliste',
-      frage: 'Schreibe einen Satz: Was nimmst du zur Prüfung mit? (3 Dinge)',
-      loesungLabel: 'Muster',
-      loesung: '*Ich nehme meinen Ausweis, einen Kuli und einen Radiergummi mit.* ~~(También vale una lista simple: Ausweis, Kuli, Radiergummi.)~~',
     },
 
     { type: 'rule' },
@@ -193,7 +163,7 @@ export default {
       items: [
         'Ich weiß: Nur der Antwortbogen zählt.',
         'Ich kann richtig ankreuzen und einen Fehler korrigieren.',
-        'Ich weiß, was ich mitbringe — und dass ich rechtzeitig übertrage.',
+        'Ich kenne meine Checkliste. Ich übertrage die Antworten rechtzeitig ~~(a tiempo)~~.',
       ],
     },
     {

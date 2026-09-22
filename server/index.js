@@ -4498,10 +4498,10 @@ PLATTFORM-INFORMATIONEN:
 - Die Karteikarten nutzen Spaced Repetition zum Vokabellernen
 - Der Fortschritt wird automatisch gespeichert
 - Die App funktioniert im Browser (Desktop und Mobil)
-- Bei schweren technischen Problemen: info@aprender-aleman.de
+- Bei schweren technischen Problemen: bitte den Support über die App-Einstellungen kontaktieren
 
 REGELN:
-- Wenn du etwas nicht weißt, sage, dass man info@aprender-aleman.de kontaktieren soll
+- Wenn du etwas nicht weißt, sage, dass der Support über die App-Einstellungen kontaktiert werden kann
 - Erfinde keine Funktionen, die nicht existieren
 - Sei kurz: maximal 3-4 Sätze pro Antwort
 - Wenn nach Deutsch-Grammatik/Vokabeln gefragt wird, empfehle den "Deutsch-Tutor"-Modus`
@@ -4997,6 +4997,14 @@ app.get('/api/deutscha1/lessons/:id', authMiddleware, deutschC1RoleGate, subscri
   res.json(lesson)
 })
 
+
+// Übungsheft por lección (A1): mismo triple gate que las lecciones.
+app.get('/api/deutscha1/heft/:id', authMiddleware, deutschC1RoleGate, subscriptionMiddleware, async (req, res) => {
+  const { getHeft } = await import('./deutscha1/heft/index.js')
+  const heft = getHeft(parseInt(req.params.id))
+  if (!heft) return res.status(404).json({ error: 'Kein Übungsheft für diese Lektion.' })
+  res.json(heft)
+})
 // ─── SERVE FRONTEND IN PRODUCTION ────────────────────
 const distPath = path.join(__dirname, '..', 'dist')
 app.use(express.static(distPath))

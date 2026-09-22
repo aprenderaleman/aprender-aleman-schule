@@ -16,7 +16,7 @@ export default {
       items: [
         'die wichtigsten unregelmäßigen Verben kennen (sprechen, essen, fahren …)',
         'wissen: nur *du* und *er/sie/es* ändern den Vokal',
-        'sagen, welche Sprachen du sprichst',
+        'sagen: „Ich spreche Spanisch und ein bisschen Deutsch.“',
       ],
     },
 
@@ -87,49 +87,30 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Richtig oder falsch?',
-      frage: 'Wähle die richtige Form.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Er (sprecht / spricht) Englisch.',
-        'Du (fahrst / fährst) nach Wien.',
-        'Sie (lest / liest) gern.',
-        'Ich (spreche / sprich) Spanisch.',
-      ],
-      loesungen: [
-        'Er **spricht** Englisch.',
-        'Du **fährst** nach Wien.',
-        'Sie **liest** gern.',
-        'Ich **spreche** Spanisch. ~~(„ich“ nunca cambia la vocal)~~',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Fragen mit Vokalwechsel',
+      items: [
+        { text: 'Was **isst** du gern? — Ich **esse** gern Käse.', gl: '— ¿Qué te gusta comer? — Me gusta el queso.' },
+        { text: '**Liest** du die Zeitung?', gl: '— ¿Lees el periódico?' },
+        { text: 'Wann **fährst** du nach Hause?', gl: '— ¿Cuándo vas a casa?' },
+        { text: '**Siehst** du das Schild?', gl: '— ¿Ves el cartel?' },
+        { text: '**Nimmst** du den Bus oder den Zug?', gl: '— ¿Tomas el bus o el tren?' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Verben ergänzen',
-      frage: 'Ergänze das Verb in der richtigen Form.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Du ___ Pizza. (essen)',
-        'Er ___ den Zug. (nehmen)',
-        'Das Baby ___ . (schlafen)',
-        '___ du den Film? (sehen)',
+      type: 'beispiele',
+      kicker: 'du und er/sie/es',
+      titel: 'Die dritte Person im Alltag',
+      items: [
+        { text: 'Mein Sohn **spricht** gut Deutsch.', gl: '— Mi hijo habla bien alemán.' },
+        { text: 'Sie **isst** einen Apfel.', gl: '— Ella come una manzana.' },
+        { text: 'Er **sieht** einen Film.', gl: '— Él ve una película.' },
+        { text: 'Oma **schläft** viel.', gl: '— La abuela duerme mucho.' },
+        { text: 'Der Mann **nimmt** ein Taxi.', gl: '— El hombre toma un taxi.' },
       ],
-      loesungen: [
-        'Du **isst** Pizza.',
-        'Er **nimmt** den Zug.',
-        'Das Baby **schläft**.',
-        '**Siehst** du den Film?',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Über eine Person',
-      frage: 'Schreibe 3 Sätze über einen Freund / eine Freundin (er/sie): sprechen, essen, fahren.',
-      loesungLabel: 'Muster',
-      loesung: '*Meine Freundin spricht Englisch. Sie isst gern Pizza. Sie fährt mit dem Bus.*',
     },
 
     { type: 'rule' },
@@ -140,7 +121,7 @@ export default {
       eyebrow: 'Prüfungsbezug',
       modul: 'Sprechen · Teil 1',
       titel: 'Sprachen',
-      anweisung: 'Im Sprechen Teil 1 sagst du, welche Sprachen du sprichst. Ergänze sprechen:',
+      anweisung: 'Im Sprechen Teil 1 sprichst du über deine Sprachen. Ergänze sprechen:',
       absaetze: [
         '„Ich {1} Spanisch und Englisch. — Welche Sprachen {2} du? — Meine Frau {3} auch Spanisch.“',
       ],

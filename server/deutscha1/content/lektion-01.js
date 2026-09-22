@@ -14,8 +14,8 @@ export default {
       type: 'lernziele',
       eyebrow: 'Lernziele',
       items: [
-        'wissen, was das Zertifikat A1 ist',
-        'die 4 Teile der Prüfung kennen (Hören, Lesen, Schreiben, Sprechen)',
+        'das Zertifikat A1 kennen',
+        'die 4 Teile kennen: Hören, Lesen, Schreiben, Sprechen',
         'den Weg kennen: Anmeldung → Prüfung → Zeugnis',
       ],
     },
@@ -106,49 +106,19 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Wörter erkennen',
-      frage: 'Ordne zu: Deutsch → Spanisch. ~~(Une cada palabra con su traducción.)~~',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'die Prüfung → ?',
-        'bestehen → ?',
-        'die Anmeldung → ?',
-        'das Zeugnis → ?',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Die Prüfung — dein Plan',
+      items: [
+        { text: 'Die **Anmeldung** ist online.', gl: '— La inscripción es online.' },
+        { text: 'Ich **höre** einen Dialog.', gl: '— Escucho un diálogo.' },
+        { text: 'Ich **lese** einen Text und **schreibe** einen kurzen Text.', gl: '— Leo un texto y escribo un texto corto.' },
+        { text: 'Ich **bestehe** mit 60 Prozent.', gl: '— Apruebo con el 60 %.' },
+        { text: 'Das **Zertifikat** ist für das Visum.', gl: '— El certificado es para el visado.' },
+        { text: 'Ich bekomme mein **Zeugnis** im Juni.', gl: '— Recibo mi diploma en junio.' },
       ],
-      loesungen: [
-        'die Prüfung → **el examen**',
-        'bestehen → **aprobar**',
-        'die Anmeldung → **la inscripción**',
-        'das Zeugnis → **el diploma**',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Richtig oder falsch?',
-      frage: 'Richtig (R) oder falsch (F)? ~~(¿Verdadero o falso?)~~',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Das A1 hat vier Teile.',
-        'Sprechen ist allein mit dem Prüfer.',
-        'Du bestehst mit 60 % der Punkte.',
-        'Man kann die Teile einzeln bestehen.',
-      ],
-      loesungen: [
-        '**Richtig** — Hören, Lesen, Schreiben, Sprechen.',
-        '**Falsch** — Sprechen ist **in der Gruppe**.',
-        '**Richtig** — 60 % insgesamt.',
-        '**Falsch** — das A1 ist **eine** Prüfung. ~~(No es modular.)~~',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Dein Plan',
-      frage: 'Schreibe 2 Sätze: Wann machst du die Prüfung? Warum? ~~(Lo importante es el plan.)~~',
-      loesungLabel: 'Muster',
-      loesung: '*Ich mache die Prüfung im Juni. Ich brauche das Zertifikat für das Visum.*',
     },
 
     { type: 'rule' },
@@ -159,7 +129,7 @@ export default {
       eyebrow: 'Prüfungsbezug',
       modul: 'Alle Teile',
       titel: 'Welcher Teil ist das?',
-      anweisung: 'Ordne die Aufgabe dem Prüfungsteil zu: Hören, Lesen, Schreiben oder Sprechen? ~~(¿A qué parte del examen pertenece cada tarea?)~~',
+      anweisung: 'Ordne zu: Welcher Teil ist das — Hören, Lesen, Schreiben oder Sprechen? ~~(¿A qué parte del examen va cada tarea?)~~',
       absaetze: [
         'a) Ein Formular ausfüllen ~~(rellenar un formulario)~~',
         'b) Eine Durchsage am Bahnhof verstehen ~~(un aviso por megafonía)~~',
@@ -198,8 +168,8 @@ export default {
       type: 'selbstcheck',
       eyebrow: 'Selbstcheck',
       items: [
-        'Ich weiß, was das Zertifikat A1 ist und wofür ich es brauche.',
-        'Ich kenne die 4 Teile der Prüfung — und: Sprechen ist in der Gruppe.',
+        'Ich kenne das Zertifikat A1. Ich weiß: Ich brauche es z. B. für das Visum.',
+        'Ich kenne die 4 Teile. Sprechen ist in der Gruppe.',
         'Ich kenne den Weg: Anmeldung → Prüfung → Zeugnis.',
       ],
     },

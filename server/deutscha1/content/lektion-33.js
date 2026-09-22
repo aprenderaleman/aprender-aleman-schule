@@ -112,52 +112,28 @@ export default {
         },
       ],
     },
-
-    { type: 'rule' },
-
-    // ── Übungen ───────────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · der, die oder das?',
-      frage: 'Ergänze den Artikel. ~~(Completa el artículo.)~~',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        '___ Küche ~~(la cocina)~~',
-        '___ Bett ~~(la cama)~~',
-        '___ Tisch ~~(la mesa)~~',
-        '___ Wohnung ~~(el piso)~~',
-      ],
-      loesungen: [
-        '**die** Küche',
-        '**das** Bett',
-        '**der** Tisch',
-        '**die** Wohnung',
+      type: 'beispiele',
+      kicker: 'Modell',
+      titel: 'Eine Wohnung komplett beschreiben',
+      items: [
+        { text: 'Ich wohne in einer kleinen **Wohnung** in Valencia.', gl: '— dónde vives: piso + ciudad' },
+        { text: 'Meine Wohnung **hat** zwei Zimmer, eine **Küche** und ein **Bad**.', gl: '— las habitaciones, con haben' },
+        { text: 'Das **Wohnzimmer** ist groß und schön.', gl: '— cómo es, con sein' },
+        { text: 'Das **Bett** und der **Schrank** sind neu.', gl: '— dos muebles, un adjetivo' },
+        { text: 'Meine **Adresse** ist Calle Colón 8, Valencia.', gl: '— calle + número, luego la ciudad' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Sätze ergänzen',
-      frage: 'Ergänze das Wort. ~~(Completa la palabra.)~~',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Meine Wohnung ___ drei Zimmer. (haben)',
-        'Ich schlafe im ___. ~~(dormitorio)~~',
-        'Der Schrank ist ___ Schlafzimmer. (im / am)',
-        'Wie ist deine ___? ~~(dirección)~~',
+      type: 'beispiele',
+      kicker: 'Wo?',
+      titel: 'in der / im — die Möbel und die Zimmer',
+      items: [
+        { text: 'Ich koche **in der Küche**.', gl: '— die Küche → in der' },
+        { text: 'Ich schlafe **im Schlafzimmer**.', gl: '— das Schlafzimmer → im' },
+        { text: 'Der **Tisch** und die **Stühle** sind im Wohnzimmer.', gl: '— la mesa y las sillas, en el salón' },
+        { text: 'Der **Schrank** ist im Schlafzimmer.', gl: '— el armario, en el dormitorio' },
       ],
-      loesungen: [
-        'Meine Wohnung **hat** drei Zimmer.',
-        'Ich schlafe im **Schlafzimmer**.',
-        'Der Schrank ist **im** Schlafzimmer.',
-        'Wie ist deine **Adresse**?',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Deine Wohnung',
-      frage: 'Beschreibe deine Wohnung: Zimmer, ein Möbelstück, deine Stadt (3-4 Sätze, ca. 25 Wörter).',
-      loesungLabel: 'Mögliche Lösung',
-      loesung: '*Ich wohne in einer kleinen Wohnung in Valencia. Meine Wohnung hat zwei Zimmer, eine Küche und ein Bad. Das Wohnzimmer ist schön. Das Bett ist neu.* ~~También vale con «Haus», con otros muebles o con tu dirección real.~~',
     },
 
     { type: 'rule' },
