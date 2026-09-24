@@ -1087,10 +1087,38 @@ app.get('/api/auth/sso-verify', async (req, res) => {
 //
 // Body: { email, full_name?, phone?, secret }
 // Returns: { ssoToken, userId, redirectUrl }
+// Nivel del alumno según b2c (students.current_level). Hasta 2026-09-25
+// ningún alumno creado por SSO tenía fila en `students`, así que todos
+// aparecían en A1 aunque b2c los tuviera en A2/B1 (caso Yenny). b2c lo
+// manda en el sso-link y en el bulk sync; aquí se persiste igual que lo
+// hace el admin de SCHULE al editar un usuario.
+const SCHULE_LEVELS = ['a1', 'a2', 'b1', 'b2', 'c1', 'c2']
+async function upsertStudentLevelFromB2c(userId, rawLevel) {
+  if (!userId || !rawLevel) return
+  let level = String(rawLevel).trim().toLowerCase()
+  if (level === 'a0') level = 'a1'
+  if (!SCHULE_LEVELS.includes(level)) return
+  const [stu] = await pool.query('SELECT id, level FROM students WHERE userId = ? LIMIT 1', [userId])
+  if (stu.length > 0) {
+    if (stu[0].level !== level) {
+      await pool.query('UPDATE students SET level = ? WHERE userId = ?', [level, userId])
+    }
+    return
+  }
+  const studentId = crypto.randomUUID()
+  await pool.query('SET FOREIGN_KEY_CHECKS=0')
+  await pool.query('INSERT INTO students (id, level, userId, classType) VALUES (?, ?, ?, ?)',
+    [studentId, level, userId, null])
+  await pool.query('UPDATE users SET studentId = ? WHERE id = ?', [studentId, userId])
+  await pool.query('SET FOREIGN_KEY_CHECKS=1')
+}
+
 app.post('/api/b2c/sso-link', async (req, res) => {
   try {
     const {
       email, full_name, phone, secret,
+      // Nivel de curso del alumno en b2c (A1..C1). Opcional.
+      level: incomingLevel = null,
       // Rol a asignar si el usuario NO existe todavía en Schule.
       // Alumnos: 'schule_student' (default). Teachers: 'teacher'. Admins: 'admin'.
       // Si el usuario ya existe, su role local se respeta.
@@ -1200,6 +1228,9 @@ app.post('/api/b2c/sso-link', async (req, res) => {
                                  trialEndsAt = DATE_ADD(NOW(), INTERVAL 100 YEAR)`,
         [userId]
       )
+      // Nivel según b2c — no bloquea el SSO si falla.
+      await upsertStudentLevelFromB2c(userId, incomingLevel).catch(e =>
+        console.error('[sso-link] level upsert failed:', e?.message || e))
     }
 
     // 3. Generate the SSO token — incluye info de impersonación si aplica
@@ -5317,6 +5348,7 @@ async function runB2cSync(triggeredBy = 'cron') {
               [newId, s.stripe_customer_id || null, s.stripe_subscription_id || null]
             )
           } catch (e) { /* swallow */ }
+          await upsertStudentLevelFromB2c(newId, s.current_level).catch(() => {})
         }
         inserted++
       } else {
@@ -5348,6 +5380,7 @@ async function runB2cSync(triggeredBy = 'cron') {
               [s.stripe_customer_id || null, s.stripe_subscription_id || null, existing[0].id]
             )
           } catch { /* may not have row yet */ }
+          await upsertStudentLevelFromB2c(existing[0].id, s.current_level).catch(() => {})
         }
         updated++
       }
