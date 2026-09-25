@@ -120,6 +120,18 @@ export default {
 
     { type: 'rule' },
 
+    // ── Texte zum Mitlesen ──────────────────────────────────────────
+    {
+      type: 'modell',
+      eyebrow: 'Texte zum Mitlesen',
+      thema: 'Lies den Aushang genau. ~~(Lee el cartel con calma: así son los textos del examen.)~~',
+      absaetze: [
+        '==Text · Aushang:== „**Schwimmbad Nord** — Im August ist das Schwimmbad geschlossen. Ab 1. September öffnen wir wieder: Montag bis Samstag von 8 bis 20 Uhr, Sonntag von 9 bis 18 Uhr. Kinder unter 6 Jahren zahlen keinen Eintritt.“',
+      ],
+    },
+
+    { type: 'rule' },
+
     // ── Prüfungsbezug ─────────────────────────────────────────────
     {
       type: 'pruefungsaufgabe',

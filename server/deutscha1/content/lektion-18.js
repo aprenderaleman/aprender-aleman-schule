@@ -107,6 +107,20 @@ export default {
 
     { type: 'rule' },
 
+    // ── Transkripte zum Mitlesen ────────────────────────────────────
+    {
+      type: 'modell',
+      eyebrow: 'Transkripte — so klingen die Texte',
+      thema: 'Lies die Transkripte laut. ~~(Lee los textos en voz alta: así suenan en el examen.)~~',
+      absaetze: [
+        '==Transkript 1 · Das Gespräch:==\n„— Hallo Tom! Gehen wir morgen ins Kino?\n— Ja, gern. Um sieben?\n— Hm, sieben ist zu früh. Lieber um acht.\n— Okay, um acht am Kino. Bis morgen!“',
+        '==Transkript 2 · Der Einkauf:==\n„— Ich gehe in den Supermarkt. Brauchen wir etwas?\n— Ja, wir brauchen Milch und Brot.\n— Haben wir noch Käse?\n— Ja, Käse haben wir noch.\n— Gut, dann kaufe ich Milch und Brot.“',
+        '==Transkript 3 · Der Anrufbeantworter:== „Hallo Frau Ruiz, hier ist die Zahnarztpraxis Doktor Wolf. Ihr Termin am Donnerstag um neun Uhr geht leider nicht. Können Sie am Freitag um elf Uhr kommen? Bitte rufen Sie uns zurück. Danke, auf Wiederhören!“',
+      ],
+    },
+
+    { type: 'rule' },
+
     // ── Prüfungsbezug ─────────────────────────────────────────────
     {
       type: 'pruefungsaufgabe',

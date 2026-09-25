@@ -129,6 +129,20 @@ export default {
 
     { type: 'rule' },
 
+    // ── Transkripte zum Mitlesen ────────────────────────────────────
+    {
+      type: 'modell',
+      eyebrow: 'Transkripte — so klingen die Texte',
+      thema: 'Lies jedes Transkript nur einmal. ~~(Una sola vez, sin volver atrás: en el examen es audio.)~~',
+      absaetze: [
+        '==Transkript 1 · Durchsage am Bahnhof:== „Achtung an Gleis 5: Der Zug nach München, Abfahrt vierzehn Uhr dreißig, hat heute leider zwanzig Minuten Verspätung. Der Zug fährt heute auch nicht von Gleis 5, sondern von Gleis 15. Ich wiederhole: Der Zug nach München fährt heute von Gleis 15.“',
+        '==Transkript 2 · Durchsage im Supermarkt:== „Liebe Kunden, heute im Angebot: ein Kilo Äpfel für nur einen Euro neunzig. Im Erdgeschoss finden Sie jetzt auch frisches Brot von unserer Bäckerei. Wir haben heute bis zwanzig Uhr geöffnet. Wir wünschen Ihnen einen schönen Einkauf!“',
+        '==Transkript 3 · Anrufbeantworter:== „Hallo Frau Sánchez, hier ist die Praxis Dr. Klein. Ihr Termin morgen um halb zehn geht leider nicht. Können Sie um halb zwölf kommen? Bitte rufen Sie uns kurz an: null sechs neun — dreizehn — vierzig. Vielen Dank und auf Wiederhören!“',
+      ],
+    },
+
+    { type: 'rule' },
+
     // ── Prüfungsbezug ─────────────────────────────────────────────
     {
       type: 'pruefungsaufgabe',

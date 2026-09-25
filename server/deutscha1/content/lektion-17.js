@@ -114,6 +114,18 @@ export default {
 
     { type: 'rule' },
 
+    // ── Transkripte zum Mitlesen ────────────────────────────────────
+    {
+      type: 'modell',
+      eyebrow: 'Transkripte — so klingen die Texte',
+      thema: 'Lies das Transkript nur einmal. ~~(Léelo una sola vez: en el examen lo oyes.)~~',
+      absaetze: [
+        '==Transkript · Anrufbeantworter:== „Hallo Herr Weber, hier ist die Praxis Doktor Klein. Ihr Termin ist am Montag um 10 Uhr. Bis Montag, auf Wiederhören!“',
+      ],
+    },
+
+    { type: 'rule' },
+
     // ── Prüfungsbezug ─────────────────────────────────────────────
     {
       type: 'pruefungsaufgabe',

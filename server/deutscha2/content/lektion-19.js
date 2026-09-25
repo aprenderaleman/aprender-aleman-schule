@@ -112,6 +112,18 @@ export default {
 
     { type: 'rule' },
 
+    // ── Texte zum Mitlesen ──────────────────────────────────────────
+    {
+      type: 'modell',
+      eyebrow: 'Texte zum Mitlesen',
+      thema: 'Lies die Mitteilung genau. ~~(Lee el mensaje con calma: así son los textos del examen.)~~',
+      absaetze: [
+        '==Text · Kurze Mitteilung:== „Hallo Miguel, unser Deutschkurs beginnt morgen nicht um 18 Uhr, sondern erst um 19 Uhr. Frau Berger ist krank, Herr Lang macht den Unterricht. Bring bitte dein Buch mit — wir arbeiten mit Kapitel 5. Bis morgen! Carla“',
+      ],
+    },
+
+    { type: 'rule' },
+
     // ── Prüfungsbezug ─────────────────────────────────────────────
     {
       type: 'pruefungsaufgabe',

@@ -198,7 +198,7 @@ function Modell({ block }) {
       <Eyebrow>{block.eyebrow}</Eyebrow>
       <div className="c1-modell">
         <div className="c1-mhead">
-          <span>{block.thema}</span>
+          <span>{renderInline(block.thema || '')}</span>
           <span className="c1-wc">{block.woerter}</span>
         </div>
         <div className="c1-mbody">

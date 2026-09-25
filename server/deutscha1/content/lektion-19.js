@@ -111,6 +111,19 @@ export default {
 
     { type: 'rule' },
 
+    // ── Transkripte zum Mitlesen ────────────────────────────────────
+    {
+      type: 'modell',
+      eyebrow: 'Transkripte — so klingen die Texte',
+      thema: 'Lies die Transkripte laut. ~~(Lee los textos en voz alta: así suenan en el examen.)~~',
+      absaetze: [
+        '==Transkript 1 · Durchsage am Bahnhof:== „Achtung am Gleis 3: Der Zug nach München, Abfahrt zehn Uhr fünfzehn, hat heute circa zwanzig Minuten Verspätung. Der Zug fährt heute von Gleis 5 ab. Wir bitten um Entschuldigung.“',
+        '==Transkript 2 · Durchsage im Supermarkt:== „Liebe Kundinnen und Kunden, heute im Angebot: Äpfel, das Kilo nur zwei Euro fünfundvierzig. Und an der Kasse: Schokolade für einen Euro. Wir haben heute bis zwanzig Uhr geöffnet.“',
+      ],
+    },
+
+    { type: 'rule' },
+
     // ── Prüfungsbezug ─────────────────────────────────────────────
     {
       type: 'pruefungsaufgabe',

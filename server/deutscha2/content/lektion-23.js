@@ -117,6 +117,19 @@ export default {
 
     { type: 'rule' },
 
+    // ── Transkripte zum Mitlesen ────────────────────────────────────
+    {
+      type: 'modell',
+      eyebrow: 'Transkripte — so klingen die Texte',
+      thema: 'Lies jedes Transkript nur einmal. ~~(Una sola vez, sin volver atrás: en el examen es audio.)~~',
+      absaetze: [
+        '==Transkript 1 · Im Geschäft:==\n**Verkäufer:** „Guten Tag, kann ich Ihnen helfen?“\n**Frau:** „Ja, ich suche eine Jacke.“\n**Verkäufer:** „Diese blaue Jacke kostet 60 Euro. Aber heute ist sie im Angebot: nur 45 Euro.“\n**Frau:** „Toll, dann nehme ich sie!“',
+        '==Transkript 2 · Am Telefon:==\n**Lena:** „Hallo Paul! Wollen wir am Wochenende etwas machen?“\n**Paul:** „Gute Idee! Gehen wir am Samstag ins Schwimmbad?“\n**Lena:** „Am Samstag kann ich leider nicht. Da besuche ich meine Oma. Lieber am Sonntag.“\n**Paul:** „Okay, dann am Sonntag. Treffen wir uns um zehn?“\n**Lena:** „Hmm, besser um halb elf. Ich muss vorher noch einkaufen.“\n**Paul:** „Gut, um halb elf am Eingang. Bringst du etwas zu essen mit?“\n**Lena:** „Ja, ich mache Sandwiches. Und du kaufst die Getränke, okay?“\n**Paul:** „Machen wir. Bis Sonntag!“',
+      ],
+    },
+
+    { type: 'rule' },
+
     // ── Prüfungsbezug ─────────────────────────────────────────────
     {
       type: 'pruefungsaufgabe',

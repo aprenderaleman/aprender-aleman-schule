@@ -129,6 +129,18 @@ export default {
 
     { type: 'rule' },
 
+    // ── Transkripte zum Mitlesen ────────────────────────────────────
+    {
+      type: 'modell',
+      eyebrow: 'Transkripte — so klingen die Texte',
+      thema: 'Lies das Transkript nur einmal. ~~(Una sola vez, sin volver atrás: en el examen es audio.)~~',
+      absaetze: [
+        '==Transkript · Durchsage im Kurs:== „Liebe Teilnehmer, der Deutschkurs beginnt heute nicht um 9 Uhr, sondern erst um 9.30 Uhr. Bitte warten Sie im Raum 12.“',
+      ],
+    },
+
+    { type: 'rule' },
+
     // ── Prüfungsbezug ─────────────────────────────────────────────
     {
       type: 'pruefungsaufgabe',
