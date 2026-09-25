@@ -7,7 +7,7 @@ export default {
     {
       typ: 'grammatik',
       titel: 'Training',
-      anweisung: 'Die Aufgaben kommen aus dem ganzen Kurs. Wähle oder schreibe die richtige Form. ~~(Los ejercicios repasan todo el curso. Elige o escribe la forma correcta.)~~',
+      anweisung: 'Die Aufgaben kommen aus dem ganzen Kurs. Wähle die richtige Form. ~~(Los ejercicios repasan todo el curso. Elige la forma correcta.)~~',
       items: [
         { typ: 'mc', frage: 'Was ___ Sie von Beruf?', optionen: ['sind', 'bist', 'seid'], loesung: 0 },
         { typ: 'mc', frage: 'ein Apfel — zwei ___', optionen: ['Äpfel', 'Apfels', 'Apfeln'], loesung: 0 },

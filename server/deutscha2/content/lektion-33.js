@@ -120,50 +120,19 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Packung, Dose, Flasche oder Kilo?',
-      frage: 'Welche Menge passt?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'eine ___ Nudeln',
-        'eine ___ Öl',
-        'eine ___ Thunfisch ~~(atún)~~',
-        'ein ___ Kartoffeln',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Einkaufen und bestellen',
+      items: [
+        { text: 'Ich brauche zwei **Flaschen** Wasser und ein **Kilo** Tomaten.', gl: '— cantidades sin «de».' },
+        { text: 'Die Bananen sind heute **billiger als** die Äpfel.', gl: '— Komparativ + als.' },
+        { text: '**Ich hätte gern** ein Stück Käse, bitte.', gl: '— quisiera: la fórmula estrella.' },
+        { text: 'Wir möchten **bestellen**: zweimal die Suppe, bitte.', gl: '' },
+        { text: 'Entschuldigung, die Suppe ist **kalt**.', gl: '— así se reclama en A2.' },
+        { text: 'Ohne **Kassenbon** kann ich die Hose nicht umtauschen.', gl: '— sin tique no hay cambio.' },
       ],
-      loesungen: [
-        'eine **Packung** Nudeln',
-        'eine **Flasche** Öl',
-        'eine **Dose** Thunfisch',
-        'ein **Kilo** Kartoffeln',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Im Restaurant',
-      frage: 'Ergänze: reservieren · hätte · stimmt · umtauschen.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Ich möchte einen Tisch für zwei Personen ___ .',
-        'Ich ___ gern die Tomatensuppe und ein Wasser.',
-        'Das macht 18,50 Euro. — Zwanzig Euro, ___ so!',
-        'Die Jacke ist zu klein. Ich möchte sie ___ .',
-      ],
-      loesungen: [
-        'Ich möchte einen Tisch für zwei Personen **reservieren**.',
-        'Ich **hätte** gern die Tomatensuppe und ein Wasser.',
-        'Das macht 18,50 Euro. — Zwanzig Euro, **stimmt** so!',
-        'Die Jacke ist zu klein. Ich möchte sie **umtauschen**.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Vergleiche Markt und Supermarkt (4-5 Sätze, ca. 35 Wörter): Wo kaufst du ein? Was ist dort billiger oder frischer? Was kaufst du am liebsten?',
-      loesungLabel: 'Mögliche Lösung',
-      loesung:
-        'Ich kaufe **am liebsten** auf dem Markt ein. Das Obst ist dort **frischer als** im Supermarkt. Aber der Supermarkt ist **billiger**: Eine Packung Nudeln kostet nur 99 Cent. Käse kaufe ich nur im Angebot. ~~(Lo que mira el corrector: dos comparativos y una cantidad tipo Packung/Kilo.)~~',
     },
 
     { type: 'rule' },

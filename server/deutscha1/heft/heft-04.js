@@ -7,7 +7,7 @@ export default {
     {
       typ: 'grammatik',
       titel: 'Grammatik',
-      anweisung: 'Wähle oder schreibe die richtige Form. ~~(Elige o escribe la forma correcta.)~~',
+      anweisung: 'Wähle die richtige Form. ~~(Elige la forma correcta.)~~',
       items: [
         { typ: 'mc', frage: 'Ich ___ María.', optionen: ['bin', 'bist', 'ist'], loesung: 0 },
         { typ: 'mc', frage: '___ du aus Spanien?', optionen: ['Bist', 'Bin', 'Seid'], loesung: 0 },

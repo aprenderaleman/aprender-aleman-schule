@@ -52,14 +52,14 @@ export default {
         {
           badge: 'Nom.',
           titel: 'Wiederholung: wie ein',
-          text: 'Im Nominativ haben Possessivartikel die __Endungen von ein__: *mein Bruder, meine Mutter, mein Auto, meine Eltern*. ~~Igual que en el A1 — si dudas, ahí está la tabla completa.~~',
+          text: 'Im Nominativ haben Possessivartikel die __Endungen von ein__: *mein Bruder, meine Mutter, mein Auto, meine Eltern*. ~~Igual que en el A1; la tabla completa viene después de estos pasos.~~',
         },
         {
           badge: 'Akk.',
           titel: 'Akkusativ: -en beim Maskulinum',
           text: 'Nur maskulin ändert sich: __meinen, deinen, seinen, unseren__ … ~~(como einen)~~\n__Ich besuche **meinen** Bruder.__ · __Wir fragen **unseren** Lehrer.__ Feminin, neutral, Plural: wie im Nominativ.',
         },
-          {
+        {
           badge: 'Dat. NEU',
           titel: 'Dativ: meinem, meiner, meinen + n',
           text: 'Nach den Dativ-Präpositionen ~~(Lektion 9)~~ __mit, bei, von, zu__: maskulin/neutral → __mein**em**__, feminin → __mein**er**__, Plural → __mein**en**__ + **-n** am Nomen.\n__mit **meinem** Bruder__ · __bei **meiner** Familie__ · __von **unseren** Eltern__ · __mit **meinen** Freunde**n**__ ~~(ojo: en plural también el sustantivo añade -n)~~',
@@ -100,59 +100,28 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Endungen erkennen',
-      frage: 'mein, meine oder meinen? Ergänze.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Das ist ___ Schwester. (die Schwester)',
-        'Das ist ___ Auto. (das Auto)',
-        'Ich liebe ___ Bruder. (der Bruder, Akkusativ)',
-        '___ Eltern wohnen in Madrid. (die Eltern, Plural)',
-      ],
-      loesungen: [
-        'Das ist **meine** Schwester.',
-        'Das ist **mein** Auto.',
-        'Ich liebe **meinen** Bruder. ~~(Akkusativ maskulin)~~',
-        '**Meine** Eltern wohnen in Madrid.',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Akkusativ: meinen, deinen, ihren …',
+      items: [
+        { text: 'Ich rufe **meinen** Chef an.', gl: '— Akkusativ maskulin: -en' },
+        { text: 'Besuchst du am Sonntag **deine** Tante?', gl: '— feminin: sin cambio' },
+        { text: 'Elena sucht **ihren** Schlüssel.', gl: '— ihr (de ella) + -en' },
+        { text: 'Habt ihr **euren** Hund gefunden?', gl: '— euer → euren' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Nominativ, Akkusativ oder Dativ?',
-      frage: 'Ergänze den Possessivartikel in der richtigen Form. ~~(Tras mit, bei, von: Dativ.)~~',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Ich wohne noch bei ___ Eltern. (mein-)',
-        'Kennst du ___ Bruder? (ihr-, de ella)',
-        'Wir fahren mit ___ Auto. (unser-)',
-        'Das ist ___ Lehrerin. (sein-)',
-        'Anna telefoniert oft mit ___ Oma. (ihr-)',
-      ],
-      loesungen: [
-        'Ich wohne noch bei **meinen** Eltern. ~~(Dativ Plural)~~',
-        'Kennst du **ihren** Bruder? ~~(Akkusativ maskulin)~~',
-        'Wir fahren mit **unserem** Auto. ~~(Dativ neutral)~~',
-        'Das ist **seine** Lehrerin. ~~(Nominativ feminin)~~',
-        'Anna telefoniert oft mit **ihrer** Oma. ~~(Dativ feminin)~~',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Über die Familie schreiben',
-      frage: 'Schreibe drei Sätze über deine Familie — mit Nominativ, Akkusativ und Dativ.',
-      loesungLabel: 'Mögliche Lösung',
-      aufgaben: [
-        '(Wer ist das? — Das ist …)',
-        '(Wen besuchst du oft? — Ich besuche …)',
-        '(Mit wem telefonierst du? — Ich telefoniere mit …)',
-      ],
-      loesungen: [
-        'Das ist **meine** Mutter.',
-        'Ich besuche oft **meinen** Opa. ~~(Akkusativ)~~',
-        'Ich telefoniere mit **meiner** Schwester. ~~(Dativ — también correcto: mit meinem Bruder, mit meinen Eltern.)~~',
+      type: 'beispiele',
+      kicker: 'mit · bei · von · zu',
+      titel: 'Dativ mit Possessivartikel',
+      items: [
+        { text: 'Ich lerne **mit meiner** Freundin für die Prüfung.', gl: '— mit + Dativ feminin' },
+        { text: 'Diego wohnt noch **bei seinen** Eltern.', gl: '— bei + Dativ Plural' },
+        { text: 'Das Fahrrad ist **von meinem** Onkel.', gl: '— von + Dativ maskulin' },
+        { text: 'Fährst du am Samstag **zu deiner** Schwester?', gl: '— zu + Dativ feminin' },
+        { text: 'Sie kocht gern **mit ihrer** Tochter.', gl: '— mit + Dativ feminin' },
       ],
     },
 
@@ -166,18 +135,18 @@ export default {
       titel: 'E-Mail: Einladung zum Familienfest',
       anweisung: 'In Teil 2 schreibst du eine kurze E-Mail (ca. 30-40 Wörter). Aufgabe: Deine Familie macht am Samstag ein Fest. Lade deinen Freund Tom ein. Schreib: Wo ist das Fest? Wer kommt? Was soll Tom mitbringen?',
       absaetze: [
-        'Denk an: **Anrede, alle drei Punkte, Gruß** — und auf die Possessivartikel achten!',
+        'Denk an: **Anrede, alle drei Punkte, Gruß**. Und achte auf die Possessivartikel!',
       ],
       loesungLabel: 'Mögliche Lösung',
       loesungen: [
         'Lieber Tom, am Samstag machen wir ein Fest bei **meinen** Eltern. **Meine** Schwester kommt mit **ihrem** Mann und **ihren** Kindern. Kommst du auch? Bring bitte **deinen** Fußball mit! Viele Grüße, Ana',
       ],
-      kommentar: 'Drei Kasus in einer Mini-E-Mail: *bei meinen Eltern* (Dativ), *mit ihrem Mann* (Dativ), *deinen Fußball* (Akkusativ) — genau das zeigt dem Korrektor A2-Niveau.',
+      kommentar: 'Zwei Kasus in einer Mini-E-Mail: *bei meinen Eltern* (Dativ), *mit ihrem Mann* (Dativ), *deinen Fußball* (Akkusativ). Genau das zeigt dem Prüfer A2-Niveau.',
     },
     {
       type: 'tipp',
       label: 'Prüfungstipp',
-      text: 'Lern dir zwei **Anker-Sätze** auswendig: *Ich wohne bei **meinen** Eltern.* und *Ich fahre mit **meiner** Familie in den Urlaub.* ~~Con esas dos plantillas resuelves casi cualquier Dativ posesivo del Schreiben.~~',
+      text: 'Lern zwei **Sätze** auswendig: *Ich wohne bei **meinen** Eltern.* und *Ich fahre mit **meiner** Familie in den Urlaub.* ~~Con esas dos plantillas resuelves casi cualquier Dativ posesivo del Schreiben.~~',
     },
 
     { type: 'rule' },
@@ -207,7 +176,7 @@ export default {
     {
       type: 'ausblick',
       eyebrow: 'Ausblick',
-      text: 'Statt *mein Bruder* immer zu wiederholen, sagst du einfach **er**, **ihn** oder **ihm**. ~~Los pronombres personales («lo veo», «le ayudo»)~~ — **mich, dich, ihn, mir, dir, ihm** — sind das Thema der nächsten Lektion. Die Endungen **-em, -er, -en** von heute siehst du dort wieder.',
+      text: 'Du musst nicht immer *mein Bruder* sagen. Sag einfach **er**, **ihn** oder **ihm**. ~~Los pronombres personales («lo veo», «le ayudo»)~~ — **mich, dich, ihn, mir, dir, ihm** — sind das Thema von Lektion 12. Die Endungen **-em, -er, -en** von heute siehst du dort wieder.',
     },
   ],
 }

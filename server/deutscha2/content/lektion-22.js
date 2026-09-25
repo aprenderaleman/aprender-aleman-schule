@@ -79,9 +79,9 @@ export default {
       type: 'prose',
       eyebrow: 'Erklärung — Die Strategie',
       card: true,
-      titel: 'Weißt du, was du suchst?',
+      titel: 'Was suchst du — Zeit, Ort oder Preis?',
       absaetze: [
-        'Eine Durchsage ist kurz — du hast **eine Chance**. Lies die Aufgabe zuerst und frag dich: Suche ich eine **Uhrzeit**, einen **Ort** oder einen **Preis**? Dann warte genau auf diese Information. ~~(escucha selectiva: sabes qué dato viene, solo tienes que cazarlo)~~',
+        'Eine Durchsage ist kurz — die Information kommt **schnell**. Lies die Aufgabe zuerst und frag dich: Suche ich eine **Uhrzeit**, einen **Ort** oder einen **Preis**? Dann warte genau auf diese Information. ~~(escucha selectiva: sabes qué dato viene, solo tienes que cazarlo)~~',
       ],
     },
 
@@ -101,56 +101,29 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Am Bahnhof',
-      frage: 'Lies die Aufgaben, dann das Transkript **nur einmal**. ~~(en el examen: audio)~~ Richtig oder falsch?',
-      aufgabe: '**Transkript — Durchsage am Bahnhof:**\n„Achtung an Gleis 5: Der Zug nach München, Abfahrt vierzehn Uhr dreißig, hat heute leider zwanzig Minuten Verspätung. Der Zug fährt heute auch nicht von Gleis 5, sondern von Gleis 15. Ich wiederhole: Der Zug nach München fährt heute von Gleis 15.“',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Der Zug fährt nach München.',
-        'Der Zug hat 20 Minuten Verspätung.',
-        'Der Zug fährt von Gleis 5.',
-      ],
-      loesungen: [
-        '**Richtig.**',
-        '**Richtig.**',
-        '**Falsch** — er fährt von Gleis **15**. ~~(fünf/fünfzehn: escucha hasta el final de la palabra)~~',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Uhrzeiten hören',
+      items: [
+        { text: '„Der Bus fährt um **halb sieben**.“', gl: '— 6.30 Uhr, ¡no las 7.30!' },
+        { text: '„Der Kurs beginnt um **Viertel nach sechs**.“', gl: '— 18.15: las seis y cuarto' },
+        { text: '„Die Praxis öffnet um **Viertel vor neun**.“', gl: '— 8.45: las nueve menos cuarto' },
+        { text: '„Abfahrt: **sechzehn Uhr fünfzehn**.“', gl: '— 16.15, la forma oficial de las estaciones' },
+        { text: '„Wir schließen um **halb neun**.“', gl: '— 20.30 Uhr' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Im Supermarkt',
-      frage: 'Lies das Transkript einmal und beantworte die Fragen.',
-      aufgabe: '**Transkript — Durchsage im Supermarkt:**\n„Liebe Kunden, heute im Angebot: ein Kilo Äpfel für nur einen Euro neunzig. Im Erdgeschoss finden Sie jetzt auch frisches Brot von unserer Bäckerei. Wir haben heute bis zwanzig Uhr geöffnet. Wir wünschen Ihnen einen schönen Einkauf!“',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Was kostet ein Kilo Äpfel?',
-        'Wo gibt es frisches Brot?',
-        'Bis wann ist der Supermarkt geöffnet?',
-      ],
-      loesungen: [
-        '**1,90 €** („einen Euro neunzig“)',
-        'Im **Erdgeschoss**.',
-        'Bis **20 Uhr**.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Anrufbeantworter',
-      frage: 'Jetzt mit *halb* und Zahlenfallen. Lies einmal und notiere die Informationen.',
-      aufgabe: '**Transkript — Anrufbeantworter:**\n„Hallo Frau Sánchez, hier ist die Praxis Dr. Klein. Ihr Termin morgen um halb zehn geht leider nicht. Können Sie um halb zwölf kommen? Bitte rufen Sie uns kurz an: null sechs neun — dreizehn — vierzig. Vielen Dank und auf Wiederhören!“',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Wann war der alte Termin?',
-        'Wann ist der neue Termin?',
-        'Wie ist die Telefonnummer?',
-      ],
-      loesungen: [
-        'Um **halb zehn = 9.30 Uhr**. ~~(¡no las 10.30!)~~',
-        'Um **halb zwölf = 11.30 Uhr**.',
-        '**069 — 13 — 40** ~~(dreizehn = 13, vierzig = 40)~~',
+      type: 'beispiele',
+      kicker: 'Zahlen & Orte',
+      titel: 'Durchsagen verstehen',
+      items: [
+        { text: '„Der Zug nach Dresden fährt heute von **Gleis 13**.“', gl: '— dreizehn = 13, no 30' },
+        { text: '„Der Zug hat **zwanzig Minuten Verspätung**.“', gl: '— 20 minutos de retraso' },
+        { text: '„Heute im **Angebot**: Käse für **drei Euro sechzig**.“', gl: '— 3,60 € — sechzig = 60' },
+        { text: '„Die Bäckerei ist im **Erdgeschoss**, am **Ausgang** West.“', gl: '— planta baja, salida oeste' },
+        { text: '„Wir haben heute bis **achtzehn Uhr geöffnet**.“', gl: '— abierto hasta las 18:00' },
       ],
     },
 

@@ -87,55 +87,30 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Welche Form ist das?',
-      frage: 'du, ihr oder Sie?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Kommen Sie bitte um 9 Uhr!',
-        'Iss dein Brot!',
-        'Wartet hier!',
-        'Sprich bitte lauter!',
-      ],
-      loesungen: [
-        '**Sie** — Verb + Sie ~~(cortesía)~~',
-        '**du** — ohne Pronomen, e → i',
-        '**ihr** — wie die ihr-Form ohne Pronomen',
-        '**du** — e → i: *du sprichst* → Sprich!',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'du, ihr, Sie',
+      items: [
+        { text: '**Nimm** bitte den Schirm mit!', gl: '— du: nehmen → Nimm! (e → i)' },
+        { text: '**Lies** den Text und **sprich** dann mit deinem Partner!', gl: '— du: lesen → Lies!, sprechen → Sprich!' },
+        { text: 'Kinder, **esst** euer Gemüse!', gl: '— ihr: sin pronombre' },
+        { text: '**Wartet** bitte hier! Ich komme gleich.', gl: '— ihr: igual que en presente' },
+        { text: '**Sprechen Sie** bitte etwas langsamer!', gl: '— Sie: cortesía' },
+        { text: '**Gehen Sie** bis zur Ampel und dann rechts!', gl: '— Wegbeschreibung (indicaciones)' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Imperativ bilden',
-      frage: 'Bilde den Imperativ.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        '(du / nehmen) ___ den Bus!',
-        '(ihr / machen) ___ die Tür zu!',
-        '(Sie / sprechen) ___ bitte langsam!',
-        '(du / lesen) ___ den Text!',
-      ],
-      loesungen: [
-        '**Nimm** den Bus! ~~(e → i, sin -st)~~',
-        '**Macht** die Tür zu!',
-        '**Sprechen Sie** bitte langsam!',
-        '**Lies** den Text!',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Ratschläge geben',
-      frage: 'Dein Freund ist immer müde. Gib zwei Ratschläge mit dem du-Imperativ.',
-      loesungLabel: 'Mögliche Lösung',
-      aufgaben: [
-        'Ratschlag 1: …',
-        'Ratschlag 2: …',
-      ],
-      loesungen: [
-        '**Geh** früh ins Bett! ~~(u otro consejo con forma du)~~',
-        '**Trink** weniger Kaffee am Abend!',
+      type: 'beispiele',
+      kicker: 'bitte',
+      titel: 'Bitten & Ratschläge im Alltag',
+      items: [
+        { text: '**Mach** eine Pause und **trink** einen Tee!', gl: '— consejo (forma du)' },
+        { text: '**Kommt** doch am Samstag zu uns!', gl: '— invitación (forma ihr)' },
+        { text: '**Essen Sie** weniger Zucker und **gehen Sie** viel spazieren!', gl: '— consejo del médico (Sie)' },
+        { text: '**Komm** bitte nicht zu spät!', gl: '— con nicht, la forma no cambia' },
+        { text: '**Macht** bitte das Fenster **zu**!', gl: '— el prefijo separable va al final' },
       ],
     },
 
@@ -190,7 +165,7 @@ export default {
     {
       type: 'ausblick',
       eyebrow: 'Ausblick',
-      text: '„**Dusch dich!**“ — Moment: Was macht das *dich* da? Manche Verben brauchen ein extra Pronomen: *sich duschen, sich freuen, sich treffen*. Die **reflexiven Verben** sind das letzte Grammatik-Thema dieses Blocks.',
+      text: '„**Dusch dich!**“ — Moment: Was macht das *dich* da? Manche Verben brauchen noch ein Pronomen: *sich duschen, sich freuen, sich treffen*. Die **reflexiven Verben** sind das letzte Grammatik-Thema in diesem Block.',
     },
   ],
 }

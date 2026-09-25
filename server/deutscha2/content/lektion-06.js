@@ -97,55 +97,29 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Welches Modalverb?',
-      frage: 'Ergänze das richtige Modalverb: kann, muss, darf oder möchte.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Ich ___ gut Fußball spielen. (habilidad)',
-        'Sie ___ heute lange arbeiten. (obligación)',
-        '___ ich das Fenster öffnen? (permiso)',
-        'Ich ___ ein Wasser, bitte. (deseo cortés)',
-      ],
-      loesungen: [
-        'Ich **kann** gut Fußball spielen.',
-        'Sie **muss** heute lange arbeiten.',
-        '**Darf** ich das Fenster öffnen?',
-        'Ich **möchte** ein Wasser, bitte.',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Modalverben im Alltag',
+      items: [
+        { text: 'Ich **muss** heute noch Hausaufgaben machen.', gl: '— obligación: müssen' },
+        { text: 'Meine Tochter **kann** schon Rad fahren.', gl: '— habilidad: ya sabe montar en bici' },
+        { text: '**Möchten** Sie einen Tee oder einen Kaffee?', gl: '— oferta cortés con möchten' },
+        { text: 'Man **darf** im Kurs Wasser trinken, aber nicht essen.', gl: '— permiso y prohibición' },
+        { text: 'Der Arzt sagt: Ich **soll** mehr schlafen.', gl: '— consejo del médico → sollen' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Satzklammer bauen',
-      frage: 'Bilde Sätze. Modalverb auf Position 2, Infinitiv ans Ende.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        '(ich / heute / nicht / kommen / können)',
-        '(du / am Samstag / arbeiten / müssen / ?)',
-        '(wir / im Sommer / nach Spanien / fahren / wollen)',
-      ],
-      loesungen: [
-        'Ich **kann** heute nicht **kommen**.',
-        '**Musst** du am Samstag **arbeiten**?',
-        'Wir **wollen** im Sommer nach Spanien **fahren**.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · können oder dürfen?',
-      frage: 'Übersetze die Idee: ¿habilidad (können) o permiso (dürfen)?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        '«Mi hijo ya sabe leer.»',
-        '«¿Puedo pagar con tarjeta?»',
-        '«Aquí no se puede aparcar.»',
-      ],
-      loesungen: [
-        'Mein Sohn **kann** schon **lesen**. ~~(habilidad)~~',
-        '**Darf** ich mit Karte **zahlen**? ~~(permiso)~~',
-        'Hier **darf** man nicht **parken**. ~~(prohibición = permiso negado)~~',
+      type: 'beispiele',
+      kicker: 'Satzklammer',
+      titel: 'Das zweite Verb wartet am Ende',
+      items: [
+        { text: 'Wir **wollen** am Sonntag einen Kuchen **backen**.', gl: '— el infinitivo cierra la frase' },
+        { text: '**Kannst** du morgen früher **kommen**?', gl: '— pregunta: modal en posición 1' },
+        { text: 'Ihr **müsst** die Wörter jeden Tag **lernen**.', gl: '— ihr müsst, con Umlaut' },
+        { text: 'Ich **möchte** im August nach Kolumbien **fliegen**.', gl: '— deseo + infinitivo al final' },
+        { text: 'Hier **darf** man nur langsam **fahren**.', gl: '— norma de tráfico con dürfen' },
       ],
     },
 
@@ -157,7 +131,7 @@ export default {
       eyebrow: 'Prüfungsbezug',
       modul: 'Sprechen · Etwas planen',
       titel: 'Zusammen ins Kino',
-      anweisung: 'In Sprechen Teil 3 planst du etwas mit deinem Partner. Modalverben sind hier sehr wichtig. Ergänze:',
+      anweisung: 'Im Sprechen (Teil 3) planst du etwas mit deinem Partner. Modalverben sind hier sehr wichtig. Ergänze: ~~(Completa:)~~',
       absaetze: [
         '„{1} wir am Freitag ins Kino gehen? — Freitag {2} ich leider arbeiten. {3} du am Samstag Zeit?“',
       ],

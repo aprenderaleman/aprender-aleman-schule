@@ -52,7 +52,7 @@ export default {
     // ── Erklärung ─────────────────────────────────────────────────
     {
       type: 'steps',
-      eyebrow: 'Erklärung — drei Situationen',
+      eyebrow: 'Erklärung — vier Situationen',
       steps: [
         {
           badge: 'ohne ein',
@@ -62,7 +62,7 @@ export default {
         {
           badge: 'bei',
           titel: 'Wo arbeitest du?',
-          text: '__Ich arbeite **bei** Siemens / bei einer kleinen Firma.__ ~~(bei + empresa)~~ __Ich arbeite **im** Büro / **in** einem Restaurant.__ Die Frage dazu: __Was sind Sie **von Beruf**?__',
+          text: '__Ich arbeite **bei** Möbel Braun / bei einer kleinen Firma.__ ~~(bei + empresa)~~ __Ich arbeite **im** Büro / **in** einem Restaurant.__ Die Frage dazu: __Was sind Sie **von Beruf**?__',
         },
         {
           badge: 'Zeit',
@@ -110,52 +110,19 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Die feminine Form',
-      frage: 'Wie heißt die feminine Form?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'der Chef → die ___',
-        'der Kollege → die ___',
-        'der Arzt → die ___',
-        'der Koch → die ___',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Arbeit im Alltag',
+      items: [
+        { text: 'Meine Schwester ist **Ärztin** von Beruf.', gl: '— femenino con Umlaut: Arzt → Ärztin.' },
+        { text: 'Ich arbeite **bei** einer kleinen Firma in Bilbao.', gl: '— bei + empresa.' },
+        { text: 'Unsere Chefin ist streng, aber fair.', gl: '' },
+        { text: 'Ich habe eine **Ausbildung** als Koch **gemacht**.', gl: '— Perfekt: el participio cierra la frase.' },
+        { text: 'Um 16 Uhr habe ich **Feierabend**.', gl: '' },
+        { text: 'Mein Kollege sucht eine neue **Stelle**.', gl: '— Stelle = puesto de trabajo.' },
       ],
-      loesungen: [
-        'der Chef → die **Chefin**',
-        'der Kollege → die **Kollegin**',
-        'der Arzt → die **Ärztin** ~~(¡con Umlaut!)~~',
-        'der Koch → die **Köchin**',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Sätze ergänzen',
-      frage: 'Ergänze: als · bei · von … bis · Feierabend — und einmal das Perfekt.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Ich arbeite ___ Kellnerin.',
-        'Er arbeitet ___ einer großen Firma.',
-        'Wir arbeiten ___ 9 ___ 17 Uhr.',
-        'Um 17 Uhr habe ich ___.',
-        'Früher ___ ich in einem Café ___ . (arbeiten, Perfekt)',
-      ],
-      loesungen: [
-        'Ich arbeite **als** Kellnerin. ~~(sin artículo)~~',
-        'Er arbeitet **bei** einer großen Firma.',
-        'Wir arbeiten **von** 9 **bis** 17 Uhr.',
-        'Um 17 Uhr habe ich **Feierabend**.',
-        'Früher **habe** ich in einem Café **gearbeitet**. ~~(haben + Partizip al final)~~',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Schreib 5-6 Sätze über deine Arbeit (ca. 35 Wörter): Beruf? Was hast du früher gemacht? Wo und wann arbeitest du? Wie findest du sie?',
-      loesungLabel: 'Mögliche Lösung',
-      loesung:
-        'Ich bin Verkäufer von Beruf. Früher habe ich als Kellner gearbeitet. Jetzt arbeite ich in einem Supermarkt in Valencia, von Montag bis Samstag, von 9 bis 15 Uhr. Die Arbeit gefällt mir, weil meine Kollegen nett sind. ~~(Clave: profesión sin artículo, un Perfekt para el pasado y el horario con von … bis.)~~',
     },
 
     { type: 'rule' },
@@ -194,7 +161,7 @@ export default {
       kopf: ['Funktion', 'So sagst du es'],
       zeilen: [
         ['profesión', 'Ich bin Lehrer(in). — ohne Artikel'],
-        ['als / bei', 'Ich arbeite als Köchin. / Ich arbeite bei Siemens.'],
+        ['als / bei', 'Ich arbeite als Köchin. / Ich arbeite bei Möbel Braun.'],
         ['horario', 'von 9 bis 17 Uhr · am Wochenende frei'],
         ['fin de jornada', 'Um 17 Uhr habe ich Feierabend.'],
         ['antes (Perfekt)', 'Ich habe als Kellner gearbeitet.'],

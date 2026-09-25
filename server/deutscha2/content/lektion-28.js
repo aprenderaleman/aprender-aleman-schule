@@ -109,47 +109,29 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Welches W-Wort?',
-      frage: 'Ergänze das W-Wort.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        '___ kommst du? — Aus Peru.',
-        '___ stehst du auf? — Um 6 Uhr.',
-        '___ machst du am Wochenende? — Ich lese.',
-        '___ Geschwister hast du? — Zwei.',
-      ],
-      loesungen: [
-        '**Woher** kommst du? ~~(origen → woher, no «de wo»)~~',
-        '**Wann** stehst du auf?',
-        '**Was** machst du am Wochenende?',
-        '**Wie viele** Geschwister hast du?',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'W-Fragen und Antworten',
+      items: [
+        { text: '„**Wie** heißt du?“ — „Ich heiße Leyla.“', gl: '— ¿cómo te llamas?' },
+        { text: '„**Woher** kommst du?“ — „Aus Ecuador.“', gl: '— origen → woher' },
+        { text: '„**Wann** frühstückst du?“ — „Um halb acht.“', gl: '— rutina: a las 7.30' },
+        { text: '„**Warum** lernst du Deutsch?“ — „Ich arbeite bald in Wien.“', gl: '— la respuesta puede ser simple' },
+        { text: '„**Wie viele** Sprachen sprichst du?“ — „Drei.“', gl: '— ¿cuántas?' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Fragen bilden',
-      frage: 'Bilde die Frage zur Antwort.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        '(wo / du / wohnen) — „Ich wohne in Köln.“',
-        '(du / Kaffee / trinken) — „Ja, gern!“',
-        '(was / du / gern / essen) — „Pizza!“',
+      type: 'beispiele',
+      kicker: 'Ja/Nein-Fragen',
+      titel: 'Das Verb springt nach vorne',
+      items: [
+        { text: '„**Arbeitest** du am Wochenende?“ — „Nein, zum Glück nicht.“', gl: '— verbo primero' },
+        { text: '„**Hast** du Haustiere?“ — „Ja, eine Katze.“', gl: '— pregunta de sí/no' },
+        { text: '„**Trinkst** du Tee oder Kaffee?“ — „Lieber Kaffee. Und du?“', gl: '— devuelve la pregunta' },
+        { text: '„**Kochst** du gern?“ — „Ja, sehr gern!“', gl: '— responde con una frase corta' },
       ],
-      loesungen: [
-        '**Wo wohnst du?**',
-        '**Trinkst du Kaffee?** ~~(Ja/Nein → verbo primero)~~',
-        '**Was isst du gern?**',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren — zwei Runden',
-      frage: 'Spiel die Prüfung: Runde 1 — Thema „Arbeit“: stell eine Frage und antworte selbst. Runde 2 — Thema „Freizeit“: genauso. Sprich laut!',
-      loesungLabel: 'Mögliche Lösung',
-      loesung: 'Runde 1: „**Wo arbeitest du?**“ — „Ich arbeite in einem Restaurant.“\nRunde 2: „**Was machst du in deiner Freizeit?**“ — „Ich höre Musik und spiele Fußball.“ ~~Cualquier pregunta con W-Wort + verbo en posición 2 y una respuesta de una frase es válida.~~',
     },
 
     { type: 'rule' },

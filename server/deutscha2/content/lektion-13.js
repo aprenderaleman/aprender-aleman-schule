@@ -55,7 +55,7 @@ export default {
         {
           badge: 'am -sten',
           titel: 'Superlativ',
-          text: '__am__ + Adjektiv + __-sten__. ~~«el más rápido» →~~ **am schnellsten**.\n__Der ICE fährt **am schnellsten**.__',
+          text: '__am__ + Adjektiv + __-sten__. ~~«el más rápido» →~~ **am schnellsten**.\n__Das Flugzeug ist **am schnellsten**.__',
         },
         {
           badge: 'als / wie',
@@ -84,55 +84,29 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Komparativ bilden',
-      frage: 'Wie heißt der Komparativ?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'klein → ___',
-        'alt → ___',
-        'gut → ___',
-        'gern → ___',
-        'viel → ___',
-      ],
-      loesungen: [
-        'klein → **kleiner**',
-        'alt → **älter** ~~(con Umlaut)~~',
-        'gut → **besser** ~~(irregular)~~',
-        'gern → **lieber** ~~(irregular)~~',
-        'viel → **mehr** ~~(irregular)~~',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Komparativ mit als',
+      items: [
+        { text: 'Meine Schwester ist **jünger als** ich.', gl: '— jung → jünger (con Umlaut)' },
+        { text: 'Das Hotel am Markt ist **schöner als** das Hotel am Bahnhof.', gl: '— schön → schöner' },
+        { text: 'Mein Vater ist **älter als** meine Mutter.', gl: '— alt → älter' },
+        { text: 'Im Zug schlafe ich **besser als** im Auto.', gl: '— gut → besser' },
+        { text: 'Heute gibt es **mehr** Sonne **als** gestern.', gl: '— viel → mehr' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · als oder wie?',
-      frage: 'Ergänze als oder wie.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Berlin ist größer ___ München.',
-        'Mein Auto ist so alt ___ dein Auto.',
-        'Ich esse lieber Pizza ___ Salat.',
-      ],
-      loesungen: [
-        'Berlin ist größer **als** München. ~~(Komparativ → als)~~',
-        'Mein Auto ist so alt **wie** dein Auto. ~~(so … wie)~~',
-        'Ich esse lieber Pizza **als** Salat.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Über dich sprechen',
-      frage: 'Antworte in ganzen Sätzen. ~~(Respuestas modelo — las tuyas pueden ser diferentes.)~~',
-      loesungLabel: 'Mögliche Lösung',
-      aufgaben: [
-        'Was trinkst du lieber: Kaffee oder Tee?',
-        'Was machst du am Wochenende am liebsten?',
-      ],
-      loesungen: [
-        'Ich trinke **lieber** Kaffee **als** Tee. ~~(también correcto: Ich trinke lieber Tee.)~~',
-        'Am Wochenende koche ich **am liebsten** mit Freunden. ~~(vale cualquier actividad con am liebsten + verbo en posición 2)~~',
+      type: 'beispiele',
+      kicker: 'am -sten',
+      titel: 'Superlativ & so … wie',
+      items: [
+        { text: 'Das Café am Park finde ich **am schönsten**.', gl: '— superlativo con am' },
+        { text: 'Ich trinke **am liebsten** Wasser mit Zitrone.', gl: '— gern → am liebsten' },
+        { text: 'Samstag ist für mich **am besten**.', gl: '— gut → am besten' },
+        { text: 'Mein Bruder isst **am meisten** — er ist **so groß wie** Papa!', gl: '— viel → am meisten · so … wie' },
+        { text: 'Laura ist **so alt wie** ich.', gl: '— igualdad: so … wie' },
       ],
     },
 

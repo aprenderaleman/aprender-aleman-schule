@@ -98,57 +98,29 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · der, die, das → Akkusativ',
-      frage: 'Ergänze den Artikel im Akkusativ. ~~Solo el masculino cambia.~~',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Ich sehe ___ Mann. (der Mann)',
-        'Wir kaufen ___ Lampe. (die Lampe)',
-        'Er isst ___ Brot. (das Brot)',
-        'Sie sucht ___ Schlüssel. (der Schlüssel)',
-      ],
-      loesungen: [
-        'Ich sehe **den** Mann. ~~(¡no *der Mann*!)~~',
-        'Wir kaufen **die** Lampe. ~~(feminin: igual)~~',
-        'Er isst **das** Brot. ~~(neutrum: igual)~~',
-        'Sie sucht **den** Schlüssel.',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Akkusativ im Alltag',
+      items: [
+        { text: 'Ich brauche **einen** Stift und **ein** Heft.', gl: '— maskulin: einen · neutral: sin cambio' },
+        { text: 'Es gibt hier **einen** Supermarkt.', gl: '— es gibt + Akkusativ' },
+        { text: 'Hast du **den** Schlüssel?', gl: '— der Schlüssel → den' },
+        { text: 'Sie trinkt **keinen** Kaffee, sie trinkt Tee.', gl: '— kein → keinen' },
+        { text: 'Wir kaufen **eine** Lampe und **einen** Tisch.', gl: '— feminin sin cambio, maskulin -en' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · einen, eine, ein — oder keinen?',
-      frage: 'Ergänze ein/eine/einen oder kein/keine/keinen.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Ich habe ___ Hund. (der Hund, +)',
-        'Sie hat ___ Auto. (das Auto, −)',
-        'Brauchst du ___ Tasche? (die Tasche, +)',
-        'Er trinkt ___ Kaffee. (der Kaffee, −)',
-      ],
-      loesungen: [
-        'Ich habe **einen** Hund.',
-        'Sie hat **kein** Auto.',
-        'Brauchst du **eine** Tasche?',
-        'Er trinkt **keinen** Kaffee.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Präpositionen mit Akkusativ',
-      frage: 'Ergänze die Präposition und den Artikel.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Das Geschenk ist ___ ___ Bruder. (para / der Bruder)',
-        '___ ___ Stadtplan finde ich das Hotel nicht. (sin / der Stadtplan)',
-        'Wir gehen ___ ___ Park. (a través de / der Park)',
-      ],
-      loesungen: [
-        'Das Geschenk ist **für den** Bruder.',
-        '**Ohne den** Stadtplan finde ich das Hotel nicht.',
-        'Wir gehen **durch den** Park.',
+      type: 'beispiele',
+      kicker: 'für · gegen · ohne · um · durch',
+      titel: 'Die Akkusativ-Präpositionen in Aktion',
+      items: [
+        { text: 'Der Kuchen ist **für die** Oma.', gl: '— für + Akkusativ' },
+        { text: 'Das Medikament ist **gegen den** Husten.', gl: '— gegen + Akkusativ' },
+        { text: '**Ohne einen** Stadtplan finde ich das Museum nicht.', gl: '— ohne + Akkusativ' },
+        { text: 'Wir laufen **um den** See.', gl: '— um + Akkusativ' },
+        { text: 'Der Zug fährt **durch einen** Tunnel.', gl: '— durch + Akkusativ' },
       ],
     },
 
@@ -160,7 +132,7 @@ export default {
       eyebrow: 'Prüfungsbezug',
       modul: 'Schreiben · E-Mail',
       titel: 'Eine Einladung',
-      anweisung: 'In Schreiben Teil 2 lädst du oft jemanden ein. Ergänze die Artikel im Akkusativ:',
+      anweisung: 'Im Schreiben (Teil 2) lädst du oft jemanden ein. Ergänze die Artikel im Akkusativ: ~~(Completa los artículos en acusativo:)~~',
       absaetze: [
         '„Liebe Ana, ich mache am Samstag {1} Ausflug an den See. Ich habe {2} Kuchen für dich. Bring bitte {3} Ball mit!“',
       ],

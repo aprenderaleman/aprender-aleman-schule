@@ -102,50 +102,30 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Welches Verb passt?',
-      frage: 'Ergänze das Verb: spielen, hören, fahren, gehen.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Musik ___',
-        'Fußball ___',
-        'Fahrrad ___',
-        'ins Kino ___',
-      ],
-      loesungen: [
-        'Musik **hören**',
-        'Fußball **spielen**',
-        'Fahrrad **fahren**',
-        'ins Kino **gehen**',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Hobbys mit gern',
+      items: [
+        { text: 'Ich spiele **gern** Gitarre, mein Bruder hört **lieber** Musik.', gl: '— Me gusta tocar la guitarra; mi hermano prefiere escuchar música.' },
+        { text: 'Meine Schwester **liest gern** Bücher.', gl: '— A mi hermana le gusta leer libros.' },
+        { text: 'Wir **wandern gern** in den Bergen.', gl: '— Nos gusta hacer senderismo en la montaña.' },
+        { text: '**Triffst** du am Wochenende deine Freunde?', gl: '— ¿Quedas con tus amigos el fin de semana?' },
+        { text: 'Mein Hobby ist **Schwimmen** — ich gehe oft ins Schwimmbad.', gl: '— Mi hobby es nadar: voy mucho a la piscina.' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Sätze ergänzen',
-      frage: 'Ergänze: gern · wollen · bin · habe.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Ich lese ___ Bücher.',
-        '___ wir am Freitag schwimmen gehen?',
-        'Am Samstag ___ ich Freunde getroffen.',
-        'Am Sonntag ___ ich in den Bergen gewandert.',
+      type: 'beispiele',
+      kicker: 'Planen & erzählen',
+      titel: 'Vom Kino bis zum Wochenende',
+      items: [
+        { text: '**Wollen wir** am Freitag Fußball spielen?', gl: '— ¿Jugamos al fútbol el viernes?' },
+        { text: 'Gute Idee! **Hast du** um fünf Uhr **Zeit**?', gl: '— ¡Buena idea! ¿Tienes tiempo a las cinco?' },
+        { text: 'Leider kann ich nicht — **vielleicht am Sonntag**?', gl: '— Por desgracia no puedo, ¿quizás el domingo?' },
+        { text: 'Am Samstag **habe** ich Musik **gehört** und ein Buch **gelesen**.', gl: '— El sábado escuché música y leí un libro. (Perfekt)' },
+        { text: 'Am Sonntag **sind** wir Fahrrad **gefahren**.', gl: '— El domingo montamos en bici. (fahren → sein)' },
       ],
-      loesungen: [
-        'Ich lese **gern** Bücher.',
-        '**Wollen** wir am Freitag schwimmen gehen?',
-        'Am Samstag **habe** ich Freunde getroffen.',
-        'Am Sonntag **bin** ich in den Bergen gewandert. ~~(Bewegung → sein)~~',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Schreib 4-5 Sätze über dein Wochenende (ca. 30 Wörter): Was hast du gemacht? Mit wem?',
-      loesungLabel: 'Mögliche Lösung',
-      loesung:
-        'Am Samstag habe ich lange geschlafen. Dann habe ich mit meinem Freund Fußball gespielt. Am Abend sind wir ins Kino gegangen. Am Sonntag habe ich Musik gehört und ein Buch gelesen. ~~(Vale cualquier texto con 2-3 verbos en Perfekt y un „gern“ o una actividad de la lista.)~~',
     },
 
     { type: 'rule' },

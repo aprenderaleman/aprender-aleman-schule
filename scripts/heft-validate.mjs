@@ -37,6 +37,10 @@ for (const f of files) {
       const a = (it.woerter||[]).map(w=>w.toLowerCase()).sort().join('|')
       const b = String(it.loesung||'').replace(/[.?!,]/g,'').toLowerCase().split(/\s+/).sort().join('|')
       if (a !== b) P(`${tag}: woerter ≠ palabras de loesung`)
+      for (const alt of it.alt || []) {
+        const c = String(alt).replace(/[.?!,]/g,'').toLowerCase().split(/\s+/).sort().join('|')
+        if (c !== a) P(`${tag}: alt "${alt}" no usa exactamente las mismas palabras`)
+      }
     } else if (it.typ === 'zuordnen') {
       for (const li of it.links || []) {
         if (!it.loesung?.[li]) P(`${tag}: "${li}" sin pareja`)

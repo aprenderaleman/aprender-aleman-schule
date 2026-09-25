@@ -126,7 +126,7 @@ export default {
       card: true,
       titel: 'Die Aufgabe',
       absaetze: [
-        'Du machst eine Geburtstagsparty. Schreib deiner Freundin Julia eine E-Mail: **Warum** feierst du? — **Wann und wo** ist die Party? — **Bitte** sie, etwas mitzubringen.',
+        'Du machst eine Geburtstagsparty. Schreib deiner Freundin Julia eine E-Mail: **Warum** feierst du? — **Wann und wo** ist die Party? — **Bitte** Julia: Sie soll etwas mitbringen.',
       ],
     },
     {
@@ -148,53 +148,28 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Liebe oder Lieber?',
-      frage: 'Wie heißt die Anrede?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Anna → …',
-        'Tom → …',
-        'deine Oma → …',
-      ],
-      loesungen: [
-        '**Liebe Anna,** ~~(mujer → Liebe)~~',
-        '**Lieber Tom,** ~~(hombre → Lieber)~~',
-        '**Liebe Oma,**',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Einladen und antworten',
+      items: [
+        { text: '**Ich möchte** dich zu meinem Geburtstag **einladen**.', gl: '— la fórmula fija: Ich möchte …' },
+        { text: 'Wir **feiern** am Freitag um 19 Uhr bei mir.', gl: '— cuándo y dónde' },
+        { text: 'Vielen Dank für die Einladung! Ich komme **gern**.', gl: '— aceptar (Zusage)' },
+        { text: '**Schade**, ich kann leider nicht kommen.', gl: '— rechazar (Absage)' },
+        { text: 'Was soll ich **mitbringen**?', gl: '— la pregunta amable al final' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Zusagen oder absagen?',
-      frage: 'Zusage ~~(sí)~~ oder Absage ~~(no)~~?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Ich komme sehr gern!',
-        'Schade, ich kann leider nicht.',
-        'Danke, ich bin gern dabei.',
-        'Ich muss leider arbeiten.',
-      ],
-      loesungen: [
-        '**Zusage**',
-        '**Absage**',
-        '**Zusage**',
-        '**Absage**',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Die E-Mail reparieren',
-      frage: 'Zwei Stellen sind falsch. Korrigiere sie.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        '„Liebe Tom: ich möchte dich einladen.“',
-        '„viele grüße, Anna“',
-      ],
-      loesungen: [
-        '„**Lieber Tom,** ich möchte dich einladen.“ ~~(Tom es hombre → Lieber; coma, no dos puntos)~~',
-        '„**Viele Grüße**\nAnna“ ~~(mayúsculas y sin coma tras el Gruß)~~',
+      type: 'beispiele',
+      kicker: 'Anrede & Gruß',
+      titel: 'Der Rahmen der E-Mail',
+      items: [
+        { text: '**Liebe Carmen,** vielen Dank für deine E-Mail!', gl: '— mujer → Liebe; coma y minúscula después' },
+        { text: '**Lieber Jonas,** wie geht es dir?', gl: '— hombre → Lieber' },
+        { text: '**Viele Grüße**\nMiguel', gl: '— sin coma tras el saludo final' },
+        { text: 'Ich **freue mich** auf deine Antwort!', gl: '— un cierre simpático antes del Gruß' },
       ],
     },
 
@@ -206,7 +181,7 @@ export default {
       eyebrow: 'Prüfungsbezug',
       modul: 'Schreiben · Teil 2',
       titel: 'Antwort auf eine Einladung',
-      anweisung: 'Dein Freund Paul hat dich zum Abendessen am Freitag eingeladen. Schreib eine Antwort (ca. 30-40 Wörter): Bedanke dich — sag zu — frag, was du mitbringen sollst.',
+      anweisung: 'Dein Freund Paul hat dich zum Abendessen am Freitag eingeladen. Schreib eine Antwort (ca. 30-40 Wörter): Bedanke dich — sag zu — frag: Was soll ich mitbringen?',
       absaetze: [
         'Denk an die Anrede *Lieber Paul,* und den Gruß ohne Komma.',
       ],

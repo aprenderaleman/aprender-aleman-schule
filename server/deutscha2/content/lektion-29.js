@@ -94,7 +94,7 @@ export default {
       type: 'modell',
       eyebrow: 'Beispiele — Modell-Monolog',
       thema: 'Von sich erzählen',
-      woerter: 60,
+      woerter: '60 Wörter',
       absaetze: [
         '„Ich heiße Carmen und **bin** 29 Jahre alt. Ich komme aus Sevilla und wohne jetzt in Berlin. Ich arbeite **als** Köchin in einem Restaurant. Ich bin verheiratet und habe keine Kinder. Meine Familie ist groß: Ich habe drei Geschwister. In meiner Freizeit höre ich Musik und koche gern. **Am Wochenende habe ich** mit Freunden Fußball **gespielt**. Das hat Spaß gemacht!“',
       ],
@@ -108,45 +108,29 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Welches Thema?',
-      frage: 'Familie, Beruf, Hobbys oder Tagesablauf?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        '„Ich stehe um 6 Uhr auf und frühstücke.“',
-        '„Ich arbeite als Verkäufer in einem Supermarkt.“',
-        '„Ich habe zwei Brüder und eine Schwester.“',
-      ],
-      loesungen: [
-        '**Tagesablauf**',
-        '**Beruf**',
-        '**Familie**',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Satz-Bausteine in Aktion',
+      items: [
+        { text: 'Ich heiße Mateo und **bin** 34 Jahre alt.', gl: '— «Tengo 34 años» → con sein.' },
+        { text: 'Ich arbeite **als** Verkäufer in einem Supermarkt.', gl: '— arbeiten als + profesión, sin artículo.' },
+        { text: 'Ich bin verheiratet und habe eine Tochter.', gl: '' },
+        { text: 'Mein Tagesablauf ist immer gleich: Ich stehe um 6 Uhr **auf**.', gl: '— aufstehen: verbo separable.' },
+        { text: 'Am Wochenende habe ich frei.', gl: '' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Bausteine ergänzen',
-      frage: 'Ergänze das richtige Wort.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Ich ___ 25 Jahre alt. (bin / habe)',
-        'Ich arbeite ___ Kellnerin. (als / wie)',
-        'Am Wochenende ___ ich einen Film gesehen. (habe / bin)',
+      type: 'beispiele',
+      kicker: 'Perfekt',
+      titel: 'Ein Satz über gestern',
+      items: [
+        { text: 'Am Samstag **habe** ich mit meiner Familie **gekocht**.', gl: '— haben + Partizip al final.' },
+        { text: 'Gestern **habe** ich Musik **gehört**.', gl: '' },
+        { text: 'Am Sonntag **bin** ich ins Kino **gegangen**.', gl: '— gehen → con sein.' },
+        { text: 'Das **hat** Spaß **gemacht**!', gl: '— la frase comodín para cerrar tu monólogo.' },
       ],
-      loesungen: [
-        'Ich **bin** 25 Jahre alt. ~~(nunca *ich habe 25 Jahre*)~~',
-        'Ich arbeite **als** Kellnerin.',
-        'Am Wochenende **habe** ich einen Film gesehen. ~~(sehen → haben)~~',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren — dein Monolog',
-      frage: 'Erzähl von dir: Name + Wohnort, ein Thema (Familie oder Beruf), ein Hobby und ein Satz im Perfekt. Sprich eine Minute laut!',
-      loesungLabel: 'Mögliche Lösung',
-      loesung: '„Ich heiße Pablo und wohne in Buenos Aires. Ich bin Student. Ich habe eine kleine Schwester. Mein Hobby ist Kino. **Gestern habe ich einen Film gesehen.**“ ~~Vale cualquier versión con tus datos — lo importante: frases cortas, verbo en posición 2, un Perfekt.~~',
     },
 
     { type: 'rule' },

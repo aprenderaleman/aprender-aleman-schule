@@ -60,7 +60,7 @@ export default {
         {
           badge: 'Schritt 3',
           titel: 'Plan festmachen',
-          text: 'Klärt __Tag, Uhrzeit und Treffpunkt__ und bestätigt den Plan: __Also, Sonntag um 18 Uhr am Kino. Bis dann!__ ~~Sin plan concreto al final, el Teil 3 no está completo.~~',
+          text: 'Sprecht über __Tag, Uhrzeit und Treffpunkt__ und sagt den Plan noch einmal:__Also, Sonntag um 18 Uhr am Kino. Bis dann!__ ~~Sin plan concreto al final, el Teil 3 no está completo.~~',
         },
       ],
     },
@@ -100,7 +100,7 @@ export default {
       type: 'modell',
       eyebrow: 'Beispiele — Modell-Dialog',
       thema: 'Zusammen ins Kino gehen',
-      woerter: 44,
+      woerter: '44 Wörter',
       absaetze: [
         'A: „**Wollen wir** am Samstag ins Kino gehen?“\nB: „**Leider** kann ich am Samstag nicht. **Lieber am** Sonntag.“\nA: „Okay, Sonntag **passt mir gut**. Um wie viel Uhr?“\nB: „Um 18 Uhr? Wir treffen uns am Kino.“\nA: „**Gute Idee!** Also, Sonntag um 18 Uhr am Kino. Bis dann!“',
       ],
@@ -113,45 +113,29 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Vorschlag, Ja oder Nein?',
-      frage: 'Ist das ein Vorschlag (V), eine Zustimmung (J) oder eine Ablehnung (N)?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        '„Leider habe ich am Montag keine Zeit.“',
-        '„Wollen wir eine Pizza machen?“',
-        '„Ja, das passt mir gut!“',
-      ],
-      loesungen: [
-        '**N** — Ablehnung ~~(fíjate en «leider»)~~',
-        '**V** — Vorschlag',
-        '**J** — Zustimmung',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Vorschläge und Antworten',
+      items: [
+        { text: '**Wollen wir** am Freitag zusammen kochen?', gl: '— la propuesta: Modalverb delante, infinitivo al final.' },
+        { text: 'Gute Idee! Das **passt mir** gut.', gl: '— aceptar.' },
+        { text: '**Leider** kann ich am Freitag nicht.', gl: '— rechazo suave con «leider».' },
+        { text: '**Lieber am** Samstag. Geht das?', gl: '— la contrapropuesta.' },
+        { text: 'Wir **treffen uns** um 19 Uhr am Bahnhof.', gl: '— quedamos a las 19 en la estación.' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Den Dialog ergänzen',
-      frage: 'Ergänze: Gute Idee / Wollen wir / Lieber',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'A: „___ am Freitag zusammen kochen?“',
-        'B: „Am Freitag kann ich nicht. ___ am Samstag.“',
-        'A: „___! Um 19 Uhr bei mir?“',
+      type: 'beispiele',
+      kicker: 'Plan festmachen',
+      titel: 'Der fertige Plan',
+      items: [
+        { text: 'Hast du am Sonntag **Zeit**?', gl: '' },
+        { text: 'Ich habe einen **Vorschlag**: Wollen wir an den See fahren?', gl: '' },
+        { text: 'Der **Treffpunkt** ist das Café am Markt.', gl: '' },
+        { text: 'Also, Samstag um 15 Uhr am Kino. **Bis dann!**', gl: '— repite el plan al final: día + hora + lugar.' },
       ],
-      loesungen: [
-        '„**Wollen wir** am Freitag zusammen kochen?“',
-        '„… **Lieber** am Samstag.“',
-        '„**Gute Idee!** Um 19 Uhr bei mir?“',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren — dein Plan',
-      frage: 'Plant einen Ausflug an den See: Mach einen Vorschlag, lehn einmal freundlich ab und macht den Plan fest (Tag + Uhrzeit + Treffpunkt). Sprich beide Rollen laut!',
-      loesungLabel: 'Mögliche Lösung',
-      loesung: 'A: „Wollen wir am Samstag an den See fahren?“ — B: „Leider kann ich am Samstag nicht. Lieber am Sonntag.“ — A: „Okay! Wir treffen uns um 10 Uhr am Bahnhof.“ — B: „Gute Idee. Also, Sonntag um 10 Uhr. Bis dann!“ ~~Válida cualquier variante con los tres pasos: proponer → rechazar suave + alternativa → plan concreto.~~',
     },
 
     { type: 'rule' },
@@ -174,7 +158,7 @@ export default {
     {
       type: 'tipp',
       label: 'Prüfungstipp',
-      text: 'Sag im Teil 3 nie nur „Ja, okay“ zu allem. Die Prüfer wollen sehen, dass du **verhandeln** kannst ~~(negociar)~~: lehn **einmal** freundlich ab und mach einen Gegenvorschlag.',
+      text: 'Sag im Teil 3 nie nur „Ja, okay“ zu allem. Die Prüfer wollen ein **echtes Gespräch** hören ~~(que sepas negociar)~~: Lehn **einmal** freundlich ab und mach einen Gegenvorschlag.',
     },
 
     { type: 'rule' },

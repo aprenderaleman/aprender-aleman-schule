@@ -6,7 +6,7 @@
 export default {
   spec: ['Bloque 1', 'Grammatik & Struktur', 'Niveau A2', 'Prüfungsrelevanz: Schreiben & Sprechen'],
   h1: 'Reflexive Verben',
-  lead: '~~«Me ducho, me alegro, quedamos»:~~ **Ich dusche mich, ich freue mich, wir treffen uns.** ~~Igual que en español — pero el pronombre cambia distinto.~~',
+  lead: '~~«Me ducho, me alegro, quedamos»:~~ **Ich dusche mich, ich freue mich, wir treffen uns.** ~~Como en español, pero el pronombre va en otro sitio.~~',
 
   content: [
     // ── Lernziele ─────────────────────────────────────────────────
@@ -15,7 +15,7 @@ export default {
       eyebrow: 'Lernziele',
       items: [
         'die Reflexivpronomen benutzen: *mich, dich, sich, uns, euch, sich*',
-        'die wichtigsten reflexiven Verben des Alltags kennen',
+        'wichtige reflexive Verben im Alltag kennen',
         'die Strukturen aus Block 1 in einer E-Mail wiedererkennen',
       ],
     },
@@ -54,7 +54,7 @@ export default {
         {
           badge: 'Position',
           titel: 'Direkt nach dem Verb',
-          text: 'Das Verb bleibt auf __Position 2__, das Pronomen kommt direkt danach:\n__Ich **freue mich** auf das Wochenende.__ · __Wir **treffen uns** im Café.__',
+          text: 'Das Verb bleibt auf __Position 2__, das Pronomen kommt direkt danach:\n__Ich **freue mich** auf das Wochenende.__ · __Wir **treffen uns** im Café.__\nAber: Das Subjekt steht nach dem Verb? Dann kommt das Pronomen nach dem Subjekt: __Am Samstag **treffen wir uns**.__',
         },
         {
           badge: 'wie Spanisch',
@@ -82,51 +82,29 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Welches Pronomen?',
-      frage: 'Ergänze mich, dich, sich, uns oder euch.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Ich freue ___ auf den Sommer.',
-        'Wann triffst du ___ mit Anna?',
-        'Sie duscht ___ nach dem Sport.',
-        'Wir ruhen ___ am Sonntag aus.',
-      ],
-      loesungen: [
-        'Ich freue **mich** auf den Sommer. ~~(ich → mich, nunca sich)~~',
-        'Wann triffst du **dich** mit Anna?',
-        'Sie duscht **sich** nach dem Sport. ~~(3ª persona → sich)~~',
-        'Wir ruhen **uns** am Sonntag aus.',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Reflexive Verben im Alltag',
+      items: [
+        { text: 'Nach der Arbeit **ruhe ich mich** eine Stunde **aus**.', gl: '— sich ausruhen: «aus» va al final' },
+        { text: '**Zieh dich** warm **an**, es ist kalt!', gl: '— Imperativ (du) + dich' },
+        { text: 'Meine Kinder **freuen sich** auf die Ferien.', gl: '— sie (plural) → sich' },
+        { text: '**Fühlst du dich** heute besser?', gl: '— pregunta: verbo + du + dich' },
+        { text: 'Paul und ich **treffen uns** jeden Freitag im Park.', gl: '— Paul und ich = wir → uns' },
+        { text: '**Interessiert ihr euch** für Kunst?', gl: '— ihr → euch' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Sätze bauen',
-      frage: 'Bilde Sätze mit dem reflexiven Verb.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        '(ich / sich freuen auf / das Wochenende)',
-        '(wir / sich treffen / um 19 Uhr / im Restaurant)',
-        '(er / sich fühlen / heute / besser)',
-      ],
-      loesungen: [
-        'Ich **freue mich auf** das Wochenende.',
-        'Wir **treffen uns** um 19 Uhr im Restaurant.',
-        'Er **fühlt sich** heute **besser**. ~~(¡y con Komparativ de la Lektion 13!)~~',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Über deinen Morgen schreiben',
-      frage: 'Schreibe drei Sätze über deinen Morgen mit reflexiven Verben.',
-      loesungLabel: 'Mögliche Lösung',
-      aufgaben: [
-        'Was machst du morgens? (sich duschen, sich anziehen, sich beeilen …)',
-      ],
-      loesungen: [
-        'Ich **dusche mich** um 7 Uhr. Dann **ziehe ich mich an**. Ich **beeile mich**, weil der Bus um 8 Uhr **fährt**. ~~(cualquier rutina real vale — verbo en posición 2, pronombre detrás)~~',
+      type: 'beispiele',
+      kicker: 'ich → mich',
+      titel: 'Nicht immer sich!',
+      items: [
+        { text: 'Ich **beeile mich** — der Zug fährt um zehn.', gl: '— ich → mich (nunca *ich beeile sich*)' },
+        { text: 'Du **duschst dich** nach dem Sport.', gl: '— du → dich' },
+        { text: 'Herr Braun **fühlt sich** heute nicht gut.', gl: '— er → sich' },
+        { text: 'Frau Yilmaz, **freuen Sie sich** auf den Urlaub?', gl: '— Sie (formal) → sich' },
       ],
     },
 
@@ -138,7 +116,7 @@ export default {
       eyebrow: 'Prüfungsbezug',
       modul: 'Schreiben · E-Mail',
       titel: 'Reflexiv in der Einladung',
-      anweisung: 'In der E-Mail (Teil 2, ~30-40 Wörter) sind sich freuen und sich treffen Gold wert. Ergänze:',
+      anweisung: 'In der E-Mail (Teil 2, ~30-40 Wörter) sind sich freuen und sich treffen sehr nützlich. Ergänze: ~~(Completa.)~~',
       absaetze: [
         '„Liebe Julia, ich {1} (sich freuen) auf deinen Besuch! {2} (sich treffen / wir) am Samstag um drei am Bahnhof?“',
       ],
@@ -151,7 +129,7 @@ export default {
     {
       type: 'modell',
       eyebrow: 'Prüfungsbezug — Modelltext',
-      thema: 'E-Mail: Einladung zum Samstag — mit allen Strukturen aus Block 1',
+      thema: 'E-Mail: Einladung zum Samstag — mit vielen Strukturen aus Block 1',
       woerter: '~35 Wörter',
       absaetze: [
         '„Liebe Anna, ich **freue mich** auf Samstag! **Komm** bitte um drei, **denn** wir wollen zuerst Kaffee trinken. **Wenn** es regnet, **bleiben** wir zu Hause — das ist **besser als** Kino. Bis bald! Deine Marta“',
@@ -161,7 +139,7 @@ export default {
         { tag: 'Imperativ', text: '*Komm bitte* — du-Form ohne -st, mit bitte (Lektion 16)' },
         { tag: 'Konnektor', text: '*denn* — Position 0, Wortstellung bleibt normal (Lektion 14)' },
         { tag: 'Nebensatz', text: '*Wenn es regnet, bleiben wir* — Verb am Ende, dann Verb zuerst (Lektion 15)' },
-        { tag: 'Komparativ', text: '*besser als* — der irreguläre Komparativ von gut (Lektion 13)' },
+        { tag: 'Komparativ', text: '*besser als* — der unregelmäßige Komparativ von gut (Lektion 13)' },
       ],
     },
     {
@@ -198,7 +176,7 @@ export default {
     {
       type: 'ausblick',
       eyebrow: 'Ausblick',
-      text: '**Geschafft!** Die Grammatik-Basis von Block 1 ist komplett: Perfekt, Vergleiche, Konnektoren, Nebensätze, Imperativ und reflexive Verben. Ab der nächsten Lektion wechselst du den Modus: Im **Modul Lesen** trainierst du Strategien für die Prüfung — nicht mehr neue Grammatik, sondern wie du Texte knackst.',
+      text: '**Geschafft!** Die Grammatik-Basis von Block 1 ist komplett: Perfekt, Vergleiche, Konnektoren, Nebensätze, Imperativ und reflexive Verben. Ab der nächsten Lektion wechselst du den Modus: Im **Modul Lesen** trainierst du Strategien für die Prüfung — keine neue Grammatik, sondern gute Tricks für Texte.',
     },
   ],
 }

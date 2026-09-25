@@ -16,7 +16,7 @@ export default {
       items: [
         'Nebensätze ~~(oraciones subordinadas)~~ mit *weil*, *dass* und *wenn* bilden',
         'die Regel anwenden: **Verb am Ende** + Komma',
-        'den typischen Fehler vermeiden: *weil ich bin müde* ❌',
+        'den typischen Fehler vermeiden ~~(evitar)~~: *weil ich bin müde* ❌',
       ],
     },
 
@@ -44,7 +44,7 @@ export default {
     // ── Erklärung ─────────────────────────────────────────────────
     {
       type: 'steps',
-      eyebrow: 'Erklärung — die Star-Regel',
+      eyebrow: 'Erklärung — die wichtigste Regel',
       steps: [
         {
           badge: 'Regel',
@@ -64,7 +64,7 @@ export default {
         {
           badge: 'wenn',
           titel: 'Bedingung & Zeit',
-          text: '__wenn__ = ~~si / cuando.~~ Steht der *wenn*-Satz vorne, beginnt der Hauptsatz mit dem **Verb**:\n__**Wenn** es **regnet**, **bleibe** ich zu Hause.__ ~~(verbo, coma, verbo — chocan en el medio)~~',
+          text: '__wenn__ = ~~si / cuando.~~ Der *wenn*-Satz steht vorne? Dann beginnt der Hauptsatz mit dem **Verb**:\n__**Wenn** es **regnet**, **bleibe** ich zu Hause.__ ~~(verbo, coma, verbo — chocan en el medio)~~',
         },
       ],
     },
@@ -96,51 +96,29 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Richtig oder falsch?',
-      frage: 'Wo steht das Verb richtig? Korrigiere die falschen Sätze.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Ich bleibe zu Hause, weil ich bin müde.',
-        'Ich glaube, dass das Hotel teuer ist.',
-        'Er lernt Deutsch, weil er wohnt in Berlin.',
-      ],
-      loesungen: [
-        '❌ → Ich bleibe zu Hause, weil ich müde **bin**. ~~(el error típico del hispanohablante)~~',
-        '✓ Richtig — das Verb *ist* steht am Ende.',
-        '❌ → Er lernt Deutsch, weil er in Berlin **wohnt**.',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'weil & dass',
+      items: [
+        { text: 'Tomás trinkt einen Kaffee, **weil** er sehr müde **ist**.', gl: '— weil: verbo al final' },
+        { text: 'Wir bleiben heute zu Hause, **weil** es stark **regnet**.', gl: '— porque llueve mucho' },
+        { text: 'Ich finde, **dass** das Buch sehr spannend **ist**.', gl: '— opino que' },
+        { text: 'Meine Mutter glaubt, **dass** ich zu viel **arbeite**.', gl: '— cree que' },
+        { text: 'Wir hoffen, **dass** ihr am Sonntag **kommt**.', gl: '— esperamos que' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Sätze verbinden',
-      frage: 'Verbinde mit weil oder dass. ~~No olvides la coma.~~',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Ich fahre mit dem Bus. + Mein Auto ist kaputt. (weil)',
-        'Ich finde: Der Film ist langweilig. (dass)',
-        'Sie ist glücklich. + Sie hat Urlaub. (weil)',
-      ],
-      loesungen: [
-        'Ich fahre mit dem Bus, **weil** mein Auto kaputt **ist**.',
-        'Ich finde, **dass** der Film langweilig **ist**.',
-        'Sie ist glücklich, **weil** sie Urlaub **hat**.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Wenn-Sätze produzieren',
-      frage: 'Ergänze die Sätze frei.',
-      loesungLabel: 'Mögliche Lösung',
-      aufgaben: [
-        'Wenn das Wetter schön ist, …',
-        'Ich bin glücklich, wenn …',
-      ],
-      loesungen: [
-        'Wenn das Wetter schön ist, **gehe ich** in den Park. ~~(el principal empieza con verbo)~~',
-        'Ich bin glücklich, wenn meine Familie zu Besuch **kommt**. ~~(vale todo lo que tenga el verbo al final)~~',
+      type: 'beispiele',
+      kicker: 'wenn',
+      titel: 'Der wenn-Satz vorne oder hinten',
+      items: [
+        { text: '**Wenn** ich müde **bin**, **gehe** ich früh ins Bett.', gl: '— verbo, coma, verbo' },
+        { text: '**Wenn** das Wetter schön **ist**, **fahren** wir an den See.', gl: '— si hace buen tiempo' },
+        { text: '**Wenn** Lea Zeit **hat**, **kocht** sie für ihre Familie.', gl: '— la principal empieza con el verbo' },
+        { text: 'Ich lese gern, **wenn** die Kinder **schlafen**.', gl: '— wenn detrás: la principal no cambia' },
+        { text: 'Ich bin glücklich, **wenn** meine Freunde zu Besuch **kommen**.', gl: '— cuando vienen de visita' },
       ],
     },
 
@@ -166,7 +144,7 @@ export default {
     {
       type: 'tipp',
       label: 'Prüfungstipp',
-      text: 'Ein **weil-Satz** in der E-Mail und ein **Ich glaube, dass …** beim Sprechen — mehr brauchst du nicht, um im A2 zu glänzen. ~~Repite en voz alta diez frases con «weil … bin/habe» hasta que el verbo al final te salga solo.~~',
+      text: 'Ein **weil-Satz** in der E-Mail und ein **Ich glaube, dass …** beim Sprechen — das zeigt dem Prüfer sofort A2-Niveau. ~~Repite en voz alta diez frases con «weil … bin/habe» hasta que el verbo al final te salga solo.~~',
     },
 
     { type: 'rule' },
@@ -195,7 +173,7 @@ export default {
     {
       type: 'ausblick',
       eyebrow: 'Ausblick',
-      text: 'Du kannst jetzt erklären, begründen und Bedingungen nennen. In der nächsten Lektion lernst du, wie man auf Deutsch **Anweisungen und Bitten** gibt: **Komm! Iss! Kommen Sie bitte!** — der Imperativ.',
+      text: 'Du kannst jetzt erklären, begründen und Bedingungen ~~(condiciones)~~ nennen. In der nächsten Lektion lernst du **Anweisungen und Bitten** auf Deutsch: **Komm! Iss! Kommen Sie bitte!** — der Imperativ.',
     },
   ],
 }

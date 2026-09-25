@@ -47,6 +47,10 @@ Tipos de ítem (todos autocorregibles en el cliente):
 3. **satzbau** — ordenar palabras para formar la frase:
    `{ typ: 'satzbau', woerter: ['heiße', 'ich', 'Paul'], loesung: 'Ich heiße Paul.' }`
    `woerter` en orden barajado fijo; `loesung` con mayúscula inicial y puntuación.
+   Si hay otro orden IGUAL de correcto (p. ej. Mittelfeld libre: *Ich habe am
+   Samstag Fußball gespielt* / *Ich habe Fußball am Samstag gespielt*), añádelo
+   en `alt: ['…']` — mismas palabras exactas. El corrector acepta loesung o
+   cualquier alt. La palabra inicial va con mayúscula en `woerter` como ancla.
 4. **zuordnen** — emparejar (4-6 pares):
    `{ typ: 'zuordnen', links: ['ich', 'du', 'er'], rechts: ['bin', 'bist', 'ist'], loesung: { 'ich': 'bin', 'du': 'bist', 'er': 'ist' } }`
 5. **korrektur** — ¿cuál es la correcta? (2 variantes, una con el error típico

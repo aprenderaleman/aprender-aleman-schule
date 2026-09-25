@@ -57,7 +57,7 @@ export default {
       card: true,
       titel: 'Drei Mini-Tests',
       absaetze: [
-        'Mach die drei Mini-Tests unten **ohne Hilfe** — kein Wörterbuch, kein Google. Kontrolliere dann die Lösungen. Bei jeder Lösung steht, **welche Lektion** das Thema erklärt. ~~¿Fallaste algo? Perfecto: ya sabes qué lección del curso lo va a arreglar. La diagnosis no se aprueba ni se suspende.~~',
+        'Mach die drei Mini-Tests im **Übungsheft** zu dieser Lektion **ohne Hilfe** — kein Wörterbuch, kein Internet. Kontrolliere dann die Lösungen. Die Tabelle unten bei „Prüfungsbezug“ zeigt dir die passende Lektion zu jedem Thema. ~~¿Fallaste algo? Perfecto: ya sabes qué lección del curso lo va a arreglar. La diagnosis no se aprueba ni se suspende.~~',
       ],
     },
 
@@ -78,57 +78,29 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen (= Mini-Tests) ────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Mini-Test Grammatik',
-      frage: 'Ergänze das richtige Wort. ~~En cada solución ves a qué lección ir si fallas.~~',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Gestern ___ ich ins Kino gegangen. (habe / bin)',
-        'Als Kind ___ ich viel Zeit. (hatte / habe)',
-        'Ich ___ heute leider nicht kommen. (kann / können)',
-        'Der Zug fährt um 8 Uhr ___. (ab / auf)',
-        'Ich sehe ___ Mann. (der / den)',
-        'Ich fahre mit ___ Bus. (dem / den)',
-        'Berlin ist ___ als Bonn. (groß / größer)',
-        'Ich bleibe zu Hause, ___ ich krank bin. (weil / denn)',
-      ],
-      loesungen: [
-        'Gestern **bin** ich ins Kino gegangen. ~~¿Fallaste? → Lektion 4 (Perfekt)~~',
-        'Als Kind **hatte** ich viel Zeit. ~~¿Fallaste? → Lektion 5 (Präteritum)~~',
-        'Ich **kann** heute leider nicht kommen. ~~¿Fallaste? → Lektion 6 (Modalverben)~~',
-        'Der Zug fährt um 8 Uhr **ab**. ~~¿Fallaste? → Lektion 7 (trennbare Verben)~~',
-        'Ich sehe **den** Mann. ~~¿Fallaste? → Lektion 8 (Akkusativ)~~',
-        'Ich fahre mit **dem** Bus. ~~¿Fallaste? → Lektion 9 (Dativ)~~',
-        'Berlin ist **größer** als Bonn. ~~¿Fallaste? → Lektion 13 (Komparativ)~~',
-        'Ich bleibe zu Hause, **weil** ich krank bin. ~~¿Fallaste? → Lektion 15 (Nebensätze)~~',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'So sprichst du über dein Lernen',
+      items: [
+        { text: 'Zahlen und Farben kann ich **schon**.', gl: '— Los números y los colores ya me los sé.' },
+        { text: 'Die Vergangenheit kann ich **noch nicht** — das kommt in Block 1.', gl: '— El pasado todavía no — llega en el bloque 1.' },
+        { text: 'Ein **Fehler** zeigt mir: Das muss ich **wiederholen**.', gl: '— Un error me enseña qué tengo que repasar.' },
+        { text: 'Ich **übe** morgens, mit einem Kaffee.', gl: '— Practico por la mañana, con un café.' },
+        { text: 'Zuerst der **Test**, dann die **Lösung** — so lernst du mehr.', gl: '— Primero el test, luego la solución: así aprendes más.' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Mini-Test Wortschatz',
-      frage: 'Welches Wort passt nicht? ~~(¿Qué palabra no encaja en el grupo?)~~',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Apfel – Brot – Stuhl – Käse',
-        'Bus – Küche – Zug – Fahrrad',
-        'Kopf – Arm – Miete – Bein',
-        'Bruder – Bahnhof – Schwester – Mutter',
+      type: 'beispiele',
+      kicker: 'A1 → A2',
+      titel: 'Ein Satz, zwei Niveaus',
+      items: [
+        { text: 'A1: Ich trinke Kaffee. → A2: Gestern **habe** ich zu viel Kaffee **getrunken**.', gl: '— El A2 añade el pasado.' },
+        { text: 'A1: Das Haus ist groß. → A2: Das Haus ist **größer als** die Wohnung.', gl: '— El A2 compara.' },
+        { text: 'A1: Ich lerne Deutsch. → A2: Ich lerne Deutsch, **weil** ich in Wien arbeite.', gl: '— El A2 explica el porqué con weil.' },
+        { text: 'A1: Er kocht. → A2: Er **hat** gestern für zehn Personen **gekocht**.', gl: '— Más detalle, más pasado.' },
       ],
-      loesungen: [
-        '**Stuhl** ~~(silla — el resto es comida; → Lektion 33, Essen & Einkaufen)~~',
-        '**Küche** ~~(cocina — el resto es transporte; → Lektion 36, Reisen & Verkehr)~~',
-        '**Miete** ~~(alquiler — el resto es el cuerpo; → Lektion 37, Gesundheit & Körper)~~',
-        '**Bahnhof** ~~(estación — el resto es familia; → Lektion 31, Familie & Freunde)~~',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Mini-Test Schreiben',
-      frage: 'Schreib 25-35 Wörter: Was hast du am Wochenende gemacht? (Wo? Mit wem? Wie war es?)',
-      loesungLabel: 'Mögliche Lösung',
-      loesung: 'Am Samstag habe ich mit meiner Familie einen Ausflug gemacht. Wir sind an den See gefahren und haben ein Picknick gemacht. Das Wetter war super und wir hatten viel Spaß. ~~(30 palabras.) Otras actividades valen igual — lo importante: Perfekt (habe … gemacht / bin … gefahren) y war/hatte. ¿Difícil? → Lektionen 4-5.~~',
     },
 
     { type: 'rule' },

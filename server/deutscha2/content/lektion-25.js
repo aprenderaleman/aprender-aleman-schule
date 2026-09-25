@@ -16,7 +16,7 @@ export default {
       eyebrow: 'Lernziele',
       items: [
         'eine kurze Mitteilung mit Anrede und Gruß schreiben',
-        'zu jedem Punkt der Aufgabe einen Satz schreiben',
+        'zu jedem Punkt in der Aufgabe einen Satz schreiben',
         'absagen, um etwas bitten und einen neuen Termin vorschlagen',
       ],
     },
@@ -55,7 +55,7 @@ export default {
         {
           badge: 'Inhalt',
           titel: 'Ein Satz pro Punkt',
-          text: 'Die Aufgabe hat Punkte ~~(p. ej.: cancela — di por qué — propón otra fecha)~~. Schreib zu jedem Punkt **einen kurzen Satz**: __was__ passiert und __wann__.',
+          text: 'Die Aufgabe hat Punkte ~~(p. ej.: cancela — di por qué — propón otra fecha)~~. Schreib zu jedem Punkt **einen kurzen Satz**: __Was__ passiert? __Wann__?',
         },
         {
           badge: 'Gruß',
@@ -109,7 +109,7 @@ export default {
       card: true,
       titel: 'Die Aufgabe',
       absaetze: [
-        'Du kannst heute nicht zum Fußball kommen. Schreib deinem Freund Marco eine SMS: **Sag ab** — sag, **warum** — schlag einen **neuen Termin** vor.',
+        'Du kannst heute nicht zum Fußball kommen. Schreib deinem Freund Marco eine SMS: **Sag ab** — schreib den **Grund** — schlag einen **neuen Termin** vor.',
       ],
     },
     {
@@ -131,49 +131,28 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Welcher Punkt?',
-      frage: 'Absagen, Grund oder neuer Termin — was macht der Satz?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Ich kann leider nicht kommen.',
-        'Ich bin krank.',
-        'Hast du am Sonntag Zeit?',
-      ],
-      loesungen: [
-        '**absagen**',
-        '**Grund** ~~(el motivo)~~',
-        '**neuer Termin**',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Absagen und Gründe',
+      items: [
+        { text: 'Ich kann am Montag **leider nicht** kommen.', gl: '— cancelar con leider' },
+        { text: 'Ich **muss** heute lange **arbeiten**.', gl: '— el motivo' },
+        { text: 'Ich bin **krank** und bleibe zu Hause.', gl: '— otro motivo típico' },
+        { text: 'Können wir den **Termin** am Donnerstag machen?', gl: '— proponer una nueva cita' },
+        { text: '**Hast du** am Sonntag **Zeit**?', gl: '— proponer con una pregunta' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Sätze bauen',
-      frage: 'Bilde die Sätze für deine Mitteilung.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        '(ich / leider / nicht kommen / kann)',
-        '(du / bitte / Milch / kannst / mitbringen / ?)',
-        '(wir / am Freitag / können / telefonieren / ?)',
-      ],
-      loesungen: [
-        'Ich **kann** leider nicht **kommen**.',
-        '**Kannst** du bitte Milch **mitbringen**?',
-        '**Können** wir am Freitag **telefonieren**? ~~(en la pregunta, el verbo va primero)~~',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Die Mitteilung ordnen',
-      frage: 'Bring die vier Teile in die richtige Reihenfolge. ~~(ordena las cuatro partes)~~',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'a) Können wir morgen zusammen lernen?  ·  b) Viele Grüße Carla  ·  c) Hallo Ines,  ·  d) ich kann heute nicht zum Kurs kommen, ich bin krank.',
-      ],
-      loesungen: [
-        '**c → d → a → b:** „Hallo Ines, ich kann heute nicht zum Kurs kommen, ich bin krank. Können wir morgen zusammen lernen?\nViele Grüße\nCarla“',
+      type: 'beispiele',
+      kicker: 'Bitten & informieren',
+      titel: 'Kurze Sätze für die SMS',
+      items: [
+        { text: 'Kannst du bitte Brot **mitbringen**?', gl: '— pedir algo' },
+        { text: '**Warte** bitte nicht auf mich.', gl: '— informar' },
+        { text: 'Ich komme heute eine Stunde **später**.', gl: '— informar: cuándo' },
+        { text: 'Der **Schlüssel** ist beim Nachbarn.', gl: '— dónde está la llave' },
       ],
     },
 
@@ -185,7 +164,7 @@ export default {
       eyebrow: 'Prüfungsbezug',
       modul: 'Schreiben · Teil 1',
       titel: 'Notiz an eine Kollegin',
-      anweisung: 'Du bist krank. Schreib deiner Kollegin Laura eine Mitteilung (ca. 20-30 Wörter): Du kommst heute nicht — sag, warum — bitte sie, den Chef zu informieren.',
+      anweisung: 'Du bist krank. Schreib deiner Kollegin Laura eine Mitteilung (ca. 20-30 Wörter): Du kommst heute nicht — schreib den Grund — bitte Laura: Sie soll den Chef informieren.',
       absaetze: [
         'Schreib zu **allen drei Punkten**. Vergiss Anrede und Gruß nicht!',
       ],
@@ -220,7 +199,7 @@ export default {
       eyebrow: 'Selbstcheck',
       items: [
         'Ich schreibe eine Mitteilung mit Anrede, Inhalt und Gruß.',
-        'Ich schreibe zu jedem Punkt der Aufgabe einen Satz.',
+        'Ich schreibe zu jedem Punkt in der Aufgabe einen Satz.',
         'Ich kann absagen, bitten und einen Termin vorschlagen.',
       ],
     },

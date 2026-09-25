@@ -107,49 +107,29 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Richtig oder falsch?',
-      frage: 'Was stimmt für die digitale Prüfung?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Ich schreibe die E-Mail mit dem Stift.',
-        'Beim Hören trage ich Kopfhörer.',
-        'Das Sprechen mache ich auch am Computer.',
-        'Für ä, ö, ü und ß gibt es Buttons.',
-      ],
-      loesungen: [
-        '**Falsch.** Du **tippst** mit der Tastatur.',
-        '**Richtig.**',
-        '**Falsch.** Du sprichst mit einem Partner und den Prüfern.',
-        '**Richtig.** ~~Los ves en el Modellsatz digital.~~',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Am Prüfungscomputer',
+      items: [
+        { text: 'Die Uhr auf dem **Bildschirm** zeigt noch 10 Minuten.', gl: '— El reloj de la pantalla marca que quedan 10 minutos.' },
+        { text: 'Ich **markiere** Antwort b.', gl: '— Marco la respuesta b.' },
+        { text: 'Wo ist die **Taste** für das ß? — Hier links.', gl: '— ¿Dónde está la tecla de la ß? — Aquí a la izquierda.' },
+        { text: 'Ohne **Kopfhörer** hörst du nichts.', gl: '— Sin auriculares no oyes nada.' },
+        { text: 'Zuerst kontrolliere ich, dann klicke ich auf „**weiter**“.', gl: '— Primero compruebo, luego hago clic en «siguiente».' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Wortschatz ergänzen',
-      frage: 'Ergänze: Bildschirm, Tastatur, klicke, Kopfhörer.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Der Text steht auf dem ___.',
-        'Ich ___ auf die richtige Antwort.',
-        'Ich tippe mit der ___.',
-        'Beim Hören trage ich ___.',
+      type: 'beispiele',
+      kicker: 'tippen üben',
+      titel: 'Sonderzeichen im Alltag',
+      items: [
+        { text: 'Ich **tippe** das Wort „möchte“ mit ö.', gl: '— Tecleo la palabra möchte con ö.' },
+        { text: 'Das Wort „heißen“ schreibt man mit ß.', gl: '— La palabra heißen se escribe con ß.' },
+        { text: 'Meine **Maus** funktioniert nicht. — Sag es der Aufsicht!', gl: '— Mi ratón no funciona. — ¡Díselo al supervisor!' },
+        { text: 'Auf Papier schreibe ich mit dem Stift, am Computer **tippe** ich.', gl: '— En papel escribo con boli; en el ordenador, tecleo.' },
       ],
-      loesungen: [
-        'Der Text steht auf dem **Bildschirm**.',
-        'Ich **klicke** auf die richtige Antwort.',
-        'Ich tippe mit der **Tastatur**.',
-        'Beim Hören trage ich **Kopfhörer**.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Tippen üben',
-      frage: 'Tippe am Computer zwei Sätze über dich — mit ä, ö oder ü.',
-      loesungLabel: 'Mögliche Lösung',
-      loesung: 'Ich übe jeden Tag Deutsch, weil ich die Prüfung bestehen möchte. Am Wochenende höre ich gern Musik. ~~Vale cualquier par de frases — lo importante: escribir los caracteres especiales sin ayuda.~~',
     },
 
     { type: 'rule' },

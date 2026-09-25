@@ -100,47 +100,29 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Richtig oder falsch?',
-      frage: 'Was stimmt? ~~(¿Qué es verdad?)~~',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Die A2-Prüfung hat Module wie B1.',
-        'Man besteht die Prüfung mit 60 % der Punkte.',
-        'Die Prüfung hat vier Teile.',
-        'Sprechen dauert ca. 30 Minuten.',
-      ],
-      loesungen: [
-        '**Falsch.** A2 hat keine Module — es ist eine Prüfung.',
-        '**Richtig.**',
-        '**Richtig.** Lesen, Hören, Schreiben, Sprechen.',
-        '**Falsch.** Sprechen dauert ca. **15** Minuten.',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Vor der Prüfung',
+      items: [
+        { text: 'Ich mache die **Anmeldung** heute Abend online.', gl: '— Hago la inscripción esta noche por internet.' },
+        { text: 'Der Test hat zwanzig **Aufgaben**.', gl: '— El test tiene veinte tareas.' },
+        { text: 'Eine **Antwort** ist richtig, zwei sind falsch.', gl: '— Una respuesta es correcta, dos son falsas.' },
+        { text: 'Mit 70 % der **Punkte** bestehst du sicher.', gl: '— Con el 70 % de los puntos apruebas seguro.' },
+        { text: 'Das **Ergebnis** siehst du nach drei Wochen online.', gl: '— El resultado lo ves online tras tres semanas.' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Wortschatz ergänzen',
-      frage: 'Ergänze das Wort aus dem Kernwortschatz.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Zuerst mache ich die ___ online.',
-        'Ich brauche 60 % der Punkte. Dann ___ ich die Prüfung.',
-        'Nach der Prüfung bekomme ich das ___.',
+      type: 'beispiele',
+      kicker: 'bestehen & Co.',
+      titel: 'Dein Weg zum Zeugnis',
+      items: [
+        { text: 'Paco lernt jeden Tag. Er möchte die Prüfung **bestehen**.', gl: '— Paco estudia cada día. Quiere aprobar el examen.' },
+        { text: 'Der mündliche **Teil** dauert nur 15 Minuten.', gl: '— La parte oral dura solo 15 minutos.' },
+        { text: 'Das **Zeugnis** brauche ich für die Arbeit.', gl: '— El certificado lo necesito para el trabajo.' },
+        { text: 'Die **Prüfung** ist am Computer oder auf Papier.', gl: '— El examen es en ordenador o en papel.' },
       ],
-      loesungen: [
-        'Zuerst mache ich die **Anmeldung** online.',
-        'Dann **bestehe** ich die Prüfung.',
-        'Nach der Prüfung bekomme ich das **Zeugnis**.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Warum machst du die A2-Prüfung? Schreib zwei Sätze.',
-      loesungLabel: 'Mögliche Lösung',
-      loesung: 'Ich mache die Prüfung, denn ich möchte in Deutschland arbeiten. Das Zeugnis ist wichtig für mich und meine Familie. ~~Vale cualquier motivo real — lo importante: dos frases completas con el verbo en posición 2.~~',
     },
 
     { type: 'rule' },

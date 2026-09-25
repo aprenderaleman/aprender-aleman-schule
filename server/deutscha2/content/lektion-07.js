@@ -88,51 +88,29 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Präfix erkennen',
-      frage: 'Wo ist das Präfix? Schreibe den Infinitiv. ~~Busca la palabrita del final y únela al verbo.~~',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Ich stehe um 6 Uhr auf. → Infinitiv: …',
-        'Der Kurs fängt gleich an. → Infinitiv: …',
-        'Abends sehen wir fern. → Infinitiv: …',
-      ],
-      loesungen: [
-        '**aufstehen** ~~(no *stehen*)~~',
-        '**anfangen**',
-        '**fernsehen**',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Ein Tag mit trennbaren Verben',
+      items: [
+        { text: 'Ich **stehe** am Sonntag erst um 10 Uhr **auf**.', gl: '— los domingos me levanto a las 10' },
+        { text: 'Meine Frau **kauft** immer freitags **ein**.', gl: '— hace la compra siempre los viernes' },
+        { text: 'Das Konzert **fängt** gleich **an** — schnell!', gl: '— el concierto empieza ya' },
+        { text: 'Abends **sehen** wir eine Stunde **fern**.', gl: '— por la noche vemos la tele una hora' },
+        { text: '**Machst** du bitte die Tür **auf**? Ich habe keine Hand frei.', gl: '— ¿me abres la puerta, por favor?' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Sätze bauen',
-      frage: 'Bilde Sätze im Präsens. Verb auf Position 2, Präfix ans Ende.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        '(ich / meine Mutter / heute / anrufen)',
-        '(wir / am Samstag / einkaufen)',
-        '(du / mitkommen / ?)',
-      ],
-      loesungen: [
-        'Ich **rufe** meine Mutter heute **an**.',
-        'Wir **kaufen** am Samstag **ein**.',
-        '**Kommst** du **mit**?',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Mit Modalverb und im Perfekt',
-      frage: 'Schreibe den Satz neu: erst mit müssen, dann im Perfekt.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Ich stehe früh auf. → mit *müssen*: … → im Perfekt: …',
-        'Er kauft ein. → mit *müssen*: … → im Perfekt: …',
-      ],
-      loesungen: [
-        'Ich **muss** früh **aufstehen**. → Ich **bin** früh **aufgestanden**.',
-        'Er **muss einkaufen**. → Er **hat eingekauft**.',
+      type: 'beispiele',
+      kicker: 'Modal & Perfekt',
+      titel: 'Getrennt oder zusammen?',
+      items: [
+        { text: 'Ich **will** heute Abend meine Eltern **anrufen**.', gl: '— con modal: infinitivo entero al final' },
+        { text: 'Karla **ist** heute um 5 Uhr **aufgestanden**.', gl: '— Perfekt: auf-ge-standen' },
+        { text: 'Wir **haben** für das Wochenende **eingekauft**.', gl: '— Perfekt: ein-ge-kauft' },
+        { text: '**Kommst** du **mit**? — Ich **kann** leider nicht **mitkommen**.', gl: '— separado sin modal, junto con modal' },
+        { text: 'Der Zug **ist** pünktlich in Bonn **angekommen**.', gl: '— an-ge-kommen, con sein (movimiento)' },
       ],
     },
 
@@ -144,7 +122,7 @@ export default {
       eyebrow: 'Prüfungsbezug',
       modul: 'Schreiben · Kurze Mitteilung',
       titel: 'SMS an eine Freundin',
-      anweisung: 'In Schreiben Teil 1 schreibst du eine kurze Nachricht (~20-30 Wörter). Trennbare Verben brauchst du fast immer. Ergänze:',
+      anweisung: 'Im Schreiben (Teil 1) schreibst du eine kurze Nachricht (~20-30 Wörter). Trennbare Verben brauchst du fast immer. Ergänze: ~~(Completa:)~~',
       absaetze: [
         '„Hallo Maria! Der Deutschkurs {1} morgen schon um 8 Uhr {1}. Ich {2} dich heute Abend {2}. Bis später!“',
       ],
@@ -158,7 +136,7 @@ export default {
     {
       type: 'tipp',
       label: 'Prüfungstipp',
-      text: 'Im **Hören** kommt die wichtige Information oft **erst am Satzende**: „Der Zug fährt heute nicht **ab**“ ~~(¡el ab del final cambia todo el sentido!)~~. Höre immer **bis zum Ende** des Satzes, bevor du antwortest.',
+      text: 'Im **Hören** kommt die wichtige Information oft **erst am Satzende**: „Der Zug fährt heute nicht **ab**“ ~~(¡el ab del final cambia todo el sentido!)~~. Hör immer **bis zum Satzende** — erst dann antwortest du.',
     },
 
     { type: 'rule' },

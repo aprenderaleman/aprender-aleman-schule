@@ -20,6 +20,11 @@ function shuffled(arr, seed) {
   return a
 }
 
+// satzbau: la clave más las alternativas igual de válidas (orden libre del
+// Mittelfeld, etc.). La puntuación no cuenta.
+const sinPunkt = s => norm(String(s).replace(/[.?!,]/g, ''))
+const satzOk = (item, built) => [item.loesung, ...(item.alt || [])].some(l => sinPunkt(l) === sinPunkt(built))
+
 // ─── ítems ───────────────────────────────────────────────────────────
 
 function ItemMC({ item, value, onChange, checked, seed }) {
@@ -114,7 +119,7 @@ function ItemSatzbau({ item, value, onChange, checked, seed, gl }) {
     return pool
   }, [start, chosen])
   const built = chosen.join(' ')
-  const ok = checked && norm(built.replace(/[.?!,]/g, '')) === norm(item.loesung.replace(/[.?!,]/g, ''))
+  const ok = checked && satzOk(item, built)
   const istFrage = String(item.loesung).trim().endsWith('?')
   return (
     <div className="c1-heft-item">
@@ -195,7 +200,7 @@ function itemCorrect(item, value) {
     case 'mc': case 'korrektur': return value === item.loesung
     case 'rf': return value === item.loesung
     case 'luecke': return Object.keys(item.loesungen).every(n => norm(value?.[n]) === norm(item.loesungen[n]))
-    case 'satzbau': return norm((value || []).join(' ').replace(/[.?!,]/g, '')) === norm(item.loesung.replace(/[.?!,]/g, ''))
+    case 'satzbau': return satzOk(item, (value || []).join(' '))
     case 'zuordnen': return item.links.every(l => norm(value?.[l]) === norm(item.loesung[l]))
     default: return false
   }

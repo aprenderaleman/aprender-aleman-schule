@@ -84,53 +84,28 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · haben oder sein?',
-      frage: 'Ergänze haben oder sein.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Ich ___ ein Buch gelesen.',
-        'Wir ___ ins Kino gegangen.',
-        'Sie ___ einen Brief geschrieben.',
-        'Er ___ nach Spanien geflogen.',
-      ],
-      loesungen: [
-        'Ich **habe** ein Buch gelesen.',
-        'Wir **sind** ins Kino gegangen. ~~(Bewegung)~~',
-        'Sie **hat** einen Brief geschrieben.',
-        'Er **ist** nach Spanien geflogen. ~~(Bewegung)~~',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'haben oder sein?',
+      items: [
+        { text: 'Ich **habe** am Montag lange **gearbeitet**.', gl: '— haben: la mayoría de los verbos' },
+        { text: 'Rosa **ist** gestern nach Sevilla **geflogen**.', gl: '— sein: movimiento (volar)' },
+        { text: 'Wir **haben** auf dem Markt Obst **gekauft**.', gl: '— haben' },
+        { text: 'Das Kind **ist** früh **eingeschlafen**.', gl: '— sein: cambio de estado (dormirse)' },
+        { text: '**Seid** ihr zu Fuß **gekommen**?', gl: '— pregunta con sein en posición 1' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Partizip II bilden',
-      frage: 'Wie heißt das Partizip II?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'kaufen → ich habe …',
-        'essen → ich habe …',
-        'fahren → ich bin …',
-      ],
-      loesungen: [
-        'ich habe **gekauft**',
-        'ich habe **gegessen**',
-        'ich bin **gefahren**',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Satz im Perfekt bilden',
-      frage: 'Bilde Sätze im Perfekt.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        '(ich / gestern / Fußball / spielen)',
-        '(wir / am Wochenende / nach München / fahren)',
-      ],
-      loesungen: [
-        'Ich **habe** gestern Fußball **gespielt**.',
-        'Wir **sind** am Wochenende nach München **gefahren**.',
+      type: 'beispiele',
+      kicker: 'Satzklammer',
+      titel: 'Das Partizip ans Ende',
+      items: [
+        { text: 'Ich **habe** heute Morgen nur einen Kaffee **getrunken**.', gl: '— haben en posición 2, participio al final' },
+        { text: 'Am Sonntag **sind** wir im Park spazieren **gegangen**.', gl: '— sein: movimiento' },
+        { text: '**Hast** du am Wochenende Fußball **gespielt**?', gl: '— pregunta: Hast du … gespielt?' },
+        { text: 'Wir **haben** das Essen noch nicht **gemacht**.', gl: '— nicht va antes del participio' },
       ],
     },
 
@@ -142,7 +117,7 @@ export default {
       eyebrow: 'Prüfungsbezug',
       modul: 'Schreiben · E-Mail',
       titel: '2 Sätze',
-      anweisung: 'Im Schreiben erzählst du oft, was du gemacht hast. Ergänze:',
+      anweisung: 'Im Schreiben erzählst du oft von gestern oder vom Wochenende. Ergänze: ~~(Completa:)~~',
       absaetze: [
         '„Liebe Anna, am Samstag {1} ich einen Ausflug {1}. Wir {2} an den See {2}.“',
       ],

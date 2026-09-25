@@ -98,57 +98,29 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Dativ erkennen',
-      frage: 'dem, der oder den? Ergänze den Artikel. ~~(Completa el artículo en dativo.)~~',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Ich danke ___ Lehrer. (der Lehrer)',
-        'Das Handy gehört ___ Frau. (die Frau)',
-        'Er hilft ___ Kind. (das Kind)',
-        'Sie dankt ___ Eltern. (die Eltern, Plural)',
-      ],
-      loesungen: [
-        'Ich danke **dem** Lehrer.',
-        'Das Handy gehört **der** Frau.',
-        'Er hilft **dem** Kind.',
-        'Sie dankt **den** Eltern. ~~(Plural: den + -n)~~',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Verben mit Dativ im Alltag',
+      items: [
+        { text: 'Ich danke **der** Lehrerin für die Hilfe.', gl: '— danken + Dativ' },
+        { text: 'Die Jacke gefällt **meinem** Vater.', gl: '— gefallen + Dativ' },
+        { text: 'Das Fahrrad gehört **dem** Mädchen.', gl: '— gehören + Dativ, neutral' },
+        { text: 'Die Kellnerin bringt **dem** Gast die Speisekarte.', gl: '— ¿a quién? → Dativ' },
+        { text: 'Antwortest du **dem** Chef heute?', gl: '— antworten + Dativ' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Präpositionen anwenden',
-      frage: 'Ergänze die Endung.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Ich fahre mit d___ Bus. (der Bus)',
-        'Er kommt aus ein___ kleinen Stadt. (die Stadt)',
-        'Wir gehen zu unser___ Oma. (die Oma)',
-        'Sie wohnt bei ihr___ Bruder. (der Bruder)',
-      ],
-      loesungen: [
-        'Ich fahre mit **dem** Bus.',
-        'Er kommt aus **einer** kleinen Stadt.',
-        'Wir gehen zu **unserer** Oma.',
-        'Sie wohnt bei **ihrem** Bruder.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Sätze produzieren',
-      frage: 'Übersetze. ~~(Traduce — cuidado con el dativo.)~~',
-      loesungLabel: 'Mögliche Lösung',
-      aufgaben: [
-        'Ayudo a mi madre.',
-        'El libro es de mi hermano. (gehören)',
-        'Voy en coche a la escuela. (mit / zu)',
-      ],
-      loesungen: [
-        'Ich helfe **meiner Mutter**.',
-        'Das Buch gehört **meinem Bruder**.',
-        'Ich fahre **mit dem** Auto **zur** Schule. ~~(zu + der = zur)~~',
+      type: 'beispiele',
+      kicker: 'mit · nach · aus · zu · von · bei · seit',
+      titel: 'Präpositionen mit Dativ in Aktion',
+      items: [
+        { text: 'Ich fahre **mit der** U-Bahn **zur** Arbeit.', gl: '— zu + der = zur' },
+        { text: 'Nach **dem** Kurs gehe ich einkaufen.', gl: '— nach + Dativ' },
+        { text: 'Lucía kommt **aus einem** Dorf **bei** Valencia.', gl: '— aus / bei + Dativ' },
+        { text: '**Seit einer** Woche wohnen wir **bei meinen** Großeltern.', gl: '— seit / bei + Dativ' },
+        { text: 'Das Geschenk ist **von der** Familie Klein.', gl: '— von + Dativ' },
       ],
     },
 
@@ -160,7 +132,7 @@ export default {
       eyebrow: 'Prüfungsbezug',
       modul: 'Schreiben · E-Mail',
       titel: 'Dativ in der E-Mail',
-      anweisung: 'In der Prüfung schreibst du oft, mit wem und zu wem du gehst. Ergänze die Artikel:',
+      anweisung: 'In der Prüfung schreibst du oft: Mit wem? Zu wem? Ergänze die Artikel: ~~(Completa los artículos:)~~',
       absaetze: [
         '„Lieber Tom, ich fahre am Samstag mit {1} Zug zu {2} Tante nach Hamburg. Kommst du mit?“',
       ],

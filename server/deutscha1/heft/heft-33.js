@@ -6,7 +6,7 @@ export default {
     {
       typ: 'grammatik',
       titel: 'Grammatik',
-      anweisung: 'Wähle oder schreibe die richtige Form. ~~(Elige o escribe la forma correcta.)~~',
+      anweisung: 'Wähle die richtige Form. ~~(Elige la forma correcta.)~~',
       items: [
         { typ: 'mc', frage: 'Meine Wohnung ___ drei Zimmer.', optionen: ['hat', 'ist', 'habt'], loesung: 0 },
         { typ: 'mc', frage: 'Ich koche ___ Küche.', optionen: ['in der', 'im', 'in das'], loesung: 0 },

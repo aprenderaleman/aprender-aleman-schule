@@ -16,7 +16,7 @@ export default {
       type: 'lernziele',
       eyebrow: 'Lernziele',
       items: [
-        'wissen, welche Texte im Lesen vorkommen: E-Mails, Anzeigen, Schilder, Pläne',
+        'die Texte im Lesen kennen: E-Mails, Anzeigen, Schilder, Pläne',
         'die Aufgabentypen kennen: richtig/falsch, Auswahl, zuordnen',
         'die Basis-Strategie anwenden: Informationen **suchen**, nicht jedes Wort verstehen',
       ],
@@ -58,7 +58,7 @@ export default {
         {
           badge: 'Aufgaben',
           titel: 'Was machst du?',
-          text: 'Du kreuzt **richtig oder falsch** an, du **wählst** eine Antwort (a, b, c) oder du **ordnest Anzeigen zu**. Das Lesen hat mehrere kurze Teile — wie viele Aufgaben es genau sind, siehst du im offiziellen __Modellsatz__.',
+          text: 'Du kreuzt **richtig oder falsch** an, du **wählst** eine Antwort (a, b, c) oder du **ordnest Anzeigen zu**. Das Lesen hat mehrere kurze Teile. Wie viele Aufgaben genau? Das siehst du im offiziellen __Modellsatz__.',
         },
         {
           badge: 'Strategie',
@@ -92,52 +92,29 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Texttyp erkennen',
-      frage: 'Welcher Texttyp ist das? Schild, Anzeige oder Nachricht?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        '„Bitte keine Fahrräder vor die Tür stellen!“',
-        '„Suche Nachhilfe in Mathe, zweimal pro Woche. Tel. 0176 99 88 77“',
-        '„Liebe Frau Kraus, ich komme morgen leider nicht zum Kurs. Viele Grüße, Ana“',
-      ],
-      loesungen: [
-        'ein **Schild** ~~(cartel con una regla)~~',
-        'eine **Anzeige** (jemand sucht etwas)',
-        'eine **Nachricht** / kurze E-Mail',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Wörter aus den Aufgaben',
+      items: [
+        { text: '**Lies** die Aufgabe und **kreuze** dann **an**: a, b oder c.', gl: '— ankreuzen: «an» va al final' },
+        { text: '**Ordne** die Anzeigen den Personen **zu**.', gl: '— zuordnen: emparejar' },
+        { text: 'Welche **Anzeige passt** zu Herrn Novak?', gl: '— passen zu: ¿qué anuncio encaja?' },
+        { text: 'Das **Beispiel** am Anfang zeigt dir die Aufgabe.', gl: '— el ejemplo ya está resuelto' },
+        { text: '**Markiere** Namen, Zahlen und Uhrzeiten im Text.', gl: '— marca los datos clave' },
+        { text: 'Der Satz ist **falsch** — die richtige **Lösung** ist b.', gl: '— falso / la solución' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Richtig oder falsch?',
-      frage: 'Lies den Text. Sind die Sätze richtig oder falsch?',
-      aufgabe: '„**Schwimmbad Nord** — Im August ist das Schwimmbad geschlossen. Ab 1. September öffnen wir wieder: Montag bis Samstag von 8 bis 20 Uhr, Sonntag von 9 bis 18 Uhr. Kinder unter 6 Jahren zahlen keinen Eintritt.“',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Im August kann man hier schwimmen.',
-        'Am Sonntag öffnet das Schwimmbad um 9 Uhr.',
-        'Kleine Kinder zahlen nichts.',
-      ],
-      loesungen: [
-        '**falsch** — im August ist es **geschlossen**.',
-        '**richtig** — „Sonntag von 9 bis 18 Uhr“.',
-        '**richtig** — „zahlen keinen Eintritt“ = ~~entrada gratis~~.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Informationen suchen',
-      frage: 'Suche die Antwort schnell im Text von Übung 2 — lies nicht alles neu!',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Wann öffnet das Schwimmbad wieder?',
-        'Wie lange ist es am Samstag geöffnet?',
-      ],
-      loesungen: [
-        'Ab **1. September**. ~~(La fecha se encuentra en segundos — eso es la estrategia.)~~',
-        'Von **8 bis 20 Uhr** — also 12 Stunden.',
+      type: 'beispiele',
+      kicker: 'Alltagstexte',
+      titel: 'Noch mehr kleine Texte',
+      items: [
+        { text: '„**Bitte leise!** Hier lernen Kinder.“', gl: '— Schild (cartel)' },
+        { text: '„**Suche** Babysitter für Freitagabend, 10 Euro pro Stunde. Tel. 0152 887 340“', gl: '— Anzeige (alguien busca algo)' },
+        { text: '„Hallo Jonas, ich bin heute krank. Kannst du mir die Hausaufgaben schicken? Danke! Mia“', gl: '— kurze Nachricht' },
+        { text: '„**Bäckerei Sommer:** Montag bis Samstag 6–18 Uhr, Sonntag geschlossen.“', gl: '— Öffnungszeiten (horario)' },
       ],
     },
 
@@ -149,7 +126,7 @@ export default {
       eyebrow: 'Prüfungsbezug',
       modul: 'Lesen',
       titel: 'So sieht die Aufgabe aus',
-      anweisung: 'Lies den Text. Sind die Sätze richtig oder falsch? Genau so arbeitest du in der Prüfung.',
+      anweisung: 'Lies den Text. Sind die Sätze richtig oder falsch? Genau so arbeitest du in der Prüfung. ~~(Lee el texto. ¿Las frases son verdaderas o falsas? Así trabajas en el examen.)~~',
       absaetze: [
         '„Liebe Nachbarn, am Samstag, dem 14. Juni, feiern wir ab 15 Uhr ein Sommerfest im Hof. Jeder bringt etwas zu essen mit. Getränke kaufen wir zusammen. Bitte sagen Sie uns bis Donnerstag Bescheid. Familie Öztürk (2. Stock)“',
       ],
@@ -167,7 +144,7 @@ export default {
     {
       type: 'tipp',
       label: 'Prüfungstipp',
-      text: 'Lies **zuerst die Aufgaben, dann den Text**. So weißt du, welche Information du suchst — und sparst Zeit. Übe vorher mit dem offiziellen **Modellsatz**: Dann kennst du am Prüfungstag jede Aufgabe schon.',
+      text: 'Lies **zuerst die Aufgaben, dann den Text**. So weißt du genau: Diese Information suche ich. Und du sparst Zeit. Übe vorher mit dem offiziellen **Modellsatz**: Dann kennst du am Prüfungstag jede Aufgabe schon.',
     },
 
     { type: 'rule' },
@@ -189,7 +166,7 @@ export default {
       type: 'selbstcheck',
       eyebrow: 'Selbstcheck',
       items: [
-        'Ich weiß, welche Texte im Lesen vorkommen.',
+        'Ich kenne die Texte im Lesen.',
         'Ich kenne die Aufgabentypen: richtig/falsch, Auswahl, zuordnen.',
         'Ich lese zuerst die Aufgabe und suche dann die Information.',
       ],

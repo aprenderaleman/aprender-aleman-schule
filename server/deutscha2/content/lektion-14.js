@@ -6,7 +6,7 @@
 export default {
   spec: ['Bloque 1', 'Grammatik & Struktur', 'Niveau A2', 'Prüfungsrelevanz: Schreiben & Sprechen'],
   h1: 'Konnektoren: und, oder, aber, denn, deshalb',
-  lead: '~~Con cinco palabritas unes tus frases:~~ **und, oder, aber, denn** ~~no cambian nada~~ — nur **deshalb** ~~cambia el orden.~~',
+  lead: '~~Con cinco palabritas unes tus frases:~~ **und, oder, aber, denn** ~~no cambian nada; solo~~ **deshalb** ~~cambia el orden.~~',
 
   content: [
     // ── Lernziele ─────────────────────────────────────────────────
@@ -16,7 +16,7 @@ export default {
       items: [
         'Sätze verbinden mit *und, oder, aber, denn*',
         'wissen: nach diesen vier Wörtern bleibt die Wortstellung normal (Position 0)',
-        'mit *deshalb* eine Folge ausdrücken — Verb direkt danach',
+        'mit *deshalb* eine Folge ~~(consecuencia)~~ ausdrücken — Verb direkt danach',
       ],
     },
 
@@ -89,53 +89,29 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Welcher Konnektor passt?',
-      frage: 'Ergänze und, oder, aber, denn.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Ich mag Tee, ___ ich mag keinen Kaffee.',
-        'Möchtest du Wasser ___ Saft?',
-        'Ich lerne Deutsch, ___ ich möchte in Deutschland arbeiten.',
-        'Am Samstag kaufe ich ein ___ ich koche für Freunde.',
-      ],
-      loesungen: [
-        'Ich mag Tee, **aber** ich mag keinen Kaffee. ~~(contraste)~~',
-        'Möchtest du Wasser **oder** Saft?',
-        'Ich lerne Deutsch, **denn** ich möchte in Deutschland arbeiten. ~~(razón)~~',
-        'Am Samstag kaufe ich ein **und** ich koche für Freunde.',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'und, oder, aber, denn',
+      items: [
+        { text: 'Paula liest ein Buch **und** Jonas hört Musik.', gl: '— y (dos sujetos, sin coma)' },
+        { text: 'Fahren wir mit dem Rad **oder** nehmen wir die U-Bahn?', gl: '— o (en una pregunta)' },
+        { text: 'Die Wohnung ist klein, **aber** sie ist sehr hell.', gl: '— pero (con coma)' },
+        { text: 'Herr Yilmaz trinkt am Abend keinen Kaffee, **denn** er **schläft** sonst schlecht.', gl: '— denn + sujeto + verbo' },
+        { text: 'Ich rufe dich an, **denn** ich **habe** eine Frage.', gl: '— porque (orden normal)' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Sätze mit deshalb bauen',
-      frage: 'Verbinde die Sätze mit deshalb. ~~Ojo con el orden: deshalb + verbo + sujeto.~~',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Es regnet. + Ich bleibe zu Hause.',
-        'Ich habe Hunger. + Ich mache ein Sandwich.',
-        'Der Zug hat Verspätung. + Wir warten am Gleis.',
-      ],
-      loesungen: [
-        'Es regnet, **deshalb bleibe ich** zu Hause.',
-        'Ich habe Hunger, **deshalb mache ich** ein Sandwich.',
-        'Der Zug hat Verspätung, **deshalb warten wir** am Gleis.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Selbst schreiben',
-      frage: 'Schreibe zwei Sätze über dich: einen mit denn, einen mit deshalb.',
-      loesungLabel: 'Mögliche Lösung',
-      aufgaben: [
-        'Warum lernst du Deutsch? (denn)',
-        'Du bist müde. Was machst du? (deshalb)',
-      ],
-      loesungen: [
-        'Ich lerne Deutsch, **denn** meine Firma hat ein Büro in Hamburg. ~~(vale cualquier razón real)~~',
-        'Ich bin müde, **deshalb trinke ich** einen Kaffee.',
+      type: 'beispiele',
+      kicker: 'deshalb',
+      titel: 'Folge mit Inversion',
+      items: [
+        { text: 'Es ist kalt, **deshalb trage ich** eine Jacke.', gl: '— deshalb + verbo + sujeto' },
+        { text: 'Mira hat morgen Geburtstag, **deshalb backen wir** einen Kuchen.', gl: '— por eso hacemos un pastel' },
+        { text: 'Der Bus kommt nicht, **deshalb gehen wir** zu Fuß.', gl: '— el verbo va justo después' },
+        { text: 'Ich habe heute frei, **deshalb schlafe ich** lange.', gl: '— NO: *deshalb ich schlafe*' },
+        { text: 'Das Museum ist am Montag zu, **deshalb besuchen wir** es am Dienstag.', gl: '— consecuencia lógica' },
       ],
     },
 
@@ -147,7 +123,7 @@ export default {
       eyebrow: 'Prüfungsbezug',
       modul: 'Schreiben · E-Mail',
       titel: 'Konnektoren einsetzen',
-      anweisung: 'Mit Konnektoren wirkt deine E-Mail (Teil 2) sofort besser. Ergänze denn, aber, deshalb:',
+      anweisung: 'Mit Konnektoren ist deine E-Mail (Teil 2) sofort besser. Ergänze denn, aber, deshalb: ~~(Con conectores tu correo mejora enseguida. Completa con denn, aber, deshalb.)~~',
       absaetze: [
         '„Hallo Jan, ich komme am Freitag, {1} ich habe frei. Ich bringe Kuchen mit, {2} ich habe keine Getränke. Mein Auto ist kaputt, {3} komme ich mit dem Zug.“',
       ],
@@ -161,7 +137,7 @@ export default {
     {
       type: 'tipp',
       label: 'Prüfungstipp',
-      text: 'Im **Schreiben** zählt die Verbindung der Sätze. Zwei kurze Sätze + ein **denn** oder **deshalb** — das reicht schon für einen guten Text. ~~Truco: memoriza «…, deshalb + verbo + yo» como bloque fijo.~~',
+      text: 'Im **Schreiben** ist das wichtig: Verbinde deine Sätze! Zwei kurze Sätze + ein **denn** oder **deshalb** — das reicht schon für einen guten Text. ~~Truco: memoriza «…, deshalb + verbo + yo» como bloque fijo.~~',
     },
 
     { type: 'rule' },
@@ -181,15 +157,15 @@ export default {
       type: 'selbstcheck',
       eyebrow: 'Selbstcheck',
       items: [
-        'Ich verbinde Sätze mit und, oder, aber, denn — ohne die Wortstellung zu ändern.',
-        'Nach deshalb stelle ich das Verb direkt an den Anfang.',
-        'Ich weiß, wo das Komma steht.',
+        'Ich verbinde Sätze mit und, oder, aber, denn. Die Wortstellung bleibt normal.',
+        'Nach deshalb kommt bei mir sofort das Verb.',
+        'Ich setze das Komma richtig.',
       ],
     },
     {
       type: 'ausblick',
       eyebrow: 'Ausblick',
-      text: 'Mit **denn** gibst du einen Grund — und die Wortstellung bleibt normal. Es gibt noch ein Wort für „porque“: **weil**. Aber Achtung: nach *weil* wandert das Verb **ans Ende**! Das ist die Star-Regel der nächsten Lektion.',
+      text: 'Mit **denn** gibst du einen Grund — und die Wortstellung bleibt normal. Es gibt noch ein Wort für „porque“: **weil**. Aber Achtung: nach *weil* steht das Verb **am Ende**! Das ist die wichtigste Regel in Lektion 15.',
     },
   ],
 }

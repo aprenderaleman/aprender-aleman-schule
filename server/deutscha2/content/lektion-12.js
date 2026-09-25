@@ -13,7 +13,7 @@ export default {
       items: [
         'die Akkusativpronomen *mich, dich, ihn, sie, es, uns, euch* benutzen',
         'die Dativpronomen *mir, dir, ihm, ihr, uns, euch, ihnen* benutzen',
-        'wissen, wann Akkusativ und wann Dativ',
+        'Akkusativ oder Dativ? Das richtige Pronomen wählen',
       ],
     },
 
@@ -65,7 +65,7 @@ export default {
         {
           badge: 'ihn!',
           titel: 'Der typische Fehler',
-          text: '~~«Lo veo» NO es *Ich sehe es* si hablas de una persona o de un sustantivo maskulin:~~ der Film → __Ich sehe **ihn**__. ~~En alemán «lo» maskulin = ihn, no es.~~',
+          text: '~~«Lo veo» NO es *Ich sehe es* si hablas de una persona o de un sustantivo masculino:~~ der Film → __Ich sehe **ihn**__. ~~En alemán, «lo» masculino = ihn, no es.~~',
         },
       ],
     },
@@ -88,57 +88,29 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Akkusativ erkennen',
-      frage: 'Ersetze das Nomen durch ein Pronomen. ~~(Sustituye por el pronombre.)~~',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Ich sehe den Film. → Ich sehe ___.',
-        'Er besucht seine Oma. → Er besucht ___.',
-        'Wir kaufen das Brot. → Wir kaufen ___.',
-        'Sie ruft ihre Eltern an. → Sie ruft ___ an.',
-      ],
-      loesungen: [
-        'Ich sehe **ihn**. ~~(der Film → maskulin → ihn)~~',
-        'Er besucht **sie**.',
-        'Wir kaufen **es**.',
-        'Sie ruft **sie** an. ~~(Plural)~~',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Akkusativ: mich, dich, ihn …',
+      items: [
+        { text: 'Wo ist der Schlüssel? Ich finde **ihn** nicht.', gl: '— der Schlüssel → ihn' },
+        { text: 'Hörst du **mich**? Die Verbindung ist schlecht.', gl: '— hören + Akkusativ' },
+        { text: 'Unsere Nachbarn sind nett. Wir laden **sie** ein.', gl: '— Plural → sie' },
+        { text: 'Das Sofa ist neu. Wir haben **es** gestern gekauft.', gl: '— das Sofa → es' },
+        { text: 'Ich hole **euch** um acht Uhr ab.', gl: '— abholen + Akkusativ' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Akkusativ oder Dativ?',
-      frage: 'Wähle das richtige Pronomen.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Ich liebe (dich / dir).',
-        'Kannst du (mich / mir) helfen?',
-        'Das Auto gehört (ihn / ihm).',
-        'Wir sehen (sie / ihr) morgen.',
-      ],
-      loesungen: [
-        'Ich liebe **dich**. ~~(lieben + Akkusativ)~~',
-        'Kannst du **mir** helfen? ~~(helfen + Dativ)~~',
-        'Das Auto gehört **ihm**. ~~(gehören + Dativ)~~',
-        'Wir sehen **sie** morgen. ~~(sehen + Akkusativ)~~',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Antworten produzieren',
-      frage: 'Antworte mit einem Pronomen.',
-      loesungLabel: 'Mögliche Lösung',
-      aufgaben: [
-        'Kennst du meinen Bruder? — Ja, …',
-        'Gefällt dir die Musik? — Ja, …',
-        'Hilfst du deiner Mutter? — Ja, …',
-      ],
-      loesungen: [
-        'Ja, ich kenne **ihn**. ~~(meinen Bruder → ihn)~~',
-        'Ja, sie gefällt **mir**.',
-        'Ja, ich helfe **ihr**. ~~(die Mutter → Dativ → ihr)~~',
+      type: 'beispiele',
+      kicker: 'Dativ',
+      titel: 'mir, dir, ihm, ihr …',
+      items: [
+        { text: 'Wie geht es **dir**? — Danke, gut.', gl: '— es geht + Dativ' },
+        { text: 'Der Rock gefällt **ihr** sehr.', gl: '— gefallen + Dativ (a ella)' },
+        { text: 'Mein Kollege hat viel Arbeit. Ich helfe **ihm**.', gl: '— helfen + Dativ (a él)' },
+        { text: 'Schmeckt **euch** die Suppe?', gl: '— schmecken + Dativ' },
+        { text: 'Ich danke **Ihnen** für die Hilfe, Frau Roth.', gl: '— Dativ formal: Ihnen' },
       ],
     },
 
@@ -165,7 +137,7 @@ export default {
     {
       type: 'tipp',
       label: 'Prüfungstipp',
-      text: 'Merke dir die drei Prüfungs-Klassiker: **Ruf mich an!**, **Das gefällt mir** und **Kommst du mit mir?** ~~Frases hechas que valen puntos en Schreiben y Sprechen — apréndelas como bloques completos.~~',
+      text: 'Lern die drei Prüfungs-Klassiker auswendig: **Ruf mich an!**, **Das gefällt mir** und **Kommst du mit mir?** ~~Frases hechas que valen puntos en Schreiben y Sprechen — apréndelas como bloques completos.~~',
     },
 
     { type: 'rule' },
@@ -194,7 +166,7 @@ export default {
     {
       type: 'ausblick',
       eyebrow: 'Ausblick',
-      text: 'Du kannst jetzt über Personen und Dinge sprechen. Jetzt lernst du zu vergleichen: **größer, besser, am liebsten** — der **Komparativ und Superlativ**. ~~(«más grande que», «el mejor», «lo que más me gusta» — imprescindible para hablar de tus gustos en el examen.)~~ Das ist das Thema der nächsten Lektion.',
+      text: 'Du kannst jetzt über Personen und Dinge sprechen. In Lektion 13 vergleichst du: **größer, besser, am liebsten** — das ist der **Komparativ und Superlativ**. ~~(«más grande que», «el mejor», «lo que más me gusta» — imprescindible para hablar de tus gustos en el examen.)~~',
     },
   ],
 }

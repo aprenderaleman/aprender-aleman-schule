@@ -102,50 +102,19 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Welches Zimmer?',
-      frage: 'Ergänze: Küche, Schlafzimmer, Bad, Wohnzimmer.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Hier kochst du: in der ___.',
-        'Hier schläfst du: im ___.',
-        'Hier duschst du: im ___.',
-        'Hier siehst du fern: im ___.',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Zu Hause',
+      items: [
+        { text: 'Unsere Wohnung ist klein, aber sehr hell.', gl: '' },
+        { text: 'Der Tisch steht **in der** Küche.', gl: '— Wo? → Dativ.' },
+        { text: 'Meine Bücher sind **im** Schrank.', gl: '— in dem = im.' },
+        { text: 'Am Sonntag bleibe ich gern **zu Hause**.', gl: '— «en casa», sin movimiento.' },
+        { text: 'Nach der Arbeit gehe ich direkt **nach Hause**.', gl: '— «a casa», con movimiento.' },
+        { text: 'Die **Miete** ist hoch: 700 Euro plus Nebenkosten.', gl: '' },
       ],
-      loesungen: [
-        'Hier kochst du: in der **Küche**.',
-        'Hier schläfst du: im **Schlafzimmer**.',
-        'Hier duschst du: im **Bad**.',
-        'Hier siehst du fern: im **Wohnzimmer**.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Wo? — Ergänze die Präposition',
-      frage: 'Ergänze: im · auf dem · neben dem.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Das Bett steht ___ Schlafzimmer.',
-        'Wir frühstücken ___ Balkon.',
-        'Die Lampe steht ___ Sofa.',
-        'Meine Kleidung ist ___ Schrank.',
-      ],
-      loesungen: [
-        'Das Bett steht **im** Schlafzimmer.',
-        'Wir frühstücken **auf dem** Balkon.',
-        'Die Lampe steht **neben dem** Sofa.',
-        'Meine Kleidung ist **im** Schrank. ~~(Wo? → Dativ)~~',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Beschreib dein Lieblingszimmer (4-5 Sätze, ca. 30 Wörter): Welches Zimmer ist es? Was steht dort? Warum magst du es?',
-      loesungLabel: 'Mögliche Lösung',
-      loesung:
-        'Mein Lieblingszimmer ist das Wohnzimmer. Es ist groß und hell. Das Sofa steht am Fenster, und neben dem Sofa steht eine Lampe. Dort höre ich am Abend Musik, weil es ruhig ist. ~~(Vale cualquier texto con 1-2 lugares en dativo y un weil.)~~',
     },
 
     { type: 'rule' },

@@ -53,7 +53,7 @@ export default {
         {
           badge: 'Schritt 1',
           titel: 'Erst die Sätze, dann der Text',
-          text: 'Lies zuerst die Sätze der Aufgabe und markiere das wichtigste Wort: Tag? Uhrzeit? Person? Dann suche die Stelle im Text. ~~(los ítems suelen ir en el orden del texto)~~',
+          text: 'Lies zuerst die Sätze in der Aufgabe und markiere das wichtigste Wort: Tag? Uhrzeit? Person? Dann suche die Stelle im Text. ~~(los ítems suelen ir en el orden del texto)~~',
         },
         {
           badge: 'Paraphrase',
@@ -83,54 +83,30 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Gleiche Idee?',
-      frage: 'Sagen die zwei Sätze das Gleiche? Ja oder nein?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        '„Ich kann nicht kommen.“ = „Ich komme nicht.“?',
-        '„Das Ticket kostet 5 Euro.“ = „Das Ticket ist kostenlos.“?',
-        '„Der Bus fährt alle 20 Minuten.“ = „Der Bus fährt oft.“?',
-      ],
-      loesungen: [
-        '**Ja** — gleiche Idee.',
-        '**Nein** — 5 Euro ist nicht kostenlos.',
-        '**Ja** — alle 20 Minuten = oft. ~~(paráfrasis típica del examen)~~',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Kurze Mitteilungen',
+      items: [
+        { text: 'Ich lade dich am Samstag zum Essen **ein**.', gl: '— einladen: el prefijo va al final' },
+        { text: 'Das Konzert **findet** im Park **statt**.', gl: '— stattfinden = tener lugar' },
+        { text: 'Ich muss den Termin **leider absagen**.', gl: '— cancelar con cortesía' },
+        { text: '**Holst** du mich um 7 Uhr am Bahnhof **ab**?', gl: '— abholen en una pregunta' },
+        { text: 'Bringt bitte etwas zu trinken **mit**!', gl: '— mitbringen en imperativo (ihr)' },
+        { text: 'Sag mir bitte bis Donnerstag **Bescheid**.', gl: '— avisar' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Kurze Mitteilung',
-      frage: 'Lies die Nachricht. Richtig oder falsch?',
-      aufgabe: '„Hallo Miguel, unser Deutschkurs beginnt morgen nicht um 18 Uhr, sondern erst um 19 Uhr. Frau Berger ist krank, Herr Lang macht den Unterricht. Bring bitte dein Buch mit — wir arbeiten mit Kapitel 5. Bis morgen! Carla“',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Der Kurs beginnt morgen um 18 Uhr.',
-        'Frau Berger macht morgen den Unterricht.',
-        'Miguel soll sein Buch mitbringen.',
-      ],
-      loesungen: [
-        '**falsch** — erst um **19 Uhr**. Die Falle „fast gleich“: 18 Uhr steht im Text, aber mit *nicht … sondern*.',
-        '**falsch** — **Herr Lang** macht den Unterricht, Frau Berger ist krank.',
-        '**richtig** — „Bring bitte dein Buch mit.“',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren — Sag es anders!',
-      frage: 'Schreibe jeden Satz mit anderen Wörtern. So verstehst du Paraphrasen besser.',
-      loesungLabel: 'Mögliche Lösung',
-      aufgaben: [
-        'Das Restaurant ist sonntags geschlossen. → …',
-        'Die Eintrittskarte kostet nichts. → …',
-        'Der Zug kommt um 7.05 Uhr an. → …',
-      ],
-      loesungen: [
-        '**Am Sonntag kann man hier nicht essen.** ~~También vale:~~ *Sonntags nicht geöffnet.*',
-        '**Die Eintrittskarte ist kostenlos.** *Der Eintritt ist gratis.*',
-        '**Der Zug kommt am Morgen an.** *Er kommt früh an.*',
+      type: 'beispiele',
+      kicker: 'Paraphrase',
+      titel: 'Gleiche Idee, andere Wörter?',
+      items: [
+        { text: '„Ich kann **leider nicht** kommen.“ = „Ich **sage ab**.“', gl: '— misma idea: **richtig**' },
+        { text: '„Das Fest **findet** am Sonntag **statt**.“ = „Das Fest ist am Sonntag.“', gl: '— misma idea: **richtig**' },
+        { text: '„Der Termin ist um 20 Uhr.“ = „Der Termin ist **am Abend**.“', gl: '— la hora se parafrasea: **richtig**' },
+        { text: '„**Ich** hole **dich** ab.“ ≠ „**Du** holst **mich** ab.“', gl: '— cambia la persona: **falsch**' },
+        { text: '„Wir treffen uns **nicht** am Montag.“ ≠ „Wir treffen uns am Montag.“', gl: '— la negación lo cambia todo: **falsch**' },
       ],
     },
 
@@ -159,12 +135,12 @@ export default {
         '3. **falsch** — die Falle „fast gleich“: Café und Arbeit stehen im Text, aber am **Vormittag**. Am Nachmittag ist der Deutschkurs.',
         '4. **richtig** — Paraphrase: „Du kannst bei mir **schlafen**“ = übernachten, und „im Juli habe ich Urlaub“.',
       ],
-      kommentar: 'Alle Typen in einer Aufgabe: direkte Information (1), Paraphrase (2, 4), Falle „fast gleich“ (3). ~~Así se reparte casi siempre en el examen.~~',
+      kommentar: 'Alle Typen in einer Aufgabe: direkte Information (1), Paraphrase (2, 4), Falle „fast gleich“ (3). ~~Una buena mezcla para entrenar.~~',
     },
     {
       type: 'tipp',
       label: 'Prüfungstipp',
-      text: 'Markiere in jedem Aufgabensatz das **Schlüsselwort** (Tag, Uhrzeit, Person, Ort) und vergleiche genau diese Stelle im Text. Wenn der Satz **fast wie der Text** klingt, sei besonders vorsichtig — prüfe jedes Detail.',
+      text: 'Markiere in jedem Aufgabensatz das **Schlüsselwort** (Tag, Uhrzeit, Person, Ort) und vergleiche genau diese Stelle im Text. Klingt der Satz **fast wie der Text**? Dann sei besonders vorsichtig — prüfe jedes Detail.',
     },
 
     { type: 'rule' },
@@ -193,7 +169,7 @@ export default {
     {
       type: 'ausblick',
       eyebrow: 'Ausblick',
-      text: 'In der nächsten Lektion kommt der zweite große Aufgabentyp: Personen suchen etwas — du findest die passende **Anzeige**. ~~Y aprenderás qué hacer cuando ningún anuncio encaja.~~',
+      text: 'In der nächsten Lektion kommt der zweite große Aufgabentyp: Personen suchen etwas — du findest die passende **Anzeige**. ~~Y aprenderás qué hacer cuando ningún anuncio encaje.~~',
     },
   ],
 }

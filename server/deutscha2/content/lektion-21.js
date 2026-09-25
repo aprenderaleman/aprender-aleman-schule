@@ -16,10 +16,10 @@ export default {
       type: 'lernziele',
       eyebrow: 'Lernziele',
       items: [
-        'wissen, was du im Modul Hören hörst',
+        'die Texte im Modul Hören kennen',
         'die Aufgaben **vor** dem Hören lesen',
         'auf Zahlen, Uhrzeiten und Orte achten',
-        'ruhig bleiben, wenn du ein Wort nicht verstehst',
+        'ruhig bleiben — auch bei einem unbekannten Wort',
       ],
     },
 
@@ -52,7 +52,7 @@ export default {
       titel: 'Zwei Arten von Texten',
       absaetze: [
         'Das Modul Hören dauert **ca. 30 Minuten**. Du hörst kurze Texte aus dem Alltag: __Durchsagen__ ~~(megafonía)~~ am Bahnhof oder im Supermarkt, Nachrichten auf dem __Anrufbeantworter__, kurze Texte im Radio — und __Gespräche__ zwischen zwei Personen.',
-        'In der Regel gibt es also zwei große Gruppen: **kurze Texte & Durchsagen** und **Gespräche**. Wie viele Teile und Aufgaben es genau sind und wie oft du jeden Text hörst, siehst du im offiziellen **Modellsatz** des Prüfungsanbieters.',
+        'In der Regel gibt es also zwei große Gruppen: **kurze Texte & Durchsagen** und **Gespräche**. Wie viele Teile und Aufgaben gibt es genau? Wie oft hörst du jeden Text? Das zeigt dir der offizielle **Modellsatz** vom Prüfungsanbieter.',
       ],
     },
     {
@@ -79,7 +79,7 @@ export default {
       card: true,
       titel: 'Die Methode in diesem Kurs',
       absaetze: [
-        'Dieser Kurs hat kein Audio. Wir üben mit **Transkripten** ~~(el texto escrito de lo que se oye)~~. So geht es: Lies die Aufgaben. Dann lies das Transkript **nur einmal**, in normalem Tempo, ohne zurückzugehen — genau wie beim Hören. Noch besser: **Eine andere Person liest dir das Transkript vor.**',
+        'Dieser Kurs hat kein Audio. Wir üben mit **Transkripten** ~~(el texto escrito de lo que se oye)~~. So geht es: Lies die Aufgaben. Dann lies das Transkript **nur einmal**, in normalem Tempo — und geh nicht zurück, genau wie beim Hören. Noch besser: **Eine andere Person liest dir das Transkript vor.**',
         'Für echtes Audio: Der offizielle **Modellsatz** ist kostenlos online — mit echten Prüfungsstimmen. Übe damit vor der Prüfung.',
       ],
     },
@@ -100,49 +100,30 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Erkennen',
-      frage: 'Wo hörst du das? Bahnhof, Supermarkt, Anrufbeantworter oder Radio?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        '„Sprechen Sie bitte nach dem Ton.“',
-        '„Der Zug hat 10 Minuten Verspätung.“',
-        '„Heute Äpfel im Angebot — nur 1 Euro!“',
-        '„Und jetzt die Nachrichten.“',
-      ],
-      loesungen: [
-        '**Anrufbeantworter** ~~(contestador)~~',
-        '**Bahnhof**',
-        '**Supermarkt**',
-        '**Radio**',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Durchsagen, Nachrichten, Gespräche',
+      items: [
+        { text: '„Achtung an **Gleis 4**: Der Zug nach Köln hat 15 Minuten Verspätung.“', gl: '— Durchsage am Bahnhof: andén + minutos' },
+        { text: '„Liebe Kunden, heute sind alle Getränke im Angebot.“', gl: '— Durchsage im Supermarkt' },
+        { text: '„Hallo Tim, hier ist Oma. Ruf mich bitte zurück!“', gl: '— Nachricht auf dem **Anrufbeantworter**' },
+        { text: '„Ihr **Termin** ist nicht am Dienstag, sondern am **Mittwoch**.“', gl: '— nicht … sondern: cuenta la segunda información' },
+        { text: '„Und jetzt der Verkehr: Auf der A7 gibt es 5 Kilometer Stau.“', gl: '— **Ansage** im Radio: atento a las cifras' },
+        { text: '„— Um wie viel **Uhr** beginnt der Film? — Um 20.15 Uhr.“', gl: '— **Gespräch**: la hora es la respuesta' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Aufgabe zuerst lesen',
-      frage: 'Lies zuerst die Aufgabe. Dann lies das Transkript **einmal**. ~~(en el examen: audio)~~ Richtig oder falsch?',
-      aufgabe: '**Aufgabe:** „Der Deutschkurs beginnt um 9 Uhr.“\n**Transkript:** „Liebe Teilnehmer, der Deutschkurs beginnt heute nicht um 9 Uhr, sondern erst um 9.30 Uhr. Bitte warten Sie im Raum 12.“',
-      loesungLabel: 'Lösung',
-      loesungen: [
-        '**Falsch** — der Kurs beginnt um **9.30 Uhr**. „Nicht …, **sondern** …“ — die zweite Information zählt!',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Zahlen-Training',
-      frage: 'Lies laut und schreib die Zahl. ~~(escucha mental: escribe la cifra)~~',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        '„Das Ticket kostet siebzehn Euro.“ → ___ €',
-        '„Der Bus kommt um vierzehn Uhr.“ → ___ Uhr',
-        '„Meine Nummer ist null — eins — fünf — neun.“ → ___',
-      ],
-      loesungen: [
-        '**17 €**',
-        '**14 Uhr** ~~(vierzehn = 14, vierzig = 40 — ¡ojo!)~~',
-        '**0159**',
+      type: 'beispiele',
+      kicker: 'Zahlen',
+      titel: 'Hör genau hin!',
+      items: [
+        { text: 'drei**zehn** = 13 · drei**ßig** = 30', gl: '— -zehn ≠ -ßig / -zig' },
+        { text: 'sech**zehn** = 16 · sech**zig** = 60', gl: '— ojo: sechzehn, sechzig (sin -s)' },
+        { text: 'sieb**zehn** = 17 · sieb**zig** = 70', gl: '— siebzehn, no «siebenzehn»' },
+        { text: '„Das kostet **vierundzwanzig** Euro.“ = 24 €', gl: '— primero la unidad: 4 + 20' },
+        { text: '„Der Bus kommt um **vierzehn** Uhr.“ = 14 Uhr', gl: '— vierzehn = 14, vierzig = 40' },
       ],
     },
 
@@ -166,7 +147,7 @@ export default {
     {
       type: 'tipp',
       label: 'Prüfungstipp',
-      text: 'Lade den offiziellen **Modellsatz** herunter — kostenlos und mit echtem Audio. In der Regel hörst du jeden Text **ein- oder zweimal**; die Details siehst du dort. Übe **einmal komplett unter Prüfungsbedingungen**.',
+      text: 'Lade den offiziellen **Modellsatz** herunter — kostenlos und mit echtem Audio. In der Regel hörst du jeden Text **ein- oder zweimal**; die Details siehst du dort. Übe **einmal komplett** — wie in der echten Prüfung.',
     },
 
     { type: 'rule' },
@@ -187,10 +168,10 @@ export default {
       type: 'selbstcheck',
       eyebrow: 'Selbstcheck',
       items: [
-        'Ich weiß, welche Texte im Modul Hören vorkommen.',
+        'Ich kenne die Texte im Modul Hören.',
         'Ich lese die Aufgaben vor dem Hören.',
         'Ich achte auf Zahlen, Uhrzeiten und Orte.',
-        'Ich bleibe ruhig, wenn ich ein Wort nicht verstehe.',
+        'Ich bleibe ruhig — auch bei einem unbekannten Wort.',
       ],
     },
     {

@@ -16,7 +16,7 @@ export default {
       eyebrow: 'Lernziele',
       items: [
         'Alltagsgespräche verstehen: einkaufen, Termine, Pläne',
-        'verstehen, **wer** was sagt',
+        'erkennen: **Wer** sagt was?',
         'Korrekturen erkennen: „nein, lieber …“, „nicht …, sondern …“',
         'bis zum Ende hören — die letzte Information zählt',
       ],
@@ -51,7 +51,7 @@ export default {
       titel: 'Zwei Personen, ein Alltagsthema',
       absaetze: [
         'Im Modul Hören gibt es auch __Gespräche__: zwei Freunde planen das Wochenende, jemand kauft ein, zwei Personen machen einen Termin am Telefon. Die Fragen dazu sind typisch A2: **Was kauft die Frau? Wann treffen sie sich? Wohin fahren sie?**',
-        'Oft fragt die Aufgabe nach **einer** Person: „Was macht **der Mann**?“ Achte darauf, wer spricht. ~~(en el audio distingues las voces; en el Transkript te ayudan los nombres)~~',
+        'Oft fragt die Aufgabe nach **einer** Person: „Was macht **der Mann**?“ Achte genau: **Wer** spricht? ~~(en el audio distingues las voces; en el Transkript te ayudan los nombres)~~',
       ],
     },
     {
@@ -91,55 +91,27 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Die finale Information',
-      frage: 'Was ist die Entscheidung am Ende?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        '„— Kommst du um drei? — Um drei geht es nicht, aber um vier.“',
-        '„— Ist das Konzert am Montag? — Nein, am Dienstag.“',
-        '„— Zwei Kilo Tomaten, bitte. — Gern. Sonst noch etwas? — Ja, ein Brot.“',
-      ],
-      loesungen: [
-        'Um **vier** (16 Uhr).',
-        'Am **Dienstag**.',
-        '**Tomaten und Brot** — die zweite Frage bringt mehr Information.',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Signalwörter hören',
+      items: [
+        { text: '„— Gehen wir ins Café? — Nein, **lieber** in den Park.“', gl: '— decisión: el parque' },
+        { text: '„— Passt es dir um sechs? — Um sechs geht es **leider** nicht, aber um sieben.“', gl: '— quedan a las siete' },
+        { text: '„Wir fahren nicht am Freitag, **sondern** am Samstag.“', gl: '— vale la segunda información' },
+        { text: '„— Ich rufe dich morgen an, okay? — **Gute Idee!**“', gl: '— llamar por teléfono: anrufen' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Im Geschäft',
-      frage: 'Lies das Transkript **einmal**. ~~(en el examen: audio)~~ Richtig oder falsch?',
-      aufgabe: '**Transkript — im Geschäft:**\n**Verkäufer:** „Guten Tag, kann ich Ihnen helfen?“\n**Frau:** „Ja, ich suche eine Jacke.“\n**Verkäufer:** „Diese blaue Jacke kostet 60 Euro. Aber heute ist sie im Angebot: nur 45 Euro.“\n**Frau:** „Toll, dann nehme ich sie!“',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Die Frau sucht eine Jacke.',
-        'Die Jacke kostet heute 60 Euro.',
-      ],
-      loesungen: [
-        '**Richtig.**',
-        '**Falsch** — heute kostet sie **45 Euro** (Angebot). ~~(oyes los dos precios: vale el último)~~',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Das große Gespräch',
-      frage: 'Lies die 4 Fragen zuerst. Dann lies das Transkript **nur einmal** — oder lass es dir vorlesen.',
-      aufgabe: '**Transkript — am Telefon (ca. 100 Wörter):**\n**Lena:** „Hallo Paul! Wollen wir am Wochenende etwas machen?“\n**Paul:** „Gute Idee! Gehen wir am Samstag ins Schwimmbad?“\n**Lena:** „Am Samstag kann ich leider nicht. Da besuche ich meine Oma. Lieber am Sonntag.“\n**Paul:** „Okay, dann am Sonntag. Treffen wir uns um zehn?“\n**Lena:** „Hmm, besser um halb elf. Ich muss vorher noch einkaufen.“\n**Paul:** „Gut, um halb elf am Eingang. Bringst du etwas zu essen mit?“\n**Lena:** „Ja, ich mache Sandwiches. Und du kaufst die Getränke, okay?“\n**Paul:** „Machen wir. Bis Sonntag!“',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Wann gehen sie ins Schwimmbad?',
-        'Um wie viel Uhr treffen sie sich?',
-        'Was macht Lena am Samstag?',
-        'Wer kauft die Getränke?',
-      ],
-      loesungen: [
-        'Am **Sonntag** — Samstag geht nicht. ~~(la corrección manda)~~',
-        'Um **halb elf = 10.30 Uhr** — nicht um zehn.',
-        'Sie besucht ihre **Oma**.',
-        '**Paul** kauft die Getränke, Lena macht die Sandwiches.',
+      type: 'beispiele',
+      kicker: 'Wer macht was?',
+      titel: 'Zwei Personen, zwei Aufgaben',
+      items: [
+        { text: '„Ich mache den Salat und du kaufst die **Getränke**.“', gl: '— cada persona una tarea: escucha QUIÉN hace QUÉ' },
+        { text: '„— Bringst du den Kuchen **mit**? — Ja, klar!“', gl: '— él trae el pastel' },
+        { text: '„— Treffen wir uns am Eingang? — **Besser** am Ausgang.“', gl: '— decisión: la salida' },
+        { text: '„Meine Schwester kommt auch mit.“', gl: '— viene una persona más' },
       ],
     },
 

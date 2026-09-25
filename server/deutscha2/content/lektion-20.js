@@ -18,7 +18,7 @@ export default {
       items: [
         'Schlüsselwörter in Situationen und Anzeigen finden',
         'die passende Anzeige wählen — und die „fast passende“ erkennen',
-        'wissen, was du machst, wenn **keine** Anzeige passt',
+        'die Lösung „0“ kennen: **keine** Anzeige passt',
       ],
     },
 
@@ -53,12 +53,12 @@ export default {
         {
           badge: 'Aufgabe',
           titel: 'So funktioniert das Zuordnen',
-          text: 'Du liest kurze __Situationen__ (Personen suchen etwas) und mehrere __Anzeigen__. Zu jeder Person suchst du die passende Anzeige. Es gibt **mehr Anzeigen als Personen** — nicht alle passen. Wie viele es genau sind, zeigt dir der offizielle Modellsatz.',
+          text: 'Du liest kurze __Situationen__ (Personen suchen etwas) und mehrere __Anzeigen__. Zu jeder Person suchst du die passende Anzeige. Es gibt **mehr Anzeigen als Personen** — nicht alle passen. Die genaue Zahl zeigt dir der offizielle Modellsatz.',
         },
         {
           badge: 'Strategie',
           titel: 'Schlüsselwörter markieren',
-          text: 'Markiere, **was die Person will** — meist zwei oder drei Bedingungen ~~(condiciones)~~: __was? wann? für wen?__ Die richtige Anzeige muss zu **allen** Bedingungen passen, nicht nur zu einer.',
+          text: '**Was will die Person?** Markiere die Bedingungen — meist zwei oder drei ~~(condiciones)~~: __was? wann? für wen?__ Die richtige Anzeige muss zu **allen** Bedingungen passen, nicht nur zu einer.',
         },
         {
           badge: 'Falle',
@@ -68,7 +68,7 @@ export default {
         {
           badge: 'Null',
           titel: 'Wenn nichts passt',
-          text: 'Manchmal passt für eine Person **keine** Anzeige. Dafür gibt es eine eigene Lösung — oft schreibt man dann „**0**“. Wie das auf dem Antwortblatt genau aussieht, siehst du im Modellsatz. ~~«0» = ningún anuncio encaja — también es una respuesta correcta.~~',
+          text: 'Manchmal passt für eine Person **keine** Anzeige. Dafür gibt es eine eigene Lösung — oft schreibt man dann „**0**“. Das genaue Format auf dem Antwortblatt siehst du im Modellsatz. ~~«0» = ningún anuncio encaja — también es una respuesta correcta.~~',
         },
       ],
     },
@@ -88,46 +88,29 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Schlüsselwörter finden',
-      frage: 'Was sucht die Person? Markiere die Bedingungen: was? wann? für wen?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Pedro sucht ein günstiges Fahrrad für seinen Sohn (8 Jahre).',
-        'Frau Ruiz möchte am Wochenende einen Kochkurs machen.',
-      ],
-      loesungen: [
-        '**Fahrrad** (was) · **günstig** (wie) · **für ein Kind** (für wen)',
-        '**Kochkurs** (was) · **am Wochenende** (wann)',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Kleine Anzeigen',
+      items: [
+        { text: '**Verkaufe** Kinderwagen, gebraucht, aber sehr gut — nur 40 Euro.', gl: '— estilo de anuncio: sin «ich»' },
+        { text: 'Schönes Zimmer im Zentrum zu **vermieten**, 380 Euro im Monat.', gl: '— vermieten: lo alquila el dueño' },
+        { text: 'Der Tennisverein **bietet** im Sommer Kurse **an** — der erste Kurs ist **kostenlos**.', gl: '— anbieten es separable' },
+        { text: 'Familie Weber **sucht** eine Babysitterin für Freitagabend.', gl: '— suchen + Akkusativ' },
+        { text: 'Das Sofa ist **gebraucht**, aber sehr **günstig**: nur 30 Euro.', gl: '— usado, pero barato' },
+        { text: 'Interesse? Dann **melden Sie sich** bitte per E-Mail!', gl: '— sich melden = contactar' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Mini-Zuordnung',
-      frage: 'Welche Anzeige passt? Eine Anzeige bleibt übrig.',
-      aufgabe: '**a)** „Spanischkurs für Anfänger, montags 18 Uhr, Volkshochschule.“\n**b)** „Verkaufe Kinderfahrrad, fast neu, nur 45 Euro.“\n**c)** „Fahrradladen Meyer: neue Fahrräder ab 299 Euro.“',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        '1. Pedro sucht ein günstiges Fahrrad für seinen Sohn. → Anzeige …?',
-        '2. Ali möchte Spanisch lernen. → Anzeige …?',
-      ],
-      loesungen: [
-        '1 → **b**: Kinderfahrrad + 45 Euro = günstig. Anzeige **c** ist die Falle: auch Fahrräder, aber neu und teuer.',
-        '2 → **a**: Spanischkurs für Anfänger.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren — deine Anzeige',
-      frage: 'Schreibe selbst eine kleine Anzeige (10–15 Wörter): Du verkaufst deinen alten Tisch. So verstehst du, wie Anzeigen gebaut sind.',
-      loesungLabel: 'Mögliche Lösung',
-      aufgaben: [
-        'Verkaufe … (Was? Wie? Preis? Kontakt?)',
-      ],
-      loesungen: [
-        '„**Verkaufe** alten Tisch aus Holz, noch sehr gut, **nur 20 Euro**. Tel. 0176 123 456.“ ~~Vale cualquier anuncio con objeto + estado o precio + contacto.~~',
+      type: 'beispiele',
+      kicker: 'Zuordnen',
+      titel: 'Passt die Anzeige?',
+      items: [
+        { text: '**Situation:** Karim sucht ein günstiges Fahrrad. → „Verkaufe altes Fahrrad, 35 Euro.“', gl: '— **passt**: Fahrrad + günstig' },
+        { text: '**Situation:** Karim sucht ein günstiges Fahrrad. → „Neue Fahrräder ab 400 Euro!“', gl: '— **passt nicht**: zu teuer ~~(el anuncio parecido)~~' },
+        { text: '**Situation:** Eva (40) möchte im Verein schwimmen. → „Schwimmverein sucht Kinder von 6 bis 12 Jahren.“', gl: '— **passt nicht**: nur für Kinder' },
+        { text: '**Situation:** Paolo möchte Klavier lernen. → Es gibt nur Anzeigen für Gitarrenkurse.', gl: '— keine Anzeige passt. Lösung: **0**' },
       ],
     },
 
@@ -155,7 +138,7 @@ export default {
     {
       type: 'tipp',
       label: 'Prüfungstipp',
-      text: 'Lies zuerst die **Situationen**, nicht die Anzeigen. Prüfe bei jeder Lösung alle Bedingungen: Thema richtig? Zeit richtig? Person richtig? Wenn **ein** Detail nicht passt, passt die Anzeige nicht — dann ist vielleicht „0“ die Lösung.',
+      text: 'Lies zuerst die **Situationen**, nicht die Anzeigen. Prüfe bei jeder Lösung alle Bedingungen: Thema richtig? Zeit richtig? Person richtig? Passt **ein** Detail nicht? Dann passt die Anzeige nicht — vielleicht ist „0“ die Lösung.',
     },
 
     { type: 'rule' },
@@ -178,13 +161,13 @@ export default {
       items: [
         'Ich markiere Schlüsselwörter in Situationen und Anzeigen.',
         'Ich erkenne die fast passende Anzeige und prüfe alle Bedingungen.',
-        'Ich weiß: Wenn keine Anzeige passt, ist „0“ die Lösung.',
+        'Ich weiß: Keine Anzeige passt? Dann ist „0“ die Lösung.',
       ],
     },
     {
       type: 'ausblick',
       eyebrow: 'Ausblick',
-      text: 'Damit kennst du die beiden großen Aufgabentypen im Lesen — ~~módulo completado~~. Weiter geht es mit dem **Hören**: Durchsagen, Gespräche und die Frage, wie oft du jeden Text hörst. Das ist das Thema der nächsten Lektion.',
+      text: 'Damit kennst du die beiden großen Aufgabentypen im Lesen — ~~módulo completado~~. Weiter geht es mit dem **Hören**: Durchsagen und Gespräche. Und: Wie oft hörst du jeden Text? Das lernst du in Lektion 21.',
     },
   ],
 }

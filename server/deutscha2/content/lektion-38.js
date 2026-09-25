@@ -102,50 +102,30 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Wie spät ist es?',
-      frage: 'Schreib die Uhrzeit auf Deutsch.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        '9:30 → ___',
-        '8:15 → ___',
-        '7:45 → ___',
-        '14:00 → ___',
-      ],
-      loesungen: [
-        '9:30 → **halb zehn** ~~(¡la trampa! media hora ANTES de las diez)~~',
-        '8:15 → **Viertel nach acht**',
-        '7:45 → **Viertel vor acht**',
-        '14:00 → **zwei Uhr** (nachmittags) / vierzehn Uhr',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Die Uhrzeit im Alltag',
+      items: [
+        { text: 'Der Film beginnt **um halb neun**.', gl: '— La película empieza a las 8:30, ¡no a las 9:30!' },
+        { text: 'Ich frühstücke **um Viertel nach sieben**.', gl: '— Desayuno a las 7:15.' },
+        { text: '**Wie viel Uhr** ist es? — Es ist **zwei Uhr**.', gl: '— ¿Qué hora es? — Son las dos.' },
+        { text: 'Der Bus kommt um 7:45 — also **um Viertel vor acht**.', gl: '— El bus llega a las 8 menos cuarto.' },
+        { text: 'Es ist schon **halb zwölf**! Wir müssen gehen.', gl: '— ¡Ya son las 11:30! Tenemos que irnos.' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · am, um oder im?',
-      frage: 'Ergänze am, um oder im — und stell das Verb richtig.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        '___ Montag stehe ich ___ 6 Uhr auf.',
-        '___ August fahre ich nach Spanien.',
-        '___ Abend sehe ich fern.',
-        'Ich (einkaufen) ___ Samstag ___ .',
+      type: 'beispiele',
+      kicker: 'am · um · im',
+      titel: 'Meine Woche',
+      items: [
+        { text: '**Am Dienstag** stehe ich **um** sechs Uhr **auf**.', gl: '— El martes me levanto a las seis. (trennbar)' },
+        { text: '**Am Vormittag** arbeite ich, **am Abend** koche ich.', gl: '— Por la mañana trabajo, por la noche cocino.' },
+        { text: '**Im Dezember** besuche ich meine Familie.', gl: '— En diciembre visito a mi familia.' },
+        { text: '**In der Nacht** schlafe ich — natürlich!', gl: '— Por la noche duermo, ¡claro! (la excepción: in der Nacht)' },
+        { text: 'Mein Deutschkurs **fängt im Oktober an**.', gl: '— Mi curso de alemán empieza en octubre. (anfangen: trennbar)' },
       ],
-      loesungen: [
-        '**Am** Montag stehe ich **um** 6 Uhr auf.',
-        '**Im** August fahre ich nach Spanien.',
-        '**Am** Abend sehe ich fern.',
-        'Ich **kaufe** **am** Samstag **ein**. ~~(trennbar: el prefijo al final)~~',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Schreib deinen Tagesablauf in 4-5 Sätzen (ca. 30 Wörter): Wann stehst du auf? Was machst du am Vormittag, am Nachmittag, am Abend?',
-      loesungLabel: 'Mögliche Lösung',
-      loesung:
-        'Ich stehe um halb sieben auf und frühstücke. Am Vormittag arbeite ich im Büro. Am Nachmittag kaufe ich ein und lerne Deutsch. Am Abend koche ich. Um elf Uhr gehe ich schlafen. ~~(Con „zuerst / dann / danach“ suena aún mejor.)~~',
     },
 
     { type: 'rule' },
@@ -198,7 +178,7 @@ export default {
     {
       type: 'ausblick',
       eyebrow: 'Ausblick',
-      text: 'Damit ist der Themenblock komplett: Freizeit, Reisen, Gesundheit und dein Alltag — die vier großen Themen des Zertifikats A2. In der nächsten Lektion testest du alles zusammen: die **Prüfungssimulation 1** wartet auf dich.',
+      text: 'Damit ist der Themenblock komplett: Familie, Wohnen, Essen, Arbeit, Freizeit, Reisen, Gesundheit und dein Alltag — das sind die großen Themen in der A2-Prüfung. In der nächsten Lektion testest du alles zusammen: die **Prüfungssimulation 1** wartet auf dich.',
     },
   ],
 }

@@ -16,7 +16,7 @@ export default {
       eyebrow: 'Lernziele',
       items: [
         'die zwei Schreibaufgaben und die Zeit kennen',
-        'wissen, was beim Schreiben wichtig ist',
+        'die Bewertung kennen: Was ist beim Schreiben wichtig?',
         'deinen Text mit einer Checkliste kontrollieren',
         'typische Fehler in einer Mitteilung finden',
       ],
@@ -59,7 +59,7 @@ export default {
       card: true,
       titel: 'Was ist wichtig?',
       absaetze: [
-        'Du hast für beide Aufgaben zusammen **ca. 30 Minuten** Zeit. Die Prüfer fragen nur zwei Dinge: **Versteht man deinen Text?** Und: **Steht etwas zu allen Punkten der Aufgabe?**',
+        'Du hast für beide Aufgaben zusammen **ca. 30 Minuten** Zeit. Die Prüfer fragen nur zwei Dinge: **Versteht man deinen Text?** Und: **Steht etwas zu allen Punkten in der Aufgabe?**',
         'Dein Deutsch muss **nicht perfekt** sein. ~~No buscan frases bonitas ni gramática perfecta: buscan que se entienda y que respondas a todos los puntos de la consigna.~~',
       ],
     },
@@ -107,53 +107,28 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Teil 1 oder Teil 2?',
-      frage: 'Welche Aufgabe ist das — Teil 1 oder Teil 2?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Schreib deinem Kollegen eine SMS: Du kommst heute später.',
-        'Lade deine Freundin per E-Mail zu deiner Party ein.',
-        'Schreib eine kurze Notiz an deine Nachbarin (ca. 25 Wörter).',
-        'Antworte auf die Einladung von Maria (ca. 35 Wörter).',
-      ],
-      loesungen: [
-        '**Teil 1** — SMS, kurz',
-        '**Teil 2** — E-Mail / Einladung',
-        '**Teil 1** — Notiz, ca. 25 Wörter',
-        '**Teil 2** — Antwort auf eine E-Mail',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Nomen groß, Verb auf Position 2',
+      items: [
+        { text: 'Ich fahre mit dem **Auto** zur **Arbeit**.', gl: '— los dos sustantivos con mayúscula' },
+        { text: 'Meine **Schwester** wohnt in Berlin.', gl: '— Schwester: sustantivo → mayúscula' },
+        { text: '**Heute komme ich** später.', gl: '— empieza otro elemento → el verbo sigue segundo' },
+        { text: 'Hast du am **Samstag Zeit**?', gl: '— Samstag y Zeit: mayúscula' },
+        { text: 'Wir **machen** am Freitag eine Party.', gl: '— verbo en posición 2' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Groß oder klein?',
-      frage: 'Korrigiere die Großschreibung. ~~(corrige las mayúsculas)~~',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'ich fahre mit dem auto zur arbeit.',
-        'meine schwester wohnt in berlin.',
-        'hast du am samstag zeit?',
-      ],
-      loesungen: [
-        '**I**ch fahre mit dem **A**uto zur **A**rbeit.',
-        '**M**eine **S**chwester wohnt in **B**erlin.',
-        '**H**ast du am **S**amstag **Z**eit?',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Verb auf Position 2',
-      frage: 'Bilde den Satz. Das Verb steht auf Position 2.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        '(ich / heute / keine Zeit / habe)',
-        '(wir / am Freitag / eine Party / machen)',
-      ],
-      loesungen: [
-        'Ich **habe** heute keine Zeit. ~~(también: Heute habe ich keine Zeit.)~~',
-        'Wir **machen** am Freitag eine Party.',
+      type: 'beispiele',
+      kicker: 'Anrede & Gruß',
+      titel: 'So beginnt und endet dein Text',
+      items: [
+        { text: '**Hallo Anna,** ich habe eine Frage.', gl: '— coma tras la Anrede, luego minúscula' },
+        { text: '**Hallo Tom,** ich komme heute später.', gl: '— la nota empieza con el saludo' },
+        { text: '**Viele Grüße**\nPedro', gl: '— despedida + nombre, en dos líneas' },
+        { text: 'Bis morgen! **Liebe Grüße**\nSofia', gl: '— otra despedida válida' },
       ],
     },
 
@@ -192,7 +167,7 @@ export default {
       eyebrow: 'Zusammenfassung',
       kopf: ['Check', 'Frage'],
       zeilen: [
-        ['Punkte', 'Steht ein Satz zu jedem Punkt der Aufgabe?'],
+        ['Punkte', 'Steht ein Satz zu jedem Punkt in der Aufgabe?'],
         ['Groß', 'Sind alle Nomen groß? (das Auto, die Arbeit)'],
         ['Verb', 'Steht das Verb auf Position 2?'],
         ['Rahmen', 'Anrede mit Komma am Anfang, Gruß + Name am Ende?'],
@@ -210,7 +185,7 @@ export default {
     {
       type: 'ausblick',
       eyebrow: 'Ausblick',
-      text: 'Jetzt kennst du das Modul. In der nächsten Lektion trainierst du **Teil 1**: die kurze Mitteilung — mit Modelltext, Redemitteln und einer echten Prüfungsaufgabe.',
+      text: 'Jetzt kennst du das Modul. In der nächsten Lektion trainierst du **Teil 1**: die kurze Mitteilung — mit Modelltext, Redemitteln und einer Prüfungsaufgabe.',
     },
   ],
 }

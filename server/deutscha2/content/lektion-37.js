@@ -51,7 +51,7 @@ export default {
       eyebrow: 'Erklärung — drei Situationen',
       steps: [
         {
-          badge: 'weh tun',
+          badge: 'wehtun',
           titel: 'Sagen, was wehtut',
           text: 'Zwei Formeln: __Mein Kopf **tut weh**.__ oder __Ich **habe** Kopf**schmerzen**.__ ~~(Schmerzen = dolores)~~\nPlural: __Meine Beine **tun** weh.__',
         },
@@ -63,7 +63,7 @@ export default {
         {
           badge: 'Apotheke',
           titel: 'In der Apotheke',
-          text: 'Du brauchst kein Rezept ~~(receta)~~ für alles: __Ich brauche **etwas gegen** Halsschmerzen.__\nDie Antwort: __**Nehmen Sie** die Tabletten **zweimal am Tag**.__ ~~(dos veces al día)~~',
+          text: 'Für manche Medikamente brauchst du kein Rezept ~~(receta)~~:__Ich brauche **etwas gegen** Halsschmerzen.__\nDie Antwort: __**Nehmen Sie** die Tabletten **zweimal am Tag**.__ ~~(dos veces al día)~~',
         },
       ],
     },
@@ -102,50 +102,31 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Körperteile',
-      frage: 'Wie heißt das auf Deutsch? Mit Artikel!',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'la cabeza → ___',
-        'la espalda → ___',
-        'la garganta → ___',
-        'la pierna → ___',
-      ],
-      loesungen: [
-        'la cabeza → **der Kopf**',
-        'la espalda → **der Rücken**',
-        'la garganta → **der Hals**',
-        'la pierna → **das Bein**',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Was tut weh?',
+      items: [
+        { text: 'Mein **Arm** tut weh — ich kann heute nicht Tennis spielen.', gl: '— Me duele el brazo: hoy no puedo jugar al tenis.' },
+        { text: 'Ich habe seit gestern **Bauchschmerzen**.', gl: '— Tengo dolor de barriga desde ayer.' },
+        { text: 'Meine **Beine tun weh** — ich bin zu viel gewandert.', gl: '— Me duelen las piernas: he caminado demasiado.' },
+        { text: 'Unser Sohn hat **Fieber** und bleibt im Bett.', gl: '— Nuestro hijo tiene fiebre y se queda en la cama.' },
+        { text: 'Frau Ortiz **ist erkältet** und kann nicht arbeiten.', gl: '— La señora Ortiz está constipada y no puede trabajar.' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Dialog ergänzen',
-      frage: 'Ergänze: Termin · weh · erkältet · gegen.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Mein Hals tut ___ .',
-        'Ich habe Husten. Ich bin ___ .',
-        'Ich möchte einen ___ für heute Nachmittag.',
-        'Haben Sie etwas ___ Fieber?',
+      type: 'beispiele',
+      kicker: 'Termin & Apotheke',
+      titel: 'Beim Arzt und in der Apotheke',
+      items: [
+        { text: 'Ich möchte **einen Termin** für Freitag machen.', gl: '— Quiero pedir cita para el viernes.' },
+        { text: '**Können Sie** um 11 Uhr kommen? — Ja, das **passt**.', gl: '— ¿Puede venir a las 11? — Sí, me viene bien.' },
+        { text: 'Ich brauche **etwas gegen** Bauchschmerzen.', gl: '— Necesito algo contra el dolor de barriga.' },
+        { text: '**Nehmen Sie** die Tabletten **zweimal am Tag**.', gl: '— Tome las pastillas dos veces al día.' },
+        { text: 'Der Arzt sagt: Bleiben Sie zwei Tage im Bett!', gl: '— El médico dice: ¡quédese dos días en cama!' },
+        { text: '**Gute Besserung!**', gl: '— ¡Que te mejores! (la respuesta típica)' },
       ],
-      loesungen: [
-        'Mein Hals tut **weh**.',
-        'Ich habe Husten. ~~(tos)~~ Ich bin **erkältet**.',
-        'Ich möchte einen **Termin** für heute Nachmittag.',
-        'Haben Sie etwas **gegen** Fieber?',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Du bist krank. Schreib 4-5 Sätze (ca. 30 Wörter): Was hast du? Was machst du? Gehst du zum Arzt?',
-      loesungLabel: 'Mögliche Lösung',
-      loesung:
-        'Ich bin erkältet und habe Fieber. Mein Kopf tut weh. Heute bleibe ich im Bett und trinke Tee. Morgen gehe ich zum Arzt. Ich habe schon einen Termin um 10 Uhr. ~~(Con „weh tun“ o „Schmerzen“ + una acción basta.)~~',
     },
 
     { type: 'rule' },

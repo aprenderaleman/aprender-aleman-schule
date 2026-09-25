@@ -102,50 +102,19 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Wie heißt das Wort?',
-      frage: 'Ergänze das Familienwort.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Mutter und Vater sind die ___.',
-        'Bruder und Schwester sind die ___.',
-        'Oma und Opa sind die ___.',
-        'Ich bin nicht verheiratet, ich bin ___.',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Meine Familie und ich',
+      items: [
+        { text: 'Das ist mein Opa. Er ist 80 und sehr lustig.', gl: '' },
+        { text: 'Am Samstag besuche ich **meine** Tante.', gl: '— Akkusativ femenino: meine.' },
+        { text: 'Mein bester Freund heißt Diego. Wir verstehen uns super.', gl: '' },
+        { text: 'Meine Schwester ist **geschieden** und hat einen Sohn.', gl: '— geschieden = divorciada.' },
+        { text: 'Unsere Kinder sind noch klein: drei und fünf Jahre alt.', gl: '' },
+        { text: 'Hast du Geschwister? — Nein, ich bin **Einzelkind**.', gl: '— hijo único.' },
       ],
-      loesungen: [
-        'Mutter und Vater sind die **Eltern**.',
-        'Bruder und Schwester sind die **Geschwister**.',
-        'Oma und Opa sind die **Großeltern**.',
-        'Ich bin nicht verheiratet, ich bin **ledig**.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · mein, meine oder meinen?',
-      frage: 'Ergänze den richtigen Possessivartikel.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Das ist ___ Vater.',
-        'Das ist ___ Mutter.',
-        '___ Eltern wohnen in Sevilla.',
-        'Am Sonntag besuche ich ___ Bruder.',
-      ],
-      loesungen: [
-        'Das ist **mein** Vater.',
-        'Das ist **meine** Mutter.',
-        '**Meine** Eltern wohnen in Sevilla.',
-        'Am Sonntag besuche ich **meinen** Bruder. ~~(Akkusativ maskulin → -en)~~',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Schreib 4-5 Sätze über deine Familie (ca. 30 Wörter): Wie groß ist sie? Wer gehört dazu? Wie sind die Personen?',
-      loesungLabel: 'Mögliche Lösung',
-      loesung:
-        'Meine Familie ist klein. Ich habe einen Bruder, er heißt Pablo und ist sehr lustig. Meine Eltern wohnen in Valencia. Ich bin ledig. Am Wochenende besuche ich oft meine Großeltern. ~~(Vale cualquier texto con posesivos correctos y 1-2 adjetivos.)~~',
     },
 
     { type: 'rule' },

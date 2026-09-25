@@ -86,55 +86,29 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Wo oder Wohin?',
-      frage: 'Dativ oder Akkusativ? ~~(Pregunta primero: ¿posición o movimiento?)~~',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Die Lampe steht auf ___ Tisch. (der Tisch)',
-        'Ich hänge das Bild an ___ Wand. (die Wand)',
-        'Er sitzt vor ___ Computer. (der Computer)',
-        'Wir fahren in ___ Stadt. (die Stadt)',
-      ],
-      loesungen: [
-        'Die Lampe steht auf **dem** Tisch. ~~(Wo? → Dativ)~~',
-        'Ich hänge das Bild an **die** Wand. ~~(Wohin? → Akkusativ)~~',
-        'Er sitzt vor **dem** Computer. ~~(Wo? → Dativ)~~',
-        'Wir fahren in **die** Stadt. ~~(Wohin? → Akkusativ)~~',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Wo? — Position mit Dativ',
+      items: [
+        { text: 'Die Schuhe stehen **unter dem** Bett.', gl: '— unter + Dativ' },
+        { text: 'Der Kalender hängt **neben der** Tür.', gl: '— neben + Dativ' },
+        { text: 'Das Restaurant liegt direkt **am** Bahnhof.', gl: '— an + dem = am' },
+        { text: '**Zwischen dem** Sofa und **dem** Fenster steht eine Lampe.', gl: '— zwischen + Dativ' },
+        { text: 'Wir sitzen **im** Garten **hinter dem** Haus.', gl: '— in / hinter + Dativ' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · legen oder liegen?',
-      frage: 'Wähle das richtige Verb und den richtigen Artikel.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Das Handy (liegt / legt) auf (dem / den) Bett.',
-        'Ich (liege / lege) den Schlüssel auf (dem / den) Tisch.',
-        'Die Schuhe (stehen / stellen) unter (dem / den) Stuhl.',
-      ],
-      loesungen: [
-        'Das Handy **liegt** auf **dem** Bett.',
-        'Ich **lege** den Schlüssel auf **den** Tisch.',
-        'Die Schuhe **stehen** unter **dem** Stuhl.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Sätze produzieren',
-      frage: 'Antworte mit einem ganzen Satz. Benutze die Kurzformen.',
-      loesungLabel: 'Mögliche Lösung',
-      aufgaben: [
-        'Wohin gehst du heute Abend? (das Kino)',
-        'Wo warst du am Sonntag? (das Schwimmbad)',
-        'Wohin fahrt ihr im Sommer? (das Meer)',
-      ],
-      loesungen: [
-        'Ich gehe heute Abend **ins** Kino. ~~(in + das)~~',
-        'Ich war am Sonntag **im** Schwimmbad. ~~(in + dem)~~',
-        'Wir fahren im Sommer **ans** Meer. ~~(an + das)~~',
+      type: 'beispiele',
+      kicker: 'Wohin?',
+      titel: 'Bewegung mit Akkusativ',
+      items: [
+        { text: 'Ich lege die Zeitung **auf den** Stuhl.', gl: '— legen → Akkusativ' },
+        { text: 'Stell die Milch bitte **in den** Kühlschrank!', gl: '— stellen → Akkusativ' },
+        { text: 'Wir fahren am Sonntag **ans** Meer.', gl: '— an + das = ans' },
+        { text: 'Die Kinder laufen **hinter das** Haus.', gl: '— Bewegung → Akkusativ' },
+        { text: 'Er hängt die Jacke **über den** Stuhl.', gl: '— hängen (Aktion) → Akkusativ' },
       ],
     },
 
@@ -146,7 +120,7 @@ export default {
       eyebrow: 'Prüfungsbezug',
       modul: 'Sprechen · Gemeinsam etwas planen',
       titel: 'Wohin gehen wir?',
-      anweisung: 'In Teil 3 plant ihr zusammen. Da brauchst du Wohin-Sätze. Ergänze:',
+      anweisung: 'Im Sprechen (Teil 3) plant ihr zusammen. Da brauchst du Wohin-Sätze. Ergänze: ~~(Completa:)~~',
       absaetze: [
         '„Gehen wir am Samstag {1} Park? — Gute Idee! Und danach {2} Café am Markt.“',
       ],
@@ -191,7 +165,7 @@ export default {
     {
       type: 'ausblick',
       eyebrow: 'Ausblick',
-      text: 'Du sagst jetzt, wo etwas ist. Aber wie sagst du, dass etwas **dir** gehört? *Mein Haus, deine Familie, sein Auto* … Die **Possessivartikel** ~~(los posesivos: mi, tu, su)~~ sind das Thema der nächsten Lektion.',
+      text: 'Du sagst jetzt, wo etwas ist. Aber wem gehört es? *Mein Haus, deine Familie, sein Auto* … Die **Possessivartikel** ~~(los posesivos: mi, tu, su)~~ sind das Thema der nächsten Lektion.',
     },
   ],
 }

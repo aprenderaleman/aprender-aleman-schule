@@ -6,7 +6,7 @@ export default {
     {
       typ: 'grammatik',
       titel: 'Grammatik',
-      anweisung: 'Wähle oder schreibe die richtige Form. ~~(Elige o escribe la forma correcta.)~~',
+      anweisung: 'Wähle die richtige Form. ~~(Elige la forma correcta.)~~',
       items: [
         { typ: 'mc', frage: 'Er ___ Deutsch.', optionen: ['spricht', 'sprecht', 'spreche'], loesung: 0 },
         { typ: 'mc', frage: 'Du ___ nach Wien.', optionen: ['fährst', 'fahrst', 'fahrt'], loesung: 0 },

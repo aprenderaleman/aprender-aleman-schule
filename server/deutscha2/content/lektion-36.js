@@ -101,50 +101,31 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Was passt?',
-      frage: 'Welches Wort passt? Fahrkarte · Gleis · Haltestelle · Zimmer.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Der Zug fährt auf ___ 3.',
-        'Ich warte an der ___ auf den Bus.',
-        'Im Hotel möchte ich ein ___ reservieren.',
-        'Am Bahnhof kaufe ich eine ___ .',
-      ],
-      loesungen: [
-        'Der Zug fährt auf **Gleis** 3.',
-        'Ich warte an der **Haltestelle** auf den Bus.',
-        'Im Hotel möchte ich ein **Zimmer** reservieren.',
-        'Am Bahnhof kaufe ich eine **Fahrkarte**.',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Mit Bus, Zug und Flugzeug',
+      items: [
+        { text: 'Ich fahre **mit dem Zug** nach Wien.', gl: '— Voy a Viena en tren. (mit + Dativ)' },
+        { text: 'Fährst du **mit dem Bus** oder **mit dem Auto** zur Arbeit?', gl: '— ¿Vas al trabajo en bus o en coche?' },
+        { text: 'Der nächste Zug **nach** Bremen fährt um 14 Uhr.', gl: '— El próximo tren a Bremen sale a las 14:00.' },
+        { text: 'Wir **sind** im Sommer **nach** Portugal **geflogen**.', gl: '— En verano volamos a Portugal. (fliegen → sein)' },
+        { text: 'Ich muss an der nächsten **Haltestelle umsteigen**.', gl: '— Tengo que hacer transbordo en la próxima parada.' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · mit dem … ergänzen',
-      frage: 'Ergänze: mit dem Zug · mit dem Bus · mit dem Flugzeug · zum.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Ich fliege ___ nach Mallorca.',
-        'Wir fahren ___ nach Hamburg. Die Fahrt dauert vier Stunden.',
-        'Er fährt jeden Tag ___ zur Schule.',
-        'Wie komme ich ___ Bahnhof?',
+      type: 'beispiele',
+      kicker: 'Unterwegs',
+      titel: 'Am Bahnhof & im Hotel',
+      items: [
+        { text: 'Eine **Fahrkarte** nach Köln, bitte — **einfach**.', gl: '— Un billete a Colonia, por favor: solo ida.' },
+        { text: 'Der Zug fährt **auf Gleis 2** ab.', gl: '— El tren sale de la vía 2.' },
+        { text: 'Entschuldigung, **wo ist** die Haltestelle?', gl: '— Perdone, ¿dónde está la parada?' },
+        { text: '**Wie komme ich zum** Hotel? — Immer **geradeaus**.', gl: '— ¿Cómo llego al hotel? — Todo recto.' },
+        { text: 'Ich möchte **ein Zimmer** für zwei Nächte **reservieren**.', gl: '— Quiero reservar una habitación para dos noches.' },
+        { text: 'Wir machen **im Mai eine Reise** nach Italien.', gl: '— En mayo hacemos un viaje a Italia.' },
       ],
-      loesungen: [
-        'Ich fliege **mit dem Flugzeug** nach Mallorca.',
-        'Wir fahren **mit dem Zug** nach Hamburg.',
-        'Er fährt jeden Tag **mit dem Bus** zur Schule.',
-        'Wie komme ich **zum** Bahnhof? ~~(zu + dem = zum)~~',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Schreib 4-5 Sätze über deinen letzten Urlaub (ca. 30 Wörter): Wohin? Wie? Was hast du gemacht?',
-      loesungLabel: 'Mögliche Lösung',
-      loesung:
-        'Im Sommer bin ich nach Berlin gefahren. Ich bin mit dem Zug gefahren. Das Hotel war klein, aber schön. Ich habe viel gesehen und Fotos gemacht. Der Urlaub war super! ~~(Importante: Perfekt + un transporte con „mit dem“.)~~',
     },
 
     { type: 'rule' },
@@ -168,7 +149,7 @@ export default {
     {
       type: 'tipp',
       label: 'Prüfungstipp',
-      text: 'Im **Hören** kommen oft **Durchsagen** am Bahnhof: Hör auf die Zahlen — **Gleis**, **Uhrzeit**, **Verspätung** ~~(retraso)~~. Übe mit dem offiziellen Modellsatz.',
+      text: 'Im **Hören** kommen oft **Durchsagen** am Bahnhof: Hör auf die Zahlen — **Gleis**, **Uhrzeit**, **Verspätung** ~~(retraso)~~. Übe mit den Prüfungssimulationen in Lektion 39 und 40.',
     },
 
     { type: 'rule' },

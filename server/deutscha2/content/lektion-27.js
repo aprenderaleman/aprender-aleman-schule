@@ -16,7 +16,7 @@ export default {
       eyebrow: 'Lernziele',
       items: [
         'die drei Teile der mündlichen Prüfung kennen',
-        'wissen, was die Prüfer bewerten ~~(qué puntúan)~~',
+        'die Bewertung kennen ~~(qué puntúan)~~',
         'drei Aussprache-Regeln für Spanischsprecher anwenden',
         'Notfall-Sätze benutzen: *Wie bitte? Noch einmal, bitte.*',
       ],
@@ -73,7 +73,7 @@ export default {
       card: true,
       titel: 'Verstehen ist wichtiger als perfekt sein',
       absaetze: [
-        'Die zentrale Frage der Prüfer: **Versteht man dich?** Ein kleiner Fehler ist kein Problem. ~~Un error de artículo no suspende a nadie.~~',
+        'Die wichtigste Frage für die Prüfer: **Versteht man dich?** Ein kleiner Fehler ist kein Problem. ~~Un error de artículo no suspende a nadie.~~',
         'Auf A2 sind **einfache, kurze Sätze** richtig und gut: Subjekt, __Verb auf Position 2__, fertig. ~~No intentes frases largas «como en español» — frase corta y clara gana puntos.~~',
         'Wichtig sind auch: du **reagierst** auf deinen Partner und deine **Aussprache** ist klar.',
       ],
@@ -112,7 +112,7 @@ export default {
         { text: '**Stadt** ↔ **Staat**', gl: '— a corta / a larga' },
         { text: '**bitten** ↔ **bieten**', gl: '— i corta / i larga' },
         { text: '**H**aus, **h**eute, **h**aben', gl: '— la h se pronuncia' },
-        { text: '**ZIM**-mer, **AR**-beit, **HO**-bby', gl: '— acento en la primera sílaba' },
+        { text: '**ZIM**-mer, **AR**-beit, **HOB**-by', gl: '— acento en la primera sílaba' },
       ],
     },
     {
@@ -120,7 +120,7 @@ export default {
       eyebrow: 'Redemittel — Notfall-Sätze',
       gruppen: [
         {
-          fn: 'Wenn du etwas nicht verstehst ~~(frases de emergencia — apréndelas de memoria)~~',
+          fn: 'Du verstehst etwas nicht? ~~(frases de emergencia — apréndelas de memoria)~~',
           saetze: [
             { satz: 'Wie bitte?', gloss: '¿cómo dice?' },
             { satz: 'Noch einmal, bitte.', gloss: 'otra vez, por favor' },
@@ -133,47 +133,28 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Welcher Teil?',
-      frage: 'Teil 1, 2 oder 3?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        '„Ich habe zwei Schwestern und wohne in Madrid.“',
-        '„Wollen wir am Samstag kochen?“ — „Gute Idee!“',
-        '„Was isst du zum Frühstück?“ — „Brot mit Käse.“',
-      ],
-      loesungen: [
-        '**Teil 2** — von sich erzählen',
-        '**Teil 3** — gemeinsam etwas planen',
-        '**Teil 1** — Fragen stellen & beantworten',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Notfall-Sätze in Aktion',
+      items: [
+        { text: '„**Wie bitte?** Können Sie das bitte **wiederholen**?“', gl: '— pedir repetición: siempre correcto' },
+        { text: '„Können Sie bitte **langsamer sprechen**?“', gl: '— más despacio, por favor' },
+        { text: '„**Noch einmal**, bitte!“', gl: '— la versión corta' },
+        { text: '„Entschuldigung, ich verstehe das Wort nicht.“', gl: '— también puedes decirlo así' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Lang oder kurz?',
-      frage: 'Ist der Vokal lang oder kurz? Sprich laut!',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Staat',
-        'kommen',
-        'Name',
-        'bitte',
+      type: 'beispiele',
+      kicker: 'Aussprache',
+      titel: 'Hör genau hin',
+      items: [
+        { text: '**Stadt** (kurz) ↔ **Staat** (lang)', gl: '— ciudad / Estado: solo cambia la vocal' },
+        { text: '**bitten** ↔ **bieten**', gl: '— pedir / ofrecer: i corta / i larga' },
+        { text: '**H**unger, **h**eute, **h**ier', gl: '— la h se pronuncia: sopla un poco de aire' },
+        { text: '**MOR**-gen, **ANT**-wort, **PRÜ**-fung', gl: '— acento en la primera sílaba' },
       ],
-      loesungen: [
-        'Staat → **lang** (aa)',
-        'kommen → **kurz** ~~(doble consonante detrás = vocal corta)~~',
-        'Name → **lang**',
-        'bitte → **kurz**',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren — reagieren',
-      frage: 'Dein Partner spricht zu schnell. Was sagst du? Schreib zwei Sätze.',
-      loesungLabel: 'Mögliche Lösung',
-      loesung: '„**Wie bitte?** Können Sie bitte **langsamer sprechen**?“ ~~También vale:~~ „Noch einmal, bitte.“ / „Können Sie das bitte wiederholen?“',
     },
 
     { type: 'rule' },
@@ -196,7 +177,7 @@ export default {
     {
       type: 'tipp',
       label: 'Prüfungstipp',
-      text: 'Im offiziellen Modellsatz siehst du die Prüfung **mit Video**. Schau ihn dir einmal ganz an — dann weißt du genau, was dich erwartet.',
+      text: 'Im offiziellen Modellsatz siehst du die Prüfung **mit Video**. Schau ihn dir einmal ganz an — dann kennst du die Prüfung genau.',
     },
 
     { type: 'rule' },

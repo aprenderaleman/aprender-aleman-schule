@@ -85,7 +85,7 @@ export default {
         { text: 'Wir **hatten** keine Zeit.', gl: '— «no teníamos tiempo»' },
         { text: 'Ich **war** krank und **konnte** nicht arbeiten.', gl: '— podía → konnte' },
         { text: 'Als Kind **durfte** er nicht lange fernsehen.', gl: '— permiso → durfte' },
-        { text: 'Mit 10 Jahren **war** ich sehr klein.', gl: '— «tenía 10 años» = *ich war 10* ¡con sein!' },
+        { text: 'Damals **war** ich 10 Jahre alt.', gl: '— «tenía 10 años» = *ich war 10 Jahre alt* ¡con sein!' },
         { text: '**Warst** du gestern im Büro? — Nein, ich **hatte** frei.', gl: '— pregunta: Warst du …?' },
         { text: 'Wir **wollten** ins Kino gehen, aber wir **mussten** arbeiten.', gl: '— wollten / mussten' },
       ],
@@ -93,55 +93,29 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · war oder hatte?',
-      frage: 'Ergänze war oder hatte in der richtigen Form.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Gestern ___ ich müde.',
-        'Wir ___ viel Arbeit.',
-        '___ du am Wochenende zu Hause?',
-        'Er ___ keinen Hunger.',
-      ],
-      loesungen: [
-        'Gestern **war** ich müde.',
-        'Wir **hatten** viel Arbeit.',
-        '**Warst** du am Wochenende zu Hause?',
-        'Er **hatte** keinen Hunger.',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'war & hatte im Alltag',
+      items: [
+        { text: 'Das Wetter **war** am Montag furchtbar.', gl: '— El lunes hizo un tiempo horrible.' },
+        { text: 'Ich **hatte** gestern viel Stress im Büro.', gl: '— Ayer tuve mucho estrés en la oficina.' },
+        { text: '**Wart** ihr schon in Wien? — Ja, im Mai.', gl: '— ¿Ya habéis estado en Viena? — Sí, en mayo.' },
+        { text: 'Der Supermarkt **hatte** kein frisches Brot.', gl: '— El súper no tenía pan fresco.' },
+        { text: 'Es **gab** am Bahnhof ein Problem.', gl: '— Hubo un problema en la estación.' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Modalverben in die Vergangenheit',
-      frage: 'Setze das Modalverb ins Präteritum.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Ich kann nicht kommen. → Gestern …',
-        'Sie muss arbeiten. → Am Montag …',
-        'Wir wollen ins Kino gehen. → Letzte Woche …',
-      ],
-      loesungen: [
-        'Gestern **konnte** ich nicht kommen.',
-        'Am Montag **musste** sie arbeiten.',
-        'Letzte Woche **wollten** wir ins Kino gehen.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Über gestern schreiben',
-      frage: 'Schreibe die Sätze in der Vergangenheit. ~~Mezcla: war/hatte/Modalverben en Präteritum, el resto en Perfekt.~~',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        '(ich / gestern / krank / sein)',
-        '(ich / nicht / arbeiten / können)',
-        '(ich / einen Tee / trinken)',
-      ],
-      loesungen: [
-        'Ich **war** gestern krank. ~~(sein → Präteritum)~~',
-        'Ich **konnte** nicht arbeiten. ~~(Modalverb → Präteritum)~~',
-        'Ich **habe** einen Tee **getrunken**. ~~(verbo normal → Perfekt)~~',
+      type: 'beispiele',
+      kicker: 'konnte, musste & Co.',
+      titel: 'Modalverben gestern',
+      items: [
+        { text: 'Ich **wollte** schwimmen gehen, aber das Bad **war** zu.', gl: '— Quería ir a nadar, pero la piscina estaba cerrada.' },
+        { text: 'Leo **musste** am Samstag arbeiten.', gl: '— Leo tuvo que trabajar el sábado.' },
+        { text: 'Wir **konnten** das Konzert nicht sehen — es **gab** keine Karten.', gl: '— No pudimos ver el concierto: no había entradas.' },
+        { text: 'Als Kind **durfte** ich keinen Kaffee trinken.', gl: '— De niño no podía (no me dejaban) tomar café.' },
+        { text: 'Ich **konnte** gestern nicht schlafen. Heute bin ich müde.', gl: '— No pude dormir; hoy estoy cansado.' },
       ],
     },
 
@@ -153,7 +127,7 @@ export default {
       eyebrow: 'Prüfungsbezug',
       modul: 'Schreiben · E-Mail',
       titel: 'Warum warst du nicht da?',
-      anweisung: 'Im Schreiben (Teil 2) erklärst du oft, warum etwas nicht möglich war. Ergänze:',
+      anweisung: 'Im Schreiben (Teil 2) erklärst du oft ein Problem von gestern. Ergänze: ~~(Completa:)~~',
       absaetze: [
         '„Lieber Tom, ich {1} gestern leider krank und {2} nicht zum Kurs kommen. {3} du Zeit am Samstag?“',
       ],
