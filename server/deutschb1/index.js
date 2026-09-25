@@ -3,6 +3,7 @@
 
 import { B1_BLOCKS, B1_TITLES, B1_LESSON_COUNT, B1_GESCHICHTEN, blockOf } from './blocks.js'
 import { CONTENT } from './content/index.js'
+import { hasHeft } from './heft/index.js'
 
 export { B1_LESSON_COUNT }
 
@@ -18,6 +19,7 @@ export function getCourseIndex() {
         block: b ? b.n : null,
         blockName: b ? b.name : null,
         ready: Boolean(CONTENT[id]),
+        heft: hasHeft(id),
       }
     }).concat(B1_GESCHICHTEN.map(g => ({
       id: g.id,
@@ -57,5 +59,5 @@ export function getLesson(id) {
   const full = CONTENT[id]
   if (!full) return { ...base, ready: false }
 
-  return { ...base, ready: true, spec: full.spec, h1: full.h1, lead: full.lead, content: full.content }
+  return { ...base, heft: hasHeft(id), ready: true, spec: full.spec, h1: full.h1, lead: full.lead, content: full.content }
 }

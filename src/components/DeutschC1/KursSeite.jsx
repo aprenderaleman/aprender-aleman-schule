@@ -156,7 +156,7 @@ export default function KursSeite({ kurs, heftMode = false }) {
       <div className="c1-wrap">
         <div className="c1-spec"><span className="c1-mod">Übungsheft</span><span className="c1-sep">·</span><span>Lektion {pad(lessonId)}</span></div>
         <h1 className="c1-title">{lesson.titel}</h1>
-        <p className="c1-lead">Übe hier, was du in der Lektion gelernt hast. <span className="c1-gl">(Practica aquí lo que aprendiste en la lección.)</span></p>
+        <p className="c1-lead">Übe hier, was du in der Lektion gelernt hast.{/A[12]/.test(kurs.name) && <> <span className="c1-gl">(Practica aquí lo que aprendiste en la lección.)</span></>}</p>
         <Link to={`${kurs.base}/${lessonId}`} className="c1-back" style={{ marginTop: 0 }}>‹ Zur Lektion</Link>
         <hr className="c1-rule" />
         <HeftBody heft={lesson} level={kurs.name.replace('Deutsch ', '')} />

@@ -175,12 +175,16 @@ function AppRoutes() {
         {/* Zertifikat C1 — curso restringido */}
         <Route path="/deutschc1" element={<C1Route><DeutschC1 /></C1Route>} />
         <Route path="/deutschc1/:id" element={<C1Route><DeutschC1 /></C1Route>} />
+        <Route path="/deutschc1/:id/heft" element={<C1Route><DeutschC1 heft /></C1Route>} />
         <Route path="/deutschb2" element={<C1Route><DeutschB2 /></C1Route>} />
         <Route path="/deutschb2/:id" element={<C1Route><DeutschB2 /></C1Route>} />
+        <Route path="/deutschb2/:id/heft" element={<C1Route><DeutschB2 heft /></C1Route>} />
         <Route path="/deutschb1" element={<C1Route><DeutschB1 /></C1Route>} />
         <Route path="/deutschb1/:id" element={<C1Route><DeutschB1 /></C1Route>} />
+        <Route path="/deutschb1/:id/heft" element={<C1Route><DeutschB1 heft /></C1Route>} />
         <Route path="/deutscha2" element={<C1Route><DeutschA2 /></C1Route>} />
         <Route path="/deutscha2/:id" element={<C1Route><DeutschA2 /></C1Route>} />
+        <Route path="/deutscha2/:id/heft" element={<C1Route><DeutschA2 heft /></C1Route>} />
         <Route path="/deutscha1" element={<C1Route><DeutschA1 /></C1Route>} />
         <Route path="/deutscha1/:id" element={<C1Route><DeutschA1 /></C1Route>} />
         <Route path="/deutscha1/:id/heft" element={<C1Route><DeutschA1 heft /></C1Route>} />

@@ -15,6 +15,6 @@ const KURS_C1 = {
   artBase: '/deutschc1',
 }
 
-export default function DeutschC1() {
-  return <KursSeite kurs={KURS_C1} />
+export default function DeutschC1({ heft = false }) {
+  return <KursSeite kurs={KURS_C1} heftMode={heft} />
 }

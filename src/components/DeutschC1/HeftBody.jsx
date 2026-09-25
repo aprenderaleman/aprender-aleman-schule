@@ -102,7 +102,7 @@ function ItemLuecke({ item, value, onChange, checked, seed }) {
   )
 }
 
-function ItemSatzbau({ item, value, onChange, checked, seed }) {
+function ItemSatzbau({ item, value, onChange, checked, seed, gl }) {
   const start = useMemo(() => shuffled(item.woerter, seed), [item, seed])
   const chosen = value || []
   const rest = useMemo(() => {
@@ -120,8 +120,8 @@ function ItemSatzbau({ item, value, onChange, checked, seed }) {
     <div className="c1-heft-item">
       <p className="c1-heft-frage">
         {istFrage
-          ? <>Bau die Frage. <span className="c1-gl">~ Ordena la pregunta.</span></>
-          : <>Bau den Satz. <span className="c1-gl">~ Ordena la frase.</span></>}
+          ? <>Bau die Frage.{gl && <> <span className="c1-gl">~ Ordena la pregunta.</span></>}</>
+          : <>Bau den Satz.{gl && <> <span className="c1-gl">~ Ordena la frase.</span></>}</>}
       </p>
       <div className={'c1-heft-satz' + (checked ? (ok ? ' is-ok' : ' is-bad') : '')}>
         {chosen.length === 0 ? <span className="c1-heft-satz-leer">…</span> : chosen.map((w, i) => (
@@ -140,12 +140,12 @@ function ItemSatzbau({ item, value, onChange, checked, seed }) {
   )
 }
 
-function ItemZuordnen({ item, value, onChange, checked, seed }) {
+function ItemZuordnen({ item, value, onChange, checked, seed, gl }) {
   const rechts = useMemo(() => shuffled([...new Set(item.rechts)], seed), [item, seed])
   const val = value || {}
   return (
     <div className="c1-heft-item">
-      <p className="c1-heft-frage">Was passt zusammen? <span className="c1-gl">~ Empareja.</span></p>
+      <p className="c1-heft-frage">Was passt zusammen?{gl && <> <span className="c1-gl">~ Empareja.</span></>}</p>
       <div className="c1-heft-zuordnen">
         {item.links.map((l, i) => {
           const state = checked ? (norm(val[l]) === norm(item.loesung[l]) ? ' is-ok' : ' is-bad') : ''
@@ -166,10 +166,10 @@ function ItemZuordnen({ item, value, onChange, checked, seed }) {
   )
 }
 
-function ItemKorrektur({ item, value, onChange, checked }) {
+function ItemKorrektur({ item, value, onChange, checked, gl }) {
   return (
     <div className="c1-heft-item">
-      <p className="c1-heft-frage">Was ist richtig? <span className="c1-gl">~ ¿Cuál es correcta?</span></p>
+      <p className="c1-heft-frage">Was ist richtig?{gl && <> <span className="c1-gl">~ ¿Cuál es correcta?</span></>}</p>
       <div className="c1-heft-opts c1-heft-opts-col">
         {item.optionen.map((o, i) => {
           const sel = value === i
@@ -215,7 +215,7 @@ function renderItem(item, props) {
 
 // ─── Teile ───────────────────────────────────────────────────────────
 
-function TeilItems({ teil, seed }) {
+function TeilItems({ teil, seed, gl }) {
   const [values, setValues] = useState({})
   const [checked, setChecked] = useState(false)
   const items = teil.items || []
@@ -241,6 +241,7 @@ function TeilItems({ teil, seed }) {
             seed: seed + i,
             value: values[i],
             checked,
+            gl,
             onChange: v => setValues(prev => ({ ...prev, [i]: v })),
           })}
         </React.Fragment>
@@ -387,6 +388,9 @@ export default function HeftBody({ heft, level = 'A1' }) {
   const seed = seedBase.current + runde * 131
 
   const ICONS = { grammatik: '🧩', lesen: '📖', schreiben: '✍️' }
+  // Glosas españolas de la interfaz solo en los niveles básicos (A1/A2):
+  // a partir de B1 el alumno lee las consignas en alemán sin apoyo.
+  const gl = /^A/.test(level)
   return (
     <div key={runde}>
       {heft.teile.map((teil, t) => (
@@ -395,14 +399,14 @@ export default function HeftBody({ heft, level = 'A1' }) {
           {teil.anweisung && <p className="c1-heft-anweisung">{renderInline(teil.anweisung)}</p>}
           {teil.typ === 'schreiben'
             ? (teil.variante === 'formular' ? <TeilFormular teil={teil} /> : <TeilSchreibenText teil={teil} level={level} />)
-            : <TeilItems teil={teil} seed={seed + t * 1000} />}
+            : <TeilItems teil={teil} seed={seed + t * 1000} gl={gl} />}
           {t < heft.teile.length - 1 && <hr className="c1-rule" />}
         </section>
       ))}
       <hr className="c1-rule" />
       <div className="c1-pa-actions">
         <button type="button" className="c1-pa-btn" onClick={() => setRunde(r => r + 1)}>
-          🔄 Nochmal üben <span className="c1-gl">~ practicar otra vez</span>
+          🔄 Nochmal üben{gl && <> <span className="c1-gl">~ practicar otra vez</span></>}
         </button>
       </div>
     </div>

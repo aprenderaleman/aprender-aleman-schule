@@ -5029,13 +5029,15 @@ app.get('/api/deutscha1/lessons/:id', authMiddleware, deutschC1RoleGate, subscri
 })
 
 
-// Übungsheft por lección (A1): mismo triple gate que las lecciones.
-app.get('/api/deutscha1/heft/:id', authMiddleware, deutschC1RoleGate, subscriptionMiddleware, async (req, res) => {
-  const { getHeft } = await import('./deutscha1/heft/index.js')
-  const heft = getHeft(parseInt(req.params.id))
-  if (!heft) return res.status(404).json({ error: 'Kein Übungsheft für diese Lektion.' })
-  res.json(heft)
-})
+// Übungsheft por lección — los 5 cursos, mismo triple gate que las lecciones.
+for (const kursDir of ['deutscha1', 'deutscha2', 'deutschb1', 'deutschb2', 'deutschc1']) {
+  app.get(`/api/${kursDir}/heft/:id`, authMiddleware, deutschC1RoleGate, subscriptionMiddleware, async (req, res) => {
+    const { getHeft } = await import(`./${kursDir}/heft/index.js`)
+    const heft = getHeft(parseInt(req.params.id))
+    if (!heft) return res.status(404).json({ error: 'Kein Übungsheft für diese Lektion.' })
+    res.json(heft)
+  })
+}
 // ─── SERVE FRONTEND IN PRODUCTION ────────────────────
 const distPath = path.join(__dirname, '..', 'dist')
 app.use(express.static(distPath))

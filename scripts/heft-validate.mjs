@@ -1,6 +1,12 @@
-// Valida todos los hefts del A1: claves, bancos, estructura.
+// Valida los hefts de un curso: claves, bancos, estructura.
+// Uso: node scripts/heft-validate.mjs [a1|a2|b1|b2|c1]  (por defecto: a1)
 import fs from 'node:fs'
-const dir = new URL('../server/deutscha1/heft/', import.meta.url)
+const kurs = (process.argv[2] || 'a1').toLowerCase()
+if (!/^(a1|a2|b1|b2|c1)$/.test(kurs)) { console.error('curso inválido: ' + kurs); process.exit(1) }
+// La heurística anti-Nebensatz en instrucciones solo aplica a los básicos:
+// desde B1 las consignas pueden llevar subordinadas sencillas.
+const basico = /^a/.test(kurs)
+const dir = new URL(`../server/deutsch${kurs}/heft/`, import.meta.url)
 let problems = 0
 const P = m => { problems++; console.log('⚠ ' + m) }
 const files = fs.readdirSync(dir).filter(f => /^heft-\d+\.js$/.test(f)).sort()
@@ -43,8 +49,8 @@ for (const f of files) {
   } else if (s?.variante === 'text') {
     if (!s.aufgabe || !s.minWoerter || !s.beispielLoesung) P(`${f}: schreiben-text incompleto`)
   } else P(`${f}: variante schreiben desconocida`)
-  // instrucciones con Nebensatz-señales (heurística)
-  for (const t of h.teile || []) {
+  // instrucciones con Nebensatz-señales (heurística, solo A1/A2)
+  if (basico) for (const t of h.teile || []) {
     if (/,\s*(weil|dass|wenn|obwohl|damit)\b/.test(t.anweisung || '')) P(`${f}: anweisung con Nebensatz: "${(t.anweisung||'').slice(0,50)}"`)
   }
 }
