@@ -491,6 +491,12 @@
   transition: background 120ms, border-color 120ms;
 }
 .c1-pa-select:focus { outline: 2px solid var(--c1-gold); outline-offset: 1px; }
+/* El popup nativo del <select> en Chromium/Windows hereda el fondo del propio
+   select: el dorado translúcido compuesto sobre blanco da un crema claro con
+   el texto casi blanco del tema oscuro — ilegible. Las <option> necesitan
+   colores SÓLIDOS explícitos; color-scheme solo no alcanza aquí. */
+.c1 select option { background-color: #15263F; color: #F0F3F7; }
+.c1[data-c1-theme="light"] select option { background-color: #FFFBF4; color: #222633; }
 /* Verde/rojo según el TEMA DEL CURSO (data-c1-theme), no el del sistema:
    base = oscuro (tonos claros), claro = tonos oscuros. */
 .c1-pa-select--ok  { background: rgba(34,197,94,.15); border: 1px solid rgba(34,197,94,.7); color: #4ade80; }
