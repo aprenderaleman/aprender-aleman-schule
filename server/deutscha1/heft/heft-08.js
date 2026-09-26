@@ -23,7 +23,7 @@ export default {
           loesungen: { 1: 'eine', 2: 'ein' },
         },
         { typ: 'satzbau', woerter: ['ist', 'Das', 'Tisch', 'der'], loesung: 'Das ist der Tisch.' },
-        { typ: 'satzbau', woerter: ['Lampe', 'ist', 'die', 'neu'], loesung: 'Die Lampe ist neu.' },
+        { typ: 'satzbau', woerter: ['Lampe', 'ist', 'Die', 'neu'], loesung: 'Die Lampe ist neu.' },
         {
           typ: 'zuordnen',
           links: ['Mann', 'Frau', 'Kind', 'Tür', 'Haus', 'Lehrer'],

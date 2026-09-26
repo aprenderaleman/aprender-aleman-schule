@@ -24,8 +24,8 @@ export default {
           bank: ['wohnt', 'sprechen', 'wohnst'],
           loesungen: { 1: 'wohnt', 2: 'sprechen' },
         },
-        { typ: 'satzbau', woerter: ['kann', 'Deutsch', 'ich', 'sprechen'], loesung: 'Ich kann Deutsch sprechen.' },
-        { typ: 'satzbau', woerter: ['stehe', 'ich', 'um', '8', 'Uhr', 'auf'], loesung: 'Um 8 Uhr stehe ich auf.' },
+        { typ: 'satzbau', woerter: ['kann', 'Deutsch', 'Ich', 'sprechen'], loesung: 'Ich kann Deutsch sprechen.' },
+        { typ: 'satzbau', woerter: ['stehe', 'ich', 'Um', '8', 'Uhr', 'auf'], loesung: 'Um 8 Uhr stehe ich auf.', alt: ['Ich stehe um 8 Uhr auf.'] },
         {
           typ: 'zuordnen',
           links: ['Wo wohnst du?', 'Wann stehst du auf?', 'Was isst du?', 'Wer ist das?'],

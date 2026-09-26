@@ -23,8 +23,8 @@ export default {
           bank: ['zweiunddreißig', 'siebzehn', 'dreiundzwanzig'],
           loesungen: { 1: 'zweiunddreißig', 2: 'siebzehn' },
         },
-        { typ: 'satzbau', woerter: ['um', 'Der', 'halb', 'beginnt', 'Kurs', 'neun'], loesung: 'Der Kurs beginnt um halb neun.' },
-        { typ: 'satzbau', woerter: ['mache', 'Im', 'die', 'August', 'ich', 'Prüfung'], loesung: 'Im August mache ich die Prüfung.' },
+        { typ: 'satzbau', woerter: ['um', 'Der', 'halb', 'beginnt', 'Kurs', 'neun'], loesung: 'Der Kurs beginnt um halb neun.', alt: ['Um halb neun beginnt der Kurs.'] },
+        { typ: 'satzbau', woerter: ['mache', 'Im', 'die', 'August', 'ich', 'Prüfung'], loesung: 'Im August mache ich die Prüfung.', alt: ['Ich mache im August die Prüfung.', 'Ich mache die Prüfung im August.'] },
         {
           typ: 'zuordnen',
           links: ['9:30', '9:15', '9:45', '21:00'],

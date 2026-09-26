@@ -6,7 +6,7 @@ export default {
     {
       typ: 'grammatik',
       titel: 'Training',
-      anweisung: 'Trainiere die Vorstellung. Wähle oder ergänze die richtige Form. ~~(Entrena la presentación. Elige o completa la forma correcta.)~~',
+      anweisung: 'Trainiere die Vorstellung. Wähle die richtige Form. ~~(Entrena la presentación. Elige la forma correcta.)~~',
       items: [
         {
           typ: 'luecke',
@@ -27,8 +27,8 @@ export default {
           optionen: ['Ich sage: R-U-I-Z.', 'Ich sage meine Telefonnummer.', 'Ich sage mein Alter.'],
           loesung: 0,
         },
-        { typ: 'satzbau', woerter: ['Jahre', 'ich', '28', 'alt', 'bin'], loesung: 'Ich bin 28 Jahre alt.' },
-        { typ: 'satzbau', woerter: ['ist', 'Hobby', 'Schwimmen', 'mein'], loesung: 'Mein Hobby ist Schwimmen.' },
+        { typ: 'satzbau', woerter: ['Jahre', 'Ich', '28', 'alt', 'bin'], loesung: 'Ich bin 28 Jahre alt.' },
+        { typ: 'satzbau', woerter: ['ist', 'Hobby', 'Schwimmen', 'Mein'], loesung: 'Mein Hobby ist Schwimmen.', alt: ['Schwimmen ist mein Hobby.'] },
         {
           typ: 'zuordnen',
           links: ['Name', 'Land', 'Wohnort', 'Beruf', 'Hobby'],

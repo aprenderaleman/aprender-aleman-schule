@@ -6,7 +6,7 @@ export default {
     {
       typ: 'grammatik',
       titel: 'Grammatik',
-      anweisung: 'Wähle oder ergänze die richtige Form. ~~(Elige o completa la forma correcta.)~~',
+      anweisung: 'Wähle die richtige Form. ~~(Elige la forma correcta.)~~',
       items: [
         {
           typ: 'zuordnen',
@@ -36,11 +36,11 @@ export default {
         {
           typ: 'mc',
           frage: 'Die Telefonnummer 030 sagst du: ___',
-          optionen: ['null drei null', 'drei null null', 'null dreißig'],
+          optionen: ['null drei null', 'drei null null', 'dreißig null'],
           loesung: 0,
         },
-        { typ: 'satzbau', woerter: ['das', 'kostet', 'Buch', 'was'], loesung: 'Was kostet das Buch?' },
-        { typ: 'satzbau', woerter: ['einen', 'bitte', 'ich', 'Termin', 'möchte'], loesung: 'Ich möchte einen Termin, bitte.' },
+        { typ: 'satzbau', woerter: ['das', 'kostet', 'Buch', 'Was'], loesung: 'Was kostet das Buch?' },
+        { typ: 'satzbau', woerter: ['einen', 'bitte', 'Ich', 'Termin', 'möchte'], loesung: 'Ich möchte einen Termin, bitte.', alt: ['Ich möchte bitte einen Termin.'] },
         {
           typ: 'korrektur',
           optionen: ['Der Termin ist am Montag um 9 Uhr.', 'Der Termin ist im Montag um 9 Uhr.'],

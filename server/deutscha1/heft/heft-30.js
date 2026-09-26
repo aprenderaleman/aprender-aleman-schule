@@ -6,7 +6,7 @@ export default {
     {
       typ: 'grammatik',
       titel: 'Grammatik',
-      anweisung: 'Wähle oder ergänze die richtige Form. ~~(Elige o completa la forma correcta.)~~',
+      anweisung: 'Wähle die richtige Form. ~~(Elige la forma correcta.)~~',
       items: [
         {
           typ: 'zuordnen',
@@ -23,7 +23,7 @@ export default {
         {
           typ: 'luecke',
           text: '{1} Bruder heißt Luis. {2} Schwester wohnt in Lima.',
-          bank: ['Mein', 'Meine', 'Dein'],
+          bank: ['Mein', 'Meine', 'Meinen'],
           loesungen: { 1: 'Mein', 2: 'Meine' },
         },
         {
@@ -45,8 +45,8 @@ export default {
           loesung: 0,
         },
         { typ: 'mc', frage: 'Ich habe ___ Bruder und eine Schwester.', optionen: ['einen', 'ein', 'eine'], loesung: 0 },
-        { typ: 'satzbau', woerter: ['wohnen', 'Eltern', 'in', 'meine', 'Spanien'], loesung: 'Meine Eltern wohnen in Spanien.' },
-        { typ: 'satzbau', woerter: ['Kinder', 'Sie', 'haben'], loesung: 'Haben Sie Kinder?' },
+        { typ: 'satzbau', woerter: ['wohnen', 'Eltern', 'in', 'Meine', 'Spanien'], loesung: 'Meine Eltern wohnen in Spanien.', alt: ['In Spanien wohnen meine Eltern.'] },
+        { typ: 'satzbau', woerter: ['Kinder', 'Sie', 'Haben'], loesung: 'Haben Sie Kinder?' },
         {
           typ: 'korrektur',
           optionen: ['Mein Bruder heißt Luis.', 'Meine Bruder heißt Luis.'],

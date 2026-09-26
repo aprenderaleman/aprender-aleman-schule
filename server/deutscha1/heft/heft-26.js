@@ -60,8 +60,8 @@ export default {
             'ie wie in „sieben“': '„i“ (lang)',
           },
         },
-        { typ: 'satzbau', woerter: ['bitte', 'einmal', 'noch'], loesung: 'Noch einmal, bitte.' },
-        { typ: 'satzbau', woerter: ['nicht', 'ich', 'verstehe'], loesung: 'Ich verstehe nicht.' },
+        { typ: 'satzbau', woerter: ['bitte', 'einmal', 'Noch'], loesung: 'Noch einmal, bitte.', alt: ['Bitte noch einmal.'] },
+        { typ: 'satzbau', woerter: ['nicht', 'Ich', 'verstehe'], loesung: 'Ich verstehe nicht.' },
       ],
     },
     {

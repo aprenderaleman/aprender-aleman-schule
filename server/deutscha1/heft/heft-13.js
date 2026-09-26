@@ -17,8 +17,8 @@ export default {
           bank: ['ein', 'an', 'fern', 'auf'],
           loesungen: { 1: 'ein', 2: 'an', 3: 'fern' },
         },
-        { typ: 'satzbau', woerter: ['stehe', 'um', 'Ich', 'auf', '7', 'Uhr'], loesung: 'Ich stehe um 7 Uhr auf.' },
-        { typ: 'satzbau', woerter: ['du', 'mit', 'kommst'], loesung: 'Kommst du mit?' },
+        { typ: 'satzbau', woerter: ['stehe', 'um', 'Ich', 'auf', '7', 'Uhr'], loesung: 'Ich stehe um 7 Uhr auf.', alt: ['Um 7 Uhr stehe ich auf.'] },
+        { typ: 'satzbau', woerter: ['du', 'mit', 'Kommst'], loesung: 'Kommst du mit?' },
         {
           typ: 'zuordnen',
           links: ['aufstehen', 'einkaufen', 'anrufen', 'fernsehen', 'zumachen'],

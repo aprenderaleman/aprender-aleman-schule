@@ -28,8 +28,8 @@ export default {
           bank: ['Hausaufgaben', 'E-Mail', 'Gruß'],
           loesungen: { 1: 'Hausaufgaben', 2: 'E-Mail' },
         },
-        { typ: 'satzbau', woerter: ['leider', 'kann', 'ich', 'kommen', 'nicht'], loesung: 'Ich kann leider nicht kommen.' },
-        { typ: 'satzbau', woerter: ['mich', 'möchtest', 'besuchen', 'du'], loesung: 'Möchtest du mich besuchen?' },
+        { typ: 'satzbau', woerter: ['leider', 'kann', 'Ich', 'kommen', 'nicht'], loesung: 'Ich kann leider nicht kommen.', alt: ['Leider kann ich nicht kommen.'] },
+        { typ: 'satzbau', woerter: ['mich', 'Möchtest', 'besuchen', 'du'], loesung: 'Möchtest du mich besuchen?' },
         {
           typ: 'korrektur',
           optionen: ['Liebe Anna, ich komme am Samstag.', 'Liebe Anna: Ich komme am Samstag.'],

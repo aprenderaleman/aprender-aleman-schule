@@ -22,8 +22,8 @@ export default {
           bank: ['kaufe', 'ein', 'esse'],
           loesungen: { 1: 'kaufe', 2: 'ein' },
         },
-        { typ: 'satzbau', woerter: ['stehe', 'ich', 'um', '7', 'Uhr', 'auf'], loesung: 'Um 7 Uhr stehe ich auf.' },
-        { typ: 'satzbau', woerter: ['gern', 'ich', 'Fußball', 'spiele'], loesung: 'Ich spiele gern Fußball.' },
+        { typ: 'satzbau', woerter: ['stehe', 'ich', 'Um', '7', 'Uhr', 'auf'], loesung: 'Um 7 Uhr stehe ich auf.', alt: ['Ich stehe um 7 Uhr auf.'] },
+        { typ: 'satzbau', woerter: ['gern', 'Ich', 'Fußball', 'spiele'], loesung: 'Ich spiele gern Fußball.' },
         {
           typ: 'zuordnen',
           links: ['aufstehen', 'einkaufen', 'fernsehen', 'frühstücken'],

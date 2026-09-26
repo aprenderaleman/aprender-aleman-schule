@@ -17,8 +17,8 @@ export default {
           bank: ['Wer', 'Was', 'Wo'],
           loesungen: { 1: 'Wer', 2: 'Was' },
         },
-        { typ: 'satzbau', woerter: ['du', 'woher', 'kommst'], loesung: 'Woher kommst du?' },
-        { typ: 'satzbau', woerter: ['Sie', 'Kinder', 'haben'], loesung: 'Haben Sie Kinder?' },
+        { typ: 'satzbau', woerter: ['du', 'Woher', 'kommst'], loesung: 'Woher kommst du?' },
+        { typ: 'satzbau', woerter: ['Sie', 'Kinder', 'Haben'], loesung: 'Haben Sie Kinder?' },
         {
           typ: 'zuordnen',
           links: ['wer', 'wo', 'woher', 'wann', 'wie'],

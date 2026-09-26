@@ -18,12 +18,12 @@ export default {
         },
         {
           typ: 'luecke',
-          text: 'Im Supermarkt kaufe ich einen Liter {1} und ein Kilo {2}. Im Café sage ich: „Die {3}, bitte!“',
+          text: 'Im Supermarkt kaufe ich einen Liter {1} und ein Kilo {2}. Im Café möchte ich zahlen: „Die {3}, bitte!“',
           bank: ['Milch', 'Äpfel', 'Rechnung', 'Durst'],
           loesungen: { 1: 'Milch', 2: 'Äpfel', 3: 'Rechnung' },
         },
-        { typ: 'satzbau', woerter: ['möchte', 'einen', 'ich', 'bitte', 'Kaffee'], loesung: 'Ich möchte einen Kaffee, bitte.' },
-        { typ: 'satzbau', woerter: ['kostet', 'das', 'was', 'Brot'], loesung: 'Was kostet das Brot?' },
+        { typ: 'satzbau', woerter: ['möchte', 'einen', 'Ich', 'bitte', 'Kaffee'], loesung: 'Ich möchte einen Kaffee, bitte.', alt: ['Ich möchte bitte einen Kaffee.'] },
+        { typ: 'satzbau', woerter: ['kostet', 'das', 'Was', 'Brot'], loesung: 'Was kostet das Brot?' },
         {
           typ: 'zuordnen',
           links: ['Brot', 'Milch', 'Kaffee', 'Käse', 'Rechnung'],

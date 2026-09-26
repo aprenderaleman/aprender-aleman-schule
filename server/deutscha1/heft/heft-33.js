@@ -22,8 +22,8 @@ export default {
           bank: ['Gartenstraße', 'Adresse', 'Wohnung'],
           loesungen: { 1: 'Gartenstraße', 2: 'Adresse' },
         },
-        { typ: 'satzbau', woerter: ['Wohnung', 'drei', 'meine', 'Zimmer', 'hat'], loesung: 'Meine Wohnung hat drei Zimmer.' },
-        { typ: 'satzbau', woerter: ['deine', 'ist', 'Adresse', 'wie'], loesung: 'Wie ist deine Adresse?' },
+        { typ: 'satzbau', woerter: ['Wohnung', 'drei', 'Meine', 'Zimmer', 'hat'], loesung: 'Meine Wohnung hat drei Zimmer.' },
+        { typ: 'satzbau', woerter: ['deine', 'ist', 'Adresse', 'Wie'], loesung: 'Wie ist deine Adresse?' },
         {
           typ: 'zuordnen',
           links: ['Küche', 'Bett', 'Tisch', 'Schrank', 'Wohnung'],
@@ -74,7 +74,7 @@ export default {
         'Ein Möbelstück: neu, groß oder klein? ~~(Un mueble: ¿nuevo, grande o pequeño?)~~',
       ],
       minWoerter: 20,
-      beispielLoesung: 'Ich wohne in einer kleinen Wohnung in Sevilla. Meine Wohnung hat zwei Zimmer, eine Küche und ein Bad. Das Bett ist neu und das Wohnzimmer ist sehr schön.',
+      beispielLoesung: 'Ich wohne in Sevilla. Meine Wohnung ist klein. Sie hat zwei Zimmer, eine Küche und ein Bad. Das Bett ist neu und das Wohnzimmer ist sehr schön.',
     },
   ],
 }

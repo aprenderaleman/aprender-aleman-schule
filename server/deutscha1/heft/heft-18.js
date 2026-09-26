@@ -75,7 +75,7 @@ export default {
         },
         {
           typ: 'mc',
-          frage: 'Was soll Sara mitbringen?',
+          frage: 'Was muss Sara mitbringen?',
           optionen: ['Schokolade', 'die Tickets', 'Milch'],
           loesung: 0,
         },

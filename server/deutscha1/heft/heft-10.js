@@ -22,8 +22,8 @@ export default {
           bank: ['nicht', 'kein', 'keine'],
           loesungen: { 1: 'nicht', 2: 'kein' },
         },
-        { typ: 'satzbau', woerter: ['keine', 'ich', 'Zeit', 'habe'], loesung: 'Ich habe keine Zeit.' },
-        { typ: 'satzbau', woerter: ['nicht', 'komme', 'Ich', 'heute'], loesung: 'Ich komme heute nicht.' },
+        { typ: 'satzbau', woerter: ['keine', 'Ich', 'Zeit', 'habe'], loesung: 'Ich habe keine Zeit.' },
+        { typ: 'satzbau', woerter: ['nicht', 'komme', 'Ich', 'heute'], loesung: 'Ich komme heute nicht.', alt: ['Heute komme ich nicht.'] },
         {
           typ: 'zuordnen',
           links: ['Hast du einen Hund?', 'Kommst du morgen?', 'Haben Sie Kinder?', 'Ist der Film gut?'],
@@ -60,8 +60,8 @@ export default {
         { typ: 'rf', aussage: 'Am Sonntag arbeitet Carlos nicht.', loesung: true },
         {
           typ: 'mc',
-          frage: 'Was hat Carlos nicht?',
-          optionen: ['ein Auto', 'einen Hund', 'eine Lampe'],
+          frage: 'Am Sonntag hat Carlos ein Problem. Was?',
+          optionen: ['Er hat kein Auto.', 'Er arbeitet.', 'Er hat keine Zeit.'],
           loesung: 0,
         },
         { typ: 'rf', aussage: 'Carlos trinkt keinen Kaffee.', loesung: true },

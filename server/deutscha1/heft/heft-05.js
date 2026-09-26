@@ -22,8 +22,8 @@ export default {
           bank: ['mache', 'hast', 'habt'],
           loesungen: { 1: 'mache', 2: 'hast' },
         },
-        { typ: 'satzbau', woerter: ['wohne', 'ich', 'in', 'Berlin'], loesung: 'Ich wohne in Berlin.' },
-        { typ: 'satzbau', woerter: ['Hunger', 'wir', 'haben'], loesung: 'Wir haben Hunger.' },
+        { typ: 'satzbau', woerter: ['wohne', 'Ich', 'in', 'Berlin'], loesung: 'Ich wohne in Berlin.', alt: ['In Berlin wohne ich.'] },
+        { typ: 'satzbau', woerter: ['Hunger', 'Wir', 'haben'], loesung: 'Wir haben Hunger.' },
         {
           typ: 'zuordnen',
           links: ['ich', 'du', 'er / sie / es', 'ihr'],

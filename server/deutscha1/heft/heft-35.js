@@ -18,12 +18,12 @@ export default {
         },
         {
           typ: 'luecke',
-          text: 'Der Mann ist Lehrer. Die Frau ist {1}. Er ist Arzt. Sie ist {2}.',
+          text: 'Der Mann ist Lehrer. Die Frau ist auch {1}. Er ist Arzt. Sie ist auch {2}.',
           bank: ['Lehrerin', 'Ärztin', 'Studentin'],
           loesungen: { 1: 'Lehrerin', 2: 'Ärztin' },
         },
-        { typ: 'satzbau', woerter: ['als', 'arbeite', 'Kellnerin', 'ich'], loesung: 'Ich arbeite als Kellnerin.' },
-        { typ: 'satzbau', woerter: ['Sie', 'was', 'von', 'sind', 'Beruf'], loesung: 'Was sind Sie von Beruf?' },
+        { typ: 'satzbau', woerter: ['als', 'arbeite', 'Kellnerin', 'Ich'], loesung: 'Ich arbeite als Kellnerin.' },
+        { typ: 'satzbau', woerter: ['Sie', 'Was', 'von', 'sind', 'Beruf'], loesung: 'Was sind Sie von Beruf?' },
         {
           typ: 'zuordnen',
           links: ['der Lehrer', 'der Arzt', 'der Verkäufer', 'der Student'],

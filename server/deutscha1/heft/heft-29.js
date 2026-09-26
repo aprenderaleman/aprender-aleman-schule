@@ -32,8 +32,8 @@ export default {
           bank: ['möchte', 'Können', 'Gib', 'Ist'],
           loesungen: { 1: 'möchte', 2: 'Können', 3: 'Gib' },
         },
-        { typ: 'satzbau', woerter: ['mir', 'Sie', 'helfen', 'bitte', 'können'], loesung: 'Können Sie mir bitte helfen?' },
-        { typ: 'satzbau', woerter: ['einen', 'bitte', 'ich', 'Kaffee', 'möchte'], loesung: 'Ich möchte bitte einen Kaffee.' },
+        { typ: 'satzbau', woerter: ['mir', 'Sie', 'helfen', 'bitte', 'Können'], loesung: 'Können Sie mir bitte helfen?' },
+        { typ: 'satzbau', woerter: ['einen', 'bitte', 'Ich', 'Kaffee', 'möchte'], loesung: 'Ich möchte bitte einen Kaffee.', alt: ['Ich möchte einen Kaffee, bitte.'] },
         {
           typ: 'zuordnen',
           links: ['Gib mir bitte deinen Stift.', 'Hast du ein Handy für mich?', 'Ich möchte bitte ein Glas Wasser.', 'Kannst du mir bitte helfen?'],

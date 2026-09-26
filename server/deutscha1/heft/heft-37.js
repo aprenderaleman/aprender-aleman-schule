@@ -24,8 +24,8 @@ export default {
           bank: ['möchte', 'Möchten', 'kann'],
           loesungen: { 1: 'möchte', 2: 'Möchten' },
         },
-        { typ: 'satzbau', woerter: ['du', 'kommst', 'woher'], loesung: 'Woher kommst du?' },
-        { typ: 'satzbau', woerter: ['möchte', 'Deutsch', 'ich', 'lernen'], loesung: 'Ich möchte Deutsch lernen.' },
+        { typ: 'satzbau', woerter: ['du', 'kommst', 'Woher'], loesung: 'Woher kommst du?' },
+        { typ: 'satzbau', woerter: ['möchte', 'Deutsch', 'Ich', 'lernen'], loesung: 'Ich möchte Deutsch lernen.' },
         {
           typ: 'zuordnen',
           links: ['geöffnet', 'geschlossen', 'verboten', 'der Ausweis'],
@@ -69,7 +69,7 @@ export default {
       variante: 'text',
       titel: 'Schreiben',
       anweisung: 'Wie in der Prüfung: Schreib eine kurze Nachricht (ca. 30 Wörter). Denk an Anrede und Gruß. ~~(Como en el examen: escribe un mensaje corto de unas 30 palabras. No olvides el saludo y la despedida.)~~',
-      aufgabe: 'Du kochst am Samstag für deine Freunde. Schreib deinem Freund Ben eine Nachricht.',
+      aufgabe: 'Du kochst am Samstag für deine Freunde. Schreib eine Nachricht an deinen Freund Ben.',
       punkte: [
         'Lade Ben ein. ~~(Invita a Ben.)~~',
         'Sag: Wann ist das Essen? ~~(Di cuándo es la comida.)~~',

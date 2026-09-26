@@ -23,8 +23,8 @@ export default {
           bank: ['die', 'der', 'das'],
           loesungen: { 1: 'die', 2: 'die' },
         },
-        { typ: 'satzbau', woerter: ['spielen', 'Die', 'im', 'Kinder', 'Park'], loesung: 'Die Kinder spielen im Park.' },
-        { typ: 'satzbau', woerter: ['sind', 'Bücher', 'die', 'neu'], loesung: 'Die Bücher sind neu.' },
+        { typ: 'satzbau', woerter: ['spielen', 'Die', 'im', 'Kinder', 'Park'], loesung: 'Die Kinder spielen im Park.', alt: ['Im Park spielen die Kinder.'] },
+        { typ: 'satzbau', woerter: ['sind', 'Bücher', 'Die', 'neu'], loesung: 'Die Bücher sind neu.' },
         {
           typ: 'zuordnen',
           links: ['der Tisch', 'die Frau', 'das Auto', 'das Kind', 'der Bruder'],
@@ -58,8 +58,8 @@ export default {
       textTitel: 'Notiz von Mama',
       text: 'Hallo Paul! Bitte kauf heute ein: sechs Äpfel, vier Bananen und zwei Brote. Kauf bitte keine Tomaten — wir haben noch drei! Am Samstag kaufen wir zwei Stühle und eine Lampe. Die Stühle sind nicht teuer. Danke! Ruf mich bitte an. Mama',
       items: [
-        { typ: 'rf', aussage: 'Paul kauft sechs Äpfel.', loesung: true },
-        { typ: 'rf', aussage: 'Paul kauft drei Tomaten.', loesung: false },
+        { typ: 'rf', aussage: 'Mama möchte sechs Äpfel.', loesung: true },
+        { typ: 'rf', aussage: 'Sie haben keine Tomaten.', loesung: false },
         {
           typ: 'mc',
           frage: 'Was kaufen sie am Samstag?',

@@ -22,8 +22,8 @@ export default {
           bank: ['kann', 'möchten', 'müsst'],
           loesungen: { 1: 'kann', 2: 'möchten' },
         },
-        { typ: 'satzbau', woerter: ['einen', 'trinken', 'ich', 'Kaffee', 'möchte'], loesung: 'Ich möchte einen Kaffee trinken.' },
-        { typ: 'satzbau', woerter: ['du', 'bitte', 'kannst', 'helfen', 'mir'], loesung: 'Kannst du mir bitte helfen?' },
+        { typ: 'satzbau', woerter: ['einen', 'trinken', 'Ich', 'Kaffee', 'möchte'], loesung: 'Ich möchte einen Kaffee trinken.' },
+        { typ: 'satzbau', woerter: ['du', 'bitte', 'Kannst', 'helfen', 'mir'], loesung: 'Kannst du mir bitte helfen?' },
         {
           typ: 'zuordnen',
           links: ['ich (können)', 'du (müssen)', 'er (möchten)', 'wir (müssen)', 'ihr (können)'],

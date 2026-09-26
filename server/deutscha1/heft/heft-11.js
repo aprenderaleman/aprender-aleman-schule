@@ -10,11 +10,11 @@ export default {
       items: [
         { typ: 'mc', frage: 'Wie heißt ___ Vater? (du)', optionen: ['dein', 'deine', 'deinen'], loesung: 0 },
         { typ: 'mc', frage: 'Wir haben ein Auto. ___ Auto ist neu.', optionen: ['Unser', 'Unsere', 'Euer'], loesung: 0 },
-        { typ: 'mc', frage: 'Das ist Paul. ___ Schwester wohnt in Berlin.', optionen: ['Seine', 'Ihre', 'Sein'], loesung: 0 },
+        { typ: 'mc', frage: 'Das ist Paul. Wie heißt ___ Schwester?', optionen: ['seine', 'ihre', 'sein'], loesung: 0 },
         {
           typ: 'luecke',
           text: 'Das ist meine Freundin Sofia. {1} Bruder wohnt in Lima. Und das ist Marco. {2} Frau heißt Julia.',
-          bank: ['Ihr', 'Seine', 'Sein', 'Ihre'],
+          bank: ['Ihr', 'Seine', 'Sein'],
           loesungen: { 1: 'Ihr', 2: 'Seine' },
         },
         {
@@ -23,8 +23,8 @@ export default {
           bank: ['Ihr', 'Ihre', 'Sein'],
           loesungen: { 1: 'Ihr', 2: 'Ihre' },
         },
-        { typ: 'satzbau', woerter: ['wohnen', 'meine', 'in', 'Eltern', 'Sevilla'], loesung: 'Meine Eltern wohnen in Sevilla.' },
-        { typ: 'satzbau', woerter: ['dein', 'heißt', 'wie', 'Bruder'], loesung: 'Wie heißt dein Bruder?' },
+        { typ: 'satzbau', woerter: ['wohnen', 'Meine', 'in', 'Eltern', 'Sevilla'], loesung: 'Meine Eltern wohnen in Sevilla.', alt: ['In Sevilla wohnen meine Eltern.'] },
+        { typ: 'satzbau', woerter: ['dein', 'heißt', 'Wie', 'Bruder'], loesung: 'Wie heißt dein Bruder?' },
         {
           typ: 'zuordnen',
           links: ['ich', 'du', 'er', 'sie (= ella)', 'wir', 'Sie (= usted)'],

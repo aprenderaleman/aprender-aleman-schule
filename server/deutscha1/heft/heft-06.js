@@ -22,8 +22,8 @@ export default {
           bank: ['spreche', 'nimmt', 'spricht'],
           loesungen: { 1: 'spreche', 2: 'nimmt' },
         },
-        { typ: 'satzbau', woerter: ['fährt', 'Berlin', 'er', 'nach'], loesung: 'Er fährt nach Berlin.' },
-        { typ: 'satzbau', woerter: ['ein', 'sie', 'Buch', 'liest'], loesung: 'Sie liest ein Buch.' },
+        { typ: 'satzbau', woerter: ['fährt', 'Berlin', 'Er', 'nach'], loesung: 'Er fährt nach Berlin.', alt: ['Nach Berlin fährt er.'] },
+        { typ: 'satzbau', woerter: ['ein', 'Sie', 'Buch', 'liest'], loesung: 'Sie liest ein Buch.' },
         {
           typ: 'zuordnen',
           links: ['sprechen', 'essen', 'fahren', 'sehen'],

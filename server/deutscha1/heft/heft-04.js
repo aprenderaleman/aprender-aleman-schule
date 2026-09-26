@@ -23,8 +23,8 @@ export default {
           bank: ['sind', 'bin', 'ist'],
           loesungen: { 1: 'sind', 2: 'bin' },
         },
-        { typ: 'satzbau', woerter: ['müde', 'ich', 'bin'], loesung: 'Ich bin müde.' },
-        { typ: 'satzbau', woerter: ['ihr', 'Spanien', 'aus', 'seid'], loesung: 'Seid ihr aus Spanien?' },
+        { typ: 'satzbau', woerter: ['müde', 'Ich', 'bin'], loesung: 'Ich bin müde.' },
+        { typ: 'satzbau', woerter: ['ihr', 'Spanien', 'aus', 'Seid'], loesung: 'Seid ihr aus Spanien?' },
         {
           typ: 'zuordnen',
           links: ['ich', 'du', 'er / sie / es', 'wir', 'ihr', 'sie / Sie'],
@@ -57,8 +57,8 @@ export default {
         { typ: 'rf', aussage: 'Tom ist aus England.', loesung: true },
         {
           typ: 'mc',
-          frage: 'Wer ist neu in Berlin?',
-          optionen: ['Sara und Tom', 'nur Tom', 'nur Sara'],
+          frage: 'Wie sind Sara und Tom in Berlin?',
+          optionen: ['sehr glücklich', 'sehr müde', 'nicht glücklich'],
           loesung: 0,
         },
       ],

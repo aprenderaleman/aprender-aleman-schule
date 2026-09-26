@@ -32,8 +32,8 @@ export default {
           bank: ['Was', 'Wo', 'Wann', 'Wer'],
           loesungen: { 1: 'Was', 2: 'Wo', 3: 'Wann' },
         },
-        { typ: 'satzbau', woerter: ['am', 'du', 'machst', 'Wochenende', 'was'], loesung: 'Was machst du am Wochenende?' },
-        { typ: 'satzbau', woerter: ['gern', 'du', 'Kaffee', 'trinkst'], loesung: 'Trinkst du gern Kaffee?' },
+        { typ: 'satzbau', woerter: ['am', 'du', 'machst', 'Wochenende', 'Was'], loesung: 'Was machst du am Wochenende?' },
+        { typ: 'satzbau', woerter: ['gern', 'du', 'Kaffee', 'Trinkst'], loesung: 'Trinkst du gern Kaffee?' },
         {
           typ: 'zuordnen',
           links: ['Was isst du zum Frühstück?', 'Wo kaufst du Obst?', 'Wann stehst du auf?', 'Hast du ein Hobby?'],
