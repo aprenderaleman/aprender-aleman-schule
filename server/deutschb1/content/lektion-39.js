@@ -50,7 +50,7 @@ export default {
       kicker: 'Alltag 1',
       titel: 'Die VHS',
       absaetze: [
-        'Fast jede Stadt hat eine __Volkshochschule (VHS)__. Dort gibt es günstige Kurse für alle: Sprachen, Computer, Kochen, Yoga. Für viele ist die VHS der erste Ort, um Deutsch zu lernen — und an vielen kann man auch offizielle Prüfungen ablegen.',
+        'Fast jede Stadt hat eine __Volkshochschule (VHS)__. Dort gibt es günstige Kurse für alle: Sprachen, Computer, Kochen, Yoga. Für viele ist die VHS der erste Ort, um Deutsch zu lernen — und an vielen kann man auch Prüfungen machen.',
       ],
     },
     {
@@ -59,7 +59,7 @@ export default {
       kicker: 'Alltag 2',
       titel: 'Niveaus und Prüfungen',
       absaetze: [
-        'Sprachkurse sind in Niveaus organisiert: __A1 bis C2__. Nach dem Kurs kommt oft eine Prüfung, zum Beispiel das Zertifikat B1. Wer besteht, bekommt ein Zertifikat — wichtig für Arbeit, Studium oder Einbürgerung.',
+        'Sprachkurse sind in Niveaus organisiert: __A1 bis C2__. Nach dem Kurs kommt oft eine Prüfung, zum Beispiel auf Niveau B1. Wer sie besteht, bekommt ein Zertifikat — wichtig für Arbeit, Studium oder Einbürgerung.',
       ],
     },
     {
@@ -134,50 +134,31 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Wortschatz',
-      frage: 'Welches Wort passt?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Du machst sie am Ende des Kurses: die ___',
-        'die Prüfung schaffen = die Prüfung ___',
-        'Etwas ist falsch — du hast einen ___ gemacht.',
-        'die günstige Schule für Erwachsene in fast jeder Stadt: die ___',
-      ],
-      loesungen: [
-        'die **Prüfung**',
-        'die Prüfung **bestehen**',
-        'einen **Fehler**',
-        'die **VHS** (Volkshochschule)',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Lernen, üben, bestehen',
+      items: [
+        { text: 'Mein Sohn **geht** seit September **in die** Schule.', gl: '— in + Akkusativ (wohin?)' },
+        { text: 'Tarek **lernt** Deutsch und **studiert** Informatik.', gl: '— Sprache: lernen · Universität: studieren' },
+        { text: 'Vor der Prüfung **übe** ich jeden Abend das Hören.' },
+        { text: 'Keine Angst vor **Fehlern** — aus Fehlern lernt man.' },
+        { text: 'Hast du dich schon **für den** Kurs **angemeldet**?', gl: '— sich anmelden für + Akk.' },
+        { text: 'Sie hat die Prüfung mit einer sehr guten **Note bestanden**.' },
       ],
     },
+
+    { type: 'rule' },
+
+    // ── Modelltext ────────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Ergänzen',
-      frage: 'lernen, studieren, anmelden oder üben?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Ich ___ Deutsch an der VHS.',
-        'Mein Bruder ___ Informatik in Valencia.',
-        'Ich habe mich für den Kurs ___.',
-        'Vor der Prüfung muss ich das Hören noch viel ___.',
+      type: 'modell',
+      eyebrow: 'Modelltext — wie ich Deutsch lerne',
+      thema: 'Seit wann? Wie oft? Was ist schwer? Was ist das Ziel? So kann ein kurzer Text über dein Deutschlernen aussehen. ~~(Es justo lo que te preguntarán en el examen oral: prepara tu propia versión.)~~',
+      absaetze: [
+        'Ich **lerne** seit zwei Jahren Deutsch. Zweimal pro Woche besuche ich einen **Kurs** an der VHS, und zu Hause **übe** ich fast jeden Tag mit einer App. Die Grammatik finde ich schwer, und beim Sprechen mache ich noch **Fehler**. Aber meine **Lehrerin** sagt, das ist normal. Mein Ziel ist die B1-**Prüfung**: Ich habe **mich** schon für die Prüfung im Juni **angemeldet**.',
       ],
-      loesungen: [
-        'Ich **lerne** Deutsch an der VHS. ~~(idioma → lernen, nunca studieren)~~',
-        'Mein Bruder **studiert** Informatik in Valencia.',
-        'Ich habe mich für den Kurs **angemeldet**.',
-        'muss ich das Hören noch viel **üben**.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Schreib 60-80 Wörter: Wie lernst du Deutsch?',
-      aufgabe: 'Seit wann lernst du? Wie oft übst du? Was findest du schwer? Was ist dein Ziel?',
-      loesungLabel: 'Mögliche Lösung',
-      loesung: 'Ich lerne seit zwei Jahren Deutsch. Zweimal pro Woche besuche ich einen Kurs an der VHS, und zu Hause übe ich fast jeden Tag mit einer App. Die Grammatik finde ich schwer, und beim Sprechen mache ich noch Fehler. Aber meine Lehrerin sagt, das ist normal. Mein Ziel ist das Zertifikat B1: Ich habe mich schon für die Prüfung im Juni angemeldet. ~~Cuenta tu caso real — es exactamente lo que te preguntarán en la Präsentation del examen.~~',
     },
 
     { type: 'rule' },

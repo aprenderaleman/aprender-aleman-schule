@@ -146,48 +146,46 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Erkennen',
-      frage: 'Zu welchem Schritt gehört der Satz?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        '„Ein Nachteil ist, dass Fast Food ungesund ist.“',
-        '„Danke fürs Zuhören!“',
-        '„Ich möchte über das Thema ‚Musik im Alltag‘ sprechen.“',
-        '„Ich höre jeden Morgen in der U-Bahn Musik.“',
-      ],
-      loesungen: [
-        '**Schritt 3** — Nachteil (Pro & Contra).',
-        '**Schritt 5** — Schluss.',
-        '**Schritt 1** — Einleitung.',
-        '**Schritt 2** — eigene Erfahrung.',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Ein Satz für jeden Schritt',
+      items: [
+        { text: 'Ich möchte heute über das **Thema** „Reisen mit dem Zug“ sprechen.', gl: '— Schritt 1: Einleitung' },
+        { text: 'Mit Sprach-Apps habe ich gute **Erfahrungen** gemacht.', gl: '— Schritt 2: eigene Erfahrung' },
+        { text: 'In meinem **Heimatland** fahren viele Menschen mit dem Auto zur Arbeit.', gl: '— Schritt 3: Situation' },
+        { text: 'Ein **Vorteil** ist, dass man flexibel ist. Ein **Nachteil** ist, dass es oft Stau gibt.', gl: '— Schritt 3: Pro & Contra, Verb am Ende' },
+        { text: '**Meiner Meinung nach** ist der Zug die beste Lösung.', gl: '— Schritt 4: Verb sofort' },
+        { text: 'Das war meine Präsentation. Danke fürs **Zuhören**!', gl: '— Schritt 5: Schluss' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Korrigieren',
-      frage: 'In jedem Satz steckt ein typischer Fehler. Korrigiere.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Meiner Meinung nach, das Thema ist wichtig.',
-        'Ein Vorteil ist, dass man kann immer einkaufen.',
-        'In meinem Heimatland die Menschen kaufen viel online.',
-      ],
-      loesungen: [
-        'Meiner Meinung nach **ist das Thema** wichtig. ~~verbo en 2ª posición, sin coma~~',
-        'Ein Vorteil ist, dass man immer einkaufen **kann**. ~~en la frase con dass, el verbo va al final~~',
-        'In meinem Heimatland **kaufen die Menschen** viel online. ~~tras el complemento inicial, el verbo va en posición 2~~',
+      type: 'beispiele',
+      kicker: 'Vorbereitung',
+      titel: 'So bereitest du dich vor',
+      items: [
+        { text: 'Ich **bereite** zu Hause zwei Themen **vor**.', gl: '— nicht erst in der Prüfung' },
+        { text: 'Auf der ersten **Folie** steht nur der Titel.', gl: '— kurz und klar' },
+        { text: 'Nach der **Einleitung** erzähle ich ein kurzes Beispiel aus meinem Alltag.', gl: '— das macht den Vortrag lebendig' },
+        { text: 'Zum **Schluss** sage ich meine **Meinung** noch einmal in einem Satz.', gl: '— ein klares Ende' },
       ],
     },
+
+    { type: 'rule' },
+
+    // ── Modell: Stichwortplan ─────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Bereite zwei Themen vor: „Fast Food“ und „Musik im Alltag“.',
-      aufgabe: 'Mach für jedes Thema Notizen zu den fünf Schritten — nur Stichwörter, keine ganzen Sätze. Übe dann laut mit der Uhr.',
-      loesungLabel: 'Mögliche Lösung',
-      loesung: 'Stichwortplan für „Fast Food“: **1** Thema Fast Food → **2** freitags Pizza mit Freunden → **3** Heimatland: viele Burger-Restaurants; Vorteil: schnell und billig; Nachteil: ungesund → **4** Meiner Meinung nach okay, aber nicht jeden Tag → **5** Danke fürs Zuhören! ~~Con una línea por paso llenas tres minutos sin memorizar frases.~~',
+      type: 'modell',
+      eyebrow: 'Modell — ein Stichwortplan',
+      thema: 'Thema „Fast Food“ — eine Zeile pro Schritt ~~(solo palabras clave, sin frases completas)~~',
+      absaetze: [
+        '**1 Einleitung:** Thema Fast Food',
+        '**2 Erfahrungen:** freitags Pizza mit Freunden',
+        '**3 Heimatland + Pro/Contra:** viele Burger-Restaurants; Vorteil: schnell und billig; Nachteil: ungesund',
+        '**4 Meinung:** okay, aber nicht jeden Tag',
+        '**5 Schluss:** Danke fürs Zuhören!',
+      ],
     },
 
     { type: 'rule' },

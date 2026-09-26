@@ -16,7 +16,7 @@ export default {
       eyebrow: 'Lernziele',
       items: [
         'den Unterschied zwischen A2 und B1 an konkreten Sätzen erkennen',
-        'mit drei Mini-Tests deine Stärken und Schwächen finden',
+        'mit drei Mini-Tests im Übungsheft deine Stärken und Schwächen finden',
         'wissen, welche Lektion dir bei welchem Fehler hilft',
         'den Plan des Kurses (fünf Blöcke) kennen',
       ],
@@ -72,63 +72,36 @@ export default {
       card: true,
       titel: 'So funktioniert die Diagnose',
       absaetze: [
-        'Gleich kommen **drei Mini-Tests**: Grammatik, Wortschatz und Schreiben. Mach sie **ohne Hilfe** und notiere deine Fehler. Bei jeder Lösung steht, **welche Lektion** dir hilft — so wird aus dem Test dein **persönlicher Lernplan**. ~~No pasa nada por fallar: para eso está el diagnóstico.~~',
+        'Die **drei Mini-Tests** findest du im **Übungsheft** zu dieser Lektion: Grammatik & Wortschatz, Lesen und Schreiben. Mach sie **ohne Hilfe** und notiere deine Fehler. Bei den Korrekturen steht, **welche Lektion** dir hilft — so wird aus dem Test dein **persönlicher Lernplan**. Fehlen dir Alltagswörter wie *Miete* oder *Bewerbung*? Dann hilft dir Block 3 (Lektionen 34–41). ~~No pasa nada por fallar: para eso está el diagnóstico.~~',
       ],
     },
 
     { type: 'rule' },
 
-    // ── Übungen = die drei Mini-Tests ─────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Mini-Test 1 · Grammatik',
-      frage: 'Ergänze oder wähle die richtige Form. Notiere, was du falsch hast.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Ich bleibe zu Hause, ___ ich krank bin. ~~(¿weil o denn?)~~',
-        'Es regnet. ___ gehen wir spazieren. (trotzdem / deshalb)',
-        'Gestern ___ wir nach Berlin gefahren. (haben / sind)',
-        'Ich stelle die Tasche ___ Tisch. (auf den / auf dem)',
-        'Das ist ein ___ Auto. (neu)',
-        'Das ist der Mann, ___ mir geholfen hat. (der / den)',
-        '___ Sie mir bitte helfen? (Können → höflicher)',
-        'Das Brot ___ jeden Morgen frisch gebacken. (wird / ist)',
-      ],
-      loesungen: [
-        '**weil** ich krank bin — Verb am Ende. ~~¿Fallo? → Lektion 4.~~',
-        '**Trotzdem** — Kontrast, nicht Folge. ~~¿Fallo? → Lektion 5.~~',
-        '**sind** — fahren = Bewegung → Perfekt mit *sein*. ~~¿Fallo? → Lektion 6.~~',
-        '**auf den** Tisch — Wohin? → Akkusativ. ~~¿Fallo? → Lektion 8.~~',
-        'ein **neues** Auto — Adjektivendung nach *ein*. ~~¿Fallo? → Lektion 10.~~',
-        '**der** mir geholfen hat — Relativpronomen im Nominativ. ~~¿Fallo? → Lektion 12.~~',
-        '**Könnten** Sie mir bitte helfen? — Konjunktiv II. ~~¿Fallo? → Lektion 13.~~',
-        '**wird** … gebacken — Passiv Präsens. ~~¿Fallo? → Lektion 15.~~',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Über das Lernen sprechen',
+      items: [
+        { text: 'Meine **Stärke** ist Lesen, meine **Schwäche** ist noch die Aussprache.', gl: '— punto fuerte · punto débil' },
+        { text: 'Aus jedem **Fehler** lerne ich etwas — deshalb notiere ich ihn.', gl: '— deshalb + verbo en posición 2' },
+        { text: 'Ich **übe** jeden Tag, **weil** ich mein Sprechen **verbessern** möchte.', gl: '— weil: verbo conjugado al final' },
+        { text: 'Vor der Prüfung **wiederhole** ich die Regeln zum Perfekt.', gl: '— repasar' },
+        { text: 'Farida hat ein klares **Ziel**: B1 im Dezember.', gl: '— la meta' },
+        { text: 'Nach einem Monat sieht Jonas schon große **Fortschritte**.', gl: '— el progreso' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Mini-Test 2 · Wortschatz',
-      frage: 'Welches Wort passt? Alltagsthemen der B1-Prüfung.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Ich habe seit drei Tagen Kopfschmerzen. Ich mache einen Termin beim ___.',
-        'Die Wohnung ist schön, aber die ___ ist zu hoch: 900 Euro im Monat.',
-        'Für die neue Stelle schreibe ich eine ___ mit Lebenslauf.',
-        'Der Zug fährt um 8 Uhr. Ich kaufe die ___ am Automaten.',
+      type: 'beispiele',
+      kicker: 'Selbst einschätzen',
+      titel: 'Ehrlich mit dir selbst',
+      items: [
+        { text: 'Ich **schätze** mein Niveau realistisch **ein**: Hören ist fast B1, Schreiben noch A2.', gl: '— einschätzen es separable' },
+        { text: 'Das **Ergebnis** vom Mini-Test notiere ich in meinem Heft.', gl: '— el resultado' },
+        { text: 'Mein **Plan**: montags Grammatik, mittwochs Wortschatz, freitags Schreiben.', gl: '— el plan semanal' },
+        { text: 'Wenn ich einen Fehler finde, **verbessere** ich ihn sofort.', gl: '— tras la frase con wenn: verbo + sujeto' },
       ],
-      loesungen: [
-        'beim **Arzt** ~~(el médico)~~',
-        'die **Miete** ~~(el alquiler — no «renta» en el sentido español)~~',
-        'eine **Bewerbung** — Thema Arbeit & Beruf.',
-        'die **Fahrkarte** ~~(el billete)~~ — Waren das viele Lücken? Der Wortschatz-Block (Lektionen 34–41) baut genau diese Themen auf.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Mini-Test 3 · Schreiben (Produzieren)',
-      frage: 'Deine Freundin Ana fragt: „Wie läuft dein Deutschkurs?“ Antworte ihr mit 40–60 Wörtern: Wie ist der Kurs? Was kannst du schon gut? Was ist noch schwer?',
-      loesungLabel: 'Mögliche Lösung',
-      loesung: 'Liebe Ana,\nmein Kurs läuft gut! Wir üben viel Grammatik, und ich verstehe schon fast alles, wenn der Lehrer langsam spricht. Lesen finde ich leicht, aber Sprechen ist noch schwer, weil ich Fehler nicht mag. Deshalb übe ich jetzt jeden Tag zehn Minuten.\nLiebe Grüße\nCarla ~~(46 palabras.) Vale cualquier contenido con las tres ideas. Nivel B1 = frases conectadas (weil, deshalb, wenn) — si solo escribiste frases sueltas tipo A2, la Lektion 4 es tu punto de partida.~~',
     },
 
     { type: 'rule' },
@@ -148,7 +121,7 @@ export default {
     {
       type: 'tipp',
       label: 'Prüfungstipp',
-      text: 'Kreuze ehrlich an: **„kann ich“ / „kann ich halb“ / „kann ich noch nicht“**. Notiere dein Ergebnis von heute — und wiederhole die drei Mini-Tests **nach Block 1**. Fortschritt sehen ist die beste Motivation.',
+      text: 'Kreuze ehrlich an: **„kann ich“ / „kann ich halb“ / „kann ich noch nicht“**. Notiere dein Ergebnis von heute — und wiederhole die drei Mini-Tests im Übungsheft **nach Block 1**. Fortschritt sehen ist die beste Motivation.',
     },
 
     { type: 'rule' },
@@ -171,7 +144,7 @@ export default {
       eyebrow: 'Selbstcheck',
       items: [
         'Ich kann an einem Satz erkennen, ob er A2 oder B1 ist.',
-        'Ich habe die drei Mini-Tests gemacht und meine Fehler notiert.',
+        'Ich habe die drei Mini-Tests im Übungsheft gemacht und meine Fehler notiert.',
         'Ich weiß, welche Lektionen für mich am wichtigsten sind.',
         'Ich kenne den Plan der fünf Blöcke.',
       ],

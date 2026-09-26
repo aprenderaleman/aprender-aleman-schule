@@ -123,53 +123,29 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Erkennen',
-      frage: 'Welche Form ist richtig?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Die Jacke (hängte / hing) im Schrank.',
-        'Ich habe die Tasche auf den Stuhl (gestellt / gestanden).',
-        'Wir haben zwei Stunden im Café (gesetzt / gesessen).',
-        'Ich warte (auf dem / auf den) Bus.',
-      ],
-      loesungen: [
-        '**hing** — Position (im Schrank → Wo?) → starke Form.',
-        '**gestellt** — Aktion (auf **den** Stuhl → Wohin?) → schwaches Partizip.',
-        '**gesessen** — Position → stark. ~~sich setzen sería la acción de sentarse.~~',
-        '**auf den** — *warten auf* + Akkusativ: feste Verbindung, die Wo-Frage zählt hier nicht.',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Wo? oder Wohin? — im Alltag',
+      items: [
+        { text: 'Leg die Schlüssel bitte **auf den** Schrank. — Sie **liegen** schon **auf dem** Schrank.', gl: '— Wohin? Akk. / Wo? Dat.' },
+        { text: 'Carmen **hat** die Blumen **zwischen die** Bücher **gestellt**.', gl: '— Aktion → schwach + Akk.' },
+        { text: 'Der Hund **lag** den ganzen Tag **unter dem** Tisch.', gl: '— liegen → lag (Position)' },
+        { text: 'Wir **setzten** die Oma **neben den** Opa.', gl: '— setzen → setzte (Aktion)' },
+        { text: 'Mein Auto **hat** die ganze Nacht **vor dem** Haus **gestanden**.', gl: '— stehen → hat gestanden' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Vergangenheit bilden',
-      frage: 'Setze ins Perfekt — Auxiliar, Partizip und Artikel.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Ich (hängen) das Poster über ___ Bett. ~~(das Bett)~~',
-        'Der Brief (liegen) auf ___ Tisch. ~~(der Tisch)~~',
-        'Sie (setzen) das Kind auf ___ Stuhl. ~~(der Stuhl)~~',
-        'Das Fahrrad (stehen) hinter ___ Haus. ~~(das Haus)~~',
-      ],
-      loesungen: [
-        'Ich **habe** das Poster über **das** Bett **gehängt**. ~~(acción → participio débil, Wohin? → Akk.)~~',
-        'Der Brief **hat** auf **dem** Tisch **gelegen**. ~~(posición → participio fuerte, Wo? → Dat.)~~',
-        'Sie **hat** das Kind auf **den** Stuhl **gesetzt**.',
-        'Das Fahrrad **hat** hinter **dem** Haus **gestanden**.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Gestern hast du dein Zimmer umgeräumt. Schreib drei Sätze in der Vergangenheit.',
-      loesungLabel: 'Mögliche Lösung',
-      aufgaben: [
-        'Satz 1: Wohin hast du etwas gestellt/gelegt/gehängt? · Satz 2: Wo stand/lag/hing es vorher? · Satz 3: ein fester Ausdruck (*an die Arbeit, unter der Woche* …)',
-      ],
-      loesungen: [
-        'Ich habe den Schreibtisch **ans** Fenster **gestellt**. Vorher **stand** er neben **der** Tür. **Unter der Woche** habe ich keine Zeit für so etwas — also bin ich am Samstag **an die Arbeit** gegangen. ~~Vale cualquier mueble — comprueba: acción → participio débil + acusativo, posición → forma fuerte + dativo.~~',
+      type: 'beispiele',
+      kicker: 'Vergangenheit',
+      titel: 'Beim Umzug',
+      items: [
+        { text: 'Zuerst **hängten** wir die Lampe **über den** Esstisch.', gl: '— hängen (Aktion) → hängte' },
+        { text: 'Die alte Lampe **hing** vorher **im** Flur.', gl: '— hängen (Position) → hing' },
+        { text: 'Ich **habe** den Teppich **vor das** Sofa **gelegt**.', gl: '— legen → hat gelegt' },
+        { text: 'Das Regal **stand** früher **an der** Wand, jetzt **steht** es **am** Fenster.', gl: '— an + dem = am' },
+        { text: 'Am Abend **saßen** alle müde **auf den** Kartons.', gl: '— sitzen → saßen + Dativ plural' },
       ],
     },
 

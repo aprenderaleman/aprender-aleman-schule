@@ -147,8 +147,8 @@ export default {
         { tag: 'Einstieg', text: 'Bezug zum Thema + persönliche Verbindung (*denn ich kaufe oft …*) — keine Anrede nötig.' },
         { tag: 'Meinung + Grund', text: '*Meiner Meinung nach* + Verb direkt danach; zwei einfache Gründe (*Zeit, Preise*).' },
         { tag: 'Beispiel', text: 'Eigene Erfahrung im Perfekt (*habe … gekauft*) — konkret: Laptop, zwei Tage.' },
-        { tag: 'Gegenseite', text: '*Trotzdem* zeigt: Du kannst auch die andere Seite sehen — gut für Kohärenz und Wortschatz.' },
-        { tag: 'Schluss', text: '*Insgesamt* + klares Fazit. 81 Wörter — fertig.' },
+        { tag: 'Gegenseite', text: '*Trotzdem* zeigt: Du kannst auch die andere Seite sehen — gut für den Zusammenhang und den Wortschatz.' },
+        { tag: 'Schluss', text: '*Insgesamt* + ein klarer Schlusssatz. 81 Wörter — fertig.' },
       ],
     },
     {
@@ -159,47 +159,30 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Erkennen',
-      frage: 'Meinung, Grund, Beispiel oder Schluss?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Meiner Meinung nach ist Fast Food ungesund.',
-        'Letzte Woche habe ich mit meiner Tochter zusammen gekocht.',
-        'Insgesamt finde ich: Kochen muss jeder lernen.',
-        'Selbst kochen ist billiger, denn Fertiggerichte kosten viel.',
-      ],
-      loesungen: [
-        '**Meinung** — Signal: *Meiner Meinung nach*.',
-        '**Beispiel** — eigene Erfahrung im Perfekt.',
-        '**Schluss** — Signal: *Insgesamt*.',
-        '**Grund** — Signal: *denn* + Begründung.',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      kicker: 'Kernwortschatz',
+      titel: 'Sätze für deinen Forumsbeitrag',
+      items: [
+        { text: '**Meiner Meinung nach** ist Carsharing gut. Der wichtigste **Grund**: Es ist **günstiger** als ein eigenes Auto.', gl: '— Meinung + Grund' },
+        { text: 'Ein **Nachteil** ist aber, dass man das Auto nicht immer sofort bekommt.', gl: '— die andere Seite' },
+        { text: 'Ich habe die **Erfahrung** gemacht, dass Sport nach der Arbeit gegen Stress hilft.', gl: '— eigenes Beispiel' },
+        { text: 'Ich **stimme** dir **zu**, Jana: Das **Thema** ist für Familien sehr wichtig.', gl: '~~con una persona: jemandem zustimmen~~' },
+        { text: 'Mit dem neuen Plan für den Schulhof **bin** ich **einverstanden**.', gl: '~~con una idea: mit etwas einverstanden sein~~' },
+        { text: '**Insgesamt** hat Homeoffice für mich mehr **Vorteile** als Nachteile.', gl: '— Schluss' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Verbinden',
-      frage: 'Verbinde die Sätze mit dem Wort in Klammern. Achte auf die Verbposition!',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Ich fahre gern Fahrrad. Es ist gesund. ~~(weil)~~',
-        'Das Ticket ist teuer. Ich fahre oft mit dem Bus. ~~(trotzdem)~~',
-        'Ich glaube: Sport macht den Kopf frei. ~~(dass)~~',
+      type: 'modell',
+      eyebrow: 'Noch ein Musterbeispiel — kurz',
+      thema: 'Kurzer Beitrag „Hausaufgaben in der Sprachschule — sinnvoll oder nicht?“',
+      absaetze: [
+        '==Ich finde, dass== Hausaufgaben sinnvoll sind, ==weil== man den Stoff zu Hause noch einmal wiederholt.',
+        'Ich habe ==zum Beispiel== durch die Hausaufgaben viele neue Wörter gelernt.',
+        '==Deshalb== mache ich sie fast immer.',
       ],
-      loesungen: [
-        'Ich fahre gern Fahrrad**, weil** es gesund **ist**. ~~verbo al final~~',
-        'Das Ticket ist teuer. **Trotzdem fahre ich** oft mit dem Bus. ~~tras trotzdem, el verbo va inmediatamente (posición 2)~~',
-        'Ich glaube**, dass** Sport den Kopf frei **macht**.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Thema: „Hausaufgaben in der Sprachschule — sinnvoll oder nicht?“ Schreib eine Meinung mit Grund, ein eigenes Beispiel und einen Schluss (drei bis vier Sätze).',
-      loesungLabel: 'Mögliche Lösung',
-      loesung: '*Ich finde, dass Hausaufgaben sinnvoll sind, weil man den Stoff zu Hause noch einmal wiederholt. Ich habe zum Beispiel durch die Hausaufgaben viele neue Wörter gelernt. Deshalb mache ich sie fast immer.* — Die Gegenmeinung ist genauso gut, solange Grund und Beispiel dabei sind.',
     },
 
     { type: 'rule' },
@@ -210,7 +193,7 @@ export default {
       eyebrow: 'Prüfungsbezug',
       modul: 'Schreiben · Teil 2 · komplette Aufgabe',
       titel: 'Forumsbeitrag „Auto in der Stadt“ · ca. 80 Wörter · 25 Minuten',
-      anweisung: 'Bearbeite die Aufgabe unter Echtbedingungen und vergleiche erst danach mit der Lösung.',
+      anweisung: 'Bearbeite die Aufgabe wie in der Prüfung: mit Uhr und ohne Hilfe. Vergleiche erst danach mit der Lösung.',
       absaetze: [
         'In einem Online-Forum lesen Sie eine Meinung zum Thema „Braucht man in der Stadt ein eigenes Auto?“. Schreiben Sie Ihre Meinung dazu (ca. 80 Wörter). Begründen Sie sie und geben Sie ein Beispiel aus Ihrer Erfahrung.',
       ],
@@ -222,7 +205,7 @@ export default {
         '*Nur für Familien mit kleinen Kindern ist ein Auto vielleicht praktisch.*',
         '*Für mich ist das Leben ohne Auto aber einfacher geworden.*',
       ],
-      kommentar: 'Der Bauplan trägt den Text: Einstieg mit persönlichem Bezug → Meinung + zwei Gründe → eigenes Beispiel im Perfekt → kurzer Blick auf die Gegenseite (*Nur für Familien …*) → Fazit. Auch „Ja, man braucht ein Auto“ wäre eine perfekte Lösung — mit Grund und Beispiel.',
+      kommentar: 'Der Bauplan gibt dem Text die Struktur: Einstieg mit persönlichem Bezug → Meinung + zwei Gründe → eigenes Beispiel im Perfekt → kurzer Blick auf die Gegenseite (*Nur für Familien …*) → Schluss. Auch „Ja, man braucht ein Auto“ wäre eine perfekte Lösung — mit Grund und Beispiel.',
     },
 
     { type: 'rule' },

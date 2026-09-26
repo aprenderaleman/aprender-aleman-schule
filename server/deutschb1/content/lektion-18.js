@@ -124,51 +124,30 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Erkennen',
-      frage: 'Zu welchem Teil des Moduls Lesen passt die Anweisung?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        '„Welche Anzeige passt zu welcher Person? Ordnen Sie zu.“',
-        '„Lesen Sie den Blog. Sind die Aussagen richtig oder falsch?“',
-        '„Ist die Person dafür oder dagegen?“',
-      ],
-      loesungen: [
-        '**Teil 2** — Anzeigen zuordnen.',
-        '**Teil 1** — Blogs & E-Mails.',
-        '**Teil 3** — Meinungen & Kommentare.',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      kicker: 'Text → Aufgabe',
+      titel: 'Noch mehr Paraphrasen',
+      items: [
+        { text: 'Text: „Die Bibliothek bleibt am Montag zu.“ → Aufgabe: „Montags **ist sie nicht geöffnet**.“', gl: '— richtig' },
+        { text: 'Text: „Der Kurs ist leider schon voll.“ → Aufgabe: „Es gibt **keine freien Plätze** mehr.“', gl: '— richtig' },
+        { text: 'Text: „Tickets gibt es nur online.“ → Aufgabe: „Man kann die Karten **an der Kasse** kaufen.“', gl: '— falsch' },
+        { text: 'Text: „Haustiere sind nicht erlaubt.“ → Aufgabe: „Man **darf keinen Hund mitbringen**.“', gl: '— richtig' },
+        { text: 'Text: „Das Konzert wurde auf Juni verschoben.“ → Aufgabe: „Es **findet später statt**.“', gl: '— richtig · Passiv aus Lektion 15' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Paraphrasen erkennen',
-      frage: 'Welche Aussage bedeutet dasselbe? a oder b?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        '„Die Wohnung ist ab sofort frei.“ — a) Man kann sofort einziehen. b) Die Wohnung kostet nichts.',
-        '„Der Kurs findet nur bei gutem Wetter statt.“ — a) Der Kurs ist immer draußen. b) Bei Regen gibt es keinen Kurs.',
-        '„Kinder unter 6 Jahren zahlen keinen Eintritt.“ — a) Für kleine Kinder ist der Besuch gratis. b) Kinder dürfen nicht mitkommen.',
-      ],
-      loesungen: [
-        '**a** — „frei“ heißt hier „nicht besetzt“, nicht „gratis“. ~~«frei» ≠ gratis en este contexto.~~',
-        '**b** — „nur bei gutem Wetter“ = bei Regen fällt er aus.',
-        '**a** — „keinen Eintritt zahlen“ = gratis.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Sag es mit anderen Worten — bilde selbst eine Paraphrase.',
-      loesungLabel: 'Mögliche Lösung',
-      aufgaben: [
-        '„Das Museum hat sonntags von 10 bis 18 Uhr geöffnet.“',
-        '„Anmeldung bis 15. März per E-Mail.“',
-      ],
-      loesungen: [
-        '„Am Sonntag kann man das Museum **tagsüber besuchen**.“ ~~Vale cualquier frase con el mismo sentido, p. ej. «Sonntags ist das Museum offen».~~',
-        '„Man muss sich **vor dem 16. März** per E-Mail **anmelden**.“',
+      type: 'beispiele',
+      kicker: 'Kernwortschatz',
+      titel: 'Typische Anweisungen verstehen',
+      items: [
+        { text: '**Kreuzen Sie** die richtige Lösung **an**.', gl: '~~marque la respuesta correcta~~' },
+        { text: '**Ordnen Sie** die Anzeigen den Personen **zu**.', gl: '— zuordnen: Anzeige → Person' },
+        { text: '**Übertragen Sie** Ihre Lösungen auf den **Antwortbogen**.', gl: '~~pase sus respuestas a la hoja~~' },
+        { text: 'Lesen Sie die **Aussagen**. Sind sie richtig oder falsch?', gl: '— richtig/falsch' },
+        { text: 'Für jede Aufgabe gibt es **nur eine** richtige Lösung.' },
       ],
     },
 

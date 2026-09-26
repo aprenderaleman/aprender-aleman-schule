@@ -125,53 +125,29 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Erkennen',
-      frage: 'Welche Tabelle? Und warum diese Endung?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Die neue Kollegin ist nett.',
-        'Er hat einen alten Computer.',
-        'Ich trinke gern schwarzen Kaffee.',
-      ],
-      loesungen: [
-        'Tabelle 1 ~~(nach *die*)~~ — Nom. fem. → neu**e**',
-        'Tabelle 2 ~~(nach *einen*)~~ — Akk. mask. → alt**en**',
-        'Tabelle 3 ~~(ohne Artikel)~~ — Akk. mask. → schwarz**en**',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Beim Einkaufen',
+      items: [
+        { text: 'Ich suche einen warm**en** Pullover für den Winter.', gl: '— Akk. mask. nach *einen* → -en' },
+        { text: 'Die blau**e** Jacke ist schön, aber zu teuer.', gl: '— Nom. fem. nach *die* → -e · nach *sein*: teuer' },
+        { text: 'Haben Sie das Hemd auch in einer klein**en** Größe?', gl: '— Dativ → -en' },
+        { text: 'Das ist ein wichtig**er** Termin für mich.', gl: '— *ein* zeigt nichts → -er wie *der*' },
+        { text: 'Zum Mittagessen gibt es frisch**en** Fisch mit gekocht**en** Kartoffeln.', gl: '— ohne Artikel: Akk. -en · Dativ Plural -en' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Endungen einsetzen',
-      frage: 'Welche Endung fehlt?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Der grün___ Tee ist lecker.',
-        'Ich suche eine günstig___ Wohnung.',
-        'Er fährt mit dem alt___ Fahrrad zur Arbeit.',
-        'Das ist ein interessant___ Buch.',
-      ],
-      loesungen: [
-        'der grün**e** Tee ~~(Nom. mask. nach der → una de las 5 casillas con -e)~~',
-        'eine günstig**e** Wohnung ~~(Akk. fem. → -e)~~',
-        'mit dem alt**en** Fahrrad ~~(Dativ → -en)~~',
-        'ein interessant**es** Buch ~~(ein zeigt nichts → -es como «das»)~~',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Selbst bilden',
-      frage: 'Ein Satz mit Adjektiv …',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        '… über deine Wohnung, mit **ein/eine**.',
-        '… über dein Lieblingsessen, **ohne Artikel**.',
-      ],
-      loesungen: [
-        'Ich habe eine klein**e**, hell**e** Wohnung. ~~Cualquier adjetivo vale; tras «eine» en Akk./Nom. fem. → -e.~~',
-        'Ich esse gern frisch**es** Brot mit gut**em** Käse. ~~Sin artículo el adjetivo lleva la señal: -es (das), -em (dem).~~',
+      type: 'beispiele',
+      kicker: 'Drei Tabellen',
+      titel: 'Ein Nomen — drei Endungen',
+      items: [
+        { text: 'Der alt**e** Computer funktioniert nicht mehr.', gl: '— Tabelle 1: nach *der* → -e' },
+        { text: 'Mein Bruder hat noch einen alt**en** Computer.', gl: '— Tabelle 2: Akk. nach *einen* → -en' },
+        { text: 'Ich arbeite gern mit alt**en** Computern.', gl: '— Tabelle 3: Dativ Plural ohne Artikel → -en' },
+        { text: 'Lisa trinkt morgens gern kalt**e** Milch.', gl: '— Tabelle 3: Akk. fem. → -e' },
+        { text: 'Wir wohnen in einem schön**en**, interessant**en** Viertel.', gl: '— zwei Adjektive, gleiche Endung' },
       ],
     },
 

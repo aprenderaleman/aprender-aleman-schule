@@ -127,49 +127,32 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Wortschatz',
-      frage: 'Welches Verb passt?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'die Miete ___ ~~(bezahlen / aufräumen)~~',
-        'die Wohnung ___ ~~(bezahlen / aufräumen)~~',
-        'neue Möbel ___ ~~(aufbauen / umziehen)~~',
-        'in eine neue Wohnung ___ ~~(aufbauen / umziehen)~~',
-      ],
-      loesungen: [
-        'die Miete **bezahlen**',
-        'die Wohnung **aufräumen**',
-        'Möbel **aufbauen**',
-        'in eine neue Wohnung **umziehen** ~~(verbo separable: ich ziehe … um)~~',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Rund um die Wohnung',
+      items: [
+        { text: 'Die **Miete** ist hoch, aber dafür hat die **Wohnung** einen großen **Balkon**.' },
+        { text: 'Kannst du den **Schrank** bitte **neben die** Tür stellen?', gl: '— Wohin? → Akk.' },
+        { text: 'Jetzt steht der Schrank **neben der** Tür.', gl: '— Wo? → Dat.' },
+        { text: 'Ich habe **dem Vermieter** geschrieben, weil die Heizung nicht funktioniert.', gl: '— schreiben + Dat.' },
+        { text: 'Laut **Hausordnung** muss es ab 22 Uhr im Haus ruhig sein.', gl: '— Ruhezeit' },
+        { text: 'Nach dem **Umzug** haben wir drei Tage lang Möbel **aufgebaut**.' },
       ],
     },
+
+    { type: 'rule' },
+
+    // ── Modelltext ────────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Sätze ergänzen',
-      frage: 'Wechselpräposition oder feste Form?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Ich stelle die Lampe ___ ___ Schreibtisch. ~~(auf, der Schreibtisch)~~',
-        'Das Bett steht ___ Schlafzimmer. ~~(in, das Schlafzimmer)~~',
-        'Es ist spät — ich gehe jetzt ___ Hause.',
-        'Bleibst du heute Abend ___ Hause?',
+      type: 'modell',
+      eyebrow: 'Modelltext — meine Wohnung',
+      thema: 'So kannst du deine Wohnung beschreiben: Zimmer, Möbel mit *stehen / hängen* (Lektion 8) und was dir gefällt.',
+      absaetze: [
+        'Ich wohne in einer kleinen Wohnung im zweiten Stock. Sie hat zwei Zimmer, eine Küche und ein Bad. Im Wohnzimmer stehen ein Sofa und ein großer Schrank, und an der Wand hängen viele Fotos.',
+        'Am besten gefällt mir der Balkon: Im Sommer sitze ich dort und trinke Kaffee. Die Miete ist nicht billig, aber die Nachbarn sind nett und ruhig. Nächstes Jahr möchte ich vielleicht in eine größere Wohnung umziehen.',
       ],
-      loesungen: [
-        'auf **den** Schreibtisch ~~(Wohin? → Akk.)~~',
-        '**im** Schlafzimmer ~~(Wo? → Dat., in + dem = im)~~',
-        '**nach** Hause ~~(Wohin?)~~',
-        '**zu** Hause ~~(Wo?)~~',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Deine Wohnung (oder deine Traumwohnung): Schreib 60–80 Wörter. ~~(habitaciones, muebles, qué te gusta)~~',
-      loesungLabel: 'Mögliche Lösung',
-      loesung: 'Ich wohne in einer kleinen Wohnung im zweiten Stock. Sie hat zwei Zimmer, eine Küche und ein Bad. Im Wohnzimmer stehen ein Sofa und ein großer Schrank, und an der Wand hängen viele Fotos. Am besten gefällt mir der Balkon: Im Sommer sitze ich dort und trinke Kaffee. Die Miete ist nicht billig, aber die Nachbarn sind nett und ruhig. Nächstes Jahr möchte ich vielleicht in eine größere Wohnung umziehen. *(~70 Wörter — wichtig: mindestens ein Satz mit stellen/stehen/hängen wie in Lektion 8.)*',
     },
 
     { type: 'rule' },

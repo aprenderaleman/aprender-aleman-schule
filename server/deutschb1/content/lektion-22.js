@@ -7,7 +7,7 @@
 export default {
   spec: ['Bloque 2', 'Prüfungsstrategie', 'Niveau B1', 'Prüfungsrelevanz: Lesen Teil 4–5'],
   h1: 'Lesen Teil 4–5: Anweisungen & formelle Texte',
-  lead: 'Hausordnung, Aushang, Brief vom Amt: Offizielle Texte klingen streng — aber sie folgen **festen Mustern**, die du knacken kannst. ~~El alemán oficial tiene fórmulas fijas.~~',
+  lead: 'Hausordnung, Aushang, Brief vom Amt: Offizielle Texte klingen streng — aber sie folgen **festen Mustern**, die du schnell erkennen kannst. ~~El alemán oficial tiene fórmulas fijas.~~',
 
   content: [
     // ── Lernziele ─────────────────────────────────────────────────
@@ -16,7 +16,7 @@ export default {
       eyebrow: 'Lernziele',
       items: [
         'formelle Kurztexte verstehen: Hausordnung, Aushang, Mitteilung vom Amt',
-        'die Struktur **sein + zu + Infinitiv** entschlüsseln (*ist zu trennen* = man muss trennen)',
+        'die Struktur **sein + zu + Infinitiv** verstehen (*ist zu trennen* = man muss trennen)',
         'Verbots- und Erlaubnis-Wortschatz erkennen (*gestattet, verboten, erlaubt*)',
         'alle fünf Teile des Moduls Lesen im Überblick wiederholen',
       ],
@@ -50,7 +50,7 @@ export default {
     // ── Erklärung ─────────────────────────────────────────────────
     {
       type: 'steps',
-      eyebrow: 'Erklärung — offizielle Sprache entschlüsseln',
+      eyebrow: 'Erklärung — offizielle Sprache verstehen',
       steps: [
         {
           badge: 'sein + zu',
@@ -98,51 +98,29 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Erkennen',
-      frage: 'Pflicht (muss) oder Verbot (darf nicht)?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        '„Das Treppenhaus ist frei zu halten.“',
-        '„Grillen auf dem Balkon ist nicht gestattet.“',
-        '„Der Schlüssel ist bei der Verwaltung abzugeben.“',
-      ],
-      loesungen: [
-        '**Pflicht** — man muss das Treppenhaus frei halten (nichts abstellen).',
-        '**Verbot** — man darf auf dem Balkon nicht grillen.',
-        '**Pflicht** — man muss den Schlüssel dort abgeben.',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Aus Briefen und Aushängen',
+      items: [
+        { text: '„Die Gebühr **ist** bei der Abholung **zu bezahlen**.“', gl: '— man muss beim Abholen bezahlen' },
+        { text: '„Das Formular **ist** vollständig **auszufüllen**.“', gl: '— alle Felder ausfüllen: Pflicht' },
+        { text: '„Bitte **beachten Sie** die neuen Öffnungszeiten.“', gl: '— bitte denken Sie an die neuen Zeiten' },
+        { text: '„Parken vor der Einfahrt **verboten**.“', gl: '— hier darf man nicht parken' },
+        { text: '„Für den Antrag **ist** vorher ein Termin **zu vereinbaren**.“', gl: '— ohne Termin geht es nicht' },
+        { text: '„Bei Problemen **wenden Sie sich an** den Hausmeister.“', gl: '— den Hausmeister kontaktieren (an + Akkusativ)' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Umformen',
-      frage: 'Sag es einfach — mit *müssen* oder *dürfen*.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        '„Die Mülltonnen sind montags an die Straße zu stellen.“',
-        '„Das Füttern der Tauben ist untersagt.“',
-        '„Reparaturen sind der Hausverwaltung zu melden.“',
-      ],
-      loesungen: [
-        'Man **muss** die Mülltonnen montags an die Straße stellen.',
-        'Man **darf** die Tauben **nicht** füttern. ~~«untersagt» = «verboten» en formal.~~',
-        'Man **muss** Reparaturen der Hausverwaltung melden.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Schreib zwei Regeln für die Hausordnung einer Sprachschule — formell, mit **sein + zu** oder **(nicht) gestattet**.',
-      loesungLabel: 'Mögliche Lösung',
-      aufgaben: [
-        'Regel 1 (Pflicht):',
-        'Regel 2 (Verbot):',
-      ],
-      loesungen: [
-        '„Die Kursräume **sind** nach dem Unterricht **aufzuräumen**.“ ~~Vale cualquier obligación con sein + zu.~~',
-        '„Essen **ist** in der Bibliothek **nicht gestattet**.“',
+      type: 'beispiele',
+      kicker: 'Frist & Gebühr',
+      titel: 'Was muss ich wann tun?',
+      items: [
+        { text: '„Die **Frist** für die Anmeldung endet am 15. Oktober.“', gl: '— letzter Tag: 15. Oktober' },
+        { text: '„Für einen neuen Ausweis ist eine **Gebühr** von 10 Euro zu bezahlen.“', gl: '— ein neuer Ausweis kostet 10 Euro' },
+        { text: '„Anträge **sind** nur mit Unterschrift **gültig**.“', gl: '— ohne Unterschrift akzeptiert das Amt den Antrag nicht' },
+        { text: '„Das Betreten der Baustelle **ist nicht gestattet**.“', gl: '— man darf nicht auf die Baustelle gehen' },
       ],
     },
 
@@ -207,8 +185,8 @@ export default {
       type: 'selbstcheck',
       eyebrow: 'Selbstcheck',
       items: [
-        'Ich verstehe eine Hausordnung und einen Brief vom Amt in den Grundzügen.',
-        'Ich entschlüssle sein + zu + Infinitiv als Pflicht („ist zu trennen“ = man muss trennen).',
+        'Ich verstehe die wichtigsten Informationen in einer Hausordnung und in einem Brief vom Amt.',
+        'Ich verstehe sein + zu + Infinitiv als Pflicht („ist zu trennen“ = man muss trennen).',
         'Ich erkenne Verbote auch in formeller Form (nicht gestattet, untersagt).',
         'Ich habe für alle fünf Teile des Moduls Lesen eine Strategie.',
       ],

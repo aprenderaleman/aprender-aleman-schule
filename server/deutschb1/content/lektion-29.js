@@ -54,7 +54,7 @@ export default {
       card: true,
       titel: 'Das Aufgabenformat',
       absaetze: [
-        'Typische Situationen: Du kannst nicht zum **Kurs** kommen, musst einen **Termin absagen** oder bittest ein **Amt** um eine Information. Ziel: **~40 Wörter in 15 Minuten** — Anrede, zwei bis drei Sätze, Gruß. Der Inhalt ist einfach; entscheidend ist das **Register**: Eine perfekte E-Mail im du-Ton wäre hier eine verfehlte Aufgabe (Kriterium *Erfüllung*).',
+        'Typische Situationen: Du kannst nicht zum **Kurs** kommen, musst einen **Termin absagen** oder bittest ein **Amt** um eine Information. Ziel: **~40 Wörter in 15 Minuten** — Anrede, zwei bis drei Sätze, Gruß. Der Inhalt ist einfach; entscheidend ist das **Register**: Eine perfekte E-Mail im du-Ton erfüllt hier die Aufgabe nicht (Kriterium *Erfüllung*).',
       ],
     },
     {
@@ -158,49 +158,30 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Erkennen',
-      frage: 'Formell (Sie) oder informell (du)? Woran erkennst du es?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        '„Sehr geehrter Herr Braun, leider muss ich unseren Termin absagen.“',
-        '„Hi Ali, ich schaffe es heute nicht!“',
-        '„Wäre es möglich, den Kurs eine Woche später zu beginnen?“',
-        '„Könntest du mir dein Buch leihen?“',
-      ],
-      loesungen: [
-        '**Formell** — Anrede *Sehr geehrter* + sachlicher Ton.',
-        '**Informell** — *Hi* + Vorname + Ausrufezeichen.',
-        '**Formell** — *Wäre es möglich* ist die höfliche Frage für Ämter und Chefs.',
-        '**Informell** — Konjunktiv II, aber mit **du** (*Könntest du*): höflich unter Freunden.',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      kicker: 'Kernwortschatz',
+      titel: 'Sätze für die formelle E-Mail',
+      items: [
+        { text: 'Leider muss ich den **Termin** am Donnerstag **absagen**.', gl: '— absagen' },
+        { text: '**Wäre** es **möglich**, die **Besprechung** auf Freitag zu **verschieben**?', gl: '— höflich bitten' },
+        { text: 'Ich möchte mich für mein **Fehlen** am Montag **entschuldigen**.' },
+        { text: 'Leider kann ich nicht **am** Elternabend **teilnehmen**, weil mein Sohn krank ist.', gl: '~~asistir a = teilnehmen an + Dativ~~' },
+        { text: 'Ich habe morgen früh einen **dringenden** Termin bei der Bank.' },
+        { text: 'Könnten Sie mir bitte die Unterlagen schicken? Vielen Dank **im Voraus**.', gl: '— Bitte + Dank' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Umformen',
-      frage: 'Mach aus den informellen Sätzen formelle. Denk an Sie (groß) und den Konjunktiv II.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Kannst du mir die Aufgaben schicken?',
-        'Ich komme morgen nicht, sorry!',
-        'Ich will einen neuen Termin.',
-        'Tschüs!',
+      type: 'modell',
+      eyebrow: 'Noch ein Musterbeispiel — kurz',
+      thema: 'Verspätung — E-Mail an den Chef, Herrn Roth',
+      absaetze: [
+        '==Sehr geehrter Herr Roth,==',
+        '==leider== komme ich morgen etwa 30 Minuten später ins Büro, ==weil== ich einen Termin bei der Bank habe. ==Bitte entschuldigen Sie== die Verspätung.',
+        '==Mit freundlichen Grüßen==\nElena Ruiz',
       ],
-      loesungen: [
-        '*Könnten Sie mir bitte die Aufgaben schicken?*',
-        '*Leider kann ich morgen nicht kommen. Bitte entschuldigen Sie.*',
-        '*Ich würde gern einen neuen Termin vereinbaren.* ~~También: Wäre ein neuer Termin möglich?~~',
-        '*Mit freundlichen Grüßen* + Name.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Du kommst morgen 30 Minuten später zur Arbeit (Grund: ein Termin bei der Bank). Schreib eine kurze formelle E-Mail an deinen Chef, Herrn Roth — mit Anrede, Grund, Entschuldigung und Gruß.',
-      loesungLabel: 'Mögliche Lösung',
-      loesung: '*Sehr geehrter Herr Roth,\nleider komme ich morgen etwa 30 Minuten später ins Büro, weil ich einen Termin bei der Bank habe. Bitte entschuldigen Sie die Verspätung.\nMit freundlichen Grüßen\nElena Ruiz*\n~~Válido con cualquier motivo razonable — lo que se evalúa: Anrede formal, weil + verbo al final, Sie mayúscula, Gruß.~~',
     },
 
     { type: 'rule' },
@@ -211,7 +192,7 @@ export default {
       eyebrow: 'Prüfungsbezug',
       modul: 'Schreiben · Teil 3 · komplette Aufgabe',
       titel: 'Formelle E-Mail „Teambesprechung“ · ca. 40 Wörter · 15 Minuten',
-      anweisung: 'Bearbeite die Aufgabe unter Echtbedingungen und vergleiche erst danach mit der Lösung.',
+      anweisung: 'Bearbeite die Aufgabe wie in der Prüfung: mit Uhr und ohne Hilfe. Vergleiche erst danach mit der Lösung.',
       absaetze: [
         'Sie haben morgen einen dringenden Termin beim Zahnarzt und können nicht an der Teambesprechung teilnehmen. Schreiben Sie an Ihre Chefin, Frau Klein (ca. 40 Wörter): Entschuldigen Sie sich höflich und nennen Sie den Grund.',
       ],
@@ -219,10 +200,10 @@ export default {
       loesungen: [
         '*Sehr geehrte Frau Klein,*',
         '*leider kann ich morgen nicht an der Teambesprechung teilnehmen, weil ich einen dringenden Termin beim Zahnarzt habe. Bitte entschuldigen Sie das.*',
-        '*Ich würde die Informationen gern später bei einer Kollegin erfragen.*',
+        '*Ich würde später gern eine Kollegin nach den Informationen fragen.*',
         '*Mit freundlichen Grüßen\nLuis Romero*',
       ],
-      kommentar: 'Alles drin auf 40 Wörtern: Anrede → Absage mit Grund (*leider … weil …*) → Entschuldigung → ein Extra-Satz mit Lösung (*Ich würde … erfragen* — Konjunktiv II) → Gruß. Und richtig: *an der Besprechung **teilnehmen***, nicht *assistieren*.',
+      kommentar: 'Alles drin auf 40 Wörtern: Anrede → Absage mit Grund (*leider … weil …*) → Entschuldigung → ein Extra-Satz mit Lösung (*Ich würde … fragen* — Konjunktiv II) → Gruß. Und richtig: *an der Besprechung **teilnehmen***, nicht *assistieren*.',
     },
 
     { type: 'rule' },

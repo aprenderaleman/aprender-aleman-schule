@@ -94,49 +94,31 @@ export default {
     },
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Erkennen',
-      frage: 'Richtig oder falsch? Prüfe die Aussage gegen den Satz.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Satz: „Wir haben früher oft zusammen gekocht.“ — Aussage: „Sie kochen oft zusammen.“',
-        'Satz: „Der Kurs war teurer, als ich dachte.“ — Aussage: „Der Kurs war günstig.“',
-        'Satz: „Ich freue mich schon auf den Besuch meiner Eltern.“ — Aussage: „Ihre Eltern kommen sie besuchen.“',
-      ],
-      loesungen: [
-        '**Falsch** — „früher“: heute nicht mehr (oder wir wissen es nicht aus dem Satz).',
-        '**Falsch** — „teurer, als ich dachte“ = eher teuer, nicht günstig.',
-        '**Richtig** — „sich freuen **auf**“ = der Besuch kommt noch. ~~Futuro planeado.~~',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      kicker: 'Text → Aussage',
+      titel: 'Richtig oder falsch? So entscheidest du',
+      items: [
+        { text: 'Text: „Seit März wohne ich in Bremen.“ → Aussage: „Sie wohnt **immer noch** in Bremen.“', gl: '— richtig · seit + Präsens' },
+        { text: 'Text: „Früher habe ich viel Sport gemacht.“ → Aussage: „Er macht **heute** viel Sport.“', gl: '— falsch · früher ≠ heute' },
+        { text: 'Text: „Ich freue mich schon auf die Hochzeit meiner Schwester.“ → Aussage: „Die Hochzeit **war schon**.“', gl: '— falsch · sich freuen auf = kommt noch' },
+        { text: 'Text: „Inzwischen vermisse ich meine Heimat nicht mehr so sehr.“ → Aussage: „Am Anfang **war** das Heimweh **stärker**.“', gl: '— richtig' },
+        { text: 'Text: „Den Yogakurs kann ich leider nicht empfehlen.“ → Aussage: „Sie **findet** den Kurs **gut**.“', gl: '— falsch · leider + nicht' },
+        { text: 'Betreff: „Grüße aus Wien!“ → Die E-Mail **berichtet** wahrscheinlich über eine Reise oder einen Umzug.', gl: '— der Betreff hilft beim Überfliegen' },
       ],
     },
+
+    { type: 'rule' },
+
+    // ── Texte zum Mitlesen ──────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Paraphrase wählen',
-      frage: 'Welche Option sagt dasselbe wie der Text? a oder b?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        '„Die Arbeit macht mir viel mehr Spaß als mein alter Job.“ — a) Sie mag ihre neue Arbeit. b) Sie möchte ihren alten Job zurück.',
-        '„Die Mieten in der Stadt sind für mich zu hoch.“ — a) Sie kann sich eine Wohnung in der Stadt nicht leisten. b) Sie wohnt gern in der Stadt.',
-      ],
-      loesungen: [
-        '**a** — „mehr Spaß als der alte Job“ = die neue Arbeit gefällt ihr.',
-        '**a** — „zu hoch“ = sie kann es nicht bezahlen. ~~«zu + adjetivo» siempre es negativo: demasiado.~~',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Lies den Mini-Text und schreibe selbst zwei Aussagen: eine richtige und eine falsche.\n„Seit Januar mache ich einen Kochkurs. Am Anfang habe ich viel verbrannt, aber inzwischen klappt fast alles. Nächsten Monat koche ich zum ersten Mal für meine Freunde.“',
-      loesungLabel: 'Mögliche Lösung',
-      aufgaben: [
-        'Eine **richtige** Aussage:',
-        'Eine **falsche** Aussage:',
-      ],
-      loesungen: [
-        '„Der Kochkurs läuft seit Januar.“ ~~También vale: «Inzwischen kocht er/sie besser».~~',
-        '„Er/Sie hat schon für seine/ihre Freunde gekocht.“ — falsch, denn das passiert erst **nächsten Monat**.',
+      type: 'modell',
+      eyebrow: 'Texte zum Mitlesen',
+      thema: 'Lies den Text einmal ganz — so klingen persönliche Texte in Teil 1.',
+      absaetze: [
+        '==Text · Persönlicher Mini-Text:== „Seit Januar mache ich einen Kochkurs. Am Anfang habe ich viel verbrannt, aber inzwischen klappt fast alles. Nächsten Monat koche ich zum ersten Mal für meine Freunde.“',
       ],
     },
 

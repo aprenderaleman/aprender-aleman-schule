@@ -16,7 +16,7 @@ export default {
       type: 'lernziele',
       eyebrow: 'Lernziele',
       items: [
-        'in einem Gespräch die Sprecher auseinanderhalten',
+        'in einem Gespräch die Sprecher unterscheiden',
         'einfache Meinungen erkennen: dafür, dagegen, unentschieden',
         'die kleinen Wörter des gesprochenen Deutsch verstehen (*also, na ja, eigentlich*)',
         'Aussagen den richtigen Personen zuordnen',
@@ -34,7 +34,7 @@ export default {
         { wort: 'zustimmen', kollokation: 'Ich stimme dir zu.', es: 'estar de acuerdo' },
         { wort: 'dafür sein', kollokation: 'Ich bin klar dafür.', es: 'estar a favor' },
         { wort: 'dagegen sein', kollokation: 'Ich bin total dagegen.', es: 'estar en contra' },
-        { wort: 'Recht haben', kollokation: 'Da hast du Recht.', es: 'tener razón' },
+        { wort: 'recht haben', kollokation: 'Da hast du recht.', es: 'tener razón' },
         { wort: 'der Vorschlag', kollokation: 'einen Vorschlag machen', es: 'la propuesta' },
         { wort: 'sich einigen', kollokation: 'Wir einigen uns auf Samstag.', es: 'ponerse de acuerdo' },
         { wort: 'überzeugt sein', kollokation: 'Ich bin nicht überzeugt.', es: 'estar convencido/a' },
@@ -52,7 +52,7 @@ export default {
       eyebrow: 'Erklärung — drei Schritte zum „Wer sagt was?“',
       steps: [
         {
-          titel: 'Stimmen auseinanderhalten',
+          titel: 'Stimmen unterscheiden',
           text: 'Die Namen fallen __am Anfang__: „Ich begrüße Frau Kern und Herrn Roth.“ Notiere sofort Kürzel (K, R) und Mann/Frau — danach erkennst du die Stimme.',
         },
         {
@@ -68,7 +68,7 @@ export default {
     {
       type: 'tabelle',
       eyebrow: 'Erklärung — die kleinen Wörter des Sprechens',
-      kopf: ['Du hörst …', 'Das signalisiert', 'Beispiel'],
+      kopf: ['Du hörst …', 'Das bedeutet', 'Beispiel'],
       zeilen: [
         ['also', 'jetzt kommt meine Meinung ~~(«pues» — ¡no significa «también»!)~~', '„Also, ich finde das gut.“'],
         ['na ja', 'Zweifel, halbes Nein', '„Na ja, ich weiß nicht.“'],
@@ -120,52 +120,51 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Erkennen',
-      frage: 'Dafür, dagegen oder unentschieden?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        '„Also, ich finde den Vorschlag super.“',
-        '„Na ja, ich weiß nicht, ob das funktioniert.“',
-        '„Eigentlich eine gute Idee, aber viel zu teuer.“',
-        '„Das sehe ich ganz anders als du.“',
-      ],
-      loesungen: [
-        '**Dafür** — *also* + „super“.',
-        '**Unentschieden/Zweifel** — *na ja* signalisiert das halbe Nein.',
-        '**Dagegen** — die Meinung steht nach dem *aber*.',
-        '**Dagegen** — klare Ablehnung.',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      kicker: 'Kernwortschatz',
+      titel: 'Meinungen im Gespräch',
+      items: [
+        { text: '„Ich bin **dafür**, dass wir den Ausflug am Samstag machen.“', gl: '— klare Zustimmung' },
+        { text: '„Darf ich kurz **unterbrechen**? Ich habe einen **Vorschlag**.“' },
+        { text: '„Der **Vorteil** ist der Preis, der **Nachteil** ist die lange Fahrt.“' },
+        { text: '„Nach einer Stunde haben wir uns endlich **geeinigt**.“', gl: '~~por fin nos pusimos de acuerdo~~' },
+        { text: '„Ich **stimme** Ihnen **zu**, Frau Berger — aber nur zum Teil.“', gl: '— nach dem *aber* kommt die Einschränkung' },
+        { text: 'Die **Moderatorin** fragt: „Herr Okafor, sind Sie jetzt **überzeugt**?“' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Gespräch — Wer sagt was?',
-      frage: 'Lies das Gespräch **nur einmal** in normalem Tempo — oder lass es dir mit verteilten Rollen vorlesen ~~(en el examen: audio)~~. Richtig oder falsch?',
-      aufgabe: '**Transkript · Alltagsgespräch (Teil 3):**\n**Lena:** Hallo Jonas! Na, wie läuft es mit der neuen Wohnung?\n**Jonas:** Ach, na ja. Die Wohnung ist schön, aber die Miete ist echt hoch. Ich überlege, ob ich mir eine Wohnung mit jemandem teile.\n**Lena:** Eine WG? Das finde ich super! Ich habe drei Jahre in einer WG gewohnt — das war eine tolle Zeit.\n**Jonas:** Schon, aber ich arbeite viel zu Hause. Ich brauche Ruhe.\n**Lena:** Verstehe. Aber allein wohnen ist doch auch manchmal langweilig, oder?\n**Jonas:** Eigentlich nicht. Also, ich koche gern allein und höre laut Musik — das geht in einer WG nicht so einfach.\n**Lena:** Na gut. Und was machst du jetzt?\n**Jonas:** Ich suche erst mal eine kleinere Wohnung. Die ist billiger, und ich habe trotzdem meine Ruhe.\n**Lena:** Das klingt vernünftig.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Jonas findet die Miete zu hoch.',
-        'Lena hat schlechte Erfahrungen mit WGs gemacht.',
-        'Jonas möchte am liebsten in eine WG ziehen.',
-        'Jonas arbeitet oft zu Hause.',
-      ],
-      loesungen: [
-        '**Richtig** — „die Miete ist echt hoch“.',
-        '**Falsch** — für sie war die WG „eine tolle Zeit“.',
-        '**Falsch** — „Schon, **aber** …“: Er sucht am Ende eine **kleinere Wohnung**. Die Meinung stand nach dem *aber*.',
-        '**Richtig** — „ich arbeite viel zu Hause“.',
+      type: 'beispiele',
+      kicker: 'Signale',
+      titel: 'Wo steht die echte Meinung?',
+      items: [
+        { text: '„**Eigentlich** gefällt mir die Idee, **aber** sie ist zu kompliziert.“', gl: '— dagegen' },
+        { text: '„**Na ja**, ich weiß nicht, ob das klappt.“', gl: '— Zweifel' },
+        { text: '„**Also**, ich finde den Vorschlag wirklich gut.“', gl: '— dafür' },
+        { text: '„**Einerseits** spart man Geld, **andererseits** verliert man Zeit.“', gl: '— unentschieden' },
+        { text: '„**Genau**, da hast du **Recht**.“', gl: '— Zustimmung' },
       ],
     },
+
+    { type: 'rule' },
+
+    // ── Transkript zum Mitlesen ───────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Und du? Schreib zwei Sätze über die WG-Frage: einen mit Zustimmung zu Lena **oder** Jonas, einen mit deiner eigenen Meinung. Benutze Redemittel aus dieser Lektion.',
-      loesungLabel: 'Mögliche Lösung',
-      loesungen: [
-        'Ich finde, Jonas hat **Recht**: Wer zu Hause arbeitet, braucht Ruhe.',
-        '**Meiner Meinung nach** ist eine WG trotzdem eine gute Idee, weil man Geld spart und nicht allein ist. — Jede Variante mit *zustimmen*, *dafür/dagegen sein* oder *Recht haben* ist richtig.',
+      type: 'modell',
+      eyebrow: 'Transkript — so klingt ein Alltagsgespräch (Teil 3)',
+      thema: 'Lies das Gespräch nur einmal in normalem Tempo — oder lass es dir mit verteilten Rollen vorlesen. ~~(En el examen es audio.)~~ Achte darauf, wer was meint.',
+      absaetze: [
+        '==Lena:== Hallo Jonas! Na, wie läuft es mit der neuen Wohnung?',
+        '==Jonas:== Ach, na ja. Die Wohnung ist schön, aber die Miete ist echt hoch. Ich überlege, ob ich mir eine Wohnung mit jemandem teile.',
+        '==Lena:== Eine WG? Das finde ich super! Ich habe drei Jahre in einer WG gewohnt — das war eine tolle Zeit.',
+        '==Jonas:== Schon, aber ich arbeite viel zu Hause. Ich brauche Ruhe.',
+        '==Lena:== Verstehe. Aber allein wohnen ist doch auch manchmal langweilig, oder?',
+        '==Jonas:== Eigentlich nicht. Also, ich koche gern allein und höre laut Musik — das geht in einer WG nicht so einfach.',
+        '==Lena:== Na gut. Und was machst du jetzt?',
+        '==Jonas:== Ich suche erst mal eine kleinere Wohnung. Die ist billiger, und ich habe trotzdem meine Ruhe.',
+        '==Lena:== Das klingt vernünftig.',
       ],
     },
 
@@ -177,7 +176,7 @@ export default {
       eyebrow: 'Prüfungsbezug',
       modul: 'Hören · Teil 4',
       titel: 'Diskussion — Aussagen zuordnen',
-      anweisung: 'Wie im Examen: erst die drei Aussagen lesen, dann das Transkript **einmal** in Echtzeit lesen ~~(en el examen: audio)~~. Wer sagt das — Frau Kern oder Herr Roth?',
+      anweisung: 'Wie in der Prüfung: erst die drei Aussagen lesen, dann das Transkript **einmal** in Echtzeit lesen ~~(en el examen: audio)~~. Wer sagt das — Frau Kern oder Herr Roth?',
       absaetze: [
         '**Moderatorin:** Willkommen zu unserer Sendung! Unser Thema heute: Sollen Geschäfte auch am Sonntag öffnen? Frau Kern, was meinen Sie?',
         '**Frau Kern:** Also, ich bin klar dafür. Viele Menschen arbeiten die ganze Woche und haben nur am Sonntag Zeit zum Einkaufen.',
@@ -213,7 +212,7 @@ export default {
       kopf: ['Teil', 'Textsorte', 'Deine Aufgabe', 'Schlüsselstrategie'],
       zeilen: [
         ['1-2', 'Durchsagen & kurze Texte', 'Fakten ankreuzen', 'Zahlen notieren · *nicht … sondern*'],
-        ['3', 'Alltagsgespräch', 'richtig oder falsch', 'Sprecher auseinanderhalten'],
+        ['3', 'Alltagsgespräch', 'richtig oder falsch', 'Sprecher unterscheiden'],
         ['4', 'Diskussion', 'Wer sagt was?', 'Meinungssignale · auf das *aber* warten'],
         ['Training', 'Transkripte + Modellsatz', 'einmal lesen/hören', 'Lösung abdecken, ehrlich kontrollieren'],
       ],
@@ -222,7 +221,7 @@ export default {
       type: 'selbstcheck',
       eyebrow: 'Selbstcheck',
       items: [
-        'Ich halte in einem Gespräch die Sprecher auseinander und notiere ihre erste Meinung.',
+        'Ich unterscheide in einem Gespräch die Sprecher und notiere ihre erste Meinung.',
         'Ich erkenne, ob jemand dafür, dagegen oder unentschieden ist.',
         'Ich verstehe *also*, *na ja* und *eigentlich* als Signale — nicht als Vokabeln.',
         'Ich kann Aussagen den richtigen Personen zuordnen.',

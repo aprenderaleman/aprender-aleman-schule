@@ -65,7 +65,7 @@ export default {
         },
         {
           titel: 'Nichts passt? Dann „0“',
-          text: 'Wenn keine Anzeige zu 100 % passt, ist die Lösung **„0“**. Das ist keine Trick-Ausnahme, sondern ein normaler Teil der Aufgabe.',
+          text: 'Wenn keine Anzeige zu 100 % passt, ist die Lösung **„0“**. Das ist kein Trick, sondern ein normaler Teil der Aufgabe.',
         },
       ],
     },
@@ -103,47 +103,19 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Erkennen',
-      frage: 'Welche 2–3 Schlüsselwörter markierst du bei diesen Personen?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Ana möchte abends nach der Arbeit Gitarre lernen. Sie ist Anfängerin.',
-        'Herr Weber sucht für seinen Sohn (10) einen Fußballverein in der Nähe.',
-        'Carla braucht günstig einen Schreibtisch — sie kann ihn selbst abholen.',
-      ],
-      loesungen: [
-        '**Gitarre** · **abends** · **Anfängerin** — drei Bedingungen, alle müssen passen.',
-        '**Fußballverein** · **Kind (10 Jahre)** · **in der Nähe**.',
-        '**Schreibtisch** · **günstig** · **selbst abholen**.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Mini-Zuordnung',
-      frage: 'Zwei Personen, drei Anzeigen — welche passt? (a, b, c oder 0)\n**a)** „Spanisch-Intensivkurs, Mo–Fr 9–12 Uhr“ · **b)** „Spanisch am Abend, für Anfänger, Di + Do 19 Uhr“ · **c)** „Nachhilfe Mathematik, alle Klassen“',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Tim arbeitet tagsüber und will als Anfänger Spanisch lernen.',
-        'Frau Ortiz sucht für ihre Tochter Nachhilfe in Englisch.',
-      ],
-      loesungen: [
-        '**b** — Abendkurs für Anfänger. Anzeige a hat das richtige Thema, aber die falsche Zeit ~~(la trampa del casi-correcto)~~.',
-        '**0** — Anzeige c bietet Nachhilfe, aber in Mathematik, nicht in Englisch. Keine Anzeige passt.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Schreib selbst eine kurze Anzeige (Fragmente erlaubt!), die zu dieser Person passt:\n„Luis sucht einen ruhigen Lernplatz mit WLAN, kostenlos, auch am Sonntag geöffnet.“',
-      loesungLabel: 'Mögliche Lösung',
-      aufgaben: [
-        'Deine Anzeige:',
-      ],
-      loesungen: [
-        '„**Stadtbibliothek am Park** — Lernplätze mit WLAN, Eintritt frei. Geöffnet täglich 9–20 Uhr, auch sonntags.“ ~~Vale cualquier anuncio con las tres condiciones: gratis + WLAN + domingo.~~',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      kicker: 'Person → Anzeige',
+      titel: 'Stimmen alle Bedingungen?',
+      items: [
+        { text: 'Person: „sucht einen **kostenlosen** Deutschkurs“ → Anzeige: „Deutsch für Anfänger, 8 € pro Stunde“', gl: '— passt nicht: nicht kostenlos' },
+        { text: 'Person: „möchte ein Zimmer **mieten**, maximal 400 €“ → Anzeige: „Wir **vermieten** ein WG-Zimmer, 380 € im Monat“', gl: '— passt: mieten ↔ vermieten, Preis stimmt' },
+        { text: 'Person: „ist Studentin und hat wenig Geld“ → Anzeige: „Kino am Markt: **Ermäßigung** für Studenten“', gl: '— passt' },
+        { text: 'Person: „sucht einen Kühlschrank, kann ihn aber **nicht selbst abholen**“ → Anzeige: „Kühlschrank, gebraucht, 50 €, nur Selbstabholung“', gl: '— passt nicht: Abholung' },
+        { text: 'Person: „möchte **sonntags** in der Bibliothek lernen“ → Anzeige: „**Öffnungszeiten**: Mo–Sa 9–19 Uhr“', gl: '— passt nicht: sonntags geschlossen' },
+        { text: 'Anzeige: „Bei Interesse **melden** Sie **sich bei** Herrn Lenz.“', gl: '— sich melden bei + Dativ' },
       ],
     },
 

@@ -92,7 +92,7 @@ export default {
       titel: 'Die Transkript-Methode dieses Kurses',
       absaetze: [
         'In den Lektionen 24 und 25 übst du mit **Transkripten** ~~(en el examen: audio)~~. Die Regel: Lies das Transkript **nur einmal**, in normalem Tempo, ohne zurückzuspringen — oder lass es dir von jemandem vorlesen. Decke die Lösung ab, löse die Aufgaben, kontrolliere erst danach. ~~Leer una sola vez simula el audio; tapar la solución simula el examen.~~',
-        'Für echtes Audio: der kostenlose offizielle **Modellsatz** Höre ihn unter Prüfungsbedingungen — jeder Text nur so oft, wie es die Anweisung erlaubt.',
+        'Für echtes Audio: der kostenlose offizielle **Modellsatz**. Höre ihn unter Prüfungsbedingungen — jeder Text nur so oft, wie es die Anweisung erlaubt.',
       ],
     },
 
@@ -115,55 +115,29 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Erkennen',
-      frage: 'Welcher Teil des Moduls ist das?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        '„Achtung an Gleis 3, der Zug nach Köln …“',
-        'Zwei Freunde sprechen über den Umzug in eine neue Wohnung.',
-        'Drei Personen diskutieren im Radio über Homeoffice.',
-        'Ein kurzer Radiobeitrag informiert über ein Stadtfest.',
-      ],
-      loesungen: [
-        '**Teil 1** — eine Durchsage am Bahnhof.',
-        '**Teil 3** — ein Alltagsgespräch zwischen zwei Personen.',
-        '**Teil 4** — eine Diskussion mit mehreren Personen.',
-        '**Teil 2** — ein kurzer Text mit Informationen.',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Wörter aus dem Modul Hören',
+      items: [
+        { text: 'Ich habe dir eine **Nachricht** auf dem Anrufbeantworter **hinterlassen**.', gl: '— typisch für Teil 1' },
+        { text: 'Die **Ansage** sagt: Die Praxis ist heute geschlossen.', gl: '— eine Ansage ist aufgenommen, nicht live' },
+        { text: 'In Teil 3 hörst du ein **Gespräch** zwischen zwei Freunden.', gl: '— Alltag: Pläne, Probleme, Verabredungen' },
+        { text: 'Die **Sprecherin** ist der **Meinung**, dass Homeoffice praktisch ist.', gl: '— Teil 4: Wer sagt was?' },
+        { text: '**Kreuzen Sie** bei jeder **Aussage** richtig oder falsch **an**.', gl: '— ankreuzen: trennbares Verb' },
+        { text: 'Nur **eine Lösung** ist richtig — die anderen sind Fallen.', gl: '— immer eine Antwort wählen' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Strategie prüfen',
-      frage: 'Richtig oder falsch?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Ich lese die Aufgaben erst **nach** dem Hören.',
-        'Bei einem unbekannten Wort höre ich einfach weiter.',
-        'Wenn ich nicht sicher bin, lasse ich die Aufgabe leer.',
-        'Vor dem Hören markiere ich Schlüsselwörter in den Aufgaben.',
-      ],
-      loesungen: [
-        '**Falsch** — immer vorher lesen und voraussagen.',
-        '**Richtig** — blockieren kostet die nächste Antwort.',
-        '**Falsch** — immer ankreuzen: Raten gibt keine Minuspunkte.',
-        '**Richtig** — so weißt du, worauf du hören musst.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Voraussagen üben: Du liest diese Aufgabe **vor** dem Hören. Welche Wörter erwartest du im Audio? Notiere je 3-4.',
-      loesungLabel: 'Mögliche Lösung',
-      aufgaben: [
-        'Aufgabe: „Der Zug fährt heute von Gleis 7 ab.“ — richtig/falsch',
-        'Aufgabe: „Das Museum ist montags geschlossen.“ — richtig/falsch',
-      ],
-      loesungen: [
-        'z. B. *Zug, Gleis, Abfahrt, eine Zahl* — und Vorsicht: vielleicht „**nicht** von Gleis 7, **sondern** …“',
-        'z. B. *Museum, Montag, geöffnet/geschlossen, Öffnungszeiten* — auch andere Wörter mit derselben Bedeutung sind gut vorausgesagt.',
+      type: 'beispiele',
+      kicker: 'Voraussagen',
+      titel: 'Welche Wörter erwarte ich im Audio?',
+      items: [
+        { text: 'Aufgabe: „Der Zug fährt heute von Gleis 7 ab.“', gl: '— Zug, Gleis, Abfahrt, eine Zahl — und vielleicht *nicht … sondern*' },
+        { text: 'Aufgabe: „Das Museum ist montags geschlossen.“', gl: '— Montag, Öffnungszeiten, geöffnet oder geschlossen' },
+        { text: 'Aufgabe: „Die Frau möchte ihren Termin verschieben.“', gl: '— Termin, leider, später, ein anderer Tag' },
+        { text: 'Aufgabe: „Morgen wird es überall warm.“', gl: '— Wetter, Grad, Sonne — oder eine Falle: *nur im Süden*' },
       ],
     },
 
@@ -177,7 +151,7 @@ export default {
       titel: 'Eine Durchsage, zwei Aufgaben',
       anweisung: 'Trainiere mit der Transkript-Methode: Lies den Text **nur einmal** in normalem Tempo ~~(en el examen: audio)~~, decke die Lösung ab und kreuze an.',
       absaetze: [
-        '„Liebe Fahrgäste, der ICE 726 nach Hamburg, planmäßige Abfahrt 14:32 Uhr, fährt heute nicht von Gleis 5, sondern von Gleis 9 ab. Bitte beachten Sie außerdem: Der Zug hält heute nicht in Göttingen. Wir bitten um Entschuldigung.“',
+        '„Liebe Fahrgäste, der Zug 726 nach Hamburg, planmäßige Abfahrt 14:32 Uhr, fährt heute nicht von Gleis 5, sondern von Gleis 9 ab. Bitte beachten Sie außerdem: Der Zug hält heute nicht in Göttingen. Wir bitten um Entschuldigung.“',
       ],
       optionen: [
         '(1) Der Zug fährt heute von Gleis 5 ab. — richtig/falsch',

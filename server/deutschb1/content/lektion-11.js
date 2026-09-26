@@ -85,8 +85,8 @@ export default {
       type: 'vergleich',
       titel: 'am schnellsten oder der schnellste?',
       zeilen: [
-        { satz: 'Der ICE fährt **am schnellsten**.', label: 'nach dem Verb → am -sten' },
-        { satz: 'Der ICE ist der **schnellste** Zug in Deutschland.', label: 'vor dem Nomen → Artikel + -ste' },
+        { satz: 'Der Schnellzug fährt **am schnellsten**.', label: 'nach dem Verb → am -sten' },
+        { satz: 'Er ist der **schnellste** Zug im ganzen Land.', label: 'vor dem Nomen → Artikel + -ste' },
       ],
     },
     {
@@ -108,7 +108,7 @@ export default {
       items: [
         { text: 'Ich suche eine größer**e** Wohnung.', gl: '— Akkusativ feminin: -e' },
         { text: 'Gibt es keinen billiger**en** Tarif?', gl: '— Akkusativ maskulin: -en' },
-        { text: 'Das war der schönst**e** Tag des Jahres.', gl: '— Superlativ + -e' },
+        { text: 'Das war der schönst**e** Tag in diesem Jahr.', gl: '— Superlativ + -e' },
         { text: 'Ich fahre mit dem nächst**en** Zug.', gl: '— Dativ: -en' },
       ],
     },
@@ -147,53 +147,29 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Erkennen',
-      frage: 'Richtig oder falsch?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Ich habe einen neueren Computer gekauft.',
-        'Je billiger das Hotel ist, desto ich bin zufriedener.',
-        'Das ist die schönste Stadt, die ich kenne.',
-        'Mein Deutsch wird immer mehr besser.',
-      ],
-      loesungen: [
-        '**Richtig** — Komparativ + Endung -en (Akkusativ maskulin).',
-        '**Falsch** → … **desto zufriedener bin ich**. Nach *desto* kommen Komparativ und dann sofort das Verb.',
-        '**Richtig** — Superlativ vor dem Nomen: die schönst**e** Stadt.',
-        '**Falsch** → … wird **immer besser**. Nie *mehr* + Komparativ.',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Vergleichen im Alltag',
+      items: [
+        { text: 'Wir brauchen ein größer**es** Auto — die Kinder werden **immer größer**.', gl: '— Komparativ + -es · Entwicklung' },
+        { text: 'Mein Opa ist **älter als** meine Oma, aber sie ist **genauso fit wie** er.', gl: '— Unterschied → als · Gleichheit → so/genauso … wie' },
+        { text: 'Zum Geburtstag hat Mia ihrer **besten** Freundin ein Buch geschenkt.', gl: '— Superlativ + Dativ-Endung -en' },
+        { text: 'Die Zugspitze ist der **höchste** Berg in Deutschland.', gl: '— hoch → höher → der höchste' },
+        { text: 'Entschuldigung, wo ist **die nächste** Apotheke?', gl: '— nah → die nächste' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Umformen',
-      frage: 'Bilde die Struktur in Klammern.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Meine Wohnung ist klein. Ich suche eine andere. ~~(comparativo delante del sustantivo)~~',
-        'viel üben → gut sprechen (je … desto)',
-        'Die Mieten steigen jedes Jahr. (immer + Komparativ)',
-        'Ich fahre mit (mein gut Freund) in den Urlaub. (Superlativ + Endung)',
-      ],
-      loesungen: [
-        'Ich suche eine **größere** Wohnung. ~~(-er + terminación -e de acusativo femenino)~~',
-        '**Je** mehr ich übe, **desto** besser spreche ich. ~~(también correcto: umso besser)~~',
-        'Die Mieten werden **immer höher**. ~~(o: immer teurer)~~',
-        'Ich fahre mit meinem **besten** Freund in den Urlaub. — Dativ → -en.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Forumsthema: „Leben in der Stadt oder auf dem Land?“ Schreib drei Sätze.',
-      loesungLabel: 'Mögliche Lösung',
-      aufgaben: [
-        'Satz 1: ein Vergleich **vor dem Nomen** · Satz 2: **je … desto** · Satz 3: **Das Wichtigste ist …**',
-      ],
-      loesungen: [
-        'Auf dem Land findet man **günstigere** Wohnungen und eine **ruhigere** Umgebung. **Je** größer die Stadt ist, **desto** teurer sind die Mieten. **Das Wichtigste** ist für mich, dass ich schnell zur Arbeit komme. ~~Valen otras ideas — comprueba: terminación tras -er, verbo al final tras je, verbo justo tras el comparativo con desto.~~',
+      type: 'beispiele',
+      kicker: 'je … desto',
+      titel: 'Meinung mit Vergleich',
+      items: [
+        { text: '**Je** länger ich in Deutschland lebe, **desto** besser verstehe ich die Leute.', gl: '— Verb am Ende / Verb sofort danach' },
+        { text: '**Je** mehr man liest, **umso** größer wird der Wortschatz.', gl: '— umso = desto' },
+        { text: 'Am Wochenende schlafe ich **am liebsten** lange.', gl: '— gern → lieber → am liebsten' },
+        { text: '**Das Schönste** an meinem Viertel ist der kleine Markt.', gl: '— Superlativ als Nomen, groß' },
+        { text: 'Für mich ist der Bus die **billigere** Lösung.', gl: '— zwei Optionen → Komparativ' },
       ],
     },
 

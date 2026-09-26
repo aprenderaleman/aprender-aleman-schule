@@ -105,53 +105,28 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Erkennen',
-      frage: 'Wo steht ein Genitiv? Markiere ihn.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Die Tür des Zimmers ist offen.',
-        'Ich fahre mit dem Auto von meinem Bruder.',
-        'Trotz der Kälte gehen wir spazieren.',
-        'Das Handy meiner Schwester ist kaputt.',
-      ],
-      loesungen: [
-        '**des Zimmers** — Genitiv neutral, Endung -s',
-        'kein Genitiv — hier steht **von + Dativ** ~~(la alternativa hablada)~~',
-        '**der Kälte** — Genitiv feminin nach *trotz*',
-        '**meiner Schwester** — Genitiv feminin mit Possessivartikel',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Wessen? — im Alltag',
+      items: [
+        { text: 'Die Wohnung **meiner Eltern** hat einen großen Garten.', gl: '— Plural mit Possessivartikel' },
+        { text: 'Hast du die Nummer **des Hausmeisters**?', gl: '= die Nummer **vom** Hausmeister ~~(hablado)~~' },
+        { text: 'Das Ende **des Films** war total spannend.', gl: '— maskulin: des + -s' },
+        { text: 'Der Hund **unseres Nachbarn** bellt jede Nacht.', gl: '— der Nachbar → des Nachbar**n**' },
+        { text: '**Pablos** Schwester studiert in Leipzig.', gl: '— Name + -s, ohne Apostroph' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Artikel einsetzen',
-      frage: 'Ergänze den Genitiv.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Der Eingang ___ ___ ist links. ~~(das Gebäude)~~',
-        'Wegen ___ ___ fahren keine Busse. ~~(der Streik)~~',
-        'Trotz ___ Hitze bleiben wir im Garten. ~~(die Hitze)~~',
-      ],
-      loesungen: [
-        'der Eingang **des Gebäudes** ~~(neutral → des + -s)~~',
-        'wegen **des Streiks** ~~(maskulin → des + -s)~~',
-        'trotz **der** Hitze ~~(feminin → solo der)~~',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Selbst bilden',
-      frage: 'Sag denselben Inhalt zweimal …',
-      loesungLabel: 'Mögliche Lösung',
-      aufgaben: [
-        '… „la bicicleta de mi vecino es nueva" — einmal mit Genitiv, einmal mit *von*.',
-        '… ein Satz mit **wegen** über deinen Alltag.',
-      ],
-      loesungen: [
-        'Das Fahrrad **meines Nachbarn** ist neu. / Das Fahrrad **von meinem Nachbarn** ist neu. ~~Ambas correctas; la primera es más formal.~~',
-        '**Wegen der Arbeit** stehe ich um sechs Uhr auf. ~~Vale cualquier causa real: wegen des Verkehrs, wegen meines Kurses…~~',
+      type: 'beispiele',
+      kicker: 'wegen · trotz · während',
+      titel: 'Durchsagen und Nachrichten',
+      items: [
+        { text: '**Wegen einer Störung** hat der Zug zehn Minuten Verspätung.', gl: '— Grund' },
+        { text: '**Trotz der Kälte** sind viele Leute im Park.', gl: '— Gegensatz' },
+        { text: '**Während des Unterrichts** bleiben die Handys aus.', gl: '— Zeit' },
+        { text: '**Wegen meines Kurses** kann ich erst um acht kommen.', gl: '— Possessivartikel im Genitiv' },
       ],
     },
 

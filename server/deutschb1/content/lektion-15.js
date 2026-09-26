@@ -112,53 +112,28 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Erkennen',
-      frage: 'Aktiv oder Passiv?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Die Post wird um 18 Uhr geschlossen.',
-        'Wir schließen das Fenster.',
-        'Das Paket wurde gestern geliefert.',
-        'Ich werde morgen einkaufen.',
-      ],
-      loesungen: [
-        '**Passiv** Präsens — wird + geschlossen',
-        '**Aktiv** — normales Subjekt + Verb',
-        '**Passiv** Präteritum — wurde + geliefert',
-        '**Aktiv** (Futur!) — werde + Infinitiv, kein Partizip II ~~(la trampa de la lección)~~',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      kicker: 'Präsens',
+      titel: 'Was passiert gerade?',
+      items: [
+        { text: 'Im Supermarkt **werden** die Regale jeden Morgen **gefüllt**.', gl: '— Plural → werden' },
+        { text: 'Die Post **wird** am Samstag um 12 Uhr **geschlossen**.', gl: '— typisches Schild' },
+        { text: 'Hier **wird** gerade eine neue Brücke **gebaut**.', gl: '~~se está construyendo~~' },
+        { text: 'Die Pakete **werden** meistens am Vormittag **geliefert**.' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Umformen',
-      frage: 'Bilde das Passiv.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Man repariert das Auto. → ___',
-        'Man kontrollierte die Tickets. → ___',
-        'Man öffnet das Geschäft um 9 Uhr. → ___',
-      ],
-      loesungen: [
-        'Das Auto **wird repariert**.',
-        'Die Tickets **wurden kontrolliert**. ~~(Plural → wurden)~~',
-        'Das Geschäft **wird** um 9 Uhr **geöffnet**.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Selbst bilden',
-      frage: 'Beschreibe im Passiv …',
-      loesungLabel: 'Mögliche Lösung',
-      aufgaben: [
-        '… was in einer Bäckerei jeden Tag passiert. ~~(dos frases)~~',
-        '… was letztes Jahr in deiner Straße gemacht wurde.',
-      ],
-      loesungen: [
-        'Das Brot **wird** früh **gebacken**. Die Brötchen **werden** um 6 Uhr **verkauft**. ~~Valen otros verbos: wird geliefert, wird vorbereitet…~~',
-        'Letztes Jahr **wurde** die Straße **repariert**. ~~También: wurde renoviert / wurde gebaut — importa wurde + Partizip II al final.~~',
+      type: 'beispiele',
+      kicker: 'Präteritum',
+      titel: 'Was ist passiert?',
+      items: [
+        { text: 'Das Museum **wurde** letztes Jahr **renoviert**.', gl: '~~se renovó~~' },
+        { text: 'Wegen des Schnees **wurde** die Autobahn **gesperrt**.', gl: '— wegen + Genitiv + Passiv' },
+        { text: 'Früher **wurde** in diesem Haus Brot **gebacken**.', gl: '— heute ist hier ein Café' },
+        { text: 'Ich **werde** das Formular morgen **ausfüllen**. — Das Formular **wurde** schon **ausgefüllt**.', gl: '— Futur (Infinitiv) ↔ Passiv (Partizip II)' },
       ],
     },
 
@@ -184,7 +159,7 @@ export default {
     {
       type: 'tipp',
       label: 'Prüfungstipp',
-      text: 'In **Lesen Teil 4–5** wimmelt es von Passiv: *wird geschlossen, wurde verschoben, wird gesperrt*. Wenn du **wird/wurde + Partizip II** sofort als „algo se hace / se hizo“ liest, sparst du wertvolle Zeit — und die brauchst du bei 65 Minuten für fünf Teile.',
+      text: 'In **Lesen Teil 4–5** gibt es sehr viel Passiv: *wird geschlossen, wurde verschoben, wird gesperrt*. Wenn du **wird/wurde + Partizip II** sofort als „algo se hace / se hizo“ liest, sparst du wertvolle Zeit — und die brauchst du bei 65 Minuten für fünf Teile.',
     },
 
     { type: 'rule' },

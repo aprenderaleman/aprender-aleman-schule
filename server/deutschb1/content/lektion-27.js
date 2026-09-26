@@ -161,51 +161,43 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Erkennen',
-      frage: 'Informell oder formell?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        '„Sehr geehrte Frau Weber, …“',
-        '„Hallo Marco, wie geht es dir?“',
-        '„Sag mal, hast du am Sonntag Zeit?“',
-      ],
-      loesungen: [
-        '**Formell** — die Anrede *Sehr geehrte* gehört zu Teil 3.',
-        '**Informell** — *Hallo* + Vorname + du-Frage.',
-        '**Informell** — *Sag mal* + du: perfekt für Teil 1.',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      kicker: 'Kernwortschatz',
+      titel: 'Sätze für deine E-Mail',
+      items: [
+        { text: 'Ich habe mich sehr **über** deine **Einladung gefreut**!', gl: '— reagieren' },
+        { text: 'Bei mir gibt es eine große **Neuigkeit**: Ich habe einen Hund!', gl: '— erzählen' },
+        { text: 'Ich muss dir unbedingt von meinem Urlaub in Portugal **erzählen**.' },
+        { text: '**Hast** du **Lust**, am Sonntag mit mir wandern zu gehen?', gl: '— vorschlagen' },
+        { text: 'Ich **schlage vor**, dass wir **uns** um sieben am Bahnhof **treffen**.' },
+        { text: 'Hoffentlich **klappt** es! **Sag** mir bitte bis Freitag **Bescheid**.', gl: '— schließen' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Ordnen',
-      frage: 'Bring die fünf Teile in die richtige Reihenfolge einer E-Mail.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        '(a) Viele Grüße\nDiego',
-        '(b) Liebe Julia,',
-        '(c) Soll ich am Freitag etwas zum Essen mitbringen?',
-        '(d) danke für deine E-Mail! Schön, dass es dir gut geht.',
-        '(e) Bei mir ist viel passiert: Ich habe eine neue Wohnung gefunden.',
+      type: 'beispiele',
+      kicker: 'Anrede & Gruß',
+      titel: 'Informell oder formell?',
+      items: [
+        { text: '*Sehr geehrte Frau Weber,*', gl: '— formell: das gehört zu Teil 3' },
+        { text: '*Hallo Marco, wie geht es dir?*', gl: '— informell: perfekt für Teil 1' },
+        { text: '*Liebe Julia, danke für deine E-Mail!*', gl: '— Komma, dann klein weiter' },
+        { text: '*Soll ich zur Party etwas **mitbringen**?*', gl: '~~«llevar algo» a una fiesta = mitbringen~~' },
+        { text: '*Liebe Grüße* — und in der nächsten Zeile: *Diego*', gl: '— kein Komma nach dem Gruß' },
       ],
-      loesung: '**b → d → e → c → a** — Anrede → reagieren → erzählen → fragen → Gruß. Beachte das kleine *danke* in (d): Nach dem Komma der Anrede geht es klein weiter.',
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Schreib je einen Satz.',
-      loesungLabel: 'Mögliche Lösung',
-      aufgaben: [
-        'Reagiere auf die Nachricht: „Ich habe die B1-Prüfung bestanden!“',
-        'Erzähl eine Neuigkeit mit *Stell dir vor, …*',
-        'Schlag ein Treffen am Wochenende vor.',
-      ],
-      loesungen: [
-        '*Toll, dass du die Prüfung bestanden hast — herzlichen Glückwunsch!* ~~Vale cualquier reacción con emoción: Super! / Ich freue mich so für dich!~~',
-        '*Stell dir vor, ich habe ein Fahrrad gekauft und fahre jetzt jeden Tag damit zur Arbeit.*',
-        '*Wie wäre es am Sonntag? Wir könnten zusammen frühstücken.* ~~También válido: Hast du am Samstag Zeit?~~',
+      type: 'modell',
+      eyebrow: 'Mini-E-Mail — die fünf Teile in der richtigen Reihenfolge',
+      thema: 'Anrede → reagieren → erzählen → fragen → Gruß',
+      absaetze: [
+        '==Liebe Julia,==',
+        'danke für deine E-Mail! Schön, dass es dir gut geht.',
+        'Bei mir ist viel passiert: Ich habe eine neue Wohnung gefunden.',
+        'Soll ich am Freitag etwas zum Essen mitbringen?',
+        '==Viele Grüße==\nDiego',
       ],
     },
 
@@ -217,7 +209,7 @@ export default {
       eyebrow: 'Prüfungsbezug',
       modul: 'Schreiben · Teil 1 · komplette Aufgabe',
       titel: 'Informelle E-Mail „Besuch bei Paul“ · ca. 80 Wörter · 20 Minuten',
-      anweisung: 'Bearbeite die Aufgabe unter Echtbedingungen (20 Minuten, alle drei Punkte) und vergleiche erst danach mit der Lösung.',
+      anweisung: 'Bearbeite die Aufgabe wie in der echten Prüfung (20 Minuten, alle drei Punkte). Vergleiche erst danach mit der Lösung.',
       absaetze: [
         'Dein Freund Paul ist in eine neue Wohnung umgezogen und hat dir geschrieben. Er lädt dich ein, ihn bald zu besuchen. Schreibe ihm eine E-Mail (ca. 80 Wörter):\n• Reagiere auf seine Nachricht.\n• Erzähl, was es bei dir Neues gibt.\n• Schlag einen Termin für einen Besuch vor.',
       ],

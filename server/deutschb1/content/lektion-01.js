@@ -53,7 +53,7 @@ export default {
       eyebrow: 'Erklärung — was B1 bedeutet',
       absaetze: [
         'B1 ist eine Stufe des __Gemeinsamen Europäischen Referenzrahmens (GER)__ und heißt dort **„selbstständige Sprachverwendung“** ~~(usuario independiente)~~. Mit B1 verstehst du die **Hauptpunkte** klarer Alltagstexte, kommst auf Reisen zurecht, schreibst **einfache zusammenhängende Texte** und sprichst über Erfahrungen, Pläne und Meinungen.',
-        'Das Zertifikat B1 wird international anerkannt. Viele Behörden verlangen es z. B. für **Aufenthaltstitel oder die Einbürgerung** — die Regeln sind aber **je nach Land und Behörde** unterschiedlich. Frag immer bei der zuständigen Behörde nach, welches Zertifikat sie akzeptiert.',
+        'Das Zertifikat B1 ist international anerkannt. Viele Behörden verlangen es z. B. für **Aufenthaltstitel oder die Einbürgerung** — die Regeln sind aber **je nach Land und Behörde** unterschiedlich. Frag immer bei der zuständigen Behörde nach, welches Zertifikat sie akzeptiert.',
       ],
     },
     {
@@ -116,47 +116,19 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Erkennen',
-      frage: 'Richtig oder falsch?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Du musst immer alle vier Module am selben Tag machen.',
-        'Ein Modul ist ab 60 von 100 Punkten bestanden.',
-        'Wenn du Schreiben nicht bestehst, wiederholst du die ganze Prüfung.',
-        'Das Modul Sprechen ist eine Paarprüfung.',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Rund um die Prüfung',
+      items: [
+        { text: 'Ich mache die **Anmeldung** online und wähle einen **Termin** im Juni.', gl: '— la inscripción · la fecha' },
+        { text: 'Yusuf hat das **Modul** Lesen mit 72 Punkten **bestanden**.', gl: '— bestehen = aprobar' },
+        { text: 'Mit 55 Punkten ist Schreiben nicht bestanden — Lina wiederholt nur dieses **Modul**.', gl: '— se repite solo el módulo suspendido' },
+        { text: 'Lies jede **Aufgabe** zweimal genau, dann machst du weniger Fehler.', gl: '— la tarea' },
+        { text: 'Nach ein paar Wochen kann Elena ihr **Ergebnis** online sehen.', gl: '— el resultado' },
+        { text: 'Herr Okafor holt sein **Zeugnis** im **Prüfungszentrum** ab.', gl: '— el diploma · el centro examinador' },
       ],
-      loesungen: [
-        '**Falsch** — die Module kannst du auch einzeln ablegen.',
-        '**Richtig** — 60 Punkte pro Modul reichen.',
-        '**Falsch** — du wiederholst nur das Modul Schreiben. ~~Solo el módulo suspendido.~~',
-        '**Richtig** — du sprichst mit einer Partnerin oder einem Partner.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Wortschatz anwenden',
-      frage: 'Welches Wort aus dem Kernwortschatz passt?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Für die Prüfung muss ich zuerst die ___ online machen.',
-        'Nach vier Wochen konnte ich mein ___ im Internet sehen.',
-        'Ich habe alle Module ___ — jetzt bekomme ich das Zeugnis!',
-      ],
-      loesungen: [
-        'die **Anmeldung** ~~(la inscripción)~~',
-        'mein **Ergebnis**',
-        '**bestanden** ~~(Partizip II de bestehen)~~',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Schreib drei Sätze: Warum machst du die B1-Prüfung? Welches Modul findest du leicht, welches schwer?',
-      loesungLabel: 'Mögliche Lösung',
-      loesung: 'Ich mache die B1-Prüfung, **weil** ich in Deutschland studieren möchte. Lesen finde ich leicht, **denn** ich lese jeden Tag deutsche Texte. Sprechen finde ich noch schwer, **deshalb** übe ich es in diesem Kurs besonders viel. ~~Vale cualquier contenido personal — fíjate en los conectores weil/denn/deshalb, que verás en la Lektion 4.~~',
     },
 
     { type: 'rule' },

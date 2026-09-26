@@ -119,53 +119,29 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Erkennen',
-      frage: 'wenn oder als?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        '___ ich klein war, hatte ich einen Hund.',
-        '___ ich Kopfschmerzen habe, trinke ich viel Wasser.',
-        '___ wir letztes Jahr in Wien waren, hat es geschneit.',
-        '___ du morgen kommst, koche ich für uns.',
-      ],
-      loesungen: [
-        '**Als** — Zeitraum in der Vergangenheit ~~(la infancia)~~.',
-        '**Wenn** — Wiederholung ~~(siempre que)~~.',
-        '**Als** — einmal, Vergangenheit ~~(el año pasado, un viaje)~~.',
-        '**Wenn** — Zukunft / Bedingung ~~(si / cuando vengas)~~.',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Gegensatz: obwohl & trotzdem',
+      items: [
+        { text: 'Ich gehe ins Konzert, **obwohl** ich wenig Geld **habe**.', gl: '— obwohl → verbo al final' },
+        { text: 'Das Wetter ist schlecht. **Trotzdem machen** wir ein Picknick.', gl: '— trotzdem → inversión' },
+        { text: '**Obwohl** Lukas krank **ist**, **geht** er zur Arbeit.', gl: '— la subordinada delante: luego el verbo' },
+        { text: 'Deutsch ist schwer, **trotzdem lerne** ich jeden Tag.', gl: '— aun así' },
+        { text: 'Sie hat keine Zeit. **Trotzdem hilft** sie ihrer Nachbarin.', gl: '— trotzdem + verbo + sujeto' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Umformen',
-      frage: 'Sag es mit dem anderen Konnektor.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Ich habe wenig Geld. Trotzdem gehe ich ins Konzert. ~~(obwohl)~~',
-        'Obwohl das Wetter schlecht ist, machen wir ein Picknick. ~~(trotzdem)~~',
-      ],
-      loesungen: [
-        'Ich gehe ins Konzert, **obwohl** ich wenig Geld **habe**. ~~El verbo pasa al final.~~',
-        'Das Wetter ist schlecht. **Trotzdem machen** wir ein Picknick. ~~Inversión tras trotzdem.~~',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Selbst bilden',
-      frage: 'Ergänze die Sätze über dein Leben.',
-      loesungLabel: 'Mögliche Lösung',
-      aufgaben: [
-        '**Als** ich ein Kind war, …',
-        '**Wenn** ich Stress habe, …',
-        'Deutsch ist schwer. **Trotzdem** …',
-      ],
-      loesungen: [
-        'Als ich ein Kind war, **habe ich** viel Fußball **gespielt**.',
-        'Wenn ich Stress habe, **höre ich** Musik.',
-        'Trotzdem **lerne ich** jeden Tag. ~~Cualquier contenido vale — comprueba solo la posición del verbo.~~',
+      type: 'beispiele',
+      kicker: 'cuando',
+      titel: 'wenn oder als?',
+      items: [
+        { text: '**Als** ich klein **war**, hatte ich einen Hund.', gl: '— etapa del pasado → als' },
+        { text: '**Wenn** ich Kopfschmerzen **habe**, trinke ich viel Wasser.', gl: '— siempre que → wenn' },
+        { text: '**Als** wir letztes Jahr in Wien **waren**, hat es geschneit.', gl: '— una vez en el pasado → als' },
+        { text: '**Wenn** du morgen **kommst**, koche ich für uns.', gl: '— futuro → wenn' },
+        { text: '**Wenn** ich Stress **habe**, höre ich Musik.', gl: '— repetido → wenn' },
       ],
     },
 

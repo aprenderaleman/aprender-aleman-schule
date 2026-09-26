@@ -3,7 +3,7 @@
 export default {
   spec: ['Bloque 3', 'Themenfelder & Wortschatz', 'Niveau B1', 'Prüfungsrelevanz: Schreiben & Lesen'],
   h1: 'Einkaufen & Konsum',
-  lead: 'Im Geschäft und online: einkaufen, bezahlen, umtauschen — und die Werbung durchschauen. ~~Léxico de supervivencia diaria.~~',
+  lead: 'Im Geschäft und online: einkaufen, bezahlen, umtauschen — und die Werbung kritisch lesen. ~~Léxico de supervivencia diaria.~~',
 
   content: [
     // ── Lernziele ─────────────────────────────────────────────────
@@ -136,50 +136,43 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Wortschatz',
-      frage: 'Welches Wort passt?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Das kleine Papier von der Kasse: der ___',
-        'Die Jacke ist zu klein — sie ___ nicht.',
-        'reduziert = im ___',
-        'ein Produkt zurückbringen und ein anderes nehmen: ___',
-      ],
-      loesungen: [
-        'der **Kassenbon**',
-        'sie **passt** nicht',
-        'im **Angebot**',
-        '**umtauschen**',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Einkaufen im Alltag',
+      items: [
+        { text: 'Die Winterjacken sind diese Woche **im Angebot** — 30 Prozent billiger.', gl: '— reduziert' },
+        { text: 'Die blaue Hose **passt** gut **zu** deiner Jacke.', gl: '— combina con' },
+        { text: 'Heb den **Kassenbon** auf, dann kannst du das Geschenk **umtauschen**.', gl: '— sin tique no hay cambio' },
+        { text: 'Ich habe die Hose in Größe L **anprobiert**, aber sie war zu groß.' },
+        { text: 'Wir **bezahlen** heute bar, weil das Kartengerät nicht funktioniert.' },
+        { text: 'Ich bekomme jeden Tag zu viel **Werbung** per E-Mail.', gl: '— die Werbung: ohne Plural' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Dialog ergänzen',
-      frage: 'Im Kleidungsgeschäft. Ergänze die Lücken.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        '● Guten Tag, ich ___ eine Winterjacke. ~~(buscar)~~',
-        '○ Gern. Welche ___ haben Sie? — M oder L.',
-        '● Kann ich die Jacke ___?',
-        '● Ich nehme sie. Kann ich mit Karte ___?',
-      ],
-      loesungen: [
-        'ich **suche** eine Winterjacke',
-        'Welche **Größe** haben Sie?',
-        'Kann ich die Jacke **anprobieren**?',
-        'Kann ich mit Karte **bezahlen**? ~~(o: zahlen)~~',
+      type: 'beispiele',
+      kicker: 'Höflich einkaufen',
+      titel: 'Mit Konjunktiv II klingt es freundlicher',
+      items: [
+        { text: 'Ich **hätte gern** die Jacke in Größe M.', gl: '— mejor que «Ich will …»' },
+        { text: '**Könnten** Sie mir die Schuhe bitte eine Nummer größer bringen?' },
+        { text: '**Würden** Sie das Geschenk bitte einpacken?' },
+        { text: 'Ich **würde** den Pullover gern **umtauschen**. Hier ist der Kassenbon.' },
       ],
     },
+
+    { type: 'rule' },
+
+    // ── Modelltexte ───────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Schreib 60-80 Wörter: Kaufst du lieber im Geschäft oder online?',
-      aufgabe: 'Sag, was du wo kaufst und warum. Nenne auch einen Nachteil.',
-      loesungLabel: 'Mögliche Lösung',
-      loesung: 'Lebensmittel kaufe ich immer im Geschäft, weil ich frisches Obst und Gemüse sehen möchte. Kleidung bestelle ich aber oft online, denn dort ist die Auswahl größer und die Preise sind oft besser. Ein Nachteil ist: Man kann nichts anprobieren. Letzte Woche habe ich Schuhe bestellt, aber die Größe hat nicht gepasst, und ich musste sie zurückschicken. Trotzdem finde ich Online-Einkaufen sehr praktisch. ~~Estructura ganadora: opinión + porqué + un ejemplo propio.~~',
+      type: 'modell',
+      eyebrow: 'Modelltexte — Dialog und kurze Meinung',
+      thema: 'Lies den Dialog und den Text. Achte im Dialog auf die fett gedruckten Wörter.',
+      absaetze: [
+        '==Dialog · Im Kleidungsgeschäft:==\n● Guten Tag, ich **suche** eine Winterjacke.\n○ Gern. Welche **Größe** haben Sie?\n● M oder L. Kann ich die Jacke **anprobieren**?\n○ Natürlich, die Kabine ist dort hinten.\n● Die Jacke in M passt. Ich nehme sie. Kann ich mit Karte **bezahlen**?\n○ Ja, gern.',
+        '==Text · Im Geschäft oder online?== Lebensmittel kaufe ich immer im Geschäft, weil ich frisches Obst und Gemüse sehen möchte. Kleidung bestelle ich aber oft online, denn dort ist die Auswahl größer und die Preise sind oft besser. Ein Nachteil ist: Man kann nichts anprobieren. Letzte Woche habe ich Schuhe bestellt, aber die Größe hat nicht gepasst, und ich musste sie zurückschicken. Trotzdem finde ich Online-Einkaufen sehr praktisch. ~~Estructura ganadora: opinión + porqué + un ejemplo propio.~~',
+      ],
     },
 
     { type: 'rule' },

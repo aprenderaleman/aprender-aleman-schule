@@ -135,50 +135,32 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Wortschatz',
-      frage: 'Welches Wort passt?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Man sieht sie im Fernsehen oder streamt sie: die ___',
-        'Damit schreibst du unterwegs Nachrichten: das ___',
-        'Dort spielt man mit anderen zusammen Sport: der ___',
-        '„Quedar con amigos“ auf Deutsch: sich ___',
-      ],
-      loesungen: [
-        'die **Serie**',
-        'das **Handy**',
-        'der **Verein**',
-        'sich **treffen** ~~(o: sich verabreden, si se fija día y hora)~~',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Freizeit, Verabredungen und Medien',
+      items: [
+        { text: 'Meine Schwester **trifft sich** jeden Freitag **mit** ihren Kolleginnen.', gl: '— sich treffen mit + Dativ' },
+        { text: 'Wir haben **uns** für Sonntag um drei **verabredet**.', gl: '— Tag und Uhrzeit fest' },
+        { text: 'Jonas **schlägt vor**, dass wir zusammen kochen.', gl: '— vorschlagen: trennbar' },
+        { text: 'Seit dem Umzug bin ich Mitglied **im Verein**.' },
+        { text: 'Am Wochenende **sehen** wir selten **fern** — wir **streamen** lieber eine **Serie**.' },
+        { text: 'Beim Essen bleibt das **Handy** bei uns in der Tasche.' },
       ],
     },
+
+    { type: 'rule' },
+
+    // ── Modelltexte ───────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Dialog ergänzen',
-      frage: 'Zwei Freunde verabreden sich. Ergänze die Lücken.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        '● Hast du am Freitag ___?',
-        '○ Ja! Wollen wir etwas zusammen ___?',
-        '● Gern. Wie ___ es mit Kino?',
-        '○ Gute Idee! Schick mir vorher eine ___.',
+      type: 'modell',
+      eyebrow: 'Modelltexte — Verabredung & Freizeit',
+      thema: 'Ein kurzer Dialog und ein Text über die Freizeit. Achte auf das Verb auf Position 2 und auf den Wortschatz der Lektion.',
+      absaetze: [
+        '==Dialog · Zwei Freunde verabreden sich:==\n● Hast du am Freitag Zeit?\n○ Ja! Wollen wir etwas zusammen unternehmen?\n● Gern. Wie wäre es mit Kino?\n○ Gute Idee! Schick mir vorher eine Nachricht.',
+        '==Text · Meine Freizeit:== In meiner Freizeit spiele ich Fußball in einem **Verein**. Wir trainieren zweimal pro Woche, und am Samstag haben wir oft ein Spiel. Danach **treffe** ich **mich** mit Freunden — wir essen zusammen oder sehen einen Film. Abends schaue ich gern **Serien** auf dem **Handy**, manchmal **sehe** ich auch **fern**. Am Sonntag **unternehme** ich etwas mit meiner Familie, zum Beispiel machen wir einen Spaziergang im Park.',
       ],
-      loesungen: [
-        'Hast du am Freitag **Zeit**?',
-        'Wollen wir etwas zusammen **unternehmen**? ~~(o: machen)~~',
-        'Wie **wäre** es mit Kino?',
-        'Schick mir vorher eine **Nachricht**.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Schreib 60-80 Wörter: Was machst du in deiner Freizeit?',
-      aufgabe: 'Nenne dein Hobby, wie oft du es machst und mit wem. Schreib auch einen Satz über Fernsehen oder Handy.',
-      loesungLabel: 'Mögliche Lösung',
-      loesung: 'In meiner Freizeit spiele ich Fußball in einem Verein. Wir trainieren zweimal pro Woche, und am Samstag haben wir oft ein Spiel. Danach treffe ich mich mit Freunden — wir essen zusammen oder sehen einen Film. Abends schaue ich gern Serien auf dem Handy, manchmal sehe ich auch fern. Am Sonntag unternehme ich etwas mit meiner Familie, zum Beispiel machen wir einen Spaziergang im Park. ~~Vale cualquier texto con tu hobby real — lo importante: verbo en posición 2 y el léxico de la lección.~~',
     },
 
     { type: 'rule' },

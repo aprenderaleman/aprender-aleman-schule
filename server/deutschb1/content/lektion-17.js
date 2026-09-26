@@ -112,55 +112,18 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Erkennen',
-      frage: 'Akkusativ oder Dativ? Warum?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Ich ziehe mich an.',
-        'Ich ziehe mir die Schuhe an.',
-        'Ich danke dir für die Hilfe.',
-        'Er interessiert sich für Autos.',
-      ],
-      loesungen: [
-        '**mich** = Akkusativ — kein anderes Objekt im Satz',
-        '**mir** = Dativ — *die Schuhe* ist schon der Akkusativ',
-        '**dir** = Dativ — *danken* ist ein Dativ-Verb',
-        '**sich** = Akkusativ — reflexives Verb mit Präposition *für*',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Pronomen einsetzen',
-      frage: 'mich, mir, dich oder dir?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Ich freue ___ auf die Party.',
-        'Kann ich ___ helfen?',
-        'Kauf ___ doch ein Eis! ~~(cómprate)~~',
-        'Beeil ___, wir sind spät!',
-      ],
-      loesungen: [
-        'Ich freue **mich** auf die Party. ~~(reflexivo, Akk.)~~',
-        'Kann ich **dir** helfen? ~~(helfen + Dativ — nunca «dich»)~~',
-        'Kauf **dir** doch ein Eis! ~~(ein Eis = Akk. → tú en Dativ)~~',
-        'Beeil **dich**, wir sind spät! ~~(reflexivo, Akk.)~~',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Selbst bilden',
-      frage: 'Antworte mit einem ganzen Satz.',
-      loesungLabel: 'Mögliche Lösung',
-      aufgaben: [
-        'Worauf freust du dich diese Woche?',
-        'Wem hilfst du manchmal — und wobei?',
-      ],
-      loesungen: [
-        'Ich freue **mich auf** das Wochenende, weil ich **mich mit** Freunden treffe. ~~Vale cualquier plan real; lo importante: mich + auf + Akkusativ.~~',
-        'Ich helfe **meiner Nachbarin** beim Einkaufen. ~~Persona en dativo: meinem Bruder, meinen Eltern…~~',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Im Alltag — mich, mir, dir',
+      items: [
+        { text: 'Ich **interessiere mich** sehr **für** Geschichte, deshalb gehe ich oft ins Museum.', gl: '— sich interessieren für + Akk.' },
+        { text: '**Beeilt euch**, der Film fängt gleich an!', gl: '— ihr → euch' },
+        { text: 'Sie hat **sich** sehr **über** die Blumen **gefreut**.', gl: '~~über = alegrarse de algo que ya pasó~~' },
+        { text: 'Kämm **dir** bitte die Haare, wir gehen gleich los.', gl: '— die Haare = Akk. → dir' },
+        { text: 'Wir **danken unseren** Nachbarn für die Hilfe beim Umzug.', gl: '— danken + Dativ Plural' },
+        { text: '**Gehört dir** der schwarze Rucksack? — Nein, er **gehört meinem** Kollegen.', gl: '— gehören + Dativ' },
       ],
     },
 

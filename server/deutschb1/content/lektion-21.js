@@ -86,7 +86,7 @@ export default {
       kicker: 'dafür · dagegen · teils-teils',
       titel: 'Woran erkennst du es?',
       items: [
-        { text: '„Endlich! Das hätte man schon viel früher machen sollen.“', gl: '— dafür: pura aprobación' },
+        { text: '„Endlich! Darauf warte ich schon seit Jahren. Super!“', gl: '— dafür: pura aprobación' },
         { text: '„Ich verstehe die Idee, aber sie löst das Problem nicht.“', gl: '— dagegen: el «aber» decide' },
         { text: '„Einerseits spart das Zeit, andererseits kostet es viel Geld. Schwierig.“', gl: '— teils-teils: sin decisión' },
         { text: '„Meiner Meinung nach nur Nachteile — ich bin klar dagegen.“', gl: '— dagegen: explícito' },
@@ -103,51 +103,19 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Erkennen',
-      frage: 'Markiere die Meinungsausdrücke. Welche Wörter zeigen die Meinung?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        '„Ich finde es super, dass die Stadt mehr Radwege baut.“',
-        '„Ich glaube nicht, dass ein Verbot etwas ändert.“',
-        '„Da stimme ich meiner Vorrednerin voll zu.“',
-      ],
-      loesungen: [
-        '**„Ich finde es super, dass …“** — klar positiv → dafür.',
-        '**„Ich glaube nicht, dass … etwas ändert“** — negativ → dagegen.',
-        '**„stimme … voll zu“** — die Person übernimmt die Meinung der Vorrednerin. ~~Para clasificarla necesitas saber qué dijo la otra persona: ¡ojo en el examen!~~',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Einordnen',
-      frage: 'Dafür, dagegen oder teils-teils?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        '„Mehr Videokonferenzen statt Dienstreisen? Unbedingt — das spart Geld und schont die Umwelt.“',
-        '„Hausaufgaben abschaffen? Es kommt darauf an: In der Grundschule ja, später eher nicht.“',
-        '„Ein tolles Projekt auf dem Papier. Aber wer soll das bezahlen? Ich bin skeptisch.“',
-      ],
-      loesungen: [
-        '**Dafür** — „unbedingt“ + zwei Vorteile.',
-        '**Teils-teils** — „es kommt darauf an“ + ja/nein je nach Fall.',
-        '**Dagegen** — nach dem „Aber“ kommen Zweifel: „skeptisch“ = kritisch, eher nein.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Thema: „Sollen Schulen Handys komplett verbieten?“ Schreib zwei kurze Kommentare (je 1–2 Sätze): einen dafür, einen dagegen. Benutze Meinungssprache.',
-      loesungLabel: 'Mögliche Lösung',
-      aufgaben: [
-        'Kommentar **dafür**:',
-        'Kommentar **dagegen**:',
-      ],
-      loesungen: [
-        '„Ich bin klar dafür. Ohne Handys sind die Schüler viel konzentrierter.“ ~~Vale cualquier variante con «ich finde / ich bin dafür / meiner Meinung nach» y una razón.~~',
-        '„Ich finde ein Verbot falsch, denn die Schüler müssen lernen, mit dem Handy richtig umzugehen.“',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      kicker: 'dafür · dagegen · teils-teils',
+      titel: 'Noch mehr Kommentare einordnen',
+      items: [
+        { text: '„Ich **stimme** Herrn Lenz **zu**: Mehr Grün in der Stadt ist wichtig.“', gl: '— dafür · zustimmen + Dativ' },
+        { text: '„Ich **glaube** nicht, dass mehr Parkplätze helfen.“', gl: '— dagegen' },
+        { text: '„Das Projekt kostet viel Geld. **Trotzdem** finde ich es richtig.“', gl: '— dafür: «trotzdem» lleva de vuelta al sí' },
+        { text: '„Ein **Vorteil** ist der Preis, ein **Nachteil** die lange Fahrt. **Es kommt darauf an**, wie oft man fährt.“', gl: '— teils-teils' },
+        { text: '„**Meiner Meinung nach** ist das reine Geldverschwendung.“', gl: '— dagegen: explícito' },
+        { text: '„**Einerseits** mehr Freizeit, **andererseits** weniger Geld — ich weiß es wirklich nicht.“', gl: '— teils-teils: sin decisión' },
       ],
     },
 
@@ -163,8 +131,8 @@ export default {
       absaetze: [
         '**(1) Tanja, 29:** Ich arbeite samstags im Krankenhaus — der Sonntag ist mein einziger freier Tag. Für Leute wie mich wäre das eine riesige Hilfe. Ich verstehe die Kritik nicht: Niemand muss ja sonntags einkaufen, aber alle könnten.',
         '**(2) Murat, 45:** Ich habe selbst zwanzig Jahre im Einzelhandel gearbeitet. Die Verkäuferinnen und Verkäufer brauchen einen festen freien Tag mit ihren Familien. Ein offener Sonntag klingt bequem, aber er wird auf dem Rücken der Angestellten organisiert. Von mir ein klares Nein.',
-        '**(3) Elena, 34:** Schwierige Frage. Einerseits fände ich es praktisch, sonntags einkaufen zu können. Andererseits ist der ruhige Sonntag etwas Besonderes, das ich nicht verlieren möchte. Vielleicht wäre ein offener Sonntag pro Monat ein guter Mittelweg.',
-        '**(4) Ben, 52:** Klar, bequem wäre das. Aber brauchen wir wirklich noch mehr Konsum? Sechs Tage Einkaufen reichen völlig. Wer nicht planen kann, dem hilft auch ein siebter Tag nicht.',
+        '**(3) Elena, 34:** Schwierige Frage. Einerseits wäre es praktisch, sonntags einkaufen zu können. Andererseits ist der ruhige Sonntag etwas Besonderes, das ich nicht verlieren möchte. Vielleicht wäre ein offener Sonntag pro Monat ein guter Mittelweg.',
+        '**(4) Ben, 52:** Klar, bequem wäre das. Aber brauchen wir wirklich noch mehr Konsum? Sechs Tage Einkaufen reichen völlig. Wenn man nicht planen kann, hilft auch ein siebter Tag nicht.',
         '**(5) Rosa, 61:** Ich bin dafür! In vielen Ländern ist das normal, und die Innenstädte sind sonntags voller Leben statt leer. Das bringt den Cafés und kleinen Läden Kunden — und der Stadt neue Arbeitsplätze.',
       ],
       optionen: [

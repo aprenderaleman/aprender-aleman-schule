@@ -268,10 +268,12 @@ function TeilItems({ teil, seed, gl }) {
 function TeilFormular({ teil }) {
   const [vals, setVals] = useState({})
   const [checked, setChecked] = useState(false)
+  // Teléfonos, fechas y códigos: "030 12 34" = "030-1234" = "0301234".
+  const clean = s => norm(s).replace(/[\s\-/.,:]/g, '')
   const ok = f => {
-    const v = norm(vals[f.id])
+    const v = clean(vals[f.id])
     return (f.erwartet || []).some(e => {
-      const n = norm(e)
+      const n = clean(e)
       return v === n || (v.length >= 4 && (n.includes(v) || v.includes(n)))
     })
   }

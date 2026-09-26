@@ -57,7 +57,7 @@ export default {
         },
         {
           titel: 'Etwas Positives sagen',
-          text: '__„Das war sehr interessant.“__ Oder konkreter: __„Mir hat gefallen, dass du ein Beispiel erzählt hast.“__ ~~ojo: tras «Mir hat gefallen, dass …» el verbo va al final.~~',
+          text: '__„Das war sehr interessant.“__ Oder konkreter: __„Mir hat gefallen, dass du ein Beispiel gebracht hast.“__ ~~ojo: tras «Mir hat gefallen, dass …» el verbo va al final.~~',
         },
         {
           titel: 'Eine Frage stellen',
@@ -114,7 +114,7 @@ export default {
       thema: 'Nach der Präsentation „Einkaufen im Internet“',
       woerter: 'zwei Mini-Dialoge',
       absaetze: [
-        '**Partnerin:** Danke für deine Präsentation, das war sehr interessant! Mir hat gefallen, dass du ein Beispiel erzählt hast. Ich habe eine Frage: Wie oft bestellst du etwas im Internet?\n**Du:** Danke für die Frage! Ich glaube, zwei- oder dreimal im Monat — meistens Bücher.',
+        '**Partnerin:** Danke für deine Präsentation, das war sehr interessant! Mir hat gefallen, dass du ein Beispiel gebracht hast. Ich habe eine Frage: Wie oft bestellst du etwas im Internet?\n**Du:** Danke für die Frage! Ich glaube, zwei- oder dreimal im Monat — meistens Bücher.',
         '**Prüfer:** Sie haben gesagt, dass kleine Geschäfte Probleme bekommen. Ist das in Ihrem Heimatland auch so?\n**Du:** Das ist eine gute Frage. Das weiß ich nicht genau, aber ich glaube ja — in meiner Stadt haben einige kleine Läden geschlossen.',
       ],
       annotationen: [
@@ -126,51 +126,29 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Erkennen',
-      frage: 'Feedback, Frage oder Antwort?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        '„Mir hat gefallen, dass du über deine Familie gesprochen hast.“',
-        '„Kannst du das genauer erklären?“',
-        '„Ehrlich gesagt weiß ich das nicht genau.“',
-        '„Das war ein spannendes Thema!“',
-      ],
-      loesungen: [
-        '**Feedback** — ein konkretes Kompliment.',
-        '**Frage** — bittet um mehr Details.',
-        '**Antwort** — ehrlich und völlig okay auf B1.',
-        '**Feedback** — allgemeines Lob.',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Feedback, Fragen, Antworten',
+      items: [
+        { text: 'Danke für deine Präsentation — das war ein **spannendes** Thema!', gl: '— danken + loben' },
+        { text: '**Mir hat gefallen**, dass du über deine Familie gesprochen hast.', gl: '— im dass-Satz: Verb am Ende' },
+        { text: 'Du hast gesagt, dass Musik dir beim Lernen hilft. Kannst du das genauer **erklären**?', gl: '— ein Detail aufnehmen und fragen' },
+        { text: '**Ehrlich gesagt** höre ich beim Lernen lieber ruhige Musik ohne Text.', gl: '— eine ehrliche Antwort' },
+        { text: 'Das weiß ich nicht **genau**, aber ich **glaube**, die Preise sind ähnlich.', gl: '— der Notausgang' },
+        { text: 'Da hast du **recht**: In der Stadt ist das Fahrrad oft schneller.', gl: '— zustimmen' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Reagieren',
-      frage: 'Dein Partner hat über „Fast Food“ präsentiert. Reagiere.',
-      loesungLabel: 'Mögliche Lösung',
-      aufgaben: [
-        'Bedanke dich und sag etwas Positives.',
-        'Stell eine einfache Frage zu seinem Alltag.',
-      ],
-      loesungen: [
-        '„Danke für deine Präsentation! Das war sehr interessant — mir hat gefallen, dass du ehrlich über deine Gewohnheiten gesprochen hast.“',
-        '„Ich habe eine Frage: Wie oft isst du Fast Food?“ ~~una W-Frage simple es suficiente~~',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Jetzt wirst du gefragt. Antworte in zwei bis drei Sätzen.',
-      loesungLabel: 'Mögliche Lösung',
-      aufgaben: [
-        '„Du hast gesagt, dass Musik dir beim Lernen hilft. Welche Musik hörst du dann?“',
-        '„Ist Onlineshopping in Ihrem Heimatland teurer als in Deutschland?“ ~~no conoces los precios exactos — usa la salida de emergencia~~',
-      ],
-      loesungen: [
-        '„Danke für die Frage! Beim Lernen höre ich ruhige Musik ohne Text, meistens Klaviermusik. Mit Text kann ich mich nicht konzentrieren.“',
-        '„Das ist eine gute Frage. Das weiß ich nicht genau, aber ich glaube, einige Produkte sind billiger und andere teurer.“',
+      type: 'beispiele',
+      kicker: 'du oder Sie?',
+      titel: 'Mit dem Partner und mit den Prüfern',
+      items: [
+        { text: 'Fährst du auch im Winter mit dem Fahrrad?', gl: '— Frage an die Partnerin: du' },
+        { text: 'Danke für Ihre Frage! Die **beantworte** ich gern.', gl: '— Antwort an die Prüfer: Sie' },
+        { text: 'Ich möchte mich für das **Feedback bedanken**.', gl: '— sich bedanken für + Akkusativ' },
+        { text: 'Ich **glaube**, in meinem Heimatland ist das ähnlich.', gl: '— eine vorsichtige Antwort' },
       ],
     },
 

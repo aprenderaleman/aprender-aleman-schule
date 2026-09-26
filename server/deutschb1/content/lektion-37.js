@@ -127,49 +127,31 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Wortschatz',
-      frage: 'Welches Wort passt?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Der Zug kommt 30 Minuten später — er hat ___',
-        'Hier wartest du auf den Bus: ___',
-        'In Mannheim aus dem einen Zug aussteigen und in den anderen einsteigen: ___',
-        'Ein Hotelzimmer für zwei Personen: ___',
-      ],
-      loesungen: [
-        '**Verspätung**',
-        '**die Haltestelle**',
-        '**umsteigen**',
-        '**das Doppelzimmer**',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Fahrkarte, Hotel und Reklamation',
+      items: [
+        { text: 'Ich habe die **Fahrkarte** am Automaten gekauft.', gl: '— am Automaten oder in der App' },
+        { text: 'Der Bus um acht Uhr **fällt** heute **aus**, ich nehme den nächsten.' },
+        { text: 'Wir warten schon zehn Minuten **an der Haltestelle**.', gl: '— an + Dativ (wo?)' },
+        { text: 'Ich möchte ein **Doppelzimmer** mit Frühstück **buchen**.' },
+        { text: 'Frag doch **an der Rezeption** nach einem Stadtplan.' },
+        { text: 'Die Gäste **beschweren sich über** den Lärm im Flur.', gl: '— sich beschweren über + Akk.' },
       ],
     },
+
+    { type: 'rule' },
+
+    // ── Modelltext ────────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Sätze ergänzen',
-      frage: 'Welche Präposition (mit Artikel) fehlt?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Ich fahre ___ ___ Bus zur Arbeit. ~~(¿«en bus»?)~~',
-        'Entschuldigung, wie komme ich ___ Bahnhof? ~~(zu + der Bahnhof)~~',
-        'Der Zug ___ Hamburg fährt von Gleis 3 ab. ~~(¿destino?)~~',
-        'Wir möchten ein Zimmer ___ drei Nächte buchen.',
+      type: 'modell',
+      eyebrow: 'Modelltext — meine letzte Reise',
+      thema: 'So kann ein kurzer Text über eine Reise aussehen: im Perfekt und mit „mit dem …“. ~~(Unos 70 palabras: una buena medida para el examen.)~~',
+      absaetze: [
+        'Im Sommer bin ich **mit dem Zug** nach München gefahren. Ich habe die Fahrkarte online gekauft, das war billiger. Leider hatte mein Zug eine Stunde **Verspätung**, und ich habe in Stuttgart den Anschluss verpasst. In München habe ich in einem kleinen Hotel gewohnt. Das **Doppelzimmer** war schön, aber die Heizung hat nicht funktioniert. Ich habe **mich** an der **Rezeption beschwert** und ein anderes Zimmer bekommen. Trotzdem war die Reise super!',
       ],
-      loesungen: [
-        '**mit dem** Bus ~~(mit + Dativ, nunca «in Bus»)~~',
-        '**zum** Bahnhof ~~(zu + dem = zum)~~',
-        'Der Zug **nach** Hamburg ~~(destino con ciudades: nach)~~',
-        'ein Zimmer **für** drei Nächte',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Deine letzte Reise: Schreib 60–80 Wörter. ~~(¿adónde? ¿en qué medio de transporte? ¿problemas? — Perfekt de la Lektion 6)~~',
-      loesungLabel: 'Mögliche Lösung',
-      loesung: 'Im Sommer bin ich mit dem Zug nach München gefahren. Ich habe die Fahrkarte online gekauft, das war billiger. Leider hatte mein Zug eine Stunde Verspätung, und ich habe in Stuttgart den Anschluss verpasst. In München habe ich in einem kleinen Hotel gewohnt. Das Doppelzimmer war schön, aber die Heizung hat nicht funktioniert. Ich habe mich an der Rezeption beschwert und ein anderes Zimmer bekommen. Trotzdem war die Reise super! *(~72 Wörter — Perfekt + mindestens un «mit dem …».)*',
     },
 
     { type: 'rule' },

@@ -133,55 +133,30 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Erkennen',
-      frage: 'Mit oder ohne ge-? Bilde das Partizip II.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'verkaufen → ___',
-        'einladen → ___',
-        'bestellen → ___',
-        'studieren → ___',
-        'erzählen → ___',
-      ],
-      loesungen: [
-        'verkaufen → **verkauft** ~~(ver- inseparable → sin ge-)~~',
-        'einladen → **eingeladen** ~~(separable → ge- en medio)~~',
-        'bestellen → **bestellt**',
-        'studieren → **studiert** ~~(-ieren → sin ge-)~~',
-        'erzählen → **erzählt**',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Partizip II — mit oder ohne ge-?',
+      items: [
+        { text: 'Tobias hat sein altes Fahrrad **verkauft**.', gl: '— ver- → sin ge-' },
+        { text: 'Wir haben alle Nachbarn zum Fest **eingeladen**.', gl: '— separable → ge- en medio' },
+        { text: 'Hast du schon das Essen **bestellt**?', gl: '— be- → sin ge-' },
+        { text: 'Meine Schwester hat in Salamanca **studiert**.', gl: '— -ieren → sin ge-' },
+        { text: 'Der Kurs **hat** pünktlich **angefangen**.', gl: '— anfangen va con haben' },
+        { text: 'Ich habe meine Brille im Zug **vergessen**.', gl: '— vergessen = Infinitiv = Partizip' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Auxiliar wählen',
-      frage: 'haben oder sein?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Wir ___ am Sonntag an die Küste gefahren.',
-        'Ich ___ meinen Bruder zum Flughafen gefahren.',
-        'Der Kurs ___ pünktlich angefangen.',
-        'Sie ___ das Paket erst gestern bekommen.',
-      ],
-      loesungen: [
-        '**sind** — fahren ohne Objekt: Bewegung → sein.',
-        '**habe** — fahren mit Objekt (meinen Bruder) → haben.',
-        '**hat** — anfangen geht mit haben: Der Kurs hat angefangen.',
-        '**hat** — bekommen: mit Objekt, Partizip ohne ge-.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Schreib den Anfang einer E-Mail über dein Wochenende (3-4 Sätze): mindestens ein Partizip **ohne ge-** und einmal **war** oder **hatte**.',
-      loesungLabel: 'Mögliche Lösung',
-      aufgaben: [
-        'Satz 1-2: Was hast du gemacht? · Satz 3: Wie war es?',
-      ],
-      loesungen: [
-        '„Liebe Marta, danke für deine Nachricht! Am Samstag habe ich meine Tante **besucht**, und sie hat mir viel von früher **erzählt**. Danach sind wir ins Zentrum gefahren. Es **war** ein toller Tag.“ ~~Vale cualquier plan — comprueba: participios sin ge- bien formados, war/hatte en Präteritum y el participio al final de la frase.~~',
+      type: 'beispiele',
+      kicker: 'haben oder sein?',
+      titel: 'Das Auxiliar richtig wählen',
+      items: [
+        { text: 'Wir **sind** am Sonntag an die Küste **gefahren**.', gl: '— fahren sin objeto → sein' },
+        { text: 'Ich **habe** meinen Bruder zum Flughafen **gefahren**.', gl: '— con objeto (meinen Bruder) → haben' },
+        { text: 'Sie **hat** das Paket erst gestern **bekommen**.', gl: '— bekommen → haben, sin ge-' },
+        { text: 'Zum Glück **ist** nichts **passiert**.', gl: '— passieren → sein' },
+        { text: 'Leider **hat** es den ganzen Tag **geregnet**, aber der Ausflug **war** schön.', gl: '— Perfekt + war en el mismo texto' },
       ],
     },
 
@@ -193,7 +168,7 @@ export default {
       eyebrow: 'Prüfungsbezug',
       modul: 'Schreiben Teil 1 · informelle E-Mail',
       titel: '3 Lücken',
-      anweisung: 'In der E-Mail (~80 Wörter, empf. 20 Minuten) mischst du Perfekt und war/hatte. Ergänze:',
+      anweisung: 'In der E-Mail (~80 Wörter, ca. 20 Minuten) mischst du Perfekt und war/hatte. Ergänze:',
       absaetze: [
         '„Hallo Jonas, stell dir vor: Ich habe endlich eine Wohnung {1} (bekommen)! Der Makler hat mir alles genau {2} (erklären). Ich {3} (sein) am Anfang ziemlich nervös — aber jetzt ist alles perfekt.“',
       ],
@@ -208,7 +183,7 @@ export default {
     {
       type: 'tipp',
       label: 'Prüfungstipp',
-      text: 'Faustregel für die ganze B1-Prüfung: **Sprechen und E-Mail → Perfekt**, aber *war, hatte, konnte, musste, wollte* immer im Präteritum. Wer *„ich bin gewesen“* schreibt, verliert keine Punkte — klingt aber steif. **„ich war“** ist kürzer und natürlicher.',
+      text: 'Faustregel für die ganze B1-Prüfung: **Sprechen und E-Mail → Perfekt**, aber *war, hatte, konnte, musste, wollte* immer im Präteritum. Wenn du *„ich bin gewesen“* schreibst, verlierst du keine Punkte — aber es klingt steif. **„ich war“** ist kürzer und natürlicher.',
     },
 
     { type: 'rule' },

@@ -62,7 +62,7 @@ export default {
       card: true,
       titel: 'Was wird bewertet?',
       absaetze: [
-        'Die Prüfer bewerten u. a., ob du **die Aufgabe erfüllst**, wie du **mit deinem Partner interagierst**, deinen **Wortschatz**, deine **Strukturen** — und deine **Aussprache**. Die genaue Punktverteilung siehst du im offiziellen Modellsatz des Prüfungsanbieters.',
+        'Die Prüfer bewerten u. a., ob du **die Aufgabe erfüllst**, wie du **mit deinem Partner sprichst und reagierst**, deinen **Wortschatz**, deine **Strukturen** — und deine **Aussprache**. Wie viele Punkte es für jeden Bereich gibt, siehst du im offiziellen Übungstest deiner Prüfung.',
         'Wichtig für B1: **Fehler sind normal.** Du musst nicht perfekt sprechen, sondern verständlich. ~~Comunicar vale más que la perfección: un error de gramática pesa menos que un silencio largo.~~',
       ],
     },
@@ -98,7 +98,7 @@ export default {
     // ── Beispiele / Redemittel ────────────────────────────────────
     {
       type: 'redemittel',
-      eyebrow: 'Beispiele — Notstrategien gegen Blockaden',
+      eyebrow: 'Beispiele — Hilfe, wenn du nicht weiterweißt',
       gruppen: [
         {
           fn: 'Du hast etwas nicht verstanden',
@@ -127,55 +127,31 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Erkennen',
-      frage: 'Teil 1, Teil 2 oder Teil 3?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        '„Wollen wir am Samstag zusammen kochen?“',
-        '„Mein Thema ist: Einkaufen im Internet.“',
-        '„Danke für deine Präsentation! Ich habe eine Frage …“',
-        '„Das ist eine gute Idee, aber Samstag kann ich nicht.“',
-      ],
-      loesungen: [
-        '**Teil 1** — ein Vorschlag beim gemeinsamen Planen.',
-        '**Teil 2** — die Einleitung der Präsentation.',
-        '**Teil 3** — Feedback und Frage nach der Präsentation.',
-        '**Teil 1** — höfliche Ablehnung im Planungsgespräch.',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      kicker: 'Kernwortschatz',
+      titel: 'Sätze rund um die Prüfung',
+      items: [
+        { text: 'Das Modul Sprechen ist eine **Paarprüfung**: Du sprichst mit einem Partner.' },
+        { text: 'In der **Vorbereitungszeit** machst du dir kurze Notizen.', gl: '— Stichwörter, keine ganzen Sätze' },
+        { text: 'Nach deiner **Präsentation** gibt dir dein Partner ein kurzes **Feedback**.' },
+        { text: 'Die **Prüferin** hört genau zu und **bewertet** auch deine **Aussprache**.' },
+        { text: '„Entschuldigung, können Sie die Frage bitte **wiederholen**?“', gl: '— höflich **nachfragen**' },
+        { text: 'Sprich langsam und **deutlich** — und achte auf den **Wortakzent**: ver**ste**hen.' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Aussprache',
-      frage: 'Langer oder kurzer Vokal? Wo liegt der Akzent?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Stadt — Staat: Welches Wort hat das lange a?',
-        'bitten — bieten: Welches Wort hat das lange i?',
-        'Wo liegt der Wortakzent: *einkaufen*?',
-        'Wo liegt der Wortakzent: *verstehen*?',
-      ],
-      loesungen: [
-        '**Staat** — langes a. ~~Stadt = a corta~~',
-        '**bieten** — langes i. ~~«ie» se lee como i larga~~',
-        '**EIN**kaufen — erste Silbe.',
-        'ver**STE**hen — zweite Silbe ~~(ver- nunca lleva el acento)~~.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Was sagst du in dieser Situation?',
-      loesungLabel: 'Mögliche Lösung',
-      aufgaben: [
-        'Die Prüferin stellt eine Frage. Du hast sie akustisch nicht verstanden.',
-        'Dir fehlt das Wort „Rabatt“. Du willst die Idee trotzdem erklären.',
-      ],
-      loesungen: [
-        '„Wie bitte? Können Sie die Frage bitte wiederholen?“ ~~también vale: Können Sie das langsamer sagen?~~',
-        '„Ich kenne das Wort nicht genau — ich meine: Man bezahlt weniger, es ist billiger.“',
+      type: 'beispiele',
+      kicker: 'Aussprache',
+      titel: 'Lang oder kurz, oben oder unten?',
+      items: [
+        { text: '**Stadt** (kurzes a) — **Staat** (langes a)', gl: '~~ciudad — Estado~~' },
+        { text: '**bitten** (kurzes i) — **bieten** (langes i)', gl: '~~pedir — ofrecer; «ie» = i larga~~' },
+        { text: '**Haus** — **aus**: Das h hörst du.', gl: '~~casa — fuera de / de~~' },
+        { text: '**ein**kaufen, **Ar**beit — aber: ver**ste**hen, Stu**dent**', gl: '~~ver- nunca lleva el acento~~' },
+        { text: 'Die **Satzmelodie**: „Hast du Zeit? ↗“ — „Wann hast du Zeit? ↘“', gl: '— Ja/Nein-Frage nach oben, W-Frage nach unten' },
       ],
     },
 
@@ -201,7 +177,7 @@ export default {
     {
       type: 'tipp',
       label: 'Prüfungstipp',
-      text: 'Sprich lieber **langsam und deutlich** als schnell und undeutlich. Eine kurze Pause ist kein Problem — ein langes Schweigen schon. Und: **Nachfragen ist eine Kompetenz**, kein Fehler.',
+      text: 'Sprich lieber **langsam und deutlich** als schnell und undeutlich. Eine kurze Pause ist kein Problem — ein langes Schweigen schon. Und: **Nachfragen ist eine Stärke**, kein Fehler.',
     },
 
     { type: 'rule' },
@@ -223,7 +199,7 @@ export default {
       eyebrow: 'Selbstcheck',
       items: [
         'Ich kenne die drei Teile des Moduls Sprechen und ihre Aufgaben.',
-        'Ich weiß, dass auch die Aussprache bewertet wird, und kenne meine vier Risiko-Punkte.',
+        'Ich weiß, dass auch die Aussprache bewertet wird, und kenne meine vier typischen Fehler.',
         'Ich kann höflich nachfragen, wenn ich etwas nicht verstehe.',
       ],
     },

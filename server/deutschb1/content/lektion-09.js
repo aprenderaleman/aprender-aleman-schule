@@ -113,55 +113,30 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Erkennen',
-      frage: 'Finde Verb + Präposition. Welcher Kasus?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Ich denke oft an meine Familie.',
-        'Sie hat mit dem Kurs angefangen.',
-        'Er hat Angst vor der Prüfung.',
-        'Wir freuen uns auf den Urlaub.',
-      ],
-      loesungen: [
-        '**denken an + Akk.** (an meine Familie)',
-        '**anfangen mit + Dat.** (mit dem Kurs)',
-        '**Angst haben vor + Dat.** (vor der Prüfung)',
-        '**sich freuen auf + Akk.** (auf den Urlaub)',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Verb + Präposition im Alltag',
+      items: [
+        { text: 'Paula ärgert sich **über den** Lärm im Haus.', gl: '— sich ärgern über + Akk.' },
+        { text: 'Ich danke dir **für die** Hilfe beim Umzug.', gl: '— danken für + Akk.' },
+        { text: 'Der Kunde fragt **nach dem** Preis.', gl: '— fragen nach + Dat.' },
+        { text: 'Mein Vater hat **mit dem** Rauchen aufgehört.', gl: '— aufhören mit + Dat. (dejar de)' },
+        { text: 'Kinder haben oft Angst **vor dem** Arzt.', gl: '— Angst haben vor + Dat.' },
+        { text: 'Darf ich dich **um einen** Gefallen bitten?', gl: '— bitten um + Akk.' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Präposition + Artikel einsetzen',
-      frage: 'Welche Präposition, welcher Kasus?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Ich warte ___ ___ Straßenbahn. ~~(die Straßenbahn)~~',
-        'Sie interessiert sich ___ ___ Musik. ~~(die Musik)~~',
-        'Er träumt ___ ___ Reise nach Japan. ~~(eine Reise)~~',
-        'Wir nehmen ___ ___ Kurs teil. ~~(der Kurs)~~',
-      ],
-      loesungen: [
-        '**auf die** Straßenbahn ~~(warten auf + Akk.)~~',
-        '**für die** Musik ~~(sich interessieren für + Akk.)~~',
-        '**von einer** Reise ~~(träumen von + Dat.)~~',
-        '**am** Kurs ~~(teilnehmen an + Dat.; an + dem = am)~~',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Selbst bilden',
-      frage: 'Antworte mit einem ganzen Satz …',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        '… auf **Worauf freust du dich?**',
-        '… auf **Wovon träumst du?**',
-      ],
-      loesungen: [
-        'Ich freue mich **auf den** Sommer. ~~Vale cualquier cosa futura: auf das Wochenende, auf meinen Geburtstag …~~',
-        'Ich träume **von einer** Weltreise. ~~También: von einem eigenen Auto, von einer neuen Wohnung …~~',
+      type: 'beispiele',
+      kicker: 'wo(r)- / da(r)-',
+      titel: 'Fragen und Antworten',
+      items: [
+        { text: '**Wovon** erzählt der Film? — Er erzählt **von** einer Familie in Wien.', gl: '— Sache → wo(r)+Präp.' },
+        { text: '**Mit wem** hast du gesprochen? — Mit meiner Lehrerin.', gl: '— Person → Präp. + wem' },
+        { text: 'Hast du an den Termin gedacht? — Ja, ich habe **daran** gedacht.', gl: '— an + Vokal → daran' },
+        { text: '**Wofür** interessierst du dich? — **Für** Fotografie.', gl: '— wofür (sin r: f es consonante)' },
+        { text: 'Hast du schon mit den Hausaufgaben angefangen? — Ja, gerade habe ich **damit** angefangen.', gl: '— anfangen mit → damit' },
       ],
     },
 

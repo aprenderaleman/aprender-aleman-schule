@@ -1,7 +1,7 @@
 // Lektion 24 · Hören: Durchsagen & kurze Texte (Teil 1-2)
 //
-// Segunda lección del bloque Hören (23-25). Práctica intensiva de T1-2
-// con 4 mini-Transkripte (~50-70 palabras) según la metodología de la 23:
+// Segunda lección del bloque Hören (23-25). Práctica de T1-2 con un
+// Transkript en formato de examen (más en el Übungsheft), metodología de la 23:
 // leer una sola vez en tiempo real, tapar la solución. Fallen: halb zehn,
 // -zehn/-zig, nicht…sondern, Paraphrase.
 
@@ -59,7 +59,7 @@ export default {
         },
         {
           badge: 'Falle 2',
-          titel: 'Zahlen im Vorbeiflug',
+          titel: 'Zahlen sofort notieren',
           text: 'Gleise, Preise, Telefonnummern: sofort __in Ziffern notieren__. Und genau hinhören: *vier**zehn*** (14) und *vier**zig*** (40) klingen fast gleich. ~~14 y 40 se distinguen solo por la terminación.~~',
         },
         {
@@ -108,59 +108,44 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Erkennen',
-      frage: 'Welche Uhrzeit ist das? Schreib sie in Ziffern.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'halb acht (morgens)',
-        'Viertel vor neun',
-        'Viertel nach zwölf',
-        'kurz nach halb sechs (abends)',
-      ],
-      loesungen: [
-        '**7:30** ~~(no 8:30 — media hora antes de las ocho)~~',
-        '**8:45**',
-        '**12:15**',
-        'ca. **17:35** — *halb sechs* = 17:30, *kurz nach* = ein paar Minuten später',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Durchsagen und Ansagen',
+      items: [
+        { text: 'Der Zug nach Kassel fährt heute von **Gleis** 8 ab.', gl: '— Ort: sofort notieren' },
+        { text: 'Kurz vor der **Abfahrt** gibt es noch eine Änderung.', gl: '— Achtung: Jetzt kommt die neue Information.' },
+        { text: 'Das Konzert am Sonntag **fällt** leider **aus**.', gl: '— es findet nicht statt' },
+        { text: 'Die Stadtführung **findet** trotz Regen **statt**.', gl: '— sie findet wie geplant statt' },
+        { text: 'Wegen einer Fortbildung bleibt die **Praxis** am Montag geschlossen.', gl: '— typisch für den Anrufbeantworter' },
+        { text: 'Die Sitzung wird auf nächste Woche **verschoben**.', gl: '— Passiv: neuer Termin' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Transkripte 1-2 — richtig oder falsch?',
-      frage: 'Lies jedes Transkript **nur einmal** in normalem Tempo ~~(en el examen: audio)~~ und entscheide mit abgedeckter Lösung: richtig oder falsch?',
-      aufgabe: '**Transkript 1 · Durchsage am Bahnhof:** „Achtung an Gleis 7: Der Regionalexpress nach Leipzig, Abfahrt 10:46 Uhr, fährt heute nicht von Gleis 7, sondern von Gleis 4 ab. Reisende nach Halle steigen bitte in Bitterfeld um. Wir danken für Ihr Verständnis.“\n**Transkript 2 · Anrufbeantworter:** „Guten Tag, hier ist die Praxis Dr. Weber. Sie rufen außerhalb unserer Sprechzeiten an. Unsere Praxis ist montags bis freitags von 8 bis 12 Uhr geöffnet, donnerstags auch von 15 bis 18 Uhr. Am kommenden Montag bleibt die Praxis wegen einer Fortbildung geschlossen. In dringenden Fällen wählen Sie bitte die 116 117.“',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Der Zug nach Leipzig fährt heute von Gleis 7 ab.',
-        'Wer nach Halle will, muss umsteigen.',
-        'Die Praxis ist am Donnerstagnachmittag geöffnet.',
-        'Am kommenden Montag ist die Praxis wie immer geöffnet.',
-      ],
-      loesungen: [
-        '**Falsch** — „**nicht** von Gleis 7, **sondern** von Gleis 4“. Die klassische Falle.',
-        '**Richtig** — „Reisende nach Halle steigen bitte in Bitterfeld um.“',
-        '**Richtig** — „donnerstags auch von 15 bis 18 Uhr“.',
-        '**Falsch** — sie bleibt „wegen einer Fortbildung **geschlossen**“.',
+      type: 'beispiele',
+      kicker: 'Uhrzeiten & Zahlen',
+      titel: 'Hören und sofort in Ziffern notieren',
+      items: [
+        { text: 'Der Bus kommt heute **erst um halb acht**.', gl: '— 7:30, nicht früher' },
+        { text: 'Wir treffen uns um **Viertel vor neun**.', gl: '— 8:45' },
+        { text: 'Die Mittagspause beginnt um **Viertel nach zwölf**.', gl: '— 12:15' },
+        { text: 'Das Ticket kostet heute im **Angebot** nur **vierzehn** Euro, nicht **vierzig**.', gl: '— -zehn oder -zig? Auf die Endung hören.' },
+        { text: 'Bitte **rufen** Sie uns **kurz nach halb sechs zurück**.', gl: '— ca. 17:35' },
       ],
     },
+
+    { type: 'rule' },
+
+    // ── Transkripte zum Mitlesen ──────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Transkript 3 — Produzieren',
-      frage: 'Wieder nur einmal lesen. Beantworte danach die drei W-Fragen in ganzen Sätzen.',
-      aufgabe: '**Transkript 3 · Radiobeitrag:** „Und hier noch ein Tipp für das Wochenende: Am Samstag findet auf dem Marktplatz das Sommerfest statt — mit Livemusik, internationalem Essen und einem großen Flohmarkt. Beginn ist um halb elf, der Eintritt ist frei. Aber Achtung: Bei Regen wird das Fest auf Sonntag verschoben. Alle Informationen finden Sie auf der Webseite der Stadt.“',
-      loesungLabel: 'Mögliche Lösung',
-      aufgaben: [
-        'Wann beginnt das Fest?',
-        'Was kostet der Eintritt?',
-        'Was passiert bei Regen?',
-      ],
-      loesungen: [
-        'Das Fest beginnt um **10:30 Uhr** — *halb elf*, eine halbe Stunde vor elf.',
-        'Der Eintritt kostet **nichts** — er ist frei.',
-        'Bei Regen wird das Fest **auf Sonntag verschoben**. — Auch richtig: „Es findet dann am Sonntag statt.“',
+      type: 'modell',
+      eyebrow: 'Transkripte — so klingen die Texte',
+      thema: 'Lies jedes Transkript nur einmal in normalem Tempo. ~~(En el examen es audio: entrénate a captar la información a la primera.)~~',
+      absaetze: [
+        '==Transkript 1 · Durchsage am Bahnhof:== „Achtung an Gleis 7: Der Regionalexpress nach Leipzig, Abfahrt 10:46 Uhr, fährt heute nicht von Gleis 7, sondern von Gleis 4 ab. Reisende nach Halle steigen bitte in Bitterfeld um. Wir danken für Ihr Verständnis.“',
+        '==Transkript 2 · Anrufbeantworter:== „Guten Tag, hier ist die Praxis Dr. Weber. Sie rufen außerhalb unserer Sprechzeiten an. Unsere Praxis ist montags bis freitags von 8 bis 12 Uhr geöffnet, donnerstags auch von 15 bis 18 Uhr. Am kommenden Montag bleibt die Praxis wegen einer Fortbildung geschlossen. In dringenden Fällen rufen Sie bitte den ärztlichen Notdienst an.“',
+        '==Transkript 3 · Radiobeitrag:== „Und hier noch ein Tipp für das Wochenende: Am Samstag findet auf dem Marktplatz das Sommerfest statt — mit Livemusik, internationalem Essen und einem großen Flohmarkt. Beginn ist um halb elf, der Eintritt ist frei. Aber Achtung: Bei Regen wird das Fest auf Sonntag verschoben. Alle Informationen finden Sie auf der Webseite der Stadt.“',
       ],
     },
 
@@ -171,7 +156,7 @@ export default {
       type: 'pruefungsaufgabe',
       eyebrow: 'Prüfungsbezug',
       modul: 'Hören · Teil 1',
-      titel: 'Transkript 4 — im Prüfungsformat',
+      titel: 'Ein Transkript im Prüfungsformat',
       anweisung: 'Wie im Examen: erst die Aufgaben lesen, dann das Transkript **einmal** in Echtzeit ~~(en el examen: audio)~~ — und ankreuzen.',
       absaetze: [
         '„Liebe Kundinnen und Kunden, heute im Angebot: frische Erdbeeren aus der Region — 500 Gramm für nur 1,99 Euro. An unserer Käsetheke bekommen Sie außerdem alle Käsesorten zwanzig Prozent günstiger. Und bitte beachten Sie: Unser Markt schließt heute bereits um 18 Uhr statt um 20 Uhr. Wir wünschen Ihnen einen schönen Einkauf.“',
@@ -214,7 +199,7 @@ export default {
         'Ich verstehe gesprochene Uhrzeiten wie *halb zehn* sofort.',
         'Ich erkenne Änderungen mit *nicht … sondern* und *statt*.',
         'Ich notiere beim Hören Ort, Zeit und Preis in Ziffern.',
-        'Ich habe die vier Transkripte nach der Einmal-Regel geübt.',
+        'Ich übe Transkripte nach der Einmal-Regel — hier und im Übungsheft.',
       ],
     },
     {

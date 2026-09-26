@@ -136,50 +136,44 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Wortschatz',
-      frage: 'Welches Wort passt?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Das Geld, das du für die Flasche zurückbekommst: das ___',
-        'Frühling, Sommer, Herbst und Winter sind die vier ___',
-        'Papier zu Papier, Glas zu Glas: den Müll ___',
-        'eine kleine Reise für einen Tag: der ___',
-      ],
-      loesungen: [
-        'das **Pfand**',
-        'die vier **Jahreszeiten**',
-        'den Müll **trennen**',
-        'der **Ausflug**',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Wetter, Müll und Natur',
+      items: [
+        { text: 'Im Juli **ist es** bei uns oft sehr heiß — über 35 Grad.', gl: '— nunca *macht es heiß*' },
+        { text: '**Mir ist kalt** — kannst du bitte die Heizung anmachen?', gl: '— tengo frío' },
+        { text: 'Den **Müll** bringe ich jeden Abend raus.' },
+        { text: 'Für diese Flasche bekommst du 25 Cent **Pfand** zurück.' },
+        { text: 'Wer die **Umwelt** schützen will, fährt öfter mit dem Rad.' },
+        { text: 'Im Herbst ist der **Wald** besonders bunt.' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Ergänzen',
-      frage: 'Wetter auf Deutsch — ergänze die Lücken.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Im August ___ es oft sehr heiß. ~~(hace)~~',
-        'Kannst du das Fenster zumachen? ___ ist kalt.',
-        'Nimm einen Regenschirm mit — es ___ gleich.',
-        'In den Bergen ___ im Januar viel Schnee.',
-      ],
-      loesungen: [
-        'Im August **ist** es oft sehr heiß. ~~(nunca *macht*)~~',
-        '**Mir** ist kalt. ~~(no *Ich bin kalt*)~~',
-        'es **regnet** gleich.',
-        'In den Bergen **liegt** im Januar viel Schnee.',
+      type: 'beispiele',
+      kicker: 'Ausflüge planen',
+      titel: 'Wetter und Natur im Gespräch',
+      items: [
+        { text: 'Wenn es morgen nicht **regnet**, machen wir einen **Ausflug** an den See.' },
+        { text: 'Bei so viel **Schnee** würde ich lieber zu Hause bleiben.' },
+        { text: 'Wir könnten am Samstag in den Bergen **wandern**.', gl: '— Vorschlag mit Konjunktiv II' },
+        { text: 'Hoffentlich scheint am Wochenende die **Sonne**.' },
+        { text: 'Der Herbst ist für mich die beste **Jahreszeit** zum Wandern.' },
       ],
     },
+
+    { type: 'rule' },
+
+    // ── Modelltext ────────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Schreib 60-80 Wörter: Wetter und Natur in deiner Heimat.',
-      aufgabe: 'Wie sind die Jahreszeiten? Was ist dein Lieblingswetter? Gib einen Ausflugstipp.',
-      loesungLabel: 'Mögliche Lösung',
-      loesung: 'Ich komme aus Valencia. Bei uns ist es im Sommer sehr heiß, oft über 35 Grad. Im Winter ist es mild, und es regnet nur wenig. Meine liebste Jahreszeit ist der Frühling, weil die Temperaturen dann perfekt sind. Wer Natur mag, sollte einen Ausflug in die Berge machen: Dort kann man wunderbar wandern, und die Landschaft ist sehr schön. Und danach gibt es am Strand ein Eis. ~~Este mismo texto te sirve casi entero para la Präsentation del examen.~~',
+      type: 'modell',
+      eyebrow: 'Modelltext — Wetter und Natur in meiner Heimat',
+      thema: 'Lies den Text. So kannst du über das Wetter und die Natur in deinem Heimatland schreiben oder sprechen.',
+      absaetze: [
+        'Ich komme aus Valencia. Bei uns ist es im Sommer sehr heiß, oft über 35 Grad. Im Winter ist es mild, und es regnet nur wenig. Meine liebste Jahreszeit ist der Frühling, weil die Temperaturen dann perfekt sind. Wer Natur mag, sollte einen Ausflug in die Berge machen: Dort kann man wunderbar wandern, und die Landschaft ist sehr schön. Und danach gibt es am Strand ein Eis.',
+        '~~Este mismo texto te sirve casi entero para la Präsentation del examen.~~',
+      ],
     },
 
     { type: 'rule' },
@@ -217,7 +211,7 @@ export default {
       card: true,
       titel: 'Wortschatz quer nutzen',
       absaetze: [
-        'In der Prüfung mischen sich die Themen ständig: Einen Ausflug planen = **Freizeit** (Lektion 38) + **Wetter** (diese Lektion) + **Einkaufen** (Lektion 40). Die Redemittel zum Vorschlagen und Reagieren funktionieren mit dem Wortschatz jeder Lektion. Lern also keine isolierten Wortlisten — **kombiniere die Themen**, genau wie im echten Leben.',
+        'In der Prüfung mischen sich die Themen ständig: Einen Ausflug planen = **Freizeit** (Lektion 38) + **Wetter** (diese Lektion) + **Einkaufen** (Lektion 40). Die Redemittel zum Vorschlagen und Reagieren funktionieren mit dem Wortschatz jeder Lektion. Lern also keine Wortlisten ohne Zusammenhang — **kombiniere die Themen**, genau wie im echten Leben.',
       ],
     },
     {

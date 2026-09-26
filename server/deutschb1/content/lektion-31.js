@@ -133,48 +133,30 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Erkennen',
-      frage: 'Vorschlag, Zustimmung oder Ablehnung?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        '„Wie wäre es mit einem Picknick?“',
-        '„Hm, ich weiß nicht. Vielleicht lieber ins Kino?“',
-        '„Ja, das passt mir gut.“',
-        '„Wollen wir uns um sieben treffen?“',
-      ],
-      loesungen: [
-        '**Vorschlag.**',
-        '**Höfliche Ablehnung** — mit neuem Vorschlag als Alternative.',
-        '**Zustimmung.**',
-        '**Vorschlag** (als Ja/Nein-Frage — die Stimme geht nach oben!).',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Vorschlagen, reagieren, sich einigen',
+      items: [
+        { text: 'Wollen wir am Sonntag einen **Ausflug** an den See machen?', gl: '— Vorschlag als Frage' },
+        { text: 'Gute Idee, aber Samstag **passt** mir nicht. Wie wäre es mit Sonntag?', gl: '— Ablehnung + Alternative' },
+        { text: 'Ich **kümmere mich um** die Fahrkarten, und du **bringst** die Brote **mit**.', gl: '— Aufgaben verteilen' },
+        { text: 'Wenn es regnet, **verschieben** wir den Ausflug auf nächste Woche.', gl: '— ein Plan B' },
+        { text: 'Also, wir **einigen uns auf** Sonntag um neun am Bahnhof.', gl: '— am Ende zusammenfassen' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Reagieren',
-      frage: 'Antworte höflich: erst zustimmen oder ablehnen, dann weiterplanen.',
-      loesungLabel: 'Mögliche Lösung',
-      aufgaben: [
-        '„Wollen wir am Freitag ins Schwimmbad gehen?“ — Du kannst am Freitag nicht.',
-        '„Ich schlage vor, dass jeder etwas zu essen mitbringt.“ — Du findest die Idee gut.',
-        '„Treffen wir uns im Café?“ — Du möchtest lieber in den Park.',
+      type: 'beispiele',
+      kicker: 'Einladen & Termine',
+      titel: 'Wer? Wann? Wo?',
+      items: [
+        { text: 'Wen **laden** wir zum Grillfest **ein**?', gl: '— Wer kommt?' },
+        { text: 'Wir **treffen uns** vor dem Kino, danach gehen wir ins Restaurant.', gl: '— Wo? → Dativ · Wohin? → Akkusativ' },
+        { text: 'Freitag **klappt** bei mir leider nicht, da muss ich lange arbeiten.', gl: '— ablehnen mit Grund' },
+        { text: 'Mach du doch einen **Vorschlag**: Was möchtest du gern machen?', gl: '— den Partner einbeziehen' },
+        { text: '**Einverstanden** — dann machen wir das so!', gl: '— zustimmen und abschließen' },
       ],
-      loesungen: [
-        '„Das ist eine gute Idee, aber am Freitag kann ich leider nicht. Wie wäre es mit Samstag?“',
-        '„Einverstanden! Ich bringe einen Salat mit.“',
-        '„Hm, im Café ist es oft voll. Können wir lieber in den Park gehen?“ ~~fíjate: im Café (Wo?) / in den Park (Wohin?) — Lektion 8~~',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Plant zu zweit einen Ausflug am Wochenende. Schreib vier Repliken: Vorschlag → Ablehnung mit Alternative → Zustimmung → Plan.',
-      aufgabe: 'Sprecht über diese Punkte: Wohin? Wann? Wie fahrt ihr? Was nehmt ihr mit?',
-      loesungLabel: 'Mögliche Lösung',
-      loesung: '**A:** „Wollen wir am Samstag einen Ausflug an den See machen?“\n**B:** „Gute Idee, aber am Samstag soll es regnen. Wie wäre es mit Sonntag?“\n**A:** „Einverstanden, dann Sonntag. Wir könnten mit dem Zug fahren, das ist billiger.“\n**B:** „Perfekt. Also: Sonntag um neun am Bahnhof, ich bringe Brote mit und du die Getränke.“ ~~Cualquier variante vale si propone, reacciona y cierra con un plan concreto.~~',
     },
 
     { type: 'rule' },
@@ -198,7 +180,7 @@ export default {
     {
       type: 'tipp',
       label: 'Prüfungstipp',
-      text: 'Teil 1 ist ein **Dialog**: Die Prüfer bewerten auch die **Interaktion**. Stell deinem Partner Fragen („Und du? Was meinst du?“) und reagiere auf seine Ideen — wer nur den eigenen Plan durchzieht, verschenkt Punkte.',
+      text: 'Teil 1 ist ein **Dialog**: Die Prüfer bewerten auch die **Interaktion**. Stell deinem Partner Fragen („Und du? Was meinst du?“) und reagiere auf seine Ideen — wer nur über den eigenen Plan spricht, verliert Punkte.',
     },
 
     { type: 'rule' },

@@ -99,51 +99,29 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Erkennen',
-      frage: 'Grund oder Folge? Und wo steht das Verb?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Ich trinke Tee, weil ich Halsschmerzen habe.',
-        'Der Zug hat Verspätung, deshalb warten wir am Gleis.',
-        'Wir bleiben drinnen, denn es ist zu kalt.',
-      ],
-      loesungen: [
-        '**Grund** (weil) → Verb am Ende: *habe*.',
-        '**Folge** (deshalb) → Inversion: *warten wir*.',
-        '**Grund** (denn) → Verb auf Position 2: *ist*.',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Gründe nennen: weil & denn',
+      items: [
+        { text: 'Ich trinke heute nur Tee, **weil** ich Halsschmerzen **habe**.', gl: '— weil → verbo al final' },
+        { text: 'Carlos kommt nicht zum Training, **denn** er **hat** keine Lust.', gl: '— denn → orden normal' },
+        { text: 'Wir kaufen oft online ein, **weil** es schneller **geht**.', gl: '— weil + causa' },
+        { text: 'Frau Yilmaz ist nicht im Büro, **denn** sie **hat** einen Termin.', gl: '— denn nunca abre la frase' },
+        { text: '**Warum** bist du so müde? — **Weil** ich schlecht geschlafen **habe**.', gl: '— Perfekt: el auxiliar va al final' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Sätze verbinden',
-      frage: 'Verbinde die zwei Sätze mit dem Konnektor in Klammern.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Ich kaufe online ein. Es ist billiger. ~~(weil)~~',
-        'Anna ist müde. Sie geht früh schlafen. ~~(deshalb)~~',
-        'Wir nehmen ein Taxi. Der Bus kommt nicht. ~~(denn)~~',
-      ],
-      loesungen: [
-        'Ich kaufe online ein, **weil** es billiger **ist**.',
-        'Anna ist müde, **deshalb geht sie** früh schlafen.',
-        'Wir nehmen ein Taxi, **denn** der Bus **kommt** nicht.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Selbst antworten',
-      frage: 'Antworte in einem ganzen Satz.',
-      loesungLabel: 'Mögliche Lösung',
-      aufgaben: [
-        'Warum lernst du Deutsch? ~~(weil)~~',
-        'Du hast keine Zeit. Was ist die Folge? ~~(deshalb)~~',
-      ],
-      loesungen: [
-        'Ich lerne Deutsch, **weil** ich die B1-Prüfung machen **möchte**. ~~Vale cualquier motivo — el verbo debe ir al final.~~',
-        'Ich habe keine Zeit, **deshalb komme** ich morgen. ~~Vale cualquier consecuencia — tras deshalb, primero el verbo.~~',
+      type: 'beispiele',
+      kicker: 'deshalb · deswegen · darum',
+      titel: 'Folgen ausdrücken',
+      items: [
+        { text: 'Der Zug hat Verspätung, **deshalb warten wir** am Gleis.', gl: '— deshalb → verbo + sujeto' },
+        { text: 'Mein Auto ist kaputt, **deswegen nehme ich** den Bus.', gl: '— deswegen = deshalb' },
+        { text: 'Ich habe keine Zeit, **darum komme ich** erst morgen.', gl: '— darum = deshalb' },
+        { text: 'Es ist zu kalt, **deshalb bleiben** die Kinder drinnen.', gl: '— sujeto después del verbo' },
+        { text: 'Anna ist krank, **deshalb kann sie** heute nicht arbeiten.', gl: '— con verbo modal: kann … arbeiten' },
       ],
     },
 
@@ -197,7 +175,7 @@ export default {
     {
       type: 'ausblick',
       eyebrow: 'Ausblick',
-      text: 'Grund und Folge kannst du jetzt. Aber was, wenn etwas **trotz** eines Grundes passiert? Dafür gibt es **obwohl** und **trotzdem** — und dazu das klassische Problem *wenn* oder *als* ~~(«cuando» tiene dos traducciones)~~. Das ist das Thema der nächsten Lektion.',
+      text: 'Grund und Folge kannst du jetzt. Aber wie drückst du einen **Gegensatz** aus? ~~(un contraste: algo pasa aunque haya un motivo en contra)~~ Dafür gibt es **obwohl** und **trotzdem** — und dazu das klassische Problem *wenn* oder *als* ~~(«cuando» tiene dos traducciones)~~. Das ist das Thema der nächsten Lektion.',
     },
   ],
 }

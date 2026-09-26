@@ -114,57 +114,29 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Erkennen',
-      frage: 'Teil 1, Teil 2 oder Teil 3?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Du schreibst deiner Freundin, warum du nicht zu ihrer Party kommen kannst.',
-        '„Sollten Kinder ein Handy haben?“ — Schreib deine Meinung dazu.',
-        'Du schreibst deiner Lehrerin, dass du morgen nicht zum Kurs kommen kannst.',
-        'Du erzählst einem Freund von deinem Umzug und lädst ihn ein.',
-      ],
-      loesungen: [
-        '**Teil 1** — informelle E-Mail an eine Freundin (du-Register).',
-        '**Teil 2** — Forumsbeitrag mit Meinung.',
-        '**Teil 3** — formelle E-Mail an die Lehrerin (Sie-Register).',
-        '**Teil 1** — informelle E-Mail an einen Freund.',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      kicker: 'Aufgabe → Teil',
+      titel: 'Welcher Text ist das?',
+      items: [
+        { text: 'Du schreibst deinem Freund Emre, warum du nicht zu seiner Party kommen kannst.', gl: '— Teil 1: informelle E-Mail (du)' },
+        { text: '„Sollten Kinder ein eigenes Handy haben?“ Schreib deine **Meinung** dazu.', gl: '— Teil 2: Forumsbeitrag' },
+        { text: 'Du schreibst deiner Lehrerin, Frau Haas, dass du morgen nicht zum Kurs kommst.', gl: '— Teil 3: formelle E-Mail (Sie)' },
+        { text: 'Der **Empfänger** ist dein Chef? Dann passt die **Anrede** *Sehr geehrter Herr …*', gl: '— das Register gehört zur Erfüllung' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Kriterium zuordnen',
-      frage: 'Welches Kriterium ist hier das Problem — Erfüllung, Kohärenz, Wortschatz oder Strukturen?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Die Aufgabe hat drei Punkte, aber die E-Mail behandelt nur einen.',
-        '„Ich komme nicht. Ich bin krank. Ich habe Fieber. Ich bleibe zu Hause.“ ~~(frases sueltas, sin conectores)~~',
-        '„Das Essen war gut, das Wetter war gut, der Film war gut.“',
-        '„Ich glaube, dass ich kann kommen.“',
-      ],
-      loesungen: [
-        '**Erfüllung** — zwei Punkte fehlen.',
-        '**Kohärenz** — keine Verbindungswörter: *Ich komme nicht, **weil** ich krank bin und Fieber habe. **Deshalb** bleibe ich zu Hause.*',
-        '**Wortschatz** — dreimal *gut*: besser *lecker, schön, spannend*.',
-        '**Strukturen** — nach „dass“ Verb ans Ende: *…, dass ich kommen **kann**.*',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Korrigieren',
-      frage: 'Korrigiere mit der Checkliste. Jeder Satz hat genau einen Fehler.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Ich danke dir für deine einladung.',
-        'Am Samstag ich komme zu deiner Party.',
-        'Ich freue mich weil wir uns lange nicht gesehen haben.',
-      ],
-      loesungen: [
-        'Ich danke dir für deine **Einladung**. ~~mayúscula: los sustantivos siempre~~',
-        'Am Samstag **komme ich** zu deiner Party. ~~verbo en posición 2~~',
-        'Ich freue mich**,** weil wir uns lange nicht gesehen haben. ~~coma obligatoria ante weil~~',
+      type: 'beispiele',
+      kicker: 'Checkliste',
+      titel: 'Fehler finden und korrigieren',
+      items: [
+        { text: '✗ *Danke für deine einladung.* → ✓ *Danke für deine **Einladung**.*', gl: '— Nomen groß' },
+        { text: '✗ *Morgen ich habe keine Zeit.* → ✓ *Morgen **habe ich** keine Zeit.*', gl: '— Verb auf Position 2' },
+        { text: '✗ *Ich komme nicht weil ich krank bin.* → ✓ *Ich komme nicht**,** weil ich krank bin.*', gl: '— Komma vor weil' },
+        { text: '✗ *Ich hoffe, dass du kannst kommen.* → ✓ *Ich hoffe, dass du kommen **kannst**.*', gl: '— nach dass: Verb ans Ende' },
+        { text: '**Kontrolliere** am Ende auch die **Grußformel**: *Viele Grüße* + Name, ohne Komma.' },
       ],
     },
 

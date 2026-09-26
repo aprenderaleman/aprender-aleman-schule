@@ -33,7 +33,7 @@ export default {
         { wort: 'das Fieber', kollokation: 'Fieber haben / messen', es: 'la fiebre' },
         { wort: 'der Husten', kollokation: 'starken Husten haben', es: 'la tos' },
         { wort: 'die Erkältung, -en', kollokation: 'eine Erkältung haben', es: 'el resfriado' },
-        { wort: 'weh tun', kollokation: 'Mein Rücken tut weh.', es: 'doler' },
+        { wort: 'wehtun', kollokation: 'Mein Rücken tut weh.', es: 'doler' },
         { wort: 'der Arzt, Ärzte / die Ärztin', kollokation: 'zum Arzt gehen', es: 'el/la médico/a' },
         { wort: 'die Praxis, Praxen', kollokation: 'in der Praxis anrufen', es: 'la consulta (médica)' },
         { wort: 'der Termin, -e', kollokation: 'einen Termin absagen', es: 'la cita (médica)' },
@@ -81,7 +81,7 @@ export default {
       kicker: 'Subthema 1',
       titel: 'Symptome beschreiben',
       items: [
-        { text: 'Mein Kopf **tut weh**. / Meine Beine **tun weh**.', gl: '— weh tun + Dativ-Person möglich: Mir tut der Kopf weh.' },
+        { text: 'Mein Kopf **tut weh**. / Meine Beine **tun weh**.', gl: '— wehtun + Dativ-Person möglich: Mir tut der Kopf weh.' },
         { text: 'Ich habe Fieber und starken Husten.' },
         { text: 'Ich bin seit gestern **erkältet**.' },
         { text: '**Mir ist schlecht.**', gl: '~~«me encuentro mal / tengo náuseas» — con Dativ~~' },
@@ -127,49 +127,32 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Wortschatz',
-      frage: 'Welches Wort passt?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Der Arzt schreibt es, die Apotheke liest es: ___',
-        '38,5 Grad — du hast ___',
-        'Schnupfen, Husten und Halsschmerzen zusammen: ___',
-        'Der Ort, wo die Ärztin arbeitet: ___',
-      ],
-      loesungen: [
-        '**das Rezept**',
-        '**Fieber**',
-        '**die Erkältung**',
-        '**die Praxis**',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Symptome, Praxis, Apotheke',
+      items: [
+        { text: 'Seit dem Wochenende habe ich **Husten** und ein bisschen **Fieber**.' },
+        { text: '**Mir tut** der **Hals** so **weh**, dass ich kaum sprechen kann.', gl: '— Mir tut … weh: Dativ' },
+        { text: 'Ich rufe gleich in der **Praxis** an und mache einen **Termin**.' },
+        { text: 'Die Ärztin hat mir ein Medikament **gegen** die Schmerzen verschrieben.', gl: '— gegen + Akk.' },
+        { text: 'Das **Rezept** bringe ich morgen in die **Apotheke**.' },
+        { text: 'Leider muss ich den **Termin** am Montag **absagen**, weil ich verreist bin.' },
       ],
     },
+
+    { type: 'rule' },
+
+    // ── Modelltext ────────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Sätze ergänzen',
-      frage: 'Welches Wort oder welche Form fehlt?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Mein Rücken ___ seit zwei Tagen ___. ~~(weh tun)~~',
-        'Ich habe starke ___schmerzen. ~~(cabeza)~~',
-        'Ich bin ___ — ich brauche Taschentücher und Tee. ~~(¿constipado?)~~',
-        'Ich kann am Montag nicht kommen. Ich möchte den Termin ___.',
+      type: 'modell',
+      eyebrow: 'Modelltext — ich bin krank',
+      thema: 'So kannst du erzählen, was du hast und was du schon gemacht hast. Achte auf das Perfekt (Lektion 6).',
+      absaetze: [
+        'Seit Montag geht es mir nicht gut. Ich bin erkältet: Ich habe Husten, Halsschmerzen und ein bisschen Fieber. Mein Kopf tut auch weh.',
+        'Gestern habe ich in der Praxis angerufen und einen Termin bekommen. Die Ärztin hat mir ein Medikament gegen den Husten verschrieben, und ich habe es in der Apotheke geholt. Jetzt bleibe ich zwei Tage im Bett, trinke viel Tee und schlafe viel. Hoffentlich bin ich am Wochenende wieder gesund.',
       ],
-      loesungen: [
-        'Mein Rücken **tut** seit zwei Tagen **weh**.',
-        '**Kopf**schmerzen',
-        'Ich bin **erkältet**. ~~(no *konstipiert* — eso es estreñido)~~',
-        'den Termin **absagen**',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Du bist krank. Beschreib in 60–80 Wörtern: Symptome, seit wann, was du machst. ~~(¿médico? ¿farmacia? ¿cama?)~~',
-      loesungLabel: 'Mögliche Lösung',
-      loesung: 'Seit Montag geht es mir nicht gut. Ich bin erkältet: Ich habe Husten, Halsschmerzen und ein bisschen Fieber. Mein Kopf tut auch weh. Gestern habe ich in der Praxis angerufen und einen Termin bekommen. Die Ärztin hat mir ein Medikament gegen den Husten verschrieben, und ich habe es in der Apotheke geholt. Jetzt bleibe ich zwei Tage im Bett, trinke viel Tee und schlafe viel. Hoffentlich bin ich am Wochenende wieder gesund. *(~75 Wörter — nota el Perfekt de la Lektion 6 para contar lo que ya pasó.)*',
     },
 
     { type: 'rule' },
@@ -204,7 +187,7 @@ export default {
       eyebrow: 'Zusammenfassung',
       kopf: ['Ausdruck', 'So benutzt du ihn'],
       zeilen: [
-        ['weh tun', 'Mein Kopf tut weh. / Meine Beine tun weh. / Mir tut der Bauch weh.'],
+        ['wehtun', 'Mein Kopf tut weh. / Meine Beine tun weh. / Mir tut der Bauch weh.'],
         ['Ich habe …', '… Fieber / Husten / Kopfschmerzen / eine Erkältung'],
         ['erkältet sein', 'Ich bin erkältet. — ~~≠ konstipiert (estreñido)~~'],
         ['der Termin', 'einen Termin vereinbaren · verschieben · **absagen**'],
@@ -215,7 +198,7 @@ export default {
       type: 'selbstcheck',
       eyebrow: 'Selbstcheck',
       items: [
-        'Ich kann meine Symptome beschreiben (weh tun, Ich habe …, erkältet sein).',
+        'Ich kann meine Symptome beschreiben (wehtun, Ich habe …, erkältet sein).',
         'Ich kann telefonisch einen Arzttermin vereinbaren und absagen.',
         'Ich weiß, wie Praxis, Rezept und Apotheke zusammenhängen.',
       ],

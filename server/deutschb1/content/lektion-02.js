@@ -107,54 +107,26 @@ export default {
       items: [
         { text: '„**Klicken Sie** die richtige Lösung **an**.“', gl: '— selecciona la respuesta' },
         { text: '„Sie können Ihre Antwort jederzeit **ändern**.“' },
-        { text: '„**Markieren** Sie die Aufgabe, um später zurückzukehren.“', gl: '— señálala para revisarla luego' },
+        { text: '„**Markieren** Sie die Aufgabe und kommen Sie später zurück.“', gl: '— señálala para revisarla luego' },
         { text: '„Die **verbleibende Zeit** sehen Sie oben rechts.“', gl: '— el reloj del examen' },
       ],
     },
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Erkennen',
-      frage: 'Richtig oder falsch?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Am Computer machst du auch das Modul Sprechen.',
-        'Eine angeklickte Antwort kannst du bis zum Ende der Zeit ändern.',
-        'Die digitale Prüfung ist kürzer als die Papierprüfung.',
-        'Beim Hören hast du eigene Kopfhörer.',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Am Computer arbeiten',
+      items: [
+        { text: 'Ich **klicke** Antwort B **an** — nein, doch C! Ich **ändere** sie schnell.', gl: '— anklicken es separable' },
+        { text: 'Der Text ist lang, deshalb **scrolle** ich nach unten.', gl: '— desplazarse por la pantalla' },
+        { text: 'Vor dem Hören setzt Mei die **Kopfhörer** auf und testet die **Lautstärke**.', gl: '— los auriculares · el volumen' },
+        { text: 'Noch zehn Minuten **Restzeit** — Pablo **markiert** zwei Aufgaben für später.', gl: '— el tiempo restante' },
+        { text: 'Auf der deutschen **Tastatur** liegt das ß neben der Null.', gl: '— teclado QWERTZ' },
+        { text: 'Beim Schreiben **tippe** ich, und das System zählt die Wörter.', gl: '— teclear' },
       ],
-      loesungen: [
-        '**Falsch** — Sprechen bleibt eine Paarprüfung.',
-        '**Richtig** — nichts ist sofort endgültig.',
-        '**Falsch** — Zeit, Aufgaben und Bewertung sind identisch.',
-        '**Richtig** — und die Lautstärke stellst du selbst ein.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Anwenden',
-      frage: 'Was machst du? Antworte mit einem Verb aus dem Kernwortschatz.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Eine Aufgabe bei Lesen ist sehr schwer, und die Zeit läuft.',
-        'Du willst eine wichtige Zahl im Text später schnell wiederfinden.',
-        'Beim Schreiben passt dein letzter Satz besser an den Anfang.',
-      ],
-      loesungen: [
-        'Die Aufgabe **markieren** und weiterarbeiten — am Ende zurückkommen.',
-        'Die Stelle im Text **markieren** — wie Unterstreichen auf Papier.',
-        'Den Satz löschen und oben neu **tippen** — genau das ist der Vorteil des Computers. ~~En papel sería un tachón; aquí, dos clics.~~',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Tipptraining: Stell die deutsche Tastatur ein und tippe in 5 Minuten vier Sätze über deinen Tag. Jeder Satz braucht einen Umlaut (ä, ö, ü), mindestens einer ein ß.',
-      loesungLabel: 'Mögliche Lösung',
-      loesung: 'Ich stehe **früh** auf und **öffne** das Fenster. Zum **Frühstück** trinke ich Kaffee. Dann laufe ich durch die **Straßen** zur Arbeit. Abends bin ich oft **müde**, aber **zufrieden**. ~~El contenido da igual: el objetivo es encontrar ä, ö, ü y ß sin buscar las teclas. Repite hasta bajar de 5 minutos.~~',
     },
 
     { type: 'rule' },
@@ -168,7 +140,7 @@ export default {
         ['Tage vorher', 'digitalen Modellsatz am Computer durchspielen · jeden Tag tippen (ä, ö, ü, ß) · Ausweis und Anmeldebestätigung bereitlegen'],
         ['Am Morgen', 'früh da sein · Ausweis mitnehmen · Handy und Notizen bleiben draußen'],
         ['Vor dem Start', 'Kopfhörer aufsetzen und Lautstärke testen · bei Fragen sofort die Aufsicht rufen'],
-        ['Während der Prüfung', 'Restzeit im Blick behalten · markieren statt lange grübeln · am Ende die Antworten kontrollieren'],
+        ['Während der Prüfung', 'Restzeit im Blick behalten · markieren statt lange nachdenken · am Ende die Antworten kontrollieren'],
       ],
     },
     {
@@ -187,7 +159,7 @@ export default {
       zeilen: [
         ['Was ist digital?', 'Lesen, Hören, Schreiben — Sprechen bleibt Paarprüfung'],
         ['Was bleibt gleich?', 'Aufgaben, Zeit und Bewertung'],
-        ['Statt unterstreichen?', 'markieren — Text hervorheben, Aufgaben für später merken'],
+        ['Statt unterstreichen?', 'markieren — Text hervorheben, sich Aufgaben für später merken'],
         ['Größter Vorteil', 'Kopfhörer beim Hören + saubere Korrekturen beim Tippen'],
         ['Größtes Risiko', 'langsames Tippen, fremde Tastatur → vorher trainieren'],
       ],

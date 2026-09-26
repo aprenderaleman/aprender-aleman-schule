@@ -121,53 +121,29 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Erkennen',
-      frage: 'Wie heißt der Infinitiv?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Sie **ging** langsam durch den Park.',
-        'Es **gab** keinen Kaffee mehr.',
-        'Er **wusste** die Antwort nicht.',
-        'Wir **sahen** das Meer zum ersten Mal.',
-      ],
-      loesungen: [
-        '**gehen** — ging.',
-        '**geben** — gab ~~(es gab = había)~~.',
-        '**wissen** — wusste.',
-        '**sehen** — sahen.',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'war, hatte & Modalverben im Alltag',
+      items: [
+        { text: 'Am Montag **hatte** ich einen Termin beim Zahnarzt.', gl: '— hatte = tenía / tuve' },
+        { text: '**Wart** ihr schon einmal in Wien? — Ja, letztes Jahr.', gl: '— ihr → wart' },
+        { text: 'Der Zug **hatte** Verspätung, deshalb **musste** ich ein Taxi nehmen.', gl: '— hatte + musste' },
+        { text: 'Früher **wollte** meine Tochter Ärztin werden.', gl: '— wollen → wollte' },
+        { text: 'Du **solltest** mich gestern doch anrufen! Warum **konntest** du nicht?', gl: '— sollen / können en pretérito' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Einsetzen',
-      frage: 'war, hatte oder Modalverb im Präteritum?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Gestern ___ ich keine Zeit. ~~(haben)~~',
-        '___ ihr am Wochenende zu Hause? ~~(sein)~~',
-        'Ich ___ als Kind kein Handy haben. ~~(dürfen)~~',
-        'Wir ___ den Bus nehmen, denn das Auto war kaputt. ~~(müssen)~~',
-      ],
-      loesungen: [
-        'Gestern **hatte** ich keine Zeit.',
-        '**Wart** ihr am Wochenende zu Hause?',
-        'Ich **durfte** als Kind kein Handy haben. ~~(sin diéresis)~~',
-        'Wir **mussten** den Bus nehmen.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Selbst erzählen',
-      frage: 'Dein letzter Urlaub — drei Sätze mit *war*, *hatte* und einem Modalverb.',
-      loesungLabel: 'Mögliche Lösung',
-      aufgaben: [
-        'Wo warst du? · Wie war das Wetter / das Hotel? · Was konntest oder musstest du (nicht) machen?',
-      ],
-      loesungen: [
-        'Letzten Sommer **war** ich in Valencia. Das Hotel **war** klein, aber wir **hatten** einen Blick aufs Meer. Leider **konnte** ich nur fünf Tage bleiben. ~~Vale cualquier historia — usa war, hatte y un modal en pretérito.~~',
+      type: 'beispiele',
+      kicker: 'Erzählform',
+      titel: 'Kleine Geschichten',
+      items: [
+        { text: 'Um sieben Uhr **kam** der Bus, aber er **war** voll.', gl: '— kommen → kam' },
+        { text: 'Jonas **sah** seine alte Lehrerin im Supermarkt.', gl: '— sehen → sah' },
+        { text: 'Niemand **wusste**, wo der Schlüssel **war**.', gl: '— wissen → wusste' },
+        { text: 'Nach dem Konzert **gab es** keine Busse mehr, also **gingen** wir zu Fuß.', gl: '— es gab · gehen → gingen' },
+        { text: 'Meine Oma **sagte** immer: „Morgen ist auch noch ein Tag.“', gl: '— sagen → sagte' },
       ],
     },
 
@@ -181,13 +157,13 @@ export default {
       titel: 'Richtig oder falsch?',
       anweisung: 'In Lesen Teil 1 liest du Blogs und E-Mails — oft in der Erzählform. Lies den Text und entscheide:',
       absaetze: [
-        '„Letztes Wochenende war ich mit meiner Familie in München. Wir hatten nur einen Tag Zeit, deshalb mussten wir früh aufstehen. Zuerst gingen wir ins Deutsche Museum, danach gab es ein Eis im Englischen Garten.“',
+        '„Letztes Wochenende war ich mit meiner Familie in München. Wir hatten nur einen Tag Zeit, deshalb mussten wir früh aufstehen. Zuerst gingen wir ins Technikmuseum, danach gab es ein Eis im Stadtpark.“',
       ],
       optionen: ['(1) Die Familie hatte viel Zeit in München.', '(2) Sie waren zuerst im Museum.'],
       loesungLabel: 'Lösung',
       loesungen: [
         '(1) **Falsch** — „Wir **hatten** nur einen Tag Zeit.“',
-        '(2) **Richtig** — „Zuerst **gingen** wir ins Deutsche Museum.“ ~~Si no reconoces «gingen» como gehen, pierdes el punto — por eso hay que saber leer estas formas.~~',
+        '(2) **Richtig** — „Zuerst **gingen** wir ins Technikmuseum.“ ~~Si no reconoces «gingen» como gehen, pierdes el punto — por eso hay que saber leer estas formas.~~',
       ],
     },
     {

@@ -127,49 +127,32 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Wortschatz',
-      frage: 'Welches Wort passt?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Das Geld, das man jeden Monat für die Arbeit bekommt: ___',
-        'Die freie Zeit nach der Arbeit: ___',
-        'Eine Person, mit der man zusammenarbeitet: ___',
-        'Extra-Stunden, die man arbeitet: ___',
-      ],
-      loesungen: [
-        '**das Gehalt**',
-        '**der Feierabend**',
-        '**der Kollege / die Kollegin**',
-        '**die Überstunden**',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Der Wortschatz im Arbeitsalltag',
+      items: [
+        { text: 'Seit März arbeitet Kemal **als** Elektriker in einer kleinen Firma.', gl: '— als + Beruf, ohne Artikel' },
+        { text: 'Meine **Kollegin** ist heute den ganzen Tag **in einer Besprechung**.' },
+        { text: 'Wer **Überstunden macht**, kann am Freitag früher **Feierabend** machen.' },
+        { text: 'Sophie hat sich **um** eine **Stelle** in einem Hotel **beworben**.', gl: '— sich bewerben um + Akk.' },
+        { text: 'In diesem Beruf **verdient** man am Anfang nicht viel.' },
+        { text: 'Der Chef hat den **Termin auf** Mittwoch **verschoben**.', gl: '— verschieben auf + Akk.' },
       ],
     },
+
+    { type: 'rule' },
+
+    // ── Modelltext ────────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Sätze ergänzen',
-      frage: 'Welche Präposition oder welches Wort fehlt?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Ich arbeite ___ Verkäufer in einem Supermarkt. ~~(¿als o wie?)~~',
-        'Ich möchte mich ___ die Stelle bewerben.',
-        'Können wir die Besprechung ___ Montag verschieben?',
-        'Um 17 Uhr mache ich ___.',
+      type: 'modell',
+      eyebrow: 'Modelltext — mein Arbeitstag',
+      thema: 'So kannst du über deinen Arbeitstag schreiben oder sprechen: Beruf mit *als*, Uhrzeiten und Wörter aus dem Kernwortschatz.',
+      absaetze: [
+        'Ich arbeite als Verkäuferin in einem kleinen Geschäft. Mein Arbeitstag beginnt um 9 Uhr. Zuerst spreche ich kurz mit meinen Kollegen, dann öffnen wir das Geschäft. Mittags habe ich eine Stunde Pause.',
+        'Manchmal muss ich Überstunden machen, aber normalerweise mache ich um 18 Uhr Feierabend. Meine Kollegen sind sehr nett, und meine Chefin hilft mir oft. Die Arbeit macht mir Spaß, aber ich möchte später mehr verdienen.',
       ],
-      loesungen: [
-        'Ich arbeite **als** Verkäufer. ~~(als, nunca wie — y sin artículo)~~',
-        'sich bewerben **um** + Akkusativ',
-        'verschieben **auf** Montag ~~(auf + Akk.)~~',
-        '**Feierabend** machen',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Dein Arbeitstag: Schreib 60–80 Wörter. ~~(profesión, horario, compañeros, Feierabend)~~',
-      loesungLabel: 'Mögliche Lösung',
-      loesung: 'Ich arbeite als Verkäuferin in einem kleinen Geschäft. Mein Arbeitstag beginnt um 9 Uhr. Zuerst spreche ich kurz mit meinen Kollegen, dann öffnen wir das Geschäft. Mittags habe ich eine Stunde Pause. Manchmal muss ich Überstunden machen, aber normalerweise mache ich um 18 Uhr Feierabend. Meine Kollegen sind sehr nett, und meine Chefin hilft mir oft. Die Arbeit macht mir Spaß, aber ich möchte später mehr verdienen. *(~70 Wörter — dein Text darf natürlich anders sein: wichtig sind Beruf mit „als“, Zeiten und 1–2 Wörter aus dem Kernwortschatz.)*',
     },
 
     { type: 'rule' },

@@ -114,60 +114,35 @@ export default {
       items: [
         { text: 'Ich **hätte gern** ein Kilo Tomaten.', gl: '— beim Einkaufen' },
         { text: 'Ich **würde gern** am Samstag kommen.', gl: '— Termin vorschlagen' },
-        { text: 'Wir **würden** lieber **ins** Kino **gehen**.', gl: '~~preferiríamos~~' },
+        { text: 'Wir **würden** lieber ins Kino **gehen**.', gl: '~~preferiríamos~~' },
         { text: 'Ich **wäre** jetzt gern am Meer.', gl: '~~ojalá estuviera…~~' },
       ],
     },
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Erkennen',
-      frage: 'Bitte oder Wunsch?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Könntest du das Licht ausmachen?',
-        'Ich würde gern mehr Deutsch sprechen.',
-        'Hätten Sie einen Stift für mich?',
-        'Ich wäre gern schon im Urlaub.',
-      ],
-      loesungen: [
-        '**Bitte** ~~(petición a otra persona)~~',
-        '**Wunsch** ~~(deseo propio)~~',
-        '**Bitte** — höfliche Frage mit *Hätten Sie …?*',
-        '**Wunsch** — mit *wäre gern*',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Im Alltag höflich bleiben',
+      items: [
+        { text: 'Entschuldigung, **könnten Sie** mir sagen, wo der Bahnhof ist?', gl: '— auf der Straße' },
+        { text: '**Würdest du** bitte den Müll runterbringen?', gl: '— zu Hause, in der WG' },
+        { text: 'Ich **hätte gern** zwei Brötchen und einen Kaffee.', gl: '— in der Bäckerei' },
+        { text: '**Wäre** es möglich, heute etwas früher zu gehen?', gl: '— bei der Arbeit, sehr höflich' },
+        { text: '**Hättest du** morgen Abend Zeit für einen Film?', gl: '— Einladung unter Freunden' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Höflich machen',
-      frage: 'Formuliere die direkten Sätze höflich um.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Helfen Sie mir! → ___',
-        'Ich will einen Tee. → ___',
-        'Mach das Fenster zu! → ___',
-      ],
-      loesungen: [
-        '**Könnten Sie** mir bitte **helfen**?',
-        'Ich **hätte gern** einen Tee.',
-        '**Würdest du** bitte das Fenster **zumachen**? ~~(o: Könntest du…?)~~',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Selbst bilden',
-      frage: 'Schreib je einen Satz …',
-      loesungLabel: 'Mögliche Lösung',
-      aufgaben: [
-        '… eine höfliche Bitte an deinen Nachbarn ~~(la música está muy alta)~~',
-        '… einen Wunsch für das Wochenende',
-      ],
-      loesungen: [
-        '**Könnten Sie** die Musik bitte leiser machen? ~~También vale: Würden Sie…? / Wäre es möglich, dass…?~~',
-        'Ich **würde** am Wochenende **gern** einen Ausflug **machen**. ~~Cualquier deseo con würde gern / hätte gern es correcto.~~',
+      type: 'beispiele',
+      kicker: 'Wünsche',
+      titel: 'Was würdest du gern machen?',
+      items: [
+        { text: 'Am liebsten **würde** ich ein Jahr in Wien **wohnen**.', gl: '— würde + Infinitiv am Ende' },
+        { text: 'Mein Bruder **wäre** gern Koch.', gl: '~~le gustaría ser cocinero~~' },
+        { text: 'Wir **hätten gern** eine größere Wohnung mit Balkon.', gl: '— hätte gern + Akkusativ' },
+        { text: 'Ich **würde** lieber mit dem Zug **fahren** — das ist bequemer.', gl: '— lieber = das mag ich mehr' },
       ],
     },
 

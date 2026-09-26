@@ -98,53 +98,29 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Erkennen',
-      frage: 'Welcher Kasus — und warum?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Die Frau, die dort arbeitet, ist meine Nachbarin.',
-        'Das Buch, das ich gerade lese, ist spannend.',
-        'Der Mann, dem das Auto gehört, ist nicht da.',
-      ],
-      loesungen: [
-        '**Nominativ** — *die* ist Subjekt ~~(ella trabaja)~~',
-        '**Akkusativ** — *das* ist Objekt ~~(yo leo el libro)~~',
-        '**Dativ** — *gehören* + Dat. ~~(el coche le pertenece A él)~~',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Menschen beschreiben',
+      items: [
+        { text: 'Die Kollegin, **die** neben mir sitzt, kommt aus Polen.', gl: '— Subjekt → Nom. fem.' },
+        { text: 'Der Arzt, **den** ich gestern angerufen habe, hat heute keine Termine.', gl: '— Objekt → Akk. mask.' },
+        { text: 'Das Mädchen, **dem** Paul Nachhilfe gibt, schreibt jetzt gute Noten.', gl: '— geben + Dat. → dem' },
+        { text: 'Die Gäste, **denen** das Essen geschmeckt hat, kommen nächste Woche wieder.', gl: '— schmecken + Dat., Plural → denen' },
+        { text: 'Kennst du die Leute, **die** im dritten Stock wohnen?', gl: '— Subjekt → Nom. Plural' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Pronomen einsetzen',
-      frage: 'der, den, denen oder wo?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Das ist der Lehrer, ___ sehr gut erklärt.',
-        'Wie heißt der Film, ___ du mir empfohlen hast?',
-        'Das sind die Nachbarn, ___ ich oft helfe.',
-        'Das ist das Restaurant, ___ wir immer essen.',
-      ],
-      loesungen: [
-        '**der** — Subjekt → Nominativ maskulin',
-        '**den** — Objekt → Akkusativ maskulin',
-        '**denen** — helfen + Dat., Plural',
-        '**wo** — Ort ~~(= in dem)~~',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Sätze verbinden',
-      frage: 'Mach aus zwei Sätzen einen — mit Relativsatz.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Ich habe einen Kuchen gebacken. **Er** schmeckt sehr gut.',
-        'Das ist meine Kollegin. Ich mag **sie** sehr.',
-      ],
-      loesungen: [
-        'Ich habe einen Kuchen gebacken, **der** sehr gut schmeckt. ~~(er = Subjekt → der; verbo al final)~~',
-        'Das ist meine Kollegin, **die** ich sehr mag. ~~(sie = Objekt → die, Akk. fem.)~~',
+      type: 'beispiele',
+      kicker: 'Dinge & Orte',
+      titel: 'Komma + Verb am Ende',
+      items: [
+        { text: 'Das Handy, **das** ich letzte Woche gekauft habe, ist schon kaputt.', gl: '— Akk. neutral · Perfekt: *habe* ganz am Ende' },
+        { text: 'Wir suchen eine Wohnung, **die** einen Balkon hat.', gl: '— Subjekt → Nom. fem.' },
+        { text: 'Das ist die Bäckerei, **wo** es die besten Brötchen gibt.', gl: '— Ort → wo' },
+        { text: 'Das Dorf, **wo** meine Großeltern leben, ist sehr klein.', gl: '— Ort → wo' },
+        { text: 'Der Bus, **der** um acht Uhr fährt, ist immer voll.', gl: '— Subjekt → Nom. mask.' },
       ],
     },
 
@@ -200,7 +176,7 @@ export default {
     {
       type: 'ausblick',
       eyebrow: 'Ausblick',
-      text: 'Es gibt auch Relativpronomen im Genitiv (*dessen/deren*) — das ist B2-Stoff, den du hier nur zu erkennen brauchst. Mit Relativsätzen kannst du jetzt Nomen präzise beschreiben. In der nächsten Lektion lernst du, höflich zu klingen: der **Konjunktiv II** — *Könnten Sie …?, Ich hätte gern …* — für höfliche Bitten und Wünsche.',
+      text: 'Es gibt auch Relativpronomen im Genitiv (*dessen/deren*) — das ist B2-Stoff. Hier musst du sie nur erkennen. Mit Relativsätzen kannst du jetzt Nomen präzise beschreiben. In der nächsten Lektion klingst du höflich: mit dem **Konjunktiv II** — *Könnten Sie …?, Ich hätte gern …* — für höfliche Bitten und Wünsche.',
     },
   ],
 }

@@ -111,53 +111,18 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Erkennen',
-      frage: 'Mit zu oder ohne zu?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Ich möchte am Samstag ___ (wandern).',
-        'Ich habe keine Zeit, dich ___ (besuchen).',
-        'Kannst du mir ___ (helfen)?',
-        'Er hört auf, ___ (rauchen).',
-      ],
-      loesungen: [
-        '**wandern** — nach *möchten* ohne zu',
-        '**zu besuchen** — nach *Zeit haben* mit zu',
-        '**helfen** — nach Modalverb *können* ohne zu',
-        '**zu rauchen** — nach *aufhören* mit zu ~~(dejar de fumar)~~',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Sätze verbinden',
-      frage: 'Verbinde mit um … zu.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Ich lerne Deutsch. Ich will die B1-Prüfung bestehen. → ___',
-        'Sie fährt in die Stadt. Sie will Geschenke kaufen. → ___',
-        'Wir stehen früh auf. Wir wollen den Zug nicht verpassen. → ___',
-      ],
-      loesungen: [
-        'Ich lerne Deutsch, **um** die B1-Prüfung **zu bestehen**. ~~(«wollen» desaparece)~~',
-        'Sie fährt in die Stadt, **um** Geschenke **zu kaufen**.',
-        'Wir stehen früh auf, **um** den Zug nicht **zu verpassen**.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Selbst bilden',
-      frage: 'Antworte mit einem ganzen Satz.',
-      loesungLabel: 'Mögliche Lösung',
-      aufgaben: [
-        'Warum lernst du Deutsch? ~~(usa um … zu)~~',
-        'Was hast du diese Woche vor? ~~(usa vorhaben + zu)~~',
-      ],
-      loesungen: [
-        'Ich lerne Deutsch, **um** in Deutschland **zu studieren**. ~~Cualquier finalidad real vale: um zu arbeiten, um Freunde zu finden…~~',
-        'Ich habe vor, am Freitag meine Eltern **zu besuchen**. ~~Estructura: vorhaben + Komma + … zu + Infinitiv.~~',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Pläne, Ziele & gute Vorsätze',
+      items: [
+        { text: 'Ich **habe vor**, nächstes Jahr in Zürich **zu studieren**.', gl: '— vorhaben + zu' },
+        { text: 'Paula **hat aufgehört**, Fleisch **zu essen**.', gl: '~~Paula ha dejado de comer carne~~' },
+        { text: 'Wir **haben** leider keine **Zeit**, dich am Bahnhof **abzuholen**.', gl: '— trennbar: ab**zu**holen' },
+        { text: 'Im Winter **ist es schwer**, früh **aufzustehen**.', gl: '— auf**zu**stehen' },
+        { text: 'Er **geht** freitags mit Kollegen **essen**, **um** sie besser **kennenzulernen**.', gl: '— gehen ohne zu · um … zu mit trennbarem Verb' },
+        { text: '**Um** Geld **zu sparen**, **versucht** Leonie, weniger online **zu kaufen**.', gl: '— um … zu am Anfang + versuchen + zu' },
       ],
     },
 
@@ -184,7 +149,7 @@ export default {
     {
       type: 'tipp',
       label: 'Prüfungstipp',
-      text: 'Beim **Sprechen Teil 2 (Präsentation)** wirkt *um … zu* sofort strukturiert: *„**Um** das Thema **zu zeigen**, habe ich drei Punkte vorbereitet.“* Ein einziger um…zu-Satz pro Text (E-Mail, Forum, Vortrag) hebt dein Niveau — die Prüfer bewerten *Strukturen* als eigenes Kriterium.',
+      text: 'Beim **Sprechen Teil 2 (Präsentation)** wirkt *um … zu* sofort strukturiert: *„**Um** das Thema besser **zu erklären**, habe ich drei Punkte vorbereitet.“* Ein einziger um…zu-Satz pro Text (E-Mail, Forum, Vortrag) hebt dein Niveau — die Prüfer bewerten *Strukturen* als eigenes Kriterium.',
     },
 
     { type: 'rule' },
