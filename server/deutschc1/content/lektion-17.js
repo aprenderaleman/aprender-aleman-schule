@@ -154,51 +154,31 @@ export default {
 
     { type: 'rule' },
 
-    // ── 6. Übungen ────────────────────────────────────────────────
+    // ── 6. Modelltext · Mehr Beispiele ────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Erkennen',
-      frage: 'Klassifiziere die Lücke [ … ] grammatisch, bevor du an ein konkretes Wort denkst: Welche Wortart fehlt, und welches Indiz im Satz beweist es?',
-      aufgaben: [
-        'Die Zahl der Studierenden ist [ … ] gestiegen, obwohl die Mieten in den Universitätsstädten steigen.',
-        '[ … ] der hohen Nachfrage wurden zusätzliche Kurse eingerichtet.',
-        'Das Unternehmen hat auf die Vorwürfe bislang nicht [ … ].',
-        'Viele Kommunen setzen [ … ] auf digitale Bürgerdienste, sondern auch auf persönliche Beratung.',
-        'Die [ … ] neuer Software erfordert Schulungen für das gesamte Personal.',
+      type: 'modell',
+      eyebrow: 'Modelltext — ein Lückentext, vollständig gelesen',
+      thema: 'Ein Sachtext im Format von Teil 2, hier mit allen eingesetzten Wörtern (fett). Lies ihn einmal flüssig durch und achte darauf, welches Indiz im Satz jedes fett gedruckte Wort erzwingt: Kasus, Verbstellung, Rektion oder Kollokation.',
+      absaetze: [
+        '*Immer mehr Städte setzen auf die **Begrünung** von Dächern und Fassaden, um sich an den Klimawandel anzupassen. **Infolge** steigender Sommertemperaturen heizen sich dicht bebaute Viertel besonders stark auf; begrünte Flächen können **zur** Senkung der Temperatur messbar **beitragen**.*',
+        '*Zahlreiche Kommunen haben deshalb Maßnahmen **ergriffen** und Förderprogramme aufgelegt, die Hausbesitzer bei der Umgestaltung unterstützen. **Obwohl** die Vorteile gut belegt sind, kommt die Umsetzung vielerorts nur langsam voran. Das liegt **allerdings** nicht nur am Geld: Vielen Eigentümern fehlt schlicht die Information, welche Unterstützung ihnen zur Verfügung **steht**.*',
       ],
-      loesungen: [
-        '**Adverb** — der Satz ist grammatisch vollständig (*ist gestiegen*); die Lücke steuert eine Nuance: *deutlich, stetig, zuletzt*.',
-        '**Präposition (+ Genitiv)** — nach der Lücke steht *der hohen Nachfrage* im Genitiv; kausale Logik: *aufgrund, wegen, infolge*.',
-        '**Partizip II eines Verbs** — *hat … nicht [ … ]* verlangt ein Partizip; die Rektion *auf + Akkusativ* passt zu *reagiert*.',
-        '**Konnektor (zweiteilig)** — das spätere *sondern auch* beweist **nicht nur**: Zweiteilige Konnektoren erkennst du an ihrem Partner im Satz.',
-        '**Nominalisierung (feminin)** — Artikel *die* + Objekt im Genitivmuster: *die Einführung neuer Software*.',
+      annotationen: [
+        { tag: 'Rektion', text: '*zur* und *beitragen* bilden ein Paar: Wer *beitragen* erkennt, hat die Präposition gleich mit. ~~En cuanto reconoces *beitragen*, la preposición viene sola.~~' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Anwenden',
-      frage: 'Zwei Kandidaten, eine Lücke: Entscheide dich und begründe grammatisch oder über die Kollokation — nicht nur über das Gefühl.',
-      aufgaben: [
-        '*[ Obwohl / Dennoch ] die Ergebnisse vorläufig sind, sorgen sie für Diskussionen.*',
-        '*[ Trotz / Wegen ] der Proteste hielt der Stadtrat an dem Bauprojekt fest.*',
-        '*Das Institut hat eine umfassende Studie [ durchgeführt / gemacht ].*',
-        '*Immer mehr Firmen interessieren sich [ für / an ] flexible Arbeitsmodelle.*',
-        '*Die Debatte hat an Schärfe [ gewonnen / bekommen ].*',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Die Werkzeuge von Teil 2 im Satz',
+      items: [
+        { text: 'Bevor du ein Wort **einsetzt**, bestimme die **Wortart** der Lücke und den **Kasus** des folgenden Nomens.' },
+        { text: 'Steht das Verb am Satzende, **kommen** nur Subjunktionen **infrage** — *dennoch* und *jedoch* lassen sich sofort **ausschließen**.', gl: '— die **Verbstellung** filtert vor der Bedeutung' },
+        { text: 'Die **Rektion** von *verzichten* verlangt *auf*: Jeder Kandidat mit einer anderen Präposition fällt aus der **Wortliste** heraus.' },
+        { text: 'Fehlt nach *Konsequenzen* das Verb, entscheidet die **Kollokation** *Konsequenzen ziehen* schneller als jede Analyse.', gl: '— Kollokationen schlagen Einzelbedeutungen' },
+        { text: 'Im **Ausschlussverfahren** vergibst du zuerst die sicheren Lücken; am Ende **bleiben** genau zwei Wörter **übrig**.' },
+        { text: 'Das **Bezugswort** eines Pronomens steht oft zwei Sätze zuvor — erst der **Zusammenhang** macht die Lücke eindeutig.' },
       ],
-      loesungen: [
-        '**Obwohl** — das Verb *sind* steht am Ende des Nebensatzes; nach *dennoch* müsste es direkt folgen (*Dennoch sorgen sie …*).',
-        '**Trotz** — die Logik ist konzessiv: Die Proteste sprachen *gegen* das Projekt, der Rat hielt daran fest. *Wegen* würde die Kausalität umkehren.',
-        '**durchgeführt** — *eine Studie durchführen* ist die C1-Kollokation; *machen* ist auf diesem Niveau ein Registerfehler.',
-        '**für** — *sich interessieren für* + Akkusativ. ~~Interferencia clásica: «interesarse por» empuja hacia una preposición falsa.~~',
-        '**gewonnen** — *an etwas gewinnen / verlieren* (an Bedeutung, an Schärfe) ist ein festes Muster mit Dativ.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Der komplette Durchlauf mit der Fünf-Schritte-Methode, Zeitlimit **8 Minuten**: Lies den Text, klassifiziere jede Lücke [1]-[8], filtere die Liste, entscheide. Wortliste (zwei Wörter bleiben übrig): **allerdings · an · Begrünung · beitragen · ergriffen · infolge · obwohl · steht · trotz · zur**',
-      aufgabe: '*Immer mehr Städte setzen auf die [1] von Dächern und Fassaden, um sich an den Klimawandel anzupassen. [2] steigender Sommertemperaturen heizen sich dicht bebaute Viertel besonders stark auf; begrünte Flächen können [3] Senkung der Temperatur messbar [4]. Zahlreiche Kommunen haben deshalb Maßnahmen [5] und Förderprogramme aufgelegt, die Hausbesitzer bei der Umgestaltung unterstützen. [6] die Vorteile gut belegt sind, kommt die Umsetzung vielerorts nur langsam voran. Das liegt [7] nicht nur am Geld: Vielen Eigentümern fehlt schlicht die Information, welche Unterstützung ihnen zur Verfügung [8].*',
-      loesung: '**Lösung mit Begründung** (übrig bleiben *an* und *trotz*):\n[1] **Begrünung** — Artikel *die* + Anschluss *von Dächern*: Es fehlt eine feminine Nominalisierung.\n[2] **Infolge** — Genitiv nach der Lücke (*steigender Sommertemperaturen*) + kausale Logik. *Trotz* scheitert am Sinn: Die Hitze ist ja die Ursache.\n[3] **zur** — die Rektion von *beitragen* verlangt *zu*: *zur Senkung beitragen*.\n[4] **beitragen** — Infinitiv nach *können*; bildet mit [3] das feste Paar *zu etwas beitragen*.\n[5] **ergriffen** — Kollokation *Maßnahmen ergreifen*; grammatisch war ein Partizip nach *haben* gefordert.\n[6] **Obwohl** — das Verb *sind* steht am Ende des Nebensatzes → Subjunktion. *Allerdings* würde das Verb direkt nach sich verlangen.\n[7] **allerdings** — Adverb; der Satz ist grammatisch komplett, die Lücke steuert nur die einschränkende Nuance.\n[8] **steht** — die Wendung *jemandem zur Verfügung stehen*; im Nebensatz mit *welche* wandert das Verb ans Ende.\n~~Fíjate en cómo [3] y [4] se resuelven en pareja: en cuanto reconoces *beitragen*, la preposición viene sola. Y el Restcheck final: cuenta — ocho huecos, ocho palabras usadas, dos sobrantes (*an*, *trotz*). Si una palabra te sale dos veces, hay un error anterior.~~',
     },
 
     { type: 'rule' },

@@ -77,7 +77,7 @@ export default {
         {
           badge: 'Bildung',
           titel: 'Die Querschnittsfrage: digitale Kompetenz',
-          text: 'Beide Seiten treffen sich bei der __digitalen Bildung__: Wer Technologie weder bedienen noch beurteilen kann, fällt auf beiden Seiten der __digitalen Kluft__ zurück — zwischen Generationen, Regionen und sozialen Schichten. Der Ausbau digitaler Kompetenzen in der Schule ist der seltene Konsens der Debatte.',
+          text: 'Beide Seiten treffen sich bei der __digitalen Bildung__: Wer Technologie weder bedienen noch beurteilen kann, landet auf der falschen Seite der __digitalen Kluft__ — zwischen Generationen, Regionen und sozialen Schichten. Der Ausbau digitaler Kompetenzen in der Schule ist der seltene Konsens der Debatte.',
         },
       ],
     },
@@ -148,7 +148,7 @@ export default {
         {
           fn: 'Risiken benennen',
           saetze: [
-            { satz: 'Bedenklich stimmt mich vor allem, dass automatisierte Entscheidungen kaum nachvollziehbar sind.', gloss: '— *bedenklich stimmen*: «hacer reflexionar con preocupación»' },
+            { satz: 'Bedenklich stimmt mich vor allem, dass automatisierte Entscheidungen kaum nachvollziehbar sind.', gloss: '— *bedenklich stimmen*: «preocupar, inquietar» (*das stimmt mich bedenklich* = eso me preocupa)' },
             { satz: 'Wir sollten uns nicht der Illusion hingeben, dass sich diese Entwicklung von selbst zum Guten wendet.' },
           ],
         },
@@ -164,52 +164,30 @@ export default {
 
     { type: 'rule' },
 
-    // ── 6. Übungen ────────────────────────────────────────────────
+    // ── 6. Modelltext · Mehr Beispiele ────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Wortschatz & Kollokationen',
-      frage: 'Ergänze das passende Wort aus dem Kernwortschatz. Achte auf Kollokation und Grammatik.',
-      aufgaben: [
-        'personenbezogene Daten … (Verb der DSGVO)',
-        'gegen den Datenschutz …',
-        'die Effizienz erheblich …',
-        'menschliche Arbeitskraft durch Maschinen …',
-        'die digitale Kluft …',
-        '… bei automatisierten Entscheidungen fordern',
+      type: 'modell',
+      eyebrow: 'Modelltext — Mini-Vortrag: KI in der Schule',
+      thema: '„KI in der Schule — Hilfsmittel oder Gefahr?“ Der Mini-Vortrag folgt dem Chancen-Risiken-Gerüst: Einstieg → Chance → Risiko → Bedingung → Fazit.',
+      absaetze: [
+        '**Künstliche Intelligenz** ist längst in den Klassenzimmern angekommen — die Frage ist, wie Schulen damit umgehen sollten. Einerseits kann KI Lernende individuell fördern und Lehrkräfte von Routineaufgaben entlasten, was die **Effizienz** des Unterrichts steigert. Andererseits besteht die Gefahr, dass Schüler das kritische Denken an den **Algorithmus** abgeben und dabei **personenbezogene Daten** preisgeben. Vertretbar erscheint mir der Einsatz daher nur, sofern der **Datenschutz** gewährleistet ist und ein **verantwortungsvoller** Umgang ausdrücklich unterrichtet wird. Alles in allem überwiegen die Chancen — aber nur mit klaren Spielregeln.',
       ],
-      loesungen: [
-        'personenbezogene Daten **verarbeiten**',
-        'gegen den Datenschutz **verstoßen** — *verstoßen gegen* + Akk.',
-        'die Effizienz erheblich **steigern**',
-        'menschliche Arbeitskraft durch Maschinen **ersetzen** — *ersetzen durch*, ~~no «ersetzen mit»: interferencia de «sustituir por/con»~~',
-        'die digitale Kluft **überwinden**',
-        '**Transparenz** bei automatisierten Entscheidungen fordern',
+      annotationen: [
+        { tag: 'Gerüst', text: 'Jeder Satz erfüllt eine Funktion: Einstieg → Chance (*einerseits*) → Risiko (*andererseits*) → Bedingung (*sofern*) → Fazit. ~~Cualquier postura es válida mientras el esquema sea reconocible.~~' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Von B2 zu C1',
-      frage: 'Forme die einfachen Sätze in C1-Sätze um. Nutze das angegebene Wort aus dem Kernwortschatz.',
-      aufgaben: [
-        'Viele Leute haben Angst, dass Roboter ihnen die Arbeit wegnehmen. (die Automatisierung)',
-        'Firmen sammeln viele Informationen über uns. (personenbezogene Daten)',
-        'Man weiß nicht, wie das Programm entscheidet. (die Transparenz)',
-        'Alte Menschen und Leute auf dem Land haben oft schlechteres Internet. (die digitale Kluft)',
-        'Wenn die KI einen Fehler macht, weiß niemand, wer schuld ist. (die Haftung)',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Den Kernwortschatz im Zusammenhang verwenden',
+      items: [
+        { text: 'Die **Digitalisierung** der Verwaltung soll Behördengänge überflüssig machen, doch vielerorts scheitert sie noch an veralteter Technik.' },
+        { text: 'Kliniken **setzen** künstliche Intelligenz zunehmend bei der Auswertung von Röntgenbildern **ein**, die endgültige Diagnose stellt jedoch weiterhin ein Arzt.', gl: '— *KI einsetzen*: el verbo estándar para «emplear» una tecnología' },
+        { text: 'Ältere Menschen ohne Internetzugang sind von der **digitalen Kluft** besonders betroffen, seit immer mehr Dienstleistungen nur noch online angeboten werden.' },
+        { text: 'Die **Daten**, die der Sprachassistent aufzeichnet, werden nach Angaben des Herstellers nach dreißig Tagen gelöscht.', gl: '— *die Daten … werden*: siempre plural' },
+        { text: 'Selbst die ausgefeilteste **Anwendung** kann menschliches Urteilsvermögen nicht vollständig **ersetzen**.' },
+        { text: 'Kritiker befürchten, dass die flächendeckende Videoanalyse im öffentlichen Raum den Weg zu lückenloser **Überwachung** ebnet.', gl: '— *den Weg zu etwas ebnen*: allanar el camino' },
       ],
-      loesungen: [
-        'Viele Beschäftigte befürchten, von der **Automatisierung** verdrängt zu werden.',
-        'Unternehmen verarbeiten in großem Umfang **personenbezogene Daten** ihrer Nutzer.',
-        'Es mangelt an **Transparenz** darüber, nach welchen Kriterien der Algorithmus entscheidet.',
-        'Die **digitale Kluft** zwischen Stadt und Land sowie zwischen den Generationen vertieft sich zusehends. ~~*zusehends* = «a ojos vista»: adverbio C1 muy rentable.~~',
-        'Bei Fehlentscheidungen einer KI ist die Frage der **Haftung** bislang nur unzureichend geklärt.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Skizziere einen Mini-Vortrag (5-6 Sätze) zum Thema „KI in der Schule — Hilfsmittel oder Gefahr?“ nach dem Chancen-Risiken-Gerüst: Einstieg → eine Chance → ein Risiko → Bedingung → Fazit. Verwende mindestens vier Kernwörter.',
-      loesung: '**Mögliche Lösung** (jede Position ist gültig, solange das Gerüst erkennbar ist):\n*Künstliche Intelligenz ist längst in den Klassenzimmern angekommen — die Frage ist, wie Schulen damit umgehen sollten. Einerseits kann KI Lernende individuell fördern und Lehrkräfte von Routineaufgaben entlasten, was die Effizienz des Unterrichts steigert. Andererseits droht die Gefahr, dass Schüler das kritische Denken an den Algorithmus abgeben und dabei personenbezogene Daten preisgeben. Vertretbar erscheint mir der Einsatz daher nur, sofern Datenschutz gewährleistet ist und ein verantwortungsvoller Umgang ausdrücklich unterrichtet wird. Alles in allem überwiegen die Chancen — aber nur mit klaren Spielregeln.*',
     },
 
     { type: 'rule' },

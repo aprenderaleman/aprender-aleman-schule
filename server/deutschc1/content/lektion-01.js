@@ -168,52 +168,32 @@ export default {
 
     { type: 'rule' },
 
-    // ── 6. Übungen ────────────────────────────────────────────────
+    // ── 6. Mehr Beispiele & Modelltext (Übungen → Übungsheft) ────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Erkennen',
-      frage: 'Die Fakten sitzen? Beantworte aus dem Gedächtnis, ohne nach oben zu scrollen.',
-      aufgaben: [
-        'Wie viele Punkte braucht man pro Modul zum Bestehen — und gibt es eine Gesamtnote?',
-        'Welche zwei Textsorten schreibt man im Modul Schreiben, und wie lang sind sie ungefähr?',
-        'Wie lange dauern die Module Lesen und Schreiben?',
-        'Was bedeutet es, dass die Prüfung „modular“ ist?',
-        'Nach welchen vier Kriterien werden Schreiben und Sprechen bewertet?',
-      ],
-      loesungen: [
-        '**60 von 100** Punkten (60 %). Eine Gesamtnote gibt es nicht — jedes Modul wird **einzeln** bewertet und bestanden.',
-        'Einen **Diskussionsbeitrag** (~230 Wörter) und eine **formelle Nachricht** (~120 Wörter).',
-        'Lesen **65 Minuten**, Schreiben **75 Minuten**.',
-        'Die vier Module sind **einzeln ablegbar und einzeln wiederholbar**; bestandene Ergebnisse bleiben gültig.',
-        '**Erfüllung, Kohärenz, Wortschatz, Strukturen.**',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Von der Anmeldung bis zum Zeugnis — der Prüfungswortschatz im Satz',
+      items: [
+        { text: 'Die **Anmeldung** beim **Prüfungszentrum** sollte spätestens sechs Wochen vor dem gewünschten **Prüfungstermin** erfolgen.', gl: '— *die Anmeldung erfolgt*: formelle Alternative zu *man meldet sich an*' },
+        { text: 'Für die **Zulassung** zur Prüfung ist kein Nachweis über ein bestimmtes Vorniveau erforderlich.', gl: '— *die Zulassung zu* + Dativ' },
+        { text: 'Weil er die **Bestehensgrenze** im Modul Hören um zwei Punkte verfehlt hat, meldet sich Jonas zur **Wiederholung** an.', gl: '— *die Bestehensgrenze verfehlen / erreichen*' },
+        { text: 'Die **Bewertung** der produktiven **Fertigkeiten** erfolgt nach vier festen Kriterien.', gl: '— Schreiben und Sprechen: Erfüllung, Kohärenz, Wortschatz, Strukturen' },
+        { text: 'Wer jede **Aufgabenstellung** zweimal liest, übersieht keinen Inhaltspunkt.', gl: '— die häufigste vermeidbare Fehlerquelle' },
+        { text: 'Nachdem Amira alle **Module** **bestanden** hatte, ließ sie sich ein **Zeugnis** ausstellen.', gl: '— *ein Zeugnis ausstellen (lassen)*' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Anwenden',
-      frage: 'Was genau musst du tun? Erkläre mit eigenen Worten, was die Anweisung verlangt — im echten Prüfungsstress bleibt dafür keine Zeit mehr.',
-      aufgaben: [
-        '„**Kreuzen Sie an**, ob die Aussage richtig oder falsch ist.“',
-        '„**Ordnen Sie** jeder Überschrift den passenden Abschnitt **zu**.“',
-        '„**Nehmen Sie Stellung** zur Aussage des Autors.“',
-        '„**Begründen Sie** Ihre Auffassung.“',
-        '„**Gehen Sie** dabei **auf** folgende Punkte **ein**.“',
-        '„**Verfassen Sie** eine formelle Nachricht an Ihre Vermieterin.“',
+      type: 'modell',
+      eyebrow: 'Modelltext — ein persönlicher Vorbereitungsplan',
+      thema: 'Wann, womit, in welcher Reihenfolge? Ein Vorbereitungsplan in fünf Sätzen',
+      woerter: 'ca. 100 Wörter',
+      absaetze: [
+        'Ich möchte die Prüfung im Juni ablegen und habe mich bereits über die Anmeldung beim Prüfungszentrum in Madrid informiert. Da die Module einzeln bewertet werden, plane ich strategisch: Lesen und Hören sind meine stärksten Fertigkeiten, dort sollte ich die Bestehensgrenze sicher erreichen. Das Modul Schreiben bereitet mir dagegen Sorgen, weil ich die Aufgabenstellungen oft zu schnell lese und Inhaltspunkte übersehe. Deshalb beginne ich meine Vorbereitung mit den Struktur-Lektionen und übe das Schreiben von Anfang an mit. Falls ein Modul nicht klappt, ist die Wiederholung zum nächsten Prüfungstermin möglich — aber mein Ziel ist, alle vier auf einmal zu bestehen.',
       ],
-      loesungen: [
-        '**Markieren**, welche der zwei (oder mehr) Optionen zutrifft — es wird nichts geschrieben, nur gewählt.',
-        'Paare bilden: Jede Überschrift bekommt **genau einen** Abschnitt. Achtung, *zuordnen* ist trennbar: *ich ordne … zu*.',
-        'Die **eigene Position** klar formulieren — zustimmen, widersprechen oder differenzieren — und sie vertreten.',
-        '**Argumente liefern**: das *Warum* hinter der Meinung. Eine Behauptung ohne Begründung zählt nicht als Stellungnahme.',
-        'Jeden genannten Punkt im Text **tatsächlich behandeln**. ~~Ojo: eingehen auf no es «entrar» — significa tratar, abordar un punto. Es de los trennbare Verben que más despistan.~~',
-        'Einen **formellen Brief/eine formelle E-Mail** schreiben: Anrede *Sehr geehrte …*, Sie-Form, sachlicher Ton, Grußformel.',
+      annotationen: [
+        { tag: 'Kollokationen', text: '*eine Prüfung ablegen*, *die Bestehensgrenze erreichen*, *die Anmeldung beim Prüfungszentrum* — der Prüfungswortschatz steht hier in seinen festen Verbindungen.' },
+        { tag: 'Aufbau', text: 'Ziel und Termin → Stärken → Schwächen → Konsequenz für die Reihenfolge → Plan B. So entsteht aus einzelnen Angaben ein kohärenter Plan.' },
       ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Formuliere in **fünf bis sechs Sätzen** deinen persönlichen Vorbereitungsplan: Ziel-Prüfungstermin, stärkstes und schwächstes Modul, Reihenfolge. Verwende dabei mindestens **fünf Wörter** aus dem Kernwortschatz.',
-      loesung: '**Mögliche Lösung** (deine Angaben sind natürlich andere — entscheidend ist der korrekte Gebrauch des Prüfungswortschatzes):\n*Ich möchte die Prüfung im Juni ablegen und habe mich bereits über die Anmeldung beim Prüfungszentrum in Madrid informiert. Da die Module einzeln bewertet werden, plane ich strategisch: Lesen und Hören sind meine stärksten Fertigkeiten, dort sollte ich die Bestehensgrenze sicher erreichen. Das Modul Schreiben bereitet mir dagegen Sorgen, weil ich die Aufgabenstellungen oft zu schnell lese und Inhaltspunkte übersehe. Deshalb beginne ich meine Vorbereitung mit den Struktur-Lektionen und übe das Schreiben von Anfang an mit. Falls ein Modul nicht klappt, ist die Wiederholung zum nächsten Prüfungstermin möglich — aber mein Ziel ist, alle vier auf einmal zu bestehen.*\nGültig ist jede Fassung, die kohärent ist, echte Planung zeigt und die Kernwörter **richtig kollokiert** verwendet (*eine Prüfung ablegen*, *die Bestehensgrenze erreichen*, *die Anmeldung beim Prüfungszentrum* …).',
     },
 
     { type: 'rule' },
@@ -274,7 +254,7 @@ export default {
     {
       type: 'ausblick',
       eyebrow: 'Ausblick',
-      text: 'Das Format kennst du jetzt — aber wo stehst **du** sprachlich? Bevor du in die Grammatik- und Strategielektionen einsteigst, brauchst du eine ehrliche **Standortbestimmung**: Was kannst du schon auf C1-Niveau, wo liegen die Lücken? In der nächsten Lektion diagnostizierst du mit drei Mini-Tests deine Grammatik, deinen Wortschatz und dein Schreiben — und bekommst eine Landkarte, welche Lektionen des Kurses du zuerst brauchst.',
+      text: 'Das Format kennst du jetzt — aber wo stehst **du** sprachlich? Bevor du in die Grammatik- und Strategielektionen einsteigst, brauchst du eine ehrliche **Standortbestimmung**: Was kannst du schon auf C1-Niveau, wo liegen die Lücken? In der nächsten Lektion diagnostizierst du im Übungsheft deine Grammatik, deinen Wortschatz, dein Leseverstehen und dein Schreiben — und bekommst eine Landkarte, welche Lektionen des Kurses du zuerst brauchst.',
     },
   ],
 }

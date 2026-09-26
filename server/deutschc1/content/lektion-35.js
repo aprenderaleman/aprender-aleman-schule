@@ -40,7 +40,7 @@ export default {
         { wort: 'die Eigenverantwortung', kollokation: 'an die Eigenverantwortung der Bürger appellieren', es: 'responsabilidad individual' },
         { wort: 'die Bevormundung', kollokation: 'staatliche Bevormundung entschieden ablehnen', es: 'paternalismo, tutela' },
       ],
-      hinweis: 'Unterscheide **die Krankenversicherung** (das System) von **der Krankenkasse** (die konkrete Institution, z. B. AOK oder TK). ~~Falso amigo: „la condición física“ es *die Kondition*, pero „una condición médica“ es *eine Erkrankung / ein Leiden* — nunca *Kondition*.~~',
+      hinweis: 'Unterscheide **die Krankenversicherung** (das System) von **der Krankenkasse** (die konkrete Kasse, bei der man Mitglied ist). ~~Falso amigo: „la condición física“ es *die Kondition*, pero „una condición médica“ es *eine Erkrankung / ein Leiden* — nunca *Kondition*.~~',
     },
 
     { type: 'rule' },
@@ -172,48 +172,34 @@ export default {
 
     { type: 'rule' },
 
-    // ── 6. Übungen ────────────────────────────────────────────────
+    // ── 6. Modelltext · Mehr Beispiele ────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Wortschatz & Kollokationen',
-      frage: 'Welches Verb passt? Ergänze in der richtigen Form: *entrichten · wahrnehmen · standhalten · appellieren · warnen*.',
-      aufgaben: [
-        'Gewerkschaften ______ seit Langem vor einer schleichenden Zweiklassenmedizin.',
-        'Alle Beschäftigten ______ einkommensabhängige Beiträge zur gesetzlichen Krankenversicherung.',
-        'Nur etwa die Hälfte der Berechtigten ______ die angebotenen Vorsorgeuntersuchungen ______.',
-        'Die Ministerin ______ an die Eigenverantwortung der Verbraucher, statt eine Steuer einzuführen.',
-        'Viele Berufseinsteiger fragen sich, wie lange sie diesem Leistungsdruck ______ können.',
+      type: 'modell',
+      eyebrow: 'Modelltext — Gliederung eines Kurzvortrags',
+      thema: '„Sollten Mensen und Kantinen ein tägliches veganes Gericht anbieten müssen?“ Die Stichpunkte führen von der Ausgangslage über beide Seiten zu einer Bewertung und einem Fazit, das die Achse Verhaltens- vs. Verhältnisprävention aufgreift.',
+      absaetze: [
+        '**Einleitung** — Ausgangslage: sinkender **Fleischkonsum**, wachsende Nachfrage nach pflanzlichen Gerichten.',
+        '**Aspekt 1 (dafür)** — Die Wahlfreiheit wird erweitert, nicht eingeschränkt; Klima- und Gesundheitsargumente; geringe Kosten.',
+        '**Aspekt 2 (dagegen)** — Verpflichtung als Symbolpolitik; Vorwurf der **Bevormundung**; Qualität zählt mehr als Quote.',
+        '**Bewertung** — Ein Angebot verpflichtend zu machen, ist keine Bevormundung, solange niemandem etwas weggenommen wird; entscheidend ist die Attraktivität des Gerichts.',
+        '**Fazit** — Verhältnisprävention im Kleinen: die gesunde Wahl zur einfachen Wahl machen.',
       ],
-      loesungen: [
-        '… **warnen** seit Langem vor … (*warnen vor* + Dat.)',
-        '… **entrichten** einkommensabhängige Beiträge … ~~Registro formal: entrichten = pagar (cuotas, tasas); nunca para compras.~~',
-        '… **nimmt** die angebotenen Vorsorgeuntersuchungen **wahr**. (*wahrnehmen* = aprovechar una oferta/cita)',
-        '… **appelliert** an die Eigenverantwortung … (*appellieren an* + Akk.)',
-        '… wie lange sie diesem Leistungsdruck **standhalten** können. (*standhalten* + Dat.)',
+      annotationen: [
+        { tag: 'Aufbau', text: 'Andere Gliederungen sind ebenso gültig, sofern beide Seiten und eine eigene Bewertung vorkommen.' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Von B2 zu C1',
-      frage: 'Formuliere die B2-Sätze mit dem Kernwortschatz und komplexeren Strukturen auf C1-Niveau um.',
-      aufgaben: [
-        'Zucker ist schlecht für die Gesundheit, deshalb wollen manche eine Steuer.',
-        'Privatpatienten bekommen schneller einen Termin. Das finden viele unfair.',
-        'Viele junge Leute haben Stress im Job und werden krank.',
-        'Es ist besser, Krankheiten zu verhindern, als sie zu behandeln.',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Kernwortschatz im Zusammenhang',
+      items: [
+        { text: 'Wer in der **gesetzlichen Krankenversicherung** versichert ist, **entrichtet** Beiträge, die sich nach dem Einkommen richten — nicht nach dem persönlichen Gesundheitsrisiko.', gl: '— *entrichten*: registro administrativo para pagar cuotas y tasas' },
+        { text: 'Nur etwa die Hälfte der Berechtigten **nimmt** die kostenlosen **Vorsorgeuntersuchungen wahr** — ein ungenutztes Potenzial der **Prävention**.', gl: '— *wahrnehmen*: aprovechar una cita o una oferta' },
+        { text: 'Ärzteverbände **warnen** eindringlich **vor einer Zweiklassenmedizin**, in der der Versichertenstatus über die Wartezeit entscheidet.' },
+        { text: 'Statt nur **an die Eigenverantwortung** zu **appellieren**, sollte der Staat die gesunde Wahl zur bequemsten machen — mit **Bevormundung** hat das wenig zu tun.' },
+        { text: 'Wer dem **Leistungsdruck** über Jahre **standhalten** muss, riskiert **chronische Erschöpfung**; die **psychische Gesundheit** verdient daher denselben Schutz wie die körperliche.', gl: '— *standhalten* + Dativ: resistir (una presión, una carga)' },
+        { text: 'Eine **ausgewogene Ernährung** muss nicht teuer sein, wohl aber durchdacht: Wer **den Fleischkonsum** deutlich **einschränkt**, sollte auf Eisen und Vitamin B12 achten.' },
       ],
-      loesungen: [
-        '**Da übermäßiger Zuckerkonsum als Mitursache mehrerer Volkskrankheiten gilt, mehren sich die Stimmen, die eine Zuckersteuer mit Lenkungswirkung fordern.**',
-        '**Dass Privatversicherte bei der Terminvergabe bevorzugt werden, empfinden viele als Verstoß gegen das Solidarprinzip — das Stichwort Zweiklassenmedizin macht die Runde.**',
-        '**Immer mehr Berufseinsteiger leiden unter einem Leistungsdruck, der auf Dauer in chronische Erschöpfung münden kann.** ~~*in etwas münden*: desembocar en; alternativa elegante a „führen zu“.~~',
-        '**Prävention ist der Behandlung vorzuziehen — vorzubeugen ist nicht nur wirksamer, sondern auch kostengünstiger als zu heilen.**',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Entwirf in Stichpunkten einen Kurz-Vortrag (5 Punkte: Einleitung, zwei Aspekte, Bewertung, Fazit) zum Thema **„Sollten Mensen und Kantinen ein tägliches veganes Gericht anbieten müssen?“**',
-      loesung: '**Mögliche Lösung** (andere Gliederungen sind richtig, wenn beide Seiten und eine Bewertung vorkommen):\n**Einleitung** — Ausgangslage: sinkender Fleischkonsum, wachsende Nachfrage nach pflanzlichen Gerichten.\n**Aspekt 1 (dafür)** — Wahlfreiheit wird erweitert, nicht eingeschränkt; Klima- und Gesundheitsargumente; geringe Kosten.\n**Aspekt 2 (dagegen)** — Verpflichtung als Symbolpolitik; Bevormundungsvorwurf; Qualität zählt mehr als Quote.\n**Bewertung** — ein Angebot verpflichtend zu machen ist keine Bevormundung, solange niemandem etwas weggenommen wird; entscheidend ist die Attraktivität des Gerichts.\n**Fazit** — Verhältnisprävention im Kleinen: Die gesunde Wahl zur einfachen Wahl machen.',
     },
 
     { type: 'rule' },

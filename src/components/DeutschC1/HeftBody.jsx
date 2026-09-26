@@ -47,6 +47,7 @@ function ItemMC({ item, value, onChange, checked, seed }) {
           )
         })}
       </div>
+      {checked && item.warum && <p className="c1-heft-sol">{renderInline(item.warum)}</p>}
     </div>
   )
 }
@@ -69,6 +70,7 @@ function ItemRF({ item, value, onChange, checked }) {
           )
         })}
       </div>
+      {checked && item.warum && <p className="c1-heft-sol">{renderInline(item.warum)}</p>}
     </div>
   )
 }
@@ -103,6 +105,7 @@ function ItemLuecke({ item, value, onChange, checked, seed }) {
       {checked && Object.keys(item.loesungen).some(n => norm(val[n]) !== norm(item.loesungen[n])) && (
         <p className="c1-heft-sol">✓ {Object.entries(item.loesungen).map(([n, w]) => `(${n}) ${w}`).join(' · ')}</p>
       )}
+      {checked && item.warum && <p className="c1-heft-sol">{renderInline(item.warum)}</p>}
     </div>
   )
 }
@@ -141,6 +144,7 @@ function ItemSatzbau({ item, value, onChange, checked, seed, gl }) {
         ))}
       </div>
       {checked && !ok && <p className="c1-heft-sol">✓ {item.loesung}</p>}
+      {checked && item.warum && <p className="c1-heft-sol">{renderInline(item.warum)}</p>}
     </div>
   )
 }
@@ -167,6 +171,7 @@ function ItemZuordnen({ item, value, onChange, checked, seed, gl }) {
           )
         })}
       </div>
+      {checked && item.warum && <p className="c1-heft-sol">{renderInline(item.warum)}</p>}
     </div>
   )
 }

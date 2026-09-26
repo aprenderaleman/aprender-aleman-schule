@@ -145,55 +145,36 @@ export default {
 
     { type: 'rule' },
 
-    // ── 6. Übungen ────────────────────────────────────────────────
+    // ── 6. Modelltext · Mehr Beispiele ────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Erkennen',
-      frage: 'Welche Haltung transportiert die markierte Partikel? Wähle: Ermunterung, Überraschung, Vermutung, Resignation, Warnung, Beschwichtigung.',
-      aufgaben: [
-        '„Das ist **ja** unglaublich — die haben schon geöffnet!“',
-        '„Verlier **bloß** nicht den Vertrag, der ist das einzige Exemplar.“',
-        '„Dann nehmen wir **halt** den späteren Zug.“',
-        '„Die Kollegin ist **wohl** im Urlaub, ihr Kalender ist geblockt.“',
-        '„Machen Sie sich **ruhig** Notizen, das ist ausdrücklich erwünscht.“',
-        '„Bewirb dich **doch** auf die Stelle — du erfüllst alle Anforderungen.“',
+      type: 'modell',
+      eyebrow: 'Modelltext — Gespräch in der Kaffeeküche',
+      thema: 'Montagmorgen, zehn Minuten vor dem Meeting: A zögert, die Kritik am Projektplan anzusprechen, B ermutigt. Sieben verschiedene Partikeln tragen die Beziehung zwischen den beiden.',
+      absaetze: [
+        'A: „Ich weiß nicht, ob ich das mit den Fristen ansprechen soll.“',
+        'B: „Sag es **doch** einfach — du hast die Zahlen auf deiner Seite.“',
+        'A: „Der Projektleiter reagiert **ja** manchmal ziemlich dünnhäutig.“',
+        'B: „Der ist heute **wohl** ohnehin milde gestimmt, sein Urlaub ist genehmigt. Sprich es **ruhig** an.“',
+        'A: „Und wenn es schiefgeht?“',
+        'B: „Das wird **schon** nicht eskalieren. Sag **bloß** nicht, die Planung sei ‚chaotisch‘ — bleib bei den Fakten.“',
+        'A: „Na gut. Dann ist es **eben** heute so weit.“',
       ],
-      loesungen: [
-        '**Überraschung** — der Sprecher stellt etwas Unerwartetes fest.',
-        '**Warnung** — *bloß* + Negation in der Aufforderung ist eine dringliche Warnung.',
-        '**Resignation** — man fügt sich in die Umstände.',
-        '**Vermutung** — *wohl* markiert einen plausiblen Schluss, wie *dürfte*.',
-        '**Beschwichtigung/Erlaubnis** — kein Grund zur Zurückhaltung.',
-        '**Ermunterung** — *doch* schiebt freundlich an.',
+      annotationen: [
+        { tag: 'Stellung', text: 'Alle Partikeln stehen unbetont im Mittelfeld. ~~Si una partícula acaba al principio de la frase, ya no es Modalpartikel.~~' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Anwenden',
-      frage: 'Setze die passende Partikel ein (doch, ja, wohl, eben, ruhig, bloß, schon, mal, eigentlich). Die Klammer nennt die gewünschte Wirkung.',
-      aufgaben: [
-        'Kommen Sie ____ vorbei, wenn Sie in der Nähe sind. *(beiläufige Einladung)*',
-        'Du hast ____ ein neues Auto! Seit wann? *(Überraschung)*',
-        'Der Bus kommt heute nicht mehr — dann laufen wir ____. *(Resignation)*',
-        'Was ist ____ aus deinem alten Mitbewohner geworden? *(beiläufiger Themenwechsel)*',
-        'Fass die Kabel ____ nicht an, die stehen unter Strom! *(scharfe Warnung)*',
-        'Keine Sorge, die Präsentation wird ____ klappen. *(Zuversicht)*',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Haltung zwischen den Zeilen',
+      items: [
+        { text: '„Ruf **doch mal** bei der Hotline an — vielleicht wissen die mehr.“', gl: '— die Kette *doch mal*: freundlicher, beiläufiger Anstoß' },
+        { text: '„Die Präsentation ist **ja** schon morgen!“ — „Keine Panik, das schaffen wir **schon**.“', gl: '— *ja*: Erschrecken über Bekanntes · *schon*: Zuversicht trotz Zweifel' },
+        { text: '„Frau Öztürk antwortet nicht.“ — „Die sitzt **wohl** noch im Flugzeug.“', gl: '— *wohl* ≈ *dürfte*: begründete Vermutung' },
+        { text: '„Vergiss **bloß** nicht, die Datei zu speichern!“', gl: '— Warnung: Es steht etwas auf dem Spiel.' },
+        { text: '„Was kostet das **eigentlich**?“ — „Mehr als gedacht. So ist das **nun mal** mit Maßanfertigungen.“', gl: '— beiläufige Frage · resignierte Feststellung' },
+        { text: 'Wer die **Sprechabsicht** hinter „Das ist **ja wohl** ein Witz!“ verkennt, hält Empörung für eine Vermutung.', gl: '— die **Abtönung** durch *ja wohl* entscheidet über die Deutung' },
       ],
-      loesungen: [
-        'Kommen Sie **doch mal** vorbei … — *doch*, *mal* oder beide zusammen; die Kette *doch mal* ist am natürlichsten.',
-        'Du hast **ja** ein neues Auto!',
-        '… dann laufen wir **eben**. — auch **halt** (mündlicher) ist richtig.',
-        'Was ist **eigentlich** aus deinem alten Mitbewohner geworden?',
-        'Fass die Kabel **bloß** nicht an! — auch **ja** (betont!) wäre hier möglich: *Fass die ja nicht an!*',
-        '… die Präsentation wird **schon** klappen.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Schreibe einen Mini-Dialog (6-8 Repliken) zwischen zwei Kollegen: A hat Angst, im Meeting die Kritik am Projektplan anzusprechen; B ermutigt. Verwende mindestens **fünf verschiedene** Partikeln und markiere sie.',
-      aufgabe: '*Situation: Montagmorgen, Kaffeeküche, das Meeting beginnt in zehn Minuten.*',
-      loesung: '**Mögliche Lösung** (jede natürliche Kombination aus fünf Partikeln zählt):\n*A: „Ich weiß nicht, ob ich das mit den Fristen ansprechen soll.“\nB: „Sag es **doch** einfach — du hast die Zahlen auf deiner Seite.“\nA: „Der Projektleiter reagiert **ja** manchmal ziemlich dünnhäutig.“\nB: „Der ist heute **wohl** ohnehin milde gestimmt, sein Urlaub ist genehmigt. Sprich es **ruhig** an.“\nA: „Und wenn es schiefgeht?“\nB: „Das wird **schon** nicht eskalieren. Sag **bloß** nicht, die Planung sei ‚chaotisch‘ — bleib bei den Fakten.“\nA: „Na gut. Dann ist es **eben** heute so weit.“*\n~~Fíjate: todas van átonas y en el Mittelfeld. Si una partícula acaba al principio de la frase, ya no es Modalpartikel.~~',
     },
 
     { type: 'rule' },

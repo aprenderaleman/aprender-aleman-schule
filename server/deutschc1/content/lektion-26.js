@@ -189,51 +189,29 @@ export default {
 
     { type: 'rule' },
 
-    // ── 6. Übungen ────────────────────────────────────────────────
+    // ── 6. Modelltext · Mehr Beispiele ────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Erkennen',
-      frage: 'Welche Strategie passt zu welcher Situation? Wähle: Zeit gewinnen · umschreiben · Selbstkorrektur · Rückfrage · Gesprächsführung übernehmen.',
-      aufgaben: [
-        'Mitten im Vortrag fällt dir das Wort „Ehrenamt“ nicht ein.',
-        'Die Prüferin stellt eine lange Nachfrage, und du hast nur die Hälfte verstanden.',
-        'Du hörst dich selbst „die Problem“ sagen.',
-        'Dein Partner antwortet in der Diskussion nur mit „Ja, genau“ und schweigt dann.',
-        'Nach einer Nachfrage ist dein Kopf komplett leer.',
-      ],
-      loesungen: [
-        '**Umschreiben:** *…dass viele Menschen freiwillig und unbezahlt arbeiten, zum Beispiel bei der Feuerwehr.* Weitersprechen, nicht suchen.',
-        '**Rückfrage:** *Verstehe ich Sie richtig, dass Sie nach den Kosten fragen?* — Das ist keine Schwäche, sondern Gesprächskompetenz.',
-        '**Selbstkorrektur:** *…die Problem — das Problem, meine ich —…* Kurz korrigieren, nicht entschuldigen, weiterreden.',
-        '**Gesprächsführung übernehmen:** eine konkrete, offene Frage stellen: *Und wie ist das in Ihrem Berufsfeld — sehen Sie da dieselben Vorteile?*',
-        '**Zeit gewinnen:** *Das ist eine interessante Frage, da muss ich kurz überlegen…* — und währenddessen den ersten Gedanken sortieren.',
+      type: 'modell',
+      eyebrow: 'Modell — ein Stichwortzettel aus der Vorbereitungsminute',
+      thema: 'Thema: „Sollten Städte den öffentlichen Nahverkehr kostenlos anbieten?“ So sieht ein brauchbarer Zettel nach 60 Sekunden aus — deiner wird anders aussehen, entscheidend ist die Form: Position, zwei Punkte, ein Beispiel, wörtlich festgelegter Einstiegs- und Schlusssatz.',
+      absaetze: [
+        '*Position: ja, aber schrittweise*\n*1 Entlastung Verkehr/Klima → weniger Autos*\n*2 Kosten → Steuern? Qualität leidet?*\n*Bsp: Tallinn/Luxemburg*',
+        '**Einstieg:** *Ich möchte über die Frage sprechen, ob der Nahverkehr kostenlos sein sollte — ein Thema, das viele Städte gerade beschäftigt.*',
+        '**Schluss:** *Zusammenfassend halte ich einen kostenlosen Nahverkehr für sinnvoll, wenn zugleich in die Qualität investiert wird.*',
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Anwenden',
-      frage: 'Umschreibe die fünf Wörter laut, in je einem vollständigen Satz, ohne das Wort selbst zu benutzen — genau wie im Prüfungsernstfall.',
-      aufgaben: [
-        'die Nachhaltigkeit',
-        'der Fachkräftemangel',
-        'die Work-Life-Balance',
-        'das Bargeld',
-        'die Weiterbildung',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Rund um die Paarprüfung',
+      items: [
+        { text: 'Während der **Vorbereitungszeit** notierte sich Tomasz nur vier **Stichwörter** — und sprach anschließend völlig frei.', gl: '— ein Gerüst, kein Manuskript' },
+        { text: 'Als Leonie mitten im **Vortrag** **ins Stocken geriet**, rettete sie sich mit der Formel *„Lassen Sie es mich anders formulieren“*.' },
+        { text: 'Die beiden **Prüfenden** achten weniger auf Tempo als auf **Flüssigkeit**: Entscheidend ist, dass keine langen Abbrüche entstehen.' },
+        { text: 'Auf die **Nachfrage** der Prüferin reagierte Samir mit einer Rückfrage: *„Verstehe ich Sie richtig, dass Sie nach den Kosten fragen?“*', gl: '— Rückfragen sind Gesprächskompetenz, keine Schwäche' },
+        { text: 'Weil ihr das Wort *Ehrenamt* nicht einfiel, **umschrieb** Carla es kurzerhand: *Arbeit, die man freiwillig und unbezahlt leistet*.' },
+        { text: 'In der Diskussion **gingen** die beiden Kandidaten spürbar **aufeinander ein** — jeder **Redebeitrag** knüpfte an den vorherigen an.', gl: '— genau das misst das Kriterium Interaktion' },
       ],
-      loesungen: [
-        '*Ich meine das Prinzip, so zu wirtschaften, dass auch künftige Generationen noch gut leben können.*',
-        '*Gemeint ist die Situation, dass Unternehmen nicht genügend ausgebildete Mitarbeiter finden.*',
-        '*Ich spreche von dem Gleichgewicht zwischen dem Beruf und dem Privatleben.*',
-        '*Also das Geld, das man in der Hand hält — Scheine und Münzen, nicht die Karte.*',
-        '*Ich meine Kurse und Schulungen, mit denen man sich im Beruf zusätzlich qualifiziert.* ~~Si tu paráfrasis suena natural, el examinador anota vocabulario, no carencia.~~',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Simuliere die Vorbereitungsminute: Thema „Sollten Städte den öffentlichen Nahverkehr kostenlos anbieten?“ Stell einen Timer auf 60 Sekunden und erstelle deinen Stichwortzettel: Position, zwei Punkte, ein Beispiel, Einstiegs- und Schlusssatz.',
-      aufgabe: 'Sprich anschließend zwei Minuten frei nach dem Zettel — am besten mit Aufnahme, um Flüssigkeit und Satzmelodie zu hören.',
-      loesung: '**Mögliche Lösung** (Stichwortzettel — deiner sieht anders aus, entscheidend ist die Form):\n*Position: ja, aber schrittweise*\n*1 Entlastung Verkehr/Klima → weniger Autos*\n*2 Kosten → Steuern? Qualität leidet?*\n*Bsp: Tallinn/Luxemburg*\n**Einstieg:** *Ich möchte über die Frage sprechen, ob der Nahverkehr kostenlos sein sollte — ein Thema, das viele Städte gerade beschäftigt.*\n**Schluss:** *Zusammenfassend halte ich einen kostenlosen Nahverkehr für sinnvoll, wenn zugleich in die Qualität investiert wird.*',
     },
 
     { type: 'rule' },

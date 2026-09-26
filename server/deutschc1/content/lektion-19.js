@@ -155,58 +155,35 @@ export default {
 
     { type: 'rule' },
 
-    // ── 6. Übungen ────────────────────────────────────────────────
+    // ── 6. Mehr Beispiele & Modelltexte (Übungen → Übungsheft) ──
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Erkennen',
-      frage: 'Welche Haltung steckt in der Formulierung — Zustimmung, Ablehnung, Einräumung, Skepsis oder referierte Fremdmeinung? Nenne das Signalwort.',
-      aufgaben: [
-        'Dass hier Handlungsbedarf besteht, will ich gar nicht bestreiten — nur setzt der Entwurf am falschen Ende an.',
-        'Befürworter verweisen gern auf skandinavische Vorbilder.',
-        'Endlich traut sich jemand, das Problem beim Namen zu nennen.',
-        'Mir erschließt sich nicht, wie das finanziert werden soll.',
-        'Das klingt gut — auf dem Papier.',
-      ],
-      loesungen: [
-        '**Einräumung** — *will ich gar nicht bestreiten* gesteht den Handlungsbedarf zu; die Position folgt nach dem Gedankenstrich: Ablehnung des Entwurfs.',
-        '**Referierte Fremdmeinung** — *Befürworter verweisen* gibt die Meinung anderer wieder; die Haltung des Autors ist noch offen (das *gern* deutet Distanz an).',
-        '**Zustimmung** — *endlich* und *traut sich* signalisieren Erleichterung und Beifall.',
-        '**Skepsis** — *mir erschließt sich nicht* bezweifelt die Finanzierbarkeit, ohne das Ziel anzugreifen.',
-        '**Skepsis/Ablehnung** — der Nachsatz *auf dem Papier* entwertet das Lob: rhetorische Wendung, die Theorie und Praxis gegeneinander ausspielt.',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Die Sprache der Meinung im Satz',
+      items: [
+        { text: 'Die Bürgermeisterin **befürwortet** den Ausbau der Radwege, **räumt** aber **ein**, dass die Finanzierung noch ungeklärt ist.', gl: '— Zustimmung + Zugeständnis in einem Satz' },
+        { text: 'Der Verband **spricht sich** entschieden **gegen** eine Verlängerung der Ladenöffnungszeiten **aus**.', gl: '— *sich aussprechen für/gegen* + Akkusativ' },
+        { text: 'Kritiker **bringen** den **Einwand** **vor**, die Studie beruhe auf einer viel zu kleinen Stichprobe.', gl: '— *einen Einwand vorbringen / erheben*' },
+        { text: 'Wer diese **Einschätzung** nicht **teilt**, sollte seinen **Standpunkt** mit Zahlen belegen.', gl: '— *eine Einschätzung teilen*, *einen Standpunkt vertreten*' },
+        { text: 'Die Ökonomin **relativiert** die Warnungen: Der Rückgang sei saisonal bedingt und keineswegs dramatisch.', gl: '— abschwächen, ohne zu widersprechen' },
+        { text: 'Nachdem er Kosten und Nutzen sorgfältig **abgewogen** hatte, **plädierte** der Gutachter **für** eine schrittweise Einführung.', gl: '— *abwägen* (abgewogen), *plädieren für*' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Anwenden',
-      frage: 'Ordne jeder Textstelle die passende Paraphrase zu: A · *Der Autor fordert staatliche Unterstützung.* — B · *Der Autor hält die Debatte für übertrieben.* — C · *Der Autor sieht vor allem die Unternehmen in der Pflicht.* — D · *Der Autor warnt vor sozialer Ungleichheit.*',
-      aufgaben: [
-        '„Wer profitiert, soll auch zahlen: Es kann nicht sein, dass die Allgemeinheit die Weiterbildung finanziert, deren Früchte allein die Firmen ernten.“',
-        '„Ohne Zuschüsse werden sich nur Gutverdiener die neuen Angebote leisten können — der Rest schaut zu.“',
-        '„So viel Aufregung um eine Entwicklung, die uns seit zwanzig Jahren begleitet — Gelassenheit stünde allen gut zu Gesicht.“',
-        '„Hier ist der Gesetzgeber gefragt: Ohne öffentliche Förderprogramme bleibt jede Reform Stückwerk.“',
+      type: 'modell',
+      eyebrow: 'Modelltexte — Vier Kurzstatements zur Weiterbildung',
+      thema: 'Lies die Statements im Stil von Teil 4 und notiere zu jedem eine Positionszeile: dafür/dagegen/teils-teils + Hauptargument.',
+      absaetze: [
+        '==Statement 1:== „Wer profitiert, soll auch zahlen: Es kann nicht sein, dass die Allgemeinheit die Weiterbildung finanziert, deren Früchte allein die Firmen ernten.“',
+        '==Statement 2:== „Ohne Zuschüsse werden sich nur Gutverdiener die neuen Angebote leisten können — der Rest schaut zu.“',
+        '==Statement 3:== „So viel Aufregung um eine Entwicklung, die uns seit zwanzig Jahren begleitet — Gelassenheit stünde allen gut zu Gesicht.“',
+        '==Statement 4:== „Hier ist der Gesetzgeber gefragt: Ohne öffentliche Förderprogramme bleibt jede Reform Stückwerk.“',
       ],
-      loesungen: [
-        '**C** — *Wer profitiert, soll auch zahlen* + *die Firmen ernten* = die Unternehmen sollen finanzieren. ~~Ni «Staat» ni «Pflicht» aparecen en el texto — la posición sí.~~',
-        '**D** — *nur Gutverdiener … der Rest schaut zu* = Warnung vor einer sozialen Schere.',
-        '**B** — *So viel Aufregung* + *Gelassenheit* = die Debatte ist dem Autor zu aufgeregt.',
-        '**A** — *der Gesetzgeber ist gefragt* + *öffentliche Förderprogramme* = Forderung nach staatlicher Unterstützung.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Jetzt baust du die Paraphrasen selbst — das schärft den Blick für die Prüfung doppelt. Formuliere jede Aussage neu, **ohne ein inhaltstragendes Wort des Originals zu wiederholen**.',
-      aufgaben: [
-        'Die Maßnahme ist zu teuer.',
-        'Der Autor findet das Verbot richtig.',
-        'Homeoffice hat Vorteile, aber auch Nachteile.',
-        'Die Politik reagiert zu langsam.',
-      ],
-      loesungen: [
-        '**Mögliche Lösung:** *Die Kosten des Vorhabens stehen in keinem Verhältnis zum Nutzen* oder *Der finanzielle Aufwand erscheint dem Autor unverhältnismäßig.*',
-        '**Mögliche Lösung:** *Der Verfasser befürwortet die Untersagung* oder *Er hält es für geboten, die Praxis zu untersagen.*',
-        '**Mögliche Lösung:** *Der Autor wägt die Chancen und Risiken des ortsunabhängigen Arbeitens gegeneinander ab.* ~~Fíjate: *abwägen* condensa el «pero» en un solo verbo.~~',
-        '**Mögliche Lösung:** *Der Autor wirft den Entscheidungsträgern Zögerlichkeit vor* oder *Aus seiner Sicht kommt die staatliche Antwort zu spät.*\nGültig ist jede Variante, die Position und Gegenstand bewahrt und den Wortlaut vollständig ersetzt — genau das leisten die Aussagen in Teil 4.',
+      annotationen: [
+        { tag: 'Statement 1', text: 'Die Unternehmen sollen zahlen — *Wer profitiert, soll auch zahlen* + *die Firmen ernten*. Weder *Staat* noch *Pflicht* steht im Text, die Position schon.' },
+        { tag: 'Statement 2', text: 'Warnung vor sozialer Ungleichheit — *nur Gutverdiener … der Rest schaut zu*.' },
+        { tag: 'Statement 3', text: 'Die Debatte ist übertrieben — *So viel Aufregung* + *Gelassenheit*.' },
+        { tag: 'Statement 4', text: 'Forderung nach staatlicher Unterstützung — *der Gesetzgeber ist gefragt* + *öffentliche Förderprogramme*.' },
       ],
     },
 
@@ -243,7 +220,7 @@ export default {
         '**6 → B** — Belegstelle: *„Über die jungen Menschen wird geredet, mit ihnen kaum.“*',
         '**7 → C** — Belegstelle: *„freiwillig kommen eben immer nur dieselben“*. Achtung, Köderwort: Auch A spricht über Freiwilligendienste — aber A will sie stärken, während nur C ihre begrenzte Reichweite behauptet.',
       ],
-      kommentar: 'Sieh dir die Verteilung an: A und B und C je zweimal, D einmal — keine „gerechte“ Aufteilung. Und beachte die Doppelgänger-Falle bei 2 und 7: Jeweils zwei Autoren teilen das Lager, aber nur einer trägt genau dieses Argument. Deine Positionszeilen (*A: contra, Freiwilligkeit stärken · B: contra, Staatskritik + Jugend übergangen · C: pro, sozialer Kitt · D: teils-teils, Pilotmodell*) entscheiden solche Fälle in Sekunden.',
+      kommentar: 'Sieh dir die Verteilung an: A und B und C je zweimal, D einmal — keine „gerechte“ Aufteilung. Und beachte die Doppelgänger-Falle bei 2 und 7: Jeweils zwei Autoren teilen das Lager, aber nur einer trägt genau dieses Argument. Deine Positionszeilen (*A: dagegen, Freiwilligkeit stärken · B: dagegen, Staatskritik + Jugend übergangen · C: dafür, sozialer Kitt · D: teils-teils, Pilotmodell*) entscheiden solche Fälle in Sekunden.',
     },
     {
       type: 'tipp',

@@ -1,13 +1,14 @@
 // Lektion 02 · Diagnose C1 — Standortbestimmung
 //
 // Bloque 0 · Einführung — Selbstdiagnose: Was unterscheidet B2 von C1,
-// drei Mini-Tests (Grammatik, Wortschatz, Produktion) mit Auswertung
-// und Selbsteinschätzung pro Modul als Grundlage des Studienplans.
+// Diagnose im Übungsheft (Grammatik/Wortschatz, Lesen, Schreibprobe) mit
+// Auswertungstabelle und Selbsteinschätzung pro Modul als Grundlage des
+// Studienplans.
 
 export default {
   spec: ['Bloque 0', 'Einführung', 'Niveau C1', 'Prüfungsrelevanz: Alle vier Module'],
   h1: 'Diagnose C1 — Standortbestimmung',
-  lead: 'Bevor du losläufst, bestimme deinen Standort: Drei Mini-Tests und eine Selbsteinschätzung zeigen dir, was schon C1 ist, was noch B2 ist — und welche Lektionen du zuerst brauchst.',
+  lead: 'Bevor du losläufst, bestimme deinen Standort: Die Diagnose im Übungsheft und eine Selbsteinschätzung zeigen dir, was schon C1 ist, was noch B2 ist — und welche Lektionen du zuerst brauchst.',
 
   content: [
     // ── 2. Lernziele ──────────────────────────────────────────────
@@ -16,7 +17,7 @@ export default {
       eyebrow: 'Lernziele',
       items: [
         'Am Ende kannst du an konkreten sprachlichen Merkmalen erklären, was einen C1-Satz von einem B2-Satz unterscheidet.',
-        'Du hast Grammatik, Wortschatz und Schreibfertigkeit mit drei Mini-Tests ehrlich diagnostiziert.',
+        'Du hast Grammatik, Wortschatz, Leseverstehen und Schreibfertigkeit mit der Diagnose im Übungsheft ehrlich überprüft.',
         'Du deutest deine Ergebnisse und weißt, welche Lektionen aus Block 1 du priorisierst.',
         'Du hast für jedes Prüfungsmodul eine erste Selbsteinschätzung nach Can-do-Kriterien notiert.',
       ],
@@ -92,7 +93,7 @@ export default {
       card: true,
       titel: 'Die Spielregeln der Diagnose',
       absaetze: [
-        'Gleich folgen **drei Mini-Tests**: Grammatik, Wortschatz, Produktion. Damit die Diagnose etwas taugt, gelten drei Regeln. **Ohne Hilfsmittel** — kein Wörterbuch, keine Suchmaschine, keine KI. **Erst alles lösen, dann vergleichen** — wer nach jeder Aufgabe in die Lösung schaut, misst sein Kurzzeitgedächtnis, nicht sein Deutsch. **Jeden Fehler notieren** — die Nummern deiner Fehler sind nachher der Schlüssel zur Auswertungstabelle.',
+        'Die eigentliche Diagnose findest du im **Übungsheft** dieser Lektion: einen Grammatik- und Wortschatzteil, einen Lesetext und eine Schreibprobe. Damit sie etwas taugt, gelten drei Regeln. **Ohne Hilfsmittel** — kein Wörterbuch, keine Suchmaschine, keine KI. **Erst alles lösen, dann prüfen** — wer nach jeder Aufgabe in die Lösung schaut, misst sein Kurzzeitgedächtnis, nicht sein Deutsch. **Jede Unsicherheit notieren** — die Strukturen, bei denen du gezögert oder dich geirrt hast, sind nachher der Schlüssel zur Auswertungstabelle weiter unten.',
         'Und vor allem: Bewerte dich nicht wohlwollend. Eine geschönte Standortbestimmung fühlt sich heute besser an und kostet dich in drei Monaten Wochen. ~~Sé duro contigo hoy: cada fallo que maquilles ahora reaparecerá el día del examen.~~',
       ],
     },
@@ -145,74 +146,46 @@ export default {
 
     { type: 'rule' },
 
-    // ── 6. Übungen ────────────────────────────────────────────────
+    // ── 6. Mehr Beispiele, Modelltext & Auswertung (Diagnose → Übungsheft) ──
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Grammatik-Diagnose',
-      frage: 'Acht Aufgaben, acht C1-Strukturen aus Block 1. Löse alles ohne Hilfsmittel und notiere die Nummern, die dir Mühe machen — sie führen dich in der Auswertungstabelle zu deinen Lektionen.',
-      aufgaben: [
-        'Forme nominal um: *Weil die Nachfrage stark gestiegen ist, wurden die Preise erhöht.*',
-        'Ergänze das fehlende Verb: *Das Formular ___ sich in wenigen Minuten ausfüllen.*',
-        'Setze in die indirekte Rede: *Die Ministerin sagte: „Die Lage ist stabil und die Zahlen sprechen für sich.“*',
-        'Ergänze: *Wenn ich von dem Termin gewusst ___, ___ ich selbstverständlich gekommen.*',
-        'Forme den Relativsatz in ein Partizipialattribut um: *die Ergebnisse, die gestern veröffentlicht wurden*',
-        'Ergänze Artikel und Endung: *Trotz d___ schlecht___ Wetters fand die Veranstaltung statt.*',
-        'Vervollständige den zweiteiligen Konnektor: *___ mehr man liest, ___ sicherer wird das Sprachgefühl.*',
-        'Drücke eine starke Vermutung aus: *Er ist gestern angekommen.* → *Er ___ gestern angekommen ___.*',
-      ],
-      loesungen: [
-        '**Aufgrund der stark gestiegenen Nachfrage** (auch: *wegen des starken Anstiegs der Nachfrage*) *wurden die Preise erhöht.* — Unsicher? → Lektion 3 (Nominalstil).',
-        '*Das Formular **lässt** sich in wenigen Minuten ausfüllen.* — *sich lassen* + Infinitiv = Passiversatz mit *können*. Unsicher? → Lektion 4 (Passiv & Passiversatzformen).',
-        '*Die Ministerin sagte, die Lage **sei** stabil und die Zahlen **sprächen** für sich* (auch: *würden für sich sprechen*). — Konjunktiv I, bei Formgleichheit Ausweichen auf Konjunktiv II. Unsicher? → Lektion 5 (Konjunktiv I).',
-        '*Wenn ich von dem Termin gewusst **hätte**, **wäre** ich selbstverständlich gekommen.* — Irrealis der Vergangenheit. Unsicher? → Lektion 6 (Konjunktiv II). ~~Ojo con el calco «habría venido» → *wäre gekommen*, no *hätte gekommen*: kommen va con sein.~~',
-        '**die gestern veröffentlichten Ergebnisse** — das Partizip trägt die Adjektivendung. Unsicher? → Lektion 7 (Erweiterte Partizipialattribute).',
-        '*Trotz **des schlechten** Wetters …* — *trotz* verlangt den Genitiv; *trotz dem* kostet auf C1 Punkte. Unsicher? → Lektion 9 (Präpositionen mit Genitiv).',
-        '***Je** mehr man liest, **desto/umso** sicherer wird das Sprachgefühl.* — Unsicher? → Lektion 11 (Zweiteilige Konnektoren).',
-        '*Er **dürfte** gestern angekommen **sein**.* — Modalverb in subjektiver Bedeutung (Vermutung mit hoher Wahrscheinlichkeit); ebenfalls richtig: *Er **müsste** … angekommen **sein*** (fast sichere Vermutung). Unsicher? → Lektion 13 (Modalverben subjektiv).',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Über den eigenen Lernstand sprechen',
+      items: [
+        { text: 'Eine ehrliche **Standortbestimmung** zeigt nicht nur **Lücken**, sondern auch **Stärken**, die man gezielt ausbauen kann.', gl: '— *nicht nur …, sondern auch*' },
+        { text: 'Viele Lernende **schätzen** ihr Leseverstehen höher **ein** als ihre Fähigkeit, sich schriftlich **differenziert** auszudrücken.', gl: '— *etwas höher / realistisch einschätzen*' },
+        { text: 'Wer die Strukturen der Mittelstufe sicher **beherrscht**, hat für C1 bereits ein solides Fundament.', gl: '— *beherrschen*: dominar, sin preposición' },
+        { text: 'Erst ein breites **Spektrum** an **Kollokationen** verleiht einem Text jene Präzision, die das Niveau verlangt.', gl: '— *ein breites Spektrum an* + Dativ' },
+        { text: 'In der Schreibprobe fiel mir auf, dass ich das **Register** kaum wechsle — hier sehe ich dringenden **Handlungsbedarf**.', gl: '— *Handlungsbedarf sehen / erkennen*' },
+        { text: 'Um den **Anforderungen** der Prüfung zu genügen, muss man komplexe Strukturen mit einer gewissen **Geläufigkeit** verwenden.', gl: '— *den Anforderungen genügen* + Dativ' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Wortschatz-Diagnose',
-      frage: 'Kollokationen, präzise Verben, Register: Wähle jeweils die richtige bzw. die C1-taugliche Variante. Auch hier: erst alles lösen, dann vergleichen.',
-      aufgaben: [
-        'eine Entscheidung *machen / nehmen / treffen*',
-        'an einem Konzept Kritik *geben / üben / machen*',
-        'gegen die Krise Maßnahmen *nehmen / stellen / ergreifen*',
-        'aus einem Fehler die Konsequenzen *holen / ziehen / nehmen*',
-        'Die Universität *stellt / gibt / legt* den Studierenden Arbeitsräume zur Verfügung.',
-        'Präziser als *sagen*: Der Autor *___*, dass die Zahlen unvollständig seien. (*macht / betont / redet*)',
-        'Die Kosten *spielen / machen / haben* bei dieser Entscheidung keine Rolle.',
-        'Welche Variante passt in eine formelle Nachricht? Bislang habe ich keine Antwort *gekriegt / erhalten / geholt*.',
+      type: 'modell',
+      eyebrow: 'Modelltext — eine Stellungnahme auf C1-Niveau',
+      thema: 'Sollte an Universitäten die Anwesenheitspflicht abgeschafft werden?',
+      woerter: 'ca. 90 Wörter',
+      absaetze: [
+        'Meines Erachtens sollte die Anwesenheitspflicht weitgehend abgeschafft werden. Studierende sind Erwachsene, die selbst einschätzen können, welche Veranstaltungen ihrem Lernfortschritt dienen; durch die Aufzeichnung von Vorlesungen lässt sich der Stoff ohnehin flexibel nachholen. Allerdings halte ich Ausnahmen für sinnvoll: In Seminaren, die vom Austausch leben, ist Anwesenheit keine Formalität, sondern Voraussetzung für das Gelingen. Statt einer starren Pflicht wäre daher ein differenziertes Modell wünschenswert, das je nach Veranstaltungsform entscheidet. So würde die Eigenverantwortung gestärkt, ohne die Qualität der Lehre zu gefährden.',
       ],
-      loesungen: [
-        '**eine Entscheidung treffen** — nie *nehmen*: ~~el calco de «tomar una decisión» es el error de hispanohablante más delatador en el examen.~~',
-        '**Kritik üben an** + Dativ — *Kritik machen* existiert nicht.',
-        '**Maßnahmen ergreifen** — auch möglich: *Maßnahmen treffen*.',
-        '**die Konsequenzen ziehen** — ebenso: *eine Lehre ziehen*, *Bilanz ziehen*.',
-        '**stellt … zur Verfügung** — Funktionsverbgefüge; das Gegenstück: *etwas steht jemandem zur Verfügung*.',
-        '**betont** — noch präziser je nach Kontext: *hebt hervor*, *weist darauf hin*. *Sagen* ist auf C1 fast immer ersetzbar.',
-        '**spielen … keine Rolle** — feste Verbindung; *keine Rolle machen* ist ein Calco.',
-        '**erhalten** — *kriegen* ist gesprochene Sprache, *bekommen* neutral, *erhalten* formell. Mehr als zwei Fehler in dieser Übung? → Lektion 8 (Funktionsverbgefüge) und Lektion 15 (Wortbildung & Kollokationen).',
+      annotationen: [
+        { tag: 'Position', text: 'Klare These, Begründung und eine Einschränkung (*Allerdings …*) — die Stellungnahme wirkt dadurch abgewogen statt einseitig.' },
+        { tag: 'Konnektoren', text: 'Jenseits von *und*, *aber*, *weil*: *allerdings*, *daher*, *statt*, *ohne … zu*.' },
+        { tag: 'Strukturen', text: 'Nominalisierung (*die Aufzeichnung von Vorlesungen*), Passiversatz (*lässt sich nachholen*), Konjunktiv II (*wäre wünschenswert*, *würde gestärkt*).' },
+        { tag: 'Checkliste', text: 'Prüfe deine Schreibprobe aus dem Übungsheft an genau diesen Punkten: Position mit Begründung und Einschränkung · Konnektoren der Schriftsprache · mindestens eine Nominalisierung, ein Passiv oder ein *sich lassen* · präzise Verben statt *machen*, *sein*, *haben* · korrekter Kasus nach Präpositionen (*trotz des*, *mit dem*, *für die*). Jedes fehlende Merkmal ist kein Versagen, sondern ein Wegweiser.' },
       ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren — Schreib-Diagnose',
-      frage: 'Die Produktionsprobe: Nimm in **80–100 Wörtern** Stellung zur Frage „Sollte an Universitäten die Anwesenheitspflicht abgeschafft werden?“ — **15 Minuten, ohne Hilfsmittel.** Vergleiche deinen Text danach Punkt für Punkt mit der Checkliste in der Lösung.',
-      loesung: '**Mögliche Lösung** (ca. 90 Wörter):\n*Meines Erachtens sollte die Anwesenheitspflicht weitgehend abgeschafft werden. Studierende sind Erwachsene, die selbst einschätzen können, welche Veranstaltungen ihrem Lernfortschritt dienen; durch die Aufzeichnung von Vorlesungen lässt sich der Stoff ohnehin flexibel nachholen. Allerdings halte ich Ausnahmen für sinnvoll: In Seminaren, die vom Austausch leben, ist Anwesenheit keine Formalität, sondern Voraussetzung für das Gelingen. Statt einer starren Pflicht wäre daher ein differenziertes Modell wünschenswert, das je nach Veranstaltungsform entscheidet. So würde die Eigenverantwortung gestärkt, ohne die Qualität der Lehre zu gefährden.*\n**Diagnose-Checkliste — prüfe deinen eigenen Text:**\n1. Klare Position + Begründung + Beispiel oder Einschränkung?\n2. Konnektoren jenseits von *und*, *aber*, *weil* (z. B. *allerdings*, *daher*, *statt*)?\n3. Mindestens eine Nominalisierung, ein Passiv oder ein *sich lassen*?\n4. Präzise Verben statt *machen*, *sein*, *haben*?\n5. Kasus nach Präpositionen korrekt (*trotz des*, *mit dem*, *für die*)?\nJedes fehlende Häkchen ist kein Versagen, sondern ein Wegweiser — die Tabelle unten sagt dir, wohin. ~~Si tu texto se parece más a la columna B2 de la tabla de arriba que a esta solución, es exactamente lo que esta lección quería descubrir.~~',
     },
     {
       type: 'tabelle',
-      eyebrow: 'Anwendung — Auswertung: von der Diagnose zum Lernplan',
-      kopf: ['Fehler bei …', 'Baustelle', 'Zuerst dorthin'],
+      eyebrow: 'Auswertung — von der Diagnose zum Lernplan',
+      kopf: ['Unsicher im Übungsheft bei …', 'Baustelle', 'Zuerst dorthin'],
       zeilen: [
-        ['Übung 1, Nr. 1–2', 'Verdichtung, unpersönlicher Stil', 'Lektion 3 (Nominalstil) · Lektion 4 (Passiv)'],
-        ['Übung 1, Nr. 3–4', 'Konjunktiv', 'Lektion 5 (Konjunktiv I) · Lektion 6 (Konjunktiv II)'],
-        ['Übung 1, Nr. 5–6', 'Attribute und Genitiv', 'Lektion 7 (Partizipialattribute) · Lektion 9 (Genitivpräpositionen)'],
-        ['Übung 1, Nr. 7–8', 'Konnektoren, Modalverben', 'Lektion 11 (Zweiteilige Konnektoren) · Lektion 13 (Modalverben subjektiv)'],
-        ['Übung 2 (ab 3 Fehlern)', 'Kollokationen, präzises Verb', 'Lektion 8 (Funktionsverbgefüge) · Lektion 15 (Wortbildung & Kollokationen)'],
-        ['Übung 3 (Checkliste)', 'Textaufbau und Register', 'Lektion 10 (Konnektoren der Schriftsprache) · Lektionen 23–25 (Modul Schreiben)'],
+        ['*aufgrund* / *ungeachtet* + Genitiv, *sich lassen* + Infinitiv', 'Verdichtung, unpersönlicher Stil', 'Lektion 3 (Nominalstil) · Lektion 4 (Passiv)'],
+        ['indirekter Rede (*sei*, *sprächen*), irrealem Bedingungssatz (*wäre gekommen*)', 'Konjunktiv', 'Lektion 5 (Konjunktiv I) · Lektion 6 (Konjunktiv II)'],
+        ['Partizipialattribut (*der … veröffentlichten Studie*), *trotz* + Genitiv', 'Attribute und Genitiv', 'Lektion 7 (Partizipialattribute) · Lektion 9 (Genitivpräpositionen)'],
+        ['*je … desto*, Relativsatz mit *woran*, Vermutung mit *dürfte* + Infinitiv Perfekt', 'Konnektoren, Satzgefüge, Modalverben', 'Lektion 11 (Zweiteilige Konnektoren) · Lektion 12 (Relativsätze komplex) · Lektion 13 (Modalverben subjektiv)'],
+        ['festen Verbindungen (*eine Entscheidung treffen*)', 'Kollokationen, präzises Verb', 'Lektion 8 (Funktionsverbgefüge) · Lektion 15 (Wortbildung & Kollokationen)'],
+        ['der Schreibprobe (Checkliste im Modelltext)', 'Textaufbau und Register', 'Lektion 10 (Konnektoren der Schriftsprache) · Lektionen 23–25 (Modul Schreiben)'],
       ],
     },
 
@@ -260,7 +233,7 @@ export default {
       eyebrow: 'Selbstcheck',
       items: [
         'Ich kann an konkreten Merkmalen erklären, was einen C1-Text von einem B2-Text unterscheidet.',
-        'Ich habe alle drei Diagnose-Tests ehrlich und ohne Hilfsmittel bearbeitet und meine Fehler notiert.',
+        'Ich habe die Diagnose im Übungsheft ehrlich und ohne Hilfsmittel bearbeitet und meine Unsicherheiten notiert.',
         'Ich weiß, welche zwei bis drei Lektionen aus Block 1 ich zuerst brauche.',
         'Ich habe für jedes Modul eine datierte Selbsteinschätzung, die ich später überprüfen kann.',
       ],

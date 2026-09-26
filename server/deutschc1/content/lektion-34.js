@@ -130,7 +130,7 @@ export default {
       titel: 'Herkunftssprachen als Ressource',
       items: [
         { text: 'Mehrsprachigkeit gilt in der Forschung längst **nicht mehr als Hindernis, sondern als Ressource** — kognitiv wie beruflich.' },
-        { text: 'Wer die Herkunftssprache seiner Familie **systematisch ausbaut**, lernt erwiesenermaßen auch die Umgebungssprache leichter.' },
+        { text: 'Wer die Herkunftssprache seiner Familie **systematisch ausbaut**, lernt Studien zufolge auch die Umgebungssprache leichter.' },
         { text: 'Eine Einwanderungsgesellschaft, die Herkunftssprachen **brachliegen lässt**, verschenkt Potenzial, das andernorts teuer eingekauft wird.', gl: '— *brachliegen lassen*: dejar sin aprovechar; colocación C1 muy rentable' },
         { text: 'Zugleich bleibt unbestritten, dass **eine sichere Beherrschung des Deutschen** die Voraussetzung für gesellschaftliche Teilhabe ist.' },
       ],
@@ -172,48 +172,30 @@ export default {
 
     { type: 'rule' },
 
-    // ── 6. Übungen ────────────────────────────────────────────────
+    // ── 6. Modelltext · Mehr Beispiele ────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Wortschatz & Kollokationen',
-      frage: 'Ergänze das passende Wort aus dem Kernwortschatz in der richtigen Form.',
-      aufgaben: [
-        'Ohne staatliche Förderung drohen kleine Dialekte innerhalb weniger Generationen ______.',
-        'Der Duden dokumentiert den Sprachgebrauch — er schreibt ihn nicht vor: Auch das Wörterbuch unterliegt dem ______.',
-        'Viele Familien geben ihre ______ bewusst an die Kinder weiter, damit die Verbindung zur Großelterngeneration nicht abreißt.',
-        'Ob sich der Genderstern langfristig ______, wird nicht per Dekret entschieden, sondern im täglichen Schreibgebrauch.',
-        'Für viele Bayern hat die Mundart eine ______ Funktion: Sie markiert Zugehörigkeit über die Sprache.',
+      type: 'modell',
+      eyebrow: 'Modelltext — Stellungnahme zu Dialekten in der Schule',
+      thema: '„Sollten Dialekte in der Schule einen festen Platz haben?“ Der Absatz referiert zuerst die Gegenposition in indirekter Rede, hält ihr ein Argument entgegen und kommt zu einer abgewogenen Empfehlung.',
+      absaetze: [
+        'Ob Dialekte in die Schule gehören, ist umstritten. Kritiker befürchten, Mundart **erschwere** den Erwerb der **Standardsprache** und **benachteilige** Kinder später im Beruf. **Dem lässt sich entgegenhalten**, dass Dialekte eine **identitätsstiftende** Funktion haben und wie eine innere **Mehrsprachigkeit** wirken: Wer zwei Varietäten beherrscht, wechselt souverän zwischen den Registern. Da zudem viele Dialekte **auszusterben drohen**, spricht einiges dafür, sie im Unterricht zumindest zu thematisieren — nicht als Ersatz für die Standardsprache, sondern als Teil des kulturellen Erbes, das die Schule weitergeben sollte.',
       ],
-      loesungen: [
-        '… drohen kleine Dialekte **auszusterben**. (*drohen* + zu-Infinitiv)',
-        '… unterliegt dem **Sprachwandel**. (*unterliegen* + Dat.)',
-        '… geben ihre **Herkunftssprache** bewusst weiter.',
-        'Ob sich der Genderstern langfristig **durchsetzt** … (*sich durchsetzen*)',
-        '… eine **identitätsstiftende** Funktion. ~~Adjetivo compuesto: stiftet Identität → identitätsstiftend.~~',
+      annotationen: [
+        { tag: 'Redewiedergabe', text: '*erschwere* und *benachteilige*: Konjunktiv I referiert die Gegenposition, ohne sie sich zu eigen zu machen.' },
+        { tag: 'Position', text: 'Jede gut begründete Haltung ist gültig — vorausgesetzt, beide Seiten kommen zur Sprache.' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Von B2 zu C1',
-      frage: 'Hebe die Sätze auf C1-Niveau: Ersetze die einfachen Formulierungen durch Kernwortschatz und komplexere Strukturen dieser Lektion.',
-      aufgaben: [
-        'Viele Leute finden Anglizismen schlecht, aber Sprachwissenschaftler finden sie normal.',
-        'Wenn man zwei Sprachen spricht, ist das gut für den Beruf.',
-        'Manche wollen gendern, manche wollen nicht gendern. Beide haben Gründe.',
-        'In der Schweiz sprechen die Leute Dialekt, aber sie schreiben Hochdeutsch.',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Kernwortschatz im Zusammenhang',
+      items: [
+        { text: 'Dass Amtsschreiben zunehmend in einfacher Sprache verfasst werden, **erleichtert** vielen Menschen die **Verständigung** mit Behörden.' },
+        { text: 'Die Kinder der Familie Yılmaz wachsen mit zwei Sprachen auf: Zu Hause sprechen sie die **Herkunftssprache**, in der Schule die **Standardsprache**.' },
+        { text: 'Manche Anglizismen haben sich so fest **durchgesetzt**, dass kaum jemand sie noch als fremd empfindet.', gl: '— *sich durchsetzen*: imponerse de forma duradera' },
+        { text: 'Wer sich der **Sprachpflege** verschreibt, sollte den **Sprachwandel** beschreiben, statt ihn aufhalten zu wollen.', gl: '— *sich einer Sache verschreiben*: consagrarse a algo' },
+        { text: 'Im öffentlichen **Sprachgebrauch** halten viele Zeitungen weiterhin am **generischen Maskulinum** fest, während Hochschulen längst andere Formen erproben.' },
       ],
-      loesungen: [
-        '**Während Sprachpuristen im Anglizismus einen Sprachverfall sehen, gilt er der Linguistik als Beleg für natürlichen Sprachwandel.**',
-        '**Mehrsprachigkeit verschafft nachweislich berufliche Vorteile und gilt in der Forschung längst als Ressource.**',
-        '**In der Debatte um gendergerechte Sprache stehen sich zwei begründete Positionen gegenüber: das Anliegen sprachlicher Sichtbarkeit und die Sorge um Lesbarkeit und Sprachfreiheit.**',
-        '**In der Deutschschweiz herrscht eine stabile Diglossie: Gesprochen wird weitgehend Mundart, geschrieben die Standardsprache.** ~~Fíjate en la pasiva con „wird“ + posición inicial del participio: registro escrito elegante.~~',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Schreibe einen Absatz (80-100 Wörter) zur Frage: **„Sollten Dialekte in der Schule einen festen Platz haben?“** Verwende mindestens vier Wörter aus dem Kernwortschatz und stelle beide Positionen dar, bevor du Stellung nimmst.',
-      loesung: '**Mögliche Lösung** (jede gut begründete Position ist richtig, solange beide Seiten vorkommen):\n*Ob Dialekte in die Schule gehören, ist umstritten. Kritiker befürchten, Mundart erschwere den Erwerb der Standardsprache und benachteilige Kinder später im Beruf. Dem lässt sich entgegenhalten, dass Dialekte eine identitätsstiftende Funktion haben und wie eine innere Mehrsprachigkeit wirken: Wer zwei Varietäten beherrscht, wechselt souverän zwischen den Registern. Da zudem viele Dialekte auszusterben drohen, spricht einiges dafür, sie im Unterricht zumindest zu thematisieren — nicht als Ersatz für die Standardsprache, sondern als Teil des kulturellen Erbes, das die Schule weitergeben sollte.*',
     },
 
     { type: 'rule' },

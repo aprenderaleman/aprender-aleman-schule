@@ -17,7 +17,7 @@ export default {
         'Am Ende kannst du die Grundbegriffe der deutschen Klimadebatte — Energiewende, Verkehrswende, CO₂-Bepreisung — sicher verwenden.',
         'Du beherrschst 14 Schlüsselwörter des Themenfelds mit ihren typischen Kollokationen.',
         'Du argumentierst differenziert in der Streitfrage „Verbote oder Anreize?“ und zwischen individueller und politischer Verantwortung.',
-        'Du schreibst einen Diskussionsbeitrag zum Klimathema nach dem Format von Schreiben Teil 1.',
+        'Du verfasst einen Diskussionsbeitrag zum Klimathema nach den Vorgaben von Schreiben Teil 1.',
       ],
     },
 
@@ -163,52 +163,31 @@ export default {
 
     { type: 'rule' },
 
-    // ── 6. Übungen ────────────────────────────────────────────────
+    // ── 6. Modelltext · Mehr Beispiele ────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Wortschatz & Kollokationen',
-      frage: 'Ergänze das passende Wort aus dem Kernwortschatz. Achte auf die Kollokation.',
-      aufgaben: [
-        'den … von Treibhausgasen deutlich senken',
-        'finanzielle … schaffen, statt alles zu verbieten',
-        'die Energiewende entschlossen …',
-        'der … auf das eigene Auto (Präposition!)',
-        'wirksame Maßnahmen … und konsequent umsetzen',
-        'schonend mit natürlichen … umgehen',
+      type: 'modell',
+      eyebrow: 'Modelltext — argumentativer Absatz: Verbote oder Anreize?',
+      thema: 'Sind Verbote oder Anreize der bessere Weg in der Klimapolitik? Der Absatz räumt mit zwar … doch ein, begründet die eigene Präferenz und schließt mit einer vermittelnden Position.',
+      absaetze: [
+        'Zwar wirken **Verbote** unmittelbar und gelten für alle gleichermaßen, doch gefährden sie auf Dauer die gesellschaftliche Akzeptanz der Klimapolitik. Finanzielle **Anreize** wie eine sozial abgefederte **CO₂-Bepreisung** erscheinen mir daher vielversprechender: Sie belohnen klimafreundliches Verhalten, statt den **Verzicht** zu erzwingen, und lassen dem Einzelnen die Wahl. Entscheidend ist allerdings, dass die **Maßnahmen** für alle **zumutbar** bleiben und die Einnahmen an die Haushalte zurückverteilt werden. Unterm Strich plädiere ich deshalb für eine Kombination: klare Regeln dort, wo es schnell gehen muss, Anreize überall sonst.',
       ],
-      loesungen: [
-        'den **Ausstoß** von Treibhausgasen deutlich senken',
-        'finanzielle **Anreize** schaffen, statt alles zu verbieten',
-        'die Energiewende entschlossen **vorantreiben**',
-        'der **Verzicht auf** das eigene Auto — *auf* + Akkusativ ~~no «Verzicht an»: interferencia típica de «renunciar a»~~',
-        'wirksame Maßnahmen **ergreifen** und konsequent umsetzen',
-        'schonend mit natürlichen **Ressourcen** umgehen',
+      annotationen: [
+        { tag: 'Einräumen', text: '*Zwar …, doch …*: die Gegenseite anerkennen, bevor man sie entkräftet.' },
+        { tag: 'Position', text: 'Vermittelnde Schlussthese mit Bedingung (*entscheidend ist allerdings, dass …*). ~~Igual de válidas serían la postura contraria o una opción tajante por uno de los dos instrumentos, siempre que la estructura (conceder → argumentar → concluir) se mantenga.~~' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Von B2 zu C1',
-      frage: 'Forme die einfachen Sätze in C1-Sätze um. Nutze das angegebene Wort aus dem Kernwortschatz.',
-      aufgaben: [
-        'Wir sollten mehr Windräder und Solaranlagen bauen. (der Ausbau)',
-        'Wenn CO₂ mehr kostet, verbrauchen die Leute weniger. (die CO₂-Bepreisung)',
-        'Jeder sollte darüber nachdenken, was er kauft. (das Konsumverhalten)',
-        'Die Politik darf arme Familien nicht überfordern. (zumutbar)',
-        'Deutschland will irgendwann kein CO₂ mehr ausstoßen. (klimaneutral)',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Den Kernwortschatz im Zusammenhang verwenden',
+      items: [
+        { text: 'Um bis zur Jahrhundertmitte **klimaneutral** zu werden, müsste die Stadt ihren Fuhrpark vollständig auf Elektroantrieb umstellen.' },
+        { text: 'Der **Ausbau der erneuerbaren Energien** stockt vielerorts, weil Genehmigungsverfahren Jahre in Anspruch nehmen.', gl: '— *in Anspruch nehmen*: requerir (tiempo, recursos)' },
+        { text: 'Wer **auf Nachhaltigkeit setzt**, sollte nicht nur auf das Etikett, sondern auch auf Herkunft und Transportwege achten.' },
+        { text: 'Ein Verbot von Einwegverpackungen würde den Verbrauch von **Ressourcen** spürbarer senken als jeder Appell an die Vernunft.' },
+        { text: 'Die Stadtwerke wollen die **Energiewende** vor Ort vorantreiben und bieten Mietern deshalb günstigen Solarstrom vom eigenen Dach an.', gl: '— *vor Ort*: a escala local, sobre el terreno' },
+        { text: 'Ohne verlässliche **Anreize** werden viele Hausbesitzer den Austausch ihrer Ölheizung weiter aufschieben.' },
       ],
-      loesungen: [
-        'Der **Ausbau** der erneuerbaren Energien muss deutlich beschleunigt werden.',
-        'Eine wirksame **CO₂-Bepreisung** setzt Anreize, den eigenen Verbrauch zu senken. ~~Nominalización + verbo preciso: la receta B2→C1 de siempre.~~',
-        'Jeder Einzelne ist gefordert, das eigene **Konsumverhalten** kritisch zu hinterfragen.',
-        'Klimapolitik muss auch für einkommensschwache Haushalte **zumutbar** bleiben.',
-        'Deutschland hat sich verpflichtet, **klimaneutral** zu werden.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Schreibe einen argumentativen Absatz (80-100 Wörter) zur Frage „Sind Verbote oder Anreize der bessere Weg in der Klimapolitik?“. Verwende mindestens vier Kernwörter und ein einräumendes Redemittel (zwar … doch / so … so).',
-      loesung: '**Mögliche Lösung** (auch die Gegenposition oder ein klares Entweder-oder ist gültig, solange die Struktur stimmt):\n*Zwar wirken Verbote unmittelbar und gelten für alle gleichermaßen, doch gefährden sie auf Dauer die gesellschaftliche Akzeptanz der Klimapolitik. Finanzielle Anreize wie eine sozial abgefederte CO₂-Bepreisung erscheinen mir daher vielversprechender: Sie belohnen klimafreundliches Verhalten, statt den Verzicht zu erzwingen, und lassen dem Einzelnen die Wahl. Entscheidend ist allerdings, dass die Maßnahmen für alle zumutbar bleiben und die Einnahmen an die Haushalte zurückverteilt werden. Unterm Strich plädiere ich deshalb für eine Kombination: klare Regeln dort, wo es schnell gehen muss, Anreize überall sonst.*',
     },
 
     { type: 'rule' },

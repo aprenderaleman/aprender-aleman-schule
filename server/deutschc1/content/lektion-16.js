@@ -168,50 +168,30 @@ export default {
 
     { type: 'rule' },
 
-    // ── 6. Übungen ────────────────────────────────────────────────
+    // ── 6. Modelltext · Mehr Beispiele ────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Erkennen',
-      frage: 'Zu welchem Teil des Moduls Lesen passt die Beschreibung — Teil 1, 2, 3 oder 4?',
-      aufgaben: [
-        'Du liest vier Kommentare zum Thema Tempolimit und entscheidest, wer die Aussage „Verbote allein ändern kein Verhalten“ sinngemäß vertritt.',
-        'In einem Artikel über Schlafforschung fehlen acht Wörter; daneben steht eine Liste mit zwölf Wörtern.',
-        'Aus einem Reportagetext wurden ganze Sätze entfernt; du entscheidest, welcher Satz in welche Lücke gehört.',
-        'Zu einem langen Artikel über Stadtplanung kreuzt du bei mehreren Aufgaben je eine von drei Optionen an.',
-        'Die entscheidende Kompetenz dieses Teils ist es, Paraphrasen zu durchschauen: Die Aussagen wiederholen nie die Wörter der Texte.',
+      type: 'modell',
+      eyebrow: 'Modelltext — ein persönlicher Prüfungsfahrplan',
+      thema: 'So kann ein konkreter Plan für die 65 Minuten aussehen: Reihenfolge, Zeitbudgets, die zwei größten Risiken und je ein Gegenmittel. Dein eigener Plan darf abweichen — entscheidend ist, dass Budgets und Gegenmittel konkret benannt sind.',
+      absaetze: [
+        '*Nach einem kurzen Überblick über alle vier Teile beginne ich mit Teil 2, weil er mir bei geringem Zeitaufwand sichere Punkte bringt (10 Minuten). Anschließend bearbeite ich Teil 3 und Teil 4 (je 15 Minuten) und zum Schluss den langen Teil 1 (20 Minuten).*',
+        '*Mein größtes Risiko ist das Festlesen an schwierigen Textstellen; dagegen hilft das konsequente Markieren und Weitergehen. Mein zweites Risiko ist das Antworten aus dem Weltwissen; dagegen hilft die Regel, jede Antwort mit einer Textstelle zu belegen. Die letzten fünf Minuten reserviere ich für offene Aufgaben und die Kontrolle des Antwortbogens.*',
       ],
-      loesungen: [
-        '**Teil 4** — Zuordnung von Aussagen zu Meinungstexten.',
-        '**Teil 2** — Lückentext mit Wortliste; es bleiben Wörter übrig.',
-        '**Teil 3** — Satzeinsetzung; geprüft wird Textkohärenz.',
-        '**Teil 1** — langer Sachtext mit Multiple-Choice-Aufgaben.',
-        '**Teil 4** — die Aussagen sind sinngemäße Umformulierungen, keine Zitate.',
+      annotationen: [
+        { tag: 'Reihenfolge', text: 'Auch die Reihenfolge 1 → 2 → 3 → 4 ist legitim. ~~Lo importante es que la suma dé 65 y que ningún Teil quede sin presupuesto.~~' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Anwenden',
-      frage: 'Welche Lesetechnik wählst du — Skimming, Scanning oder detailliertes Lesen? Begründe kurz.',
-      aufgaben: [
-        'Du hast Teil 1 aufgeschlagen und noch keine Aufgabe gelesen.',
-        'Eine Aufgabe fragt: „In welchem Jahr wurde das Pilotprojekt gestartet?“',
-        'Zwei Optionen unterscheiden sich nur darin, ob der Autor etwas „ablehnt“ oder „für verfrüht hält“.',
-        'In Teil 4 suchst du, welcher der vier Autoren sich zu den Kosten äußert.',
-        'Du hast eine Lücke in Teil 3 gefunden und zwei Kandidatensätze in der engeren Wahl.',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Die Aufgabensprache im Einsatz',
+      items: [
+        { text: 'Die Angabe zur Teilnehmerzahl lässt sich **dem** dritten **Abschnitt entnehmen** — und nur ihm.', gl: '— *entnehmen* + Dativ: aus dem Text, nicht aus dem Weltwissen' },
+        { text: 'Kannst du deine Antwort nicht mit einer **Textstelle belegen**, ist sie vermutlich ein **Distraktor**.' },
+        { text: 'Welche **Aussage trifft** auf die Verfasserin **zu**? — Gesucht ist ihre eigene Position, nicht die, die sie referiert.', gl: '— *zutreffen auf* + Akkusativ' },
+        { text: 'In Teil 4 werden die Positionen nie wörtlich, sondern stets **sinngemäß** wiedergegeben.' },
+        { text: 'Wer seine Lösungen erst in der letzten Minute auf den Antwortbogen **überträgt**, riskiert Flüchtigkeitsfehler.', gl: '— lieber im Puffer: *übertragen* = pasar a limpio' },
       ],
-      loesungen: [
-        '**Skimming** — erst Thema und Textaufbau erfassen, dann zu den Aufgaben.',
-        '**Scanning** — nach Jahreszahlen suchen; Zahlen sind die schnellsten Anker.',
-        '**Detailliertes Lesen** — der Unterschied liegt in einer Nuance der Belegstelle; hier zählt jedes Wort, besonders Einschränkungen wie *noch*, *bislang*, *grundsätzlich*.',
-        '**Scanning** — Signalwörter des Themas Kosten (*Preis, finanzieren, Budget*) in allen vier Texten suchen.',
-        '**Detailliertes Lesen** — die Sätze vor und nach der Lücke genau prüfen: Verweise, Anschlüsse, Logik.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Schreibe deinen persönlichen **Prüfungsfahrplan** für das Modul Lesen: Reihenfolge der Teile, Zeitbudget pro Teil, deine zwei größten Risiken und je ein Gegenmittel. Nutze vollständige Sätze — der Fahrplan ist zugleich eine Schreibübung im Nominalstil.',
-      loesung: '**Mögliche Lösung** (dein Plan darf abweichen — entscheidend ist, dass Budgets und Gegenmittel konkret sind):\n*Nach einem kurzen Überblick über alle vier Teile beginne ich mit Teil 2, weil er mir bei geringem Zeitaufwand sichere Punkte bringt (10 Minuten). Anschließend bearbeite ich Teil 3 und Teil 4 (je 15 Minuten) und zum Schluss den langen Teil 1 (20 Minuten). Mein größtes Risiko ist das Festlesen an schwierigen Textstellen; dagegen hilft das konsequente Markieren und Weitergehen. Mein zweites Risiko ist das Antworten aus dem Weltwissen; dagegen hilft die Regel, jede Antwort mit einer Textstelle zu belegen. Die letzten fünf Minuten reserviere ich für offene Aufgaben und die Kontrolle des Antwortbogens.*\n~~También es válido el orden 1→2→3→4: lo importante es que la suma dé 65 y que ningún Teil quede sin presupuesto.~~',
     },
 
     { type: 'rule' },

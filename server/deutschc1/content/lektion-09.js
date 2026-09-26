@@ -146,53 +146,47 @@ export default {
 
     { type: 'rule' },
 
-    // ── 6. Übungen ────────────────────────────────────────────────
+    // ── 6. Mehr Beispiele ─────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Erkennen',
-      frage: 'Bestimme Bedeutung (kausal, konzessiv, temporal, modal, final, referierend) und Register (neutral, gehoben, amtlich) der markierten Präposition.',
-      aufgaben: [
-        'Angesichts der Haushaltslage sind Einsparungen unvermeidlich.',
-        'Zwecks Rückfragen erreichen Sie uns unter der genannten Nummer.',
-        'Die Echtheit des Dokuments wurde anhand der Unterschrift geprüft.',
-        'Ungeachtet des Widerstands wurde das Gesetz verabschiedet.',
-        'Seitens der Universität gab es zunächst keine Stellungnahme.',
-      ],
-      loesungen: [
-        '**kausal, gehoben** — *angesichts*: der sichtbare Anlass; ideal für Argumentationen.',
-        '**final, amtlich** — *zwecks*: reines Verwaltungsdeutsch, nur für formelle Nachrichten.',
-        '**modal/instrumental, neutral-formell** — *anhand*: das Hilfsmittel der Prüfung.',
-        '**konzessiv, gehoben** — *ungeachtet*: stärker und schriftlicher als *trotz*.',
-        '**referierend, amtlich** — *seitens*: benennt den Urheber, ohne ihn zum Subjekt zu machen.',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Kernwortschatz im Satz',
+      items: [
+        { text: '**Infolge des Hochwassers** mussten mehrere Dörfer evakuiert werden.', gl: '— Bericht: Ursache-Folge-Kette' },
+        { text: '**Mittels eines neuen Verfahrens** lassen sich die Messwerte deutlich genauer bestimmen.' },
+        { text: '**Anhand konkreter Beispiele** erläuterte die Referentin die Folgen der Reform.' },
+        { text: '**Zwecks Klärung des Sachverhalts** bitten wir Sie, uns die Unterlagen **innerhalb einer Woche** zuzusenden.', gl: '— zwecks + innerhalb: klassischer Behördenton' },
+        { text: '**Seitens der Anwohner** wurden **hinsichtlich des Lärmschutzes** erhebliche Bedenken geäußert.' },
+        { text: '**Außerhalb der Sprechzeiten** erreichen Sie uns ausschließlich per E-Mail.' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Umformen',
-      frage: 'Forme den Nebensatz in eine Präpositionalphrase mit Genitivpräposition um — das Handwerk aus Lektion 3, jetzt mit dem vollen Inventar.',
-      aufgaben: [
-        'Weil es an Personal fehlt, bleibt das Schwimmbad geschlossen.',
-        'Obwohl die Experten mehrfach gewarnt hatten, wurde weitergebaut.',
-        'Weil das Interesse groß ist, wird ein zweiter Termin angeboten.',
-        'Indem man die Daten analysierte, konnte der Fehler gefunden werden.',
-        'Solange die Messe dauert, sind alle Hotels ausgebucht.',
-        'Die Stadt äußerte sich nicht dazu, wie es mit dem Stadion weitergeht.',
-      ],
-      loesungen: [
-        '**Mangels Personals** bleibt das Schwimmbad geschlossen. ~~También correcto: *mangels Personal* — el genitivo del singular sin artículo suele quedar sin marcar; lo agramatical sería *mangels dem Personal*.~~',
-        '**Ungeachtet der mehrfachen Warnungen** der Experten wurde weitergebaut. / **Trotz mehrfacher Warnungen** …',
-        '**Aufgrund des großen Interesses** wird ein zweiter Termin angeboten.',
-        '**Mittels einer Analyse der Daten** / **Anhand der Daten** konnte der Fehler gefunden werden.',
-        '**Während der Messe** sind alle Hotels ausgebucht.',
-        '**Hinsichtlich der Zukunft des Stadions** äußerte sich die Stadt nicht. / **Bezüglich der Zukunft** …',
+      type: 'beispiele',
+      kicker: 'Nominalstil',
+      titel: 'Vom Nebensatz zur Genitivphrase',
+      items: [
+        { text: 'Weil die Nachfrage hoch ist, … → **Aufgrund der hohen Nachfrage** …' },
+        { text: 'Obwohl alle protestierten, … → **Ungeachtet aller Proteste** …', gl: '— gehobener als *trotz*' },
+        { text: 'Da es keine Alternativen gibt, … → **Mangels Alternativen** …', gl: '— Plural ohne Artikel: Dativ-Endung *-n*' },
+        { text: 'Solange die Verhandlungen dauern, … → **Während der Verhandlungen** …' },
       ],
     },
+
+    { type: 'rule' },
+
+    // ── Modelltext ────────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Schreibe den Anfang einer formellen Beschwerde (4-5 Sätze) an eine Sprachschule: Der gebuchte C1-Kurs wurde kurzfristig abgesagt. Verwende mindestens **vier** verschiedene Genitivpräpositionen in passendem Register.',
-      aufgabe: 'Bausteine: Bezug auf die Buchung — Grund der Beschwerde — Folge für dich — Forderung mit Frist.',
-      loesung: '**Mögliche Lösung** (andere Präpositionen und Reihenfolgen sind gültig):\n*Sehr geehrte Damen und Herren,\n**bezüglich meiner Buchung** vom 3. August wende ich mich mit einer Beschwerde an Sie. **Aufgrund der kurzfristigen Absage** des C1-Kurses — **seitens Ihrer Verwaltung** lediglich per SMS mitgeteilt — musste ich bereits gebuchte Fahrten stornieren. **Angesichts dieser Umstände** halte ich eine bloße Gutschrift für unzureichend. Ich bitte Sie daher, mir **innerhalb von zwei Wochen** den vollen Betrag zu erstatten.*\nPrüfe beim Korrekturlesen jede Phrase auf die Genitivmarkierung — und dass höchstens eine amtliche Präposition (*zwecks, mangels*) pro Text steht.',
+      type: 'modell',
+      eyebrow: 'Modelltext — Beginn einer formellen Beschwerde',
+      thema: 'Der gebuchte C1-Kurs einer Sprachschule wurde kurzfristig abgesagt. Bausteine: Bezug auf die Buchung — Grund der Beschwerde — Folge — Forderung mit Frist.',
+      absaetze: [
+        'Sehr geehrte Damen und Herren,',
+        '**bezüglich meiner Buchung** vom 3. August wende ich mich mit einer Beschwerde an Sie. **Aufgrund der kurzfristigen Absage** des C1-Kurses — **seitens Ihrer Verwaltung** lediglich per SMS mitgeteilt — musste ich bereits gebuchte Fahrten stornieren. **Angesichts dieser Umstände** halte ich eine bloße Gutschrift für unzureichend. Ich bitte Sie daher, mir **innerhalb von zwei Wochen** den vollen Betrag zu erstatten.',
+      ],
+      annotationen: [
+        { tag: 'Bausteine', text: 'Bezug (*bezüglich*) → Grund (*aufgrund*) mit Urheber (*seitens*) → Folge und Bewertung (*angesichts*) → Forderung mit Frist (*innerhalb von*).' },
+        { tag: 'Korrekturlesen', text: 'Lohnt bei jeder Phrase: Ist der Genitiv markiert? Und steht höchstens eine amtliche Präposition (*zwecks, mangels*) im Text?' },
+      ],
     },
 
     { type: 'rule' },

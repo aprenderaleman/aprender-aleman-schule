@@ -13,7 +13,7 @@ export default {
       type: 'lernziele',
       eyebrow: 'Lernziele',
       items: [
-        'Am Ende kennst du die rund 25 rentabelsten Funktionsverbgefüge, geordnet nach ihrem Funktionsverb.',
+        'Am Ende kennst du die rund 25 gebräuchlichsten Funktionsverbgefüge, geordnet nach ihrem Funktionsverb.',
         'Du wandelst zwischen Gefüge und einfachem Verb um (*Kritik üben ↔ kritisieren*) und wählst nach Register.',
         'Du unterscheidest die Aktiv- und die Passivvariante (*zur Verfügung **stellen** vs. **stehen***, *zum Ausdruck **bringen** vs. **kommen***).',
         'Du erkennst die grammatischen Eigenheiten der Gefüge: fester Artikel, feste Präposition, Nomen im Endfeld.',
@@ -61,7 +61,7 @@ export default {
 
     {
       type: 'tabelle',
-      eyebrow: 'Erklärung — Die rentabelsten Gefüge nach Funktionsverb',
+      eyebrow: 'Erklärung — Die gebräuchlichsten Gefüge nach Funktionsverb',
       kopf: ['Funktionsverb', 'Gefüge', 'einfaches Verb'],
       zeilen: [
         ['treffen', 'eine Entscheidung / Vorkehrungen / eine Auswahl treffen', 'entscheiden · vorsorgen · auswählen'],
@@ -150,53 +150,46 @@ export default {
 
     { type: 'rule' },
 
-    // ── 6. Übungen ────────────────────────────────────────────────
+    // ── 6. Mehr Beispiele ─────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Erkennen',
-      frage: 'Finde das Funktionsverbgefüge, gib das einfache Verb an und entscheide: aktive oder passivische Bedeutung?',
-      aufgaben: [
-        'Die neue Verordnung tritt am 1. März in Kraft.',
-        'Der Betriebsrat übte scharfe Kritik an den Plänen.',
-        'Solche Argumente finden in der Debatte kaum noch Beachtung.',
-        'Die Bürgermeisterin ergriff noch am Abend das Wort.',
-        'Der Vorschlag wurde von allen Fraktionen in Zweifel gezogen.',
-      ],
-      loesungen: [
-        '*in Kraft treten* = **gültig werden** — passivische Bedeutung: niemand wird genannt, es geschieht.',
-        '*Kritik üben an* = **kritisieren** — aktiv: der Betriebsrat handelt.',
-        '*Beachtung finden* = **beachtet werden** — passivisch: verstecktes Passiv mit *finden*.',
-        '*das Wort ergreifen* = **zu sprechen beginnen** — aktiv.',
-        '*in Zweifel ziehen* = **anzweifeln** — aktiv, hier zusätzlich im echten Passiv (*wurde … gezogen*).',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Kernwortschatz im Satz',
+      items: [
+        { text: 'Angesichts der Hitzewelle **ergriff** die Stadt sofort **Maßnahmen** zum Schutz älterer Menschen.' },
+        { text: 'Bei der Planung wurde auf die Bedürfnisse der Anwohner kaum **Rücksicht genommen**.', gl: '— *Rücksicht nehmen auf* + Akk., hier im Passiv' },
+        { text: 'Der Verband versucht seit Jahren, **auf** die Gesetzgebung **Einfluss** zu **nehmen**.' },
+        { text: 'Die Beschwerde wurde **zur Kenntnis genommen**, eine Antwort steht jedoch noch aus.', gl: '— *zur Kenntnis nehmen*: registrar, sin comprometerse' },
+        { text: 'Mit ihrer Spende **leistet** die Stiftung einen wichtigen **Beitrag zur** Sanierung des Theaters.' },
+        { text: 'Die Lieferanten **setzen** den Betrieb mit immer kürzeren Fristen **unter Druck**.' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Umformen',
-      frage: 'Ersetze das einfache Verb durch das passende Funktionsverbgefüge — der Satz soll formeller klingen.',
-      aufgaben: [
-        'Die Stadt entschied erst nach Monaten.',
-        'Der Verein hat wesentlich zum Erfolg des Projekts beigetragen.',
-        'Die Behörde informierte die Anwohner nicht rechtzeitig.',
-        'Immer mehr Patienten nutzen die Online-Sprechstunde.',
-        'Das alte Verfahren wird kaum noch angewendet.',
-        'Wir erwägen, den Vertrag zu kündigen.',
-      ],
-      loesungen: [
-        'Die Stadt **traf** erst nach Monaten **eine Entscheidung**.',
-        'Der Verein **hat** einen wesentlichen **Beitrag zum** Erfolg des Projekts **geleistet**.',
-        'Die Behörde **setzte** die Anwohner nicht rechtzeitig **in Kenntnis**.',
-        'Immer mehr Patienten **nehmen** die Online-Sprechstunde **in Anspruch**. ~~„Usar“ ≠ *benutzen* en registro formal: para servicios y prestaciones, *in Anspruch nehmen*.~~',
-        'Das alte Verfahren **findet** kaum noch **Anwendung**.',
-        'Wir **ziehen in Erwägung**, den Vertrag zu kündigen. / Wir **ziehen** eine Kündigung des Vertrags **in Erwägung**.',
+      type: 'beispiele',
+      kicker: 'Paare',
+      titel: 'Bewirken — Geschehen',
+      items: [
+        { text: 'Der Landtag **setzt** das Gesetz im Mai **in Kraft**. → Das Gesetz **tritt** im Mai **in Kraft**.' },
+        { text: 'Die Moderatorin **brachte** die Frage **zur Sprache**. → Die Frage **kam** erst am Ende **zur Sprache**.' },
+        { text: 'Die Stadt **stellt** zwei Säle **zur Verfügung**. → Zwei Säle **stehen zur Verfügung**.' },
+        { text: 'Man **wendet** das Verfahren nur selten **an**. → Das Verfahren **findet** nur selten **Anwendung**.', gl: '— *finden* als verstecktes Passiv' },
       ],
     },
+
+    { type: 'rule' },
+
+    // ── Modelltext ────────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Schreibe die vier Stichpunkte als kurzen formellen Bericht (4-5 Sätze). Verwende mindestens **vier** verschiedene Funktionsverbgefüge, davon eines mit passivischer Bedeutung.',
-      aufgabe: '*Stichpunkte einer Bürgerversammlung: — Verkehrsberuhigung: viele Anwohner dafür — Kritik: Parkplatzmangel — Stadt: prüft Tiefgarage — neue Regeln: gültig ab Sommer*',
-      loesung: '**Mögliche Lösung** (andere Gefüge sind gültig, solange vier verschiedene vorkommen):\n*Auf der Bürgerversammlung **brachten** zahlreiche Anwohner ihre Unterstützung für die Verkehrsberuhigung **zum Ausdruck**. Zugleich **wurde** am Mangel an Parkplätzen deutliche **Kritik geübt**. Die Stadtverwaltung erklärte, sie **ziehe** den Bau einer Tiefgarage **in Betracht**. Die neuen Regelungen **treten** im Sommer **in Kraft**; bis dahin **steht** der bisherige Parkraum weiterhin **zur Verfügung**.*\nPassivische Bedeutung tragen hier *in Kraft treten* und *zur Verfügung stehen*. Beachte auch den Konjunktiv I (*ziehe*) — die Lektionen greifen ineinander.',
+      type: 'modell',
+      eyebrow: 'Modelltext — Bericht über eine Bürgerversammlung',
+      thema: 'Stichpunkte: Verkehrsberuhigung — viele Anwohner dafür · Kritik: Parkplatzmangel · Stadt prüft Tiefgarage · neue Regeln gültig ab Sommer',
+      absaetze: [
+        'Auf der Bürgerversammlung **brachten** zahlreiche Anwohner ihre Unterstützung für die Verkehrsberuhigung **zum Ausdruck**. Zugleich **wurde** am Mangel an Parkplätzen deutliche **Kritik geübt**. Die Stadtverwaltung erklärte, sie **ziehe** den Bau einer Tiefgarage **in Betracht**. Die neuen Regelungen **treten** im Sommer **in Kraft**; bis dahin **steht** der bisherige Parkraum weiterhin **zur Verfügung**.',
+      ],
+      annotationen: [
+        { tag: 'Paare', text: 'Aktiv-kausativ: *zum Ausdruck bringen*, *Kritik üben*, *in Betracht ziehen*. Passivische Bedeutung tragen *in Kraft treten* und *zur Verfügung stehen*.' },
+        { tag: 'Vernetzung', text: 'Beachte auch den Konjunktiv I (*ziehe*) und das Passiv (*wurde Kritik geübt*) — die Lektionen greifen ineinander.' },
+      ],
     },
 
     { type: 'rule' },

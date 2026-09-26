@@ -137,7 +137,7 @@ export default {
         { text: 'Die Verhandlungen **dürften** sich bis in den Herbst **hinziehen**.', gl: '— Prognoseform der Presse' },
         { text: 'Es **könnte** sich auch um einen Messfehler **handeln**.' },
         { text: 'Das **mag** auf dem Papier überzeugen, in der Praxis scheitert es.', gl: '— Zugeständnis vor dem Gegenschlag' },
-        { text: 'So schnell **kann** die Entscheidung gar nicht gefallen sein — der Ausschuss tagt noch.', gl: '— *kann nicht*: der subjektive Gegenpol zu *muss*' },
+        { text: 'So schnell **kann** die Entscheidung gar nicht **fallen** — der Ausschuss tagt noch.', gl: '— *kann nicht*: der subjektive Gegenpol zu *muss*' },
       ],
     },
     {
@@ -165,53 +165,31 @@ export default {
 
     { type: 'rule' },
 
-    // ── 6. Übungen ────────────────────────────────────────────────
+    // ── 6. Modelltext · Mehr Beispiele ────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Erkennen',
-      frage: 'Objektiv oder subjektiv? Bestimme die Lesart und formuliere die Bedeutung mit eigenen Worten.',
-      aufgaben: [
-        'Besucher müssen sich am Empfang anmelden.',
-        'Das muss ein Missverständnis sein.',
-        'Der Angeklagte will das Opfer nie getroffen haben.',
-        'Als Praktikantin durfte sie an keiner Vorstandssitzung teilnehmen.',
-        'Der neue Flughafen soll 2030 eröffnet werden — sagt zumindest die Betreibergesellschaft.',
+      type: 'modell',
+      eyebrow: 'Modelltext — interne Einschätzung nach einem Serverausfall',
+      thema: 'Ein Serverausfall hat die Firma einen Arbeitstag gekostet, die Ursache ist ungeklärt. Die Einschätzung hält vier Grade der Gewissheit sauber auseinander: logischer Schluss, zweifelhafte Eigenbehauptung, Hörensagen und offene Möglichkeit.',
+      absaetze: [
+        '*Indizien: Update in der Nacht · Techniker bestreitet einen Fehler · ähnlicher Vorfall beim Mutterkonzern · Stromschwankungen gemeldet*',
+        'Der Ausfall **muss** mit dem nächtlichen Update zusammenhängen — er begann exakt danach. Der zuständige Techniker **will** dabei keinen Fehler gemacht **haben**. Beim Mutterkonzern **soll** es im Frühjahr einen ähnlichen Vorfall gegeben **haben**. Es **könnte** allerdings auch an den gemeldeten Stromschwankungen gelegen **haben**; endgültige Klarheit **dürfte** erst der Prüfbericht **bringen**.',
       ],
-      loesungen: [
-        '**Objektiv** — Vorschrift: Es besteht die Pflicht, sich anzumelden.',
-        '**Subjektiv** — Schlussfolgerung des Sprechers: Ich bin fast sicher, dass es ein Missverständnis ist.',
-        '**Subjektiv** — Eigenbehauptung mit Distanz: Er behauptet es, der Sprecher zweifelt. ~~No es «quiere no haberlo conocido» — wollen aquí = «pretende que».~~',
-        '**Objektiv** — fehlende Erlaubnis in der Vergangenheit: Präteritum + Infinitiv I.',
-        '**Subjektiv** — wiedergegebene Ankündigung Dritter; der Nebensatz macht die Quelle explizit.',
+      annotationen: [
+        { tag: 'Infinitiv II', text: 'Alles Vergangene steht im Infinitiv II (*gemacht haben, gegeben haben, gelegen haben*). ~~Nunca «musste» para una suposición actual.~~' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Umformen',
-      frage: 'Drücke die Einschätzung in Klammern mit einem subjektiven Modalverb aus. Achte bei Vergangenem auf den Infinitiv II.',
-      aufgaben: [
-        'Der Chef ist nicht im Haus. *(fast sicher — sein Wagen ist weg)*',
-        'Die Aktie steigt nächste Woche. *(begründete Annahme)*',
-        'Der Bewerber hat seine Zeugnisse gefälscht. *(Behauptung der Presse)*',
-        'Die Zeugin hat den Streit nicht mitbekommen. *(ihre eigene, zweifelhafte Aussage)*',
-        'Das Projekt ist an der Finanzierung gescheitert. *(offene Möglichkeit)*',
-        'Die Unterlagen sind gestern angekommen. *(Berechnung: so lange dauert die Post)*',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Gewissheit dosieren, Quellen markieren',
+      items: [
+        { text: 'Nach unserer **Einschätzung** **dürfte** der Schaden geringer ausfallen als zunächst befürchtet.', gl: '— *dürfte*: die vorsichtige, begründete Prognose' },
+        { text: 'Der **mutmaßliche** Drahtzieher **soll** sich ins Ausland abgesetzt **haben**; **dem Vernehmen nach** wird bereits international nach ihm gefahndet.', gl: '— Behauptung Dritter über Vergangenes: *soll* + Infinitiv II' },
+        { text: 'Das Unternehmen **bestreitet** die Vorwürfe; es **will** sämtliche Vorschriften eingehalten **haben**.', gl: '— *wollen*: Eigenbehauptung, die der Autor nicht übernimmt' },
+        { text: 'Die Unterlagen **können** nicht zufällig verschwunden **sein** — dafür war der Tresor zu gut gesichert.', gl: '— *kann nicht*: der Sprecher schließt eine Möglichkeit aus' },
+        { text: 'Die Zahlen **mögen** aus einer verlässlichen **Quelle** stammen — aussagekräftig sind sie deshalb noch lange nicht.', gl: '— *mag*: Zugeständnis vor dem Einwand' },
+        { text: 'Das war **offenbar** ein Missverständnis: Die Ministerin **muss** die Frage falsch verstanden **haben**.', gl: '— *offenbar* und *muss*: dieselbe Schlussfolgerung, einmal als Adverb, einmal als Modalverb' },
       ],
-      loesungen: [
-        'Der Chef **muss** außer Haus **sein** — sein Wagen ist weg.',
-        'Die Aktie **dürfte** nächste Woche **steigen**.',
-        'Der Bewerber **soll** seine Zeugnisse gefälscht **haben**.',
-        'Die Zeugin **will** den Streit nicht mitbekommen **haben**.',
-        'Das Projekt **könnte** an der Finanzierung gescheitert **sein**.',
-        'Die Unterlagen **müssten** gestern angekommen **sein**.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Ein Serverausfall hat deine Firma einen Tag Arbeit gekostet; die Ursache ist ungeklärt. Schreibe vier Sätze einer internen Einschätzung mit **vier verschiedenen** Vermutungsgraden bzw. Wiedergabeformen (z. B. muss, dürfte, könnte, soll). Markiere die Modalverben.',
-      aufgabe: '*Indizien: Update in der Nacht · Techniker bestreitet einen Fehler · ähnlicher Vorfall beim Mutterkonzern · Stromschwankungen gemeldet*',
-      loesung: '**Mögliche Lösung** (andere Zuordnungen sind richtig, wenn Grad und Form stimmen):\n*Der Ausfall **muss** mit dem nächtlichen Update zusammenhängen — er begann exakt danach. Der zuständige Techniker **will** dabei keinen Fehler gemacht **haben**. Beim Mutterkonzern **soll** es im Frühjahr einen ähnlichen Vorfall gegeben **haben**. Es **könnte** allerdings auch an den gemeldeten Stromschwankungen gelegen **haben**; endgültige Klarheit **dürfte** erst der Prüfbericht **bringen**.*\n~~Fíjate en la forma: todo lo referido al pasado lleva Infinitiv II (gemacht haben, gegeben haben, gelegen haben) — nunca «musste» para una suposición actual.~~',
     },
 
     { type: 'rule' },

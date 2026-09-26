@@ -123,7 +123,7 @@ export default {
       kicker: 'Selbstkorrektur',
       titel: 'Die letzte Version gilt',
       items: [
-        { text: '*„Das betrifft etwa hundert — ==nein, ich muss mich korrigieren: knapp hundertfünfzig== Betriebe.“* → Richtige Antwort: ca. 150. Die 100 wartet als Distraktor in Option a.', gl: '' },
+        { text: '*„Das betrifft etwa hundert — ==nein, ich muss mich korrigieren: knapp hundertfünfzig== Betriebe.“* → Richtige Antwort: ca. 150. Die 100 wartet als Distraktor in den Antwortoptionen.', gl: '' },
         { text: '*„Wir starten im Frühjahr, ==beziehungsweise realistischerweise im Sommer==.“* → Prüfungsrelevant: Sommer.', gl: '' },
         { text: '*„Ich würde sagen, es ist ein Erfolg — ==oder besser gesagt: ein Teilerfolg==.“* → Die Abschwächung ist die Antwort: kein voller Erfolg.', gl: '~~El examen adora este patrón: la primera versión aparece literal entre las opciones.~~' },
       ],
@@ -152,56 +152,18 @@ export default {
 
     { type: 'rule' },
 
-    // ── 6. Übungen ────────────────────────────────────────────────
+    // ── 6. Mehr Beispiele (Übungen → Übungsheft) ─────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Erkennen',
-      frage: 'Welcher Marker liegt vor — Reformulierung, Selbstkorrektur, Füllwort, Einschub oder Relativierung? Und: Trägt die Stelle prüfungsrelevante Information?',
-      aufgaben: [
-        '„Das war, äh, halt eine schwierige Phase für uns alle.“',
-        '„Wir haben zwanzig Standorte — beziehungsweise neunzehn, einer schließt gerade.“',
-        '„Im Grunde finde ich die Idee ja richtig.“',
-        '„Das Verfahren ist — übrigens haben das die Kollegen in Wien entwickelt — inzwischen Standard.“',
-        '„Es war keine Krise, eher — wie soll ich sagen — eine Zäsur, ein Einschnitt eben.“',
-      ],
-      loesungen: [
-        '**Füllwörter** (*äh, halt*) — keine Information; die Aussage ist schlicht „schwierige Phase“.',
-        '**Selbstkorrektur** — prüfungsrelevant: ==19== Standorte; die 20 ist der geborene Distraktor.',
-        '**Relativierung** (*im Grunde … ja*) — hochrelevant: Das *aber* ist noch nicht gefallen, kommt aber fast sicher. Warte, bevor du „stimmt zu“ ankreuzt.',
-        '**Einschub** (*übrigens …*) — Nebeninformation; die Hauptaussage ist „inzwischen Standard“. Nicht den Faden verlieren.',
-        '**Reformulierung** — relevant: Der Sprecher ersetzt *Krise* bewusst durch *Zäsur* — die Option „Er beschreibt die Zeit als Krise“ wäre falsch.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Anwenden',
-      frage: 'Übersetze die nuancierte Äußerung in die nüchterne Sprache einer Antwortoption: Welche Haltung liegt vor?',
-      aufgaben: [
-        '„Ich möchte die Studie nicht kleinreden — nur basiert sie auf ganzen dreißig Befragten.“',
-        '„Ob uns das Gesetz weiterbringt? Schauen wir mal. Ich lasse mich gern überraschen.“',
-        '„Dagegen kann man ja im Ernst nichts haben.“',
-        '„Das würde ich so unterschreiben — mit einer Fußnote vielleicht.“',
-      ],
-      loesungen: [
-        '**Er zweifelt die Aussagekraft der Studie an** — die Einleitung ist Höflichkeit, das Argument (winzige Stichprobe) ist die Kritik.',
-        '**Sie ist skeptisch, ob das Gesetz etwas bewirkt** — *schauen wir mal* + ironisches *überraschen lassen* = höfliche Zweifel, keine Vorfreude.',
-        '**Er stimmt zu** — die doppelte Verneinung (*nichts dagegen haben*) ist Zustimmung im Understatement.',
-        '**Sie stimmt weitgehend zu, mit einem Vorbehalt** — *unterschreiben* = volle Zustimmung, die *Fußnote* meldet die Einschränkung an. ~~La opción correcta dirá «stimmt überwiegend zu» — no «stimmt vorbehaltlos zu».~~',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Die Gegenrichtung schärft das Ohr: Verwandle die plumpe Aussage in gesprochenes C1-Deutsch — mit mindestens einem Marker dieser Lektion (Reformulierung, Abschwächung, Einräumung, Selbstkorrektur).',
-      aufgaben: [
-        'Die App ist schlecht.',
-        'Das Projekt hat zu viel gekostet.',
-        'Ich stimme dir nicht zu.',
-      ],
-      loesungen: [
-        '**Mögliche Lösung:** *„Also, die App hat sicher ihre Stärken — nur die Bedienung, ehrlich gesagt, die ist noch nicht ausgereift, oder sagen wir: verbesserungswürdig.“* — Einräumung + Reformulierung.',
-        '**Mögliche Lösung:** *„Wir sind, na ja, nicht ganz im Budget geblieben — beziehungsweise, um ehrlich zu sein, deutlich darüber.“* — Understatement + Selbstkorrektur nach *beziehungsweise*.',
-        '**Mögliche Lösung:** *„Da bin ich, offen gestanden, nicht ganz bei dir — im Grunde sehe ich es fast umgekehrt.“* — abgeschwächter Widerspruch statt frontalem *nein*.\nGültig ist jede Variante, die die Kernaussage bewahrt und sie hörbar abfedert — genau diese Verpackungen musst du in der Prüfung rückwärts auspacken.',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Die Marker des gesprochenen Deutsch im Satz',
+      items: [
+        { text: 'Erst durch eine kurze **Reformulierung** wurde klar, dass der Gast die Reform nicht ablehnt, sondern nur ihr Tempo kritisiert.', gl: '— *durch Reformulierung präzisieren*' },
+        { text: 'Die Moderatorin ließ ihn ausreden, **hakte** dann aber **nach**: „Heißt das, Sie würden das Gesetz stoppen?“', gl: '— *nachhaken*: gezielt nachfragen' },
+        { text: 'Mit dem **Einschub** über seine Studienzeit **schweifte** der Forscher weit vom Thema **ab**.', gl: '— *vom Thema abschweifen*' },
+        { text: 'Anfangs sprach sie von einem Durchbruch, **schwächte** diese Einschätzung später aber deutlich **ab**.', gl: '— *eine Aussage nachträglich abschwächen*' },
+        { text: 'Auf die **Suggestivfrage** ging die Ministerin nicht ein; sie **deutete** lediglich **an**, dass es Gespräche gebe.', gl: '— *andeuten* statt klar sagen' },
+        { text: '**Im Grunde** hat der Kritiker recht — ob seine Lösung praktikabel ist, sei **dahingestellt**.', gl: '— Zustimmung mit Hintertür' },
       ],
     },
 

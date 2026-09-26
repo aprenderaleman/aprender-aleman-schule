@@ -111,7 +111,7 @@ export default {
         { text: 'Die Genschere eröffnet **Heilungschancen bei Erbkrankheiten** — zugleich wären Eingriffe in die Keimbahn **unumkehrbar** und beträfen kommende Generationen.' },
         { text: 'Tierversuche sind in Deutschland **streng genehmigungspflichtig**; nach dem 3R-Prinzip sollen sie ersetzt, verringert und verbessert werden.' },
         { text: 'Dass die EU Tierversuche für Kosmetik verboten hat, **belegt**, dass ethische Grenzziehungen die Forschung nicht lähmen müssen.' },
-        { text: 'Ein pauschales Verbot **würde der Komplexität des Problems ebenso wenig gerecht wie eine pauschale Freigabe** — es kommt auf Zweck, Auflagen und Alternativen an.', gl: '— la doble negación equilibrada: fórmula estrella para no tomar partido' },
+        { text: 'Ein pauschales Verbot **würde der Komplexität des Problems ebenso wenig gerecht wie eine pauschale Freigabe** — es kommt auf Zweck, Auflagen und Alternativen an.', gl: '— *ebenso wenig … wie*: rechaza por igual los dos extremos, fórmula estrella para no tomar partido' },
       ],
     },
     {
@@ -132,7 +132,7 @@ export default {
       items: [
         { text: 'Die Daten **belegen** einen Zusammenhang, **beweisen** aber keine Ursache — Korrelation ist keine Kausalität.' },
         { text: 'Neuere Studien **legen nahe**, dass die Wirkung überschätzt wurde; die ursprüngliche Hypothese gilt inzwischen als **widerlegt**.', gl: '— *nahelegen*: sugerir (los datos), más débil que *belegen*' },
-        { text: 'Einzelne Befunde **stellen das Modell infrage**, ohne es schon zu **entkräften**.' },
+        { text: 'Einzelne Befunde **stellen das Modell infrage**, ohne es schon zu **widerlegen**.' },
       ],
     },
 
@@ -172,48 +172,32 @@ export default {
 
     { type: 'rule' },
 
-    // ── 6. Übungen ────────────────────────────────────────────────
+    // ── 6. Modelltext · Mehr Beispiele ────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Wortschatz & Kollokationen',
-      frage: 'Belegen, beweisen, widerlegen, nahelegen oder infrage stellen? Ergänze das präziseste Verb in der richtigen Form.',
-      aufgaben: [
-        'Die Messergebnisse ______ die Hypothese eindeutig — sie ist damit vom Tisch.',
-        'Mehrere Studien ______, dass ein Zusammenhang bestehen könnte; sicher ist das aber nicht.',
-        'Der Skandal um gefälschte Daten ______ die Glaubwürdigkeit des gesamten Fachgebiets ______.',
-        'Mit Laborexperimenten lässt sich die These zwar ______, ein mathematischer Beweis ist das jedoch nicht.',
-        'Ein einziges Gegenbeispiel genügt, um eine Allaussage zu ______.',
+      type: 'modell',
+      eyebrow: 'Modelltext — der ethische Dreischritt am Beispiel Tierversuche',
+      thema: 'Sollten Tierversuche in der Grundlagenforschung weiterhin erlaubt sein? Der Absatz durchläuft Nutzen, Risiko und Alternativen und endet mit einer bedingten Stellungnahme.',
+      absaetze: [
+        'Der Nutzen von Tierversuchen liegt in Erkenntnissen, die sich derzeit weder an Zellkulturen noch am Computer vollständig gewinnen lassen — von der Krebs- bis zur Impfstoffforschung. Dem steht das Leid empfindungsfähiger Tiere gegenüber, zumal die Übertragbarkeit der Ergebnisse auf den Menschen begrenzt ist. Alternativen wie Organchips und Simulationen sind vielversprechend, ersetzen den Tierversuch aber erst in Teilbereichen.',
+        'Vertretbar erscheint mir die Fortführung daher nur unter drei Bedingungen: strenge Genehmigungspflicht im Einzelfall, konsequente Anwendung des 3R-Prinzips und eine massive Förderung der Alternativmethoden — mit dem erklärten Ziel des Ausstiegs.',
       ],
-      loesungen: [
-        '… **widerlegen** die Hypothese eindeutig. (refutada = eliminada)',
-        '… **legen nahe**, dass … (sugieren: el grado más débil de certeza)',
-        '… **stellt** die Glaubwürdigkeit … **infrage**. (*etwas infrage stellen*)',
-        '… lässt sich die These zwar **belegen** … ~~belegen = respaldar con datos; beweisen = demostrar de forma concluyente. En ciencias empíricas casi siempre belegen.~~',
-        '… um eine Allaussage zu **widerlegen**.',
+      annotationen: [
+        { tag: 'Dreischritt', text: 'Nutzen (*liegt in …*) → Risiko (*dem steht … gegenüber, zumal …*) → Alternativen (*sind vielversprechend, ersetzen … aber erst …*) → bedingte Stellungnahme (*vertretbar nur unter … Bedingungen*).' },
+        { tag: 'Position', text: 'Eine strengere oder liberalere Gewichtung ist ebenso vertretbar — vorausgesetzt, alle drei Schritte kommen vor.' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Von B2 zu C1',
-      frage: 'Hebe die Sätze mit dem Kernwortschatz und der Reservesprache dieser Lektion auf C1-Niveau.',
-      aufgaben: [
-        'Der Staat gibt viel Geld für Forschung aus. Das ist gut, weil man später neue Sachen erfindet.',
-        'Viele Leute sind gegen Tierversuche, aber Forscher sagen, sie brauchen sie noch.',
-        'Manche Menschen glauben der Wissenschaft nicht mehr.',
-        'Gentechnik kann Krankheiten heilen, aber sie ist auch gefährlich.',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Kernwortschatz im Zusammenhang',
+      items: [
+        { text: 'Kürzungen bei der **Forschungsförderung** treffen zuerst die **Grundlagenforschung**, weil sich ihr Nutzen nicht in Quartalszahlen ausdrücken lässt.' },
+        { text: 'Die Ergebnisse der **angewandten Forschung** fließen oft direkt in marktfähige Produkte ein — ein Argument, mit dem sich öffentliche Mittel leichter rechtfertigen lassen.' },
+        { text: 'Bevor der Ausschuss entscheidet, will er ein unabhängiges **Gutachten** einholen, das Chancen und Risiken des **Eingriffs** gegeneinander abwägt.', gl: '— *ein Gutachten einholen*: solicitar un dictamen' },
+        { text: 'Solange die langfristige Unbedenklichkeit der **Gentechnik** nicht **belegt** ist, bleibt jeder Eingriff in die Keimbahn ethisch hochumstritten.' },
+        { text: 'Ein einziger manipulierter Datensatz kann die **Glaubwürdigkeit** eines ganzen Instituts beschädigen — und der **Skepsis** gegenüber der Forschung neue Nahrung geben.', gl: '— *einer Sache Nahrung geben*: alimentar (una sospecha, un temor)' },
+        { text: 'Gute **Wissenschaftskommunikation** erklärt nicht nur, welche Hypothesen **widerlegt** wurden, sondern auch, warum das ein Fortschritt ist.' },
       ],
-      loesungen: [
-        '**Dass Deutschland über drei Prozent seiner Wirtschaftsleistung in Forschung investiert, zahlt sich langfristig aus: Aus zweckfreier Grundlagenforschung sind Durchbrüche wie der Laser hervorgegangen.**',
-        '**Während Tierschützer ein rasches Verbot fordern, verweist die Forschung darauf, dass Tierversuche in Teilen der Medikamentenentwicklung bislang unersetzlich seien — Konsens besteht immerhin über das 3R-Prinzip.** ~~„seien“: Konjunktiv I — refieres la postura de la ciencia sin afirmarla tú.~~',
-        '**Einer lautstarken Minderheit gilt die Wissenschaft als unglaubwürdig — den Umfragen zufolge ist das Grundvertrauen der Bevölkerung jedoch bemerkenswert stabil.**',
-        '**Die Gentechnik eröffnet Heilungschancen bei Erbkrankheiten, wirft aber zugleich die Frage auf, wie sich unumkehrbare Eingriffe ins Erbgut verantworten lassen.**',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Wende den ethischen Dreischritt (Nutzen — Risiko — Alternativen) schriftlich an: ein Absatz (90-110 Wörter) zur Frage **„Sollten Tierversuche in der Grundlagenforschung weiterhin erlaubt sein?“** Ende mit einer bedingten Stellungnahme (*vertretbar erscheint mir … nur, wenn …*).',
-      loesung: '**Mögliche Lösung** (auch eine strengere oder liberalere Gewichtung ist vertretbar, solange alle drei Schritte vorkommen):\n*Der Nutzen von Tierversuchen liegt in Erkenntnissen, die sich derzeit weder an Zellkulturen noch am Computer vollständig gewinnen lassen — von der Krebs- bis zur Impfstoffforschung. Dem steht das Leid empfindungsfähiger Tiere gegenüber, zumal die Übertragbarkeit der Ergebnisse auf den Menschen begrenzt ist. Alternativen wie Organchips und Simulationen sind vielversprechend, ersetzen den Tierversuch aber erst in Teilbereichen. Vertretbar erscheint mir die Fortführung daher nur unter drei Bedingungen: strenge Genehmigungspflicht im Einzelfall, konsequente Anwendung des 3R-Prinzips und eine massive Förderung der Alternativmethoden — mit dem erklärten Ziel des Ausstiegs.*',
     },
 
     { type: 'rule' },

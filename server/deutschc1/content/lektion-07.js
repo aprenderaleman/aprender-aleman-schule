@@ -158,53 +158,30 @@ export default {
 
     { type: 'rule' },
 
-    // ── 6. Übungen ────────────────────────────────────────────────
+    // ── 6. Mehr Beispiele ─────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Erkennen',
-      frage: 'Markiere das Partizipialattribut, nenne sein Bezugsnomen und bestimme den Typ (P I, P II passiv, P II aktiv-vollzogen, Gerundivum).',
-      aufgaben: [
-        'Die im Bericht genannten Zahlen stammen aus dem Vorjahr.',
-        'Die noch zu klärenden Fragen betreffen vor allem die Finanzierung.',
-        'Der seit Monaten andauernde Streik legt den Verkehr lahm.',
-        'Die aus dem Ausland zurückgekehrten Fachkräfte finden schnell Arbeit.',
-        'Nach geltendem Recht ist dieses Vorgehen zulässig.',
-      ],
-      loesungen: [
-        '*im Bericht genannten* → **Zahlen**; **P II passiv**: die Zahlen, die im Bericht genannt werden.',
-        '*noch zu klärenden* → **Fragen**; **Gerundivum**: die Fragen, die noch geklärt werden müssen.',
-        '*seit Monaten andauernde* → **Streik**; **P I**: der Streik, der seit Monaten andauert.',
-        '*aus dem Ausland zurückgekehrten* → **Fachkräfte**; **P II aktiv-vollzogen**: die Fachkräfte, die zurückgekehrt sind (*zurückkehren* bildet das Perfekt mit *sein*).',
-        '*geltendem* → **Recht**; **P I**, lexikalisiert: das Recht, das gilt.',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Kernwortschatz in der Klammer',
+      items: [
+        { text: 'Die **vorliegende**, von drei Hochschulen gemeinsam durchgeführte Studie **widerlegt** eine lange gültige Annahme.', gl: '— lexikalisiertes Partizip + erweitertes Attribut, durch Komma getrennt' },
+        { text: 'Nach **geltendem** Recht müssen die **betreffenden** Personen vorab schriftlich informiert werden.' },
+        { text: 'Die im Bericht **bereits erwähnten** Risiken werden in der **anstehenden** Sitzung erneut erörtert.', gl: '= die Risiken, die im Bericht bereits erwähnt wurden' },
+        { text: 'Eine **kürzlich veröffentlichte** Untersuchung stützt die **höchst umstrittene** These nur teilweise.' },
+        { text: 'Angesichts des **zunehmenden** Fachkräftemangels ergreifen viele Betriebe **entsprechende** Maßnahmen.', gl: '— *zunehmend*: nie *zugenommen* als Attribut' },
+        { text: 'Die vor der **bevorstehenden** Prüfung **noch zu wiederholenden** Kapitel stehen im Lernplan.', gl: '— Gerundivum: die Kapitel, die noch wiederholt werden müssen' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Umformen',
-      frage: 'Aufgaben 1-3: Löse das Attribut in einen Relativsatz auf. Aufgaben 4-6: Baue den Relativsatz zum Partizipialattribut um.',
-      aufgaben: [
-        'Die von der Regierung angekündigten Steuersenkungen bleiben aus.',
-        'Die auf dem Kongress diskutierten Ergebnisse werden bald veröffentlicht.',
-        'Die dringend zu sanierenden Schulen stehen auf einer Prioritätenliste.',
-        'Der Vortrag, der gestern von einer bekannten Klimaforscherin gehalten wurde, war ausgebucht.',
-        'Die Kosten, die ständig steigen, gefährden das Projekt.',
-        'Die Anträge, die bis Monatsende bearbeitet werden müssen, stapeln sich.',
+      type: 'beispiele',
+      kicker: 'Auflösen',
+      titel: 'Vom Attribut zum Relativsatz',
+      items: [
+        { text: 'die **von der Stadt geplante** Umgehungsstraße', gl: '= die Umgehungsstraße, die von der Stadt geplant wird' },
+        { text: 'die **seit Jahren in Berlin lebenden** Künstlerinnen', gl: '= die Künstlerinnen, die seit Jahren in Berlin leben' },
+        { text: 'das **an zu hohen Kosten gescheiterte** Bauvorhaben', gl: '= das Bauvorhaben, das an zu hohen Kosten gescheitert ist — aktiv' },
+        { text: 'die **nicht zu vernachlässigenden** Nebenwirkungen', gl: '= die Nebenwirkungen, die nicht vernachlässigt werden dürfen' },
       ],
-      loesungen: [
-        'Die Steuersenkungen, **die von der Regierung angekündigt wurden**, bleiben aus.',
-        'Die Ergebnisse, **die auf dem Kongress diskutiert wurden**, werden bald veröffentlicht.',
-        'Die Schulen, **die dringend saniert werden müssen**, stehen auf einer Prioritätenliste. ~~El Gerundivum esconde un „deber ser“: no lo traduzcas como simple pasiva.~~',
-        'Der **gestern von einer bekannten Klimaforscherin gehaltene** Vortrag war ausgebucht.',
-        'Die **ständig steigenden** Kosten gefährden das Projekt.',
-        'Die **bis Monatsende zu bearbeitenden** Anträge stapeln sich.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Verbinde jedes Satzpaar zu **einem** Satz mit erweitertem Partizipialattribut. Entscheide selbst, welcher Satz zum Attribut wird.',
-      aufgabe: '*1. Eine Studie wurde letzte Woche veröffentlicht. Die Studie sorgt für Diskussionen.*\n*2. Immer mehr Beschäftigte arbeiten im Homeoffice. Diese Beschäftigten wünschen sich klarere Regeln.*\n*3. Mehrere Probleme müssen noch gelöst werden. Die Probleme betreffen den Datenschutz.*',
-      loesung: '**Mögliche Lösung** (Wortstellung in der Klammer kann leicht variieren):\n*1. Die **letzte Woche veröffentlichte** Studie sorgt für Diskussionen.*\n*2. Die **im Homeoffice arbeitenden** Beschäftigten wünschen sich klarere Regeln.*\n*3. Die **noch zu lösenden** Probleme betreffen den Datenschutz.*\nGültig ist auch die Gegenrichtung mit Relativsatz — aber die Aufgabe verlangt das Attribut. Prüfe zum Schluss immer die **Adjektivendung** des Partizips: Sie richtet sich nach Artikel, Genus und Kasus des Bezugsnomens.',
     },
 
     { type: 'rule' },

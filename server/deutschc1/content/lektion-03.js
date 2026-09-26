@@ -7,7 +7,7 @@
 //   3. Kernwortschatz  10-14 palabras con artículo, Kollokation y significado
 //   4. Erklärung       regla clara + contraste; varios bloques (prose/steps/tabelle)
 //   5. Beispiele       abundantes, agrupados por función, con glosa mínima
-//   6. Übungen         3 de dificultad creciente: erkennen → umformen → produzieren
+//   6. Mehr Beispiele  + Modelltext; la práctica vive en el Übungsheft (heft-03.js)
 //   7. Prüfungsbezug   mini-tarea con formato real del examen + Prüfungstipp
 //   8. Abschluss       Zusammenfassung (tabelle) + Selbstcheck + Ausblick
 //
@@ -200,53 +200,33 @@ export default {
 
     { type: 'rule' },
 
-    // ── 6. Übungen ────────────────────────────────────────────────
+    // ── 6. Mehr Beispiele & Modelltext (Übungen → Übungsheft) ────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Erkennen',
-      frage: 'Welche Sätze stehen im Nominalstil? Markiere die Nominalphrase und nenne den Nebensatz, der dahintersteckt.',
-      aufgaben: [
-        'Nach Abschluss der Verhandlungen wurde der Vertrag unterzeichnet.',
-        'Obwohl das Wetter schlecht war, fand das Konzert statt.',
-        'Bei Nichteinhaltung der Frist verfällt der Anspruch.',
-        'Die Regierung hat beschlossen, die Steuern zu senken.',
-        'Durch den Einsatz moderner Technik konnten die Kosten gesenkt werden.',
-      ],
-      loesungen: [
-        '**Nominal** — *Nach Abschluss der Verhandlungen* = *Nachdem die Verhandlungen abgeschlossen worden waren*.',
-        '**Verbal** — Nebensatz mit *obwohl*. Nominal wäre: *Trotz des schlechten Wetters*.',
-        '**Nominal** — *Bei Nichteinhaltung der Frist* = *Wenn die Frist nicht eingehalten wird*. ~~Nota la negación incorporada al sustantivo: *Nicht* + *Einhaltung*.~~',
-        '**Verbal** — Infinitivsatz. Nominal wäre: *Die Regierung hat die Senkung der Steuern beschlossen*.',
-        '**Nominal** — *Durch den Einsatz moderner Technik* = *Indem man moderne Technik einsetzte*.',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Der Kernwortschatz in dichten Sätzen',
+      items: [
+        { text: '**Nach Beendigung** der Bauarbeiten wird die Brücke wieder für den Verkehr freigegeben.', gl: '— nachdem … beendet sind → nach Beendigung + Gen.' },
+        { text: 'Die **Durchführung** der Umfrage übernimmt ein externes Institut.', gl: '— eine Umfrage durchführen → die Durchführung der Umfrage' },
+        { text: 'Seit der **Einführung** des neuen Fahrplans ist ein spürbarer **Rückgang** der Verspätungen zu beobachten.', gl: '— Subjekt des Verbs → Genitiv: *die Verspätungen gehen zurück*' },
+        { text: '**Ungeachtet** der **Zunahme** digitaler Angebote bleibt die **Teilnahme an** Präsenzkursen hoch.', gl: '— drei Nominalisierungen: an der Grenze dessen, was ein Satz verträgt' },
+        { text: 'Die **Inanspruchnahme** der Beratung ist für Studierende kostenlos.', gl: '— eine Leistung in Anspruch nehmen → die Inanspruchnahme einer Leistung' },
+        { text: '**Bei Ihrer Ankunft** erhalten Sie die Unterlagen; **bei Vorliegen** aller Nachweise wird der Ausweis sofort ausgestellt.', gl: '— wenn Sie ankommen / wenn alle Nachweise vorliegen' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Umformen',
-      frage: 'Forme den Nebensatz in eine Nominalphrase um. Achte auf Präposition, Kasus und Genitiv.',
-      aufgaben: [
-        'Weil das Wetter schlecht war, wurde das Spiel abgesagt.',
-        'Nachdem die Sitzung beendet war, gingen alle nach Hause.',
-        'Wenn Sie Fragen haben, wenden Sie sich an die Rezeption.',
-        'Obwohl die Kosten hoch sind, wird das Projekt fortgesetzt.',
-        'Indem man die Abläufe digitalisiert, spart die Firma Zeit.',
-        'Damit die Mitarbeiter geschult werden, wurde ein Kurs eingerichtet.',
+      type: 'modell',
+      eyebrow: 'Modelltext — dosierter Nominalstil',
+      thema: 'Ein Absatz, zwei Nominalphrasen: vom Verbalstil zum ausgewogenen Schriftdeutsch',
+      woerter: 'ca. 45 Wörter',
+      absaetze: [
+        '**Verbal:** *Nachdem die Stadt ein neues Verkehrskonzept eingeführt hatte, nahm der Autoverkehr im Zentrum deutlich ab. Obwohl einige Händler protestierten, blieb die Stadtverwaltung bei ihrer Entscheidung. Indem sie die Parkgebühren erhöhte, finanzierte sie zusätzliche Buslinien.*',
+        '**Dosiert nominal:** *Nach der Einführung eines neuen Verkehrskonzepts nahm der Autoverkehr im Zentrum deutlich ab. Obwohl einige Händler protestierten, blieb die Stadtverwaltung bei ihrer Entscheidung. Durch die Erhöhung der Parkgebühren finanzierte sie zusätzliche Buslinien.*',
       ],
-      loesungen: [
-        '**Wegen des schlechten Wetters** wurde das Spiel abgesagt.',
-        '**Nach Beendigung der Sitzung** gingen alle nach Hause.',
-        '**Bei Fragen** wenden Sie sich an die Rezeption. ~~Observa cuánto se acorta: todo el Nebensatz cabe en dos palabras.~~',
-        '**Trotz der hohen Kosten** wird das Projekt fortgesetzt.',
-        '**Durch die Digitalisierung der Abläufe** spart die Firma Zeit.',
-        '**Zur Schulung der Mitarbeiter** wurde ein Kurs eingerichtet.',
+      annotationen: [
+        { tag: 'Verdichtung', text: '*nachdem … eingeführt hatte* → *nach der Einführung* + Gen.; *indem … erhöhte* → *durch die Erhöhung* + Gen. Das Objekt wandert jeweils in den Genitiv.' },
+        { tag: 'Dosierung', text: 'Der mittlere Satz bleibt bewusst verbal: Drei Nominalphrasen hintereinander würden den Absatz schwerfällig machen. Genau diese Balance bewertet das Kriterium „Strukturen“.' },
       ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Schreibe den folgenden Absatz so um, dass er **genau zwei** Nominalphrasen enthält — nicht mehr. Entscheide selbst, welche Stellen sich eignen.',
-      aufgabe: '*Nachdem die Stadt ein neues Verkehrskonzept eingeführt hatte, nahm der Autoverkehr im Zentrum deutlich ab. Obwohl einige Händler protestierten, blieb die Stadtverwaltung bei ihrer Entscheidung. Indem sie die Parkgebühren erhöhte, finanzierte sie zusätzliche Buslinien.*',
-      loesung: '**Mögliche Lösung** (andere Kombinationen sind richtig, solange es genau zwei Nominalphrasen sind):\n*Nach der Einführung eines neuen Verkehrskonzepts nahm der Autoverkehr im Zentrum deutlich ab. Obwohl einige Händler protestierten, blieb die Stadtverwaltung bei ihrer Entscheidung. Durch die Erhöhung der Parkgebühren finanzierte sie zusätzliche Buslinien.*\n~~El segundo Satz se queda verbal a propósito: tres nominalizaciones seguidas serían pesadas. Esa dosificación es exactamente lo que evalúa el criterio „Strukturen“.~~',
     },
 
     { type: 'rule' },

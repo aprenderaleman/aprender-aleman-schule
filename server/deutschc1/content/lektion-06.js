@@ -165,53 +165,43 @@ export default {
 
     { type: 'rule' },
 
-    // ── 6. Übungen ────────────────────────────────────────────────
+    // ── 6. Mehr Beispiele ─────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Erkennen',
-      frage: 'Bestimme Funktion (Bedingung, Wunsch, Vergleich, Höflichkeit, beinahe) und Zeitstufe (Gegenwart oder Vergangenheit).',
-      aufgaben: [
-        'An Ihrer Stelle würde ich das Angebot annehmen.',
-        'Beinahe wäre die Rede ins Wasser gefallen.',
-        'Er verhält sich, als ob ihn das alles nichts anginge.',
-        'Hätten wir doch auf die Experten gehört!',
-        'Dürfte ich Sie kurz unterbrechen?',
-      ],
-      loesungen: [
-        '**Bedingung, Gegenwart** — die Bedingung steckt in *an Ihrer Stelle* (= wenn ich Sie wäre).',
-        '**beinahe, Vergangenheit** — *wäre gefallen*: Es ist gerade noch gut gegangen.',
-        '**Vergleich, Gegenwart** — *als ob + anginge* (K II von *angehen*): Er tut nur so.',
-        '**Wunsch, Vergangenheit** — Inversion + *doch*: nicht mehr zu ändern, daher Bedauern.',
-        '**Höflichkeit, Gegenwart** — *dürfte* macht die Unterbrechung diplomatisch.',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Kernwortschatz im Konjunktiv II',
+      items: [
+        { text: '**Angenommen**, die Verhandlungen **würden** endgültig **scheitern** — **wäre** die Stadt auf diesen Fall vorbereitet?', gl: '— *angenommen* als Konjunktiv-Auslöser' },
+        { text: '**Hätte** er die Frist nicht **versäumt**, **wäre** sein Antrag längst bewilligt.', gl: '— Vergangenheit im wenn-Teil, Gegenwart im Hauptsatz: die Folge dauert an' },
+        { text: 'Ich **bedaure** sehr, dass wir diese **Gelegenheit** nicht genutzt haben — sie **wäre** einmalig gewesen.' },
+        { text: '**Unter der Voraussetzung**, dass alle zustimmen, **könnten** wir schon im Mai beginnen; **andernfalls** verschiebt sich der Start.', gl: '— *andernfalls* leitet die reale Alternative ein' },
+        { text: '**Im Rückblick** **hätte** man die Risiken nüchterner einschätzen **müssen**.', gl: '— Rückblick-Kritik mit Modalverb' },
+        { text: '**An Ihrer Stelle** **würde** ich den Vertrag **gegebenenfalls** noch einmal juristisch prüfen lassen.' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Umformen',
-      frage: 'Mache aus der realen Aussage einen irrealen Satz. Die Klammer sagt dir, welche Form gefragt ist.',
-      aufgaben: [
-        'Ich habe kein Auto, deshalb fahre ich mit dem Zug. (Bedingung, Gegenwart)',
-        'Man hat die Warnungen ignoriert, deshalb kam es zum Datenleck. (Bedingung, Vergangenheit)',
-        'Er ist kein Fachmann, aber er redet so. (Vergleich mit als ob)',
-        'Die Behörde hat die Anwohner nicht informiert. (Kritik im Rückblick mit Modalverb)',
-        'Ich habe die Gelegenheit verpasst. Das bedaure ich. (Wunschsatz)',
-        'Geben Sie mir bitte Bescheid. (höfliche Bitte mit Konjunktiv II)',
-      ],
-      loesungen: [
-        'Wenn ich ein Auto **hätte**, **würde** ich nicht mit dem Zug **fahren**. / …, **führe** ich nicht mit dem Zug.',
-        '**Hätte** man die Warnungen nicht **ignoriert**, **wäre** es nicht zum Datenleck **gekommen**.',
-        'Er redet, **als ob** er ein Fachmann **wäre**. / Er redet, **als wäre** er ein Fachmann.',
-        'Die Behörde **hätte** die Anwohner **informieren müssen**. ~~La forma estrella para criticar en la Diskussion: „habría que haber…“ en una sola construcción.~~',
-        '**Hätte** ich die Gelegenheit **doch nur genutzt**! / Wenn ich die Gelegenheit **doch nicht verpasst hätte**!',
-        '**Würden** Sie mir bitte Bescheid **geben**? / **Könnten** Sie mir Bescheid geben?',
+      type: 'beispiele',
+      kicker: 'Formelle Nachricht',
+      titel: 'Höflich, aber bestimmt',
+      items: [
+        { text: 'Ich **wäre** Ihnen dankbar, wenn Sie mir den Eingang meiner Unterlagen kurz **bestätigen könnten**.' },
+        { text: '**Wäre** es möglich, den Termin um eine Woche zu verschieben?' },
+        { text: 'Eine frühere Benachrichtigung **hätte** uns viel Aufwand erspart.', gl: '— Kritik, diplomatisch verpackt' },
+        { text: 'Diese Lösung **dürfte** für beide Seiten akzeptabel sein.', gl: '— *dürfte* = vorsichtige Vermutung' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Thema: **„Was wäre, wenn es kein Smartphone gäbe?“** Schreibe vier Sätze: eine irreale Bedingung in der Gegenwart, eine in der Vergangenheit, einen Vergleich mit *als ob* und eine vorsichtige Einschätzung mit *dürfte*.',
-      aufgabe: 'Nutze mindestens zwei eigene Konjunktivformen (*gäbe, wäre, hätte, käme, müsste* …) — nicht nur *würde*.',
-      loesung: '**Mögliche Lösung** (Inhalt frei, die vier Funktionen müssen erkennbar sein):\n*Gäbe es kein Smartphone, **müssten** wir uns wieder feste Verabredungen merken — und **würden** vermutlich pünktlicher sein. Ohne Smartphones **hätten** sich viele Freundschaften über große Entfernungen nie **entwickelt**. Manche Menschen behandeln ihr Gerät, **als ob** es ein Körperteil **wäre**. Ein Alltag ganz ohne Smartphone **dürfte** für die meisten von uns kaum noch vorstellbar sein.*\nGültig sind alle inhaltlichen Varianten; prüfe nur: wenn-Satz oder Inversion? *hätte/wäre* + Partizip II für die Vergangenheit? *als ob* mit Verb am Ende?',
+      type: 'modell',
+      eyebrow: 'Modelltext — vier Funktionen in vier Sätzen',
+      thema: 'Was wäre, wenn es kein Smartphone gäbe?',
+      woerter: 'ca. 60 Wörter',
+      absaetze: [
+        '*Gäbe es kein Smartphone, **müssten** wir uns wieder feste Verabredungen merken — und **würden** vermutlich pünktlicher sein. Ohne Smartphones **hätten** sich viele Freundschaften über große Entfernungen nie **entwickelt**. Manche Menschen behandeln ihr Gerät, **als ob** es ein Körperteil **wäre**. Ein Alltag ganz ohne Smartphone **dürfte** für die meisten von uns kaum noch vorstellbar sein.*',
+      ],
+      annotationen: [
+        { tag: 'Funktionen', text: 'Irreale Bedingung in der Gegenwart mit Inversion (*Gäbe es …*), irreale Bedingung in der Vergangenheit (*hätten sich … entwickelt*, die Bedingung steckt in *ohne Smartphones*), irrealer Vergleich (*als ob … wäre*), vorsichtige Einschätzung (*dürfte*).' },
+        { tag: 'Formen', text: 'Eigene Konjunktivformen (*gäbe, müssten, hätten, wäre, dürfte*) statt durchgehend *würde* — genau diese Bandbreite macht den Text zu C1.' },
+      ],
     },
 
     { type: 'rule' },

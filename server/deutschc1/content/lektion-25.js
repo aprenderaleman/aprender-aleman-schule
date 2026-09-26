@@ -4,7 +4,7 @@
 // Struktur-Steps, Redemittel-Gruppen und das kommentierte Musterbeispiel
 // „Beschwerde über einen Sprachkurs". Neu: Kernwortschatz des formellen
 // Registers, die vier Nachrichtentypen, Konjunktiv II der Höflichkeit,
-// drei Übungen und Prüfungsbezug mit kompletter Aufgabe + Mögliche Lösung.
+// Modelltext (Entschuldigung), Mehr Beispiele und Prüfungsbezug mit kompletter Aufgabe + Mögliche Lösung.
 
 export default {
   spec: ['Bloque 2', 'Prüfungsstrategie', 'Niveau C1', 'Prüfungsrelevanz: Schreiben Teil 2 (~120 Wörter · 30 Min)'],
@@ -189,49 +189,35 @@ export default {
 
     { type: 'rule' },
 
-    // ── 6. Übungen ────────────────────────────────────────────────
+    // ── 6. Modelltext · Mehr Beispiele ────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Erkennen',
-      frage: 'Welcher Nachrichtentyp liegt jeweils vor — Beschwerde, Anfrage, Bitte oder Entschuldigung? Woran erkennst du es?',
-      aufgaben: [
-        '„Könnten Sie mir bitte mitteilen, ob der Aufbaukurs auch online angeboten wird und welche Kosten dafür anfallen?“',
-        '„Leider muss ich feststellen, dass die zugesagte Reparatur auch nach drei Wochen nicht erfolgt ist.“',
-        '„Ich bedaure sehr, dass ich die Unterlagen nicht fristgerecht eingereicht habe, und sende sie Ihnen anbei nach.“',
-        '„Ich wäre Ihnen außerordentlich dankbar, wenn Sie mir eine Verlängerung der Abgabefrist um eine Woche gewähren könnten.“',
+      type: 'modell',
+      eyebrow: 'Modelltext — die Entschuldigung',
+      thema: 'Absage eines verbindlich zugesagten Workshops an die Organisatorin, Frau Krüger (ca. 90 Wörter): Anrede, Anlass, Entschuldigung mit Grund, Lösungsvorschlag, Schluss.',
+      woerter: 'ca. 90 Wörter',
+      absaetze: [
+        'Sehr geehrte Frau Krüger,',
+        'ich bedaure sehr, Ihnen mitteilen zu müssen, dass ich am Workshop zur Projektplanung am 14. November nicht teilnehmen kann, obwohl ich bereits fest zugesagt hatte. Bitte entschuldigen Sie die kurzfristige Absage: Mein Vorgesetzter hat mich für genau diese Woche unerwartet auf eine Dienstreise geschickt, die sich leider nicht verschieben lässt.',
+        'Sehr gern würde ich den Workshop beim nächsten Termin nachholen. Ich wäre Ihnen sehr dankbar, wenn Sie mich dafür vormerken und mir den neuen Termin mitteilen könnten.',
+        'Vielen Dank für Ihr Verständnis.',
+        'Mit freundlichen Grüßen\nDaniel Ortega',
       ],
-      loesungen: [
-        '**Anfrage** — es werden Informationen erfragt (*mitteilen, ob…*); neutraler Ton, keine Kritik.',
-        '**Beschwerde** — Signalformel *leider muss ich feststellen* + benannter Mangel mit Zeitangabe.',
-        '**Entschuldigung** — Fehler wird eingeräumt (*ich bedaure, dass ich…*) und eine Lösung gleich mitgeliefert.',
-        '**Bitte** — maximale Höflichkeitsstufe (*wäre … dankbar, wenn … könnten*), weil um eine Ausnahme gebeten wird.',
+      annotationen: [
+        { tag: 'Aufbau', text: 'Entschuldigung + Grund + Lösungsvorschlag. ~~Una Entschuldigung sin propuesta de solución queda coja.~~' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Umformen',
-      frage: 'Mache aus den zu direkten Sätzen formell-höfliche Varianten mit Konjunktiv II. Achte auf die Verbstellung.',
-      aufgaben: [
-        'Antworten Sie mir schnell.',
-        'Ich will einen anderen Termin.',
-        'Geben Sie mir mein Geld zurück, oder ich gehe zum Anwalt.',
-        'Sagen Sie mir, wann der Kurs anfängt.',
-        'Das ist nicht mein Fehler, sondern Ihrer.',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Der Kernwortschatz im formellen Satz',
+      items: [
+        { text: 'Mit meinem **Anliegen** habe ich mich bereits zweimal an Ihre Hotline gewandt, bislang jedoch ohne Ergebnis.', gl: '— *sich wenden an*: Partizip *gewandt* (auch *gewendet*)' },
+        { text: 'Könnten Sie mir bitte mitteilen, welche Abteilung für Reklamationen **zuständig** ist?' },
+        { text: 'Ich **beanstande** die Rechnung vom 4. März, da mir zwei nicht erbrachte Leistungen berechnet wurden.', gl: '— erst der Mangel, dann die Begründung' },
+        { text: 'Da Sie mir den Umzugstermin **verbindlich** zugesagt hatten, bitte ich um **umgehende** Klärung.' },
+        { text: 'Obwohl die Garantie abgelaufen ist, wären wir bereit, Ihnen die Reparaturkosten aus **Kulanz** zu erstatten.', gl: '— *Kulanz*: Entgegenkommen ohne rechtliche Verpflichtung' },
+        { text: 'Sollte die **Rückerstattung** nicht bis zum Ende der **Frist** erfolgen, sähe ich mich gezwungen, weitere Schritte zu prüfen.', gl: '— die höfliche Eskalationsstufe im Konjunktiv II' },
       ],
-      loesungen: [
-        '*Für eine baldige Rückmeldung wäre ich Ihnen sehr dankbar.*',
-        '*Ich wäre Ihnen dankbar, wenn Sie mir einen alternativen Termin anbieten könnten.*',
-        '*Ich möchte Sie bitten, mir den Betrag zu erstatten. Andernfalls sähe ich mich gezwungen, rechtliche Schritte zu prüfen.* ~~La amenaza existe, pero viste traje: Konjunktiv II + «rechtliche Schritte prüfen».~~',
-        '*Könnten Sie mir bitte mitteilen, wann der Kurs beginnt?* — Achtung: indirekte Frage, Verb ans Ende.',
-        '*Nach meinem Verständnis liegt das Versäumnis nicht auf meiner Seite; ich bitte Sie daher, den Sachverhalt noch einmal zu prüfen.*',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Entschuldigung: Du kannst an einem verbindlich zugesagten Workshop deiner Firma nicht teilnehmen (Grund: kurzfristige Dienstreise). Schreibe die vollständige Nachricht an die Organisatorin, Frau Krüger (~90 Wörter): Anrede, Anlass, Entschuldigung mit Grund, Lösungsvorschlag, Schluss.',
-      aufgabe: 'Prüfe danach: Sie/Ihnen groß? Anrede mit Komma und klein weiter? Alle vier Inhaltspunkte drin?',
-      loesung: '**Mögliche Lösung** (ca. 90 Wörter):\n*Sehr geehrte Frau Krüger,\nich bedaure sehr, Ihnen mitteilen zu müssen, dass ich am Workshop zur Projektplanung am 14. November nicht teilnehmen kann, obwohl ich bereits fest zugesagt hatte. Bitte entschuldigen Sie die kurzfristige Absage: Mein Vorgesetzter hat mich für genau diese Woche unerwartet auf eine Dienstreise geschickt, die sich leider nicht verschieben lässt.\nSehr gern würde ich den Workshop beim nächsten Termin nachholen. Ich wäre Ihnen sehr dankbar, wenn Sie mich dafür vormerken und mir den neuen Termin mitteilen könnten.\nVielen Dank für Ihr Verständnis.\nMit freundlichen Grüßen\nDaniel Ortega*\n~~Fíjate: disculpa + causa + propuesta de solución. Una Entschuldigung sin propuesta queda coja.~~',
     },
 
     { type: 'rule' },

@@ -155,53 +155,35 @@ export default {
 
     { type: 'rule' },
 
-    // ── 6. Übungen ────────────────────────────────────────────────
+    // ── 6. Mehr Beispiele ─────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Erkennen',
-      frage: 'Bestimme für den markierten Konnektor die Wortart (Adverb, Subjunktion, Präposition) und erkläre die Verbstellung.',
-      aufgaben: [
-        'Die Zahlen sind rückläufig, **gleichwohl** investiert die Firma weiter.',
-        '**Wenngleich** der Vorschlag Charme hat, ist er nicht finanzierbar.',
-        '**Ungeachtet** aller Proteste wurde das Gesetz verabschiedet.',
-        'Der Markt wächst, **demnach** lohnt sich der Einstieg.',
-        'Wir verlängern den Vertrag, **sofern** beide Seiten zustimmen.',
-      ],
-      loesungen: [
-        '**Adverb** — besetzt Position 1, danach sofort das konjugierte Verb: *gleichwohl investiert …* (Inversion).',
-        '**Subjunktion** — leitet einen Nebensatz ein, das Verb steht am Ende: *… Charme hat*.',
-        '**Präposition** — kein Satz, sondern Nominalphrase im Genitiv: *aller Proteste*. Die Verbstellung des Hauptsatzes bleibt unberührt.',
-        '**Adverb** — Inversion: *demnach lohnt sich …*.',
-        '**Subjunktion** — Verbletztstellung: *… beide Seiten zustimmen*. ~~Ojo: «siempre que» pide subjuntivo en español; en alemán basta el indicativo con el verbo al final.~~',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Drei Syntaxklassen im Einsatz',
+      items: [
+        { text: 'Die Umfrage ist nicht repräsentativ, **gleichwohl** liefert sie wertvolle Hinweise.', gl: '— Adverb → Inversion: *liefert* sofort nach dem Konnektor' },
+        { text: 'Die Stelle wurde intern besetzt, **zumal** der Kandidat das Projekt bereits **kannte**.', gl: '— zusätzlicher Grund, Verb ans Ende' },
+        { text: '**Ungeachtet** der hohen Kosten hält die Stadt an der Sanierung fest.', gl: '— Präposition + Genitiv, kein Nebensatz' },
+        { text: 'Alle Fristen wurden eingehalten; der Antrag ist **mithin** zulässig.', gl: '— *mithin* im Mittelfeld: typisch für Gutachten und Bescheide' },
+        { text: 'Die Stadt investiert in Radwege, **wohingegen** das Umland weiter auf das Auto **setzt**.', gl: '— adversative Subjunktion; *hingegen* bliebe ohne Verbletztstellung' },
+        { text: '**So sehr** man die Absicht **auch** begrüßen **mag**, die Umsetzung überzeugt nicht.', gl: '— gehobene Konzessivformel' },
       ],
     },
+
+    { type: 'rule' },
+
+    // ── Modelltext ────────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Umformen',
-      frage: 'Ersetze den neutralen Konnektor durch die gehobene Variante in Klammern und passe die Syntax an.',
-      aufgaben: [
-        'Das Projekt ist teuer, **trotzdem** wird es fortgesetzt. *(gleichwohl)*',
-        'Die Nachfrage sinkt, **deshalb** müssen wir reagieren. *(folglich)*',
-        '**Obwohl** die Beweislage klar ist, zögert das Gericht. *(wenngleich)*',
-        'Die Jüngeren sind dafür, **aber** die Älteren lehnen ab. *(hingegen)*',
-        'Er verdient den Posten, **auch weil** er das Team seit Jahren kennt. *(zumal)*',
-        '**Obwohl es viele Warnungen gab**, fuhr er los. *(ungeachtet + Nominalphrase)*',
+      type: 'modell',
+      eyebrow: 'Modelltext — drei Konnektoren, wohldosiert',
+      thema: 'Diskussionsbeitrag: Homeoffice-Pflicht für Unternehmen?',
+      absaetze: [
+        'Für viele Beschäftigte entfallen im Homeoffice die täglichen Pendelzeiten, **folglich** steigt ihre Zufriedenheit messbar. **Wenngleich** dieser Gewinn an Lebensqualität unbestreitbar ist, leidet auf Dauer der Teamgeist. Befürworter verweisen auf das Vertrauen, das Arbeitgeber ihren Mitarbeitern entgegenbringen sollten; Kritiker **hingegen** betonen, dass sich längst nicht jede Tätigkeit digitalisieren lässt. Eine gesetzliche Pflicht griffe daher zu kurz.',
       ],
-      loesungen: [
-        'Das Projekt ist teuer, **gleichwohl wird es fortgesetzt**. — Adverb, Inversion bleibt.',
-        'Die Nachfrage sinkt, **folglich müssen wir reagieren**.',
-        '**Wenngleich die Beweislage klar ist**, zögert das Gericht. — Subjunktion, Verb ans Ende.',
-        'Die Jüngeren sind dafür, **die Älteren hingegen lehnen ab**. — *hingegen* steht elegant nach dem kontrastierten Subjekt.',
-        'Er verdient den Posten, **zumal er das Team seit Jahren kennt**.',
-        '**Ungeachtet zahlreicher Warnungen** fuhr er los. — Aus dem Nebensatz wird eine Genitivphrase (Lektion 3 lässt grüßen).',
+      annotationen: [
+        { tag: 'Syntax', text: '*folglich* (Adverb → Inversion: *steigt*), *wenngleich* (Subjunktion → Verb am Ende: *ist*), *hingegen* (Adverb nach dem kontrastierten Subjekt *Kritiker*).' },
+        { tag: 'Dosierung', text: 'Ein konzessiver, ein folgernder und ein adversativer Konnektor in vier Sätzen sind das Maximum. ~~Más sonaría artificial — y eso también resta puntos.~~' },
       ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Schreibe einen Absatz (4-5 Sätze) für einen Diskussionsbeitrag zum Thema „Homeoffice-Pflicht für Unternehmen?“. Verwende genau **drei** gehobene Konnektoren: einen konzessiven, einen folgernden und einen adversativen. Markiere sie.',
-      aufgabe: '*Stichpunkte: Pendelzeiten entfallen · Teamgeist leidet · nicht jede Tätigkeit ist digitalisierbar · Vertrauen der Arbeitgeber*',
-      loesung: '**Mögliche Lösung** (jede Kombination aus je einem konzessiven, folgernden und adversativen Konnektor ist richtig):\n*Für viele Beschäftigte entfallen im Homeoffice die täglichen Pendelzeiten, **folglich** steigt ihre Zufriedenheit messbar. **Wenngleich** dieser Gewinn an Lebensqualität unbestreitbar ist, leidet auf Dauer der Teamgeist. Befürworter verweisen auf das Vertrauen, das Arbeitgeber ihren Mitarbeitern entgegenbringen sollten; Kritiker **hingegen** betonen, dass sich längst nicht jede Tätigkeit digitalisieren lässt. Eine gesetzliche Pflicht griffe daher zu kurz.*\n~~Fíjate: tres conectores en cuatro frases es el máximo. Más sonaría artificial — y eso también resta puntos.~~',
     },
 
     { type: 'rule' },
@@ -225,7 +207,7 @@ export default {
         '{5} **Ungeachtet** — Präposition + Genitiv (*der offenen Fragen*)',
         '{6} **wenngleich** — konzessive Subjunktion: Verb *steht* am Ende',
       ],
-      kommentar: 'Strategie: Prüfe zuerst die **Verbstellung nach der Lücke**. Verb sofort dahinter → Adverb; Verb am Satzende → Subjunktion; Genitivphrase ohne Verb → Präposition. Damit scheiden meist die Hälfte der Optionen sofort aus.',
+      kommentar: 'Strategie: Prüfe zuerst die **Verbstellung nach der Lücke**. Verb sofort dahinter → Adverb; Verb am Satzende → Subjunktion; Genitivphrase ohne Verb → Präposition. Damit scheidet meist schon die Hälfte der Optionen aus.',
     },
     {
       type: 'tipp',

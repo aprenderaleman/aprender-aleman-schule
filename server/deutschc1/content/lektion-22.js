@@ -155,37 +155,49 @@ export default {
 
     { type: 'rule' },
 
-    // ── 6. Übungen ────────────────────────────────────────────────
+    // ── 6. Mehr Beispiele & Modelltexte (Übungen → Übungsheft) ───
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Erkennen',
-      frage: 'In welche Phase eines Vortrags gehört das Signal — Einleitung, Gliederungsankündigung, Hauptteil-Übergang, Beispiel/Exkurs oder Fazit?',
-      aufgaben: [
-        '„Lassen Sie mich mit einer Zahl beginnen, die mich selbst überrascht hat.“',
-        '„Ich werde erstens …, zweitens … und drittens … beleuchten.“',
-        '„Wie sich das konkret auswirkt, zeigt der Fall einer Kleinstadt in Brandenburg.“',
-        '„Kehren wir von diesem kleinen Umweg zurück zur eigentlichen Frage.“',
-        '„Was folgt aus alledem für die Praxis?“',
+      type: 'modell',
+      eyebrow: 'Transkript — eine Mini-Diskussion',
+      thema: 'Thema „KI-Werkzeuge an Hochschulen“: vier Beiträge, drei Stimmen. Lies das Transkript einmal in Echtzeit und führe für jede Person eine Positionszeile in höchstens fünf Wörtern. Wer fordert konkrete Regeln statt Verbote?',
+      absaetze: [
+        '**Prof. Berger:** „Wenn Studierende ihre Hausarbeiten von einer KI schreiben lassen, können wir die Hausarbeit als Prüfungsform beerdigen. Ich sehe das mit großer Sorge.“',
+        '**Frau Yilmaz (Studierendenvertretung):** „Die Sorge verstehe ich, nur ist das Kind längst in den Brunnen gefallen: Alle nutzen diese Werkzeuge. Statt sie zu verteufeln, sollten wir verbindlich regeln, was erlaubt ist und was gekennzeichnet werden muss.“',
+        '**Dr. Hoffmann:** „Ich gehe noch weiter: Wer künftig wissenschaftlich arbeiten will, muss diese Werkzeuge kompetent nutzen können. Wir sollten das aktiv lehren, nicht bloß dulden.“',
+        '**Prof. Berger:** „Bei aller Skepsis — dem Vorschlag verbindlicher Kennzeichnungsregeln könnte ich mich anschließen.“',
       ],
-      loesungen: [
-        '**Einleitung** — der Zahlen-Einstieg weckt Aufmerksamkeit; die These kommt erst danach.',
-        '**Gliederungsankündigung** — sofort als Drei-Punkte-Landkarte notieren.',
-        '**Beispiel** — *zeigt der Fall* kündigt die Veranschaulichung an; hier verstecken sich Detailfragen.',
-        '**Exkurs-Ende / Übergang** — der Sprecher holt den roten Faden zurück; jetzt wieder volle Aufmerksamkeit.',
-        '**Fazit** — die rhetorische Frage leitet die Schlussfolgerung ein; die letzte Aufgabe des Blatts wartet genau hier.',
+      annotationen: [
+        { tag: 'Positionszeilen', text: 'Berger: *Sorge, Prüfungsform bedroht → am Ende offen für Regeln* · Yilmaz: *Realität akzeptieren, verbindliche Regeln* · Hoffmann: *weiter: aktiv lehren*.' },
+        { tag: 'Regeln statt Verbote', text: '**Frau Yilmaz** (*„verbindlich regeln, was erlaubt ist“*). Dr. Hoffmann geht über Regeln hinaus — er will lehren, nicht nur regeln.' },
+        { tag: 'Positionswechsel', text: 'Bergers zweiter Beitrag verschiebt seine Position: Auf die Frage „Wer zeigt sich am Ende kompromissbereit?“ wäre er die Antwort. ~~Las notas se corrigen, no se tachan mentalmente.~~ ~~(En el examen sería audio.)~~' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Anwenden',
-      frage: 'Mini-Diskussion ~~(Transkript — en el examen sería audio)~~ zum Thema „KI-Werkzeuge an Hochschulen“: Lies die vier Beiträge einmal in Echtzeit und notiere pro Person die Position in maximal fünf Wörtern. Beantworte dann: Wer fordert konkrete Regeln statt Verbote?\n\n**Prof. Berger:** „Wenn Studierende ihre Hausarbeiten von einer KI schreiben lassen, können wir die Hausarbeit als Prüfungsform beerdigen. Ich sehe das mit großer Sorge.“ — **Frau Yilmaz (Studierendenvertretung):** „Die Sorge verstehe ich, nur ist das Kind längst in den Brunnen gefallen: Alle nutzen diese Werkzeuge. Statt sie zu verteufeln, sollten wir verbindlich regeln, was erlaubt ist und was gekennzeichnet werden muss.“ — **Dr. Hoffmann:** „Ich gehe noch weiter: Wer künftig wissenschaftlich arbeiten will, muss diese Werkzeuge kompetent nutzen können. Wir sollten das aktiv lehren, nicht bloß dulden.“ — **Prof. Berger:** „Bei aller Skepsis — dem Vorschlag verbindlicher Kennzeichnungsregeln könnte ich mich anschließen.“',
-      loesung: '**Positionszeilen:** Berger: *Sorge, Prüfungsform bedroht → am Ende offen für Regeln* · Yilmaz: *Realität akzeptieren, verbindliche Regeln* · Hoffmann: *weiter: aktiv lehren*.\n**Antwort: Frau Yilmaz** — sie prägt die Forderung (*„verbindlich regeln, was erlaubt ist“*). Beachte zwei Fallen: Dr. Hoffmann geht *über* Regeln hinaus (lehren statt nur regeln) — und Prof. Berger **wechselt** am Ende teilweise die Position: Ein Item „Wer zeigt sich am Ende kompromissbereit?“ hätte ihn zur Antwort. ~~El segundo turno de un mismo hablante puede cambiar su casilla: por eso las notas se corrigen, no se tachan mentalmente.~~',
+      type: 'modell',
+      eyebrow: 'Modelltext — die Landkarte eines Kurzvortrags',
+      thema: 'Kurzvortrag „Ehrenamt in der Krise?“: Gliederungsankündigung, zwei Übergänge und ein Fazit-Einstieg — genau die Sätze, die du im Prüfungsaudio als Orientierungsmarken hörst.',
+      absaetze: [
+        '*Gliederung:* „Ich möchte ==zunächst== die aktuelle Lage des Ehrenamts skizzieren, ==anschließend== nach den Ursachen des Rückgangs fragen und ==abschließend== überlegen, was Vereine und Politik dagegen tun können.“',
+        '*Übergang zu Punkt 2:* „==Damit komme ich zum zweiten Punkt==: Woran liegt dieser Rückgang eigentlich?“',
+        '*Übergang zu Punkt 3:* „Welche Schlüsse lassen sich daraus ziehen? ==Das führt mich zu meinem letzten Punkt.==“',
+        '*Fazit:* „==Zusammenfassend lässt sich festhalten==: Das Ehrenamt stirbt nicht — es wandelt sich.“',
+      ],
+      annotationen: [
+        { tag: 'Doppelnutzen', text: 'Wer diese Sätze selbst bauen kann, hört sie im Prüfungsaudio wie Leuchttürme — und nutzt sie im Modul Sprechen für den eigenen Vortrag.' },
+      ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Baue die Landkarte selbst: Formuliere für einen dreiteiligen Kurzvortrag zum Thema „Ehrenamt in der Krise?“ die Gliederungsankündigung (ein Satz), je einen Übergangssatz zu Punkt 2 und 3 sowie einen Fazit-Einstieg — mit den Signalwörtern dieser Lektion.',
-      loesung: '**Mögliche Lösung:**\n*Gliederung:* „Ich möchte zunächst die aktuelle Lage des Ehrenamts skizzieren, anschließend nach den Ursachen des Rückgangs fragen und abschließend überlegen, was Vereine und Politik dagegen tun können.“\n*Übergang zu 2:* „Damit komme ich zum zweiten Punkt: Woran liegt dieser Rückgang eigentlich?“\n*Übergang zu 3:* „Welche Schlüsse lassen sich daraus ziehen? Das führt mich zu meinem letzten Punkt.“\n*Fazit:* „Zusammenfassend lässt sich festhalten: Das Ehrenamt stirbt nicht — es wandelt sich.“\nGültig ist jede Variante mit klarer Dreiteilung und expliziten Signalwörtern. Wer diese Sätze selbst bauen kann, hört sie im Prüfungsaudio wie Leuchttürme — und nutzt sie außerdem im Modul Sprechen für den eigenen Vortrag.',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Struktur und Streit — der Kernwortschatz im Satz',
+      items: [
+        { text: 'In ihrer **Einleitung** umriss die Referentin das Thema mit einer einzigen Zahl; die **These** folgte erst im dritten Satz.', gl: '— der anekdotische Einstieg ist Rampe, nicht Hauptaussage' },
+        { text: 'Der **Übergang** zum zweiten Teil war so knapp, dass ihn nur bemerkte, wer auf die **Signalwörter** achtete.', gl: '— *auf etwas achten* + Akk.' },
+        { text: 'Mit einem kurzen **Exkurs** in die Stadtgeschichte **veranschaulichte** der Redner, wie alt der Konflikt eigentlich ist.', gl: '— *etwas an einem Beispiel / mit etwas veranschaulichen*' },
+        { text: 'In der **Diskussionsrunde** **bezog** die Ministerin erst nach zwanzig Minuten **Position** — und **widersprach** dabei ausdrücklich ihrer **Vorrednerin**.', gl: '— *widersprechen* + Dat.: ~~contradecir a alguien~~' },
+        { text: '„Sollen wir also tatenlos zusehen?“ — Auf die **rhetorische Frage** folgte prompt die Antwort: „Selbstverständlich nicht.“', gl: '— die Antwort trägt die Aussage, nicht die Frage' },
+        { text: 'Ihr **Fazit** zog die Moderatorin in einem Satz: Einig sei man sich nur über das Ziel, nicht über den Weg.', gl: '— Konjunktiv I (*sei*) in der Wiedergabe' },
+      ],
     },
 
     { type: 'rule' },

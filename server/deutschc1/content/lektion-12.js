@@ -160,53 +160,35 @@ export default {
 
     { type: 'rule' },
 
-    // ── 6. Übungen ────────────────────────────────────────────────
+    // ── 6. Mehr Beispiele ─────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Erkennen',
-      frage: 'Richtig oder falsch? Korrigiere die fehlerhaften Relativanschlüsse und begründe.',
-      aufgaben: [
-        'Der Autor, dessen die Bücher weltweit gelesen werden, lebt zurückgezogen.',
-        'Die Firma, deren Umsatz eingebrochen ist, entlässt Personal.',
-        'Das ist alles, das ich dazu sagen kann.',
-        'Die Nachbarin, worauf ich mich immer verlassen konnte, zieht weg.',
-        'Er bestand die Prüfung im ersten Anlauf, was ihm niemand zugetraut hatte.',
-      ],
-      loesungen: [
-        '**Falsch** — nach *dessen* steht das Nomen ohne Artikel: *der Autor, **dessen Bücher** weltweit gelesen werden*.',
-        '**Richtig** — Bezugswort *die Firma* (feminin) → *deren*; dass *Umsatz* maskulin ist, spielt keine Rolle. ~~Justo al revés que «cuyo»: la concordancia mira hacia atrás, no hacia delante.~~',
-        '**Falsch** — nach *alles* steht *was*: *alles, **was** ich dazu sagen kann*.',
-        '**Falsch** — bei Personen nie wo(r)-Form: *die Nachbarin, **auf die** ich mich immer verlassen konnte*.',
-        '**Richtig** — *was* bezieht sich auf den ganzen Satz (das Bestehen der Prüfung), nicht auf ein einzelnes Nomen.',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Relativanschlüsse mit dem Kernwortschatz',
+      items: [
+        { text: 'Die Stadt ergriff eine **Maßnahme**, **deren** Wirkung erst Jahre später sichtbar wurde.', gl: '— *eine Maßnahme ergreifen*; Bezugswort feminin → deren' },
+        { text: 'Der Gutachter schilderte einen **Sachverhalt**, **an dessen** Richtigkeit niemand zweifelte.', gl: '— *zweifeln an* + dessen + Nomen' },
+        { text: 'Die Behörde prüft, ob die **Voraussetzungen**, **von denen** die Förderung abhängt, erfüllt sind.', gl: '— *abhängen von* → von denen' },
+        { text: 'Die Kommission gelangte zu der **Erkenntnis**, dass der Streit auf einem Missverständnis **beruhte**, **woraufhin** beide Seiten einlenkten.', gl: '— *woraufhin* bezieht sich auf den ganzen Satz' },
+        { text: '**Wer** über langjährige Erfahrung **verfügt**, wird bei der Auswahl bevorzugt.', gl: '— freier Relativsatz ohne Bezugswort' },
+        { text: 'Ein **Umstand**, **der** oft übersehen wird → ein oft **übersehener** Umstand.', gl: '— kurz und schriftsprachlich: Partizipialattribut' },
       ],
     },
+
+    { type: 'rule' },
+
+    // ── Modelltext ────────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Umformen',
-      frage: 'Verbinde die Sätze mit dem passenden Relativanschluss — oder forme zwischen Relativsatz und Partizipialattribut um, wo es verlangt ist.',
-      aufgaben: [
-        'Die Stadt saniert ihre Schulen. Deren Zustand wurde jahrelang kritisiert.',
-        'Wir suchen eine Lösung. Mit ihrer Hilfe lassen sich beide Ziele erreichen.',
-        'Der Konzern kündigte Kurzarbeit an. Daraufhin fiel der Aktienkurs.',
-        'Es gibt nichts. Man müsste sich dafür rechtfertigen.',
-        'Die Teilnehmer, die aus dem Ausland angereist waren, erhielten einen Zuschuss. *(→ Partizipialattribut)*',
-        'Die seit Monaten diskutierte Reform wurde gestern verabschiedet. *(→ Relativsatz)*',
+      type: 'modell',
+      eyebrow: 'Modelltext — drei Relativstrukturen in zwei Sätzen',
+      thema: 'Kurzporträt eines Unternehmens: Genitiv-Relativsatz, Satzbezug und freier Relativsatz',
+      absaetze: [
+        'Das Unternehmen, **dessen** Produkte in über fünfzig Ländern verkauft werden, hat seinen Hauptsitz überraschend verlegt, **was** in der Belegschaft für erhebliche Unruhe sorgte. **Wer** dort seit Jahren arbeitet, **der** fragt sich nun, wie sicher der eigene Arbeitsplatz noch ist.',
       ],
-      loesungen: [
-        'Die Stadt saniert ihre Schulen, **deren Zustand jahrelang kritisiert wurde**.',
-        'Wir suchen eine Lösung, **mit deren Hilfe sich beide Ziele erreichen lassen**.',
-        'Der Konzern kündigte Kurzarbeit an, **woraufhin der Aktienkurs fiel**.',
-        'Es gibt nichts, **wofür man sich rechtfertigen müsste**.',
-        'Die **aus dem Ausland angereisten** Teilnehmer erhielten einen Zuschuss.',
-        'Die Reform, **die seit Monaten diskutiert wird/wurde**, wurde gestern verabschiedet.',
+      annotationen: [
+        { tag: 'Strukturen', text: 'Genitiv-Relativsatz (*dessen Produkte*), Satzbezug (*was* bezieht sich auf die ganze Verlegung), freier Relativsatz mit Wiederaufnahme (*Wer …, der …*).' },
+        { tag: 'Varianten', text: 'Ebenso möglich: *woraufhin* statt *was* — und *deren* bei einem femininen Bezugswort (*die Firma, deren Produkte*). ~~Lo que no puede fallar: dessen/deren según el antecedente, no según el sustantivo siguiente.~~' },
       ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Schreibe drei zusammenhängende Sätze über ein Unternehmen deiner Wahl. Pflicht: ein Genitiv-Relativsatz (*dessen/deren*), ein Satzbezug (*was/wodurch/woraufhin*) und ein *wer*-Satz. Markiere die Strukturen.',
-      aufgabe: '*Mögliche Aspekte: Produkte · Ruf · Arbeitsbedingungen · jüngste Entscheidung*',
-      loesung: '**Mögliche Lösung** (Inhalt frei; bewertet werden die drei Strukturen):\n*Das Unternehmen, **dessen** Produkte in über fünfzig Ländern verkauft werden, hat seinen Hauptsitz überraschend verlegt, **was** in der Belegschaft für erhebliche Unruhe sorgte. **Wer** dort seit Jahren arbeitet, **der** fragt sich nun, wie sicher der eigene Arbeitsplatz noch ist.*\n~~Válido también: woraufhin/wodurch en vez de was, y deren si eliges una empresa con nombre femenino (die Firma, die Bank). Lo que no puede fallar: dessen/deren según el antecedente, no según el sustantivo siguiente.~~',
     },
 
     { type: 'rule' },
@@ -219,11 +201,11 @@ export default {
       titel: 'Mini-Aufgabe · 6 Lücken',
       anweisung: 'Relativanschlüsse gehören zu den beliebtesten Lücken in Teil 2, weil Bezugswort und Verbpräposition die Lösung eindeutig machen. Wähle für jede Lücke das passende Wort.',
       absaetze: [
-        'Die Deutsche Nationalbibliothek, {1} Bestand mehr als vierzig Millionen Medien umfasst, sammelt alles, {2} in Deutschland veröffentlicht wird. Seit 2006 gehören dazu auch digitale Publikationen, {3} sich die Sammelpraxis grundlegend verändert hat. Jeder Verlag, {4} Titel in Deutschland erscheinen, ist zur Abgabe zweier Exemplare verpflichtet — eine Regel, {5} deren Einhaltung die Bibliothek genau achtet. {6} die Bestände nutzen möchte, benötigt lediglich einen Ausweis.',
+        'Die Landesbibliothek, {1} Bestand mehr als vier Millionen Medien umfasst, sammelt alles, {2} im Bundesland veröffentlicht wird. Seit einigen Jahren gehören dazu auch digitale Publikationen, {3} sich die Sammelpraxis grundlegend verändert hat. Jeder Verlag, {4} Titel im Land erscheinen, ist zur Abgabe zweier Exemplare verpflichtet — eine Regel, {5} deren Einhaltung die Bibliothek genau achtet. {6} die Bestände nutzen möchte, benötigt lediglich einen Ausweis.',
       ],
       optionen: ['auf', 'deren', 'Wer', 'wodurch', 'was', 'dessen'],
       loesungen: [
-        '{1} **deren** — Bezugswort *die Nationalbibliothek* (feminin); das folgende *Bestand* (maskulin) ist irrelevant',
+        '{1} **deren** — Bezugswort *die Landesbibliothek* (feminin); das folgende *Bestand* (maskulin) ist irrelevant',
         '{2} **was** — nach *alles* steht immer *was*',
         '{3} **wodurch** — Bezug auf den ganzen vorangehenden Satz',
         '{4} **dessen** — Bezugswort *jeder Verlag* (maskulin); das pluralische *Titel* danach ist irrelevant',

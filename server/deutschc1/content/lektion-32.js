@@ -129,7 +129,7 @@ export default {
         { text: 'Wer dauerhaft einer hohen **Belastung ausgesetzt ist**, riskiert langfristig seine Gesundheit — **Burnout** ist keine Modediagnose, sondern eine reale Gefahr.' },
         { text: 'Die **Vereinbarkeit** von Familie und Beruf entscheidet sich weniger an schönen Worten als an Betreuungsplätzen und verlässlichen Arbeitszeiten.' },
         { text: 'Solange vor allem Mütter in **Teilzeit** wechseln, bleibt die partnerschaftliche Aufteilung der Sorgearbeit ein Versprechen.' },
-        { text: 'Immer mehr Väter nehmen **Elternzeit** — allerdings meist nur für die Mindestdauer.' },
+        { text: 'Immer mehr Väter nehmen **Elternzeit** — allerdings meist nur für wenige Monate.' },
       ],
     },
 
@@ -175,52 +175,30 @@ export default {
 
     { type: 'rule' },
 
-    // ── 6. Übungen ────────────────────────────────────────────────
+    // ── 6. Modelltext · Mehr Beispiele ────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Wortschatz & Kollokationen',
-      frage: 'Ergänze das passende Wort oder Verb aus dem Kernwortschatz.',
-      aufgaben: [
-        'dem Fachkräftemangel … (Verb mit Dativ)',
-        'einer hohen Belastung … sein',
-        'die Grenze zwischen Arbeit und Privatleben …',
-        'Elternzeit … bzw. …',
-        'die Vereinbarkeit … Familie und Beruf (Präposition!)',
-        '… Homeoffice arbeiten (Präposition!)',
+      type: 'modell',
+      eyebrow: 'Modelltext — argumentativer Absatz zur Vier-Tage-Woche',
+      thema: '„Sollten Unternehmen die Vier-Tage-Woche einführen?“ Der Absatz stützt sich auf Pilotprojekte, räumt mit einem Redemittel des Differenzierens die Grenzen des Modells ein und mündet in eine vermittelnde Position.',
+      absaetze: [
+        'Pilotprojekte in mehreren Ländern deuten darauf hin, dass eine **Vier-Tage-Woche** die **Produktivität** keineswegs senken muss: Ausgeruhte Beschäftigte arbeiten konzentrierter, der Krankenstand sinkt, und im Wettbewerb um Fachkräfte werden attraktive **Arbeitsbedingungen** ohnehin zum entscheidenden Faktor. **Man sollte allerdings nicht übersehen**, dass sich Arbeit in der Pflege oder im Handwerk nicht beliebig verdichten lässt — was im Büro funktioniert, ist dort kaum übertragbar. Ich plädiere deshalb für branchenspezifische Modelle statt einer pauschalen Lösung: Die Vier-Tage-Woche sollte erprobt werden, wo sie machbar ist, ohne den **Fachkräftemangel** andernorts zu verschärfen.',
       ],
-      loesungen: [
-        'dem Fachkräftemangel **entgegenwirken** — Verb mit Dativ, wie *begegnen*',
-        'einer hohen Belastung **ausgesetzt** sein — *ausgesetzt sein* + Dat.',
-        'die Grenze zwischen Arbeit und Privatleben **verwischen**',
-        'Elternzeit **nehmen** bzw. **beantragen**',
-        'die Vereinbarkeit **von** Familie und Beruf — ~~no «zwischen»: la colocación fija es *Vereinbarkeit von X und Y*~~',
-        '**im** Homeoffice arbeiten',
+      annotationen: [
+        { tag: 'Aufbau', text: 'Beleg (*Pilotprojekte … deuten darauf hin*) → Einräumung (*Man sollte allerdings nicht übersehen …*) → vermittelnde Position (*Ich plädiere deshalb für …*).' },
+        { tag: 'Position', text: 'Ein klares Ja oder Nein ist ebenso gültig — vorausgesetzt, es wird differenziert begründet.' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Von B2 zu C1',
-      frage: 'Forme die einfachen Sätze in C1-Sätze um. Nutze das angegebene Wort aus dem Kernwortschatz.',
-      aufgaben: [
-        'Es gibt nicht genug Pflegekräfte und Handwerker. (der Fachkräftemangel)',
-        'Viele Leute müssen auch abends noch Mails beantworten. (die Erreichbarkeit)',
-        'Wer zu viel arbeitet, kann krank werden. (das Burnout)',
-        'Mit Kindern ist es schwer, voll zu arbeiten. (die Vereinbarkeit)',
-        'Die Firmen müssen ihren Mitarbeitern mehr bieten. (die Arbeitsbedingungen)',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Kernwortschatz im Zusammenhang',
+      items: [
+        { text: 'Die **Flexibilisierung** der Arbeitszeiten kommt vor allem jenen zugute, die Pflegeaufgaben mit dem Beruf **vereinbaren** müssen.', gl: '— *jemandem zugutekommen*: beneficiar a alguien' },
+        { text: 'Nach zwei Jahren Dauerstress **reichte** die Projektleiterin schließlich die **Kündigung ein** — sie wollte nicht an einem **Burnout erkranken**.' },
+        { text: 'Wer nach der **Elternzeit** in **Teilzeit** wechselt, nimmt häufig einen Karriereknick in Kauf.', gl: '— *etwas in Kauf nehmen*: asumir un inconveniente' },
+        { text: 'Solange die **Erreichbarkeit** nach Feierabend nicht geregelt ist, bleibt die Erholung vom Wohlwollen der Vorgesetzten abhängig.' },
+        { text: 'Die **Belastung** in der Pflege hat ein Ausmaß erreicht, das viele Fachkräfte zum Berufsausstieg bewegt.', gl: '— *jemanden zu etwas bewegen*: llevar a alguien a hacer algo' },
       ],
-      loesungen: [
-        'Der **Fachkräftemangel** trifft Pflege und Handwerk mit besonderer Härte.',
-        'Die Erwartung ständiger **Erreichbarkeit** höhlt den Feierabend zunehmend aus. ~~*aushöhlen* = «vaciar de contenido»: verbo C1 muy expresivo.~~',
-        'Dauerhafte Überlastung erhöht das Risiko, an einem **Burnout** zu erkranken.',
-        'Die **Vereinbarkeit** von Familie und Beruf scheitert häufig an fehlenden Betreuungsangeboten.',
-        'Wer Fachkräfte gewinnen will, muss attraktive **Arbeitsbedingungen** bieten.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Schreibe einen argumentativen Absatz (80-100 Wörter) zur Frage „Sollten Unternehmen die Vier-Tage-Woche einführen?“. Verwende mindestens vier Kernwörter, ein Redemittel des Differenzierens und einen Verweis auf Pilotprojekte.',
-      loesung: '**Mögliche Lösung** (auch ein klares Ja oder Nein ist gültig, wenn es differenziert begründet wird):\n*Pilotprojekte in mehreren Ländern deuten darauf hin, dass eine Vier-Tage-Woche die Produktivität keineswegs senken muss: Ausgeruhte Beschäftigte arbeiten konzentrierter, der Krankenstand sinkt, und im Wettbewerb um Fachkräfte werden attraktive Arbeitsbedingungen ohnehin zum entscheidenden Faktor. Man sollte allerdings nicht übersehen, dass sich Arbeit in der Pflege oder im Handwerk nicht beliebig verdichten lässt — was im Büro funktioniert, ist dort kaum übertragbar. Ich plädiere deshalb für branchenspezifische Modelle statt einer pauschalen Lösung: Die Vier-Tage-Woche sollte erprobt werden, wo sie machbar ist, ohne den Fachkräftemangel andernorts zu verschärfen.*',
     },
 
     { type: 'rule' },

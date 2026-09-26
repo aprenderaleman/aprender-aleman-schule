@@ -39,7 +39,7 @@ export default {
         { wort: 'in Frage stellen', kollokation: 'ein Ergebnis in Frage stellen', es: 'cuestionar' },
         { wort: 'eine Frage aufwerfen', kollokation: 'grundsätzliche Fragen aufwerfen', es: 'plantear una cuestión' },
       ],
-      hinweis: 'Kollokationen lernt man als **Paar, nie als Einzelwort**. *~Eine Entscheidung machen~* versteht jeder — aber es ist der sicherste Marker für „übersetzt aus einer anderen Sprache“. ~~«Tomar» una decisión tampoco ayuda: en alemán no se toma, se «encuentra» (treffen).~~',
+      hinweis: 'Kollokationen lernt man als **Paar, nie als Einzelwort**. *~Eine Entscheidung machen~* versteht jeder — aber es ist der sicherste Marker für „übersetzt aus einer anderen Sprache“. ~~«Tomar» una decisión tampoco ayuda: en alemán no se toma ni se hace: se *trifft* (treffen).~~',
     },
 
     { type: 'rule' },
@@ -127,7 +127,7 @@ export default {
       items: [
         { text: '**suchen** → **ver**suchen (probieren) → **be**suchen (hingehen) → **unter**suchen (analysieren) → **er**suchen (formell bitten)', gl: '— derselbe Stamm, vier Bedeutungen: das Präfix entscheidet' },
         { text: 'Der Vertrag wurde **miss**achtet, das Vertrauen **zer**stört, die Zusammenarbeit **be**endet.' },
-        { text: 'Die Stadt **ent**lastet den Verkehr, indem sie Busspuren einrichtet.', gl: '— ent- = Last wegnehmen' },
+        { text: 'Die Stadt **ent**lastet die Innenstadt, indem sie den Durchgangsverkehr umleitet.', gl: '— ent- = Last wegnehmen' },
         { text: 'Das Team hat sich die Führung hart **er**kämpft.', gl: '— er- = Ergebnis erreicht' },
       ],
     },
@@ -157,53 +157,31 @@ export default {
 
     { type: 'rule' },
 
-    // ── 6. Übungen ────────────────────────────────────────────────
+    // ── 6. Mehr Beispiele ─────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Erkennen',
-      frage: 'Erschließe die markierten Wörter über Präfix bzw. Suffix: Was bedeuten sie, welches Genus haben die Nomen?',
-      aufgaben: [
-        'Nach dem Skandal wuchs das **Misstrauen** gegenüber dem Vorstand.',
-        'Die alte Fabrik **zerfällt** seit Jahren.',
-        'Die **Entlassung** von zweihundert Beschäftigten wurde angekündigt.',
-        'Der Autor hat sich den Erfolg über Jahrzehnte **erschrieben**.',
-        'Die **Machbarkeit** des Projekts wird derzeit geprüft.',
-      ],
-      loesungen: [
-        '**das Misstrauen** — miss- kehrt *Vertrauen* ins Negative; substantivierter Infinitiv → neutral.',
-        '**zerfallen** — zer- = in Teile: das Gebäude löst sich Stück für Stück auf.',
-        '**die Entlassung** — ent- = wegnehmen (aus dem Arbeitsverhältnis) + -ung → feminin.',
-        '**sich erschreiben** — er- = durch die Tätigkeit erreichen: Er hat den Erfolg durch Schreiben erlangt.',
-        '**die Machbarkeit** — machbar + -keit = die Eigenschaft, machbar zu sein; -keit → feminin.',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      kicker: 'Kollokationen',
+      titel: 'Feste Partner im Zusammenhang',
+      items: [
+        { text: 'Bevor wir eine endgültige Entscheidung **treffen**, sollten wir auch eine Kooperation mit dem Nachbarlandkreis **in Betracht ziehen**.' },
+        { text: 'Nach dem Datenleck **übernahm** die Geschäftsführerin die **Verantwortung** und **zog** personelle **Konsequenzen**.', gl: '— zwei Kollokationen, ein Satz: typisch für Berichte' },
+        { text: 'Interessenverbände versuchen seit Jahren, **Einfluss** auf die Gesetzgebung zu **nehmen**.' },
+        { text: 'Die Studie **wirft** grundsätzliche **Fragen auf**: Wer trägt die Kosten, wenn die Maßnahmen scheitern?' },
+        { text: 'Die Gemeinde **ergriff** umgehend **Maßnahmen** und **leistete** damit einen wichtigen **Beitrag** zur Entspannung der Lage.', gl: '— nie *Maßnahmen nehmen*, nie *einen Beitrag machen*' },
+        { text: 'Wer im Straßenverkehr keine **Rücksicht** auf Schwächere **nimmt**, gefährdet nicht nur sich selbst.', gl: '— *Rücksicht nehmen auf* + Akkusativ' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Anwenden',
-      frage: 'Korrigiere die Kollokationsfehler — jeder Satz enthält genau einen typischen Übersetzungsfehler.',
-      aufgaben: [
-        'Die Geschäftsführung hat endlich eine Entscheidung gemacht.',
-        'Die Gewerkschaft machte scharfe Kritik an dem Plan.',
-        'Erfahrung spielt bei der Auswahl eine große Wichtigkeit.',
-        'Die Regierung muss dringend Maßnahmen nehmen.',
-        'Ich stehe Ihnen gern zur Disposition.',
-        'Aus dem Fehlschlag sollten wir Konsequenzen nehmen.',
+      type: 'beispiele',
+      kicker: 'Wortbildung',
+      titel: 'Wortfamilien im Satz',
+      items: [
+        { text: 'Die **Entscheidung** fiel knapp aus; **entscheidend** war am Ende die Stimme der Vorsitzenden.', gl: '— entscheiden → die Entscheidung → entscheidend' },
+        { text: 'An der **Wirksamkeit** der Kampagne gibt es Zweifel — **gewirkt** hat sie bislang kaum.', gl: '— wirksam + -keit → feminin' },
+        { text: 'Nicht böser Wille, sondern ein **Missverständnis** hat die Zusammenarbeit **zerstört**.', gl: '— miss- = Fehlgriff · zer- = in Stücke' },
+        { text: 'Die **Verantwortlichen** haben wenig **verantwortungsvoll** gehandelt.', gl: '— eine Wortfamilie, zwei Wortarten' },
       ],
-      loesungen: [
-        '… eine Entscheidung **getroffen**. ~~El calco de «hacer/tomar» delata al no nativo al instante.~~',
-        'Die Gewerkschaft **übte** scharfe Kritik an dem Plan.',
-        'Erfahrung **spielt** bei der Auswahl eine große **Rolle**. — *Wichtigkeit* kollokiert nicht mit *spielen*.',
-        'Die Regierung muss dringend Maßnahmen **ergreifen**.',
-        'Ich stehe Ihnen gern zur **Verfügung**. — *Disposition* existiert, aber nicht in dieser Formel.',
-        'Aus dem Fehlschlag sollten wir Konsequenzen **ziehen**.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Vervollständige die Wortfamilien und schreibe dann mit jeder Familie einen C1-tauglichen Satz, der zusätzlich eine Kollokation aus dieser Lektion enthält.',
-      aufgabe: '*1) wirken → die ___ → ___sam → die ___samkeit\n2) verantworten → die ___ → verantwortungs___ (Adjektiv)\n3) entscheiden → die ___ → ___end (Partizip als Adjektiv)*',
-      loesung: '**Wortfamilien:** 1) die Wirkung → wirksam → die Wirksamkeit · 2) die Verantwortung → verantwortungsvoll (auch: verantwortungsbewusst) · 3) die Entscheidung → entscheidend.\n**Mögliche Sätze** (frei; bewertet werden Familie + Kollokation):\n*1) Um die Wirksamkeit der Kampagne zu erhöhen, wurden zusätzliche Maßnahmen ergriffen.\n2) Wer eine Führungsposition anstrebt, muss bereit sein, Verantwortung zu übernehmen — und zwar verantwortungsvoll.\n3) Bei der Standortwahl spielte die Verkehrsanbindung eine entscheidende Rolle.*',
     },
 
     { type: 'rule' },

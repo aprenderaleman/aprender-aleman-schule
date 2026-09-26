@@ -99,7 +99,7 @@ export default {
       titel: 'Offene Märkte und ihre Kehrseite',
       items: [
         { text: 'Als Exportnation **verdankt Deutschland dem Freihandel einen erheblichen Teil seines Wohlstands** — rund jeder vierte Arbeitsplatz hängt am Export.' },
-        { text: 'Handelsabkommen ohne verbindliche Sozial- und Umweltstandards **laufen Gefahr, einen Wettlauf nach unten auszulösen**.', gl: '— *der Wettlauf nach unten*: race to the bottom; imagen fija del debate' },
+        { text: 'Handelsabkommen ohne verbindliche Sozial- und Umweltstandards **laufen Gefahr, einen Wettlauf nach unten auszulösen**.', gl: '— *der Wettlauf nach unten*: la «carrera a la baja»; imagen fija del debate' },
         { text: 'Die Pandemie hat schonungslos offengelegt, **wie verwundbar lückenlos optimierte Lieferketten sind**.' },
       ],
     },
@@ -131,7 +131,7 @@ export default {
         { text: 'Fast Fashion steht sinnbildlich für ein Wirtschaftsmodell, das **auf Wegwerfen statt auf Weiterverwenden** setzt — die Kreislaufwirtschaft kehrt diese Logik um.' },
         { text: 'Bewusster Verzicht ist ehrenwert, **bleibt aber Symbolpolitik**, solange die günstigste Option zugleich die schädlichste ist.' },
         { text: 'Konsumkritik darf nicht zur **Frage des Geldbeutels** werden: Wer wenig verdient, kauft nicht aus Überzeugung billig.', gl: '— con esta frase matizas la crítica al consumo sin sonar moralista' },
-        { text: 'Statt den Einzelnen zu moralisieren, sollte man **die nachhaltige Wahl zur einfachsten machen** — ein Prinzip, das du schon aus der Gesundheitsdebatte kennst.' },
+        { text: 'Statt an die Moral des Einzelnen zu appellieren, sollte man **die nachhaltige Wahl zur einfachsten machen** — ein Prinzip, das du schon aus der Gesundheitsdebatte kennst.' },
       ],
     },
 
@@ -171,48 +171,33 @@ export default {
 
     { type: 'rule' },
 
-    // ── 6. Übungen ────────────────────────────────────────────────
+    // ── 6. Modell & mehr Beispiele ────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Wortschatz & Kollokationen',
-      frage: 'Ergänze das passende Wort aus dem Kernwortschatz in der richtigen Form.',
-      aufgaben: [
-        'Große Unternehmen müssen ihrer ______ entlang der gesamten Lieferkette nachkommen.',
-        'Die ______ der Produktion ins Ausland hat ganze Regionen ihrer Industriearbeitsplätze beraubt.',
-        'Ziel der ______ ist es, Rohstoffe so lange wie möglich im Wirtschaftskreislauf zu halten.',
-        'Ökonomen streiten darüber, ob die Globalisierung die soziale ______ innerhalb der Industrieländer verschärft hat.',
-        'Hohe Energiepreise gefährden die ______ der europäischen Industrie im globalen Vergleich.',
+      type: 'modell',
+      eyebrow: 'Modell — der Feldwechsel-Test',
+      thema: 'Das Prüfungsthema „Sollte Fliegen teurer werden?“ stand in keiner Lektion. Die Gliederung zeigt, wie sich eine Argumentation in fünf Schritten allein aus Achsen und Belegen dreier Themenfelder aufbauen lässt (die Felder stehen jeweils in Klammern).',
+      absaetze: [
+        '**1. Relevanz:** Fliegen ist die klimaschädlichste Fortbewegungsart pro Kilometer — die Folgekosten trägt die Allgemeinheit (Achse *Folgekosten/Solidargemeinschaft* — Gesundheit).',
+        '**2. Pro Verteuerung:** Preissignale haben Lenkungswirkung, wie die Zuckerabgabe in Großbritannien belegt (Beleg-Recycling — Gesundheit/Wissenschaft).',
+        '**3. Contra:** Eine Flugabgabe trifft Geringverdiener härter als Vielflieger mit hohem Einkommen — Verzicht darf keine Frage des Geldbeutels sein (Achse *Verteilung/Ungleichheit* — Wirtschaft).',
+        '**4. Abwägung:** Studienlage referieren statt behaupten — *den Daten zufolge*, *belegen vs. nahelegen* (Gewissheitsskala — Wissenschaft).',
+        '**5. Fazit:** Verteuern ja, aber sozial abgefedert und mit Alternativen (Bahnausbau) — die nachhaltige Wahl zur einfachsten machen (Achse *Verhältnisprävention* — Gesundheit/Wirtschaft).',
       ],
-      loesungen: [
-        '… ihrer **Sorgfaltspflicht** … nachkommen. (*einer Pflicht nachkommen* + Dat.)',
-        'Die **Verlagerung** der Produktion … ~~*berauben* + Gen.: „ha privado a regiones enteras de sus empleos“ — genitivo de privación, registro alto.~~',
-        'Ziel der **Kreislaufwirtschaft** ist es …',
-        '… die soziale **Ungleichheit** … verschärft hat.',
-        '… gefährden die **Wettbewerbsfähigkeit** der europäischen Industrie.',
+      annotationen: [
+        { tag: 'Recycling', text: 'Jede Kombination aus mindestens drei Themenfeldern ist gültig: Entscheidend ist, Achsen wiederzuverwenden, nicht Themen auswendig zu lernen.' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Von B2 zu C1',
-      frage: 'Formuliere auf C1-Niveau um — und recycle dabei bewusst Strukturen aus den vier vorigen Themenfeldern (Konjunktiv I, Balance-Formeln, Gewissheitsskala).',
-      aufgaben: [
-        'Freihandel ist gut für Deutschland, aber manche Leute verlieren ihre Arbeit.',
-        'Firmen sollen kontrollieren, dass ihre Zulieferer die Arbeiter fair behandeln.',
-        'Manche sagen, jeder soll weniger kaufen. Andere sagen, das bringt nichts.',
-        'Die Reichen werden reicher und die Armen bleiben arm.',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Kernwortschatz im Zusammenhang',
+      items: [
+        { text: 'Wer die **Wertschöpfung** im Inland halten will, muss mehr bieten als niedrige Löhne — gefragt sind Qualifikation, Innovation und verlässliche Infrastruktur.' },
+        { text: 'Die **Verlagerung** der Chipfertigung nach Asien galt lange als effizient; heute gilt sie vielen als strategischer Fehler.', gl: '— *gelten als*: la fórmula neutra para referir un juicio ajeno' },
+        { text: 'Ein **Handelsabkommen**, das Umweltstandards nur unverbindlich erwähnt, dürfte an der Wirklichkeit in den Fabriken wenig ändern.' },
+        { text: 'Das **Gefälle** zwischen wirtschaftsstarken Ballungsräumen und strukturschwachen Regionen ist mit der Globalisierung eher gewachsen als geschrumpft.' },
+        { text: 'Die **Kreislaufwirtschaft** kann die **Wettbewerbsfähigkeit** rohstoffarmer Länder stärken, weil sie Abhängigkeiten von Importen verringert.', gl: '— la sostenibilidad como ventaja competitiva: el argumento que reconcilia ecología y economía' },
       ],
-      loesungen: [
-        '**So unbestritten Deutschland als Exportnation vom Freihandel profitiert, so wenig lässt sich leugnen, dass einzelne Branchen und Regionen zu den Verlierern zählen.**',
-        '**Das Lieferkettengesetz verpflichtet Unternehmen, menschenwürdige Arbeitsbedingungen bei ihren Zulieferern sicherzustellen — die freiwillige Selbstverpflichtung war den Befunden zufolge hinter den Erwartungen zurückgeblieben.**',
-        '**Während die einen im bewussten Verzicht einen wirksamen Hebel sehen, wenden andere ein, individueller Konsumverzicht bleibe Symbolik, solange sich die Verhältnisse nicht änderten.** ~~Konjunktiv de la voz referida que entrenaste en migración y ciencia: „bleibe“ (Konjunktiv I) y „änderten“ (Konjunktiv II como sustituto, porque el Konjunktiv I coincidiría con el indicativo).~~',
-        '**Das Vermögensgefälle verfestigt sich: Wer viel besitzt, akkumuliert weiter, während Aufstiegschancen für Einkommensschwache begrenzt bleiben.**',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren — der Feldwechsel-Test',
-      frage: 'Der eigentliche Blockabschluss: Nimm das Prüfungsthema **„Sollte Fliegen teurer werden?“** — es stand in keiner Lektion. Skizziere in 5 Stichpunkten eine Argumentation, indem du Achsen aus mindestens **drei** Themenfeldern des Blocks wiederverwendest (benenne die Felder in Klammern).',
-      loesung: '**Mögliche Lösung** (jede Kombination aus mindestens drei Feldern ist richtig):\n**1.** Relevanz: Fliegen ist die klimaschädlichste Fortbewegungsart pro Kilometer — die Folgekosten trägt die Allgemeinheit (Achse *Folgekosten/Solidargemeinschaft* — Gesundheit).\n**2.** Pro Verteuerung: Preissignale haben Lenkungswirkung, wie die Zuckerabgabe in Großbritannien belegt (Beleg-Recycling — Gesundheit/Wissenschaft).\n**3.** Contra: Eine Flugabgabe trifft Geringverdiener härter als Vielflieger mit hohem Einkommen — Verzicht darf keine Frage des Geldbeutels sein (Achse *Verteilung/Ungleichheit* — Wirtschaft).\n**4.** Abwägung: Studienlage referieren statt behaupten — *den Daten zufolge*, *belegen vs. nahelegen* (Gewissheitsskala — Wissenschaft).\n**5.** Fazit: Verteuern ja, aber sozial abgefedert und mit Alternativen (Bahnausbau) — die nachhaltige Wahl zur einfachsten machen (Achse *Verhältnisprävention* — Gesundheit/Wirtschaft).',
     },
 
     { type: 'rule' },
@@ -231,7 +216,7 @@ export default {
       loesungen: [
         'Ob T-Shirt oder Smartphone — fast alles, was wir kaufen, durchläuft globale Lieferketten. Unter welchen Bedingungen am Anfang dieser Ketten gearbeitet wird, bekommen Verbraucher selten zu sehen. Die Frage, ob Unternehmen dafür gesetzlich geradestehen sollen, betrifft daher unser aller Konsum.\n\nFür eine gesetzliche Sorgfaltspflicht spricht zunächst, dass die freiwillige Selbstverpflichtung vieler Konzerne nach übereinstimmender Einschätzung hinter den Erwartungen zurückgeblieben ist. Wer von globaler Arbeitsteilung profitiert, kann sich der Verantwortung für menschenwürdige Arbeitsbedingungen nicht entziehen. Deutschland hat mit dem Lieferkettengesetz vorgelegt; verbindliche Regeln schaffen zudem gleiche Bedingungen für alle Anbieter: Wer heute schon verantwortungsvoll produziert, hätte endlich keinen Wettbewerbsnachteil mehr gegenüber Konkurrenten, die billiger fertigen lassen.\n\nDagegen wird eingewandt, die Bürokratielast treffe ausgerechnet den Mittelstand, während Weltkonzerne eigene Abteilungen dafür unterhalten. Auch sei die Kontrolle weit verzweigter Lieferketten in der Praxis kaum zu leisten. Schlimmstenfalls ziehen sich Unternehmen aus armen Ländern ganz zurück — den Beschäftigten dort wäre damit am wenigsten gedient.\n\nMeines Erachtens sprechen die besseren Argumente dennoch für verbindliche Regeln. Der Einwand der Bürokratie wiegt schwer, doch er spricht für praktikablere Vorschriften, nicht für gar keine. Dass die Schweizer Konzernverantwortungsinitiative trotz einer Mehrheit der Stimmen scheiterte, zeigt zugleich, wie zäh der Weg ist — und dass nationale Alleingänge nicht genügen: Wirksam wird eine Sorgfaltspflicht erst auf europäischer Ebene.\n\nUnterm Strich gilt: Wohlstand, der auf unwürdigen Arbeitsbedingungen beruht, ist zu billig erkauft. Strengere Regeln sind kein Handelshemmnis, sondern die Geschäftsgrundlage eines fairen Welthandels.',
       ],
-      kommentar: 'Beachte das Recycling: *hinter den Erwartungen zurückbleiben* (Gesundheit), das referierende *treffe/wäre gedient* (Migration), der Umgang mit dem Gegenargument (*wiegt schwer, doch…*) und ein realer Beleg pro Seite. Genau so sieht ein 90-Punkte-Text aus.',
+      kommentar: 'Beachte das Recycling: *hinter den Erwartungen zurückbleiben* (Gesundheit), das referierende *treffe/sei … kaum zu leisten* (Migration), der Umgang mit dem Gegenargument (*wiegt schwer, doch…*) und ein realer Beleg pro Seite. Genau so sieht ein 90-Punkte-Text aus.',
     },
     {
       type: 'tipp',

@@ -197,47 +197,45 @@ export default {
 
     { type: 'rule' },
 
-    // ── 6. Übungen ────────────────────────────────────────────────
+    // ── 6. Modelltexte · Mehr Beispiele ───────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Erkennen',
-      frage: 'Welche Interaktionsfunktion erfüllt jede Äußerung: Wort ergreifen, anknüpfen, nuanciert zustimmen, höflich widersprechen oder Kompromiss anbahnen?',
-      aufgaben: [
-        '„Vielleicht können wir uns darauf einigen, dass beides nötig ist: Verbote und Anreize.“',
-        '„Darf ich da kurz einhaken? Genau bei den Kosten sehe ich das Problem.“',
-        '„Ich kann Ihren Standpunkt gut nachvollziehen, teile ihn aber nicht, weil die Zahlen dagegen sprechen.“',
-        '„Ihr Beispiel mit den Schulkantinen zeigt sehr gut, worum es eigentlich geht.“',
-        '„Das sehe ich im Prinzip genauso — mit einer Einschränkung, was die Finanzierung betrifft.“',
+      type: 'modell',
+      eyebrow: 'Modell — der Dreischritt in Aktion',
+      thema: 'Drei zugespitzte Thesen eines Partners, drei Reaktionen nach demselben Muster: andocken → Position mit Nuance → Ball zurückspielen.',
+      absaetze: [
+        '**Partner:** „Streaming hat das Kino überflüssig gemacht — wer geht denn noch ins Kino?“\n**Reaktion:** ==Sie sprechen einen echten Wandel an== — die Zahlen geben Ihnen ja teilweise recht. ==Allerdings== erlebt das Kino gerade bei Großproduktionen ein Comeback, weil das Gemeinschaftserlebnis zu Hause fehlt. ==Oder sehen Sie das als vorübergehende Nostalgie?==',
+        '**Partner:** „Ohne Noten würden Schüler doch gar nichts mehr lernen.“\n**Reaktion:** ==Ich verstehe den Gedanken dahinter:== Noten schaffen Verbindlichkeit. ==Da stimme ich Ihnen aber nur bedingt zu==, denn Motivation entsteht nachweislich eher durch Rückmeldung als durch Ziffern. ==Wäre ein Mittelweg — Noten erst ab der Oberstufe — für Sie denkbar?==',
+        '**Partner:** „Künstliche Intelligenz wird mehr Arbeitsplätze schaffen als vernichten.“\n**Reaktion:** ==Das ist eine optimistische These, die ich gern aufgreife.== Im Kern mag sie stimmen, ==allerdings== trifft der Übergang genau die, die sich am schwersten umschulen lassen. ==Müsste man also nicht zuerst über Weiterbildung sprechen, bevor man Entwarnung gibt?==',
       ],
-      loesungen: [
-        '**Kompromiss anbahnen** — gemeinsames Ergebnis wird vorgeschlagen.',
-        '**Wort ergreifen** — höfliche Unterbrechung mit sofortiger inhaltlicher Rechtfertigung.',
-        '**Höflich widersprechen** — Verständnis zeigen (*nachvollziehen*), dann begründet ablehnen.',
-        '**Anknüpfen** — der Beitrag des Partners wird ausdrücklich gewürdigt und weitergeführt.',
-        '**Nuanciert zustimmen** — Zustimmung mit benannter Einschränkung.',
+      annotationen: [
+        { tag: 'Ball zurück', text: 'Alle drei Reaktionen enden mit einer Frage. ~~El balón siempre vuelve al compañero.~~' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Anwenden',
-      frage: 'Dein Partner sagt in der Diskussion die folgenden Sätze. Reagiere jeweils mit dem Dreischritt: andocken → Position mit Nuance → Ball zurückspielen.',
-      aufgaben: [
-        '„Streaming hat das Kino überflüssig gemacht — wer geht denn noch ins Kino?“',
-        '„Ohne Noten würden Schüler doch gar nichts mehr lernen.“',
-        '„Künstliche Intelligenz wird mehr Arbeitsplätze schaffen als vernichten.“',
-      ],
-      loesungen: [
-        '*Sie sprechen einen echten Wandel an — die Zahlen geben Ihnen ja teilweise recht. Allerdings erlebt das Kino gerade bei Großproduktionen ein Comeback, weil das Gemeinschaftserlebnis zu Hause fehlt. Oder sehen Sie das als vorübergehende Nostalgie?*',
-        '*Ich verstehe den Gedanken dahinter: Noten schaffen Verbindlichkeit. Da stimme ich Ihnen aber nur bedingt zu, denn Motivation entsteht nachweislich eher durch Rückmeldung als durch Ziffern. Wäre ein Mittelweg — Noten erst ab der Oberstufe — für Sie denkbar?*',
-        '*Das ist eine optimistische These, die ich gern aufgreife. Im Kern mag sie stimmen, allerdings trifft der Übergang genau die, die sich am schwersten umschulen lassen. Müsste man also nicht zuerst über Weiterbildung sprechen, bevor man Entwarnung gibt?* ~~Fíjate: las tres respuestas acaban en pregunta — el balón siempre vuelve al compañero.~~',
+      type: 'modell',
+      eyebrow: 'Modell — ein Diskussionsskript mit Kompromiss',
+      thema: 'Streitfrage: „Sollte Werbung für ungesunde Lebensmittel verboten werden?“ A ist dafür, B dagegen; sechs Redebeiträge mit nuancierter Zustimmung, einer Frage als Einwand und einem gemeinsam formulierten Kompromiss.',
+      absaetze: [
+        '**A:** Werbung für Zucker und Fast Food nimmt gezielt Kinder ins Visier — ein Verbot wäre überfällig. ==Wie sehen Sie das?==',
+        '**B:** ==Im Kern verstehe ich die Sorge, allerdings== halte ich Verbote für den falschen Weg: Aufklärung wirkt nachhaltiger als Bevormundung.',
+        '**A:** ==Da knüpfe ich gern an== — nur: Aufklärung und Werbemilliarden kämpfen nicht mit gleichen Waffen. ==Ist es nicht eher so, dass== Kinder Werbung gar nicht kritisch einordnen können?',
+        '**B:** Bei Kindern gebe ich Ihnen recht, ==das räume ich ein.== Bei Erwachsenen aber sollte der Staat nicht entscheiden, was auf den Teller kommt.',
+        '**A:** Dann liegt der ==Kompromiss== ja fast auf dem Tisch: ein Verbot nur für Werbung, die sich an Kinder richtet.',
+        '**B:** ==Darauf können wir uns einigen== — Kinderwerbung verbieten, Erwachsene aufklären.',
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Schreibe ein Diskussions-Skript von sechs Redebeiträgen (A–B–A–B–A–B) zur Streitfrage „Sollte Werbung für ungesunde Lebensmittel verboten werden?“ — A ist dafür, B dagegen, am Ende steht ein Kompromiss. Lies es anschließend laut mit verteilten Rollen oder nimm beide Stimmen selbst auf.',
-      aufgabe: 'Pflicht: mindestens ein *Im Kern … allerdings*, eine Frage als Einwand (*Ist es nicht eher so…?*) und ein gemeinsam formulierter Kompromiss.',
-      loesung: '**Mögliche Lösung** (gekürzt — dein Skript darf länger sein):\n*A: Werbung für Zucker und Fast Food zielt gezielt auf Kinder — ein Verbot wäre überfällig. Wie sehen Sie das?*\n*B: Im Kern verstehe ich die Sorge, allerdings halte ich Verbote für den falschen Weg: Aufklärung wirkt nachhaltiger als Bevormundung.*\n*A: Da knüpfe ich gern an — nur: Aufklärung und Werbemilliarden kämpfen nicht mit gleichen Waffen. Ist es nicht eher so, dass Kinder Werbung gar nicht kritisch einordnen können?*\n*B: Bei Kindern gebe ich Ihnen recht, das räume ich ein. Bei Erwachsenen aber sollte der Staat nicht entscheiden, was auf den Teller kommt.*\n*A: Dann liegt der Kompromiss ja fast auf dem Tisch: ein Verbot nur für Werbung, die sich an Kinder richtet.*\n*B: Darauf können wir uns einigen — Kinderwerbung verbieten, Erwachsene aufklären.*',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Zustimmen, widersprechen, einigen',
+      items: [
+        { text: 'Ihren Einwand kann ich gut **nachvollziehen** — dennoch **teile** ich Ihre **Meinung** nur **bedingt**.', gl: '— erst Verständnis zeigen, dann differenzieren' },
+        { text: 'Wenn ich Sie kurz **unterbrechen** darf: Genau an diesem Punkt setzt mein **Einwand** an.' },
+        { text: 'Darauf ließe sich **entgegnen**, dass die Kosten langfristig sinken.', gl: '— Konjunktiv II: der Widerspruch klingt sachlich statt schroff' },
+        { text: 'Ich möchte an das **anknüpfen**, was Sie über die Pendler gesagt haben, und Ihr Beispiel noch einmal **aufgreifen**.' },
+        { text: 'Zwei Punkte muss ich Ihnen **einräumen**: Die Maßnahme ist teuer, und sie wirkt erst verzögert.' },
+        { text: 'Nach längerem Hin und Her **einigten** sich die beiden **auf** einen **Kompromiss**, der beide Positionen berücksichtigte.', gl: '— *sich einigen auf* + Akkusativ' },
+      ],
     },
 
     { type: 'rule' },

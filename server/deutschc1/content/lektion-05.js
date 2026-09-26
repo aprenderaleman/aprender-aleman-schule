@@ -151,53 +151,28 @@ export default {
 
     { type: 'rule' },
 
-    // ── 6. Übungen ────────────────────────────────────────────────
+    // ── 6. Modelltext · Mehr Beispiele ────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Erkennen',
-      frage: 'Konjunktiv I, Ausweichform Konjunktiv II oder Indikativ? Entscheide — und sage, wer hier eigentlich spricht: die zitierte Person oder der Autor.',
-      aufgaben: [
-        'Der Bürgermeister erklärte, die Sanierung sei abgeschlossen.',
-        'Die Anwohner sagten, sie hätten von den Plänen nichts gewusst.',
-        'Die Sanierung hat drei Jahre gedauert.',
-        'Die Firma teilte mit, man werde die Fristen künftig einhalten.',
-        'Kritiker meinten, die Stadt wisse seit Langem von den Mängeln.',
-      ],
-      loesungen: [
-        '**Konjunktiv I** (*sei*) — Redewiedergabe: Es ist die Behauptung des Bürgermeisters, nicht des Autors.',
-        '**Ausweichform K II** (*hätten*) — *sie haben* wäre mit dem Indikativ identisch; die Aussage stammt von den Anwohnern.',
-        '**Indikativ** — hier spricht der Autor selbst und stellt einen Fakt fest.',
-        '**Konjunktiv I** (*werde*) — Zukunft in der indirekten Rede; Aussage der Firma.',
-        '**Konjunktiv I** (*wisse*) — Behauptung der Kritiker. ~~En español las cinco frases llevarían indicativo — la diferencia que el alemán marca con la forma verbal, el español la deja al contexto.~~',
+      type: 'modell',
+      eyebrow: 'Modelltext — vom Interview zur Zeitungsmeldung',
+      thema: 'Dieselbe Aussage zweimal: als wörtliches Zitat und als Pressemeldung, in der nach einer einzigen Redeeinleitung allein der Konjunktiv die Wiedergabe trägt.',
+      absaetze: [
+        '*Interview mit der Leiterin des Stadtarchivs:* „Unser Archiv platzt aus allen Nähten. Wir haben seit Jahren einen Neubau beantragt, aber die Stadt hat nie reagiert. Nächstes Jahr werden wir wertvolle Bestände auslagern müssen. Besuchen Sie uns — dann verstehen Sie das Problem sofort!“',
+        '*Als Zeitungsmeldung:* Die Leiterin des Stadtarchivs schlug Alarm: Das Archiv **platze** aus allen Nähten. Man **habe** seit Jahren einen Neubau **beantragt**, doch die Stadt **habe** nie **reagiert**. Nächstes Jahr **werde** man wertvolle Bestände auslagern müssen. Wer das Archiv besuche, **verstehe** das Problem sofort.',
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Umformen',
-      frage: 'Übertrage in die indirekte Rede. Achte auf Zeitstufe, Formengleichheit und die Wiedergabe von Frage und Aufforderung.',
-      aufgaben: [
-        'Die Ministerin: „Die Reform entlastet die Familien.“',
-        'Der Zeuge: „Ich habe den Unfall genau gesehen.“',
-        'Die Studierenden: „Wir bekommen zu wenig Unterstützung.“',
-        'Der Arzt: „Bleiben Sie zwei Tage zu Hause!“',
-        'Die Journalistin: „Wann wurde der Fehler entdeckt?“',
-        'Der Trainer: „Wir werden das Finale gewinnen.“',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Redeeinleitungen mit Profil',
+      items: [
+        { text: 'Der Konzern **dementierte** die Berichte: Ein Verkauf des Werks **stehe** nicht zur Debatte.', gl: '— *dementieren*: offizielle Zurückweisung' },
+        { text: 'Die Ministerin **räumte ein**, bei der Planung **seien** Fehler gemacht worden.', gl: '— *einräumen*: ein Zugeständnis' },
+        { text: 'Der Angeklagte **bestreitet**, am Tatort gewesen zu sein; seine Anwältin **versichert**, er **habe** ein Alibi.' },
+        { text: 'Die Gewerkschaft **erhob** schwere **Vorwürfe**: Die Beschäftigten **würden** systematisch überwacht.', gl: '— *würden*: Ausweichform, da *werden* formgleich wäre' },
+        { text: '**Dem Bericht zufolge** ist die Zahl der Anträge deutlich gestiegen — **angeblich**, weil die Frist verkürzt wurde.', gl: '— *zufolge* nachgestellt mit Dativ; *angeblich* markiert Zweifel' },
+        { text: 'Zu den **Äußerungen** ihres Kollegen wollte **sich** die Abgeordnete nicht **äußern**.' },
       ],
-      loesungen: [
-        'Die Ministerin sagte, die Reform **entlaste** die Familien.',
-        'Der Zeuge versicherte, er **habe** den Unfall genau **gesehen**.',
-        'Die Studierenden klagten, sie **bekämen** zu wenig Unterstützung / sie **würden** zu wenig Unterstützung **bekommen**. ~~*sie bekommen* sería idéntico al indicativo → Ausweichen.~~',
-        'Der Arzt sagte, er/sie **solle** zwei Tage zu Hause bleiben.',
-        'Die Journalistin fragte, **wann** der Fehler **entdeckt worden sei**.',
-        'Der Trainer kündigte an, man **werde** das Finale gewinnen.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Mache aus dem Interviewausschnitt eine kurze Zeitungsmeldung (3-4 Sätze) in indirekter Rede. Nur **eine** Redeeinleitung — danach soll der Konjunktiv allein die Wiedergabe tragen.',
-      aufgabe: '*Interview mit der Leiterin des Stadtarchivs:* „Unser Archiv platzt aus allen Nähten. Wir haben seit Jahren einen Neubau beantragt, aber die Stadt hat nie reagiert. Nächstes Jahr werden wir wertvolle Bestände auslagern müssen. Besuchen Sie uns — dann verstehen Sie das Problem sofort!“',
-      loesung: '**Mögliche Lösung** (Redeeinleitung und Satzfolge dürfen variieren):\n*Die Leiterin des Stadtarchivs schlug Alarm: Das Archiv **platze** aus allen Nähten. Man **habe** seit Jahren einen Neubau **beantragt**, doch die Stadt **habe** nie **reagiert**. Nächstes Jahr **werde** man wertvolle Bestände auslagern müssen. Man **möge** das Archiv besuchen — dann **verstehe** man das Problem sofort.*\nGültig sind auch *Die Bürger sollten das Archiv besuchen* statt *man möge* und *verstünde* statt *verstehe*; entscheidend ist, dass **jeder** Satz eine Konjunktivform trägt.',
     },
 
     { type: 'rule' },

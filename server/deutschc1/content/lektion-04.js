@@ -176,53 +176,44 @@ export default {
 
     { type: 'rule' },
 
-    // ── 6. Übungen ────────────────────────────────────────────────
+    // ── 6. Mehr Beispiele ─────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Erkennen',
-      frage: 'Welche Form liegt vor: Vorgangspassiv, Zustandspassiv, unpersönliches Passiv oder Ersatzform? Benenne sie und gib die Bedeutung an.',
-      aufgaben: [
-        'Die Fenster sind geputzt.',
-        'Die Fenster werden gerade geputzt.',
-        'Das Formular ist vollständig auszufüllen.',
-        'Es wurde lange über den Vorschlag gestritten.',
-        'Der Text liest sich erstaunlich leicht.',
-      ],
-      loesungen: [
-        '**Zustandspassiv** — *sein + P II*: das Ergebnis zählt, das Putzen ist vorbei.',
-        '**Vorgangspassiv** — *werden + P II*: der Prozess läuft in diesem Moment.',
-        '**Ersatzform** *sein + zu* — hier Notwendigkeit: *muss vollständig ausgefüllt werden*.',
-        '**Unpersönliches Passiv** — *streiten* ist intransitiv, es gibt kein Subjekt; das *es* ist bloß Platzhalter.',
-        '**Ersatzform** (mediales *sich*) — *kann leicht gelesen werden*. ~~No es un „se“ libre como en español: funciona porque lleva el adverbio *leicht*.~~',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Kernwortschatz im Passiv',
+      items: [
+        { text: 'Der Fehler im System **ist** noch in der Nacht **behoben worden**.', gl: '— Perfekt des Vorgangspassivs mit *worden*' },
+        { text: 'Die Einwände der Anwohner **hätten** stärker **berücksichtigt werden müssen**.', gl: '— Kritik im Rückblick' },
+        { text: 'Ob die Reform in dieser Form **umsetzbar** ist, **lässt sich** noch nicht **absehen**.', gl: '— zwei Ersatzformen in einem Satz' },
+        { text: 'Die Sicherheit der Teilnehmenden **ist** in jedem Fall **zu gewährleisten**.', gl: '— *sein + zu*: Notwendigkeit, typisch für Vorschriften' },
+        { text: 'Nach dem Hochwasser **wurden** umgehend **Maßnahmen ergriffen**.', gl: '— *Maßnahmen ergreifen*, nie *nehmen*' },
+        { text: 'Jahrelang **ist** die Instandhaltung der Schulen **vernachlässigt worden**.' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Umformen',
-      frage: 'Forme ins Passiv um. Behalte Zeit und Modalverb bei.',
-      aufgaben: [
-        'Man renoviert das Gebäude.',
-        'Man musste die Sitzung verschieben.',
-        'Man hat die Regel im letzten Jahr geändert.',
-        'Man hätte die Anwohner rechtzeitig informieren müssen.',
-        'Man kann dieses Verhalten nicht akzeptieren. (auch mit einer Ersatzform)',
-        'Man half den Opfern sofort.',
-      ],
-      loesungen: [
-        'Das Gebäude **wird renoviert**.',
-        'Die Sitzung **musste verschoben werden**.',
-        'Die Regel **ist** im letzten Jahr **geändert worden**. (*Die Regel wurde geändert* wäre Präteritum — die Aufgabe verlangt aber, das Perfekt beizubehalten.)',
-        'Die Anwohner **hätten** rechtzeitig **informiert werden müssen**.',
-        'Dieses Verhalten **kann nicht akzeptiert werden**. / … **lässt sich nicht akzeptieren**. / … **ist** nicht **akzeptabel**.',
-        'Den Opfern **wurde** sofort **geholfen**. ~~Interferencia típica: *Die Opfer wurden geholfen* es agramatical — el dativo de *helfen* nunca se convierte en sujeto, a diferencia de „las víctimas fueron ayudadas“.~~',
+      type: 'beispiele',
+      kicker: 'Vorgang · Zustand · Ersatzform',
+      titel: 'Eine Entscheidung, drei Perspektiven',
+      items: [
+        { text: 'Das Gesetz **wird** morgen im Parlament **verabschiedet**.', gl: '— Vorgang: der Prozess steht bevor' },
+        { text: 'Das Gesetz **ist verabschiedet** — jetzt geht es um die Umsetzung.', gl: '— Zustand: das Ergebnis liegt vor' },
+        { text: 'Die Begründung der Regierung **ist** durchaus **nachvollziehbar**.', gl: '— *-bar*: kann nachvollzogen werden' },
+        { text: 'Für viele Kommunen **ist** eine schnelle Umsetzung kaum **zu leisten**.', gl: '— *sein + zu*: hier Möglichkeit' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Formuliere die folgende Hausordnung neu: mindestens **ein Vorgangspassiv**, **einmal sein + zu** und **einmal sich lassen** — und höchstens ein einziges *man*.',
-      aufgabe: '*Man trennt den Müll. Man muss die Haustür ab 22 Uhr abschließen. Man kann Fahrräder problemlos im Hof abstellen. Man reinigt das Treppenhaus jede Woche.*',
-      loesung: '**Mögliche Lösung** (andere Kombinationen sind richtig, solange die drei geforderten Formen vorkommen):\n*Der Müll **wird getrennt**. Die Haustür **ist** ab 22 Uhr **abzuschließen**. Fahrräder **lassen sich** problemlos im Hof **abstellen**. Das Treppenhaus **wird** jede Woche **gereinigt**.*\nGültige Varianten: *Die Haustür **muss** ab 22 Uhr **abgeschlossen werden*** (Passiv + Modal) oder *Fahrräder **können** im Hof **abgestellt werden***. Entscheidend ist der Wechsel der Formen — genau diese Variation bewertet das Kriterium „Strukturen“.',
+      type: 'modell',
+      eyebrow: 'Modelltext — eine Hausordnung ohne „man“',
+      thema: 'Vier Regeln, vier Formen: vom monotonen *man* zum variierten Passiv',
+      woerter: 'ca. 25 Wörter',
+      absaetze: [
+        '**Mit man:** *Man trennt den Müll. Man muss die Haustür ab 22 Uhr abschließen. Man kann Fahrräder problemlos im Hof abstellen. Man reinigt das Treppenhaus jede Woche.*',
+        '**Variiert:** *Der Müll **wird getrennt**. Die Haustür **ist** ab 22 Uhr **abzuschließen**. Fahrräder **lassen sich** problemlos im Hof **abstellen**. Das Treppenhaus **wird** jede Woche **gereinigt**.*',
+      ],
+      annotationen: [
+        { tag: 'Formen', text: 'Vorgangspassiv (*wird getrennt*), *sein + zu* für die Vorschrift (*ist abzuschließen* = muss abgeschlossen werden), *sich lassen* für die Möglichkeit (*lassen sich abstellen* = können abgestellt werden).' },
+        { tag: 'Varianten', text: 'Ebenso richtig: *Die Haustür muss ab 22 Uhr abgeschlossen werden* oder *Fahrräder können im Hof abgestellt werden*. Entscheidend ist der Wechsel der Formen — genau diese Variation bewertet das Kriterium „Strukturen“.' },
+      ],
     },
 
     { type: 'rule' },

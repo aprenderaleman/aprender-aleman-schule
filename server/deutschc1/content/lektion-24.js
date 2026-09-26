@@ -3,8 +3,9 @@
 // Ausbau der Kurzversion (curso-c1.html) auf den Standard der 8 Secciones.
 // Erhalten geblieben: die Vier-Schritte-Struktur, die Redemittel-Gruppen und
 // das kommentierte Musterbeispiel „Smartphone-Verbot". Neu: Kernwortschatz
-// der Argumentation, erweiterte Redemittel, drei Übungen (zweites Thema:
-// Ehrenamt) und Prüfungsbezug mit kompletter Aufgabe + Mögliche Lösung.
+// der Argumentation, erweiterte Redemittel, Mehr Beispiele + Modelltext
+// (zweites Thema: Ehrenamt; die Praxis lebt im Übungsheft heft-24.js) und
+// Prüfungsbezug mit kompletter Aufgabe + Mögliche Lösung.
 
 export default {
   spec: ['Bloque 2', 'Prüfungsstrategie', 'Niveau C1', 'Prüfungsrelevanz: Schreiben Teil 1 (~230 Wörter · 40 Min)'],
@@ -205,51 +206,33 @@ export default {
 
     { type: 'rule' },
 
-    // ── 6. Übungen ────────────────────────────────────────────────
+    // ── 6. Mehr Beispiele & Modelltext (Übungen → Übungsheft) ────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Erkennen',
-      frage: 'Ein Diskussionsbeitrag ist in Einzelsätze zerfallen. Ordne jeden Satz seiner Funktion zu: Einleitung, Pro-Argument, Gegenargument, Position oder Schluss.',
-      aufgaben: [
-        '„Alles in allem sollte Wohnraum kein Spekulationsobjekt sein.“',
-        '„Ob der Staat die Mieten deckeln sollte, wird derzeit heftig debattiert.“',
-        '„Kritiker wenden ein, dass ein Mietendeckel den Wohnungsbau bremst, weil Investoren abwandern.“',
-        '„Ich plädiere daher für eine Deckelung, die Neubauten ausdrücklich ausnimmt.“',
-        '„Ein gewichtiges Argument dafür ist der Schutz einkommensschwacher Haushalte vor Verdrängung.“',
-      ],
-      loesungen: [
-        '**Schluss** — *alles in allem* signalisiert das Fazit.',
-        '**Einleitung** — die Streitfrage wird benannt, ohne Position zu beziehen.',
-        '**Gegenargument** — *Kritiker wenden ein* + Begründung mit *weil*.',
-        '**Position** — *ich plädiere für* + differenzierender Zusatz (der Mittelweg!).',
-        '**Pro-Argument** — *ein gewichtiges Argument dafür ist* + konkreter Nutzen.',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Die Sprache der Argumentation im Satz',
+      items: [
+        { text: 'Die **Streitfrage** lautet nicht, *ob* Städte handeln müssen, sondern *wie* — wer das in der Einleitung klarstellt, gewinnt sofort an Profil.', gl: '— *die Streitfrage benennen / zuspitzen*' },
+        { text: 'Die **Befürworter** einer Citymaut verweisen auf London; **Kritiker** **wenden ein**, dass sich das Modell kaum auf kleinere Städte übertragen lasse.', gl: '— Konjunktiv I (*lasse*) für das referierte Gegenargument' },
+        { text: 'Wer einen **Standpunkt** **vertritt**, sollte die Gegenposition kennen — sonst lässt sich kein Einwand **entkräften**.', gl: '— ~~sostener una postura / rebatir una objeción~~' },
+        { text: 'Nach gründlichem **Abwägen** **überwiegen** aus meiner Sicht die Risiken: Die Kosten stehen in keinem Verhältnis zum Nutzen.', gl: '— *überwiegen* intransitiv: *die Vorteile überwiegen*' },
+        { text: 'Statt eines Verbots **plädiere** ich **für** einen **Mittelweg**: klare Regeln im Unterricht, Freiräume in den Pausen.', gl: '— *plädieren für* + Akk.' },
+        { text: 'Ein **stichhaltiges** Argument braucht einen Beleg; wer sich nur auf das eigene Gefühl beruft, hat sich nicht wirklich **mit** dem Thema **auseinandergesetzt**.', gl: '— *sich auseinandersetzen mit* + Dat.' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Umformen',
-      frage: 'Thema „Sollte ehrenamtliches Engagement für Jugendliche verpflichtend sein?“ — hebe die B2-Sätze mit den Redemitteln dieser Lektion auf C1-Niveau.',
-      aufgaben: [
-        'Viele Leute reden jetzt über Pflicht-Ehrenamt für Jugendliche.',
-        'Ehrenamt ist gut, weil man Verantwortung lernt.',
-        'Aber manche sagen, Pflicht und Freiwilligkeit passen nicht zusammen.',
-        'Das stimmt ein bisschen, aber trotzdem ist die Idee gut.',
-        'Ich finde, ein Pflichtjahr mit freier Auswahl ist am besten.',
+      type: 'modell',
+      eyebrow: 'Modelltext — ein Kurzbeitrag zum Ehrenamt',
+      thema: 'Streitfrage: Sollte ehrenamtliches Engagement für Jugendliche verpflichtend sein? Einleitung, Pro-Argument mit Beispiel, Gegenargument mit Konzession und begründete Position in einem zusammenhängenden Text.',
+      woerter: 'ca. 130 Wörter',
+      absaetze: [
+        '*==In letzter Zeit wird häufig darüber diskutiert, ob== ehrenamtliches Engagement für Jugendliche verpflichtend sein sollte. ==Ein gewichtiges Argument dafür ist== der soziale Zusammenhalt: Wer früh Verantwortung übernimmt, entwickelt Empathie und ein stärkeres Gemeinschaftsgefühl. Das zeigt sich daran, dass Jugendliche mit ehrenamtlicher Erfahrung später deutlich häufiger gesellschaftlich aktiv bleiben — sei es im Sportverein, in der Nachbarschaftshilfe oder im Umweltschutz.*',
+        '*==Kritiker wenden allerdings ein, dass== erzwungenes Engagement seinen Kern verliere — Freiwilligkeit lasse sich nicht verordnen. ==Zwar trifft dieser Einwand einen wunden Punkt, dennoch== entdecken viele junge Menschen ihre Begeisterung erst durch einen Anstoß von außen; das bestätigen die Erfahrungen der Freiwilligendienste seit Jahren.*',
+        '*==Ich plädiere daher für== ein verpflichtendes Engagementjahr mit frei wählbarem Einsatzbereich: Die Pflicht öffnet die Tür, die Wahlfreiheit sorgt dafür, dass daraus echtes, dauerhaftes Engagement entstehen kann.*',
       ],
-      loesungen: [
-        '*In letzter Zeit wird häufig darüber diskutiert, ob ehrenamtliches Engagement für Jugendliche verpflichtend sein sollte.*',
-        '*Ein gewichtiges Argument dafür ist, dass junge Menschen früh Verantwortung übernehmen und dabei Empathie entwickeln.*',
-        '*Kritiker wenden allerdings ein, dass sich Verpflichtung und Freiwilligkeit grundsätzlich widersprechen — erzwungenes Engagement sei kein Engagement.* ~~El Konjunktiv I (*sei*) marca que reproduces el argumento ajeno.~~',
-        '*Zwar trifft dieser Einwand einen wunden Punkt, dennoch zeigt die Erfahrung, dass viele Jugendliche erst durch den Anstoß von außen ihre Begeisterung entdecken.*',
-        '*Ich plädiere daher für ein verpflichtendes Engagementjahr, bei dem die Jugendlichen den Einsatzbereich frei wählen können.*',
+      annotationen: [
+        { tag: 'Konjunktiv I', text: '*verliere, lasse*: Das Gegenargument wird referiert, nicht übernommen. ~~Marca que reproduces el argumento ajeno, sin hacerlo tuyo.~~' },
       ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Schreibe zum Ehrenamts-Thema einen vollständigen Kurzbeitrag (~130 Wörter): Einleitung, ein Pro-Argument mit Beispiel, ein Gegenargument, begründete Position. Nutze die Sätze aus Übung 2 als Steinbruch, aber forme einen zusammenhängenden Text mit Konnektoren.',
-      aufgabe: 'Prüfe am Ende mit der Checkliste aus Lektion 23: Kommas vor Nebensätzen, Verbstellung, Genus.',
-      loesung: '**Mögliche Lösung** (ca. 130 Wörter — dein Text darf inhaltlich abweichen, solange alle vier Funktionen erkennbar sind):\n*In letzter Zeit wird häufig darüber diskutiert, ob ehrenamtliches Engagement für Jugendliche verpflichtend sein sollte. Ein gewichtiges Argument dafür ist der soziale Zusammenhalt: Wer früh Verantwortung übernimmt, entwickelt Empathie und ein stärkeres Gemeinschaftsgefühl. Das zeigt sich daran, dass Jugendliche mit ehrenamtlicher Erfahrung später deutlich häufiger gesellschaftlich aktiv bleiben — sei es im Sportverein, in der Nachbarschaftshilfe oder im Umweltschutz. Kritiker wenden allerdings ein, dass erzwungenes Engagement seinen Kern verliere — Freiwilligkeit lasse sich nicht verordnen. Zwar trifft dieser Einwand einen wunden Punkt, dennoch entdecken viele junge Menschen ihre Begeisterung erst durch einen Anstoß von außen; das bestätigen die Erfahrungen der Freiwilligendienste seit Jahren. Ich plädiere daher für ein verpflichtendes Engagementjahr mit frei wählbarem Einsatzbereich: Die Pflicht öffnet die Tür, die Wahlfreiheit sorgt dafür, dass daraus echtes, dauerhaftes Engagement entstehen kann.*',
     },
 
     { type: 'rule' },

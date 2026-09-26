@@ -3,8 +3,8 @@
 // Bloque 3 «Themenfelder» — lecciones temáticas: léxico, ideas y argumentos
 // de los campos que caen en el examen. Estructura de 8 secciones adaptada:
 // Kernwortschatz amplio (14) · Erklärung = panorama del debate · Beispiele =
-// frases C1 por subtema · Redemittel · Übungen (léxico → B2→C1 → producción)
-// · Prüfungsbezug con tarea real y solución modelo.
+// frases C1 por subtema · Redemittel · Modelltext + Mehr Beispiele (la práctica
+// está en el Übungsheft) · Prüfungsbezug con tarea real y solución modelo.
 
 export default {
   spec: ['Bloque 3', 'Themenfelder', 'Niveau C1', 'Prüfungsrelevanz: Sprechen Teil 1 · Schreiben Teil 1'],
@@ -20,7 +20,7 @@ export default {
         'Am Ende kannst du das deutsche Bildungssystem — duales System, Föderalismus, Numerus clausus — präzise und mit dem richtigen Fachwortschatz beschreiben.',
         'Du beherrschst 14 Schlüsselbegriffe des Themenfelds mit ihren typischen Kollokationen.',
         'Du führst die Debatten um Studiengebühren, Chancengleichheit und lebenslanges Lernen mit differenzierten Pro- und Contra-Argumenten.',
-        'Du strukturierst einen Vortrag zum Thema Bildung genau nach dem Format von Sprechen Teil 1.',
+        'Du gliederst einen Vortrag zum Thema Bildung exakt nach den Vorgaben von Sprechen Teil 1.',
       ],
     },
 
@@ -179,52 +179,31 @@ export default {
 
     { type: 'rule' },
 
-    // ── 6. Übungen ────────────────────────────────────────────────
+    // ── 6. Modelltext · Mehr Beispiele ────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Wortschatz & Kollokationen',
-      frage: 'Welches Verb passt? Ergänze die typische Kollokation aus dem Kernwortschatz.',
-      aufgaben: [
-        'eine Ausbildung … (beenden? machen? Welches Verb ist C1?)',
-        'Studiengebühren … / wieder …',
-        'einen höheren Bildungsabschluss …',
-        'die Durchlässigkeit des Systems …',
-        'am Numerus clausus …',
-        'an einer beruflichen Weiterbildung …',
+      type: 'modell',
+      eyebrow: 'Modelltext — argumentativer Absatz zu Studiengebühren',
+      thema: 'Sollte das Erststudium gebührenfrei bleiben? Der Absatz wägt mit einerseits … andererseits ab, stützt sich auf den Zusammenhang zwischen Bildungserfolg und sozialer Herkunft und bezieht am Ende klar Position.',
+      absaetze: [
+        'Einerseits würden **Studiengebühren** die chronisch unterfinanzierten Hochschulen spürbar entlasten, andererseits träfen sie vor allem Studierende aus einkommensschwachen Familien. Da der Bildungserfolg in Deutschland ohnehin stark von der **sozialen Herkunft** abhängt, würde eine Gebührenpflicht die **Chancengleichheit** weiter untergraben: Wer keine finanziellen Rücklagen hat, würde eher auf ein Studium verzichten oder es vorzeitig abbrechen. Ich bin daher der festen Überzeugung, dass das Erststudium auch künftig gebührenfrei bleiben muss — Bildung ist ein öffentliches Gut, und die **Durchlässigkeit** des Systems darf nicht vom Geldbeutel abhängen.',
       ],
-      loesungen: [
-        'eine Ausbildung **absolvieren** — ~~«hacer una FP»; *machen* es B1, *absolvieren* es el registro C1~~',
-        'Studiengebühren **erheben** / wieder **abschaffen**',
-        'einen höheren Bildungsabschluss **erwerben**',
-        'die Durchlässigkeit des Systems **erhöhen**',
-        'am Numerus clausus **scheitern**',
-        'an einer beruflichen Weiterbildung **teilnehmen**',
+      annotationen: [
+        { tag: 'Abwägen', text: '*Einerseits … andererseits* im Konjunktiv II (*würden entlasten, träfen*): beide Seiten, bevor die Position fällt.' },
+        { tag: 'Position', text: 'Klare Schlussthese mit Begründung. ~~Igual de válidas serían la postura contraria (elección más consciente de la carrera, normalidad internacional) o un compromiso: tasas diferidas y dependientes de los ingresos futuros.~~' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Von B2 zu C1',
-      frage: 'Forme die einfachen Sätze in C1-Sätze um. Nutze das angegebene Wort aus dem Kernwortschatz.',
-      aufgaben: [
-        'Arme Kinder haben es in der Schule schwerer. (benachteiligen)',
-        'Alle sollen die gleichen Chancen haben, egal woher sie kommen. (die soziale Herkunft)',
-        'Man muss sein ganzes Leben lang lernen. (das lebenslange Lernen)',
-        'Immer mehr junge Leute studieren, und das ist ein Problem für das Handwerk. (die Akademisierung)',
-        'Der Staat sollte kleine Kinder besser fördern. (die Förderung)',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Den Kernwortschatz im Zusammenhang verwenden',
+      items: [
+        { text: 'Wer nach der **Ausbildung** berufsbegleitend die Meisterprüfung ablegt, erwirbt damit zugleich die Berechtigung zum Studium.', gl: '— ejemplo de *Durchlässigkeit* entre formación profesional y universidad' },
+        { text: 'Kinder aus einkommensschwachen Familien werden nicht nur durch fehlendes Geld **benachteiligt**, sondern auch durch fehlende Vorbilder im eigenen Umfeld.', gl: '— *nicht nur …, sondern auch*: el conector doble que amplía el argumento' },
+        { text: 'Die Landesregierung will die frühkindliche **Förderung** ausbauen und dafür bis zum Ende der Legislaturperiode zusätzliche Mittel bereitstellen.' },
+        { text: 'Ohne eine gezielte Beratung an den Schulen wird sich die einseitige **Akademisierung** kaum bremsen lassen.' },
+        { text: 'Betriebe, die ihren Beschäftigten eine **Weiterbildung** finanzieren, profitieren langfristig selbst von deren höherer Qualifikation.', gl: '— *profitieren von + Dat.*: sacar provecho de' },
+        { text: 'Dass jemand am **Numerus clausus** scheitert, sagt über seine Eignung für den Arztberuf wenig aus.', gl: '— argumento clásico contra la nota de corte' },
       ],
-      loesungen: [
-        'Kinder aus einkommensschwachen Familien werden im Bildungssystem strukturell **benachteiligt**.',
-        'Der Bildungserfolg darf nicht von der **sozialen Herkunft** abhängen.',
-        'Das **lebenslange Lernen** ist angesichts des technologischen Wandels zur Notwendigkeit geworden.',
-        'Die zunehmende **Akademisierung** verschärft den Nachwuchsmangel im Handwerk.',
-        'Die frühkindliche **Förderung** müsste deutlich ausgebaut werden. ~~Fíjate: el paso B2→C1 casi siempre pasa por la nominalización + un verbo preciso.~~',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Schreibe einen argumentativen Absatz (80-100 Wörter) zur Frage „Sollte das Erststudium gebührenfrei bleiben?“. Verwende mindestens vier Wörter aus dem Kernwortschatz und ein Redemittel des Abwägens.',
-      loesung: '**Mögliche Lösung** (jede gut begründete Position ist richtig):\n*Einerseits würden Studiengebühren die chronisch unterfinanzierten Hochschulen spürbar entlasten, andererseits träfen sie vor allem Studierende aus einkommensschwachen Familien. Da der Bildungserfolg in Deutschland ohnehin stark von der sozialen Herkunft abhängt, würde eine Gebührenpflicht die Chancengleichheit weiter untergraben: Wer keine finanziellen Rücklagen hat, würde eher auf ein Studium verzichten oder es vorzeitig abbrechen. Ich bin daher der festen Überzeugung, dass das Erststudium auch künftig gebührenfrei bleiben muss — Bildung ist ein öffentliches Gut, und die Durchlässigkeit des Systems darf nicht vom Geldbeutel abhängen.*\nGültige Varianten: die Pro-Position mit *bewusstere Studienwahl* und *internationale Normalität*, oder ein Kompromiss (nachgelagerte, einkommensabhängige Gebühren).',
     },
 
     { type: 'rule' },

@@ -154,46 +154,36 @@ export default {
 
     { type: 'rule' },
 
-    // ── 6. Übungen ────────────────────────────────────────────────
+    // ── 6. Modelltext · Mehr Beispiele ────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Erkennen',
-      frage: 'Inventur der Voraussetzungen: Unterstreiche (gedanklich) die Kohäsionssignale des herausgelösten Satzes und formuliere, was im Text **davor** stehen muss.',
-      aufgaben: [
-        'Dennoch hält die Mehrheit der Befragten an dieser Gewohnheit fest.',
-        'Sie warnen vor allem vor den langfristigen Folgen für die Innenstädte.',
-        'Der Vergleich hinkt jedoch in einem entscheidenden Punkt.',
-        'Dazu zählt etwa die Möglichkeit, Prüfungen online abzulegen.',
-        'Ganz anders sieht es in ländlichen Regionen aus.',
+      type: 'modell',
+      eyebrow: 'Modelltexte — Übergänge, die tragen',
+      thema: 'Vier kurze Passagen, in denen jeweils der mittlere Satz die Brücke schlägt. Achte auf die fett gedruckten Signale: Sie verankern den Brückensatz im Vorsatz und liefern dem Folgesatz, was dieser voraussetzt.',
+      absaetze: [
+        '*Immer mehr Betriebe klagen über unbesetzte Ausbildungsplätze. Allein im Handwerk blieben zuletzt Zehntausende **Stellen frei**. Die Gründe **dafür** sind vielfältig.*',
+        '*Die Gemeinde hat ein Fahrverbot für den Marktplatz beschlossen. **Die Regelung** gilt zunächst für ein Jahr zur Probe. Erst **danach** soll über eine dauerhafte Lösung entschieden werden.*',
+        '*Kritiker bemängeln die hohen Kosten des Projekts. **Zudem** bezweifeln **sie** den ökologischen Nutzen. Die Stadtverwaltung weist **beide Vorwürfe** zurück.*',
+        '*Viele Museen experimentieren inzwischen mit virtuellen Rundgängen. **Diese Angebote** erreichen auch Menschen, die aus finanziellen oder gesundheitlichen Gründen nie ein Museum betreten würden. Ganz ersetzen lässt sich der Besuch vor Ort **dadurch** freilich nicht.*',
       ],
-      loesungen: [
-        '*Dennoch* → davor ein Argument **gegen** die Gewohnheit; *dieser Gewohnheit* → die Gewohnheit muss bereits konkret benannt sein.',
-        '*Sie warnen* → davor eine **Personengruppe im Plural** (Forscher, Händler, Kritiker), die als Warnende infrage kommt.',
-        '*Der Vergleich* → davor muss tatsächlich **verglichen** worden sein (etwa: „X funktioniert wie Y“); *jedoch* kündigt die Einschränkung eines eben gemachten Punktes an.',
-        '*Dazu zählt* → davor eine **Kategorie oder Aufzählung** (z. B. „digitale Angebote“), zu der das Beispiel gehören kann.',
-        'Fast keine Rückverweise → der Satz eröffnet einen **Kontrast auf Absatzebene**; davor muss die Lage in Städten oder einem anderen Raum beschrieben sein.',
+      annotationen: [
+        { tag: 'Passage 1', text: '*dafür* findet in den freien Stellen seinen Bezug.' },
+        { tag: 'Passage 2', text: '*Die Regelung* nimmt das Fahrverbot wieder auf, *danach* braucht die Probezeit als Bezugspunkt.' },
+        { tag: 'Passage 3', text: '*beide* verlangt genau zwei Kritikpunkte; *zudem* reiht den zweiten an den ersten.' },
+        { tag: 'Passage 4', text: 'Wiederaufnahme durch Synonym plus Demonstrativum; *freilich nicht* schränkt den eben genannten Vorteil ein.' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Anwenden',
-      frage: 'Welcher der beiden Kandidaten gehört in die Lücke? Entscheide über die Kohäsion und benenne das Signal, an dem der andere scheitert.',
-      aufgaben: [
-        'Text: *Immer mehr Betriebe klagen über unbesetzte Ausbildungsplätze. [ … ] Die Gründe dafür sind vielfältig.* — Kandidat A: *Allein im Handwerk blieben zuletzt Zehntausende Stellen frei.* — Kandidat B: *Deshalb steigt die Zahl der Bewerbungen stetig.*',
-        'Text: *Die Gemeinde hat ein Fahrverbot für den Marktplatz beschlossen. [ … ] Erst danach soll über eine dauerhafte Lösung entschieden werden.* — Kandidat A: *Die Regelung gilt zunächst für ein Jahr zur Probe.* — Kandidat B: *Viele Städte kämpfen mit zu viel Verkehr.*',
-        'Text: *Kritiker bemängeln die hohen Kosten des Projekts. [ … ] Die Stadtverwaltung weist beide Vorwürfe zurück.* — Kandidat A: *Zudem bezweifeln sie den ökologischen Nutzen.* — Kandidat B: *Das Projekt wurde bereits 2019 angekündigt.*',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Die Sprache der Textkohärenz im Einsatz',
+      items: [
+        { text: 'Das *dies* im Kandidaten **verweist auf** den gesamten **vorangehenden** Satz, nicht auf ein einzelnes Nomen.', gl: '— Demonstrativa nehmen oft ganze Sachverhalte wieder auf' },
+        { text: 'Der Satz *Diese Bedenken teilen viele Eltern* **setzt voraus**, dass zuvor Bedenken geäußert wurden.' },
+        { text: 'Ohne **Bezugswort** im Vorsatz bleibt das Pronomen in der Luft — der **Anschluss** misslingt.' },
+        { text: 'Ein Satz ohne Rückverweis lässt sich am ehesten an einem Absatzbeginn **einschieben**, wo der **rote Faden** neu ansetzen darf.' },
+        { text: 'Der Brückensatz **knüpft an** den Einwand des Vorsatzes **an** und bereitet zugleich den **nachfolgenden** Satz vor.', gl: '— *anknüpfen an* + Akkusativ' },
+        { text: 'Erst die **Wiederaufnahme** durch *das Vorhaben* macht den Übergang **stimmig**: Die **Kohäsion** sichert, was die **Kohärenz** verspricht.' },
       ],
-      loesungen: [
-        '**A** — der Satz konkretisiert die Klage mit einer Zahl, und das ***dafür*** im Folgesatz (*die Gründe dafür*) findet in den unbesetzten Stellen seinen Bezug. B scheitert doppelt: *deshalb* ergibt nach einer Klage über **unbesetzte** Plätze keinen kausalen Sinn, und steigende Bewerbungen widersprechen dem Problem.',
-        '**A** — *die Regelung* nimmt das Fahrverbot bestimmt wieder auf, und *erst danach* im Folgesatz braucht die Probezeit als Bezugspunkt. B ist die klassische Falle: thematisch passend, aber ohne jeden Faden zu *danach*.',
-        '**A** — der Folgesatz spricht von *beiden Vorwürfen*: Es müssen also **zwei** sein — die Kosten plus der bezweifelte Nutzen; *zudem* reiht den zweiten an den ersten. B liefert keinen zweiten Vorwurf, das Zahlwort *beide* bliebe ohne Deckung.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Jetzt baust du die Brücke selbst: Schreibe für die Lücke einen passenden Verbindungssatz — mit mindestens **zwei** expliziten Kohäsionssignalen (Pronomen/Demonstrativum, Konnektor oder Wiederaufnahme).\n\n*Viele Museen experimentieren inzwischen mit virtuellen Rundgängen. [ … ] Ganz ersetzen lässt sich der Besuch vor Ort dadurch freilich nicht.*',
-      loesung: '**Mögliche Lösung:** *Diese Angebote erreichen auch Menschen, die aus finanziellen oder gesundheitlichen Gründen nie ein Museum betreten würden.*\n**Warum sie funktioniert:** *Diese Angebote* nimmt die virtuellen Rundgänge als Synonym wieder auf (Wiederaufnahme + Demonstrativum); der Satz nennt einen Vorteil, an dem das *freilich nicht* des Folgesatzes seine Einschränkung festmachen kann — und *dadurch* im Folgesatz findet in den Angeboten sein Bezugswort.\n~~Otras variantes válidas: cualquier frase que (1) retome los recorridos virtuales con *sie/diese/solche Formate* y (2) aporte algo positivo que el *freilich nicht* pueda limitar. Inválida sería una frase sobre precios de entradas: tema cercano, cohesión cero.~~',
     },
 
     { type: 'rule' },

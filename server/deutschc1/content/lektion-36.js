@@ -121,7 +121,7 @@ export default {
       items: [
         { text: 'Für die einen ist die doppelte Staatsbürgerschaft **die überfällige Anerkennung doppelter Lebenswirklichkeiten**, für die anderen ein Hindernis für eindeutige Zugehörigkeit.' },
         { text: 'Befürworter argumentieren, die Einbürgerung stehe **am Anfang gelingender Integration**, weil sie politische Teilhabe erst ermögliche; Kritiker sähen sie lieber als deren Abschluss.' },
-        { text: 'Wer hier geboren wurde, hier zur Schule ging und hier arbeitet, **empfindet die Frage nach der „eigentlichen“ Heimat oft als unzutreffend**.' },
+        { text: 'Wer hier geboren wurde, hier zur Schule ging und hier arbeitet, **empfindet die Frage nach der „eigentlichen“ Heimat oft als befremdlich**.' },
       ],
     },
     {
@@ -171,48 +171,28 @@ export default {
 
     { type: 'rule' },
 
-    // ── 6. Übungen ────────────────────────────────────────────────
+    // ── 6. Modelltext · Mehr Beispiele ────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Wortschatz & Kollokationen',
-      frage: 'Ergänze das passende Substantiv aus dem Kernwortschatz.',
-      aufgaben: [
-        'Viele zugewanderte Ärztinnen warten monatelang auf die ______ ihrer Abschlüsse.',
-        'Wer eingebürgert werden möchte, muss bestimmte Voraussetzungen für die ______ erfüllen — unter anderem Sprachkenntnisse.',
-        'Ziel jeder Integrationspolitik sollte die gleichberechtigte ______ an Bildung, Arbeit und politischer Mitsprache sein.',
-        'Ohne qualifizierte Zuwanderung lässt sich der ______ in der Pflege kaum beheben.',
-        'Anonymisierte Bewerbungen gelten als ein Mittel, um ______ auf dem Arbeitsmarkt abzubauen.',
-      ],
-      loesungen: [
-        '… auf die **Anerkennung** ihrer Abschlüsse. (*die Anerkennung* + Gen.)',
-        '… Voraussetzungen für die **Einbürgerung** erfüllen.',
-        '… die gleichberechtigte **Teilhabe** an Bildung … (*Teilhabe an* + Dat.) ~~No confundas *Teilhabe* (participación social) con *Teilnahme* (participación puntual en un evento).~~',
-        '… der **Fachkräftemangel** in der Pflege …',
-        '… um **Diskriminierung** auf dem Arbeitsmarkt abzubauen.',
+      type: 'modell',
+      eyebrow: 'Modelltext — abwägender Absatz zur Einbürgerung',
+      thema: 'Soll die Einbürgerung am Anfang oder am Ende des Integrationsprozesses stehen? Der Absatz referiert beide Positionen mit Konjunktiv I und Verben des Berichtens, bevor er vorsichtig Stellung bezieht.',
+      absaetze: [
+        'Befürworter einer frühen Einbürgerung argumentieren, der Pass ermögliche politische Teilhabe und stärke die Identifikation mit dem neuen Land — Integration gelinge schneller, wenn man dazugehöre. Kritiker halten dagegen, die Staatsbürgerschaft sei kein Startkapital, sondern ein Abschluss: Erst wer Sprache, Arbeit und Alltag gemeistert habe, solle den letzten Schritt gehen.',
+        'Mir scheint ein vermittelnder Weg überzeugend: klare, erreichbare Voraussetzungen — Sprachnachweis, gesicherter Lebensunterhalt — und danach ein zügiges Verfahren. So wird die Einbürgerung weder verschenkt noch zur unerreichbaren Belohnung, sondern zu dem, was sie sein sollte: ein verlässlicher Meilenstein gelingender Teilhabe.',
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Von B2 zu C1',
-      frage: 'Formuliere die Sätze auf C1-Niveau um — mit Kernwortschatz, differenzierenden Quantoren und komplexerer Syntax.',
-      aufgaben: [
-        'Deutschland braucht Arbeiter aus dem Ausland, weil es zu wenige Fachkräfte gibt.',
-        'Die Migranten müssen Deutsch lernen. Der Staat muss Kurse anbieten.',
-        'Manche sind für den doppelten Pass, manche sind dagegen.',
-        'Es gibt Diskriminierung bei der Wohnungssuche. Das ist ein Problem.',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Kernwortschatz im Zusammenhang',
+      items: [
+        { text: 'Deutschland **versteht sich** inzwischen offiziell **als Einwanderungsgesellschaft** — ein Selbstbild, das jahrzehntelang politisch umstritten war.' },
+        { text: 'Um dem **Fachkräftemangel entgegenzuwirken**, will das Land die **Zuwanderung** aus Nicht-EU-Staaten weiter erleichtern.', gl: '— *entgegenwirken* + Dativ: contrarrestar' },
+        { text: 'Wer einen **Integrationskurs absolviert** hat, erfüllt eine wichtige Voraussetzung für die **Einbürgerung**.', gl: '— *absolvieren*: cursar y completar (curso, formación)' },
+        { text: 'Ohne eine zügige **Anerkennung** ihrer Abschlüsse bleibt vielen Eingewanderten die **Teilhabe** am Arbeitsleben verwehrt, die ihrer Qualifikation entspräche.' },
+        { text: 'Anonymisierte Bewerbungsverfahren sollen **Diskriminierung** aufgrund der **Herkunft** abbauen und damit den gesellschaftlichen **Zusammenhalt** stärken.' },
+        { text: 'Kulturelle **Vielfalt** als Bereicherung zu begreifen heißt nicht, auf gemeinsame Spielregeln zu verzichten — beides gehört zusammen.' },
       ],
-      loesungen: [
-        '**Angesichts des demografischen Wandels ist Deutschland auf qualifizierte Zuwanderung angewiesen, will es dem Fachkräftemangel wirksam entgegenwirken.** ~~„will es…“: condicional invertida de registro alto = wenn es … will.~~',
-        '**Integration ist keine Einbahnstraße: Sie setzt den Spracherwerb der Zugewanderten ebenso voraus wie ein ausreichendes Kursangebot des Staates.**',
-        '**An der doppelten Staatsbürgerschaft scheiden sich die Geister: Die einen sehen in ihr die Anerkennung doppelter Lebenswirklichkeiten, die anderen befürchten unklare Zugehörigkeiten.**',
-        '**Dass Wohnungssuchende mit ausländisch klingendem Namen nachweislich benachteiligt werden, offenbart Handlungsbedarf beim Abbau von Diskriminierung.**',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Schreibe einen abwägenden Absatz (90-110 Wörter) zur Frage: **„Sollte die Einbürgerung am Anfang oder am Ende des Integrationsprozesses stehen?“** Referiere beide Positionen mit Konjunktiv I oder Verben des Berichtens, bevor du vorsichtig Stellung nimmst.',
-      loesung: '**Mögliche Lösung** (auch die Gegenposition ist mit guter Begründung vertretbar):\n*Befürworter einer frühen Einbürgerung argumentieren, der Pass ermögliche politische Teilhabe und stärke die Identifikation mit dem neuen Land — Integration gelinge schneller, wenn man dazugehöre. Kritiker halten dagegen, die Staatsbürgerschaft sei kein Startkapital, sondern ein Abschluss: Erst wer Sprache, Arbeit und Alltag gemeistert habe, solle den letzten Schritt gehen. Mir scheint ein vermittelnder Weg überzeugend: klare, erreichbare Voraussetzungen — Sprachnachweis, gesicherter Lebensunterhalt — und danach ein zügiges Verfahren. So wird die Einbürgerung weder verschenkt noch zur unerreichbaren Belohnung, sondern zu dem, was sie sein sollte: ein verlässlicher Meilenstein gelingender Teilhabe.*',
     },
 
     { type: 'rule' },

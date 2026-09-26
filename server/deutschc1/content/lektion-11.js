@@ -166,51 +166,35 @@ export default {
 
     { type: 'rule' },
 
-    // ── 6. Übungen ────────────────────────────────────────────────
+    // ── 6. Mehr Beispiele ─────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Erkennen',
-      frage: 'Kongruenz-Fehlerjagd: Prüfe in jedem Satz die Verbform. Korrigiere, wo nötig — zwei Sätze sind bereits korrekt.',
-      aufgaben: [
-        'Sowohl die Geschäftsführung als auch der Betriebsrat war über die Pläne informiert.',
-        'Nicht nur die Kosten, sondern auch der Zeitplan sprechen gegen das Projekt.',
-        'Weder die Ministerin noch ihr Sprecher wollte sich äußern.',
-        'Entweder der Verlag oder die Autorin tragen die Korrekturkosten.',
-        'Sowohl der Bericht als auch die Stellungnahme fehlen noch.',
-      ],
-      loesungen: [
-        'Korrektur: *… **waren** informiert.* — *sowohl … als auch* addiert die Subjekte → Plural.',
-        'Korrektur: *… sondern auch der Zeitplan **spricht** …* — das nähere Subjekt ist Singular.',
-        '**Korrekt.** Zwei Singulare → Singular (*wollte*) ist die saubere Wahl; Plural wäre zulässig.',
-        'Korrektur: *… oder die Autorin **trägt** …* — auch hier entscheidet das nähere Subjekt.',
-        '**Korrekt.** Plural *fehlen* ist bei *sowohl … als auch* der Standard.',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Paare im Kommentar und im Bericht',
+      items: [
+        { text: 'Die Umfragewerte **schwankten** monatelang: **bald** lag die Regierung vorn, **bald** die Opposition.', gl: '— gehobener Wechsel mit *schwanken*' },
+        { text: 'Lob und Kritik **halten sich** im Gutachten **die Waage**: **Zwar** überzeugt die Methodik, **aber** die Datenbasis ist dünn.', gl: '— *zwar* in Position 1 → Inversion' },
+        { text: '**Weder** die Stadt **noch** das Land **fühlt** sich für die Sanierung der Brücke zuständig.', gl: '— zwei Singulare → Singular bevorzugt' },
+        { text: '**Je** gründlicher man die Quellen prüft, **desto** widersprüchlicher **erscheint** das Bild.', gl: '— *desto* + Komparativ + Verb' },
+        { text: '**Nicht nur** fehlt es an Personal, **sondern** die Ausstattung ist **auch** veraltet.', gl: '— markierte Spitzenstellung: höchstens einmal pro Text' },
+        { text: 'Die Teilnehmenden kamen **halb** aus beruflichem Interesse, **halb** aus privater Neugier.', gl: '— zwei gleichrangige Motive' },
       ],
     },
+
+    { type: 'rule' },
+
+    // ── Modelltext ────────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Umformen',
-      frage: 'Vom Neutralen ins Gehobene: Forme jeden Satz um — mit stilistischer Inversion oder dem Paar in Klammern.',
-      aufgaben: [
-        'Die Lage ist nicht nur ernst, sondern sie verschlechtert sich auch täglich. *(nicht nur in Spitzenstellung)*',
-        'Er war nicht informiert und hatte auch nicht zugestimmt. *(weder … noch als Satzpaar)*',
-        'Wir senken die Kosten, oder wir verlieren den Auftrag. *(entweder mit Inversion)*',
-        'Ihre Stimmung schwankte: mal war sie euphorisch, mal völlig resigniert. *(bald … bald)*',
-        'Er hat teilweise aus Neugier zugesagt und teilweise aus Pflichtgefühl. *(halb … halb)*',
+      type: 'modell',
+      eyebrow: 'Modelltext — zwei Paare, eine Inversion, zwei Adverbien',
+      thema: 'Diskussionsbeitrag „Brauchen Ehrenamtliche eine finanzielle Anerkennung?“',
+      absaetze: [
+        '**Nicht nur ist** der Nachwuchsmangel in den Vereinen unübersehbar, **sondern** die Zahl der langjährig Engagierten geht **auch** zurück. **Einerseits** lässt sich Motivation nicht kaufen, **andererseits** signalisiert eine Aufwandspauschale echte Wertschätzung. **Gleichwohl** darf das Ehrenamt kein verdeckter Niedriglohnsektor werden — und die öffentlichen Kassen sind leer. **Folglich** wäre eine steuerfreie Pauschale der richtige Mittelweg: Sie honoriert den Einsatz, ohne ihn zum Job zu machen.',
       ],
-      loesungen: [
-        '**Nicht nur ist** die Lage ernst, **sondern** sie verschlechtert sich **auch** täglich. — Verb direkt nach *nicht nur*; *auch* hinter das Verb des zweiten Teils.',
-        '**Weder war** er informiert, **noch hatte** er zugestimmt. — Inversion in beiden Hälften.',
-        '**Entweder senken** wir die Kosten, **oder** wir verlieren den Auftrag. — *entweder* besetzt Position 1, das Verb folgt sofort.',
-        'Ihre Stimmung schwankte: **bald** war sie euphorisch, **bald** völlig resigniert. — Gehobenes Register; das zweite Verb darf elliptisch entfallen.',
-        'Er hat **halb** aus Neugier, **halb** aus Pflichtgefühl zugesagt. — *teils … teils* wäre die neutrale Alternative.',
+      annotationen: [
+        { tag: 'Dosierung', text: 'Eine einzige stilistische Inversion (*Nicht nur ist …*) beim stärksten Argument. ~~Más sería recargar.~~' },
+        { tag: 'Parallelität', text: 'Jedes Paar verbindet gleichrangige Elemente (*einerseits … andererseits* zwei Hauptsätze); *gleichwohl* und *folglich* führen die Argumentation weiter — genau das punktet beim Kriterium „Strukturen“.' },
       ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Schreibe den Kernabsatz eines Diskussionsbeitrags zum Thema „Brauchen Ehrenamtliche eine finanzielle Anerkennung?“ (4-6 Sätze). Verwende **zwei verschiedene Paare** — davon **eines mit stilistischer Inversion** — und **mindestens ein Konnektoradverb aus Lektion 10**. Markiere alles.',
-      aufgabe: '*Stichpunkte: Nachwuchsmangel in den Vereinen · Motivation ist nicht käuflich · Wertschätzung signalisieren · leere öffentliche Kassen*',
-      loesung: '**Mögliche Lösung** (jede Kombination aus zwei Paaren, einer Inversion und einem Adverb ist richtig):\n***Nicht nur ist** der Nachwuchsmangel in den Vereinen unübersehbar, **sondern auch** die Zahl der langjährig Engagierten geht zurück. **Einerseits** lässt sich Motivation nicht kaufen, **andererseits** signalisiert eine Aufwandspauschale echte Wertschätzung. **Gleichwohl** darf das Ehrenamt kein verdeckter Niedriglohnsektor werden — und die öffentlichen Kassen sind leer. **Folglich** wäre eine steuerfreie Pauschale der richtige Mittelweg: Sie honoriert den Einsatz, ohne ihn zum Job zu machen.*\n~~Una sola inversión estilística por texto — más sería recargar; y cada par une elementos paralelos: eso puntúa en «Strukturen».~~',
     },
 
     { type: 'rule' },
@@ -223,12 +207,12 @@ export default {
       titel: 'Mini-Aufgabe · 6 Lücken',
       anweisung: 'Bei Konnektorenpaaren testet der Lückentext fast immer den zweiten Teil — der erste steht im Text und verrät die Lösung. Wähle für jede Lücke das passende Wort.',
       absaetze: [
-        'Weder die Kommunen {1} der Bund fühlen sich allein zuständig — die Finanzierung der Bibliotheken bleibt {2} ein Dauerthema. Dabei gilt: Je vielfältiger das Angebot ist, {3} mehr Menschen nutzen es. Nicht nur steigen die Ausleihzahlen wieder, {4} auch als Lernorte werden die Häuser neu entdeckt. Die Stimmung vor Ort ist geteilt: {5} überwiegt der Stolz auf das eigene Haus, bald die Sorge um den Etat. Sowohl die Politik {6} die Träger müssen folglich verlässlich planen.',
+        'Weder der Bund {1} die Kommunen fühlen sich allein zuständig — die Finanzierung der Bibliotheken bleibt {2} ein Dauerthema. Dabei gilt: Je vielfältiger das Angebot ist, {3} mehr Menschen nutzen es. Nicht nur steigen die Ausleihzahlen wieder, {4} auch als Lernorte werden die Häuser neu entdeckt. Die Stimmung vor Ort ist geteilt: {5} überwiegt der Stolz auf das eigene Haus, bald die Sorge um den Etat. Sowohl die Politik {6} die Träger müssen folglich verlässlich planen.',
       ],
-      optionen: ['noch', 'gleichwohl', 'desto', 'sondern', 'bald', 'als auch'],
+      optionen: ['noch', 'somit', 'desto', 'sondern', 'bald', 'als auch'],
       loesungen: [
-        '{1} **noch** — *weder* im Text verlangt seinen festen Partner; *fühlen* steht im Plural (*die Kommunen*).',
-        '{2} **gleichwohl** — konzessives Adverb im Mittelfeld (Lektion 10); nichts kündigt hier einen zweiten Teil an.',
+        '{1} **noch** — *weder* im Text verlangt seinen festen Partner; *fühlen* steht im Plural (nächststehendes Subjekt *die Kommunen*).',
+        '{2} **somit** — folgerndes Adverb im Mittelfeld (Lektion 10): Weil sich niemand zuständig fühlt, bleibt die Finanzierung offen; nichts kündigt hier einen zweiten Teil an.',
         '{3} **desto** — *je vielfältiger …* verlangt *desto/umso* + Komparativ + Verb.',
         '{4} **sondern** — *nicht nur* steht invertiert am Satzanfang (*steigen die Ausleihzahlen*); der zweite Teilsatz bringt *sondern … auch*.',
         '{5} **bald** — das zweite *bald* steht bereits im Text: das gehobene Paar für den Stimmungswechsel.',

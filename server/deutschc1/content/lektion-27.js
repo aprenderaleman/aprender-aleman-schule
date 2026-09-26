@@ -18,7 +18,7 @@ export default {
         'Am Ende kannst du einen Kurzvortrag nach dem Muster Einleitung — Hauptpunkte — Fazit aufbauen und frei nach Stichwörtern halten.',
         'Du machst deine Gliederung mit mündlichen Signalwörtern hörbar (*zunächst, anschließend, abschließend*).',
         'Du reagierst souverän auf Nachfragen — auch auf solche, die du nicht erwartet hast.',
-        'Du hast zwei eigene Themen vollständig vorbereitet und kannst das Verfahren auf jedes neue Thema übertragen.',
+        'Du erstellst in kürzester Zeit ein tragfähiges Vortragsgerüst und kannst das Verfahren auf jedes neue Thema übertragen.',
       ],
     },
 
@@ -175,7 +175,7 @@ export default {
         '==Beginnen wir mit den Vorteilen.== Ein Auslandsstudium erweitert den Horizont wie kaum etwas anderes: Man lernt nicht nur eine Sprache auf hohem Niveau, sondern auch, sich in einer fremden Kultur zurechtzufinden. ==Lassen Sie mich das an einem Beispiel veranschaulichen:== Eine Freundin von mir hat zwei Semester in Leipzig studiert — sie sagt heute, dass sie dort mehr über sich selbst gelernt hat als in vier Jahren an der Heimatuniversität. Hinzu kommt der berufliche Nutzen, denn viele Arbeitgeber werten Auslandserfahrung als Zeichen von Selbstständigkeit.',
         '==Auf der anderen Seite darf man die Schwierigkeiten nicht vergessen.== Ein Auslandsstudium kostet Geld — Miete, Versicherung, oft Studiengebühren —, und nicht jede Familie kann das tragen. Dazu kommt die emotionale Seite: Heimweh, Bürokratie, am Anfang auch Einsamkeit. Wer glaubt, das Auslandsjahr sei ein langer Urlaub, wird schnell korrigiert.',
         '==Abschließend lässt sich festhalten, dass== die Vorteile für mich klar überwiegen — allerdings nur, wenn die Finanzierung gesichert ist. ==Ich persönlich bin überzeugt, dass== man eine solche Chance nutzen sollte: Was man dort an Selbstständigkeit gewinnt, trägt einen ein Leben lang.',
-        '**Nachfrage der Prüferin:** *Sie sprachen von den Kosten — sollten Staaten Auslandssemester stärker fördern?* — ==Das ist eine berechtigte Frage.== Ich denke, ja: Programme wie Erasmus zeigen, dass Förderung den Zugang gerechter macht. ==Das passt zu dem, was ich vorhin sagte:== Die Chance darf nicht vom Einkommen der Eltern abhängen.',
+        '**Nachfrage der Prüferin:** *Sie sprachen von den Kosten — sollten Staaten Auslandssemester stärker fördern?* — ==Das ist eine berechtigte Frage.== Ich denke, ja: Staatliche Austauschprogramme zeigen, dass Förderung den Zugang gerechter macht. ==Das passt zu dem, was ich vorhin sagte:== Die Chance darf nicht vom Einkommen der Eltern abhängen.',
       ],
       annotationen: [
         { tag: 'Einstieg', text: 'Thema + persönlicher Bezug + angekündigte Gliederung: der Vertrag mit den Zuhörern steht nach 30 Sekunden.' },
@@ -194,49 +194,44 @@ export default {
 
     { type: 'rule' },
 
-    // ── 6. Übungen ────────────────────────────────────────────────
+    // ── 6. Modelltexte · Mehr Beispiele ───────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Erkennen',
-      frage: 'Ein Vortrag ist in Bausteine zerfallen. Bringe die Signalsätze in die richtige Reihenfolge und benenne die Funktion jedes Satzes.',
-      aufgaben: [
-        '„Abschließend lässt sich festhalten, dass beide Wohnformen ihre Berechtigung haben.“',
-        '„Lassen Sie mich das an einem Beispiel veranschaulichen: Meine Nachbarn haben drei Generationen unter einem Dach.“',
-        '„Ich möchte heute darüber sprechen, ob mehrere Generationen unter einem Dach leben sollten.“',
-        '„Auf der anderen Seite kann das enge Zusammenleben auch Konflikte verschärfen.“',
-        '„Zunächst gehe ich auf die Vorteile ein, danach auf die Probleme.“',
-      ],
-      loesungen: [
-        'Reihenfolge: **3 → 5 → 2 → 4 → 1.**',
-        'Satz 3 = **Einstieg** (Thema nennen), Satz 5 = **Gliederungsankündigung**, Satz 2 = **Beispiel** im Hauptpunkt 1, Satz 4 = **Übergang** zum Hauptpunkt 2, Satz 1 = **Fazit**.',
-        'Merke: Ohne die Sätze 5 und 4 wäre der Inhalt identisch — aber die Zuhörer hätten keine Landkarte. Genau diese Wegweiser bewertet die Kohärenz.',
+      type: 'modell',
+      eyebrow: 'Modell — vom Stichwort zum Vortragssatz',
+      thema: 'Thema: „Homeoffice — die Zukunft der Arbeit?“ Aus fünf Stichpunkten (Thema · Pro · Beispiel · Contra · Fazit) werden fünf gesprochene Sätze, jeder mit einem hörbaren Signalwort oder Redemittel.',
+      absaetze: [
+        '*Stichwörter: Homeoffice — Zukunft der Arbeit? · Pro: flexible Zeiteinteilung + kein Arbeitsweg · Bsp: Bruder, IT-Firma, 3 Tage zu Hause · Contra: Teamgefühl leidet, Grenze Arbeit/Privat verschwimmt · Fazit: hybride Modelle*',
+        '==Ich möchte heute über== das Homeoffice sprechen — und über die Frage, ob es die Zukunft der Arbeit ist.',
+        '==Ein klarer Vorteil ist== die flexible Zeiteinteilung, zumal auch der tägliche Arbeitsweg entfällt. ==Lassen Sie mich das an einem Beispiel veranschaulichen:== Mein Bruder arbeitet in einer IT-Firma und ist drei Tage pro Woche zu Hause — er möchte nicht mehr tauschen.',
+        '==Auf der anderen Seite darf man nicht vergessen, dass== das Teamgefühl leidet und die Grenze zwischen Arbeit und Privatleben verschwimmt.',
+        '==Abschließend lässt sich festhalten, dass== hybride Modelle am sinnvollsten sind — sie verbinden die Freiheit des Homeoffice mit dem Zusammenhalt im Büro.',
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Anwenden',
-      frage: 'Aus Stichwörtern werden Vortragssätze: Formuliere jeden Stichpunkt als vollständigen gesprochenen Satz mit einem passenden Signalwort oder Redemittel.',
-      aufgaben: [
-        'Thema nennen: Homeoffice — Zukunft der Arbeit?',
-        'Pro: flexible Zeiteinteilung + kein Arbeitsweg',
-        'Beispiel: eigener Bruder, IT-Firma, 3 Tage zu Hause',
-        'Contra: Teamgefühl leidet, Grenze Arbeit/Privat verschwimmt',
-        'Fazit: hybride Modelle am sinnvollsten',
+      type: 'modell',
+      eyebrow: 'Modell — ein komplettes Vortragsgerüst',
+      thema: 'Thema: „Sollte gesunde Ernährung in der Schule unterrichtet werden?“ Stichwortzettel (Position, zwei Punkte, Beispiel) plus wörtlich festgelegter Einstiegs- und Schlusssatz — das wiederholbare Verfahren: Gerüst bauen → Klammer festlegen → frei sprechen.',
+      absaetze: [
+        '*Zettel: Position: ja, als Praxisfach · 1 Gesundheit: Übergewicht ↑, früh Gewohnheiten · 2 Aber: Lehrpläne voll, Aufgabe der Eltern? · Bsp: Kochprojekt an meiner Schule*',
+        '**Einstieg:** *Ich möchte heute darüber sprechen, ob gesunde Ernährung ein Schulfach sein sollte — meiner Meinung nach eine der unterschätztesten Bildungsfragen.*',
+        '**Schluss:** *Abschließend lässt sich festhalten: Ein eigenes Fach braucht es vielleicht nicht — aber feste Praxisprojekte, denn was man als Kind kochen lernt, isst man als Erwachsener.*',
       ],
-      loesungen: [
-        '*Ich möchte heute über das Homeoffice sprechen — und über die Frage, ob es die Zukunft der Arbeit ist.*',
-        '*Ein klarer Vorteil ist die flexible Zeiteinteilung, zumal auch der tägliche Arbeitsweg entfällt.*',
-        '*Lassen Sie mich das an einem Beispiel veranschaulichen: Mein Bruder arbeitet in einer IT-Firma und ist drei Tage pro Woche zu Hause — er möchte nicht mehr tauschen.*',
-        '*Auf der anderen Seite darf man nicht vergessen, dass das Teamgefühl leidet und die Grenze zwischen Arbeit und Privatleben verschwimmt.*',
-        '*Abschließend lässt sich festhalten, dass hybride Modelle am sinnvollsten sind — sie verbinden die Freiheit des Homeoffice mit dem Zusammenhalt im Büro.*',
+      annotationen: [
+        { tag: 'Wiederverwertung', text: '~~Los temas del examen se repiten en familias (educación, salud, digitalización, medio ambiente): un guion como este se recicla para toda la familia.~~' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Bereite zwei komplette Vortragsgerüste vor — Thema A: „Sollte gesunde Ernährung in der Schule unterrichtet werden?“, Thema B: „Brauchen wir noch Bargeld?“ Für jedes: Stichwortzettel (Position, 2 Punkte, Beispiel) + wörtlicher Einstiegs- und Schlusssatz. Halte danach beide Vorträge laut, mit Timer auf 4 Minuten.',
-      aufgabe: 'Ziel ist nicht der perfekte Text, sondern das wiederholbare Verfahren: Gerüst bauen → Klammer festlegen → frei sprechen.',
-      loesung: '**Mögliche Lösung für Thema A** (Thema B analog):\n*Zettel: Position: ja, als Praxisfach · 1 Gesundheit: Übergewicht ↑, früh Gewohnheiten · 2 Aber: Lehrpläne voll, Aufgabe der Eltern? · Bsp: Kochprojekt an meiner Schule*\n**Einstieg:** *Ich möchte heute darüber sprechen, ob gesunde Ernährung ein Schulfach sein sollte — meiner Meinung nach eine der unterschätztesten Bildungsfragen.*\n**Schluss:** *Abschließend lässt sich festhalten: Ein eigenes Fach braucht es vielleicht nicht — aber feste Praxisprojekte, denn was man als Kind kochen lernt, isst man als Erwachsener.*\n~~Guarda estos guiones: los temas del examen se repiten en familias (educación, salud, digitalización, medio ambiente) y un guion se recicla para toda la familia.~~',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Vortragssprache im Einsatz',
+      items: [
+        { text: 'Für den **Einstieg** wählte Jonas eine überraschende Zahl — schon nach dem ersten Satz hörte der ganze Raum zu.', gl: '— ein gelungener Einstieg weckt Neugier' },
+        { text: 'Zunächst möchte ich die **Entwicklung** der letzten zehn Jahre kurz nachzeichnen.' },
+        { text: 'Einen **Aspekt** möchte ich besonders **hervorheben**: die Kosten für die Kommunen.' },
+        { text: 'Um diese These zu stützen, **führe** ich zwei Beispiele aus meiner eigenen Stadt **an**.', gl: '— *anführen*: trennbar, Akkusativ' },
+        { text: 'In fast allen Großstädten **lässt sich** eine deutliche **Tendenz** zum Teilen statt Besitzen **beobachten**.' },
+        { text: 'Wie ist dieser **Wandel** insgesamt **einzuschätzen**? — Ich sehe darin mehr Chancen als Risiken.', gl: '— rhetorische Frage als Überleitung zum Fazit' },
+      ],
     },
 
     { type: 'rule' },

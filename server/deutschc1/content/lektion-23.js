@@ -44,7 +44,7 @@ export default {
         { wort: 'die Wortzahl', kollokation: 'die vorgegebene Wortzahl einhalten', es: 'número de palabras' },
         { wort: 'der Verstoß', kollokation: 'ein Verstoß gegen das Register', es: 'infracción, falta contra algo' },
       ],
-      hinweis: 'Achtung, falscher Freund: **der Beitrag** ist hier die *aportación* zu einer Diskussion — nicht die Mitgliedsgebühr und schon gar nicht ein „Pago“. Und **die Aufgabenstellung** verlangt die Präposition *in*: *In der Aufgabenstellung steht, dass…*',
+      hinweis: 'Achtung, Mehrdeutigkeit: **der Beitrag** ist hier die *aportación* zu einer Diskussion — nicht der Mitgliedsbeitrag ~~(cuota)~~. Und **die Aufgabenstellung** verlangt die Präposition *in*: *In der Aufgabenstellung steht, dass…*',
     },
 
     { type: 'rule' },
@@ -131,7 +131,7 @@ export default {
         {
           badge: 'Komma',
           titel: 'Kommasetzung',
-          text: 'Im Deutschen steht **vor jedem Nebensatz ein Komma**: vor *dass, weil, obwohl, wenn* — immer, ohne Ausnahme. ~~En español «creo que» va sin coma; en alemán «Ich glaube, dass» la lleva obligatoriamente.~~ Dafür gibt es **kein Komma nach Adverbien am Satzanfang** (*Deshalb sollten wir…*, nicht *Deshalb, sollten wir…*).',
+          text: 'Im Deutschen wird **jeder Nebensatz durch Komma abgetrennt**: Vor *dass, weil, obwohl, wenn* steht im Satzinneren immer ein Komma, ohne Ausnahme. ~~En español «creo que» va sin coma; en alemán «Ich glaube, dass» la lleva obligatoriamente.~~ Dafür gibt es **kein Komma nach Adverbien am Satzanfang** (*Deshalb sollten wir…*, nicht *Deshalb, sollten wir…*).',
         },
         {
           badge: 'Verb',
@@ -183,53 +183,31 @@ export default {
 
     { type: 'rule' },
 
-    // ── 6. Übungen ────────────────────────────────────────────────
+    // ── 6. Mehr Beispiele & Modelltext (Übungen → Übungsheft) ────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Erkennen',
-      frage: 'Welches Bewertungskriterium leidet in jeder Situation am stärksten: Erfüllung der Aufgabe, Kohärenz, Wortschatz oder Strukturen?',
-      aufgaben: [
-        'Der Beitrag behandelt drei Leitpunkte glänzend — den vierten gar nicht.',
-        'Der Text besteht fast nur aus Hauptsätzen, die mit *und* oder *aber* verbunden sind.',
-        'Die Nachricht an die Hausverwaltung beginnt mit „Hallo Leute“ und endet mit „LG“.',
-        'In jedem zweiten Satz steht *wichtig*, *gut* oder *Problem*.',
-        'Die Nebensätze sind ambitioniert, aber das Verb steht fast nie am Ende.',
-      ],
-      loesungen: [
-        '**Erfüllung der Aufgabe** — ein fehlender Leitpunkt drückt dieses Kriterium sofort, egal wie gut der Rest ist.',
-        '**Strukturen** (und mittelbar Kohärenz) — es fehlt die syntaktische Vielfalt: Nebensätze, Passiv, Konnektoren.',
-        '**Erfüllung der Aufgabe** — das Register gehört zur Textsorte; ein Duz-Ton in einer formellen Nachricht ist ein Aufgabenverstoß, kein bloßer Stilfehler.',
-        '**Wortschatz** — Wiederholungen und Allzweckwörter zeigen fehlende lexikalische Bandbreite.',
-        '**Strukturen** — komplexe Sätze zählen nur, wenn sie korrekt sind; systematische Verbstellungsfehler wiegen schwerer als einfache, richtige Sätze.',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Der Kernwortschatz des Moduls im Satz',
+      items: [
+        { text: 'Lies die **Aufgabenstellung** zweimal: Wer einen **Leitpunkt** übersieht, gefährdet die **Erfüllung** der Aufgabe, bevor er den ersten Satz geschrieben hat.', gl: '— *in der Aufgabenstellung steht …*' },
+        { text: 'Eine **Gliederung** in Stichpunkten dauert fünf Minuten; auf einen ausformulierten **Entwurf** verzichtest du unter Zeitdruck besser.', gl: '— *auf etwas verzichten* + Akk.' },
+        { text: 'Ohne Konnektoren verliert selbst ein inhaltlich starker Beitrag den **roten Faden** — und damit Punkte bei der **Kohärenz**.', gl: '— *den roten Faden verlieren / wiederaufnehmen*' },
+        { text: 'Die **formelle Nachricht** an die Hausverwaltung mit „Hallo“ zu beginnen, gilt als **Verstoß** gegen das Register.', gl: '— *ein Verstoß gegen* + Akk.' },
+        { text: 'Viele Kandidatinnen scheitern nicht am Wortschatz, sondern an der **Zeiteinteilung**: Für die **Überarbeitung** bleibt dann keine Minute.', gl: '— *an etwas scheitern* + Dat.' },
+        { text: 'Die vorgegebene **Wortzahl** ist ein Richtwert: Zehn Prozent darüber oder darunter wirken sich auf kein **Bewertungskriterium** aus.', gl: '— *sich auf etwas auswirken* + Akk.' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Anwenden',
-      frage: 'Hier sind sechs Sätze mit typischen Fehlern von Spanischsprachigen. Korrigiere sie — jeder Satz enthält genau einen Fehler.',
-      aufgaben: [
-        'Ich hoffe dass Sie mir weiterhelfen können.',
-        'Das ist ein sehr interessante Thema.',
-        'Obwohl es gibt viele Vorteile, bleibe ich skeptisch.',
-        'Wegen dem schlechten Wetter wurde die Veranstaltung abgesagt.',
-        'Am Ende, ich denke, dass ein Kompromiss nötig ist.',
-        'Ich möchte gern teilnehmen an dem Seminar.',
+      type: 'modell',
+      eyebrow: 'Modelltext — ein Fünf-Minuten-Revisionsplan',
+      thema: 'Fünf Prüfschritte in fester Reihenfolge, jeder als Imperativsatz mit konkretem Suchauftrag — nicht „Grammatik prüfen“, sondern „Suche X und kontrolliere Y“. Die Reihenfolge ist variabel, solange der Leitpunkt-Check und die drei Fehlerjagden vorkommen.',
+      absaetze: [
+        '1. *Lies die Aufgabenstellung erneut und hake jeden Leitpunkt im Text ab.*',
+        '2. *Suche jedes „dass“, „weil“ und „obwohl“ — steht davor ein Komma und das Verb am Ende?*',
+        '3. *Prüfe jeden Satzanfang mit „deshalb“, „außerdem“ oder „trotzdem“ — steht das Verb direkt danach?*',
+        '4. *Kontrolliere die Artikel der zehn wichtigsten Nomen deines Textes, besonders „das Problem“, „das Thema“, „das Ziel“.*',
+        '5. *Zähle die Wörter grob und prüfe in Teil 2 Anrede, Grußformel und die Großschreibung von „Sie“.*',
       ],
-      loesungen: [
-        'Ich hoffe**,** dass Sie mir weiterhelfen können. — Komma vor *dass*, immer.',
-        'Das ist ein sehr interessante**s** Thema. — *das Thema*: Neutrum, trotz ~~«el tema»~~.',
-        'Obwohl es viele Vorteile **gibt**, bleibe ich skeptisch. — Verb ans Ende des Nebensatzes.',
-        'Wegen **des schlechten Wetters** wurde die Veranstaltung abgesagt. — *wegen* + Genitiv; *wegen dem* kostet auf C1 Punkte.',
-        '**Am Ende denke ich**, dass ein Kompromiss nötig ist. — kein Komma nach der Angabe, Verb auf Position 2. ~~Calco de «Al final, yo creo que…».~~',
-        'Ich möchte gern **an dem Seminar teilnehmen**. — der Infinitiv schließt die Satzklammer; die Präpositionalphrase steht davor.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Erstelle deinen persönlichen Fünf-Minuten-Revisionsplan: fünf Prüfschritte in fester Reihenfolge, jeder als Imperativsatz mit einem konkreten Suchauftrag.',
-      aufgabe: 'Formuliere die fünf Schritte so, dass du sie in der Prüfung mechanisch abarbeiten kannst — nicht „Grammatik prüfen“, sondern „Suche X und kontrolliere Y“.',
-      loesung: '**Mögliche Lösung** (deine Reihenfolge darf abweichen, solange Leitpunkte und die drei Fehlerjagden vorkommen):\n1. *Lies die Aufgabenstellung erneut und hake jeden Leitpunkt im Text ab.*\n2. *Suche jedes „dass“, „weil“ und „obwohl“ — steht davor ein Komma und das Verb am Ende?*\n3. *Prüfe jeden Satzanfang mit „deshalb/außerdem/trotzdem“ — steht das Verb direkt danach?*\n4. *Kontrolliere die Artikel der zehn wichtigsten Nomen deines Textes, besonders „das Problem“, „das Thema“, „das Ziel“.*\n5. *Zähle die Wörter grob und prüfe Anrede, Grußformel und Sie-Großschreibung in Teil 2.*',
     },
 
     { type: 'rule' },

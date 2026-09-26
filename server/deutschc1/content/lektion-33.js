@@ -115,9 +115,9 @@ export default {
       kicker: 'Desinformation',
       titel: 'Über Fake News und Verantwortung sprechen',
       items: [
-        { text: 'Gezielte **Desinformation** zielt weniger darauf ab, eine Lüge zu etablieren, als darauf, das Vertrauen in alle Quellen zu zerstören.', gl: '— *weniger darauf … als darauf*: contraste C1 de manual' },
+        { text: 'Systematische **Desinformation** zielt weniger darauf ab, eine Lüge zu etablieren, als darauf, das Vertrauen in alle Quellen zu zerstören.', gl: '— *weniger darauf … als darauf*: contraste C1 de manual' },
         { text: '**Falschmeldungen** verbreiten sich in Windeseile — ihre Richtigstellung erreicht meist nur einen Bruchteil des Publikums.' },
-        { text: 'Es greift zu kurz, allein die **Plattformen** zur Verantwortung zu ziehen; ohne kritische Nutzer bleibt jede Regulierung Stückwerk.', gl: '— *es greift zu kurz* + *Stückwerk bleiben*: dos fórmulas de juicio en un solo Satz' },
+        { text: 'Es greift zu kurz, allein die **Plattformen** zur Verantwortung zu ziehen; ohne kritische Nutzer bleibt jede Regulierung Stückwerk.', gl: '— *es greift zu kurz* + *Stückwerk bleiben*: dos fórmulas de juicio en una sola frase' },
         { text: 'Wer eine **Quelle** nicht prüfen kann, sollte sie auch nicht weiterverbreiten — so banal diese Regel klingt, so selten wird sie befolgt.' },
       ],
     },
@@ -163,52 +163,31 @@ export default {
 
     { type: 'rule' },
 
-    // ── 6. Übungen ────────────────────────────────────────────────
+    // ── 6. Modelltext · Mehr Beispiele ────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Wortschatz & Kollokationen',
-      frage: 'Ergänze das passende Wort aus dem Kernwortschatz. Achte auf die Kollokation.',
-      aufgaben: [
-        'gezielte Desinformation …',
-        'eine Falschmeldung … (aufdecken — aber mit dem C1-Verb)',
-        'in einer Filterblase … sein',
-        'an Glaubwürdigkeit … bzw. …',
-        'die Plattformen zur Verantwortung …',
-        'eine enorme … erzielen',
+      type: 'modell',
+      eyebrow: 'Modelltext — argumentativer Absatz zum öffentlich-rechtlichen Rundfunk',
+      thema: '„Ist der öffentlich-rechtliche Rundfunk noch zeitgemäß?“ Der Absatz beginnt mit einem Zugeständnis an die Kritiker, stützt die eigene Position mit Kernwortschatz und endet mit einer Bedingung für die Zukunft.',
+      absaetze: [
+        'Der **öffentlich-rechtliche Rundfunk** **mag** schwerfällig und reformbedürftig **sein** — überflüssig ist er deshalb noch lange nicht. In einer Öffentlichkeit, in der sich **Falschmeldungen** in Windeseile **verbreiten** und **Reichweite** mehr zählt als **Glaubwürdigkeit**, braucht es ein Angebot, das der Meinungsvielfalt und nicht der Quote verpflichtet ist. **Bei aller Kritik** am Rundfunkbeitrag halte ich diese Unabhängigkeit für sein stärkstes Argument: Wer Information allein dem Markt überlässt, bekommt **Schlagzeilen** statt Einordnung. Zeitgemäß wird der Rundfunk allerdings nur bleiben, wenn er das junge Publikum dort erreicht, wo es längst ist — auf den **Plattformen**.',
       ],
-      loesungen: [
-        'gezielte Desinformation **verbreiten**',
-        'eine Falschmeldung **entlarven** — ~~«desenmascarar»: más preciso que *aufdecken* cuando algo se hace pasar por verdad~~',
-        'in einer Filterblase **gefangen** sein',
-        'an Glaubwürdigkeit **verlieren** bzw. **gewinnen** — *an* + Dat.',
-        'die Plattformen zur Verantwortung **ziehen**',
-        'eine enorme **Reichweite** erzielen',
+      annotationen: [
+        { tag: 'Konzession', text: 'Zwei konzessive Mittel (*mag … sein — …* und *bei aller Kritik*) räumen den Einwand ein, bevor sie ihn entkräften.' },
+        { tag: 'Position', text: 'Eine kritische Haltung zum Rundfunk ist ebenso gültig — vorausgesetzt, sie wird differenziert begründet.' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Von B2 zu C1',
-      frage: 'Forme die einfachen Sätze in C1-Sätze um. Nutze das angegebene Wort aus dem Kernwortschatz.',
-      aufgaben: [
-        'Falsche Nachrichten verbreiten sich sehr schnell im Internet. (die Falschmeldung)',
-        'Viele Leute glauben Influencern mehr als Journalisten. (die Glaubwürdigkeit)',
-        'Die Schüler sollten lernen, Informationen zu prüfen. (die Medienkompetenz)',
-        'Man sieht im Internet nur noch die eigene Meinung. (die Filterblase)',
-        'Das Fernsehen von ARD und ZDF wird von allen bezahlt. (der öffentlich-rechtliche Rundfunk)',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Kernwortschatz im Zusammenhang',
+      items: [
+        { text: 'Kaum war das manipulierte Video online, hatte es schon eine **Reichweite** erzielt, von der seriöse Redaktionen nur träumen können.' },
+        { text: 'Eine unabhängige Rechercheplattform konnte die angebliche Umfrage binnen weniger Stunden als **Falschmeldung entlarven**.', gl: '— *binnen* + Gen./Dat.: registro escrito para «en el plazo de»' },
+        { text: 'Wer **Desinformation** gezielt **verbreitet**, setzt darauf, dass kaum jemand die **Quelle** prüft.' },
+        { text: 'Mit jeder unbelegten Behauptung **verliert** ein Medium **an Glaubwürdigkeit** — und gewinnt sie nur mühsam zurück.', gl: '— *an etwas verlieren/gewinnen*: *an* + Dat. expresa el ámbito del cambio' },
+        { text: 'Die **Vielfalt** der Stimmen im Netz ist ein demokratischer Gewinn, solange sie nicht in lauter voneinander abgeschotteten **Filterblasen** zerfällt.' },
+        { text: 'Seit **Influencer** ihre Werbung kennzeichnen müssen, lässt sich eine bezahlte Empfehlung zumindest auf den zweiten Blick erkennen.' },
       ],
-      loesungen: [
-        '**Falschmeldungen** verbreiten sich in sozialen Netzwerken in Windeseile — weit schneller als jede Richtigstellung.',
-        'Dass Influencer bei vielen eine höhere **Glaubwürdigkeit** genießen als Journalisten, sollte den Qualitätsmedien zu denken geben. ~~*Glaubwürdigkeit genießen* y *zu denken geben*: dos colocaciones C1 en un Satz.~~',
-        'Die Vermittlung von **Medienkompetenz** müsste fest im Lehrplan verankert werden.',
-        'Empfehlungsalgorithmen begünstigen die Entstehung von **Filterblasen**, in denen die eigene Sicht ständig bestätigt wird.',
-        'Der **öffentlich-rechtliche Rundfunk** wird über eine Haushaltsabgabe finanziert und ist dem Gemeinwohl verpflichtet.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Schreibe einen argumentativen Absatz (80-100 Wörter) zur Frage „Ist der öffentlich-rechtliche Rundfunk noch zeitgemäß?“. Verwende mindestens vier Kernwörter und ein konzessives Redemittel (mag … sein / bei aller Kritik).',
-      loesung: '**Mögliche Lösung** (auch die kritische Position ist gültig, solange sie differenziert bleibt):\n*Der öffentlich-rechtliche Rundfunk mag schwerfällig und reformbedürftig sein — überflüssig ist er deshalb noch lange nicht. In einer Öffentlichkeit, in der sich Falschmeldungen in Windeseile verbreiten und Reichweite mehr zählt als Glaubwürdigkeit, braucht es ein Angebot, das der Meinungsvielfalt und nicht der Quote verpflichtet ist. Bei aller Kritik am Rundfunkbeitrag halte ich diese Unabhängigkeit für sein stärkstes Argument: Wer Information allein dem Markt überlässt, bekommt Schlagzeilen statt Einordnung. Zeitgemäß wird der Rundfunk allerdings nur bleiben, wenn er das junge Publikum dort erreicht, wo es längst ist — auf den Plattformen.*',
     },
 
     { type: 'rule' },

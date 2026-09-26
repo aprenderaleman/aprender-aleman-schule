@@ -31,7 +31,7 @@ export default {
         { wort: 'die Hauptaussage', kollokation: 'die Hauptaussage eines Beitrags erfassen', es: 'idea principal' },
         { wort: 'die Einlesezeit', kollokation: 'die Einlesezeit für die Aufgaben nutzen', es: 'tiempo previo para leer los ítems' },
         { wort: 'sich Notizen machen', kollokation: 'sich beim Hören Notizen machen', es: 'tomar notas' },
-        { wort: 'das Stichwort', kollokation: 'in Stichwörtern notieren', es: 'palabra clave' },
+        { wort: 'das Stichwort', kollokation: 'in Stichworten notieren', es: 'palabra clave' },
         { wort: 'mitkommen', kollokation: 'beim schnellen Sprechtempo mitkommen', es: 'seguir el ritmo' },
         { wort: 'den Faden verlieren', kollokation: 'kurz den Faden verlieren', es: 'perder el hilo' },
         { wort: 'verpassen', kollokation: 'eine Information verpassen', es: 'perderse (una información)' },
@@ -145,48 +145,32 @@ export default {
 
     { type: 'rule' },
 
-    // ── 6. Übungen ────────────────────────────────────────────────
+    // ── 6. Mehr Beispiele & Transkript (Übungen → Übungsheft) ──
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Erkennen',
-      frage: 'Zu welchem Teil des Moduls Hören passt die Beschreibung — Teil 1, 2, 3 oder 4?',
-      aufgaben: [
-        'Drei Gäste und eine Moderatorin streiten über Videoüberwachung; du entscheidest, wer welche Position vertritt.',
-        'Eine Wissenschaftlerin erklärt im Gespräch mit einem Journalisten ihre Forschung; die Items fragen nach Details und Begründungen.',
-        'Du hörst den Text als einzigen im Modul zweimal.',
-        'Mehrere kurze Gesprächsabschnitte zu Alltagsthemen; die Items zielen auf die Kernaussage jedes Abschnitts.',
-        'Der Text ist monologisch und folgt einer angekündigten Gliederung.',
-      ],
-      loesungen: [
-        '**Teil 3** — Diskussion mit Positionszuordnung.',
-        '**Teil 2** — Interview mit Detailverstehen.',
-        '**Teil 4** — nur der Vortrag wird zweimal gespielt.',
-        '**Teil 1** — Podcast/Gespräch mit globalem und selektivem Verstehen.',
-        '**Teil 4** — der Vortrag; seine Gliederung ist deine Landkarte (Lektion 22).',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Der Wortschatz des Hörmoduls im Satz',
+      items: [
+        { text: 'Wer die **Einlesezeit** konsequent **nutzt**, weiß schon vor dem ersten Satz, worauf er achten muss.', gl: '— *die Einlesezeit nutzen*, nicht bloß „haben“' },
+        { text: 'Beim zweiten **Hörtext** bin ich anfangs kaum **mitgekommen**, weil die **Sprecherin** sehr schnell sprach.', gl: '— *mitkommen* = folgen können' },
+        { text: 'Aus Angst, etwas zu **verpassen**, schrieb Hamid jedes Wort mit — und **verlor** prompt **den Faden**.', gl: '— *etwas verpassen*, aber *den Faden verlieren*' },
+        { text: 'Der **Äußerung** des Experten ist zu **entnehmen**, dass er das Projekt inzwischen skeptischer sieht.', gl: '— *einer Äußerung etwas entnehmen* + Dativ' },
+        { text: 'Olga **macht sich** nur zu Zahlen und Gegensätzen **Notizen** — in **Stichworten**, nie in ganzen Sätzen.', gl: '— *sich Notizen machen*' },
+        { text: 'Wer mit dem **Transkript** trainiert, sollte die Lösungen **abdecken** und den Text **in Echtzeit** lesen.', gl: '— die drei Regeln der Transkript-Methode' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Anwenden',
-      frage: 'Verdichte die gehörten Sätze zu Notizen von höchstens fünf Wörtern — so, dass die prüfungsrelevante Information erhalten bleibt.',
-      aufgaben: [
-        '„Wir hatten mit etwa zweihundert Anmeldungen gerechnet, am Ende waren es über sechshundert.“',
-        '„Grundsätzlich begrüße ich den Vorstoß, auch wenn mir das Tempo Sorgen macht.“',
-        '„Der Umsatz ist nicht etwa eingebrochen, wie oft behauptet wird — er stagniert lediglich.“',
-        '„Früher haben wir alles ausgedruckt; heute läuft die komplette Abstimmung digital.“',
+      type: 'modell',
+      eyebrow: 'Transkript — Generalprobe der Transkript-Methode',
+      thema: 'Lies das Transkript einmal in Echtzeit — zügig und ohne zurückzuspringen — und halte in Stichworten fest, warum das Projekt anfangs belächelt wurde und woran die Sprecherin seinen Erfolg misst. Decke die Anmerkungen ab, bis du geantwortet hast.',
+      absaetze: [
+        '==Transkript · Stadtteilradio:== „Als wir vor vier Jahren die erste Reparaturwerkstatt im Stadtteilzentrum eröffnet haben, hat man uns belächelt — Reparieren galt als Nostalgie, als Hobby für Bastler, ehrlich gesagt. Heute kommen jede Woche an die achtzig Leute: Studentinnen mit kaputten Kopfhörern, Rentner mit vierzig Jahre alten Toastern. Für mich ist aber gar nicht die Besucherzahl der eigentliche Erfolg. Entscheidend ist, dass die Hälfte von ihnen wiederkommt — und irgendwann nicht mehr fragt, ob sich die Reparatur lohnt, sondern wie sie geht.“',
       ],
-      loesungen: [
-        '**erwartet 200 → 600+** — die Differenz zwischen Erwartung und Ergebnis ist das Item.',
-        '**pro, aber Tempo Sorge** — Zustimmung mit Einschränkung; beide Hälften notieren.',
-        '**nicht Einbruch, nur Stagnation** — die Struktur *nicht X, sondern Y* ist die halbe Miete gegen den Distraktor.',
-        '**früher Papier → heute digital** — der Zeitkontrast trägt die Aussage. ~~Flechas y abreviaturas valen más que frases: nadie evalúa tus notas.~~',
+      annotationen: [
+        { tag: 'Anfangs belächelt', text: 'Reparieren galt als **Nostalgie, als Bastler-Hobby** — nicht als ernsthaftes Konzept.' },
+        { tag: 'Maßstab des Erfolgs', text: 'Nicht die Besucherzahl, sondern dass **die Hälfte wiederkommt** und sich die Frage verschiebt: von *lohnt sich das?* zu *wie geht das?* — also das veränderte Verhalten.' },
+        { tag: 'Falle', text: 'Wer „achtzig Leute pro Woche“ notiert, ist auf den Distraktor hereingefallen: Die Sprecherin entwertet die Zahl selbst (*„gar nicht die Besucherzahl“*). ~~En el examen sería audio: una sola escucha, sin volver atrás.~~' },
       ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Generalprobe der Transkript-Methode. Decke zuerst die Lösung ab. Lies dann das Transkript **einmal in Echtzeit** — zügig, ohne zurückzuspringen — und beantworte dabei die zwei Fragen: **1.** Warum wurde das Projekt anfangs belächelt? **2.** Woran misst die Sprecherin den Erfolg?\n\n**Transkript** ~~(esto sería audio en el examen)~~: *„Als wir vor vier Jahren die erste Reparaturwerkstatt im Stadtteilzentrum eröffnet haben, hat man uns belächelt — Reparieren galt als Nostalgie, als Hobby für Bastler, ehrlich gesagt. Heute kommen jede Woche an die achtzig Leute: Studentinnen mit kaputten Kopfhörern, Rentner mit vierzig Jahre alten Toastern. Für mich ist aber gar nicht die Besucherzahl der eigentliche Erfolg. Entscheidend ist, dass die Hälfte von ihnen wiederkommt — und irgendwann nicht mehr fragt, ob sich die Reparatur lohnt, sondern wie sie geht.“*',
-      loesung: '**1.** Reparieren galt als **Nostalgie, als Bastler-Hobby** — nicht als ernsthaftes Konzept.\n**2.** Nicht an der Besucherzahl, sondern daran, dass **die Hälfte wiederkommt und sich die Frage verschiebt**: von *lohnt sich das?* zu *wie geht das?* — also am veränderten Verhalten.\n**Auswertung deiner Generalprobe:** Hast du bei Frage 2 „achtzig Leute pro Woche“ geantwortet? Dann hat der Distraktor funktioniert — die Sprecherin entwertet die Zahl selbst (*„gar nicht die Besucherzahl“*). Hast du zurückgelesen? Im Audio gäbe es diese Möglichkeit nicht — beim nächsten Transkript strenger sein.',
     },
 
     { type: 'rule' },
