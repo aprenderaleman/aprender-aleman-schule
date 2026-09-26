@@ -103,6 +103,7 @@ export default {
       items: [
         { text: 'Ich versuche, auf eine **ausgewogene Ernährung** zu **achten**.' },
         { text: 'Unter der Woche koche ich selten frisch, **weil** mir nach der Arbeit die Energie **fehlt**.' },
+        { text: 'Viel Obst und Gemüse gehört für mich zu einer **gesunden Ernährung** dazu.' },
       ],
     },
     {
@@ -145,49 +146,28 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Wortschatz',
-      frage: 'Was brauchst du? Wähl: die Überweisung, das Rezept, die Krankmeldung, der Termin.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Du willst zum Hautarzt — er nimmt dich nur mit einem Papier vom Hausarzt.',
-        'Du bist krank und kannst nicht arbeiten — dein Chef braucht ein Dokument.',
-        'Das Medikament gibt es in der Apotheke nur mit einem Papier vom Arzt.',
-        'Ohne Anmeldung wirst du in der Praxis nicht behandelt.',
-      ],
-      loesungen: [
-        '**die Überweisung** — vom Hausarzt zum Facharzt.',
-        '**die Krankmeldung** — sich beim Arbeitgeber krankmelden.',
-        '**das Rezept** — der Arzt stellt es aus.',
-        '**der Termin** — vorher in der Praxis vereinbaren.',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Der Kernwortschatz im Satz',
+      items: [
+        { text: 'Seit dem Umzug bin ich bei einer anderen **Krankenkasse** versichert — die neue Karte kam schon nach einer Woche.', gl: '— *bei einer Krankenkasse versichert sein*' },
+        { text: 'Die **Praxis** ist mittwochnachmittags geschlossen; **Termine** kann man aber jederzeit online buchen.', gl: '— *die Praxis*: la consulta' },
+        { text: 'Mit der **Überweisung** meines **Hausarztes** bekomme ich beim Orthopäden schneller einen Termin.', gl: '— derivación del médico de cabecera al especialista' },
+        { text: 'Das **Rezept** löse ich gleich in der **Apotheke** gegenüber ein.', gl: '— *ein Rezept einlösen*: presentar la receta' },
+        { text: 'Jonas hat eine schwere **Erkältung** und hat sich für den Rest der Woche **krankgemeldet**.', gl: '— resfriado, no *Konstipation*' },
+        { text: 'Seit Mira mehr auf ihre **Ernährung** achtet und täglich mit dem Rad fährt, kann sie **Stress** viel besser **abbauen**.', gl: '— *auf die Ernährung achten* / *Stress abbauen*' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Sätze ergänzen',
-      frage: 'Ergänze das passende Wort — Vorsicht beim falschen Freund.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Ich bin … und habe Husten und Schnupfen.',
-        'Fast alle Menschen in Deutschland sind bei einer … versichert.',
-        'Sport hilft, … abzubauen.',
-        'Ich achte auf eine ausgewogene … mit viel Gemüse.',
+      type: 'modell',
+      eyebrow: 'Modelltext — wie gesund lebe ich?',
+      thema: 'Eine ehrliche Selbsteinschätzung zu Ernährung, Bewegung und Stress — mit einem Vorsatz am Ende. ~~(Texto modelo: fíjate en «Ehrlich gesagt …», «Deshalb habe ich einen Plan …» y la fórmula final.)~~',
+      absaetze: [
+        'Ehrlich gesagt lebe ich nur halb gesund. Am Wochenende koche ich frisch, aber unter der Woche esse ich oft Fertiggerichte, weil mir nach der Arbeit die Energie fehlt. Bewegung kommt bei mir zu kurz: Ich sitze den ganzen Tag am Schreibtisch, und abends bin ich zu müde für Sport.',
+        'Deshalb habe ich einen Plan: Ich nehme ab jetzt die Treppe statt des Aufzugs und gehe in der Mittagspause eine halbe Stunde spazieren. Kleine Routinen statt großer Pläne!',
       ],
-      loesungen: [
-        'Ich bin **erkältet** … ~~no *konstipiert*: eso significa estreñido~~',
-        'bei einer **Krankenkasse** versichert',
-        '**Stress** abzubauen',
-        'eine ausgewogene **Ernährung**',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Wie gesund lebst du wirklich? Beschreib deine Ernährung, deine Bewegung und deinen Stress im Alltag — ehrlich und mit einem Vorsatz am Ende. Schreib 80–100 Wörter.',
-      loesungLabel: 'Mögliche Lösung',
-      loesung: 'Ehrlich gesagt lebe ich nur halb gesund. Am Wochenende koche ich frisch, aber unter der Woche esse ich oft Fertiggerichte, weil mir nach der Arbeit die Energie fehlt. Bewegung kommt bei mir zu kurz: Ich sitze den ganzen Tag am Schreibtisch, und abends bin ich zu müde für Sport. Deshalb habe ich einen Plan: Ich nehme ab jetzt die Treppe statt des Aufzugs und gehe in der Mittagspause eine halbe Stunde spazieren. Kleine Routinen statt großer Pläne! *(~80 Wörter)*',
     },
 
     { type: 'rule' },

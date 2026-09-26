@@ -108,55 +108,29 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Erkennen',
-      frage: 'Was steckt dahinter: *müssen* oder *können*?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Der Antrag ist bis zum 15. März einzureichen.',
-        'Diese Frage lässt sich leicht beantworten.',
-        'Das Ziel ist mit wenig Geld erreichbar.',
-        'Die Sicherheitshinweise sind unbedingt zu beachten.',
-      ],
-      loesungen: [
-        '**müssen** — der Antrag muss eingereicht werden. ~~(plazo oficial)~~',
-        '**können** — die Frage kann leicht beantwortet werden.',
-        '**können** — das Ziel kann erreicht werden. ~~(-bar = posibilidad)~~',
-        '**müssen** — die Hinweise müssen beachtet werden. ~~(*unbedingt* refuerza la obligación)~~',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Passiv mit Modalverben im Alltag',
+      items: [
+        { text: 'Die Heizung **muss** vor dem Winter **gewartet werden**.', gl: '— hay que revisarla' },
+        { text: 'Die Tickets **können** auch an der Abendkasse **gekauft werden**.', gl: '— posibilidad' },
+        { text: 'Wegen des Streiks **konnte** die Ware nicht rechtzeitig **geliefert werden**.', gl: '— Präteritum: solo cambia el modal' },
+        { text: 'Im Lesesaal **darf** nicht laut **telefoniert werden**.', gl: '— prohibición formal' },
+        { text: 'Die Ärztin meint, dass die Wunde täglich **gereinigt werden muss**.', gl: '— Nebensatz: modal al final' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Umformen',
-      frage: 'Bilde das Passiv mit Modalverb.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Man muss die Fenster regelmäßig putzen.',
-        'Man kann das Ticket am Automaten kaufen.',
-        'Man durfte die Dokumente nicht kopieren. ~~(Präteritum)~~',
-      ],
-      loesungen: [
-        'Die Fenster **müssen** regelmäßig **geputzt werden**.',
-        'Das Ticket **kann** am Automaten **gekauft werden**.',
-        'Die Dokumente **durften** nicht **kopiert werden**.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Formuliere die Regel dreimal um: „Die Bewerbung kann per E-Mail geschickt werden.“',
-      loesungLabel: 'Mögliche Lösung',
-      aufgaben: [
-        'mit man',
-        'mit sich lassen',
-        'mit einem Adjektiv auf -bar ~~(pista: per E-Mail … möglich → versendbar)~~',
-      ],
-      loesungen: [
-        '**Man** kann die Bewerbung per E-Mail schicken.',
-        'Die Bewerbung **lässt sich** per E-Mail **schicken**.',
-        'Die Bewerbung ist per E-Mail **versendbar**. ~~(también válido: Der Versand per E-Mail ist möglich.)~~',
+      type: 'beispiele',
+      kicker: 'Ersatzformen',
+      titel: 'lässt sich, ist zu, -bar — in Anzeigen und Regeln',
+      items: [
+        { text: 'Das Sofa **lässt sich** mit wenigen Handgriffen in ein Bett **verwandeln**.', gl: '— sich lassen = se puede' },
+        { text: 'Die Gebühr **ist** vor Kursbeginn **zu überweisen**.', gl: '— sein + zu = obligación' },
+        { text: 'Der Lärm der Baustelle **ist** kaum noch **zu ertragen**.', gl: '— sein + zu = (no) se puede' },
+        { text: 'Der Kundenservice ist rund um die Uhr **erreichbar**.', gl: '— -bar = posibilidad' },
+        { text: 'Hier **kann man** gebrauchte Fahrräder günstig **kaufen**.', gl: '— man + Aktiv, la opción neutra' },
       ],
     },
 

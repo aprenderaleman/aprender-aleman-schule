@@ -95,7 +95,7 @@ export default {
         { text: '**Nachdem** er die Prüfung bestanden **hat**, sucht er eine Stelle.', gl: '— Perfekt → Präsens' },
         { text: '**Bevor** du gehst, schließ bitte das Fenster.', gl: '' },
         { text: '**Während** er arbeitet, hört er Musik.', gl: '' },
-        { text: '**Seitdem** sie in Hamburg **wohnt**, fährt sie mit dem Rad.', gl: '— alemán: presente, no pasado' },
+        { text: '**Seitdem** sie in der Innenstadt **wohnt**, fährt sie mit dem Rad.', gl: '— alemán: presente, no pasado' },
         { text: 'Wir warten, **bis** der Regen **aufhört**.', gl: '' },
       ],
     },
@@ -105,7 +105,7 @@ export default {
       titel: 'Bedingung — „¿bajo qué condición?“',
       items: [
         { text: '**Wenn** ich Zeit **habe**, helfe ich dir.', gl: '' },
-        { text: '**Falls** es Probleme **gibt**, rufen Sie mich bitte an.', gl: '— posibilidad remota' },
+        { text: '**Falls** es Probleme **gibt**, rufen Sie mich bitte an.', gl: '— solo una posibilidad, no algo seguro' },
         { text: '**Sofern** alle einverstanden **sind**, beginnen wir morgen.', gl: '— registro formal' },
       ],
     },
@@ -121,55 +121,29 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Erkennen',
-      frage: 'Bestimme den Typ: final, temporal oder konditional.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Falls der Zug Verspätung hat, nimm den Bus.',
-        'Nachdem er angekommen war, rief er sofort an.',
-        'Sie spart jeden Monat, um im Sommer zu verreisen.',
-        'Während wir aßen, klingelte das Telefon.',
-      ],
-      loesungen: [
-        '**konditional** (falls)',
-        '**temporal** (nachdem + Plusquamperfekt)',
-        '**final** (um … zu)',
-        '**temporal** (während)',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Zweck, Zeit und Bedingung im Alltag',
+      items: [
+        { text: 'Ich stehe eine Stunde früher auf, **um** vor der Arbeit **zu joggen**.', gl: '— mismo sujeto → um … zu' },
+        { text: 'Die Kollegin schickt mir die Folien, **damit** ich mich **vorbereiten kann**.', gl: '— dos sujetos → damit' },
+        { text: '**Nachdem** wir den Vertrag unterschrieben **hatten**, bekamen wir die Schlüssel.', gl: '— Plusquamperfekt → Präteritum' },
+        { text: '**Während** die Kinder **schlafen**, beantworte ich meine E-Mails.', gl: '— al mismo tiempo' },
+        { text: 'Bleiben Sie bitte in der Leitung, **bis** eine Mitarbeiterin frei **ist**.', gl: '— bis: punto final' },
+        { text: '**Falls** der Flug **ausfällt**, erstatten wir Ihnen den vollen Preis.', gl: '— falls: solo por si acaso' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · damit oder um … zu?',
-      frage: 'Verbinde die Sätze mit der passenden Finalkonstruktion.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Ich gehe früh ins Bett. Ich will morgen fit sein.',
-        'Der Lehrer wiederholt die Regel. Die Schüler sollen sie verstehen.',
-        'Wir sparen Strom. Die Rechnung soll niedriger werden.',
-      ],
-      loesungen: [
-        'Ich gehe früh ins Bett, **um** morgen fit **zu sein**. ~~(mismo sujeto)~~',
-        'Der Lehrer wiederholt die Regel, **damit** die Schüler sie **verstehen**. ~~(dos sujetos)~~',
-        'Wir sparen Strom, **damit** die Rechnung niedriger **wird**.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Verbinde mit dem angegebenen Temporalkonnektor — achte bei *nachdem* auf die Zeitenfolge.',
-      loesungLabel: 'Mögliche Lösung',
-      aufgaben: [
-        'Ich bestand die Prüfung. Danach feierte ich mit Freunden. ~~(nachdem)~~',
-        'Zuerst gehe ich einkaufen. Dann koche ich. ~~(bevor)~~',
-        'Sie wohnt in Berlin. Seit dieser Zeit spricht sie viel besser Deutsch. ~~(seitdem)~~',
-      ],
-      loesungen: [
-        '**Nachdem** ich die Prüfung bestanden **hatte**, feierte ich mit Freunden. ~~(Plusquamperfekt → Präteritum)~~',
-        '**Bevor** ich koche, gehe ich einkaufen. ~~(también válido: Ich gehe einkaufen, bevor ich koche.)~~',
-        '**Seitdem** sie in Berlin wohnt, spricht sie viel besser Deutsch.',
+      type: 'beispiele',
+      kicker: 'Formell geschrieben',
+      titel: 'Konnektoren in E-Mails und Mitteilungen',
+      items: [
+        { text: '**Sofern** keine Einwände **bestehen**, gilt der neue Plan ab Montag.', gl: '— sofern: registro formal' },
+        { text: '**Bevor** Sie den Antrag **abschicken**, prüfen Sie bitte alle Angaben.', gl: '— primero comprobar, luego enviar' },
+        { text: '**Seit** die Firma flexible Arbeitszeiten **anbietet**, sind die Mitarbeitenden zufriedener.', gl: '— seit + presente: dura hasta hoy' },
+        { text: 'Wir informieren Sie rechtzeitig, **damit** Sie Ihre Reise **planen können**.', gl: '— damit + modal al final' },
       ],
     },
 

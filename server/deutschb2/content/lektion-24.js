@@ -2,7 +2,7 @@
 //
 // Bloque 2 — Modul Hören. Respeta el canon de la Lektion 23:
 // ca. 40 min, 4 Teile; detalles finos siempre en genérico + Modellsatz.
-// Práctica: 4 mini-Transkripte (~60-80 palabras) con un ítem cada uno.
+// Transkripte de muestra en bloque modell; la práctica está en el Übungsheft.
 
 export default {
   spec: ['Bloque 2', 'Modul Hören · Teil 1', 'Niveau B2', 'Prüfungsrelevanz: Hören'],
@@ -119,44 +119,44 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Erkennen',
-      frage: 'Schreib die Uhrzeit in Ziffern.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'halb neun (morgens)',
-        'Viertel nach sieben (abends)',
-        'kurz vor zwölf (mittags)',
-        'zwanzig nach drei (nachmittags)',
-      ],
-      loesungen: [
-        '**8.30 Uhr** — halb = media hora antes de la hora nombrada.',
-        '**19.15 Uhr**',
-        '**ca. 11.55 Uhr** — „kurz vor“ = ungefähre Angabe.',
-        '**15.20 Uhr**',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Typische Sätze aus Teil 1',
+      items: [
+        { text: 'Wegen einer Signalstörung hat der Regionalzug nach Bremen etwa **zwanzig** Minuten **Verspätung**.', gl: '— 20: escucha el final *-zig*' },
+        { text: 'Bitte beachten Sie unsere geänderten **Öffnungszeiten**: Ab Montag schließen wir schon um **halb sechs**.', gl: '— 17:30, no 18:30' },
+        { text: 'Hier ist der **Anrufbeantworter** der Zahnarztpraxis Özdemir — bitte **melden** Sie sich morgen ab acht Uhr.', gl: '' },
+        { text: 'Der Workshop am Donnerstag **fällt aus**; wir **verschieben** ihn **auf** den 3. Juni.', gl: '— el evento es el sujeto de *ausfallen*; *verschieben auf* + Akk.' },
+        { text: 'Leider muss ich unseren Termin morgen kurzfristig **absagen**.', gl: '— *absagen*: cancela la persona' },
+        { text: 'Die Lesung **findet** heute **nicht** in der Bibliothek, **sondern** im Rathaus **statt**.', gl: '— la información válida viene después de *sondern*' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Anwenden — zwei Mini-Hörtexte',
-      frage: 'Lies jedes Transkript **einmal** in normalem Tempo ~~(en el examen: audio)~~, Lösung abdecken, dann antworten.\n\n**Transkript A — Bahnhofsdurchsage:** „Meine Damen und Herren, auf Gleis 5 fährt in wenigen Minuten der ICE 517 nach München ein, planmäßige Abfahrt 14.32 Uhr. Der Zug hat heute circa 20 Minuten Verspätung. Reisende nach Augsburg beachten bitte: Der Anschlusszug wartet **nicht**. Nutzen Sie stattdessen den Regionalexpress um 15.10 Uhr von Gleis 9.“\n\n**Transkript B — Telefongespräch:** „— Praxis Dr. Weber, guten Tag. — Guten Tag, hier Yilmaz. Ich habe morgen um halb elf einen Termin, aber ich schaffe es leider nicht. Könnte ich ihn verschieben? — Moment … Donnerstag um Viertel nach neun wäre etwas frei. — Hm, da arbeite ich. Geht auch nachmittags? — Freitag um 16.20 Uhr? — Ja, das passt. Vielen Dank!“',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Zu A: Der Anschlusszug nach Augsburg wartet auf die verspäteten Reisenden. — richtig / falsch',
-        'Zu B: Der neue Termin ist am Donnerstag um 9.15 Uhr. — richtig / falsch',
-      ],
-      loesungen: [
-        '**falsch** — „Der Anschlusszug wartet nicht“; die Alternative ist der Regionalexpress um 15.10 Uhr.',
-        '**falsch** — Donnerstag 9.15 Uhr wird **angeboten**, aber abgelehnt („da arbeite ich“). Der neue Termin: **Freitag, 16.20 Uhr**.',
+      type: 'beispiele',
+      kicker: 'Erreichbarkeit & Änderungen',
+      titel: 'Wer ist wann und wo erreichbar?',
+      items: [
+        { text: 'Sie **erreichen** uns montags bis freitags von **Viertel nach acht** bis 16 Uhr.', gl: '— 8:15' },
+        { text: 'In der **Durchsage** heißt es: Der Zug nach Kassel fährt heute ausnahmsweise von **Gleis** 12.', gl: '— *ausnahmsweise* = señal de cambio' },
+        { text: 'Wegen einer kurzfristigen **Änderung** beginnt das Seminar erst um neun Uhr **fünfundvierzig**.', gl: '— 9:45: unidades antes que decenas' },
+        { text: 'Bei Fragen **melden** Sie sich bitte direkt am Empfang.', gl: '' },
       ],
     },
+
+    { type: 'rule' },
+
+    // ── Transkripte zum Mitlesen ──────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren — hören und notieren',
-      frage: 'Lies das Transkript **einmal** ~~(en el examen: audio)~~. Beantworte die Frage und notiere danach aus dem Gedächtnis die drei Kerndaten: **Was? Wann? Wo?**\n\n**Transkript C — Radiohinweis:** „Und noch ein Hinweis für alle, die am Wochenende zum Stadtfest wollen: Wegen des Sturms beginnt das Fest nicht wie geplant am Freitagabend, sondern erst am Samstag um elf Uhr. Das Konzert auf dem Marktplatz fällt komplett aus; stattdessen spielt die Band am Sonntag im Kulturhaus. Der Eintritt bleibt an beiden Tagen frei.“\n\n**Frage:** Das Konzert … a) beginnt am Freitagabend · b) findet im Kulturhaus statt · c) kostet am Sonntag Eintritt',
-      loesung: '**b)** — das Konzert fällt auf dem Marktplatz aus und wird ins **Kulturhaus** verlegt. — Mögliche Notizen: *Was?* Stadtfest + Konzert verlegt. *Wann?* Fest ab Sa 11 Uhr, Konzert So. *Wo?* Kulturhaus statt Marktplatz.',
+      type: 'modell',
+      eyebrow: 'Transkripte — so klingt Teil 1',
+      thema: 'Lies jedes Transkript nur einmal in normalem Tempo und achte auf Uhrzeiten, Orte und Planänderungen. ~~(En el examen es audio: entrénate a captar el dato a la primera.)~~',
+      absaetze: [
+        '==Transkript A · Bahnhofsdurchsage:== „Meine Damen und Herren, auf Gleis 5 fährt in wenigen Minuten der Schnellzug 517 nach München ein, planmäßige Abfahrt 14.32 Uhr. Der Zug hat heute circa 20 Minuten Verspätung. Reisende nach Augsburg beachten bitte: Der Anschlusszug wartet **nicht**. Nutzen Sie stattdessen den Regionalexpress um 15.10 Uhr von Gleis 9.“',
+        '==Transkript B · Telefongespräch:== „— Praxis Dr. Weber, guten Tag. — Guten Tag, hier Yilmaz. Ich habe morgen um halb elf einen Termin, aber ich schaffe es leider nicht. Könnte ich ihn verschieben? — Moment … Donnerstag um Viertel nach neun wäre etwas frei. — Hm, da arbeite ich. Geht auch nachmittags? — Freitag um 16.20 Uhr? — Ja, das passt. Vielen Dank!“',
+        '==Transkript C · Radiohinweis:== „Und noch ein Hinweis für alle, die am Wochenende zum Stadtfest wollen: Wegen des Sturms beginnt das Fest nicht wie geplant am Freitagabend, sondern erst am Samstag um elf Uhr. Das Konzert auf dem Marktplatz fällt komplett aus; stattdessen spielt die Band am Sonntag im Kulturhaus. Der Eintritt bleibt an beiden Tagen frei.“',
+      ],
     },
 
     { type: 'rule' },

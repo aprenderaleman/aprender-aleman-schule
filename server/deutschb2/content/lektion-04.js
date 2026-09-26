@@ -18,7 +18,7 @@ export default {
       items: [
         'kausale, konzessive und konsekutive Sätze sicher bilden',
         'Konjunktion, Subjunktion und Verbindungsadverb an der Verbstellung erkennen',
-        'den passenden Konnektor auswählen und korrekt interpungieren',
+        'den passenden Konnektor auswählen und die Kommas richtig setzen',
       ],
     },
 
@@ -80,9 +80,9 @@ export default {
       kicker: 'kausal',
       titel: 'Grund — „¿por qué?“',
       items: [
-        { text: 'Ich lerne Deutsch, **weil** ich in Wien studieren **möchte**.', gl: '— Nebensatz, verbo al final' },
-        { text: 'Ich lerne Deutsch, **denn** ich **möchte** in Wien studieren.', gl: '— Hauptsatz, verbo 2º' },
-        { text: 'Ich möchte in Wien studieren, **deshalb lerne** ich Deutsch.', gl: '— adverbio, inversión' },
+        { text: 'Ich lerne Deutsch, **weil** ich in Deutschland studieren **möchte**.', gl: '— Nebensatz, verbo al final' },
+        { text: 'Ich lerne Deutsch, **denn** ich **möchte** in Deutschland studieren.', gl: '— Hauptsatz, verbo 2º' },
+        { text: 'Ich möchte in Deutschland studieren, **deshalb lerne** ich Deutsch.', gl: '— adverbio, inversión' },
       ],
     },
     {
@@ -116,53 +116,29 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Erkennen',
-      frage: 'Bestimme den Typ: kausal, konzessiv oder konsekutiv.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Ich bleibe zu Hause, weil ich müde bin.',
-        'Es war so kalt, dass wir umkehrten.',
-        'Obwohl er wenig lernt, besteht er die Prüfung.',
-        'Es regnet. Trotzdem gehen wir spazieren.',
-      ],
-      loesungen: [
-        '**kausal** (weil)',
-        '**konsekutiv** (so … dass)',
-        '**konzessiv** (obwohl)',
-        '**konzessiv** (trotzdem)',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Konnektoren im Alltag und im Beruf',
+      items: [
+        { text: '**Da** die Bahn heute **streikt**, arbeiten viele im Homeoffice.', gl: '— da: causa conocida, a menudo al inicio' },
+        { text: 'Ich nehme das Rad, **denn** mit dem Auto **stehe** ich nur im Stau.', gl: '— denn: verbo en 2ª posición' },
+        { text: 'Die Miete ist gestiegen, **daher suchen** wir eine kleinere Wohnung.', gl: '— daher = deshalb → inversión' },
+        { text: 'Der Kurs war teuer. **Dennoch hat** er sich gelohnt.', gl: '— dennoch = trotzdem, algo más formal' },
+        { text: 'Die Präsentation war **so** gut vorbereitet, **dass** niemand Fragen **hatte**.', gl: '— so + Adjektiv … dass' },
+        { text: 'Alle Unterlagen liegen vor, **somit können** wir den Antrag abschicken.', gl: '— somit: consecuencia, registro formal' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Verbinden',
-      frage: 'Nutze den passenden Konnektor.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Er ging zur Arbeit. Er war krank. ~~(Einräumung)~~',
-        'Es schneite die ganze Nacht. Die Straßen waren gesperrt. ~~(Folge)~~',
-        'Es war spät. Wir gingen nach Hause. ~~(Adverb)~~',
-      ],
-      loesungen: [
-        'Er ging zur Arbeit, **obwohl** er krank **war**.',
-        'Es schneite die ganze Nacht, **sodass** die Straßen gesperrt **waren**.',
-        'Es war spät, **deshalb gingen** wir nach Hause.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Umformen',
-      frage: 'Von der Präposition zum Nebensatz.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Wegen des Staus kam ich zu spät. → ~~(weil …)~~',
-        'Trotz der Kälte gingen wir spazieren. → ~~(obwohl …)~~',
-      ],
-      loesungen: [
-        '**Weil** es einen Stau **gab**, kam ich zu spät.',
-        '**Obwohl** es kalt **war**, gingen wir spazieren.',
+      type: 'beispiele',
+      kicker: 'Präposition oder Nebensatz?',
+      titel: 'wegen / trotz ↔ weil / obwohl',
+      items: [
+        { text: '**Wegen** des Staus kam ich zu spät. → **Weil** es einen Stau **gab**, kam ich zu spät.', gl: '— wegen + Genitiv ↔ weil + verbo al final' },
+        { text: '**Trotz** der Kälte gingen wir spazieren. → **Obwohl** es kalt **war**, gingen wir spazieren.', gl: '— trotz + Genitiv ↔ obwohl + verbo al final' },
+        { text: '**Wegen** der hohen Nachfrage ist der Kurs bereits ausgebucht.', gl: '— estilo nominal, típico de textos escritos' },
+        { text: '**Trotz** guter Noten **bekam** sie keinen Studienplatz.', gl: '— después de la preposición: verbo en 2ª posición' },
       ],
     },
 

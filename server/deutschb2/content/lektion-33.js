@@ -3,12 +3,13 @@
 // Bloque 3 (Themenfelder & Wortschatz): léxico, ideas y opiniones del campo
 // «trabajo» — Bewerbung, Arbeitsalltag, Homeoffice, Work-Life-Balance.
 // Estructura temática según encargo: Kernwortschatz amplio, debate con
-// posturas, Beispiele por subtema, Redemittel, 3 Übungen, Prüfungsbezug real.
+// posturas, Beispiele por subtema, Redemittel, Modelltext, Prüfungsbezug;
+// práctica en el Übungsheft.
 
 export default {
   spec: ['Bloque 3', 'Themenfelder & Wortschatz', 'Niveau B2', 'Prüfungsrelevanz: alle Module'],
   h1: 'Arbeit & Beruf',
-  lead: 'Bewerbung, Arbeitsalltag, Homeoffice und Work-Life-Balance: der Wortschatz und die Argumente, mit denen du im Examen über Arbeit sprichst und schreibst.',
+  lead: 'Bewerbung, Arbeitsalltag, Homeoffice und Work-Life-Balance: der Wortschatz und die Argumente, mit denen du in der Prüfung über Arbeit sprichst und schreibst.',
 
   content: [
     // ── Lernziele ─────────────────────────────────────────────────
@@ -149,49 +150,31 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Kollokationen',
-      frage: 'Welches Verb passt? (abschicken · sammeln · teilnehmen · machen)',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'eine Bewerbung …',
-        'Erfahrung …',
-        'an einer Besprechung …',
-        'Feierabend …',
-      ],
-      loesungen: [
-        'eine Bewerbung **abschicken**',
-        'Erfahrung **sammeln**',
-        'an einer Besprechung **teilnehmen**',
-        'Feierabend **machen**',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Kollokationen rund um die Arbeit',
+      items: [
+        { text: 'Gestern habe ich meine **Bewerbung** mit dem aktuellen **Lebenslauf** per E-Mail abgeschickt.', gl: '— *eine Bewerbung abschicken*' },
+        { text: 'Das **Gehalt** ist etwas niedriger, dafür darf ich zwei Tage pro Woche im **Homeoffice** arbeiten.', gl: '— *dafür* = a cambio' },
+        { text: 'Im **Vorstellungsgespräch** hat man mich gefragt, wo ich schon **Erfahrung gesammelt** habe.', gl: '— *Erfahrung sammeln*, no «hacer experiencia»' },
+        { text: 'Seit ich **in Teilzeit** arbeite, achte ich viel bewusster auf meine **Work-Life-Balance**.', gl: '' },
+        { text: 'Nach der **Besprechung** mache ich heute pünktlich **Feierabend**.', gl: '— *Feierabend machen*: terminar la jornada' },
       ],
     },
+
+    { type: 'rule' },
+
+    // ── Modelltext ────────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Sätze ergänzen',
-      frage: 'Ergänze das passende Wort aus dem Kernwortschatz (oder die passende Präposition).',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Ich habe mich … eine Stelle als Kellner beworben.',
-        'Das … ist nicht sehr hoch, aber die Arbeit macht mir Spaß.',
-        'Zwei Tage pro Woche arbeite ich im … .',
-        'Sie arbeitet … Erzieherin in einem Kindergarten.',
+      type: 'modell',
+      eyebrow: 'Modelltext — was mir bei der Arbeit wichtig ist',
+      thema: 'Was ist dir bei der Arbeit am wichtigsten: das Gehalt, die Kollegen oder die freie Zeit?',
+      woerter: 'ca. 80 Wörter',
+      absaetze: [
+        'Für mich sind die Kollegen am wichtigsten, denn wir verbringen jeden Tag viele Stunden zusammen. Wenn die Stimmung im Team gut ist, gehe ich gern zur Arbeit, obwohl das Gehalt vielleicht nicht das höchste ist. Natürlich spielt auch die freie Zeit eine Rolle: Ich möchte nach Feierabend wirklich abschalten und keine E-Mails mehr lesen. Deshalb suche ich eine Stelle mit klaren Arbeitszeiten und netten Kollegen. Ein hohes Gehalt ist angenehm, aber es macht mich nicht glücklich, wenn die Arbeitsatmosphäre schlecht ist.',
       ],
-      loesungen: [
-        'Ich habe mich **um** eine Stelle als Kellner beworben.',
-        'Das **Gehalt** ist nicht sehr hoch, aber die Arbeit macht mir Spaß.',
-        'Zwei Tage pro Woche arbeite ich im **Homeoffice**.',
-        'Sie arbeitet **als** Erzieherin in einem Kindergarten. ~~Recuerda: als, no *wie*.~~',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Was ist dir bei der Arbeit am wichtigsten: das Gehalt, die Kollegen oder die freie Zeit? Schreib 80–100 Wörter mit mindestens einem Konnektor (weil, deshalb, obwohl).',
-      loesungLabel: 'Mögliche Lösung',
-      loesung: 'Für mich sind die Kollegen am wichtigsten, denn wir verbringen jeden Tag viele Stunden zusammen. Wenn die Stimmung im Team gut ist, gehe ich gern zur Arbeit, obwohl das Gehalt vielleicht nicht das höchste ist. Natürlich spielt auch die freie Zeit eine Rolle: Ich möchte nach Feierabend wirklich abschalten und keine E-Mails mehr lesen. Deshalb suche ich eine Stelle mit klaren Arbeitszeiten und netten Kollegen. Ein hohes Gehalt ist angenehm, aber es macht mich nicht glücklich, wenn die Arbeitsatmosphäre schlecht ist. *(81 Wörter — auch eine andere Priorität ist natürlich richtig, solange du sie begründest.)*',
     },
 
     { type: 'rule' },

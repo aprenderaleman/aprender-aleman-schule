@@ -3,7 +3,8 @@
 // Bloque 2 · Die wichtigste Schreibaufgabe des B2: Meinung zu einem
 // Alltagsthema, ~150 Wörter, alle Inhaltspunkte. Struktur in vier
 // Schritten, Redemittel nach Funktion, kommentiertes Muster (150 Wörter,
-// nachgezählt), drei Übungen und eine komplette Prüfungsaufgabe.
+// nachgezählt), zweiter Modelltext, Mehr Beispiele und eine komplette
+// Prüfungsaufgabe. Übungen → Übungsheft (heft-28.js).
 // Ausblick → Lektion 29 (formelle Nachricht).
 
 export default {
@@ -175,51 +176,31 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Modelltext + Mehr Beispiele ───────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Erkennen',
-      frage: 'Passt der Satz in einen Forumsbeitrag? Entscheide: ja oder nein — und warum?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        '„Sehr geehrte Damen und Herren, ich beziehe mich auf Ihre Diskussion.“',
-        '„Aus meiner Erfahrung kann ich sagen, dass Wochenmärkte oft günstiger sind, als man denkt.“',
-        '„Boah, wer so was glaubt, hat echt keine Ahnung!“',
-        '„Ich sehe das ähnlich wie die meisten hier, möchte aber einen Punkt ergänzen.“',
-        '„Mit freundlichen Grüßen, Ana López“',
-      ],
-      loesungen: [
-        '**Nein** — Anrede und Amtston gehören in die formelle Nachricht (Teil 2), nicht ins Forum.',
-        '**Ja** — persönliche Erfahrung, neutraler Ton: genau das Register von Teil 1.',
-        '**Nein** — Slang und Angriffe auf andere Nutzer kosten beim Register sofort Punkte.',
-        '**Ja** — höflicher Bezug auf die Diskussion plus eigener Beitrag: ideal.',
-        '**Nein** — ein Forumsbeitrag endet mit dem Fazit, ohne Grußformel.',
+      type: 'modell',
+      eyebrow: 'Modelltext — ein zweiter Beitrag',
+      thema: 'Forum: „Leben in der Stadt oder auf dem Land?“ Achte auf die vier Schritte: Einstieg, Meinung, eigene Erfahrung, Einräumung + Fazit. Die Gegenposition (pro Land) wäre genauso gültig — bewertet wird die Struktur, nicht die Meinung.',
+      absaetze: [
+        'In meiner Familie diskutieren wir seit Monaten über genau diese Frage, deshalb schreibe ich hier sehr gern meine Meinung dazu.',
+        'Ich bin überzeugt, dass das Leben in der Stadt für junge Leute mehr Vorteile bietet: Die Wege sind kurz, das Angebot an Arbeit ist deutlich größer, und man braucht für den Alltag nicht unbedingt ein eigenes Auto.',
+        'Ich spreche aus eigener Erfahrung: Vor drei Jahren bin ich vom Dorf nach Valencia gezogen. Seitdem erreiche ich meine Arbeit in zwanzig Minuten mit der U-Bahn und treffe meine Freunde auch spontan am Abend.',
+        'Natürlich hat das Land auch Vorteile, zum Beispiel die Ruhe, die günstigeren Wohnungen und die Natur direkt vor der Tür. Für Familien mit kleinen Kindern kann das Dorf sogar ideal sein.',
+        'Insgesamt finde ich aber, dass die Stadt besser zu meinem Leben passt. Am Ende hängt die Entscheidung wohl davon ab, in welcher Phase des Lebens man gerade steht.',
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Redemittel einsetzen',
-      frage: 'Ergänze den Beitrag zum Thema „Brauchen Kinder ein eigenes Handy?“ mit dem passenden Redemittel: *Meiner Meinung nach · zum Beispiel · Natürlich stimmt es, dass · Alles in allem*.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        '„___ sollten Kinder erst in der Schulzeit ein eigenes Handy bekommen.“',
-        '„Mein Neffe hat ___ schon mit acht Jahren stundenlang Videos geschaut.“',
-        '„___ Eltern ihre Kinder unterwegs erreichen möchten.“',
-        '„___ finde ich klare Regeln besser als ein komplettes Verbot.“',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Der Kernwortschatz im Forumsbeitrag',
+      items: [
+        { text: 'Ich bin der **Ansicht**, dass Schulen mehr Sport anbieten sollten.', gl: '— un peldaño más formal que «ich finde»' },
+        { text: 'Die neuen Parkgebühren **betreffen** vor allem Pendler aus dem Umland.', gl: '— betreffen + Akk.: afectar a' },
+        { text: 'In diesem Punkt **stimme** ich Jana völlig **zu**.', gl: '— zustimmen + dativo, sin *mit*' },
+        { text: 'Aus eigener **Erfahrung** weiß ich, dass Fahrgemeinschaften viel Geld sparen.', gl: '— la experiencia propia hace creíble el argumento' },
+        { text: 'Ein überzeugendes **Argument** für das Homeoffice ist die gesparte Fahrzeit.' },
+        { text: 'Mein **Fazit**: Die **Vorteile** überwiegen die **Nachteile** deutlich.', gl: '— cierre claro en una sola frase' },
       ],
-      loesungen: [
-        '**Meiner Meinung nach** sollten Kinder … — danach Inversion: das Verb bleibt an Position 2.',
-        'Mein Neffe hat **zum Beispiel** schon mit acht Jahren …',
-        '**Natürlich stimmt es, dass** Eltern ihre Kinder unterwegs erreichen möchten. — Nebensatz: Verb ans Ende.',
-        '**Alles in allem** finde ich klare Regeln besser als ein komplettes Verbot.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Forum „Leben in der Stadt oder auf dem Land?“ — Schreibe einen kompletten Beitrag (ca. 150 Wörter). Gehe auf drei Punkte ein: deine Meinung, eine eigene Erfahrung, ein Vorteil der anderen Seite.',
-      aufgabe: 'Prüfe danach mit dem Schluss-Check: Verb an Position 2? Komma vor dass/weil? Nomen groß? Alle drei Punkte erkennbar?',
-      loesung: '**Mögliche Lösung** (150 Wörter):\n*In meiner Familie diskutieren wir seit Monaten über genau diese Frage, deshalb schreibe ich hier sehr gern meine Meinung dazu.\nIch bin überzeugt, dass das Leben in der Stadt für junge Leute mehr Vorteile bietet: Die Wege sind kurz, das Angebot an Arbeit ist deutlich größer, und man braucht für den Alltag nicht unbedingt ein eigenes Auto.\nIch spreche aus eigener Erfahrung: Vor drei Jahren bin ich vom Dorf nach Valencia gezogen. Seitdem erreiche ich meine Arbeit in zwanzig Minuten mit der U-Bahn und treffe meine Freunde auch spontan am Abend.\nNatürlich hat das Land auch Vorteile, zum Beispiel die Ruhe, die günstigeren Wohnungen und die Natur direkt vor der Tür. Für Familien mit kleinen Kindern kann das Dorf sogar ideal sein.\nInsgesamt finde ich aber, dass die Stadt besser zu meinem Leben passt. Am Ende hängt die Entscheidung wohl davon ab, in welcher Phase des Lebens man gerade steht.*\nGleich gültig: die Gegenposition (pro Land) — bewertet wird die Struktur, nicht die Meinung.',
     },
 
     { type: 'rule' },

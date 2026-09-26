@@ -135,46 +135,28 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Erkennen',
-      frage: 'Genitiv oder umgangssprachlicher Dativ? Korrigiere für die Prüfung, wo nötig.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Wegen dem Unfall war die Autobahn gesperrt.',
-        'Trotz des Verbots parken hier viele Autos.',
-        'Während dem Essen sollte man nicht telefonieren.',
-      ],
-      loesungen: [
-        'Wegen **des Unfalls** war die Autobahn gesperrt. ~~El original es Umgangssprache.~~',
-        'Richtig so — **des Verbots** ist bereits Genitiv.',
-        'Während **des Essens** sollte man nicht telefonieren.',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Genitiv statt Dativ — so schreibst du es in der Prüfung',
+      items: [
+        { text: '**Wegen des** Staus kam der Techniker erst am Nachmittag.', gl: '— gesprochen oft: wegen dem Stau' },
+        { text: '**Trotz der** vielen Beschwerden hat die Hausverwaltung nichts unternommen.', gl: '— a pesar de las muchas quejas' },
+        { text: '**Während des** Essens bleibt das Handy bei uns in der Tasche.', gl: '— no: während dem Essen' },
+        { text: '**Aufgrund der** großen Nachfrage gibt es für den Kurs eine Warteliste.', gl: '— formal: típico en avisos' },
+        { text: 'Die Rechnung muss **innerhalb von** 30 Tagen bezahlt werden.', gl: '— sin artículo → innerhalb von + Dativ' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Umformen',
-      frage: 'Vom Nebensatz zur Präposition — die Brücke aus Lektion 16.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Obwohl die Preise hoch sind, buchen viele die Reise. → (trotz …)',
-        'Weil die Nachfrage groß ist, gibt es Wartelisten. → (wegen/aufgrund …)',
-        'Während wir renovierten, wohnten wir bei Freunden. → (während …)',
-      ],
-      loesungen: [
-        '**Trotz der hohen Preise** buchen viele die Reise.',
-        '**Wegen der großen Nachfrage** (formeller: **Aufgrund der großen Nachfrage**) gibt es Wartelisten.',
-        '**Während der Renovierung** wohnten wir bei Freunden. ~~renovieren → die Renovierung: la Nominalisierung de la Lektion 16.~~',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Schreib die Einleitung (3–4 Sätze) eines Forumsbeitrags zum Thema „Homeoffice — Fluch oder Segen?“. Pflicht: eine Genitiv-Präposition, ein Relativsatz, ein Infinitivsatz mit um … zu.',
-      loesungLabel: 'Mögliche Lösung',
-      loesungen: [
-        '**Während der Pandemie** habe ich zwei Jahre im Homeoffice gearbeitet — eine Erfahrung, **die** meinen Blick auf die Arbeit verändert hat. **Trotz mancher Nachteile** möchte ich diese Flexibilität nicht mehr verlieren. Viele Firmen nutzen das Homeoffice inzwischen gezielt, **um** gute Leute **zu gewinnen**. ~~Se evalúan las tres estructuras obligatorias, no el contenido; cualquier postura vale.~~',
+      type: 'beispiele',
+      kicker: 'Präposition ↔ Nebensatz',
+      titel: 'Die Brücke in beide Richtungen',
+      items: [
+        { text: '**Trotz seiner Erkältung** ist Jonas zum Training gegangen. = **Obwohl** er erkältet war, …', gl: '— trotz ↔ obwohl' },
+        { text: '**Während der Renovierung** wohnen wir bei meinen Eltern. = **Während** die Wohnung renoviert wird, …', gl: '— Passiv (Lektion 10)' },
+        { text: '**Statt eines Anrufs** hat sie mir eine lange Nachricht geschrieben. = **Anstatt** mich **anzurufen**, …', gl: '— anstatt … zu (Lektion 14)' },
+        { text: '**Wegen des schlechten Wetters** wurde der Ausflug verschoben. = **Weil** das Wetter schlecht war, …', gl: '— wegen ↔ weil' },
       ],
     },
 

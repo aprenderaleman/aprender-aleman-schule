@@ -4,6 +4,7 @@
 // (Deutschlandticket como concepto), Beschwerden unterwegs (Verspätung,
 // Anschluss, Erstattung), nachhaltig reisen. Cierre del bloque temático:
 // reciclar léxico y opiniones entre campos. Ausblick → 41 Prüfungssimulation 1.
+// Práctica en el Übungsheft (heft-40); texto modelo conservado como bloque modell.
 
 export default {
   spec: ['Bloque 3', 'Themenfelder & Wortschatz', 'Niveau B2', 'Prüfungsrelevanz: Sprechen Teil 1 & Hören'],
@@ -43,7 +44,7 @@ export default {
         { wort: 'das Gepäck', kollokation: 'das Gepäck aufgeben', es: 'el equipaje' },
         { wort: 'nachhaltig', kollokation: 'nachhaltig reisen', es: 'sostenible' },
       ],
-      hinweis: 'Man fährt **mit dem Zug**, **mit dem Bus**, **mit dem Auto** — ~~el „en tren“ español se calca mal: *in Zug* o *im Zug fahren* como medio de transporte es el error clásico.~~ Und das Deutschlandticket gilt im Nah- und Regionalverkehr, nicht im ICE.',
+      hinweis: 'Man fährt **mit dem Zug**, **mit dem Bus**, **mit dem Auto** — ~~el „en tren“ español se calca mal: *in Zug* o *im Zug fahren* como medio de transporte es el error clásico.~~ Und das Deutschlandticket gilt im Nah- und Regionalverkehr, nicht im Fernverkehr.',
     },
 
     { type: 'rule' },
@@ -82,7 +83,7 @@ export default {
       kicker: 'Strategie',
       titel: 'Ein Block, ein System: Wortschatz recyceln',
       absaetze: [
-        'Mit dieser Lektion endet der Themenblock — und jetzt siehst du das Muster: **Die Themen teilen sich Wortschatz und Redemittel.** Die Reklamation aus Lektion 39 funktioniert genauso bei einer stornierten Buchung; das Abwägen aus Lektion 38 passt auf Fliegen vs. Bahn; die Struktur Pro–Contra–Mitte trägt jedes Prüfungsthema. Lerne also __ein System__ statt vier Listen: zwölf Wörter mit Kollokation pro Thema plus deine festen Meinungs-Redemittel. ~~Esta es la preparación real del examen: pocas estructuras, muy bien amortizadas.~~',
+        'Mit dieser Lektion endet der Themenblock — und jetzt siehst du das Muster: **Die Themen teilen sich Wortschatz und Redemittel.** Die Reklamation aus Lektion 39 funktioniert genauso bei einer stornierten Buchung; das Abwägen aus Lektion 38 passt auf Fliegen vs. Bahn; die Struktur Pro–Contra–Mitte trägt jedes Prüfungsthema. Lerne also __ein System__ statt acht Listen: zwölf Wörter mit Kollokation pro Thema plus deine festen Meinungs-Redemittel. ~~Esta es la preparación real del examen: pocas estructuras, muy bien amortizadas.~~',
       ],
     },
 
@@ -138,49 +139,32 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Wortschatz',
-      frage: 'Welches Wort aus dem Kernwortschatz passt?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'das Geld, das man zurückbekommt, wenn der Zug ausfällt',
-        'der Zug, den man nach dem Umsteigen erreichen muss',
-        'eine Reservierung rückgängig machen',
-        'Hotel, Ferienwohnung oder Hostel — der Oberbegriff',
-      ],
-      loesungen: [
-        '**die Erstattung**',
-        '**der Anschluss**',
-        '**(die Buchung) stornieren**',
-        '**die Unterkunft**',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Kollokationen rund ums Reisen',
+      items: [
+        { text: 'Die Ferienwohnung war doppelt vergeben, deshalb mussten wir die ganze **Buchung stornieren**.', gl: '— *eine Buchung stornieren*: anular una reserva' },
+        { text: 'Mit dem Nachtzug haben wir eine **Strecke** von fast tausend Kilometern **zurückgelegt**.', gl: '— *eine Strecke zurücklegen*: recorrer un trayecto' },
+        { text: 'Am Schalter mussten wir unser **Gepäck** schon zwei Stunden vor dem Abflug **aufgeben**.', gl: '— *das Gepäck aufgeben*: facturar el equipaje' },
+        { text: 'Weil der Bus **ausgefallen** ist, habe ich **den Anschluss** in Linz **verpasst**.', gl: '— *ausfallen* forma el Perfekt con **sein**' },
+        { text: 'Für die Verspätung habe ich online **eine Erstattung beantragt** und das Geld nach zwei Wochen bekommen.', gl: '' },
+        { text: 'Im Alltag **nutze** ich fast nur **öffentliche Verkehrsmittel** — das ist günstig und **nachhaltig**.', gl: '' },
       ],
     },
+
+    { type: 'rule' },
+
+    // ── Modelltext ────────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Unterwegs — Sätze vervollständigen',
-      frage: 'Ergänze das passende Wort in der richtigen Form.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Der ICE hat heute leider dreißig Minuten ___ .',
-        'In Mannheim müssen Sie in den Regionalzug ___ .',
-        'Wegen des Sturms ___ gestern viele Flüge ___ .',
-        'Wir fahren am liebsten ___ Zug in den Urlaub. ~~(ojo con la preposición)~~',
+      type: 'modell',
+      eyebrow: 'Modelltext — eine Reise, bei der etwas schiefging',
+      thema: 'Erzähl von einer Reise, bei der etwas schiefging — und davon, was du daraus gelernt hast.',
+      woerter: 'ca. 95 Wörter',
+      absaetze: [
+        'Letzten Sommer wollte ich mit dem Zug nach Hamburg fahren. Die Strecke war lang, und ich musste zweimal umsteigen. Schon der erste Zug hatte eine Stunde Verspätung, sodass ich den Anschluss in Hannover verpasste. Am Ende kam ich nachts an, und meine Unterkunft war schon geschlossen! Daraus habe ich zwei Dinge gelernt: Erstens plane ich beim Umsteigen jetzt immer mehr Zeit ein, und zweitens hebe ich alle Tickets auf — die Erstattung für die Verspätung habe ich nämlich problemlos bekommen. Trotzdem reise ich weiter mit der Bahn: Es ist einfach nachhaltiger.',
       ],
-      loesungen: [
-        'Der ICE hat dreißig Minuten **Verspätung**.',
-        'In Mannheim müssen Sie **umsteigen**.',
-        'Wegen des Sturms **fielen** viele Flüge **aus** / sind viele Flüge **ausgefallen**.',
-        'Wir fahren am liebsten **mit dem** Zug. ~~(mit + Dativ, no „en el tren“)~~',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Schreibe 80–100 Wörter: Erzähle von einer Reise, bei der etwas schiefging — und was du daraus gelernt hast. Nutze mindestens fünf Wörter aus dem Kernwortschatz.',
-      loesungLabel: 'Mögliche Lösung',
-      loesung: 'Letzten Sommer wollte ich mit dem Zug nach Hamburg fahren. Die Strecke war lang, und ich musste zweimal umsteigen. Schon der erste Zug hatte eine Stunde Verspätung, sodass ich den Anschluss in Hannover verpasste. Am Ende kam ich nachts an, und meine Unterkunft war schon geschlossen! Daraus habe ich zwei Dinge gelernt: Erstens plane ich beim Umsteigen jetzt immer mehr Zeit ein, und zweitens hebe ich alle Tickets auf — die Erstattung für die Verspätung habe ich nämlich problemlos bekommen. Trotzdem reise ich weiter mit der Bahn: Es ist einfach nachhaltiger. ~~(~95 Wörter)~~',
     },
 
     { type: 'rule' },
@@ -208,7 +192,7 @@ export default {
     {
       type: 'tipp',
       label: 'Prüfungstipp',
-      text: 'Beim Vortrag zahlt sich der ganze Block aus: **Jedes der vier Themenfelder kann drankommen.** Struktur und Redemittel bleiben immer gleich; nur die zwölf Themenwörter wechselst du aus. Übe denselben Vortrag einmal pro Themenfeld — laut und mit der Uhr.',
+      text: 'Beim Vortrag zahlt sich der ganze Block aus: **Jedes der acht Themenfelder kann drankommen.** Struktur und Redemittel bleiben immer gleich; nur die zwölf Themenwörter wechselst du aus. Übe denselben Vortrag einmal pro Themenfeld — laut und mit der Uhr.',
     },
 
     { type: 'rule' },
@@ -231,9 +215,9 @@ export default {
       eyebrow: 'Selbstcheck',
       items: [
         'Ich beschreibe eine Reise von der Buchung bis zur Erstattung — auch wenn etwas schiefgeht.',
-        'Ich sage mit dem Zug fahren und nutze den Mobilitätswortschatz korrekt.',
+        'Ich sage *mit dem Zug fahren* (nicht *in Zug*) und verwende den Mobilitätswortschatz korrekt.',
         'Ich strukturiere einen kurzen Vortrag mit Einleitung, Pro, Contra, Beispiel und Fazit.',
-        'Ich kann Redemittel und Argumente aus allen vier Themenfeldern wiederverwenden.',
+        'Ich kann Redemittel und Argumente aus allen acht Themenfeldern wiederverwenden.',
       ],
     },
     {

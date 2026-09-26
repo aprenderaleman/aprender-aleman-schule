@@ -60,7 +60,7 @@ export default {
         {
           badge: 'Präp.',
           titel: 'Mit Präposition',
-          text: 'Die Präposition steht __vor__ dem Relativpronomen und bestimmt den Kasus.\n__Das ist der Kollege, **mit dem** ich das Projekt mache.__\n__Die Firma, **für die** er arbeitet, sitzt in Hamburg.__ ~~En alemán la preposición nunca se queda al final como en inglés.~~',
+          text: 'Die Präposition steht __vor__ dem Relativpronomen und bestimmt den Kasus.\n__Das ist der Kollege, **mit dem** ich das Projekt mache.__\n__Die Firma, **für die** er arbeitet, sitzt in der Innenstadt.__ ~~En alemán la preposición nunca se queda al final como en inglés.~~',
         },
         {
           badge: 'Genitiv',
@@ -75,7 +75,7 @@ export default {
         {
           badge: 'wo',
           titel: 'wo für Orte',
-          text: 'Bei Orten kannst du statt Präposition + Pronomen einfach **wo** nehmen: __die Stadt, **wo** ich wohne__ = __die Stadt, **in der** ich wohne__. Bei Städte- und Ländernamen ist *wo* sogar die einzige Option: __in Berlin, **wo** …__',
+          text: 'Bei Orten kannst du statt Präposition + Pronomen einfach **wo** nehmen: __die Stadt, **wo** ich wohne__ = __die Stadt, **in der** ich wohne__. Bei Städte- und Ländernamen ist *wo* sogar die einzige Option: __in Spanien, **wo** …__',
         },
       ],
     },
@@ -126,50 +126,29 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Erkennen',
-      frage: 'Welche Form ist richtig — und warum?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Der Film, (der / den / dem) wir gesehen haben, war langweilig.',
-        'Die Kollegin, (deren / dessen / die) Büro nebenan liegt, ist im Urlaub.',
-        'Alles, (das / was / wo) er erzählt, ist übertrieben.',
-        'Die Leute, (mit den / mit denen / mit deren) ich arbeite, sind nett.',
-      ],
-      loesungen: [
-        '**den** — Akkusativobjekt im Relativsatz (wir haben *den Film* gesehen).',
-        '**deren** — Bezugswort *die Kollegin* (feminin) → deren, egal dass *Büro* neutral ist.',
-        '**was** — nach *alles* steht immer was.',
-        '**mit denen** — Dativ Plural nach *mit*.',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Relativsätze im Alltag',
+      items: [
+        { text: 'Die Wohnung, **die** wir gestern besichtigt haben, ist leider schon vergeben.', gl: '— Akkusativ: wir haben die Wohnung besichtigt' },
+        { text: 'Der Vermieter, **dem** ich die Kaution überwiesen habe, meldet sich nicht.', gl: '— Dativ: jemandem etwas überweisen' },
+        { text: 'Die Kolleginnen, **auf die** ich mich immer verlassen kann, sind heute alle krank.', gl: '— sich verlassen auf + Akk.' },
+        { text: 'Das Unternehmen, **dessen** Zentrale im Norden liegt, eröffnet eine Filiale in Spanien.', gl: '— das Unternehmen → dessen' },
+        { text: 'Die Mieter, **deren** Heizung ausgefallen ist, bekommen eine Entschädigung.', gl: '— Plural → deren, sin artículo detrás' },
+        { text: 'Der Zug hatte zwei Stunden Verspätung, **was** mich sehr geärgert hat.', gl: '— was se refiere a toda la frase' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Verbinden',
-      frage: 'Bilde aus zwei Sätzen einen Relativsatz.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Das ist der Trainer. Ich habe dir von ihm erzählt.',
-        'Wir besichtigen eine Wohnung. Ihre Miete ist bezahlbar.',
-        'Sie hat die Prüfung bestanden. Das freut mich sehr.',
-      ],
-      loesungen: [
-        'Das ist der Trainer, **von dem** ich dir erzählt habe.',
-        'Wir besichtigen eine Wohnung, **deren** Miete bezahlbar ist.',
-        'Sie hat die Prüfung bestanden, **was** mich sehr freut.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Definiere die drei Begriffe mit einem Relativsatz: ein Mitbewohner, eine Bibliothek, ein Smartphone.',
-      loesungLabel: 'Mögliche Lösung',
-      loesungen: [
-        'Ein Mitbewohner ist jemand, **mit dem** man eine Wohnung teilt.',
-        'Eine Bibliothek ist ein Ort, **wo** man Bücher ausleihen kann. ~~También válido: an dem / in der.~~',
-        'Ein Smartphone ist ein Gerät, **ohne das** viele nicht mehr leben können.',
+      type: 'beispiele',
+      kicker: 'Definieren',
+      titel: 'Begriffe erklären mit Relativsatz',
+      items: [
+        { text: 'Eine Mitbewohnerin ist eine Person, **mit der** man eine Wohnung teilt.', gl: '— teilen mit + Dat.' },
+        { text: 'Eine Bibliothek ist ein Ort, **wo** man Bücher ausleihen kann.', gl: '— lugar → wo (= an dem)' },
+        { text: 'Ein Smartphone ist ein Gerät, **ohne das** viele nicht mehr leben können.', gl: '— ohne + Akk.' },
+        { text: 'Ein Pendler ist jemand, **der** jeden Tag zwischen Wohnort und Arbeitsort hin- und herfährt.', gl: '— Nominativ: sujeto del relativo' },
       ],
     },
 

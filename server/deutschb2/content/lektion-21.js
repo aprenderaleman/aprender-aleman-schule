@@ -41,7 +41,7 @@ export default {
         { wort: 'es ist höchste Zeit', kollokation: 'Es ist höchste Zeit, dass sich etwas ändert.', es: 'ya va siendo hora' },
         { wort: 'auf Kosten + Gen.', kollokation: 'Erfolg auf Kosten der Schwächeren', es: 'a costa de' },
       ],
-      hinweis: '~~*angeblich* es un falso amigo parcial: no significa «amablemente» ni «supuesto» neutro — expresa que el autor DUDA de la afirmación. Si el comentario dice „die angeblich saubere Lösung", el autor no se lo cree.~~',
+      hinweis: '~~Ojo con *angeblich*: no es un «supuestamente» neutro — expresa que el autor DUDA de la afirmación. Si el comentario dice „die angeblich saubere Lösung“, el autor no se lo cree.~~',
     },
 
     { type: 'rule' },
@@ -99,56 +99,33 @@ export default {
         { text: '„Die Reform ist **längst überfällig**.“', gl: '— pro: el autor la quería desde hace tiempo' },
         { text: '„**Zwar** spart die Stadt damit Geld, **aber** der Preis ist hoch.“', gl: '— la posición real viene tras *aber*: contra' },
         { text: '„Eine **wirklich geniale** Idee — wenn man vergisst, dass sie schon dreimal gescheitert ist.“', gl: '— ironía: el elogio exagerado + el «detalle» lo desmonta' },
-        { text: '„Die **„Experten“** haben wieder einmal alles im Griff.“', gl: '— comillas + *wieder einmal*: el autor no les cree' },
+        { text: '„Die **‚Experten‘** haben wieder einmal alles im Griff.“', gl: '— comillas + *wieder einmal*: el autor no les cree' },
         { text: '„**Immerhin** hat die Politik das Problem jetzt erkannt.“', gl: '— concesión mínima: algo es algo, pero insuficiente' },
       ],
     },
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Erkennen',
-      frage: 'Positiv, negativ oder ironisch? Bestimme die Wertung.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        '„Es ist erfreulich, dass endlich jemand Verantwortung übernimmt.“',
-        '„Na großartig — noch ein Formular, das niemand versteht.“',
-        '„Die Entscheidung ist mehr als fragwürdig.“',
-        '„Die angeblich alternativlose Lösung hat erstaunlich viele Alternativen.“',
-      ],
-      loesungen: [
-        '**positiv** — *erfreulich* + *endlich* (lang erwartet).',
-        '**ironisch** — *großartig* ist als Kritik gemeint; das Detail („niemand versteht“) entlarvt es.',
-        '**negativ** — *fragwürdig*, verstärkt durch *mehr als*.',
-        '**ironisch/negativ** — *angeblich* signalisiert Zweifel; der Nachsatz widerlegt die Behauptung.',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Wertungen in Zeitungskommentaren',
+      items: [
+        { text: '**Erfreulich** ist, dass die Stadt endlich neue Radwege baut.', gl: '— valoración positiva al inicio de la frase' },
+        { text: 'Es ist **bedauerlich**, dass das Jugendzentrum schließen muss.', gl: '— lamentable: valoración negativa' },
+        { text: 'Die Kritik an der Schulleitung kommt **zu Recht**: Die Eltern wurden viel zu spät informiert.', gl: '— zu Recht = con razón' },
+        { text: '**Kaum verwunderlich**, dass die Mieten weiter steigen — es wird ja kaum gebaut.', gl: '— nada sorprendente' },
+        { text: 'Die Sparpläne gehen vor allem **auf Kosten** der Pflegekräfte.', gl: '— auf Kosten + Gen.' },
+        { text: '**Letztlich** entscheidet nicht der Plan, sondern seine Umsetzung.', gl: '— en definitiva: suele anunciar la conclusión' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Die echte Position finden',
-      frage: 'Wofür ist der Verfasser wirklich? Achte auf *zwar … aber* und *allerdings*.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        '„Zwar kostet die Sanierung der Schwimmbäder Millionen, aber eine Stadt ohne Schwimmbad ist ärmer, als jede Bilanz zeigen kann.“',
-        '„Das neue Bezahlsystem ist bequem, allerdings bezahlen wir mit etwas, das teurer ist als Geld: unseren Daten.“',
-      ],
-      loesungen: [
-        '**Für die Sanierung** — der *zwar*-Teil räumt die Kosten ein, der *aber*-Teil trägt die Position.',
-        '**Gegen das System** (oder stark skeptisch) — nach *allerdings* kommt der entscheidende Einwand: der Preis sind die Daten.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Schreibe einen Mini-Kommentar (3–4 Sätze) zum Thema „Mehr Videokameras auf öffentlichen Plätzen?“ — mit mindestens einem Wertungswort und einem *zwar … aber*.',
-      loesungLabel: 'Mögliche Lösung',
-      aufgaben: [
-        'Position frei wählbar — wichtig sind die sprachlichen Mittel.',
-      ],
-      loesungen: [
-        '**Zwar** versprechen Kameras mehr Sicherheit, **aber** sie schaffen vor allem ein Gefühl der Überwachung. Dass Straftaten dadurch verschwinden, ist eine **fragwürdige** Hoffnung — meistens verlagern sie sich nur. **Es ist höchste Zeit**, stattdessen in Beleuchtung und Präsenz von Menschen zu investieren. ~~Vale la posición contraria, si usa los mismos recursos: valoración + zwar/aber.~~',
+      type: 'modell',
+      eyebrow: 'Modelltext — ein Mini-Kommentar',
+      thema: 'Thema: Mehr Videokameras auf öffentlichen Plätzen? Achte auf das Wertungswort, auf *zwar … aber* und auf die Forderung am Schluss.',
+      absaetze: [
+        '**Zwar** versprechen Kameras mehr Sicherheit, **aber** sie schaffen vor allem ein Gefühl der Überwachung. Dass Straftaten dadurch verschwinden, ist eine **fragwürdige** Hoffnung — meistens verlagern sie sich nur. **Es ist höchste Zeit**, stattdessen in bessere Beleuchtung und mehr Personal vor Ort zu investieren.',
       ],
     },
 

@@ -116,55 +116,29 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Erkennen',
-      frage: 'Vorgangspassiv oder Zustandspassiv? Und in welcher Zeit?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Die Rechnung ist schon bezahlt.',
-        'Die Straße wurde gestern gesperrt.',
-        'Das Paket ist heute Morgen geliefert worden.',
-        'Hier wird eine neue Schule gebaut.',
-      ],
-      loesungen: [
-        '**Zustandspassiv** (sein + P II) — Resultat. ~~«está pagada»~~',
-        '**Vorgangspassiv, Präteritum** (wurde + P II).',
-        '**Vorgangspassiv, Perfekt** (ist + P II + worden).',
-        '**Vorgangspassiv, Präsens** (wird + P II).',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Vorgang und Zustand im Alltag',
+      items: [
+        { text: 'Die Heizung **wird** morgen früh **repariert**.', gl: '— Vorgang: Präsens con valor de futuro' },
+        { text: 'Seit gestern **ist** die Heizung **repariert** — endlich ist es wieder warm.', gl: '— Zustand: ya está arreglada' },
+        { text: 'Unsere Bestellung **ist** noch nicht **geliefert worden**.', gl: '— Perfekt: worden, ¡no geworden!' },
+        { text: 'Das Konzert **wurde** wegen des Unwetters **abgesagt**.', gl: '— Präteritum' },
+        { text: 'Die Straße wurde **durch den Schnee** blockiert und **von der Stadt** wieder geräumt.', gl: '— causa → durch · agente → von' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Umformen',
-      frage: 'Bilde das Passiv in der angegebenen Zeit.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Man kontrolliert die Tickets am Eingang. ~~(Präsens)~~',
-        'Die Firma entließ zwanzig Mitarbeiter. ~~(Präteritum)~~',
-        'Man hat das Problem endlich gelöst. ~~(Perfekt)~~',
-      ],
-      loesungen: [
-        'Die Tickets **werden** am Eingang **kontrolliert**.',
-        'Zwanzig Mitarbeiter **wurden** (von der Firma) **entlassen**.',
-        'Das Problem **ist** endlich **gelöst worden**.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Sag es auf Deutsch — mit Passiv oder *man*. ~~(Las tres frases usan «se» en español.)~~',
-      loesungLabel: 'Mögliche Lösung',
-      aufgaben: [
-        '«Se venden bicicletas de segunda mano.» ~~(verkaufen, gebrauchte Fahrräder)~~',
-        '«Aquí no se puede fumar.» ~~(rauchen … dürfen)~~',
-        '«El informe se envió ayer.» ~~(der Bericht, schicken)~~',
-      ],
-      loesungen: [
-        'Gebrauchte Fahrräder **werden verkauft**. ~~(también: Man verkauft gebrauchte Fahrräder. / Gebrauchte Fahrräder zu verkaufen.)~~',
-        'Hier **darf** nicht **geraucht werden**. ~~(o simplemente: Hier darf man nicht rauchen. — el Passiv con Modalverb llega en la Lektion 11)~~',
-        'Der Bericht **wurde** gestern **geschickt**.',
+      type: 'beispiele',
+      kicker: 'se → Passiv oder man',
+      titel: '„Se“ auf Deutsch',
+      items: [
+        { text: 'In unserem Café **werden** ab sofort Aushilfen **gesucht**.', gl: '— «se buscan ayudantes»' },
+        { text: 'Hier **isst man** wirklich gut.', gl: '— «aquí se come bien»; también: Hier wird gut gegessen.' },
+        { text: 'Unser Flug **ist gestrichen worden**.', gl: '— «se ha cancelado el vuelo»' },
+        { text: 'Die Apotheke **ist** am Wochenende **geschlossen**.', gl: '— «está cerrada» → sein + Partizip II' },
+        { text: 'Alle Formulare **werden** online **ausgefüllt** und **von** einer Sachbearbeiterin **geprüft**.', gl: '— Vorgang + agente con von' },
       ],
     },
 

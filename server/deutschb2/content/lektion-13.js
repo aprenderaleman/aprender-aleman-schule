@@ -85,7 +85,7 @@ export default {
         {
           badge: 'P II',
           titel: 'Partizip II → passiv oder abgeschlossen',
-          text: 'Mit etwas **wurde** etwas gemacht: __das repariert**e** Auto__ = das Auto, **das repariert wurde**. __die geplante Reise__ = die Reise, die geplant wurde/ist.',
+          text: 'Mit dem Nomen **wurde** etwas gemacht: __das repariert**e** Auto__ = das Auto, **das repariert wurde**. __die geplante Reise__ = die Reise, die geplant wurde/ist.',
         },
         {
           badge: 'Endung',
@@ -116,7 +116,7 @@ export default {
       items: [
         { text: 'Die **steigenden** Mieten sind das größte Problem der Stadt.', gl: '= die Mieten, die steigen' },
         { text: 'Immer mehr Menschen leiden unter dem **zunehmenden** Lärm.', gl: '= dem Lärm, der zunimmt' },
-        { text: 'Für **Berufstätige** mit **wachsender** Verantwortung ist Zeit knapp.', gl: '= Verantwortung, die wächst' },
+        { text: 'Für Berufstätige mit **wachsender** Verantwortung ist Zeit knapp.', gl: '= Verantwortung, die wächst' },
       ],
     },
     {
@@ -141,52 +141,28 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Erkennen',
-      frage: 'Wähle die richtige Endung.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Er trinkt gern (schwarzer / schwarzen / schwarzes) Kaffee.',
-        'Das ist ein (interessantes / interessanter / interessante) Angebot.',
-        'Sie hilft dem (neue / neuen / neuer) Praktikanten.',
-        'Wir wohnen in einer ruhig___ Straße mit alt___ Häusern.',
-      ],
-      loesungen: [
-        '**schwarzen** — Akkusativ maskulin ohne Artikel: das Adjektiv trägt das Signal -en.',
-        '**interessantes** — ein zeigt beim Neutrum nichts → Adjektiv übernimmt -s.',
-        '**neuen** — Dativ → immer -en.',
-        'in einer ruhig**en** Straße mit alt**en** Häusern — Dativ → -en, Dativ Plural → -en.',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Endungen und Partizipien rund ums Wohnen',
+      items: [
+        { text: 'Wegen der **steigenden** Nebenkosten ziehen viele Familien an den Stadtrand.', gl: '— wegen + Genitiv Plural → -en' },
+        { text: 'Wir haben eine frisch **renovierte** Zweizimmerwohnung mit **großem** Balkon gefunden.', gl: '— mit + Dativ ohne Artikel: großem trägt das Signal' },
+        { text: 'Das **geplante** Einkaufszentrum soll mehr Verkehr ins Viertel bringen.', gl: '= das Einkaufszentrum, das geplant ist' },
+        { text: 'Bei **geöffnetem** Fenster kann ich wegen des **zunehmenden** Lärms nicht schlafen.', gl: '— bei + Dativ sin artículo → -em; des + Genitiv → -en' },
+        { text: 'Ein **gebrauchter** Kühlschrank reicht für die erste Zeit völlig aus.', gl: '— ein zeigt beim Maskulinum nichts → -er' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Umformen',
-      frage: 'Mach aus dem Relativsatz ein Partizip-Attribut.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'die Kosten, die steigen',
-        'der Bericht, der veröffentlicht wurde',
-        'die Kinder, die im Garten spielen',
-        'ein Problem, das gelöst wurde',
-      ],
-      loesungen: [
-        'die **steigenden** Kosten ~~(Partizip I: activo)~~',
-        'der **veröffentlichte** Bericht ~~(Partizip II: pasivo)~~',
-        'die **im Garten spielenden** Kinder — die Ergänzung rückt vor das Partizip',
-        'ein **gelöstes** Problem',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Schreib drei Sätze zum Thema „Wohnen in der Stadt“ — jeder mit einem Partizip-Attribut (steigend, renoviert, geplant).',
-      loesungLabel: 'Mögliche Lösung',
-      loesungen: [
-        'Die **steigenden** Mieten machen das Wohnen im Zentrum fast unmöglich.',
-        'Für eine frisch **renovierte** Wohnung zahlt man schnell 300 Euro mehr.',
-        'Das **geplante** Wohnprojekt am Stadtrand soll 2028 fertig sein. ~~Cualquier sustantivo plausible con la terminación correcta vale.~~',
+      type: 'beispiele',
+      kicker: 'Formell geschrieben',
+      titel: 'Partizip-Attribute in E-Mails und Berichten',
+      items: [
+        { text: 'Aus den oben **genannten** Gründen bitte ich Sie um eine **schnelle** Antwort.', gl: '— fórmula típica de la carta formal' },
+        { text: 'Im **folgenden** Abschnitt fassen wir die wichtigsten Ergebnisse zusammen.', gl: '— im = in dem → -en' },
+        { text: 'Die **sinkenden** Besucherzahlen zwingen das Museum zu **neuen** Ideen.', gl: '= die Zahlen, die sinken' },
+        { text: 'Für das **wachsende** Team suchen wir eine **passende** Bürofläche.', gl: '— Akkusativ neutro/femenino tras artículo → -e' },
       ],
     },
 

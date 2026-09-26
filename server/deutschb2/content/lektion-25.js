@@ -108,44 +108,28 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Erkennen',
-      frage: 'Was signalisiert der Sprecher wirklich: Zustimmung, Widerspruch oder Skepsis?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        '„Na ja, ich weiß nicht, ob das die Lösung ist.“',
-        '„Das stimmt schon, aber die Kosten wären enorm.“',
-        '„Ehrlich gesagt halte ich wenig von dem Vorschlag.“',
-      ],
-      loesungen: [
-        '**Skepsis** — „na ja“ + „ich weiß nicht, ob“ = Zweifel, höflich verpackt.',
-        '**Widerspruch** — die Zustimmung ist nur Höflichkeit; die Meinung steht nach dem *aber*.',
-        '**Ablehnung** — offen und direkt (*wenig halten von*).',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Standpunkte in Interview und Diskussion',
+      items: [
+        { text: '„**Ehrlich gesagt** halte ich **wenig von** dieser Reform.“', gl: '— opinión abierta y negativa' },
+        { text: '„Da muss ich Ihnen **widersprechen**: Die Zahlen zeigen etwas anderes.“', gl: '— discrepancia directa, pero educada' },
+        { text: '„In diesem Punkt **stimme** ich Frau Kaya voll **zu**.“', gl: '— zustimmen + dativo, sin preposición' },
+        { text: '„Das klingt gut. **Allerdings** fehlt mir noch ein konkreter Plan.“', gl: '— primero elogio, luego la restricción' },
+        { text: 'Herr Braun vertritt einen klaren **Standpunkt**: Er ist gegen jede Gebühr.', gl: '— así lo resume la tarea del examen' },
+        { text: 'In der **Anmoderation** stellt die Moderatorin beide Gäste mit Namen und Beruf vor.', gl: '— momento clave para anotar las siglas' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Anwenden — Wer sagt was?',
-      frage: 'Lies die Mini-Diskussion **einmal** in normalem Tempo ~~(en el examen: audio)~~ und ordne die Aussagen zu: **Frau Kaya** oder **Herr Braun**?\n\n**Transkript — Diskussion:** „*Moderator:* Frau Kaya, Herr Braun — soll unsere Innenstadt autofrei werden? — *Frau Kaya:* Unbedingt. Für mich ist die Luftqualität das wichtigste Argument: weniger Autos, weniger Abgase — davon profitieren alle. — *Herr Braun:* Das stimmt schon, aber denken Sie an den Einzelhandel. Wenn die Kunden nicht mehr mit dem Auto kommen können, kaufen sie im Internet — und die Geschäfte verlieren. — *Frau Kaya:* Dafür gibt es doch Parkhäuser am Rand. — *Herr Braun:* Na ja. Vielleicht wäre ein Kompromiss besser: autofreie Wochenenden — und unter der Woche bleibt alles offen.“',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Diese Person hält die Luftqualität für das wichtigste Argument.',
-        'Diese Person befürchtet Nachteile für die Geschäfte.',
-        'Diese Person schlägt einen Kompromiss vor.',
+      type: 'modell',
+      eyebrow: 'Transkript — Wer sagt was?',
+      thema: 'Lies die Mini-Diskussion **einmal** in normalem Tempo ~~(en el examen: audio)~~ und achte darauf, wer welche Position vertritt: **Frau Kaya** oder **Herr Braun**?',
+      absaetze: [
+        '„*Moderator:* Frau Kaya, Herr Braun — soll unsere Innenstadt autofrei werden? — *Frau Kaya:* Unbedingt. Für mich ist die Luftqualität das wichtigste Argument: weniger Autos, weniger Abgase — davon profitieren alle. — *Herr Braun:* Das stimmt schon, aber denken Sie an den Einzelhandel. Wenn die Kunden nicht mehr mit dem Auto kommen können, kaufen sie im Internet — und die Geschäfte verlieren. — *Frau Kaya:* Dafür gibt es doch Parkhäuser am Rand. — *Herr Braun:* Na ja. Vielleicht wäre ein Kompromiss besser: autofreie Wochenenden — und unter der Woche bleibt alles offen.“',
+        'Achte auf Herrn Braun: Sein „Das stimmt schon“ ist **keine** Zustimmung — seine Position steht nach dem *aber*. Mehr Aufgaben zu Interview und Diskussion findest du im **Übungsheft**.',
       ],
-      loesungen: [
-        '**Frau Kaya** — „Für mich ist die Luftqualität das wichtigste Argument.“',
-        '**Herr Braun** — „… und die Geschäfte verlieren.“ Sein „Das stimmt schon“ ist **keine** Zustimmung.',
-        '**Herr Braun** — „Vielleicht wäre ein Kompromiss besser …“',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren — nuanciert widersprechen',
-      frage: 'Jemand sagt: „Homeoffice sollte für alle Pflicht sein.“ Formuliere einen höflichen, nuancierten Widerspruch in 2-3 Sätzen. Benutze mindestens zwei Marker aus dieser Lektion (*das stimmt schon, aber / ehrlich gesagt / na ja / allerdings*).',
-      loesung: '**Mögliche Lösung:** „Das stimmt schon, Homeoffice hat viele Vorteile. Ehrlich gesagt halte ich eine Pflicht aber für falsch — nicht jeder kann zu Hause konzentriert arbeiten.“ — Gültig ist jede Variante mit höflicher Teilzustimmung, klarem Einwand nach *aber/allerdings* und korrekter Verbstellung. Das trainiert zugleich das Modul Sprechen.',
     },
 
     { type: 'rule' },

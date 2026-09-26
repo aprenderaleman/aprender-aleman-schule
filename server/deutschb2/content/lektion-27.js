@@ -135,51 +135,29 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Erkennen',
-      frage: 'Welches Kriterium ist jeweils betroffen — Erfüllung, Kohärenz, Wortschatz oder Strukturen?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Der Beitrag ist praktisch fehlerfrei, aber ein Inhaltspunkt der Aufgabe fehlt komplett.',
-        'Alle Sätze sind korrekt, stehen aber unverbunden nebeneinander — ohne Absätze, ohne Konnektoren.',
-        'Der Text benutzt achtmal *gut* und sechsmal *machen*.',
-        'Der Text besteht nur aus kurzen Hauptsätzen, und nach *weil* steht das Verb an Position 2.',
-      ],
-      loesungen: [
-        '**Erfüllung** — die Aufgabe ist nicht vollständig bearbeitet; das kostet auch bei perfekter Sprache Punkte.',
-        '**Kohärenz** — es fehlen Gliederung und Verknüpfung.',
-        '**Wortschatz** — zu wenig Variation; treffendere Wörter wählen (*hilfreich, praktisch; erledigen, organisieren*).',
-        '**Strukturen** — keine Satzvariation und ein Verbstellungsfehler nach *weil*.',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Über Aufgabe, Bewertung und Überarbeitung sprechen',
+      items: [
+        { text: 'Lies die **Aufgabenstellung** zweimal und hake jeden **Inhaltspunkt** ab, sobald du ihn behandelt hast.', gl: '— así no se te olvida ningún punto' },
+        { text: 'Ein Forumsbeitrag und eine formelle Nachricht sind zwei verschiedene **Textsorten** — mit unterschiedlichem **Register**.', gl: '— tuteo frente a *Sie*' },
+        { text: 'Gliedere deinen Text in drei **Absätze** und **verknüpfe** die Sätze mit Konnektoren.', gl: '— criterio «Kohärenz»' },
+        { text: 'Statt „eine Sache machen“ findest du fast immer einen treffenderen **Ausdruck**: *ein Problem lösen, einen Termin vereinbaren*.', gl: '— criterio «Wortschatz»' },
+        { text: 'Die meisten Punkte gehen nicht durch Unwissen verloren, sondern durch **Flüchtigkeitsfehler**.', gl: '— por eso existe el Schluss-Check' },
+        { text: 'Wer seinen Text am Ende nicht **überarbeitet**, verschenkt Punkte — und fällt im schlimmsten Fall **durch**.', gl: '— durchfallen = suspender' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Korrigieren',
-      frage: 'In jedem Satz steckt genau ein typischer Fehler. Finde und korrigiere ihn.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Ich habe eine Problem mit meinem Vertrag.',
-        'Am Montag ich kann leider nicht kommen.',
-        'Ich glaube dass die Idee sehr gut ist.',
-        'Meine schwester sucht eine neue Wohnung.',
-        'Ich bin sehr müde, weil ich habe schlecht geschlafen.',
+      type: 'modell',
+      eyebrow: 'Modelltext — vorher und nachher',
+      thema: 'Ein Mini-Absatz zum Thema Online-Kurse, einmal ohne und einmal mit Verknüpfung. Achte darauf, wie Konnektoren die Gedanken logisch verbinden und wie sich die Verbstellung anpasst.',
+      absaetze: [
+        '**Vorher:** „Ich finde Online-Kurse gut. Man kann zu Hause lernen. Man braucht Disziplin. Viele Leute machen den Kurs nicht fertig.“',
+        '**Nachher:** „Ich finde Online-Kurse praktisch, **weil** man zu Hause lernen **kann**. **Allerdings braucht** man viel Disziplin — **deshalb machen** viele Leute den Kurs nicht fertig.“',
+        'Nach *weil* wandert das Verb ans Ende; nach *allerdings* und *deshalb* steht es direkt an Position 2. Auch *praktisch* statt *gut* bringt Punkte im Wortschatz. Weitere Aufgaben zum Schluss-Check findest du im **Übungsheft**.',
       ],
-      loesungen: [
-        'Ich habe **ein Problem** mit meinem Vertrag. — *das* Problem. ~~No calques «el problema».~~',
-        '**Am Montag kann ich** leider nicht kommen. — Verb an Position 2, danach das Subjekt.',
-        'Ich glaube**,** dass die Idee sehr gut ist. — Komma vor *dass*.',
-        'Meine **Schwester** sucht eine neue Wohnung. — Nomen groß.',
-        '… weil ich schlecht **geschlafen habe**. — nach *weil* Verb ans Ende.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Überarbeiten',
-      frage: 'Verbessere den Mini-Absatz: verbinde die Sätze mit Konnektoren und gliedere die Gedanken. „Ich finde Online-Kurse gut. Man kann zu Hause lernen. Man braucht Disziplin. Viele Leute machen den Kurs nicht fertig.“',
-      loesungLabel: 'Mögliche Lösung',
-      loesung: '*Ich finde Online-Kurse praktisch, **weil** man zu Hause lernen kann. **Allerdings** braucht man viel Disziplin — **deshalb** machen viele Leute den Kurs nicht fertig.*\nAuch gut: *denn* statt *weil* (Verb bleibt an Position 2) oder *darum/daher* statt *deshalb*. Wichtig ist, dass die logische Verbindung sichtbar wird und die Verbstellung zum Konnektor passt.',
     },
 
     { type: 'rule' },

@@ -117,55 +117,29 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Erkennen',
-      frage: 'Welche Funktion hat der Satz: Bedingung, Vorwurf, Rat im Nachhinein oder beinahe-Ereignis?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Du hättest früher kommen sollen!',
-        'Wenn wir reserviert hätten, hätten wir einen Tisch bekommen.',
-        'Ich hätte fast meinen Schlüssel verloren.',
-        'An Ihrer Stelle hätte ich schriftlich reklamiert.',
-      ],
-      loesungen: [
-        '**Vorwurf** (hätte + Infinitiv + sollen).',
-        '**irreale Bedingung** der Vergangenheit.',
-        '**beinahe-Ereignis** (fast + K II Vergangenheit).',
-        '**Rat im Nachhinein** (an Ihrer Stelle …).',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Verpasste Chancen im Alltag',
+      items: [
+        { text: '**Wenn** wir den Wetterbericht **gelesen hätten**, **wären** wir nicht ohne Schirm **losgegangen**.', gl: '— irreale Bedingung der Vergangenheit' },
+        { text: '**Hätte** Paula das Angebot **angenommen**, **wäre** sie ins Ausland **gezogen**.', gl: '— sin wenn: verbo en posición 1' },
+        { text: 'Ohne deine Hilfe **hätte** ich den Umzug nie **geschafft**.', gl: '— ohne …: la condición va implícita' },
+        { text: 'Der Hausmeister **hätte** die Heizung schon im Oktober **reparieren müssen**.', gl: '— Doppelinfinitiv al final' },
+        { text: 'Das Kind **wäre beinahe** vom Fahrrad **gefallen**.', gl: '— casi se cae (pero no se cayó)' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Umformen',
-      frage: 'Was wäre gewesen? Bilde den irrealen Bedingungssatz der Vergangenheit.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Ich habe den Bus verpasst. Ich bin zu spät gekommen.',
-        'Er hat die E-Mail nicht gelesen. Er ist nicht zum Termin erschienen.',
-        'Wir haben keine Karten gekauft. Wir haben das Konzert nicht gesehen.',
-      ],
-      loesungen: [
-        '**Wenn** ich den Bus nicht **verpasst hätte**, **wäre** ich pünktlich **gekommen**.',
-        '**Wenn** er die E-Mail **gelesen hätte**, **wäre** er zum Termin **erschienen**.',
-        '**Wenn** wir Karten **gekauft hätten**, **hätten** wir das Konzert **gesehen**.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Dein Freund hat die B2-Prüfung nicht bestanden, weil er kaum geübt hat. Formuliere: einen Vorwurf, einen Rat im Nachhinein und einen Trost mit irrealer Bedingung.',
-      loesungLabel: 'Mögliche Lösung',
-      aufgaben: [
-        'Vorwurf mit sollen',
-        'Rat mit „an deiner Stelle“',
-        'Bedingungssatz der Vergangenheit',
-      ],
-      loesungen: [
-        'Du **hättest** mehr Modelltests **machen sollen**! ~~(vale cualquier vorwurf con hätte + Inf. + sollen)~~',
-        'An deiner Stelle **hätte** ich jeden Tag eine Stunde **geübt**.',
-        '**Wenn** du regelmäßig **geübt hättest**, **hättest** du bestanden — beim nächsten Mal klappt es!',
+      type: 'beispiele',
+      kicker: 'Im Beruf',
+      titel: 'Rückblick auf ein schwieriges Projekt',
+      items: [
+        { text: '**Wenn** wir die Kunden früher **informiert hätten**, **hätten** sie sich nicht **beschwert**.', gl: '' },
+        { text: 'Die Firma **hätte** mehr Personal **einstellen sollen**.', gl: '— crítica: debería haber …' },
+        { text: 'An Ihrer Stelle **hätte** ich die Präsentation **verschoben**.', gl: '— consejo a posteriori, registro formal' },
+        { text: 'Das Projekt **wäre fast** am Budget **gescheitert**.', gl: '— fast + wäre: por poco fracasa' },
+        { text: 'Mit etwas mehr Zeit **hätten** wir das besser **machen können**.', gl: '— posibilidad desaprovechada' },
       ],
     },
 
@@ -179,7 +153,7 @@ export default {
       titel: '3 Lücken',
       anweisung: 'So sieht das im Prüfungsformat aus: die korrekte Vergangenheitsform des Konjunktivs II auswählen.',
       absaetze: [
-        'Gestern habe ich fast einen wichtigen Termin verpasst — ich {1} beinahe im Büro eingeschlafen. Mein Kollege meinte, ich {2} früher ins Bett gehen sollen. Er hat recht: Wenn ich mehr {3}, wäre mir das nicht passiert.',
+        'Gestern hätte ich fast einen wichtigen Termin verpasst — ich {1} beinahe im Büro eingeschlafen. Mein Kollege meinte, ich {2} früher ins Bett gehen sollen. Er hat recht: Wenn ich mehr {3}, wäre mir das nicht passiert.',
       ],
       optionen: [
         '(1) a) hätte · b) wäre · c) würde',

@@ -128,47 +128,19 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Erkennen',
-      frage: 'Richtig oder falsch?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Im digitalen Format sprichst du auch das Modul Sprechen am Computer.',
-        'Eine angeklickte Antwort kannst du bis zum Ende der Zeit ändern.',
-        'Am Computer ist die Prüfungszeit kürzer als auf Papier.',
-        'Das Audio beim Hören läuft individuell über Kopfhörer.',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Am Bildschirm arbeiten',
+      items: [
+        { text: '**Scroll** im Lesetext bis ganz nach unten — auch die letzte Zeile kann wichtig sein.' },
+        { text: 'Ich habe die Aufgabe **markiert** und bin am Ende noch einmal zurückgesprungen.', gl: '— markieren = señalar para revisar' },
+        { text: 'Vor dem Start testet jeder seine **Kopfhörer** und stellt die Lautstärke ein.' },
+        { text: 'Die **Restzeit** läuft oben rechts auf dem **Bildschirm** mit.' },
+        { text: 'Im **Eingabefeld** zählt das System die Wörter automatisch mit.', gl: '— la cuenta de palabras la hace el programa' },
+        { text: 'Wer das ß auf der **Tastatur** erst suchen muss, verliert beim **Tippen** wertvolle Sekunden.' },
       ],
-      loesungen: [
-        '**Falsch** — Sprechen bleibt eine Paarprüfung mit echten Prüfenden.',
-        '**Richtig** — erst mit Ablauf der Zeit ist die Auswahl endgültig.',
-        '**Falsch** — Zeit, Aufgaben und Bewertung sind identisch.',
-        '**Richtig** — und die Lautstärke regelst du selbst.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Anwenden',
-      frage: 'Was tust du in dieser Situation? Antworte mit dem passenden Verb aus dem Kernwortschatz.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Bei Lesen Teil 3 bist du bei einer Aufgabe unsicher, die Zeit läuft.',
-        'Im Lesetext willst du eine wichtige Zahl später schnell wiederfinden.',
-        'Beim Schreiben merkst du, dass dein zweiter Absatz besser an den Anfang passt.',
-      ],
-      loesungen: [
-        'Die Aufgabe **markieren**, weiterarbeiten und am Ende des Moduls **zurückkommen** — sich nicht festbeißen.',
-        'Die Stelle mit dem **Markierungswerkzeug** hervorheben — wie Unterstreichen auf Papier.',
-        'Den Absatz einfach **ausschneiden und umstellen** — genau das ist der Vorteil des Tippens.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Tipptraining: Stell die deutsche Tastatur ein und tippe in maximal 5 Minuten vier Sätze über deinen Alltag. Jeder Satz braucht mindestens einen Umlaut (ä, ö, ü), einer davon ein ß.',
-      loesungLabel: 'Mögliche Lösung',
-      loesung: 'Ich stehe **früh** auf und **öffne** zuerst das Fenster. Zum **Frühstück** trinke ich Kaffee mit Milch. Danach laufe ich durch die **Straßen** zum Büro. Abends **wäre** ich gern sportlicher, aber meistens bin ich **müde**. ~~Cualquier contenido vale — el objetivo es mecánico: encontrar ä, ö, ü y ß sin buscar las teclas. Repite el ejercicio hasta bajar de 5 minutos.~~',
     },
 
     { type: 'rule' },
@@ -219,7 +191,7 @@ export default {
     {
       type: 'ausblick',
       eyebrow: 'Ausblick',
-      text: 'Du kennst jetzt die Prüfung und ihr Format. Bevor der Kurs richtig startet, kommt die ehrliche Frage: **Wo stehst du gerade?** In der nächsten Lektion machst du eine Standortbestimmung mit drei Mini-Tests — und findest heraus, welche Lektionen für dich am wichtigsten sind.',
+      text: 'Du kennst jetzt die Prüfung und ihr Format. Bevor der Kurs richtig startet, kommt die ehrliche Frage: **Wo stehst du gerade?** In der nächsten Lektion machst du eine Standortbestimmung — und findest heraus, welche Lektionen für dich am wichtigsten sind.',
     },
   ],
 }

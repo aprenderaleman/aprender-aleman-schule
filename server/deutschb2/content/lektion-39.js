@@ -3,6 +3,7 @@
 // Bloque 3 — Themenfelder & Wortschatz. Einkaufen, Online-Handel und
 // Rücksendungen, Werbung, sparen vs. ausgeben — y la Reklamation, que
 // enlaza con la formelle Nachricht de la lección 29 (Schreiben Teil 2).
+// Modelltext conservado; práctica en el Übungsheft.
 
 export default {
   spec: ['Bloque 3', 'Themenfelder & Wortschatz', 'Niveau B2', 'Prüfungsrelevanz: Schreiben Teil 2 & Lesen'],
@@ -133,49 +134,32 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Wortschatz',
-      frage: 'Welches Wort passt zur Situation?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Du schickst ein Paket an den Online-Shop zurück.',
-        'Der Laden zieht zehn Prozent vom Preis ab.',
-        'Du meldest dem Shop schriftlich, dass das Produkt defekt ist.',
-        'Das Papier, das du an der Kasse bekommst und aufbewahren solltest.',
-      ],
-      loesungen: [
-        '**die Rücksendung**',
-        '**der Rabatt**',
-        '**die Reklamation**',
-        '**der Kassenbon**',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Kollokationen rund um Konsum und Geld',
+      items: [
+        { text: 'Wer den **Kassenbon aufbewahrt**, kann die Jacke ohne Probleme **umtauschen**.', gl: '' },
+        { text: 'Die **Rücksendung** war kostenlos, aber das Geld kam erst nach drei Wochen zurück.', gl: '' },
+        { text: 'Mit dem Gutscheincode habe ich zehn Prozent **Rabatt bekommen**.', gl: '— *einen Rabatt bekommen*' },
+        { text: 'Mein Nachbar **beschwert sich** ständig **über** die Paketboten.', gl: '— *über* + Akk., nunca *von*' },
+        { text: 'Seit ich jeden Monat meine **Rechnungen prüfe**, **gebe** ich deutlich weniger Geld **aus**.', gl: '' },
+        { text: 'Kinder **lassen sich** besonders leicht **von Werbung beeinflussen**.', gl: '' },
       ],
     },
+
+    { type: 'rule' },
+
+    // ── Modelltext ────────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Ausgeben oder verbringen?',
-      frage: 'Ergänze ausgeben, verbringen, sparen oder sich beschweren in der richtigen Form.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Letzten Monat habe ich viel zu viel Geld für Kleidung ___ .',
-        'Am Wochenende ___ wir viel Zeit auf dem Flohmarkt.',
-        'Sie ___ sich gestern beim Vermieter über den Lärm ___ . ~~(ojo: über + Akkusativ)~~',
-        'Wenn du jeden Monat etwas zur Seite legst, ___ du genug für den Führerschein.',
+      type: 'modell',
+      eyebrow: 'Modelltext — online oder im Geschäft?',
+      thema: 'Kaufst du lieber online oder im Geschäft?',
+      woerter: 'ca. 90 Wörter',
+      absaetze: [
+        'Ehrlich gesagt kaufe ich fast alles online, weil es so bequem ist: Ich gebe die Bestellung abends auf, und zwei Tage später kommt die Lieferung. Außerdem findet man im Internet oft einen Rabatt. Ich finde es allerdings problematisch, dass dadurch viele Geschäfte in der Innenstadt schließen — und ich gebe online schneller Geld aus, weil alles nur einen Klick entfernt ist. Letzten Monat habe ich zum Beispiel drei Jacken bestellt und zwei zurückgeschickt. Deshalb versuche ich jetzt, bewusster zu konsumieren: erst überlegen, dann kaufen.',
       ],
-      loesungen: [
-        'Ich habe zu viel Geld **ausgegeben**. ~~(dinero → ausgeben)~~',
-        'Wir **verbringen** viel Zeit auf dem Flohmarkt. ~~(tiempo → verbringen)~~',
-        'Sie **hat** sich **über den Lärm beschwert**.',
-        '… **sparst** du genug für den Führerschein.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Schreibe 80–100 Wörter: Kaufst du lieber online oder im Geschäft? Nenne einen Vorteil, einen Nachteil und ein persönliches Beispiel.',
-      loesungLabel: 'Mögliche Lösung',
-      loesung: 'Ehrlich gesagt kaufe ich fast alles online, weil es so bequem ist: Ich gebe die Bestellung abends auf, und zwei Tage später kommt die Lieferung. Außerdem findet man im Internet oft einen Rabatt. Ich finde es allerdings problematisch, dass dadurch viele Geschäfte in der Innenstadt schließen — und ich gebe online schneller Geld aus, weil alles nur einen Klick entfernt ist. Letzten Monat habe ich zum Beispiel drei Jacken bestellt und zwei zurückgeschickt. Deshalb versuche ich jetzt, bewusster zu konsumieren: erst überlegen, dann kaufen. ~~(~90 Wörter)~~',
     },
 
     { type: 'rule' },

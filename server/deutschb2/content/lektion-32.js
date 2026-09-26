@@ -161,44 +161,30 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Erkennen',
-      frage: 'Welche Funktion hat das Redemittel — Zustimmung, Widerspruch, Kompromiss oder Abschluss?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        '„Das sehe ich genauso.“',
-        '„Wie wäre es, wenn wir uns in der Mitte treffen?“',
-        '„Ich sehe das ein bisschen anders.“',
-        '„Gut, dann sind wir uns einig.“',
-      ],
-      loesungen: [
-        '**Zustimmung** — volle Übereinstimmung.',
-        '**Kompromiss** — schlägt eine Mittellösung vor.',
-        '**Widerspruch** — höflich abgeschwächt („ein bisschen“).',
-        '**Abschluss** — besiegelt das gemeinsame Ergebnis.',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Reagieren statt referieren',
+      items: [
+        { text: 'In diesem Punkt **stimme** ich dir völlig **zu**: Das Angebot für Familien muss besser werden.', gl: '— *zustimmen* + Dat., sin preposición' },
+        { text: 'Da muss ich dir leider **widersprechen** — mit dem Rad ist man in der Stadt oft schneller.', gl: '— *widersprechen* + Dat.' },
+        { text: 'Dein **Argument** mit den Kosten greife ich gern auf, aber man muss auch an die Umwelt denken.', gl: '— retomar la palabra del compañero = interacción' },
+        { text: 'Einen **Einwand** habe ich noch: Nicht jeder hat zu Hause genug Platz dafür.', gl: '' },
+        { text: 'Entschuldige, ich wollte dich nicht **unterbrechen** — sprich ruhig weiter.', gl: '— tras interrumpir, devolver la palabra con cortesía' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Anwenden',
-      frage: 'Reagiere laut auf die Aussage des Partners: erst würdigen, dann einschränken („Da hast du recht, aber …“ / „Das stimmt schon, trotzdem …“) — und stelle am Ende eine Gegenfrage.',
-      loesungLabel: 'Mögliche Lösung',
-      aufgaben: [
-        'Partner: „Online-Kurse sind besser als Präsenzkurse, weil sie viel billiger sind.“',
-        'Partner: „Man sollte im Urlaub nicht mehr fliegen — das schadet der Umwelt zu sehr.“',
+      type: 'beispiele',
+      kicker: 'Kompromiss',
+      titel: 'Zu einem gemeinsamen Ergebnis kommen',
+      items: [
+        { text: 'Mein **Vorschlag** wäre, dass wir abwechselnd kochen und bestellen.', gl: '— Konjunktiv II suaviza la propuesta' },
+        { text: 'Wenn wir beide Seiten **abwägen**, ist ein Tag Homeoffice pro Woche wohl die beste Lösung.', gl: '' },
+        { text: 'Mit diesem **Kompromiss** bin ich **einverstanden**.', gl: '— *einverstanden sein mit* + Dat.; nunca «Ich bin de acuerdo»' },
+        { text: 'Gut, dann **einigen** wir uns **auf** eine kurze Reise im Frühling.', gl: '— *sich einigen auf* + Akk.' },
+        { text: 'Du hast mich **überzeugt** — so kommen wir zu einem gemeinsamen **Ergebnis**.', gl: '' },
       ],
-      loesungen: [
-        '„Da hast du recht, billiger sind sie meistens. Aber im Präsenzkurs spricht man viel mehr, und das ist beim Sprachenlernen entscheidend. Hast du beides schon ausprobiert?“',
-        '„Das stimmt schon, Fliegen belastet das Klima. Trotzdem finde ich ein totales Verbot unrealistisch — man könnte stattdessen kurze Strecken mit dem Zug fahren. Wie machst du das im Urlaub?“ — Jede Antwort mit Würdigung, Einschränkung und Gegenfrage ist gültig.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Schreibe eine Mini-Diskussion mit **sechs Redebeiträgen** (A-B-A-B-A-B) zur Frage „Gemeinsam kochen oder Essen bestellen — was ist besser für einen Abend mit Freunden?“ und schließe mit einem ausgesprochenen Kompromiss. Lies sie danach laut in beiden Rollen.',
-      loesung: '**Mögliche Lösung (Skizze):** A: kochen → gemeinsame Aktivität, billiger. / B: „Da hast du recht, aber …“ → bestellen spart Zeit, keiner steht allein in der Küche. / A: „Das stimmt schon, trotzdem …“ → zusammen kochen IST das Programm; Frage an B. / B: gibt zu, schlägt vor: einfaches Gericht wählen. / A: ergänzt: Nachtisch bestellen. / B: „Dann sind wir uns einig: Hauptgericht kochen wir, den Nachtisch bestellen wir.“ — Inhaltlich sind viele Varianten richtig; Pflicht sind höflicher Widerspruch, mindestens eine Gegenfrage und der hörbare Kompromiss am Ende.',
     },
 
     { type: 'rule' },

@@ -123,48 +123,28 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Erkennen',
-      frage: 'Welches Verb steckt im Nomen? Und was bedeutet der Satz?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        '„Die Benutzung der Waschmaschine ist nach 22 Uhr untersagt.“',
-        '„Bei Verspätung informieren Sie bitte das Sekretariat.“',
-        '„Das Betreten der Baustelle ist verboten.“',
-      ],
-      loesungen: [
-        '**benutzen** — Man darf die Waschmaschine nach 22 Uhr nicht benutzen.',
-        '**sich verspäten** — Wenn Sie sich verspäten, informieren Sie das Sekretariat.',
-        '**betreten** — Man darf die Baustelle nicht betreten. ~~Típico cartel alemán: substantivierter Infinitiv + verboten/untersagt.~~',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Nominalstil auf Schildern und in Mitteilungen',
+      items: [
+        { text: '**Das Betreten** des Rasens ist verboten.', gl: '— típico cartel: substantivierter Infinitiv + verboten/untersagt' },
+        { text: '**Bei Verlust** des Schlüssels wenden Sie sich bitte an den Hausmeister.', gl: '= wenn Sie den Schlüssel verlieren' },
+        { text: '**Wegen der Verspätung** des Busses hat die Prüfung zehn Minuten später begonnen.', gl: '= weil sich der Bus verspätet hat' },
+        { text: '**Nach der Anmeldung** erhalten Sie eine Bestätigung per E-Mail.', gl: '= nachdem Sie sich angemeldet haben' },
+        { text: '**Zum Einkaufen** fahre ich lieber mit dem Fahrrad als mit dem Auto.', gl: '= para hacer la compra' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Umformen',
-      frage: 'Transformiere: Nebensatz → nominale Wendung (oder zurück).',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Weil die Straße gesperrt war, kamen wir zu spät. → (wegen …)',
-        'Wenn das Wetter schlecht ist, fällt das Grillfest aus. → (bei …)',
-        'Zum Anmelden brauchen Sie Ihren Ausweis. → (Wenn …)',
-      ],
-      loesungen: [
-        '**Wegen der gesperrten Straße** kamen wir zu spät. ~~Fíjate: el Partizip II de la Lektion 13 reaparece como atributo.~~',
-        '**Bei schlechtem Wetter** fällt das Grillfest aus.',
-        '**Wenn Sie sich anmelden** (möchten), brauchen Sie Ihren Ausweis.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Schreib drei Regeln für eine WG (piso compartido) im Nominalstil: eine mit -ung, eine mit substantiviertem Infinitiv, eine mit bei.',
-      loesungLabel: 'Mögliche Lösung',
-      loesungen: [
-        'Die **Reinigung** der Küche übernimmt jede Woche eine andere Person.',
-        '**Das Rauchen** ist nur auf dem Balkon erlaubt.',
-        '**Bei Problemen** sprechen wir das Thema beim WG-Abend an. ~~Cualquier regla plausible vale — evaluamos el patrón nominal, no el contenido.~~',
+      type: 'beispiele',
+      kicker: 'Nomen → Verb',
+      titel: 'Zurück in den verbalen Stil',
+      items: [
+        { text: '**Die Lösung** des Problems dauert länger als geplant. → Es dauert länger als geplant, das Problem zu **lösen**.', gl: '— Infinitivsatz mit zu (Lektion 14)' },
+        { text: '**Beim Einkaufen** vergesse ich immer die Hälfte. → **Wenn** ich **einkaufe**, vergesse ich immer die Hälfte.', gl: '' },
+        { text: 'Vielen Dank für **die Einladung**! → Vielen Dank, dass ihr uns **eingeladen** habt!', gl: '' },
+        { text: '**Bei der Bewerbung** hat mir meine Schwester geholfen. → Meine Schwester hat mir geholfen, als ich mich **beworben** habe.', gl: '— el reflexivo vuelve con el verbo' },
       ],
     },
 

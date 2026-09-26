@@ -2,7 +2,8 @@
 //
 // Bloque 3 — Themenfelder & Wortschatz. Wohnungssuche mit el léxico real
 // (Kaltmiete, Nebenkosten, Kaution, WG), Nachbarschaft & Hausordnung
-// (enlace con Lesen Teil 5), Stadt vs. Land.
+// (enlace con Lesen Teil 5), Stadt vs. Land. Modelltext conservado;
+// práctica en el Übungsheft.
 
 export default {
   spec: ['Bloque 3', 'Themenfelder & Wortschatz', 'Niveau B2', 'Prüfungsrelevanz: Lesen Teil 5 & Schreiben'],
@@ -127,49 +128,32 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Wortschatz',
-      frage: 'Welches Wort aus dem Kernwortschatz passt?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'das Geld, das man als Sicherheit zahlt und beim Auszug zurückbekommt',
-        'die Miete ohne Heizung, Wasser und andere Kosten',
-        'eine Wohnung, die sich mehrere Personen teilen',
-        'der Text mit den Regeln für alle Bewohner eines Hauses',
-      ],
-      loesungen: [
-        '**die Kaution**',
-        '**die Kaltmiete**',
-        '**die WG (Wohngemeinschaft)**',
-        '**die Hausordnung**',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Kollokationen rund ums Wohnen',
+      items: [
+        { text: 'Die Wohnung gefällt uns sehr, aber **die Kaltmiete** liegt über unserem Budget.', gl: '' },
+        { text: 'Nach der **Besichtigung** haben wir den **Mietvertrag** sofort **unterschrieben**.', gl: '' },
+        { text: 'Unser **Vermieter** hat die Nachbarwohnung an ein junges Paar **vermietet**.', gl: '— *vermieten*: dar en alquiler' },
+        { text: 'Beim Auszug haben wir **die Kaution** vollständig **zurückbekommen**.', gl: '' },
+        { text: 'Seit ich **in eine WG gezogen** bin, koche ich fast nie mehr allein.', gl: '' },
+        { text: 'Bitte **haltet** euch **an die Ruhezeiten** — unsere **Nachbarn** haben kleine Kinder.', gl: '— *sich an etwas halten*: respetar, cumplir' },
       ],
     },
+
+    { type: 'rule' },
+
+    // ── Modelltext ────────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Mieten oder vermieten?',
-      frage: 'Ergänze die passende Form von mieten, vermieten oder umziehen.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Herr Weber ___ die Wohnung im dritten Stock an ein junges Paar.',
-        'Wir ___ seit zwei Jahren eine kleine Wohnung am Stadtrand.',
-        'Nächsten Monat ___ ich nach Leipzig ___ — ich habe dort eine Stelle gefunden.',
-        'Die Wohnung wird erst frei, wenn die alten Mieter ___ sind.',
+      type: 'modell',
+      eyebrow: 'Modelltext — Stadt oder Land?',
+      thema: 'Wohnst du lieber in der Stadt oder auf dem Land — und warum?',
+      woerter: 'ca. 90 Wörter',
+      absaetze: [
+        'Im Moment wohne ich in einer WG mitten in der Stadt, und für dieses Leben spricht viel: Ich brauche kein Auto, meine Arbeit und meine Freunde sind in der Nähe. Dagegen spricht allerdings der Preis — allein die Kaltmiete für mein Zimmer ist höher, als früher eine ganze Wohnung auf dem Land gekostet hat. Trotzdem überwiegen für mich die Vorteile der Stadt, zumindest jetzt. Wenn ich später eine Familie habe, sieht das vielleicht anders aus: mehr Platz, ein Garten, ruhige Nachbarn. Es kommt eben darauf an, in welcher Lebensphase man ist.',
       ],
-      loesungen: [
-        'Herr Weber **vermietet** die Wohnung. ~~(el dueño la cede → vermieten)~~',
-        'Wir **mieten** seit zwei Jahren eine kleine Wohnung.',
-        'Nächsten Monat **ziehe** ich nach Leipzig **um**.',
-        '… wenn die alten Mieter **umgezogen** sind.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Schreibe 80–100 Wörter: Wohnst du lieber in der Stadt oder auf dem Land — und warum? Wäge mindestens einen Vorteil und einen Nachteil ab und nutze zwei Redemittel.',
-      loesungLabel: 'Mögliche Lösung',
-      loesung: 'Im Moment wohne ich in einer WG mitten in der Stadt, und für dieses Leben spricht viel: Ich brauche kein Auto, meine Arbeit und meine Freunde sind in der Nähe. Dagegen spricht allerdings der Preis — allein die Kaltmiete für mein Zimmer ist höher, als früher eine ganze Wohnung auf dem Land gekostet hat. Trotzdem überwiegen für mich die Vorteile der Stadt, zumindest jetzt. Wenn ich später eine Familie habe, sieht das vielleicht anders aus: mehr Platz, ein Garten, ruhige Nachbarn. Es kommt eben darauf an, in welcher Lebensphase man ist. ~~(~90 Wörter)~~',
     },
 
     { type: 'rule' },
@@ -199,7 +183,7 @@ export default {
         '(3) → **A** — „ganztägig an Sonn- und Feiertagen“ = den ganzen Tag leise.',
         'Abschnitt **D** bleibt übrig.',
       ],
-      kommentar: 'Typisch für solche Regeltexte ist der unpersönliche Stil: „ist zu vermeiden“, „ist nicht gestattet“, „sind freizuhalten“. Diese sein + zu + Infinitiv-Formen bedeuten müssen oder dürfen — wer sie erkennt, löst Teil 5 deutlich schneller.',
+      kommentar: 'Typisch für solche Regeltexte ist der unpersönliche Stil: „ist zu vermeiden“, „ist nicht gestattet“, „sind freizuhalten“. Die Formen mit sein + zu + Infinitiv bedeuten meist müssen (verneint: nicht dürfen) — wer sie erkennt, löst Teil 5 deutlich schneller.',
     },
     {
       type: 'tipp',

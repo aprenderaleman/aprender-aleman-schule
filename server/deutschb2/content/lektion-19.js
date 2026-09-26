@@ -88,7 +88,7 @@ export default {
     {
       type: 'prose',
       absaetze: [
-        '~~Ojo, hispanohablantes: en el examen no cuenta lo que es verdad en el mundo, sino lo que dice el texto. „Seguro que es así" no es un argumento — *belegen oder ausschließen*.~~',
+        '~~Ojo, hispanohablantes: en el examen no cuenta lo que es verdad en el mundo, sino lo que dice el texto. «Seguro que es así» no es un argumento — *belegen oder ausschließen*.~~',
       ],
     },
 
@@ -109,47 +109,18 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Erkennen',
-      frage: 'Welcher Distraktor-Typ ist das: Wortfalle, Sinnumkehr oder „steht nicht im Text“?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Text: „Kaum ein Kunde nutzt den neuen Service.“ — Option: „Der neue Service wird viel genutzt.“',
-        'Text: „Die Stadt plant einen neuen Radweg am Fluss.“ — Option: „Der Radweg am Fluss ist bei Touristen beliebt.“',
-        'Text: „Der Kurs kostet für Studierende nichts.“ — Option: „Studierende interessieren sich nicht für den Kurs.“ ~~(fíjate en *nichts* / *nicht*)~~',
-      ],
-      loesungen: [
-        '**Sinnumkehr** — *kaum ein* (casi nadie) wird zu *viel genutzt*.',
-        '**Steht nicht im Text** — der Radweg ist erst geplant; über Touristen sagt der Text nichts.',
-        '**Wortfalle** — *nichts kosten* (gratis) hat mit *sich nicht interessieren* nichts zu tun; nur das kleine Wort lockt.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Anwenden',
-      frage: 'Paraphrasiere zuerst die Textstelle, wähle dann die richtige Option — und begründe.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Textstelle: „Wer täglich eine Stunde pendelt, gewinnt im Homeoffice pro Woche fast einen halben Arbeitstag.“ — a) Pendler sparen im Homeoffice viel Zeit. · b) Im Homeoffice arbeitet man einen halben Tag weniger.',
-        'Textstelle: „Ganz ohne Werbung kommt kaum eine Zeitung aus.“ — a) Zeitungen verzichten heute auf Werbung. · b) Fast alle Zeitungen brauchen Werbung.',
-      ],
-      loesungen: [
-        '**a** — Paraphrase: die Fahrtzeit fällt weg → Zeitgewinn. Option b ist eine Wortfalle: „ein halber Tag“ bezieht sich auf gesparte Fahrtzeit, nicht auf weniger Arbeit.',
-        '**b** — „kaum eine kommt ohne … aus“ = fast alle brauchen es. Option a ist die Sinnumkehr.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Baue selbst eine Aufgabe: Schreibe zu der Textstelle eine richtige Aussage (Paraphrase) und einen Distraktor (Wortfalle oder Sinnumkehr).',
-      loesungLabel: 'Mögliche Lösung',
-      aufgaben: [
-        'Textstelle: „Immer mehr junge Leute verzichten auf ein eigenes Auto und teilen sich stattdessen Fahrzeuge über Carsharing-Apps.“',
-      ],
-      loesungen: [
-        'Richtige Aussage: **„Das eigene Auto wird für junge Menschen unwichtiger.“** — Distraktor (Sinnumkehr): **„Immer mehr junge Leute kaufen sich ein eigenes Auto.“** ~~Cualquier par funciona si la correcta reformula y la trampa repite palabras o invierte el sentido.~~',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Rund um Aufgabe und Textstelle',
+      items: [
+        { text: '**Unterstreiche** in jeder **Auswahlaufgabe** zuerst die **Schlüsselwörter** der Frage.', gl: '— primero la pregunta, luego las opciones' },
+        { text: 'Aufgabe 3 **bezieht sich auf** den dritten Absatz — dort suchst du die passende **Textstelle**.', gl: '— sich beziehen auf + Akk.' },
+        { text: '**Laut einer Umfrage** möchte **die Mehrheit der Beschäftigten** flexibler arbeiten.', gl: '— die Mehrheit + genitivo, verbo en singular' },
+        { text: 'Option c kann ich **ausschließen**: Über die Kosten sagt der Text gar nichts.', gl: '— descartar con un motivo concreto' },
+        { text: '**Im Gegensatz zu** den jüngeren Befragten nutzen ältere kaum Carsharing.', gl: '— im Gegensatz zu + Dat.' },
+        { text: 'Kannst du die Antwort mit dem Text **belegen**? Wenn nicht, ist sie vermutlich ein **Distraktor**.', gl: '— belegen = justificar con el texto' },
       ],
     },
 

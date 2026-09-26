@@ -16,7 +16,7 @@ export default {
       eyebrow: 'Lernziele',
       items: [
         'den Unterschied zwischen B1 und B2 an konkreten Beispielen erkennen',
-        'mit drei Mini-Tests deine Lücken in Grammatik, Wortschatz und Schreiben finden',
+        'mit der Diagnose im Übungsheft deine Lücken in Grammatik, Lesen und Schreiben finden',
         'dich pro Modul realistisch einschätzen (Kann-ich-das-Tabelle)',
         'deinen Weg durch die fünf Blöcke des Kurses planen',
       ],
@@ -49,7 +49,7 @@ export default {
       type: 'prose',
       eyebrow: 'Erklärung — warum eine Diagnose?',
       absaetze: [
-        'Wer B2 vorbereitet, hat **keine Zeit, alles zu wiederholen**. Eine Standortbestimmung zeigt dir, wo deine Lücken sind — damit du __gezielt__ übst. Deshalb bekommt in dieser Lektion jede Lösung einen Wegweiser: **„Fehler? → Lektion N“**.',
+        'Wer B2 vorbereitet, hat **keine Zeit, alles zu wiederholen**. Eine Standortbestimmung zeigt dir, wo deine Lücken sind — damit du __gezielt__ übst. Deshalb zeigt dir das Übungsheft bei jedem Thema einen Wegweiser: **„Fehler? → Lektion N“**.',
       ],
     },
     {
@@ -76,7 +76,7 @@ export default {
       type: 'prose',
       eyebrow: 'Erklärung — so funktioniert die Diagnose',
       absaetze: [
-        'Unten warten **drei Mini-Tests**: Grammatik, Wortschatz und ein kurzer Schreibtext. Arbeite sie **ohne Hilfsmittel** durch und schau erst dann in die Lösungen. ~~No es un examen: un fallo aquí es información valiosa, no un problema.~~',
+        'Die Diagnose machst du im **Übungsheft** zu dieser Lektion: ein Grammatik-Test mit Themen aus Block 1, ein Lesetext und eine kurze Schreibaufgabe. Arbeite **ohne Hilfsmittel** und schau erst danach in die Lösungen. ~~No es un examen: un fallo aquí es información valiosa, no un problema.~~',
       ],
     },
 
@@ -98,57 +98,43 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen: die drei Mini-Tests ──────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Mini-Test 1 · Grammatik',
-      frage: 'Wähle oder ergänze. Jede Lösung zeigt dir: Fehler? → dann diese Lektion zuerst.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Ich komme später, ___ ich noch einen Termin habe. ~~a) denn · b) weil · c) deshalb~~',
-        'Ich mache den Kurs, ___ mein Deutsch besser wird. ~~a) damit · b) um · c) weil~~',
-        '___ mehr du übst, ___ sicherer wirst du. ~~(completa)~~',
-        'Wenn ich mehr Zeit ___, ___ ich jeden Tag lernen. ~~(haben / lernen — irreal)~~',
-        'Das Formular muss bis Montag ___ werden. ~~(ausfüllen)~~',
-        'Der Kollege, ___ ___ ich das Projekt mache, kommt aus Peru. ~~(mit)~~',
-        'Ich warte schon seit Tagen ___ deine Antwort. ~~a) auf · b) für · c) an~~',
-      ],
-      loesungen: [
-        '**b) weil** — das Verb steht am Ende („… habe“); nach *denn* stünde es auf Position 2. Fehler? → **Lektion 4**',
-        '**a) damit** — anderes Subjekt („mein Deutsch“), also kein *um … zu*. Fehler? → **Lektion 5**',
-        '**Je** mehr du übst, **desto** sicherer wirst du. Fehler? → **Lektion 6**',
-        'Wenn ich mehr Zeit **hätte**, **würde** ich jeden Tag **lernen**. Fehler? → **Lektion 7**',
-        'Das Formular muss bis Montag **ausgefüllt** werden. Fehler? → **Lektion 11**',
-        'Der Kollege, **mit dem** ich das Projekt mache … Fehler? → **Lektion 12**',
-        '**a) auf** — *warten auf* + Akkusativ. ~~No es «esperar por».~~ Fehler? → **Lektion 15**',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Über das eigene Lernen sprechen',
+      items: [
+        { text: 'Nach der **Standortbestimmung** wusste Emre genau, wo seine **Lücken** lagen.' },
+        { text: 'Meine größte **Stärke** ist das Hören, meine größte **Schwäche** das Schreiben.' },
+        { text: 'Bevor ich mit Block 2 anfange, will ich die Adjektivdeklination **auffrischen**.', gl: '— refrescar lo ya aprendido' },
+        { text: 'Es ist gar nicht so leicht, das eigene Niveau realistisch **einzuschätzen**.', gl: '— por eso ayuda un test' },
+        { text: 'Statt alles zu wiederholen, übt Carla **gezielt** die Themen, bei denen sie unsicher ist.' },
+        { text: 'Ein realistischer **Lernplan** mit klaren **Lernzielen** macht deine **Fortschritte** sichtbar.' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Mini-Test Wortschatz',
-      frage: 'Typische B2-Kollokationen — welche Variante ist richtig?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'eine Entscheidung ___ ~~a) machen · b) treffen~~',
-        'Welches Wort passt nicht? ~~Gehalt – Lohn – Miete – Einkommen~~',
-        'sich ___ eine Stelle bewerben ~~a) für · b) um~~',
-        'die Vor- und ___ abwägen ~~(completa)~~',
-        '___ meiner Meinung nach / Meiner Meinung ___ … — wie heißt es richtig?',
-      ],
-      loesungen: [
-        '**b) treffen** — eine Entscheidung *treffen*. ~~Calco típico de «tomar/hacer una decisión»: nunca «machen».~~',
-        '**Miete** — die anderen drei bezeichnen Geld, das man *bekommt*; die Miete *bezahlt* man.',
-        '**b) um** — sich *um* eine Stelle bewerben.',
-        'die Vor- und **Nachteile** abwägen — die Grundformel jeder B2-Argumentation.',
-        '**Meiner Meinung nach** … — ohne Präposition davor. ~~«Según mi opinión» ≠ *nach meiner Meinung nach*: la trampa es doblar la preposición.~~',
+      type: 'beispiele',
+      kicker: 'Wortschatz',
+      titel: 'Kollokationen, die im B2 zählen',
+      items: [
+        { text: 'Nach langem Überlegen hat Ana eine **Entscheidung getroffen**.', gl: '— nunca «eine Entscheidung machen»' },
+        { text: 'Samir **bewirbt sich um** eine Stelle als Ingenieur.', gl: '— lo estándar: sich **um** eine Stelle bewerben' },
+        { text: 'Bevor du dich festlegst, solltest du die **Vor- und Nachteile abwägen**.', gl: '— la base de toda argumentación B2' },
+        { text: '**Meiner Meinung nach** ist Homeoffice nicht für jeden geeignet.', gl: '— sin preposición delante: no «nach meiner Meinung nach»' },
+        { text: 'Wir **warten** schon seit Wochen **auf** eine Antwort.', gl: '— warten auf + Akk., no «für»' },
       ],
     },
+
+    { type: 'rule' },
+
+    // ── Modelltext ────────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Mini-Test Schreiben',
-      frage: 'Stell dich in einem Lernforum vor (60–80 Wörter): Wer bist du? Warum lernst du Deutsch? Was ist dein Ziel mit dem B2? Nutze mindestens zwei Konnektoren.',
-      loesungLabel: 'Mögliche Lösung',
-      loesung: 'Hallo zusammen! Ich heiße Lucía und komme aus Valencia. Ich arbeite als Krankenschwester und lerne seit zwei Jahren Deutsch, **weil** ich in Deutschland arbeiten möchte. Für die Berufsanerkennung brauche ich das Zertifikat B2, **deshalb** bereite ich mich jetzt intensiv vor. **Obwohl** die Grammatik manchmal schwierig ist, macht mir die Sprache viel Spaß. Mein Ziel ist es, die Prüfung im Sommer zu bestehen! *(62 Wörter)* ~~Autoevalúa: ¿verbo al final tras «weil/obwohl»? ¿Inversión tras «deshalb»? ¿60-80 palabras? Si algo falló → Lektionen 4 y 28.~~',
+      type: 'modell',
+      eyebrow: 'Modelltext — Vorstellung im Lernforum',
+      thema: 'Forumsbeitrag · Achte auf die Verbstellung nach *weil*, *deshalb* und *obwohl*.',
+      absaetze: [
+        'Hallo zusammen! Ich heiße Lucía und komme aus Spanien. Ich arbeite als Krankenschwester und lerne seit zwei Jahren Deutsch, **weil** ich in Deutschland arbeiten möchte. Für die Berufsanerkennung brauche ich das Zertifikat B2, **deshalb** bereite ich mich jetzt intensiv vor. **Obwohl** die Grammatik manchmal schwierig ist, macht mir die Sprache viel Spaß. Mein Ziel ist es, die Prüfung im Sommer zu bestehen!',
+      ],
     },
 
     { type: 'rule' },
@@ -191,7 +177,7 @@ export default {
       eyebrow: 'Selbstcheck',
       items: [
         'Ich kann an Beispielen erklären, was B2 von B1 unterscheidet.',
-        'Ich habe die drei Mini-Tests gemacht und weiß, welche Lektionen ich zuerst brauche.',
+        'Ich habe die Diagnose im Übungsheft gemacht und weiß, welche Lektionen ich zuerst brauche.',
         'Ich habe mich pro Modul ehrlich eingeschätzt.',
         'Ich kenne die fünf Blöcke des Kurses und habe einen Lernplan.',
       ],
@@ -199,7 +185,7 @@ export default {
     {
       type: 'ausblick',
       eyebrow: 'Ausblick',
-      text: 'Jetzt geht es richtig los: **Lektion 4, „Konnektoren I“** — die Modelllektion des Kurses. An ihr siehst du, wie jede Lektion der Methode aufgebaut ist: Wortschatz, Erklärung, Beispiele, Übungen und Prüfungsbezug. Inhaltlich lernst du dort, Grund, Einräumung und Folge mit der richtigen Verbstellung zu verbinden.',
+      text: 'Jetzt geht es richtig los: **Lektion 4, „Konnektoren I“** — die Modelllektion des Kurses. An ihr siehst du, wie jede Lektion der Methode aufgebaut ist: Wortschatz, Erklärung, Beispiele, Prüfungsbezug — und dazu das Übungsheft. Inhaltlich lernst du dort, Grund, Einräumung und Folge mit der richtigen Verbstellung zu verbinden.',
     },
   ],
 }

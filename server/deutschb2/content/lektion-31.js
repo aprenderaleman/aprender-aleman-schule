@@ -4,7 +4,7 @@
 // Vortrag ~4 Min. über ein Alltagsthema + Nachfragen. Estructura
 // Einleitung → 2-3 Punkte + Beispiel → Fazit; Signalwörter orales;
 // Stichwortzettel sin leer; técnica de Nachfragen bestätigen → antworten
-// → zurückgeben. Vortrag modelo comentado + práctica de 2 guiones.
+// → zurückgeben. Vortrag modelo comentado; práctica en el Übungsheft.
 
 export default {
   spec: ['Bloque 2', 'Modul Sprechen · Teil 1', 'Niveau B2', 'Prüfungsrelevanz: Sprechen'],
@@ -168,44 +168,29 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Erkennen',
-      frage: 'Welche Funktion hat das Signalwort — Einleitung, Übergang, Beispiel oder Fazit?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        '„Zusammenfassend kann man sagen, dass …“',
-        '„Ein Beispiel dafür ist …“',
-        '„Ich möchte heute über … sprechen.“',
-        '„Ich komme jetzt zum nächsten Punkt.“',
-      ],
-      loesungen: [
-        '**Fazit** — leitet die Zusammenfassung am Ende ein.',
-        '**Beispiel** — kündigt die eigene Erfahrung an.',
-        '**Einleitung** — nennt das Thema im ersten Satz.',
-        '**Übergang** — verbindet zwei Punkte hörbar.',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Der rote Faden im Vortrag',
+      items: [
+        { text: 'In meiner **Einleitung** nenne ich kurz das Thema und sage, warum es mich persönlich betrifft.', gl: '— tema + relevancia en dos frases' },
+        { text: 'Ein wichtiger **Aspekt** ist die Zeit: Wer Sport treibt, muss ihn fest in die Woche einplanen.', gl: '' },
+        { text: 'Die **Vor- und Nachteile** des Landlebens kenne ich **aus eigener Erfahrung**, denn ich bin in einem Dorf aufgewachsen.', gl: '— la experiencia propia da contenido y tiempo' },
+        { text: 'Damit komme ich zum zweiten Punkt — ich **gehe** jetzt **zu** den Kosten **über**.', gl: '— *übergehen zu* + Dat.' },
+        { text: 'Zum Schluss möchte ich die wichtigsten Punkte kurz **zusammenfassen** und ein **Fazit** ziehen.', gl: '— *ein Fazit ziehen*, no *machen*' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Anwenden',
-      frage: 'Antworte laut mit der Drei-Schritt-Technik (bestätigen → kurz antworten → zurückgeben). Dein Vortragsthema war „Sport im Alltag“.',
-      loesungLabel: 'Mögliche Lösung',
-      aufgaben: [
-        'Nachfrage: „Du hast gesagt, Sport kostet Zeit. Wie viel Zeit brauchst du pro Woche?“',
-        'Nachfrage: „Ist ein Fitnessstudio nicht ziemlich teuer?“',
+      type: 'beispiele',
+      kicker: 'Nachfragen',
+      titel: 'Auf Fragen eingehen, ohne den Faden zu verlieren',
+      items: [
+        { text: 'Danke, dass Sie diese **Frage stellen** — darauf **gehe** ich gern noch einmal **ein**.', gl: '— *eine Frage stellen*; *eingehen auf* + Akk.' },
+        { text: 'Das ist ein gutes **Beispiel**: Bei mir war es genauso, als ich umgezogen bin.', gl: '' },
+        { text: 'Auch bei der Antwort halte ich den **Blickkontakt** zu meinem Partner.', gl: '— mirar al compañero también cuenta como interacción' },
+        { text: 'Ich will den **roten Faden** nicht verlieren, deshalb antworte ich kurz und frage dann zurück: „Und wie ist das bei dir?“', gl: '— responder breve + devolver la pregunta' },
       ],
-      loesungen: [
-        '„Gute Frage! Bei mir sind es ungefähr drei Stunden pro Woche — zweimal joggen und einmal schwimmen. Machst du selbst auch regelmäßig Sport?“',
-        '„Das stimmt, billig ist es nicht. Deshalb laufe ich lieber draußen — das kostet nichts. Warst du schon mal in einem Fitnessstudio?“ — Jede Antwort mit den drei Schritten und 1-2 Sätzen Inhalt ist richtig.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Bereite **zwei** Stichwortgerüste vor (je max. 25 Wörter, 7-8 Minuten pro Thema — mit Timer!): **a)** „Leben in der Stadt oder auf dem Land?“ · **b)** „Braucht man heute noch Bargeld?“ Halte danach einen der beiden Vorträge laut und stoppe die Zeit.',
-      loesung: '**Mögliche Lösung zu a):** „Einl.: Wo lebt man besser? / P1: Stadt → Arbeit, Kultur, ÖPNV (Bsp. mein Umzug) / P2: Land → Ruhe, Natur, Miete billiger (Bsp. Großeltern) / Meinung: jung Stadt, Familie Land / Fazit + Fragen?“ — Andere Punkte und Beispiele sind genauso gültig; entscheidend sind Stichwörter statt Sätze, je ein eigenes Beispiel pro Punkt und ein klares Fazit. Wer beim lauten Vortrag unter 3 Minuten bleibt, verlängert die **Beispiele**, nicht die Theorie.',
     },
 
     { type: 'rule' },

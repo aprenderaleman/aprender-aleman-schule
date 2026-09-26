@@ -112,36 +112,28 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Erkennen',
-      frage: 'Welche Funktion hat der Satz im Vortrag: Einleitung, neuer Punkt, Beleg oder Fazit?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        '„Darüber hinaus dürfen wir die Umwelt nicht vergessen.“',
-        '„Ich möchte heute über das Ehrenamt sprechen und dabei auf zwei Fragen eingehen.“',
-        '„Ein Beispiel dafür ist das Repair-Café in unserer Stadt.“',
-        '„Zusammenfassend lässt sich sagen: Ohne Freiwillige geht es nicht.“',
-      ],
-      loesungen: [
-        '**Neuer Punkt** — *darüber hinaus* eröffnet einen weiteren Aspekt.',
-        '**Einleitung** — Thema + Bauplan.',
-        '**Beleg** — vertieft den vorherigen Punkt, kein neues Thema.',
-        '**Fazit** — die Kernaussage.',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Signalwörter im Vortrag',
+      items: [
+        { text: '„**Darüber hinaus** dürfen wir die Folgen für die Umwelt nicht vergessen.“', gl: '— nuevo punto, igual que *außerdem*' },
+        { text: '„Das Ehrenamt ist **einerseits** eine Bereicherung, **andererseits** kostet es viel Zeit.“', gl: '— contraste de dos lados' },
+        { text: '„Ich möchte heute **auf zwei Fragen eingehen**: Wer hilft — und warum?“', gl: '— el mapa del Vortrag' },
+        { text: '„Ein weiterer **Aspekt** ist die Rolle der Schulen.“', gl: '— anuncia el siguiente punto' },
+        { text: '„**Abschließend** noch ein Beispiel aus unserer Stadt.“', gl: '— se acerca el final' },
+        { text: '„Mein **Fazit**: Ohne Freiwillige geht es nicht.“', gl: '— la Kernaussage, casi siempre objeto de una pregunta' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Anwenden — die Gliederung wiederherstellen',
-      frage: 'Diese fünf Sätze stammen aus einem Vortrag über das Fahrrad in der Stadt — aber in falscher Reihenfolge. Bring sie mithilfe der Signalwörter in die logische Ordnung (1-5).\n\na) „Abschließend lässt sich sagen: Die Stadt der Zukunft fährt Rad — wenn die Politik mitspielt.“\nb) „Zunächst zu den Vorteilen: Radfahren ist günstig, gesund und leise.“\nc) „In meinem Vortrag geht es um die Frage, welche Rolle das Fahrrad im Stadtverkehr spielen kann.“\nd) „Eine Studie aus Kopenhagen zeigt, dass gute Radwege die Zahl der Radfahrer verdoppeln können.“\ne) „Außerdem müssen wir über die Infrastruktur sprechen — ohne sichere Radwege steigt niemand um.“',
-      loesung: '**c → b → e → d → a.** Einleitung (c: Thema), erster Punkt (b: *zunächst*), neuer Punkt (e: *außerdem*), Beleg zum Infrastruktur-Punkt (d: *eine Studie zeigt*), Fazit (a: *abschließend*). Der Beleg (d) muss **nach** e stehen, weil er die Radwege-These stützt.',
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren — dein Mini-Vortrag',
-      frage: 'Baue das Gerüst eines Mini-Vortrags (4-5 Sätze) zum Thema „Lernen mit dem Handy“. Pflicht: eine Einleitung mit Bauplan und die Signalwörter *zunächst*, *außerdem* und *abschließend*.',
-      loesung: '**Mögliche Lösung:** „In meinem Vortrag geht es um das Lernen mit dem Handy; dabei möchte ich auf zwei Punkte eingehen. Zunächst zu den Vorteilen: Mit Apps kann man überall üben. Außerdem muss man die Nachteile sehen — das Handy lenkt leicht ab. Abschließend lässt sich sagen: Das Handy ist ein gutes Werkzeug, wenn man es bewusst benutzt.“ — Gültig ist jede Variante mit klarem Bauplan und korrekter Verbstellung nach dem Signalwort (*Außerdem **muss** man …* — Inversion, ~~no calques „además uno debe“~~). Dieses Gerüst brauchst du wieder im Modul Sprechen.',
+      type: 'modell',
+      eyebrow: 'Modelltext — ein Mini-Vortrag in fünf Sätzen',
+      thema: 'Thema: Welche Rolle kann das Fahrrad im Stadtverkehr spielen? Achte darauf, wie die Signalwörter die Gliederung tragen: Einleitung → erster Punkt → neuer Punkt → Beleg → Fazit.',
+      absaetze: [
+        '„In meinem Vortrag geht es um die Frage, welche Rolle das Fahrrad im Stadtverkehr spielen kann. **Zunächst** zu den Vorteilen: Radfahren ist günstig, gesund und leise. **Außerdem** müssen wir über die Infrastruktur sprechen — ohne sichere Radwege steigt niemand um. **Eine Studie aus Kopenhagen zeigt**, dass gute Radwege die Zahl der Radfahrer verdoppeln können. **Abschließend lässt sich sagen**: Die Stadt der Zukunft fährt Rad — wenn die Politik mitspielt.“',
+        'Die Studie steht **nach** dem Infrastruktur-Punkt, weil sie genau diese These stützt: ein Beleg, kein neues Thema. Weitere Aufgaben zur Gliederung findest du im **Übungsheft**.',
+      ],
     },
 
     { type: 'rule' },

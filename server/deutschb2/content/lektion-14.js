@@ -78,7 +78,7 @@ export default {
         {
           badge: 'damit',
           titel: 'Der „para“-Fehler: um … zu vs. damit',
-          text: '**Gleiches Subjekt → um … zu**: *Ich lerne Deutsch, **um** in Wien **zu studieren**.* **Verschiedene Subjekte → damit** (Nebensatz mit eigenem Subjekt): *Ich arbeite viel, **damit meine Kinder** studieren können.* ~~En español ambos son «para (que)» — en alemán la elección es obligatoria.~~',
+          text: '**Gleiches Subjekt → um … zu**: *Ich lerne Deutsch, **um** im Ausland **zu studieren**.* **Verschiedene Subjekte → damit** (Nebensatz mit eigenem Subjekt): *Ich arbeite viel, **damit meine Kinder** studieren können.* ~~En español ambos son «para (que)» — en alemán la elección es obligatoria.~~',
         },
       ],
     },
@@ -110,8 +110,8 @@ export default {
     },
     {
       type: 'beispiele',
-      kicker: 'trennbar & Perfekt',
-      titel: 'Die Formsachen',
+      kicker: 'trennbar & Es ist …',
+      titel: 'Wohin kommt das zu?',
       items: [
         { text: 'Vergiss nicht, die Tür **abzuschließen**.', gl: '— zu dentro del verbo separable' },
         { text: 'Ich freue mich, Sie bald **kennenzulernen**.', gl: '— fórmula de la formelle Nachricht' },
@@ -130,52 +130,29 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Erkennen',
-      frage: 'Mit zu oder ohne zu?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Er versucht, jeden Tag Sport ___ (machen).',
-        'Sie kann heute leider nicht ___ (kommen).',
-        'Wir gehen am Samstag ___ (einkaufen).',
-        'Hast du Zeit, mir kurz ___ (helfen)?',
-        'Ich lasse mir die Haare ___ (schneiden).',
-      ],
-      loesungen: [
-        'Sport **zu machen** — versuchen + Infinitivsatz.',
-        'nicht **kommen** — Modalverb kann → ohne zu.',
-        '**einkaufen** — gehen + Aktivität → ohne zu.',
-        'mir kurz **zu helfen** — Zeit haben + Infinitivsatz.',
-        '**schneiden** — lassen → ohne zu.',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Pläne, Vorsätze und Entscheidungen',
+      items: [
+        { text: 'Nach dem Studium **habe** ich **vor**, ein Jahr in Österreich **zu arbeiten**.', gl: '— vorhaben + Infinitivsatz' },
+        { text: 'Seit Januar **versucht** Jonas, jeden Tag mit dem Rad zur Arbeit **zu fahren**.', gl: '— zu + Infinitiv am Ende' },
+        { text: 'Meine Schwester **hat aufgehört**, abends am Handy **zu sitzen**.', gl: '— aufhören = dejar de' },
+        { text: 'Wir **haben beschlossen**, die Wohnung selbst **zu streichen**, **anstatt** Handwerker **zu bezahlen**.', gl: '— anstatt … zu = en vez de' },
+        { text: 'Er **hat versprochen**, mich vom Bahnhof **abzuholen**.', gl: '— zu dentro del verbo separable' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Verbinden',
-      frage: 'um … zu oder damit? Verbinde die Sätze.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Ich mache einen Sprachkurs. Ich will die B2-Prüfung bestehen.',
-        'Die Firma bietet Homeoffice an. Die Mitarbeiter sollen flexibler arbeiten können.',
-        'Er nimmt ein Taxi. Er will den Zug nicht verpassen.',
-      ],
-      loesungen: [
-        'Ich mache einen Sprachkurs, **um** die B2-Prüfung **zu bestehen**. ~~Mismo sujeto.~~',
-        'Die Firma bietet Homeoffice an, **damit die Mitarbeiter** flexibler arbeiten können. ~~Sujetos distintos → damit obligatorio.~~',
-        'Er nimmt ein Taxi, **um** den Zug nicht **zu verpassen**.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Deine Pläne für die Prüfung: Schreib drei Sätze mit vorhaben, um … zu und ohne … zu.',
-      loesungLabel: 'Mögliche Lösung',
-      loesungen: [
-        'Ich habe vor, jeden Tag eine Lektion **zu wiederholen**.',
-        'Ich löse alte Modellsätze, **um** das Prüfungsformat besser **kennenzulernen**.',
-        'Ich gehe nicht in die Prüfung, **ohne** vorher gut geschlafen **zu haben**. ~~Vale cualquier contenido; lo evaluable es: coma, zu, infinitivo al final.~~',
+      type: 'beispiele',
+      kicker: 'Formell & Beruf',
+      titel: 'Infinitivsätze in E-Mails und Gesprächen',
+      items: [
+        { text: 'Ich **empfehle** Ihnen, die Unterlagen per Einschreiben **zu schicken**.', gl: '— empfehlen + Dativ + Infinitivsatz' },
+        { text: '**Es ist wichtig**, die Frist genau **einzuhalten**.', gl: '— Es ist + Adj. + Infinitivsatz' },
+        { text: 'Als Werkstudentin **habe** ich **die Möglichkeit**, flexibel von zu Hause **zu arbeiten**.', gl: '— Nomen + haben + zu' },
+        { text: 'Leider **habe** ich **vergessen**, Ihnen den Anhang **mitzuschicken**.', gl: '— fórmula típica de disculpa' },
+        { text: 'Sie hat gekündigt, **ohne** eine neue Stelle **zu haben**.', gl: '— ohne … zu = sin + infinitivo' },
       ],
     },
 

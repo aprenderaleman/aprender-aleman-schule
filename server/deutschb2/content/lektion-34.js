@@ -92,7 +92,7 @@ export default {
       kicker: 'Bildungsweg',
       titel: 'Über den eigenen Weg sprechen',
       items: [
-        { text: 'Nach der Schule habe ich eine **Ausbildung** als Mechatronikerin **gemacht**.' },
+        { text: 'Nach der Schule habe ich eine **Ausbildung** zur Mechatronikerin **gemacht**.' },
         { text: 'Mein Bruder **studiert** Informatik im dritten Semester.' },
         { text: 'Sie hat ihr **Studium** mit einer sehr guten **Note abgeschlossen**.' },
       ],
@@ -147,49 +147,28 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Wortschatz',
-      frage: 'Bildung, Ausbildung oder Studium? Wähl das passende Wort.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Nach der Schule hat er eine … als Koch gemacht.',
-        'Sie hat ihr … in Medizin nach sechs Jahren abgeschlossen.',
-        'Gute … ist die Basis für die Zukunft eines Landes.',
-        'Ohne … keinen guten Beruf, sagt mein Vater — er meint Schule, Lehre oder Uni.',
-      ],
-      loesungen: [
-        'eine **Ausbildung** als Koch ~~oficio concreto → Ausbildung~~',
-        'ihr **Studium** in Medizin ~~universidad → Studium~~',
-        'Gute **Bildung** ~~concepto general → Bildung~~',
-        'Ohne **Bildung** — hier passt nur das allgemeine Wort.',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Der Kernwortschatz im Satz',
+      items: [
+        { text: 'Nach der **Ausbildung** zur Bankkauffrau hat Aylin berufsbegleitend Wirtschaft **studiert**.', gl: '— primero FP, luego carrera a tiempo parcial' },
+        { text: 'Wer in Deutschland Medizin studieren will, braucht einen **Abschluss** mit sehr guten **Noten**.', gl: '— *der Abschluss*: el título final' },
+        { text: 'Die **Vorlesung** am Montag um acht besucht kaum jemand — die Folien stehen ohnehin online.', gl: '— *eine Vorlesung besuchen*' },
+        { text: 'Tobias ist in Mathematik **durchgefallen**, die übrigen **Prüfungen** des Semesters hat er aber alle **bestanden**.', gl: '— *in* + asignatura + *durchfallen* / *eine Prüfung bestehen*' },
+        { text: 'Zwei Tage pro Woche sitzt unsere **Auszubildende** in der **Berufsschule**, den Rest der Woche arbeitet sie bei uns mit.', gl: '— el sistema dual en una frase' },
+        { text: 'Ohne regelmäßige **Weiterbildung** verliert man in der IT-Branche schnell den Anschluss.', gl: '— *den Anschluss verlieren*: quedarse atrás' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Kollokationen ergänzen',
-      frage: 'Ergänze das passende Verb (bestehen · durchfallen · besuchen · machen).',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'eine Vorlesung …',
-        'bei einer Prüfung …',
-        'eine Weiterbildung …',
-        'eine Prüfung …',
+      type: 'modell',
+      eyebrow: 'Modelltext — mein Bildungsweg',
+      thema: 'So kannst du deinen eigenen Bildungsweg beschreiben: Schule, Studium oder Ausbildung, und was du heute noch lernst. ~~(Texto modelo con las colocaciones de la lección; adáptalo a tu propia historia.)~~',
+      absaetze: [
+        'Ich habe in meinem Heimatland die Schule abgeschlossen und danach ein Studium im Fach Betriebswirtschaft begonnen. Das Studium war sehr theoretisch, deshalb habe ich nebenbei in einer kleinen Firma gearbeitet, um praktische Erfahrung zu sammeln. Vor zwei Jahren habe ich meinen Abschluss gemacht — darauf bin ich sehr stolz.',
+        'Heute lerne ich Deutsch, weil ich mich beruflich weiterentwickeln möchte — für mich gehört das zum lebenslangen Lernen. Später möchte ich eine Weiterbildung im Bereich Online-Marketing machen, denn dort verändert sich alles sehr schnell.',
       ],
-      loesungen: [
-        'eine Vorlesung **besuchen**',
-        'bei einer Prüfung **durchfallen**',
-        'eine Weiterbildung **machen**',
-        'eine Prüfung **bestehen**',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Beschreib deinen eigenen Bildungsweg: Schule, Ausbildung oder Studium, und was du heute noch lernst. Schreib 80–100 Wörter.',
-      loesungLabel: 'Mögliche Lösung',
-      loesung: 'Ich habe in meinem Heimatland die Schule abgeschlossen und danach ein Studium im Fach Betriebswirtschaft begonnen. Das Studium war sehr theoretisch, deshalb habe ich nebenbei in einer kleinen Firma gearbeitet, um praktische Erfahrung zu sammeln. Vor zwei Jahren habe ich meinen Abschluss gemacht — darauf bin ich sehr stolz. Heute lerne ich Deutsch, weil ich mich beruflich weiterentwickeln möchte — für mich gehört das zum lebenslangen Lernen. Später möchte ich eine Weiterbildung im Bereich Online-Marketing machen, denn dort verändert sich alles sehr schnell. *(81 Wörter — dein echter Bildungsweg mit den Kollokationen der Lektion ist natürlich genauso richtig.)*',
     },
 
     { type: 'rule' },

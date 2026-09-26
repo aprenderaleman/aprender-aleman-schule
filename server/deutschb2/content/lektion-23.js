@@ -95,7 +95,7 @@ export default {
       card: true,
       titel: 'Die Transkript-Methode',
       absaetze: [
-        'Dieser Kurs hat kein Audio — die Hörtexte stehen als **Transkripte** da, markiert mit ~~(en el examen: audio)~~. Drei Regeln, damit das Training echt bleibt: **(1)** Lies das Transkript nur **einmal**, in normalem Sprechtempo, ohne zurückzuspringen — oder lass es dir **vorlesen**. **(2)** Decke die Lösung ab, bis du geantwortet hast. **(3)** Ergänze regelmäßig die **offiziellen Modellsätze** — kostenlos und mit echtem Audio. Transkript = Technik-Übung, Modellsatz = Generalprobe.',
+        'Dieser Kurs hat kein Audio — die Hörtexte stehen als **Transkripte** da, markiert mit ~~(en el examen: audio)~~. Drei Regeln, damit das Training echt bleibt: **(1)** Lies das Transkript nur **einmal**, in normalem Sprechtempo, ohne zurückzuspringen — oder lass es dir **vorlesen**. **(2)** Decke die Lösung ab, bis du geantwortet hast. **(3)** Ergänze dein Training regelmäßig mit den **offiziellen Modellsätzen** — kostenlos und mit echtem Audio. Transkript = Technik-Übung, Modellsatz = Generalprobe.',
       ],
     },
 
@@ -127,46 +127,42 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Erkennen',
-      frage: 'Zu welchem Teil des Moduls passt die Anweisung? (Teil 1–4)',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        '„Sie hören nun einen Vortrag über das Thema Schlaf.“',
-        '„Sie hören kurze Gespräche und Ansagen aus dem Alltag.“',
-        '„Sie hören ein Gespräch, in dem mehrere Personen diskutieren. Wer sagt was?“',
-        '„Sie hören ein Interview mit einer Wissenschaftlerin.“',
-      ],
-      loesungen: [
-        '**Teil 4** — Vortrag (eine Stimme, strukturiert).',
-        '**Teil 1** — Gespräche & Ansagen (Alltagssituationen).',
-        '**Teil 3** — Diskussion (Aussagen zuordnen).',
-        '**Teil 2** — Interview (Moderator + Gast).',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Rund um das Modul Hören',
+      items: [
+        { text: 'Vor jedem Teil hast du etwas Zeit, die **Aufgaben** zu lesen.', gl: '— aprovéchala para marcar las palabras clave' },
+        { text: 'In Teil 3 **ordnest** du jede **Aussage** einer **Sprecherin** oder einem **Sprecher zu**.', gl: '— ¿quién dice qué?' },
+        { text: 'Die **Durchsage** läuft nur einmal — mach dir sofort eine kurze **Notiz** zu Gleis und Uhrzeit.', gl: '' },
+        { text: 'Wenn du unsicher bist, **kreuz** trotzdem eine Lösung **an**.', gl: '— una casilla vacía nunca puntúa' },
+        { text: 'Im **Gespräch** widerspricht die Kundin dem Verkäufer — Aussage b ist also **falsch**.', gl: '' },
+        { text: 'Einen kompletten **Modellsatz** solltest du vor der Prüfung mindestens einmal mit echtem Audio hören.', gl: '— la prueba general' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Antizipieren',
-      frage: 'Worauf hörst du? Nenne für jede Aufgabe zwei Dinge, auf die du achten würdest.',
-      loesungLabel: 'Mögliche Lösung',
-      aufgaben: [
-        'Aufgabe: „Die Bibliothek schließt diese Woche früher.“',
-        'Aufgabe: „Herr Moreno soll die Praxis zurückrufen.“',
-        'Aufgabe: „Der Redner sieht auch Nachteile der neuen Technologie.“',
-      ],
-      loesungen: [
-        'Auf **Uhrzeiten** und Zeitangaben wie *diese Woche, ab Montag, ausnahmsweise*.',
-        'Auf **Aufforderungen** (*rufen Sie zurück, melden Sie sich*) und eine **Telefonnummer**.',
-        'Auf **Kontrastsignale**: *aber, allerdings, ein Nachteil ist …*.',
+      type: 'beispiele',
+      kicker: 'Ansage oder Aussage?',
+      titel: 'Ähnliche Wörter, andere Bedeutung',
+      items: [
+        { text: 'Die **Ansage** im Zug war kaum zu verstehen.', gl: '— lo que se oye por megafonía' },
+        { text: 'Welche **Aussage** passt zum Text?', gl: '— lo que lees en la tarea' },
+        { text: 'Nach der **Durchsage** liefen alle Reisenden zu Gleis 3.', gl: '— aviso por altavoz' },
+        { text: 'Die Zeugin hat bei der Polizei eine **Aussage** gemacht.', gl: '— declaración: otro uso frecuente' },
       ],
     },
+
+    { type: 'rule' },
+
+    // ── Transkript zum Mitlesen ───────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren — die Methode testen',
-      frage: 'Wende die Transkript-Methode an: Lies die Durchsage **einmal** in normalem Tempo (Lösung abdecken!) und notiere danach aus dem Gedächtnis drei Stichwörter: **Was? Wann? Was sollst du tun?**\n\n*Transkript* ~~(en el examen: audio)~~: „Liebe Kundinnen und Kunden, wegen einer technischen Störung schließt unser Kaufhaus heute bereits um 17 Uhr. Die Abholung bestellter Waren ist morgen ab 9.30 Uhr wieder möglich. Bitte bringen Sie dafür Ihre Abholnummer mit. Wir danken für Ihr Verständnis.“',
-      loesung: '**Was?** Kaufhaus schließt früher (technische Störung). **Wann?** Heute 17 Uhr; Abholung morgen ab 9.30 Uhr. **Was tun?** Abholnummer mitbringen. — Treffen deine Stichwörter das Wesentliche (auch mit anderen Worten), sitzt die Methode; komplette Sätze brauchst du nie.',
+      type: 'modell',
+      eyebrow: 'Transkript — die Methode testen',
+      thema: 'Lies die Durchsage nur einmal in normalem Tempo, ohne zurückzuspringen. ~~(En el examen es audio: entrénate a captar lo esencial a la primera.)~~',
+      absaetze: [
+        '==Durchsage im Kaufhaus:== „Liebe Kundinnen und Kunden, wegen einer technischen Störung schließt unser Kaufhaus heute bereits um 17 Uhr. Die Abholung bestellter Waren ist morgen ab 9.30 Uhr wieder möglich. Bitte bringen Sie dafür Ihre Abholnummer mit. Wir danken für Ihr Verständnis.“',
+      ],
     },
 
     { type: 'rule' },

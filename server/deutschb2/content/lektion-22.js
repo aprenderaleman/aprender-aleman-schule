@@ -7,7 +7,7 @@
 export default {
   spec: ['Bloque 2', 'Prüfungsstrategie', 'Niveau B2', 'Prüfungsrelevanz: Lesen Teil 5'],
   h1: 'Lesen: formeller Regeltext',
-  lead: 'Teil 5 des Moduls Lesen: Hausordnung, AGB, Vertrag — Amtsdeutsch entschlüsseln, die Struktur nutzen und das Modul Lesen komplett machen.',
+  lead: 'Teil 5 des Moduls Lesen: Hausordnung, AGB, Vertrag — Amtsdeutsch entschlüsseln, die Struktur nutzen und das Modul Lesen abschließen.',
 
   content: [
     // ── Lernziele ─────────────────────────────────────────────────
@@ -106,53 +106,29 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Erkennen',
-      frage: 'Sag es einfach: Was bedeutet die Regel in Alltagsdeutsch?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        '„Die Benutzung des Aufzugs ist Kindern unter zehn Jahren nur in Begleitung Erwachsener gestattet.“',
-        '„Der Arbeitnehmer hat Arbeitsunfähigkeit unverzüglich anzuzeigen.“',
-        '„Der Betreiber ist berechtigt, die Öffnungszeiten zu ändern.“',
-        '„Für abgestellte Fahrzeuge wird keine Haftung übernommen.“',
-      ],
-      loesungen: [
-        'Kinder unter zehn **dürfen nur mit** einem Erwachsenen Aufzug fahren.',
-        'Wer krank ist, **muss sofort** Bescheid sagen. ~~*anzeigen* aquí = comunicar, no denunciar.~~',
-        'Der Betreiber **darf** die Öffnungszeiten ändern.',
-        'Wenn am geparkten Auto etwas passiert, **bezahlt der Betreiber nicht**.',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Regeltexte aus dem Alltag',
+      items: [
+        { text: '„Die **Nutzung** der Waschküche ist **nur** werktags von 8 bis 20 Uhr **gestattet**.“', gl: '— permitido, pero solo en ese horario: ojo al *nur*' },
+        { text: '„Der **Vermieter ist berechtigt**, die Miete nach einer **Frist** von drei Monaten anzupassen.“', gl: '— tiene derecho a hacerlo, respetando un plazo' },
+        { text: '„Die **Mieter sind zur** regelmäßigen Reinigung der Gemeinschaftsflächen **verpflichtet**.“', gl: '— obligación: *verpflichtet zu* + Dativ (zur = zu der)' },
+        { text: '„Für Schäden durch unsachgemäße Nutzung **haftet** die verursachende Mietpartei.“', gl: '— quien lo rompe, lo paga' },
+        { text: '„Die neue **Hausordnung tritt** zum 1. April **in Kraft**.“', gl: '— entra en vigor' },
+        { text: '„Verstöße gegen diese **Vorschrift** sind der Hausverwaltung **unverzüglich** zu melden.“', gl: '— sein + zu + Inf.: hay que avisar de inmediato' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Anwenden',
-      frage: 'Richtig oder falsch? Regel: „Das Musizieren ist werktags von 19 bis 8 Uhr sowie ganztägig an Sonn- und Feiertagen untersagt.“',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Am Dienstag um 15 Uhr darf man Klavier spielen.',
-        'Am Sonntag um 15 Uhr darf man Klavier spielen.',
-        'Am Mittwoch um 21 Uhr darf man Klavier spielen.',
-      ],
-      loesungen: [
-        '**Richtig** — Dienstag ist ein Werktag, 15 Uhr liegt außerhalb der Verbotszeit (19–8 Uhr).',
-        '**Falsch** — an Sonn- und Feiertagen gilt das Verbot *ganztägig*.',
-        '**Falsch** — 21 Uhr liegt in der Verbotszeit ab 19 Uhr. Die kleinen Zeitangaben entscheiden alles.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Formuliere die zwei Alltagssätze als formelle Regeln im Stil einer Hausordnung.',
-      loesungLabel: 'Mögliche Lösung',
-      aufgaben: [
-        'Man darf im Keller nicht rauchen.',
-        'Wer etwas kaputt macht, muss es bezahlen.',
-      ],
-      loesungen: [
-        '**Das Rauchen ist in den Kellerräumen untersagt.** — auch richtig: „… ist nicht gestattet.“',
-        '**Für Schäden haftet die Person, die sie verursacht hat.** ~~Cualquier variante con *haften für* o *ist verpflichtet, … zu ersetzen* es válida, p. ej. „Der Verursacher ist verpflichtet, den Schaden zu ersetzen.“~~',
+      type: 'beispiele',
+      kicker: 'Formell → einfach',
+      titel: 'Dieselbe Regel, zwei Register',
+      items: [
+        { text: '„Das Grillen auf den Balkonen **ist untersagt**.“ → Auf dem Balkon **darf man nicht** grillen.', gl: '' },
+        { text: '„Der Zutritt ist Kindern unter zwölf Jahren **nur** in Begleitung Erwachsener **gestattet**.“ → Kinder unter zwölf **dürfen nur mit** einem Erwachsenen hinein.', gl: '' },
+        { text: '„Die Kaution **ist** innerhalb einer **Frist** von zwei Wochen **zu überweisen**.“ → Man **muss** die Kaution in zwei Wochen überweisen.', gl: '— sein + zu + Inf. = müssen' },
+        { text: '„Für Garderobe **wird nicht gehaftet**.“ → Wenn deine Jacke verschwindet, **bezahlt** niemand dafür.', gl: '— Passiv sin agente: nadie se hace responsable' },
       ],
     },
 

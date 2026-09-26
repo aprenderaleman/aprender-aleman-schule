@@ -116,55 +116,29 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Erkennen',
-      frage: 'Welches Paar passt? Wähle nach der Bedeutung.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Er isst ___ Fleisch ___ Fisch — er ist Veganer. ~~(ninguno de los dos)~~',
-        'Das Praktikum war ___ anstrengend, ___ sehr lehrreich. ~~(concesión)~~',
-        '___ du bezahlst jetzt, ___ du bekommst eine Rechnung. ~~(alternativa)~~',
-        'Sie ist ___ freundlich, ___ auch sehr kompetent. ~~(no solo … sino)~~',
-      ],
-      loesungen: [
-        'Er isst **weder** Fleisch **noch** Fisch.',
-        'Das Praktikum war **zwar** anstrengend, **aber** sehr lehrreich.',
-        '**Entweder** du bezahlst jetzt, **oder** du bekommst eine Rechnung.',
-        'Sie ist **nicht nur** freundlich, **sondern auch** sehr kompetent.',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Zweiteilige Konnektoren im Alltag',
+      items: [
+        { text: '**Sowohl** die Hin- **als auch** die Rückfahrt sind im Preis enthalten.', gl: '— tanto … como' },
+        { text: 'Das Hotel liegt **nicht nur** zentral, **sondern** ist **auch** erstaunlich ruhig.', gl: '— coma antes de sondern' },
+        { text: 'Im Kühlschrank sind **weder** Milch **noch** Eier.', gl: '— sin kein adicional' },
+        { text: '**Entweder** du meldest dich heute an, **oder** der Platz geht an jemand anderen.', gl: '— solo una de las dos opciones' },
+        { text: '**Zwar ist** die Miete hoch, **aber** dafür brauche ich kein Auto.', gl: '— zwar en posición 1 → inversión' },
+        { text: '**Je** öfter wir Deutsch **sprechen**, **umso** weniger Angst **haben** wir vor Fehlern.', gl: '— umso = desto' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · je … desto bilden',
-      frage: 'Verbinde die Sätze mit *je … desto*.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Man übt viel. Man macht wenige Fehler.',
-        'Das Wetter ist gut. Viele Leute sitzen draußen.',
-        'Ich stehe früh auf. Ich schaffe viel.',
-      ],
-      loesungen: [
-        '**Je mehr** man **übt**, **desto weniger** Fehler **macht** man.',
-        '**Je besser** das Wetter **ist**, **desto mehr** Leute **sitzen** draußen.',
-        '**Je früher** ich **aufstehe**, **desto mehr schaffe** ich.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Schreibe zum Thema „Online-Kurse“ je einen Satz mit den angegebenen Paaren.',
-      loesungLabel: 'Mögliche Lösung',
-      aufgaben: [
-        'einerseits … andererseits',
-        'sowohl … als auch',
-        'je … desto',
-      ],
-      loesungen: [
-        '**Einerseits** sind Online-Kurse flexibel, **andererseits** fehlt der direkte Kontakt. ~~(cualquier par de argumentos opuestos vale)~~',
-        'Online-Kurse eignen sich **sowohl** für Berufstätige **als auch** für Studierende.',
-        '**Je interaktiver** ein Online-Kurs **ist**, **desto mehr lernt** man. ~~(válida toda frase con Nebensatz + inversión)~~',
+      type: 'beispiele',
+      kicker: 'In der Diskussion',
+      titel: 'Argumente abwägen',
+      items: [
+        { text: '**Einerseits** ist das Auto bequem, **andererseits** belastet es die Umwelt.', gl: '— dos lados, sin tomar partido' },
+        { text: 'Homeoffice spart **zwar** Zeit, **aber** Arbeit und Freizeit lassen sich schwerer trennen.', gl: '— concedo … pero' },
+        { text: 'Die Reform betrifft **nicht nur** die Schüler, **sondern auch** die Lehrkräfte und Eltern.', gl: '— ampliar el argumento' },
+        { text: '**Je** mehr Menschen das Fahrrad **nutzen**, **desto** sicherer **müssen** die Radwege sein.', gl: '— Nebensatz + inversión' },
       ],
     },
 

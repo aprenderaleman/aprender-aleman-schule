@@ -2,7 +2,8 @@
 //
 // Bloque 3 — Themenfelder & Wortschatz. Estructura temática B2:
 // Kernwortschatz como lista, Erklärung = debate cotidiano con posturas,
-// Beispiele por subtema, Redemittel de opinión, 3 Übungen, Prüfungsbezug real.
+// Beispiele por subtema, Redemittel de opinión, Modelltext, Prüfungsbezug real;
+// práctica en el Übungsheft.
 
 export default {
   spec: ['Bloque 3', 'Themenfelder & Wortschatz', 'Niveau B2', 'Prüfungsrelevanz: Schreiben Teil 1 & Sprechen'],
@@ -95,7 +96,7 @@ export default {
       titel: 'Soziale Medien & Streaming',
       items: [
         { text: 'In sozialen Netzwerken **poste** ich selten etwas, aber ich lese viel mit.' },
-        { text: 'Wir haben zwei Streamingdienste **abonniert** — fernsehen wie früher tun wir kaum noch.' },
+        { text: 'Wir haben zwei Streamingdienste **abonniert** — klassisches Fernsehen schauen wir kaum noch.' },
         { text: 'Man sollte **die Quelle prüfen**, bevor man eine Nachricht weiterschickt.', gl: '— clave contra las fake news' },
       ],
     },
@@ -127,49 +128,32 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Wortschatz',
-      frage: 'Welches Wort passt zur Definition?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'die Zeit, die man täglich vor Handy, Tablet oder Fernseher verbringt',
-        'der Schutz persönlicher Informationen im Internet',
-        'ein Foto oder einen Text in sozialen Netzwerken veröffentlichen',
-        'prüfen, woher eine Information stammt',
-      ],
-      loesungen: [
-        '**die Bildschirmzeit**',
-        '**der Datenschutz**',
-        '**posten**',
-        '**die Quelle prüfen**',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Kollokationen rund um Medien',
+      items: [
+        { text: 'Bevor ich eine **App herunterlade**, lese ich nach, welche Daten sie sammelt.', gl: '— *herunterladen*: descargar' },
+        { text: 'Seit ich meine **Bildschirmzeit begrenze**, schlafe ich viel besser.', gl: '' },
+        { text: 'Auf dem Spielplatz **schauen** viele Eltern **ständig aufs Handy**.', gl: '— *aufs Handy schauen*: mirar el móvil' },
+        { text: 'Wer **im Internet** eine spannende Meldung findet, sollte zuerst **die Quelle prüfen**.', gl: '— *im Internet*, siempre con artículo' },
+        { text: '**Der Datenschutz** ist mir wichtig, deshalb **poste** ich keine Fotos von meinen Kindern.', gl: '' },
+        { text: 'Im Urlaub **schalte** ich bewusst **ab** und lese keine beruflichen **Nachrichten**.', gl: '— *abschalten*: desconectar' },
       ],
     },
+
+    { type: 'rule' },
+
+    // ── Modelltext ────────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Kollokationen einsetzen',
-      frage: 'Ergänze das passende Verb in der richtigen Form.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Kannst du mir die App zeigen? Ich möchte sie auch ___ . ~~(descargar)~~',
-        'Viele Firmen ___ die Daten ihrer Nutzer und verkaufen sie weiter.',
-        'Wir haben letzten Monat einen neuen Streamingdienst ___ .',
-        'Abends lege ich das Handy weg — ich muss lernen, richtig ___ .',
+      type: 'modell',
+      eyebrow: 'Modelltext — mein Smartphone und ich',
+      thema: 'Wie nutzt du dein Smartphone — und was würdest du gern ändern?',
+      woerter: 'ca. 85 Wörter',
+      absaetze: [
+        'Ich nutze mein Smartphone jeden Tag: Ich verschicke Nachrichten, höre Musik und bin in einem sozialen Netzwerk aktiv, obwohl ich selten etwas poste. Einerseits erleichtern mir die Apps den Alltag, andererseits ist meine Bildschirmzeit viel zu hoch — oft mehr als vier Stunden. Meiner Meinung nach liegt das Problem nicht am Gerät, sondern am Umgang damit. Deshalb möchte ich zwei Dinge ändern: abends bewusst abschalten und beim Datenschutz vorsichtiger sein, zum Beispiel mit sicheren Passwörtern.',
       ],
-      loesungen: [
-        'Ich möchte sie auch **herunterladen**.',
-        'Viele Firmen **sammeln** die Daten ihrer Nutzer.',
-        'Wir haben einen neuen Streamingdienst **abonniert**.',
-        'Ich muss lernen, richtig **abzuschalten**.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Schreibe 80–100 Wörter: Wie nutzt du dein Smartphone — und was würdest du gern ändern? Nutze mindestens fünf Wörter aus dem Kernwortschatz und ein Redemittel.',
-      loesungLabel: 'Mögliche Lösung',
-      loesung: 'Ich nutze mein Smartphone jeden Tag: Ich verschicke Nachrichten, höre Musik und bin in einem sozialen Netzwerk aktiv, obwohl ich selten etwas poste. Einerseits erleichtern mir die Apps den Alltag, andererseits ist meine Bildschirmzeit viel zu hoch — oft mehr als vier Stunden. Meiner Meinung nach liegt das Problem nicht am Gerät, sondern am Umgang damit. Deshalb möchte ich zwei Dinge ändern: abends bewusst abschalten und beim Datenschutz vorsichtiger sein, zum Beispiel mit sicheren Passwörtern. ~~(~85 Wörter — vale cualquier texto que use el léxico y justifique la opinión.)~~',
     },
 
     { type: 'rule' },

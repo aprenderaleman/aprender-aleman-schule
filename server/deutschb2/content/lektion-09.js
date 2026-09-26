@@ -95,7 +95,7 @@ export default {
       items: [
         { text: 'Er sagte, er **habe** von nichts **gewusst**.', gl: '— pasado con habe' },
         { text: 'Sie erklärte, sie **sei** erst gestern **angekommen**.', gl: '— pasado con sei (verbo con sein)' },
-        { text: 'Der Chef kündigte an, die Preise **würden** stabil bleiben. / … **werde** man die Preise nicht erhöhen.', gl: '— futuro' },
+        { text: 'Der Chef kündigte an, man **werde** die Preise nicht erhöhen — sie **würden** stabil bleiben.', gl: '— futuro: werde; en plural, würden (sie werden = indicativo)' },
       ],
     },
     {
@@ -119,55 +119,30 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Erkennen',
-      frage: 'Fakt des Autors oder wiedergegebene Aussage? Woran erkennst du es?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Der Sprecher erklärte, das Unternehmen sei nicht verantwortlich.',
-        'Immer mehr Menschen arbeiten im Homeoffice.',
-        'Die Anwohner berichteten, sie hätten den Lärm oft gemeldet.',
-        'Die Studie zeigt, dass der Konsum gesunken ist.',
-      ],
-      loesungen: [
-        '**wiedergegebene Aussage** — *sei* (Konjunktiv I).',
-        '**Fakt/Aussage des Autors** — Indikativ.',
-        '**wiedergegebene Aussage** — *hätten* (K II als Ausweichform im Plural).',
-        '**als Fakt präsentiert** — Indikativ (*ist gesunken*), Quelle: die Studie.',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      kicker: 'direkt → indirekt',
+      titel: 'Aus der direkten in die indirekte Rede',
+      items: [
+        { text: 'Die Ärztin: „Die Operation ist gut verlaufen.“ → Die Ärztin sagte, die Operation **sei** gut **verlaufen**.', gl: '— pasado con sei' },
+        { text: 'Der Vermieter: „Ich habe den Handwerker schon bestellt.“ → Er erklärte, er **habe** den Handwerker schon **bestellt**.', gl: '— pasado con habe' },
+        { text: 'Die Trainerin: „Das Team muss mehr trainieren.“ → Sie meinte, das Team **müsse** mehr trainieren.', gl: '— müsse' },
+        { text: 'Die Eltern: „Wir haben keine Information bekommen.“ → Die Eltern kritisierten, sie **hätten** keine Information bekommen.', gl: '— plural: hätten en lugar de haben' },
+        { text: 'Der Bürgermeister: „Die Stadt wird ein neues Hallenbad bauen.“ → Er kündigte an, die Stadt **werde** ein neues Hallenbad bauen.', gl: '— futuro con werde' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Umformen',
-      frage: 'Gib die Aussagen indirekt wieder (3. Person, Konjunktiv I).',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Der Arzt: „Der Patient ist auf dem Weg der Besserung.“',
-        'Die Ministerin: „Ich habe den Bericht noch nicht gelesen.“',
-        'Der Trainer: „Das Team kann den Titel gewinnen.“',
-      ],
-      loesungen: [
-        'Der Arzt sagte, der Patient **sei** auf dem Weg der Besserung.',
-        'Die Ministerin erklärte, sie **habe** den Bericht noch nicht **gelesen**.',
-        'Der Trainer meinte, das Team **könne** den Titel gewinnen.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Dein Vermieter hat dir am Telefon drei Dinge gesagt. Berichte einem Mitbewohner in indirekter Rede: „Die Heizung wird nächste Woche repariert.“ · „Ich habe den Handwerker schon beauftragt.“ · „Die Kosten sind kein Problem für euch.“',
-      loesungLabel: 'Mögliche Lösung',
-      aufgaben: [
-        'Satz 1: die Reparatur',
-        'Satz 2: der Handwerker',
-        'Satz 3: die Kosten',
-      ],
-      loesungen: [
-        'Der Vermieter sagte, die Heizung **werde** nächste Woche repariert.',
-        'Er **habe** den Handwerker schon **beauftragt**.',
-        'Die Kosten **seien** kein Problem für uns. ~~(en el habla coloquial también válido: Er hat gesagt, dass die Kosten kein Problem für uns sind.)~~',
+      type: 'beispiele',
+      kicker: 'Presse',
+      titel: 'So klingt es in den Nachrichten',
+      items: [
+        { text: '**Laut** Polizei **gebe** es keine Verletzten.', gl: '— laut: indica la fuente' },
+        { text: 'Einem Sprecher **zufolge** **wolle** das Unternehmen 200 neue Stellen schaffen.', gl: '— zufolge va detrás del sustantivo' },
+        { text: 'Die Gewerkschaft behauptet, die Löhne **seien** seit Jahren zu niedrig.', gl: '— el periodista toma distancia' },
+        { text: 'Der Minister versicherte, er **wisse** nichts von den Problemen.', gl: '— wisse = K I de wissen' },
+        { text: 'Anwohner berichten, sie **könnten** nachts wegen des Lärms nicht schlafen.', gl: '— sie können = indicativo → könnten' },
       ],
     },
 

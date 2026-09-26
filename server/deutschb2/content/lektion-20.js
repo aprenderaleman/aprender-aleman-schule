@@ -95,47 +95,18 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Erkennen',
-      frage: 'Pro, contra oder teils-teils? Bestimme die Haltung.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        '„Ich kann dem Vorschlag wenig abgewinnen — er löst das eigentliche Problem nicht.“',
-        '„Grundsätzlich eine gute Sache, aber die Umsetzung überzeugt mich noch nicht.“',
-        '„Endlich passiert etwas! Ich habe lange auf so eine Regelung gewartet.“',
-        '„Ob das klappt? Ich habe da so meine Zweifel.“',
-      ],
-      loesungen: [
-        '**contra** — „wenig abgewinnen können“ = etwas nicht gut finden.',
-        '**teils-teils** — Zustimmung im Prinzip („grundsätzlich gut“), Kritik am Detail („aber“).',
-        '**pro** — Freude und Ungeduld signalisieren klare Zustimmung.',
-        '**skeptisch/contra** — „seine Zweifel haben“ = bezweifeln.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Zuordnen im Kleinen',
-      frage: 'Welche Aussage passt zu welcher Person? Eine Aussage passt zu niemandem.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        '**Person A:** „Seit die Innenstadt autofrei ist, kaufe ich wieder gern dort ein — man hört sogar die Vögel.“ · **Person B:** „Ohne Parkplätze bleiben die Kunden weg; einige Geschäfte haben schon geschlossen.“\n**Aussage 1:** Die Regelung schadet dem Handel. · **Aussage 2:** Das Einkaufen ist angenehmer geworden. · **Aussage 3:** Die Stadt sollte mehr Busse einsetzen.',
-      ],
-      loesungen: [
-        '**Aussage 1 → B** (geschlossene Geschäfte = Schaden für den Handel) · **Aussage 2 → A** („kaufe wieder gern dort ein“ = angenehmer) · **Aussage 3 → niemand**: Busse erwähnt keine der beiden Personen — klassischer Distraktor über plausibles Weltwissen.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Formuliere deine Meinung zum Thema „Hausaufgaben abschaffen?“ dreimal — jedes Mal mit einem anderen Ausdruck aus dem Kernwortschatz.',
-      loesungLabel: 'Mögliche Lösung',
-      aufgaben: [
-        'Nutze z. B. *halten für*, *bezweifeln*, *einerseits … andererseits*.',
-      ],
-      loesungen: [
-        '**Ich halte** Hausaufgaben **für** sinnvoll, wenn sie kurz sind. — **Ich bezweifle**, dass Kinder ohne Übung zu Hause genug lernen. — **Einerseits** kosten Hausaufgaben Freizeit, **andererseits** festigen sie den Stoff. ~~Cualquier contenido vale; lo que se evalúa es la estructura del Meinungsausdruck.~~',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Meinungen im Alltag',
+      items: [
+        { text: '**Ich halte** die neue Parkregel **für** fair, aber meine Nachbarin **lehnt** sie entschieden **ab**.', gl: '— halten für + Akk.; ablehnen = rechazar' },
+        { text: '**Ich bin der Ansicht**, dass Kantinen mehr vegetarische Gerichte anbieten sollten.', gl: '— der Ansicht sein, dass …' },
+        { text: 'Die meisten Eltern **befürworten** das Handyverbot in den Pausen.', gl: '— befürworten = apoyar' },
+        { text: '**Ich stimme dir zu**, dass die Mieten zu hoch sind. Trotzdem **bezweifle** ich, dass die Reform hilft.', gl: '— zustimmen + Dat.; bezweifeln, dass …' },
+        { text: 'Mein Kollege bleibt **skeptisch**, was die neue Software angeht.', gl: '— skeptisch, was … angeht' },
+        { text: '**Einerseits** ist die Wohnung günstig, **andererseits** liegt sie weit vom Zentrum entfernt.', gl: '— teils-teils: ventaja + inconveniente' },
       ],
     },
 

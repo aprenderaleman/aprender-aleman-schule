@@ -121,55 +121,30 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Erkennen',
-      frage: 'Real oder irreal? Und welche Funktion: Bedingung, Wunsch oder Höflichkeit?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Wenn der Bus pünktlich kommt, schaffe ich den Zug.',
-        'Könnten Sie mir bitte das Formular schicken?',
-        'Wenn ich doch in Spanien wäre!',
-        'Wenn er weniger arbeiten würde, hätte er mehr Energie.',
-      ],
-      loesungen: [
-        '**real** — Bedingung im Indikativ.',
-        '**irreal** in der Form — Funktion: **höfliche Bitte**.',
-        '**irreal** — **Wunsch** (doch + Ausrufezeichen).',
-        '**irreal** — **Bedingung** in der Gegenwart.',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Konjunktiv II im Alltag',
+      items: [
+        { text: '**Wenn** ich ein Auto **hätte**, **würde** ich am Wochenende an den See **fahren**.', gl: '— irreale Bedingung' },
+        { text: '**Wenn** unser Chef nicht so streng **wäre**, **könnten** wir öfter im Homeoffice arbeiten.', gl: '— könnte: forma propia del modal' },
+        { text: '**Käme** der Bus pünktlich, **müsste** ich nicht jeden Morgen zur Haltestelle rennen.', gl: '— sin wenn: verbo en posición 1' },
+        { text: 'Ich **ginge** gern mit, aber heute habe ich leider keine Zeit.', gl: '— ginge = würde gehen (más formal)' },
+        { text: '**Wenn** ich **wüsste**, wo der Schlüssel ist, **müssten** wir nicht den Hausmeister rufen.', gl: '— wüsste = sabría' },
+        { text: '**Wäre** der Urlaub **doch** nicht schon vorbei!', gl: '— deseo: doch + signo de exclamación' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Umformen',
-      frage: 'Mach aus der Realität einen irrealen Bedingungssatz.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Ich habe kein Auto, deshalb fahre ich mit dem Bus.',
-        'Er ist nicht fit, deshalb macht er nicht beim Marathon mit.',
-        'Wir wissen die Adresse nicht, deshalb fragen wir nach.',
-      ],
-      loesungen: [
-        '**Wenn** ich ein Auto **hätte**, **würde** ich nicht mit dem Bus **fahren**.',
-        '**Wenn** er fit **wäre**, **würde** er beim Marathon **mitmachen**.',
-        '**Wenn** wir die Adresse **wüssten**, **würden** wir nicht **nachfragen**.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Formuliere frei: zwei Wünsche und eine höfliche Bitte an deinen Vermieter.',
-      loesungLabel: 'Mögliche Lösung',
-      aufgaben: [
-        'Wunsch: mehr Freizeit',
-        'Wunsch: eine größere Wohnung',
-        'Bitte: die Heizung reparieren',
-      ],
-      loesungen: [
-        '**Wenn** ich **doch** mehr Freizeit **hätte**! ~~(o: Hätte ich nur mehr Freizeit!)~~',
-        '**Wenn** unsere Wohnung **nur** größer **wäre**!',
-        '**Könnten** Sie bitte die Heizung reparieren lassen? ~~(también: Wären Sie so nett, … / Ich wäre Ihnen dankbar, wenn …)~~',
+      type: 'beispiele',
+      kicker: 'Formell geschrieben',
+      titel: 'Höflich bitten in E-Mails und Telefonaten',
+      items: [
+        { text: '**Könnten** Sie mir den Vertrag noch einmal per Post schicken?', gl: '— petición formal' },
+        { text: 'Ich **wäre** Ihnen dankbar, wenn Sie sich bis Freitag **melden würden**.', gl: '— würde al final de la subordinada' },
+        { text: '**Dürfte** ich kurz Ihr Telefon benutzen?', gl: '— dürfte: pedir permiso con cortesía' },
+        { text: 'Wir **hätten** gern einen Tisch für vier Personen um 19 Uhr.', gl: '— hätten gern = quisiéramos' },
+        { text: 'Es **wäre** schön, wenn wir den Termin auf Montag verschieben **könnten**.', gl: '— propuesta suave' },
       ],
     },
 

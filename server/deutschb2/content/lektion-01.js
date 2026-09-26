@@ -115,45 +115,19 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Erkennen',
-      frage: 'Richtig oder falsch?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Wer ein Modul nicht besteht, muss die ganze Prüfung wiederholen.',
-        'Ein Modul ist ab 60 von 100 Punkten bestanden.',
-        'Das Modul Sprechen ist eine Paarprüfung.',
-        'Das Zertifikat B2 ist nur zwei Jahre gültig.',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Rund um Anmeldung, Bewertung und Ergebnis',
+      items: [
+        { text: 'Im Juni **lege** ich Lesen und Hören **ab**, Schreiben und Sprechen erst im Herbst.', gl: '— ablegen = presentarse, no «aprobar»' },
+        { text: 'Mit 58 Punkten ist Jonas im Modul Hören knapp **durchgefallen**.', gl: '— dos puntos por debajo del mínimo' },
+        { text: 'Für die **Anmeldung** brauchst du eine E-Mail-Adresse und einen gültigen Ausweis.' },
+        { text: 'Die **Bewertung** im Modul Schreiben folgt festen Kriterien.', gl: '— la corrección no es arbitraria' },
+        { text: 'Sobald das **Ergebnis** online steht, bekommst du eine Nachricht.' },
+        { text: 'Wer die nötige **Punktzahl** nicht erreicht, **wiederholt** nur dieses eine Modul.' },
       ],
-      loesungen: [
-        '**Falsch** — die Prüfung ist modular: Man wiederholt nur das nicht bestandene Modul.',
-        '**Richtig** — 100 Punkte pro Modul, bestanden ab 60.',
-        '**Richtig** — Vortrag + Diskussion, in der Regel mit einem Partner oder einer Partnerin.',
-        '**Falsch** — das Zeugnis ist unbegrenzt gültig (Institutionen können aber ein aktuelles Zeugnis verlangen).',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Anwenden',
-      frage: 'Lies das Ergebnis und entscheide.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Marta hat: Lesen 72, Hören 55, Schreiben 81, Sprechen 63. Welche Module hat sie bestanden? Was macht sie jetzt?',
-        'Diego kann nur samstags zur Prüfung und will nicht alles an einem Tag ablegen. Geht das?',
-      ],
-      loesungen: [
-        'Bestanden: **Lesen, Schreiben, Sprechen** (≥ 60). Hören (55) hat sie nicht bestanden — sie meldet sich **nur für das Modul Hören** neu an; die drei bestandenen bleiben gültig.',
-        '**Ja** — die Module kann man auf verschiedene Termine verteilen und einzeln ablegen.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Dein Ziel: Schreib 3–4 Sätze — warum machst du das B2, und bis wann willst du es schaffen? Nutze mindestens zwei Wörter aus dem Kernwortschatz.',
-      loesungLabel: 'Mögliche Lösung',
-      loesung: 'Ich möchte das Zertifikat B2 **ablegen**, weil ich mich in Deutschland um eine Stelle bewerben will. Mein Ziel ist es, alle vier Module beim ersten Versuch zu **bestehen**. Deshalb arbeite ich jeden Tag mit diesem Kurs und melde mich für einen Termin im Sommer an. ~~Vale cualquier variante con tu motivo real — lo importante: 2+ palabras del Kernwortschatz y verbos bien colocados.~~',
     },
 
     { type: 'rule' },

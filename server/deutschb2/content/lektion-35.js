@@ -149,49 +149,28 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Kollokationen',
-      frage: 'Welches Verb passt? (trennen · senken · zurückbringen · verzichten)',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'den Müll …',
-        'den Verbrauch …',
-        'die Pfandflaschen …',
-        'auf unnötige Verpackung …',
-      ],
-      loesungen: [
-        'den Müll **trennen**',
-        'den Verbrauch **senken**',
-        'die Pfandflaschen **zurückbringen**',
-        'auf unnötige Verpackung **verzichten** ~~verzichten auf + Akkusativ~~',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Der Kernwortschatz im Satz',
+      items: [
+        { text: 'Seit Kurzem stehen in unserem Hof vier verschiedene **Tonnen** — die **Mülltrennung** nehmen hier alle ernst.', gl: '— *die Mülltrennung ernst nehmen*' },
+        { text: 'Für jede Dose zahlt man an der Kasse 25 Cent **Pfand**, die man am Automaten **zurückbekommt**.', gl: '— el depósito se recupera al devolver el envase' },
+        { text: 'Unsere Firma will den **Verbrauch** von Papier bis Ende des Jahres um ein Drittel **senken**.', gl: '— *den Verbrauch senken*' },
+        { text: 'Wer auf dem Wochenmarkt einkauft, **verzichtet** meistens automatisch **auf** viel **Verpackung**.', gl: '— *verzichten auf* + Akk.' },
+        { text: 'Die **Verschmutzung** der Meere durch Plastik ist eines der größten Umweltprobleme unserer Zeit.', gl: '— «contaminación» = *Verschmutzung*' },
+        { text: 'Mit **öffentlichen Verkehrsmitteln** dauert Hannahs Weg zur Arbeit zwar länger, dafür kann sie im Zug lesen.', gl: '— *zwar … dafür*: ventaja frente a inconveniente' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Sätze ergänzen',
-      frage: 'Ergänze das passende Wort aus dem Kernwortschatz.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Papier kommt in die blaue … .',
-        'An der Kasse bezahlst du … , das du beim Zurückbringen der Flasche wiederbekommst.',
-        'Die … in den Großstädten ist ein Problem für die Gesundheit.',
-        'Es ist schwer, alte … zu ändern.',
+      type: 'modell',
+      eyebrow: 'Modelltext — mein Alltag und die Umwelt',
+      thema: 'Was tust du im Alltag für die Umwelt — und was (noch) nicht? So könnte eine ehrliche Antwort mit den Redemitteln der Lektion klingen. ~~(Texto modelo: fíjate en cómo combina opinión, ejemplos concretos y una propuesta con «Ein erster Schritt wäre …».)~~',
+      absaetze: [
+        'Ich finde, dass jeder Einzelne etwas für die Umwelt tun kann, auch ohne perfekt zu sein. Bei mir zu Hause trennen wir den Müll, und zum Einkaufen nehme ich immer eine Stofftasche mit, weil ich unnötige Verpackung vermeiden möchte. Außerdem fahre ich fast immer mit öffentlichen Verkehrsmitteln zur Arbeit.',
+        'Ehrlich gesagt könnte ich aber noch mehr tun: Ich kaufe selten regionale Produkte, denn sie sind oft teurer. Ein erster Schritt wäre, einmal pro Woche auf dem Markt einzukaufen. Kleine Schritte summieren sich — davon bin ich überzeugt.',
       ],
-      loesungen: [
-        'in die blaue **Tonne**',
-        'bezahlst du **Pfand**',
-        'Die **Verschmutzung** ~~no *Kontamination*~~',
-        'alte **Gewohnheiten** zu ändern',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Was machst du im Alltag für die Umwelt — und was (noch) nicht? Schreib 80–100 Wörter und nutze mindestens ein Redemittel der Lektion.',
-      loesungLabel: 'Mögliche Lösung',
-      loesung: 'Ich finde, dass jeder Einzelne etwas für die Umwelt tun kann, auch ohne perfekt zu sein. Bei mir zu Hause trennen wir den Müll, und zum Einkaufen nehme ich immer eine Stofftasche mit, weil ich unnötige Verpackung vermeiden möchte. Außerdem fahre ich fast immer mit öffentlichen Verkehrsmitteln zur Arbeit. Ehrlich gesagt könnte ich aber noch mehr tun: Ich kaufe selten regionale Produkte, denn sie sind oft teurer. Ein erster Schritt wäre, einmal pro Woche auf dem Markt einzukaufen. Kleine Schritte summieren sich — davon bin ich überzeugt. *(86 Wörter)*',
     },
 
     { type: 'rule' },
@@ -237,7 +216,7 @@ export default {
       zeilen: [
         ['Müll', 'die Mülltrennung, die Tonne, das Recycling', 'Bei uns wird der Müll streng getrennt.'],
         ['Pfand', 'das Pfand, die Mehrwegflasche, der Automat', 'Leere Flaschen bringt man zum Pfandautomaten.'],
-        ['Energie & Verkehr', 'der Strom, der Verbrauch, die Verkehrsmittel', 'Ich fahre öfter Rad, um Strom und Benzin zu sparen.'],
+        ['Energie & Verkehr', 'der Strom, der Verbrauch, die Verkehrsmittel', 'Ich fahre öfter Rad, um Benzin zu sparen.'],
         ['Konsum', 'die Verpackung, die Gewohnheit, regional', 'Kleine Schritte summieren sich.'],
       ],
     },

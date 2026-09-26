@@ -89,7 +89,7 @@ export default {
         {
           badge: 'Korrelat',
           titel: 'Das Korrelat: darauf, dass …',
-          text: 'Wenn nach dem Verb ein **ganzer Satz** kommt, kündigt das da(r)-Wort ihn an: __Ich freue mich **darauf**, **dass** du kommst.__ · __Es hängt **davon** ab, **ob** es regnet.__ Auch mit Infinitivsatz: __Ich freue mich darauf, dich **zu sehen**.__ Das ist die Brücke zur letzten Lektion.',
+          text: 'Wenn nach dem Verb ein **ganzer Satz** kommt, kündigt das da(r)-Wort ihn an: __Ich freue mich **darauf**, **dass** du kommst.__ · __Es hängt **davon** ab, **ob** es regnet.__ Auch mit Infinitivsatz: __Ich freue mich darauf, dich **zu sehen**.__ Das ist die Brücke zur vorigen Lektion.',
         },
       ],
     },
@@ -131,54 +131,29 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Erkennen',
-      frage: 'Welche Präposition fehlt?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Sie interessiert sich sehr ___ Politik.',
-        'Wir warten schon eine Stunde ___ den Techniker.',
-        'Das hängt ___ Wetter ab.',
-        'Er hat sich ___ eine Stelle als Ingenieur beworben.',
-        'Ich träume ___ einem Haus am Meer.',
-      ],
-      loesungen: [
-        '**für** Politik — sich interessieren für + Akk. ~~(interesarse *por* → für, nunca *für über*)~~',
-        '**auf** den Techniker — warten auf + Akk.',
-        '**vom** Wetter — abhängen von + Dat. (von + dem = vom).',
-        '**um** eine Stelle — sich bewerben um + Akk.',
-        '**von** einem Haus — träumen von, nunca *mit*.',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Feste Paare im Alltag',
+      items: [
+        { text: 'Seit dem Umzug **kümmert** sich mein Bruder **um** unseren Hund.', gl: '— sich kümmern um + Akk.' },
+        { text: 'Ich kann mich einfach nicht **an** das frühe Aufstehen **gewöhnen**.', gl: '— sich gewöhnen an + Akk.' },
+        { text: 'Der Rotwein **passt** perfekt **zu** diesem Gericht.', gl: '— passen zu + Dat.' },
+        { text: '**Worüber** habt ihr in der Sitzung so lange diskutiert? — **Über** das neue Budget.', gl: '— Sache → worüber' },
+        { text: 'Kennst du Frau Lindner? — Ja, ich habe letztes Jahr **mit ihr** zusammengearbeitet.', gl: '— Person → mit ihr, nunca damit' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Anwenden',
-      frage: 'Antworte mit da(r)-Wort oder Präposition + Pronomen — je nachdem, ob Sache oder Person.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Denkst du noch an die Prüfung? — Ja, …',
-        'Kümmerst du dich um deine Großmutter? — Ja, …',
-        'Nimmst du am Seminar teil? — Ja, …',
-        'Wie fragst du nach dem Objekt? „Er wartet auf den Bescheid.“',
-      ],
-      loesungen: [
-        'Ja, ich denke noch oft **daran**. ~~Sache → daran.~~',
-        'Ja, ich kümmere mich **um sie**. ~~Person → um sie.~~',
-        'Ja, ich nehme **daran** teil.',
-        '**Worauf** wartet er? ~~Sache → worauf.~~',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Schreib drei Sätze über deinen Deutschkurs mit Korrelat: sich freuen auf, abhängen von, sich bedanken für.',
-      loesungLabel: 'Mögliche Lösung',
-      loesungen: [
-        'Ich freue mich **darauf**, nach der Prüfung das Zertifikat in der Hand zu halten.',
-        'Mein Erfolg hängt **davon** ab, **ob** ich jeden Tag übe.',
-        'Ich bedanke mich bei meiner Lehrerin **dafür**, **dass** sie meine Texte korrigiert. ~~Estructura evaluable: da(r)-Wort + coma + dass/ob/zu-Satz.~~',
+      type: 'beispiele',
+      kicker: 'Korrelat',
+      titel: 'da(r)-Wort + Nebensatz oder Infinitivsatz',
+      items: [
+        { text: 'Viele Mieter **beschweren** sich **darüber**, **dass** die Heizung nicht funktioniert.', gl: '— darüber kündigt den dass-Satz an' },
+        { text: 'Ich **denke** oft **daran**, mein Studium noch einmal neu **zu beginnen**.', gl: '— Korrelat + Infinitivsatz' },
+        { text: 'Unsere Lehrerin **bittet** uns **darum**, pünktlich **zu kommen**.', gl: '— bitten um → darum' },
+        { text: 'Der Preis **hängt davon ab**, **ob** Sie mit Frühstück buchen.', gl: '— abhängen von + ob-Satz' },
+        { text: 'Wir haben lange **darüber nachgedacht**, **wie** wir das Projekt finanzieren.', gl: '— nachdenken über + indirekte Frage' },
       ],
     },
 
@@ -209,7 +184,7 @@ export default {
     {
       type: 'tipp',
       label: 'Prüfungstipp',
-      text: 'Diese Verben sind in **allen vier Modulen** Punktebringer: im Lesen erkennst du an der Präposition die Bedeutung, im Schreiben liefern *Ich freue mich darauf, … / Ich bedanke mich dafür, …* fertige formelle Formeln. Häufigster Fehler der Prüfung: die **spanische Präposition zu übersetzen** — im Zweifel lieber die auswendig gelernte Kollokation als die Intuition.',
+      text: 'Diese Verben sind in **allen vier Modulen** Punktebringer: im Lesen erkennst du an der Präposition die Bedeutung, im Schreiben liefern *Ich freue mich darauf, … / Ich bedanke mich dafür, …* fertige formelle Formeln. Häufigster Fehler in der Prüfung: die **spanische Präposition zu übersetzen** — im Zweifel lieber die auswendig gelernte Kollokation als die Intuition.',
     },
 
     { type: 'rule' },

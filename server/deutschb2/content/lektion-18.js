@@ -115,53 +115,29 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Mehr Beispiele ────────────────────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Erkennen',
-      frage: 'Zu welchem Teil des Moduls passt die Anweisung? (Teil 1–2, 3, 4 oder 5)',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        '„Ordnen Sie den Abschnitten der Hausordnung die passenden Überschriften zu.“',
-        '„Welche Aussage entspricht der Meinung des Verfassers? Kreuzen Sie an: a, b oder c.“',
-        '„Wer sagt was? Ordnen Sie die Aussagen den vier Personen zu.“',
-        '„Lesen Sie den Artikel und kreuzen Sie bei jeder Frage die richtige Lösung an.“',
-      ],
-      loesungen: [
-        '**Teil 5** — formeller Regeltext, Überschriften zuordnen.',
-        '**Teil 4** — Kommentar, Standpunkt des Verfassers.',
-        '**Teil 3** — Meinungen mehrerer Personen zuordnen.',
-        '**Teil 1–2** — Artikel mit Auswahlaufgaben a/b/c.',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Typische Anweisungen — und zu welchem Teil sie gehören',
+      items: [
+        { text: '„Lesen Sie die Überschriften und ordnen Sie jedem **Abschnitt** der Hausordnung eine Überschrift **zu**.“', gl: '— Teil 5: Regeltext' },
+        { text: '„Welche **Aussage** entspricht der Meinung des **Verfassers**? **Kreuzen** Sie a, b oder c **an**.“', gl: '— Teil 4: Kommentar' },
+        { text: '„Wer vertritt welche Meinung? **Ordnen** Sie die Aussagen den Personen **zu**.“', gl: '— Teil 3: Meinungen' },
+        { text: '„Lesen Sie den Artikel. Welche Lösung **stimmt mit dem Text überein**: a, b oder c?“', gl: '— Teil 1–2: Artikel' },
+        { text: '„Dem Text ist zu **entnehmen**, dass …“', gl: '— fórmula típica de las preguntas: «del texto se deduce que…»' },
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Paraphrasen prüfen',
-      frage: 'Sagt die Aussage dasselbe wie der Text? Ja oder nein — mit Begründung.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Text: „Die Bibliothek ist außer montags täglich geöffnet.“ — Aussage: „Die Bibliothek ist jeden Tag geöffnet.“',
-        'Text: „Immer mehr Firmen bieten flexible Arbeitszeiten an.“ — Aussage: „Die Zahl der Firmen mit flexiblen Arbeitszeiten steigt.“',
-        'Text: „Das Konzert wurde wegen des Wetters verschoben.“ — Aussage: „Das Konzert fällt aus.“',
-      ],
-      loesungen: [
-        '**Nein** — „außer montags“ bedeutet: an einem Tag geschlossen; „jeden Tag“ ist falsch.',
-        '**Ja** — „immer mehr“ = „die Zahl steigt“; klassische korrekte Paraphrase.',
-        '**Nein** — „verschoben“ (findet später statt) ist nicht „fällt aus“ (findet nicht statt).',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Schreibe zu jedem Satz eine Paraphrase mit anderen Wörtern.',
-      loesungLabel: 'Mögliche Lösung',
-      aufgaben: [
-        'Die Miete in Großstädten ist in den letzten Jahren stark gestiegen.',
-        'Nur wenige Teilnehmer haben den Kurs abgebrochen.',
-      ],
-      loesungen: [
-        '**Wohnen in Großstädten ist heute deutlich teurer als früher.** ~~Vale cualquier variante que exprese la subida sin usar *steigen*.~~',
-        '**Fast alle Teilnehmer haben den Kurs zu Ende gemacht.** — auch richtig: „Die meisten blieben bis zum Schluss dabei.“',
+      type: 'beispiele',
+      kicker: 'Text ↔ Aussage',
+      titel: 'Noch mehr Paraphrasen — und zwei Fallen',
+      items: [
+        { text: 'Text: „Die Mieten in Großstädten sind stark **gestiegen**.“ → Aussage: „Wohnen in der Großstadt ist **viel teurer** geworden.“', gl: '— paráfrasis correcta' },
+        { text: 'Text: „**Immer mehr** Firmen bieten Homeoffice an.“ → Aussage: „**Die Zahl** der Firmen mit Homeoffice **steigt**.“', gl: '— immer mehr ≈ die Zahl steigt' },
+        { text: 'Text: „Die Teilnahme ist **freiwillig**.“ → Aussage: „**Niemand muss** mitmachen.“', gl: '— freiwillig = no obligatorio' },
+        { text: 'Text: „Die Ausstellung ist **außer montags** geöffnet.“ → Falsche Aussage: „Die Ausstellung ist **jeden Tag** geöffnet.“', gl: '— ¡trampa! el lunes está cerrada' },
+        { text: 'Text: „**Einige** Nutzer finden die App kompliziert.“ → Falsche Aussage: „Die App ist für **die meisten** Nutzer zu kompliziert.“', gl: '— ¡trampa! einige ≠ die meisten' },
       ],
     },
 

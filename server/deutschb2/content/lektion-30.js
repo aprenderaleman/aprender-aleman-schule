@@ -180,50 +180,31 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Musterzettel + Mehr Beispiele ─────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Erkennen',
-      frage: 'Welches Kriterium leidet hier am meisten — Erfüllung/Interaktion, Flüssigkeit, Strukturen oder Aussprache?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Ein Kandidat liest seinen Vortrag Wort für Wort vom Zettel ab.',
-        'Eine Kandidatin sagt: „Ich möchte sprechen über meine Erfahrung.“',
-        'Ein Kandidat redet in der Diskussion drei Minuten allein, ohne den Partner einzubeziehen.',
-        'Eine Kandidatin spricht „Stadt“ und „Staat“ völlig gleich aus.',
-      ],
-      loesungen: [
-        '**Flüssigkeit (und Aussprache)** — Abgelesenes klingt monoton; der Vortrag muss frei mit Stichwörtern gehalten werden.',
-        '**Strukturen** — Verbstellung: „Ich möchte **über meine Erfahrung sprechen**.“ ~~Calco del español „quiero hablar sobre…“.~~',
-        '**Erfüllung/Interaktion** — Teil 2 bewertet das Gespräch; ein Monolog verfehlt die Aufgabe.',
-        '**Aussprache** — Vokallänge: *Stadt* kurz, *Staat* lang.',
+      type: 'modell',
+      eyebrow: 'Musterzettel — Stichwörter statt Sätze',
+      thema: 'Vortragsthema: „Feste oder flexible Arbeitszeiten?“ — maximal 25 Wörter, Gerüst: Einleitung → 2 Punkte + Beispiele → Meinung → Fazit. Entscheidend ist nicht die genaue Form, sondern das Prinzip: Stichwörter statt Sätze, 2-3 Punkte mit eigenem Beispiel, am Ende Meinung und Fazit.',
+      absaetze: [
+        'Einl.: Arbeitszeit — wichtig für alle',
+        'P1: fest → klare Struktur, Feierabend (Bsp. Vater)',
+        'P2: flexibel → Familie, Pendeln (Bsp. Homeoffice-Freundin)',
+        'Meinung: flexibel + Kernzeiten',
+        'Fazit + Fragen?',
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Anwenden',
-      frage: 'Markiere die betonte Silbe (sprich die Wörter laut!).',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'einkaufen',
-        'bezahlen',
-        'studieren',
-        'Nachfrage',
-        'verstehen',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Der Kernwortschatz rund um die Sprechprüfung',
+      items: [
+        { text: 'In der **Paarprüfung** sprichst du mit einem Partner vor zwei **Prüfenden**.', gl: '— los examinadores son „die Prüfenden“' },
+        { text: 'Nutze die **Vorbereitungszeit**, um zuerst beide Aufgabenblätter zu lesen.', gl: '— um … zu: finalidad' },
+        { text: 'Auf meinem **Stichwortzettel** stehen nur fünf kurze Zeilen.' },
+        { text: 'Nach dem **Vortrag** stellt meine Partnerin eine **Nachfrage** zu meinem Beispiel.', gl: '— primero la exposición, después las preguntas' },
+        { text: 'Bei „organisieren“ wird die Silbe mit *ie* **betont**.', gl: '— los verbos en -ieren llevan el acento en *ie*' },
+        { text: 'Er spricht nicht fehlerfrei, aber **flüssig** und mit einer natürlichen **Satzmelodie**.', gl: '— justo lo que valoran los criterios' },
       ],
-      loesungen: [
-        '**EIN**kaufen — trennbares Präfix wird betont.',
-        'be**ZAH**len — untrennbares Präfix bleibt unbetont.',
-        'stud**IE**ren — *-ieren* betont das *ie*.',
-        '**NACH**frage — Nomen mit Präfix: Akzent vorn.',
-        'ver**STE**hen — untrennbares Präfix unbetont.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Simuliere die Vorbereitungszeit: Stell dir einen Timer auf 15 Minuten und schreibe zum Vortragsthema „Feste oder flexible Arbeitszeiten?“ einen Stichwortzettel mit maximal 25 Wörtern (Gerüst: Einleitung → 2 Punkte + Beispiele → Meinung → Fazit).',
-      loesung: '**Mögliche Lösung:** „Einl.: Arbeitszeit — wichtig für alle / P1: fest → klare Struktur, Feierabend (Bsp. Vater) / P2: flexibel → Familie, Pendeln (Bsp. Homeoffice-Freundin) / Meinung: flexibel + Kernzeiten / Fazit + Fragen?“ — Jede andere Gliederung ist gültig, solange sie **Stichwörter statt Sätze** enthält, 2-3 Punkte mit eigenem Beispiel plant und mit Meinung und Fazit endet.',
     },
 
     { type: 'rule' },

@@ -3,8 +3,9 @@
 // Bloque 2 · Abschluss des Schreib-Moduls: ~100 Wörter an Vorgesetzte,
 // Vermieterin oder Kursleitung. Anrede & Gruß, Sie-Register, höflicher
 // Konjunktiv II, drei Nachrichtentypen, kommentiertes Muster (104 Wörter,
-// nachgezählt), drei Übungen, komplette Prüfungsaufgabe mit Lösung und
-// Synthese-Tabelle des Moduls. Ausblick → Lektion 30 (Modul Sprechen).
+// nachgezählt), Modelltext Entschuldigung + Lösung, Mehr Beispiele,
+// komplette Prüfungsaufgabe mit Lösung und Synthese-Tabelle des Moduls.
+// Übungen → Übungsheft (heft-29.js). Ausblick → Lektion 30 (Modul Sprechen).
 
 export default {
   spec: ['Bloque 2', 'Prüfungsstrategie', 'Niveau B2', 'Prüfungsrelevanz: Schreiben Teil 2 (~100 Wörter · empf. 25 Min)'],
@@ -188,47 +189,32 @@ export default {
 
     { type: 'rule' },
 
-    // ── Übungen ───────────────────────────────────────────────────
+    // ── Modelltext + Mehr Beispiele ───────────────────────────────
     {
-      type: 'uebung',
-      eyebrow: 'Anwendung — Übung 1 · Erkennen',
-      frage: 'Welcher Typ ist das — Entschuldigung mit Lösung, Bitte oder Mitteilung? Woran erkennst du es?',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        '„Es tut mir sehr leid, dass ich am Montag nicht kommen kann. Gern hole ich die Stunde am Mittwoch nach.“',
-        '„Könnten Sie mir bitte mitteilen, wann der nächste Kurs beginnt und was er kostet?“',
-        '„Ich möchte Ihnen mitteilen, dass ich zum 31. März aus der Wohnung ausziehen werde.“',
-      ],
-      loesungen: [
-        '**Entschuldigung + Lösung** — *es tut mir leid* plus Vorschlag zum Nachholen; ohne den zweiten Teil wäre die Entschuldigung unvollständig.',
-        '**Bitte** (Anfrage) — Konjunktiv II *könnten Sie* und zwei erfragte Informationen.',
-        '**Mitteilung** — Signalformel *ich möchte Ihnen mitteilen, dass …*; hier wird informiert, nicht gebeten.',
+      type: 'modell',
+      eyebrow: 'Modelltext — Entschuldigung mit Lösung',
+      thema: 'Mitteilung an den Vorgesetzten, Herrn Schneider: Du kommst morgen erst gegen 11 Uhr (Grund: dringender Arzttermin). Achte auf das Muster: Mitteilung + Entschuldigung + Lösungsvorschlag.',
+      absaetze: [
+        'Sehr geehrter Herr Schneider,',
+        'leider kann ich morgen erst gegen elf Uhr ins Büro kommen, weil ich einen dringenden Arzttermin habe, den ich nicht verschieben konnte. Bitte entschuldigen Sie die kurzfristige Nachricht.',
+        'Damit keine Arbeit liegen bleibt, würde ich morgen Abend eine Stunde länger bleiben. Meine Kollegin Frau Marx weiß außerdem Bescheid und übernimmt am Vormittag die Telefonate.',
+        'Wenn Sie noch Fragen haben, erreichen Sie mich jederzeit auf dem Handy.',
+        'Vielen Dank für Ihr Verständnis.',
+        'Mit freundlichen Grüßen\nPablo Ríos',
       ],
     },
     {
-      type: 'uebung',
-      eyebrow: 'Übung 2 · Umformen',
-      frage: 'Zu direkt für eine formelle Nachricht — formuliere höflich mit Konjunktiv II und Sie-Register.',
-      loesungLabel: 'Lösung',
-      aufgaben: [
-        'Ich will am Freitag frei haben.',
-        'Reparieren Sie endlich die Waschmaschine!',
-        'Sag mir, wann die Prüfung ist.',
-        'Ich komme nicht zum Kurs. Punkt.',
+      type: 'beispiele',
+      eyebrow: 'Mehr Beispiele',
+      titel: 'Der Kernwortschatz in formellen Nachrichten',
+      items: [
+        { text: 'Leider muss ich unseren **Termin** am Dienstag **absagen**.', gl: '— absagen: cancelar una cita' },
+        { text: 'Wäre es möglich, die Besprechung auf nächste Woche zu **verschieben**?', gl: '— verschieben: aplazar, no cancelar' },
+        { text: 'Ich möchte mich noch einmal für die Verspätung **entschuldigen**.', gl: '— sich entschuldigen für + Akk.' },
+        { text: 'Am Elternabend kann ich aus beruflichen **Gründen** leider nicht **teilnehmen**.', gl: '— teilnehmen an + Dat. = asistir a' },
+        { text: 'Sie **erreichen** mich vormittags unter der Nummer 030 5566778.', gl: '— erreichen: localizar a alguien' },
+        { text: 'Über eine kurze **Antwort** bis Freitag würde ich mich freuen.', gl: '— cierre cortés con Konjunktiv II' },
       ],
-      loesungen: [
-        '*Ich würde am Freitag gern einen Tag freinehmen. Wären Sie damit einverstanden?*',
-        '*Könnten Sie bitte bald jemanden schicken, der die Waschmaschine repariert?* ~~La exigencia se convierte en pregunta cortés.~~',
-        '*Könnten Sie mir bitte mitteilen, wann die Prüfung stattfindet?* — indirekte Frage: Verb ans Ende.',
-        '*Leider kann ich am Kurs nicht teilnehmen. Bitte entschuldigen Sie mein Fehlen.* — Grund oder Entschuldigung gehören immer dazu.',
-      ],
-    },
-    {
-      type: 'uebung',
-      eyebrow: 'Übung 3 · Produzieren',
-      frage: 'Mitteilung an deinen Vorgesetzten, Herrn Schneider: Du kommst morgen erst gegen 11 Uhr (Grund: dringender Arzttermin). Schreibe die komplette Nachricht (ca. 80 Wörter): Anrede, Grund, Entschuldigung, Lösungsvorschlag, Gruß.',
-      aufgabe: 'Prüfe danach: Anrede mit Komma und klein weiter? Sie/Ihnen groß? Lösungsvorschlag enthalten?',
-      loesung: '**Mögliche Lösung** (80 Wörter):\n*Sehr geehrter Herr Schneider,\nleider kann ich morgen erst gegen elf Uhr ins Büro kommen, weil ich einen dringenden Arzttermin habe, den ich nicht verschieben konnte. Bitte entschuldigen Sie die kurzfristige Nachricht.\nDamit keine Arbeit liegen bleibt, würde ich morgen Abend eine Stunde länger bleiben. Meine Kollegin Frau Marx weiß außerdem Bescheid und übernimmt am Vormittag die Telefonate.\nWenn Sie noch Fragen haben, erreichen Sie mich jederzeit auf dem Handy.\nVielen Dank für Ihr Verständnis.\nMit freundlichen Grüßen\nPablo Ríos*\n~~Fíjate en el patrón: aviso + disculpa + solución. Un aviso sin propuesta de solución queda cojo.~~',
     },
 
     { type: 'rule' },
