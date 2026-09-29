@@ -14,8 +14,8 @@ import * as b2c from './b2cClient.js'
 import { createMagicLink, consumeMagicLink, purgeOld as purgeMagicLinks, TTL_MS as MAGIC_LINK_TTL_MS } from './magicLink.js'
 import { sendEmail, magicLinkTemplate } from './emailSender.js'
 import {
-  assertCanStartRealAttempt, canonicalRealScore, withinTimeLimit,
-  examSpec, PRUEFUNG_PASS_PCT,
+  assertCanStartRealAttempt, canonicalRealScore, gradeProductiveReal, withinTimeLimit,
+  examSpec, levelPassStatus, PRUEFUNG_PASS_PCT,
 } from './realExam.js'
 import { LEVEL_TEST_QUESTIONS, computeLevel as computeLevelTestLevel } from './level-test-bank.js'
 import { getCourseIndex as getC1Index, getLesson as getC1Lesson } from './deutschc1/index.js'
@@ -1878,8 +1878,7 @@ app.get('/api/internal/student/progress', async (req, res) => {
 
     const modules = await bestPerModule('real')
     const simulModules = await bestPerModule('simulation')
-    const passedCount = PRUEFUNG_MODULES.filter(m => modules[m]?.passed).length
-    const allPassed = passedCount === PRUEFUNG_MODULES.length
+    const { passedCount, allPassed, compensated, avgPct } = levelPassStatus(level, modules)
 
     res.json({
       found: true,
@@ -1902,6 +1901,8 @@ app.get('/api/internal/student/progress', async (req, res) => {
         simulacros: simulModules,
         passedCount,
         allPassed,
+        compensated,       // A1/A2: aprobado por media sin aprobar los 4 módulos
+        avgPct,
       },
       guarantee: {
         pathThreshold: GUARANTEE_PATH_THRESHOLD,
@@ -1969,7 +1970,7 @@ app.post('/api/internal/certificate/issue', async (req, res) => {
       }
       if (r.attemptId) attemptIds.push(r.attemptId)
     }
-    const allPassed = PRUEFUNG_MODULES.every(m => modules[m]?.passed)
+    const { allPassed, compensated } = levelPassStatus(lvl, modules)
 
     // Path % (same rule as /api/internal/student/progress)
     const levelSuffix = lvl.toLowerCase()
@@ -1985,7 +1986,7 @@ app.post('/api/internal/certificate/issue', async (req, res) => {
 
     if (!allPassed && pathPct < GUARANTEE_PATH_THRESHOLD) {
       return res.status(400).json({
-        error: 'El alumno no cumple los requisitos para certificar (necesita aprobar los 4 módulos reales O alcanzar 85% de la ruta).',
+        error: 'El alumno no cumple los requisitos para certificar (necesita aprobar los 4 módulos reales —en A1/A2 basta una media del 60 % sin ningún módulo por debajo del 40 %— O alcanzar 85% de la ruta).',
         allPassed,
         pathPct,
       })
@@ -2013,7 +2014,7 @@ app.post('/api/internal/certificate/issue', async (req, res) => {
       level: lvl,
       modules,
       pathPct,
-      basedOn: allPassed ? 'pruefung_passed' : 'path_threshold_reached',
+      basedOn: allPassed ? (compensated ? 'pruefung_passed_compensated' : 'pruefung_passed') : 'path_threshold_reached',
       frozenAttemptIds: attemptIds,
     })
   } catch (err) {
@@ -4115,14 +4116,16 @@ app.get('/api/pruefungen/cert-status', authMiddleware, subscriptionMiddleware, a
     const total = LEVEL_EXERCISE_TOTALS[level] || 0
     const pathPct = total > 0 ? Math.round((100 * completed) / total) : 0
 
-    const passedCount = ['lesen', 'hoeren', 'schreiben', 'sprechen'].filter(m => modules[m].passed).length
-    const allPassed = passedCount === 4
+    const { passedCount, allPassed, compensated, avgPct, compensation } = levelPassStatus(level, modules)
 
     res.json({
       level,
       modules,
       passedCount,
       allPassed,
+      compensated,
+      avgPct,
+      compensation,
       path: { completed, total, pct: pathPct, threshold: GUARANTEE_PATH_THRESHOLD },
       eligibleForCertificate: allPassed || pathPct >= GUARANTEE_PATH_THRESHOLD,
     })
@@ -4205,10 +4208,10 @@ app.post('/api/pruefungen/attempts', authMiddleware, subscriptionMiddleware, blo
 })
 
 // FINISH attempt — saves score, responses, feedback.
-// For mode='real' the client-supplied score is discarded for Lesen/Hören
-// (recomputed server-side against the answer manifest) and clamped for
-// Schreiben/Sprechen. Frozen attempts (used by a certificate) cannot be
-// re-graded.
+// For mode='real' the client-supplied score is always discarded: Lesen/Hören
+// are recomputed against the answer manifest and Schreiben/Sprechen are
+// re-graded server-side from the submitted texts (AI cache → usually free).
+// Frozen attempts (used by a certificate) cannot be re-graded.
 app.post('/api/pruefungen/attempts/:id/finish', authMiddleware, subscriptionMiddleware, blockIfReadOnly, async (req, res) => {
   try {
     const attemptId = parseInt(req.params.id)
@@ -4233,7 +4236,21 @@ app.post('/api/pruefungen/attempts/:id/finish', authMiddleware, subscriptionMidd
           code: 'duration_exceeded',
         })
       }
-      const canon = canonicalRealScore(attempt, { score, maxScore, responses })
+      let canon
+      if (attempt.module === 'schreiben' || attempt.module === 'sprechen') {
+        if (!ANTHROPIC_API_KEY) return res.status(503).json({ error: 'Servicio de IA no disponible. Vuelve a intentarlo en unos minutos.' })
+        const who = { userId: req.user.id, userName: req.user.fullName || 'Student' }
+        try {
+          canon = await gradeProductiveReal(attempt, responses, (kind, t) => kind === 'writing-task'
+            ? gradeSchreibenCore({ level: t.level, taskType: t.taskType, taskPrompt: t.taskPrompt, submission: t.text, minWords: t.minWords }, who)
+            : gradeSprechenCore({ level: t.level, taskType: t.taskType, taskPrompt: t.taskPrompt, transcript: t.text, durationSeconds: t.durationSeconds }, who))
+        } catch (e) {
+          console.error('Real productive grading error:', e.message)
+          return res.status(503).json({ error: 'No se pudo corregir el examen ahora. Vuelve a pulsar «Prüfung abgeben» en unos minutos.', code: 'grading_unavailable' })
+        }
+      } else {
+        canon = canonicalRealScore(attempt, { score, maxScore, responses })
+      }
       if (!canon) return res.status(500).json({ error: 'No se pudo puntuar el examen (manifest ausente).' })
       finalScore = canon.score
       finalMax = canon.maxScore
@@ -4293,32 +4310,88 @@ app.get('/api/pruefungen/attempts', authMiddleware, subscriptionMiddleware, asyn
   }
 })
 
-// GRADE Schreiben submission with Claude using the official rubric
-app.post('/api/pruefungen/grade-schreiben', authMiddleware, subscriptionMiddleware, aiRateLimit, aiDailyCap, blockIfReadOnly, async (req, res) => {
-  try {
-    if (!ANTHROPIC_API_KEY) return res.status(503).json({ error: 'Servicio de IA no disponible.' })
-    const { level, taskType, taskPrompt, submission, minWords } = req.body
-    if (!level || !taskPrompt || !submission) {
-      return res.status(400).json({ error: 'Faltan datos.' })
-    }
+// ─── Corrección IA de Schreiben / Sprechen ─────────────────────────────
+// Un solo sitio para el enunciado y la caché: lo usan los endpoints (el
+// alumno durante el examen y el Übungsheft) y el cierre del examen real,
+// que vuelve a puntuar en el servidor sin fiarse de la nota del cliente.
+// El prefijo de versión de la caché cambia cuando cambia el enunciado.
+const GRADING_CACHE_VERSION = 'v2'
 
-    const wordCount = submission.trim().split(/\s+/).filter(Boolean).length
-    const userName = req.user.fullName || 'Student'
+// Qué se exige de verdad en cada nivel — el examinador mide contra esto,
+// no contra un hablante nativo.
+const LEVEL_EXPECTATIONS = {
+  A1: 'kurze, einfache Sätze und Grundwortschatz. Viele Fehler (Verbendungen, Artikel, Wortstellung) sind auf A1 normal, solange die Botschaft verständlich ist.',
+  A2: 'einfache, mit „und“, „aber“, „weil“ verbundene Sätze und Alltagswortschatz. Fehler bei Kasus, Endungen und Wortstellung sind auf A2 normal, solange der Text verständlich ist.',
+  B1: 'ein zusammenhängender Text mit Begründungen und gängigen Konnektoren. Fehler, die das Verständnis nicht stören, sind auf B1 normal.',
+  B2: 'ein klar gegliederter Text, der Argumente abwägt und Nebensätze sicher einsetzt. Gelegentliche Fehler, die das Verständnis nicht stören, sind auf B2 normal.',
+  C1: 'ein differenzierter, gut strukturierter Text mit präzisem, variiertem Ausdruck. Vereinzelte Fehler sind auch auf C1 normal.',
+  C2: 'ein souveräner, stilistisch angemessener Text. Seltene Flüchtigkeitsfehler sind normal.',
+}
 
-    // Memoise by (level + task + submission). Same exam re-submitted → free.
-    const cacheKey = evalCacheKey('grade-schreiben', [level, taskPrompt, submission])
-    const cached = await getCachedEvaluation(cacheKey)
-    if (cached) {
-      recordAIUsage({ userId: req.user.id, endpoint: 'grade-schreiben', model: 'CACHE', cacheKey, cacheHit: 1 }).catch(() => {})
-      return res.json(cached)
-    }
+function gradingRules(level) {
+  const lvl = String(level || '').toUpperCase()
+  return `BEWERTUNGSMASSSTAB (${lvl}): Erwartet wird ${LEVEL_EXPECTATIONS[lvl] || LEVEL_EXPECTATIONS.B1}
+- Miss am Niveau ${lvl}, nicht an muttersprachlicher Perfektion. Bewerte fair und wohlwollend, wie ein erfahrener Prüfer.
+- Fehler, die das Verständnis nicht beeinträchtigen, führen nur zu geringem Abzug. Wiederholte gleiche Fehler zählen einmal.
+- Wer die Aufgabe inhaltlich erfüllt und verständlich formuliert, besteht in der Regel (total mindestens 60).
+- Unter 60 nur, wenn wesentliche Inhaltspunkte fehlen, der Text in großen Teilen unverständlich ist oder deutlich unter dem Niveau ${lvl} liegt.`
+}
 
-    const message = `Du bist offizieller Prüfer für die Deutschprüfung ${level}. Bewerte diesen Schreibteil nach den offiziellen Bewertungskriterien.
+const GRADING_JSON_SHAPE = (wordCount, source) => `Antworte AUSSCHLIESSLICH mit gültigem JSON, ohne Markdown-Codeblock:
+{
+  "scores": {
+    "erfuellung": 20,
+    "kohaerenz": 18,
+    "wortschatz": 15,
+    "strukturen": 17
+  },
+  "total": 70,
+  "passed": true,
+  "wordCount": ${wordCount},
+  "errors": [
+    {"original": "exakte Stelle aus ${source}", "correction": "Korrektur", "explanation": "kurze Erklärung", "severity": "low|medium|high"}
+  ],
+  "strengths": ["Was gut gemacht wurde, in 1-2 Sätzen"],
+  "improvements": ["Konkreter Verbesserungsvorschlag"],
+  "overall": "Gesamtkommentar (2-3 Sätze, ermutigend aber präzise)"
+}
+
+total = Summe der vier scores. passed = true wenn total >= 60.
+Nenne in "errors" höchstens die 8 wichtigsten Fehler.`
+
+// total siempre = suma de los cuatro criterios (0-100) y passed coherente.
+function normalizeGrading(result) {
+  const s = result?.scores || {}
+  const sum = ['erfuellung', 'kohaerenz', 'wortschatz', 'strukturen']
+    .reduce((acc, k) => acc + Math.max(0, Math.min(25, Number(s[k]) || 0)), 0)
+  const total = Math.max(0, Math.min(100, Math.round(sum || Number(result?.total) || 0)))
+  return { ...result, total, passed: total >= PRUEFUNG_PASS_PCT }
+}
+
+async function gradeWithAI(endpoint, cacheParts, message, { userId, userName, level }) {
+  const cacheKey = evalCacheKey(`${endpoint}-${GRADING_CACHE_VERSION}`, cacheParts)
+  const cached = await getCachedEvaluation(cacheKey)
+  if (cached) {
+    recordAIUsage({ userId, endpoint, model: 'CACHE', cacheKey, cacheHit: 1 }).catch(() => {})
+    return cached
+  }
+  const text = await callAnthropic([{ role: 'user', content: message }], userName, level, 1500, { userId, endpoint, cacheKey })
+  const jsonMatch = text.match(/\{[\s\S]*\}/)
+  if (!jsonMatch) throw new Error('ai_unparseable')
+  const result = normalizeGrading(JSON.parse(jsonMatch[0]))
+  putCachedEvaluation(cacheKey, endpoint, result).catch(() => {})
+  return result
+}
+
+async function gradeSchreibenCore({ level, taskType, taskPrompt, submission, minWords }, who) {
+  const wordCount = String(submission).trim().split(/\s+/).filter(Boolean).length
+  const message = `Du bist Prüfer für die Deutschprüfung ${level}. Bewerte diesen Schreibteil nach den offiziellen Bewertungskriterien.
 
 AUFGABE (${taskType || 'Schreibaufgabe'}):
 ${taskPrompt}
 
 MINDESTWORTANZAHL: ${minWords || '?'} | TATSÄCHLICH: ${wordCount} Wörter
+(Liegt der Text bis zu 20 % unter der Mindestwortzahl, nur leichter Abzug bei „Erfüllung“.)
 
 EINREICHUNG DES STUDENTEN:
 """
@@ -4331,38 +4404,55 @@ Bewerte nach den 4 offiziellen Kriterien (jeweils 0-25 Punkte, Gesamt max. 100):
 3. Wortschatz (Bandbreite und Korrektheit)
 4. Strukturen (Grammatik, Syntax, morphologische Korrektheit)
 
-Antworte AUSSCHLIESSLICH mit gültigem JSON, ohne Markdown-Codeblock:
-{
-  "scores": {
-    "erfuellung": 20,
-    "kohaerenz": 18,
-    "wortschatz": 15,
-    "strukturen": 17
-  },
-  "total": 70,
-  "passed": true,
-  "wordCount": ${wordCount},
-  "errors": [
-    {"original": "exakte Stelle aus dem Text", "correction": "Korrektur", "explanation": "kurze Erklärung", "severity": "low|medium|high"}
-  ],
-  "strengths": ["Was gut gemacht wurde, in 1-2 Sätzen"],
-  "improvements": ["Konkreter Verbesserungsvorschlag"],
-  "overall": "Gesamtkommentar (2-3 Sätze, ermutigend aber präzise)"
+${gradingRules(level)}
+
+${GRADING_JSON_SHAPE(wordCount, 'dem Text')}`
+  return gradeWithAI('grade-schreiben', [level, taskPrompt, submission], message, { ...who, level })
 }
 
-passed = true wenn total >= 60.`
+async function gradeSprechenCore({ level, taskType, taskPrompt, transcript, durationSeconds }, who) {
+  const wordCount = String(transcript).trim().split(/\s+/).filter(Boolean).length
+  const message = `Du bist Prüfer für die Deutschprüfung ${level}, Modul Sprechen. Du bewertest die TRANSKRIPTION einer mündlichen Antwort.
 
-    const text = await callAnthropic(
-      [{ role: 'user', content: message }],
-      userName,
-      level,
-      1500,
-      { userId: req.user.id, endpoint: 'grade-schreiben', cacheKey }
+WICHTIG: Die Transkription wurde automatisch von der Spracherkennung des Browsers erstellt.
+- Du kannst Aussprache, Intonation und Flüssigkeit nicht hören: bewerte NUR Inhalt, Wortschatz, Strukturen und Kohärenz und erwähne im Kommentar, dass die Aussprache nicht automatisch bewertet wurde.
+- Werte NICHT als Fehler: fehlende oder falsche Zeichensetzung, Groß-/Kleinschreibung, fehlende Satzgrenzen, Füllwörter (äh, also) und Wörter, die offensichtlich falsch erkannt wurden (ähnlich klingende Wörter, die im Kontext keinen Sinn ergeben).
+- Gesprochene Sprache ist weniger formell als geschriebene; typische mündliche Strukturen sind korrekt.
+
+AUFGABE (${taskType || 'Sprechaufgabe'}):
+${taskPrompt}
+
+DAUER: ${durationSeconds || '?'} Sekunden | WÖRTER: ${wordCount}
+
+TRANSKRIPT:
+"""
+${transcript}
+"""
+
+Bewerte nach 4 Kriterien (jeweils 0-25 Punkte, Gesamt max. 100):
+1. Erfüllung der Aufgabe (Wurden die Punkte angesprochen?)
+2. Kohärenz (Logischer Aufbau, Verknüpfungen)
+3. Wortschatz (Bandbreite, Angemessenheit)
+4. Strukturen (Grammatik soweit aus dem Transkript erkennbar)
+
+${gradingRules(level)}
+
+${GRADING_JSON_SHAPE(wordCount, 'dem Transkript')}`
+  return gradeWithAI('grade-sprechen', [level, taskPrompt, transcript], message, { ...who, level })
+}
+
+// GRADE Schreiben submission with Claude using the official rubric
+app.post('/api/pruefungen/grade-schreiben', authMiddleware, subscriptionMiddleware, aiRateLimit, aiDailyCap, blockIfReadOnly, async (req, res) => {
+  try {
+    if (!ANTHROPIC_API_KEY) return res.status(503).json({ error: 'Servicio de IA no disponible.' })
+    const { level, taskType, taskPrompt, submission, minWords } = req.body
+    if (!level || !taskPrompt || !submission) {
+      return res.status(400).json({ error: 'Faltan datos.' })
+    }
+    const result = await gradeSchreibenCore(
+      { level, taskType, taskPrompt, submission, minWords },
+      { userId: req.user.id, userName: req.user.fullName || 'Student' }
     )
-    const jsonMatch = text.match(/\{[\s\S]*\}/)
-    if (!jsonMatch) return res.status(500).json({ error: 'Error al procesar respuesta de IA.' })
-    const result = JSON.parse(jsonMatch[0])
-    putCachedEvaluation(cacheKey, 'grade-schreiben', result).catch(() => {})
     res.json(result)
   } catch (err) {
     console.error('Grade Schreiben error:', err.message)
@@ -4378,70 +4468,10 @@ app.post('/api/pruefungen/grade-sprechen', authMiddleware, subscriptionMiddlewar
     if (!level || !taskPrompt || !transcript) {
       return res.status(400).json({ error: 'Faltan datos.' })
     }
-
-    const wordCount = String(transcript).trim().split(/\s+/).filter(Boolean).length
-    const userName = req.user.fullName || 'Student'
-
-    // Memoise by (level + task + transcript). Same transcript → free re-grade.
-    const cacheKey = evalCacheKey('grade-sprechen', [level, taskPrompt, transcript])
-    const cached = await getCachedEvaluation(cacheKey)
-    if (cached) {
-      recordAIUsage({ userId: req.user.id, endpoint: 'grade-sprechen', model: 'CACHE', cacheKey, cacheHit: 1 }).catch(() => {})
-      return res.json(cached)
-    }
-
-    const message = `Du bist offizieller Prüfer für die Deutschprüfung ${level}, Modul Sprechen. Du bewertest die TRANSKRIPTION einer mündlichen Antwort.
-
-WICHTIG: Du kannst keine Aussprache, Intonation oder Sprechflüssigkeit direkt hören — du arbeitest nur mit dem Transkript. Bewerte deshalb NUR Inhalt, Wortschatz, Strukturen und Kohärenz. Erwähne im Kommentar, dass Aussprache nicht automatisch bewertet werden konnte.
-
-AUFGABE (${taskType || 'Sprechaufgabe'}):
-${taskPrompt}
-
-DAUER: ${durationSeconds || '?'} Sekunden | WÖRTER: ${wordCount}
-
-TRANSKRIPT (automatisch erstellt mit Whisper, kann kleine Fehler enthalten):
-"""
-${transcript}
-"""
-
-Bewerte nach 4 Kriterien (jeweils 0-25 Punkte, Gesamt max. 100):
-1. Erfüllung der Aufgabe (Wurden alle Punkte angesprochen?)
-2. Kohärenz (Logischer Aufbau, Verknüpfungen)
-3. Wortschatz (Bandbreite, Angemessenheit)
-4. Strukturen (Grammatik soweit aus dem Transkript erkennbar)
-
-Antworte AUSSCHLIESSLICH mit gültigem JSON, ohne Markdown-Codeblock:
-{
-  "scores": {
-    "erfuellung": 20,
-    "kohaerenz": 18,
-    "wortschatz": 15,
-    "strukturen": 17
-  },
-  "total": 70,
-  "passed": true,
-  "wordCount": ${wordCount},
-  "errors": [
-    {"original": "exakte Stelle aus dem Transkript", "correction": "Korrektur", "explanation": "kurze Erklärung", "severity": "low|medium|high"}
-  ],
-  "strengths": ["Was gut gemacht wurde"],
-  "improvements": ["Konkreter Verbesserungsvorschlag"],
-  "overall": "Gesamtkommentar (2-3 Sätze, ermutigend; weise darauf hin, dass Aussprache nicht automatisch bewertet wurde)"
-}
-
-passed = true wenn total >= 60.`
-
-    const text = await callAnthropic(
-      [{ role: 'user', content: message }],
-      userName,
-      level,
-      1500,
-      { userId: req.user.id, endpoint: 'grade-sprechen', cacheKey }
+    const result = await gradeSprechenCore(
+      { level, taskType, taskPrompt, transcript, durationSeconds },
+      { userId: req.user.id, userName: req.user.fullName || 'Student' }
     )
-    const jsonMatch = text.match(/\{[\s\S]*\}/)
-    if (!jsonMatch) return res.status(500).json({ error: 'Error al procesar respuesta de IA.' })
-    const result = JSON.parse(jsonMatch[0])
-    putCachedEvaluation(cacheKey, 'grade-sprechen', result).catch(() => {})
     res.json(result)
   } catch (err) {
     console.error('Grade Sprechen error:', err.message)

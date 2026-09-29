@@ -486,7 +486,7 @@ export default function PruefungPlayer() {
       // — no Blobs to strip since we now transcribe in the browser.
       const cleanResponses = { ...responses }
       if (attemptId) {
-        await fetch(`${API_URL}/api/pruefungen/attempts/${attemptId}/finish`, {
+        const finishRes = await fetch(`${API_URL}/api/pruefungen/attempts/${attemptId}/finish`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${getToken()}` },
           body: JSON.stringify({
@@ -502,6 +502,19 @@ export default function PruefungPlayer() {
             },
           }),
         })
+        // En modo real la nota que cuenta es la del servidor: si no se pudo
+        // guardar, el alumno debe poder reenviar en vez de ver un resultado
+        // que no quedó registrado.
+        if (examMode === 'real') {
+          const saved = await finishRes.json().catch(() => ({}))
+          if (!finishRes.ok) throw new Error(saved.error || 'No se pudo guardar el examen. Vuelve a pulsar «Prüfung abgeben».')
+          if (typeof saved.score === 'number') {
+            finalResult.score = saved.score
+            finalResult.maxScore = saved.maxScore
+            finalResult.percentage = saved.percentage
+            finalResult.passed = saved.passed
+          }
+        }
       }
       setResult(finalResult)
       setPhase('results')

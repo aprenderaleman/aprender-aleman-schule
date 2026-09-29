@@ -40,6 +40,41 @@ export const REAL_ATTEMPT_LIFETIME_CAP = 3
 export const REAL_DURATION_GRACE_SECONDS = 5 * 60
 export const PRUEFUNG_PASS_PCT = 60
 
+// Aprobado de NIVEL (garantía). Desde B1, como el examen oficial, cada módulo
+// por separado (≥60 %). En A1/A2 el examen oficial es una prueba global: los
+// módulos compensan — media ≥60 % sin ningún módulo por debajo del mínimo.
+export const COMPENSATION_LEVELS = ['A1', 'A2']
+export const COMPENSATION_MIN_MODULE_PCT = 40
+const LEVEL_MODULES = ['lesen', 'hoeren', 'schreiben', 'sprechen']
+
+// modules: { lesen: { bestPct, passed } | null, … } — mejores intentos reales.
+export function levelPassStatus(level, modules) {
+  const passedCount = LEVEL_MODULES.filter(m => modules?.[m]?.passed).length
+  const pcts = LEVEL_MODULES.map(m => modules?.[m]?.bestPct)
+  const allAttempted = pcts.every(p => p != null)
+  const avgPct = allAttempted ? Math.round(pcts.reduce((s, p) => s + Number(p), 0) / pcts.length) : null
+  const compensated = passedCount < LEVEL_MODULES.length
+    && COMPENSATION_LEVELS.includes(String(level).toUpperCase())
+    && allAttempted
+    && pcts.every(p => Number(p) >= COMPENSATION_MIN_MODULE_PCT)
+    && avgPct >= PRUEFUNG_PASS_PCT
+  return {
+    passedCount,
+    allPassed: passedCount === LEVEL_MODULES.length || compensated,
+    compensated,
+    avgPct,
+    compensation: COMPENSATION_LEVELS.includes(String(level).toUpperCase())
+      ? { minModulePct: COMPENSATION_MIN_MODULE_PCT, avgPct: PRUEFUNG_PASS_PCT }
+      : null,
+  }
+}
+
+// Mismo texto de consigna que construye el cliente (PruefungPlayer) — tiene
+// que coincidir byte a byte para reutilizar la corrección ya cacheada.
+export function productiveTaskPrompt(part) {
+  return part.taskPrompt + (part.bullets ? '\n\nPunkte:\n' + part.bullets.map(b => `- ${b}`).join('\n') : '')
+}
+
 // Grace + duration limit lookup
 export function examSpec(examId) {
   return ANSWERS[examId] || null
@@ -75,13 +110,19 @@ export function gradeObjective(examId, responses) {
       }
     }
     if (Array.isArray(part.fields)) {
-      // Formular parts (rare, mostly A1 Schreiben). Field-by-field match.
+      // Formular (A1 Schreiben). `expected` es una LISTA de variantes; mismo
+      // criterio que PruefungPlayer: exacto o contención con ≥4 caracteres.
+      const normF = s => String(s ?? '').trim().toLowerCase().replace(/\s+/g, ' ')
       for (const f of part.fields) {
         const pts = f.points || 1
         maxScore += pts
-        const v = String(responses?.[part.id]?.[f.id] ?? '').trim().toLowerCase()
-        const expected = String(f.expected ?? '').trim().toLowerCase()
-        if (v && v === expected) score += pts
+        const v = normF(responses?.[part.id]?.[f.id])
+        const variants = Array.isArray(f.expected) ? f.expected : [f.expected]
+        const ok = v && variants.some(exp => {
+          const e = normF(exp)
+          return v === e || (v.length >= 4 && (e.includes(v) || v.includes(e)))
+        })
+        if (ok) score += pts
       }
     }
   }
@@ -142,9 +183,8 @@ export async function assertCanStartRealAttempt({ pool, userId, level, module, u
 /**
  * Called from POST /api/pruefungen/attempts/:id/finish for mode='real'.
  * Given the raw attempt row + the payload the client sent, returns the
- * canonical {score, maxScore} we should persist. Never trusts the
- * client's `score` for Lesen/Hören; leaves it as-is for Schreiben/Sprechen
- * (those already come from our AI endpoints).
+ * canonical {score, maxScore} we should persist for Lesen/Hören. Never
+ * trusts the client's `score`. Schreiben/Sprechen → gradeProductiveReal.
  */
 export function canonicalRealScore(attemptRow, payload) {
   const spec = ANSWERS[attemptRow.examId]
@@ -157,12 +197,43 @@ export function canonicalRealScore(attemptRow, payload) {
     return graded
   }
 
-  // Schreiben / Sprechen: keep whatever the client sent, but clamp it to
-  // the exam's declared maxScore so nobody can inflate above 100%.
-  const submittedScore = Number(payload.score) || 0
-  const submittedMax = Number(payload.maxScore) || spec.maxScore || 100
-  const maxScore = Math.min(submittedMax, spec.maxScore || submittedMax)
-  const score = Math.max(0, Math.min(maxScore, submittedScore))
+  // Schreiben / Sprechen: se corrigen con gradeProductiveReal (asíncrono).
+  return null
+}
+
+/**
+ * Schreiben / Sprechen en modo real: el servidor puntúa él mismo a partir
+ * de los textos/transcripciones enviados — nunca acepta la nota del cliente.
+ * `grade(kind, { level, taskType, taskPrompt, text, minWords, durationSeconds })`
+ * devuelve la corrección IA ({ total 0-100 }); el cliente ya pidió la misma
+ * corrección durante el examen, así que normalmente sale de la caché.
+ */
+export async function gradeProductiveReal(attemptRow, responses, grade) {
+  const spec = ANSWERS[attemptRow.examId]
+  if (!spec) return null
+  const objective = gradeObjective(attemptRow.examId, responses || {}) || { score: 0, maxScore: 0 }
+  let score = objective.score
+  let maxScore = objective.maxScore
+  for (const part of spec.parts || []) {
+    if (part.kind !== 'writing-task' && part.kind !== 'speaking-task') continue
+    const possible = part.maxScore || 25
+    maxScore += possible
+    const r = responses?.[part.id]
+    const text = part.kind === 'writing-task'
+      ? String(r || '').trim()
+      : String(r?.transcript || '').trim()
+    if (!text) continue
+    const ai = await grade(part.kind, {
+      level: spec.level,
+      taskType: part.taskType,
+      taskPrompt: productiveTaskPrompt(part),
+      text,
+      minWords: part.minWords,
+      durationSeconds: r?.durationSeconds || 0,
+    })
+    const total = Math.max(0, Math.min(100, Number(ai?.total) || 0))
+    score += Math.round((total / 100) * possible)
+  }
   return { score, maxScore }
 }
 

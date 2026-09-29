@@ -53,7 +53,7 @@ export default function CertificateStatus() {
   // Un 200 con forma inesperada no debe tumbar toda la página de Prüfungen.
   if (loading || !data || !data.modules || !data.path) return null
 
-  const { level, modules, passedCount, path, eligibleForCertificate } = data
+  const { level, modules, passedCount, path, eligibleForCertificate, compensated, avgPct, compensation } = data
 
   return (
     <motion.section
@@ -72,6 +72,16 @@ export default function CertificateStatus() {
           <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">
             Solo los exámenes en modo <strong>real</strong> cuentan para el certificado.
           </p>
+          {compensation && (
+            <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">
+              En {level} los módulos compensan: apruebas con una <strong>media del {compensation.avgPct}%</strong> y ningún módulo por debajo del {compensation.minModulePct}%.
+            </p>
+          )}
+          {compensated && (
+            <p className="text-xs font-semibold text-emerald-700 dark:text-emerald-400 mt-1">
+              ✓ Nivel aprobado por media ({avgPct}%).
+            </p>
+          )}
         </div>
         {eligibleForCertificate && (
           <span className="shrink-0 inline-flex items-center gap-1 text-xs font-bold px-3 py-1 rounded-full bg-emerald-500 text-white shadow-sm">

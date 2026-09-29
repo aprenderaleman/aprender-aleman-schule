@@ -43,8 +43,13 @@ function compactPart(part) {
   }
   // Speaking / writing parts have no correct answer — the AI grades them.
   if (part.kind === 'speaking-task' || part.kind === 'writing-task') {
+    // Lo necesario para que el servidor corrija él mismo el modo real, con
+    // la misma consigna que envía el cliente (reaprovecha la caché IA).
     out.maxScore = part.maxScore || 25
-    out.taskPrompt = part.taskPrompt || null
+    out.taskPrompt = part.taskPrompt
+    if (part.taskType) out.taskType = part.taskType
+    if (part.bullets) out.bullets = part.bullets
+    if (part.minWords) out.minWords = part.minWords
   }
   return out
 }
