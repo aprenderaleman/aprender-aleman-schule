@@ -14,8 +14,9 @@ import * as b2c from './b2cClient.js'
 import { createMagicLink, consumeMagicLink, purgeOld as purgeMagicLinks, TTL_MS as MAGIC_LINK_TTL_MS } from './magicLink.js'
 import { sendEmail, magicLinkTemplate } from './emailSender.js'
 import {
-  assertCanStartRealAttempt, canonicalRealScore, gradeProductiveReal, withinTimeLimit,
-  examSpec, levelPassStatus, PRUEFUNG_PASS_PCT,
+  assertCanStartRealAttempt, withinTimeLimit, examSpec, levelPassStatus, PRUEFUNG_PASS_PCT,
+  READINESS_MIN_SIM_PCT, getExam, poolOf, realExamFor, catalog, catalogEntry, publicExam,
+  gradeExam, partScores, studentDetail, audioClips, needsGeneratedAudio, speechSegments,
 } from './realExam.js'
 import { LEVEL_TEST_QUESTIONS, computeLevel as computeLevelTestLevel } from './level-test-bank.js'
 import { getCourseIndex as getC1Index, getLesson as getC1Lesson } from './deutschc1/index.js'
@@ -1986,7 +1987,7 @@ app.post('/api/internal/certificate/issue', async (req, res) => {
 
     if (!allPassed && pathPct < GUARANTEE_PATH_THRESHOLD) {
       return res.status(400).json({
-        error: 'El alumno no cumple los requisitos para certificar (necesita aprobar los 4 módulos reales —en A1/A2 basta una media del 60 % sin ningún módulo por debajo del 40 %— O alcanzar 85% de la ruta).',
+        error: 'El alumno no cumple los requisitos para certificar (necesita aprobar los 4 módulos reales —A1/A2: media del 60 % sin ningún módulo por debajo del 40 %; B1-C2: un único módulo entre 50 y 59 % vale con media del 65 %— O alcanzar 85% de la ruta).',
         allPassed,
         pathPct,
       })
@@ -4104,6 +4105,25 @@ app.get('/api/pruefungen/cert-status', authMiddleware, subscriptionMiddleware, a
       }
     }
 
+    // Preparación: el examen real de un módulo se desbloquea con un simulacro
+    // de ese módulo a partir de READINESS_MIN_SIM_PCT.
+    const [sims] = await pool.query(
+      `SELECT module, MAX(score / NULLIF(maxScore, 0) * 100) AS bestPct
+         FROM schule_pruefungen_attempts
+        WHERE userId = ? AND level = ? AND mode = 'simulation'
+          AND finishedAt IS NOT NULL AND maxScore > 0
+        GROUP BY module`,
+      [req.user.id, level]
+    )
+    const simBest = Object.fromEntries(sims.map(r => [r.module, Math.round(Number(r.bestPct) || 0)]))
+    const staff = isExamStaff(req.user.role)
+    for (const m of ['lesen', 'hoeren', 'schreiben', 'sprechen']) {
+      const best = simBest[m] ?? null
+      const ready = staff || (best != null && best >= READINESS_MIN_SIM_PCT)
+      modules[m].readiness = { bestSimPct: best, requiredPct: READINESS_MIN_SIM_PCT, ready }
+      modules[m].canStartRealNow = modules[m].canStartRealNow && ready
+    }
+
     // Path % (same rule as internal endpoints)
     const levelSuffix = level.toLowerCase()
     const [pathRows] = await pool.query(
@@ -4173,49 +4193,176 @@ app.delete('/api/pruefungen/plan', authMiddleware, subscriptionMiddleware, async
   }
 })
 
-// START a new attempt — returns attempt id and server-side timestamp for fair timing
+// ─── Exámenes: contenido solo en servidor ──────────────────────────────
+const isExamStaff = role => ['teacher', 'admin', 'superadmin'].includes(role)
+
+// Audio de Hören de los exámenes nuevos: se sintetiza con OpenAI TTS la
+// primera vez que se pide y queda en disco. Los simulacros antiguos traen
+// su mp3 estático en el frontend y no pasan por aquí.
+const TTS_API_KEY = process.env.OPENAI_API_KEY || ''
+const AUDIO_CACHE_DIR = process.env.AUDIO_CACHE_DIR || path.join(__dirname, 'audio-cache')
+const SAFE_ID = /^[\w-]+$/
+const clipFile = (examId, clipId) => path.join(AUDIO_CACHE_DIR, examId, `${clipId}.mp3`)
+const ttsInFlight = new Map()
+
+// Un examen del pool real solo se ofrece si su audio puede servirse.
+function examUsable(exam) {
+  if (!needsGeneratedAudio(exam)) return true
+  if (TTS_API_KEY) return true
+  return Object.entries(audioClips(exam)).every(([clipId, c]) => c.staticUrl || fs.existsSync(clipFile(exam.id, clipId)))
+}
+
+function audioUrlFactory() {
+  const tokens = new Map()
+  return (examId, clipId) => {
+    if (!tokens.has(examId)) tokens.set(examId, jwt.sign({ scope: 'aud', e: examId }, JWT_SECRET, { expiresIn: '6h' }))
+    return `/api/pruefungen/audio/${examId}/${clipId}?t=${tokens.get(examId)}`
+  }
+}
+
+async function ttsSpeak(text, voice) {
+  const r = await fetch('https://api.openai.com/v1/audio/speech', {
+    method: 'POST',
+    headers: { Authorization: `Bearer ${TTS_API_KEY}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify({ model: 'tts-1', input: text, voice, response_format: 'mp3' }),
+  })
+  if (!r.ok) throw new Error(`tts ${r.status}`)
+  return Buffer.from(await r.arrayBuffer())
+}
+
+// Un clip = sus intervenciones sintetizadas (una voz por hablante, sin leer
+// las etiquetas «Mann:» / «Frau:») y concatenadas en un solo mp3.
+async function synthesizeClip(examId, clipId, transcript) {
+  const file = clipFile(examId, clipId)
+  if (fs.existsSync(file)) return file
+  const key = `${examId}/${clipId}`
+  if (!ttsInFlight.has(key)) {
+    ttsInFlight.set(key, (async () => {
+      const buffers = []
+      for (const seg of speechSegments(transcript)) buffers.push(await ttsSpeak(seg.text, seg.voice))
+      if (!buffers.length) throw new Error('empty transcript')
+      await fs.promises.mkdir(path.dirname(file), { recursive: true })
+      await fs.promises.writeFile(file + '.tmp', Buffer.concat(buffers))
+      await fs.promises.rename(file + '.tmp', file)
+      return file
+    })().finally(() => ttsInFlight.delete(key)))
+  }
+  return ttsInFlight.get(key)
+}
+
+app.get('/api/pruefungen/audio/:examId/:clipId', async (req, res) => {
+  try {
+    const { examId, clipId } = req.params
+    if (!SAFE_ID.test(examId) || !SAFE_ID.test(clipId)) return res.status(400).end()
+    let payload = null
+    try { payload = jwt.verify(String(req.query.t || ''), JWT_SECRET) } catch { /* inválido */ }
+    if (!payload || payload.scope !== 'aud' || payload.e !== examId) return res.status(403).json({ error: 'No autorizado.' })
+    const clip = getExam(examId) && audioClips(getExam(examId))[clipId]
+    if (!clip?.transcript) return res.status(404).json({ error: 'Audio no encontrado.' })
+    if (!fs.existsSync(clipFile(examId, clipId)) && !TTS_API_KEY) return res.status(503).json({ error: 'Audio no disponible.' })
+    const file = await synthesizeClip(examId, clipId, clip.transcript)
+    res.setHeader('Content-Type', 'audio/mpeg')
+    res.setHeader('Cache-Control', 'private, max-age=3600')
+    res.sendFile(file)
+  } catch (err) {
+    console.error('Exam audio error:', err.message)
+    res.status(502).json({ error: 'No se pudo generar el audio.' })
+  }
+})
+
+// Lección del curso que prepara cada módulo — para mandar a repasar tras un suspenso.
+const COURSE_INDEX_BY_LEVEL = { A1: getA1Index, A2: getA2Index, B1: getB1Index, B2: getB2Index, C1: getC1Index }
+const MODULE_WORD = { lesen: 'Lesen', hoeren: 'Hören', schreiben: 'Schreiben', sprechen: 'Sprechen' }
+function reviewLink(level, module) {
+  const lvl = String(level).toUpperCase()
+  const index = COURSE_INDEX_BY_LEVEL[lvl]?.()
+  if (!index) return null
+  const re = new RegExp(`(^|[^A-Za-zÄÖÜäöü])${MODULE_WORD[module]}([^A-Za-zÄÖÜäöü]|$)`)
+  const lesson = index.lessons.find(l => l.id < 90 && re.test(l.titel))
+  const base = `/deutsch${lvl.toLowerCase()}`
+  return lesson ? { path: `${base}/${lesson.id}`, titel: lesson.titel } : { path: base, titel: `Deutsch ${lvl}` }
+}
+
+// CATÁLOGO: metadatos de los exámenes (sin contenido).
+app.get('/api/pruefungen/catalog', authMiddleware, subscriptionMiddleware, (req, res) => {
+  res.json({ exams: catalog(examUsable), readinessMinPct: READINESS_MIN_SIM_PCT })
+})
+
+// Metadatos de un examen + los del examen real de su nivel y módulo.
+app.get('/api/pruefungen/exams/:id', authMiddleware, subscriptionMiddleware, (req, res) => {
+  const exam = getExam(req.params.id)
+  if (!exam) return res.status(404).json({ error: 'Examen no encontrado.' })
+  const real = realExamFor(exam.level, exam.module, examUsable)
+  res.json({ exam: catalogEntry(exam), real: real ? catalogEntry(real) : null, readinessMinPct: READINESS_MIN_SIM_PCT })
+})
+
+// START — crea el intento y entrega el examen SIN claves. En modo real el
+// examen lo elige el servidor (pool real del nivel y módulo).
 app.post('/api/pruefungen/attempts', authMiddleware, subscriptionMiddleware, blockIfReadOnly, async (req, res) => {
   try {
-    const { provider = 'goethe', level, module, examId, mode = 'simulation' } = req.body
-    if (!level || !module || !examId) {
-      return res.status(400).json({ error: 'Faltan datos.' })
-    }
-    // Guardarraíles solo para exámenes reales; simulacros pasan libre.
-    if (mode === 'real') {
-      const spec = examSpec(examId)
-      if (!spec) return res.status(404).json({ error: 'Examen no encontrado en el manifest.' })
+    const { examId, mode = 'simulation' } = req.body
+    let exam = getExam(examId)
+    if (!exam) return res.status(404).json({ error: 'Examen no encontrado.' })
+    const staff = isExamStaff(req.user.role)
 
+    // Un frontend antiguo en caché (PWA) aún lleva las preguntas del simulacro
+    // en su bundle y manda level/module: a ese no se le cambia el examen, o
+    // se le corregiría con las claves de otro. Se actualiza solo al recargar.
+    const legacyClient = req.body.level !== undefined || req.body.module !== undefined
+
+    if (mode === 'real') {
+      if (!legacyClient) exam = realExamFor(exam.level, exam.module, examUsable) || exam
       const gate = await assertCanStartRealAttempt({
         pool,
         userId: req.user.id,
-        level,
-        module,
+        level: exam.level,
+        module: exam.module,
         userLevel: req.user.level || 'A1',
+        isStaff: staff,
       })
       if (gate) return res.status(gate.status).json({ error: gate.error, code: gate.code })
+    } else if (poolOf(exam) !== 'simulation' && !staff) {
+      return res.status(403).json({ error: 'Este examen solo está disponible como examen real.' })
     }
 
     const [result] = await pool.query(
       `INSERT INTO schule_pruefungen_attempts (userId, provider, level, module, examId, mode)
        VALUES (?, ?, ?, ?, ?, ?)`,
-      [req.user.id, provider, level, module, examId, mode]
+      [req.user.id, exam.provider || 'goethe', exam.level, exam.module, exam.id, mode]
     )
-    res.json({ attemptId: result.insertId, startedAt: new Date().toISOString(), mode })
+    res.json({
+      attemptId: result.insertId,
+      startedAt: new Date().toISOString(),
+      mode,
+      exam: publicExam(exam, audioUrlFactory()),
+    })
   } catch (err) {
     console.error('Start attempt error:', err)
     res.status(500).json({ error: 'Error al iniciar el intento.' })
   }
 })
 
-// FINISH attempt — saves score, responses, feedback.
-// For mode='real' the client-supplied score is always discarded: Lesen/Hören
-// are recomputed against the answer manifest and Schreiben/Sprechen are
-// re-graded server-side from the submitted texts (AI cache → usually free).
-// Frozen attempts (used by a certificate) cannot be re-graded.
-app.post('/api/pruefungen/attempts/:id/finish', authMiddleware, subscriptionMiddleware, blockIfReadOnly, async (req, res) => {
+// Cerrar un simulacro de Schreiben/Sprechen consume IA: mismo tope diario
+// que las correcciones sueltas. El examen real nunca se bloquea por el tope.
+async function capIfProductiveSimulation(req, res, next) {
+  try {
+    const [rows] = await pool.query(
+      'SELECT module, mode FROM schule_pruefungen_attempts WHERE id = ? AND userId = ? LIMIT 1',
+      [parseInt(req.params.id), req.user.id]
+    )
+    const a = rows[0]
+    if (a && a.mode !== 'real' && (a.module === 'schreiben' || a.module === 'sprechen')) return aiDailyCap(req, res, next)
+  } catch { /* si falla la consulta, no bloquear */ }
+  next()
+}
+
+// FINISH — el servidor corrige TODO (objetivo + IA) a partir de las respuestas;
+// nunca acepta una nota del cliente. Simulacro: devuelve las soluciones.
+// Real: solo la nota por Teil y la corrección de Schreiben/Sprechen.
+app.post('/api/pruefungen/attempts/:id/finish', authMiddleware, subscriptionMiddleware, blockIfReadOnly, capIfProductiveSimulation, async (req, res) => {
   try {
     const attemptId = parseInt(req.params.id)
-    const { score, maxScore, responses, feedback } = req.body
+    const { responses, feedback } = req.body
 
     const [rows] = await pool.query(
       'SELECT id, userId, examId, mode, level, module, startedAt, frozenAt FROM schule_pruefungen_attempts WHERE id = ? LIMIT 1',
@@ -4226,51 +4373,46 @@ app.post('/api/pruefungen/attempts/:id/finish', authMiddleware, subscriptionMidd
     if (attempt.userId !== req.user.id) return res.status(403).json({ error: 'No autorizado.' })
     if (attempt.frozenAt) return res.status(409).json({ error: 'Este examen ya fue usado para emitir un certificado y no puede volver a corregirse.' })
 
-    let finalScore, finalMax
+    const exam = getExam(attempt.examId)
+    if (!exam) return res.status(500).json({ error: 'No se pudo puntuar el examen (examen no encontrado).' })
+
     if (attempt.mode === 'real') {
-      // Duration limit (client can't linger).
       const spec = examSpec(attempt.examId)
-      if (spec && !withinTimeLimit(attempt, spec)) {
+      if (!withinTimeLimit(attempt, spec)) {
         return res.status(400).json({
           error: `Tiempo máximo del examen superado (${spec.durationMinutes} min).`,
           code: 'duration_exceeded',
         })
       }
-      let canon
-      if (attempt.module === 'schreiben' || attempt.module === 'sprechen') {
-        if (!ANTHROPIC_API_KEY) return res.status(503).json({ error: 'Servicio de IA no disponible. Vuelve a intentarlo en unos minutos.' })
-        const who = { userId: req.user.id, userName: req.user.fullName || 'Student' }
-        try {
-          canon = await gradeProductiveReal(attempt, responses, (kind, t) => kind === 'writing-task'
-            ? gradeSchreibenCore({ level: t.level, taskType: t.taskType, taskPrompt: t.taskPrompt, submission: t.text, minWords: t.minWords }, who)
-            : gradeSprechenCore({ level: t.level, taskType: t.taskType, taskPrompt: t.taskPrompt, transcript: t.text, durationSeconds: t.durationSeconds }, who))
-        } catch (e) {
-          console.error('Real productive grading error:', e.message)
-          return res.status(503).json({ error: 'No se pudo corregir el examen ahora. Vuelve a pulsar «Prüfung abgeben» en unos minutos.', code: 'grading_unavailable' })
-        }
-      } else {
-        canon = canonicalRealScore(attempt, { score, maxScore, responses })
-      }
-      if (!canon) return res.status(500).json({ error: 'No se pudo puntuar el examen (manifest ausente).' })
-      finalScore = canon.score
-      finalMax = canon.maxScore
-    } else {
-      // Simulacros keep the legacy behaviour (client-supplied score).
-      if (typeof score !== 'number' || typeof maxScore !== 'number' || maxScore <= 0) {
-        return res.status(400).json({ error: 'Datos de puntuación inválidos.' })
-      }
-      finalScore = score
-      finalMax = maxScore
     }
 
+    const productive = (exam.parts || []).some(p => p.kind === 'writing-task' || p.kind === 'speaking-task')
+    if (productive && !ANTHROPIC_API_KEY) {
+      return res.status(503).json({ error: 'Servicio de IA no disponible. Vuelve a intentarlo en unos minutos.', code: 'grading_unavailable' })
+    }
+    const who = { userId: req.user.id, userName: req.user.fullName || 'Student' }
+    let graded
+    try {
+      graded = await gradeExam(exam, responses, (kind, t) => kind === 'writing-task'
+        ? gradeSchreibenCore({ level: t.level, taskType: t.taskType, taskPrompt: t.taskPrompt, submission: t.text, minWords: t.minWords }, who)
+        : gradeSprechenCore({ level: t.level, taskType: t.taskType, taskPrompt: t.taskPrompt, transcript: t.text, durationSeconds: t.durationSeconds }, who))
+    } catch (e) {
+      console.error('Exam grading error:', e.message)
+      return res.status(503).json({ error: 'No se pudo corregir el examen ahora. Vuelve a pulsar «Prüfung abgeben» en unos minutos.', code: 'grading_unavailable' })
+    }
+
+    const finalScore = graded.score
+    const finalMax = graded.maxScore || exam.maxScore || 1
     const durationSec = Math.round((Date.now() - new Date(attempt.startedAt).getTime()) / 1000)
     const passed = (finalScore / finalMax) >= (PRUEFUNG_PASS_PCT / 100) ? 1 : 0
+    // El detalle completo se guarda siempre (el equipo docente puede revisarlo).
+    const stored = { detail: graded.detail, ...(feedback?.supervision ? { supervision: feedback.supervision } : {}) }
 
     await pool.query(
       `UPDATE schule_pruefungen_attempts
        SET finishedAt = NOW(), score = ?, maxScore = ?, passed = ?, durationSeconds = ?, responses = ?, feedback = ?
        WHERE id = ?`,
-      [finalScore, finalMax, passed, durationSec, JSON.stringify(responses || null), JSON.stringify(feedback || null), attemptId]
+      [finalScore, finalMax, passed, durationSec, JSON.stringify(responses || null), JSON.stringify(stored), attemptId]
     )
     res.json({
       ok: true,
@@ -4279,6 +4421,9 @@ app.post('/api/pruefungen/attempts/:id/finish', authMiddleware, subscriptionMidd
       passed: !!passed,
       percentage: Math.round((finalScore / finalMax) * 100),
       mode: attempt.mode,
+      detail: studentDetail(attempt.mode, graded.detail),
+      partScores: partScores(exam, graded.detail),
+      review: reviewLink(exam.level, exam.module),
     })
   } catch (err) {
     console.error('Finish attempt error:', err)

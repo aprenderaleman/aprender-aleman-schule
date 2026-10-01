@@ -72,9 +72,14 @@ export default function CertificateStatus() {
           <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">
             Solo los exámenes en modo <strong>real</strong> cuentan para el certificado.
           </p>
-          {compensation && (
+          {compensation?.kind === 'global' && (
             <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">
               En {level} los módulos compensan: apruebas con una <strong>media del {compensation.avgPct}%</strong> y ningún módulo por debajo del {compensation.minModulePct}%.
+            </p>
+          )}
+          {compensation?.kind === 'light' && (
+            <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">
+              Cada módulo se aprueba con un <strong>60%</strong>. Un único módulo entre {compensation.minModulePct} y 59% también vale si tu media es del {compensation.avgPct}% o más.
             </p>
           )}
           {compensated && (
@@ -168,6 +173,20 @@ export function ModuleStatus({ level, module }) {
         <span className="font-bold">Modo real</span>
       </div>
       <p>Intentos: <strong>{status.attempts} / 3</strong> ({status.attemptsLeft} restantes)</p>
+      {status.readiness && !status.readiness.ready && (
+        <p className="inline-flex items-start gap-1 text-amber-700 dark:text-amber-300 font-bold">
+          <Lock size={12} className="mt-0.5 shrink-0" />
+          <span>
+            Para desbloquear el examen real, consigue al menos un {status.readiness.requiredPct}% en un simulacro de este módulo
+            {status.readiness.bestSimPct != null ? ` (tu mejor: ${status.readiness.bestSimPct}%)` : ''}.
+          </span>
+        </p>
+      )}
+      {status.readiness?.ready && status.readiness.bestSimPct != null && !status.passed && (
+        <p className="text-emerald-700 dark:text-emerald-300 inline-flex items-center gap-1">
+          <Check size={12} /> Preparado: simulacro al {status.readiness.bestSimPct}%
+        </p>
+      )}
       {status.passed && (
         <p className="text-emerald-700 dark:text-emerald-300 font-bold inline-flex items-center gap-1">
           <Check size={12} /> Ya aprobado ({status.bestPct}%)

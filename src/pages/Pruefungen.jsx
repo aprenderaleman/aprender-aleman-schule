@@ -9,8 +9,7 @@ import {
 import Navbar from '../components/Layout/Navbar'
 import Footer from '../components/Layout/Footer'
 import { useAuth } from '../context/AuthContext'
-import { getExamsFor, countsByModule } from '../data/pruefungen'
-import CertificateStatus from '../components/Pruefungen/CertificateStatus'
+import CertificateStatus, { useCertStatus } from '../components/Pruefungen/CertificateStatus'
 
 const API_URL = import.meta.env.VITE_API_URL || ''
 
@@ -298,15 +297,39 @@ function PruefungsWizard({ onComplete, initialError }) {
   )
 }
 
+// Texto de estado del examen real de un módulo en la tarjeta del panel.
+function realExamHint(real, cert) {
+  if (!real) return `Solo disponible para tu nivel actual${cert?.level ? ` (${cert.level})` : ''}.`
+  if (real.passed) return `Aprobado (${real.bestPct}%)`
+  if (real.readiness?.ready) return 'Preguntas nuevas · cuenta para el certificado'
+  const best = real.readiness?.bestSimPct
+  return `Se desbloquea con un simulacro al ${real.readiness?.requiredPct ?? 65}%${best != null ? ` · tu mejor: ${best}%` : ''}`
+}
+
 /* ==========================
    PRÜFUNGS-DASHBOARD
    ========================== */
 function PruefungsDashboard({ plan, onReset, onRefresh }) {
   const navigate = useNavigate()
+  const { getToken } = useAuth()
   const levelMeta = LEVEL_BY_CODE[plan.level] || LEVEL_BY_CODE.A1
   const progress = plan.progress || { lesen: 0, hoeren: 0, schreiben: 0, sprechen: 0 }
   const totalProgress = Math.round((progress.lesen + progress.hoeren + progress.schreiben + progress.sprechen) / 4)
-  const counts = countsByModule(plan.level)
+
+  // El catálogo (solo metadatos) viene del servidor: el contenido de los
+  // exámenes ya no viaja en el bundle.
+  const [catalog, setCatalog] = useState([])
+  useEffect(() => {
+    let cancelled = false
+    fetch(`${API_URL}/api/pruefungen/catalog`, { headers: { Authorization: `Bearer ${getToken()}` } })
+      .then(r => (r.ok ? r.json() : { exams: [] }))
+      .then(j => { if (!cancelled) setCatalog(j.exams || []) })
+      .catch(() => {})
+    return () => { cancelled = true }
+  }, [])
+  const { data: cert } = useCertStatus()
+  const simsFor = (module) => catalog.filter(e => e.level === plan.level && e.module === module && e.pool === 'simulation')
+  const counts = Object.fromEntries(MODULES.map(m => [m.id, simsFor(m.id).length]))
 
   const daysLeft = plan.examDate
     ? Math.max(0, Math.ceil((new Date(plan.examDate) - new Date()) / (1000 * 60 * 60 * 24)))
@@ -384,7 +407,8 @@ function PruefungsDashboard({ plan, onReset, onRefresh }) {
           {MODULES.map((m, i) => {
             const Icon = m.icon
             const score = progress[m.id] || 0
-            const exams = getExamsFor(plan.level, m.id)
+            const exams = simsFor(m.id)
+            const real = cert?.level === plan.level ? cert.modules?.[m.id] : null
             const hasContent = exams.length > 0
             return (
               <motion.div
@@ -417,34 +441,52 @@ function PruefungsDashboard({ plan, onReset, onRefresh }) {
                 </div>
                 <p className="text-xs text-gray-400 mb-3">{score}% bereit</p>
 
-                {/* Exam list — dos botones por examen para elegir modo sin abrir intro */}
+                {/* Simulacros (práctica) y, aparte, el examen real del módulo */}
                 {hasContent && (
                   <div className="space-y-2 pt-2 border-t border-gray-100 dark:border-gray-700">
                     {exams.map(ex => (
-                      <div key={ex.id} className="rounded-xl bg-gray-50 dark:bg-gray-700/50 p-2.5">
-                        <div className="mb-2 min-w-0">
+                      <div key={ex.id} className="rounded-xl bg-gray-50 dark:bg-gray-700/50 p-2.5 flex items-center gap-3">
+                        <div className="flex-1 min-w-0">
                           <p className="text-sm font-semibold text-gray-800 dark:text-gray-100 truncate">{ex.title}</p>
                           <p className="text-xs text-gray-500 dark:text-gray-400">
                             {ex.durationMinutes} min · {ex.maxScore} Punkte
                           </p>
                         </div>
-                        <div className="flex gap-2">
-                          <Link
-                            to={`/pruefungen/${ex.id}?mode=simulation`}
-                            className="flex-1 inline-flex items-center justify-center gap-1 text-xs font-bold py-1.5 px-2 rounded-lg bg-indigo-100 dark:bg-indigo-900/40 text-indigo-700 dark:text-indigo-300 hover:bg-indigo-200 transition"
-                          >
-                            <Play size={12} /> Simulacro
-                          </Link>
-                          <Link
-                            to={`/pruefungen/${ex.id}?mode=real`}
-                            className="flex-1 inline-flex items-center justify-center gap-1 text-xs font-bold py-1.5 px-2 rounded-lg bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:from-purple-700 hover:to-pink-700 transition shadow-sm"
-                            title="Cuenta para el certificado. 24 h entre intentos, máx 3."
-                          >
-                            <Trophy size={12} /> Real
-                          </Link>
-                        </div>
+                        <Link
+                          to={`/pruefungen/${ex.id}?mode=simulation`}
+                          className="shrink-0 inline-flex items-center justify-center gap-1 text-xs font-bold py-1.5 px-3 rounded-lg bg-indigo-100 dark:bg-indigo-900/40 text-indigo-700 dark:text-indigo-300 hover:bg-indigo-200 transition"
+                        >
+                          <Play size={12} /> Simulacro
+                        </Link>
                       </div>
                     ))}
+
+                    {/* Examen real: preguntas nuevas, se desbloquea con un buen simulacro */}
+                    <div className="rounded-xl border-2 border-purple-200 dark:border-purple-800 bg-purple-50/60 dark:bg-purple-900/10 p-2.5">
+                      <div className="flex items-center gap-3">
+                        <div className="flex-1 min-w-0">
+                          <p className="text-sm font-bold text-purple-800 dark:text-purple-200 flex items-center gap-1.5">
+                            <Trophy size={13} /> Examen real
+                          </p>
+                          <p className="text-xs text-gray-600 dark:text-gray-300">
+                            {realExamHint(real, cert)}
+                          </p>
+                        </div>
+                        {real?.readiness?.ready ? (
+                          <Link
+                            to={`/pruefungen/${exams[0].id}?mode=real`}
+                            className="shrink-0 inline-flex items-center justify-center gap-1 text-xs font-bold py-1.5 px-3 rounded-lg bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:from-purple-700 hover:to-pink-700 transition shadow-sm"
+                            title="Cuenta para el certificado. 24 h entre intentos, máx 3."
+                          >
+                            <Trophy size={12} /> Empezar
+                          </Link>
+                        ) : (
+                          <span className="shrink-0 inline-flex items-center gap-1 text-xs font-bold py-1.5 px-3 rounded-lg bg-gray-200 dark:bg-gray-700 text-gray-500 dark:text-gray-400">
+                            <Lock size={12} /> Bloqueado
+                          </span>
+                        )}
+                      </div>
+                    </div>
                   </div>
                 )}
               </motion.div>

@@ -107,7 +107,6 @@ assets/                     Fuentes para generar iconos con
 capacitor.config.ts         Config central (appId, WebView URL, plugins)
 
 scripts/
-  build-pruefungen-answers.mjs  Prebuild: genera server/pruefungen-answers.json
 
 src/utils/
   platform.js               isNative / isIOS / isAndroid / isWeb
@@ -124,7 +123,7 @@ src/utils/
 
 Cuando cambia código del frontend:
 ```bash
-npm run build       # incluye prebuild (sync-pruefungen)
+npm run build       # los exámenes viven solo en el servidor (server/pruefungen/data)
 npx cap sync        # copia dist/ + config a las plataformas
 npx cap run android # o open ios en Xcode
 ```

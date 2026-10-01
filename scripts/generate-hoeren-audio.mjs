@@ -43,7 +43,7 @@ function nextVoice() {
 import { pathToFileURL } from 'node:url';
 
 function dataUrl(filename) {
-  return pathToFileURL(path.join(PROJECT_ROOT, 'src', 'data', 'pruefungen', filename)).href;
+  return pathToFileURL(path.join(PROJECT_ROOT, 'server', 'pruefungen', 'data', filename)).href;
 }
 
 const { goetheA1HoerenExams } = await import(dataUrl('goethe-a1-hoeren.js'));

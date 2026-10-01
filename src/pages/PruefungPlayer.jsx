@@ -9,7 +9,6 @@ import {
 import Navbar from '../components/Layout/Navbar'
 import { useAuth } from '../context/AuthContext'
 import { useWakeLock } from '../hooks/useWakeLock'
-import { getExamById, gradeObjectiveExam } from '../data/pruefungen'
 import { isSpeechRecognitionSupported, startRecognition, speak } from '../utils/speech'
 import { ModuleStatus } from '../components/Pruefungen/CertificateStatus'
 
@@ -41,7 +40,7 @@ function countTotalItems(exam) {
     // matching cuenta por ítem, no por bloque — así "Aufgaben" y el progreso
     // cuadran con la puntuación (p. ej. 25 Aufgaben ↔ 25 Punkte en B1 Lesen).
     if (Array.isArray(part.questions)) {
-      for (const q of part.questions) n += q.type === 'matching' ? Object.keys(q.correct).length : 1
+      for (const q of part.questions) n += q.type === 'matching' ? q.items.length : 1
     }
     else if (part.kind === 'formular') n += part.fields.length
     else if (part.kind === 'writing-task') n += 1
@@ -57,7 +56,7 @@ function countAnswered(exam, responses) {
       for (const q of part.questions) {
         const r = responses[q.id]
         if (q.type === 'matching') {
-          n += Object.keys(r || {}).filter(k => r[k] !== undefined && k in q.correct).length
+          n += q.items.filter(it => r && r[it.id] !== undefined).length
         } else if (r !== undefined) {
           n++
         }
@@ -78,14 +77,61 @@ function countAnswered(exam, responses) {
 /* ==========================
    Main Player
    ========================== */
+// El contenido de los exámenes vive solo en el servidor. Este componente
+// pide los metadatos (título, duración…); el examen en sí —sin claves— llega
+// al iniciar el intento, y la corrección la hace siempre el servidor.
 export default function PruefungPlayer() {
   const { examId } = useParams()
+  const { getToken } = useAuth()
+  const [meta, setMeta] = useState(undefined) // undefined = cargando · null = no existe
+
+  useEffect(() => {
+    let cancelled = false
+    setMeta(undefined)
+    fetch(`${API_URL}/api/pruefungen/exams/${examId}`, { headers: { Authorization: `Bearer ${getToken()}` } })
+      .then(r => (r.ok ? r.json() : null))
+      .then(j => { if (!cancelled) setMeta(j && j.exam ? j : null) })
+      .catch(() => { if (!cancelled) setMeta(null) })
+    return () => { cancelled = true }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [examId])
+
+  if (meta === undefined) {
+    return (
+      <div className="min-h-screen bg-background">
+        <Navbar />
+        <div className="flex items-center justify-center py-32">
+          <Loader2 size={32} className="animate-spin text-indigo-500" />
+        </div>
+      </div>
+    )
+  }
+  if (!meta) {
+    return (
+      <div className="min-h-screen bg-background">
+        <Navbar />
+        <div className="max-w-2xl mx-auto px-4 py-20 text-center">
+          <AlertTriangle size={48} className="text-orange-500 mx-auto mb-4" />
+          <h1 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-2">Prüfung nicht gefunden</h1>
+          <p className="text-gray-500 dark:text-gray-400 mb-6">Diese Prüfung existiert nicht oder wurde noch nicht veröffentlicht.</p>
+          <Link to="/pruefungen" className="inline-flex items-center gap-2 px-5 py-2.5 bg-indigo-600 text-white font-bold rounded-xl hover:bg-indigo-700 transition">
+            <ArrowLeft size={16} /> Zurück zu Prüfungen
+          </Link>
+        </div>
+      </div>
+    )
+  }
+  return <PlayerInner key={examId} meta={meta} />
+}
+
+function PlayerInner({ meta }) {
   const navigate = useNavigate()
   const { getToken } = useAuth()
-  const exam = useMemo(() => getExamById(examId), [examId])
+  // `exam` es el examen que se está haciendo (llega del servidor al empezar).
+  const [exam, setExam] = useState(null)
 
   // Keep the screen awake during the exam
-  useWakeLock(!!exam)
+  useWakeLock(true)
 
   const [searchParams] = useSearchParams()
   const [phase, setPhase] = useState('intro') // intro | running | results
@@ -218,21 +264,9 @@ export default function PruefungPlayer() {
     await uploadChainRef.current
   }
 
-  if (!exam) {
-    return (
-      <div className="min-h-screen bg-background">
-        <Navbar />
-        <div className="max-w-2xl mx-auto px-4 py-20 text-center">
-          <AlertTriangle size={48} className="text-orange-500 mx-auto mb-4" />
-          <h1 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-2">Prüfung nicht gefunden</h1>
-          <p className="text-gray-500 dark:text-gray-400 mb-6">Diese Prüfung existiert nicht oder wurde noch nicht veröffentlicht.</p>
-          <Link to="/pruefungen" className="inline-flex items-center gap-2 px-5 py-2.5 bg-indigo-600 text-white font-bold rounded-xl hover:bg-indigo-700 transition">
-            <ArrowLeft size={16} /> Zurück zu Prüfungen
-          </Link>
-        </div>
-      </div>
-    )
-  }
+  // En la portada se muestran los datos del examen que toca según el modo:
+  // el simulacro elegido o el examen real de ese nivel y módulo.
+  const info = examMode === 'real' ? (meta.real || meta.exam) : meta.exam
 
   /* Start countdown when phase becomes 'running' */
   useEffect(() => {
@@ -276,21 +310,16 @@ export default function PruefungPlayer() {
       const res = await fetch(`${API_URL}/api/pruefungen/attempts`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${getToken()}` },
-        body: JSON.stringify({
-          provider: exam.provider,
-          level: exam.level,
-          module: exam.module,
-          examId: exam.id,
-          mode: examMode,
-        }),
+        body: JSON.stringify({ examId: meta.exam.id, mode: examMode }),
       })
       if (!res.ok) {
         const err = await res.json().catch(() => ({}))
         throw new Error(err.error || 'Konnte nicht starten')
       }
       const data = await res.json()
+      setExam(data.exam)
       setAttemptId(data.attemptId)
-      setSecondsLeft(exam.durationMinutes * 60)
+      setSecondsLeft(data.exam.durationMinutes * 60)
       setPhase('running')
       setPartIdx(0)
       setResponses({})
@@ -303,7 +332,22 @@ export default function PruefungPlayer() {
     }
   }
 
-  const handleSubmit = async () => {
+  // `auto` = entrega forzada por el temporizador (sin preguntar nada).
+  const handleSubmit = async (auto = false) => {
+    if (grading) return
+    // Aviso antes de entregar un texto vacío o por debajo del mínimo: es el
+    // despiste que más puntos cuesta en Schreiben.
+    if (!auto) {
+      const short = []
+      for (const part of exam.parts) {
+        if (part.kind !== 'writing-task') continue
+        const text = (responses[part.id] || '').trim()
+        const words = text ? text.split(/\s+/).filter(Boolean).length : 0
+        if (!words) short.push(`${part.title}: noch kein Text`)
+        else if (part.minWords && words < part.minWords) short.push(`${part.title}: ${words} Wörter (Minimum ${part.minWords})`)
+      }
+      if (short.length && !window.confirm(`Achtung:\n\n${short.join('\n')}\n\nMöchtest du trotzdem abgeben?`)) return
+    }
     if (timerRef.current) clearInterval(timerRef.current)
     setGrading(true)
     setError(null)
@@ -311,212 +355,29 @@ export default function PruefungPlayer() {
     // antes de dar el intento por terminado.
     try { await stopRecordingAndFlush() } catch { /* la nota no depende del vídeo */ }
     try {
-      // Objective grading (Lesen / Hören questions)
-      const objective = gradeObjectiveExam(exam, responses)
-
-      // Subjective + formular grading
-      const writingFeedback = {}
-      let extraScore = 0
-      let extraMax = 0
-      let combinedDetail = [...objective.detail]
-
-      for (const part of exam.parts) {
-        if (part.kind === 'formular') {
-          const userVals = responses[part.id] || {}
-          let earned = 0
-          const fieldDetails = []
-          for (const f of part.fields) {
-            const userVal = (userVals[f.id] || '').trim().toLowerCase().replace(/\s+/g, ' ')
-            const ok = (f.expected || []).some(exp => {
-              const e = String(exp).trim().toLowerCase().replace(/\s+/g, ' ')
-              if (!userVal) return false
-              if (userVal === e) return true
-              // Tolerancia parcial solo con longitud suficiente: sin el mínimo,
-              // una sola letra contenida en el valor esperado puntuaba como correcta.
-              return userVal.length >= 4 && (e.includes(userVal) || userVal.includes(e))
-            })
-            if (ok) earned += f.points || 1
-            fieldDetails.push({ id: f.id, label: f.label, user: userVals[f.id] || '', expected: f.expected, ok, points: f.points || 1 })
-          }
-          const possible = part.fields.reduce((s, f) => s + (f.points || 1), 0)
-          extraScore += earned
-          extraMax += possible
-          combinedDetail.push({
-            partId: part.id,
-            type: 'formular',
-            earned,
-            possible,
-            fields: fieldDetails,
-          })
-        }
-
-        if (part.kind === 'speaking-task') {
-          const v = responses[part.id]
-          const possible = part.maxScore || 25
-          extraMax += possible
-          if (!v || !v.transcript) {
-            combinedDetail.push({
-              partId: part.id,
-              type: 'speaking-task',
-              earned: 0,
-              possible,
-              skipped: true,
-            })
-            continue
-          }
-          try {
-            // Transcript is captured live in the browser via Web Speech
-            // (see SpeakingTaskView) — no server-side transcription step.
-            const transcript = v.transcript
-
-            if (!transcript || !transcript.trim()) {
-              combinedDetail.push({
-                partId: part.id,
-                type: 'speaking-task',
-                earned: 0,
-                possible,
-                error: 'Keine Sprache erkannt.',
-              })
-              continue
-            }
-
-            // Grade
-            const gRes = await fetch(`${API_URL}/api/pruefungen/grade-sprechen`, {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${getToken()}` },
-              body: JSON.stringify({
-                level: exam.level,
-                taskType: part.taskType,
-                taskPrompt: part.taskPrompt + (part.bullets ? '\n\nPunkte:\n' + part.bullets.map(b => `- ${b}`).join('\n') : ''),
-                transcript,
-                durationSeconds: v.durationSeconds || 0,
-              }),
-            })
-            if (!gRes.ok) throw new Error('KI-Bewertung fehlgeschlagen')
-            const aiResult = await gRes.json()
-            const earned = Math.round((aiResult.total / 100) * possible)
-            extraScore += earned
-            writingFeedback[part.id] = aiResult
-            combinedDetail.push({
-              partId: part.id,
-              type: 'speaking-task',
-              earned,
-              possible,
-              transcript,
-              durationSeconds: v.durationSeconds || 0,
-              ai: aiResult,
-            })
-          } catch (e) {
-            combinedDetail.push({
-              partId: part.id,
-              type: 'speaking-task',
-              earned: 0,
-              possible,
-              error: e.message,
-            })
-          }
-        }
-
-        if (part.kind === 'writing-task') {
-          const submission = (responses[part.id] || '').trim()
-          const possible = part.maxScore || 25
-          extraMax += possible
-          if (!submission) {
-            combinedDetail.push({
-              partId: part.id,
-              type: 'writing-task',
-              earned: 0,
-              possible,
-              skipped: true,
-            })
-            continue
-          }
-          // Call AI grader
-          try {
-            const res = await fetch(`${API_URL}/api/pruefungen/grade-schreiben`, {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${getToken()}` },
-              body: JSON.stringify({
-                level: exam.level,
-                taskType: part.taskType,
-                taskPrompt: part.taskPrompt + (part.bullets ? '\n\nPunkte:\n' + part.bullets.map(b => `- ${b}`).join('\n') : ''),
-                submission,
-                minWords: part.minWords,
-              }),
-            })
-            if (!res.ok) throw new Error('AI-Bewertung fehlgeschlagen')
-            const aiResult = await res.json()
-            // Map AI total (0-100) to part.maxScore
-            const earned = Math.round((aiResult.total / 100) * possible)
-            extraScore += earned
-            writingFeedback[part.id] = aiResult
-            combinedDetail.push({
-              partId: part.id,
-              type: 'writing-task',
-              earned,
-              possible,
-              ai: aiResult,
-            })
-          } catch (e) {
-            combinedDetail.push({
-              partId: part.id,
-              type: 'writing-task',
-              earned: 0,
-              possible,
-              error: e.message,
-            })
-          }
-        }
-      }
-
-      const totalScore = objective.score + extraScore
-      const totalMax = objective.maxScore + extraMax
-      const percentage = totalMax > 0 ? Math.round((totalScore / totalMax) * 100) : 0
-      const passed = percentage >= 60
-      const finalResult = {
-        score: totalScore,
-        maxScore: totalMax,
-        percentage,
-        passed,
-        detail: combinedDetail,
-        writingFeedback,
-      }
-
-      // Speaking-task responses are already { transcript, durationSeconds }
-      // — no Blobs to strip since we now transcribe in the browser.
-      const cleanResponses = { ...responses }
-      if (attemptId) {
-        const finishRes = await fetch(`${API_URL}/api/pruefungen/attempts/${attemptId}/finish`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${getToken()}` },
-          body: JSON.stringify({
-            score: finalResult.score,
-            maxScore: finalResult.maxScore,
-            responses: cleanResponses,
-            feedback: {
-              detail: combinedDetail,
-              writingFeedback,
-              ...(examMode === 'real'
-                ? { supervision: { recorded: true, events: supervisionRef.current } }
-                : {}),
-            },
-          }),
-        })
-        // En modo real la nota que cuenta es la del servidor: si no se pudo
-        // guardar, el alumno debe poder reenviar en vez de ver un resultado
-        // que no quedó registrado.
-        if (examMode === 'real') {
-          const saved = await finishRes.json().catch(() => ({}))
-          if (!finishRes.ok) throw new Error(saved.error || 'No se pudo guardar el examen. Vuelve a pulsar «Prüfung abgeben».')
-          if (typeof saved.score === 'number') {
-            finalResult.score = saved.score
-            finalResult.maxScore = saved.maxScore
-            finalResult.percentage = saved.percentage
-            finalResult.passed = saved.passed
-          }
-        }
-      }
-      setResult(finalResult)
+      const res = await fetch(`${API_URL}/api/pruefungen/attempts/${attemptId}/finish`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${getToken()}` },
+        body: JSON.stringify({
+          responses,
+          feedback: examMode === 'real'
+            ? { supervision: { recorded: true, events: supervisionRef.current } }
+            : {},
+        }),
+      })
+      const saved = await res.json().catch(() => ({}))
+      // Si no se pudo corregir o guardar, el alumno debe poder reenviar.
+      if (!res.ok) throw new Error(saved.error || 'No se pudo corregir el examen. Vuelve a pulsar «Prüfung abgeben».')
+      setResult({
+        score: saved.score,
+        maxScore: saved.maxScore,
+        percentage: saved.percentage,
+        passed: saved.passed,
+        detail: saved.detail || [],
+        partScores: saved.partScores || [],
+        review: saved.review || null,
+        responses,
+      })
       setPhase('results')
       stopCamera()
       window.scrollTo(0, 0)
@@ -529,14 +390,14 @@ export default function PruefungPlayer() {
 
   // Mantener siempre la versión más reciente de handleSubmit disponible
   // para el intervalo del temporizador (ver submitRef arriba).
-  useEffect(() => { submitRef.current = handleSubmit })
+  useEffect(() => { submitRef.current = () => handleSubmit(true) })
 
   const setAnswer = (qid, value) => {
     setResponses(prev => ({ ...prev, [qid]: value }))
   }
 
-  const totalQuestions = useMemo(() => countTotalItems(exam), [exam])
-  const answeredCount = useMemo(() => countAnswered(exam, responses), [exam, responses])
+  const totalQuestions = useMemo(() => (exam ? countTotalItems(exam) : info.items), [exam, info])
+  const answeredCount = useMemo(() => (exam ? countAnswered(exam, responses) : 0), [exam, responses])
 
   /* ───── INTRO PHASE ───── */
   if (phase === 'intro') {
@@ -549,15 +410,15 @@ export default function PruefungPlayer() {
           </Link>
           <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="bg-white dark:bg-gray-800 rounded-2xl border-2 border-indigo-200 dark:border-indigo-800 p-6 md:p-8">
             <div className="inline-flex items-center gap-2 bg-indigo-100 dark:bg-indigo-900/40 text-indigo-700 dark:text-indigo-300 px-3 py-1 rounded-full text-xs font-bold mb-3">
-              <BookOpen size={12} /> Zertifikat {exam.level} · {moduleLabel(exam.module)}
+              <BookOpen size={12} /> Zertifikat {info.level} · {moduleLabel(info.module)}
             </div>
-            <h1 className="text-2xl md:text-3xl font-extrabold text-gray-800 dark:text-gray-100 mb-2">{exam.title}</h1>
-            {exam.description && <p className="text-gray-500 dark:text-gray-400 mb-6">{exam.description}</p>}
+            <h1 className="text-2xl md:text-3xl font-extrabold text-gray-800 dark:text-gray-100 mb-2">{info.title}</h1>
+            {info.description && <p className="text-gray-500 dark:text-gray-400 mb-6">{info.description}</p>}
 
             <div className="grid grid-cols-3 gap-3 mb-6">
-              <Stat label="Dauer" value={`${exam.durationMinutes} min`} />
+              <Stat label="Dauer" value={`${info.durationMinutes} min`} />
               <Stat label="Aufgaben" value={totalQuestions} />
-              <Stat label="Bestanden ab" value={`${exam.passScore}/${exam.maxScore}`} />
+              <Stat label="Bestanden ab" value={`${info.passScore}/${info.maxScore}`} />
             </div>
 
             {/* Modus-Auswahl: Simulacro vs Examen real */}
@@ -577,7 +438,7 @@ export default function PruefungPlayer() {
                   <span className="font-bold text-gray-800 dark:text-gray-100">Simulacro</span>
                 </div>
                 <p className="text-xs text-gray-600 dark:text-gray-300">
-                  Práctica ilimitada. No cuenta para el certificado. Sirve para prepararte.
+                  Práctica ilimitada con soluciones. Con un {meta.readinessMinPct || 65}% desbloqueas el examen real.
                 </p>
               </button>
               <button
@@ -595,14 +456,14 @@ export default function PruefungPlayer() {
                   <span className="font-bold text-gray-800 dark:text-gray-100">Examen real</span>
                 </div>
                 <p className="text-xs text-gray-600 dark:text-gray-300">
-                  Cuenta para el certificado. 24 h de espera entre intentos, máx. 3.
+                  Preguntas nuevas. Cuenta para el certificado. 24 h entre intentos, máx. 3.
                 </p>
               </button>
             </div>
 
             {examMode === 'real' && (
               <div className="mb-4">
-                <ModuleStatus level={exam.level} module={exam.module} />
+                <ModuleStatus level={info.level} module={info.module} />
               </div>
             )}
 
@@ -665,12 +526,12 @@ export default function PruefungPlayer() {
                 <AlertTriangle size={14} /> Vor dem Start lesen
               </p>
               <ul className="text-sm text-amber-800 dark:text-amber-200 space-y-1 list-disc list-inside">
-                <li>Du hast {exam.durationMinutes} Minuten Zeit. Der Test endet automatisch.</li>
+                <li>Du hast {info.durationMinutes} Minuten Zeit. Der Test endet automatisch.</li>
                 <li>Beantworte alle Aufgaben — falsche Antworten zählen 0 Punkte, nicht negativ.</li>
                 <li>Schließe den Tab während der Prüfung nicht — deine Antworten gehen sonst verloren.</li>
                 <li>Du kannst zwischen den Teilen frei wechseln, bevor du abgibst.</li>
                 {examMode === 'real' && (
-                  <li className="font-bold">Modo real: solo tu nivel actual, con cooldown 24 h y máx 3 intentos.</li>
+                  <li className="font-bold">Modo real: solo tu nivel actual, con cooldown 24 h y máx 3 intentos. Al terminar verás tu nota por partes, sin las soluciones.</li>
                 )}
                 {examMode === 'real' && (
                   <li className="font-bold">La cámara debe permanecer encendida todo el examen; si se apaga, el intento queda marcado.</li>
@@ -733,15 +594,67 @@ export default function PruefungPlayer() {
             <p className="text-sm opacity-90 mt-3">
               {result.passed
                 ? `Glückwunsch! Du hast die Bestehensgrenze von ${exam.passScore}/${exam.maxScore} überschritten.`
-                : `Du brauchst mindestens ${exam.passScore}/${exam.maxScore} (60%), um zu bestehen. Schau dir die Lösungen an und versuche es noch einmal.`}
+                : examMode === 'real'
+                  ? `Du brauchst mindestens ${exam.passScore}/${exam.maxScore} (60%), um zu bestehen. Wiederhole die schwachen Teile und versuche es noch einmal.`
+                  : `Du brauchst mindestens ${exam.passScore}/${exam.maxScore} (60%), um zu bestehen. Schau dir die Lösungen an und versuche es noch einmal.`}
             </p>
           </motion.div>
 
+          {/* Qué repasar: la lección del curso que prepara este módulo */}
+          {!result.passed && result.review && (
+            <Link
+              to={result.review.path}
+              className="block mb-6 rounded-2xl border-2 border-indigo-200 dark:border-indigo-800 bg-indigo-50 dark:bg-indigo-900/20 p-4 hover:border-indigo-400 transition"
+            >
+              <p className="text-xs font-bold uppercase tracking-wide text-indigo-600 dark:text-indigo-300 mb-1">So bereitest du dich vor</p>
+              <p className="text-sm font-bold text-gray-800 dark:text-gray-100 flex items-center gap-1">
+                {result.review.titel} <ChevronRight size={14} />
+              </p>
+              <p className="text-xs text-gray-600 dark:text-gray-300 mt-1">
+                Repasa esta lección y su cuaderno de ejercicios, y vuelve a hacer el simulacro antes del siguiente intento.
+              </p>
+            </Link>
+          )}
+
+          {/* Nota por Teil — siempre; en el examen real es todo lo que se enseña de la parte objetiva */}
+          {result.partScores.length > 0 && (
+            <div className="bg-white dark:bg-gray-800 rounded-2xl p-5 border border-gray-200 dark:border-gray-700 mb-6">
+              <h2 className="font-bold text-gray-800 dark:text-gray-100 text-lg mb-3">Ergebnis pro Teil</h2>
+              <div className="space-y-2">
+                {result.partScores.map(ps => {
+                  const pct = ps.possible ? Math.round((ps.earned / ps.possible) * 100) : 0
+                  return (
+                    <div key={ps.partId}>
+                      <div className="flex items-center justify-between text-sm mb-1">
+                        <span className="font-medium text-gray-700 dark:text-gray-200">{ps.title}</span>
+                        <span className="font-bold text-gray-800 dark:text-gray-100">{ps.earned} / {ps.possible}</span>
+                      </div>
+                      <div className="h-2 bg-gray-100 dark:bg-gray-700 rounded-full overflow-hidden">
+                        <div className={`h-full ${pct >= 60 ? 'bg-emerald-500' : 'bg-orange-500'}`} style={{ width: `${pct}%` }} />
+                      </div>
+                    </div>
+                  )
+                })}
+              </div>
+              {examMode === 'real' && (
+                <p className="text-xs text-gray-500 dark:text-gray-400 mt-3">
+                  En el examen real no se muestran las soluciones: así cada intento vale de verdad.
+                </p>
+              )}
+            </div>
+          )}
+
           {/* Per-question feedback */}
-          <h2 className="font-bold text-gray-800 dark:text-gray-100 text-lg mb-3">Detaillierte Lösungen</h2>
+          {result.detail.length > 0 && (
+            <h2 className="font-bold text-gray-800 dark:text-gray-100 text-lg mb-3">
+              {examMode === 'real' ? 'Korrektur' : 'Detaillierte Lösungen'}
+            </h2>
+          )}
           <div className="space-y-4 mb-6">
             {exam.parts.map((part) => {
               const partDetail = result.detail.find(d => d.partId === part.id && (d.type === 'formular' || d.type === 'writing-task' || d.type === 'speaking-task'))
+              // En modo real solo llega el detalle de Schreiben/Sprechen.
+              if (!result.detail.some(d => d.partId === part.id)) return null
               return (
                 <div key={part.id} className="bg-white dark:bg-gray-800 rounded-2xl p-5 border border-gray-200 dark:border-gray-700">
                   <h3 className="font-bold text-gray-800 dark:text-gray-100 mb-3">{part.title}</h3>
@@ -773,7 +686,7 @@ export default function PruefungPlayer() {
 
           <div className="flex gap-3">
             <button
-              onClick={() => { setPhase('intro'); setResult(null); setResponses({}); setAttemptId(null) }}
+              onClick={() => { setPhase('intro'); setResult(null); setResponses({}); setAttemptId(null); setExam(null) }}
               className="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl border-2 border-indigo-300 text-indigo-600 font-bold hover:bg-indigo-50"
             >
               <RotateCcw size={16} /> Wiederholen
@@ -869,11 +782,11 @@ export default function PruefungPlayer() {
             </button>
           ) : (
             <button
-              onClick={handleSubmit}
+              onClick={() => handleSubmit()}
               disabled={grading}
               className="flex items-center gap-1 px-6 py-2.5 rounded-xl text-sm font-bold bg-gradient-to-r from-green-600 to-emerald-600 text-white hover:from-green-700 hover:to-emerald-700 shadow-md disabled:opacity-60"
             >
-              {grading ? 'Wird abgegeben…' : 'Prüfung abgeben'} <CheckCircle2 size={16} />
+              {grading ? 'Wird korrigiert…' : 'Prüfung abgeben'} <CheckCircle2 size={16} />
             </button>
           )}
         </div>
@@ -1025,6 +938,7 @@ function AudioContext({ ctx }) {
   const allowed = ctx.allowedPlays || 1
   const [playsLeft, setPlaysLeft] = useState(allowed)
   const [showTranscript, setShowTranscript] = useState(false)
+  const [audioFailed, setAudioFailed] = useState(false)
   const audioRef = useRef(null)
 
   const handlePlay = () => {
@@ -1051,20 +965,22 @@ function AudioContext({ ctx }) {
         </div>
       </div>
 
-      {ctx.audioUrl ? (
+      {ctx.audioUrl && !audioFailed ? (
         <audio
           ref={audioRef}
-          src={ctx.audioUrl}
+          src={ctx.audioUrl.startsWith('/api/') ? `${API_URL}${ctx.audioUrl}` : ctx.audioUrl}
           controls
           controlsList="nodownload noplaybackrate"
+          preload="auto"
           onPlay={handlePlay}
           onEnded={handleEnded}
+          onError={() => setAudioFailed(true)}
           className="w-full"
         />
       ) : (
         <div className="bg-white/60 dark:bg-gray-800/60 rounded-xl p-4 text-center">
-          <p className="text-xs text-gray-600 dark:text-gray-300 italic">
-            Audio wird gerade aufgenommen. Bis dahin kannst du das Transkript lesen.
+          <p className="text-xs text-red-600 dark:text-red-300 font-bold">
+            Das Audio konnte nicht geladen werden. Lade die Seite neu oder versuche es in ein paar Minuten noch einmal.
           </p>
         </div>
       )}

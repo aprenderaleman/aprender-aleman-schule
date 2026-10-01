@@ -10,7 +10,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const dataDir = path.resolve(__dirname, '..', 'src', 'data', 'pruefungen');
+const dataDir = path.resolve(__dirname, '..', 'server', 'pruefungen', 'data');
 
 const mapping = {
   'goethe-a1-hoeren.js': {

@@ -26,3 +26,7 @@ ios/.xcode.env.local
 ios/App/App.xcworkspace/xcuserdata/
 ios/App/App.xcodeproj/xcuserdata/
 .env.development.local
+
+# Datos generados en el servidor (nunca al repo)
+server/recordings/
+server/audio-cache/
