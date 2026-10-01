@@ -648,3 +648,162 @@
   font-size: 13.5px; padding: 4px 11px; border: 1px solid var(--c1-gold-line);
   border-radius: 999px; background: var(--c1-gold-soft);
 }
+
+/* ─────────────────────────────────────────────────────────────
+ * Modo presentación — proyector / clase en vivo
+ * ───────────────────────────────────────────────────────────── */
+
+/* Botón de lanzamiento en la cabecera de la lección (solo teachers) */
+.c1-pres-launch {
+  display: inline-flex; align-items: center; gap: 7px;
+  font: inherit; font-size: 13px; font-weight: 700;
+  padding: 7px 14px; margin: 8px 0 14px;
+  border-radius: 999px; cursor: pointer;
+  background: var(--c1-gold); color: #fff; border: 1px solid var(--c1-gold);
+  transition: filter 120ms, transform 120ms;
+}
+.c1-pres-launch:hover { filter: brightness(1.08); transform: translateY(-1px); }
+.c1-pres-launch span { font-size: 10px; }
+
+/* Overlay fullscreen */
+.c1-pres {
+  position: fixed; inset: 0; z-index: 1000;
+  background: #0f1115; color: #f5f1e8;
+  display: flex; flex-direction: column;
+  font-size: 1.35rem; line-height: 1.55;
+}
+
+.c1-pres-bar {
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 3px; background: rgba(255,255,255,.08); z-index: 2;
+}
+.c1-pres-bar-fill {
+  height: 100%; background: var(--c1-gold);
+  transition: width 220ms ease;
+}
+
+.c1-pres-head {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 32px 8px; z-index: 2;
+}
+.c1-pres-title { min-width: 0; }
+.c1-pres-chip {
+  display: inline-block; padding: 4px 12px;
+  font-size: 13px; font-weight: 700; letter-spacing: .05em;
+  text-transform: uppercase; color: var(--c1-gold);
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.08); border-radius: 999px;
+}
+.c1-pres-meta { display: flex; align-items: center; gap: 14px; }
+.c1-pres-count {
+  font-family: var(--c1-mono); font-size: 13px;
+  color: rgba(255,255,255,.55); letter-spacing: .05em;
+}
+.c1-pres-btn {
+  font: inherit; font-size: 18px; line-height: 1;
+  width: 36px; height: 36px; border-radius: 50%;
+  background: rgba(255,255,255,.06); color: #fff;
+  border: 1px solid rgba(255,255,255,.1); cursor: pointer;
+}
+.c1-pres-btn:hover { background: rgba(255,255,255,.12); }
+
+/* Flechas laterales — mitad superior y inferior clickeable grande */
+.c1-pres-nav {
+  position: absolute; top: 60px; bottom: 50px;
+  width: 10vw; max-width: 120px; z-index: 1;
+  background: transparent; color: rgba(255,255,255,.25);
+  border: 0; font-size: 48px; font-weight: 300; cursor: pointer;
+  transition: background 160ms, color 160ms;
+}
+.c1-pres-nav:hover:not(:disabled) {
+  background: rgba(255,255,255,.03); color: rgba(255,255,255,.75);
+}
+.c1-pres-nav:disabled { opacity: .2; cursor: default; }
+.c1-pres-nav--prev { left: 0; }
+.c1-pres-nav--next { right: 0; }
+
+.c1-pres-stage {
+  flex: 1; min-height: 0; overflow-y: auto;
+  padding: 20px clamp(60px, 10vw, 160px) 60px;
+  display: flex; align-items: flex-start; justify-content: center;
+}
+.c1-pres-slide {
+  width: 100%; max-width: 1100px;
+  animation: c1-pres-in 240ms ease both;
+}
+@keyframes c1-pres-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.c1-pres-foot {
+  padding: 10px 32px 14px; text-align: center;
+  font-family: var(--c1-mono); font-size: 11px;
+  color: rgba(255,255,255,.3); letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+/* ─── Dentro de la slide: paleta oscura + tipografía gigante ─── */
+.c1-pres .c1-prose,
+.c1-pres .c1-prose p,
+.c1-pres .c1-prose li,
+.c1-pres .c1-prose td,
+.c1-pres .c1-prose th { color: #f5f1e8; }
+
+.c1-pres .c1-prose h1,
+.c1-pres .c1-prose h2,
+.c1-pres .c1-prose h3,
+.c1-pres .c1-prose strong { color: #fff; }
+
+.c1-pres .c1-prose { font-size: 1.4rem; }
+.c1-pres .c1-eyebrow { font-size: 15px; color: var(--c1-gold); }
+.c1-pres .c1-muted  { color: rgba(255,255,255,.55); }
+.c1-pres mark { background: rgba(234,179,8,.22); color: #fde68a; padding: 0 4px; border-radius: 4px; }
+
+.c1-pres .c1-de { color: #fde68a; }
+.c1-pres hr, .c1-pres .c1-rule { border-color: rgba(255,255,255,.1); }
+
+.c1-pres table { background: rgba(255,255,255,.02); }
+.c1-pres th, .c1-pres td { border-color: rgba(255,255,255,.1) !important; }
+.c1-pres .c1-ws { background: rgba(255,255,255,.03); border-color: rgba(255,255,255,.08); }
+
+/* Tarjetas: fondos semitransparentes sobre el oscuro */
+.c1-pres .c1-modell,
+.c1-pres .c1-pa,
+.c1-pres .c1-ueb,
+.c1-pres .c1-ausblick {
+  background: rgba(255,255,255,.04);
+  border-color: rgba(255,255,255,.1);
+}
+
+/* Lückentext interactivos: visibles sobre oscuro */
+.c1-pres .c1-pa-select {
+  color: #fff; background: rgba(234,179,8,.15);
+  border-color: var(--c1-gold);
+}
+.c1-pres .c1-pa-select option { color: #000; }
+
+/* Gap token (los {N} decorativos cuando no son interactivos) */
+.c1-pres .c1-gap {
+  color: var(--c1-gold);
+  background: rgba(234,179,8,.12);
+  border-color: var(--c1-gold);
+}
+
+/* Botones de acción dentro de la slide */
+.c1-pres .c1-pa-btn {
+  background: rgba(255,255,255,.08); color: #f5f1e8;
+  border-color: rgba(255,255,255,.15);
+}
+.c1-pres .c1-pa-btn--primary {
+  background: var(--c1-gold); color: #0f1115; border-color: var(--c1-gold);
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+  .c1-pres { font-size: 1.1rem; }
+  .c1-pres-stage { padding: 16px 20px 50px; }
+  .c1-pres-head { padding: 12px 16px 6px; }
+  .c1-pres-nav { font-size: 32px; width: 15vw; }
+  .c1-pres .c1-prose { font-size: 1.1rem; }
+}

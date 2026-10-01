@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import C1LessonBody from './C1LessonBody'
+import PresentationMode from './PresentationMode'
+import { useAuth } from '../../context/AuthContext'
 
 const pad = n => String(n).padStart(2, '0')
 
@@ -53,6 +55,12 @@ function Pager({ prev, next, base }) {
 }
 
 export default function C1Lesson({ lesson, kurs }) {
+  const { user } = useAuth()
+  const [presenting, setPresenting] = useState(false)
+  const canPresent = ['teacher', 'admin', 'superadmin'].includes(user?.role)
+    && lesson?.ready
+    && (lesson?.content?.length || 0) > 0
+
   return (
     <div className="c1-wrap">
       {lesson.ready ? (
@@ -68,8 +76,28 @@ export default function C1Lesson({ lesson, kurs }) {
           <ExamStamp spec={lesson.spec} />
           <h2 className="c1-title">{lesson.h1 || lesson.titel}</h2>
           {lesson.lead && <p className="c1-lead">{lesson.lead}</p>}
+
+          {canPresent && (
+            <button
+              type="button"
+              onClick={() => setPresenting(true)}
+              className="c1-pres-launch"
+              aria-label="Präsentation starten"
+              title="Präsentation starten"
+            >
+              <span aria-hidden="true">▶</span> Präsentation
+            </button>
+          )}
+
           <hr className="c1-rule" />
           <C1LessonBody content={lesson.content || []} next={lesson.next} base={kurs.base} />
+
+          <PresentationMode
+            lesson={lesson}
+            base={kurs.base}
+            open={presenting}
+            onClose={() => setPresenting(false)}
+          />
         </>
       ) : (
         <div className="c1-placeholder">
