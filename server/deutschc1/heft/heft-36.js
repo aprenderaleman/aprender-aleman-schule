@@ -114,6 +114,38 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Du hörst ein Radiointerview mit der Leiterin einer Beratungsstelle für zugewanderte Fachkräfte. Entscheide, welche Antwort dem Gehörten entspricht bzw. ob die Aussage richtig oder falsch ist.',
+      audio: {
+        transcript: 'Moderator: Frau Demir, Sie leiten seit sechs Jahren eine Beratungsstelle für zugewanderte Fachkräfte in Leipzig. Woran scheitert die Anerkennung ausländischer Abschlüsse am häufigsten?\nExpertin: Anders als viele vermuten, nicht an mangelnder Qualifikation. Das größte Hindernis ist die Dauer der Verfahren. Im Durchschnitt warten unsere Ratsuchenden vierzehn Monate auf ihren Bescheid, nicht vier, wie es die Behörden einmal in Aussicht gestellt hatten.\nModerator: Was bedeutet diese Wartezeit für die Betroffenen?\nExpertin: Viele schlagen sich mit Aushilfsjobs durch. Eine Bauingenieurin hat anderthalb Jahre lang in einem Warenlager gearbeitet. Je länger eine solche Phase dauert, desto mehr Fachwissen geht verloren und desto schwerer fällt später der Wiedereinstieg.\nModerator: Seit dem vergangenen Jahr bieten Sie zusätzlich ein Mentoringprogramm an. Mit welchem Ergebnis?\nExpertin: Wir vermitteln den Zugewanderten eine Fachkraft aus demselben Beruf, die sie durch das Verfahren begleitet. Von den achtzig Teilnehmenden des ersten Jahrgangs haben inzwischen gut zwei Drittel eine Stelle, die ihrer Ausbildung entspricht. Beschleunigt hat das Mentoring die Verfahren allerdings nicht. Es hilft vor allem dabei, die Unterlagen vollständig einzureichen und berufliche Kontakte zu knüpfen.\nModerator: Und was fordern Sie von der Politik?\nExpertin: Nicht so sehr neue Gesetze als vielmehr zusätzliches Personal in den zuständigen Stellen. Solange dort Sachbearbeiter fehlen, läuft jede Erleichterung ins Leere. Integration ist keine Einbahnstraße, die Aufnahmegesellschaft muss ihren Teil eben auch leisten.',
+      },
+      items: [
+        {
+          typ: 'mc',
+          frage: 'Worin sieht Frau Demir das größte Hindernis bei der Anerkennung ausländischer Abschlüsse?',
+          optionen: [
+            'In der unzureichenden Qualifikation vieler Antragstellender.',
+            'In der langen Dauer der Verfahren.',
+            'In unvollständigen Unterlagen der Antragstellenden.',
+          ],
+          loesung: 1,
+        },
+        { typ: 'rf', aussage: 'Die Ratsuchenden der Beratungsstelle warten im Durchschnitt vier Monate auf ihren Bescheid.', loesung: false },
+        {
+          typ: 'mc',
+          frage: 'Welche Wirkung schreibt Frau Demir dem Mentoringprogramm zu?',
+          optionen: [
+            'Es hilft vor allem dabei, vollständige Unterlagen einzureichen und berufliche Kontakte aufzubauen.',
+            'Es hat die Anerkennungsverfahren der Teilnehmenden spürbar verkürzt.',
+            'Es hat sämtlichen Teilnehmenden des ersten Jahrgangs zu einer Stelle verholfen, die ihrer Ausbildung entspricht.',
+          ],
+          loesung: 0,
+        },
+        { typ: 'rf', aussage: 'Nach Ansicht von Frau Demir bleiben gesetzliche Erleichterungen wirkungslos, solange es in den zuständigen Stellen an Personal fehlt.', loesung: true },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -126,6 +158,27 @@ export default {
       ],
       minWoerter: 80,
       beispielLoesung: 'Sehr geehrte Frau Nowak,\nals ehrenamtliche Sprachpatin wende ich mich mit einem dringenden Anliegen an Sie. Die Integrationskurse in unserer Stadt sind seit Monaten überfüllt; viele Zugewanderte warten bis zu einem halben Jahr auf einen Platz. Gerade in dieser Zeit geht wertvolle Motivation verloren, und manche nehmen notgedrungen Hilfstätigkeiten an, die weit unter ihrer Qualifikation liegen.\nDer Erwerb der Sprache ist jedoch der Schlüssel zu gesellschaftlicher Teilhabe und zur Anerkennung beruflicher Abschlüsse. Jede Verzögerung erschwert daher nicht nur die Integration der Betroffenen, sondern verschärft auch den Fachkräftemangel vor Ort.\nIch möchte Ihnen vorschlagen, zusätzliche Abendkurse in den Räumen der Volkshochschule einzurichten und pensionierte Lehrkräfte für die Überbrückung zu gewinnen. Über eine Rückmeldung würde ich mich sehr freuen.\nMit freundlichen Grüßen\nJonas Feldmann',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Halte einen Diskussionsbeitrag von etwa zwei Minuten. Sprich frei und zusammenhängend, bleibe sachlich und vermeide Verallgemeinerungen.',
+      aufgabe: 'In einer Diskussionsrunde an deiner Volkshochschule wird die These vertreten: „Wer sich einbürgern lässt, sollte seine bisherige Staatsbürgerschaft aufgeben.“ Nimm in einem Diskussionsbeitrag dazu Stellung: Beziehe klar Position, begründe sie mit zwei Argumenten, gehe auf ein Gegenargument ein und schließe mit einem Fazit. Bleibe dabei sachlich und vermeide Verallgemeinerungen.',
+      punkte: [
+        'deine Position zur These',
+        'zwei Argumente, möglichst mit einem Beispiel',
+        'ein Gegenargument, das du aufgreifst und entkräftest',
+        'ein kurzes Fazit',
+      ],
+      redemittel: [
+        'Dieser These kann ich mich nicht anschließen, denn …',
+        'Hinzu kommt, dass …',
+        'Kritiker geben zu bedenken, dass …',
+        'Diesen Einwand nehme ich ernst, er überzeugt mich aber nicht, weil …',
+        'Alles in allem spricht vieles dafür, dass …',
+      ],
+      maxSekunden: 120,
+      beispielLoesung: 'Dieser These kann ich mich nicht anschließen, und ich möchte kurz begründen, warum.\nErstens entspricht die doppelte Staatsbürgerschaft schlicht der Lebenswirklichkeit vieler Menschen. Wer seit zwanzig Jahren hier lebt und arbeitet, aber Eltern und Geschwister im Herkunftsland hat, fühlt sich eben beiden Ländern zugehörig. Ihn zu einer Entscheidung zu zwingen, hieße, einen Teil seiner Biografie für ungültig zu erklären.\nZweitens fördert die Einbürgerung die politische Teilhabe. Wer wählen darf, identifiziert sich stärker mit dem Land, in dem er lebt. Muss man dafür jedoch den alten Pass abgeben, verzichten viele auf die Einbürgerung — und bleiben dauerhaft von Wahlen ausgeschlossen. Das kann sich eine Einwanderungsgesellschaft meiner Ansicht nach nicht leisten.\nNun geben Kritiker zu bedenken, zwei Pässe könnten zu Loyalitätskonflikten führen. Diesen Einwand nehme ich ernst, er überzeugt mich aber nicht. Denn Zugehörigkeit zeigt sich doch im Alltag: darin, dass jemand die Sprache spricht, die Gesetze achtet und sich einbringt — und nicht darin, wie viele Pässe in der Schublade liegen.\nAlles in allem spricht also vieles dafür, die doppelte Staatsbürgerschaft zuzulassen. Entscheidend ist nicht der Pass, sondern die Frage, ob jemand gleichberechtigt am gesellschaftlichen Leben teilhat.',
     },
   ],
 }

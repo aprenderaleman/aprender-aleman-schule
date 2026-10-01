@@ -116,6 +116,38 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Du hörst einen Ausschnitt aus einem Podcast zum Thema Sprachprüfungen. Entscheide bei jeder Aufgabe, welche Antwort dem Gehörten entspricht bzw. ob die Aussage richtig oder falsch ist.',
+      audio: {
+        transcript: 'Moderator: Willkommen zu unserem Podcast rund ums Deutschlernen. Bei mir ist heute Lena, die im Frühjahr ihre mündliche Prüfung abgelegt hat. Lena, wie lief es?\nLena: Besser als befürchtet, obwohl der Tag holprig begann. Ich war für neun Uhr eingeplant, kam aber erst um halb elf an die Reihe, weil sich alles verschoben hatte. Das Warten hat mich nervöser gemacht als die Prüfung selbst.\nModerator: Worüber musstest du sprechen?\nLena: Über die Frage, ob Museen grundsätzlich auf Eintrittsgeld verzichten sollten. In der Vorbereitungszeit habe ich mir nur fünf Stichwörter notiert, dazu den ersten Satz.\nModerator: Und bist du irgendwann ins Stocken geraten?\nLena: Ja, allerdings nicht im Vortrag, sondern erst bei einer Nachfrage. Mir fiel das Wort Subvention nicht ein. Ich habe es dann einfach umschrieben, also Geld, das der Staat dazugibt. Die Prüferin hat nur genickt.\nModerator: Wie war es mit deinem Partner?\nLena: Anfangs schwierig. Er hat sehr lange geredet und kaum Pausen gelassen. Irgendwann habe ich ihn höflich unterbrochen und ihm eine Frage gestellt, danach sind wir viel besser aufeinander eingegangen.\nModerator: Was würdest du heute anders machen?\nLena: Ich würde früher anfangen, mich selbst aufzunehmen. Das habe ich erst in den letzten zwei Wochen getan, und gerade das hat mir am meisten gebracht.',
+      },
+      items: [
+        {
+          typ: 'mc',
+          frage: 'Was hat Lena am Prüfungstag nach eigener Aussage am meisten verunsichert?',
+          optionen: [
+            'dass ihr bei einer Nachfrage ein Wort nicht einfiel',
+            'dass sie anderthalb Stunden länger warten musste als geplant',
+            'dass ihr Partner ihr anfangs kaum Raum ließ',
+          ],
+          loesung: 1,
+        },
+        {
+          typ: 'mc',
+          frage: 'Worüber sprach Lena in ihrem Vortrag?',
+          optionen: [
+            'über staatliche Subventionen für Theater',
+            'über längere Öffnungszeiten von Museen',
+            'über kostenlosen Eintritt in Museen',
+          ],
+          loesung: 2,
+        },
+        { typ: 'rf', aussage: 'Lena geriet mitten in ihrem Vortrag ins Stocken.', loesung: false },
+        { typ: 'rf', aussage: 'Mit Tonaufnahmen von sich selbst hat Lena erst kurz vor der Prüfung begonnen.', loesung: true },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -128,6 +160,27 @@ export default {
       ],
       minWoerter: 80,
       beispielLoesung: 'Für die Paarprüfung spricht vor allem, dass sie einer echten Gesprächssituation deutlich näherkommt als ein Einzelgespräch mit den Prüfenden. Wer aufeinander eingehen, nachfragen und das Wort abgeben muss, zeigt eine Kompetenz, die im Alltag unverzichtbar ist. Hinzu kommt, dass sich viele Kandidaten in Gegenwart eines Partners weniger beobachtet fühlen.\nAllerdings birgt das Format auch Risiken. Ein sehr dominanter oder sehr stiller Partner kann den Gesprächsverlauf erschweren, und manche geraten gerade dann ins Stocken, wenn sie sich mit anderen vergleichen.\nNach meiner Einschätzung überwiegen dennoch die Vorteile, zumal jeder Kandidat einzeln an den Kriterien gemessen wird. Wer die Paarprüfung als gemeinsame Aufgabe versteht, kann von ihr nur profitieren.',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Halte einen Kurzvortrag (etwa zwei Minuten). Sprich frei nach Stichwörtern und lies nichts ab.',
+      aufgabe: 'Halte einen Kurzvortrag zum Thema „Sprachen lernen mit Apps — ersetzt das Smartphone den Sprachkurs?“ (etwa zwei Minuten). Baue ihn so auf: Einstiegssatz zum Thema, ein Vorteil und ein Nachteil des Lernens mit Apps, ein Beispiel aus deiner eigenen Erfahrung und ein Schlusssatz, der deine Position zusammenfasst. Nimm dir vorher eine Minute Zeit, notiere nur Stichwörter und lege deinen ersten und deinen letzten Satz wörtlich fest. Wenn dir ein Wort fehlt, umschreibe es, statt abzubrechen.',
+      punkte: [
+        'Stelle das Thema in einem klaren Einstiegssatz vor.',
+        'Erläutere einen Vorteil und einen Nachteil des Lernens mit Apps.',
+        'Veranschauliche einen der beiden Punkte an einem Beispiel aus deiner eigenen Erfahrung.',
+        'Schließe mit einem Satz, der deine Position zusammenfasst.',
+      ],
+      redemittel: [
+        'Ich möchte über die Frage sprechen, ob …',
+        'Dafür spricht vor allem, dass …',
+        'Lassen Sie es mich anders formulieren: …',
+        'Genauer gesagt geht es mir um …',
+        'Zusammenfassend halte ich … für …',
+      ],
+      maxSekunden: 120,
+      beispielLoesung: 'Ich möchte über die Frage sprechen, ob Sprachlern-Apps den klassischen Sprachkurs ersetzen können — ein Thema, das mich als Deutschlernerin unmittelbar betrifft. Für die Apps spricht vor allem, dass sie jederzeit verfügbar sind: Gelernt wird, wann und wo es gerade passt. Ich selbst habe über viele Monate hinweg morgens in der U-Bahn Vokabeln wiederholt, zehn Minuten am Tag. Ohne das Smartphone hätte ich diese Regelmäßigkeit nie erreicht, zumal die meisten Programme wenig oder gar nichts kosten. Allerdings stößt man damit rasch an Grenzen. Eine App korrigiert einzelne Wörter, ein echtes Gespräch führt sie nicht. Mir fehlte — wie soll ich sagen — das Gegenüber, also jemand, der nachfragt, der widerspricht, auf den ich spontan reagieren muss. Genauer gesagt: Nach einem Jahr verstand ich zwar erstaunlich viel, geriet beim Sprechen aber ständig ins Stocken. Das änderte sich erst im Kurs, wo ich Woche für Woche mit anderen diskutieren musste. Zusammenfassend halte ich Apps für eine sinnvolle Ergänzung, nicht aber für einen Ersatz: Wortschatz lässt sich allein aufbauen, das freie Sprechen hingegen nur im Austausch mit anderen.',
     },
   ],
 }

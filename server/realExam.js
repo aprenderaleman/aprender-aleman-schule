@@ -137,9 +137,14 @@ function genderOf(label) {
 // Felix», «Mein Name ist Elena Ruiz», «hier spricht Frau Wendt») lo lee una
 // voz de su género y no el narrador neutro.
 function monologueVoice(text) {
-  const m = String(text).slice(0, 220).match(/\b(?:[Hh]ier (?:ist|spricht)|[Ii]ch bin|[Ii]ch heiße|[Mm]ein Name ist)\s+(?:(Herr|Frau)\s+)?([A-ZÄÖÜ][a-zäöüßáéíóú]+)/)
-  if (!m) return null
-  const g = m[1] ? (m[1] === 'Frau' ? 'f' : 'm') : FEMALE_NAMES.has(m[2]) ? 'f' : MALE_NAMES.has(m[2]) ? 'm' : null
+  const head = String(text).slice(0, 220)
+  const m = head.match(/\b(?:[Hh]ier (?:ist|spricht)|[Ii]ch bin|[Ii]ch heiße|[Mm]ein Name ist)\s+(?:(Herr|Frau)\s+)?([A-ZÄÖÜ][a-zäöüßáéíóú]+)/)
+  // «hier spricht Ihre Zugbegleiterin» / «… Ihr Zugbegleiter»
+  const r = head.match(/\b[Hh]ier spricht\s+(?:[Ii]hre?|[Ee]ure?|[Dd]eine?)\s+([A-ZÄÖÜ][a-zäöüß]+)/)
+  const g = m?.[1] ? (m[1] === 'Frau' ? 'f' : 'm')
+    : m && FEMALE_NAMES.has(m[2]) ? 'f'
+    : m && MALE_NAMES.has(m[2]) ? 'm'
+    : r ? genderOf(r[1]) : null
   return g === 'f' ? VOICES_F[0] : g === 'm' ? VOICES_M[0] : null
 }
 

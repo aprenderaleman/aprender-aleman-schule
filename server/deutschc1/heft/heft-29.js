@@ -94,6 +94,34 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Du hörst ein Radiointerview mit einer Bildungsforscherin. Entscheide bei jeder Aufgabe, welche Antwort dem Gehörten entspricht bzw. ob die Aussage richtig oder falsch ist.',
+      audio: {
+        transcript: 'Moderator: Jedes Jahr verlassen Tausende junge Menschen die Hochschule ohne Abschluss. Die Bildungsforscherin Jana Scholz hat untersucht, was aus ihnen wird. Frau Scholz, ist ein Studienabbruch ein Scheitern?\nJana: In den Augen vieler Eltern leider ja. Unsere Daten zeigen etwas anderes. Wir haben rund zweitausend ehemalige Studierende befragt, und gut die Hälfte von ihnen hatte innerhalb eines Jahres eine Ausbildung im dualen System begonnen.\nModerator: Und wie zufrieden sind diese Leute?\nJana: Erstaunlich zufrieden. Mehr als achtzig Prozent würden sich wieder so entscheiden. Viele sagten uns, sie hätten zum ersten Mal das Gefühl, etwas Sinnvolles zu tun.\nModerator: Warum haben sie dann überhaupt ein Studium aufgenommen?\nJana: Der häufigste Grund war nicht etwa das Interesse am Fach, sondern die Erwartung des Umfelds. Wer Abitur hat, studiert, so die verbreitete Vorstellung. Über die Ausbildung als gleichwertigen Weg waren die meisten am Gymnasium kaum informiert worden.\nModerator: Rechnen die Betriebe den Abbrechern ihr Studium an?\nJana: Teilweise. Häufig lässt sich die Ausbildungszeit um ein halbes Jahr verkürzen, in Einzelfällen sogar um ein ganzes. Das hängt allerdings vom Betrieb ab, einen Anspruch darauf gibt es nicht.\nModerator: Was folgt daraus für die Politik?\nJana: Die Beratung muss früher ansetzen, spätestens in der neunten Klasse, und sie muss beide Wege gleichberechtigt vorstellen.',
+      },
+      items: [
+        {
+          typ: 'mc',
+          frage: 'Wie viele der Befragten begannen innerhalb eines Jahres nach dem Studienabbruch eine Ausbildung?',
+          optionen: ['gut die Hälfte', 'mehr als achtzig Prozent', 'rund ein Drittel'],
+          loesung: 0,
+        },
+        { typ: 'rf', aussage: 'Die meisten Befragten hatten ihr Studium vor allem aus Interesse am Fach aufgenommen.', loesung: false },
+        {
+          typ: 'mc',
+          frage: 'Was sagt Frau Scholz über die Verkürzung der Ausbildungszeit?',
+          optionen: [
+            'Sie steht Studienabbrechern rechtlich zu und beträgt stets ein Jahr.',
+            'Sie ist häufig möglich, liegt aber im Ermessen des Betriebs.',
+            'Sie wird Studienabbrechern in der Regel verweigert.',
+          ],
+          loesung: 1,
+        },
+        { typ: 'rf', aussage: 'Nach Ansicht von Frau Scholz sollte die Beratung spätestens in der neunten Klasse beginnen.', loesung: true },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -106,6 +134,26 @@ export default {
       ],
       minWoerter: 80,
       beispielLoesung: 'Die Forderung, an allen Gymnasien ein verpflichtendes Praktikum in einem Ausbildungsbetrieb einzuführen, halte ich für überlegenswert. Viele Jugendliche entscheiden sich heute fast selbstverständlich für ein Studium, ohne die Alternativen überhaupt zu kennen. Ein Praktikum könnte ihnen zeigen, dass eine Ausbildung im dualen System kein Bildungsweg zweiter Klasse ist.\nDem lässt sich entgegenhalten, dass vier Wochen Unterricht verloren gingen und manche Betriebe mit zusätzlichen Praktikanten überfordert wären. Dieser Einwand wiegt jedoch weniger schwer als der Nutzen: Gerade Jugendliche, in deren Familie noch niemand eine Ausbildung absolviert hat, erhielten so Einblicke, die ihnen sonst verwehrt blieben.\nIch plädiere daher für das Praktikum — als Gegengewicht zur einseitigen Akademisierung und als Beitrag zu einer bewussteren Berufswahl.',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Halte einen Vortrag (etwa zweieinhalb Minuten). Sprich frei und gliedere deinen Vortrag erkennbar in Einstieg, Hauptteil und Fazit.',
+      aufgabe: 'Halte einen strukturierten Vortrag zum Thema „Chancengleichheit in der Bildung: Entscheidet die soziale Herkunft über den Bildungserfolg?“ (etwa zweieinhalb Minuten). Stelle das Thema vor und begründe seine Bedeutung, beschreibe die Situation in deinem Heimatland, wäge Nutzen und Grenzen einer Maßnahme ab, die die Chancengleichheit fördern könnte, und schließe mit einem begründeten Fazit. Verwende mindestens vier Begriffe aus dem Kernwortschatz der Lektion, etwa soziale Herkunft, benachteiligen, Bildungsabschluss oder frühkindliche Förderung.',
+      punkte: [
+        'Stelle das Thema vor und erkläre, warum es von Bedeutung ist.',
+        'Beschreibe die Situation in deinem Heimatland.',
+        'Nenne eine Maßnahme, die die Chancengleichheit fördern könnte, und wäge ihren Nutzen und ihre Grenzen ab.',
+        'Ziehe ein Fazit mit einer begründeten eigenen Einschätzung.',
+      ],
+      redemittel: [
+        'In meinem Vortrag geht es um die Frage, ob …',
+        'Was mein Heimatland betrifft, …',
+        'Einerseits …, andererseits …',
+        'Alles in allem bin ich der Überzeugung, dass …',
+      ],
+      maxSekunden: 150,
+      beispielLoesung: 'In meinem Vortrag geht es um die Frage, ob die soziale Herkunft über den Bildungserfolg entscheidet. Das Thema ist deshalb so wichtig, weil der Bildungsabschluss später über Einkommen, Gesundheit und gesellschaftliche Teilhabe mitbestimmt. Zunächst beschreibe ich die Situation in meinem Heimatland, dann gehe ich auf eine mögliche Maßnahme ein, und zum Schluss ziehe ich ein Fazit.\nWas mein Heimatland Spanien betrifft, so ist der Zugang zu Bildung auf dem Papier für alle gleich. In der Praxis sieht es anders aus. Kinder aus bildungsfernen Familien verlassen die Schule deutlich häufiger ohne Abschluss, und wer es sich leisten kann, bezahlt private Nachhilfe. Ich habe das selbst erlebt: In meiner Klasse hatten fast alle, die später studiert haben, Eltern mit einem Hochschulabschluss.\nWas lässt sich dagegen tun? Am meisten verspreche ich mir von der frühkindlichen Förderung. Einerseits erreicht man die Kinder in einem Alter, in dem die Unterschiede noch klein sind — wer mit drei Jahren sprachlich gefördert wird, startet nicht schon benachteiligt in die Grundschule. Andererseits kostet ein solcher Ausbau viel Geld und verlangt gut ausgebildetes Personal, das vielerorts fehlt. Und natürlich kann auch der beste Kindergarten das Elternhaus nicht ersetzen.\nAlles in allem bin ich der Überzeugung, dass die Herkunft den Bildungsweg zwar stark beeinflusst, ihn aber nicht bestimmen muss. Chancengleichheit entsteht nicht von selbst — sie ist eine Frage des politischen Willens, und früh investiertes Geld ist hier am besten angelegt.',
     },
   ],
 }

@@ -96,6 +96,30 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Du hörst einen Ausschnitt aus einem Podcast. Entscheide, welche Antwort dem Gehörten entspricht bzw. ob die Aussage richtig oder falsch ist.',
+      audio: {
+        transcript: 'Lena: Hallo und willkommen zu einer neuen Folge. Felix, du warst letzte Woche in einem Mehrgenerationenhaus in Freiburg. Wie war es?\nFelix: Spannend, Lena. Dort wohnen sowohl Familien mit kleinen Kindern als auch Menschen über achtzig unter einem Dach, insgesamt sechsunddreißig Personen.\nLena: Und das funktioniert?\nFelix: Meistens. Die Idee ist einfach. Je mehr man sich im Alltag hilft, desto weniger ist man auf fremde Dienste angewiesen. Die Älteren holen die Kinder vom Kindergarten ab, die Jüngeren erledigen dafür die Einkäufe.\nLena: Klingt fast zu schön.\nFelix: Zwar schwärmen alle vom Zusammenhalt, aber es gibt auch Streit. Nicht nur über den Lärm im Treppenhaus wird diskutiert, sondern auch über den Putzplan. Eine Bewohnerin sagte mir, die Stimmung sei bald herzlich, bald ziemlich gereizt.\nLena: Ist so ein Haus teuer?\nFelix: Weder besonders teuer noch wirklich günstig. Die Miete liegt etwa im Durchschnitt der Stadt. Allerdings zahlt jeder zusätzlich vierzig Euro im Monat für die Gemeinschaftsräume.\nLena: Würdest du selbst einziehen?\nFelix: Im Moment nicht, mir wäre das zu eng. Aber im Alter kann ich es mir gut vorstellen. Die Warteliste ist übrigens lang. Wer einziehen will, wartet nicht ein Jahr, sondern rund drei Jahre.',
+      },
+      items: [
+        {
+          typ: 'mc',
+          frage: 'Welcher Gedanke liegt dem Haus laut Felix zugrunde?',
+          optionen: ['Wer einander im Alltag hilft, braucht seltener fremde Dienste.', 'Wer gemeinsam wohnt, zahlt weniger Miete.', 'Wer alt ist, soll nicht allein wohnen müssen.'],
+          loesung: 0,
+        },
+        {
+          typ: 'mc',
+          frage: 'Worüber wird im Haus laut Felix gestritten?',
+          optionen: ['über die Kosten für die Gemeinschaftsräume', 'über die Verteilung der Einkäufe', 'über Lärm und den Putzplan'],
+          loesung: 2,
+        },
+        { typ: 'rf', aussage: 'Die Miete ist deutlich niedriger als sonst in der Stadt.', loesung: false },
+        { typ: 'rf', aussage: 'Felix kann sich vorstellen, im Alter in einem solchen Haus zu wohnen.', loesung: true },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -108,6 +132,21 @@ export default {
       ],
       minWoerter: 80,
       beispielLoesung: 'Die Rezension bespricht Katrin Albers’ zweiten Roman, der die Geschichte einer Familie über drei Generationen in einem Dorf an der Oder erzählt. Das Urteil fällt gemischt aus: Stärken und Schwächen halten sich die Waage.\nGelobt werden sowohl die eindringlichen Landschaftsbilder als auch die eigenständige Stimme jeder Figur. Kritisiert wird hingegen, dass die zahlreichen Andeutungen unaufgelöst bleiben, was auf fast vierhundert Seiten unentschlossen wirke.\nMich macht die Besprechung durchaus neugierig. Nicht nur schätze ich Romane, die sprachlich anspruchsvoll sind, sondern ich habe auch nichts gegen offene Enden — im Gegenteil. Je weniger ein Buch erklärt, desto länger beschäftigt es mich. Ich werde den Roman daher lesen und mir selbst ein Urteil bilden.',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Halte einen strukturierten Kurzvortrag von etwa zwei Minuten. Sprich frei und gliedere deutlich in Einleitung, Hauptteil und Schluss.',
+      aufgabe: 'Halte vor einer Seminargruppe einen strukturierten Kurzvortrag von etwa zwei Minuten zum Thema „Studium oder Berufsausbildung — welcher Weg bereitet besser auf das Berufsleben vor?“. Gliedere ihn deutlich in Einleitung, Hauptteil und Schluss und verwende mindestens drei zweiteilige Konnektoren.',
+      punkte: [
+        'Führe kurz in das Thema ein.',
+        'Stelle die Stärken und Schwächen beider Wege einander gegenüber.',
+        'Schließe mit einer eigenen, begründeten Einschätzung.',
+        'Verwende mindestens drei zweiteilige Konnektoren, etwa „sowohl … als auch“, „zwar … aber“ oder „je … desto“.',
+      ],
+      redemittel: ['Einerseits …, andererseits …', 'Wer studiert, erwirbt nicht nur …, sondern auch …', 'Zwar …, aber …', 'Je …, desto …', 'Meiner Einschätzung nach ist weder … noch … grundsätzlich überlegen.'],
+      maxSekunden: 150,
+      beispielLoesung: 'In meinem Vortrag gehe ich der Frage nach, ob ein Studium oder eine Berufsausbildung besser auf das Berufsleben vorbereitet. Die Frage ist aktuell, denn einerseits drängen immer mehr junge Leute an die Hochschulen, andererseits suchen viele Betriebe händeringend Auszubildende.\nZunächst zum Studium. Wer studiert, erwirbt nicht nur Fachwissen, sondern lernt auch, sich selbstständig in komplexe Themen einzuarbeiten. Zwar eröffnet ein Abschluss langfristig oft die besseren Aufstiegschancen, aber der Weg dorthin ist lang, und viele haben bis zum Examen kaum einen Betrieb von innen gesehen.\nGenau hier liegt die Stärke der Ausbildung. Die Auszubildenden sammeln vom ersten Tag an sowohl praktische Erfahrung als auch eigenes Geld. Je früher man Verantwortung übernimmt, desto sicherer bewegt man sich später im Beruf. Allerdings legt man sich früh fest, und ein späterer Wechsel in ein anderes Berufsfeld fällt entsprechend schwerer.\nMeiner Einschätzung nach ist weder der eine noch der andere Weg grundsätzlich überlegen. Entscheidend ist, ob er zur Person passt: Wer gern theoretisch arbeitet, ist an der Hochschule besser aufgehoben, wer lieber anpackt, im Betrieb. Am überzeugendsten finde ich deshalb Modelle, die beides verbinden, etwa ein duales Studium. Dort muss man sich nicht entweder für die Theorie oder für die Praxis entscheiden, sondern bekommt beides. Vielen Dank für Ihre Aufmerksamkeit.',
     },
   ],
 }

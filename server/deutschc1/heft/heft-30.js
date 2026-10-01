@@ -94,6 +94,38 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Du hörst einen Radiobeitrag über ein Energieprojekt. Entscheide bei jeder Aufgabe, welche Antwort dem Gehörten entspricht bzw. ob die Aussage richtig oder falsch ist.',
+      audio: {
+        transcript: 'In Altenrode, einem Dorf mit knapp neunhundert Einwohnern im Norden Hessens, drehen sich seit dem vergangenen Herbst drei Windräder. Das Besondere daran ist, dass sie nicht einem Energiekonzern gehören, sondern den Bürgerinnen und Bürgern selbst. Mehr als zweihundert Haushalte haben sich an der Genossenschaft beteiligt, der Mindestanteil lag bei fünfhundert Euro. Dabei war das Projekt anfangs heftig umstritten. Als die Pläne vor sechs Jahren bekannt wurden, gründete sich umgehend eine Bürgerinitiative dagegen. Man fürchtete Lärm und sinkende Grundstückspreise. Die Stimmung kippte erst, als der Gemeinderat vorschlug, die Anwohner am Gewinn zu beteiligen. Heute fließt ein Teil der Einnahmen in die Gemeindekasse. Davon wurde zunächst das Dach der Grundschule saniert, im kommenden Jahr soll ein Dorfbus folgen, der die Älteren zum Einkaufen in die Kreisstadt bringt. Bürgermeisterin Anna Reuter räumt ein, dass nicht alle überzeugt sind. Einige Familien am Ortsrand klagen weiterhin über den Schattenwurf der Anlagen. Dennoch hält sie das Modell für übertragbar. Die Energiewende, sagt sie, stoße dort auf Zustimmung, wo die Menschen nicht nur die Lasten tragen, sondern auch am Ertrag teilhaben. Inzwischen haben sich vier Nachbargemeinden in Altenrode nach den Erfahrungen erkundigt.',
+      },
+      items: [
+        { typ: 'rf', aussage: 'Die Windräder von Altenrode sind Eigentum der Bürgerinnen und Bürger.', loesung: true },
+        {
+          typ: 'mc',
+          frage: 'Wodurch änderte sich die anfangs ablehnende Stimmung im Dorf?',
+          optionen: [
+            'durch ein Gutachten, das die Sorge vor Lärm entkräftete',
+            'durch den Vorschlag, die Anwohner am Gewinn zu beteiligen',
+            'durch die Zusage, die Grundstückspreise stabil zu halten',
+          ],
+          loesung: 1,
+        },
+        {
+          typ: 'mc',
+          frage: 'Wofür wurden die Einnahmen der Gemeinde bereits verwendet?',
+          optionen: [
+            'für die Sanierung des Schuldachs',
+            'für einen Dorfbus in die Kreisstadt',
+            'für den Bau eines vierten Windrads',
+          ],
+          loesung: 0,
+        },
+        { typ: 'rf', aussage: 'Laut der Bürgermeisterin gibt es im Ort inzwischen keine Beschwerden über die Anlagen mehr.', loesung: false },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -106,6 +138,25 @@ export default {
       ],
       minWoerter: 80,
       beispielLoesung: 'Der Bericht zieht Bilanz nach einem einjährigen Verkehrsversuch in Lindenfeld. Die Stadt hat dabei bewusst auf Verbote verzichtet und ausschließlich auf Anreize gesetzt: kostenlose Busse im Zehnminutentakt und neue Radwege. Während sich die Zahl der Fahrgäste nahezu verdoppelt hat, ist der Autoverkehr in der Innenstadt lediglich um rund acht Prozent zurückgegangen, da vor allem Menschen umgestiegen sind, die ohnehin selten Auto fuhren.\nMeines Erachtens zeigt der Versuch, dass Anreize allein nicht genügen. Zwar ist die breite Zustimmung ein wertvolles Ergebnis, doch ohne flankierende Maßnahmen bleibt die Klimawirkung gering. Sinnvoll wären höhere Parkgebühren in der Innenstadt, deren Einnahmen vollständig in den Nahverkehr fließen. So bliebe die Verkehrswende sozial zumutbar und würde den Ausstoß von Treibhausgasen tatsächlich senken.',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Nimm in einem Diskussionsbeitrag Stellung (etwa zweieinhalb Minuten). Sprich frei und begründe deine Position.',
+      aufgabe: 'In einer Diskussionsrunde steht folgende These im Raum: „Der Einzelne kann das Klima nicht retten. Individueller Verzicht ist reine Symbolik — verantwortlich sind allein Politik und Industrie.“ Nimm dazu in einem Diskussionsbeitrag von etwa zweieinhalb Minuten Stellung: Räume zunächst ein, was an der These zutrifft, halte ihr dann mindestens ein begründetes Gegenargument samt Beispiel entgegen und beziehe zum Schluss klar Position. Verwende mindestens vier Begriffe aus dem Kernwortschatz der Lektion, etwa Verzicht, Konsumverhalten, Maßnahmen ergreifen oder CO₂-Bepreisung.',
+      punkte: [
+        'Räume ein, was an der These berechtigt ist.',
+        'Halte ihr mindestens ein begründetes Gegenargument entgegen und stütze es mit einem Beispiel.',
+        'Beziehe zum Schluss klar Position.',
+      ],
+      redemittel: [
+        'Zwar trifft es zu, dass …, doch …',
+        'Dem lässt sich entgegenhalten, dass …',
+        'Entscheidend ist meines Erachtens, dass …',
+        'Unterm Strich plädiere ich dafür, …',
+      ],
+      maxSekunden: 150,
+      beispielLoesung: 'Die These klingt provokant, und ich gebe zu: Sie hat einen wahren Kern. Zwar trifft es zu, dass ein einzelner Mensch den Ausstoß von Treibhausgasen kaum messbar senkt. Wenn ich auf einen Flug verzichte, hebt die Maschine trotzdem ab. Und es stimmt auch, dass die großen Hebel woanders liegen — bei der Energiewende, bei der Verkehrswende, bei einer wirksamen CO₂-Bepreisung. Das kann nur die Politik durchsetzen.\nDem lässt sich allerdings entgegenhalten, dass Politik und Industrie nicht im luftleeren Raum handeln. Unternehmen produzieren, was gekauft wird, und Regierungen ergreifen nur Maßnahmen, für die es eine Mehrheit gibt. Genau hier kommt das eigene Konsumverhalten ins Spiel. Ein Beispiel aus meinem Umfeld: Vor zehn Jahren gab es in der Kantine meiner Firma ein einziges vegetarisches Gericht, heute sind es drei — nicht, weil es jemand vorgeschrieben hätte, sondern weil die Nachfrage gestiegen ist. Viele einzelne Entscheidungen haben also das Angebot verändert.\nHinzu kommt ein zweiter Gedanke: Wer selbst nichts ändern will, wird auch keine Partei wählen, die ihm etwas zumutet. Der individuelle Verzicht ist deshalb keine bloße Symbolik, sondern die Voraussetzung dafür, dass strengere Regeln überhaupt akzeptiert werden.\nUnterm Strich plädiere ich dafür, beides nicht gegeneinander auszuspielen. Der Einzelne rettet das Klima nicht allein — aber ohne ihn bewegen sich weder Politik noch Industrie. Verantwortung lässt sich teilen, aber nicht abschieben.',
     },
   ],
 }

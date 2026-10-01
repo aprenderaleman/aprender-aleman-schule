@@ -93,6 +93,30 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Du hörst einen Ausschnitt aus einer Podiumsdiskussion. Entscheide beim Hören, welche Antwort zutrifft bzw. ob die Aussage richtig oder falsch ist. Halte die Positionen der Beteiligten auseinander.',
+      audio: {
+        transcript: 'Moderatorin: Guten Abend und willkommen zu unserer Diskussionsrunde. Soll die Universität die Anwesenheitspflicht in Seminaren wieder einführen? Herr Professor Kramer, Sie haben das gefordert.\nProfessor: Ja, und zwar aus Erfahrung. In meinem Seminar saßen zu Semesterbeginn vierzig Studierende, im Januar noch vierzehn. Ein Seminar lebt aber vom Gespräch. Wie soll man diskutieren, wenn jede Woche andere Gesichter im Raum sitzen?\nModeratorin: Frau Sommer, Sie vertreten die Studierenden. Was entgegnen Sie?\nFrau: Dass leere Seminare ein Problem sind, da gebe ich meinem Vorredner recht. Nur trifft eine Pflicht die Falschen. Zwei Drittel unserer Studierenden arbeiten neben dem Studium. Wer wegen einer Schicht dreimal fehlt, verliert dann das ganze Seminar.\nProfessor: Nun könnte man einwenden, wer arbeiten muss, solle eben weniger Kurse belegen. Das halte ich allerdings selbst für weltfremd. Mir geht es nicht um Strafe, sondern um Verbindlichkeit.\nFrau: Dann schlage ich etwas anderes vor, nämlich keine Pflicht für alle, sondern eine verbindliche Anmeldung mit festen Arbeitsgruppen. Wer fehlt, lässt seine Gruppe im Stich. Das wirkt stärker als jede Liste.\nProfessor: Das überzeugt mich mehr, als ich erwartet hätte. Ich wäre bereit, dieses Modell ein Semester lang zu erproben, vorausgesetzt, wir werten es danach gemeinsam aus.\nModeratorin: Vielen Dank. Über den Vorschlag berät der Senat im Mai.',
+      },
+      items: [
+        {
+          typ: 'mc',
+          frage: 'Wie viele Studierende besuchten das Seminar von Professor Kramer im Januar noch?',
+          optionen: ['40', '24', '14'],
+          loesung: 2,
+        },
+        { typ: 'rf', aussage: 'Frau Sommer bestreitet, dass schlecht besuchte Seminare ein Problem darstellen.', loesung: false },
+        {
+          typ: 'mc',
+          frage: 'Wie steht Professor Kramer zu dem Einwand, berufstätige Studierende sollten eben weniger Kurse belegen?',
+          optionen: ['Er schließt sich ihm ausdrücklich an.', 'Er hält ihn selbst für realitätsfern.', 'Er hält ihn für rechtlich bedenklich.'],
+          loesung: 1,
+        },
+        { typ: 'rf', aussage: 'Am Ende ist Professor Kramer bereit, den Vorschlag von Frau Sommer unter einer Bedingung zu testen.', loesung: true },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -105,6 +129,21 @@ export default {
       ],
       minWoerter: 80,
       beispielLoesung: 'In der Diskussionsrunde im Rathaus ging es um die Frage, ob die städtischen Museen künftig täglich freien Eintritt gewähren sollen. Museumsdirektor Adeyemi sprach sich klar dafür aus: Seit Einführung des freien Sonntags hätten sich die Besucherzahlen verdoppelt. Stadträtin Brandt widersprach zunächst, da ungedeckte Einnahmeausfälle Ausstellungen und Personal gefährdeten. Die Kulturwissenschaftlerin Hartmann gab zu bedenken, dass freier Eintritt nur in Verbindung mit Vermittlungsangeboten neues Publikum erreiche. Dieses Argument überzeugte offenbar auch Frau Brandt, die sich am Ende für ein Pilotjahr offen zeigte, sofern das Land sich an den Kosten beteiligt.\nMeiner Ansicht nach hat Frau Hartmann den entscheidenden Punkt benannt. Ein Pilotjahr halte ich für sinnvoll, allerdings nur, wenn ein Teil der Mittel gezielt in Führungen und Schulprojekte fließt. Andernfalls profitieren vor allem jene, die ohnehin ins Museum gehen.',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Halte einen Diskussionsbeitrag von etwa zweieinhalb Minuten. Knüpf an das Gesagte an, bevor du widersprichst, und beziehe am Ende klar Position.',
+      aufgabe: 'Du nimmst an einer Diskussionsrunde zur Kulturpolitik deiner Stadt teil. Dein Vorredner hat soeben die These vertreten: „Öffentliche Bibliotheken sind im digitalen Zeitalter überflüssig; das Geld wäre anderswo besser angelegt.“ Halte dazu einen Diskussionsbeitrag von etwa zweieinhalb Minuten: Knüpf an das Gesagte an, bevor du widersprichst, begründe deinen Widerspruch und beziehe am Ende klar Position.',
+      punkte: [
+        'Nimm ausdrücklich Bezug auf deinen Vorredner und gib seine These knapp wieder.',
+        'Gesteh ihm zu, was an seiner Beobachtung zutrifft.',
+        'Widersprich ihm mit zwei Argumenten und veranschauliche eines davon an einem Beispiel.',
+        'Beziehe zum Schluss klar Position.',
+      ],
+      redemittel: ['Mein Vorredner hat die These vertreten, dass …', 'In einem Punkt gebe ich Ihnen recht: …', 'Ihrer Schlussfolgerung muss ich allerdings entschieden widersprechen.', 'Das lässt sich an einem Beispiel veranschaulichen.'],
+      maxSekunden: 150,
+      beispielLoesung: 'Vielen Dank. Mein Vorredner hat die These vertreten, öffentliche Bibliotheken seien im digitalen Zeitalter überflüssig. In einem Punkt gebe ich Ihnen recht: Wer nur schnell eine Information sucht, geht heute nicht mehr in den Lesesaal, sondern greift zum Handy. Auch die Ausleihzahlen gedruckter Bücher gehen zurück, das will ich gar nicht bestreiten. Ihrer Schlussfolgerung muss ich allerdings entschieden widersprechen. Erstens ist eine Bibliothek längst mehr als ein Bücherlager. Sie ist einer der wenigen Orte in der Stadt, an denen man sich aufhalten kann, ohne etwas zu bezahlen. Das lässt sich an einem Beispiel veranschaulichen. In der Bibliothek in meinem Viertel sitzen nachmittags Schülerinnen und Schüler, die zu Hause kein eigenes Zimmer haben, neben Rentnern, die Zeitung lesen, und Zugewanderten, die dort Deutsch lernen. Wohin sollen diese Menschen gehen, wenn das Haus schließt? Zweitens ist das Digitale kein Ersatz, sondern eine zusätzliche Aufgabe. Nicht jeder kann sich Abonnements für Zeitungen, Datenbanken und Hörbücher leisten, und nicht jeder findet sich im Netz allein zurecht. Genau hier beraten Bibliotheken. Ich beziehe deshalb klar Position: Wer an den Bibliotheken spart, spart nicht an Büchern, sondern an Bildung und Begegnung. Statt sie zu schließen, sollten wir ihre Öffnungszeiten verlängern.',
     },
   ],
 }

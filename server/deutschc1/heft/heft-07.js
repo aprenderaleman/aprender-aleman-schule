@@ -99,6 +99,30 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Du hörst einen Ausschnitt aus einem Radiofeature. Entscheide, welche Antwort dem Gehörten entspricht bzw. ob die Aussage richtig oder falsch ist.',
+      audio: {
+        transcript: 'Wer nachts aus dem Fenster schaut, sieht in den meisten Städten kaum noch Sterne. Schuld daran ist das von Straßenlaternen, Schaufenstern und Werbetafeln ausgehende Licht, das den Himmel aufhellt. Fachleute sprechen von der sogenannten Lichtverschmutzung. Eine kürzlich veröffentlichte Untersuchung eines Forschungsinstituts in Kassel zeigt, dass die nächtliche Helligkeit in Mitteleuropa nicht, wie lange angenommen, um zwei, sondern um rund sechs Prozent pro Jahr zunimmt. Die Folgen sind nicht zu unterschätzen. Von künstlichem Licht angezogene Insekten kreisen bis zur Erschöpfung um die Lampen, und die im Herbst nach Süden ziehenden Vögel verlieren die Orientierung. Auch der durch helle Nächte gestörte Schlaf vieler Menschen gilt inzwischen als ernstes Gesundheitsrisiko. Einige Gemeinden haben bereits entsprechende Maßnahmen ergriffen. In einer bei Fulda gelegenen Kleinstadt werden die Laternen seit dem vergangenen Frühjahr zwischen ein Uhr und fünf Uhr morgens abgeschaltet. Die anfangs befürchtete Zunahme von Einbrüchen ist ausgeblieben, und die Stadt spart jährlich etwa vierzigtausend Euro Stromkosten. Die noch zu lösende Aufgabe liegt nach Ansicht der Forscherinnen woanders. Die privat betriebene Beleuchtung von Gärten und Fassaden wächst weiter, und für sie gibt es bislang keine verbindlichen Regeln.',
+      },
+      items: [
+        { typ: 'rf', aussage: 'Der Untersuchung zufolge wird der Nachthimmel rascher heller, als man lange angenommen hatte.', loesung: true },
+        {
+          typ: 'mc',
+          frage: 'Was ist in der Kleinstadt geschehen, seit die Laternen nachts abgeschaltet werden?',
+          optionen: ['Die Zahl der Einbrüche hat leicht zugenommen.', 'Die befürchtete Zunahme von Einbrüchen ist nicht eingetreten.', 'Die Abschaltung wurde nach Protesten wieder zurückgenommen.'],
+          loesung: 1,
+        },
+        { typ: 'rf', aussage: 'In der Kleinstadt bleiben die Straßenlaternen seit dem Frühjahr die ganze Nacht über ausgeschaltet.', loesung: false },
+        {
+          typ: 'mc',
+          frage: 'Worin sehen die Forscherinnen die Aufgabe, die noch zu lösen ist?',
+          optionen: ['in den hohen Kosten für sparsamere Laternen', 'im Widerstand der Geschäftsleute gegen dunkle Schaufenster', 'in der bislang ungeregelten privaten Beleuchtung'],
+          loesung: 2,
+        },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -111,6 +135,26 @@ export default {
       ],
       minWoerter: 80,
       beispielLoesung: 'Der Artikelauszug stellt eine Studie aus Hannover vor, der zufolge rund ein Drittel der befragten Schulleitungen den Zustand ihrer Gebäude als mangelhaft einstuft. Die seit Langem bekannten Schäden nehmen inzwischen schneller zu, vor allem wegen der stark gestiegenen Baukosten. Ungeklärt ist, ob Land oder Kommunen die anstehenden Investitionen finanzieren sollen.\nMeiner Ansicht nach ist die von der Studie empfohlene Lösung überzeugend. Ein gemeinsamer Fonds beendet das gegenseitige Zuschieben der Verantwortung und schafft Planungssicherheit. Entscheidend ist allerdings, dass die bereitgestellten Mittel zuerst dort ankommen, wo die Schäden am gravierendsten sind. Denn die eigentlich Betroffenen, die Schülerinnen und Schüler, können auf das Ende eines Zuständigkeitsstreits nicht warten.',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Nimm etwa zwei Minuten lang zusammenhängend Stellung. Sprich frei und gliedere deinen Beitrag deutlich.',
+      aufgabe: 'In einem Seminar zur Arbeitswelt wird die Frage diskutiert, ob regelmäßige berufliche Weiterbildung für alle Beschäftigten verpflichtend sein sollte. Nimm dazu in einer klar gegliederten mündlichen Stellungnahme von etwa zwei Minuten Position und verwende dabei mindestens zwei Partizipialattribute.',
+      punkte: [
+        'Erläutere kurz, warum das Thema an Bedeutung gewinnt.',
+        'Nenne ein Argument für und eines gegen eine Pflicht zur Weiterbildung.',
+        'Formuliere deine eigene, begründete Position.',
+        'Verwende mindestens zwei Partizipialattribute, etwa „die sich rasch verändernde Arbeitswelt“.',
+      ],
+      redemittel: [
+        'In der sich rasch verändernden Arbeitswelt …',
+        'Ein häufig genanntes Argument lautet, dass …',
+        'Ein nicht zu unterschätzender Einwand ist, dass …',
+        'Aus den genannten Gründen halte ich … für …',
+      ],
+      maxSekunden: 120,
+      beispielLoesung: 'Ich möchte mich zu der Frage äußern, ob berufliche Weiterbildung verpflichtend sein sollte. Das Thema gewinnt an Bedeutung, weil sich die Arbeitswelt rasant verändert. Viele vor zwanzig Jahren erlernte Fähigkeiten reichen heute nicht mehr aus, und die durch die Digitalisierung entstehenden Aufgaben verlangen ständig neues Wissen.\nFür eine Pflicht spricht, dass gerade die Beschäftigten, die eine Weiterbildung am dringendsten bräuchten, freiwillige Angebote am seltensten nutzen. Eine für alle geltende Regel würde verhindern, dass sie den Anschluss verlieren.\nDagegen gibt es allerdings einen nicht zu unterschätzenden Einwand: Erzwungenes Lernen bringt wenig. Wer nur im Kurs sitzt, weil er muss, nimmt kaum etwas mit. Außerdem bleibt die Frage, wer die damit verbundenen Kosten trägt: der Betrieb oder die Beschäftigten selbst?\nIch halte eine starre Pflicht deshalb für den falschen Weg. Überzeugender finde ich ein fest zugesichertes Recht, zum Beispiel fünf bezahlte Lerntage pro Jahr, bei denen die Beschäftigten über die Inhalte mitentscheiden. So bliebe die Motivation erhalten, und die Betriebe bekämen trotzdem besser qualifizierte Mitarbeiterinnen und Mitarbeiter.\nMein Fazit lautet also: Die Möglichkeit zur Weiterbildung muss garantiert sein, aber wirklich gut funktioniert Lernen nur dann, wenn man es selbst will.',
     },
   ],
 }

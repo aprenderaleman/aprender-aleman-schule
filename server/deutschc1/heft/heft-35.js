@@ -119,6 +119,30 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Du hörst einen Ausschnitt aus einem Podcast, in dem Jana und Felix über eine Studie sprechen. Entscheide, welche Antwort dem Gehörten entspricht bzw. ob die Aussage richtig oder falsch ist.',
+      audio: {
+        transcript: 'Jana: Willkommen zu einer neuen Folge unseres Podcasts. Felix, du hast dir die neue Befragung zur psychischen Gesundheit von Studierenden angesehen. Was steht drin?\nFelix: Vor allem eine Zahl, die mich erschreckt hat, Jana. Gut vierzig Prozent der Befragten geben an, unter chronischer Erschöpfung zu leiden. Vor fünf Jahren war es noch etwa ein Viertel.\nJana: Liegt das am Leistungsdruck im Studium selbst?\nFelix: Das dachte ich auch. Als häufigste Ursache nennen die Befragten aber nicht die Prüfungen, sondern die Doppelbelastung durch Studium und Nebenjob. Wer mehr als fünfzehn Stunden pro Woche arbeitet, ist deutlich häufiger betroffen.\nJana: Und was unternehmen die Hochschulen?\nFelix: Viele bieten Kurse zur Stressbewältigung an. Die Autorinnen der Studie halten das allerdings für ein Feigenblatt, solange sich an den Verhältnissen nichts ändert.\nJana: Das sehe ich etwas anders. Ich habe selbst so einen Kurs besucht, und mir hat er geholfen, rechtzeitig Hilfe zu suchen. Auf einen Termin bei der psychologischen Beratung musste ich dann allerdings sieben Wochen warten.\nFelix: Genau da setzt die Studie an. Sie fordert nicht noch mehr Kurse, sondern zusätzliche Beratungsstellen und Prüfungsphasen, die sich besser mit einem Nebenjob vereinbaren lassen.\nJana: Dann hoffen wir, dass das jemand liest, der darüber entscheidet.',
+      },
+      items: [
+        { typ: 'rf', aussage: 'Vor fünf Jahren klagte etwa jeder vierte Befragte über chronische Erschöpfung.', loesung: true },
+        {
+          typ: 'mc',
+          frage: 'Was nennen die Befragten als häufigste Ursache ihrer Erschöpfung?',
+          optionen: ['Den Druck in den Prüfungsphasen.', 'Die langen Wartezeiten bei der psychologischen Beratung.', 'Die Doppelbelastung durch Studium und Nebenjob.'],
+          loesung: 2,
+        },
+        {
+          typ: 'mc',
+          frage: 'Wie beurteilt Jana die Kurse zur Stressbewältigung?',
+          optionen: ['Sie hat selbst von einem solchen Kurs profitiert.', 'Sie hält sie wie die Autorinnen der Studie für ein Feigenblatt.', 'Sie hält sie für wirksamer als zusätzliche Beratungsstellen.'],
+          loesung: 0,
+        },
+        { typ: 'rf', aussage: 'Die Studie fordert in erster Linie, das Angebot an Kursen zur Stressbewältigung auszubauen.', loesung: false },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -131,6 +155,20 @@ export default {
       ],
       minWoerter: 80,
       beispielLoesung: 'Auf den ersten Blick klingt ein Beitragsrabatt für gesundheitsbewusste Versicherte überzeugend: Wer regelmäßig Sport treibt und Vorsorgeuntersuchungen wahrnimmt, stärkt die Prävention und senkt langfristig die Kosten für alle. Ein finanzieller Anreiz könnte zudem Menschen erreichen, an denen Aufklärungskampagnen vorbeigehen.\nDennoch überwiegen für mich die Bedenken. Die gesetzliche Krankenversicherung beruht auf dem Solidarprinzip: Die Beiträge richten sich nach dem Einkommen, nicht nach dem Risiko. Ein Bonus würde vor allem jene belohnen, die ohnehin gesund leben und über Zeit und Geld verfügen, während chronisch Kranke oder Schichtarbeiter leer ausgingen. Zudem ist die Grenze zur Bevormundung schnell überschritten, wenn Kassen das Freizeitverhalten kontrollieren.\nSinnvoller wäre es daher, Vorsorgeangebote auszubauen und leichter zugänglich zu machen, statt an die Eigenverantwortung Einzelner zu appellieren und sie finanziell zu sortieren.',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Nimm mündlich zu einer These Stellung. Sprich zusammenhängend etwa zwei Minuten (höchstens 150 Sekunden).',
+      aufgabe: 'In einer Diskussionssendung fällt die These: „Was auf meinem Teller liegt, ist Privatsache — der Staat hat sich aus der Ernährung seiner Bürger herauszuhalten.“ Nimm dazu in einem zusammenhängenden Diskussionsbeitrag Stellung. Wäge Eigenverantwortung und Bevormundung gegeneinander ab und stütze dich auf mindestens ein konkretes Beispiel.',
+      punkte: [
+        'Erkläre, was an der These berechtigt ist.',
+        'Zeige an einem Beispiel (etwa Zuckersteuer, Kantinenangebot oder Werbung), wo Appelle an die Eigenverantwortung an Grenzen stoßen.',
+        'Beziehe Position: Welche staatlichen Eingriffe hältst du für vertretbar, welche nicht?',
+      ],
+      redemittel: ['So berechtigt … ist, so wenig …', 'Wie das Beispiel … zeigt, …', 'Zwischen Fürsorge und Bevormundung verläuft ein schmaler Grat.', 'Bei aller Skepsis gegenüber staatlichen Eingriffen: …'],
+      maxSekunden: 150,
+      beispielLoesung: 'Auf den ersten Blick klingt die These überzeugend. Natürlich möchte niemand, dass ihm der Staat vorschreibt, was er zu Mittag isst. Erwachsene Menschen sind mündig, und wer sich bewusst für die Currywurst entscheidet, hat jedes Recht dazu. Insofern ist der Appell an die Eigenverantwortung berechtigt.\nAber so berechtigt er ist, so wenig ändert er an den Verhältnissen, unter denen wir einkaufen. Wenn die Limonade billiger ist als das Wasser und Werbung für Süßigkeiten sich gezielt an Kinder richtet, dann ist die Entscheidung eben nicht mehr ganz frei. Hinzu kommt: Übergewicht und Diabetes zählen zu den Volkskrankheiten, und die Folgekosten trägt die Allgemeinheit über die Krankenkassenbeiträge. Wo alle mitbezahlen, endet das rein private Ermessen.\nNehmen wir die Zuckersteuer. Wie das britische Beispiel zeigt, senken viele Hersteller den Zuckergehalt ihrer Getränke, sobald er sie Geld kostet. Niemandem wurde etwas verboten, und trotzdem hat sich etwas bewegt.\nDas ist für mich der entscheidende Punkt. Zwischen Fürsorge und Bevormundung verläuft ein schmaler Grat, und die Grenze ziehe ich bei der Wahlfreiheit. Verbote lehne ich ab — niemand soll mir das Stück Kuchen wegnehmen. Maßnahmen dagegen, die die gesunde Wahl zur einfachsten machen, also Preissignale, eine klare Kennzeichnung oder ein gutes Kantinenangebot, halte ich für vertretbar. Die These greift also zu kurz: Der Teller ist privat, aber die Bedingungen, unter denen er gefüllt wird, sind es nicht.',
     },
   ],
 }

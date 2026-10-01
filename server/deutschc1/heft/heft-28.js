@@ -120,6 +120,38 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Du hörst einen Ausschnitt aus einer Podiumsdiskussion. Entscheide bei jeder Aufgabe, welche Antwort dem Gehörten entspricht bzw. ob die Aussage richtig oder falsch ist.',
+      audio: {
+        transcript: 'Moderatorin: Sollten Smartphones an Schulen ganz verboten werden? Darüber diskutieren heute die Schulleiterin Sabine Keller und der Elternvertreter Markus Brandt. Frau Keller, an Ihrer Schule gilt ein solches Verbot bereits.\nSabine: Ja, seit zwei Jahren. Die Geräte bleiben bis zum Unterrichtsschluss im Schließfach. Seither wird in den Pausen wieder mehr miteinander gesprochen, und die Zahl der Konflikte ist spürbar zurückgegangen.\nMarkus: Im Kern kann ich das gut nachvollziehen, allerdings geht mir ein vollständiges Verbot zu weit. Kinder müssen den vernünftigen Umgang mit dem Gerät lernen, und wo, wenn nicht in der Schule?\nSabine: Das ist ein berechtigter Einwand, Herr Brandt. Nur haben wir genau das versucht. Vor dem Verbot galt bei uns eine Regelung mit festen Handyzeiten, und die ließ sich schlicht nicht kontrollieren.\nMarkus: Dann lag das Problem aber nicht am Handy, sondern an der fehlenden Aufsicht. Ich würde mir wünschen, dass die Schule Medienkompetenz als eigenes Fach unterrichtet.\nSabine: Dem stimme ich nur bedingt zu. Ein eigenes Fach halte ich für unrealistisch, die Stundenpläne sind voll. Projektwochen wären dagegen denkbar.\nModeratorin: Zeichnet sich da ein Kompromiss ab?\nMarkus: Vielleicht können wir uns darauf einigen, dass das Verbot für die unteren Klassen bleibt und die Älteren ihr Gerät im Unterricht gezielt einsetzen dürfen.\nSabine: Darüber ließe sich reden, allerdings erst ab der zehnten Klasse.',
+      },
+      items: [
+        {
+          typ: 'mc',
+          frage: 'Was hat sich an Frau Kellers Schule seit dem Verbot verändert?',
+          optionen: [
+            'Die Leistungen in den Hauptfächern haben sich verbessert.',
+            'Es gibt weniger Konflikte, und in den Pausen wird mehr miteinander geredet.',
+            'Die Beschwerden der Eltern haben deutlich zugenommen.',
+          ],
+          loesung: 1,
+        },
+        { typ: 'rf', aussage: 'Bevor das Verbot eingeführt wurde, hatte die Schule eine Regelung mit festen Handyzeiten erprobt.', loesung: true },
+        { typ: 'rf', aussage: 'Frau Keller spricht sich dafür aus, Medienkompetenz als eigenes Schulfach einzuführen.', loesung: false },
+        {
+          typ: 'mc',
+          frage: 'Welcher Kompromiss zeichnet sich am Ende ab?',
+          optionen: [
+            'Das Verbot wird an der gesamten Schule aufgehoben.',
+            'Das Verbot gilt künftig nur noch während der Pausen.',
+            'Für die Jüngeren bleibt das Verbot, die Älteren dürfen das Handy im Unterricht gezielt nutzen.',
+          ],
+          loesung: 2,
+        },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -132,6 +164,26 @@ export default {
       ],
       minWoerter: 80,
       beispielLoesung: 'Sehr geehrte Damen und Herren,\nbezugnehmend auf Ihren Aufruf möchte ich zu den Plänen für eine autofreie Innenstadt Stellung nehmen. Grundsätzlich begrüße ich das Vorhaben, da es Lärm und Luftverschmutzung deutlich verringern würde.\nDen Einwand vieler Einzelhändler, ihnen würden Kundinnen und Kunden verloren gehen, kann ich gut nachvollziehen. Allerdings zeigen Erfahrungen aus anderen Städten, dass Fußgängerzonen die Aufenthaltsqualität steigern und oft sogar mehr Laufkundschaft anziehen.\nIch würde daher einen Kompromiss vorschlagen: Die Sperrung sollte schrittweise, Zone für Zone, erfolgen, und zwar erst, nachdem der Nahverkehr ausgebaut wurde. Für Menschen mit eingeschränkter Mobilität sowie für Lieferverkehr wären Ausnahmen vorzusehen.\nIch wäre Ihnen dankbar, wenn Sie diesen Vorschlag bei Ihren weiteren Planungen berücksichtigen könnten.\nMit freundlichen Grüßen\nElif Demir',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Sprich einen Diskussionsbeitrag (etwa zweieinhalb Minuten). Gehe zuerst auf das Argument deines Gegenübers ein, bevor du deine eigene Position entwickelst.',
+      aufgabe: 'Du nimmst an einer Diskussion über die These „Beliebte Städte sollten von Tagestouristen Eintritt verlangen“ teil. Dein Gesprächspartner hat eben gesagt: „Wer nur für ein paar Stunden kommt, verstopft die Altstadt und lässt kaum Geld da, während die Stadt für Reinigung und Sicherheit aufkommt. Eine Eintrittsgebühr ist da nur gerecht.“ Reagiere mit einem eigenen Diskussionsbeitrag von etwa zweieinhalb Minuten: Knüpfe ausdrücklich an das Gesagte an, räume ein, was daran berechtigt ist, widersprich mit mindestens einem begründeten Einwand samt Beispiel und spiele deinem Gegenüber am Ende mit einem Kompromissvorschlag oder einer Frage den Ball zurück.',
+      punkte: [
+        'Greife ein Argument deines Gesprächspartners ausdrücklich auf und räume ein, was daran berechtigt ist.',
+        'Bringe mindestens einen begründeten Einwand vor und stütze ihn mit einem Beispiel.',
+        'Schließe mit einem Kompromissvorschlag oder einer Frage an dein Gegenüber.',
+      ],
+      redemittel: [
+        'Sie haben eben gesagt, dass …',
+        'Im Kern stimme ich Ihnen zu, allerdings …',
+        'Darauf lässt sich entgegnen, dass …',
+        'Ist es nicht eher so, dass …?',
+        'Vielleicht können wir uns darauf einigen, dass …',
+      ],
+      maxSekunden: 150,
+      beispielLoesung: 'Sie haben eben gesagt, dass Tagesgäste die Altstadt verstopfen und kaum Geld dalassen — und im Kern stimme ich Ihnen zu. Wer einmal an einem Samstag im August versucht hat, sich durch die Gassen einer überlaufenen Altstadt zu schieben, kann den Unmut der Einheimischen gut nachvollziehen. Auch dass die Kosten für Reinigung und Sicherheit an der Stadt hängen bleiben, lässt sich kaum bestreiten. Ihre Schlussfolgerung teile ich allerdings nur bedingt.\nDarauf lässt sich nämlich entgegnen, dass eine Gebühr von wenigen Euro kaum jemanden abhält. Venedig hat genau das erprobt: Die Stadt nahm zwar Geld ein, leerer wurde es an den betreffenden Tagen jedoch nicht. Wer eine weite Anreise in Kauf nimmt, lässt sich von fünf Euro nicht abschrecken.\nHinzu kommt ein Einwand, der für mich noch schwerer wiegt: Eine Stadt, die Eintritt verlangt, erklärt sich selbst zum Museum. Und ist es nicht eher so, dass die Gebühr gerade diejenigen trifft, die ohnehin wenig haben — die Familie aus dem Umland etwa, die sich keine Hotelübernachtung leisten kann? Der Zugang zum öffentlichen Raum sollte nicht vom Geldbeutel abhängen.\nIch würde deshalb weniger beim Preis ansetzen als bei der Steuerung. Vielleicht können wir uns darauf einigen, dass Städte an besonders vollen Tagen die Zahl der Reisebusse und Kreuzfahrtschiffe begrenzen dürfen, der Zugang für den Einzelnen aber frei bleibt. Oder sehen Sie darin einen faulen Kompromiss?',
     },
   ],
 }

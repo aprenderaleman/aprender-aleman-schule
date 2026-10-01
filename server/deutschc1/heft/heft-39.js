@@ -100,6 +100,38 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Prüfungssimulation: Du hörst einen Ausschnitt aus einem wissenschaftlichen Vortrag. Lies zuerst die Aufgaben, höre dann den Vortrag und entscheide, welche Antwort dem Gehörten entspricht bzw. ob die Aussage richtig oder falsch ist.',
+      audio: {
+        transcript: 'Meine Damen und Herren, mein Name ist Katharina Wolf. Ich stelle Ihnen heute eine Untersuchung vor, die unser Institut für Stadtklimaforschung in den vergangenen drei Sommern in Mannheim durchgeführt hat. Wir wollten wissen, wie stark Straßenbäume ihre Umgebung abkühlen.\nZunächst zum Vorgehen. Gemessen haben wir in sechzehn Straßen, von denen die Hälfte dicht mit Bäumen bestanden ist, während die übrigen nahezu kahl sind. Erfasst wurde nicht nur die Temperatur der Luft, sondern auch die der Oberflächen.\nDas Ergebnis hat uns selbst überrascht. An heißen Nachmittagen war die Luft unter den Bäumen lediglich um anderthalb Grad kühler, also weit weniger, als gemeinhin behauptet wird. Der Asphalt hingegen heizte sich im Schatten um bis zu achtzehn Grad weniger auf. Wie Passanten die Hitze empfinden, hängt demnach weniger von der Luft ab als von der Strahlung, vor der das Blätterdach sie schützt. Nachts kehrte sich das Bild allerdings teilweise um, denn unter dichten Kronen entweicht die Wärme langsamer, sodass es in engen Straßen sogar geringfügig wärmer blieb.\nWas folgt daraus? Unsere Daten legen nahe, dass Bäume vor allem tagsüber entlasten. Dass sie ein überhitztes Viertel insgesamt abkühlen, ist damit keineswegs belegt. Zudem spendet ein junger Baum erst nach etwa fünfzehn Jahren nennenswert Schatten. Ich plädiere deshalb dafür, alte Bestände zu erhalten, statt sich allein auf Neupflanzungen zu verlassen.',
+      },
+      items: [
+        {
+          typ: 'mc',
+          frage: 'Was ergaben die Messungen an heißen Nachmittagen?',
+          optionen: [
+            'Die Luft war unter den Bäumen um bis zu achtzehn Grad kühler als in den kahlen Straßen.',
+            'Weder bei der Luft noch beim Asphalt zeigte sich ein nennenswerter Unterschied.',
+            'Die Luft war unter den Bäumen nur wenig kühler, der Asphalt heizte sich dort jedoch erheblich weniger auf.',
+          ],
+          loesung: 2,
+        },
+        { typ: 'rf', aussage: 'Nach Darstellung der Referentin hängt es in erster Linie von der Lufttemperatur ab, wie stark Passanten die Hitze empfinden.', loesung: false },
+        {
+          typ: 'mc',
+          frage: 'Was zeigte sich bei den nächtlichen Messungen?',
+          optionen: [
+            'Die baumbestandenen Straßen kühlten nachts besonders rasch ab.',
+            'In engen Straßen mit dichten Baumkronen blieb es etwas wärmer.',
+            'Zwischen den Straßen ließ sich nachts kein Unterschied mehr messen.',
+          ],
+          loesung: 1,
+        },
+        { typ: 'rf', aussage: 'Die Referentin begründet ihr Plädoyer für den Erhalt alter Bäume unter anderem damit, dass neu gepflanzte Bäume erst nach vielen Jahren ausreichend Schatten spenden.', loesung: true },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -112,6 +144,27 @@ export default {
       ],
       minWoerter: 80,
       beispielLoesung: 'Der Artikel berichtet über einen einjährigen Modellversuch zur Viertagewoche in einer Stadtverwaltung in Nordhessen. Laut Zwischenbilanz sei die Zahl der Krankheitstage deutlich gesunken, offene Stellen ließen sich schneller besetzen, und auch die Bürger hätten von längeren Öffnungszeiten profitiert. Der Autor gibt jedoch zu bedenken, dass sich vermutlich vor allem motivierte Beschäftigte freiwillig gemeldet hätten; zudem seien Überstunden in der Bilanz nicht erfasst. Während die Personalvertretung eine Ausweitung fordere, verlange der Kämmerer zunächst eine unabhängige Auswertung.\nMeines Erachtens ist die Position des Kämmerers überzeugender. Die Ergebnisse sind zwar ermutigend, doch solange die Stichprobe verzerrt ist, lässt sich kaum abschätzen, wie das Modell in allen Abteilungen wirken würde. Ich plädiere daher für eine zweite, wissenschaftlich begleitete Testphase, bevor eine endgültige Entscheidung getroffen wird.',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Prüfungssimulation: Halte einen strukturierten Vortrag von etwa zweieinhalb Minuten. Notiere dir vorher höchstens fünf Minuten lang Stichpunkte und sprich dann frei und am Stück, ohne abzulesen.',
+      aufgabe: 'Thema: „Sollten junge Menschen nach der Schule ein soziales Pflichtjahr leisten?“ Halte dazu einen Vortrag mit Einleitung, Hauptteil und Schluss: Führe zum Thema hin und nenne deine These, begründe sie mit zwei Argumenten, setze dich mit einem Gegenargument auseinander und schließe mit einem Fazit.',
+      punkte: [
+        'Hinführung zum Thema und deine These',
+        'zwei Argumente, jeweils mit Beispiel oder Begründung',
+        'ein Gegenargument und deine Entgegnung',
+        'Fazit mit Ausblick',
+      ],
+      redemittel: [
+        'In meinem Vortrag möchte ich zeigen, warum …',
+        'Dafür spricht zunächst …',
+        'Hinzu kommt …',
+        'Kritiker wenden ein, … Dieser Einwand ist berechtigt, er spricht jedoch eher für … als gegen …',
+        'Abschließend lässt sich festhalten: …',
+      ],
+      maxSekunden: 150,
+      beispielLoesung: 'In Pflegeheimen, Kitas und Rettungsdiensten fehlt überall Personal. Vor diesem Hintergrund wird immer wieder gefordert, alle jungen Menschen sollten nach der Schule ein soziales Pflichtjahr leisten. In meinem Vortrag möchte ich zeigen, warum ich diese Idee im Kern für richtig halte — allerdings nur unter bestimmten Bedingungen.\nDafür spricht zunächst der gesellschaftliche Zusammenhalt. Wer ein Jahr lang in einem Pflegeheim oder in einer Werkstatt für Menschen mit Behinderung mitarbeitet, begegnet Menschen, mit denen er sonst nie in Berührung käme. Solche Erfahrungen bauen Vorurteile ab, und zwar nachhaltiger als jeder Unterricht.\nHinzu kommt der persönliche Gewinn. Viele wissen mit achtzehn noch nicht, was sie beruflich machen wollen. Ein Jahr in der Praxis verschafft Orientierung, und nicht wenige entdecken dabei einen Beruf, den sie vorher nie in Betracht gezogen hätten.\nKritiker wenden ein, ein Pflichtjahr sei ein massiver Eingriff in die persönliche Freiheit, und unmotivierte Helfer seien für die Einrichtungen eher eine Last als eine Hilfe. Dieser Einwand ist berechtigt. Er spricht meines Erachtens jedoch weniger gegen den Dienst selbst als für eine kluge Ausgestaltung: Die jungen Leute müssten ihren Einsatzbereich frei wählen können, vom Umweltschutz bis zum Sportverein, und sie müssten angemessen bezahlt und betreut werden.\nAbschließend lässt sich festhalten: Ein Pflichtjahr löst den Personalmangel sicher nicht, und das sollte auch nicht sein Zweck sein. Es kann aber dazu beitragen, dass sich Menschen unterschiedlicher Herkunft und verschiedener Generationen wieder begegnen, und deshalb halte ich es, klug ausgestaltet, für einen Gewinn. Entscheidend wird sein, ob die Politik bereit ist, die nötigen Mittel dafür bereitzustellen.',
     },
   ],
 }

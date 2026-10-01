@@ -116,6 +116,38 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Du hörst eine Nachricht auf dem Anrufbeantworter. Entscheide bei jeder Aufgabe, welche Antwort dem Gehörten entspricht bzw. ob die Aussage richtig oder falsch ist.',
+      audio: {
+        transcript: 'Guten Tag, Frau Lindner, hier spricht Tobias Wendt vom Kundenservice des Möbelhauses am Stadtpark in Kassel. Ich melde mich wegen Ihrer Reklamation vom dritten März. Sie hatten beanstandet, dass der Esstisch mit einer beschädigten Tischplatte geliefert wurde und dass Ihnen zusätzlich Lieferkosten berechnet wurden, obwohl eine kostenlose Lieferung zugesagt war. Ich habe den Sachverhalt geprüft und kann Ihnen Folgendes mitteilen. Die Lieferkosten in Höhe von neunundvierzig Euro erstatten wir Ihnen selbstverständlich vollständig, hier lag der Fehler eindeutig bei uns. Was die Tischplatte betrifft, so können wir Ihnen bedauerlicherweise keinen Preisnachlass gewähren, sondern ausschließlich einen Austausch anbieten. Die neue Platte ist bereits bestellt und trifft voraussichtlich in der übernächsten Woche bei uns ein. Für die entstandenen Unannehmlichkeiten bitte ich Sie vielmals um Entschuldigung. Aus Kulanz legen wir der Lieferung einen Gutschein über dreißig Euro bei. Ich wäre Ihnen dankbar, wenn Sie mir bis Freitag einen Wunschtermin für die Montage nennen könnten, am besten per E-Mail, da ich telefonisch nur vormittags zu erreichen bin. Die Rückerstattung wird innerhalb von vierzehn Tagen auf Ihr Konto überwiesen. Für Rückfragen stehe ich Ihnen gern zur Verfügung. Auf Wiederhören.',
+      },
+      items: [
+        {
+          typ: 'mc',
+          frage: 'Wie begründet Herr Wendt die Erstattung der Lieferkosten?',
+          optionen: [
+            'Das Möbelhaus hat sie zu Unrecht berechnet.',
+            'Sie erfolgt aus Kulanz, obwohl die Berechnung korrekt war.',
+            'Sie soll die beschädigte Tischplatte ausgleichen.',
+          ],
+          loesung: 0,
+        },
+        { typ: 'rf', aussage: 'Für die beschädigte Tischplatte gewährt das Möbelhaus einen Preisnachlass.', loesung: false },
+        {
+          typ: 'mc',
+          frage: 'Worum bittet Herr Wendt Frau Lindner?',
+          optionen: [
+            'Sie soll ihn am Vormittag zurückrufen.',
+            'Sie soll ihm ihre Bankverbindung bestätigen.',
+            'Sie soll ihm bis Freitag einen Termin für die Montage vorschlagen.',
+          ],
+          loesung: 2,
+        },
+        { typ: 'rf', aussage: 'Als Zeichen des Entgegenkommens erhält Frau Lindner einen Gutschein im Wert von 30 Euro.', loesung: true },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -128,6 +160,27 @@ export default {
       ],
       minWoerter: 80,
       beispielLoesung: 'Sehr geehrte Damen und Herren,\nich wende mich an Sie, weil ich mit meinem Aufenthalt in Ihrem Hotel vom 3. bis 5. Mai leider nicht zufrieden war.\nGebucht und bestätigt hatte ich ein ruhiges Zimmer mit Frühstück. Zum einen wurde mir jedoch ein Zimmer zur Straße zugewiesen, in dem wegen einer Baustelle ab sieben Uhr an Schlaf nicht zu denken war. Zum anderen wurde mir das Frühstück zusätzlich in Rechnung gestellt, obwohl es im Buchungspreis enthalten war.\nIch möchte Sie daher bitten, mir den Frühstückspreis vollständig sowie einen angemessenen Teil des Zimmerpreises bis zum 31. Mai zu erstatten. Für eine baldige Rückmeldung wäre ich Ihnen sehr dankbar.\nMit freundlichen Grüßen\nLukas Hoffmann',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Sprich eine formelle Nachricht auf die Mailbox (etwa zwei Minuten). Sprich frei, in ganzen Sätzen und durchgehend im Sie-Register.',
+      aufgabe: 'Du hast der Leiterin einer Sprachschule, Frau Brandt, verbindlich zugesagt, ihr bis Freitag die Übersetzung einer Informationsbroschüre zu liefern. Weil du krank geworden bist, kannst du die Frist nicht einhalten. Du erreichst Frau Brandt telefonisch nicht und sprichst ihr eine formelle Nachricht von etwa zwei Minuten auf die Mailbox. Baue sie so auf: Name und Anlass des Anrufs, Entschuldigung mit kurzer Begründung, Vorschlag einer neuen Frist samt einem Entgegenkommen, Bitte um Rückmeldung und Verabschiedung. Bleibe durchgehend beim Sie und formuliere deine Bitte höflich im Konjunktiv II.',
+      punkte: [
+        'Nenne deinen Namen und den Anlass deines Anrufs.',
+        'Entschuldige dich und schildere kurz den Grund für die Verzögerung.',
+        'Schlage eine neue Frist vor und biete ein Entgegenkommen an.',
+        'Bitte um eine Rückmeldung und verabschiede dich angemessen.',
+      ],
+      redemittel: [
+        'Ich rufe an, weil …',
+        'Bedauerlicherweise muss ich Ihnen mitteilen, dass …',
+        'Ich wäre Ihnen sehr dankbar, wenn Sie … könnten.',
+        'Als Entgegenkommen könnte ich Ihnen anbieten, …',
+        'Könnten Sie mir bitte kurz mitteilen, ob …?',
+      ],
+      maxSekunden: 120,
+      beispielLoesung: 'Guten Tag, Frau Brandt, hier spricht Carmen Vidal. Ich rufe an, weil es um die Übersetzung Ihrer Informationsbroschüre geht, die ich Ihnen für diesen Freitag verbindlich zugesagt hatte. Bedauerlicherweise muss ich Ihnen mitteilen, dass ich diese Frist nicht einhalten kann. Ich bin seit Anfang der Woche krank und konnte mehrere Tage überhaupt nicht arbeiten. Das tut mir aufrichtig leid, zumal ich weiß, dass Sie die Broschüre für Ihre Informationsveranstaltung brauchen. Für die Unannehmlichkeiten, die Ihnen dadurch entstehen, bitte ich Sie vielmals um Entschuldigung. Ungefähr zwei Drittel des Textes sind bereits fertig. Ich wäre Ihnen sehr dankbar, wenn Sie mir die Frist bis zum kommenden Mittwoch verlängern könnten. Als Entgegenkommen könnte ich Ihnen anbieten, den fertigen Teil schon heute zu schicken, damit Sie ihn vorab prüfen können. Selbstverständlich würde ich Ihnen außerdem einen Nachlass auf das vereinbarte Honorar einräumen. Könnten Sie mir bitte kurz mitteilen, ob Sie mit diesem Vorschlag einverstanden wären? Sie erreichen mich jederzeit unter dieser Nummer oder per E-Mail. Vielen Dank für Ihr Verständnis und auf Wiederhören.',
     },
   ],
 }

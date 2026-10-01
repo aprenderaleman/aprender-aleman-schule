@@ -99,6 +99,30 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Du hörst ein Gespräch zwischen zwei Kollegen. Achte nicht nur auf die Informationen, sondern auch auf die Haltung der Sprechenden, und entscheide dann, welche Antwort zutrifft bzw. ob die Aussage richtig oder falsch ist.',
+      audio: {
+        transcript: 'Jana: Tobias, hast du mal kurz Zeit? Es geht um die Abschiedsfeier für Frau Lindner.\nTobias: Klar, Jana, komm ruhig rein. Die Feier ist doch am Donnerstag, oder?\nJana: Nein, eben nicht mehr. Am Donnerstag ist ja die Betriebsversammlung. Wir mussten auf Freitag ausweichen, sechzehn Uhr.\nTobias: Freitagnachmittag? Da sind wohl die meisten schon im Wochenende.\nJana: Ich weiß, aber es ging halt nicht anders. Der große Besprechungsraum war sonst die ganze Woche belegt.\nTobias: Na gut. Und wer hält eigentlich die Rede?\nJana: Der Abteilungsleiter wollte ursprünglich, aber der ist verreist. Jetzt habe ich an dich gedacht. Du hast doch am längsten mit ihr zusammengearbeitet.\nTobias: Ich? Das ist ja eine Überraschung! Wie lang soll das denn werden?\nJana: Fünf Minuten reichen völlig. Das kriegst du schon hin.\nTobias: Meinetwegen. Und was ist mit dem Geschenk?\nJana: Wir haben dreihundertfünfzig Euro gesammelt. Geplant war erst ein Reisegutschein, aber sie fährt ja kaum noch weg. Jetzt wird es ein Jahresabo fürs Theater.\nTobias: Schöne Idee. Weiß sie eigentlich schon davon?\nJana: Nein! Erwähn das bloß nicht, wenn du sie nachher in der Kantine triffst. Es soll eine Überraschung bleiben.\nTobias: Keine Sorge, von mir erfährt sie nichts.',
+      },
+      items: [
+        { typ: 'rf', aussage: 'Jana ist überzeugt, dass sich ein günstigerer Termin hätte finden lassen.', loesung: false },
+        {
+          typ: 'mc',
+          frage: 'Weshalb fällt Janas Wahl für die Rede auf Tobias?',
+          optionen: ['Weil der Abteilungsleiter ihn dafür vorgeschlagen hat.', 'Weil er sich selbst dafür angeboten hat.', 'Weil niemand länger mit Frau Lindner zusammengearbeitet hat als er.'],
+          loesung: 2,
+        },
+        {
+          typ: 'mc',
+          frage: 'Wie nimmt Tobias die Bitte auf, die Rede zu halten?',
+          optionen: ['Er ist überrascht, erklärt sich aber ohne große Begeisterung bereit.', 'Er fühlt sich geehrt und sagt sofort mit Freude zu.', 'Er zögert und will die Entscheidung dem Abteilungsleiter überlassen.'],
+          loesung: 0,
+        },
+        { typ: 'rf', aussage: 'Statt des zunächst geplanten Reisegutscheins bekommt Frau Lindner ein Theaterabonnement.', loesung: true },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -111,6 +135,20 @@ export default {
       ],
       minWoerter: 80,
       beispielLoesung: 'In ihrem Essay setzt sich Ingrid Solberg mit der Frage auseinander, warum Modalpartikeln Deutschlernenden so große Schwierigkeiten bereiten. Sie vertritt die These, diese Wörter veränderten nicht den Inhalt einer Aussage, sondern zeigten die Haltung des Sprechers gegenüber seinem Gesprächspartner. Fortgeschrittene Lernende befänden sich daher in einem Dilemma: Ohne Partikeln klinge ihr Deutsch hölzern, mit wahllos gesetzten Partikeln riskierten sie ernste Missverständnisse. Als Ausweg empfiehlt die Verfasserin, zunächst im Hören ein Gespür für die Sprechabsicht zu entwickeln.\nDiese Strategie halte ich für überzeugend. Auch mir ist die Wirkung der Partikeln erst bewusst geworden, als ich Gespräche unter Muttersprachlern aufmerksam verfolgt habe. Allerdings sollte man mit dem eigenen Gebrauch nicht zu lange warten: Wer einige sichere Partikeln früh erprobt, gewinnt an Natürlichkeit, ohne viel zu riskieren.',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Sprich etwa zwei Minuten frei, so wie du es in einer Besprechung unter vertrauten Kolleginnen und Kollegen tun würdest. Töne deine Äußerungen mit Modalpartikeln ab, damit dein Einwand freundlich und nicht schroff klingt.',
+      aufgabe: 'In deinem Team, in dem sich alle duzen, soll die wöchentliche Besprechung von Montagmorgen auf Freitagnachmittag verlegt werden. Du hältst das für keine gute Idee. Melde dich in der Besprechung mit einem zusammenhängenden Redebeitrag von etwa zwei Minuten zu Wort: Leite deinen Einwand höflich ein, begründe ihn und mache einen Gegenvorschlag. Töne deine Äußerungen mit Modalpartikeln ab (etwa ja, doch, mal, eben, halt, ruhig), damit der Einwand freundlich und nicht schroff klingt.',
+      punkte: [
+        'Leite deinen Einwand höflich ein und zeige Verständnis für den Vorschlag.',
+        'Nenne zwei Gründe, die gegen den Freitagnachmittag sprechen.',
+        'Mache einen Gegenvorschlag und ermuntere das Team, ihn auszuprobieren.',
+      ],
+      redemittel: ['Darf ich dazu mal kurz etwas sagen?', 'Ich verstehe ja, warum …', 'Am Freitagnachmittag sind wir doch alle …', 'Lasst uns doch einfach mal …', 'Sagt ruhig, wenn ihr das anders seht.'],
+      maxSekunden: 120,
+      beispielLoesung: 'Darf ich dazu mal kurz etwas sagen? Ich verstehe ja, warum der Vorschlag kommt: Der Montagmorgen ist für viele stressig, und manche stehen dann noch im Stau. Das ist eben so, das kann keiner ändern. Trotzdem halte ich den Freitagnachmittag eigentlich für die schlechtere Lösung.\nErstens sind wir am Freitag um drei doch alle mit dem Kopf schon im Wochenende. Da trifft man wohl kaum noch gute Entscheidungen. Zweitens besprechen wir in der Runde ja vor allem, was in der Woche ansteht. Wenn wir das erst am Freitag tun, liegen zwei freie Tage dazwischen, und am Montag hat die Hälfte halt wieder vergessen, wer was übernimmt.\nMein Vorschlag wäre deshalb: Lasst uns doch den Montag behalten, aber erst um zehn anfangen statt um halb neun. Dann kann jeder in Ruhe ankommen und schon mal seine Mails lesen. Probieren wir das ruhig mal vier Wochen aus. Wenn es nicht klappt, können wir ja immer noch über den Freitag reden. Das kriegen wir schon hin. Sagt ruhig, wenn ihr das anders seht.',
     },
   ],
 }

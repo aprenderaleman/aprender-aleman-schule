@@ -99,6 +99,30 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Du hörst einen Ausschnitt aus einer Podiumsdiskussion. Entscheide, welche Antwort dem Gehörten entspricht bzw. ob die Aussage richtig oder falsch ist.',
+      audio: {
+        transcript: 'Moderator: Willkommen zu unserer Podiumsdiskussion. Frau Brandt, Sie leiten das Personalwesen einer Versicherung und haben Ihre Beschäftigten an drei festen Tagen ins Büro zurückgeholt. Warum?\nFrau: Weil wir gemerkt haben, dass vor allem neue Kolleginnen und Kollegen im Homeoffice kaum Anschluss finden. Die Produktivität war übrigens nie das Problem, die blieb konstant. Was gelitten hat, war die Bindung ans Team.\nModerator: Herr Demir, Sie vertreten den Betriebsrat. Teilen Sie diese Einschätzung?\nMann: Nur zum Teil. In unserer Befragung haben nicht dreißig, sondern dreizehn Prozent angegeben, dass ihnen der Austausch fehlt. Die große Mehrheit schätzt den Wegfall des Pendelns. Was die Leute wirklich belastet, ist die ständige Erreichbarkeit am Abend.\nFrau: Da widerspreche ich gar nicht. Deshalb gilt bei uns seit Januar, dass nach achtzehn Uhr keine Mails mehr beantwortet werden müssen.\nMann: Auf dem Papier, Frau Brandt. Solange Vorgesetzte abends selbst schreiben, bleibt der Feierabend bloße Theorie.\nModerator: Was wäre denn Ihr Vorschlag?\nMann: Dass die Teams selbst festlegen, an welchen Tagen sie sich im Betrieb treffen. Feste Tage von oben treiben gerade Eltern in die Teilzeit oder zur Kündigung.\nFrau: Darüber können wir reden, sofern wenigstens ein gemeinsamer Tag pro Woche bleibt.',
+      },
+      items: [
+        {
+          typ: 'mc',
+          frage: 'Weshalb hat Frau Brandt feste Bürotage eingeführt?',
+          optionen: ['Weil die Produktivität im Homeoffice nachgelassen hatte.', 'Weil neue Beschäftigte im Homeoffice kaum Anschluss ans Team fanden.', 'Weil der Betriebsrat auf mehr Präsenz gedrängt hatte.'],
+          loesung: 1,
+        },
+        { typ: 'rf', aussage: 'Laut der Befragung des Betriebsrats vermisst knapp ein Drittel der Beschäftigten den Austausch im Büro.', loesung: false },
+        {
+          typ: 'mc',
+          frage: 'Wie beurteilt Herr Demir die Regelung, nach achtzehn Uhr keine Mails mehr beantworten zu müssen?',
+          optionen: ['Er hält sie für wirkungslos, solange Vorgesetzte abends selbst Mails verschicken.', 'Er hält sie für überflüssig, weil abends ohnehin kaum jemand arbeitet.', 'Er verlangt, sie auch auf das Wochenende auszudehnen.'],
+          loesung: 0,
+        },
+        { typ: 'rf', aussage: 'Frau Brandt ist bereit, über frei wählbare Bürotage zu verhandeln, wenn ein gemeinsamer Tag pro Woche erhalten bleibt.', loesung: true },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -111,6 +135,21 @@ export default {
       ],
       minWoerter: 80,
       beispielLoesung: 'Seit sich das Homeoffice in vielen Büroberufen etabliert hat, verwischt die Grenze zwischen Arbeit und Privatleben zusehends. Wer auch abends noch Mails beantworten soll, ist einer dauerhaften Belastung ausgesetzt, die das Risiko eines Burnouts erhöht.\nFür ein Recht auf Nichterreichbarkeit spricht vor allem, dass es Beschäftigte schützt, die sich allein kaum gegen die Erwartungen ihrer Vorgesetzten wehren können. Man sollte allerdings nicht übersehen, dass starre Regeln gerade jenen schaden könnten, die ihre Arbeitszeit bewusst flexibel gestalten, um Familie und Beruf zu vereinbaren.\nIch halte ein solches Recht dennoch für sinnvoll — vorausgesetzt, es lässt Raum für individuelle Absprachen. Wer Fachkräfte halten will, muss ohnehin Arbeitsbedingungen bieten, die den Feierabend respektieren.',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Halte einen Kurzvortrag. Sprich zusammenhängend etwa zwei Minuten (höchstens 150 Sekunden).',
+      aufgabe: 'Halte einen strukturierten Kurzvortrag zum Thema „Vereinbarkeit von Familie und Beruf — wer ist in der Pflicht?“. Gliedere ihn in die vier Bausteine Einstieg, Situation in deinem Heimatland, Abwägung und Fazit und verwende mindestens vier Begriffe aus dem Kernwortschatz der Lektion.',
+      punkte: [
+        'Einstieg: Führe zum Thema hin und erkläre, warum es so viele Beschäftigte betrifft.',
+        'Heimatland: Beschreibe kurz, wie Eltern dort Familie und Beruf vereinbaren.',
+        'Abwägung: Stelle gegenüber, was Betriebe und was der Staat beitragen können — und wo die Grenzen liegen.',
+        'Fazit: Formuliere eine begründete eigene Position.',
+      ],
+      redemittel: ['In meinem Vortrag geht es um die Frage, …', 'In meinem Heimatland …', 'Auf der einen Seite …, auf der anderen Seite …', 'Man sollte allerdings nicht übersehen, dass …', 'Alles in allem halte ich … für …'],
+      maxSekunden: 150,
+      beispielLoesung: 'In meinem Vortrag geht es um die Frage, wer eigentlich dafür verantwortlich ist, dass sich Familie und Beruf vereinbaren lassen. Das Thema betrifft Millionen von Beschäftigten — spätestens dann, wenn das erste Kind da ist und zwei volle Stellen plötzlich nicht mehr in einen Tag passen.\nIn meinem Heimatland lösen viele Familien das Problem privat: Die Großeltern springen ein, weil Betreuungsplätze knapp sind und die Arbeitstage oft bis in den Abend dauern. Elternzeit nehmen fast nur die Mütter, und zwar meist kurz.\nAuf der einen Seite können die Betriebe viel tun. Flexible Arbeitszeiten und Tage im Homeoffice ersparen das Pendeln und verschaffen Eltern Luft. Im Wettbewerb um Fachkräfte sind solche Arbeitsbedingungen ohnehin ein starkes Argument. Man sollte allerdings nicht übersehen, dass Flexibilität auch Entgrenzung bedeuten kann: Wer abends am Küchentisch weiterarbeitet, ist einer doppelten Belastung ausgesetzt.\nAuf der anderen Seite steht der Staat. Ohne verlässliche Ganztagsbetreuung nützt das schönste Arbeitszeitmodell wenig. Und solange vor allem Mütter in Teilzeit wechseln, bleibt die gerechte Aufteilung der Sorgearbeit ein Versprechen.\nAlles in allem halte ich die Vereinbarkeit für eine gemeinsame Aufgabe. Der Staat muss die Betreuung sichern, die Betriebe müssen Spielräume bieten — aber entscheidend ist am Ende, dass sich Väter und Mütter die Arbeit zu Hause wirklich teilen. Sonst bleibt Vereinbarkeit ein Frauenthema, und genau das sollte sie nicht sein. Vielen Dank.',
     },
   ],
 }

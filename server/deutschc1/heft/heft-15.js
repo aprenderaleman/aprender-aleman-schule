@@ -100,6 +100,30 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Du hörst ein Radiofeature über eine Kleinstadt. Entscheide, welche Antwort dem Gehörten entspricht bzw. ob die Aussage richtig oder falsch ist.',
+      audio: {
+        transcript: 'In vielen Kleinstädten stehen Ladenlokale leer, und die Innenstädte veröden. Eine Gemeinde in Nordhessen hat daraus Konsequenzen gezogen und einen ungewöhnlichen Weg eingeschlagen. Vor drei Jahren traf der Stadtrat eine weitreichende Entscheidung: Die Stadt mietet leer stehende Geschäfte selbst an und stellt sie Gründerinnen und Gründern zur Verfügung, im ersten Jahr mietfrei, danach zu einem ermäßigten Preis.\nAnfangs wurde an dem Vorhaben scharfe Kritik geübt. Der örtliche Einzelhandelsverband sprach von einer Verzerrung des Wettbewerbs, und manche Bürger hielten das Ganze für Geldverschwendung. Inzwischen sind die meisten Zweifel verstummt. Von ehemals dreißig leeren Läden sind nur noch dreizehn ungenutzt. Entstanden sind unter anderem eine Fahrradwerkstatt, ein Buchcafé und eine Schneiderei.\nEine entscheidende Rolle spielte dabei nicht das Geld, sondern die Beratung, betont die Bürgermeisterin. Wer einen Laden eröffnet, bekommt eine erfahrene Geschäftsfrau oder einen erfahrenen Geschäftsmann aus dem Ort zur Seite gestellt. Nicht alle Versuche sind geglückt. Zwei Läden mussten nach wenigen Monaten wieder schließen, weil die Inhaber die laufenden Kosten unterschätzt hatten.\nDie Stadt will das Programm dennoch fortsetzen und zieht nun in Betracht, auch die leer stehenden Wohnungen über den Läden einzubeziehen. Mehrere Nachbargemeinden haben bereits Interesse angemeldet.',
+      },
+      items: [
+        { typ: 'rf', aussage: 'Wer einen der Läden übernimmt, zahlt von Beginn an eine ermäßigte Miete.', loesung: false },
+        {
+          typ: 'mc',
+          frage: 'Wie hat sich der Leerstand in der Innenstadt entwickelt?',
+          optionen: ['Von dreizehn leeren Läden sind inzwischen alle wieder vermietet.', 'Zu den dreißig bestehenden Läden sind dreizehn neue hinzugekommen.', 'Von dreißig leeren Läden stehen heute noch dreizehn leer.'],
+          loesung: 2,
+        },
+        {
+          typ: 'mc',
+          frage: 'Was war nach Ansicht der Bürgermeisterin für den Erfolg ausschlaggebend?',
+          optionen: ['die finanzielle Förderung durch die Stadt', 'die persönliche Beratung durch erfahrene Geschäftsleute', 'die Unterstützung durch den Einzelhandelsverband'],
+          loesung: 1,
+        },
+        { typ: 'rf', aussage: 'Zwei Geschäfte gaben wieder auf, weil ihre Inhaber die laufenden Kosten zu niedrig eingeschätzt hatten.', loesung: true },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -112,6 +136,20 @@ export default {
       ],
       minWoerter: 80,
       beispielLoesung: 'Sehr geehrte Damen und Herren,\nmit Bedauern habe ich erfahren, dass Sie den Präsenzunterricht am Abend ab dem kommenden Semester streichen und nur noch Onlinekurse anbieten möchten. Für berufstätige Teilnehmende wie mich hätte diese Entscheidung erhebliche Folgen: Gerade der persönliche Austausch im Kurs spielt für unseren Lernerfolg eine entscheidende Rolle.\nIch möchte Sie daher bitten, eine Alternative in Betracht zu ziehen. Denkbar wäre etwa ein Wechselmodell, bei dem sich Präsenz- und Onlinetermine abwechseln. So könnten Sie Kosten senken und zugleich Rücksicht auf die Bedürfnisse Ihrer Abendgruppen nehmen.\nÜber eine Stellungnahme würde ich mich sehr freuen. Für ein Gespräch stehe ich Ihnen jederzeit gern zur Verfügung.\nMit freundlichen Grüßen\nTomás Herrera',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Halte einen Kurzvortrag (etwa zweieinhalb Minuten). Gliedere ihn klar und verwende mindestens vier feste Nomen-Verb-Verbindungen, etwa einen Beitrag leisten, Verantwortung übernehmen, eine Rolle spielen oder Maßnahmen ergreifen.',
+      aufgabe: 'Du hältst in einem Seminar einen strukturierten Kurzvortrag von etwa zweieinhalb Minuten zum Thema „Ehrenamtliches Engagement — unverzichtbar oder überschätzt?“. Gliedere ihn erkennbar in Einleitung, Hauptteil und Fazit und verwende mindestens vier feste Nomen-Verb-Verbindungen, etwa einen Beitrag leisten, Verantwortung übernehmen, eine Rolle spielen oder Maßnahmen ergreifen.',
+      punkte: [
+        'Führe in das Thema ein und erläutere, welche Rolle das Ehrenamt für die Gesellschaft spielt.',
+        'Stelle dar, welche Probleme entstehen, wenn Freiwillige Aufgaben des Staates übernehmen.',
+        'Schlage Maßnahmen vor, mit denen sich mehr Menschen für ein Ehrenamt gewinnen ließen, und ziehe ein Fazit.',
+      ],
+      redemittel: ['In meinem Vortrag gehe ich der Frage nach, …', 'Eine entscheidende Rolle spielt dabei …', 'Kritik wird vor allem daran geübt, dass …', 'Man sollte daher in Betracht ziehen, …', 'Abschließend lässt sich festhalten, dass …'],
+      maxSekunden: 150,
+      beispielLoesung: 'In meinem Vortrag gehe ich der Frage nach, ob ehrenamtliches Engagement unverzichtbar ist oder ob wir es überschätzen. Ich beginne mit seiner Bedeutung, komme dann zu den Problemen und schließe mit einigen Vorschlägen.\nZunächst zur Bedeutung. Ohne Freiwillige gäbe es vielerorts weder eine Feuerwehr noch Sportvereine oder Nachbarschaftshilfe. Wer sich engagiert, leistet also einen wichtigen Beitrag zum Zusammenhalt. Und er übernimmt Verantwortung für andere, ohne dafür bezahlt zu werden. Gerade auf dem Land spielt das Ehrenamt deshalb eine entscheidende Rolle.\nAllerdings wird daran auch Kritik geübt, und zwar zu Recht. Wenn Freiwillige Lebensmittel verteilen oder Kinder bei den Hausaufgaben betreuen, erledigen sie oft Aufgaben, für die eigentlich der Staat zuständig wäre. Das wirft eine grundsätzliche Frage auf: Verlässt sich die Politik zu sehr auf die Hilfsbereitschaft der Bürger? Hinzu kommt, dass viele Vereine kaum noch Nachwuchs finden, weil Berufstätigen schlicht die Zeit fehlt.\nWas lässt sich tun? Meiner Ansicht nach müssen Politik und Arbeitgeber Maßnahmen ergreifen. Unternehmen könnten ihre Beschäftigten einige Stunden im Monat freistellen. Außerdem sollte man in Betracht ziehen, ehrenamtliche Tätigkeit bei der Rente anzurechnen. Und die Vereine selbst sollten stärker Rücksicht auf Menschen nehmen, die sich nur für ein kurzes Projekt binden wollen.\nAbschließend lässt sich festhalten: Das Ehrenamt ist unverzichtbar, aber es darf kein Ersatz für staatliche Leistungen sein. Vielen Dank für Ihre Aufmerksamkeit.',
     },
   ],
 }

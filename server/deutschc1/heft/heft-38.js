@@ -100,6 +100,38 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Du hörst einen Ausschnitt aus einer Podiumsdiskussion über ein geplantes Handelsabkommen. Entscheide, welche Antwort dem Gehörten entspricht bzw. ob die Aussage richtig oder falsch ist. Achte darauf, wer welche Position vertritt.',
+      audio: {
+        transcript: 'Moderatorin: Guten Abend und willkommen zu unserer Podiumsdiskussion über das geplante Handelsabkommen. Frau Lindner, Sie führen einen Maschinenbaubetrieb mit zweihundert Beschäftigten. Was versprechen Sie sich davon?\nFrau: Sehr viel. Wir erwirtschaften fast drei Viertel unseres Umsatzes im Ausland. Fallen die Zölle weg, sichern wir unsere Wettbewerbsfähigkeit und damit die Arbeitsplätze hier in der Region.\nModeratorin: Herr Vogt, Sie vertreten die Gewerkschaft und sehen das Abkommen kritisch. Lehnen Sie es grundsätzlich ab?\nMann: Keineswegs. Ich bestreite gar nicht, dass offene Märkte Wohlstand schaffen. Mich stört, dass die Gewinne höchst ungleich verteilt sind. In unserer Nachbarstadt hat ein Zulieferer vor zwei Jahren die Produktion ins Ausland verlagert, dreihundertfünfzig Menschen haben ihre Stelle verloren. Solche Verlierer kommen im Vertragstext nicht vor.\nFrau: Das will ich nicht kleinreden, Herr Vogt. Aber die Verlagerung wäre auch ohne Abkommen gekommen, nur eben ohne verbindliche Regeln.\nMann: Dann dürfen diese Regeln aber kein zahnloser Tiger bleiben, Frau Lindner. Menschenwürdige Arbeitsbedingungen werden bislang nur in einem unverbindlichen Anhang erwähnt.\nModeratorin: Wo könnten Sie beide sich einigen?\nFrau: Verbindliche Standards würde ich mittragen, sofern sie für alle Anbieter gelten und der Nachweis kleinere Betriebe nicht in Bürokratie ersticken lässt.\nMann: Damit könnte ich leben, vorausgesetzt, Verstöße werden auch tatsächlich geahndet.',
+      },
+      items: [
+        { typ: 'rf', aussage: 'Der Betrieb von Frau Lindner erzielt rund ein Viertel seines Umsatzes im Ausland.', loesung: false },
+        {
+          typ: 'mc',
+          frage: 'Was beanstandet Herr Vogt an dem Abkommen in erster Linie?',
+          optionen: [
+            'Dass die Gewinne ungleich verteilt sind und die Verlierer unberücksichtigt bleiben.',
+            'Dass offene Märkte seiner Ansicht nach keinen Wohlstand schaffen.',
+            'Dass menschenwürdige Arbeitsbedingungen darin mit keinem Wort erwähnt werden.',
+          ],
+          loesung: 0,
+        },
+        {
+          typ: 'mc',
+          frage: 'Wie reagiert Frau Lindner auf das Beispiel des Zulieferers aus der Nachbarstadt?',
+          optionen: [
+            'Sie bezweifelt, dass dort tatsächlich so viele Stellen verloren gegangen sind.',
+            'Sie meint, die Produktion wäre auch ohne das Abkommen verlagert worden.',
+            'Sie sieht die Verantwortung dafür bei den Gewerkschaften.',
+          ],
+          loesung: 1,
+        },
+        { typ: 'rf', aussage: 'Beide können sich verbindliche Standards vorstellen, knüpfen ihre Zustimmung aber jeweils an eine Bedingung.', loesung: true },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -112,6 +144,27 @@ export default {
       ],
       minWoerter: 80,
       beispielLoesung: 'Fast Fashion steht sinnbildlich für ein Wirtschaftsmodell, das auf Wegwerfen statt auf Weiterverwenden setzt: Kleidung wird billig produziert, kurz getragen und schnell entsorgt. Eine Abgabe soll diesen Konsum verteuern und so die Umwelt entlasten.\nFür den Vorschlag spricht, dass Preissignale eine nachweisbare Lenkungswirkung haben; bewusster Verzicht allein bleibt dagegen Symbolik. Allerdings träfe eine solche Abgabe ausgerechnet Menschen mit geringem Einkommen, die nicht aus Überzeugung billig kaufen. Konsumkritik darf nicht zur Frage des Geldbeutels werden, sonst verschärft sie die soziale Ungleichheit.\nMeines Erachtens ist eine Abgabe daher nur vertretbar, wenn die Einnahmen zurückfließen — etwa in die Förderung von Reparaturangeboten und in den Ausbau der Kreislaufwirtschaft. So würde die nachhaltige Wahl zur einfachsten, ohne den Einzelnen zu bevormunden.',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Halte ein Eingangsstatement von etwa zwei Minuten. Sprich frei und zusammenhängend und ziehe eine abgewogene Bilanz, statt pauschal zu urteilen.',
+      aufgabe: 'Du nimmst an einer Podiumsdiskussion mit dem Titel „Freihandel — Wohlstand für alle?“ teil und hältst das Eingangsstatement. Ordne deine Gedanken nach dem Dreieck Wohlstand — Verantwortung — Verteilung, ziehe eine abgewogene Bilanz, statt pauschal zu urteilen, und schließe mit einer klaren Forderung.',
+      punkte: [
+        'Wohlstand: Was hat der freie Handel gebracht?',
+        'Verantwortung: Zu welchen Bedingungen wird produziert?',
+        'Verteilung: Wer gewinnt, wer verliert?',
+        'deine Forderung zum Schluss',
+      ],
+      redemittel: [
+        'Zieht man Bilanz, so …',
+        'Die Kehrseite ist allerdings, dass …',
+        'Wer von … profitiert, kann sich … nicht entziehen.',
+        'Offene Märkte ja — aber nur zu Bedingungen, die …',
+        'Am Ende läuft es auf die Frage hinaus, …',
+      ],
+      maxSekunden: 120,
+      beispielLoesung: 'Vielen Dank für die Einladung. Freihandel — Wohlstand für alle? Meine Antwort lautet: Wohlstand ja, für alle leider noch nicht. Lassen Sie mich das in drei Schritten begründen.\nErstens der Wohlstand. Zieht man Bilanz, so haben offene Märkte gerade einer Exportnation enorm genützt: Sie sichern Arbeitsplätze, und wir alle profitieren von größerer Auswahl und niedrigeren Preisen. Den Freihandel pauschal zu verdammen wäre deshalb verfehlt.\nZweitens die Verantwortung. Niedrige Preise haben eine Kehrseite, die wir selten zu sehen bekommen, nämlich die Arbeitsbedingungen am Anfang der Lieferkette. Wer von der globalen Arbeitsteilung profitiert, kann sich seiner Sorgfaltspflicht nicht entziehen.\nDrittens die Verteilung, und hier liegt für mich der wunde Punkt. Die Gewinne des Handels sind höchst ungleich verteilt. Wird eine Fabrik ins Ausland verlagert, dann hilft es den Entlassenen wenig, dass die Wirtschaft insgesamt wächst. Solche Verlierer dürfen wir nicht übergehen.\nDaraus ergibt sich meine Forderung: offene Märkte ja — aber nur zu Bedingungen, die menschenwürdige Arbeit verbindlich machen, und mit gezielter Weiterbildung in den Regionen, die der Wandel besonders hart trifft. Am Ende läuft es auf eine einzige Frage hinaus: Wie verteilen wir Nutzen, Lasten und Verantwortung?',
     },
   ],
 }

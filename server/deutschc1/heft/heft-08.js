@@ -100,6 +100,30 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Du hörst ein Radiointerview mit der Leiterin einer Stadtbibliothek. Entscheide, welche Antwort dem Gehörten entspricht bzw. ob die Aussage richtig oder falsch ist.',
+      audio: {
+        transcript: 'Moderator: Frau Lindner, Ihre Stadtbibliothek ist seit Kurzem auch sonntags geöffnet, und zwar ganz ohne Personal. Wer hat diese Entscheidung getroffen?\nFrau: Der Stadtrat, im vergangenen Herbst. Die Regelung ist allerdings nicht im Januar in Kraft getreten, wie ursprünglich geplant, sondern erst im März, weil die Technik noch fehlte.\nModerator: Wie funktioniert das genau?\nFrau: Die Räume stehen sonntags von zehn bis achtzehn Uhr zur Verfügung. Man öffnet die Tür mit dem Bibliotheksausweis und verbucht die Medien selbst am Automaten.\nModerator: Und wird das Angebot in Anspruch genommen?\nFrau: Stärker als erwartet. Wir hatten mit etwa hundertfünfzig Besuchern pro Sonntag gerechnet, tatsächlich sind es fast dreihundert. Vor allem Familien und Studierende kommen.\nModerator: Es wurde aber auch Kritik geübt.\nFrau: Ja, vor allem von der Gewerkschaft. Sie befürchtet, dass auf lange Sicht Stellen gestrichen werden. Diese Sorge nehme ich ernst. Der Stadtrat hat jedoch schriftlich zugesichert, dass kein Arbeitsplatz wegfällt.\nModerator: Gab es Probleme mit Diebstahl oder Vandalismus?\nFrau: Bisher kaum. Zwei beschädigte Stühle in vier Monaten, mehr nicht.\nModerator: Ziehen Sie weitere Öffnungszeiten in Betracht?\nFrau: Wir ziehen in Erwägung, auch werktags bis zweiundzwanzig Uhr zu öffnen. Darüber wird aber frühestens im nächsten Jahr entschieden.',
+      },
+      items: [
+        {
+          typ: 'mc',
+          frage: 'Wann ist die Regelung zur Sonntagsöffnung in Kraft getreten?',
+          optionen: ['im Januar', 'im März', 'im Herbst'],
+          loesung: 1,
+        },
+        { typ: 'rf', aussage: 'Sonntags kommen ungefähr doppelt so viele Menschen in die Bibliothek wie erwartet.', loesung: true },
+        {
+          typ: 'mc',
+          frage: 'Was befürchtet die Gewerkschaft?',
+          optionen: ['dass langfristig Stellen wegfallen', 'dass sonntags mehr Medien gestohlen werden', 'dass das Personal künftig auch sonntags arbeiten muss'],
+          loesung: 0,
+        },
+        { typ: 'rf', aussage: 'Die Öffnung an Werktagen bis zweiundzwanzig Uhr ist bereits beschlossen.', loesung: false },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -112,6 +136,26 @@ export default {
       ],
       minWoerter: 80,
       beispielLoesung: 'Sehr geehrte Damen und Herren,\nmit Interesse habe ich den Abschlussbericht zur Viertagewoche gelesen und möchte meine Unterstützung für eine Fortsetzung des Modells zum Ausdruck bringen. Weniger Krankheitstage und deutlich mehr Bewerbungen sprechen aus meiner Sicht eindeutig für das Projekt.\nAllerdings habe ich selbst erlebt, wie lang die Wartezeiten in den Bürgerbüros anfangs waren. Die zusätzlichen Online-Termine haben die Lage verbessert; ich rege jedoch an, auch älteren Menschen ohne Internetzugang eine telefonische Terminvergabe zur Verfügung zu stellen.\nIch wäre Ihnen dankbar, wenn Sie mich über Ihre Entscheidung rechtzeitig in Kenntnis setzen könnten.\nMit freundlichen Grüßen\nTomás Ferreira',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Halte einen zusammenhängenden Redebeitrag von etwa zwei Minuten. Sprich frei und in einem sachlichen, überzeugenden Ton.',
+      aufgabe: 'In der Mitarbeiterversammlung deines Unternehmens darfst du einen Vorschlag vorstellen: Die Firma soll allen Beschäftigten zwei bezahlte Arbeitstage pro Jahr für ehrenamtliches Engagement zur Verfügung stellen. Überzeuge Geschäftsführung und Kollegium in einem sachlichen Redebeitrag von etwa zwei Minuten von deinem Vorschlag und setze dabei mindestens drei Funktionsverbgefüge ein.',
+      punkte: [
+        'Stell den Vorschlag vor und erkläre, wie er umgesetzt werden könnte.',
+        'Begründe, welchen Nutzen Beschäftigte und Unternehmen davon hätten.',
+        'Geh auf einen möglichen Einwand ein und entkräfte ihn.',
+        'Setze mindestens drei Funktionsverbgefüge ein, etwa „einen Beitrag leisten“ oder „in Erwägung ziehen“.',
+      ],
+      redemittel: [
+        'Ich möchte heute einen Vorschlag zur Diskussion stellen: …',
+        'Damit würden wir einen Beitrag zu … leisten.',
+        'Natürlich wird man Kritik an … üben, aber …',
+        'Ich bitte Sie, diesen Vorschlag ernsthaft in Erwägung zu ziehen.',
+      ],
+      maxSekunden: 120,
+      beispielLoesung: 'Liebe Kolleginnen und Kollegen, sehr geehrte Geschäftsführung, ich möchte heute einen Vorschlag zur Diskussion stellen. Unser Unternehmen sollte allen Beschäftigten zwei bezahlte Arbeitstage pro Jahr für ein Ehrenamt zur Verfügung stellen. Wer das Angebot in Anspruch nehmen will, meldet den Termin vier Wochen vorher an, genau wie einen Urlaubstag.\nWarum lohnt sich das? Erstens leisten wir damit einen sichtbaren Beitrag zum Leben in unserer Stadt. Sportvereine, Nachbarschaftshilfen oder die freiwillige Feuerwehr suchen dringend Helfer. Zweitens profitieren wir selbst. Wer sich engagiert, lernt zu organisieren und Verantwortung zu übernehmen, und das kommt auch der Arbeit zugute. Außerdem werden wir als Arbeitgeber attraktiver, und das spielt bei der Suche nach Fachkräften eine große Rolle.\nNatürlich wird man Kritik an den Kosten üben. Zwei Tage pro Person klingen nach viel. Ich bin aber überzeugt, dass sich das rechnet: Zufriedene Beschäftigte bleiben länger im Betrieb, und jede Kündigung kostet deutlich mehr als zwei Arbeitstage.\nIch bitte Sie deshalb, den Vorschlag ernsthaft in Erwägung zu ziehen. Wir könnten mit einer Testphase von einem Jahr beginnen und danach gemeinsam eine Entscheidung treffen. Vielen Dank.',
     },
   ],
 }

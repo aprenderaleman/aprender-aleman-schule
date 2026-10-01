@@ -100,6 +100,30 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Du hörst eine Nachricht auf dem Anrufbeantworter. Entscheide, welche Antwort dem Gehörten entspricht bzw. ob die Aussage richtig oder falsch ist.',
+      audio: {
+        transcript: 'Guten Tag, Herr Winkler, hier spricht Sabine Kraus von der Bürgerstiftung. Ich rufe wegen Ihres Förderantrags an, dessen Unterlagen uns seit letzter Woche vorliegen. Zunächst die gute Nachricht. Das Projekt, für das Sie Mittel beantragt haben, hat die erste Auswahlrunde bestanden. Allerdings fehlt uns noch der Kostenplan, ohne den der Ausschuss keine endgültige Entscheidung treffen kann. Bitte reichen Sie ihn bis Dienstag nach, und zwar nicht per Post, sondern über das Formular auf unserer Internetseite. Außerdem haben Sie eine Summe von fünfzehntausend Euro angegeben. Die Höchstgrenze, bis zu der wir fördern, liegt jedoch bei zwölftausend Euro, was Sie bei Ihrer Planung berücksichtigen sollten. Wer mehr benötigt, kann zusätzlich Mittel bei der Stadt beantragen, wobei dort andere Fristen gelten. Der Ausschuss, dessen Vorsitzende Sie gern persönlich kennenlernen möchte, tagt am Donnerstag, dem zwanzigsten März, um vierzehn Uhr dreißig. Sie hätten zehn Minuten Zeit, um Ihr Vorhaben vorzustellen, woraufhin noch Fragen gestellt werden. Alles, was Sie dafür brauchen, ist ein kurzer Überblick. Eine Präsentation ist nicht nötig. Sie erreichen mich vormittags unter der Durchwahl zwei neun fünf. Vielen Dank und auf Wiederhören.',
+      },
+      items: [
+        { typ: 'rf', aussage: 'Der Förderantrag von Herrn Winkler ist bereits endgültig bewilligt.', loesung: false },
+        {
+          typ: 'mc',
+          frage: 'Auf welchem Weg soll Herr Winkler den Kostenplan nachreichen?',
+          optionen: ['mit der Post', 'über ein Formular im Internet', 'persönlich in der Sitzung des Ausschusses'],
+          loesung: 1,
+        },
+        {
+          typ: 'mc',
+          frage: 'Welchen Betrag fördert die Stiftung höchstens?',
+          optionen: ['zwölftausend Euro', 'fünfzehntausend Euro', 'zwanzigtausend Euro'],
+          loesung: 0,
+        },
+        { typ: 'rf', aussage: 'Nach der Vorstellung seines Vorhabens muss Herr Winkler im Ausschuss mit Rückfragen rechnen.', loesung: true },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -112,6 +136,27 @@ export default {
       ],
       minWoerter: 80,
       beispielLoesung: 'Sehr geehrte Damen und Herren,\nich wende mich im Namen des Trägervereins des Reparaturtreffs Wehlheiden an Sie, dessen Arbeit Sie vielleicht aus der Lokalpresse kennen. Im ersten Jahr haben unsere Ehrenamtlichen rund 600 Geräte instand gesetzt, wodurch mehrere Tonnen Elektroschrott vermieden wurden.\nDa die meisten unserer Helfer über siebzig sind, möchten wir im Herbst Kurse anbieten, in denen Jugendliche die Grundlagen der Elektronik erlernen. Die wichtigsten Voraussetzungen sind bereits erfüllt: Räume und erfahrene Kursleiter stehen zur Verfügung. Was uns fehlt, sind Mittel für Werkzeug und Material, über die ein kleiner Verein wie unserer nicht verfügt.\nÜber die Gelegenheit, Ihnen unser Vorhaben in einem persönlichen Gespräch vorzustellen, würden wir uns sehr freuen.\nMit freundlichen Grüßen\nTobias Engel',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Halte einen Kurzvortrag von etwa zwei Minuten. Sprich frei und zusammenhängend und verknüpfe deine Gedanken mit Relativsätzen.',
+      aufgabe: 'Halte vor einer Seminargruppe einen frei gesprochenen Kurzvortrag von etwa zwei Minuten über eine Erfindung, deren Bedeutung für unseren Alltag deiner Meinung nach unterschätzt wird. Verknüpfe deine Gedanken mit mindestens drei komplexen Relativanschlüssen.',
+      punkte: [
+        'Stelle die Erfindung vor und erkläre, wozu sie dient.',
+        'Zeige an Beispielen, was sich durch sie verändert hat.',
+        'Begründe, warum ihre Bedeutung oft übersehen wird.',
+        'Verwende mindestens drei komplexe Relativanschlüsse, etwa mit „deren“, „wodurch“ oder „was“.',
+      ],
+      redemittel: [
+        'Ich möchte über eine Erfindung sprechen, deren Bedeutung …',
+        '…, wodurch …',
+        'Alles, was wir dafür brauchen, …',
+        'Wer heute …, kann …',
+        'Das ist ein Umstand, über den wir selten nachdenken.',
+      ],
+      maxSekunden: 150,
+      beispielLoesung: 'Ich möchte heute über eine Erfindung sprechen, deren Bedeutung wir meistens übersehen: den Kühlschrank. Er steht in jeder Küche, und genau deshalb denkt kaum jemand über ihn nach.\nWozu dient er? Ganz einfach: Er hält Lebensmittel frisch, wodurch wir sie viel länger aufbewahren können. Das klingt banal, hat aber unseren Alltag grundlegend verändert. Früher musste man fast täglich einkaufen, was einen enormen Zeitaufwand bedeutete. Heute reicht ein Einkauf pro Woche. Wer berufstätig ist, kann abends in zehn Minuten etwas kochen, weil alles, was er braucht, schon im Haus ist.\nDazu kommt die Gesundheit. Milch, Fleisch und Fisch, deren Haltbarkeit früher nur wenige Tage betrug, lassen sich heute sicher lagern. Krankheiten, an denen früher viele Menschen litten, weil sie verdorbenes Essen gegessen hatten, sind selten geworden. Auch viele Medikamente müssen gekühlt werden. Ohne Kühlung wäre die moderne Medizin kaum denkbar.\nWarum wird das alles unterschätzt? Ich glaube, weil der Kühlschrank einfach funktioniert. Er ist leise und unauffällig, und das ist ein Umstand, der ihn fast unsichtbar macht. Erst wenn er kaputtgeht, merken wir, wie abhängig wir von ihm sind.\nFür mich ist er deshalb eine der wichtigsten Erfindungen überhaupt, auch wenn kaum jemand von ihm schwärmt. Vielen Dank.',
     },
   ],
 }

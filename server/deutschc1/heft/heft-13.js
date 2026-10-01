@@ -100,6 +100,30 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Du hörst ein Radiointerview mit einem Archäologen. Achte genau darauf, was als gesichert, was als Vermutung und was als bloße Behauptung dargestellt wird, und entscheide dann, welche Antwort zutrifft bzw. ob die Aussage richtig oder falsch ist.',
+      audio: {
+        transcript: 'Moderatorin: Herr Brandt, Sie leiten die Grabung in der Regensburger Altstadt, wo bei Bauarbeiten ein Tonkrug voller Silbermünzen aufgetaucht ist. Was wissen Sie bisher sicher?\nExperte: Sicher ist nur wenig. Der Krug enthielt genau zweihundertsiebzehn Münzen, und er lag gut einen Meter unter einem alten Kellerboden. Alles Weitere sind Einschätzungen.\nModeratorin: In manchen Berichten hieß es, der Schatz stamme aus dem vierzehnten Jahrhundert.\nExperte: Das kann nicht stimmen. Die jüngste Münze wurde erst im Jahr fünfzehnhundertvierzig geprägt. Der Krug dürfte also kurz danach vergraben worden sein, vermutlich in einer Krisenzeit.\nModeratorin: Und wem gehörte er?\nExperte: Das Haus soll damals einem Tuchhändler gehört haben, so steht es jedenfalls in einer deutlich späteren Chronik. Eine verlässliche Quelle ist das allerdings nicht. Der Besitzer muss aber wohlhabend gewesen sein, sonst hätte er eine solche Summe kaum zurücklegen können.\nModeratorin: Der Bauarbeiter, der den Krug entdeckt hat, will den Fund sofort gemeldet haben.\nExperte: Das sagt er. Die Behörde wurde allerdings erst zwei Tage später informiert, und zwar nicht von ihm, sondern vom Bauleiter. Ob Münzen fehlen, lässt sich nicht mehr feststellen.\nModeratorin: Wie viel ist der Fund wert?\nExperte: Der Marktwert mag bei vierzigtausend Euro liegen, wissenschaftlich ist der Fund jedoch weit bedeutender. Ab dem kommenden Frühjahr wird er im Stadtmuseum zu sehen sein.',
+      },
+      items: [
+        { typ: 'rf', aussage: 'Wie viele Münzen der Krug enthielt, steht nach Auskunft des Archäologen fest.', loesung: true },
+        {
+          typ: 'mc',
+          frage: 'Wie beurteilt der Archäologe die Datierung des Fundes?',
+          optionen: ['Er hält die Angabe, der Schatz stamme aus dem vierzehnten Jahrhundert, für plausibel.', 'Er schließt das vierzehnte Jahrhundert aus und vermutet, dass der Krug kurz nach 1540 vergraben wurde.', 'Er hält eine zeitliche Einordnung für unmöglich, solange nicht alle Münzen untersucht sind.'],
+          loesung: 1,
+        },
+        { typ: 'rf', aussage: 'Dass das Haus einem Tuchhändler gehörte, betrachtet der Archäologe als zuverlässig belegt.', loesung: false },
+        {
+          typ: 'mc',
+          frage: 'Was erfährt man über die Meldung des Fundes?',
+          optionen: ['Der Bauarbeiter informierte die Behörde noch am Tag der Entdeckung.', 'Der Bauleiter meldete den Fund erst, als feststand, dass Münzen fehlten.', 'Die Behörde wurde zwei Tage später vom Bauleiter verständigt.'],
+          loesung: 2,
+        },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -112,6 +136,21 @@ export default {
       ],
       minWoerter: 80,
       beispielLoesung: 'Befürworter einer frühen Berichterstattung argumentieren, die Öffentlichkeit habe ein Recht darauf, von möglichen Missständen zu erfahren — gerade wenn einflussreiche Personen betroffen seien. Das mag zutreffen, doch die Risiken sind erheblich. Wer in der Presse als mutmaßlicher Täter erscheint, dürfte diesen Ruf kaum wieder loswerden, selbst wenn sich die Vorwürfe später als haltlos erweisen. Viele Leser überlesen zudem, dass jemand etwas getan haben soll, und halten die bloße Behauptung für eine Tatsache.\nNach meiner Einschätzung sollten Medien über Verdachtsfälle nur dann berichten, wenn sie sich auf mehrere verlässliche Quellen berufen können und die Betroffenen Gelegenheit zur Stellungnahme erhalten haben. Sprachliche Distanzierung allein genügt nicht: Wer die Vorwürfe bestreitet, muss ebenso ausführlich zu Wort kommen.',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Sprich einen Kurzbericht für eine Radiosendung (etwa zwei Minuten). Mache sprachlich deutlich, was gesichert ist, was du vermutest und was andere lediglich behaupten.',
+      aufgabe: 'Du arbeitest für ein Stadtradio und berichtest in der Abendsendung in einem zusammenhängenden mündlichen Bericht über einen ungeklärten Vorfall: Am Dienstagabend fiel in der gesamten Innenstadt drei Stunden lang der Strom aus. Stütze dich auf diese Notizen: Beginn gegen 18 Uhr · Bauarbeiten in der Bahnhofstraße, Kabel möglicherweise beschädigt · der Energieversorger erklärt, das Netz ordnungsgemäß gewartet zu haben · laut Anwohnern flackerte das Licht schon in der Vorwoche · Prüfbericht in zwei Wochen. Sprich etwa zwei Minuten und mache dabei durchgehend sprachlich kenntlich, was gesichert ist, was du vermutest und was andere lediglich behaupten (subjektive Modalverben wie muss, dürfte, könnte, will, soll).',
+      punkte: [
+        'Berichte, was über den Stromausfall feststeht.',
+        'Äußere begründete Vermutungen über die Ursache (muss, dürfte, könnte + Infinitiv II).',
+        'Gib wieder, was der Energieversorger und die Anwohner behaupten (will, soll), ohne dich dafür zu verbürgen.',
+        'Schließe mit einem Ausblick auf die weitere Aufklärung.',
+      ],
+      redemittel: ['Fest steht bislang nur, dass …', 'Die Ursache dürfte … gewesen sein.', 'Der Versorger will … haben.', 'Anwohnern zufolge soll …', 'Endgültige Klarheit dürfte erst … bringen.'],
+      maxSekunden: 120,
+      beispielLoesung: 'Guten Abend. Am Dienstagabend ist in der gesamten Innenstadt der Strom ausgefallen. Fest steht bislang nur, dass der Ausfall gegen 18 Uhr begann und rund drei Stunden dauerte. Betroffen waren Geschäfte, Restaurants und zahlreiche Haushalte.\nDie Ursache ist noch ungeklärt. Vieles spricht aber dafür, dass sie mit den Bauarbeiten in der Bahnhofstraße zusammenhängt: Dort dürfte bei den Arbeiten ein Kabel beschädigt worden sein. Sicher ist das nicht — es könnte sich auch um einen technischen Defekt im Netz gehandelt haben.\nDer Energieversorger bestreitet jede Verantwortung. Er will das Netz erst vor Kurzem ordnungsgemäß gewartet haben. Anwohner schildern das allerdings anders: Schon in der Vorwoche soll in mehreren Straßen immer wieder das Licht geflackert haben. Wenn das stimmt, muss es bereits vorher ein Problem gegeben haben, und dann kann die Wartung kaum so gründlich gewesen sein, wie der Versorger behauptet. Das mag eine naheliegende Erklärung sein, bewiesen ist sie aber nicht.\nEndgültige Klarheit dürfte erst der Prüfbericht bringen, der in zwei Wochen vorliegen soll. Bis dahin bleibt offen, wer für den Schaden aufkommen muss. Wir halten Sie auf dem Laufenden.',
     },
   ],
 }

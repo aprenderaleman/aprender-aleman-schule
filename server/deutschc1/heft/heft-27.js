@@ -120,6 +120,30 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Du hörst einen Ausschnitt aus einem wissenschaftlichen Vortrag. Entscheide bei jeder Aufgabe, welche Antwort dem Gehörten entspricht bzw. ob die Aussage richtig oder falsch ist.',
+      audio: {
+        transcript: 'Meine Damen und Herren, ich möchte heute über ein Phänomen sprechen, das lange unterschätzt wurde, nämlich die Einsamkeit junger Erwachsener. Zunächst stelle ich Ihnen die Ergebnisse unserer Befragung vor, anschließend gehe ich auf mögliche Ursachen ein. Befragt haben wir rund dreitausend Personen in sechs deutschen Großstädten. Das überraschendste Ergebnis möchte ich gleich hervorheben. Am häufigsten fühlen sich nicht etwa die über Siebzigjährigen einsam, sondern die Achtzehn- bis Neunundzwanzigjährigen. In dieser Gruppe gab fast jeder Dritte an, sich oft oder sehr oft allein zu fühlen. Bei den Älteren war es lediglich jeder Sechste. Wie lässt sich das erklären? Viele vermuten die Ursache in den sozialen Medien. Unsere Daten stützen diese These allerdings nur bedingt. Entscheidender scheint zu sein, wie oft jemand umzieht. Wer in den vergangenen fünf Jahren mehr als zweimal den Wohnort gewechselt hatte, berichtete deutlich häufiger von Einsamkeit, und zwar unabhängig davon, wie viel Zeit er im Internet verbrachte. Es lässt sich also eine klare Tendenz beobachten. Mobilität, die im Berufsleben als Stärke gilt, hat einen sozialen Preis. Im zweiten Teil meines Vortrags zeige ich Ihnen, was Städte dagegen unternehmen können.',
+      },
+      items: [
+        {
+          typ: 'mc',
+          frage: 'Welche Altersgruppe fühlt sich laut der Befragung am häufigsten einsam?',
+          optionen: ['die über 70-Jährigen', 'die 18- bis 29-Jährigen', 'die 30- bis 49-Jährigen'],
+          loesung: 1,
+        },
+        { typ: 'rf', aussage: 'Von den jungen Erwachsenen fühlt sich fast jeder Dritte häufig allein.', loesung: true },
+        { typ: 'rf', aussage: 'Die Daten belegen eindeutig, dass soziale Medien die Hauptursache der Einsamkeit sind.', loesung: false },
+        {
+          typ: 'mc',
+          frage: 'Welcher Faktor hängt nach den vorgestellten Daten am engsten mit Einsamkeit zusammen?',
+          optionen: ['lange Arbeitszeiten', 'die im Internet verbrachte Zeit', 'häufige Wohnortwechsel'],
+          loesung: 2,
+        },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -132,6 +156,27 @@ export default {
       ],
       minWoerter: 80,
       beispielLoesung: 'Die Rezension bespricht einen Ratgeber zum freien Sprechen, der sich weniger mit Lampenfieber als mit der Struktur eines Vortrags befasst. Nach Ansicht der Autorin verliert nur selten den Faden, wer sein Ziel kennt. Der Rezensent lobt insbesondere das Kapitel über die angekündigte Gliederung sowie die Hinweise zum Einsatz konkreter Beispiele. Kritisch sieht er hingegen, dass der Umgang mit Nachfragen nur oberflächlich behandelt wird und sich manches wiederholt. Insgesamt empfiehlt er das Buch dennoch.\nMeiner Erfahrung nach trifft der Ansatz des Buches zu: Seit ich zu Beginn jedes Vortrags die Gliederung ankündige, gerate ich kaum noch ins Stocken. Allerdings würde ich ergänzen, dass Nachfragen gezielt geübt werden müssen, da sie sich nicht vorbereiten lassen.',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Halte einen Vortrag (etwa zweieinhalb Minuten). Sprich frei nach Stichwörtern und mache deine Gliederung hörbar.',
+      aufgabe: 'Halte einen strukturierten Vortrag zum Thema „Teilen statt besitzen: Immer mehr Menschen leihen oder teilen Autos, Werkzeug oder Kleidung, statt sie zu kaufen“ (etwa zweieinhalb Minuten). Kündige zu Beginn deine Gliederung an, erläutere dann die Vorteile dieser Entwicklung an einem konkreten Beispiel, gehe auf ihre Nachteile oder Grenzen ein und schließe mit einem Fazit, in dem du die Entwicklung bewertest. Markiere jeden Übergang mit einem Signalwort.',
+      punkte: [
+        'Stelle das Thema vor und kündige deine Gliederung an.',
+        'Erläutere die Vorteile dieser Entwicklung und veranschauliche sie an einem konkreten Beispiel.',
+        'Gehe auf Nachteile oder Grenzen ein.',
+        'Ziehe ein Fazit und bewerte die Entwicklung aus deiner Sicht.',
+      ],
+      redemittel: [
+        'Ich möchte heute über … sprechen.',
+        'Zunächst gehe ich auf … ein, anschließend auf …',
+        'Lassen Sie mich das an einem Beispiel veranschaulichen: …',
+        'Auf der anderen Seite darf man nicht vergessen, dass …',
+        'Abschließend lässt sich festhalten, dass …',
+      ],
+      maxSekunden: 150,
+      beispielLoesung: 'Ich möchte heute über eine Entwicklung sprechen, die sich in vielen Städten beobachten lässt: Immer mehr Menschen teilen Dinge, statt sie zu besitzen. Zunächst gehe ich auf die Vorteile ein, anschließend auf die Grenzen, und zum Schluss ziehe ich ein kurzes Fazit.\nBeginnen wir mit den Vorteilen. Wer teilt, spart Geld und schont Ressourcen. Ein Auto steht die meiste Zeit des Tages ungenutzt herum — da liegt die gemeinsame Nutzung geradezu nahe. Lassen Sie mich das an einem Beispiel veranschaulichen: In meinem Wohnhaus gibt es seit zwei Jahren einen Raum, in dem die Nachbarn ihr Werkzeug zur Verfügung stellen. Ich habe seitdem keine Bohrmaschine mehr gekauft, und ganz nebenbei habe ich meine Nachbarn kennengelernt. Das Teilen hat also neben der wirtschaftlichen auch eine soziale Seite.\nSo viel zu den Vorteilen — nun zu den Grenzen. Auf der anderen Seite darf man nicht vergessen, dass Teilen einen gewissen Organisationsaufwand mit sich bringt: Man muss planen, reservieren und sich auf andere verlassen können. In ländlichen Regionen, wo das nächste Leihauto zwanzig Kilometer entfernt steht, stößt das Modell rasch an seine Grenzen. Hinzu kommt, dass mit Geliehenem erfahrungsgemäß weniger sorgfältig umgegangen wird als mit Eigenem.\nAbschließend lässt sich festhalten, dass das Teilen kein Ersatz für Eigentum ist, wohl aber eine sinnvolle Ergänzung. Ich persönlich bin überzeugt, dass sich diese Tendenz fortsetzen wird — vor allem in den Städten, wo der Platz knapp und das Angebot groß ist.',
     },
   ],
 }

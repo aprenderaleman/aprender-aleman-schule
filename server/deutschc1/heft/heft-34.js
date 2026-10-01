@@ -100,6 +100,30 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Du hörst ein Radiofeature über ein Dialektprojekt. Entscheide, welche Antwort dem Gehörten entspricht bzw. ob die Aussage richtig oder falsch ist.',
+      audio: {
+        transcript: 'Wer in einem kleinen Ort im Allgäu morgens die Tür des Kindergartens öffnet, hört zuerst Mundart. Seit drei Jahren sprechen die Erzieherinnen dort vormittags bewusst Dialekt mit den Kindern, nachmittags dagegen Standardsprache. Anfangs stieß das Vorhaben auf Skepsis. Nicht die zugezogenen Familien, sondern ausgerechnet einheimische Eltern fürchteten, ihre Kinder könnten später in der Schule Nachteile haben.\nDie Leiterin der Einrichtung ließ das Projekt deshalb von einer Sprachwissenschaftlerin begleiten. Deren Zwischenbilanz liegt nun vor. Die Kinder beherrschen die Standardsprache genauso sicher wie Gleichaltrige in den Nachbarorten, und sie wechseln müheloser zwischen den beiden Registern. Besonders profitierten Kinder, die zu Hause eine andere Herkunftssprache sprechen, denn für sie sei der Dialekt ein Schlüssel zur Dorfgemeinschaft.\nGanz ungetrübt ist die Bilanz allerdings nicht. Von den sieben Erzieherinnen sprechen nur noch zwei den Ortsdialekt von klein auf, die übrigen mussten ihn sich mühsam aneignen. Fände man keinen Nachwuchs, so die Leiterin, drohe das Projekt in wenigen Jahren auszusterben wie die Mundart selbst. Die Gemeinde will nun ältere Dorfbewohner als Vorlesepaten gewinnen. Ob sich das Modell andernorts durchsetzt, bleibt offen. Anfragen aus anderen Gemeinden gibt es bereits.',
+      },
+      items: [
+        {
+          typ: 'mc',
+          frage: 'Wie ist der Sprachgebrauch im Kindergarten geregelt?',
+          optionen: ['Vormittags wird Dialekt gesprochen, nachmittags Standardsprache.', 'An drei Tagen pro Woche wird Dialekt gesprochen, sonst Standardsprache.', 'Mit den jüngeren Kindern wird Dialekt gesprochen, mit den älteren Standardsprache.'],
+          loesung: 0,
+        },
+        { typ: 'rf', aussage: 'Vorbehalte gegen das Projekt hatten vor allem Familien, die neu in den Ort gezogen waren.', loesung: false },
+        {
+          typ: 'mc',
+          frage: 'Was ergab die wissenschaftliche Begleitung des Projekts?',
+          optionen: ['Die Kinder beherrschen die Standardsprache etwas weniger sicher, wechseln aber leichter das Register.', 'Die Kinder beherrschen die Standardsprache ebenso sicher wie andere und wechseln leichter das Register.', 'Die Kinder mit einer anderen Herkunftssprache waren durch den Dialekt zusätzlich belastet.'],
+          loesung: 1,
+        },
+        { typ: 'rf', aussage: 'Die Mehrheit der Erzieherinnen musste den Ortsdialekt erst erlernen.', loesung: true },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -112,6 +136,21 @@ export default {
       ],
       minWoerter: 80,
       beispielLoesung: 'Sehr geehrte Frau Dr. Lindqvist,\naus dem letzten Elternbrief habe ich erfahren, dass auf dem Pausenhof künftig nur noch Deutsch gesprochen werden soll. Ihr Anliegen kann ich durchaus nachvollziehen: Eine sichere Beherrschung der Standardsprache ist die Voraussetzung für schulischen Erfolg, und die Verständigung zwischen allen Kindern muss gewährleistet sein.\nDennoch halte ich ein Verbot für problematisch. Viele Kinder erleben ihre Herkunftssprache als identitätsstiftend; wer sie ihnen in der Pause untersagt, vermittelt, Mehrsprachigkeit sei ein Makel statt einer Ressource.\nKönnten Sie stattdessen in Betracht ziehen, Deutsch im Unterricht verbindlich vorzuschreiben, die Pausen aber frei zu lassen? Über ein persönliches Gespräch würde ich mich sehr freuen.\nMit freundlichen Grüßen\nAmira Haddad',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Halte einen Kurzvortrag. Sprich zusammenhängend etwa zwei Minuten (höchstens 150 Sekunden).',
+      aufgabe: 'Halte einen strukturierten Kurzvortrag zum Thema „Gendergerechte Sprache in Behörden und Medien — notwendiger Wandel oder unnötige Vorschrift?“. Gib die Positionen beider Lager wieder, ohne sie dir zu eigen zu machen, bewerte die Frage anschließend auf zwei Ebenen (praktisch und symbolisch) und ziehe ein Fazit.',
+      punkte: [
+        'Einleitung: Führe mit einem Beispiel aus dem Alltag zum Thema hin.',
+        'Beide Lager: Gib je ein Argument der Befürworter und der Kritiker wieder (machen geltend, dass … / wenden ein, dass …).',
+        'Bewertung: Trenne die praktische Ebene (Lesbarkeit, Verständigung) von der symbolischen (Sichtbarkeit, Zugehörigkeit).',
+        'Fazit: Formuliere eine begründete eigene Einschätzung.',
+      ],
+      redemittel: ['Befürworter machen geltend, dass …', 'Dem halten Kritiker entgegen, dass …', 'Nicht von der Hand zu weisen ist das Argument, dass …', 'Pauschale Urteile greifen hier meines Erachtens zu kurz.', 'Unterm Strich scheint mir entscheidend, ob …'],
+      maxSekunden: 150,
+      beispielLoesung: 'Neulich bekam ich einen Brief von meiner Stadtverwaltung, adressiert an die „lieben Bürgerinnen und Bürger“. Ein Nachbar fand das selbstverständlich, ein anderer ärgerte sich darüber. Genau um diese Frage geht es in meinem Vortrag: Ist gendergerechte Sprache in Behörden und Medien ein notwendiger Wandel oder eine unnötige Vorschrift?\nBefürworter machen geltend, dass das generische Maskulinum Frauen sprachlich unsichtbar mache. Sprache präge unser Denken, und wer von „Ärzten“ spreche, habe eben meist Männer vor Augen. Dem halten Kritiker entgegen, dass gegenderte Formen die Lesbarkeit beeinträchtigten und sich nicht per Verordnung durchsetzen ließen. Vorgaben von oben erzeugten vor allem Widerstand.\nWie lässt sich das bewerten? Ich möchte zwei Ebenen trennen. Auf der praktischen Ebene ist das Argument der Kritiker nicht von der Hand zu weisen: Ein Text voller Sonderzeichen erschwert die Verständigung, gerade für Menschen, die Deutsch erst lernen. Auf der symbolischen Ebene dagegen geht es um Zugehörigkeit. Wo alle gemeint sind, sollten sich auch alle angesprochen fühlen — und das leistet eine Doppelform wie „Bürgerinnen und Bürger“ ganz ohne Sonderzeichen.\nPauschale Urteile greifen hier meines Erachtens zu kurz. Unterm Strich scheint mir entscheidend, ob eine Form verständlich bleibt. Behörden sollten daher alle ansprechen, aber niemandem vorschreiben, wie er privat zu sprechen hat. Was sich am Ende durchsetzt, entscheidet ohnehin kein Gremium, sondern der Sprachgebrauch. Vielen Dank.',
     },
   ],
 }

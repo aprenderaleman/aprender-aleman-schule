@@ -93,6 +93,30 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Du hörst einen Ausschnitt aus einem wissenschaftlichen Vortrag. Entscheide beim Hören, welche Antwort zutrifft bzw. ob die Aussage richtig oder falsch ist.',
+      audio: {
+        transcript: 'Meine Damen und Herren, was unterscheidet gute Texte von schwachen, wenn die Zeit knapp ist? Dieser Frage sind wir am Institut für Schreibforschung in einer aktuellen Studie nachgegangen. Ich möchte Ihnen zunächst den Aufbau der Untersuchung schildern und dann zwei Ergebnisse vorstellen, die uns selbst überrascht haben. Wir haben hundertsechzig Studierende gebeten, in fünfundvierzig Minuten einen argumentativen Text zu verfassen, und dabei jeden Tastendruck aufgezeichnet. Nun könnte man annehmen, dass diejenigen am besten abschneiden, die am längsten planen. Das hat sich nicht bestätigt. Wer mehr als ein Viertel der Zeit auf die Gliederung verwendete, geriet am Ende in Zeitnot und brach den Schluss häufig ab. Damit komme ich zum zweiten Ergebnis. Entscheidend war nicht, wie viel jemand überarbeitete, sondern wann. Die stärksten Texte stammten von Personen, die nach jedem Absatz kurz innehielten und das Geschriebene noch einmal lasen. Wer die Überarbeitung dagegen ganz ans Ende schob, korrigierte dort fast nur noch Tippfehler und Endungen, der rote Faden blieb unangetastet. Was folgt daraus? Kohärenz entsteht während des Schreibens und nicht danach. Im nächsten Teil zeige ich Ihnen, wie sich dieses Innehalten gezielt einüben lässt.',
+      },
+      items: [
+        { typ: 'rf', aussage: 'Die besten Texte schrieben diejenigen, die sich für die Planung am meisten Zeit nahmen.', loesung: false },
+        {
+          typ: 'mc',
+          frage: 'Was beobachteten die Forschenden bei Personen, die mehr als ein Viertel der Zeit für die Gliederung aufwendeten?',
+          optionen: ['Ihnen fehlte am Ende die Zeit für einen vollständigen Schluss.', 'Ihre Texte wiesen einen besonders klaren roten Faden auf.', 'Sie machten auffallend viele Tippfehler.'],
+          loesung: 0,
+        },
+        {
+          typ: 'mc',
+          frage: 'Wodurch zeichneten sich die Verfasser der stärksten Texte aus?',
+          optionen: ['Sie überarbeiteten insgesamt am meisten.', 'Sie überarbeiteten ihren Text erst am Schluss, dafür aber besonders gründlich.', 'Sie lasen das Geschriebene schon während des Schreibens abschnittsweise durch.'],
+          loesung: 2,
+        },
+        { typ: 'rf', aussage: 'Den Teilnehmenden stand für ihren Text eine Dreiviertelstunde zur Verfügung.', loesung: true },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -105,6 +129,20 @@ export default {
       ],
       minWoerter: 80,
       beispielLoesung: 'Sehr geehrte Damen und Herren,\nam 14. Juni habe ich in Ihrem Prüfungszentrum die Prüfung zum Zertifikat C1 abgelegt. Im Modul Schreiben habe ich die Bestehensgrenze leider um drei Punkte verfehlt.\nDa ich gezielt an meinen Schwächen arbeiten möchte, wäre ich Ihnen dankbar, wenn Sie mir eine Aufschlüsselung meiner Bewertung nach den vier Bewertungskriterien zukommen lassen könnten. Insbesondere interessiert mich, ob eher die Erfüllung der Aufgabe oder die Strukturen den Ausschlag gegeben haben.\nDarüber hinaus möchte ich mich erkundigen, wann der nächste Termin stattfindet, an dem ich das Modul einzeln wiederholen kann. Für eine Rückmeldung bis zum 30. Juni wäre ich Ihnen sehr verbunden.\nMit freundlichen Grüßen\nLucía Fernández',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Halte ein Kurzreferat von etwa zweieinhalb Minuten. Sprich frei und in einer für deine Zuhörer nachvollziehbaren Reihenfolge.',
+      aufgabe: 'In deinem Vorbereitungskurs auf das Zertifikat C1 stellt jede Person in einem Kurzreferat ihren persönlichen Plan für das Modul Schreiben vor. Halte dein Referat (etwa zweieinhalb Minuten, frei gesprochen): Erkläre in einer für deine Zuhörer nachvollziehbaren Reihenfolge, wie du die 75 Minuten einteilst, und begründe deine Entscheidungen.',
+      punkte: [
+        'Stelle deine Zeiteinteilung für die beiden Aufgaben und die Überarbeitung vor.',
+        'Begründe, warum du vor dem Schreiben eine Gliederung anfertigst oder darauf verzichtest.',
+        'Erkläre, worauf du in der Überarbeitungsphase zuerst achtest und warum.',
+      ],
+      redemittel: ['Für … plane ich … Minuten ein, weil …', 'Mit … beginne ich, da …', 'Auf einen ausformulierten Entwurf verzichte ich, denn …', 'In der Überarbeitungsphase achte ich zuerst darauf, ob …', 'Ausschlaggebend dafür ist, dass …'],
+      maxSekunden: 150,
+      beispielLoesung: 'Ich stelle euch heute kurz meinen Plan für das Modul Schreiben vor. Für die beiden Aufgaben stehen mir fünfundsiebzig Minuten zur Verfügung, und die teile ich folgendermaßen ein: vierzig Minuten für den Diskussionsbeitrag, dreißig für die formelle Nachricht und die letzten fünf für die Überarbeitung. Mit dem Diskussionsbeitrag beginne ich, da er länger ist, mehr Punkte bringt und einen frischen Kopf verlangt. Bei Minute vierzig breche ich ab, selbst wenn mir noch der Schlusssatz fehlt. Das fällt mir schwer, aber eine halbe Nachricht kostet mehr als ein unfertiger Schluss. Vor jedem Text mache ich eine kurze Gliederung, höchstens fünf Minuten. Früher habe ich einfach losgeschrieben und dann mittendrin gemerkt, dass ich einen Leitpunkt vergessen hatte. Seit ich mir zu jedem Leitpunkt zwei Stichwörter notiere, passiert mir das nicht mehr, und der rote Faden ergibt sich fast von selbst. Auf einen ausformulierten Entwurf verzichte ich dagegen, denn den lässt die Zeit schlicht nicht zu. In den letzten fünf Minuten kontrolliere ich zuerst, ob wirklich alle Leitpunkte im Text vorkommen, denn die Erfüllung der Aufgabe wiegt am schwersten. Danach suche ich gezielt nach meinen typischen Fehlern, also nach der Verbstellung im Nebensatz und nach den Artikeln. Mehr ist in dieser Zeit nicht zu schaffen, aber genau diese Fehler kosten mich erfahrungsgemäß die meisten Punkte.',
     },
   ],
 }

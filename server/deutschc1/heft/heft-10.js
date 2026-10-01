@@ -93,6 +93,30 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Du hörst einen Ausschnitt aus einer Podiumsdiskussion. Entscheide, welche Antwort dem Gehörten entspricht bzw. ob die Aussage richtig oder falsch ist.',
+      audio: {
+        transcript: 'Moderatorin: Willkommen zu unserer Podiumsdiskussion. Die Frage des Abends lautet, ob wir noch Bargeld brauchen. Herr Albrecht, Sie sind Ökonom und sagen Nein.\nMann: Nicht ganz. Ich sage, wir brauchen deutlich weniger davon. Bargeld verursacht hohe Kosten, zumal Transport und Sicherung immer aufwendiger werden. Folglich tragen am Ende alle diese Kosten mit, auch diejenigen, die längst mit Karte zahlen.\nModeratorin: Frau Demir, Sie vertreten einen Verbraucherverband und sehen das anders.\nFrau: Allerdings. Wenngleich das Kostenargument stimmt, übersieht Herr Albrecht etwas Entscheidendes. Bargeld schützt die Privatsphäre. Bei jeder Kartenzahlung entstehen Daten. Münzen und Scheine hingegen hinterlassen keine Spur.\nMann: Das bestreite ich nicht. Gleichwohl zeigt die Erfahrung aus Skandinavien, dass eine Gesellschaft fast ohne Bargeld funktioniert.\nFrau: Dort wurden indes gerade wieder Gesetze erlassen, die die Banken verpflichten, Bargeld anzubieten. Ältere Menschen und Menschen ohne Konto waren nämlich ausgeschlossen.\nModeratorin: Wäre ein Kompromiss denkbar?\nMann: Durchaus. Ich könnte mit einer Obergrenze leben, sofern sie nicht bei zehntausend, sondern bei etwa dreitausend Euro pro Barzahlung liegt.\nFrau: Eine Obergrenze lehne ich nicht grundsätzlich ab. Wichtiger wäre mir allerdings ein gesetzlich garantiertes Recht, überall bar zahlen zu dürfen.',
+      },
+      items: [
+        {
+          typ: 'mc',
+          frage: 'Welches Argument führt Herr Albrecht gegen das Bargeld an?',
+          optionen: ['Es erleichtert Straftaten.', 'Es verursacht hohe Kosten, die alle mittragen.', 'Es wird von jüngeren Menschen kaum noch genutzt.'],
+          loesung: 1,
+        },
+        { typ: 'rf', aussage: 'Frau Demir hält das Kostenargument von Herrn Albrecht für falsch.', loesung: false },
+        {
+          typ: 'mc',
+          frage: 'Unter welcher Bedingung würde Herr Albrecht eine Obergrenze für Barzahlungen akzeptieren?',
+          optionen: ['wenn sie bei rund dreitausend Euro liegt', 'wenn sie bei zehntausend Euro liegt', 'wenn sie ausschließlich für Unternehmen gilt'],
+          loesung: 0,
+        },
+        { typ: 'rf', aussage: 'Frau Demir ist ein gesetzliches Recht auf Barzahlung wichtiger als die Frage der Obergrenze.', loesung: true },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -105,6 +129,26 @@ export default {
       ],
       minWoerter: 80,
       beispielLoesung: 'Die Auswertung aus Süddeutschland zeigt, dass eine autofreie Altstadt mehr Passanten anzieht und der Gastronomie nützt, während die Fachgeschäfte kaum profitieren.\nFür die Anwohner ist der Gewinn offensichtlich: weniger Lärm, bessere Luft, mehr Aufenthaltsqualität. Der Einzelhandel hingegen hat berechtigte Sorgen, zumal viele Kunden aus dem Umland auf das Auto angewiesen sind. Wenngleich ich diese Bedenken ernst nehme, halte ich die Sperrung insgesamt für richtig, denn eine lebendige Innenstadt lebt von Menschen, nicht von Parkplätzen.\nIch befürworte das Modell daher, sofern die Stadt gleichzeitig in Busverbindungen und Park-and-Ride-Plätze investiert. Ohne diese Anbindung verlagert sich der Einkauf an den Stadtrand; folglich wäre am Ende niemandem geholfen.',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Halte einen zusammenhängenden Diskussionsbeitrag von etwa zwei Minuten. Sprich frei und mach den Gang deiner Argumentation hörbar.',
+      aufgabe: 'In einer Diskussionsrunde wird folgende These vertreten: „Hausaufgaben sind überholt und sollten abgeschafft werden.“ Reagiere darauf mit einem zusammenhängenden Diskussionsbeitrag von etwa zwei Minuten, in dem du die These prüfst und eine eigene Position beziehst. Mach den Gang deiner Argumentation mit mindestens drei gehobenen Konnektoren hörbar.',
+      punkte: [
+        'Greif die These auf und räume ein, was für sie spricht.',
+        'Halte mit mindestens einem gewichtigen Gegenargument dagegen.',
+        'Zieh ein Fazit und nenne eine Bedingung, unter der du deine Position ändern würdest.',
+        'Verwende mindestens drei gehobene Konnektoren, etwa „gleichwohl“, „zumal“, „folglich“ oder „sofern“.',
+      ],
+      redemittel: [
+        'Die These klingt zunächst überzeugend, zumal …',
+        'Gleichwohl halte ich es für voreilig, …',
+        'Folglich plädiere ich dafür, …',
+        'Meine Position würde ich ändern, sofern …',
+      ],
+      maxSekunden: 120,
+      beispielLoesung: 'Die These, Hausaufgaben seien überholt, klingt zunächst überzeugend. Viele Kinder sitzen nach einem langen Schultag noch stundenlang am Schreibtisch, und die Freizeit kommt zu kurz. Hinzu kommt ein Gerechtigkeitsproblem: Manche Eltern können helfen oder Nachhilfe bezahlen, andere hingegen nicht. Hausaufgaben vergrößern mithin die Unterschiede zwischen den Kindern, statt sie auszugleichen.\nGleichwohl halte ich eine vollständige Abschaffung für voreilig. Wer eine Sprache oder Mathematik lernt, muss üben, und zwar regelmäßig und selbstständig. Im Unterricht bleibt dafür selten genug Zeit, zumal die Klassen groß sind. Außerdem lernen Kinder durch Hausaufgaben, sich ihre Arbeit selbst einzuteilen. Diese Fähigkeit brauchen sie später im Studium und im Beruf.\nDas eigentliche Problem liegt demnach nicht in den Hausaufgaben selbst, sondern in ihrer Menge und in der fehlenden Unterstützung. Folglich plädiere ich dafür, sie nicht abzuschaffen, sondern zu verändern: kürzere, sinnvollere Aufgaben, die niemanden überfordern.\nMeine Position würde ich allerdings ändern, sofern alle Schulen zu echten Ganztagsschulen würden. Wenn dort feste Übungszeiten mit Lehrkräften stattfänden, wären Hausaufgaben zu Hause tatsächlich überflüssig. Solange das nicht der Fall ist, sollten wir an ihnen festhalten.',
     },
   ],
 }

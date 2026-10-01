@@ -101,6 +101,38 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Prüfungssimulation: Du hörst ein Radiointerview mit einem Arbeitspsychologen. Lies zuerst die Aufgaben, höre dann das Interview und entscheide, welche Antwort dem Gehörten entspricht bzw. ob die Aussage richtig oder falsch ist. Achte nicht nur auf einzelne Angaben, sondern auch auf die Haltung des Befragten.',
+      audio: {
+        transcript: 'Moderatorin: Herr Reinhardt, Sie erforschen als Arbeitspsychologe, wie sich Lärm auf die Konzentration auswirkt. Ist das Großraumbüro wirklich so schlecht wie sein Ruf?\nPsychologe: Das kommt ganz darauf an, was man dort tut. Für rasche Absprachen im Team ist es durchaus brauchbar. Wer hingegen einen anspruchsvollen Text verfassen muss, zahlt dort einen hohen Preis.\nModeratorin: Woran liegt das? An der Lautstärke?\nPsychologe: Eben nicht. In unseren Versuchen hat ein gleichmäßiges Rauschen die Leute kaum gestört, selbst wenn es recht laut war. Was die Leistung einbrechen ließ, waren verständliche Gespräche in unmittelbarer Nähe. Sprache kann unser Gehirn schlicht nicht ausblenden, es hört unwillkürlich mit. Die Zahl der Fehler stieg dabei um rund ein Sechstel.\nModeratorin: Merken die Beschäftigten das eigentlich selbst?\nPsychologe: Erstaunlicherweise nur zum Teil. Viele gaben an, sie hätten sich an die Geräuschkulisse längst gewöhnt. Ihre Ergebnisse fielen aber keineswegs besser aus als die der Neulinge. Man gewöhnt sich offenbar an das Gefühl, gestört zu werden, nicht an die Störung selbst.\nModeratorin: Dann helfen wohl nur Kopfhörer.\nPsychologe: Die halte ich bestenfalls für eine Notlösung. Wer dabei Musik mit gesungenem Text hört, tauscht ja nur eine Sprachquelle gegen eine andere. Sinnvoller wären Rückzugsräume für konzentriertes Arbeiten und feste Zeiten, in denen nicht telefoniert wird. Das kostet wenig, setzt allerdings voraus, dass sich auch die Führungskräfte daran halten.',
+      },
+      items: [
+        {
+          typ: 'mc',
+          frage: 'Wie beurteilt Herr Reinhardt das Großraumbüro?',
+          optionen: [
+            'Er hält es für jede Art von Büroarbeit für ungeeignet.',
+            'Er hält es für Absprachen im Team für tauglich, für anspruchsvolle Einzelarbeit dagegen nicht.',
+            'Er hält seinen schlechten Ruf für ein unbegründetes Vorurteil.',
+          ],
+          loesung: 1,
+        },
+        { typ: 'rf', aussage: 'In den Versuchen beeinträchtigten verständliche Gespräche die Leistung stärker als ein lautes, gleichmäßiges Rauschen.', loesung: true },
+        {
+          typ: 'mc',
+          frage: 'Was ergab sich bei den Beschäftigten, die sich nach eigener Aussage an die Geräuschkulisse gewöhnt hatten?',
+          optionen: [
+            'Sie machten deutlich weniger Fehler als neue Beschäftigte.',
+            'Sie arbeiteten langsamer, dafür aber sorgfältiger als neue Beschäftigte.',
+            'Sie schnitten nicht besser ab als neue Beschäftigte.',
+          ],
+          loesung: 2,
+        },
+        { typ: 'rf', aussage: 'Nach Einschätzung von Herrn Reinhardt scheitern Rückzugsräume und telefonfreie Zeiten in erster Linie an den Kosten.', loesung: false },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -113,6 +145,27 @@ export default {
       ],
       minWoerter: 80,
       beispielLoesung: 'Sehr geehrte Damen und Herren,\nvom 12. bis 14. März habe ich an Ihrem Seminar „Projektmanagement kompakt“ teilgenommen. Leider muss ich feststellen, dass die Veranstaltung in wesentlichen Punkten nicht Ihrer Ausschreibung entsprach.\nZum einen wurde die angekündigte Fachreferentin ohne vorherige Information durch eine Vertretung ersetzt, die mit den Inhalten erkennbar wenig vertraut war. Zum anderen entfiel das Modul zur Budgetplanung ersatzlos — gerade dieser Programmpunkt war für meine Anmeldung ausschlaggebend, da ich ab dem Sommer die Verantwortung für die Kostenplanung in meiner Abteilung übernehme.\nAngesichts dieser Mängel halte ich eine Erstattung von mindestens einem Drittel der Seminargebühr für angemessen. Ich bitte Sie, mir bis zum 15. April mitzuteilen, wie Sie in dieser Angelegenheit verfahren werden.\nMit freundlichen Grüßen\nDragana Petrović',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Prüfungssimulation: Halte einen Diskussionsbeitrag von etwa zweieinhalb Minuten. Sprich frei und am Stück; überbrücke Denkpausen mit einer Strukturformel, statt abzubrechen.',
+      aufgabe: 'In einer Diskussionsrunde wird die These vertreten: „Wer länger lebt, muss auch länger arbeiten — das Rentenalter sollte automatisch mit der Lebenserwartung steigen.“ Nimm in einem Diskussionsbeitrag dazu Stellung: Beziehe klar Position, stütze sie mit zwei Argumenten, gehe auf ein Gegenargument ein und formuliere zum Schluss ein Fazit.',
+      punkte: [
+        'deine Position zur These',
+        'zwei Argumente, eines davon mit einem Beispiel',
+        'ein Gegenargument und deine Entgegnung',
+        'ein Fazit',
+      ],
+      redemittel: [
+        'Ich halte diese These im Grundsatz für …, auch wenn …',
+        'Lassen Sie mich das an einem Beispiel verdeutlichen: …',
+        'Nun mag man einwenden, dass …',
+        'Das trifft zwar zu, spricht aber nicht gegen …, sondern für …',
+        'Unterm Strich heißt das für mich: …',
+      ],
+      maxSekunden: 150,
+      beispielLoesung: 'Ich halte diese These im Grundsatz für nachvollziehbar, auch wenn sie mir in dieser Pauschalität zu weit geht. Das möchte ich kurz begründen.\nMein erstes Argument: Die Lebenserwartung ist höchst ungleich verteilt. Lassen Sie mich das an einem Beispiel verdeutlichen: Ein Dachdecker, der mit sechzehn in die Lehre gegangen ist, hat mit Mitte sechzig oft einen kaputten Rücken und lebt statistisch gesehen deutlich kürzer als eine Juristin, die erst mit Ende zwanzig ins Berufsleben eingestiegen ist. Stiege das Rentenalter für beide gleichermaßen, so träfe es ausgerechnet denjenigen, der am längsten eingezahlt hat.\nMein zweites Argument betrifft den Arbeitsmarkt. Ein höheres Rentenalter nützt wenig, solange viele Betriebe Ältere gar nicht mehr einstellen. Wer mit zweiundsechzig seine Stelle verliert und keine neue findet, für den läuft die Regel auf nichts anderes hinaus als auf eine gekürzte Rente.\nNun mag man einwenden, dass immer weniger Beschäftigte für immer mehr Rentnerinnen und Rentner aufkommen müssen und dass es der jungen Generation gegenüber ungerecht wäre, ihr die gesamte Last aufzubürden. Das trifft zwar zu, spricht aber nicht gegen eine Differenzierung, sondern für eine klügere Regel. Denkbar wäre etwa, nicht das Lebensalter, sondern die Zahl der Beitragsjahre zugrunde zu legen. Wer fünfundvierzig Jahre gearbeitet hat, sollte ohne Abzüge gehen dürfen, und wer länger arbeiten kann und will, dem sollte man es so leicht wie möglich machen.\nUnterm Strich heißt das für mich: länger arbeiten, ja — aber nicht für alle gleich. Eine starre Kopplung an die Lebenserwartung wäre bequem für die Politik; gerecht wäre sie nicht.',
     },
   ],
 }

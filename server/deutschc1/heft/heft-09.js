@@ -100,6 +100,30 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Du hörst einen Ausschnitt aus einem wissenschaftlichen Vortrag. Entscheide, welche Antwort dem Gehörten entspricht bzw. ob die Aussage richtig oder falsch ist.',
+      audio: {
+        transcript: 'Meine Damen und Herren, ich komme nun zu unseren eigenen Ergebnissen. Aufgrund der hormonellen Umstellung in der Pubertät werden Jugendliche abends später müde als Kinder. Infolge des frühen Unterrichtsbeginns schlafen sie deshalb an Schultagen deutlich zu wenig. Anhand der Daten von rund sechshundert Schülerinnen und Schülern aus vier Gymnasien konnten wir das genau belegen. Mittels eines Armbands, das die Bewegungen im Schlaf aufzeichnet, haben wir die Schlafdauer innerhalb eines ganzen Schuljahres gemessen. Im Durchschnitt schliefen die Jugendlichen nicht acht, sondern nur sechseinhalb Stunden pro Nacht. An zwei der vier Schulen wurde der Unterrichtsbeginn während der Studie von halb acht auf halb neun verlegt. Dort verlängerte sich die Schlafdauer um durchschnittlich vierzig Minuten, und die Zahl der Verspätungen ging um ein Drittel zurück. Hinsichtlich der Noten fiel das Ergebnis weniger eindeutig aus. Verbesserungen zeigten sich lediglich in Mathematik, nicht aber in den Sprachen. Ungeachtet dieser Ergebnisse lehnen viele Eltern eine Verlegung ab, vor allem wegen der eigenen Arbeitszeiten. Angesichts der gesundheitlichen Folgen dauerhaften Schlafmangels halten wir sie dennoch für dringend geboten.',
+      },
+      items: [
+        {
+          typ: 'mc',
+          frage: 'Wie wurde die Schlafdauer der Jugendlichen ermittelt?',
+          optionen: ['mit Fragebögen, die die Eltern ausfüllten', 'mit einem Armband, das Bewegungen aufzeichnet', 'mit Messungen in einem Schlaflabor'],
+          loesung: 1,
+        },
+        { typ: 'rf', aussage: 'An allen vier beteiligten Schulen wurde der Unterrichtsbeginn während der Studie nach hinten verlegt.', loesung: false },
+        { typ: 'rf', aussage: 'Trotz der Ablehnung durch viele Eltern spricht sich das Forschungsteam dafür aus, den Unterricht später beginnen zu lassen.', loesung: true },
+        {
+          typ: 'mc',
+          frage: 'Was ergab die Studie in Bezug auf die Noten?',
+          optionen: ['Sie verbesserten sich in allen Fächern.', 'Sie blieben insgesamt unverändert.', 'Sie verbesserten sich nur in Mathematik.'],
+          loesung: 2,
+        },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -112,6 +136,26 @@ export default {
       ],
       minWoerter: 80,
       beispielLoesung: 'Das Konzept der „Stadt der kurzen Wege“ sieht vor, dass Geschäfte, Schulen und Ärzte innerhalb einer Viertelstunde zu Fuß erreichbar sind.\nAuf den ersten Blick scheinen kleinere Städte dafür ideal: Aufgrund ihrer überschaubaren Größe liegen viele Einrichtungen ohnehin nah beieinander. Angesichts der zunehmenden Schließung von Läden und Arztpraxen droht jedoch gerade dort der umgekehrte Trend. Hinzu kommt, dass mangels eines dichten Busnetzes viele Menschen auf das Auto angewiesen bleiben.\nIch halte das Modell dennoch für übertragbar — allerdings nur, wenn die Kommunen gezielt in Ortskerne investieren. Ungeachtet aller Hindernisse wäre eine lebendige Mitte für kleinere Städte ein großer Gewinn.',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Halte einen sachlichen Redebeitrag von etwa zwei Minuten. Sprich frei und zusammenhängend und achte auf ein formelles Register.',
+      aufgabe: 'Deine Stadt will aufgrund der hohen Betriebskosten das einzige Hallenbad schließen. Auf einer Bürgerversammlung hast du zwei Minuten Redezeit. Sprich dich in einem sachlichen Redebeitrag in formellem Register für oder gegen die Schließung aus und leite deine Gedanken mit mindestens drei Genitivpräpositionen ein.',
+      punkte: [
+        'Nimm Bezug auf die Ausgangslage und mach deine Position deutlich.',
+        'Begründe sie mit mindestens zwei Argumenten.',
+        'Schlag eine Alternative oder einen Kompromiss vor.',
+        'Leite deine Gedanken mit mindestens drei Genitivpräpositionen ein, etwa „angesichts“, „hinsichtlich“ oder „ungeachtet“.',
+      ],
+      redemittel: [
+        'Angesichts der angespannten Haushaltslage …',
+        'Hinsichtlich der Kosten möchte ich zu bedenken geben, dass …',
+        'Aufgrund fehlender … / Infolge der Schließung …',
+        'Ungeachtet aller Sparzwänge …',
+      ],
+      maxSekunden: 120,
+      beispielLoesung: 'Sehr geehrte Damen und Herren, ich möchte mich zur geplanten Schließung des Hallenbads äußern. Angesichts der angespannten Haushaltslage verstehe ich, dass die Stadt sparen muss. Trotzdem halte ich diese Entscheidung für falsch, und zwar aus zwei Gründen.\nErstens geht es um Sicherheit. Aufgrund fehlender Wasserzeiten lernen schon heute immer weniger Kinder richtig schwimmen. Ohne unser Bad müssten die Grundschulen ihren Schwimmunterricht komplett streichen, denn das nächste Hallenbad liegt dreißig Kilometer entfernt.\nZweitens ist das Bad ein Treffpunkt. Ältere Menschen kommen zur Wassergymnastik, Vereine trainieren dort, und Familien verbringen im Winter ihre Sonntage im Bad. Außerhalb der Sommermonate gibt es in unserer Stadt kaum vergleichbare Angebote.\nHinsichtlich der Kosten möchte ich einen Kompromiss vorschlagen. Die Stadt könnte die Öffnungszeiten kürzen und das Bad an zwei Tagen pro Woche nur für Schulen und Vereine öffnen. Mittels einer neuen Heizanlage ließe sich außerdem viel Energie sparen, und dafür gibt es Fördergelder. Viele Bürgerinnen und Bürger wären sicher auch bereit, etwas höhere Eintrittspreise zu zahlen.\nUngeachtet aller Sparzwänge gilt: Ein Bad, das einmal geschlossen ist, wird so schnell nicht wieder eröffnet. Ich bitte den Stadtrat deshalb, die Entscheidung zu überdenken. Vielen Dank.',
     },
   ],
 }

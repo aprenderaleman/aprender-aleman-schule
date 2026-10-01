@@ -101,6 +101,30 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Du hörst einen Radiobeitrag aus den Regionalnachrichten. Achte darauf, wem welche Aussage zugeschrieben wird, und entscheide, welche Lösung dem Gehörten entspricht bzw. ob die Aussage richtig oder falsch ist.',
+      audio: {
+        transcript: 'Der geplante Windpark am Stadtrand von Paderborn bleibt umstritten. Auf einer Bürgerversammlung, zu der am Mittwochabend rund dreihundert Menschen gekommen waren, verteidigte der Bürgermeister das Vorhaben. Die sechs Anlagen könnten rechnerisch etwa fünfzehntausend Haushalte mit Strom versorgen, sagte er. Zudem fließe ein Teil der Einnahmen direkt in die Stadtkasse; man wolle damit unter anderem die Sanierung zweier Schulen finanzieren. Eine Sprecherin der Bürgerinitiative bestritt, dass die Anwohner ausreichend informiert worden seien. Von den Plänen habe man erst aus der Zeitung erfahren. Sie betonte, die Initiative lehne die Windkraft keineswegs grundsätzlich ab, fordere aber einen größeren Abstand zu den Wohnhäusern, nämlich tausend statt der vorgesehenen siebenhundert Meter. Der Betreiber wies den Vorwurf zurück, er habe Messwerte zum Lärm zurückgehalten. Das Gutachten liege seit Wochen im Rathaus aus und könne von allen eingesehen werden. Er räumte allerdings ein, dass der ursprüngliche Zeitplan nicht zu halten sei. Mit dem Bau könne nicht wie angekündigt im Herbst, sondern frühestens im kommenden Frühjahr begonnen werden. Der Stadtrat will in vier Wochen über das Projekt abstimmen. Bis dahin soll eine zweite Versammlung stattfinden, bei der auch ein unabhängiger Gutachter gehört wird.',
+      },
+      items: [
+        { typ: 'rf', aussage: 'Nach Angaben des Bürgermeisters soll ein Teil der Einnahmen der Sanierung von Schulen zugutekommen.', loesung: true },
+        { typ: 'rf', aussage: 'Die Bürgerinitiative lehnt die Nutzung der Windkraft grundsätzlich ab.', loesung: false },
+        {
+          typ: 'mc',
+          frage: 'Welchen Abstand zu den Wohnhäusern verlangt die Bürgerinitiative?',
+          optionen: ['siebenhundert Meter', 'tausend Meter', 'fünfzehnhundert Meter'],
+          loesung: 1,
+        },
+        {
+          typ: 'mc',
+          frage: 'Was räumt der Betreiber ein?',
+          optionen: ['dass Messwerte zum Lärm zurückgehalten wurden', 'dass das Gutachten bislang nicht öffentlich zugänglich ist', 'dass sich der Baubeginn verzögert'],
+          loesung: 2,
+        },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -113,6 +137,20 @@ export default {
       ],
       minWoerter: 80,
       beispielLoesung: 'Der Artikel berichtet über den Streit um die geplante Schließung der Stadtteilbibliothek in Bremen-Vegesack. Die Kulturbehörde begründet ihre Entscheidung mit sinkenden Ausleihzahlen und hohen Sanierungskosten. Das Angebot werde nicht abgebaut, sondern lediglich in die gut erreichbare Zentralbibliothek verlagert; den Vorwurf, man spare auf Kosten der Kinder, weist sie zurück. Der Elternverein hält dagegen, die Ausleihzahlen gäben die tatsächliche Nutzung nur unzureichend wieder, weil viele Familien die Bibliothek vor allem als Lernort nutzten. Zudem sei der Weg in die Innenstadt für jüngere Kinder zu weit.\nIch halte die Argumente des Elternvereins für überzeugender. Wenn eine Bibliothek mehr Besucher zählt als alle anderen im Stadtgebiet, lässt sich ihre Bedeutung kaum an der Zahl ausgeliehener Bücher messen. Die Behörde sollte das unabhängige Gutachten abwarten, bevor sie Tatsachen schafft.',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Halte einen Diskussionsbeitrag von etwa zweieinhalb Minuten. Gib fremde Positionen in indirekter Rede wieder und grenze deine eigene Meinung deutlich davon ab.',
+      aufgabe: 'In einer Diskussionsrunde deines Sprachkurses steht folgende These zur Debatte: „Soziale Medien schaden der politischen Meinungsbildung mehr, als sie ihr nützen.“ Halte dazu einen Diskussionsbeitrag von etwa zweieinhalb Minuten. Gib die fremden Positionen in indirekter Rede mit dem Konjunktiv I wieder und grenze deine eigene Meinung deutlich davon ab.',
+      punkte: [
+        'Gib wieder, was Befürworter und Gegner der These behaupten, und variiere dabei die Redeeinleitungen.',
+        'Bezieh selbst Position und stütze sie mit einem Beispiel.',
+        'Geh auf einen naheliegenden Einwand ein und entkräfte ihn.',
+      ],
+      redemittel: ['Kritiker behaupten, … sei …', 'Dem halten andere entgegen, … könne …', 'Ich selbst bin der Auffassung, dass …', 'Häufig wird eingewandt, …'],
+      maxSekunden: 150,
+      beispielLoesung: 'Die These lautet, soziale Medien schadeten der politischen Meinungsbildung mehr, als sie ihr nützten. Dazu möchte ich Stellung nehmen. Zunächst zu den beiden Lagern. Kritiker behaupten, in den Netzwerken setze sich nicht das beste Argument durch, sondern die lauteste Empörung. Die Nutzer bekämen vor allem Beiträge angezeigt, die ihre eigene Meinung bestätigten, und verlören so den Blick für andere Sichtweisen. Dem halten die Verteidiger entgegen, noch nie sei es so einfach gewesen, sich zu informieren und selbst mitzureden. Gerade junge Leute, so betonen sie, kämen über diese Kanäle überhaupt erst mit Politik in Berührung. Ich selbst bin der Auffassung, dass die These in dieser Zuspitzung nicht stimmt. Entscheidend ist nicht das Medium, sondern der Umgang damit. In meinem Heimatort ist vor zwei Jahren eine Initiative gegen die Schließung des Krankenhauses entstanden, und zwar ausschließlich über eine Online-Gruppe. Innerhalb weniger Wochen haben sich Hunderte beteiligt, die vorher nie auf eine Versammlung gegangen waren. Das ist Meinungsbildung im besten Sinn. Häufig wird eingewandt, solche Beispiele seien die Ausnahme, die Regel seien Falschmeldungen. Das Problem bestreite ich nicht. Aber Falschmeldungen hat es auch in gedruckten Zeitungen immer gegeben; neu ist nur die Geschwindigkeit. Die Antwort darauf kann deshalb kein Rückzug aus den Netzwerken sein. Wir brauchen vielmehr Schulen, in denen man lernt, Quellen zu prüfen, und Plattformen, die verpflichtet werden, nachweislich falsche Behauptungen zu kennzeichnen. Mein Fazit: Soziale Medien schaden der Meinungsbildung nur dort, wo wir ihnen das Denken überlassen.',
     },
   ],
 }

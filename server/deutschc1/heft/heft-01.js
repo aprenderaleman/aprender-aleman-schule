@@ -101,6 +101,30 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Du hörst eine Nachricht auf deiner Mailbox. Entscheide, welche Lösung dem Gehörten entspricht bzw. ob die Aussage richtig oder falsch ist.',
+      audio: {
+        transcript: 'Guten Tag, Frau Morales, hier spricht Tobias Brandt vom Prüfungszentrum in Leipzig. Ich rufe wegen Ihrer Anmeldung zum Zertifikat C1 an. Leider muss ich Ihnen mitteilen, dass der Prüfungstermin am vierzehnten Juni bereits ausgebucht ist. Wir können Ihnen stattdessen den achtundzwanzigsten Juni anbieten. An diesem Tag würden Sie vormittags die Module Lesen, Hören und Schreiben ablegen. Das Modul Sprechen findet allerdings nicht am selben Tag statt, sondern erst am Montag darauf, und zwar um fünfzehn Uhr dreißig. Bitte kommen Sie am achtundzwanzigsten spätestens um Viertel nach acht; die Prüfung selbst beginnt um neun Uhr. Noch ein Hinweis zu Ihren Unterlagen: Die Kopie Ihres Ausweises liegt uns vor, es fehlt jedoch noch die unterschriebene Einverständniserklärung. Die können Sie uns einfach per E-Mail schicken, ein Brief ist nicht nötig. Falls Ihnen der neue Termin nicht passt, geben Sie uns bitte bis Freitag Bescheid; sonst reservieren wir den Platz verbindlich für Sie. Die Prüfungsgebühr überweisen Sie bitte erst, wenn Sie unsere schriftliche Bestätigung erhalten haben. Sie erreichen mich werktags zwischen zehn und sechzehn Uhr unter der Durchwahl vier, sieben, null. Vielen Dank und auf Wiederhören.',
+      },
+      items: [
+        { typ: 'rf', aussage: 'Meldet sich Frau Morales bis Freitag nicht, wird ihr Platz am neuen Termin anderweitig vergeben.', loesung: false },
+        {
+          typ: 'mc',
+          frage: 'Wann findet das Modul Sprechen statt?',
+          optionen: ['am Nachmittag desselben Tages', 'am Montag nach den schriftlichen Modulen', 'eine Woche vor den übrigen Modulen'],
+          loesung: 1,
+        },
+        {
+          typ: 'mc',
+          frage: 'Was soll Frau Morales dem Prüfungszentrum noch zukommen lassen?',
+          optionen: ['eine Kopie ihres Ausweises', 'einen Beleg über die bezahlte Prüfungsgebühr', 'eine unterschriebene Einverständniserklärung'],
+          loesung: 2,
+        },
+        { typ: 'rf', aussage: 'Die Prüfungsgebühr soll erst überwiesen werden, nachdem die schriftliche Bestätigung eingetroffen ist.', loesung: true },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -113,6 +137,20 @@ export default {
       ],
       minWoerter: 80,
       beispielLoesung: 'Sehr geehrte Damen und Herren, mein Name ist Lucía Ferrer; ich arbeite seit einem Jahr als Pflegefachkraft in Nürnberg und benötige für die Anerkennung meines Abschlusses das Zertifikat C1. Daher möchte ich mich bei Ihnen über die Anmeldung informieren. Könnten Sie mir bitte mitteilen, bis wann die Anmeldung für die Prüfungstermine im Herbst erfolgen muss und ob noch Plätze frei sind? Darüber hinaus wüsste ich gern, ob sich ein nicht bestandenes Modul einzeln wiederholen lässt und ob dafür eine bestimmte Frist gilt. Für Ihre Auskunft bedanke ich mich im Voraus. Mit freundlichen Grüßen Lucía Ferrer',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Nimm mündlich Stellung. Sprich etwa zwei Minuten frei und zusammenhängend.',
+      aufgabe: 'In deinem Sprachkurs wird diskutiert, ob man die vier Module des Zertifikats C1 besser an einem einzigen Prüfungstermin oder verteilt auf mehrere Termine ablegen sollte. Nimm dazu vor der Gruppe in einer zusammenhängenden Stellungnahme von etwa zwei Minuten Position: Wäge beide Vorgehensweisen ab, begründe deine eigene Entscheidung und schließe mit einem Rat.',
+      punkte: [
+        'Nenne je ein Argument für beide Vorgehensweisen.',
+        'Leg dar, wofür du dich selbst entscheiden würdest, und begründe das mit deiner persönlichen Situation.',
+        'Schließe mit einem Rat an andere Lernende.',
+      ],
+      redemittel: ['Für … spricht vor allem, dass …', 'Dagegen lässt sich einwenden, dass …', 'In meinem Fall …', 'Alles in allem würde ich dazu raten, …'],
+      maxSekunden: 120,
+      beispielLoesung: 'Die Frage, ob man alle vier Module auf einmal ablegen sollte, lässt sich meiner Meinung nach nicht pauschal beantworten. Für einen einzigen Prüfungstermin spricht vor allem, dass man die Sache schnell hinter sich hat: Man bereitet sich einmal intensiv vor, reist nur einmal an und hält am Ende das komplette Zeugnis in der Hand. Dagegen lässt sich einwenden, dass so ein Prüfungstag enorm anstrengend ist. Wer morgens schon drei Module geschrieben hat, ist beim Sprechen vielleicht nicht mehr in Bestform. Verteilt man die Module auf zwei Termine, sinkt der Druck deutlich, und man kann sich gezielt auf die schwächere Fertigkeit konzentrieren. In meinem Fall würde ich mich trotzdem für einen einzigen Termin entscheiden. Ich brauche das Zertifikat nämlich bis zum Herbst für meine Bewerbung, und ich weiß, dass ich mich unter Zeitdruck besser konzentriere. Außerdem beruhigt mich der Gedanke, dass ich ein einzelnes Modul wiederholen kann, falls ich die Bestehensgrenze irgendwo verfehle; die bestandenen Ergebnisse bleiben ja gültig. Alles in allem würde ich anderen Lernenden raten, ehrlich zu überlegen, wie belastbar sie an einem langen Prüfungstag sind. Wer bei Stress schnell Fehler macht, sollte die Modularität ruhig nutzen. Wer dagegen unter Druck aufblüht, kann alles an einem Wochenende schaffen.',
     },
   ],
 }

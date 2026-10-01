@@ -100,6 +100,30 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Du hörst einen Ausschnitt aus einem Vortrag auf einer Fachtagung. Entscheide, welche Lösung dem Gehörten entspricht bzw. ob die Aussage richtig oder falsch ist.',
+      audio: {
+        transcript: 'Meine Damen und Herren, mein Name ist Lena Hoffmann. Als Stadtplanerin möchte ich Ihnen heute die Ergebnisse unseres Pilotprojekts in Münster vorstellen. Vor achtzehn Monaten haben wir mit der Einführung eines kostenlosen Leihsystems für Lastenräder begonnen, zunächst an vier Stationen, inzwischen an elf. Ungeachtet anfänglicher Zweifel im Stadtrat war die Nachfrage von Beginn an hoch. Im ersten Jahr verzeichneten wir rund dreizehntausend Ausleihen; für das zweite Jahr rechnen wir mit einer Zunahme um etwa ein Viertel. Interessant ist, wer die Räder nutzt. Wir hatten vor allem mit Familien gerechnet. Tatsächlich entfällt jedoch fast die Hälfte der Ausleihen auf kleine Betriebe, also auf Handwerker und Händler, die damit Waren in der Innenstadt ausliefern. Eine Befragung nach Abschluss des ersten Jahres ergab außerdem, dass jede dritte Fahrt eine Autofahrt ersetzt hat. Von einem spürbaren Rückgang des Autoverkehrs können wir deshalb aber noch nicht sprechen, dafür ist das Angebot zu klein. Probleme gab es auch. Die Wartung der Räder erwies sich als deutlich teurer als geplant, und an zwei Stationen kam es wiederholt zu Beschädigungen. Über die Fortführung des Projekts entscheidet der Stadtrat im März. Voraussetzung für eine Ausweitung ist allerdings die Beteiligung weiterer Stadtteile an den Kosten.',
+      },
+      items: [
+        {
+          typ: 'mc',
+          frage: 'An wie vielen Stationen lassen sich die Lastenräder derzeit ausleihen?',
+          optionen: ['an vier', 'an elf', 'an dreizehn'],
+          loesung: 1,
+        },
+        { typ: 'rf', aussage: 'Dass ein großer Teil der Ausleihen auf kleine Betriebe entfällt, entsprach den Erwartungen der Planer.', loesung: false },
+        { typ: 'rf', aussage: 'Obwohl manche Fahrten das Auto ersetzen, hat sich der Autoverkehr in der Stadt noch nicht spürbar verringert.', loesung: true },
+        {
+          typ: 'mc',
+          frage: 'Welche Schwierigkeit wird im Vortrag genannt?',
+          optionen: ['Die Instandhaltung der Räder kostete mehr als vorgesehen.', 'Die Nachfrage ging nach wenigen Monaten zurück.', 'Der Stadtrat hat die Finanzierung bereits gestrichen.'],
+          loesung: 0,
+        },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -112,6 +136,21 @@ export default {
       ],
       minWoerter: 80,
       beispielLoesung: 'Sehr geehrte Damen und Herren, in Ihrem Artikel berichten Sie über die geplante Ausweitung der verkehrsberuhigten Zone. Als Anwohnerin der Innenstadt begrüße ich dieses Vorhaben grundsätzlich: Seit Einführung der Zone ist die Luft spürbar sauberer, und meine Kinder fahren wieder mit dem Rad zur Schule. Allerdings darf man die Sorgen der angrenzenden Viertel nicht ignorieren, denn wenn sich der Verkehr lediglich verlagert, ist niemandem geholfen. Auch der Einzelhandel braucht Planungssicherheit. Deshalb empfehle ich dem Stadtrat, die Zone erst nach Auswertung des Pilotprojekts auszuweiten und die Anwohner frühzeitig einzubeziehen. Zur Stärkung des Einzelhandels wären zudem günstige Parkplätze am Rand der Innenstadt sinnvoll. Mit freundlichen Grüßen Ana Kovač',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Trag frei vor und sprich etwa zwei Minuten. Mündlich gilt der Verbalstil: Löse die Stichpunkte in vollständige Sätze mit Verben und Nebensätzen auf.',
+      aufgabe: 'An einer Schule in deiner Stadt beginnt der Unterricht seit einem Jahr versuchsweise erst um neun Uhr. Du hast das Pilotprojekt begleitet und berichtest darüber auf einer Bürgerversammlung in einem frei gehaltenen Kurzvortrag von etwa zwei Minuten. Auf deinem Notizzettel stehen vier Stichpunkte im Nominalstil; formuliere sie beim Sprechen in den Verbalstil um, also in vollständige Sätze mit Verben und Nebensätzen.',
+      punkte: [
+        'Einführung des späteren Unterrichtsbeginns nach Befragung von Eltern und Lehrkräften',
+        'seit Beginn des Projekts: Rückgang der Verspätungen, Zunahme der Aufmerksamkeit in den ersten Stunden',
+        'Kritik berufstätiger Eltern wegen fehlender Betreuung am frühen Morgen',
+        'Empfehlung: Fortführung des Projekts bei gleichzeitiger Einrichtung einer Frühbetreuung',
+      ],
+      redemittel: ['Bevor die Schule …, hat sie …', 'Seitdem kommen …', 'Allerdings beschweren sich …, weil …', 'Ich empfehle deshalb, … zu …'],
+      maxSekunden: 120,
+      beispielLoesung: 'Guten Abend, ich möchte Ihnen kurz von unserem Pilotprojekt berichten. Seit einem Jahr fängt der Unterricht an unserer Schule nicht mehr um acht, sondern erst um neun Uhr an. Bevor die Schule das eingeführt hat, hat sie die Eltern und die Lehrkräfte befragt, und eine klare Mehrheit war dafür, es wenigstens auszuprobieren. Was hat sich seitdem verändert? Zunächst einmal kommen deutlich weniger Schülerinnen und Schüler zu spät. Außerdem berichten die Lehrkräfte, dass die Klassen in den ersten beiden Stunden viel aufmerksamer sind als früher. Die Jugendlichen schlafen einfach länger, und das merkt man sofort. Es gibt allerdings auch Kritik, und die möchte ich nicht verschweigen. Vor allem berufstätige Eltern beschweren sich, weil ihre Kinder am frühen Morgen nicht betreut werden. Wer um halb acht bei der Arbeit sein muss, kann ein elfjähriges Kind schlecht eine Stunde allein zu Hause lassen. Das ist ein ernstes Problem, aber es lässt sich lösen. Ich empfehle deshalb, das Projekt fortzuführen und gleichzeitig eine Frühbetreuung einzurichten. Dann können die Kinder, deren Eltern früh arbeiten, schon ab halb acht in die Schule kommen. So behalten wir die Vorteile des späteren Beginns, ohne dass einzelne Familien dafür den Preis zahlen.',
     },
   ],
 }

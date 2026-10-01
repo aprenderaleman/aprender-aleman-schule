@@ -100,6 +100,30 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Du hörst einen Ausschnitt aus einem Podcast zur Prüfungsvorbereitung. Entscheide, welche Antwort dem Gehörten entspricht bzw. ob die Aussage richtig oder falsch ist. Stütze dich ausschließlich auf das, was die Gesprächspartnerin sagt.',
+      audio: {
+        transcript: 'Moderator: Willkommen zu unserem Prüfungspodcast. Heute ist Sabine Keller zu Gast, die seit zwölf Jahren Kandidaten auf das Zertifikat C1 vorbereitet. Frau Keller, woran scheitern Ihre Teilnehmenden im Modul Lesen am häufigsten?\nExpertin: Nicht am Wortschatz, wie viele vermuten, sondern an der Uhr. In meinem letzten Kurs habe ich einen Probetest schreiben lassen. Von achtzehn Teilnehmenden haben nur sieben alle vier Teile geschafft.\nModerator: Was raten Sie also?\nExpertin: Einen festen Zeitplan, und zwar schriftlich. Früher habe ich empfohlen, immer mit dem langen ersten Text zu beginnen. Davon bin ich abgekommen. Heute lasse ich jeden zwei Reihenfolgen ausprobieren und dann selbst entscheiden.\nModerator: Und wie gehen Ihre Teilnehmenden mit unbekannten Wörtern um?\nExpertin: Oft zu ängstlich. Eine Teilnehmerin hat mir einmal erzählt, sie habe in der Prüfung fünf Minuten über einem einzigen Fachbegriff gebrütet. Die Aufgabe ließ sich aber ganz ohne dieses Wort lösen. Das hat sie erst zu Hause gemerkt.\nModerator: Wie oft sollte man vor der Prüfung einen kompletten Test üben?\nExpertin: Mindestens dreimal, und immer mit laufender Uhr. Ohne Zeitdruck zu üben, bringt wenig. Viele meiner Teilnehmenden üben lieber einzelne Teile, weil das bequemer ist. Das Zeitgefühl für fünfundsechzig Minuten entsteht so allerdings nicht.',
+      },
+      items: [
+        {
+          typ: 'mc',
+          frage: 'Was ergab der Probetest in Frau Kellers letztem Kurs?',
+          optionen: ['Sieben von achtzehn Teilnehmenden bearbeiteten alle vier Teile.', 'Sieben von achtzehn Teilnehmenden wurden nicht rechtzeitig fertig.', 'Die Mehrheit scheiterte an Lücken im Wortschatz.'],
+          loesung: 0,
+        },
+        { typ: 'rf', aussage: 'Frau Keller rät ihren Teilnehmenden bis heute, grundsätzlich mit dem langen ersten Text zu beginnen.', loesung: false },
+        { typ: 'rf', aussage: 'Die Teilnehmerin, von der Frau Keller erzählt, hätte die Aufgabe auch ohne den unbekannten Fachbegriff lösen können.', loesung: true },
+        {
+          typ: 'mc',
+          frage: 'Wie beurteilt Frau Keller das Üben einzelner Prüfungsteile?',
+          optionen: ['Es sei sinnvoll, sofern man dabei die Uhr mitlaufen lasse.', 'Es sei bequemer, vermittle aber kein Gefühl für die gesamte Prüfungszeit.', 'Es eigne sich vor allem für Teilnehmende, die noch wenig Übung haben.'],
+          loesung: 1,
+        },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -112,6 +136,21 @@ export default {
       ],
       minWoerter: 80,
       beispielLoesung: 'In diesem Forum wird behauptet, im Modul Lesen komme es vor allem auf die richtige Strategie an, während der Wortschatz eine untergeordnete Rolle spiele. Für diese These spricht eine Studie aus Leipzig: Teilnehmende, die zunächst die Aufgaben überflogen und dann gezielt nach Belegstellen suchten, schnitten deutlich besser ab als diejenigen, die den Text Wort für Wort lasen. Dennoch halte ich die These in ihrer Zuspitzung für problematisch. Wer eine Belegstelle zwar findet, sie aber sprachlich nicht versteht, fällt trotz aller Technik auf Distraktoren herein. Meiner Ansicht nach ergänzen sich beide Faktoren: Strategie verhindert, dass vorhandene Kenntnisse verschenkt werden, ersetzt sie aber nicht. Prüfungskandidaten würde ich daher raten, ihren Wortschatz kontinuierlich auszubauen und zugleich jeden Übungstest mit laufender Uhr zu bearbeiten.',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Sprich einen Diskussionsbeitrag (etwa zweieinhalb Minuten). Beziehe klar Position, stütze sie mit Argumenten und setze dich mit mindestens einem Gegenargument auseinander.',
+      aufgabe: 'In einer Diskussionsrunde wird die These vertreten: „Am Bildschirm wird nur noch überflogen — wer gründlich lesen will, braucht Papier.“ Nimm dazu in einem zusammenhängenden Diskussionsbeitrag von etwa zweieinhalb Minuten Stellung: Gib die These sinngemäß wieder, beziehe klar Position, stütze sie mit Argumenten, setze dich mit mindestens einem Gegenargument auseinander und schließe mit einem Fazit.',
+      punkte: [
+        'Gib die These sinngemäß wieder und nenne deine Position.',
+        'Begründe deine Position mit zwei Argumenten oder Beispielen.',
+        'Greife ein Gegenargument auf und entkräfte es.',
+        'Schließe mit einem knappen Fazit.',
+      ],
+      redemittel: ['Die These lautet sinngemäß, dass …', 'Dem kann ich nur teilweise zustimmen.', 'Entscheidend ist meines Erachtens nicht …, sondern …', 'Nun könnte man einwenden, dass …', 'Unterm Strich …'],
+      maxSekunden: 150,
+      beispielLoesung: 'Die These lautet sinngemäß, dass man am Bildschirm Texte nur noch überfliegt und gründliches Lesen allein auf Papier möglich ist. Dem kann ich nur teilweise zustimmen.\nRichtig ist, dass der Bildschirm zum schnellen Lesen verführt. Wer im Netz unterwegs ist, sucht meist gezielt nach einer Information, findet sie und klickt weiter. Dazu kommen Nachrichten und Werbung, die ständig ablenken. Das kenne ich von mir selbst: Einen langen Artikel lese ich am Handy selten bis zum Ende.\nEntscheidend ist meines Erachtens aber nicht das Medium, sondern die Art, wie wir damit umgehen. Zum einen kommt es auf den Zweck an. Wenn ich nur wissen will, wann ein Zug fährt, wäre gründliches Lesen schlicht Zeitverschwendung. Überfliegen ist also kein Mangel, sondern eine Technik, die man beherrschen muss. Zum anderen lässt sich auch am Bildschirm konzentriert lesen, wenn man die Bedingungen dafür schafft: Benachrichtigungen ausschalten, den Text vergrößern, wichtige Stellen markieren.\nNun könnte man einwenden, dass man sich an Gedrucktes besser erinnert. Das mag stimmen, betrifft aber vor allem Menschen, die das Lesen auf Papier gelernt haben. Wer von klein auf digital liest und es geübt hat, dürfte diesen Nachteil kaum haben.\nUnterm Strich brauchen wir also nicht unbedingt Papier, sondern die Fähigkeit, bewusst zwischen schnellem und genauem Lesen zu wechseln. Und die lässt sich auf jedem Medium trainieren.',
     },
   ],
 }

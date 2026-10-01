@@ -94,6 +94,30 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Du hörst eine Nachricht auf deiner Mailbox. Entscheide beim Hören, welche Antwort zutrifft bzw. ob die Aussage richtig oder falsch ist.',
+      audio: {
+        transcript: 'Guten Tag, hier spricht Sabine Reuter von der Forumsredaktion der Wochenzeitung. Ich rufe wegen Ihres Diskussionsbeitrags zu der Streitfrage an, ob Kurzstreckenflüge verboten werden sollten. Wir würden Ihren Text gern abdrucken, allerdings nicht in der Ausgabe am Donnerstag, wie ich Ihnen geschrieben hatte, sondern erst in der Wochenendausgabe am Samstag. Dafür müssten wir ihn etwas kürzen. Zurzeit hat er rund dreihundertfünfzig Wörter, Platz haben wir für zweihundertfünfzig. Ich schlage vor, das zweite Beispiel zu streichen, das mit der Bahnfahrt nach Wien. Ihr stichhaltigstes Argument, der Vergleich der Reisezeiten, bleibt selbstverständlich stehen. Noch etwas zum Inhalt. Sie wägen sehr sorgfältig ab, aber Ihr eigener Standpunkt wird erst im letzten Satz deutlich. Unsere Leserinnen und Leser sollten früher erfahren, wofür Sie plädieren. Könnten Sie den Text entsprechend ergänzen? Die überarbeitete Fassung bräuchte ich bis Mittwoch, zwölf Uhr, und zwar per E-Mail, bitte nicht über das Formular auf unserer Website, denn das ist derzeit gestört. Falls Sie Fragen haben, erreichen Sie mich heute bis halb fünf und morgen ab neun Uhr unter der Durchwahl vier, sieben, null. Vielen Dank und auf Wiederhören.',
+      },
+      items: [
+        {
+          typ: 'mc',
+          frage: 'Wann soll der Beitrag nach dem jetzigen Stand erscheinen?',
+          optionen: ['am Mittwoch', 'am Samstag', 'am Donnerstag'],
+          loesung: 1,
+        },
+        {
+          typ: 'mc',
+          frage: 'Welche Passage soll nach dem Vorschlag von Frau Reuter entfallen?',
+          optionen: ['das Beispiel mit der Bahnfahrt nach Wien', 'der Vergleich der Reisezeiten', 'der Schlusssatz'],
+          loesung: 0,
+        },
+        { typ: 'rf', aussage: 'Frau Reuter bemängelt, dass der Beitrag die Gegenseite zu wenig berücksichtigt.', loesung: false },
+        { typ: 'rf', aussage: 'Heute ist Frau Reuter bis 16:30 Uhr telefonisch erreichbar.', loesung: true },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -106,6 +130,21 @@ export default {
       ],
       minWoerter: 80,
       beispielLoesung: 'Kaum ein Thema wird derzeit so kontrovers diskutiert wie die Frage, ob große Supermärkte verpflichtet werden sollten, unverkaufte Lebensmittel zu spenden. Angesichts der Mengen, die täglich im Müll landen, ist diese Debatte längst überfällig.\nEin gewichtiges Argument für eine solche Pflicht ist die Verschwendung selbst: Einwandfreie Lebensmittel wegzuwerfen, während andere Menschen auf Unterstützung angewiesen sind, lässt sich ethisch kaum rechtfertigen. Kritiker wenden ein, dass gemeinnützige Ausgabestellen schon heute an ihre logistischen Grenzen stoßen. Zwar trifft dieser Einwand zu, dennoch spricht er nicht gegen die Pflicht, sondern für eine bessere Ausstattung der Abnehmer.\nIch plädiere daher für einen Mittelweg: eine Spendenpflicht für große Märkte, verbunden mit staatlicher Förderung für Transport und Kühlung. Nur so wird aus einer guten Absicht eine wirksame Maßnahme.',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Halte einen strukturierten Vortrag von etwa zweieinhalb Minuten. Mach den Aufbau für deine Zuhörer hörbar: Gliederung ankündigen, Übergänge markieren, Fazit ziehen.',
+      aufgabe: 'Halte auf einer Tagung zum Thema „Zusammenleben in der Stadt“ einen strukturierten Vortrag von etwa zweieinhalb Minuten über Einsamkeit in der Großstadt. Kündige zu Beginn deine Gliederung an, markiere die Übergänge hörbar und schließe mit einem Fazit, in dem du Position beziehst.',
+      punkte: [
+        'Umreiße das Problem und seine Bedeutung.',
+        'Nenne zwei Ursachen.',
+        'Wäge zwei mögliche Maßnahmen gegeneinander ab.',
+        'Ziehe ein Fazit und sag, wofür du plädierst.',
+      ],
+      redemittel: ['Ich möchte zunächst …, anschließend … und abschließend …', 'Damit komme ich zu …', 'Ein gewichtiges Argument dafür ist, dass …', 'Zusammenfassend lässt sich festhalten: …'],
+      maxSekunden: 150,
+      beispielLoesung: 'Meine Damen und Herren, in einer Stadt mit einer Million Einwohnern allein zu sein, das klingt paradox, und doch ist es für viele Alltag. Ich möchte zunächst skizzieren, wie groß das Problem ist, anschließend nach den Ursachen fragen und abschließend zwei Maßnahmen gegeneinander abwägen. Zur Ausgangslage. In Umfragen gibt etwa jeder Vierte an, sich häufig einsam zu fühlen, und zwar nicht nur ältere Menschen, sondern zunehmend auch junge Erwachsene. Das ist mehr als ein unangenehmes Gefühl, denn Einsamkeit macht auf Dauer krank. Damit komme ich zu den Ursachen. Erstens leben in Großstädten immer mehr Menschen allein, oft weit entfernt von ihrer Familie. Zweitens verschwinden die Orte, an denen man sich begegnet, ohne etwas kaufen zu müssen. Was lässt sich dagegen tun? Das führt mich zu meinem letzten Punkt. Manche Städte setzen auf Beratungstelefone und Besuchsdienste. Ein gewichtiges Argument dafür ist, dass man so auch Menschen erreicht, die ihre Wohnung kaum noch verlassen. Kritiker wenden jedoch ein, dass dadurch keine dauerhaften Kontakte entstehen. Stichhaltiger erscheint mir deshalb die zweite Maßnahme, nämlich offene Nachbarschaftstreffs. Zwar kosten sie Miete und Personal, dennoch wirken sie nachhaltiger, weil dort aus Besuchern Bekannte werden. Zusammenfassend lässt sich festhalten: Einsamkeit ist kein privates Versagen, sondern eine Folge davon, wie wir unsere Städte gestalten. Ich plädiere daher dafür, Begegnung genauso selbstverständlich zu planen wie Straßen und Parkplätze. Vielen Dank.',
     },
   ],
 }

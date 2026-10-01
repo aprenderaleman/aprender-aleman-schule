@@ -99,6 +99,30 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Du hörst einen Ausschnitt aus einer Podiumsdiskussion. Entscheide, welche Antwort dem Gehörten entspricht bzw. ob die Aussage richtig oder falsch ist. Achte darauf, wer welche Position vertritt.',
+      audio: {
+        transcript: 'Moderatorin: Herzlich willkommen zu unserer Podiumsdiskussion über verständliche Behördensprache. Herr Professor Albers, Sie haben amtliche Schreiben untersucht. Was macht sie so schwer lesbar?\nProfessor: Meist nicht die Fachwörter, sondern die fehlenden Verbindungen zwischen den Sätzen. In unserer Stichprobe von vierhundert Bescheiden fehlte in jedem dritten ein erkennbarer roter Faden. Da steht eine Forderung, und erst zwei Absätze später folgt die Begründung.\nModeratorin: Frau Demir, Sie leiten ein Bürgeramt. Trifft Sie diese Kritik?\nExpertin: Teilweise. Unsere Schreiben müssen vor Gericht bestehen, deshalb übernehmen wir viele Formulierungen aus dem Gesetz. Dennoch haben wir vor zwei Jahren begonnen, unsere Vorlagen zu überarbeiten. Seitdem ist die Zahl der telefonischen Rückfragen um ein Viertel gesunken.\nProfessor: Das deckt sich mit unseren Befunden. Allerdings genügt es nicht, lange Sätze zu kürzen. Wer nur kürzt, zerreißt oft gerade die Anschlüsse, auf die der Leser angewiesen ist.\nExpertin: Diese Erfahrung haben wir auch gemacht. Unsere ersten Entwürfe bestanden aus lauter kurzen Hauptsätzen und wirkten wie eine Liste von Befehlen. Erst als wir Konnektoren wie deshalb oder trotzdem wieder einfügten, kamen die Texte bei den Bürgern besser an.\nModeratorin: Was kostet eine solche Überarbeitung?\nExpertin: Vor allem Zeit. Für fünfzig Vorlagen haben wir anderthalb Jahre gebraucht, nicht sechs Monate, wie ursprünglich geplant.',
+      },
+      items: [
+        {
+          typ: 'mc',
+          frage: 'Worin sieht Professor Albers die Hauptursache dafür, dass amtliche Schreiben schwer lesbar sind?',
+          optionen: ['in der großen Zahl von Fachwörtern', 'in fehlenden Verbindungen zwischen den Sätzen', 'in Formulierungen, die aus Gesetzen übernommen werden'],
+          loesung: 1,
+        },
+        { typ: 'rf', aussage: 'Seit das Bürgeramt von Frau Demir seine Vorlagen überarbeitet, sind die telefonischen Rückfragen um ein Viertel zurückgegangen.', loesung: true },
+        {
+          typ: 'mc',
+          frage: 'Welche Erfahrung machte das Bürgeramt mit seinen ersten Entwürfen?',
+          optionen: ['Die vielen kurzen Hauptsätze wirkten wie eine Reihe von Befehlen.', 'Die Texte hielten einer gerichtlichen Prüfung nicht stand.', 'Die Texte kamen bei den Bürgern auf Anhieb gut an.'],
+          loesung: 0,
+        },
+        { typ: 'rf', aussage: 'Die Überarbeitung der fünfzig Vorlagen war wie geplant nach sechs Monaten abgeschlossen.', loesung: false },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -111,6 +135,20 @@ export default {
       ],
       minWoerter: 80,
       beispielLoesung: 'Das Essayfragment befasst sich mit der Frage, wie sich das Lesen in Zeiten kurzer Textformate verändert. Der Verfasser geht davon aus, dass mit der Länge der Texte auch der Zusammenhang verloren gehe, also jene unscheinbaren Verweise, die Sätze miteinander verbinden. Die Sprachwissenschaftlerin Johanna Brecht verschärft diese Beobachtung: Wer nur noch einzelne Sätze lese, verliere die Fähigkeit, Übergänge wahrzunehmen. Dieser Einschätzung widerspricht der Verfasser jedoch. Seiner Ansicht nach fehle jungen Lesern nicht die Kompetenz, sondern lediglich die Übung, längeren Gedankengängen zu folgen.\nIch teile diese Sichtweise weitgehend. Auch mir fällt es nach einem Tag voller Kurznachrichten schwer, mich auf einen langen Artikel einzulassen. Nach einigen Seiten stellt sich die Konzentration jedoch meist wieder ein. Gerade deshalb halte ich regelmäßiges Lesen längerer Texte für unverzichtbar.',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Halte einen strukturierten Vortrag (etwa zweieinhalb Minuten). Kündige deine Gliederung an und mache die Übergänge zwischen den Teilen hörbar, sodass deine Zuhörer dem roten Faden mühelos folgen können.',
+      aufgabe: 'Halte vor einem Publikum, das du siezt, einen strukturierten Vortrag von etwa zweieinhalb Minuten zum Thema „Massentourismus — Segen oder Fluch für beliebte Reiseziele?“. Kündige deine Gliederung an, mache die Übergänge zwischen den Teilen hörbar und knüpfe im Fazit an deine Einleitung an.',
+      punkte: [
+        'Führe in das Thema ein und kündige den Aufbau deines Vortrags an.',
+        'Stelle dar, was der Tourismus beliebten Reisezielen bringt und womit er sie belastet, und veranschauliche beides jeweils mit einem Beispiel.',
+        'Ziehe ein begründetes Fazit und knüpfe dabei an deine Einleitung an.',
+      ],
+      redemittel: ['Mein Vortrag gliedert sich in drei Teile: …', 'Damit komme ich zum zweiten Punkt.', 'Diesen Vorteilen stehen allerdings … gegenüber.', 'Wie eingangs erwähnt, …', 'Daraus ergibt sich für mich folgendes Fazit: …'],
+      maxSekunden: 150,
+      beispielLoesung: 'Sehr geehrte Damen und Herren, wer im Sommer durch die Altstadt von Venedig oder Dubrovnik geht, kommt stellenweise kaum noch voran. Ist der Massentourismus für solche Orte ein Segen oder ein Fluch? Mein Vortrag gliedert sich in drei Teile: Zunächst zeige ich, was beliebte Reiseziele dem Tourismus verdanken, danach, welchen Preis sie dafür zahlen, und am Ende ziehe ich ein Fazit.\nBeginnen wir mit den Vorteilen. Der Tourismus schafft Arbeitsplätze, und zwar gerade dort, wo es sonst kaum welche gäbe. In dem Küstenort, aus dem meine Familie stammt, lebt inzwischen fast jeder zweite Haushalt von den Gästen; ohne sie wären die Jüngeren längst weggezogen. Hinzu kommt, dass viele Städte ihre historischen Bauten nur dank dieser Einnahmen erhalten können.\nDamit komme ich zum zweiten Punkt. Diesen Vorteilen stehen allerdings erhebliche Belastungen gegenüber. Am schwersten wiegt die Verdrängung der Einheimischen: Wo Wohnungen an Feriengäste vermietet werden, steigen die Mieten, und der Bäcker an der Ecke weicht dem Andenkenladen. Außerdem leidet die Umwelt unter Müll und Wasserknappheit. So droht der Tourismus genau das zu zerstören, was die Besucher einmal angelockt hat.\nWas folgt daraus? Wie eingangs erwähnt, kommt man in manchen Altstädten kaum noch voran, und davon haben weder die Bewohner noch die Gäste etwas. Ein Fluch ist der Tourismus meines Erachtens dennoch nicht, sofern man ihn steuert: durch Obergrenzen für Ferienwohnungen, durch Gebühren für Tagesgäste und durch Angebote außerhalb der Hochsaison. Daraus ergibt sich für mich folgendes Fazit: Entscheidend ist nicht, ob Gäste kommen, sondern wie viele und zu welchen Bedingungen. Ich danke Ihnen für Ihre Aufmerksamkeit.',
     },
   ],
 }

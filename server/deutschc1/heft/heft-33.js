@@ -100,6 +100,30 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Du hörst ein Radiointerview mit einer Medienforscherin. Entscheide, welche Antwort dem Gehörten entspricht bzw. ob die Aussage richtig oder falsch ist.',
+      audio: {
+        transcript: 'Moderator: Frau Professorin Albers, Sie haben untersucht, wie Jugendliche mit Nachrichten in sozialen Netzwerken umgehen. Was hat Sie am meisten überrascht?\nForscherin: Dass die Jugendlichen keineswegs leichtgläubig sind. Fast alle wussten, dass Reichweite nichts über Glaubwürdigkeit aussagt. Trotzdem hat nur etwa jeder Sechste die Quelle eines Beitrags tatsächlich geprüft, bevor er ihn geteilt hat.\nModerator: Woran liegt das?\nForscherin: Weniger an fehlendem Wissen als an der Situation. Geteilt wird in Sekunden, meist unterwegs, und zwar vor allem das, was Freunde bereits verbreitet haben. Das Vertrauen gilt also nicht dem Absender, sondern der Person, die den Beitrag weiterleitet.\nModerator: Sie haben in Ihrem Projekt auch Unterricht erprobt. Mit Erfolg?\nForscherin: Teilweise. Einmalige Projekttage haben praktisch nichts bewirkt. Wirksam war dagegen ein Kurs über ein ganzes Halbjahr, in dem die Klassen selbst reißerische Schlagzeilen und Falschmeldungen entworfen haben. Wer die Mechanismen einmal selbst angewendet hat, durchschaut sie später schneller.\nModerator: Also Medienkompetenz als eigenes Schulfach?\nForscherin: Davon halte ich wenig. Mir wäre lieber, sie würde in bestehenden Fächern verankert, etwa in Deutsch und Politik. Ein zusätzliches Fach scheitert schon am Mangel an Lehrkräften.',
+      },
+      items: [
+        { typ: 'rf', aussage: 'Die meisten befragten Jugendlichen hielten Beiträge mit hoher Reichweite für besonders glaubwürdig.', loesung: false },
+        {
+          typ: 'mc',
+          frage: 'Wem vertrauen die Jugendlichen laut der Forscherin, wenn sie einen Beitrag teilen?',
+          optionen: ['Dem ursprünglichen Absender des Beitrags.', 'Der Person aus dem eigenen Umfeld, die den Beitrag weitergeleitet hat.', 'Der Plattform, auf der der Beitrag erschienen ist.'],
+          loesung: 1,
+        },
+        {
+          typ: 'mc',
+          frage: 'Welche Unterrichtsform hat sich in dem Projekt als wirksam erwiesen?',
+          optionen: ['Einmalige Projekttage zum Umgang mit Nachrichten.', 'Ein eigenes Schulfach Medienkompetenz mit zusätzlichen Lehrkräften.', 'Ein halbjähriger Kurs, in dem die Klassen selbst Falschmeldungen erstellten.'],
+          loesung: 2,
+        },
+        { typ: 'rf', aussage: 'Die Forscherin spricht sich dagegen aus, Medienkompetenz als eigenes Schulfach einzuführen.', loesung: true },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -112,6 +136,20 @@ export default {
       ],
       minWoerter: 80,
       beispielLoesung: 'Die Rezension bespricht Henrik Solbergs Buch „Die Ökonomie der Empörung“. Solberg vertritt die These, nicht einzelne Falschmeldungen seien das Problem, sondern ein Geschäftsmodell, das Reichweite belohne und Glaubwürdigkeit vernachlässige. Gelobt werden die sorgfältig recherchierten Kapitel über virale Beiträge; kritisiert wird hingegen, dass der Autor im Schlussteil offenlasse, wer über wahr und falsch entscheiden solle.\nDiese Kritik halte ich für berechtigt. Die Plattformen zur Verantwortung zu ziehen, ist zwar notwendig, denn sie verdienen an der Verbreitung von Desinformation. Löschpflichten allein greifen aber zu kurz, solange Nutzer Quellen nicht kritisch prüfen. Meines Erachtens führt daher kein Weg daran vorbei, Medienkompetenz fest im Unterricht zu verankern — nur so lässt sich die Meinungsbildung dauerhaft vor Manipulation schützen.',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Reagiere mit einer eigenen Wortmeldung auf einen Diskussionsbeitrag. Sprich zusammenhängend etwa zwei Minuten (höchstens 150 Sekunden).',
+      aufgabe: 'Du nimmst an einer Diskussionsrunde über Medien teil. Dein Vorredner hat behauptet: „Influencer sind für junge Menschen längst glaubwürdiger als Journalisten — und das ist auch gut so.“ Reagiere darauf mit einer zusammenhängenden Wortmeldung: Räume zunächst ein, was an der Aussage zutrifft, widersprich dann begründet und anhand eines Beispiels und schließe mit einer Forderung.',
+      punkte: [
+        'Zugeständnis: Was machen Influencer aus Sicht ihres Publikums besser als klassische Medien?',
+        'Widerspruch: Warum sind Reichweite und Glaubwürdigkeit nicht dasselbe? Führe ein Beispiel an.',
+        'Forderung: Was müsste sich ändern — bei den Plattformen, in der Schule oder bei den Nutzern selbst?',
+      ],
+      redemittel: ['Mein Vorredner mag recht haben, wenn er sagt, dass …', 'Man wird … nicht gerecht, wenn man …', 'Bei aller Sympathie für … halte ich es für bedenklich, wenn …', 'Meines Erachtens führt kein Weg daran vorbei, …'],
+      maxSekunden: 150,
+      beispielLoesung: 'Ich möchte direkt an meinen Vorredner anknüpfen. Er mag recht haben, wenn er sagt, dass Influencer viele junge Menschen besser erreichen als jede Nachrichtenredaktion. Sie sprechen die Sprache ihres Publikums, sie wirken nahbar, und man wird ihnen nicht gerecht, wenn man sie pauschal als oberflächlich abtut. Manche erklären Politik verständlicher als so mancher Leitartikel.\nAber dass das gut so sei, bezweifle ich entschieden. Reichweite sagt nun einmal nichts über Glaubwürdigkeit aus. Eine Journalistin muss ihre Quellen prüfen, und wenn sie einen Fehler macht, gibt es eine Redaktion, die ihn korrigiert. Ein Influencer dagegen verdient sein Geld oft mit Werbung, die als persönliche Empfehlung getarnt ist. Nehmen wir jemanden, der seinem Publikum ein Nahrungsergänzungsmittel ans Herz legt: Ob dahinter Überzeugung steckt oder ein Vertrag, erkennt man bestenfalls auf den zweiten Blick. Und wer einem Menschen vertraut wie einem Freund, hinterfragt ihn eben nicht.\nBei aller Sympathie für neue Formate halte ich es deshalb für bedenklich, wenn sie den Journalismus ersetzen, statt ihn zu ergänzen. Meines Erachtens führt kein Weg daran vorbei, Medienkompetenz fest in der Schule zu verankern. Jugendliche müssen lernen, den Absender zu hinterfragen — ganz gleich, ob er eine Krawatte trägt oder eine Kamera in der Hand hält. Glaubwürdigkeit muss man sich verdienen, und zwar durch geprüfte Quellen, nicht durch Klickzahlen.',
     },
   ],
 }

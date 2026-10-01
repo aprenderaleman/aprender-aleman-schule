@@ -99,6 +99,30 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Du hörst ein Interview. Entscheide beim Hören, welche Antwort der Position der befragten Person entspricht bzw. ob die Aussage richtig oder falsch ist.',
+      audio: {
+        transcript: 'Moderator: Frau Albers, Sie beraten Städte, in deren Zentren immer mehr Geschäfte leer stehen. Der Onlinehandel hat die Innenstadt also endgültig erledigt?\nExpertin: So pauschal würde ich das nicht sagen. Der Onlinehandel hat die Entwicklung beschleunigt, ausgelöst hat er sie nicht. Viele Zentren waren schon vorher, na ja, sagen wir, ziemlich eintönig. Überall dieselben Ketten, kaum Wohnungen, abends alles dunkel.\nModerator: Was machen Städte denn falsch, wenn ein großes Kaufhaus schließt?\nExpertin: Sie warten zu lange auf den nächsten großen Mieter. In einer Stadt, die ich begleitet habe, stand das Gebäude vier, nein, ich muss mich korrigieren, fast sechs Jahre leer, bevor man überhaupt über Alternativen nachgedacht hat.\nModerator: Und die Alternative heißt dann Stadtbibliothek und Arztpraxen statt Mode?\nExpertin: Im Grunde ja, allerdings nicht als Notlösung. Wenn unten ein Markt ist, darüber eine Bibliothek und ganz oben Wohnungen, kommen die Leute aus unterschiedlichen Gründen, sprich, das Haus ist von morgens bis abends belebt.\nModerator: Das klingt teuer. Können sich das nur reiche Städte leisten?\nExpertin: Ganz von der Hand zu weisen ist der Einwand nicht. Billig ist so ein Umbau nie. Ein Gebäude jahrelang leer stehen zu lassen, kommt eine Stadt am Ende aber teurer zu stehen.',
+      },
+      items: [
+        {
+          typ: 'mc',
+          frage: 'Welche Rolle schreibt Frau Albers dem Onlinehandel zu?',
+          optionen: ['Er hat einen bereits laufenden Prozess verstärkt.', 'Er hat den Niedergang der Zentren überhaupt erst in Gang gesetzt.', 'Er ist für die Lage der Innenstädte ohne Bedeutung.'],
+          loesung: 0,
+        },
+        {
+          typ: 'mc',
+          frage: 'Wie lange stand das Kaufhaus in der Stadt, von der Frau Albers berichtet, leer?',
+          optionen: ['vier Jahre', 'mehr als sechs Jahre', 'knapp sechs Jahre'],
+          loesung: 2,
+        },
+        { typ: 'rf', aussage: 'Die gemischte Nutzung eines ehemaligen Kaufhauses ist für Frau Albers eine bloße Verlegenheitslösung.', loesung: false },
+        { typ: 'rf', aussage: 'Den Hinweis auf die hohen Kosten hält Frau Albers für zumindest teilweise berechtigt.', loesung: true },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -111,6 +135,21 @@ export default {
       ],
       minWoerter: 80,
       beispielLoesung: 'Sehr geehrte Damen und Herren,\nam Dienstagabend habe ich in Ihrer Sendung das Interview mit einer Verkehrsplanerin über autofreie Innenstädte verfolgt. Das Thema ist hochaktuell, umso mehr hat mich die Gesprächsführung enttäuscht.\nDer Moderator stellte überwiegend Suggestivfragen wie „Das ist doch reine Bevormundung, oder?“ und unterbrach seinen Gast, sobald dieser differenzieren wollte. Auf diese Weise ließ sich kaum nachvollziehen, welche Position die Expertin tatsächlich vertritt.\nIch rege daher an, Interviewpartnern künftig mehr Raum für ihre Antworten zu geben und kritische Nachfragen offen zu formulieren. Nachhaken ist legitim — die Antwort vorwegzunehmen dagegen nicht.\nMit freundlichen Grüßen\nIrene Castellano',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Sprich etwa zwei Minuten. Formuliere abgewogen, wie es für ein Interview typisch ist: Weise die Zuspitzung zurück, differenziere und komm am Ende zu einer klaren Aussage.',
+      aufgabe: 'Du bist als Gast in einen Podcast über Sprachen eingeladen. Die Moderatorin fragt dich: „Übersetzungs-Apps werden immer besser. Fremdsprachen zu lernen ist also bald reine Zeitverschwendung, oder?“ Antworte ausführlich in einem zusammenhängenden Redebeitrag von etwa zwei Minuten. Formuliere abgewogen, wie es für ein Interview typisch ist: Weise die Zuspitzung zurück, differenziere und komm am Ende zu einer klaren Aussage.',
+      punkte: [
+        'Geh auf die Suggestivfrage ein, ohne ihre These einfach zu übernehmen.',
+        'Räume ein, was die Apps tatsächlich leisten.',
+        'Zeige an einem Beispiel aus deiner eigenen Erfahrung, wo ihre Grenzen liegen.',
+        'Fasse deine Position am Ende in einem Satz zusammen.',
+      ],
+      redemittel: ['So pauschal würde ich das nicht sagen.', 'Im Grunde stimmt das, allerdings …', 'Ganz von der Hand zu weisen ist das nicht, nur …', 'Anders gesagt: …'],
+      maxSekunden: 120,
+      beispielLoesung: 'Also, so pauschal würde ich das nicht sagen. Im Grunde stimmt es ja, dass diese Apps erstaunlich gut geworden sind. Wenn ich im Urlaub eine Speisekarte verstehen oder nach dem Weg fragen will, reicht das Handy völlig aus, das will ich gar nicht kleinreden. Allerdings ist das, sagen wir, nur die Oberfläche einer Sprache. Ich gebe Ihnen ein Beispiel. Als ich nach Deutschland kam, habe ich in den ersten Wochen bei Besprechungen eine App mitlaufen lassen. Die Wörter habe ich verstanden, das Gespräch nicht. Wenn eine Kollegin sagte, da sei sie nicht ganz bei mir, dann stand auf dem Bildschirm eine korrekte Übersetzung. Dass das ein ziemlich deutlicher Widerspruch war, hat mir aber kein Programm verraten. Und bis ich meine Antwort eingetippt hatte, war die Runde längst beim nächsten Punkt. Dazu kommt etwas, das oft unterschätzt wird, nämlich Vertrauen. Wer die Sprache des anderen spricht, auch mit Fehlern, zeigt, dass er sich Mühe gibt. Ein Gerät dazwischen schafft immer Abstand. Anders gesagt: Für Informationen genügt die App, für Beziehungen nicht. Zeitverschwendung ist das Lernen also sicher nicht, es verschiebt sich höchstens, wofür wir es brauchen.',
     },
   ],
 }

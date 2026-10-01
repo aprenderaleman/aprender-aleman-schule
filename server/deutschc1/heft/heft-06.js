@@ -100,6 +100,30 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Du hörst einen Ausschnitt aus einer Podiumsdiskussion. Entscheide, welche Lösung dem Gehörten entspricht bzw. ob die Aussage richtig oder falsch ist.',
+      audio: {
+        transcript: 'Moderatorin: Angenommen, die Vier-Tage-Woche würde morgen überall eingeführt. Was wäre die Folge? Herr Lehmann, Sie leiten einen Handwerksbetrieb mit vierzig Beschäftigten.\nUnternehmer: Für uns wäre das kaum zu schaffen. Wir finden schon heute nicht genug Fachkräfte. Wenn alle einen Tag weniger arbeiten würden, müssten wir Aufträge ablehnen.\nModeratorin: Frau Seidel, Sie forschen seit Jahren zur Arbeitszeit. Teilen Sie diese Sorge?\nForscherin: Nur zum Teil. In unserem Versuch mit sechzehn Betrieben ist die Produktivität nicht gesunken, sondern in den meisten Fällen sogar leicht gestiegen. Vor allem aber haben sich die Krankheitstage fast halbiert.\nUnternehmer: Das mag im Büro funktionieren. Ein Dach lässt sich aber nicht schneller decken, nur weil die Leute ausgeruht sind.\nForscherin: Da gebe ich Ihnen recht. Deshalb würde ich auch nie ein Gesetz für alle Branchen fordern. Sinnvoller wäre es, wenn jeder Betrieb selbst entscheiden dürfte.\nModeratorin: Herr Lehmann, haben Sie es denn je ausprobiert?\nUnternehmer: Beinahe. Vor zwei Jahren hätten wir fast ein Modell mit vier längeren Tagen eingeführt. Gescheitert ist es nicht an mir, sondern an der Belegschaft. Die Älteren wollten keine Zehn-Stunden-Tage.\nForscherin: Hätten Sie die Arbeitszeit insgesamt verkürzt, statt sie nur anders zu verteilen, wäre die Abstimmung vermutlich anders ausgegangen.\nUnternehmer: Mag sein. Aber das hätte ich mir damals schlicht nicht leisten können.',
+      },
+      items: [
+        {
+          typ: 'mc',
+          frage: 'Was hat der Versuch von Frau Seidel in Bezug auf die Produktivität ergeben?',
+          optionen: ['Sie ist in den meisten Betrieben leicht gestiegen.', 'Sie ist spürbar gesunken.', 'Sie hat sich nahezu halbiert.'],
+          loesung: 0,
+        },
+        { typ: 'rf', aussage: 'Frau Seidel spricht sich für eine gesetzliche Vier-Tage-Woche in allen Branchen aus.', loesung: false },
+        {
+          typ: 'mc',
+          frage: 'Woran ist das Vier-Tage-Modell im Betrieb von Herrn Lehmann gescheitert?',
+          optionen: ['an fehlenden Fachkräften', 'an der Ablehnung durch Herrn Lehmann selbst', 'am Widerstand älterer Beschäftigter gegen sehr lange Arbeitstage'],
+          loesung: 2,
+        },
+        { typ: 'rf', aussage: 'Herrn Lehmann zufolge wäre eine Verkürzung der gesamten Arbeitszeit für seinen Betrieb damals finanziell nicht tragbar gewesen.', loesung: true },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -112,6 +136,21 @@ export default {
       ],
       minWoerter: 80,
       beispielLoesung: 'Das Essayfragment vertritt die These, dass wir verpasste Gelegenheiten langfristig stärker bereuen als Fehlentscheidungen, warnt aber davor, daraus eine simple Lebensregel abzuleiten.\nIch teile diese Einschätzung weitgehend. Hätte ich mich mit zwanzig nicht getraut, für ein Jahr nach Leipzig zu gehen, würde ich heute kaum fließend Deutsch sprechen — und vermutlich würde ich mein Zögern bis heute bereuen. Wer nie etwas wagt, geht zwar kein Risiko ein, versäumt aber womöglich die wichtigsten Erfahrungen seines Lebens.\nMan könnte allerdings einwenden, dass sich nicht jeder Risiken leisten kann: Für jemanden mit Familie und wenig Rücklagen dürfte ein Neuanfang weit schwerer wiegen. Mut ist also wichtig — allerdings unter der Voraussetzung, dass man die möglichen Folgen realistisch abgewogen hat.',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Halte einen strukturierten Vortrag von etwa zweieinhalb Minuten. Bleib konsequent im Gedankenexperiment und verwende dafür den Konjunktiv II der Gegenwart und der Vergangenheit.',
+      aufgabe: 'Halte in deinem Sprachkurs einen strukturierten Vortrag von etwa zweieinhalb Minuten zu dem Gedankenexperiment „Was wäre, wenn von morgen an alle Menschen dieselbe Sprache sprächen?“. Bleib konsequent im Gedankenexperiment: Verwende den Konjunktiv II der Gegenwart und, wenn du von deinem Erlebnis erzählst, den Konjunktiv II der Vergangenheit.',
+      punkte: [
+        'Beschreibe, wie sich der Alltag und das Zusammenleben verändern würden.',
+        'Erläutere, was dadurch gewonnen wäre und was verloren ginge.',
+        'Erzähle von einer Situation, die mit einer gemeinsamen Sprache anders verlaufen wäre.',
+        'Schließe mit einer vorsichtig formulierten eigenen Einschätzung.',
+      ],
+      redemittel: ['Angenommen, alle sprächen …', 'Gewonnen wäre dadurch vor allem …', 'Hätten wir damals …, wäre …', 'Unter der Voraussetzung, dass …, könnte ich mir vorstellen, …'],
+      maxSekunden: 150,
+      beispielLoesung: 'Angenommen, alle Menschen sprächen von morgen an dieselbe Sprache: Wie sähe unsere Welt dann aus? Auf dieses Gedankenexperiment möchte ich mich heute einlassen. Zunächst zum Alltag. Wir könnten uns überall mühelos verständigen, im Urlaub genauso wie auf dem Amt. Niemand müsste mehr Formulare übersetzen lassen, und wer in ein anderes Land zöge, fände sich dort vom ersten Tag an zurecht. Sprachkurse wie dieser wären überflüssig, und ich säße jetzt vermutlich nicht hier. Was wäre damit gewonnen? Sicher würden Handel und Wissenschaft profitieren, denn Missverständnisse ließen sich viel leichter vermeiden. Auch Zugewanderte hätten es leichter, weil ihnen keine Stelle mehr wegen fehlender Sprachkenntnisse verwehrt bliebe. Verloren ginge allerdings etwas Entscheidendes. Mit jeder Sprache verschwände eine eigene Art, die Welt zu sehen: Redewendungen, Witze und Gedichte, die sich nicht übertragen lassen. Die Welt wäre bequemer, aber auch ärmer. Ich denke dabei an meine erste Woche in Deutschland. Meine Vermieterin erklärte mir damals die Mülltrennung, und ich verstand kaum ein Wort. Hätten wir eine gemeinsame Sprache gehabt, wäre mir manche peinliche Situation erspart geblieben. Andererseits hätte ich meine Vermieterin dann nie um Hilfe bitten müssen, und wir wären wohl gar nicht ins Gespräch gekommen. Gerade aus dieser Unbeholfenheit ist eine Freundschaft entstanden. Mein Fazit fällt deshalb vorsichtig aus. Unter der Voraussetzung, dass sie nur zusätzlich neben den Muttersprachen bestünde, könnte ich mir eine gemeinsame Sprache durchaus vorstellen. Müssten wir dafür alle anderen aufgeben, wäre der Preis meines Erachtens zu hoch.',
     },
   ],
 }

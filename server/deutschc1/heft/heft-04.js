@@ -101,6 +101,30 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Du hörst ein Interview aus einer regionalen Radiosendung. Entscheide, welche Lösung dem Gehörten entspricht bzw. ob die Aussage richtig oder falsch ist.',
+      audio: {
+        transcript: 'Moderator: In der Nacht zum Dienstag ist in der Kieler Innenstadt eine Hauptwasserleitung geplatzt. Bei mir im Studio ist Sabine Albers, die technische Leiterin der Stadtwerke. Frau Albers, was genau ist passiert?\nExpertin: Gegen drei Uhr morgens wurde bei uns ein starker Druckabfall gemessen. Kurz darauf stand die Holtenauer Straße unter Wasser. Die Leitung wurde sofort abgesperrt, und rund vierzehnhundert Haushalte mussten vorübergehend ohne Wasser auskommen.\nModerator: Sind die Haushalte inzwischen wieder versorgt?\nExpertin: Ja, seit gestern Abend sind alle wieder angeschlossen. Das Wasser sollte in den betroffenen Häusern allerdings noch bis Donnerstag abgekocht werden.\nModerator: In der Presse war zu lesen, dass die Leitung über hundert Jahre alt ist.\nExpertin: Das stimmt nicht ganz. Sie wurde vor siebzig Jahren verlegt, nicht vor hundert. Alt ist sie trotzdem, und ihr Austausch war ohnehin für das kommende Jahr vorgesehen.\nModerator: Hätte der Schaden also verhindert werden können?\nExpertin: Das lässt sich im Moment nicht mit Sicherheit sagen. Die Leitung ist erst im Herbst überprüft worden, und dabei wurden keine Mängel festgestellt. Die Ursache ist noch zu klären.\nModerator: Wann kann die Straße wieder befahren werden?\nExpertin: Für Busse und Fahrräder ist sie voraussichtlich ab Montag befahrbar, für den Autoverkehr erst in drei Wochen.',
+      },
+      items: [
+        { typ: 'rf', aussage: 'In den betroffenen Häusern kann das Leitungswasser inzwischen wieder bedenkenlos getrunken werden.', loesung: false },
+        {
+          typ: 'mc',
+          frage: 'Wie alt ist die geplatzte Leitung nach Angaben von Frau Albers?',
+          optionen: ['über hundert Jahre', 'siebzehn Jahre', 'siebzig Jahre'],
+          loesung: 2,
+        },
+        { typ: 'rf', aussage: 'Bei der letzten Überprüfung der Leitung waren keine Schäden aufgefallen.', loesung: true },
+        {
+          typ: 'mc',
+          frage: 'Wer kann die Straße voraussichtlich ab Montag wieder benutzen?',
+          optionen: ['der gesamte Verkehr', 'zunächst nur Busse und Fahrräder', 'ausschließlich Lieferfahrzeuge und Autos der Anwohner'],
+          loesung: 1,
+        },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -113,6 +137,21 @@ export default {
       ],
       minWoerter: 80,
       beispielLoesung: 'Sehr geehrte Damen und Herren,\n\nwie in der Presse berichtet wurde, verzögert sich die Sanierung der Strombrücke um mindestens ein Jahr. Seit der Sperrung für Lastwagen wird der gesamte Lieferverkehr durch unsere Wohnstraße umgeleitet. Nachts ist an Schlaf kaum noch zu denken, und der Schulweg meiner Kinder ist deutlich gefährlicher geworden.\n\nDass die Schäden zunächst begutachtet werden müssen, ist durchaus nachvollziehbar. Die Anwohner hätten jedoch rechtzeitig über die Umleitung informiert werden müssen, statt davon aus der Zeitung zu erfahren.\n\nIch bitte Sie daher, zwei Maßnahmen zu prüfen: Erstens ließe sich der Lieferverkehr zwischen 22 und 6 Uhr auf die Umgehungsstraße verlegen. Zweitens sollte vor der Grundschule eine Tempo-30-Zone eingerichtet werden. Beides wäre ohne großen Aufwand umsetzbar.\n\nFür eine baldige Antwort wäre ich Ihnen dankbar.\n\nMit freundlichen Grüßen\nDaniel Ortiz',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Halte einen strukturierten Vortrag von etwa zweieinhalb Minuten. Stell die Vorgänge in den Vordergrund und wechsle zwischen Passiv und Ersatzformen.',
+      aufgabe: 'Halte in deinem Sprachkurs einen strukturierten Vortrag von etwa zweieinhalb Minuten zum Thema „Was muss getan werden, damit unsere Städte auf Hitzesommer vorbereitet sind?“. Stell die Vorgänge in den Vordergrund: Verwende mehrfach das Passiv und mindestens zwei Passiversatzformen, etwa „sich lassen“ mit Infinitiv, „sein“ mit „zu“ und Infinitiv oder ein Adjektiv auf „-bar“.',
+      punkte: [
+        'Schildere, welche Probleme in heißen Sommern in den Städten zu beobachten sind.',
+        'Stell zwei Maßnahmen vor, die bereits ergriffen wurden oder sich leicht umsetzen ließen.',
+        'Erläutere, was deiner Ansicht nach bisher vernachlässigt worden ist.',
+        'Schließe mit einem Fazit.',
+      ],
+      redemittel: ['Seit einigen Jahren ist zu beobachten, dass …', '… lässt sich ohne großen Aufwand umsetzen.', 'Bisher ist kaum berücksichtigt worden, dass …', 'Es müsste dringend … werden.'],
+      maxSekunden: 150,
+      beispielLoesung: 'In meinem Vortrag geht es um die Frage, was getan werden muss, damit unsere Städte auf Hitzesommer vorbereitet sind. Zuerst beschreibe ich das Problem, dann stelle ich zwei Maßnahmen vor, und am Ende sage ich, was meiner Ansicht nach bisher vernachlässigt worden ist. Zum Problem: Seit einigen Jahren werden in vielen Städten immer häufiger Temperaturen von fast vierzig Grad gemessen. Besonders in dicht bebauten Vierteln kühlt es nachts kaum noch ab, weil Beton und Asphalt die Wärme speichern. Darunter leiden vor allem ältere Menschen und kleine Kinder. Was lässt sich dagegen tun? Die erste Maßnahme ist leicht umsetzbar: Es müssen mehr Bäume gepflanzt werden, denn sie spenden Schatten und kühlen die Luft. In meiner Heimatstadt Sevilla sind in den letzten Jahren ganze Straßen mit Sonnensegeln überspannt worden, und auch das hilft spürbar. Die zweite Maßnahme betrifft das Wasser. In jedem Viertel sollten öffentliche Trinkbrunnen aufgestellt werden, und Parks sind so anzulegen, dass Regenwasser gespeichert werden kann. Beides ist durchaus finanzierbar. Vernachlässigt worden ist dagegen bisher der Schutz derjenigen, die sich nicht selbst helfen können. Es ist kaum berücksichtigt worden, dass viele alte Menschen allein in überhitzten Wohnungen leben. Hier müsste ein Hitzeplan erstellt werden: Bei einer Hitzewelle werden gefährdete Personen angerufen oder besucht, und kühle Räume wie Bibliotheken bleiben länger geöffnet. Mein Fazit: Die Hitze selbst ist nicht zu verhindern, ihre Folgen aber lassen sich deutlich verringern. Dafür müssen die Maßnahmen allerdings jetzt umgesetzt werden und nicht erst nach dem nächsten Rekordsommer.',
     },
   ],
 }

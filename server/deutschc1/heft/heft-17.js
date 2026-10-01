@@ -100,6 +100,30 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Du hörst einen Ausschnitt aus einem wissenschaftlichen Vortrag. Entscheide, welche Antwort dem Gehörten entspricht bzw. ob die Aussage richtig oder falsch ist.',
+      audio: {
+        transcript: 'Meine Damen und Herren, im zweiten Teil meines Vortrags möchte ich Ihnen zeigen, warum der Lückentext als Prüfungsform so beliebt ist. Die Idee ist älter, als viele annehmen. Sie stammt nicht aus dem Sprachunterricht, sondern aus der Zeitungsforschung. Ursprünglich wollte man damit messen, wie verständlich ein Artikel für seine Leser ist. Erst später entdeckten Sprachlehrer das Verfahren für sich.\nWas geschieht nun beim Ausfüllen im Kopf? Unsere Arbeitsgruppe hat dazu sechzig Studierende untersucht, die Deutsch als Fremdsprache lernen. Die eine Hälfte durfte den gesamten Text vorab lesen, die andere musste sofort mit der ersten Lücke beginnen. Das Ergebnis war eindeutig. Die erste Gruppe löste im Durchschnitt siebzehn von zwanzig Lücken richtig, die zweite lediglich zwölf. Bemerkenswert ist, dass beide Gruppen fast gleich viel Zeit benötigten. Das vorherige Lesen kostet also keine Zeit, es spart sie an anderer Stelle wieder ein.\nBesonders aufschlussreich waren die Fehler. Die meisten betrafen nicht etwa seltene Fachwörter, sondern unscheinbare Präpositionen und Konnektoren. Offenbar verlassen sich viele Lernende hier auf ihr Gefühl, statt den Satzbau zu prüfen. Im nächsten Abschnitt werde ich darauf eingehen, welche Folgen das für den Unterricht haben sollte.',
+      },
+      items: [
+        {
+          typ: 'mc',
+          frage: 'Wozu diente der Lückentext dem Vortrag zufolge ursprünglich?',
+          optionen: ['zur Messung der Verständlichkeit von Zeitungsartikeln', 'zur Einstufung von Sprachlernenden in Kursniveaus', 'zur Überprüfung von Grammatikkenntnissen im Unterricht'],
+          loesung: 0,
+        },
+        {
+          typ: 'mc',
+          frage: 'Welches Ergebnis erzielte die Gruppe, die sofort mit der ersten Lücke beginnen musste?',
+          optionen: ['durchschnittlich siebzehn richtige Lösungen', 'durchschnittlich zwölf richtige Lösungen', 'durchschnittlich zwanzig richtige Lösungen'],
+          loesung: 1,
+        },
+        { typ: 'rf', aussage: 'Die Gruppe, die den Text vorab lesen durfte, brauchte für die Aufgabe insgesamt deutlich länger als die andere.', loesung: false },
+        { typ: 'rf', aussage: 'Die häufigsten Fehler werden im Vortrag darauf zurückgeführt, dass viele Lernende nach Gefühl entscheiden, statt den Satzbau zu prüfen.', loesung: true },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -112,6 +136,20 @@ export default {
       ],
       minWoerter: 80,
       beispielLoesung: 'Sehr geehrte Frau Dr. Okonkwo,\nzunächst möchte ich mich für Ihren abwechslungsreichen Unterricht bedanken. Mit Blick auf die Prüfung erlaube ich mir jedoch eine Anregung. Wie mehreren anderen Teilnehmenden bereitet mir der Lückentext nach wie vor große Schwierigkeiten: Wir verlieren zu viel Zeit, weil wir die Lücken intuitiv statt systematisch füllen, und scheitern häufig an der Rektion von Verben und an festen Kollokationen.\nDaher würde ich vorschlagen, jede Woche einen Lückentext unter Prüfungsbedingungen zu bearbeiten und anschließend gemeinsam zu besprechen, welche Indizien — Kasus, Verbstellung, Bezugswort — zur Lösung geführt haben. Ergänzend könnten wir eine Liste der wichtigsten Kollokationen anlegen.\nÜber eine kurze Rückmeldung, ob sich dieser Vorschlag umsetzen ließe, würde ich mich sehr freuen.\nMit freundlichen Grüßen\nLucía Fernández',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Halte einen kurzen Erklärvortrag (gut zwei Minuten). Sprich frei, gliedere deine Schritte hörbar (zunächst, anschließend, erst dann, zum Schluss) und verwende die Fachbegriffe der Lektion.',
+      aufgabe: 'In deinem Vorbereitungskurs auf das Zertifikat C1 stellt jede Woche jemand eine Arbeitstechnik vor. Diesmal bist du an der Reihe: Erkläre den anderen Teilnehmenden in einem frei gesprochenen, zusammenhängenden Kurzvortrag von gut zwei Minuten, wie man den Lückentext systematisch löst. Gliedere deine Schritte hörbar (zunächst, anschließend, erst dann, zum Schluss) und verwende die einschlägigen Fachbegriffe, etwa Wortart, Kasus, Verbstellung, Konnektor und Kollokation.',
+      punkte: [
+        'Erkläre, was dieser Prüfungsteil eigentlich testet.',
+        'Beschreibe dein Vorgehen Schritt für Schritt, von der ersten Lektüre bis zur Schlusskontrolle.',
+        'Warne vor einer typischen Falle und veranschauliche sie an einem Beispiel.',
+      ],
+      redemittel: ['Zunächst einmal sollte man wissen, dass …', 'Bevor ich an die Bedeutung denke, …', 'Auf diese Weise bleiben nur noch … übrig.', 'Eine typische Falle besteht darin, dass …', 'Zum Schluss empfiehlt es sich, …'],
+      maxSekunden: 135,
+      beispielLoesung: 'Ich möchte euch heute zeigen, wie ich beim Lückentext vorgehe. Zunächst einmal sollte man wissen, was dieser Teil überhaupt testet. Es geht weniger um Leseverstehen als um Grammatik: um Konnektoren, Präpositionen und feste Kollokationen.\nDeshalb gehe ich in vier Schritten vor. Zuerst lese ich den ganzen Text einmal durch, ohne etwas einzusetzen. Das dauert höchstens anderthalb Minuten, und danach weiß ich, worum es geht. Anschließend bestimme ich bei jeder Lücke die Wortart: Fehlt ein Verb, eine Präposition, ein Konnektor? Ich achte auf den Kasus des folgenden Nomens und auf die Verbstellung. Erst dann schaue ich in die Wortliste und streiche alles, was grammatisch nicht infrage kommt. Auf diese Weise bleiben meistens nur zwei oder drei Wörter übrig, und zwischen denen entscheide ich nach dem Zusammenhang. Die sicheren Lücken fülle ich zuerst, denn mit jedem eingesetzten Wort wird die Liste kürzer.\nEine typische Falle besteht darin, dass zwei Wörter fast dasselbe bedeuten, zum Beispiel „obwohl“ und „trotzdem“. Inhaltlich passen oft beide. Steht das Verb aber am Satzende, kommt nur „obwohl“ infrage. Wer hier nach Gefühl entscheidet, verliert den Punkt.\nZum Schluss empfiehlt es sich, den vollständigen Text noch einmal flüssig zu lesen. Wenn ein Satz holpert, stimmt meistens etwas nicht. Mit dieser Methode komme ich gut mit zehn Minuten aus.',
     },
   ],
 }

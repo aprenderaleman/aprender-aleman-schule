@@ -119,6 +119,34 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Du hörst einen Ausschnitt aus einem Wissenschaftspodcast. Entscheide, welche Antwort dem Gehörten entspricht bzw. ob die Aussage richtig oder falsch ist. Achte darauf, was als belegt gilt und was die Daten lediglich nahelegen.',
+      audio: {
+        transcript: 'Jana: Willkommen zu einer neuen Folge unseres Wissenschaftspodcasts. Felix, du hast diese Woche ein Labor in Jena besucht, das Tierversuche ersetzen will.\nFelix: Genau, Jana. Dort arbeitet ein Team mit sogenannten Organchips. Das sind winzige Plättchen, auf denen menschliche Leberzellen wachsen. An ihnen lässt sich prüfen, ob ein neuer Wirkstoff die Leber schädigt.\nJana: Und das funktioniert so zuverlässig wie am Tier?\nFelix: Die ersten Daten legen das zumindest nahe. Von siebzig getesteten Substanzen hat der Chip bei gut sechzig die Schäden richtig vorhergesagt. Belegt ist damit allerdings noch nichts, betont die Leiterin der Gruppe, denn die Ergebnisse müssten erst von unabhängigen Laboren bestätigt werden.\nJana: Heißt das, Tierversuche wären bald überflüssig?\nFelix: Eben nicht. Ein Chip bildet ein einzelnes Organ ab, nicht das Zusammenspiel im ganzen Körper. Die Forscherin rechnet damit, dass sich in den nächsten zehn Jahren etwa ein Drittel der Versuche ersetzen lässt, keineswegs alle.\nJana: Und woran hängt es dann?\nFelix: Überraschenderweise weniger an der Technik als an der Forschungsförderung. Das Projekt wird nur für drei Jahre finanziert, und für die aufwendige Überprüfung der Methode gibt es bisher kaum Geld, weil sie als wenig originell gilt.\nJana: Das klingt paradox.\nFelix: Ist es auch. Wer Tierversuche schrittweise ersetzen will, muss gerade diese unspektakuläre Arbeit bezahlen.',
+      },
+      items: [
+        { typ: 'rf', aussage: 'Die Leiterin der Forschungsgruppe betrachtet die Zuverlässigkeit des Chips durch die bisherigen Daten als belegt.', loesung: false },
+        {
+          typ: 'mc',
+          frage: 'Wie viele Substanzen wurden mit dem Organchip insgesamt getestet?',
+          optionen: ['siebzehn', 'gut sechzig', 'siebzig'],
+          loesung: 2,
+        },
+        {
+          typ: 'mc',
+          frage: 'Womit begründet Felix, dass Tierversuche auch künftig nicht völlig überflüssig werden?',
+          optionen: [
+            'Damit, dass ein Chip nur ein einzelnes Organ und nicht das Zusammenspiel im gesamten Körper abbildet.',
+            'Damit, dass der Chip bei einem Teil der Substanzen die Schäden nicht richtig vorhergesagt hat.',
+            'Damit, dass die Technik der Chips noch nicht ausgereift ist.',
+          ],
+          loesung: 0,
+        },
+        { typ: 'rf', aussage: 'Die Überprüfung der neuen Methode wird bislang kaum gefördert, weil sie als wenig originell gilt.', loesung: true },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -131,6 +159,27 @@ export default {
       ],
       minWoerter: 80,
       beispielLoesung: 'In seinem Essay „Vom Mut zur Vorläufigkeit“ vertritt Lukas Brenner die These, geänderte Empfehlungen diskreditierten die Wissenschaft nicht, sondern belegten vielmehr ihre Funktionsweise: Forschung lebe davon, eigene Annahmen infrage zu stellen. Das eigentliche Problem sieht er in einer Kommunikation, die Unsicherheit verschweige und vorläufige Erkenntnisse als endgültig darstelle. Er fordert daher, klar zu trennen, was Daten belegen und was sie lediglich nahelegen.\nIch halte diese Forderung für überzeugend, wenngleich sie zu kurz greift. Auch Medien und Politik tragen Verantwortung, denn sie verkürzen vorsichtige Befunde oft zu griffigen Schlagzeilen. Während der Pandemie wurden etwa Modellrechnungen als sichere Prognosen missverstanden, obwohl die Forschenden ausdrücklich auf ihre Unsicherheit hingewiesen hatten. Ehrliche Wissenschaftskommunikation ist deshalb notwendig, aber nur dann wirksam, wenn auch die Vermittler sorgfältig arbeiten.',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Halte einen Kurzvortrag von etwa zweieinhalb Minuten. Sprich frei, trenne Belegtes von bloß Befürchtetem und formuliere dein Urteil mit wissenschaftlicher Vorsicht.',
+      aufgabe: 'Halte vor deinem Kurs einen Kurzvortrag zu der Frage: „Sollten Eingriffe ins menschliche Erbgut erlaubt werden, um schwere Erbkrankheiten zu verhindern?“ Gliedere den Vortrag nach dem ethischen Dreischritt Nutzen — Risiko — Alternativen, trenne dabei Belegtes von bloß Befürchtetem und schließe mit einem abgewogenen, vorsichtig formulierten Urteil.',
+      punkte: [
+        'Nutzen: Was steht zu gewinnen?',
+        'Risiko: Was ist belegt, was wird lediglich befürchtet?',
+        'Alternativen: Geht es auch anders?',
+        'dein Urteil, gegebenenfalls an Bedingungen geknüpft',
+      ],
+      redemittel: [
+        'Nach derzeitigem Stand des Wissens …',
+        'Dem stehen allerdings erhebliche Risiken gegenüber.',
+        'So groß die Chancen sind, so wenig lassen sich die Risiken beziffern.',
+        'Vertretbar erscheint mir das nur unter strengen Auflagen.',
+        'Entscheidend ist letztlich nicht, ob …, sondern …',
+      ],
+      maxSekunden: 150,
+      beispielLoesung: 'Stellen wir uns vor, eine schwere Erbkrankheit ließe sich verhindern, noch bevor ein Kind geboren wird. Genau das verspricht die sogenannte Genschere, und darüber möchte ich heute sprechen. Ich gehe in drei Schritten vor: Nutzen, Risiko, Alternativen.\nZunächst zum Nutzen. Er liegt auf der Hand: Familien, in denen eine schwere Krankheit seit Generationen weitergegeben wird, könnten gesunde Kinder bekommen. Für die Betroffenen wäre das eine enorme Erleichterung.\nDem stehen allerdings erhebliche Risiken gegenüber. Ein Eingriff ins Erbgut ist unumkehrbar, und er betrifft nicht nur einen einzelnen Menschen, sondern auch dessen Nachkommen. Nach derzeitigem Stand des Wissens lässt sich nicht ausschließen, dass dabei unbeabsichtigte Veränderungen entstehen. Belegt sind solche Fehler im Labor; welche Langzeitfolgen sie hätten, weiß schlicht niemand. Hinzu kommt die Sorge, dass man eines Tages nicht mehr nur heilt, sondern Kinder nach Wunsch gestaltet. Das ist bislang eine Befürchtung, kein Befund — ernst nehmen sollte man sie trotzdem.\nBleibt die Frage nach den Alternativen. Und die gibt es durchaus: Paare mit einem erhöhten Risiko können sich schon heute genetisch beraten lassen, und manche Erkrankungen lassen sich nach der Geburt behandeln, ohne dass man ins Erbgut künftiger Generationen eingreift.\nIch komme zum Schluss. So groß die Chancen sind, so wenig lassen sich die Risiken derzeit seriös beziffern. Eine Freigabe hielte ich deshalb für verfrüht. Vertretbar erscheint mir allenfalls Forschung unter strengen Auflagen, also mit der Genehmigung einer unabhängigen Ethikkommission. Entscheidend ist letztlich nicht, ob wir forschen, sondern wer darüber wacht.',
     },
   ],
 }

@@ -94,6 +94,30 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Du hörst einen Ausschnitt aus einem wissenschaftlichen Vortrag. Entscheide, welche Antwort dem Gehörten entspricht bzw. ob die Aussage richtig oder falsch ist.',
+      audio: {
+        transcript: 'Meine Damen und Herren, lassen Sie mich die Ergebnisse unserer Studie zusammenfassen. Über achtzehn Monate hinweg haben wir in vier Kliniken untersucht, wie zuverlässig ein KI-System Hautveränderungen beurteilt. Trainiert wurde der Algorithmus mit rund sechzigtausend Aufnahmen. Das Ergebnis mag manche überraschen. Das System allein erkannte bösartige Veränderungen nicht besser, sondern etwa ebenso gut wie erfahrene Fachärzte. Deutlich überlegen war erst die Kombination, also die Ärztin, die den Vorschlag der Maschine kritisch prüft. In dieser Konstellation sank die Zahl der übersehenen Fälle um fast ein Fünftel.\nAllerdings zeigte sich auch eine Schwäche. Bei Patienten mit dunkler Haut lag die Fehlerquote spürbar höher, weil solche Aufnahmen in den Trainingsdaten kaum vorkamen. Der Algorithmus hat also eine Verzerrung übernommen, die niemand beabsichtigt hatte.\nBemerkenswert fand ich außerdem die Reaktion der Befragten. Nicht die Patienten, sondern die Ärzte äußerten die größten Vorbehalte, und zwar vor allem wegen der ungeklärten Haftung. Wer verantwortet eine Fehldiagnose, wenn Mensch und Maschine sich einig waren? Solange diese Frage offenbleibt, halte ich einen Einsatz ohne ärztliche Kontrolle für nicht vertretbar. Unsere Empfehlung lautet daher, solche Systeme als zweite Meinung einzusetzen und die Trainingsdaten offenzulegen.',
+      },
+      items: [
+        { typ: 'rf', aussage: 'Das KI-System allein erkannte bösartige Hautveränderungen zuverlässiger als erfahrene Fachärzte.', loesung: false },
+        {
+          typ: 'mc',
+          frage: 'Wodurch ging die Zahl der übersehenen Fälle zurück?',
+          optionen: ['Dadurch, dass der Algorithmus mit zusätzlichen Aufnahmen trainiert wurde.', 'Dadurch, dass Ärztinnen und Ärzte die Vorschläge des Systems kritisch überprüften.', 'Dadurch, dass besonders schwierige Fälle von der Studie ausgenommen wurden.'],
+          loesung: 1,
+        },
+        {
+          typ: 'mc',
+          frage: 'Welche Konsequenz wird im Vortrag aus der ungeklärten Haftungsfrage gezogen?',
+          optionen: ['Solche Systeme sollten in Kliniken vorerst gar nicht eingesetzt werden.', 'Für Fehldiagnosen sollten künftig die Hersteller der Systeme haften.', 'Solche Systeme sollten nur unter ärztlicher Kontrolle eingesetzt werden.'],
+          loesung: 2,
+        },
+        { typ: 'rf', aussage: 'Die größten Vorbehalte gegenüber dem System kamen aus der Ärzteschaft.', loesung: true },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -106,6 +130,21 @@ export default {
       ],
       minWoerter: 80,
       beispielLoesung: 'Sehr geehrte Damen und Herren,\nmit Interesse habe ich Ihrer Ankündigung entnommen, dass Anträge auf Wohngeld künftig von einem KI-System vorgeprüft werden sollen. Dass sich dadurch die Bearbeitungszeiten verkürzen und die Effizienz der Verwaltung steigt, begrüße ich ausdrücklich.\nZugleich habe ich Bedenken. Die Anträge enthalten hochsensible personenbezogene Daten; mir ist nicht klar, wo und wie lange diese verarbeitet werden. Zudem fehlt es an Transparenz darüber, nach welchen Kriterien der Algorithmus entscheidet — und wer haftet, wenn ein Antrag zu Unrecht abgelehnt wird.\nIch bitte Sie daher um Auskunft zu diesen Punkten. Darüber hinaus schlage ich vor, jede ablehnende Empfehlung des Systems von einer Sachbearbeiterin oder einem Sachbearbeiter überprüfen zu lassen. Nur so ist ein verantwortungsvoller Einsatz der Technologie gewährleistet.\nMit freundlichen Grüßen\nAmira Haddad',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Halte einen Diskussionsbeitrag. Sprich zusammenhängend etwa zwei Minuten (höchstens 150 Sekunden).',
+      aufgabe: 'In einer Diskussionsrunde steht folgende These im Raum: „Künstliche Intelligenz wird den Menschen in den meisten Büroberufen ersetzen — sich dagegen zu wehren, ist zwecklos.“ Nimm dazu in einem zusammenhängenden Diskussionsbeitrag Stellung. Gehe nach dem Dreischritt Chance → Risiko → Bedingung vor, veranschauliche die Chance an einem konkreten Beispiel und beziehe am Ende klar Position.',
+      punkte: [
+        'Greife die These auf und benenne eine Chance der Automatisierung mit einem konkreten Beispiel.',
+        'Stelle dem ein Risiko gegenüber, etwa Verzerrung, mangelnde Transparenz oder ungeklärte Haftung.',
+        'Formuliere eine Bedingung, unter der du den Einsatz von KI für vertretbar hältst (sofern …).',
+        'Schließe mit deiner eigenen Position zur These.',
+      ],
+      redemittel: ['Richtig eingesetzt, …', 'Bedenklich stimmt mich vor allem, dass …', 'Ich halte … nur für vertretbar, sofern …', 'Die Frage ist nicht, ob …, sondern wie …'],
+      maxSekunden: 150,
+      beispielLoesung: 'Die These, KI werde den Menschen in den meisten Büroberufen ersetzen, halte ich für zu pauschal — und den Zusatz, Widerstand sei zwecklos, für geradezu gefährlich. Lassen Sie mich das begründen.\nZunächst zur Chance: Richtig eingesetzt, entlastet KI die Beschäftigten von Routinearbeit. Denken Sie an eine Sachbearbeiterin, die täglich Hunderte von Formularen prüft. Wenn ein System diese Vorprüfung übernimmt, gewinnt sie Zeit für die schwierigen Fälle, also für genau die Arbeit, die Urteilsvermögen verlangt. Das steigert die Effizienz, ohne dass jemand überflüssig wird.\nBedenklich stimmt mich allerdings etwas anderes. Algorithmen übernehmen die Verzerrungen ihrer Trainingsdaten, und ihre Entscheidungen sind kaum nachvollziehbar. Wenn ein System Bewerbungen aussortiert und niemand erklären kann, warum, dann haben wir ein Problem — erst recht, solange ungeklärt ist, wer bei Fehlentscheidungen haftet. Hinzu kommt, dass die Automatisierung diesmal auch qualifizierte Tätigkeiten erfasst. Das sollte man nicht kleinreden.\nDeshalb halte ich den Einsatz von KI im Büro nur für vertretbar, sofern drei Dinge geregelt sind: Transparenz bei automatisierten Entscheidungen, eine eindeutige Haftung und ein Anspruch auf Weiterbildung für alle, deren Aufgaben sich verändern.\nMein Fazit lautet also: Die Frage ist nicht, ob wir KI einsetzen, sondern wie — und wer die Spielregeln festlegt. KI wird viele Tätigkeiten verändern, aber ersetzen wird sie den Menschen nur dort, wo wir es zulassen. Zwecklos ist da gar nichts.',
     },
   ],
 }
