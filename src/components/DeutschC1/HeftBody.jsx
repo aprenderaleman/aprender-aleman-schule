@@ -1,6 +1,7 @@
-import React, { useMemo, useRef, useState } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { renderInline } from './inline.jsx'
 import { useAuth } from '../../context/AuthContext'
+import { isSpeechRecognitionSupported, startRecognition, speak, stopSpeaking } from '../../utils/speech'
 
 const API_URL = import.meta.env.VITE_API_URL || ''
 
@@ -225,7 +226,7 @@ function renderItem(item, props) {
 
 // ─── Teile ───────────────────────────────────────────────────────────
 
-function TeilItems({ teil, seed, gl }) {
+function TeilItems({ teil, seed, gl, intro = null, afterCheck = null }) {
   const [values, setValues] = useState({})
   const [checked, setChecked] = useState(false)
   const items = teil.items || []
@@ -245,6 +246,7 @@ function TeilItems({ teil, seed, gl }) {
           <div className="c1-mbody c1-heft-lesetext">{renderInline(teil.text)}</div>
         </div>
       )}
+      {intro}
       {items.map((it, i) => (
         <React.Fragment key={i}>
           {renderItem(it, {
@@ -266,6 +268,229 @@ function TeilItems({ teil, seed, gl }) {
         </button>
         {checked && <span className="c1-pa-score" aria-live="polite">{score} / {items.length} richtig</span>}
       </div>
+      {checked && afterCheck}
+    </>
+  )
+}
+
+// ─── Hören ───────────────────────────────────────────────────────────
+// Audio del servidor (voces distintas por hablante) si existe; si no, la voz
+// del navegador lee el texto. La transcripción solo se enseña tras corregir.
+function HoerPlayer({ audio, level }) {
+  const [failed, setFailed] = useState(false)
+  const [speaking, setSpeaking] = useState(false)
+  useEffect(() => () => stopSpeaking(), [])
+  const url = audio?.audioUrl && !failed
+    ? (audio.audioUrl.startsWith('/api/') ? `${API_URL}${audio.audioUrl}` : audio.audioUrl)
+    : null
+  const play = async () => {
+    if (speaking) { stopSpeaking(); setSpeaking(false); return }
+    setSpeaking(true)
+    await speak(audio?.sprechtext || '', { rate: /^A/.test(level) ? 0.85 : 0.95 })
+    setSpeaking(false)
+  }
+  return (
+    <div className="c1-heft-audio">
+      {url ? (
+        <audio src={url} controls preload="none" controlsList="nodownload" onError={() => setFailed(true)} />
+      ) : (
+        <button type="button" className="c1-pa-btn c1-pa-btn--primary" onClick={play}>
+          {speaking ? '■ Stopp' : '▶ Anhören'}
+        </button>
+      )}
+    </div>
+  )
+}
+
+function TeilHoeren({ teil, seed, gl, level }) {
+  return (
+    <TeilItems
+      teil={teil}
+      seed={seed}
+      gl={gl}
+      intro={<HoerPlayer audio={teil.audio} level={level} />}
+      afterCheck={teil.audio?.transcript ? (
+        <details className="c1-ueb" style={{ marginTop: 12 }}>
+          <summary>Transkript</summary>
+          <div className="c1-sol c1-prose"><p className="c1-heft-lesetext">{teil.audio.transcript}</p></div>
+        </details>
+      ) : null}
+    />
+  )
+}
+
+// ─── Sprechen ────────────────────────────────────────────────────────
+// El alumno habla, el navegador transcribe y la IA corrige el contenido
+// (no la pronunciación). Sin micrófono/reconocimiento: puede escribirlo.
+function TeilSprechen({ teil, level, gl }) {
+  const { getToken } = useAuth()
+  const [phase, setPhase] = useState('idle') // idle | recording | done
+  const [transcript, setTranscript] = useState('')
+  const [interim, setInterim] = useState('')
+  const [seconds, setSeconds] = useState(0)
+  const [busy, setBusy] = useState(false)
+  const [fb, setFb] = useState(null)
+  const [error, setError] = useState(null)
+  const [manual, setManual] = useState(false) // sin micrófono: escribir la respuesta
+  const recRef = useRef(null)
+  const tickRef = useRef(null)
+  const startedRef = useRef(0)
+  const durationRef = useRef(0)
+  const supported = isSpeechRecognitionSupported()
+  const limit = teil.maxSekunden || 60
+
+  useEffect(() => () => {
+    if (recRef.current) recRef.current.abort()
+    if (tickRef.current) clearInterval(tickRef.current)
+  }, [])
+
+  const stop = async () => {
+    if (tickRef.current) clearInterval(tickRef.current)
+    if (!recRef.current) return
+    const { transcript: t } = await recRef.current.stop()
+    recRef.current = null
+    durationRef.current = Math.max(1, Math.round((Date.now() - startedRef.current) / 1000))
+    setTranscript(t || '')
+    setInterim('')
+    setPhase('done')
+  }
+
+  const start = () => {
+    setError(null); setFb(null); setTranscript(''); setInterim('')
+    try {
+      recRef.current = startRecognition({
+        lang: 'de-DE',
+        onPartial: t => setInterim(t),
+        onError: code => {
+          if (tickRef.current) clearInterval(tickRef.current)
+          if (recRef.current) { recRef.current.abort(); recRef.current = null }
+          setPhase('idle')
+          setManual(true)
+          setError(code === 'audio-capture'
+            ? 'Kein Mikrofon gefunden.'
+            : code === 'network'
+              ? 'Die Spracherkennung ist gerade nicht erreichbar.'
+              : 'Kein Zugriff auf das Mikrofon. Erlaube den Zugriff im Browser — oder schreib deine Antwort.')
+        },
+      })
+    } catch {
+      setError('Die Spracherkennung konnte nicht starten.')
+      return
+    }
+    startedRef.current = Date.now()
+    setSeconds(limit)
+    setPhase('recording')
+    tickRef.current = setInterval(() => {
+      setSeconds(sec => {
+        if (sec <= 1) { clearInterval(tickRef.current); stop(); return 0 }
+        return sec - 1
+      })
+    }, 1000)
+  }
+
+  const korrigieren = async () => {
+    setBusy(true); setError(null)
+    try {
+      const res = await fetch(`${API_URL}/api/pruefungen/grade-sprechen`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${getToken()}` },
+        body: JSON.stringify({
+          level,
+          taskType: 'Übungsheft',
+          taskPrompt: teil.aufgabe + (teil.punkte ? '\n\nPunkte:\n' + teil.punkte.map(p => `- ${p}`).join('\n') : ''),
+          transcript: transcript.trim(),
+          durationSeconds: durationRef.current,
+        }),
+      })
+      if (!res.ok) throw new Error('Korrektur nicht möglich. Versuch es später.')
+      setFb(await res.json())
+    } catch (e) {
+      setError(e.message)
+    } finally {
+      setBusy(false)
+    }
+  }
+
+  const words = transcript.trim() ? transcript.trim().split(/\s+/).length : 0
+
+  return (
+    <>
+      <div className="c1-impuls">
+        <p className="c1-q">{renderInline(teil.aufgabe)}</p>
+        {teil.punkte?.length > 0 && (
+          <ol>{teil.punkte.map((p, i) => <li key={i}>{renderInline(p)}</li>)}</ol>
+        )}
+      </div>
+      {teil.redemittel?.length > 0 && (
+        <div className="c1-heft-redemittel">
+          {teil.redemittel.map((r, i) => <span key={i}>{renderInline(r)}</span>)}
+        </div>
+      )}
+
+      {supported ? (
+        <div className="c1-heft-rec">
+          {phase === 'idle' && (
+            <button type="button" className="c1-pa-btn c1-pa-btn--primary" onClick={start}>
+              🎙 Aufnahme starten{gl && <> <span className="c1-gl">~ grabar</span></>}
+            </button>
+          )}
+          {phase === 'recording' && (
+            <>
+              <button type="button" className="c1-pa-btn c1-heft-rec-stop" onClick={stop}>■ Stopp</button>
+              <span className="c1-pa-score">● {seconds}s</span>
+              {interim && <p className="c1-heft-rec-live">„{interim}“</p>}
+            </>
+          )}
+          {phase === 'done' && (
+            <button type="button" className="c1-pa-btn" onClick={start}>
+              🔄 Neu aufnehmen{gl && <> <span className="c1-gl">~ grabar otra vez</span></>}
+            </button>
+          )}
+        </div>
+      ) : (
+        <p className="c1-heft-sol">
+          Dein Browser unterstützt keine Spracherkennung (nutze Chrome, Edge oder Safari). Du kannst deine Antwort auch schreiben.
+        </p>
+      )}
+
+      {(phase === 'done' || !supported || manual) && (
+        <>
+          <textarea
+            className="c1-heft-textarea"
+            rows={4}
+            placeholder={supported ? 'Dein Text erscheint hier…' : 'Schreib hier, was du sagen würdest…'}
+            value={transcript}
+            onChange={e => setTranscript(e.target.value)}
+          />
+          <div className="c1-pa-actions">
+            <button type="button" className="c1-pa-btn c1-pa-btn--primary" disabled={busy || words < 3} onClick={korrigieren}>
+              {busy ? 'Wird korrigiert…' : 'Korrigieren lassen'}
+            </button>
+            <span className="c1-pa-score">{words} Wörter</span>
+          </div>
+        </>
+      )}
+
+      {error && <p className="c1-heft-sol">{error}</p>}
+      {fb && (
+        <div className="c1-card c1-heft-feedback">
+          <p className="c1-heft-fb-total">✓ Korrektur: <strong>{fb.total} / 100</strong></p>
+          {fb.overall && <p>{fb.overall}</p>}
+          {Array.isArray(fb.errors) && fb.errors.length > 0 && (
+            <ul className="c1-heft-fb-fehler">
+              {fb.errors.map((e, i) => (
+                <li key={i}><s>{e.original}</s> → <strong>{e.correction}</strong>{e.explanation ? ` — ${e.explanation}` : ''}</li>
+              ))}
+            </ul>
+          )}
+          {teil.beispielLoesung && (
+            <details className="c1-ueb" style={{ marginTop: 12 }}>
+              <summary>Beispiel</summary>
+              <div className="c1-sol c1-prose"><p>{renderInline(teil.beispielLoesung)}</p></div>
+            </details>
+          )}
+        </div>
+      )}
     </>
   )
 }
@@ -399,7 +624,7 @@ export default function HeftBody({ heft, level = 'A1' }) {
   const seedBase = useRef(Math.floor(Math.random() * 100000))
   const seed = seedBase.current + runde * 131
 
-  const ICONS = { grammatik: '🧩', lesen: '📖', schreiben: '✍️' }
+  const ICONS = { grammatik: '🧩', lesen: '📖', hoeren: '🎧', schreiben: '✍️', sprechen: '🎙' }
   // Glosas españolas de la interfaz solo en los niveles básicos (A1/A2):
   // a partir de B1 el alumno lee las consignas en alemán sin apoyo.
   const gl = /^A/.test(level)
@@ -411,7 +636,11 @@ export default function HeftBody({ heft, level = 'A1' }) {
           {teil.anweisung && <p className="c1-heft-anweisung">{renderInline(teil.anweisung)}</p>}
           {teil.typ === 'schreiben'
             ? (teil.variante === 'formular' ? <TeilFormular teil={teil} /> : <TeilSchreibenText teil={teil} level={level} />)
-            : <TeilItems teil={teil} seed={seed + t * 1000} gl={gl} />}
+            : teil.typ === 'sprechen'
+              ? <TeilSprechen teil={teil} level={level} gl={gl} />
+              : teil.typ === 'hoeren'
+                ? <TeilHoeren teil={teil} seed={seed + t * 1000} gl={gl} level={level} />
+                : <TeilItems teil={teil} seed={seed + t * 1000} gl={gl} />}
           {t < heft.teile.length - 1 && <hr className="c1-rule" />}
         </section>
       ))}

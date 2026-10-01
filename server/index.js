@@ -4250,6 +4250,43 @@ async function synthesizeClip(examId, clipId, transcript) {
   return ttsInFlight.get(key)
 }
 
+// Texto de un clip: de un examen (examId) o del Hören de un cuaderno
+// («heft-<curso>» + «l<lección>»).
+const HEFT_KURSE = ['deutscha1', 'deutscha2', 'deutschb1', 'deutschb2', 'deutschc1']
+async function clipTranscript(examId, clipId) {
+  const hm = /^heft-(deutsch[a-c][12])$/.exec(examId)
+  if (hm && HEFT_KURSE.includes(hm[1])) {
+    const lm = /^l(\d{1,2})$/.exec(clipId)
+    if (!lm) return null
+    const { getHeft } = await import(`./${hm[1]}/heft/index.js`)
+    const teil = getHeft(parseInt(lm[1]))?.teile?.find(t => t.typ === 'hoeren')
+    return teil?.audio?.transcript || null
+  }
+  const exam = getExam(examId)
+  return (exam && audioClips(exam)[clipId]?.transcript) || null
+}
+
+// El cuaderno tal como llega al alumno: el Hören lleva la URL del audio del
+// servidor (si puede generarse) y el texto sin etiquetas de hablante para
+// que, si no, lo lea la voz del navegador.
+function heftForStudent(kursDir, id, heft) {
+  if (!heft.teile?.some(t => t.typ === 'hoeren')) return heft
+  const examId = `heft-${kursDir}`
+  const clipId = `l${String(id).padStart(2, '0')}`
+  const serverAudio = !!TTS_API_KEY || fs.existsSync(clipFile(examId, clipId))
+  return {
+    ...heft,
+    teile: heft.teile.map(t => t.typ !== 'hoeren' ? t : {
+      ...t,
+      audio: {
+        ...t.audio,
+        audioUrl: serverAudio ? audioUrlFactory()(examId, clipId) : null,
+        sprechtext: speechSegments(t.audio?.transcript).map(seg => seg.text).join(' '),
+      },
+    }),
+  }
+}
+
 app.get('/api/pruefungen/audio/:examId/:clipId', async (req, res) => {
   try {
     const { examId, clipId } = req.params
@@ -4257,10 +4294,10 @@ app.get('/api/pruefungen/audio/:examId/:clipId', async (req, res) => {
     let payload = null
     try { payload = jwt.verify(String(req.query.t || ''), JWT_SECRET) } catch { /* inválido */ }
     if (!payload || payload.scope !== 'aud' || payload.e !== examId) return res.status(403).json({ error: 'No autorizado.' })
-    const clip = getExam(examId) && audioClips(getExam(examId))[clipId]
-    if (!clip?.transcript) return res.status(404).json({ error: 'Audio no encontrado.' })
+    const transcript = await clipTranscript(examId, clipId)
+    if (!transcript) return res.status(404).json({ error: 'Audio no encontrado.' })
     if (!fs.existsSync(clipFile(examId, clipId)) && !TTS_API_KEY) return res.status(503).json({ error: 'Audio no disponible.' })
-    const file = await synthesizeClip(examId, clipId, clip.transcript)
+    const file = await synthesizeClip(examId, clipId, transcript)
     res.setHeader('Content-Type', 'audio/mpeg')
     res.setHeader('Cache-Control', 'private, max-age=3600')
     res.sendFile(file)
@@ -5208,9 +5245,10 @@ app.get('/api/deutscha1/lessons/:id', authMiddleware, deutschC1RoleGate, subscri
 for (const kursDir of ['deutscha1', 'deutscha2', 'deutschb1', 'deutschb2', 'deutschc1']) {
   app.get(`/api/${kursDir}/heft/:id`, authMiddleware, deutschC1RoleGate, subscriptionMiddleware, async (req, res) => {
     const { getHeft } = await import(`./${kursDir}/heft/index.js`)
-    const heft = getHeft(parseInt(req.params.id))
+    const id = parseInt(req.params.id)
+    const heft = getHeft(id)
     if (!heft) return res.status(404).json({ error: 'Kein Übungsheft für diese Lektion.' })
-    res.json(heft)
+    res.json(heftForStudent(kursDir, id, heft))
   })
 }
 // ─── SERVE FRONTEND IN PRODUCTION ────────────────────

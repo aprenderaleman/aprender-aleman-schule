@@ -635,3 +635,16 @@
   margin: 0 0 26px; background: var(--c1-ink);
 }
 @media (max-width: 860px) { .c1-block-art { max-height: 150px; } }
+
+/* Übungsheft — Hören y Sprechen */
+.c1-heft-audio { margin: 4px 0 16px; }
+.c1-heft-audio audio { width: 100%; max-width: 520px; }
+.c1-heft-rec { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin: 14px 0; }
+.c1-heft-rec-stop { border-color: rgba(239,68,68,.8); color: #fca5a5; }
+.c1[data-c1-theme="light"] .c1-heft-rec-stop { color: #b91c1c; }
+.c1-heft-rec-live { flex-basis: 100%; margin: 0; font-style: italic; color: var(--c1-muted); font-size: 14px; }
+.c1-heft-redemittel { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0 0; }
+.c1-heft-redemittel span {
+  font-size: 13.5px; padding: 4px 11px; border: 1px solid var(--c1-gold-line);
+  border-radius: 999px; background: var(--c1-gold-soft);
+}

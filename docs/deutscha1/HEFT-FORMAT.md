@@ -110,3 +110,78 @@ Variante B (lecciones impares) — **texto** (corrección por IA):
 - Alemán y glosas impecables; gramática de la lección y anteriores, NUNCA posterior.
 - Cero 'Goethe', cero marcas reales. Personajes variados (no siempre María).
 - Los ítems reciclan el Kernwortschatz de la lección — esa es la función del cuaderno.
+
+## Partes nuevas: Hören y Sprechen (todos los niveles)
+
+El cuaderno completo tiene **5 Teile, en este orden**:
+`grammatik` · `lesen` · **`hoeren`** · `schreiben` · **`sprechen`**.
+Validar: `node scripts/heft-validate.mjs <nivel> --full`.
+
+### Teil Hören (va DESPUÉS de lesen, ANTES de schreiben)
+
+```js
+{
+  typ: 'hoeren',
+  titel: 'Hören',
+  anweisung: 'Hör den Text. Richtig oder falsch? ~~(Escucha el texto. ¿Verdadero o falso?)~~',
+  audio: {
+    transcript: 'Mann: Guten Tag! Ich möchte einen Kaffee, bitte.\nFrau: Gern. Mit Milch?\nMann: Ja, bitte.',
+  },
+  items: [ /* rf y/o mc — se contestan SOLO con lo que se oye */ ],
+}
+```
+
+| Nivel | Palabras del transcript | Ítems |
+|---|---|---|
+| A1 | 30–60 | 3 |
+| A2 | 50–90 | 3 |
+| B1 | 80–140 | 4 |
+| B2 | 110–180 | 4 |
+| C1 | 140–220 | 4 |
+
+Reglas del `transcript` (se convierte en AUDIO con voces sintéticas):
+- Diálogos: **una intervención por línea**, `Etiqueta: texto`. La etiqueta NO se
+  pronuncia y decide la voz: usa `Mann` / `Frau`, un rol (`Verkäuferin`, `Arzt`,
+  `Moderator`…) o un nombre de pila. Misma etiqueta = misma voz.
+- Como la etiqueta no se oye, si una pregunta depende de quién habla, el nombre
+  tiene que oírse en el diálogo («Hallo Jana!»).
+- Monólogos (Durchsage, Nachricht, Radiobeitrag): texto sin etiqueta. NO empieces
+  una línea con «Palabra: …» (se confundiría con un hablante).
+- Sin abreviaturas (z. B., Dr., ca.), sin paréntesis ni acotaciones. Horas, fechas
+  y precios escritos como deben sonar: `um halb neun`, `14 Uhr 20`, `drei Euro fünfzig`.
+- NO pongas `audioUrl`.
+- Tipos de texto, rotando: Gespräch · Durchsage/Ansage · Nachricht auf dem
+  Anrufbeantworter · Radiobeitrag · (B2/C1) Interview, kurzer Vortrag.
+- Recicla el Kernwortschatz y la gramática de la lección (y anteriores, nunca
+  posteriores). Texto NUEVO, distinto del de `lesen`.
+- Ítems: mezcla rf y mc; claves variadas; incluye al menos una trampa típica del
+  examen (dato corregido «nicht …, sondern …», hora, número, paráfrasis).
+
+### Teil Sprechen (va al FINAL, después de schreiben)
+
+```js
+{
+  typ: 'sprechen',
+  titel: 'Sprechen',
+  anweisung: 'Sprich 30 Sekunden. ~~(Habla 30 segundos.)~~',
+  aufgabe: '<consigna concreta: qué decir y a quién>',
+  punkte: ['<2-4 puntos de contenido, uno por línea>'],
+  redemittel: ['Ich heiße …', 'Ich komme aus …'],   // opcional: arranques de frase
+  maxSekunden: 30,
+  beispielLoesung: '<lo que diría un buen alumno del nivel, en lengua HABLADA>',
+}
+```
+
+| Nivel | maxSekunden | Tarea típica |
+|---|---|---|
+| A1 | 30–45 | presentarse, pedir algo, 3 frases sobre un tema; `redemittel` obligatorios |
+| A2 | 45–60 | contar algo cotidiano, proponer, pedir información; `redemittel` recomendados |
+| B1 | 60–90 | mini-presentación, opinión con razón, contar una experiencia |
+| B2 | 90–120 | Stellungnahme, Vor- und Nachteile, kurzer Vortrag |
+| C1 | 120–150 | Vortrag estructurado, Diskussionsbeitrag con tesis y contraargumento |
+
+- Monólogo (se graba y lo corrige la IA): nada de tareas que necesiten pareja.
+- Liga la tarea al tema y a la gramática de la lección; alterna con la de
+  `schreiben` (que no pidan lo mismo).
+- `anweisung`, `aufgabe` y `punkte` siguen la regla de idioma del nivel
+  (A1/A2: frases principales, du, glosa española en `anweisung`).

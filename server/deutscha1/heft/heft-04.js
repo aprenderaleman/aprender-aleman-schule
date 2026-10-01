@@ -64,6 +64,19 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Hör das Gespräch. Was ist richtig? ~~(Escucha la conversación. ¿Qué es correcto?)~~',
+      audio: {
+        transcript: 'Frau: Hallo! Ich bin Laura. Bist du neu hier?\nMann: Ja, ich bin neu. Ich bin Mateo.\nFrau: Bist du aus Spanien, Mateo?\nMann: Nein, ich bin aus Chile. Und du?\nFrau: Ich bin aus Wien. Wie alt bist du?\nMann: Ich bin 28 Jahre alt.\nFrau: Ich bin auch 28 Jahre alt!',
+      },
+      items: [
+        { typ: 'rf', aussage: 'Mateo ist neu hier.', loesung: true },
+        { typ: 'mc', frage: 'Mateo ist aus …', optionen: ['Chile', 'Spanien', 'Wien'], loesung: 0 },
+        { typ: 'rf', aussage: 'Laura ist 30 Jahre alt.', loesung: false },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'formular',
       titel: 'Schreiben',
@@ -76,6 +89,16 @@ export default {
         { id: 'stadt', label: 'Stadt jetzt', erwartet: ['Hamburg'] },
         { id: 'telefon', label: 'Telefonnummer', erwartet: ['0176 5544332', '01765544332'] },
       ],
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Stell dich vor. Sprich 30 Sekunden. ~~(Preséntate. Habla 30 segundos.)~~',
+      aufgabe: 'Wer bist du? Sag drei Sätze.',
+      punkte: ['dein Name', 'dein Land oder deine Stadt', 'dein Alter'],
+      redemittel: ['Ich bin …', 'Ich bin aus …', 'Ich bin … Jahre alt.'],
+      maxSekunden: 30,
+      beispielLoesung: 'Hallo! Ich bin Ana. Ich bin aus Peru. Ich bin 26 Jahre alt.',
     },
   ],
 }
