@@ -63,6 +63,19 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Hör das Gespräch. Was ist richtig? ~~(Escucha la conversación. ¿Qué es correcto?)~~',
+      audio: {
+        transcript: 'Frau: Tom, ich habe Hunger. Haben wir Brot?\nMann: Nein. Wir haben kein Brot und auch keinen Käse.\nFrau: Dann kaufe ich jetzt im Supermarkt ein. Brauchen wir auch Milch?\nMann: Ja, einen Liter Milch, bitte. Und ein Kilo Äpfel.\nFrau: Die Äpfel sind heute billig. Ich kaufe zwei Kilo.\nMann: Sehr gut. Danke, Lena!',
+      },
+      items: [
+        { typ: 'rf', aussage: 'Die Frau hat Hunger.', loesung: true },
+        { typ: 'mc', frage: 'Wie viel Milch brauchen Tom und Lena?', optionen: ['zwei Liter', 'einen Liter', 'drei Liter'], loesung: 1 },
+        { typ: 'rf', aussage: 'Die Frau kauft ein Kilo Äpfel.', loesung: false },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'formular',
       titel: 'Schreiben',
@@ -75,6 +88,21 @@ export default {
         { id: 'wasser', label: 'Wasser (wie viel?)', erwartet: ['drei Flaschen', '3 Flaschen'] },
         { id: 'preis', label: 'Preis', erwartet: ['12 Euro 50', '12,50 Euro', '12,50 €'] },
       ],
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Du bist im Café. Sprich 30 Sekunden. ~~(Estás en la cafetería. Habla 30 segundos.)~~',
+      aufgabe: 'Du hast Hunger und Durst. Bestell im Café und bezahl. ~~(Tienes hambre y sed. Pide en la cafetería y paga.)~~',
+      punkte: [
+        'Hunger und Durst ~~(hambre y sed)~~',
+        'Was möchtest du? ~~(¿Qué quieres pedir?)~~',
+        'der Preis ~~(el precio)~~',
+        'die Rechnung ~~(la cuenta)~~',
+      ],
+      redemittel: ['Ich habe …', 'Ich möchte … , bitte.', 'Was kostet …?', 'Die Rechnung, …'],
+      maxSekunden: 30,
+      beispielLoesung: 'Guten Tag! Ich habe Hunger und Durst. Ich möchte ein Brot mit Käse und einen Kaffee mit Milch, bitte. Was kostet das? Danke! Die Rechnung, bitte!',
     },
   ],
 }

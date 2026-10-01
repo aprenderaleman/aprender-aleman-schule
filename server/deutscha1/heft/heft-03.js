@@ -72,6 +72,19 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Hör die Nachricht. Was ist richtig? ~~(Escucha el mensaje. ¿Qué es correcto?)~~',
+      audio: {
+        transcript: 'Hallo Marta, hier ist Jonas. Ich lerne jetzt auch Deutsch! Ich übe jeden Tag dreißig Minuten. Heute mache ich Lektion vier. Nein, Lektion fünf! Ich verstehe schon ein bisschen. Am Samstag wiederhole ich alles. Und du? Machst du heute den Test? Tschüs!',
+      },
+      items: [
+        { typ: 'rf', aussage: 'Jonas übt jeden Tag 30 Minuten.', loesung: true },
+        { typ: 'mc', frage: 'Was macht Jonas heute?', optionen: ['Lektion 4', 'Lektion 5', 'den Test'], loesung: 1 },
+        { typ: 'rf', aussage: 'Jonas wiederholt am Sonntag.', loesung: false },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -84,6 +97,16 @@ export default {
       ],
       minWoerter: 12,
       beispielLoesung: 'Ich lerne jeden Tag ein bisschen — 20 Minuten. Heute mache ich Lektion 3. Am Sonntag wiederhole ich alles.',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Sprich 30 Sekunden über deinen Kurs. ~~(Habla 30 segundos sobre tu curso.)~~',
+      aufgabe: 'Was machst du heute im Kurs? Sag drei Sätze. ~~(¿Qué haces hoy en el curso? Di tres frases.)~~',
+      punkte: ['die Lektion heute', 'der Test', 'Verstehst du schon ein bisschen Deutsch?'],
+      redemittel: ['Ich mache heute …', 'Ich lerne …', 'Ich verstehe schon …', 'Ich verstehe noch nicht …'],
+      maxSekunden: 30,
+      beispielLoesung: 'Hallo! Ich lerne Deutsch. Ich mache heute Lektion 3. Ich mache einen kleinen Test. Ich verstehe schon ein bisschen Deutsch. Ich verstehe noch nicht alles, aber das ist okay.',
     },
   ],
 }

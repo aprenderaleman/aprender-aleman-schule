@@ -89,6 +89,19 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Hör die Durchsage. Was ist richtig? ~~(Escucha el aviso. ¿Qué es correcto?)~~',
+      audio: {
+        transcript: 'Guten Tag! Hier ist eine Information. Das Museum ist heute nicht bis 18 Uhr, sondern nur bis 16 Uhr geöffnet. Die Kasse ist am Eingang. Essen und Trinken sind im Museum verboten. Der Ausgang A ist heute geschlossen. Bitte benutzen Sie den Ausgang B. Vielen Dank!',
+      },
+      items: [
+        { typ: 'mc', frage: 'Das Museum ist heute geöffnet bis …', optionen: ['18 Uhr', '16 Uhr', '6 Uhr'], loesung: 1 },
+        { typ: 'rf', aussage: 'Im Museum kann man essen und trinken.', loesung: false },
+        { typ: 'rf', aussage: 'Der Ausgang B ist heute geöffnet.', loesung: true },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'formular',
       titel: 'Schreiben',
@@ -101,6 +114,16 @@ export default {
         { id: 'wohnort', label: 'Wohnort', erwartet: ['Hamburg'] },
         { id: 'telefon', label: 'Telefonnummer', erwartet: ['040 12 34 987', '0401234987'] },
       ],
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Sprich 30 Sekunden. ~~(Habla 30 segundos.)~~',
+      aufgabe: 'Dein Supermarkt: Sag drei oder vier Sätze. ~~(Tu supermercado: di tres o cuatro frases.)~~',
+      punkte: ['Wo ist der Supermarkt?', 'Wann ist er geöffnet?', 'Wann ist er geschlossen?', 'Was kaufst du im Supermarkt?'],
+      redemittel: ['Mein Supermarkt ist in …', 'Er ist von … bis … geöffnet.', 'Am … ist er geschlossen.', 'Ich kaufe …'],
+      maxSekunden: 30,
+      beispielLoesung: 'Mein Supermarkt ist in der Gartenstraße. Er ist von Montag bis Samstag geöffnet, von 8 bis 20 Uhr. Am Sonntag ist er geschlossen. Im Supermarkt kaufe ich Brot, Milch und Obst.',
     },
   ],
 }

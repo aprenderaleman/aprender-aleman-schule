@@ -65,6 +65,19 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Wie in der Prüfung: Hör das Gespräch. Was ist richtig? ~~(Como en el examen: escucha la conversación. ¿Qué es correcto?)~~',
+      audio: {
+        transcript: 'Frau: Guten Tag! Ich möchte einen Deutschkurs machen.\nMann: Gern. Der Kurs beginnt am Montag um neun Uhr.\nFrau: Am Vormittag arbeite ich. Haben Sie auch einen Kurs am Abend?\nMann: Ja, am Dienstag und am Donnerstag um 18 Uhr.\nFrau: Sehr gut! Was kostet der Kurs?\nMann: 190 Euro. Bitte bringen Sie Ihren Ausweis mit.',
+      },
+      items: [
+        { typ: 'rf', aussage: 'Die Frau arbeitet am Vormittag.', loesung: true },
+        { typ: 'mc', frage: 'Wann ist der Kurs am Abend?', optionen: ['am Montag', 'am Dienstag und am Donnerstag', 'am Freitag'], loesung: 1 },
+        { typ: 'rf', aussage: 'Der Kurs kostet 119 Euro.', loesung: false },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -77,6 +90,20 @@ export default {
       ],
       minWoerter: 25,
       beispielLoesung: 'Lieber Ben, ich koche am Samstag für meine Freunde. Wir essen um 19 Uhr bei mir. Kommst du auch? Bringst du bitte Wasser oder Brot mit? Viele Grüße, Ana',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Wie in der Prüfung: Sprich über das Thema. Sprich 45 Sekunden. ~~(Como en el examen: habla sobre el tema. Habla 45 segundos.)~~',
+      aufgabe: 'Thema „Essen und Einkaufen“: Was isst du gern? Wo kaufst du ein? ~~(Tema «Comer y comprar»: ¿qué te gusta comer? ¿Dónde haces la compra?)~~',
+      punkte: [
+        'Was isst und trinkst du gern? ~~(¿Qué te gusta comer y beber?)~~',
+        'Wo und wann kaufst du ein? ~~(¿Dónde y cuándo haces la compra?)~~',
+        'Was kaufst du? ~~(¿Qué compras?)~~',
+      ],
+      redemittel: ['Ich esse gern …', 'Ich trinke gern …', 'Ich kaufe im … ein.', 'Am Samstag kaufe ich …'],
+      maxSekunden: 45,
+      beispielLoesung: 'Ich esse gern Brot mit Käse. Am Morgen trinke ich gern Kaffee mit Milch. Am Samstag kaufe ich im Supermarkt ein. Ich kaufe Brot, Milch, Käse und zwei Kilo Äpfel. Am Abend koche ich gern für meine Familie.',
     },
   ],
 }

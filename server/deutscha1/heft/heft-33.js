@@ -63,6 +63,19 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Hör die Nachricht. Was ist richtig? ~~(Escucha el mensaje. ¿Qué es correcto?)~~',
+      audio: {
+        transcript: 'Hallo Clara, hier ist Felix. Ich wohne jetzt in Köln. Meine Wohnung ist neu. Sie hat drei Zimmer und ein Bad. Die Küche ist klein, aber schön. Ich habe ein Bett und einen Tisch, aber ich habe keinen Schrank. Meine Adresse ist Parkstraße vierzehn. Nein, nicht vierzehn! Die Adresse ist Parkstraße vierzig. Komm bitte am Samstag. Bis Samstag!',
+      },
+      items: [
+        { typ: 'rf', aussage: 'Die Wohnung hat drei Zimmer.', loesung: true },
+        { typ: 'rf', aussage: 'Felix hat einen Schrank.', loesung: false },
+        { typ: 'mc', frage: 'Wie ist die Adresse?', optionen: ['Parkstraße 14', 'Parkstraße 4', 'Parkstraße 40'], loesung: 2 },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -75,6 +88,20 @@ export default {
       ],
       minWoerter: 20,
       beispielLoesung: 'Ich wohne in Sevilla. Meine Wohnung ist klein. Sie hat zwei Zimmer, eine Küche und ein Bad. Das Bett ist neu und das Wohnzimmer ist sehr schön.',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Deine Adresse und ein Zimmer. Sprich 40 Sekunden. ~~(Tu dirección y una habitación. Habla 40 segundos.)~~',
+      aufgabe: 'Wie ist deine Adresse? Wie ist dein Schlafzimmer oder dein Wohnzimmer? Sag vier Sätze. ~~(¿Cuál es tu dirección? ¿Cómo es tu dormitorio o tu salón? Di cuatro frases.)~~',
+      punkte: [
+        'deine Adresse: Straße, Hausnummer, Stadt ~~(tu dirección: calle, número, ciudad)~~',
+        'ein Zimmer: groß, klein, schön? ~~(una habitación: ¿grande, pequeña, bonita?)~~',
+        'die Möbel im Zimmer ~~(los muebles de la habitación)~~',
+      ],
+      redemittel: ['Meine Adresse ist …', 'Mein Schlafzimmer ist …', 'Im Zimmer sind …', 'Das Bett ist …'],
+      maxSekunden: 40,
+      beispielLoesung: 'Ich wohne in Madrid. Meine Adresse ist Calle Mayor 15. Mein Schlafzimmer ist klein, aber schön. Im Zimmer sind ein Bett, ein Schrank und ein Stuhl. Das Bett ist groß und der Schrank ist neu.',
     },
   ],
 }

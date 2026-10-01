@@ -94,7 +94,7 @@ export default {
       typ: 'sprechen',
       titel: 'Sprechen',
       anweisung: 'Stell dich vor. Sprich 30 Sekunden. ~~(Preséntate. Habla 30 segundos.)~~',
-      aufgabe: 'Wer bist du? Sag drei Sätze.',
+      aufgabe: 'Wer bist du? Sag drei Sätze. ~~(¿Quién eres? Di tres frases.)~~',
       punkte: ['dein Name', 'dein Land oder deine Stadt', 'dein Alter'],
       redemittel: ['Ich bin …', 'Ich bin aus …', 'Ich bin … Jahre alt.'],
       maxSekunden: 30,

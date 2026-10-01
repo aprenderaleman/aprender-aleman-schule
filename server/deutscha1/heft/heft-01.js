@@ -78,6 +78,19 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Hör die Durchsage. Was ist richtig? ~~(Escucha el aviso. ¿Qué es correcto?)~~',
+      audio: {
+        transcript: 'Guten Morgen und herzlich willkommen! Heute ist die Prüfung. Die Prüfung hat vier Teile. Wir beginnen um neun Uhr mit Hören. Dann kommen Lesen und Schreiben. Sprechen ist um zwölf Uhr, in der Gruppe. Das Ergebnis bekommen Sie im Juni. Viel Erfolg!',
+      },
+      items: [
+        { typ: 'rf', aussage: 'Die Prüfung beginnt um zehn Uhr.', loesung: false },
+        { typ: 'mc', frage: 'Wann ist Sprechen?', optionen: ['um neun Uhr', 'um zwölf Uhr', 'um zwei Uhr'], loesung: 1 },
+        { typ: 'rf', aussage: 'Das Ergebnis kommt im Juni.', loesung: true },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -90,6 +103,16 @@ export default {
       ],
       minWoerter: 12,
       beispielLoesung: 'Ich mache die Prüfung im Juni. Ich brauche das Zertifikat für das Visum. Die Prüfung hat vier Teile. Mein Ziel: 60 Prozent!',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Sag „Hallo“ und stell dich vor. Sprich 30 Sekunden. ~~(Saluda y preséntate. Habla 30 segundos.)~~',
+      aufgabe: 'Du bist neu im Deutschkurs. Stell dich vor. Sag drei Sätze. ~~(Eres nuevo en el curso de alemán. Preséntate. Di tres frases.)~~',
+      punkte: ['dein Name', 'deine Stadt', 'Du lernst Deutsch.'],
+      redemittel: ['Hallo! Ich bin …', 'Ich bin aus …', 'Ich lerne …'],
+      maxSekunden: 30,
+      beispielLoesung: 'Hallo! Ich bin Carmen. Ich bin aus Málaga. Ich lerne Deutsch.',
     },
   ],
 }

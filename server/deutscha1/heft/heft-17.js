@@ -78,6 +78,24 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Lies zuerst die Aufgaben. Hör dann die Ansage am Telefon. ~~(Lee primero las tareas. Luego escucha el aviso telefónico.)~~',
+      audio: {
+        transcript: 'Guten Tag, hier ist das Café am Bahnhof. Heute haben wir leider nicht geöffnet. Wir sind ab Mittwoch wieder für Sie da. Das Café öffnet um acht Uhr und schließt um achtzehn Uhr. Am Samstag öffnen wir um halb neun. Vielen Dank und auf Wiederhören!',
+      },
+      items: [
+        { typ: 'rf', aussage: 'Das Café ist heute geöffnet.', loesung: false },
+        { typ: 'mc', frage: 'Das Café ist wieder geöffnet ab …', optionen: ['Montag', 'Mittwoch', 'Samstag'], loesung: 1 },
+        {
+          typ: 'mc',
+          frage: 'Wann öffnet das Café am Samstag?',
+          optionen: ['um 8.30 Uhr', 'um 9.30 Uhr', 'um 8 Uhr'],
+          loesung: 0,
+        },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -90,6 +108,16 @@ export default {
       ],
       minWoerter: 15,
       beispielLoesung: 'Hallo Leo, hier ist Marta. Wir haben morgen einen Termin um 10 Uhr. Ruf mich bitte zurück!',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Sprich 40 Sekunden. ~~(Habla 40 segundos.)~~',
+      aufgabe: 'Dein Freund Marco macht bald die Prüfung. Was muss er im Hören machen? Sag vier Sätze. ~~(Tu amigo Marco hace pronto el examen. ¿Qué tiene que hacer en el Hören? Di cuatro frases.)~~',
+      punkte: ['zuerst: die Aufgaben lesen', 'dann: den Text hören', 'nicht jedes Wort verstehen', 'immer ankreuzen'],
+      redemittel: ['Lies zuerst …', 'Hör dann …', 'Du musst nicht …', 'Kreuze immer …'],
+      maxSekunden: 40,
+      beispielLoesung: 'Hallo Marco! Das Hören ist kein Problem. Lies zuerst die Aufgaben. Hör dann den Text. Du musst nicht jedes Wort verstehen — das ist normal. Und kreuze immer an!',
     },
   ],
 }

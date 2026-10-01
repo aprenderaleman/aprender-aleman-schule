@@ -63,6 +63,19 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Hör das Gespräch. Was ist richtig? ~~(Escucha la conversación. ¿Qué es correcto?)~~',
+      audio: {
+        transcript: 'Mann: Hallo, Eva! Was machst du hier?\nFrau: Hallo, Daniel! Ich lerne Deutsch. Wir haben heute Deutschkurs.\nMann: Wohnst du jetzt in Köln?\nFrau: Nein, ich wohne in Bonn. Mein Freund wohnt in Köln.\nMann: Hast du Kinder?\nFrau: Ja, ich habe drei Kinder. Sie machen Sport.\nMann: Ich habe Hunger. Hast du Zeit?\nFrau: Ja, ich habe Zeit.',
+      },
+      items: [
+        { typ: 'mc', frage: 'Wo wohnt Eva?', optionen: ['in Köln', 'in Bonn', 'in Berlin'], loesung: 1 },
+        { typ: 'rf', aussage: 'Eva hat zwei Kinder.', loesung: false },
+        { typ: 'rf', aussage: 'Daniel hat Hunger.', loesung: true },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -75,6 +88,16 @@ export default {
       ],
       minWoerter: 12,
       beispielLoesung: 'Ich wohne in Lima. Ich lerne Deutsch. Ich habe zwei Kinder und ein Auto.',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Stell eine Person vor. Sprich 40 Sekunden. ~~(Presenta a una persona. Habla 40 segundos.)~~',
+      aufgabe: 'Wer ist dein Freund oder deine Freundin? Sag vier Sätze mit er oder sie. ~~(¿Quién es tu amigo o tu amiga? Di cuatro frases con er o sie.)~~',
+      punkte: ['der Name', 'das Land', 'die Stadt jetzt', 'haben: ein Auto, Kinder, viele Fragen …'],
+      redemittel: ['Das ist …', 'Er / Sie kommt aus …', 'Er / Sie wohnt in …', 'Er / Sie hat …'],
+      maxSekunden: 40,
+      beispielLoesung: 'Das ist meine Freundin Carla. Sie kommt aus Mexiko. Sie wohnt jetzt in München. Sie lernt Deutsch. Sie hat zwei Kinder und ein Auto.',
     },
   ],
 }

@@ -63,6 +63,19 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Hör das Gespräch. Was ist richtig? ~~(Escucha la conversación. ¿Qué es correcto?)~~',
+      audio: {
+        transcript: 'Frau: Hallo Jonas! Was ist das? Ein Foto?\nMann: Ja. Das ist ein Haus in Graz. Das Haus ist groß, aber alt.\nFrau: Und wer ist die Frau?\nMann: Die Frau heißt Petra.\nFrau: Und der Mann?\nMann: Der Mann ist Lehrer. Er kommt aus Wien.\nFrau: Und das Mädchen?\nMann: Das Mädchen heißt Lena. Lena ist acht Jahre alt.',
+      },
+      items: [
+        { typ: 'rf', aussage: 'Das Haus ist neu.', loesung: false },
+        { typ: 'mc', frage: 'Wo ist das Haus?', optionen: ['in Wien', 'in Bonn', 'in Graz'], loesung: 2 },
+        { typ: 'rf', aussage: 'Das Mädchen ist acht Jahre alt.', loesung: true },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'formular',
       titel: 'Schreiben',
@@ -75,6 +88,16 @@ export default {
         { id: 'stadt', label: 'Stadt jetzt', erwartet: ['Bonn'] },
         { id: 'telefon', label: 'Telefonnummer', erwartet: ['0159 776655', '0159776655'] },
       ],
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Sprich 30 Sekunden. ~~(Habla 30 segundos.)~~',
+      aufgabe: 'Wie ist dein Haus? Sag vier Sätze mit der, die oder das. ~~(¿Cómo es tu casa? Di cuatro frases con der, die o das.)~~',
+      punkte: ['das Haus: groß oder klein?', 'der Tisch: neu oder alt?', 'die Lampe', 'die Tür'],
+      redemittel: ['Das Haus ist …', 'Der Tisch ist …', 'Die Lampe ist …', 'Die Tür ist …'],
+      maxSekunden: 30,
+      beispielLoesung: 'Das Haus ist klein und alt. Der Tisch ist groß und neu. Die Lampe ist auch neu. Und die Tür ist alt.',
     },
   ],
 }

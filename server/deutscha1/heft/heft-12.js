@@ -69,6 +69,19 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Hör die Ansage. Was ist richtig? ~~(Escucha el aviso. ¿Qué es correcto?)~~',
+      audio: {
+        transcript: 'Guten Tag! Heute machen wir einen Test. Sie müssen bitte den Ausweis zeigen. Sie können mit Kugelschreiber schreiben, aber nicht mit Bleistift. Sie haben zwanzig Minuten Zeit. Nein, nicht zwanzig! Sie haben dreißig Minuten. Möchten Sie etwas trinken? Ein Wasser können Sie hier trinken. Aber Sie können hier leider nicht essen.',
+      },
+      items: [
+        { typ: 'rf', aussage: 'Sie müssen den Ausweis zeigen.', loesung: true },
+        { typ: 'rf', aussage: 'Sie können mit Bleistift schreiben.', loesung: false },
+        { typ: 'mc', frage: 'Wie viel Zeit haben Sie?', optionen: ['zwanzig Minuten', 'dreizehn Minuten', 'dreißig Minuten'], loesung: 2 },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'formular',
       titel: 'Schreiben',
@@ -81,6 +94,16 @@ export default {
         { id: 'kurs', label: 'Kurs am', erwartet: ['Abend', 'am Abend'] },
         { id: 'telefon', label: 'Telefonnummer', erwartet: ['0157 2233448', '01572233448'] },
       ],
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Sprich 30 Sekunden. ~~(Habla 30 segundos.)~~',
+      aufgabe: 'Du bist im Café. Was möchtest du? Bestell mit „Ich möchte …“. ~~(Estás en el café. ¿Qué quieres? Pide con «Ich möchte …».)~~',
+      punkte: ['etwas trinken', 'etwas essen', 'bezahlen'],
+      redemittel: ['Ich möchte bestellen, bitte.', 'Ich möchte einen … trinken.', 'Ich möchte ein … essen.', 'Ich möchte bitte …'],
+      maxSekunden: 30,
+      beispielLoesung: 'Guten Tag! Ich möchte bestellen, bitte. Ich möchte einen Kaffee trinken. Und ich möchte ein Brötchen essen. Danke! Ich möchte jetzt bitte bezahlen.',
     },
   ],
 }

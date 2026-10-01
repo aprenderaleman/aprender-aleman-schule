@@ -90,6 +90,19 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Hör die Nachricht. Was ist richtig? ~~(Escucha el mensaje. ¿Qué es correcto?)~~',
+      audio: {
+        transcript: 'Hallo Sofia, hier ist Jan. Ich verkaufe meinen Tisch. Er ist fast neu und kostet nur 40 Euro. Das ist billig! Möchtest du den Tisch kaufen? Dann komm bitte morgen. Aber nicht um 17 Uhr, sondern um 18 Uhr. Ich wohne in der Bahnhofstraße 5. Ruf mich bitte an! Tschüs!',
+      },
+      items: [
+        { typ: 'rf', aussage: 'Jan verkauft einen Tisch.', loesung: true },
+        { typ: 'rf', aussage: 'Der Tisch kostet 14 Euro.', loesung: false },
+        { typ: 'mc', frage: 'Jan sagt: Komm morgen um …', optionen: ['17 Uhr', '18 Uhr', '8 Uhr'], loesung: 1 },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -102,6 +115,16 @@ export default {
       ],
       minWoerter: 12,
       beispielLoesung: 'Hallo Diego, ich komme um 17 Uhr. Ich bin im Café am Markt. Bring bitte das Buch mit!',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Sprich 30 Sekunden. ~~(Habla 30 segundos.)~~',
+      aufgabe: 'Du verkaufst dein Fahrrad. Sprich eine Nachricht für deinen Freund Leo. ~~(Vendes tu bicicleta. Deja un mensaje de voz a tu amigo Leo.)~~',
+      punkte: ['Was verkaufst du?', 'Wie ist das Fahrrad?', 'Wie viel kostet es?', 'Wann kann Leo anrufen?'],
+      redemittel: ['Ich verkaufe …', 'Es ist …', 'Es kostet nur …', 'Ruf mich bitte … an.'],
+      maxSekunden: 30,
+      beispielLoesung: 'Hallo Leo! Ich verkaufe mein Fahrrad. Es ist fast neu und sehr gut. Es kostet nur 70 Euro. Möchtest du das Fahrrad kaufen? Dann ruf mich bitte heute Abend an. Tschüs!',
     },
   ],
 }

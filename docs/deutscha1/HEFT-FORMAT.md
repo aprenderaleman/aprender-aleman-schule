@@ -185,3 +185,9 @@ Reglas del `transcript` (se convierte en AUDIO con voces sintéticas):
   `schreiben` (que no pidan lo mismo).
 - `anweisung`, `aufgabe` y `punkte` siguen la regla de idioma del nivel
   (A1/A2: frases principales, du, glosa española en `anweisung`).
+  En **A1** la `aufgabe` lleva además su glosa española `~~(…)~~`: el alumno
+  tiene que entender qué decir. En A2 solo `anweisung`; desde B1, sin glosa.
+  El corrector de IA recibe la consigna sin glosas (las quita el cliente).
+- Ningún ítem de Hören debe poder contestarse sin escuchar (por cultura
+  general o por lo que enseña la propia lección).
+- Números que son trampa (14/40, 17/70), escritos en letras en el transcript.

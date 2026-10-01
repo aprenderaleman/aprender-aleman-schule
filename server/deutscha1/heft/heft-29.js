@@ -83,6 +83,24 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Hör das Gespräch. Richtig oder falsch? ~~(Escucha la conversación. ¿Verdadero o falso?)~~',
+      audio: {
+        transcript: 'Frau: Hallo Jan! Kannst du mir morgen bitte helfen?\nMann: Ja, gern, Mia. Wann?\nFrau: Um vier Uhr?\nMann: Tut mir leid, um vier Uhr habe ich Deutschkurs. Aber um fünf Uhr habe ich Zeit.\nFrau: Gut, um fünf Uhr. Und hast du jetzt einen Stift für mich?\nMann: Kein Problem. Hier bitte.',
+      },
+      items: [
+        { typ: 'rf', aussage: 'Jan hilft Mia morgen.', loesung: true },
+        {
+          typ: 'mc',
+          frage: 'Wann hat Jan Zeit?',
+          optionen: ['um vier Uhr', 'um fünf Uhr', 'um sechs Uhr'],
+          loesung: 1,
+        },
+        { typ: 'rf', aussage: 'Jan hat keinen Stift.', loesung: false },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -95,6 +113,25 @@ export default {
       ],
       minWoerter: 12,
       beispielLoesung: '— Gib mir bitte dein Buch. — Hier bitte!\n— Können Sie bitte die Tür öffnen? — Ja, gern.',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Formuliere Bitten. Sprich 30 Sekunden. ~~(Formula peticiones. Habla 30 segundos.)~~',
+      aufgabe: 'Du hast drei Bildkarten wie in Teil 3: „Stift“, „Fenster“ und „Glas Wasser“. Formuliere für jede Karte eine Bitte. Sag immer „bitte“! ~~(Tienes tres tarjetas como en la parte 3: «bolígrafo», «ventana» y «vaso de agua». Formula una petición para cada tarjeta. ¡Di siempre «bitte»!)~~',
+      punkte: [
+        'Karte „Stift“: eine Bitte mit du',
+        'Karte „Fenster“: eine Bitte mit Sie',
+        'Karte „Glas Wasser“: eine Bitte mit „Ich möchte …“',
+      ],
+      redemittel: [
+        'Gib mir bitte …',
+        'Kannst du mir bitte … geben?',
+        'Können Sie bitte … öffnen?',
+        'Ich möchte bitte …',
+      ],
+      maxSekunden: 30,
+      beispielLoesung: 'Gib mir bitte deinen Stift. Können Sie bitte das Fenster öffnen? Ich möchte bitte ein Glas Wasser.',
     },
   ],
 }

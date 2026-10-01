@@ -69,6 +69,19 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Hör das Gespräch im Deutschkurs. Was ist richtig? ~~(Escucha la conversación en el curso de alemán. ¿Qué es correcto?)~~',
+      audio: {
+        transcript: 'Lehrerin: Guten Morgen, Pablo! Komm bitte, der Kurs fängt an.\nPablo: Entschuldigen Sie, Frau Lang! Der Bus kommt heute nicht.\nLehrerin: Kein Problem. Lies bitte Text drei.\nPablo: Text zwei?\nLehrerin: Nein, Text drei. Schreib dann die Antworten.\nPablo: Gut. Helfen Sie mir bitte! Ich habe keinen Stift.\nLehrerin: Warte einen Moment. Hier, nimm meinen Stift!',
+      },
+      items: [
+        { typ: 'rf', aussage: 'Pablo liest Text zwei.', loesung: false },
+        { typ: 'mc', frage: 'Was hat Pablo nicht?', optionen: ['ein Buch', 'einen Stift', 'einen Text'], loesung: 1 },
+        { typ: 'rf', aussage: 'Der Bus kommt heute nicht.', loesung: true },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'formular',
       titel: 'Schreiben',
@@ -81,6 +94,16 @@ export default {
         { id: 'tag', label: 'Test am', erwartet: ['Freitag', 'am Freitag'] },
         { id: 'email', label: 'E-Mail', erwartet: ['elena.castro@post.de'] },
       ],
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Sprich 30 Sekunden. Benutze den Imperativ mit du. ~~(Habla 30 segundos. Usa el imperativo con du.)~~',
+      aufgabe: 'Dein Freund Leo ist neu im Deutschkurs. Sag Leo vier Sätze mit Imperativ. ~~(Tu amigo Leo es nuevo en el curso de alemán. Dile cuatro frases en imperativo.)~~',
+      punkte: ['kommen', 'einen Moment warten', 'den Text lesen', 'die Antworten schreiben'],
+      redemittel: ['Komm bitte …', 'Warte …', 'Lies bitte …', 'Schreib bitte …'],
+      maxSekunden: 30,
+      beispielLoesung: 'Hallo Leo! Komm bitte, der Kurs fängt an. Warte einen Moment — hier ist dein Buch. Lies bitte den Text. Und schreib dann die Antworten!',
     },
   ],
 }

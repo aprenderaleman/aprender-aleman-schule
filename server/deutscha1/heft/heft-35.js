@@ -63,6 +63,19 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Hör die Vorstellung. Was ist richtig? ~~(Escucha la presentación. ¿Qué es correcto?)~~',
+      audio: {
+        transcript: 'Guten Tag! Ich heiße Marta Silva und komme aus Portugal. Ich bin Ingenieurin von Beruf. Aber jetzt arbeite ich als Verkäuferin in einem Geschäft in Kassel. Ich arbeite von Montag bis Freitag, von neun bis fünfzehn Uhr. Am Samstag arbeite ich nicht. Meine Kollegen sind sehr nett.',
+      },
+      items: [
+        { typ: 'rf', aussage: 'Marta ist Ingenieurin von Beruf.', loesung: true },
+        { typ: 'mc', frage: 'Wo arbeitet Marta jetzt?', optionen: ['im Büro', 'im Restaurant', 'im Geschäft'], loesung: 2 },
+        { typ: 'rf', aussage: 'Marta arbeitet auch am Samstag.', loesung: false },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -75,6 +88,21 @@ export default {
       ],
       minWoerter: 20,
       beispielLoesung: 'Ich heiße Laura. Ich komme aus Mexiko und wohne in Frankfurt. Ich bin Verkäuferin und arbeite in einem Geschäft. Am Abend höre ich gern Musik.',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Sprich über eine Person. Sprich 40 Sekunden. ~~(Habla sobre una persona. Habla 40 segundos.)~~',
+      aufgabe: 'Dein Freund oder deine Freundin: Was ist er oder sie von Beruf? Sag vier Sätze. ~~(Tu amigo o tu amiga: ¿cuál es su profesión? Di cuatro frases.)~~',
+      punkte: [
+        'Wie heißt er oder sie? ~~(¿Cómo se llama?)~~',
+        'Was ist er oder sie von Beruf? ~~(¿Cuál es su profesión?)~~',
+        'Wo und wann arbeitet er oder sie? ~~(¿Dónde y cuándo trabaja?)~~',
+        'Wie sind die Kollegen? ~~(¿Cómo son los compañeros?)~~',
+      ],
+      redemittel: ['Mein Freund heißt …', 'Sie ist … von Beruf.', 'Er arbeitet als …', 'Sie arbeitet im …'],
+      maxSekunden: 40,
+      beispielLoesung: 'Meine Freundin heißt Carmen. Sie kommt aus Spanien und wohnt in Wien. Sie ist Ärztin von Beruf. Sie arbeitet im Krankenhaus, von acht bis sechzehn Uhr. Ihre Kollegen sind sehr nett.',
     },
   ],
 }

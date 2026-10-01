@@ -64,6 +64,19 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Hör die Nachricht. Was ist richtig? ~~(Escucha el mensaje. ¿Qué es correcto?)~~',
+      audio: {
+        transcript: 'Hallo Mia, hier ist Ben. Morgen ist Samstag. Ich stehe um acht Uhr auf. Dann kaufe ich im Supermarkt ein. Der Supermarkt macht um neun Uhr auf. Kommst du mit? Am Abend sehe ich nicht fern. Ich möchte einen Salat machen. Du kannst auch kommen. Ich rufe dich heute Abend an.',
+      },
+      items: [
+        { typ: 'rf', aussage: 'Ben steht um neun Uhr auf.', loesung: false },
+        { typ: 'rf', aussage: 'Ben kauft morgen im Supermarkt ein.', loesung: true },
+        { typ: 'mc', frage: 'Wann ruft Ben an?', optionen: ['heute Abend', 'morgen Abend', 'am Sonntag'], loesung: 0 },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -76,6 +89,16 @@ export default {
       ],
       minWoerter: 15,
       beispielLoesung: 'Ich stehe um 8 Uhr auf. Am Nachmittag kaufe ich im Supermarkt ein. Am Abend rufe ich meine Freundin an. Dann sehe ich fern.',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Sprich 40 Sekunden. ~~(Habla 40 segundos.)~~',
+      aufgabe: 'Du möchtest am Samstag einen Film sehen. Dein Freund ist nicht da. Sprich eine Nachricht. ~~(Quieres ver una película el sábado. Tu amigo no está. Déjale un mensaje de voz.)~~',
+      punkte: ['Wann fängt der Film an?', 'Frag: Kommt er mit?', 'Wann rufst du an?'],
+      redemittel: ['Hallo …, hier ist …', 'Der Film fängt um … Uhr an.', 'Kommst du …?', 'Ich rufe dich … an.'],
+      maxSekunden: 40,
+      beispielLoesung: 'Hallo Daniel, hier ist Marta. Ich möchte am Samstag einen Film sehen. Der Film fängt um acht Uhr an. Kommst du mit? Ich rufe dich morgen an.',
     },
   ],
 }

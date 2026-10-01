@@ -69,6 +69,19 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Hör die Nachricht von Sophie. Was ist richtig? ~~(Escucha el mensaje de Sophie. ¿Qué es correcto?)~~',
+      audio: {
+        transcript: 'Hallo Lukas, hier ist Sophie. Am Samstag habe ich Geburtstag. Ich bin dann dreiundzwanzig Jahre alt! Ich mache eine Party. Die Party beginnt um halb acht. Kommst du? Meine Adresse ist neu. Ich wohne jetzt in Köln, Gartenstraße vierzehn. Ruf mich bitte an! Bis Samstag!',
+      },
+      items: [
+        { typ: 'rf', aussage: 'Sophie hat am Samstag Geburtstag.', loesung: true },
+        { typ: 'mc', frage: 'Wie alt ist Sophie dann?', optionen: ['32', '23', '14'], loesung: 1 },
+        { typ: 'mc', frage: 'Wann beginnt die Party?', optionen: ['um 7:30', 'um 8:30', 'um 8:00'], loesung: 0 },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'formular',
       titel: 'Schreiben',
@@ -81,6 +94,16 @@ export default {
         { id: 'uhrzeit', label: 'Kurs um', erwartet: ['halb sieben', 'um halb sieben', '6:30', '18:30'] },
         { id: 'telefon', label: 'Telefonnummer', erwartet: ['0176 889922', '0176889922'] },
       ],
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Sprich 40 Sekunden. Benutze Uhrzeiten. ~~(Habla 40 segundos. Usa las horas.)~~',
+      aufgabe: 'Wie ist dein Montag? Sag vier Sätze mit Uhrzeit. ~~(¿Cómo es tu lunes? Di cuatro frases con la hora.)~~',
+      punkte: ['aufstehen: Wann?', 'Arbeit oder Kurs: Wann?', 'am Abend: Was machst du?'],
+      redemittel: ['Am Montag stehe ich um … auf.', 'Um … beginnt …', 'Ich arbeite bis … Uhr.', 'Am Abend …'],
+      maxSekunden: 40,
+      beispielLoesung: 'Am Montag stehe ich um halb sieben auf. Um acht Uhr beginnt meine Arbeit. Ich arbeite bis fünf Uhr. Um Viertel nach sechs habe ich Deutschkurs. Am Abend koche ich und sehe fern.',
     },
   ],
 }

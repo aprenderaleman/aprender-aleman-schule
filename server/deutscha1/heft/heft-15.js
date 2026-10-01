@@ -70,6 +70,24 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Hör das Gespräch. Was ist richtig? ~~(Escucha la conversación. ¿Qué es correcto?)~~',
+      audio: {
+        transcript: 'Frau: Tom, hast du Brüder oder Schwestern?\nMann: Ja, ich habe zwei Brüder und eine Schwester. Und du, Lea?\nFrau: Ich habe keine Brüder, aber drei Schwestern.\nMann: Drei Schwestern! Haben sie Kinder?\nFrau: Ja, meine Schwester Anna hat zwei Kinder. Die Kinder sind fünf und sieben Jahre alt.\nMann: Haben die Kinder Handys?\nFrau: Nein, sie haben keine Handys. Sie lesen Bücher!',
+      },
+      items: [
+        {
+          typ: 'mc',
+          frage: 'Tom hat …',
+          optionen: ['drei Schwestern', 'zwei Brüder und eine Schwester', 'zwei Schwestern und einen Bruder'],
+          loesung: 1,
+        },
+        { typ: 'rf', aussage: 'Lea hat zwei Schwestern.', loesung: false },
+        { typ: 'rf', aussage: 'Die Kinder haben keine Handys.', loesung: true },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -82,6 +100,16 @@ export default {
       ],
       minWoerter: 14,
       beispielLoesung: 'Ich mache am Samstag eine Party. Ich kaufe zehn Äpfel, sechs Bananen und zwei Kuchen. Ich kaufe keine Tomaten — wir haben noch vier.',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Sprich 30 Sekunden. Benutze den Plural. ~~(Habla 30 segundos. Usa el plural.)~~',
+      aufgabe: 'Was hast du? Sag vier Sätze über deine Sachen. ~~(¿Qué tienes? Di cuatro frases sobre tus cosas.)~~',
+      punkte: ['Tische und Stühle', 'Bücher, Lampen oder Handys', 'Was hast du nicht?'],
+      redemittel: ['Ich habe zwei …', 'Ich habe viele …', 'Die … sind …', 'Ich habe keine …'],
+      maxSekunden: 30,
+      beispielLoesung: 'Ich habe einen Tisch und vier Stühle. Die Stühle sind alt. Ich habe viele Bücher und zwei Lampen. Ich habe kein Auto, aber ich habe zwei Handys.',
     },
   ],
 }

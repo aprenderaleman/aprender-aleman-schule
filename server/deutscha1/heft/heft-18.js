@@ -82,6 +82,24 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Hör das Gespräch. Achtung: Korrektur! Was ist richtig? ~~(Escucha la conversación. Ojo: ¡hay corrección! ¿Qué es correcto?)~~',
+      audio: {
+        transcript: 'Frau: Hallo Felix! Gehen wir am Samstag zusammen essen?\nMann: Hallo Nora! Samstag geht leider nicht. Geht auch Sonntag?\nFrau: Ja, Sonntag passt gut. Um fünf?\nMann: Fünf ist zu früh. Ich arbeite bis fünf. Lieber um halb sieben.\nFrau: Okay. Treffen wir uns am Bahnhof?\nMann: Ja, das passt gut. Bis Sonntag!',
+      },
+      items: [
+        { typ: 'rf', aussage: 'Felix und Nora treffen sich am Samstag.', loesung: false },
+        {
+          typ: 'mc',
+          frage: 'Sie treffen sich um …',
+          optionen: ['5 Uhr', '6.30 Uhr', '7.30 Uhr'],
+          loesung: 1,
+        },
+        { typ: 'rf', aussage: 'Sie treffen sich am Bahnhof.', loesung: true },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'formular',
       titel: 'Schreiben',
@@ -94,6 +112,16 @@ export default {
         { id: 'telefon', label: 'Telefonnummer', erwartet: ['030 22 88 461', '0302288461'] },
         { id: 'tun', label: 'Frau López muss …', erwartet: ['zurückrufen', 'anrufen', 'rufen Sie zurück', 'sie muss zurückrufen'] },
       ],
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Sprich eine Nachricht auf den Anrufbeantworter. Sprich 40 Sekunden. ~~(Deja un mensaje en el contestador. Habla 40 segundos.)~~',
+      aufgabe: 'Du triffst morgen um 17 Uhr deine Freundin Paula. Das geht leider nicht. Paula ist nicht da. Sprich deine Nachricht. ~~(Mañana a las 17 h quedas con tu amiga Paula. Por desgracia no puedes. Paula no está. Di tu mensaje.)~~',
+      punkte: ['Wer bist du?', 'Warum rufst du an?', 'Wann kannst du?', 'Was muss Paula machen?'],
+      redemittel: ['Hallo Paula, hier ist …', '… geht leider nicht.', 'Lieber um … / am …', 'Ruf mich bitte zurück!'],
+      maxSekunden: 40,
+      beispielLoesung: 'Hallo Paula, hier ist Diego. Wir treffen uns morgen um fünf — das geht leider nicht. Ich muss arbeiten. Geht auch halb sieben? Oder lieber am Freitag? Ruf mich bitte zurück! Bis bald!',
     },
   ],
 }

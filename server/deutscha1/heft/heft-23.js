@@ -75,6 +75,19 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Hör das Gespräch. Was ist richtig? ~~(Escucha la conversación. ¿Qué es correcto?)~~',
+      audio: {
+        transcript: 'Frau: Guten Tag! Sie möchten einen Deutschkurs machen? Dann füllen wir jetzt das Formular aus. Wie ist Ihr Vorname?\nMann: Diego.\nFrau: Und Ihr Familienname?\nMann: Ramos.\nFrau: Wo wohnen Sie, Herr Ramos?\nMann: In Köln, in der Marktstraße 14.\nFrau: Marktstraße 40?\nMann: Nein, 14. Eins, vier.\nFrau: Danke. Und jetzt bitte Ihre Unterschrift.',
+      },
+      items: [
+        { typ: 'rf', aussage: 'Ramos ist der Vorname.', loesung: false },
+        { typ: 'mc', frage: 'Herr Ramos wohnt in der Marktstraße …', optionen: ['40', '14', '4'], loesung: 1 },
+        { typ: 'rf', aussage: 'Der Wohnort ist Köln.', loesung: true },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -87,6 +100,16 @@ export default {
       ],
       minWoerter: 15,
       beispielLoesung: 'Guten Tag! Ich heiße Paula Ríos und ich komme aus Chile. Ich wohne jetzt in Berlin. Ich möchte einen Deutschkurs am Abend machen.',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Stell eine Person vor. Sprich 30 Sekunden. ~~(Presenta a una persona. Habla 30 segundos.)~~',
+      aufgabe: 'Stell einen Freund oder eine Freundin vor. Benutze die Formular-Wörter. ~~(Presenta a un amigo o a una amiga. Usa las palabras del formulario.)~~',
+      punkte: ['Vorname und Familienname', 'Wohnort und Straße', 'Land'],
+      redemittel: ['Das ist mein Freund … / meine Freundin …', 'Sein Familienname ist … / Ihr Familienname ist …', 'Sein Wohnort ist … / Ihr Wohnort ist …', 'Er kommt aus … / Sie kommt aus …'],
+      maxSekunden: 30,
+      beispielLoesung: 'Das ist meine Freundin. Ihr Vorname ist Carla und ihr Familienname ist Moreno. Ihr Wohnort ist Leipzig. Sie wohnt in der Bahnhofstraße 8. Sie kommt aus Kolumbien.',
     },
   ],
 }

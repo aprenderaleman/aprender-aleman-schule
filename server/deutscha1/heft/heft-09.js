@@ -64,6 +64,19 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Hör das Gespräch. Was ist richtig? ~~(Escucha la conversación. ¿Qué es correcto?)~~',
+      audio: {
+        transcript: 'Frau: Guten Tag! Ich suche eine Bäckerei. Gibt es hier eine Bäckerei?\nMann: Ja, es gibt eine Bäckerei am Park.\nFrau: Am Bahnhof?\nMann: Nein, am Park. Am Bahnhof gibt es nur ein Café.\nFrau: Danke! Ich brauche ein Brot.\nMann: Das Brot da ist sehr gut. Es kostet drei Euro.\nFrau: Super! Und dann trinke ich einen Tee im Café.',
+      },
+      items: [
+        { typ: 'mc', frage: 'Was sucht die Frau?', optionen: ['einen Supermarkt', 'eine Bäckerei', 'einen Park'], loesung: 1 },
+        { typ: 'rf', aussage: 'Die Bäckerei ist am Bahnhof.', loesung: false },
+        { typ: 'rf', aussage: 'Das Brot kostet drei Euro.', loesung: true },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -76,6 +89,16 @@ export default {
       ],
       minWoerter: 15,
       beispielLoesung: 'Ich kaufe einen Apfel und eine Banane. Ich trinke einen Kaffee. Ich esse ein Brötchen und einen Salat.',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Sprich 30 Sekunden. ~~(Habla 30 segundos.)~~',
+      aufgabe: 'Deine Stadt: Was gibt es da? Sag drei Sätze mit „es gibt“. ~~(Tu ciudad: ¿qué hay allí? Di tres frases con «es gibt».)~~',
+      punkte: ['der Park', 'der Supermarkt oder die Bäckerei', 'der Bahnhof oder das Café'],
+      redemittel: ['Ich wohne in …', 'Es gibt einen …', 'Es gibt eine …', 'Es gibt auch ein …'],
+      maxSekunden: 30,
+      beispielLoesung: 'Ich wohne in Granada. In Granada gibt es einen Park. Es gibt auch einen Supermarkt und eine Bäckerei. Am Bahnhof gibt es ein Café.',
     },
   ],
 }

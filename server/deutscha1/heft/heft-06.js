@@ -68,6 +68,19 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Hör die Nachricht. Richtig oder falsch? ~~(Escucha el mensaje. ¿Verdadero o falso?)~~',
+      audio: {
+        transcript: 'Hallo Oma, hier ist Felix. Wir sind jetzt in Wien. Papa liest die Zeitung, und Lisa schläft noch. Ich esse einen Apfel. Heute Abend sehen wir einen Film. Morgen fahren wir nicht nach Hause, wir fahren nach Salzburg. Wir nehmen den Bus um acht Uhr. Tschüs, Oma!',
+      },
+      items: [
+        { typ: 'rf', aussage: 'Lisa liest die Zeitung.', loesung: false },
+        { typ: 'mc', frage: 'Felix fährt morgen …', optionen: ['nach Hause', 'nach Wien', 'nach Salzburg'], loesung: 2 },
+        { typ: 'rf', aussage: 'Felix nimmt den Bus um acht Uhr.', loesung: true },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'formular',
       titel: 'Schreiben',
@@ -80,6 +93,16 @@ export default {
         { id: 'sprachen', label: 'Sprachen', erwartet: ['Spanisch und Englisch', 'Spanisch, Englisch'] },
         { id: 'essen', label: 'Isst gern', erwartet: ['Pizza'] },
       ],
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Sprich über dich und eine Person. Sprich 45 Sekunden. ~~(Habla de ti y de otra persona. Habla 45 segundos.)~~',
+      aufgabe: 'Welche Sprachen sprichst du? Was isst du gern? Und dein Freund oder deine Freundin? Sag vier Sätze. ~~(¿Qué idiomas hablas? ¿Qué te gusta comer? ¿Y tu amigo o tu amiga? Di cuatro frases.)~~',
+      punkte: ['deine Sprachen', 'Was isst du gern?', 'Bus, Zug oder Auto?', 'dein Freund oder deine Freundin: Er / Sie spricht …'],
+      redemittel: ['Ich spreche … und ein bisschen …', 'Ich esse gern …', 'Ich nehme den …', 'Mein Freund / Meine Freundin spricht …'],
+      maxSekunden: 45,
+      beispielLoesung: 'Ich spreche Spanisch und ein bisschen Deutsch. Ich esse gern Pizza. Ich nehme jeden Tag den Bus. Meine Freundin Sofia spricht Englisch. Sie fährt mit dem Auto.',
     },
   ],
 }

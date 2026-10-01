@@ -88,6 +88,19 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Hör das Gespräch. Was ist richtig? ~~(Escucha la conversación. ¿Qué es correcto?)~~',
+      audio: {
+        transcript: 'Prüferin: Guten Tag! Wir machen jetzt Teil eins. Wie heißen Sie?\nMann: Ich heiße Pedro Salas.\nPrüferin: Woher kommen Sie, Herr Salas?\nMann: Wie bitte? Noch einmal, bitte.\nPrüferin: Woher kommen Sie?\nMann: Ich komme aus Kuba und wohne in Mainz.\nPrüferin: Danke. Jetzt kommt Teil zwei. Ziehen Sie bitte eine Karte.',
+      },
+      items: [
+        { typ: 'mc', frage: 'Pedro wohnt in …', optionen: ['Kuba', 'Mainz', 'Bonn'], loesung: 1 },
+        { typ: 'rf', aussage: 'Pedro versteht eine Frage nicht.', loesung: true },
+        { typ: 'rf', aussage: 'Die Prüferin sagt: „Jetzt kommt Teil drei.“', loesung: false },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'formular',
       titel: 'Schreiben',
@@ -100,6 +113,16 @@ export default {
         { id: 'wohnort', label: 'Wohnort', erwartet: ['Frankfurt'] },
         { id: 'telefon', label: 'Telefonnummer', erwartet: ['069 442211', '069442211'] },
       ],
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Stell dich kurz vor. Sprich 30 Sekunden. ~~(Preséntate brevemente. Habla 30 segundos.)~~',
+      aufgabe: 'Das ist Teil 1. Wer bist du? Sag vier Sätze. Sprich langsam. ~~(Esta es la parte 1. ¿Quién eres? Di cuatro frases. Habla despacio.)~~',
+      punkte: ['dein Name', 'dein Land', 'deine Stadt', 'deine Sprachen'],
+      redemittel: ['Ich heiße …', 'Ich komme aus …', 'Ich wohne in …', 'Ich spreche …'],
+      maxSekunden: 30,
+      beispielLoesung: 'Guten Tag! Ich heiße Lucía Vega. Ich komme aus Kolumbien. Ich wohne in Wien. Ich spreche Spanisch und ein bisschen Deutsch.',
     },
   ],
 }

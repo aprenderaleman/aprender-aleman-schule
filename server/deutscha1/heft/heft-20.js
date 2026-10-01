@@ -82,6 +82,19 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Hör das Gespräch. Was ist richtig? ~~(Escucha la conversación. ¿Qué es correcto?)~~',
+      audio: {
+        transcript: 'Mann: Hallo Lea! Hier ist eine Notiz von Marta.\nFrau: Hallo Jonas! Was schreibt sie?\nMann: Sie kommt heute nicht um 18 Uhr. Sie kommt um 20 Uhr.\nFrau: Gut. Und was liest du da?\nMann: Eine Anzeige. Ein Fahrrad, nur 60 Euro!\nFrau: Super, du brauchst ein Fahrrad! Hast du die Telefonnummer?\nMann: Ja. Ich rufe heute Abend an.',
+      },
+      items: [
+        { typ: 'rf', aussage: 'Marta kommt heute um 18 Uhr.', loesung: false },
+        { typ: 'mc', frage: 'Was kostet 60 Euro?', optionen: ['ein Fahrrad', 'ein Tisch', 'eine Notiz'], loesung: 0 },
+        { typ: 'rf', aussage: 'Jonas ruft heute Abend an.', loesung: true },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'formular',
       titel: 'Schreiben',
@@ -94,6 +107,16 @@ export default {
         { id: 'strasse', label: 'Straße', erwartet: ['Hafenstraße 22', 'Hafenstraße'] },
         { id: 'telefon', label: 'Telefonnummer', erwartet: ['040 66 77 889', '04066 77889', '0406677889'] },
       ],
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Sprich 30 Sekunden. ~~(Habla 30 segundos.)~~',
+      aufgabe: 'Was liest du? Sag drei oder vier Sätze. ~~(¿Qué lees? Di tres o cuatro frases.)~~',
+      punkte: ['Was liest du jeden Tag?', 'Was liest du gern?', 'Was liest du auf Deutsch?'],
+      redemittel: ['Ich lese jeden Tag …', 'Ich lese gern …', 'Auf Deutsch lese ich …', 'Ich verstehe …'],
+      maxSekunden: 30,
+      beispielLoesung: 'Ich lese jeden Tag E-Mails und Nachrichten. Ich lese gern Bücher. Auf Deutsch lese ich kurze Texte, Notizen und Anzeigen. Ich verstehe nicht jedes Wort. Aber das ist kein Problem!',
     },
   ],
 }

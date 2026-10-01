@@ -71,6 +71,19 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Hör das Gespräch. Was ist richtig? ~~(Escucha la conversación. ¿Qué es correcto?)~~',
+      audio: {
+        transcript: 'Mann: Hallo Elena! Wo wohnt deine Familie?\nFrau: Meine Eltern wohnen in Madrid. Aber mein Bruder wohnt hier in München.\nMann: Wie heißt dein Bruder?\nFrau: Er heißt Diego. Seine Frau kommt aus Italien. Ihr Name ist Lucia.\nMann: Haben sie Kinder?\nFrau: Ja, zwei. Ihre Kinder sind drei und fünf Jahre alt. Und deine Familie, Felix?\nMann: Meine Schwester wohnt in Wien.',
+      },
+      items: [
+        { typ: 'mc', frage: 'Wo wohnt der Bruder von Elena?', optionen: ['in Madrid', 'in München', 'in Wien'], loesung: 1 },
+        { typ: 'rf', aussage: 'Die Frau von Diego kommt aus Italien.', loesung: true },
+        { typ: 'rf', aussage: 'Diego und Lucia haben drei Kinder.', loesung: false },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -83,6 +96,16 @@ export default {
       ],
       minWoerter: 16,
       beispielLoesung: 'Meine Mutter heißt Rosa und mein Vater heißt Pedro. Ich habe einen Bruder. Sein Name ist Juan und er ist 20 Jahre alt. Meine Familie wohnt in Valencia.',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Sprich 40 Sekunden. ~~(Habla 40 segundos.)~~',
+      aufgabe: 'Wer ist dein Freund oder deine Freundin? Sag vier Sätze mit sein oder ihr. ~~(¿Quién es tu amigo o tu amiga? Di cuatro frases con los posesivos sein o ihr.)~~',
+      punkte: ['der Name', 'die Stadt', 'der Bruder oder die Schwester', 'die Eltern'],
+      redemittel: ['Mein Freund / Meine Freundin heißt …', 'Er / Sie wohnt in …', 'Sein Bruder / Ihr Bruder heißt …', 'Seine Eltern / Ihre Eltern wohnen in …'],
+      maxSekunden: 40,
+      beispielLoesung: 'Meine Freundin heißt Carla. Sie wohnt in Madrid. Ihr Bruder heißt Pablo und ihre Schwester heißt Inés. Ihre Eltern wohnen in Toledo.',
     },
   ],
 }

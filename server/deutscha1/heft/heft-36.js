@@ -60,6 +60,19 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Wie in der Prüfung: Lies zuerst die Aufgaben. Hör dann die Durchsage. Was ist richtig? ~~(Como en el examen: lee primero las tareas. Luego escucha el aviso. ¿Qué es correcto?)~~',
+      audio: {
+        transcript: 'Achtung, bitte! Der Zug nach Hamburg fährt heute nicht um 14 Uhr 20 ab. Er hat 30 Minuten Verspätung und fährt um 14 Uhr 50 ab. Der Zug fährt heute auch nicht von Gleis 3 ab. Bitte gehen Sie zu Gleis 8. Vielen Dank!',
+      },
+      items: [
+        { typ: 'mc', frage: 'Wann fährt der Zug nach Hamburg ab?', optionen: ['um 14.20 Uhr', 'um 14.50 Uhr', 'um 15.20 Uhr'], loesung: 1 },
+        { typ: 'rf', aussage: 'Der Zug fährt heute von Gleis 3 ab.', loesung: false },
+        { typ: 'rf', aussage: 'Der Zug hat 30 Minuten Verspätung.', loesung: true },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'formular',
       titel: 'Schreiben',
@@ -72,6 +85,20 @@ export default {
         { id: 'strasse', label: 'Straße, Hausnummer', erwartet: ['Blumenstraße 8'] },
         { id: 'wohnort', label: 'Wohnort', erwartet: ['München'] },
       ],
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Wie in der Prüfung: Sprich über dich. Sprich 45 Sekunden. ~~(Como en el examen: habla de ti. Habla 45 segundos.)~~',
+      aufgabe: 'Sprich über deine Familie und deinen Tag. ~~(Habla de tu familia y de tu día.)~~',
+      punkte: [
+        'dein Name und dein Wohnort ~~(tu nombre y dónde vives)~~',
+        'deine Familie: Eltern, Bruder, Schwester, Kinder ~~(tu familia: padres, hermano, hermana, hijos)~~',
+        'dein Tag: aufstehen, arbeiten, Abend ~~(tu día: levantarte, trabajar, la noche)~~',
+      ],
+      redemittel: ['Ich heiße … und wohne in …', 'Meine Familie wohnt in …', 'Ich habe einen Bruder / eine Schwester.', 'Um … Uhr stehe ich auf.'],
+      maxSekunden: 45,
+      beispielLoesung: 'Ich heiße Lucía und wohne in Hamburg. Meine Familie wohnt in Kolumbien. Ich habe einen Bruder und eine Schwester. Mein Bruder heißt Andrés und ist Lehrer. Um sieben Uhr stehe ich auf. Von neun bis siebzehn Uhr arbeite ich im Büro. Am Abend koche ich und höre Musik.',
     },
   ],
 }

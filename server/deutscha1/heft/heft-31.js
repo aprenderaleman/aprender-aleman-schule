@@ -79,6 +79,24 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Hör das Gespräch. Was ist richtig? ~~(Escucha la conversación. ¿Qué es correcto?)~~',
+      audio: {
+        transcript: 'Mann: Hallo Sara! Wann treffen wir uns morgen?\nFrau: Um halb vier, Tom. Passt das?\nMann: Nein, das geht nicht. Ich arbeite bis vier Uhr.\nFrau: Dann um Viertel nach vier?\nMann: Ja, das passt.\nFrau: Gut. Ich habe auch das Buch für dich. Es kostet zwölf Euro fünfzig.',
+      },
+      items: [
+        {
+          typ: 'mc',
+          frage: 'Wann treffen sich Sara und Tom?',
+          optionen: ['um 3:30 Uhr', 'um 4:15 Uhr', 'um 4:45 Uhr'],
+          loesung: 1,
+        },
+        { typ: 'rf', aussage: 'Tom hat um halb vier Zeit.', loesung: false },
+        { typ: 'rf', aussage: 'Das Buch kostet 12,50 Euro.', loesung: true },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -91,6 +109,25 @@ export default {
       ],
       minWoerter: 18,
       beispielLoesung: '— Praxis Dr. Schmidt, guten Tag!\n— Guten Tag, ich möchte einen Termin, bitte.\n— Geht es am Dienstag um 10 Uhr?\n— Ja, das passt. Vielen Dank!',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Sprich eine Nachricht für eine Freundin. Sprich 30 Sekunden. ~~(Deja un mensaje para una amiga. Habla 30 segundos.)~~',
+      aufgabe: 'Du möchtest Anna am Wochenende treffen. Anna ist nicht da. Sprich eine Nachricht am Telefon. ~~(Quieres quedar con Anna el fin de semana. Anna no está. Deja un mensaje en el teléfono.)~~',
+      punkte: [
+        'der Tag: am …',
+        'die Uhrzeit: um …',
+        'deine Telefonnummer: Zahl für Zahl',
+      ],
+      redemittel: [
+        'Hallo Anna, hier ist …',
+        'Hast du am … Zeit?',
+        'Geht es um … Uhr?',
+        'Meine Telefonnummer ist …',
+      ],
+      maxSekunden: 30,
+      beispielLoesung: 'Hallo Anna, hier ist Carlos. Hast du am Samstag Zeit? Wir trinken einen Kaffee. Geht es um halb vier? Meine Telefonnummer ist null eins sieben zwei, vier fünf, sechs eins. Tschüss!',
     },
   ],
 }

@@ -63,6 +63,19 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Hör das Gespräch. Was ist richtig? ~~(Escucha la conversación. ¿Qué es correcto?)~~',
+      audio: {
+        transcript: 'Mann: Hallo Sofia! Wann stehst du am Montag auf?\nFrau: Um halb sieben. Dann frühstücke ich. Von acht bis sechzehn Uhr arbeite ich.\nMann: Und am Abend? Siehst du fern?\nFrau: Nein, am Abend koche ich und höre Musik.\nMann: Was machst du gern am Samstag?\nFrau: Am Samstag schwimme ich gern.',
+      },
+      items: [
+        { typ: 'mc', frage: 'Wann steht Sofia am Montag auf?', optionen: ['um 6.30 Uhr', 'um 7.30 Uhr', 'um 7 Uhr'], loesung: 0 },
+        { typ: 'rf', aussage: 'Am Abend kocht Sofia.', loesung: true },
+        { typ: 'rf', aussage: 'Am Samstag spielt Sofia Fußball.', loesung: false },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'formular',
       titel: 'Schreiben',
@@ -75,6 +88,20 @@ export default {
         { id: 'hobby', label: 'Hobby', erwartet: ['Tennis'] },
         { id: 'schlafen', label: 'Schlafen (Uhrzeit)', erwartet: ['23 Uhr', 'um 23 Uhr', '23'] },
       ],
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Wie ist dein Tag? Sprich 40 Sekunden. ~~(¿Cómo es tu día? Habla 40 segundos.)~~',
+      aufgabe: 'Beschreibe deinen Tag und dein Hobby. ~~(Describe tu día y tu hobby.)~~',
+      punkte: [
+        'Wann stehst du auf? ~~(¿Cuándo te levantas?)~~',
+        'Was machst du am Nachmittag und am Abend? ~~(¿Qué haces por la tarde y por la noche?)~~',
+        'Was machst du gern? ~~(¿Qué te gusta hacer?)~~',
+      ],
+      redemittel: ['Ich stehe um … Uhr auf.', 'Von … bis … Uhr arbeite ich.', 'Am Abend …', 'Ich … gern …'],
+      maxSekunden: 40,
+      beispielLoesung: 'Ich stehe um sieben Uhr auf. Dann frühstücke ich. Von neun bis siebzehn Uhr arbeite ich. Am Nachmittag kaufe ich ein. Am Abend koche ich und sehe fern. Mein Hobby ist Musik. Ich höre gern Musik und ich lese gern Bücher.',
     },
   ],
 }

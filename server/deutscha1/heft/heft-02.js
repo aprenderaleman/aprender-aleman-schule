@@ -67,6 +67,19 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Hör das Gespräch. Was ist richtig? ~~(Escucha la conversación. ¿Qué es correcto?)~~',
+      audio: {
+        transcript: 'Frau: Guten Morgen! Ihren Ausweis, bitte.\nMann: Guten Morgen! Hier ist mein Ausweis.\nFrau: Danke, Herr Ruiz. Haben Sie einen Kugelschreiber?\nMann: Nein, ich habe einen Bleistift und einen Radiergummi.\nFrau: Das ist okay. Und Ihr Handy?\nMann: Ich habe kein Handy.\nFrau: Sehr gut. Die Prüfung beginnt heute um zehn Uhr, nicht um neun Uhr. Sie haben noch Zeit.',
+      },
+      items: [
+        { typ: 'rf', aussage: 'Herr Ruiz hat einen Kugelschreiber.', loesung: false },
+        { typ: 'rf', aussage: 'Herr Ruiz hat kein Handy.', loesung: true },
+        { typ: 'mc', frage: 'Wann beginnt die Prüfung?', optionen: ['um neun Uhr', 'um elf Uhr', 'um zehn Uhr'], loesung: 2 },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'formular',
       titel: 'Schreiben',
@@ -79,6 +92,16 @@ export default {
         { id: 'datum', label: 'Datum der Prüfung', erwartet: ['12. Mai', 'am 12. Mai', '12 Mai'] },
         { id: 'telefon', label: 'Telefonnummer', erwartet: ['0157 3344221', '01573344221'] },
       ],
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Heute ist dein Prüfungstag. Sprich 30 Sekunden. ~~(Hoy es el día de tu examen. Habla 30 segundos.)~~',
+      aufgabe: 'Du bist im Prüfungszentrum. Was hast du heute? Sag drei Sätze. ~~(Estás en el centro de examen. ¿Qué llevas hoy? Di tres frases.)~~',
+      punkte: ['dein Ausweis', 'Kuli oder Bleistift?', 'dein Handy: ja oder nein?'],
+      redemittel: ['Hier ist mein …', 'Ich habe einen …', 'Ich schreibe mit dem …', 'Ich habe kein …'],
+      maxSekunden: 30,
+      beispielLoesung: 'Guten Morgen! Hier ist mein Ausweis. Ich habe einen Bleistift und einen Radiergummi. Ich schreibe mit dem Bleistift. Ich habe kein Handy.',
     },
   ],
 }

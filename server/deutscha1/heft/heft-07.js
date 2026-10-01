@@ -69,6 +69,19 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Hör das Gespräch. Was ist richtig? ~~(Escucha la conversación. ¿Qué es correcto?)~~',
+      audio: {
+        transcript: 'Frau: Pedro, wer ist das?\nMann: Das ist mein Freund Karl.\nFrau: Woher kommt er?\nMann: Er kommt aus Wien.\nFrau: Wohnt er auch in Wien?\nMann: Nein, er wohnt jetzt in Zürich.\nFrau: Was macht er in Zürich?\nMann: Er lernt Englisch.\nFrau: Und wann kommt er?\nMann: Er kommt am Sonntag.',
+      },
+      items: [
+        { typ: 'rf', aussage: 'Karl wohnt jetzt in Wien.', loesung: false },
+        { typ: 'mc', frage: 'Was macht Karl in Zürich?', optionen: ['Er lernt Deutsch.', 'Er macht Sport.', 'Er lernt Englisch.'], loesung: 2 },
+        { typ: 'rf', aussage: 'Karl kommt am Sonntag.', loesung: true },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -81,6 +94,16 @@ export default {
       ],
       minWoerter: 12,
       beispielLoesung: 'Wo wohnst du? Wie alt bist du? Sprichst du Englisch? Hast du Kinder?',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Antworte auf die Fragen. Sprich 40 Sekunden. ~~(Responde a las preguntas. Habla 40 segundos.)~~',
+      aufgabe: 'Eine Person im Kurs fragt dich. Antworte im ganzen Satz. Stell dann auch eine Frage. ~~(Una persona del curso te pregunta. Responde con frases completas. Después haz tú también una pregunta.)~~',
+      punkte: ['Wie heißt du?', 'Woher kommst du? Wo wohnst du?', 'Sprichst du Englisch?', 'deine Frage: Und du? …'],
+      redemittel: ['Ich heiße …', 'Ich komme aus …', 'Ich wohne in …', 'Ja, ich spreche … / Nein, ich spreche …'],
+      maxSekunden: 40,
+      beispielLoesung: 'Ich heiße Lucía. Ich komme aus Argentinien. Ich wohne jetzt in Frankfurt. Ja, ich spreche Englisch und ein bisschen Deutsch. Und du? Woher kommst du?',
     },
   ],
 }

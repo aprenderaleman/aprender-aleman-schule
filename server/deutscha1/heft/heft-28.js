@@ -83,6 +83,29 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Hör das Gespräch im Kurs. Was ist richtig? ~~(Escucha la conversación en clase. ¿Qué es correcto?)~~',
+      audio: {
+        transcript: 'Frau: Meine Karte ist Einkaufen. Marco, wo kaufst du Obst?\nMann: Ich kaufe Obst auf dem Markt. Meine Karte ist Arbeit. Wann gehst du zur Arbeit, Nina?\nFrau: Um halb acht.\nMann: Arbeitest du auch am Samstag?\nFrau: Nein, am Samstag arbeite ich nicht. Am Samstag spiele ich Tennis.',
+      },
+      items: [
+        { typ: 'rf', aussage: 'Marco kauft Obst auf dem Markt.', loesung: true },
+        {
+          typ: 'mc',
+          frage: 'Wann geht Nina zur Arbeit?',
+          optionen: ['um 8:30 Uhr', 'um 7:30 Uhr', 'um 8:00 Uhr'],
+          loesung: 1,
+        },
+        {
+          typ: 'mc',
+          frage: 'Was macht Nina am Samstag?',
+          optionen: ['Sie arbeitet.', 'Sie kauft Obst.', 'Sie spielt Tennis.'],
+          loesung: 2,
+        },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'formular',
       titel: 'Schreiben',
@@ -95,6 +118,25 @@ export default {
         { id: 'hobby', label: 'Hobby', erwartet: ['Tennis'] },
         { id: 'telefon', label: 'Telefonnummer', erwartet: ['0341 778812', '0341778812'] },
       ],
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Stell Fragen und antworte. Sprich 45 Sekunden. ~~(Haz preguntas y responde. Habla 45 segundos.)~~',
+      aufgabe: 'Du hast drei Karten wie in Teil 2. Stell für jede Karte eine Frage. Antworte dann selbst. ~~(Tienes tres tarjetas como en la parte 2. Haz una pregunta para cada tarjeta. Luego responde tú mismo.)~~',
+      punkte: [
+        'Karte „Essen: Abendessen“',
+        'Karte „Freizeit: Wochenende“',
+        'Karte „Wohnen: Stadt“',
+      ],
+      redemittel: [
+        'Was isst du …? — Ich esse …',
+        'Was machst du …? — Ich …',
+        'Wo wohnst du? — Ich wohne in …',
+        'Hast du …? — Ja, … / Nein, …',
+      ],
+      maxSekunden: 45,
+      beispielLoesung: 'Was isst du zum Abendessen? — Ich esse Brot und trinke Tee. Was machst du am Wochenende? — Am Wochenende spiele ich Fußball. Wo wohnst du? — Ich wohne in Leipzig.',
     },
   ],
 }

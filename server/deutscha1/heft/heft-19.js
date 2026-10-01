@@ -83,6 +83,19 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Hör die Durchsage am Bahnhof. Was ist richtig? ~~(Escucha el aviso de megafonía en la estación. ¿Qué es correcto?)~~',
+      audio: {
+        transcript: 'Achtung am Gleis vier! Der Zug nach Leipzig, Abfahrt vierzehn Uhr dreißig, hat heute circa fünfundzwanzig Minuten Verspätung. Der Zug fährt heute von Gleis neun ab, nicht von Gleis vier. Wir bitten um Entschuldigung.',
+      },
+      items: [
+        { typ: 'rf', aussage: 'Der Zug fährt nach Leipzig.', loesung: true },
+        { typ: 'mc', frage: 'Der Zug fährt heute von Gleis … ab.', optionen: ['4', '9', '14'], loesung: 1 },
+        { typ: 'rf', aussage: 'Der Zug hat 52 Minuten Verspätung.', loesung: false },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -95,6 +108,16 @@ export default {
       ],
       minWoerter: 15,
       beispielLoesung: 'Hallo Eva, ich bin am Bahnhof. Mein Zug hat 20 Minuten Verspätung. Ich komme um halb sieben. Bis später!',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Mach eine Durchsage. Sprich 40 Sekunden. ~~(Haz un aviso por megafonía. Habla 40 segundos.)~~',
+      aufgabe: 'Du arbeitest im Supermarkt. Sprich eine Durchsage für die Kunden. ~~(Trabajas en el supermercado. Di un aviso para los clientes.)~~',
+      punkte: ['ein Angebot', 'der Preis', 'geöffnet bis … Uhr'],
+      redemittel: ['Liebe Kundinnen und Kunden!', 'Heute im Angebot: …', 'Das Kilo kostet nur …', 'Wir haben heute bis … Uhr geöffnet.'],
+      maxSekunden: 40,
+      beispielLoesung: 'Liebe Kundinnen und Kunden! Heute im Angebot: Bananen. Das Kilo kostet nur zwei Euro zwanzig. An der Kasse haben wir Schokolade für drei Euro. Wir haben heute bis einundzwanzig Uhr geöffnet. Vielen Dank!',
     },
   ],
 }

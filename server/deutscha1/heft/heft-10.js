@@ -68,6 +68,19 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Hör die Nachricht. Was ist richtig? ~~(Escucha el mensaje. ¿Qué es correcto?)~~',
+      audio: {
+        transcript: 'Hallo Paula, hier ist Markus. Ich bin im Café am Park. Ich arbeite heute nicht und habe Zeit. Kommst du auch? Das Café ist nicht teuer. Ein Tee kostet nur zwei Euro. Es gibt leider keinen Salat, aber das Brot ist sehr gut. Ich habe aber ein Problem. Ich habe kein Geld. Hast du zehn Euro?',
+      },
+      items: [
+        { typ: 'rf', aussage: 'Markus hat heute Zeit.', loesung: true },
+        { typ: 'mc', frage: 'Was kostet ein Tee?', optionen: ['zwei Euro', 'zehn Euro', 'zwölf Euro'], loesung: 0 },
+        { typ: 'rf', aussage: 'Im Café gibt es Salat.', loesung: false },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'formular',
       titel: 'Schreiben',
@@ -80,6 +93,16 @@ export default {
         { id: 'stadt', label: 'Stadt jetzt', erwartet: ['Köln'] },
         { id: 'email', label: 'E-Mail', erwartet: ['marta.ruiz@post.de'] },
       ],
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Sprich 30 Sekunden. ~~(Habla 30 segundos.)~~',
+      aufgabe: 'Was hast du nicht? Was machst du nicht? Sag vier Sätze mit kein oder nicht. ~~(¿Qué no tienes? ¿Qué no haces? Di cuatro frases con kein o nicht.)~~',
+      punkte: ['Auto, Hund oder Katze', 'Zeit oder Geld', 'Kaffee oder Tee', 'arbeiten am Sonntag'],
+      redemittel: ['Ich habe kein …', 'Ich habe keine …', 'Ich trinke keinen …', 'Ich … nicht.'],
+      maxSekunden: 30,
+      beispielLoesung: 'Ich habe kein Auto und ich habe keinen Hund. Heute habe ich leider keine Zeit. Ich trinke keinen Kaffee. Und am Sonntag arbeite ich nicht.',
     },
   ],
 }

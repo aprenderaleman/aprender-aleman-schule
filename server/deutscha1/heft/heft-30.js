@@ -85,6 +85,24 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Hör das Gespräch im Büro. Was ist richtig? ~~(Escucha la conversación en la oficina. ¿Qué es correcto?)~~',
+      audio: {
+        transcript: 'Frau: Guten Tag! Wie ist Ihr Familienname, bitte?\nMann: Molina. Mein Vorname ist Javier.\nFrau: Wie ist Ihre Adresse, Herr Molina?\nMann: Bergstraße siebzehn in Kassel.\nFrau: Bergstraße siebzig?\nMann: Nein, siebzehn. Eins, sieben.\nFrau: Danke. Sind Sie verheiratet?\nMann: Ja, ich bin verheiratet und habe zwei Kinder.',
+      },
+      items: [
+        { typ: 'rf', aussage: 'Der Vorname ist Molina.', loesung: false },
+        {
+          typ: 'mc',
+          frage: 'Wie ist die Adresse?',
+          optionen: ['Bergstraße 17', 'Bergstraße 70', 'Bergstraße 7'],
+          loesung: 0,
+        },
+        { typ: 'rf', aussage: 'Herr Molina hat zwei Kinder.', loesung: true },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'formular',
       titel: 'Schreiben',
@@ -97,6 +115,25 @@ export default {
         { id: 'wohnort', label: 'Wohnort', erwartet: ['Bremen'] },
         { id: 'strasse', label: 'Straße', erwartet: ['Hafenstraße 20', 'Hafenstraße'] },
       ],
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Stell deine Familie vor. Sprich 45 Sekunden. ~~(Presenta a tu familia. Habla 45 segundos.)~~',
+      aufgabe: 'Sprich über deine Familie. Sag vier oder fünf Sätze. ~~(Habla de tu familia. Di cuatro o cinco frases.)~~',
+      punkte: [
+        'deine Eltern: Namen und Wohnort',
+        'dein Bruder oder deine Schwester',
+        'du: verheiratet oder ledig? Kinder?',
+      ],
+      redemittel: [
+        'Mein Vater heißt … Meine Mutter heißt …',
+        'Meine Eltern wohnen in …',
+        'Ich habe einen Bruder / eine Schwester.',
+        'Ich bin verheiratet / ledig.',
+      ],
+      maxSekunden: 45,
+      beispielLoesung: 'Das ist meine Familie. Mein Vater heißt Jorge und meine Mutter heißt Elena. Meine Eltern wohnen in Quito. Ich habe einen Bruder und eine Schwester. Mein Bruder heißt Andrés. Ich bin ledig und habe keine Kinder.',
     },
   ],
 }

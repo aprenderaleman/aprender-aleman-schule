@@ -68,6 +68,19 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Hör das Gespräch. Was ist richtig? ~~(Escucha la conversación. ¿Qué es correcto?)~~',
+      audio: {
+        transcript: 'Mann: Hallo Nina, hier ist Tom. Danke für die Karte aus Wien!\nFrau: Gern, Tom! Am Samstag habe ich Geburtstag. Ich mache eine Party. Kommst du?\nMann: Am Samstag kann ich leider nicht kommen. Ich besuche meine Eltern in Bremen.\nFrau: Dann komm am Sonntag! Wir trinken Kaffee. Um 15 Uhr?\nMann: Lieber um 16 Uhr.\nFrau: Gut, um 16 Uhr. Bis Sonntag!',
+      },
+      items: [
+        { typ: 'rf', aussage: 'Tom kommt am Samstag zu Nina.', loesung: false },
+        { typ: 'mc', frage: 'Was macht Tom am Samstag?', optionen: ['Er besucht seine Eltern.', 'Er ist krank.', 'Er schreibt eine Karte.'], loesung: 0 },
+        { typ: 'mc', frage: 'Wann treffen sich Nina und Tom am Sonntag?', optionen: ['um 15 Uhr', 'um 16 Uhr', 'um 6 Uhr'], loesung: 1 },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -80,6 +93,16 @@ export default {
       ],
       minWoerter: 20,
       beispielLoesung: 'Lieber Pablo,\nich mache einen Deutschkurs in Hamburg. Der Kurs ist super und die Stadt ist sehr schön. Möchtest du mich im Sommer besuchen?\nViele Grüße\nAna',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Sprich 30 Sekunden. ~~(Habla 30 segundos.)~~',
+      aufgabe: 'Du bist krank. Sprich eine Nachricht für deine Lehrerin, Frau Weber. ~~(Estás enfermo/a. Deja un mensaje de voz a tu profesora, la señora Weber.)~~',
+      punkte: ['Du kannst heute nicht kommen.', 'Warum nicht?', 'Frag: Was sind die Hausaufgaben?'],
+      redemittel: ['Guten Tag, Frau Weber, hier ist …', 'Ich kann heute leider nicht …', 'Ich bin …', 'Was sind …?'],
+      maxSekunden: 30,
+      beispielLoesung: 'Guten Tag, Frau Weber, hier ist Ana López. Ich kann heute leider nicht zum Kurs kommen. Ich bin krank. Was sind die Hausaufgaben? Vielen Dank und auf Wiederhören!',
     },
   ],
 }

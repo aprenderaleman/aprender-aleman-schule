@@ -79,6 +79,19 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Hör die Nachricht. Was ist richtig? ~~(Escucha el mensaje. ¿Qué es correcto?)~~',
+      audio: {
+        transcript: 'Guten Tag, Frau Molina. Hier ist das Hotel am Park in Kiel. Sie möchten ein Einzelzimmer reservieren. Leider ist kein Einzelzimmer frei. Wir haben aber ein Doppelzimmer. Es kostet 75 Euro. Ihre Ankunft ist am Freitag, Ihre Abreise am Montag. Passt das? Bitte rufen Sie uns an. Vielen Dank und auf Wiederhören!',
+      },
+      items: [
+        { typ: 'rf', aussage: 'Das Hotel hat ein Einzelzimmer für Frau Molina.', loesung: false },
+        { typ: 'mc', frage: 'Wie viel kostet das Doppelzimmer?', optionen: ['57 Euro', '70 Euro', '75 Euro'], loesung: 2 },
+        { typ: 'rf', aussage: 'Die Abreise ist am Montag.', loesung: true },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'formular',
       titel: 'Schreiben',
@@ -91,6 +104,16 @@ export default {
         { id: 'ankunft', label: 'Ankunft', erwartet: ['03.08.', '03.08', '3.8.'] },
         { id: 'zimmer', label: 'Zimmer', erwartet: ['Einzelzimmer', 'ein Einzelzimmer'] },
       ],
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Sprich 40 Sekunden. ~~(Habla 40 segundos.)~~',
+      aufgabe: 'Du machst Urlaub in Wien. Du möchtest ein Zimmer reservieren. Sprich eine Nachricht für das Hotel. ~~(Vas de vacaciones a Viena. Quieres reservar una habitación. Deja un mensaje de voz al hotel.)~~',
+      punkte: ['dein Name', 'Einzelzimmer oder Doppelzimmer?', 'Ankunft und Abreise', 'deine Telefonnummer'],
+      redemittel: ['Mein Name ist …', 'Ich möchte ein … reservieren.', 'Die Ankunft ist am …, die Abreise ist am …', 'Meine Telefonnummer ist …'],
+      maxSekunden: 40,
+      beispielLoesung: 'Guten Tag! Mein Name ist Laura Pérez. Ich möchte ein Einzelzimmer reservieren. Die Ankunft ist am Freitag, die Abreise ist am Sonntag. Meine Telefonnummer ist 0176 33 44 55. Vielen Dank und auf Wiederhören!',
     },
   ],
 }

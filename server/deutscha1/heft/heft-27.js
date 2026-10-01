@@ -79,6 +79,24 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Hör die Nachricht am Telefon. Was ist richtig? ~~(Escucha el mensaje de teléfono. ¿Qué es correcto?)~~',
+      audio: {
+        transcript: 'Guten Tag! Mein Name ist Elena Ruiz. Ich buchstabiere Ruiz, das ist R, U, I, Z. Ich bin 31 Jahre alt und komme aus Bolivien. Ich wohne jetzt in Graz. Ich bin Köchin von Beruf. Ich lerne Deutsch für die Arbeit. Meine Telefonnummer ist null sechs sechs vier, drei zwei, eins sieben. Vielen Dank!',
+      },
+      items: [
+        { typ: 'rf', aussage: 'Elena kommt aus Bolivien.', loesung: true },
+        { typ: 'rf', aussage: 'Elena ist 41 Jahre alt.', loesung: false },
+        {
+          typ: 'mc',
+          frage: 'Wie ist die Telefonnummer von Elena?',
+          optionen: ['0664 23 17', '0664 32 71', '0664 32 17'],
+          loesung: 2,
+        },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -91,6 +109,26 @@ export default {
       ],
       minWoerter: 20,
       beispielLoesung: 'Ich heiße Marta Silva. Ich bin 30 Jahre alt und komme aus Ecuador. Ich wohne in Berlin. Ich spreche Spanisch und ein bisschen Deutsch. Ich bin Verkäuferin von Beruf. Mein Hobby ist Musik.',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Erzähl von dir. Sprich 45 Sekunden. ~~(Habla de ti. Habla 45 segundos.)~~',
+      aufgabe: 'Stell dich vor wie in Teil 1. Buchstabiere dann deinen Namen. Sag auch deine Telefonnummer. ~~(Preséntate como en la parte 1. Después deletrea tu nombre. Di también tu número de teléfono.)~~',
+      punkte: [
+        'Name, Alter, Land und Wohnort',
+        'Sprachen, Beruf und Hobby',
+        'dein Name: Buchstabe für Buchstabe',
+        'deine Telefonnummer: Zahl für Zahl',
+      ],
+      redemittel: [
+        'Ich heiße … Ich bin … Jahre alt.',
+        'Ich komme aus … Ich wohne in …',
+        'Ich spreche … Ich bin … von Beruf.',
+        'Mein Hobby ist … Meine Telefonnummer ist …',
+      ],
+      maxSekunden: 45,
+      beispielLoesung: 'Ich heiße Daniel Mora. Ich bin 27 Jahre alt. Ich komme aus Costa Rica und wohne in Hamburg. Ich spreche Spanisch und ein bisschen Deutsch. Ich bin Koch von Beruf. Mein Hobby ist Fußball. Mein Name ist Mora: M – O – R – A. Meine Telefonnummer ist null vier null, fünf fünf, zwei eins.',
     },
   ],
 }
