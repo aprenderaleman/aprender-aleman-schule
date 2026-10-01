@@ -26,6 +26,11 @@ function shuffled(arr, seed) {
 const sinPunkt = s => norm(String(s).replace(/[.?!,]/g, ''))
 const satzOk = (item, built) => [item.loesung, ...(item.alt || [])].some(l => sinPunkt(l) === sinPunkt(built))
 
+// Consigna que recibe el corrector de IA: sin las glosas españolas ~~(…)~~
+// ni las marcas de formato, que son ayudas visuales para el alumno.
+const plain = t => String(t || '').replace(/~~[^~]*~~/g, '').replace(/\*\*|__|==/g, '').replace(/\s+/g, ' ').trim()
+const aufgabeText = teil => plain(teil.aufgabe) + (teil.punkte?.length ? '\n\nPunkte:\n' + teil.punkte.map(p => `- ${plain(p)}`).join('\n') : '')
+
 // ─── ítems ───────────────────────────────────────────────────────────
 
 function ItemMC({ item, value, onChange, checked, seed }) {
@@ -397,7 +402,7 @@ function TeilSprechen({ teil, level, gl }) {
         body: JSON.stringify({
           level,
           taskType: 'Übungsheft',
-          taskPrompt: teil.aufgabe + (teil.punkte ? '\n\nPunkte:\n' + teil.punkte.map(p => `- ${p}`).join('\n') : ''),
+          taskPrompt: aufgabeText(teil),
           transcript: transcript.trim(),
           durationSeconds: durationRef.current,
         }),
@@ -556,7 +561,7 @@ function TeilSchreibenText({ teil, level }) {
         body: JSON.stringify({
           level,
           taskType: 'Übungsheft',
-          taskPrompt: teil.aufgabe + (teil.punkte ? '\n\nPunkte:\n' + teil.punkte.map(p => `- ${p}`).join('\n') : ''),
+          taskPrompt: aufgabeText(teil),
           submission: text.trim(),
           minWords: teil.minWoerter,
         }),
