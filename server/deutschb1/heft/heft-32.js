@@ -80,6 +80,30 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Du hörst eine kurze Präsentation im Deutschkurs. Löse die Aufgaben.',
+      audio: {
+        transcript: 'Ich möchte heute über das Thema Haustiere sprechen. Das Thema finde ich interessant, weil ich selbst seit vier Jahren einen Hund habe. Eigentlich wollte ich am Anfang eine Katze, aber meine Kinder haben sich einen Hund gewünscht. Ich habe damit gute Erfahrungen gemacht. Ich gehe jeden Morgen eine halbe Stunde mit ihm spazieren und bin deshalb viel fitter als früher. In meinem Heimatland Peru haben viele Familien einen Hund. Die Tiere leben dort aber meistens draußen im Hof und nicht in der Wohnung. Ein Vorteil ist, dass man mit einem Haustier nie allein ist. Ein Nachteil ist, dass man nicht mehr einfach in den Urlaub fahren kann. Meiner Meinung nach ist ein Haustier etwas Schönes, aber man braucht viel Zeit dafür. Das war meine Präsentation. Danke fürs Zuhören!',
+      },
+      items: [
+        {
+          typ: 'mc',
+          frage: 'Wie lange hat die Person schon einen Hund?',
+          optionen: ['seit einem halben Jahr', 'seit vier Jahren', 'seit vierzehn Jahren'],
+          loesung: 1,
+        },
+        { typ: 'rf', aussage: 'Zuerst wollte die Person lieber eine Katze.', loesung: true },
+        { typ: 'rf', aussage: 'In Peru leben die meisten Hunde in der Wohnung.', loesung: false },
+        {
+          typ: 'mc',
+          frage: 'Welchen Nachteil nennt die Person?',
+          optionen: ['Ein Hund kostet viel Geld.', 'Man hat morgens keine Zeit mehr.', 'Man kann nicht mehr so leicht in den Urlaub fahren.'],
+          loesung: 2,
+        },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'formular',
       titel: 'Schreiben',
@@ -92,6 +116,28 @@ export default {
         { id: 'thema', label: 'Thema der Präsentation', erwartet: ['Mit dem Fahrrad durch die Stadt', '„Mit dem Fahrrad durch die Stadt“', 'Fahrrad fahren in der Stadt', 'mit dem Fahrrad durch die Stadt'] },
         { id: 'technik', label: 'Technik für die Präsentation', erwartet: ['Beamer', 'einen Beamer', 'ein Beamer'] },
       ],
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Halte eine kurze Präsentation wie in der Prüfung. Sprich etwa 90 Sekunden.',
+      aufgabe: 'Halte eine kurze Präsentation zum Thema „Musik im Alltag“, wie im zweiten Teil der mündlichen Prüfung. Folge den fünf Schritten: Einleitung, Erfahrungen, Heimatland, Meinung, Schluss.',
+      punkte: [
+        'Einleitung: Nenn dein Thema.',
+        'Erzähl von deinen Erfahrungen und gib ein Beispiel.',
+        'Situation in deinem Heimatland: ein Vorteil und ein Nachteil.',
+        'Sag deine Meinung und beende die Präsentation.',
+      ],
+      redemittel: [
+        'Ich möchte heute über das Thema „…“ sprechen.',
+        'Ich habe damit gute Erfahrungen gemacht. Zum Beispiel …',
+        'In meinem Heimatland ist das so: …',
+        'Ein Vorteil ist, dass … / Ein Nachteil ist, dass …',
+        'Meiner Meinung nach ist …',
+        'Das war meine Präsentation. Danke fürs Zuhören!',
+      ],
+      maxSekunden: 90,
+      beispielLoesung: 'Ich möchte heute über das Thema „Musik im Alltag“ sprechen. Das Thema finde ich interessant, weil ich fast den ganzen Tag Musik höre. Ich habe damit gute Erfahrungen gemacht. Zum Beispiel höre ich morgens im Bus immer Musik, dann bin ich wacher und habe bessere Laune. Beim Lernen höre ich aber nur ruhige Musik ohne Text. In meinem Heimatland Kolumbien ist Musik sehr wichtig. Man hört sie überall, im Bus, im Supermarkt und auf der Straße. Ein Vorteil ist, dass die Leute oft fröhlich sind und zusammen tanzen. Ein Nachteil ist, dass es manchmal sehr laut ist und die Nachbarn nicht schlafen können. Meiner Meinung nach ist Musik gut für die Stimmung, aber jeder sollte auch an die anderen denken. Das war meine Präsentation. Danke fürs Zuhören!',
     },
   ],
 }

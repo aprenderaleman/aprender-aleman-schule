@@ -75,6 +75,30 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Du bist bei einer Wohnungsbesichtigung. Hör zu und löse die Aufgaben.',
+      audio: {
+        transcript: 'Guten Tag, kommen Sie bitte herein! Die Wohnung liegt im dritten Stock, einen Aufzug gibt es leider nicht. Hier links ist das Wohnzimmer. Es ist sehr hell, weil es zwei große Fenster hat. Der Schrank im Flur bleibt in der Wohnung, die anderen Möbel nimmt der alte Mieter mit. Die Küche ist klein, aber neu. Einen Balkon hat die Wohnung nicht. Dafür dürfen alle Mieter den Garten hinter dem Haus benutzen. Nun zur Miete. Die Kaltmiete ist sechshundertzwanzig Euro, dazu kommen hundertfünfzig Euro Nebenkosten. Die Kaution ist zwei Kaltmieten. Laut Hausordnung ist ab zweiundzwanzig Uhr Ruhezeit, am Sonntag den ganzen Tag. Frei ist die Wohnung nicht ab dem ersten Mai, sondern erst ab dem fünfzehnten. Haben Sie noch Fragen?',
+      },
+      items: [
+        {
+          typ: 'mc',
+          frage: 'Welche Möbel bleiben in der Wohnung?',
+          optionen: ['alle Möbel im Wohnzimmer', 'keine Möbel', 'nur der Schrank im Flur'],
+          loesung: 2,
+        },
+        { typ: 'rf', aussage: 'Die Mieter dürfen den Garten benutzen.', loesung: true },
+        {
+          typ: 'mc',
+          frage: 'Wie hoch ist die Miete ohne Nebenkosten?',
+          optionen: ['150 Euro', '620 Euro', '770 Euro'],
+          loesung: 1,
+        },
+        { typ: 'rf', aussage: 'Die Wohnung ist ab dem ersten Mai frei.', loesung: false },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -87,6 +111,20 @@ export default {
       ],
       minWoerter: 40,
       beispielLoesung: 'Lieber Jonas,\nich habe endlich eine neue Wohnung gefunden! Am 15. Mai ziehe ich nach Lindenau um. Die Wohnung hat drei Zimmer, eine große Küche und einen Balkon. Leider liegt sie im dritten Stock, und es gibt keinen Aufzug. Kannst du mir am Samstag beim Tragen helfen? Wir müssen auch den Schrank im Schlafzimmer aufbauen. Danach gibt es natürlich Pizza für alle!\nLiebe Grüße\nFatima',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Sag deine Meinung zu einem Vorschlag. Sprich etwa 75 Sekunden.',
+      aufgabe: 'In deinem Haus soll die Ruhezeit schon um 20 Uhr beginnen. Bisher beginnt sie um 22 Uhr. Sag den Nachbarn deine Meinung dazu.',
+      punkte: [
+        'Bist du für oder gegen den Vorschlag?',
+        'Nenn zwei Gründe für deine Meinung.',
+        'Mach am Ende einen eigenen Vorschlag.',
+      ],
+      redemittel: ['Ich bin für / gegen den Vorschlag, weil …', 'Ein Nachteil ist, dass …', 'Meiner Meinung nach ist …', 'Ich schlage vor, dass …'],
+      maxSekunden: 75,
+      beispielLoesung: 'Guten Abend, ich möchte kurz etwas zu dem Vorschlag sagen. Ehrlich gesagt bin ich gegen eine Ruhezeit ab 20 Uhr. Ich verstehe, dass Familien mit kleinen Kindern abends Ruhe brauchen. Aber viele von uns arbeiten bis sechs oder sieben Uhr. Wenn ich nach Hause komme, muss ich noch kochen, aufräumen und manchmal die Wäsche waschen. Das geht nicht ganz leise. Ein Nachteil ist auch, dass man abends keinen Besuch mehr einladen kann. Meiner Meinung nach ist 20 Uhr einfach zu früh. Ich schlage vor, dass die Ruhezeit bei 22 Uhr bleibt. Aber wir könnten alle versprechen, dass wir nach acht keine laute Musik mehr hören. Dann sind hoffentlich alle zufrieden.',
     },
   ],
 }

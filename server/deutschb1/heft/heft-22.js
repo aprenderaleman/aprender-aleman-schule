@@ -101,6 +101,30 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Hör das Gespräch im Treppenhaus. Löse dann die vier Aufgaben.',
+      audio: {
+        transcript: 'Frau: Hallo, Herr Petrov! Haben Sie den neuen Aushang im Treppenhaus schon gelesen?\nMann: Nein, noch nicht. Was steht denn da, Frau Lang?\nFrau: Die Verwaltung hat die Hausordnung geändert. Fahrräder sind im Treppenhaus nicht mehr gestattet. Da steht: Sie sind bis Ende des Monats in den Keller zu bringen.\nMann: Schade, mein Rad steht immer vor meiner Tür. Und was ist mit dem Grillen?\nFrau: Grillen auf dem Balkon bleibt verboten. Im Hof ist es aber erlaubt, allerdings nur bis zweiundzwanzig Uhr.\nMann: Aha. Brauche ich für den Keller einen Schlüssel?\nFrau: Ja. Dafür müssen Sie ein Formular ausfüllen. Sie bezahlen keine Gebühr, sondern nur zehn Euro Pfand.\nMann: Und an wen wende ich mich?\nFrau: An den Hausmeister, nicht an die Verwaltung. Er ist dienstags im Büro.',
+      },
+      items: [
+        { typ: 'rf', aussage: 'Fahrräder dürfen weiter im Treppenhaus stehen.', loesung: false },
+        {
+          typ: 'mc',
+          frage: 'Wo dürfen die Bewohner grillen?',
+          optionen: ['auf dem Balkon', 'im Hof, aber nur bis 22 Uhr', 'nirgends im Haus'],
+          loesung: 1,
+        },
+        { typ: 'rf', aussage: 'Für den Kellerschlüssel ist ein Formular auszufüllen.', loesung: true },
+        {
+          typ: 'mc',
+          frage: 'An wen soll sich Herr Petrov wenden?',
+          optionen: ['an die Verwaltung', 'an Frau Lang', 'an den Hausmeister'],
+          loesung: 2,
+        },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'formular',
       titel: 'Schreiben',
@@ -113,6 +137,20 @@ export default {
         { id: 'wunschtermin', label: 'Wunschtermin', erwartet: ['Dienstagvormittag', 'am Dienstagvormittag', 'Dienstag vormittags', 'Dienstag Vormittag', 'Dienstag vormittag'] },
         { id: 'telefon', label: 'Telefon', erwartet: ['0176 / 44 55 66', '0176 445566', '0176/445566', '0176 44 55 66', '0176/44 55 66', '0176445566'] },
       ],
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Sprich etwa 75 Sekunden. Erklär die Regeln klar und freundlich.',
+      aufgabe: 'Eine neue Nachbarin ist in dein Haus gezogen. Erklär ihr die wichtigsten Regeln im Haus.',
+      punkte: [
+        'Was ist im Haus verboten?',
+        'Was ist erlaubt, aber nur zu bestimmten Zeiten?',
+        'An wen kann sie sich bei Problemen wenden?',
+      ],
+      redemittel: ['Bei uns ist … verboten.', 'Man darf …, aber nur bis …', 'Bitte beachte, dass …', 'Bei Problemen wendest du dich an …'],
+      maxSekunden: 75,
+      beispielLoesung: 'Hallo, herzlich willkommen im Haus! Ich erkläre dir kurz die wichtigsten Regeln. Rauchen ist im Treppenhaus verboten, und man darf dort auch keine Fahrräder abstellen. Die Fahrräder kommen in den Keller. Musik hören und feiern ist natürlich erlaubt, aber nur bis zehn Uhr abends. Danach muss es ruhig sein, weil viele Nachbarn früh aufstehen. Bitte beachte auch, dass wir den Müll trennen: Für Papier, Glas und Bio gibt es eigene Tonnen im Hof. Wenn etwas kaputt ist, wendest du dich am besten an den Hausmeister, Herrn Yilmaz. Seine Nummer steht auf dem Aushang im Erdgeschoss. Und wenn du Fragen hast, klingel einfach bei mir!',
     },
   ],
 }

@@ -74,6 +74,30 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Nina und Paul planen ihren Urlaub. Hör die Diskussion und löse die vier Aufgaben.',
+      audio: {
+        transcript: 'Frau: Schau mal, Paul, ich habe zwei Angebote für unseren Urlaub gefunden: ein Hotel am Meer und eine Ferienwohnung in den Bergen.\nMann: Was ist denn billiger, Nina?\nFrau: Die Ferienwohnung. Sie kostet siebzig Euro pro Nacht, das Hotel neunzig. Aber im Hotel ist das Frühstück schon dabei.\nMann: Hm. Ich finde, die Wohnung ist trotzdem die bessere Wahl. Sie ist größer, und wir können selbst kochen.\nFrau: Stimmt, aber am Meer ist das Wetter wärmer. Und je wärmer es ist, desto besser kann ich mich erholen.\nMann: In den Bergen ist es aber ruhiger. Im Sommer wird es am Meer immer voller.\nFrau: Das ist wahr. Und was machen wir im Urlaub am liebsten? Wandern!\nMann: Genau. Das Wichtigste ist für mich die Ruhe.\nFrau: Also gut, dann buche ich die Ferienwohnung.',
+      },
+      items: [
+        {
+          typ: 'mc',
+          frage: 'Was kostet das Hotel pro Nacht?',
+          optionen: ['70 Euro', '79 Euro', '90 Euro'],
+          loesung: 2,
+        },
+        { typ: 'rf', aussage: 'In der Ferienwohnung ist das Frühstück im Preis dabei.', loesung: false },
+        { typ: 'rf', aussage: 'Paul findet es in den Bergen ruhiger als am Meer.', loesung: true },
+        {
+          typ: 'mc',
+          frage: 'Wofür entscheiden sich Nina und Paul am Ende?',
+          optionen: ['für das Hotel am Meer', 'für die Ferienwohnung in den Bergen', 'für einen Urlaub zu Hause'],
+          loesung: 1,
+        },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -86,6 +110,20 @@ export default {
       ],
       minWoerter: 40,
       beispielLoesung: 'Ich finde, in der Stadt ist das Fahrrad die bessere Wahl. Mit dem Rad bin ich oft schneller als mit dem Auto, weil ich nicht im Stau stehe. Außerdem ist es viel billiger. Je mehr Leute Rad fahren, desto sauberer wird die Luft. Das Wichtigste ist für mich aber, dass ich jeden Tag ein bisschen Sport mache. Viele Grüße, Daniel',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Vergleiche und sag deine Meinung. Sprich ungefähr 75 Sekunden.',
+      aufgabe: 'Online einkaufen oder im Geschäft: Was findest du besser? Vergleiche beide Möglichkeiten.',
+      punkte: [
+        'Vergleiche Preis, Zeit und Auswahl.',
+        'Erzähl von einer eigenen Erfahrung.',
+        'Sag am Ende: Was ist für dich das Wichtigste?',
+      ],
+      redemittel: ['… ist billiger / bequemer als …', 'Je teurer …, desto …', 'Am liebsten kaufe ich …', 'Das Wichtigste ist für mich …'],
+      maxSekunden: 75,
+      beispielLoesung: 'Ich kaufe lieber online ein als im Geschäft. Online ist die Auswahl größer, und die Preise sind oft niedriger. Außerdem ist es bequemer, weil ich nicht in die Stadt fahren muss. Aber es gibt auch Nachteile: Im Geschäft kann ich die Sachen sofort mitnehmen, online muss ich länger warten. Letzten Monat habe ich Schuhe bestellt, und sie waren zu klein. Im Geschäft passiert mir das nicht. Je teurer ein Produkt ist, desto lieber gehe ich ins Geschäft. Das Wichtigste ist für mich aber die Zeit. Deshalb kaufe ich die meisten Sachen online.',
     },
   ],
 }

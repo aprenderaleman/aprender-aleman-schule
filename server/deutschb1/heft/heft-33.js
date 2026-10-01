@@ -75,6 +75,30 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Du hörst ein Gespräch nach Tareks Präsentation im Deutschkurs. Löse die Aufgaben.',
+      audio: {
+        transcript: 'Frau: Danke für deine Präsentation, Tarek! Das war ein spannendes Thema. Mir hat gefallen, dass du so ehrlich von deinen Problemen am Anfang erzählt hast.\nMann: Danke, Olga. Das freut mich.\nFrau: Ich habe eine Frage. Du hast gesagt, dass du jeden Abend eine Serie auf Deutsch siehst. Wie lange machst du das schon?\nMann: Seit einem halben Jahr. Aber ehrlich gesagt nicht jeden Abend, sondern nur drei- oder viermal pro Woche.\nFrau: Und siehst du die Serien mit Untertiteln?\nMann: Ja, aber mit deutschen. Am Anfang habe ich arabische Untertitel benutzt, das hat mir aber nicht geholfen.\nFrau: Kannst du mir eine Serie empfehlen?\nMann: Das ist eine gute Frage. Den Titel weiß ich nicht mehr genau, aber ich schreibe ihn dir morgen nach dem Kurs auf.\nFrau: Super, danke!',
+      },
+      items: [
+        {
+          typ: 'mc',
+          frage: 'Was hat Olga an der Präsentation gefallen?',
+          optionen: ['Tarek hat viele Beispiele genannt.', 'Tarek hat sehr deutlich gesprochen.', 'Tarek hat ehrlich von seinen Problemen erzählt.'],
+          loesung: 2,
+        },
+        { typ: 'rf', aussage: 'Tarek sieht jeden Abend eine Serie auf Deutsch.', loesung: false },
+        {
+          typ: 'mc',
+          frage: 'Welche Untertitel benutzt Tarek jetzt?',
+          optionen: ['deutsche', 'arabische', 'keine'],
+          loesung: 0,
+        },
+        { typ: 'rf', aussage: 'Tarek will Olga den Titel der Serie später aufschreiben.', loesung: true },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -87,6 +111,20 @@ export default {
       ],
       minWoerter: 40,
       beispielLoesung: 'Lieber Samuel,\nvielen Dank für deine Präsentation, das war ein spannendes Thema! Mir hat besonders gefallen, dass du von deinem Alltag erzählt hast. Das Beispiel mit dem Fahrrad war sehr gut. Ich habe noch eine Frage: Fährst du auch im Winter jeden Tag mit dem Fahrrad zur Arbeit?\nViele Grüße\nAna',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Antworte auf zwei Fragen zu deiner Präsentation. Sprich etwa eine Minute.',
+      aufgabe: 'Du hast über „Das Handy im Alltag“ präsentiert. Jetzt stellt dir die Prüferin zwei Fragen. Beantworte beide.',
+      punkte: [
+        'Bedank dich zuerst für die Fragen.',
+        'Frage 1: „Wie viele Stunden am Tag benutzen Sie Ihr Handy?“',
+        'Frage 2: „Sollten Kinder schon ein eigenes Handy haben? Warum?“',
+      ],
+      redemittel: ['Danke für die Frage!', 'Das ist eine gute Frage. Ich denke, …', 'Ehrlich gesagt …', 'Das weiß ich nicht genau, aber ich glaube, …'],
+      maxSekunden: 60,
+      beispielLoesung: 'Danke für die Fragen! Zur ersten Frage: Ehrlich gesagt benutze ich mein Handy ziemlich viel. Das weiß ich nicht genau, aber ich glaube, es sind drei oder vier Stunden am Tag. Morgens lese ich Nachrichten, und abends schreibe ich mit meiner Familie. Die zweite Frage ist eine gute Frage. Ich denke, kleine Kinder brauchen noch kein eigenes Handy, weil sie lieber draußen spielen sollten. Aber mit zwölf Jahren ist ein Handy praktisch, zum Beispiel wenn das Kind allein zur Schule fährt. Dann können die Eltern anrufen. Wichtig ist, dass es feste Zeiten ohne Handy gibt.',
     },
   ],
 }

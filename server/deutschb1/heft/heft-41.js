@@ -95,6 +95,30 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Hör den Wetterbericht im Radio. Löse dann die vier Aufgaben.',
+      audio: {
+        transcript: 'Und jetzt das Wetter für das Wochenende. Am Samstag regnet es am Vormittag noch im ganzen Land. Erst am Nachmittag kommt im Süden die Sonne heraus, im Norden bleibt es den ganzen Tag nass und windig. Die Temperaturen liegen bei dreizehn Grad. Der Sonntag wird viel schöner. Dann scheint überall die Sonne, und es wird bis zu neunzehn Grad warm. Das ist der perfekte Tag für einen Ausflug in den Wald oder in die Berge. Aber Vorsicht, ab tausend Metern Höhe liegt noch Schnee, und einige Wanderwege sind gesperrt. Informieren Sie sich also vorher im Internet. Und zum Schluss unser Tipp für die Umwelt. Am Sonntag treffen sich ab zehn Uhr Freiwillige am Stadtsee und sammeln Müll. Wer mitmachen möchte, bekommt dort Handschuhe und Müllsäcke.',
+      },
+      items: [
+        { typ: 'rf', aussage: 'Am Samstagnachmittag scheint im Norden die Sonne.', loesung: false },
+        {
+          typ: 'mc',
+          frage: 'Wie warm wird es am Sonntag?',
+          optionen: ['bis zu 13 Grad', 'bis zu 19 Grad', 'bis zu 9 Grad'],
+          loesung: 1,
+        },
+        {
+          typ: 'mc',
+          frage: 'Warum soll man sich vor einer Wanderung in den Bergen informieren?',
+          optionen: ['Weil es dort am Sonntag regnet.', 'Weil viele Wege zu voll sind.', 'Weil manche Wege gesperrt sind.'],
+          loesung: 2,
+        },
+        { typ: 'rf', aussage: 'Bei der Aktion am Stadtsee bekommt man Handschuhe.', loesung: true },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -107,6 +131,20 @@ export default {
       ],
       minWoerter: 40,
       beispielLoesung: 'Liebe Hanna,\nich freue mich sehr auf deinen Besuch! Im Frühling ist das Wetter bei uns meistens schön: Die Sonne scheint, und es ist schon warm, aber nicht zu heiß. Wir könnten einen Ausflug in die Berge machen und dort wandern. Der Wald ist im April besonders grün. Bring bitte gute Schuhe und eine Regenjacke mit, denn manchmal regnet es auch.\nBis bald und liebe Grüße\nLucía',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Sprich über das Thema Umwelt. Du hast 90 Sekunden Zeit.',
+      aufgabe: 'Was tust du im Alltag für die Umwelt? Berichte und gib einen Tipp.',
+      punkte: [
+        'Was machst du schon für die Umwelt?',
+        'Was findest du schwierig?',
+        'Welchen Tipp gibst du anderen?',
+      ],
+      redemittel: ['Ich versuche, … zu …', 'Für mich ist es wichtig, dass …', 'Schwierig finde ich …', 'Mein Tipp ist: …'],
+      maxSekunden: 90,
+      beispielLoesung: 'Ich versuche, im Alltag etwas für die Umwelt zu tun. Zu Hause trenne ich den Müll: Papier, Bioabfall, Verpackungen und Restmüll. Die Pfandflaschen bringe ich jede Woche zurück in den Supermarkt. Außerdem fahre ich fast immer mit dem Fahrrad zur Arbeit, auch wenn es regnet. Schwierig finde ich das Einkaufen, weil im Supermarkt fast alles in Plastik verpackt ist. Das ärgert mich wirklich. Deshalb kaufe ich Obst und Gemüse lieber auf dem Markt und nehme meine eigene Tasche mit. Mein Tipp ist: Fangt mit kleinen Dingen an. Man muss nicht alles perfekt machen, aber jeder kann ein bisschen helfen, die Umwelt zu schützen.',
     },
   ],
 }

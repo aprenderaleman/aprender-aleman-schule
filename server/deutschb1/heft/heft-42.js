@@ -87,6 +87,30 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Du nimmst an einer Stadtführung teil. Hör zu und löse die vier Aufgaben.',
+      audio: {
+        transcript: 'Herzlich willkommen zu unserer Führung durch die Altstadt. Mein Name ist Katrin, und ich begleite Sie heute. Wir stehen hier vor dem alten Rathaus. Es wurde nicht, wie viele denken, im Mittelalter gebaut, sondern erst vor etwa zweihundert Jahren. Der Bürgermeister arbeitet heute woanders, im Gebäude ist jetzt das Stadtmuseum. Gleich gehen wir zusammen weiter zum Marktplatz und danach zur Kirche. Dort können Sie auf den Turm steigen. Das kostet drei Euro, für Kinder nur einen Euro fünfzig. Die Führung dauert insgesamt neunzig Minuten, wir sind also gegen halb fünf wieder hier. Am Ende haben Sie noch Zeit für einen Kaffee am Fluss. Eine Bitte habe ich noch. Bleiben Sie bitte zusammen, denn in den engen Straßen verliert man sich schnell. Haben Sie noch Fragen? Dann gehen wir los.',
+      },
+      items: [
+        {
+          typ: 'mc',
+          frage: 'Wann wurde das alte Rathaus gebaut?',
+          optionen: ['im Mittelalter', 'vor ungefähr 200 Jahren', 'vor ungefähr 20 Jahren'],
+          loesung: 1,
+        },
+        { typ: 'rf', aussage: 'Im alten Rathaus befindet sich heute ein Museum.', loesung: true },
+        {
+          typ: 'mc',
+          frage: 'Was bezahlt ein Erwachsener für den Turm?',
+          optionen: ['3 Euro', '1,50 Euro', '5 Euro'],
+          loesung: 0,
+        },
+        { typ: 'rf', aussage: 'Die Führung dauert eine halbe Stunde.', loesung: false },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'formular',
       titel: 'Schreiben',
@@ -99,6 +123,21 @@ export default {
         { id: 'strasse', label: 'Straße und Hausnummer', erwartet: ['Gartenstraße 14', 'Gartenstr. 14'] },
         { id: 'email', label: 'E-Mail', erwartet: ['o.kovalenko@beispiel.de'] },
       ],
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Halte eine kurze Präsentation wie in der Prüfung. Du hast 90 Sekunden Zeit.',
+      aufgabe: 'Halte eine kurze Präsentation wie im zweiten Teil der mündlichen Prüfung. Dein Thema ist: „Mit dem Fahrrad zur Arbeit — eine gute Idee?“',
+      punkte: [
+        'Stell das Thema vor.',
+        'Erzähl von deinen eigenen Erfahrungen.',
+        'Nenne einen Vorteil und einen Nachteil.',
+        'Sag deine Meinung und bedanke dich.',
+      ],
+      redemittel: ['Ich möchte heute über das Thema … sprechen.', 'Ich selbst habe die Erfahrung gemacht, dass …', 'Ein Vorteil ist … Ein Nachteil ist aber …', 'Vielen Dank fürs Zuhören.'],
+      maxSekunden: 90,
+      beispielLoesung: 'Ich möchte heute über das Thema „Mit dem Fahrrad zur Arbeit“ sprechen. Zuerst erzähle ich von meinen Erfahrungen, dann nenne ich Vor- und Nachteile, und am Ende sage ich meine Meinung. Ich selbst fahre seit zwei Jahren mit dem Rad ins Büro. Früher habe ich den Bus genommen und stand oft im Stau. Ein großer Vorteil ist, dass man sich jeden Tag bewegt. Außerdem ist das Fahrrad billig und gut für die Umwelt. Ein Nachteil ist aber das Wetter: Wenn es regnet oder schneit, macht es wirklich keinen Spaß. Und in manchen Städten gibt es zu wenige Radwege, das ist gefährlich. Ich finde trotzdem, dass das Fahrrad eine sehr gute Idee ist, wenn der Weg nicht zu lang ist. Vielen Dank fürs Zuhören.',
     },
   ],
 }

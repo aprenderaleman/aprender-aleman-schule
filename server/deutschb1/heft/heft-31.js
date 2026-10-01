@@ -75,6 +75,30 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Du hörst ein Gespräch zwischen Jana und Felix. Löse die Aufgaben.',
+      audio: {
+        transcript: 'Frau: Hallo Felix! Unsere Kollegin Marta hat am Wochenende Geburtstag. Wollen wir sie mit einem Ausflug überraschen?\nMann: Gute Idee, Jana! Wie wäre es mit Samstag? Wir könnten an den See fahren.\nFrau: Samstag passt mir leider nicht, da besuche ich meine Eltern. Können wir den Ausflug auf Sonntag verschieben?\nMann: Einverstanden. Aber am See ist es sonntags immer so voll. Vielleicht lieber in die Berge?\nFrau: Ja, Marta wandert sowieso gern. Treffen wir uns um neun am Bahnhof?\nMann: Der Zug fährt schon um zehn vor neun. Sagen wir lieber halb neun, dann haben wir noch Zeit für die Fahrkarten.\nFrau: Gut. Ich kümmere mich um das Picknick. Bringst du die Getränke mit?\nMann: Klar, das mache ich.\nFrau: Super, das ist ein Plan!',
+      },
+      items: [
+        { typ: 'rf', aussage: 'Jana und Felix machen den Ausflug am Samstag.', loesung: false },
+        {
+          typ: 'mc',
+          frage: 'Wohin fahren sie?',
+          optionen: ['an den See', 'in die Berge', 'zu Janas Eltern'],
+          loesung: 1,
+        },
+        {
+          typ: 'mc',
+          frage: 'Wann treffen sie sich am Bahnhof?',
+          optionen: ['um halb neun', 'um zehn vor neun', 'um neun Uhr'],
+          loesung: 0,
+        },
+        { typ: 'rf', aussage: 'Felix bringt die Getränke mit.', loesung: true },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -87,6 +111,21 @@ export default {
       ],
       minWoerter: 40,
       beispielLoesung: 'Liebe Lea,\ndanke für deine Nachricht, das ist eine tolle Idee! Leider kann ich am Samstag nicht, weil ich bis zum Abend arbeiten muss. Wie wäre es mit Sonntag? Wir könnten mit dem Fahrrad an den See fahren. Ich kümmere mich um das Essen und bringe Brote mit. Bringst du die Getränke mit?\nSag mir kurz Bescheid, ob dir Sonntag passt.\nViele Grüße\nPablo',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Stell einen Plan vor. Sprich etwa 75 Sekunden. Du kannst dir vorher Notizen machen.',
+      aufgabe: 'Euer Deutschkurs ist bald zu Ende, und ihr wollt zusammen feiern. Stell der Gruppe deinen Vorschlag vor.',
+      punkte: [
+        'Wann und wo soll die Feier sein? Warum dort?',
+        'Wer bringt was mit?',
+        'Was macht ihr, wenn es regnet?',
+        'Frag die Gruppe am Ende nach ihrer Meinung.',
+      ],
+      redemittel: ['Ich schlage vor, dass …', 'Wir könnten …', 'Wenn es regnet, …', 'Was meint ihr? Passt euch das?'],
+      maxSekunden: 75,
+      beispielLoesung: 'Hallo zusammen! Unser Kurs ist ja bald zu Ende, und ich finde, das müssen wir feiern. Ich schlage vor, dass wir uns am letzten Kurstag, also am Freitag, um sechs im Stadtpark treffen. Dort gibt es viel Platz und einen Grillplatz, und es kostet nichts. Wir könnten zusammen grillen. Ich kümmere mich um das Fleisch und das Gemüse. Vielleicht kann jeder noch etwas mitbringen, zum Beispiel einen Salat, Brot oder Getränke. Unsere Lehrerin laden wir natürlich auch ein. Wenn es regnet, feiern wir einfach im Kursraum, der ist am Freitagabend frei. Also: Freitag um sechs im Park, und jeder bringt etwas mit. Was meint ihr? Passt euch der Termin?',
     },
   ],
 }

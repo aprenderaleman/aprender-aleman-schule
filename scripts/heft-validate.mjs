@@ -2,6 +2,7 @@
 // Uso: node scripts/heft-validate.mjs [a1|a2|b1|b2|c1] [--full]   (por defecto: a1)
 //   --full exige las 5 partes (grammatik · lesen · hoeren · schreiben · sprechen).
 import fs from 'node:fs'
+import { speechSegments } from '../server/realExam.js'
 const kurs = (process.argv[2] || 'a1').toLowerCase()
 const full = process.argv.includes('--full')
 if (!/^(a1|a2|b1|b2|c1)$/.test(kurs)) { console.error('curso inválido: ' + kurs); process.exit(1) }
@@ -9,7 +10,7 @@ if (!/^(a1|a2|b1|b2|c1)$/.test(kurs)) { console.error('curso inválido: ' + kurs
 // desde B1 las consignas pueden llevar subordinadas sencillas.
 const basico = /^a/.test(kurs)
 // Palabras del transcript de Hören por nivel (mín, máx).
-const HOER_LEN = { a1: [25, 70], a2: [40, 100], b1: [70, 150], b2: [100, 190], c1: [130, 230] }[kurs]
+const HOER_LEN = { a1: [25, 65], a2: [45, 95], b1: [75, 145], b2: [105, 185], c1: [135, 225] }[kurs]
 const HOER_ITEMS = basico ? 3 : 4
 const dir = new URL(`../server/deutsch${kurs}/heft/`, import.meta.url)
 let problems = 0
@@ -74,7 +75,9 @@ for (const f of files) {
   if (ho) {
     withHoeren++
     const tr = String(ho.audio?.transcript || '')
-    const n = tr.trim() ? tr.trim().split(/\s+/).length : 0
+    // Palabras que se OYEN (las etiquetas de hablante no se pronuncian).
+    const spoken = speechSegments(tr).map(sg => sg.text).join(' ').trim()
+    const n = spoken ? spoken.split(/\s+/).length : 0
     if (!tr) P(`${f}: hoeren sin audio.transcript`)
     else if (n < HOER_LEN[0] || n > HOER_LEN[1]) P(`${f}: transcript de ${n} palabras (rango ${HOER_LEN[0]}-${HOER_LEN[1]})`)
     if (ho.audio?.audioUrl) P(`${f}: hoeren no debe llevar audioUrl (lo pone el servidor)`)

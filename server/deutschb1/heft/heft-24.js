@@ -84,6 +84,30 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Du hörst zwei kurze Texte. Lies zuerst die Aufgaben. Löse zu jedem Text zwei Aufgaben.',
+      audio: {
+        transcript: 'Nummer eins. Achtung an Gleis drei! Der Regionalzug nach Bremen, planmäßige Abfahrt sechzehn Uhr zwölf, hat heute etwa vierzehn Minuten Verspätung. Bitte beachten Sie außerdem, dass der Zug nicht von Gleis drei, sondern von Gleis sechs abfährt. Wir bitten um Entschuldigung.\nNummer zwei. Guten Tag, hier ist die Sprachschule am Markt. Ich habe eine Nachricht für alle Teilnehmer vom Abendkurs. Der Kurs am Dienstag fällt leider aus, weil unsere Lehrerin krank ist. Er wird auf Donnerstag verschoben und beginnt dann nicht um achtzehn Uhr, sondern erst um halb sieben. Der Kurs findet wie immer in Raum fünf statt. Wenn Sie am Donnerstag keine Zeit haben, rufen Sie uns bitte zurück. Vielen Dank!',
+      },
+      items: [
+        { typ: 'rf', aussage: 'Text 1: Der Zug nach Bremen fährt heute von Gleis 6 ab.', loesung: true },
+        {
+          typ: 'mc',
+          frage: 'Text 1: Wie viel Verspätung hat der Zug?',
+          optionen: ['40 Minuten', '4 Minuten', '14 Minuten'],
+          loesung: 2,
+        },
+        { typ: 'rf', aussage: 'Text 2: Der Abendkurs findet diese Woche am Dienstag statt.', loesung: false },
+        {
+          typ: 'mc',
+          frage: 'Text 2: Wann beginnt der Kurs am Donnerstag?',
+          optionen: ['um 18:00 Uhr', 'um 18:30 Uhr', 'um 19:30 Uhr'],
+          loesung: 1,
+        },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'formular',
       titel: 'Schreiben',
@@ -96,6 +120,21 @@ export default {
         { id: 'uhrzeit', label: 'Uhrzeit (in Ziffern)', erwartet: ['9:30', '9.30', '9:30 Uhr', '9.30 Uhr', '09:30', '09:30 Uhr'] },
         { id: 'telefon', label: 'Rückruf unter', erwartet: ['0152 / 33 77 11', '0152 337711', '0152/337711', '0152 33 77 11', '0152337711'] },
       ],
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Sprich eine Sprachnachricht von etwa 75 Sekunden. Nenne Tag und Uhrzeit genau.',
+      aufgabe: 'Euer Kursfest kann am Freitag nicht stattfinden. Informiere deine Kursgruppe mit einer Sprachnachricht.',
+      punkte: [
+        'Warum fällt das Fest am Freitag aus?',
+        'Wann und wo findet es jetzt statt?',
+        'Was sollen alle mitbringen?',
+        'Was sollen die anderen tun, wenn sie keine Zeit haben?',
+      ],
+      redemittel: ['Leider fällt … aus, weil …', 'Wir verschieben das Fest auf …', 'Es beginnt nicht um …, sondern erst um …', 'Ruft mich bitte zurück, wenn …'],
+      maxSekunden: 75,
+      beispielLoesung: 'Hallo zusammen, hier ist Diego. Ich habe leider eine schlechte Nachricht: Unser Kursfest am Freitag fällt aus, weil der Raum in der Sprachschule nicht frei ist. Aber keine Sorge, wir verschieben das Fest nur um eine Woche. Es findet jetzt am Freitag, dem zwölften Juli, im Stadtpark statt. Wir beginnen nicht um sechs, sondern erst um halb sieben, damit alle nach der Arbeit kommen können. Bitte bringt etwas zu essen oder zu trinken mit, am besten etwas aus eurem Land. Wenn jemand an dem Tag keine Zeit hat, ruft mich bitte zurück oder schreibt mir kurz. Bis bald!',
     },
   ],
 }

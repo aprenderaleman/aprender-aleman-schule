@@ -75,6 +75,30 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Du hörst eine Nachricht auf der Mailbox von Herrn Demir. Löse die Aufgaben.',
+      audio: {
+        transcript: 'Hallo Herr Demir, hier ist Kim Sommer aus dem Sekretariat. Ich rufe wegen der Besprechung mit dem neuen Kunden an. Wir müssen den Termin leider verschieben. Die Besprechung ist nicht morgen um zehn, sondern erst am Donnerstag um vierzehn Uhr dreißig. Sie findet auch nicht im Büro der Chefin statt, sondern im großen Raum im zweiten Stock. Und noch etwas. Ihre Kollegin Frau Nowak hat sich heute Morgen krankgemeldet und kommt erst nächste Woche wieder. Könnten Sie deshalb morgen zwei Überstunden machen und ihre Kunden anrufen? Dafür können Sie am Freitag schon mittags Feierabend machen. Bitte rufen Sie mich heute noch zurück. Ich bin bis siebzehn Uhr im Büro. Vielen Dank und bis später!',
+      },
+      items: [
+        {
+          typ: 'mc',
+          frage: 'Wann findet die Besprechung jetzt statt?',
+          optionen: ['morgen um 10 Uhr', 'am Freitag um 12 Uhr', 'am Donnerstag um 14.30 Uhr'],
+          loesung: 2,
+        },
+        { typ: 'rf', aussage: 'Die Besprechung findet im Büro der Chefin statt.', loesung: false },
+        {
+          typ: 'mc',
+          frage: 'Warum soll Herr Demir Überstunden machen?',
+          optionen: ['Weil eine Kollegin krank ist.', 'Weil der neue Kunde früher kommt.', 'Weil die Chefin im Urlaub ist.'],
+          loesung: 0,
+        },
+        { typ: 'rf', aussage: 'Am Freitag kann Herr Demir früher nach Hause gehen.', loesung: true },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'formular',
       titel: 'Schreiben',
@@ -87,6 +111,20 @@ export default {
         { id: 'arzt', label: 'Arzttermin (Uhrzeit)', erwartet: ['um 10 Uhr', '10 Uhr', '10:00', '10.00', '10:00 Uhr', '10'] },
         { id: 'verschieben', label: 'Welcher Termin wird verschoben?', erwartet: ['die Besprechung mit Herrn Yilmaz um 14 Uhr', 'die Besprechung mit Herrn Yilmaz', 'Besprechung mit Herrn Yilmaz', 'Besprechung', 'die Besprechung', 'Besprechung um 14 Uhr'] },
       ],
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Erzähl von deinem Beruf. Sprich etwa 75 Sekunden. Du kannst dir vorher Notizen machen.',
+      aufgabe: 'Im Sprachcafé stellen heute alle ihren Beruf vor. Erzähl von deiner Arbeit oder von deinem Wunschberuf.',
+      punkte: [
+        'Als was arbeitest du – oder möchtest du arbeiten? Und wo?',
+        'Wie sieht ein normaler Arbeitstag aus?',
+        'Was gefällt dir an dem Beruf, und was nicht?',
+      ],
+      redemittel: ['Ich arbeite als … in …', 'Mein Arbeitstag beginnt um …', 'Um … mache ich Feierabend.', 'Mir gefällt, dass …'],
+      maxSekunden: 75,
+      beispielLoesung: 'Hallo, ich bin Diego und ich arbeite als Koch in einem Hotel in Köln. Mein Arbeitstag beginnt um zehn Uhr. Zuerst haben wir eine kurze Besprechung mit dem Chef, dann bereiten wir das Mittagessen vor. Am Nachmittag habe ich zwei Stunden Pause, und abends koche ich wieder. Normalerweise mache ich um zehn Uhr abends Feierabend, aber am Wochenende muss ich oft Überstunden machen. Mir gefällt, dass meine Kollegen sehr nett sind und dass ich jeden Tag etwas Neues lerne. Nicht so gut finde ich die Arbeitszeiten, weil ich abends fast nie bei meiner Familie bin. Das Gehalt ist in Ordnung, aber später möchte ich gern mehr verdienen.',
     },
   ],
 }

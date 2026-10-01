@@ -64,6 +64,30 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Hör das Interview im Radio. Löse dann die vier Aufgaben.',
+      audio: {
+        transcript: 'Moderatorin: Guten Morgen, hier ist das Stadtradio! Unsere Frage heute: Worüber ärgern Sie sich im Alltag, und worauf freuen Sie sich? Am Telefon ist Herr Demir. Hallo!\nMann: Guten Morgen! Also, ich ärgere mich oft über die Busse. Ich warte jeden Morgen lange auf den Bus, manchmal zwanzig Minuten.\nModeratorin: Haben Sie schon mit der Stadt darüber gesprochen?\nMann: Ja, ich habe einen Brief geschrieben, aber ich warte immer noch auf eine Antwort.\nModeratorin: Und worauf freuen Sie sich?\nMann: Auf den Urlaub! In drei Wochen fahre ich mit meiner Familie ans Meer. Meine Kinder träumen schon lange davon.\nModeratorin: Interessieren sich Ihre Kinder für Wassersport?\nMann: Nein, dafür nicht. Sie interessieren sich mehr für Tiere, und am Meer gibt es ein großes Aquarium.\nModeratorin: Dann viel Spaß! Danke für Ihren Anruf.',
+      },
+      items: [
+        {
+          typ: 'mc',
+          frage: 'Worüber ärgert sich Herr Demir?',
+          optionen: ['über die Busse', 'über seinen Urlaub', 'über das Radio'],
+          loesung: 0,
+        },
+        { typ: 'rf', aussage: 'Herr Demir hat schon eine Antwort von der Stadt bekommen.', loesung: false },
+        {
+          typ: 'mc',
+          frage: 'Wann fährt die Familie ans Meer?',
+          optionen: ['in zwei Wochen', 'in drei Tagen', 'in drei Wochen'],
+          loesung: 2,
+        },
+        { typ: 'rf', aussage: 'Die Kinder von Herrn Demir interessieren sich für Tiere.', loesung: true },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -76,6 +100,20 @@ export default {
       ],
       minWoerter: 40,
       beispielLoesung: 'Lieber Jan, vielen Dank für deine Einladung! Ich freue mich sehr darüber und komme natürlich gern. Besonders freue ich mich auf deine Freunde aus Hamburg und auf die Musik. Soll ich dir helfen? Ich kann mich um den Kuchen kümmern oder am Samstag früher kommen. Bis bald und liebe Grüße, Aylin',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Erzähl von dir. Sprich ungefähr 60 Sekunden.',
+      aufgabe: 'Wofür interessierst du dich, worüber ärgerst du dich, wovon träumst du? Erzähl.',
+      punkte: [
+        'Wofür interessierst du dich? Warum?',
+        'Worüber ärgerst du dich manchmal?',
+        'Wovon träumst du?',
+      ],
+      redemittel: ['Ich interessiere mich für …', 'Ich ärgere mich oft über …', 'Ich träume von …', 'Ich denke oft daran.'],
+      maxSekunden: 60,
+      beispielLoesung: 'Ich interessiere mich sehr für Musik. Ich spiele seit fünf Jahren Gitarre, und am Wochenende gehe ich oft auf Konzerte. Darüber spreche ich auch gern mit meinen Freunden. Manchmal ärgere ich mich über meine Nachbarn, weil sie nachts sehr laut sind. Dann kann ich nicht schlafen. Ich habe schon mit ihnen darüber gesprochen, aber es hat nicht geholfen. Und wovon träume ich? Ich träume von einer Reise nach Japan. Ich denke oft daran und spare schon Geld dafür.',
     },
   ],
 }

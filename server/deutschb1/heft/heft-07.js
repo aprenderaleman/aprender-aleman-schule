@@ -65,6 +65,30 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Hör das Gespräch zwischen Meike und Jonas. Löse dann die vier Aufgaben.',
+      audio: {
+        transcript: 'Frau: Hallo Jonas! Wie war dein Wochenende in Hamburg?\nMann: Hallo Meike! Na ja, es war nicht so toll. Am Freitag hatte mein Zug zwei Stunden Verspätung.\nFrau: Oh nein! Und dann?\nMann: Ich war erst um Mitternacht im Hotel. Eigentlich wollte ich abends noch essen gehen, aber alle Restaurants waren schon zu.\nFrau: Und am Samstag? Konntest du wenigstens die Stadt ansehen?\nMann: Am Vormittag ja. Ich wollte eine Hafenrundfahrt machen, aber es gab keine Karten mehr. Deshalb war ich im Museum. Das war wirklich interessant.\nFrau: War das Wetter gut?\nMann: Nein, es hat den ganzen Tag geregnet. Und am Sonntag musste ich schon um acht Uhr zurückfahren, weil ich am Nachmittag arbeiten musste.\nFrau: Schade! Nächstes Mal komme ich mit.',
+      },
+      items: [
+        { typ: 'rf', aussage: 'Jonas war am Freitag schon am Nachmittag im Hotel.', loesung: false },
+        {
+          typ: 'mc',
+          frage: 'Warum konnte Jonas am Freitagabend nicht essen gehen?',
+          optionen: ['Er hatte keinen Hunger mehr.', 'Die Restaurants waren schon geschlossen.', 'Er musste noch arbeiten.'],
+          loesung: 1,
+        },
+        {
+          typ: 'mc',
+          frage: 'Was hat Jonas am Samstagvormittag gemacht?',
+          optionen: ['Er hat eine Hafenrundfahrt gemacht.', 'Er war einkaufen.', 'Er war im Museum.'],
+          loesung: 2,
+        },
+        { typ: 'rf', aussage: 'Am Sonntag musste Jonas früh zurückfahren.', loesung: true },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -77,6 +101,20 @@ export default {
       ],
       minWoerter: 40,
       beispielLoesung: 'Liebe Frau Hoffmann, leider konnte ich letzte Woche nicht zum Kurs kommen. Ich war krank und hatte hohes Fieber. Ich musste zum Arzt gehen und durfte drei Tage nicht aus dem Haus. Jetzt geht es mir wieder besser. Welche Hausaufgaben hatten wir? Können Sie mir bitte die Seiten schicken? Viele Grüße, Irina Popescu',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Erzähl von früher. Sprich ungefähr 60 Sekunden.',
+      aufgabe: 'Erzähl von deiner Schulzeit. Benutze war, hatte und die Modalverben im Präteritum.',
+      punkte: [
+        'Wo war deine Schule? Wie war es dort?',
+        'Was durftest du nicht? Was musstest du machen?',
+        'Was wolltest du später werden?',
+      ],
+      redemittel: ['Meine Schule war …', 'Wir hatten …', 'Ich durfte nicht …', 'Ich musste immer …', 'Ich wollte … werden.'],
+      maxSekunden: 60,
+      beispielLoesung: 'Meine Schule war in einer kleinen Stadt in Kolumbien. Wir waren dreißig Kinder in der Klasse, und wir hatten eine sehr nette Lehrerin. Mathe war mein Lieblingsfach, aber in Sport war ich nicht gut. Im Unterricht durften wir nicht essen, und wir mussten eine Uniform tragen. Das fand ich damals nicht schön. Nach der Schule musste ich zuerst meine Hausaufgaben machen, erst dann durfte ich draußen spielen. Als ich zehn war, wollte ich Pilotin werden. Heute arbeite ich im Büro, aber ich reise immer noch sehr gern.',
     },
   ],
 }

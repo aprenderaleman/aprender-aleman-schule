@@ -88,6 +88,30 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Du bist am Bahnhof und hörst eine Durchsage. Löse die vier Aufgaben.',
+      audio: {
+        transcript: 'Achtung, eine Durchsage für alle Reisenden nach München. Der Zug nach München, planmäßige Abfahrt um vierzehn Uhr zwölf, fährt heute nicht von Gleis sieben ab, sondern von Gleis neun. Der Zug hat außerdem ungefähr zwanzig Minuten Verspätung. Grund dafür sind Bauarbeiten auf der Strecke. Reisende nach Stuttgart steigen bitte nicht wie geplant in Nürnberg um, sondern schon in Würzburg. Dort wartet Ihr Anschlusszug auf Sie. Der Regionalzug nach Aschaffenburg um vierzehn Uhr dreißig fällt heute leider aus. Bitte nehmen Sie den Bus vor dem Bahnhof. Ihre Fahrkarte gilt auch im Bus. Bei Fragen hilft Ihnen unser Personal an der Information in der Bahnhofshalle. Wir bitten um Ihr Verständnis und wünschen Ihnen eine gute Reise.',
+      },
+      items: [
+        {
+          typ: 'mc',
+          frage: 'Von welchem Gleis fährt der Zug nach München heute ab?',
+          optionen: ['von Gleis 7', 'von Gleis 9', 'von Gleis 12'],
+          loesung: 1,
+        },
+        { typ: 'rf', aussage: 'Der Zug nach München fällt heute aus.', loesung: false },
+        {
+          typ: 'mc',
+          frage: 'Wo sollen Reisende nach Stuttgart heute umsteigen?',
+          optionen: ['in Würzburg', 'in Nürnberg', 'in München'],
+          loesung: 0,
+        },
+        { typ: 'rf', aussage: 'Für den Bus nach Aschaffenburg braucht man keine neue Fahrkarte.', loesung: true },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -100,6 +124,21 @@ export default {
       ],
       minWoerter: 40,
       beispielLoesung: 'Sehr geehrte Damen und Herren,\nich habe vom 3. bis zum 5. März in Ihrem Hotel gewohnt. Leider hat die Heizung in meinem Zimmer nicht funktioniert, und es war nachts sehr kalt. Ich habe mich an der Rezeption beschwert, aber niemand hat die Heizung repariert. Könnten Sie mir bitte einen Teil des Preises zurückzahlen?\nMit freundlichen Grüßen\nLukas Brenner',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Erzähl von einer Reise. Sprich etwa 60 bis 90 Sekunden.',
+      aufgabe: 'Du hast eine Reise gemacht, und unterwegs gab es ein Problem. Erzähl, was passiert ist.',
+      punkte: [
+        'Wohin und womit bist du gefahren?',
+        'Welches Problem gab es unterwegs?',
+        'Wie hast du das Problem gelöst?',
+        'Was machst du beim nächsten Mal anders?',
+      ],
+      redemittel: ['Letztes Jahr bin ich mit … nach … gefahren.', 'Leider hatte … Verspätung.', 'Deshalb musste ich …', 'Beim nächsten Mal …'],
+      maxSekunden: 90,
+      beispielLoesung: 'Letzten Sommer bin ich mit dem Zug von Köln nach Wien gefahren. Die Fahrkarte hatte ich schon früh gebucht. Leider hatte der erste Zug vierzig Minuten Verspätung, und in Nürnberg habe ich meinen Anschluss verpasst. Ich bin dann zur Information gegangen und habe gefragt, was ich machen kann. Die Frau dort war sehr nett. Sie hat mir gesagt, dass ich einfach den nächsten Zug nehmen darf. Also habe ich zwei Stunden am Bahnhof gewartet und etwas gegessen. Am Abend bin ich endlich im Hotel angekommen, aber ich war total müde. Beim nächsten Mal plane ich mehr Zeit zum Umsteigen ein. Das ist viel entspannter.',
     },
   ],
 }

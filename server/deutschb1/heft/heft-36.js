@@ -75,6 +75,30 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Du rufst in einer Arztpraxis an und hörst eine Ansage. Löse die Aufgaben.',
+      audio: {
+        transcript: 'Guten Tag, Sie sind mit der Praxis von Doktor Lehmann verbunden. Leider rufen Sie außerhalb unserer Öffnungszeiten an. Wir sind montags bis freitags von acht bis zwölf Uhr für Sie da, am Dienstag und am Donnerstag auch nachmittags von fünfzehn bis achtzehn Uhr. Bitte beachten Sie, dass die Praxis vom dritten bis zum zehnten März geschlossen ist. In dieser Zeit hilft Ihnen Frau Doktor Aksoy in der Gartenstraße vierzehn. Wenn Sie nur ein Rezept brauchen, sprechen Sie bitte nach dem Ton Ihren Namen und das Medikament auf das Band. Sie können das Rezept dann am nächsten Tag ab elf Uhr abholen. Wenn Sie einen Termin absagen möchten, rufen Sie bitte morgen früh wieder an. Vielen Dank und auf Wiederhören.',
+      },
+      items: [
+        {
+          typ: 'mc',
+          frage: 'An welchen Tagen ist die Praxis auch nachmittags geöffnet?',
+          optionen: ['montags und mittwochs', 'montags bis freitags', 'dienstags und donnerstags'],
+          loesung: 2,
+        },
+        { typ: 'rf', aussage: 'Anfang März ist die Praxis geschlossen.', loesung: true },
+        {
+          typ: 'mc',
+          frage: 'Was soll man tun, wenn man nur ein Rezept braucht?',
+          optionen: ['Namen und Medikament auf das Band sprechen', 'morgen früh wieder anrufen', 'zu Frau Doktor Aksoy gehen'],
+          loesung: 0,
+        },
+        { typ: 'rf', aussage: 'Das Rezept kann man am nächsten Tag ab acht Uhr abholen.', loesung: false },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'formular',
       titel: 'Schreiben',
@@ -87,6 +111,20 @@ export default {
         { id: 'seit', label: 'Seit wann?', erwartet: ['seit Dienstag', 'Dienstag'] },
         { id: 'wunsch', label: 'Wunschtermin', erwartet: ['Donnerstagnachmittag', 'Donnerstag nachmittag', 'Donnerstag Nachmittag', 'am Donnerstagnachmittag', 'Donnerstag'] },
       ],
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Sprich eine Nachricht auf den Anrufbeantworter. Du hast etwa eine Minute Zeit.',
+      aufgabe: 'Du hast am Donnerstag um 9 Uhr einen Termin beim Zahnarzt. Du bist aber stark erkältet. Sprich eine Nachricht auf den Anrufbeantworter der Praxis und sag den Termin ab.',
+      punkte: [
+        'Nenn deinen Namen und deinen Termin.',
+        'Erklär, warum du nicht kommen kannst. Beschreib deine Symptome.',
+        'Bitte um einen neuen Termin und sag, wann es dir passt.',
+      ],
+      redemittel: ['Ich muss meinen Termin am … leider absagen.', 'Ich bin erkältet und habe …', 'Könnten wir den Termin auf … verschieben?', 'Es tut mir leid, dass ich so kurzfristig absage.'],
+      maxSekunden: 60,
+      beispielLoesung: 'Guten Tag, hier spricht Lucía Morales. Ich habe am Donnerstag um neun Uhr einen Termin bei Ihnen. Leider muss ich den Termin absagen. Ich bin seit gestern stark erkältet. Ich habe Fieber und Husten, und mein Hals tut sehr weh. So kann ich nicht zum Zahnarzt kommen. Es tut mir leid, dass ich so kurzfristig absage. Könnten wir den Termin auf nächste Woche verschieben? Am besten passt es mir am Dienstag oder am Mittwoch am Nachmittag, weil ich vormittags arbeite. Bitte rufen Sie mich zurück, meine Nummer haben Sie ja. Vielen Dank und auf Wiederhören!',
     },
   ],
 }

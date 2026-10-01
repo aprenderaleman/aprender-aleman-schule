@@ -75,6 +75,30 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Du hörst ein Gespräch zwischen Carmen und Lukas. Löse die Aufgaben.',
+      audio: {
+        transcript: 'Mann: Hallo Carmen! Du hast doch gestern im Kurs den Modellsatz am Computer gemacht. Wie war es?\nFrau: Hallo Lukas! Eigentlich ganz gut. Am Anfang war ich aber sehr nervös.\nMann: Warum? War die Technik kompliziert?\nFrau: Nein, gar nicht. Man klickt die Antworten einfach mit der Maus an. Und man kann sie bis zum Ende noch ändern.\nMann: Und das Hören? Hast du alles gut verstanden?\nFrau: Zuerst nicht, weil mein Kopfhörer zu leise war. Dann habe ich die Lautstärke selbst eingestellt.\nMann: Und beim Schreiben? Ich tippe leider sehr langsam.\nFrau: Ich auch! Am Ende hatte ich nur noch zwei Minuten Restzeit. Deshalb übe ich jetzt jeden Tag zehn Minuten auf der deutschen Tastatur.\nMann: Gute Idee. Das mache ich ab heute auch.',
+      },
+      items: [
+        { typ: 'rf', aussage: 'Für Carmen war die Technik kompliziert.', loesung: false },
+        {
+          typ: 'mc',
+          frage: 'Warum hat Carmen beim Hören zuerst nicht alles verstanden?',
+          optionen: ['Der Kopfhörer war zu leise.', 'Der Text war zu schnell.', 'Der Kopfhörer war kaputt.'],
+          loesung: 0,
+        },
+        {
+          typ: 'mc',
+          frage: 'Wie viel Restzeit hatte Carmen am Ende beim Schreiben?',
+          optionen: ['zehn Minuten', 'zwei Minuten', 'keine Zeit mehr'],
+          loesung: 1,
+        },
+        { typ: 'rf', aussage: 'Lukas möchte jetzt auch das Tippen üben.', loesung: true },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'formular',
       titel: 'Schreiben',
@@ -87,6 +111,20 @@ export default {
         { id: 'termin', label: 'Termin', erwartet: ['22. Mai', '22.05.', '22.5.'] },
         { id: 'email', label: 'E-Mail', erwartet: ['diego.fernandez@beispiel.de'] },
       ],
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Sprich etwa eine Minute über deine Erfahrung.',
+      aufgabe: 'Lernst und schreibst du lieber am Computer oder auf Papier? Erzähl.',
+      punkte: [
+        'Was machst du am Computer oder am Handy für dein Deutsch?',
+        'Was findest du am Computer praktisch?',
+        'Was ist für dich noch schwer, und wie übst du das?',
+      ],
+      redemittel: ['Am Computer mache ich …', 'Praktisch finde ich, dass …', 'Schwer ist für mich noch …'],
+      maxSekunden: 60,
+      beispielLoesung: 'Ich lerne eigentlich gern am Computer. Jeden Abend mache ich dort Übungen und höre kurze Texte mit Kopfhörern. Praktisch finde ich, dass ich meine Antworten sofort ändern kann. Auf Papier ist das nicht so einfach. Außerdem sehe ich am Bildschirm immer die Restzeit, das hilft mir. Schwer ist für mich noch das Tippen. Ich schreibe langsam, und auf der deutschen Tastatur suche ich oft das ä und das ß. Deshalb tippe ich jetzt jeden Tag eine kurze E-Mail auf Deutsch. Lange Texte lese ich aber lieber auf Papier, weil meine Augen am Bildschirm schnell müde sind.',
     },
   ],
 }

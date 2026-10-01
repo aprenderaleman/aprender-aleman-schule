@@ -95,6 +95,30 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Lies zuerst die Aufgaben. Hör dann die Durchsage im Museum und löse sie.',
+      audio: {
+        transcript: 'Liebe Besucherinnen und Besucher, herzlich willkommen im Stadtmuseum. Bitte beachten Sie die folgenden Informationen. Die Führung durch die neue Ausstellung beginnt heute nicht um vierzehn Uhr, sondern erst um halb drei. Treffpunkt ist nicht an der Kasse, sondern im ersten Stock vor dem Café. Die Führung dauert etwa fünfundvierzig Minuten und kostet drei Euro. Für Kinder unter zwölf Jahren ist sie kostenlos. Fotografieren ist in der Ausstellung leider nicht gestattet. Große Taschen und Rucksäcke geben Sie bitte an der Garderobe im Erdgeschoss ab. Unser Museum schließt heute um achtzehn Uhr, das Café bereits eine halbe Stunde früher. Wir wünschen Ihnen einen schönen Besuch.',
+      },
+      items: [
+        { typ: 'rf', aussage: 'Die Führung beginnt heute um 14 Uhr.', loesung: false },
+        {
+          typ: 'mc',
+          frage: 'Wo treffen sich die Besucher für die Führung?',
+          optionen: ['an der Kasse', 'an der Garderobe im Erdgeschoss', 'vor dem Café im ersten Stock'],
+          loesung: 2,
+        },
+        { typ: 'rf', aussage: 'Kinder unter zwölf Jahren bezahlen für die Führung nichts.', loesung: true },
+        {
+          typ: 'mc',
+          frage: 'Wann schließt das Café heute?',
+          optionen: ['um 17:30 Uhr', 'um 18:00 Uhr', 'um 18:30 Uhr'],
+          loesung: 0,
+        },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -107,6 +131,21 @@ export default {
       ],
       minWoerter: 40,
       beispielLoesung: 'Hallo Duc, ich habe das gleiche Problem! Ich höre jeden Abend eine kurze Diskussion im Radio und notiere, wer was sagt. Mein Tipp für Teil 4: Achte auf Wörter wie „ich finde“, „ich bin dagegen“ oder „aber“. Oft sagt eine Person zuerst Ja und am Ende doch Nein. Hör also immer bis zum Schluss zu! Viel Glück bei der Prüfung! Liebe Grüße, Marta',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Sprich etwa 75 Sekunden. Erzähl die Geschichte der Reihe nach.',
+      aufgabe: 'Erzähl von einer Situation, in der du etwas auf Deutsch nicht verstanden hast.',
+      punkte: [
+        'Wo warst du und wer hat gesprochen?',
+        'Was hast du nicht verstanden?',
+        'Was hast du dann gemacht?',
+        'Was machst du heute anders?',
+      ],
+      redemittel: ['Einmal war ich …', 'Ich habe nur … verstanden.', 'Deshalb habe ich …', 'Heute achte ich vor allem auf …'],
+      maxSekunden: 75,
+      beispielLoesung: 'Einmal war ich am Bahnhof in Köln und wollte nach Bonn fahren. Plötzlich gab es eine Durchsage. Die Sprecherin hat sehr schnell gesprochen, und es war laut. Ich habe nur „Bonn“ und „Gleis“ verstanden, aber nicht die Nummer. Zuerst war ich ziemlich nervös. Dann habe ich einen Mann neben mir gefragt: „Entschuldigung, was hat sie gesagt?“ Er hat mir erklärt, dass mein Zug von einem anderen Gleis abfährt. Zum Glück habe ich den Zug noch bekommen. Heute bleibe ich bei Durchsagen ruhig. Ich achte vor allem auf die Zahlen, und wenn ich etwas nicht verstehe, frage ich sofort nach.',
     },
   ],
 }

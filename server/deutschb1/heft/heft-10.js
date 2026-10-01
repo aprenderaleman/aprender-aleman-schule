@@ -80,6 +80,30 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Hör die Durchsage im Kaufhaus. Löse dann die vier Aufgaben.',
+      audio: {
+        transcript: 'Liebe Kundinnen und Kunden, herzlich willkommen im Kaufhaus am Markt! Heute haben wir tolle Angebote für Sie. In der ersten Etage finden Sie warme Winterjacken für Damen und Herren. Die blauen Jacken kosten heute nicht neunundachtzig, sondern nur neunundfünfzig Euro. Im Erdgeschoss gibt es bequeme Schuhe aus weichem Leder und bunte Schals zum halben Preis. Für Kinder haben wir einen kleinen roten Rucksack mit einer praktischen Trinkflasche im Angebot. Und haben Sie Hunger? In unserem neuen Restaurant in der dritten Etage bekommen Sie heute eine heiße Suppe und frisches Brot für vier Euro fünfzig. Bitte beachten Sie, dass wir heute schon um achtzehn Uhr schließen. Wir wünschen Ihnen einen schönen Einkauf!',
+      },
+      items: [
+        {
+          typ: 'mc',
+          frage: 'Was kosten die blauen Jacken heute?',
+          optionen: ['89 Euro', '59 Euro', '50 Euro'],
+          loesung: 1,
+        },
+        { typ: 'rf', aussage: 'Die bequemen Schuhe gibt es im Erdgeschoss.', loesung: true },
+        {
+          typ: 'mc',
+          frage: 'Was bekommt man im Restaurant für 4,50 Euro?',
+          optionen: ['eine Suppe mit Brot', 'einen Kaffee mit Kuchen', 'ein Mittagessen mit Getränk'],
+          loesung: 0,
+        },
+        { typ: 'rf', aussage: 'Das Kaufhaus ist heute bis 20 Uhr geöffnet.', loesung: false },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'formular',
       titel: 'Schreiben',
@@ -92,6 +116,20 @@ export default {
         { id: 'ort', label: 'Wo verloren?', erwartet: ['im Bus 42', 'Bus 42', 'im Bus', 'Bus Nummer 42'] },
         { id: 'jacke', label: 'Jacke — Farbe', erwartet: ['blau'] },
       ],
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Beschreib eine Person. Sprich ungefähr 75 Sekunden.',
+      aufgabe: 'Beschreib eine Person aus deiner Familie oder einen guten Freund.',
+      punkte: [
+        'Wie sieht die Person aus? (Haare, Augen, Größe)',
+        'Welche Kleidung trägt sie gern?',
+        'Wie ist ihr Charakter? Gib ein Beispiel.',
+      ],
+      redemittel: ['Sie hat lange / kurze … Haare.', 'Er trägt oft einen … Pullover.', 'Sie ist ein sehr … Mensch.'],
+      maxSekunden: 75,
+      beispielLoesung: 'Ich beschreibe meine Schwester Carmen. Sie ist 35 Jahre alt und ziemlich groß. Sie hat lange schwarze Haare und dunkle Augen. Carmen trägt gern bequeme Kleidung: meistens eine blaue Jeans und einen weiten Pullover. Im Winter hat sie immer ihren alten roten Mantel an. Sie liebt diesen Mantel. Carmen ist ein sehr freundlicher und lustiger Mensch. Sie hat immer eine gute Idee und hilft allen. Letztes Jahr hatte ich zum Beispiel ein großes Problem mit meiner Wohnung, und sie hat mir sofort ein freies Zimmer bei sich angeboten. Sie ist wirklich eine tolle Schwester.',
     },
   ],
 }

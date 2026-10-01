@@ -80,6 +80,30 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Du hörst eine Durchsage am Bahnhof. Löse die Aufgaben.',
+      audio: {
+        transcript: 'Achtung an Gleis vier, eine wichtige Information für alle Reisenden nach Nürnberg. Der Regionalzug nach Nürnberg, Abfahrt 14 Uhr 20, hat heute etwa 25 Minuten Verspätung, weil es ein technisches Problem an der Strecke gibt. Der Zug fährt außerdem nicht von Gleis vier, sondern von Gleis sieben ab. Bitte gehen Sie deshalb jetzt zu Gleis sieben. Der Aufzug dort ist leider kaputt, deswegen benutzen Reisende mit Kinderwagen oder viel Gepäck bitte die Rampe hinten am Bahnsteig. Sie haben es eilig? Dann nehmen Sie den Bus Linie zwölf vor dem Bahnhof, denn er fährt in zehn Minuten direkt nach Nürnberg. Ihre Fahrkarte ist auch im Bus gültig. Wir bitten um Entschuldigung und danken für Ihr Verständnis.',
+      },
+      items: [
+        {
+          typ: 'mc',
+          frage: 'Warum hat der Zug Verspätung?',
+          optionen: ['Weil es ein technisches Problem gibt.', 'Weil das Wetter schlecht ist.', 'Weil der Aufzug kaputt ist.'],
+          loesung: 0,
+        },
+        { typ: 'rf', aussage: 'Der Zug nach Nürnberg fährt heute von Gleis vier ab.', loesung: false },
+        {
+          typ: 'mc',
+          frage: 'Was sollen Reisende mit viel Gepäck benutzen?',
+          optionen: ['den Aufzug', 'die Treppe', 'die Rampe'],
+          loesung: 2,
+        },
+        { typ: 'rf', aussage: 'Für den Bus braucht man keine neue Fahrkarte.', loesung: true },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'formular',
       titel: 'Schreiben',
@@ -92,6 +116,20 @@ export default {
         { id: 'strasse', label: 'Straße und Hausnummer', erwartet: ['Gartenstraße 12', 'Gartenstr. 12'] },
         { id: 'telefon', label: 'Telefon', erwartet: ['0157 2233441', '01572233441'] },
       ],
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Sag deine Meinung und nenne Gründe. Sprich etwa eine Minute.',
+      aufgabe: 'Wohnst du lieber in der Stadt oder auf dem Land? Begründe deine Meinung.',
+      punkte: [
+        'Wo wohnst du jetzt, und wie gefällt es dir?',
+        'Nenne zwei Gründe mit weil oder denn.',
+        'Sag eine Folge mit deshalb.',
+      ],
+      redemittel: ['Ich wohne lieber …, weil …', '…, denn …', 'Deshalb …'],
+      maxSekunden: 75,
+      beispielLoesung: 'Ich wohne jetzt in einer großen Stadt, in Köln, und es gefällt mir gut. Ich wohne lieber in der Stadt, weil hier alles in der Nähe ist. Ich brauche kein Auto, denn die Straßenbahn fährt alle zehn Minuten. Außerdem gibt es viele Kinos, Cafés und Kurse. Das finde ich wichtig, weil ich gern neue Leute kennenlerne. Natürlich ist die Stadt auch laut, und die Mieten sind hoch. Deshalb habe ich nur eine kleine Wohnung. Auf dem Land ist es ruhig und billig, aber ich habe dort keine Arbeit. Deswegen bleibe ich im Moment in der Stadt. Später möchte ich vielleicht ein Haus mit Garten haben.',
     },
   ],
 }

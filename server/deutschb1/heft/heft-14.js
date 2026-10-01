@@ -80,6 +80,30 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Hör die Durchsage am Bahnhof. Löse dann die vier Aufgaben.',
+      audio: {
+        transcript: 'Achtung an Gleis zwei! Wegen des schlechten Wetters fährt der Regionalzug nach Leipzig heute nicht um sechzehn Uhr zehn, sondern erst um sechzehn Uhr vierzig. Der Zug hält außerdem nicht an Gleis zwei, sondern an Gleis neun. Reisende nach Halle nehmen bitte den Bus der Linie dreißig vor dem Haupteingang des Bahnhofs. Trotz der Verspätung erreichen Sie in Leipzig alle Anschlusszüge. Während der Wartezeit bekommen Sie im Café des Reisezentrums ein kostenloses Getränk. Zeigen Sie dort bitte Ihre Fahrkarte. Wegen der Bauarbeiten ist der Aufzug an Gleis neun leider außer Betrieb. Die Mitarbeiter des Bahnhofs helfen Ihnen gern mit Ihrem Gepäck. Wir bitten um Ihr Verständnis.',
+      },
+      items: [
+        {
+          typ: 'mc',
+          frage: 'Wann fährt der Zug nach Leipzig heute ab?',
+          optionen: ['um 16 Uhr 10', 'um 16 Uhr 40', 'um 16 Uhr 14'],
+          loesung: 1,
+        },
+        { typ: 'rf', aussage: 'Der Zug nach Leipzig fährt heute von Gleis zwei ab.', loesung: false },
+        { typ: 'rf', aussage: 'In Leipzig kann man trotz der Verspätung noch umsteigen.', loesung: true },
+        {
+          typ: 'mc',
+          frage: 'Was bekommen die Reisenden im Café?',
+          optionen: ['eine neue Fahrkarte', 'Hilfe mit dem Gepäck', 'ein Getränk, das nichts kostet'],
+          loesung: 2,
+        },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'formular',
       titel: 'Schreiben',
@@ -92,6 +116,21 @@ export default {
         { id: 'besitzer', label: 'Wem gehört die Tasche?', erwartet: ['seiner Frau', 'meiner Frau', 'seine Frau', 'Frau', 'Ehefrau', 'der Frau von Karim Haddad'] },
         { id: 'anruf', label: 'Anruf möglich', erwartet: ['nach 18 Uhr', 'ab 18 Uhr', 'abends', '18 Uhr'] },
       ],
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Erzähl von einem Erlebnis. Sprich etwa 75 Sekunden.',
+      aufgabe: 'Erzähl von einem Ausflug oder einer Reise mit einem Problem. Benutze wegen, trotz oder während.',
+      punkte: [
+        'Wohin wolltest du fahren, und mit wem?',
+        'Welches Problem gab es? Nenne den Grund.',
+        'Was habt ihr trotz des Problems gemacht?',
+        'Wie war der Tag am Ende?',
+      ],
+      redemittel: ['Wegen des … / der … konnten wir nicht …', 'Trotz des … / der … sind wir …', 'Während der Fahrt …'],
+      maxSekunden: 75,
+      beispielLoesung: 'Letzten Sommer wollte ich mit meiner Schwester an die Ostsee fahren. Wir hatten nur einen Tag frei. Aber wegen eines Unfalls auf der Autobahn standen wir zwei Stunden im Stau. Während der Wartezeit haben wir Musik gehört und die Brote meiner Mutter gegessen. Am Meer war dann auch noch das Wetter schlecht: Es hat geregnet. Trotz des Regens sind wir am Strand spazieren gegangen, und danach haben wir in einem kleinen Café Fischbrötchen gegessen. Wegen des Staus waren wir erst um Mitternacht wieder zu Hause. Aber es war trotzdem ein schöner Tag.',
     },
   ],
 }

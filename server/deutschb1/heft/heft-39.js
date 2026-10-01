@@ -75,6 +75,30 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Hör die Nachricht auf dem Anrufbeantworter. Löse dann die vier Aufgaben.',
+      audio: {
+        transcript: 'Guten Tag, Herr Demir, hier spricht Claudia Wendt von der Volkshochschule. Ich rufe wegen Ihres Deutschkurses an. Der Unterricht am Donnerstag fällt leider aus, weil Ihre Lehrerin krank ist. Wir holen die Stunde nicht am Freitag nach, sondern am Samstag, von zehn bis halb eins. Bitte beachten Sie, dass der Kurs am Samstag nicht im Raum vierzehn stattfindet, sondern im Raum vierzig im zweiten Stock. Und noch etwas. Sie wollten sich für die Prüfung im Juni anmelden. Dafür brauchen wir bis nächsten Mittwoch Ihr Formular und eine Kopie von Ihrem Ausweis. Die Gebühr können Sie später bezahlen. Wenn Sie am Samstag nicht kommen können, rufen Sie mich bitte zurück. Sie erreichen mich vormittags im Büro. Vielen Dank und auf Wiederhören.',
+      },
+      items: [
+        { typ: 'rf', aussage: 'Am Donnerstag findet kein Unterricht statt.', loesung: true },
+        {
+          typ: 'mc',
+          frage: 'An welchem Tag wird die Stunde nachgeholt?',
+          optionen: ['am Freitag', 'am Samstag', 'am Mittwoch'],
+          loesung: 1,
+        },
+        {
+          typ: 'mc',
+          frage: 'In welchem Raum ist der Kurs an diesem Tag?',
+          optionen: ['im Raum 14', 'im Raum 4', 'im Raum 40'],
+          loesung: 2,
+        },
+        { typ: 'rf', aussage: 'Herr Demir muss die Gebühr für die Prüfung bis Mittwoch bezahlen.', loesung: false },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -87,6 +111,20 @@ export default {
       ],
       minWoerter: 40,
       beispielLoesung: 'Liebe Sofia,\nschön, dass du auch Deutsch lernen möchtest! Ich lerne seit zwei Jahren Deutsch und besuche zweimal pro Woche einen Abendkurs. Zu Hause übe ich jeden Tag zwanzig Minuten Vokabeln und höre Podcasts. Mein Tipp: Hab keine Angst vor Fehlern und sprich so viel wie möglich. Aus Fehlern lernt man!\nViele Grüße\nPaula',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Sag deine Meinung und begründe sie. Sprich etwa 60 bis 90 Sekunden.',
+      aufgabe: 'Lernt man eine Sprache besser im Kurs oder allein zu Hause? Sag deine Meinung.',
+      punkte: [
+        'Was ist ein Vorteil von einem Kurs?',
+        'Was ist ein Vorteil, wenn man allein lernt?',
+        'Was findest du besser? Nenne einen Grund.',
+      ],
+      redemittel: ['Ich bin der Meinung, dass …', 'Ein Vorteil ist, dass …', 'Auf der anderen Seite …', 'Deshalb finde ich …'],
+      maxSekunden: 90,
+      beispielLoesung: 'Ich bin der Meinung, dass man beides braucht, aber ein Kurs ist für mich wichtiger. Im Kurs kann man die Lehrerin fragen, wenn man etwas nicht versteht. Außerdem spricht man dort mit anderen Leuten, und das ist für mich das Wichtigste. Auf der anderen Seite kann ich zu Hause lernen, wann ich will, zum Beispiel abends nach der Arbeit. Vokabeln übe ich lieber allein, weil ich dafür Ruhe brauche. Nur allein zu lernen finde ich aber schwierig, denn niemand korrigiert meine Fehler. Und ehrlich gesagt bin ich allein manchmal ein bisschen faul. Deshalb finde ich einen Kurs besser, auch wenn er mehr kostet.',
     },
   ],
 }

@@ -85,6 +85,30 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Hör die Nachrichten im Radio. Löse dann die vier Aufgaben.',
+      audio: {
+        transcript: 'Und nun die Nachrichten aus der Region. Das Schwimmbad am Stadtpark wurde gestern nach acht Monaten wieder eröffnet. Es wurde komplett renoviert, und für die Kinder wurde ein neues Becken gebaut. Der Eintritt kostet jetzt nicht mehr vier, sondern fünf Euro. Die Brücke über den Fluss wird ab Montag repariert. Sie wird deshalb für Autos gesperrt, Fußgänger und Radfahrer können sie aber weiter benutzen. Die Arbeiten dauern drei Wochen. Und noch eine Meldung von der Polizei. In der Nacht zum Sonntag wurden am Bahnhof zwölf Fahrräder gestohlen. Die Polizei bittet um Hinweise. Am Wochenende wird außerdem der neue Markt am Rathaus eröffnet. Dort werden Obst, Gemüse und Brot aus der Region verkauft, samstags von acht bis vierzehn Uhr.',
+      },
+      items: [
+        {
+          typ: 'mc',
+          frage: 'Was ist im Schwimmbad neu?',
+          optionen: ['ein Becken für Kinder', 'ein Café', 'ein Parkplatz'],
+          loesung: 0,
+        },
+        { typ: 'rf', aussage: 'Der Eintritt ins Schwimmbad kostet jetzt vier Euro.', loesung: false },
+        { typ: 'rf', aussage: 'Fußgänger können die Brücke auch während der Arbeiten benutzen.', loesung: true },
+        {
+          typ: 'mc',
+          frage: 'Wann ist der neue Markt geöffnet?',
+          optionen: ['jeden Tag von acht bis zwölf Uhr', 'samstags von acht bis vierzehn Uhr', 'sonntags von acht bis vierzehn Uhr'],
+          loesung: 1,
+        },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -97,6 +121,21 @@ export default {
       ],
       minWoerter: 40,
       beispielLoesung: 'Hallo zusammen! In meiner Straße ist viel passiert. Im Frühling wurde der Spielplatz renoviert, und im Sommer wurden neue Bäume gepflanzt. Im Moment wird die alte Bäckerei umgebaut. Dort wird bald ein kleiner Supermarkt eröffnet. Ich finde das super, weil ich jetzt nicht mehr so weit zum Einkaufen fahren muss. Nur der Lärm am Morgen stört mich. Viele Grüße, Deniz',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Sprich etwa 75 Sekunden. Benutze das Passiv mindestens dreimal.',
+      aufgabe: 'Stell ein Fest aus deinem Land oder deiner Stadt vor.',
+      punkte: [
+        'Welches Fest ist es, und wann wird es gefeiert?',
+        'Was wird gegessen und getrunken?',
+        'Was wird auf der Straße oder zu Hause gemacht?',
+        'Wie findest du das Fest?',
+      ],
+      redemittel: ['… wird im … gefeiert.', 'Es wird viel … gegessen.', 'Auf den Straßen wird / werden …', 'Früher wurde …'],
+      maxSekunden: 75,
+      beispielLoesung: 'Ich möchte die Fallas in Valencia vorstellen. Das Fest wird jedes Jahr im März gefeiert. Schon Monate vorher werden große Figuren aus Holz und Papier gebaut. Sie werden dann in der ganzen Stadt gezeigt. Am letzten Abend werden fast alle Figuren verbrannt, nur eine wird gerettet. Während des Festes wird viel Paella gegessen, und überall werden Churros mit Schokolade verkauft. Auf den Straßen wird Musik gespielt, und jeden Tag gibt es ein Feuerwerk. Früher war das Fest klein, heute kommen Touristen aus der ganzen Welt. Ich finde das Fest toll, aber es ist auch sehr laut!',
     },
   ],
 }

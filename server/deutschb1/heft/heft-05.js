@@ -75,6 +75,30 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Du hörst einen Beitrag im Radio. Löse die Aufgaben.',
+      audio: {
+        transcript: 'Und jetzt Nachrichten aus der Region. In Freiburg hat am Sonntag das Straßenfest in der Altstadt stattgefunden, obwohl es den ganzen Vormittag stark geregnet hat. Die Organisatorin Petra Lang sagt, dass sie am Morgen wenig Hoffnung hatte. Als sie aus dem Fenster gesehen hat, war der Himmel ganz grau. Trotzdem sind mehr als zweitausend Besucher gekommen, nicht nur tausend wie im letzten Jahr. Wenn die Leute feiern möchten, bleiben sie eben nicht zu Hause, meint Frau Lang. Am Nachmittag war es dann trocken, und die Musik hat bis zweiundzwanzig Uhr gespielt. Wenn alles klappt, findet das nächste Straßenfest schon im September statt. Der Eintritt bleibt kostenlos.',
+      },
+      items: [
+        { typ: 'rf', aussage: 'Am Sonntag hat es in Freiburg kein Straßenfest gegeben.', loesung: false },
+        {
+          typ: 'mc',
+          frage: 'Wie viele Besucher sind dieses Jahr gekommen?',
+          optionen: ['weniger als tausend', 'genau tausend', 'mehr als zweitausend'],
+          loesung: 2,
+        },
+        { typ: 'rf', aussage: 'Am Nachmittag hat es nicht mehr geregnet.', loesung: true },
+        {
+          typ: 'mc',
+          frage: 'Bis wann hat die Musik gespielt?',
+          optionen: ['bis 20 Uhr', 'bis 22 Uhr', 'bis 2 Uhr'],
+          loesung: 1,
+        },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -87,6 +111,20 @@ export default {
       ],
       minWoerter: 40,
       beispielLoesung: 'Liebe Nina, vielen Dank für die Einladung! Ich komme am Samstag gern, obwohl ich gerade sehr viel Arbeit habe. Als wir letztes Jahr zusammen gefeiert haben, war es wirklich lustig. Soll ich etwas mitbringen? Wenn du möchtest, backe ich einen Kuchen. Ich freue mich schon! Liebe Grüße, Daniel',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Erzähl von früher. Sprich etwa eine Minute.',
+      aufgabe: 'Wie war dein Leben, als du ein Kind warst? Erzähl.',
+      punkte: [
+        'Wo hast du gewohnt, als du ein Kind warst?',
+        'Was hast du immer gemacht, wenn du frei hattest?',
+        'Was machst du heute noch, obwohl du wenig Zeit hast?',
+      ],
+      redemittel: ['Als ich ein Kind war, …', 'Immer wenn …, …', 'Obwohl …, …', 'Trotzdem …'],
+      maxSekunden: 75,
+      beispielLoesung: 'Als ich ein Kind war, habe ich mit meiner Familie in einem kleinen Dorf in Peru gewohnt. Wir hatten ein Haus mit einem großen Garten. Immer wenn ich frei hatte, habe ich mit meinen Freunden draußen Fußball gespielt. Wenn es geregnet hat, sind wir zu meiner Oma gegangen, und sie hat uns Geschichten erzählt. Als ich zwölf war, sind wir in die Stadt gezogen. Das war am Anfang schwer für mich. Heute wohne ich in Deutschland und arbeite viel. Obwohl ich wenig Zeit habe, spiele ich jeden Samstag Fußball. Meine Oma ist jetzt sehr alt. Trotzdem telefonieren wir jede Woche, und sie erzählt immer noch gern.',
     },
   ],
 }

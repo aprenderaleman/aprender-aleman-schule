@@ -69,6 +69,30 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Hör die Nachricht auf dem Anrufbeantworter. Löse dann die vier Aufgaben.',
+      audio: {
+        transcript: 'Hallo Felix, hier ist Carla. Danke, dass du nächste Woche meine Blumen gießt! Der Schlüssel liegt nicht unter der Fußmatte, sondern bei meiner Nachbarin, Frau Sommer. Sie wohnt im ersten Stock. Die Gießkanne steht im Bad neben der Waschmaschine. Die Blumen auf dem Balkon brauchen jeden Tag Wasser, die Pflanzen im Wohnzimmer nur zweimal pro Woche. Stell bitte die große Pflanze nicht ans Fenster, denn dort ist es zu kalt für sie. Meine Post kannst du einfach auf den Küchentisch legen. Ach ja, im Kühlschrank liegt noch Käse, und auf dem Regal über dem Herd steht eine Flasche Saft. Das kannst du gern nehmen. Ich komme am Sonntag gegen neunzehn Uhr zurück. Vielen Dank und bis bald!',
+      },
+      items: [
+        {
+          typ: 'mc',
+          frage: 'Wo ist der Schlüssel für die Wohnung?',
+          optionen: ['unter der Fußmatte', 'bei der Nachbarin', 'im Briefkasten'],
+          loesung: 1,
+        },
+        { typ: 'rf', aussage: 'Die Gießkanne steht auf dem Balkon.', loesung: false },
+        {
+          typ: 'mc',
+          frage: 'Wie oft brauchen die Pflanzen im Wohnzimmer Wasser?',
+          optionen: ['jeden Tag', 'einmal pro Woche', 'zweimal pro Woche'],
+          loesung: 2,
+        },
+        { typ: 'rf', aussage: 'Felix soll die Post auf den Küchentisch legen.', loesung: true },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'formular',
       titel: 'Schreiben',
@@ -81,6 +105,20 @@ export default {
         { id: 'sofa', label: 'Sofa — wohin?', erwartet: ['ins Wohnzimmer', 'in das Wohnzimmer', 'Wohnzimmer'] },
         { id: 'regal', label: 'Regal — wohin?', erwartet: ['ins Arbeitszimmer', 'in das Arbeitszimmer', 'Arbeitszimmer'] },
       ],
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Beschreib ein Zimmer. Sprich ungefähr 75 Sekunden.',
+      aufgabe: 'Beschreib dein Lieblingszimmer. Wo steht, liegt und hängt alles?',
+      punkte: [
+        'Welches Zimmer ist es? Was machst du dort?',
+        'Wo stehen die Möbel? Was hängt an der Wand?',
+        'Was hast du zuletzt neu hingestellt oder aufgehängt? Wohin?',
+      ],
+      redemittel: ['Mein Lieblingszimmer ist …', 'Neben dem Fenster steht …', 'An der Wand hängt …', 'Ich habe … an die Wand gehängt.'],
+      maxSekunden: 75,
+      beispielLoesung: 'Mein Lieblingszimmer ist das Wohnzimmer. Dort lese ich abends oder sehe Filme. Das Sofa steht an der Wand, und vor dem Sofa liegt ein Teppich. Neben dem Fenster steht mein Schreibtisch, weil es dort hell ist. Über dem Sofa hängen drei Fotos von meiner Familie. Zwischen dem Sofa und der Tür steht ein Regal mit Büchern. Letzten Monat habe ich eine Lampe gekauft. Ich habe sie zuerst auf den Schreibtisch gestellt, aber das war nicht gut. Jetzt steht sie in der Ecke hinter dem Sofa. Und meine Gitarre habe ich an die Wand gehängt.',
     },
   ],
 }

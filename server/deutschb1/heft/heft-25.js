@@ -85,6 +85,35 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Hör die Diskussion im Radio. Wer sagt was? Löse die vier Aufgaben.',
+      audio: {
+        transcript: 'Moderatorin: Willkommen zu unserer Sendung! Unser Thema heute: Soll die Innenstadt am Samstag autofrei sein? Frau Brandt, was meinen Sie?\nFrau: Also, ich bin klar dafür. Ohne Autos ist es ruhiger, und die Kinder können endlich auf der Straße spielen.\nModeratorin: Und Sie, Herr Demir?\nMann: Na ja, ich bin nicht überzeugt. Ich habe ein Möbelgeschäft im Zentrum, und viele Kunden kommen mit dem Auto.\nFrau: Darf ich kurz unterbrechen? Der Bus fährt doch alle zehn Minuten.\nMann: Da haben Sie recht. Aber einen Schrank nimmt niemand mit in den Bus.\nFrau: Eigentlich stimmt das. Dann mache ich einen Vorschlag: Die Innenstadt ist nicht den ganzen Tag autofrei, sondern nur am Nachmittag.\nMann: Das ist eine gute Idee. Da stimme ich Ihnen zu.\nModeratorin: Schön, dann haben Sie sich ja geeinigt. Vielen Dank!',
+      },
+      items: [
+        {
+          typ: 'mc',
+          frage: 'Wer sagt das? „Für Kinder ist eine Innenstadt ohne Autos besser.“',
+          optionen: ['die Moderatorin', 'Frau Brandt', 'Herr Demir'],
+          loesung: 1,
+        },
+        {
+          typ: 'mc',
+          frage: 'Wer sagt das? „Viele Kunden brauchen das Auto.“',
+          optionen: ['die Moderatorin', 'Frau Brandt', 'Herr Demir'],
+          loesung: 2,
+        },
+        {
+          typ: 'mc',
+          frage: 'Worauf einigen sich Frau Brandt und Herr Demir?',
+          optionen: ['Die Innenstadt ist nur am Samstagnachmittag autofrei.', 'Die Innenstadt ist den ganzen Samstag autofrei.', 'Am Samstag fahren mehr Busse ins Zentrum.'],
+          loesung: 0,
+        },
+        { typ: 'rf', aussage: 'Herr Demir stimmt dem Vorschlag am Ende zu.', loesung: true },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -97,6 +126,21 @@ export default {
       ],
       minWoerter: 40,
       beispielLoesung: 'Hallo Paula,\ndanke für deinen Bericht! Ich bin eigentlich dafür, weil ein Grillplatz die Nachbarn zusammenbringt. Das ist ein großer Vorteil. Ein Nachteil ist natürlich der Rauch, besonders für Frau Novak. Mein Vorschlag: Wir hängen einen Plan mit den Grillzeiten auf und räumen danach immer gemeinsam auf.\nViele Grüße\nTimo, 1. Stock',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Erzähl von einer Diskussion. Sprich ungefähr eine Minute.',
+      aufgabe: 'Du hast mit Freunden, Nachbarn oder Kollegen über ein Thema diskutiert. Erzähl davon.',
+      punkte: [
+        'Worüber habt ihr diskutiert?',
+        'Wer war dafür, wer war dagegen? Warum?',
+        'Was war deine Meinung?',
+        'Wie habt ihr euch am Ende geeinigt?',
+      ],
+      redemittel: ['Wir haben über … diskutiert.', '… war dafür, weil …', 'Ich war eigentlich dagegen, aber …', 'Am Ende haben wir uns geeinigt: …'],
+      maxSekunden: 75,
+      beispielLoesung: 'Also, letzten Monat habe ich mit meinen Mitbewohnern diskutiert. Das Thema war: Wer putzt die Küche? Mein Mitbewohner Karim war für einen festen Putzplan, weil die Küche oft schmutzig war. Ich war eigentlich dagegen. Ich arbeite oft abends und habe dann wenig Zeit. Meine Mitbewohnerin Jule war unentschieden. Na ja, wir haben ziemlich lange geredet. Dann hat Jule einen Vorschlag gemacht: Jeder putzt eine Woche lang, aber man darf mit den anderen tauschen. Das hat mich überzeugt. Am Ende haben wir uns geeinigt, und jetzt funktioniert es ganz gut.',
     },
   ],
 }

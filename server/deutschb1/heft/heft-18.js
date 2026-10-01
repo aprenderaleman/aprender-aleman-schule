@@ -86,6 +86,30 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Hör die Informationen der Kursleiterin. Achte auf Paraphrasen in den Aufgaben.',
+      audio: {
+        transcript: 'So, zum Schluss noch ein paar Informationen zum Übungstest. Wir schreiben den Lesetest nicht am Donnerstag, sondern erst am Freitag, und zwar um halb zehn in Raum zwölf. Seid bitte schon um Viertel nach neun da. Ihr habt fünfundsechzig Minuten Zeit für fünf Teile. Lest zuerst die Aufgaben und überfliegt dann den Text. Ihr dürft Schlüsselwörter unterstreichen, aber ein Wörterbuch ist nicht erlaubt. Kreuzt am Ende jede Aufgabe an, denn für falsche Lösungen gibt es keine Minuspunkte. Vergesst nicht, eure Lösungen auf den Antwortbogen zu übertragen. Nach dem Test machen wir keinen Unterricht mehr, ihr könnt dann gleich nach Hause gehen. Wer am Freitag keine Zeit hat, schreibt den Test am Dienstag nach dem Kurs. Die Ergebnisse bekommt ihr am Montag per E-Mail.',
+      },
+      items: [
+        {
+          typ: 'mc',
+          frage: 'Wann beginnt der Lesetest?',
+          optionen: ['am Donnerstag um halb zehn', 'am Freitag um halb zehn', 'am Freitag um Viertel nach neun'],
+          loesung: 1,
+        },
+        { typ: 'rf', aussage: 'Nach dem Lesetest geht der Unterricht normal weiter.', loesung: false },
+        { typ: 'rf', aussage: 'Wer am Freitag nicht kommen kann, darf den Test an einem anderen Tag schreiben.', loesung: true },
+        {
+          typ: 'mc',
+          frage: 'Wie bekommen die Teilnehmer ihre Ergebnisse?',
+          optionen: ['am Montag im Kurs', 'mit der Post', 'in einer E-Mail'],
+          loesung: 2,
+        },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'formular',
       titel: 'Schreiben',
@@ -98,6 +122,21 @@ export default {
         { id: 'beginn', label: 'Beginn', erwartet: ['ab November', 'November', 'im November'] },
         { id: 'telefon', label: 'Telefon', erwartet: ['0176 5523 4410', '017655234410', '0176 55234410'] },
       ],
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Sprich etwa 75 Sekunden. Erzähl frei und in ganzen Sätzen.',
+      aufgabe: 'Sprich über das Thema „Lesen auf Deutsch“: Was liest du, und wie liest du?',
+      punkte: [
+        'Was liest du auf Deutsch, und wo?',
+        'Was machst du, wenn du ein Wort nicht verstehst?',
+        'Welche Strategie hilft dir bei langen Texten?',
+        'Welchen Tipp gibst du anderen Lernenden?',
+      ],
+      redemittel: ['Ich lese oft …', 'Wenn ich ein Wort nicht verstehe, …', 'Zuerst überfliege ich …', 'Mein Tipp ist: …'],
+      maxSekunden: 75,
+      beispielLoesung: 'Ich lese jeden Tag ein bisschen auf Deutsch. Morgens im Bus lese ich kurze Nachrichten auf dem Handy, und am Wochenende lese ich manchmal einen Blog über Reisen. Früher habe ich jedes unbekannte Wort im Wörterbuch gesucht. Das hat sehr lange gedauert! Heute lese ich einfach weiter, wenn ich ein Wort nicht verstehe. Meistens verstehe ich den Satz trotzdem. Bei langen Texten überfliege ich zuerst alles und suche die Schlüsselwörter. Erst dann lese ich die wichtigen Stellen genau. Mein Tipp für andere: Lest Texte über Themen, für die ihr euch interessiert. Dann macht das Lesen Spaß, und man lernt die Wörter fast automatisch.',
     },
   ],
 }

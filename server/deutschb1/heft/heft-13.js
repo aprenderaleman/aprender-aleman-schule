@@ -80,6 +80,30 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Hör das Telefongespräch. Löse dann die vier Aufgaben.',
+      audio: {
+        transcript: 'Mann: Restaurant Seeblick, guten Tag. Was kann ich für Sie tun?\nFrau: Guten Tag, hier spricht Marta Ruiz. Ich hätte gern einen Tisch für Samstagabend, für sechs Personen.\nMann: Am Samstag um sieben ist leider alles voll. Könnten Sie auch später kommen?\nFrau: Wäre halb neun möglich?\nMann: Ja, um halb neun hätten wir einen Tisch frei, aber nicht auf der Terrasse, sondern drinnen am Fenster.\nFrau: Das wäre in Ordnung. Meine Mutter hat Geburtstag. Könnten Sie vielleicht einen Kuchen vorbereiten?\nMann: Gern. Würden Sie uns bitte bis Donnerstag sagen, welchen Kuchen Sie möchten?\nFrau: Natürlich, ich rufe morgen noch einmal an. Vielen Dank!\nMann: Vielen Dank für Ihren Anruf, Frau Ruiz. Bis Samstag!',
+      },
+      items: [
+        { typ: 'rf', aussage: 'Frau Ruiz reserviert einen Tisch für sechs Personen.', loesung: true },
+        {
+          typ: 'mc',
+          frage: 'Um wie viel Uhr bekommt Frau Ruiz den Tisch?',
+          optionen: ['um sieben Uhr', 'um halb acht', 'um halb neun'],
+          loesung: 2,
+        },
+        { typ: 'rf', aussage: 'Der Tisch von Frau Ruiz ist auf der Terrasse.', loesung: false },
+        {
+          typ: 'mc',
+          frage: 'Was soll Frau Ruiz bis Donnerstag machen?',
+          optionen: ['einen Kuchen ins Restaurant bringen', 'sagen, welchen Kuchen sie möchte', 'den Tisch bezahlen'],
+          loesung: 1,
+        },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -92,6 +116,20 @@ export default {
       ],
       minWoerter: 40,
       beispielLoesung: 'Liebe Frau Kaya, ich fahre nächste Woche für fünf Tage zu meiner Familie nach Köln. Hätten Sie vielleicht Zeit für eine kleine Hilfe? Könnten Sie meine Blumen gießen? Würden Sie auch meine Post aus dem Briefkasten nehmen? Ich wäre Ihnen sehr dankbar. Ich könnte Ihnen den Schlüssel am Sonntagabend bringen. Wäre das in Ordnung? Viele Grüße, Julia Brandt',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Sprich etwa eine Minute über deine Wünsche.',
+      aufgabe: 'Du hast ein Jahr frei und genug Geld. Was würdest du gern machen? Benutze würde, hätte und wäre.',
+      punkte: [
+        'Wo würdest du gern wohnen oder wohin würdest du reisen?',
+        'Was hättest du gern, was du jetzt nicht hast?',
+        'Was würdest du gern lernen oder ausprobieren? Warum?',
+      ],
+      redemittel: ['Ich würde gern …', 'Am liebsten würde ich …', 'Ich hätte gern …', 'Ich wäre gern …'],
+      maxSekunden: 60,
+      beispielLoesung: 'Also, ein Jahr frei, das wäre toll! Am liebsten würde ich ein Jahr in Wien wohnen, weil ich die Stadt sehr schön finde. Ich hätte gern eine kleine Wohnung mit Balkon, denn jetzt wohne ich in einer WG und habe nur ein Zimmer. Ich würde auch gern viel reisen, zum Beispiel nach Norwegen. Dort wäre ich gern im Sommer, weil es dann lange hell ist. Und ich würde gern Klavier spielen lernen. Dafür habe ich im Moment leider keine Zeit. Ja, und am Ende würde ich wahrscheinlich lieber dort bleiben als zurückkommen!',
     },
   ],
 }

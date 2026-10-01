@@ -79,6 +79,30 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Du hörst eine Ansage am Telefon. Löse die Aufgaben.',
+      audio: {
+        transcript: 'Guten Tag, hier ist das Prüfungszentrum am Stadtpark. Im Moment ist unser Büro leider geschlossen. Wir sind von Montag bis Donnerstag von neun bis sechzehn Uhr für Sie da, am Freitag nur bis dreizehn Uhr. Und jetzt eine wichtige Information für Sie. Die nächste Prüfung für das Zertifikat B1 findet nicht am zwölften, sondern am neunzehnten Juni statt. Die Anmeldung machen Sie bitte online auf unserer Internetseite. Dort wählen Sie Ihre Module und einen Termin. Die Anmeldung ist noch bis zum fünften Juni möglich. Ihr Ergebnis sehen Sie nach etwa sechs Wochen online. Das Zeugnis holen Sie dann bei uns im Büro ab, aber bitte nur am Vormittag. Bringen Sie dafür Ihren Ausweis mit. Vielen Dank für Ihren Anruf und auf Wiederhören.',
+      },
+      items: [
+        { typ: 'rf', aussage: 'Am Freitag ist das Büro bis 16 Uhr geöffnet.', loesung: false },
+        {
+          typ: 'mc',
+          frage: 'Wann findet die nächste Prüfung statt?',
+          optionen: ['am 5. Juni', 'am 12. Juni', 'am 19. Juni'],
+          loesung: 2,
+        },
+        { typ: 'rf', aussage: 'Man kann sich noch bis zum 5. Juni für die Prüfung anmelden.', loesung: true },
+        {
+          typ: 'mc',
+          frage: 'Wann kann man das Zeugnis im Büro abholen?',
+          optionen: ['nur am Vormittag', 'nur am Nachmittag', 'den ganzen Tag'],
+          loesung: 0,
+        },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -91,6 +115,20 @@ export default {
       ],
       minWoerter: 40,
       beispielLoesung: 'Liebe Lucía,\ntoll, dass du auch die Prüfung machen willst! Sie hat vier Module: Lesen, Hören, Schreiben und Sprechen. Ein Modul bestehst du ab 60 von 100 Punkten. Die Anmeldung machst du online: Du wählst die Module und einen Termin. Mein Tipp: Lies jede Aufgabe genau, denn so machst du weniger Fehler.\nViele Grüße\nAhmed',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Sprich etwa eine Minute. Du kannst dir vorher kurz Notizen machen.',
+      aufgabe: 'Erzähl von deinem Plan: Warum möchtest du das Zertifikat B1 machen?',
+      punkte: [
+        'Wofür brauchst du das Zertifikat?',
+        'Welches Modul ist für dich leicht, welches schwer?',
+        'Wann und wo möchtest du die Prüfung machen?',
+      ],
+      redemittel: ['Ich möchte das Zertifikat machen, weil …', 'Schwer ist für mich das Modul …', 'Die Prüfung möchte ich im … machen.'],
+      maxSekunden: 60,
+      beispielLoesung: 'Also, ich möchte das Zertifikat B1 machen, weil ich in Deutschland als Krankenpfleger arbeiten will. Für die Stelle brauche ich das Zeugnis. Lesen ist für mich ziemlich leicht, denn ich lese jeden Tag Nachrichten auf Deutsch. Schwer ist für mich das Modul Sprechen. Ich bin immer nervös, wenn ich frei sprechen muss. Deshalb übe ich jetzt jede Woche mit einem Freund. Die Prüfung möchte ich im November machen. Ich habe schon ein Prüfungszentrum in der Nähe gefunden, und die Anmeldung mache ich nächste Woche online. Ich hoffe, dass ich alle vier Module bestehe.',
     },
   ],
 }

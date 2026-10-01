@@ -83,6 +83,30 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Hör die Informationen vor der mündlichen Prüfung. Löse dann die vier Aufgaben.',
+      audio: {
+        transcript: 'Guten Morgen und herzlich willkommen im Prüfungszentrum. Ich erkläre Ihnen kurz, wie die mündliche Prüfung heute funktioniert. Sie machen eine Paarprüfung, das heißt, Sie sprechen immer zu zweit. Die Liste mit den Paaren hängt neben der Tür. Zuerst haben Sie fünfzehn Minuten Vorbereitungszeit in Raum drei. Handys und Taschen lassen Sie bitte hier bei mir. Papier und Stift müssen Sie nicht mitbringen, beides bekommen Sie von uns. Die Prüfung selbst findet nicht in Raum drei statt, sondern in Raum sieben im ersten Stock. Das erste Paar ist um halb zehn dran. Zeigen Sie den Prüfern bitte zuerst Ihren Ausweis. Sprechen Sie langsam und deutlich, und fragen Sie einfach nach, wenn Sie etwas nicht verstehen. Ihre Ergebnisse bekommen Sie in vier Wochen per Post. Viel Erfolg!',
+      },
+      items: [
+        { typ: 'rf', aussage: 'Papier und Stift müssen die Teilnehmer selbst mitbringen.', loesung: false },
+        {
+          typ: 'mc',
+          frage: 'Wo findet die Prüfung statt?',
+          optionen: ['in Raum drei', 'in Raum sieben', 'im Erdgeschoss'],
+          loesung: 1,
+        },
+        { typ: 'rf', aussage: 'Die Teilnehmer finden ihren Partner auf einer Liste neben der Tür.', loesung: true },
+        {
+          typ: 'mc',
+          frage: 'Wann bekommen die Teilnehmer ihre Ergebnisse?',
+          optionen: ['in drei Wochen', 'in sieben Wochen', 'in vier Wochen'],
+          loesung: 2,
+        },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'formular',
       titel: 'Schreiben',
@@ -95,6 +119,21 @@ export default {
         { id: 'partner', label: 'Partner/in für die Paarprüfung', erwartet: ['Ewa Nowak', 'Nowak', 'Ewa'] },
         { id: 'thema', label: 'Thema der Präsentation', erwartet: ['Einkaufen im Internet', '„Einkaufen im Internet“', 'Einkaufen im Internet.'] },
       ],
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Halte eine kurze Präsentation. Sprich langsam und deutlich, höchstens 90 Sekunden.',
+      aufgabe: 'Halte eine kurze Präsentation wie in der mündlichen Prüfung. Dein Thema heißt „Selbst kochen oder essen gehen?“. Sprich über diese vier Punkte.',
+      punkte: [
+        'Einleitung: Nenne dein Thema.',
+        'Erzähl von deiner eigenen Erfahrung.',
+        'Nenne einen Vorteil und einen Nachteil.',
+        'Schluss: Sag deine Meinung und bedank dich.',
+      ],
+      redemittel: ['Ich spreche heute über das Thema …', 'Ich selbst …', 'Ein Vorteil ist, dass …', 'Ein Nachteil ist, dass …', 'Vielen Dank fürs Zuhören.'],
+      maxSekunden: 90,
+      beispielLoesung: 'Guten Tag! Ich spreche heute über das Thema „Selbst kochen oder essen gehen?“. Zuerst erzähle ich von meiner Erfahrung. Ich selbst koche fast jeden Abend zu Hause. Am Wochenende koche ich oft zusammen mit meiner Mitbewohnerin, das macht uns viel Spaß. Ins Restaurant gehe ich nur ein- oder zweimal im Monat. Ein Vorteil vom Kochen ist, dass es günstiger und meistens auch gesünder ist. Ich weiß genau, was in meinem Essen ist. Ein Nachteil ist, dass man viel Zeit braucht: einkaufen, kochen und danach noch die Küche aufräumen. Im Restaurant muss man das alles nicht machen. Insgesamt finde ich, dass selbst kochen im Alltag besser ist. Aber ein Restaurantbesuch mit Freunden ist etwas Besonderes. Vielen Dank fürs Zuhören!',
     },
   ],
 }

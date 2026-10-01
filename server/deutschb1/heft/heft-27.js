@@ -79,6 +79,30 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Hör die Nachricht auf dem Anrufbeantworter. Löse dann die vier Aufgaben.',
+      audio: {
+        transcript: 'Hallo Sofía, hier ist Maren. Schade, dass du nicht ans Telefon gehst! Stell dir vor, ich habe endlich die Stelle in der Buchhandlung bekommen. Das möchte ich feiern, und zwar am Samstag bei mir zu Hause. Eigentlich wollte ich um sieben anfangen, aber meine Schwester kommt erst später. Deshalb geht es nicht um sieben los, sondern um halb acht. Getränke habe ich genug. Hast du Lust, einen Salat mitzubringen? Dein Nudelsalat war letztes Mal so lecker! Ach ja, und noch etwas: Meine Klingel ist kaputt. Ruf mich bitte kurz an, wenn du vor der Tür stehst. Sag mir bis Donnerstag Bescheid, ob es bei dir klappt. Ich freue mich auf dich. Tschüss!',
+      },
+      items: [
+        {
+          typ: 'mc',
+          frage: 'Warum macht Maren eine Feier?',
+          optionen: ['Sie hat Geburtstag.', 'Sie hat eine neue Stelle bekommen.', 'Sie ist umgezogen.'],
+          loesung: 1,
+        },
+        { typ: 'rf', aussage: 'Die Feier beginnt um sieben Uhr.', loesung: false },
+        {
+          typ: 'mc',
+          frage: 'Was soll Sofía mitbringen?',
+          optionen: ['einen Salat', 'Getränke', 'einen Kuchen'],
+          loesung: 0,
+        },
+        { typ: 'rf', aussage: 'Sofía soll Maren anrufen, wenn sie am Samstag vor dem Haus ankommt.', loesung: true },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -91,6 +115,21 @@ export default {
       ],
       minWoerter: 40,
       beispielLoesung: 'Lieber Jannik,\nherzlichen Glückwunsch! Toll, dass du die Prüfung bestanden hast. Natürlich komme ich am Samstag gern.\nBei mir gibt es auch eine Neuigkeit: Stell dir vor, ich habe einen Platz im Fotokurs bekommen!\nSoll ich etwas mitbringen, vielleicht einen Salat? Sag mir einfach kurz Bescheid.\nViele Grüße\nNora',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Sprich eine Sprachnachricht für einen Freund. Du hast ungefähr eine Minute.',
+      aufgabe: 'Du hast eine neue Wohnung gefunden. Sprich deinem Freund Leo eine Sprachnachricht.',
+      punkte: [
+        'Erzähl die Neuigkeit.',
+        'Beschreib kurz die Wohnung.',
+        'Lade Leo ein und schlag einen Termin vor.',
+        'Bitte ihn, dir Bescheid zu sagen.',
+      ],
+      redemittel: ['Stell dir vor, …', 'Bei mir gibt es eine Neuigkeit: …', 'Hast du Lust, …?', 'Sag mir bitte kurz Bescheid, ob …'],
+      maxSekunden: 75,
+      beispielLoesung: 'Hallo Leo, ich bin es, Marta. Stell dir vor, ich habe endlich eine neue Wohnung gefunden! Ich bin so froh. Sie ist nicht groß, nur zwei Zimmer, aber sie ist hell und hat einen kleinen Balkon. Und das Beste: Bis zur Arbeit brauche ich nur zehn Minuten mit dem Fahrrad. Am ersten Juni ziehe ich um. Hast du Lust, mich danach zu besuchen? Ich schlage den Samstag in zwei Wochen vor, so gegen sechs. Dann koche ich etwas für uns, und du siehst die Wohnung. Sag mir bitte kurz Bescheid, ob das bei dir klappt. Bis bald, tschüss!',
     },
   ],
 }

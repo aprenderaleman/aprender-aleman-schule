@@ -80,6 +80,30 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Hör die Nachricht auf dem Anrufbeantworter. Löse dann die vier Aufgaben.',
+      audio: {
+        transcript: 'Hallo Sven, hier ist Carla. Schade, dass du nicht da bist. Ich habe vor, am Samstag eine Radtour an den See zu machen. Hast du Lust mitzukommen? Treffpunkt ist nicht am Bahnhof, sondern vor der Bäckerei am Markt, und zwar um Viertel nach neun. Ich versuche, pünktlich zu sein, aber du kennst mich ja. Vergiss bitte nicht, eine Jacke mitzunehmen, denn am Abend wird es kühl. Ich bringe Brote und Obst mit, du musst also nichts kaufen. Um Geld zu sparen, fahren wir nicht mit dem Zug zurück, sondern wieder mit dem Rad. Ach ja, mein Bruder Timo hat leider keine Zeit mitzukommen, er muss arbeiten. Ruf mich bitte bis Freitagabend an, um mir Bescheid zu sagen. Tschüs!',
+      },
+      items: [
+        { typ: 'rf', aussage: 'Der Treffpunkt für die Radtour ist am Bahnhof.', loesung: false },
+        {
+          typ: 'mc',
+          frage: 'Um wie viel Uhr ist der Treffpunkt?',
+          optionen: ['um Viertel vor neun', 'um neun Uhr', 'um Viertel nach neun'],
+          loesung: 2,
+        },
+        { typ: 'rf', aussage: 'Sven muss kein Essen für die Radtour kaufen.', loesung: true },
+        {
+          typ: 'mc',
+          frage: 'Warum fahren Carla und Sven nicht mit dem Zug zurück?',
+          optionen: ['Weil sie Geld sparen möchten.', 'Weil am Abend kein Zug mehr fährt.', 'Weil Timo sie mit dem Auto abholt.'],
+          loesung: 0,
+        },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'formular',
       titel: 'Schreiben',
@@ -92,6 +116,20 @@ export default {
         { id: 'sprache', label: 'Muttersprache', erwartet: ['Portugiesisch'] },
         { id: 'email', label: 'E-Mail', erwartet: ['mariana.costa@beispiel.de'] },
       ],
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Sprich etwa 75 Sekunden. Benutze zu + Infinitiv und um … zu.',
+      aufgabe: 'Was möchtest du im nächsten Jahr anders machen? Sprich über deine Pläne.',
+      punkte: [
+        'Was hast du vor? Nenne zwei Pläne.',
+        'Womit möchtest du anfangen oder aufhören?',
+        'Wozu machst du das? Nenne dein Ziel mit um … zu.',
+      ],
+      redemittel: ['Ich habe vor, … zu …', 'Ich möchte aufhören, … zu …', 'Es ist schwer, … zu …', 'Ich mache das, um … zu …'],
+      maxSekunden: 75,
+      beispielLoesung: 'Im nächsten Jahr möchte ich einiges anders machen. Ich habe vor, mehr Sport zu treiben. Im Januar fange ich an, zweimal pro Woche zu schwimmen. Ich mache das, um fit zu bleiben und um besser zu schlafen. Außerdem habe ich vor, weniger Zeit am Handy zu verbringen. Es ist wirklich schwer, das Handy abends auszumachen! Deshalb versuche ich, es nach zehn Uhr nicht mehr zu benutzen. Ich möchte auch aufhören, so viel Fast Food zu essen. Um Geld zu sparen, will ich öfter zu Hause kochen. Und ich habe Lust, endlich einen Tanzkurs zu machen. Mal sehen, ob ich das alles schaffe!',
     },
   ],
 }

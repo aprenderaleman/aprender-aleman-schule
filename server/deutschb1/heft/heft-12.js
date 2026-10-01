@@ -80,6 +80,30 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Du machst eine Stadtführung. Hör der Stadtführerin zu und löse die vier Aufgaben.',
+      audio: {
+        transcript: 'Herzlich willkommen zu unserer Führung durch die Altstadt! Ich heiße Martina und bin die Stadtführerin, die Sie heute begleitet. Wir stehen hier auf dem Marktplatz, wo früher jeden Samstag der Markt stattfand. Heute findet er nicht mehr samstags, sondern mittwochs statt. Das große Haus, das Sie links sehen, ist das alte Rathaus. Es ist über vierhundert Jahre alt. Der Turm, den Sie dahinter sehen, gehört zur Stadtkirche. Besucher, die gut zu Fuß sind, können später hinaufsteigen. Der Eintritt kostet zwei Euro. Danach gehen wir zu dem Brunnen, den die Kinder hier besonders lieben. Unsere Führung dauert ungefähr neunzig Minuten und endet in einem Café, wo Sie etwas trinken können. Haben Sie Fragen? Dann fragen Sie mich gern unterwegs.',
+      },
+      items: [
+        {
+          typ: 'mc',
+          frage: 'Wann findet der Markt heute statt?',
+          optionen: ['am Samstag', 'am Mittwoch', 'jeden Tag'],
+          loesung: 1,
+        },
+        { typ: 'rf', aussage: 'Das alte Rathaus ist mehr als 400 Jahre alt.', loesung: true },
+        { typ: 'rf', aussage: 'Für den Turm muss man nichts bezahlen.', loesung: false },
+        {
+          typ: 'mc',
+          frage: 'Wo endet die Führung?',
+          optionen: ['auf dem Marktplatz', 'am Brunnen', 'in einem Café'],
+          loesung: 2,
+        },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'formular',
       titel: 'Schreiben',
@@ -92,6 +116,20 @@ export default {
         { id: 'termin', label: 'Treffen — wann?', erwartet: ['Mittwochabend', 'am Mittwochabend', 'mittwochabends', 'Mittwoch', 'mittwochs'] },
         { id: 'wohnort', label: 'Wohnort', erwartet: ['Bremen-Neustadt', 'Bremen Neustadt', 'Bremen'] },
       ],
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Erzähl, was dir wichtig ist. Sprich ungefähr 75 Sekunden.',
+      aufgabe: 'Stell einen Menschen, einen Ort und einen Gegenstand vor, die dir wichtig sind. Benutze Relativsätze.',
+      punkte: [
+        'ein Mensch, der dir oft hilft',
+        'ein Ort, wo du dich wohlfühlst',
+        'ein Gegenstand, den du jeden Tag benutzt',
+      ],
+      redemittel: ['… ist ein Mensch, der …', '… ist ein Ort, wo …', '… ist etwas, das ich …'],
+      maxSekunden: 75,
+      beispielLoesung: 'Ein Mensch, der mir sehr wichtig ist, ist mein Freund Diego. Er ist jemand, der immer Zeit für mich hat. Wenn ich ein Problem habe, ist er der Erste, den ich anrufe. Ein Ort, wo ich mich wohlfühle, ist der kleine Park in meinem Viertel. Dort gibt es eine Bank, die unter einem alten Baum steht. Da sitze ich oft und lese. Und der Gegenstand, den ich jeden Tag benutze, ist mein Fahrrad. Es ist ein altes Rad, das mir mein Onkel geschenkt hat. Ich fahre damit zur Arbeit und zum Deutschkurs.',
     },
   ],
 }

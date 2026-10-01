@@ -149,6 +149,30 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Du hörst eine Nachricht auf der Mailbox. Löse die Aufgaben.',
+      audio: {
+        transcript: 'Guten Tag, Herr Ruiz, hier ist Sabine Albers von der Sprachschule. Ich habe Ihren Test von gestern schon korrigiert und möchte Ihnen kurz das Ergebnis sagen. Beim Lesen haben Sie fast keine Fehler gemacht, das ist Ihre große Stärke. Auch Ihr Wortschatz ist gut. Ihre Schwäche ist im Moment noch die Grammatik, vor allem die Sätze mit weil und dass. Deshalb empfehle ich Ihnen nicht den Kurs am Montag, sondern den Kurs am Mittwoch. Dort wiederholen wir genau diese Themen. Der Kurs beginnt um achtzehn Uhr dreißig und dauert neunzig Minuten. Wenn Sie jeden Tag eine Viertelstunde üben, sehen Sie schnell Fortschritte. Bitte rufen Sie mich bis Freitag zurück. Vielen Dank und bis bald!',
+      },
+      items: [
+        { typ: 'rf', aussage: 'Frau Albers hat den Test schon korrigiert.', loesung: true },
+        {
+          typ: 'mc',
+          frage: 'Was ist die Schwäche von Herrn Ruiz?',
+          optionen: ['das Lesen', 'der Wortschatz', 'die Grammatik'],
+          loesung: 2,
+        },
+        {
+          typ: 'mc',
+          frage: 'Welchen Kurs empfiehlt Frau Albers?',
+          optionen: ['den Kurs am Montag', 'den Kurs am Mittwoch', 'den Kurs am Freitag'],
+          loesung: 1,
+        },
+        { typ: 'rf', aussage: 'Der Kurs beginnt um 18 Uhr.', loesung: false },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Mini-Test 3 · Schreiben',
@@ -161,6 +185,20 @@ export default {
       ],
       minWoerter: 40,
       beispielLoesung: 'Liebe Ana,\nmein Kurs läuft gut! Wir üben viel Grammatik, und ich verstehe schon fast alles, wenn der Lehrer langsam spricht. Lesen finde ich leicht, aber Sprechen ist noch schwer, weil ich Angst vor Fehlern habe. Deshalb übe ich jetzt jeden Tag zehn Minuten mit einer Kollegin.\nLiebe Grüße\nCarla',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Sprich etwa eine Minute. Du kannst dir vorher kurz Notizen machen.',
+      aufgabe: 'Stell deinen Lernplan für die nächsten Wochen vor. Benutze weil, deshalb oder wenn.',
+      punkte: [
+        'Was ist dein Ziel?',
+        'Wann und wie oft übst du?',
+        'Was möchtest du verbessern, und wie machst du das?',
+      ],
+      redemittel: ['Mein Ziel ist …', 'Ich übe jeden Tag … / zweimal pro Woche …', 'Ich möchte … verbessern. Deshalb …'],
+      maxSekunden: 75,
+      beispielLoesung: 'Mein Ziel ist klar: Ich möchte im Frühling die B1-Prüfung bestehen. Deshalb habe ich einen Lernplan gemacht. Von Montag bis Freitag übe ich jeden Morgen zwanzig Minuten vor der Arbeit. Am Wochenende wiederhole ich dann alles noch einmal. Meine Stärke ist das Lesen, aber beim Sprechen mache ich noch viele Fehler. Das möchte ich verbessern. Ich treffe mich deshalb einmal pro Woche mit einer Lerngruppe, und wir sprechen nur Deutsch. Wenn ich einen Fehler mache, notiere ich ihn in meinem Heft. Am Ende vom Monat mache ich einen kurzen Test. So sehe ich meine Fortschritte, und das motiviert mich.',
     },
   ],
 }

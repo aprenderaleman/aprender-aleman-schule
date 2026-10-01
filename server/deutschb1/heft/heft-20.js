@@ -85,6 +85,30 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Hör das Telefongespräch. Löse dann die vier Aufgaben. Achte auf Zahlen und Zeiten.',
+      audio: {
+        transcript: 'Frau: Kern, guten Tag.\nMann: Guten Tag, Frau Kern, hier ist Okafor. Ich rufe wegen Ihrer Anzeige an. Haben Sie das Sofa noch?\nFrau: Ja, es ist noch da. Es ist gebraucht, aber erst zwei Jahre alt.\nMann: In der Anzeige steht achtzig Euro. Stimmt das?\nFrau: Nicht mehr. Ich möchte es schnell verkaufen, deshalb kostet es jetzt nur noch fünfzig Euro.\nMann: Das ist günstig! Können Sie es auch bringen?\nFrau: Nein, leider nicht. Sie müssen es selbst abholen. Den kleinen Tisch bekommen Sie aber kostenlos dazu.\nMann: Gut. Passt es Ihnen am Samstag um zehn?\nFrau: Am Samstag bin ich nicht da. Kommen Sie doch am Freitag um halb sechs.\nMann: In Ordnung, dann bis Freitag!',
+      },
+      items: [
+        {
+          typ: 'mc',
+          frage: 'Wie viel kostet das Sofa jetzt?',
+          optionen: ['80 Euro', '50 Euro', '15 Euro'],
+          loesung: 1,
+        },
+        { typ: 'rf', aussage: 'Frau Kern bringt das Sofa zum Käufer nach Hause.', loesung: false },
+        { typ: 'rf', aussage: 'Für den kleinen Tisch muss Herr Okafor nichts bezahlen.', loesung: true },
+        {
+          typ: 'mc',
+          frage: 'Wann holt Herr Okafor das Sofa ab?',
+          optionen: ['am Freitag um 17:30 Uhr', 'am Freitag um 18:30 Uhr', 'am Samstag um 10:00 Uhr'],
+          loesung: 0,
+        },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'formular',
       titel: 'Schreiben',
@@ -97,6 +121,21 @@ export default {
         { id: 'preis', label: 'Preis', erwartet: ['45 Euro', '45 €', '45', '45 EUR', '45,00 €'] },
         { id: 'abholung', label: 'Lieferung oder Selbstabholung?', erwartet: ['Selbstabholung', 'selbst abholen', 'Abholung'] },
       ],
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Sprich eine Nachricht auf den Anrufbeantworter. Du hast etwa eine Minute.',
+      aufgabe: 'Du hast eine Anzeige gelesen: „Gebrauchtes Fahrrad, 90 Euro“. Du rufst an, aber der Verkäufer ist nicht zu Hause. Sprich ihm eine Nachricht auf den Anrufbeantworter.',
+      punkte: [
+        'Sag deinen Namen und warum du anrufst.',
+        'Stell zwei Fragen zum Fahrrad.',
+        'Sag, wann du das Fahrrad abholen kannst.',
+        'Bitte um einen Rückruf.',
+      ],
+      redemittel: ['Ich rufe wegen Ihrer Anzeige an.', 'Ich möchte gern wissen, ob …', 'Ich könnte das Fahrrad am … abholen.', 'Bitte melden Sie sich bei mir unter …'],
+      maxSekunden: 60,
+      beispielLoesung: 'Guten Tag, mein Name ist Elena Torres. Ich rufe wegen Ihrer Anzeige an, es geht um das gebrauchte Fahrrad für 90 Euro. Ich habe großes Interesse, aber ich habe noch zwei Fragen. Wie alt ist das Fahrrad denn? Und ich möchte gern wissen, ob das Licht funktioniert. Wenn alles in Ordnung ist, könnte ich das Fahrrad am Samstagvormittag abholen. Passt Ihnen das? Bitte melden Sie sich bei mir unter 0176 20 30 40. Vielen Dank und auf Wiederhören!',
     },
   ],
 }

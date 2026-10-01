@@ -79,6 +79,30 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Hör das Gespräch nach dem Probetest. Löse dann die vier Aufgaben.',
+      audio: {
+        transcript: 'Frau: Hallo Deniz! Na, wie war dein Probetest im Schreiben?\nMann: Hallo Mila! Na ja, nicht so gut. Ich habe mir die Zeit schlecht eingeteilt.\nFrau: Wieso? Wir hatten doch sechzig Minuten.\nMann: Ja, aber für die erste E-Mail habe ich nicht zwanzig, sondern fast vierzig Minuten gebraucht. Für den Forumsbeitrag hatte ich dann nur noch zehn Minuten.\nFrau: Oh nein! Und die formelle E-Mail?\nMann: Die habe ich geschafft, aber ich habe die Grußformel vergessen. Und bei dir?\nFrau: Bei mir hat die Zeit gereicht. Ich habe am Ende sogar alle drei Texte kontrolliert und noch zwei Fehler gefunden: Ein Komma hat gefehlt, und ein Nomen war kleingeschrieben.\nMann: Super! Nächstes Mal nehme ich eine Uhr mit.',
+      },
+      items: [
+        { typ: 'rf', aussage: 'Deniz hat für die erste E-Mail zwanzig Minuten gebraucht.', loesung: false },
+        {
+          typ: 'mc',
+          frage: 'Was hat in der formellen E-Mail von Deniz gefehlt?',
+          optionen: ['die Anrede', 'die Grußformel', 'ein Komma'],
+          loesung: 1,
+        },
+        { typ: 'rf', aussage: 'Mila hat ihre Texte am Ende noch einmal gelesen und dabei Fehler gefunden.', loesung: true },
+        {
+          typ: 'mc',
+          frage: 'Was will Deniz beim nächsten Mal machen?',
+          optionen: ['mit dem Forumsbeitrag anfangen', 'ein Wörterbuch mitbringen', 'eine Uhr mitnehmen'],
+          loesung: 2,
+        },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'formular',
       titel: 'Schreiben',
@@ -91,6 +115,21 @@ export default {
         { id: 'fehler', label: 'Häufige Fehler', erwartet: ['Kommas und die Verbposition', 'Kommas und Verbposition', 'Kommas, Verbposition', 'Komma und Verbposition'] },
         { id: 'termin', label: 'Wunschtermin', erwartet: ['Mittwochabend', 'am Mittwochabend', 'Mittwoch', 'Mittwoch abend'] },
       ],
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Berichte im Kurs von deinen Erfahrungen. Sprich ungefähr eine Minute.',
+      aufgabe: 'Wie schreibst du Texte auf Deutsch? Berichte von deinen Erfahrungen.',
+      punkte: [
+        'Welche Texte schreibst du auf Deutsch?',
+        'Was ist für dich beim Schreiben schwierig?',
+        'Welche Fehler machst du oft?',
+        'Wie kontrollierst du deinen Text am Ende?',
+      ],
+      redemittel: ['Ich schreibe auf Deutsch vor allem …', 'Am schwierigsten ist für mich …', 'Ich vergesse oft, dass …', 'Am Ende kontrolliere ich …'],
+      maxSekunden: 75,
+      beispielLoesung: 'Also, ich schreibe auf Deutsch vor allem E-Mails an meine Kollegen und manchmal kurze Nachrichten an Freunde. Im Kurs schreiben wir auch Forumsbeiträge. Am schwierigsten ist für mich die Zeit. Ich denke zu lange nach, und dann werde ich nicht fertig. Meine typischen Fehler sind die Artikel und das Verb im Nebensatz. Nach „weil“ vergesse ich oft, dass das Verb am Ende steht. Deshalb kontrolliere ich jetzt jeden Text mit einer Checkliste. Zuerst suche ich alle Nomen und schaue, ob sie großgeschrieben sind. Dann kontrolliere ich die Verben und die Kommas. Das dauert nur drei Minuten, aber ich finde fast immer einen Fehler.',
     },
   ],
 }

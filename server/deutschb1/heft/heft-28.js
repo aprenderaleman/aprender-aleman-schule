@@ -83,6 +83,30 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Hör die Meinung einer Hörerin im Radio. Löse dann die vier Aufgaben.',
+      audio: {
+        transcript: 'Guten Morgen, hier spricht Ivana aus Leipzig. Ihr Thema heute finde ich sehr interessant: Braucht man wirklich ein Fitnessstudio? Meiner Meinung nach nicht. Ein Studio ist teuer, und viele Leute gehen nach ein paar Wochen nicht mehr hin. Ich habe selbst diese Erfahrung gemacht. Vor zwei Jahren habe ich jeden Monat vierzig Euro bezahlt, aber ich war insgesamt nur dreimal dort. Deshalb habe ich damit aufgehört. Jetzt laufe ich nicht mehr im Studio, sondern im Park, zweimal pro Woche mit einer Nachbarin. Das kostet nichts, und zu zweit macht es mehr Spaß. Ein Nachteil ist natürlich das Wetter: Im Winter ist es oft kalt und dunkel. Trotzdem finde ich insgesamt: Sport an der frischen Luft ist die bessere Lösung.',
+      },
+      items: [
+        { typ: 'rf', aussage: 'Ivana findet, dass man ein Fitnessstudio braucht.', loesung: false },
+        {
+          typ: 'mc',
+          frage: 'Wie oft war Ivana im Fitnessstudio?',
+          optionen: ['dreimal', 'zweimal pro Woche', 'jeden Monat einmal'],
+          loesung: 0,
+        },
+        {
+          typ: 'mc',
+          frage: 'Wo macht Ivana jetzt Sport?',
+          optionen: ['zu Hause', 'im Studio', 'im Park'],
+          loesung: 2,
+        },
+        { typ: 'rf', aussage: 'Ivana nennt auch einen Nachteil: das Wetter im Winter.', loesung: true },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'formular',
       titel: 'Schreiben',
@@ -95,6 +119,21 @@ export default {
         { id: 'grund', label: 'Grund: Wie oft fährt der Bus?', erwartet: ['zweimal am Tag', 'nur zweimal am Tag', 'zweimal', 'nur zweimal', 'zwei Mal am Tag', '2-mal am Tag', '2 Mal am Tag'] },
         { id: 'beispiel', label: 'Beispiel: Was musste sie nehmen?', erwartet: ['ein Taxi', 'Taxi', 'das Taxi'] },
       ],
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Sag deine Meinung zu einem Vorschlag. Sprich höchstens 90 Sekunden.',
+      aufgabe: 'In einem Forum liest du: „Kinder unter zwölf Jahren sollen kein eigenes Handy haben.“ Was denkst du darüber?',
+      punkte: [
+        'Sag klar deine Meinung.',
+        'Nenne mindestens einen Grund.',
+        'Gib ein Beispiel aus deiner Erfahrung.',
+        'Beende deine Antwort mit einem Schlusssatz.',
+      ],
+      redemittel: ['Meiner Meinung nach …', 'Ich finde, dass …', 'Ich habe zum Beispiel …', 'Insgesamt finde ich: …'],
+      maxSekunden: 90,
+      beispielLoesung: 'Das Thema finde ich sehr wichtig, weil meine Nichte zehn Jahre alt ist und unbedingt ein Handy haben will. Meiner Meinung nach ist der Vorschlag richtig. Ich finde, dass Kinder unter zwölf Jahren noch kein eigenes Handy brauchen. Sie sitzen sonst zu lange vor dem Bildschirm und spielen weniger draußen. Ich habe zum Beispiel bei meinem Neffen gesehen, dass er mit dem Handy viel schlechter geschlafen hat. Deshalb haben seine Eltern es abends immer weggenommen. Natürlich hat ein Handy auch einen Vorteil: Die Eltern können ihr Kind immer anrufen. Aber dafür reicht ein einfaches Telefon ohne Internet. Insgesamt finde ich: Ein eigenes Handy ist erst ab zwölf Jahren sinnvoll.',
     },
   ],
 }

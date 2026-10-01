@@ -75,6 +75,30 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Hör die Sprachnachricht. Löse dann die vier Aufgaben.',
+      audio: {
+        transcript: 'Hallo Miriam, hier ist Sofia! Endlich habe ich Zeit für eine Nachricht. Seit sechs Wochen wohne ich jetzt in Bremen. Ich bin nicht wegen des Studiums umgezogen, sondern wegen meiner neuen Stelle im Krankenhaus. Am Anfang war ich oft allein und habe euch alle sehr vermisst. Inzwischen kenne ich aber ein paar nette Kolleginnen, und wir gehen jeden Donnerstag zusammen schwimmen. In den ersten Wochen habe ich in einem Hotel im Zentrum gewohnt, jetzt habe ich eine kleine Wohnung am Stadtrand. Dort ist es ruhiger, aber leider brauche ich vierzig Minuten bis zur Arbeit. Über dein Paket habe ich mich riesig gefreut, vielen Dank! Und ich freue mich schon auf deinen Besuch im Oktober. Dann zeige ich dir mein Lieblingscafé am Fluss. Ruf mich doch am Wochenende an! Tschüss!',
+      },
+      items: [
+        { typ: 'rf', aussage: 'Sofia ist wegen ihres Studiums nach Bremen gezogen.', loesung: false },
+        {
+          typ: 'mc',
+          frage: 'Was macht Sofia jeden Donnerstag?',
+          optionen: ['Sie besucht einen Kurs im Zentrum.', 'Sie telefoniert mit Miriam.', 'Sie geht mit Kolleginnen schwimmen.'],
+          loesung: 2,
+        },
+        { typ: 'rf', aussage: 'Sofia wohnt inzwischen in einer Wohnung am Stadtrand.', loesung: true },
+        {
+          typ: 'mc',
+          frage: 'Worauf freut sich Sofia?',
+          optionen: ['auf ein Paket von Miriam', 'auf Miriams Besuch im Oktober', 'auf ihre neue Stelle'],
+          loesung: 1,
+        },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -83,6 +107,21 @@ export default {
       punkte: ['Wie war der Anfang in der neuen Stadt?', 'Was ist inzwischen besser?', 'Worauf freust du dich?'],
       minWoerter: 40,
       beispielLoesung: 'Liebe Mia, seit drei Monaten wohne ich jetzt in Leipzig. Am Anfang war es schwer, weil alles neu war. Ich habe euch alle sehr vermisst. Inzwischen habe ich eine nette Kollegin gefunden, und wir gehen oft zusammen joggen. Ich freue mich schon auf deinen Besuch im Mai! Ich kann dir hier ein tolles Café empfehlen. Viele Grüße, Pablo',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Sprich etwa eine Minute. Erzähl frei und lies nicht ab.',
+      aufgabe: 'Eine wichtige Person wohnt weit weg von dir. Erzähl von ihr.',
+      punkte: [
+        'Wer ist die Person und wo wohnt sie?',
+        'Was vermisst du besonders?',
+        'Wie bleibt ihr in Kontakt?',
+        'Worauf freust du dich?',
+      ],
+      redemittel: ['Ich möchte von … erzählen.', 'Ich vermisse vor allem …', 'Früher haben wir …, inzwischen …', 'Ich freue mich schon auf …'],
+      maxSekunden: 60,
+      beispielLoesung: 'Ich möchte von meiner Schwester Lucía erzählen. Sie wohnt in Bogotá, und ich wohne seit einem Jahr in Stuttgart. Ich vermisse sie sehr, vor allem unsere langen Gespräche. Früher haben wir jeden Sonntag zusammen gekocht. Inzwischen telefonieren wir zweimal pro Woche mit Video, und sie schickt mir oft Fotos. Das ist schön, aber es ist natürlich nicht das Gleiche. Im Dezember fliege ich nach Hause. Darauf freue ich mich schon sehr!',
     },
   ],
 }

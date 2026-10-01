@@ -80,6 +80,30 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Hör die Diskussion zwischen Markus und Elif. Löse dann die vier Aufgaben.',
+      audio: {
+        transcript: 'Mann: Elif, hast du das gelesen? Die Geschäfte in unserer Stadt sollen bald auch am Sonntag öffnen. Ich bin dafür!\nFrau: Wirklich, Markus? Warum denn?\nMann: Unter der Woche arbeite ich bis sieben Uhr abends. Am Sonntag hätte ich endlich Zeit zum Einkaufen.\nFrau: Das klingt praktisch, aber denk an die Verkäuferinnen. Meine Schwester arbeitet in einem Kaufhaus. Der Sonntag ist der einzige Tag, an dem ihre ganze Familie zu Hause ist. Deshalb bin ich dagegen.\nMann: Da stimme ich dir zu, das ist ein Nachteil. Aber vielleicht bekommen die Leute am Sonntag mehr Geld.\nFrau: Ich glaube, das bringt nichts. Zeit ist wichtiger als Geld.\nMann: Einerseits hast du recht. Andererseits muss ja niemand jeden Sonntag arbeiten. Ich bleibe trotzdem bei meiner Meinung.',
+      },
+      items: [
+        { typ: 'rf', aussage: 'Elif arbeitet selbst als Verkäuferin in einem Kaufhaus.', loesung: false },
+        {
+          typ: 'mc',
+          frage: 'Warum ist Elif gegen offene Geschäfte am Sonntag?',
+          optionen: ['Sonntags sind die Geschäfte zu voll.', 'Sonntags verdient man weniger Geld.', 'Sonntags sind die Familien zusammen.'],
+          loesung: 2,
+        },
+        { typ: 'rf', aussage: 'Markus findet auch, dass es einen Nachteil gibt.', loesung: true },
+        {
+          typ: 'mc',
+          frage: 'Welche Meinung hat Markus am Ende?',
+          optionen: ['Er ist dafür.', 'Er ist dagegen.', 'Er hat keine klare Meinung mehr.'],
+          loesung: 0,
+        },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -88,6 +112,21 @@ export default {
       punkte: ['Sag deine Meinung: dafür, dagegen oder teils-teils?', 'Nenne einen Vorteil und einen Nachteil.', 'Schreib am Ende einen klaren Schlusssatz.'],
       minWoerter: 40,
       beispielLoesung: 'Meiner Meinung nach ist das eine schwierige Frage. Einerseits ist ein Verbot gut, weil die Schüler im Unterricht besser aufpassen. Andererseits braucht man das Handy manchmal, zum Beispiel für einen Anruf bei den Eltern. Trotzdem bin ich am Ende dafür: In den Pausen sollen die Kinder lieber miteinander sprechen.',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Sag deine Meinung zu dem Vorschlag. Sprich etwa 90 Sekunden.',
+      aufgabe: 'In deiner Firma gibt es einen Vorschlag: „Freitags arbeiten alle von zu Hause.“ Was denkst du darüber?',
+      punkte: [
+        'Sag klar: Bist du dafür, dagegen oder teils-teils?',
+        'Nenne einen Vorteil und einen Nachteil.',
+        'Gib ein Beispiel aus deinem Alltag.',
+        'Sag am Ende noch einmal deine Meinung.',
+      ],
+      redemittel: ['Meiner Meinung nach …', 'Ich bin dafür / dagegen, weil …', 'Ein Vorteil ist, dass …', 'Einerseits …, andererseits …', 'Trotzdem finde ich …'],
+      maxSekunden: 90,
+      beispielLoesung: 'Meiner Meinung nach ist das eine gute Idee, ich bin also dafür. Ein großer Vorteil ist, dass man Zeit spart. Ich fahre zum Beispiel jeden Tag fast eine Stunde mit der Bahn zur Arbeit. Zu Hause könnte ich in dieser Zeit schon arbeiten oder ein bisschen länger schlafen. Außerdem ist es zu Hause oft ruhiger als im Büro. Natürlich gibt es auch einen Nachteil: Man sieht die Kollegen nicht, und manche Fragen kann man am Telefon nicht so gut klären. Einerseits ist das schade, andererseits ist es ja nur ein Tag pro Woche. Trotzdem finde ich den Vorschlag gut. An vier Tagen sind wir zusammen im Büro, und das reicht.',
     },
   ],
 }

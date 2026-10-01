@@ -80,6 +80,30 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Hör das Gespräch zwischen Lena und Marco. Löse dann die vier Aufgaben.',
+      audio: {
+        transcript: 'Lena: Hallo Marco! Hast du am Samstag schon etwas vor?\nMarco: Hallo Lena! Nein, noch nicht. Eigentlich wollte ich nur zu Hause bleiben und meine Serie weiterschauen.\nLena: Schon wieder? Lass uns lieber etwas zusammen unternehmen. Ich schlage vor, wir gehen ins Kino.\nMarco: Ins Kino möchte ich nicht so gern, ich sitze schon die ganze Woche vor dem Bildschirm. Wie wäre es mit Bowling?\nLena: Gute Idee! Sollen wir uns um sieben treffen?\nMarco: Das ist mir zu früh, ich habe bis halb sieben Training im Verein. Geht es auch um acht?\nLena: Ja, kein Problem. Treffen wir uns direkt dort?\nMarco: Lieber an der Haltestelle am Rathaus, dann gehen wir zusammen hin.\nLena: Einverstanden. Ich schicke dir morgen noch eine Nachricht.',
+      },
+      items: [
+        { typ: 'rf', aussage: 'Marco hat für Samstag schon eine Verabredung.', loesung: false },
+        {
+          typ: 'mc',
+          frage: 'Was machen Lena und Marco am Samstag zusammen?',
+          optionen: ['Sie gehen ins Kino.', 'Sie schauen eine Serie.', 'Sie gehen zum Bowling.'],
+          loesung: 2,
+        },
+        {
+          typ: 'mc',
+          frage: 'Um wie viel Uhr treffen sie sich?',
+          optionen: ['um acht', 'um halb sieben', 'um sieben'],
+          loesung: 0,
+        },
+        { typ: 'rf', aussage: 'Die beiden treffen sich an einer Haltestelle.', loesung: true },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'formular',
       titel: 'Schreiben',
@@ -92,6 +116,20 @@ export default {
         { id: 'termin', label: 'Wunschtermin', erwartet: ['Mittwochabend', 'am Mittwochabend', 'Mittwoch', 'Mittwoch abends', 'mittwochs'] },
         { id: 'kamera', label: 'Eigene Kamera? (ja/nein)', erwartet: ['ja'] },
       ],
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Sprich eine Sprachnachricht. Du hast 60 Sekunden Zeit.',
+      aufgabe: 'Dein Freund Tim ist neu in der Stadt. Sprich ihm eine Sprachnachricht und schlag ihm etwas für das Wochenende vor.',
+      punkte: [
+        'Was möchtest du mit ihm unternehmen?',
+        'Warum ist das eine gute Idee?',
+        'Wann und wo trefft ihr euch?',
+      ],
+      redemittel: ['Hast du am … schon etwas vor?', 'Ich schlage vor, dass wir …', 'Wir könnten uns um … treffen.', 'Schick mir bitte eine Nachricht, ob …'],
+      maxSekunden: 60,
+      beispielLoesung: 'Hallo Tim, hier ist Pablo. Hast du am Sonntag schon etwas vor? Ich schlage vor, dass wir zusammen zum Flohmarkt am Fluss gehen. Der ist wirklich toll, und danach kann man dort gut etwas essen. Ich glaube, das gefällt dir, weil du doch alte Schallplatten sammelst. Außerdem lernst du so ein bisschen die Stadt kennen. Wir könnten uns um elf Uhr an der Haltestelle am Markt treffen. Wenn es regnet, gehen wir einfach ins Kino. Schick mir bitte eine Nachricht, ob du Zeit hast. Bis dann!',
     },
   ],
 }

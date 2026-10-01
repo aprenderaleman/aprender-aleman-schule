@@ -99,6 +99,30 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Hör das Gespräch im Schuhgeschäft. Löse dann die vier Aufgaben.',
+      audio: {
+        transcript: 'Verkäufer: Guten Tag, kann ich Ihnen helfen?\nKundin: Ja, bitte. Ich suche Wanderschuhe. Die braunen hier gefallen mir, aber ich sehe keinen Preis.\nVerkäufer: Die kosten normalerweise fünfundneunzig Euro. Diese Woche sind sie aber im Angebot, für neunundsechzig Euro.\nKundin: Das ist ja günstig! Haben Sie die auch in Größe neununddreißig?\nVerkäufer: In Braun leider nicht mehr, nur noch in Grau. Die braunen bekommen wir erst am Montag wieder.\nKundin: Grau gefällt mir nicht so gut. Kann ich die braunen in Größe vierzig anprobieren?\nVerkäufer: Natürlich, bitte sehr.\nKundin: Sie sind ein bisschen groß, aber mit dicken Socken passen sie gut. Ich nehme sie. Kann ich mit Karte bezahlen?\nVerkäufer: Ja, gern, vorne an der Kasse. Heben Sie bitte den Kassenbon auf. Damit können Sie die Schuhe vierzehn Tage lang umtauschen.',
+      },
+      items: [
+        {
+          typ: 'mc',
+          frage: 'Was kosten die Schuhe in dieser Woche?',
+          optionen: ['95 Euro', '69 Euro', '59 Euro'],
+          loesung: 1,
+        },
+        { typ: 'rf', aussage: 'Die braunen Schuhe gibt es heute in Größe 39.', loesung: false },
+        {
+          typ: 'mc',
+          frage: 'Welche Schuhe kauft die Kundin?',
+          optionen: ['die braunen in Größe 40', 'die grauen in Größe 39', 'die braunen in Größe 39'],
+          loesung: 0,
+        },
+        { typ: 'rf', aussage: 'Die Kundin kann die Schuhe zwei Wochen lang umtauschen.', loesung: true },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'formular',
       titel: 'Schreiben',
@@ -111,6 +135,20 @@ export default {
         { id: 'groesse_neu', label: 'Gewünschte Größe', erwartet: ['L', 'Größe L'] },
         { id: 'telefon', label: 'Telefon', erwartet: ['0171 5538902', '01715538902', '0171-5538902'] },
       ],
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Sprich über das Thema Einkaufen. Du hast 90 Sekunden Zeit.',
+      aufgabe: 'Wie kaufst du ein? Beschreib deine Gewohnheiten und sag deine Meinung zu Werbung.',
+      punkte: [
+        'Wo und wie oft kaufst du ein?',
+        'Wie bezahlst du am liebsten, und warum?',
+        'Wie findest du Werbung und Angebote?',
+      ],
+      redemittel: ['… kaufe ich meistens im … / auf dem … ein.', 'Ich bezahle am liebsten …, weil …', 'Auf Angebote achte ich …', 'Werbung finde ich …, weil …'],
+      maxSekunden: 90,
+      beispielLoesung: 'Lebensmittel kaufe ich meistens einmal pro Woche im Supermarkt ein, am liebsten am Samstagmorgen. Obst und Gemüse hole ich aber auf dem Markt, weil es dort frischer ist. Kleidung kaufe ich nur im Geschäft, denn ich möchte alles zuerst anprobieren. Ich bezahle fast immer mit Karte. Das geht schnell, und ich muss kein Bargeld mitnehmen. Nur auf dem Markt bezahle ich bar. Auf Angebote achte ich schon, vor allem bei teuren Sachen. Werbung finde ich aber oft nervig. Ich bekomme jeden Tag viele E-Mails von Online-Shops und lösche sie sofort. Ehrlich gesagt habe ich wegen Werbung auch schon Dinge gekauft, die ich gar nicht gebraucht habe.',
     },
   ],
 }

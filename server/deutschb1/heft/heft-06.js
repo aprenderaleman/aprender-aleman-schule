@@ -76,6 +76,30 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Du hörst ein Gespräch zwischen Jana und Emre. Löse die Aufgaben.',
+      audio: {
+        transcript: 'Frau: Hallo Emre! Wie war dein Wochenende? Bist du nach Hamburg gefahren?\nMann: Hallo Jana! Nein, am Ende bin ich nicht nach Hamburg, sondern an die Ostsee gefahren. Meine Schwester hat mich eingeladen.\nFrau: Wie schön! Bist du mit dem Zug gefahren?\nMann: Das war der Plan. Aber ich habe den Zug verpasst, weil ich zu spät aufgestanden bin. Deshalb hat mich meine Schwester mit dem Auto abgeholt.\nFrau: So ein Glück! Und was habt ihr dort gemacht?\nMann: Am Samstag sind wir lange am Strand spazieren gegangen. Am Abend hat meine Schwester Fisch gekocht, und wir haben viel erzählt.\nFrau: Und am Sonntag?\nMann: Da ist etwas Dummes passiert. Ich habe mein Handy am Strand verloren. Zum Glück hat es ein Kind gefunden.\nFrau: Na, dann hast du ja wirklich viel erlebt!',
+      },
+      items: [
+        {
+          typ: 'mc',
+          frage: 'Wohin ist Emre am Wochenende gefahren?',
+          optionen: ['nach Hamburg', 'an die Ostsee', 'zu seinen Eltern'],
+          loesung: 1,
+        },
+        { typ: 'rf', aussage: 'Emre ist mit dem Zug gefahren.', loesung: false },
+        { typ: 'rf', aussage: 'Am Samstagabend hat Emres Schwester gekocht.', loesung: true },
+        {
+          typ: 'mc',
+          frage: 'Was ist am Sonntag passiert?',
+          optionen: ['Emre hat sein Handy verloren.', 'Emre hat den Zug verpasst.', 'Ein Kind hat Emres Fahrkarte gefunden.'],
+          loesung: 0,
+        },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'formular',
       titel: 'Schreiben',
@@ -88,6 +112,21 @@ export default {
         { id: 'ort', label: 'Wo verloren?', erwartet: ['Straßenbahn Linie 4', 'in der Straßenbahn Linie 4', 'Linie 4', 'in der Straßenbahn', 'Straßenbahn'] },
         { id: 'telefon', label: 'Telefon', erwartet: ['0160 7788990', '01607788990'] },
       ],
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Erzähl von einem Erlebnis. Sprich etwa 90 Sekunden.',
+      aufgabe: 'Erzähl im Perfekt von deinem letzten Ausflug oder von deiner letzten Reise.',
+      punkte: [
+        'Wohin bist du gefahren, und mit wem?',
+        'Was hast du dort gemacht?',
+        'Was ist Besonderes passiert?',
+        'Wie hat es dir gefallen?',
+      ],
+      redemittel: ['Ich bin nach … gefahren.', 'Dort habe ich …', 'Dann ist etwas Dummes / Lustiges passiert: …'],
+      maxSekunden: 90,
+      beispielLoesung: 'Im August bin ich mit zwei Freundinnen nach Wien gefahren. Wir sind am Freitag sehr früh aufgestanden und haben den Zug um sechs Uhr genommen. In Wien haben wir zuerst das Zentrum besucht und viele Fotos gemacht. Am Nachmittag sind wir in ein Café gegangen, und ich habe ein Stück Torte gegessen. Am Samstag ist dann etwas Dummes passiert: Ich habe meine Jacke in der Straßenbahn vergessen. Wir sind sofort zurückgefahren, aber die Jacke war weg. Zum Glück hat der Fahrer sie gefunden und im Büro abgegeben. Am Abend haben wir ein Konzert besucht, das hat mir sehr gut gefallen. Am Sonntag sind wir müde, aber glücklich nach Hause gekommen. Die Reise war wirklich toll, und ich habe viel Deutsch gesprochen.',
     },
   ],
 }

@@ -85,6 +85,30 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Hör das Gespräch zwischen Lena und Marco. Löse dann die vier Aufgaben.',
+      audio: {
+        transcript: 'Frau: Hallo Marco! Du, ich habe mich gestern für den Kochkurs angemeldet. Interessierst du dich nicht auch für italienische Küche?\nMann: Doch, sehr! Wann findet der Kurs denn statt, Lena?\nFrau: Jeden Mittwoch um halb sieben. Wir treffen uns im Kulturzentrum in der Bergstraße.\nMann: Mittwochs kann ich. Muss man etwas mitbringen?\nFrau: Nur eine Schürze. Die Töpfe und Messer gehören dem Kulturzentrum.\nMann: Gut. Und was kostet das?\nFrau: Sechzig Euro für Studenten, sonst achtzig.\nMann: Ich bin leider kein Student mehr. Hilfst du mir bei der Anmeldung? Die Internetseite gefällt mir gar nicht.\nFrau: Klar, ich helfe dir. Aber beeil dich, es gibt nur noch drei Plätze!\nMann: Dann machen wir das heute Abend. Ich danke dir, Lena. Ich freue mich schon auf den Kurs!',
+      },
+      items: [
+        { typ: 'rf', aussage: 'Lena hat sich schon für den Kochkurs angemeldet.', loesung: true },
+        {
+          typ: 'mc',
+          frage: 'Was muss man zum Kurs mitbringen?',
+          optionen: ['Töpfe und Messer', 'eine Schürze', 'nichts'],
+          loesung: 1,
+        },
+        {
+          typ: 'mc',
+          frage: 'Wie viel muss Marco für den Kurs bezahlen?',
+          optionen: ['sechzig Euro', 'siebzig Euro', 'achtzig Euro'],
+          loesung: 2,
+        },
+        { typ: 'rf', aussage: 'Im Kochkurs sind noch viele Plätze frei.', loesung: false },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -97,6 +121,21 @@ export default {
       ],
       minWoerter: 40,
       beispielLoesung: 'Liebe Nora, vielen Dank für das tolle Buch! Es gefällt mir sehr, ich habe schon die Hälfte gelesen. Ich freue mich schon auf die Sommerferien, denn ich fahre mit meiner Schwester ans Meer. Wollen wir uns vorher treffen? Hast du am Samstag Zeit? Wir könnten uns um drei Uhr im Café am Markt treffen. Liebe Grüße, Samira',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Sprich etwa 75 Sekunden. Benutze reflexive Verben und Verben mit Dativ.',
+      aufgabe: 'Stell ein Hobby vor, für das du dich besonders interessierst.',
+      punkte: [
+        'Wofür interessierst du dich, und seit wann?',
+        'Wer hat dir am Anfang geholfen?',
+        'Mit wem triffst du dich dafür, und wo?',
+        'Was gefällt dir daran besonders?',
+      ],
+      redemittel: ['Ich interessiere mich für …', '… hat mir am Anfang geholfen.', 'Wir treffen uns …', 'Mir gefällt besonders, dass …'],
+      maxSekunden: 75,
+      beispielLoesung: 'Ich interessiere mich sehr für Musik. Vor drei Jahren habe ich mir eine Gitarre gekauft, und seitdem spiele ich fast jeden Tag. Am Anfang hat mir mein Onkel geholfen. Er hat mir die ersten Lieder gezeigt. Dafür danke ich ihm noch heute! Jetzt treffe ich mich jeden Freitag mit zwei Freunden. Wir treffen uns im Keller meiner Eltern, weil wir dort laut sein können. Mir gefällt besonders, dass ich beim Spielen den Stress vergesse. Und ich freue mich immer, wenn meiner Familie ein neues Lied gefällt. Im Sommer spielen wir auf einem kleinen Fest. Darauf freue ich mich schon sehr!',
     },
   ],
 }

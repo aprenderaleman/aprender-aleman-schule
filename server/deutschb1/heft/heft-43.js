@@ -89,6 +89,35 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Du hörst eine Diskussion zwischen Sabine und Tobias. Löse die vier Aufgaben.',
+      audio: {
+        transcript: 'Sabine: Hast du das gelesen, Tobias? Die Stadt will die Innenstadt für Autos sperren.\nTobias: Ja, Sabine, und ich finde das ehrlich gesagt übertrieben. Wie sollen ältere Leute dann zum Arzt kommen?\nSabine: Mit dem Bus. Die Stadt hat versprochen, dass er dann alle zehn Minuten fährt und nicht mehr nur alle dreißig.\nTobias: Das glaube ich erst, wenn ich es sehe. Und die Geschäfte? Die verlieren doch Kunden, wenn niemand mehr vor der Tür parken kann.\nSabine: In anderen Städten war es genau umgekehrt. Dort kommen mehr Menschen ins Zentrum, weil es ruhiger und sauberer ist.\nTobias: Na gut, weniger Lärm wäre schön, da hast du recht. Aber ganz ohne Autos geht es nicht.\nSabine: Lieferwagen dürfen ja weiter hineinfahren, allerdings nur bis elf Uhr vormittags.\nTobias: Trotzdem, ich bin dagegen. Man sollte zuerst die Bürger fragen.\nSabine: Da bin ich deiner Meinung.',
+      },
+      items: [
+        {
+          typ: 'mc',
+          frage: 'Wer findet den Plan der Stadt übertrieben?',
+          optionen: ['Sabine', 'Tobias', 'beide'],
+          loesung: 1,
+        },
+        {
+          typ: 'mc',
+          frage: 'Wie oft soll der Bus in Zukunft fahren?',
+          optionen: ['alle 10 Minuten', 'alle 30 Minuten', 'alle 13 Minuten'],
+          loesung: 0,
+        },
+        { typ: 'rf', aussage: 'Lieferwagen dürfen den ganzen Tag ins Zentrum fahren.', loesung: false },
+        {
+          typ: 'mc',
+          frage: 'Wer meint, dass man zuerst die Bürger fragen sollte?',
+          optionen: ['Sabine', 'Tobias', 'beide'],
+          loesung: 2,
+        },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -101,6 +130,21 @@ export default {
       ],
       minWoerter: 40,
       beispielLoesung: 'Hallo Jonas,\nich habe deine Anzeige gelesen und hätte großes Interesse an einem Tandem. Ich heiße Carmen, komme aus Bogotá und wohne seit einem Jahr in Mannheim. Ich lerne Deutsch, weil ich hier als Ingenieurin arbeiten möchte. Hättest du am Samstagnachmittag Zeit? Wir könnten uns um 15 Uhr in einem Café am Marktplatz treffen.\nViele Grüße\nCarmen',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Halte deine Präsentation wie am Prüfungstag: frei und am Stück. Du hast 90 Sekunden.',
+      aufgabe: 'Halte eine Präsentation wie im zweiten Teil der mündlichen Prüfung. Dein Thema ist: „Urlaub im eigenen Land oder im Ausland?“',
+      punkte: [
+        'Stell das Thema und deinen Plan vor.',
+        'Berichte von deinen Erfahrungen und von deinem Heimatland.',
+        'Nenne Vor- und Nachteile.',
+        'Sag deine Meinung und bedanke dich.',
+      ],
+      redemittel: ['In meiner Präsentation geht es um …', 'In meinem Heimatland …', 'Dazu gebe ich ein Beispiel.', 'Zum Schluss möchte ich sagen, dass …', 'Vielen Dank für Ihre Aufmerksamkeit.'],
+      maxSekunden: 90,
+      beispielLoesung: 'In meiner Präsentation geht es um die Frage: Urlaub im eigenen Land oder im Ausland? Ich spreche zuerst über meine Erfahrungen und mein Heimatland, dann über Vor- und Nachteile. Als Kind bin ich mit meiner Familie jeden Sommer ans Meer gefahren, nur zwei Stunden von zu Hause entfernt. Erst mit zwanzig war ich zum ersten Mal im Ausland. In meinem Heimatland, in Spanien, bleiben viele Leute im Urlaub im eigenen Land, weil es dort Strand und Berge gibt. Ein Vorteil ist, dass die Reise kurz und billig ist. Außerdem versteht man die Sprache. Im Ausland lernt man dafür eine andere Kultur kennen. Dazu gebe ich ein Beispiel. In Deutschland habe ich gelernt, pünktlich zu sein. Aber so eine Reise kostet mehr, und man braucht mehr Zeit. Zum Schluss möchte ich sagen, dass ich beides mag. Vielen Dank für Ihre Aufmerksamkeit.',
     },
   ],
 }

@@ -90,6 +90,30 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Hör das Telefongespräch mit der Zahnarztpraxis. Löse dann die vier Aufgaben.',
+      audio: {
+        transcript: 'Frau: Zahnarztpraxis Lindner, guten Tag. Was kann ich für Sie tun?\nMann: Guten Tag, hier spricht Pablo Rivas. Ich habe morgen um neun Uhr einen Termin. Leider muss ich ihn absagen, weil ich an einer wichtigen Besprechung teilnehmen muss.\nFrau: Kein Problem, Herr Rivas. Möchten Sie den Termin verschieben?\nMann: Ja, gern. Wäre es möglich, am Donnerstag zu kommen?\nFrau: Am Donnerstag ist leider nichts mehr frei. Ich könnte Ihnen den Freitag anbieten, um Viertel nach elf.\nMann: Freitag passt gut. Könnten Sie mir den Termin bitte noch per E-Mail schicken?\nFrau: Natürlich, das mache ich sofort. Bitte bringen Sie am Freitag Ihre Versichertenkarte mit.\nMann: In Ordnung. Vielen Dank im Voraus und auf Wiederhören!',
+      },
+      items: [
+        {
+          typ: 'mc',
+          frage: 'Warum sagt Herr Rivas den Termin ab?',
+          optionen: ['Er ist krank.', 'Er hat eine Besprechung.', 'Er ist im Urlaub.'],
+          loesung: 1,
+        },
+        { typ: 'rf', aussage: 'Der neue Termin ist am Donnerstag.', loesung: false },
+        {
+          typ: 'mc',
+          frage: 'Um wie viel Uhr ist der neue Termin?',
+          optionen: ['um 11:15 Uhr', 'um 9:00 Uhr', 'um 11:45 Uhr'],
+          loesung: 0,
+        },
+        { typ: 'rf', aussage: 'Die Praxis schreibt Herrn Rivas eine E-Mail mit dem neuen Termin.', loesung: true },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -102,6 +126,21 @@ export default {
       ],
       minWoerter: 40,
       beispielLoesung: 'Sehr geehrte Frau Albers,\nleider kann ich morgen nicht zum Test kommen, weil ich einen dringenden Termin beim Arzt habe. Bitte entschuldigen Sie das. Wäre es möglich, den Test auf nächste Woche zu verschieben? Am Dienstag und am Mittwoch habe ich den ganzen Tag Zeit.\nVielen Dank im Voraus.\nMit freundlichen Grüßen\nNuria Castillo',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Sprich eine formelle Nachricht auf den Anrufbeantworter. Benutze die Sie-Form.',
+      aufgabe: 'Du interessierst dich für einen Computerkurs. Das Büro der Schule ist geschlossen. Sprich auf den Anrufbeantworter.',
+      punkte: [
+        'Stell dich kurz vor.',
+        'Sag, für welchen Kurs du dich interessierst.',
+        'Bitte höflich um Informationen zu Preis und Kurszeiten.',
+        'Bitte darum, dass man dich zurückruft.',
+      ],
+      redemittel: ['Guten Tag, mein Name ist …', 'Ich würde gern …', 'Könnten Sie mir bitte sagen, …?', 'Wäre es möglich, dass …?', 'Vielen Dank im Voraus.'],
+      maxSekunden: 75,
+      beispielLoesung: 'Guten Tag, mein Name ist Diego Paredes. Ich rufe an, weil ich mich für Ihren Computerkurs für Anfänger interessiere. Ich würde gern im Oktober an dem Kurs teilnehmen. Leider habe ich auf Ihrer Internetseite nicht alle Informationen gefunden. Könnten Sie mir bitte sagen, wie viel der Kurs kostet? Ich würde auch gern wissen, an welchen Tagen er stattfindet. Abends ab achtzehn Uhr habe ich immer Zeit, aber am Vormittag muss ich leider arbeiten. Wäre es möglich, dass Sie mich zurückrufen? Meine Nummer ist 0176 443 210. Vielen Dank im Voraus und auf Wiederhören.',
     },
   ],
 }
