@@ -107,6 +107,38 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Du hörst einen Radiokommentar zu einer neuen Gebühr. Achte auf die Wertungen und entscheide, welche Aussage dem Kommentar entspricht.',
+      audio: {
+        transcript: 'Seit dem ersten März zahlt man in unserer Stadt für jeden Einwegbecher fünfzig Cent extra. Viele Cafébesitzer behaupten, dass ihnen deshalb die Kundschaft wegläuft. Ein fragwürdiges Argument, denn wer seinen eigenen Becher mitbringt, zahlt keinen Cent mehr. Erfreulich ist dagegen, was man schon nach wenigen Wochen sieht. Die Mülleimer am Bahnhof sind nicht mehr überfüllt, und die Stadtreinigung findet rund ein Drittel weniger Becher auf den Straßen. Zwar bedeutet die Gebühr für kleine Betriebe zusätzliche Arbeit, aber dieser Aufwand ist gering im Vergleich zu den Kosten, die der Müll bisher verursacht hat. Bedauerlich finde ich allerdings, dass die Stadt noch immer nicht sagt, wofür sie die Einnahmen verwendet. Angeblich fließt das Geld in den Umweltschutz, nur konnte mir das im Rathaus niemand bestätigen. Die Gebühr selbst war längst überfällig. Jetzt ist es höchste Zeit, dass die Stadt offen sagt, was mit dem Geld geschieht.',
+      },
+      items: [
+        {
+          typ: 'mc',
+          frage: 'Wie wird die neue Gebühr im Kommentar insgesamt beurteilt?',
+          optionen: [
+            'Sie wird abgelehnt, weil die Cafés ihre Kundschaft verlieren.',
+            'Sie wird begrüßt; kritisiert wird nur, dass unklar ist, wohin das Geld fließt.',
+            'Sie wird als überflüssig bezeichnet, weil der Müll kaum weniger geworden ist.',
+          ],
+          loesung: 1,
+        },
+        { typ: 'rf', aussage: 'Im Kommentar wird die Sorge der Cafébesitzer als berechtigt dargestellt.', loesung: false },
+        {
+          typ: 'mc',
+          frage: 'Was hat sich seit der Einführung der Gebühr verändert?',
+          optionen: [
+            'Nur noch ein Drittel der Kundschaft kauft Kaffee zum Mitnehmen.',
+            'Die Stadtreinigung braucht ein Drittel mehr Personal.',
+            'Auf den Straßen liegt etwa ein Drittel weniger Becher.',
+          ],
+          loesung: 2,
+        },
+        { typ: 'rf', aussage: 'Im Rathaus wurde nicht bestätigt, dass die Einnahmen für den Umweltschutz verwendet werden.', loesung: true },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -119,6 +151,20 @@ export default {
       ],
       minWoerter: 60,
       beispielLoesung: 'Sehr geehrte Damen und Herren, die geplante Schließung der Stadtbibliothek am Samstag halte ich für eine bedauerliche Entscheidung. Zwar muss die Stadt sparen, aber der Samstag ist für viele Berufstätige und Familien der einzige Tag, an dem sie die Bibliothek überhaupt besuchen können. Kaum verwunderlich also, dass sich schon zahlreiche Eltern beschwert haben. Die Einsparung ist gering, der Schaden für die Bildung dagegen groß. Es ist höchste Zeit, dass die Stadt andere Lösungen prüft, zum Beispiel kürzere Öffnungszeiten am Montag. Mit freundlichen Grüßen, Ingrid Paulsen',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Sprich einen Hörerkommentar für das Lokalradio. Du hast etwa 100 Sekunden.',
+      aufgabe: 'Das Lokalradio sammelt Hörerkommentare zu folgendem Plan: Deine Stadt will die Parkgebühren im Zentrum verdoppeln, um den Autoverkehr zu verringern. Nimm einen Kommentar von etwa 100 Sekunden auf, in dem du den Plan bewertest.',
+      punkte: [
+        'Sag, was du an dem Plan erfreulich und was du fragwürdig findest.',
+        'Erkläre, auf wessen Kosten der Plan deiner Meinung nach geht.',
+        'Sag, was die Stadt stattdessen oder zusätzlich tun sollte.',
+      ],
+      redemittel: ['Erfreulich ist, dass …', 'Fragwürdig finde ich allerdings, …', 'Das geht vor allem auf Kosten …', 'Letztlich …'],
+      maxSekunden: 100,
+      beispielLoesung: 'Die Stadt will also die Parkgebühren im Zentrum verdoppeln. Erfreulich ist, dass sie den Autoverkehr endlich ernst nimmt, denn die Innenstadt ist seit Jahren verstopft. Fragwürdig finde ich allerdings, wie sie das Problem lösen will. Vielleicht bleiben ein paar Autos zu Hause. Aber wer auf dem Land wohnt, hat oft gar keine andere Möglichkeit, dort fährt der letzte Bus um sieben Uhr abends. Die höheren Gebühren gehen also vor allem auf Kosten der Pendler und der Leute mit wenig Geld. Wer gut verdient, zahlt einfach und parkt weiter direkt vor dem Geschäft. Kaum verwunderlich, dass auch die Händler nervös werden. Aus meiner Sicht müsste die Stadt zuerst die Alternativen verbessern, also günstige Parkplätze am Stadtrand anbieten und Busse einsetzen, die auch abends fahren. Letztlich funktioniert der Plan nur, wenn sie beides zusammen angeht. Sonst bleibt am Ende eine teure Idee, die niemandem hilft.',
     },
   ],
 }

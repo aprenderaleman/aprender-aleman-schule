@@ -117,6 +117,38 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Du hörst eine Radiodiskussion mit zwei Gästen. Löse die Aufgaben und achte darauf, wer welchen Standpunkt vertritt.',
+      audio: {
+        transcript: 'Moderatorin: Sollen Handys an Schulen verboten werden? Darüber diskutiere ich heute mit der Lehrerin Sabine Winter und mit Markus Lehmann, Vater von zwei Schulkindern. Frau Winter, was halten Sie von einem Verbot?\nSabine: Ehrlich gesagt halte ich wenig davon. Natürlich lenken die Geräte ab, aber ein Verbot löst das Problem nicht. Die Kinder müssen lernen, vernünftig damit umzugehen, und wo, wenn nicht in der Schule?\nModeratorin: Herr Lehmann, sehen Sie das auch so?\nMarkus: Na ja. Das klingt schon gut, aber in der Praxis sieht es anders aus. Meine Tochter ist dreizehn und schaut selbst in der Pause nur auf den Bildschirm. Deshalb bin ich für ein klares Verbot, zumindest bis zur achten Klasse.\nSabine: Da muss ich Ihnen widersprechen, Herr Lehmann. Was verboten ist, wird doch erst richtig interessant.\nMarkus: In diesem Punkt haben Sie vielleicht recht. Allerdings wäre ich schon zufrieden, wenn die Handys wenigstens im Unterricht ausgeschaltet blieben.\nSabine: Dem stimme ich sofort zu. An meiner Schule gilt das übrigens seit zwei Jahren.',
+      },
+      items: [
+        {
+          typ: 'mc',
+          frage: 'Welchen Standpunkt vertritt Frau Winter?',
+          optionen: [
+            'Handys lenken so stark ab, dass man sie an Schulen verbieten muss.',
+            'Handys sollten auch während des Unterrichts erlaubt sein.',
+            'Ein Verbot hilft nicht; die Kinder sollen den Umgang mit dem Handy in der Schule lernen.',
+          ],
+          loesung: 2,
+        },
+        { typ: 'rf', aussage: 'Herr Lehmann teilt die Meinung von Frau Winter, dass ein Verbot nicht sinnvoll ist.', loesung: false },
+        {
+          typ: 'mc',
+          frage: 'Für wen fordert Herr Lehmann ein Handyverbot?',
+          optionen: [
+            'für alle Schülerinnen und Schüler',
+            'mindestens bis zur achten Klasse',
+            'nur für Kinder unter dreizehn Jahren',
+          ],
+          loesung: 1,
+        },
+        { typ: 'rf', aussage: 'Am Ende sind sich beide Gäste einig, dass Handys im Unterricht ausgeschaltet bleiben sollten.', loesung: true },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -129,6 +161,25 @@ export default {
       ],
       minWoerter: 60,
       beispielLoesung: 'Ehrlich gesagt halte ich wenig davon, die Innenstadt sofort und komplett für Autos zu sperren. Das stimmt schon: Weniger Verkehr bedeutet bessere Luft, und davon profitieren wir alle. Allerdings sind viele ältere Menschen und Handwerker auf das Auto angewiesen, und die kleinen Geschäfte brauchen ihre Kundschaft. Mein Vorschlag wäre deshalb ein Kompromiss: Wir sollten zuerst autofreie Samstage testen und am Stadtrand Parkplätze mit guten Busverbindungen schaffen. Wenn das funktioniert, kann man den nächsten Schritt gehen. Viele Grüße, Matteo',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Nimm an einer Diskussion teil und sprich deinen Beitrag auf. Sprich etwa 90 Sekunden.',
+      aufgabe: 'In einer Radiosendung wird über die Vier-Tage-Woche diskutiert. Ein Gast sagt: „Wer nur vier Tage arbeitet, schafft weniger — das kann sich kein Unternehmen leisten.“ Reagiere mit einem eigenen Diskussionsbeitrag von etwa 90 Sekunden.',
+      punkte: [
+        'Geh zuerst auf das Argument des Gastes ein (das stimmt schon, aber …).',
+        'Nenne dein wichtigstes Gegenargument und beleg es mit einem Beispiel.',
+        'Formuliere am Schluss klar deinen Standpunkt.',
+      ],
+      redemittel: [
+        'Das stimmt schon, aber …',
+        'Da muss ich Ihnen widersprechen: …',
+        'Ehrlich gesagt halte ich viel / wenig von …',
+        'Mein Standpunkt ist deshalb klar: …',
+      ],
+      maxSekunden: 90,
+      beispielLoesung: 'Also, das stimmt schon: Für manche Betriebe wäre eine Vier-Tage-Woche schwierig, zum Beispiel für ein kleines Restaurant oder für ein Krankenhaus. Da ist was dran. Allerdings muss ich Ihnen in einem Punkt widersprechen: Wer weniger Tage arbeitet, schafft nicht automatisch weniger. Ehrlich gesagt sitzen viele von uns am Freitagnachmittag im Büro und sind kaum noch produktiv. Eine Freundin von mir arbeitet seit einem Jahr nur vier Tage pro Woche. Sie sagt, sie ist konzentrierter und viel seltener krank, und ihre Firma ist mit den Ergebnissen zufrieden. Na ja, und man darf auch nicht vergessen, dass Firmen mit so einem Modell leichter gute Leute finden. Mein Standpunkt ist deshalb klar: Die Vier-Tage-Woche passt nicht zu jedem Beruf, aber wo es möglich ist, sollten Unternehmen sie ausprobieren. Ich halte viel davon.',
     },
   ],
 }

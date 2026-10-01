@@ -100,6 +100,25 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Du hörst eine Nachricht auf dem Anrufbeantworter. Entscheide bei jeder Aufgabe, welche Lösung dem Gehörten entspricht.',
+      audio: {
+        transcript: 'Guten Tag, Herr Demir, hier spricht Monika Lindner. Sie haben auf meine Anzeige für die Dreizimmerwohnung in der Gartenstraße geantwortet, vielen Dank für Ihre Nachricht. Ich möchte Ihnen gern einen Termin zur Besichtigung anbieten. Am Freitag bin ich leider verhindert, deshalb schlage ich Samstag um halb elf vor. Bitte klingeln Sie bei der Hausverwaltung, ich warte dann im Erdgeschoss auf Sie. Noch kurz zu den Kosten, weil in der Anzeige ein Fehler war. Die Kaltmiete beträgt nicht achthundertfünfzig, sondern achthundertfünfzehn Euro. Dazu kommen ungefähr zweihundert Euro Nebenkosten für Heizung und Wasser. Die Kaution beträgt zwei Kaltmieten und kann in drei Raten bezahlt werden. Die Wohnung wird zum ersten Mai frei, die jetzigen Mieter ziehen Mitte April aus. Bringen Sie zur Besichtigung bitte Ihre letzten drei Gehaltsabrechnungen mit. Den Mietvertrag würden wir erst später unterschreiben. Falls Ihnen der Termin nicht passt, rufen Sie mich bitte bis Donnerstagabend zurück. Sie erreichen mich am besten nach achtzehn Uhr. Auf Wiederhören!',
+      },
+      items: [
+        {
+          typ: 'mc',
+          frage: 'Welchen Termin schlägt Frau Lindner für die Besichtigung vor?',
+          optionen: ['Freitag um 10:30 Uhr', 'Samstag um 11:30 Uhr', 'Samstag um 10:30 Uhr'],
+          loesung: 2,
+        },
+        { typ: 'mc', frage: 'Wie hoch ist die Kaltmiete?', optionen: ['815 Euro', '850 Euro', '1.015 Euro'], loesung: 0 },
+        { typ: 'rf', aussage: 'Herr Demir muss die Kaution auf einmal bezahlen.', loesung: false },
+        { typ: 'rf', aussage: 'Zur Besichtigung soll Herr Demir Gehaltsabrechnungen mitbringen.', loesung: true },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -112,6 +131,20 @@ export default {
       ],
       minWoerter: 60,
       beispielLoesung: 'Sehr geehrter Herr Brandt, mit großem Interesse habe ich Ihre Anzeige für die Zweizimmerwohnung gelesen. Mein Name ist Lucía Ortega, ich bin 29 Jahre alt und arbeite als Physiotherapeutin. Da ich ab Juni eine neue Stelle in Ihrer Stadt antrete, suche ich eine ruhige Wohnung in der Nähe. Bevor ich mich bewerbe, hätte ich zwei Fragen: Wie hoch sind die Nebenkosten ungefähr, und wie viele Kaltmieten beträgt die Kaution? Außerdem würde ich die Wohnung gern besichtigen. Wäre ein Termin am kommenden Samstagvormittag möglich? Über eine Antwort würde ich mich sehr freuen. Mit freundlichen Grüßen, Lucía Ortega',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Sprich eine Sprachnachricht, in der du zwei Möglichkeiten abwägst. Sprich etwa 100 Sekunden frei und in ganzen Sätzen.',
+      aufgabe: 'Dein Freund Pablo hat eine Stelle in München gefunden und bittet dich um Rat: Soll er in ein WG-Zimmer in der Innenstadt ziehen oder in eine eigene, günstigere Wohnung in einem Dorf außerhalb? Sprich ihm eine Sprachnachricht (etwa 100 Sekunden), in der du beide Möglichkeiten abwägst und ihm eine Empfehlung gibst.',
+      punkte: [
+        'Nenne Vor- und Nachteile des WG-Zimmers in der Stadt.',
+        'Nenne Vor- und Nachteile der Wohnung auf dem Land.',
+        'Gib eine klare Empfehlung und begründe sie.',
+      ],
+      redemittel: ['Für … spricht, dass …', 'Dagegen spricht allerdings, dass …', 'Es kommt darauf an, …', 'An deiner Stelle würde ich …'],
+      maxSekunden: 100,
+      beispielLoesung: 'Hallo Pablo, danke für deine Nachricht und erst mal herzlichen Glückwunsch zur neuen Stelle! Du wolltest wissen, was ich an deiner Stelle machen würde. Also, für das WG-Zimmer in der Stadt spricht, dass du alles in der Nähe hast: die Arbeit, Cafés, Kultur. Du brauchst kein Auto, und über die Mitbewohner lernst du schnell Leute kennen. Dagegen spricht allerdings, dass du Küche und Bad teilen musst und trotzdem ziemlich viel Miete zahlst. Die Wohnung auf dem Land ist günstiger, du hättest mehr Platz und deine Ruhe. Dafür müsstest du jeden Tag pendeln, und abends fährt wahrscheinlich kaum noch ein Bus. Ich glaube, es kommt darauf an, was dir im Moment wichtiger ist. Du kennst in München ja noch niemanden. Deshalb würde ich an deiner Stelle zuerst in die WG ziehen, zumindest für das erste Jahr. Wenn du die Stadt besser kennst, kannst du immer noch umziehen. Lies aber den Mietvertrag genau durch, bevor du ihn unterschreibst! Melde dich, wenn du dich entschieden hast.',
     },
   ],
 }

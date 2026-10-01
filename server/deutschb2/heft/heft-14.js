@@ -94,6 +94,30 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Du hörst ein Gespräch zwischen zwei Bekannten. Entscheide, welche Aussage dem Gehörten entspricht.',
+      audio: {
+        transcript: 'Felix: Hallo Jana! Du siehst aber sportlich aus. Hast du etwa angefangen zu joggen?\nJana: Ja, Felix, seit drei Wochen. Ich habe beschlossen, endlich mehr für meine Gesundheit zu tun.\nFelix: Respekt! Ich habe schon oft versucht, regelmäßig Sport zu machen, leider ohne Erfolg.\nJana: Mir hilft es, einen festen Plan zu haben. Ich laufe dienstags und freitags, nicht morgens, sondern nach der Arbeit, um den Kopf frei zu bekommen.\nFelix: Und läufst du allein?\nJana: Meistens ja. Aber im Juni habe ich vor, an einem Lauf über zehn Kilometer teilzunehmen. Hast du nicht Lust mitzumachen?\nFelix: Zehn Kilometer? Ich schaffe es ja kaum, die Treppe hochzugehen, ohne eine Pause zu machen!\nJana: Dann fang doch klein an. Ich empfehle dir, erst einmal zwanzig Minuten zu gehen, anstatt gleich zu rennen.\nFelix: Na gut. Ich verspreche dir, am Freitag mitzukommen. Aber vergiss nicht, mir vorher zu schreiben!\nJana: Abgemacht. Wir treffen uns um halb sieben am Park.',
+      },
+      items: [
+        { typ: 'rf', aussage: 'Jana joggt schon seit drei Monaten.', loesung: false },
+        {
+          typ: 'mc',
+          frage: 'Wann geht Jana laufen?',
+          optionen: ['morgens vor der Arbeit', 'nach der Arbeit', 'in der Mittagspause'],
+          loesung: 1,
+        },
+        {
+          typ: 'mc',
+          frage: 'Was hat Jana im Juni vor?',
+          optionen: ['an einem Lauf über zehn Kilometer teilzunehmen', 'einen Laufkurs für Anfänger zu leiten', 'jeden Tag zwanzig Minuten zu gehen'],
+          loesung: 0,
+        },
+        { typ: 'rf', aussage: 'Felix sagt zu, am Freitag mit Jana zu trainieren.', loesung: true },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -106,6 +130,20 @@ export default {
       ],
       minWoerter: 60,
       beispielLoesung: 'Betreff: Beschwerde — ausstehende Reparatur meiner Heizung — Sehr geehrte Damen und Herren, am 3. November hat mir Ihr Mitarbeiter versprochen, meine defekte Heizung innerhalb von drei Tagen zu reparieren. Inzwischen sind zwei Wochen vergangen, ohne dass sich jemand gemeldet hat. Ich habe mehrmals versucht, Sie telefonisch zu erreichen, leider ohne Erfolg. Da es nachts schon sehr kalt ist, musste ich ein Heizgerät kaufen, um die Wohnung einigermaßen warm zu halten. Ich fordere Sie daher auf, die Reparatur bis spätestens Freitag durchzuführen. Andernfalls sehe ich mich gezwungen, einen anderen Betrieb zu beauftragen und Ihnen die Mehrkosten in Rechnung zu stellen. Mit freundlichen Grüßen, Daniel Sørensen',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Sprich eine Sprachnachricht auf. Du hast etwa 90 Sekunden Zeit. Verwende mehrere Infinitivsätze mit zu.',
+      aufgabe: 'Ein Freund aus deinem Heimatland hat vor, nächstes Jahr nach Deutschland zu ziehen, um dort zu arbeiten. Er bittet dich um Rat. Sprich ihm eine Sprachnachricht von etwa 90 Sekunden auf und gib ihm Empfehlungen. Verwende dabei mehrere Infinitivsätze mit zu (auch um … zu, ohne … zu oder anstatt … zu).',
+      punkte: [
+        'Was sollte er schon vor der Abreise erledigen?',
+        'Was empfiehlst du ihm, um schnell Deutsch zu lernen?',
+        'Was sollte er auf keinen Fall vergessen?',
+      ],
+      redemittel: ['Ich empfehle dir, … zu …', 'Es ist wichtig, … zu …', 'Versuch auf jeden Fall, … zu …', 'Vergiss nicht, … zu …'],
+      maxSekunden: 90,
+      beispielLoesung: 'Hallo Diego, schön, dass du vorhast, nach Deutschland zu kommen! Ich gebe dir gern ein paar Tipps. Erstens empfehle ich dir, schon jetzt eine Wohnung zu suchen, denn das dauert hier oft Monate. Es ist auch wichtig, alle Zeugnisse übersetzen zu lassen, bevor du abreist. Zweitens: Fang am besten sofort an, Deutsch zu lernen, anstatt bis zur Ankunft zu warten. Versuch, jeden Tag ein bisschen zu üben, zum Beispiel mit Podcasts oder Serien. Hier hast du dann die Möglichkeit, einen Abendkurs zu besuchen, um auch Leute kennenzulernen. Und noch etwas: Vergiss nicht, dich in den ersten zwei Wochen bei der Stadt anzumelden. Ohne Anmeldung kannst du nämlich kein Konto eröffnen. Ich freue mich sehr, dich bald hier zu sehen. Melde dich, wenn du Fragen hast!',
     },
   ],
 }

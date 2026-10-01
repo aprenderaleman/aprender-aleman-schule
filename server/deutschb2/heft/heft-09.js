@@ -90,6 +90,30 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Du hörst einen Beitrag aus den Regionalnachrichten. Achte darauf, wer was behauptet, und entscheide, welche Aussage dem Gehörten entspricht.',
+      audio: {
+        transcript: 'Und nun zu den Nachrichten aus der Region. In Altenbruck soll der Wochenmarkt vom Rathausplatz an den Bahnhof umziehen. Das teilte ein Sprecher der Stadt am Montag mit. Der Rathausplatz sei für die inzwischen fünfzig Stände zu klein geworden, außerdem fehle es dort an Parkplätzen. Am Bahnhof gebe es genug Platz, und mit Bus und Bahn komme man leichter dorthin. Die Händler sehen das anders. Ihre Sprecherin Maria Keller sagte unserem Sender, die meisten Kunden kämen zu Fuß aus der Altstadt und würden den längeren Weg nicht in Kauf nehmen. Man habe die Händler außerdem nicht nach ihrer Meinung gefragt. Sie rechne mit einem Rückgang der Einnahmen um ein Drittel. Die Stadt weist diese Kritik zurück. Es habe im Frühjahr zwei Informationsabende gegeben, dazu sei jedoch kaum jemand erschienen. Der Stadtrat stimmt am vierzehnten Juni über den Umzug ab. Bis dahin findet der Markt wie gewohnt mittwochs und samstags auf dem Rathausplatz statt.',
+      },
+      items: [
+        {
+          typ: 'mc',
+          frage: 'Wie begründet die Stadt den geplanten Umzug des Marktes?',
+          optionen: ['Der Rathausplatz soll umgebaut werden.', 'Der Rathausplatz reicht für die vielen Stände nicht mehr aus.', 'Die Anwohner haben sich über den Lärm beschwert.'],
+          loesung: 1,
+        },
+        { typ: 'rf', aussage: 'Laut Maria Keller kommen die meisten Kunden mit dem Auto zum Markt.', loesung: false },
+        {
+          typ: 'mc',
+          frage: 'Womit rechnet die Sprecherin der Händler?',
+          optionen: ['Ein Drittel der Händler gibt seinen Stand auf.', 'Die Standgebühren steigen um ein Drittel.', 'Die Einnahmen gehen um ein Drittel zurück.'],
+          loesung: 2,
+        },
+        { typ: 'rf', aussage: 'Die Stadt erklärt, sie habe bereits im Frühjahr über ihre Pläne informiert.', loesung: true },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -102,6 +126,21 @@ export default {
       ],
       minWoerter: 60,
       beispielLoesung: 'Hallo zusammen, ich lese hier seit Tagen mit und möchte auch etwas dazu sagen. Die Geschäftsleute behaupten, ohne Parkplätze kämen keine Kunden mehr in die Stadt. Laut Stadtverwaltung sei die Luft dagegen so schlecht, dass man handeln müsse. Ich finde, beide Seiten haben ein bisschen recht. Eine autofreie Innenstadt wäre für Familien und Radfahrer wunderbar, aber viele Menschen vom Land brauchen ihr Auto. Mein Vorschlag: Man sollte am Stadtrand große Parkplätze bauen und von dort alle zehn Minuten einen kostenlosen Bus in die Innenstadt fahren lassen. So könnten alle weiterhin bequem einkaufen. Viele Grüße, Samira',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Halte einen kurzen Vortrag über Vor- und Nachteile. Du hast zwei Minuten Zeit.',
+      aufgabe: 'Viele Menschen informieren sich heute nur noch über soziale Medien und nicht mehr über Zeitung, Radio oder Fernsehen. Halte einen kurzen Vortrag von etwa zwei Minuten zu diesem Thema und gib dabei auch wieder, was andere dazu sagen (indirekte Rede mit Konjunktiv I).',
+      punkte: [
+        'Beschreibe, wie du dich selbst über aktuelle Ereignisse informierst.',
+        'Nenne Vor- und Nachteile von Nachrichten aus sozialen Medien.',
+        'Gib wieder, was Kritiker oder Befürworter dazu sagen (Kritiker sagen, … sei … / … habe …).',
+        'Sag zum Schluss deine eigene Meinung.',
+      ],
+      redemittel: ['In meinem Vortrag geht es um …', 'Ein klarer Vorteil ist, dass …', 'Kritiker sagen, … sei / habe …', 'Befürworter meinen dagegen, … könne …', 'Ich persönlich bin der Meinung, dass …'],
+      maxSekunden: 120,
+      beispielLoesung: 'In meinem Vortrag geht es um die Frage, ob soziale Medien eine gute Quelle für Nachrichten sind. Ich selbst lese morgens in der Bahn zuerst die Meldungen auf dem Handy, und abends höre ich meistens noch die Nachrichten im Radio. Ein klarer Vorteil der sozialen Medien ist die Geschwindigkeit: Wenn irgendwo etwas passiert, erfährt man es sofort. Außerdem kostet es nichts, und man kann direkt mit anderen darüber diskutieren. Es gibt aber auch Nachteile. Kritiker sagen, im Netz sei vieles nicht geprüft, und falsche Meldungen würden sich schneller verbreiten als richtige. Eine Journalistin hat neulich im Radio erklärt, man sehe dort fast nur Beiträge, die zur eigenen Meinung passen. Das finde ich überzeugend. Befürworter meinen dagegen, jeder könne sich heute aus viel mehr Quellen informieren als früher, und das stimmt natürlich auch. Ich persönlich bin der Meinung, dass soziale Medien für den ersten Überblick praktisch sind. Wer ein Thema aber wirklich verstehen will, sollte zusätzlich eine seriöse Zeitung lesen oder Nachrichten hören. Die Mischung ist für mich die beste Lösung.',
     },
   ],
 }

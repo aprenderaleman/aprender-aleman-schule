@@ -123,6 +123,34 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Du hörst ein Interview mit einem Aussprachetrainer. Löse die Aufgaben.',
+      audio: {
+        transcript: 'Moderatorin: Herr Brenner, Sie arbeiten als Aussprachetrainer an einer Sprachschule in Hamburg. Wer kommt zu Ihnen?\nExperte: Vor allem Menschen, die kurz vor einer mündlichen Prüfung stehen. Früher habe ich übrigens Schauspieler unterrichtet, erst seit sechs Jahren arbeite ich mit Deutschlernenden.\nModeratorin: Wie beginnen Sie mit einem neuen Kursteilnehmer?\nExperte: Ich lasse ihn zunächst zwei Minuten frei sprechen und nehme das auf. Die meisten erschrecken, wenn sie sich zum ersten Mal selbst hören. Aber genau dann fällt ihnen auf, woran sie arbeiten müssen.\nModeratorin: Und wie viel sollte man üben? Eine Stunde am Tag?\nExperte: Na ja, das hält niemand durch. Mir reichen fünfzehn Minuten, aber wirklich jeden Tag und immer laut.\nModeratorin: Erinnern Sie sich an einen besonderen Fall?\nExperte: Ja, an eine Ärztin aus Chile. Sie sprach fast fehlerfrei, wurde aber von ihren Patienten oft nicht verstanden, weil sie viel zu schnell redete. Wir haben nicht an einzelnen Lauten gearbeitet, sondern nur an Pausen und am Tempo. Nach zwei Monaten war das Problem gelöst.',
+      },
+      items: [
+        { typ: 'rf', aussage: 'Bevor Herr Brenner mit Deutschlernenden arbeitete, unterrichtete er Schauspieler.', loesung: true },
+        {
+          typ: 'mc',
+          frage: 'Was macht Herr Brenner zu Beginn mit neuen Kursteilnehmern?',
+          optionen: [
+            'Er lässt sie einen Text vorlesen.',
+            'Er nimmt auf, wie sie frei sprechen.',
+            'Er erklärt ihnen die schwierigsten Laute.',
+          ],
+          loesung: 1,
+        },
+        {
+          typ: 'mc',
+          frage: 'Wie lange sollte man laut Herrn Brenner täglich üben?',
+          optionen: ['eine Stunde', 'fünfzig Minuten', 'fünfzehn Minuten'],
+          loesung: 2,
+        },
+        { typ: 'rf', aussage: 'Mit der Ärztin aus Chile hat Herr Brenner vor allem einzelne Laute trainiert.', loesung: false },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -135,6 +163,25 @@ export default {
       ],
       minWoerter: 60,
       beispielLoesung: 'Die Frage interessiert mich sehr, denn ich habe meine mündliche Prüfung in drei Wochen. Meiner Meinung nach ist die Paarprüfung fairer, als viele denken. Ein großer Vorteil ist, dass man in der Diskussion ein echtes Gespräch führt und nicht nur die Fragen der Prüfenden beantwortet. Natürlich gibt es auch einen Nachteil: Wenn der Partner sehr dominant ist, kommt man selbst weniger zu Wort. Mein Tipp für die Vorbereitungszeit: Schreibt nur Stichwörter auf euren Zettel und notiert euch auch ein paar Redemittel für die Diskussion. Insgesamt finde ich das Format gut, weil es der Realität näher ist als ein reines Interview.',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Halte einen kurzen Vortrag wie in Teil 1 der mündlichen Prüfung. Notiere dir vorher nur Stichwörter und sprich dann frei, etwa zwei Minuten.',
+      aufgabe: 'Dein Vortragsthema lautet: „Allein lernen oder in der Gruppe?“ Halte dazu einen kurzen, frei gesprochenen Vortrag (etwa zwei Minuten): Stell das Thema vor, wäge Vor- und Nachteile ab und zieh ein Fazit.',
+      punkte: [
+        'Leite kurz in das Thema ein.',
+        'Nenne Vor- und Nachteile, jeweils mit einem eigenen Beispiel.',
+        'Sag deine Meinung und zieh ein Fazit.',
+      ],
+      redemittel: [
+        'In meinem Vortrag geht es um die Frage, ob …',
+        'Ein großer Vorteil ist, dass … / Dagegen spricht, dass …',
+        'Ich persönlich finde, dass …',
+        'Zusammenfassend lässt sich sagen: …',
+      ],
+      maxSekunden: 120,
+      beispielLoesung: 'In meinem Vortrag geht es um die Frage, ob man besser allein oder in der Gruppe lernt. Viele von uns bereiten sich gerade auf eine Prüfung vor, deshalb ist das Thema sehr aktuell. Zunächst zum Lernen allein. Ein großer Vorteil ist, dass ich mein Tempo selbst bestimme. Vokabeln zum Beispiel wiederhole ich am liebsten abends allein, weil ich mich dann gut konzentrieren kann. Ein Nachteil ist allerdings, dass niemand meine Fehler korrigiert. Außerdem verschiebe ich das Lernen allein oft auf morgen. Nun zur Gruppe. Dafür spricht, dass man sich gegenseitig motiviert und schwierige Dinge erklärt. Seit ich mich jeden Samstag mit zwei Kolleginnen aus dem Kurs treffe, spreche ich viel flüssiger, denn in der Gruppe muss ich einfach reden. Dagegen spricht, dass man leicht Zeit verliert. Manchmal trinken wir eine Stunde Kaffee, bevor wir überhaupt anfangen. Ich persönlich finde, dass beides wichtig ist: Grammatik und Wortschatz lerne ich allein, das Sprechen übe ich in der Gruppe. Zusammenfassend lässt sich sagen: Die beste Lösung ist eine Mischung, und jeder muss ausprobieren, was für ihn funktioniert. Vielen Dank fürs Zuhören.',
     },
   ],
 }

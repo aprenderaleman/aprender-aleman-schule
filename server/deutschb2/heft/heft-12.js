@@ -78,6 +78,30 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Du hörst ein Radiointerview. Entscheide, welche Aussage dem Gehörten entspricht.',
+      audio: {
+        transcript: 'Moderator: Heute bei uns im Studio: Sandra Vogt, die in Kassel ein Reparaturcafé gegründet hat. Frau Vogt, was genau ist das?\nFrau: Das ist ein Ort, an dem man kaputte Dinge gemeinsam mit Fachleuten repariert. Zu uns kommen Menschen, deren Toaster oder Fahrrad nicht mehr funktioniert und die nichts wegwerfen wollen.\nModerator: Und wer repariert?\nFrau: Ehrenamtliche, von denen viele früher als Elektriker oder Schneiderin gearbeitet haben. Im Moment sind es vierzehn. Wichtig ist: Die Besucher schauen nicht nur zu, sondern helfen selbst mit.\nModerator: Muss man dafür bezahlen?\nFrau: Nein, die Reparatur ist kostenlos. Nur Ersatzteile, die wir bestellen müssen, bezahlt man selbst. Die meisten spenden trotzdem etwas, was uns natürlich sehr freut.\nModerator: Was wird denn am häufigsten gebracht?\nFrau: Viele denken an Handys, aber es sind eindeutig Kaffeemaschinen. Etwa zwei Drittel der Geräte können wir retten.\nModerator: Und wann haben Sie geöffnet?\nFrau: Jeden ersten Samstag im Monat, von zehn bis vierzehn Uhr, im Stadtteilzentrum, wo wir auch unser Werkzeug lagern.',
+      },
+      items: [
+        {
+          typ: 'mc',
+          frage: 'Wer repariert die Gegenstände im Reparaturcafé?',
+          optionen: ['bezahlte Fachleute', 'Ehrenamtliche zusammen mit den Besuchern', 'die Besucher ganz allein'],
+          loesung: 1,
+        },
+        { typ: 'rf', aussage: 'Ersatzteile, die bestellt werden müssen, bezahlen die Besucher selbst.', loesung: true },
+        {
+          typ: 'mc',
+          frage: 'Was wird am häufigsten ins Reparaturcafé gebracht?',
+          optionen: ['Kaffeemaschinen', 'Handys', 'Toaster'],
+          loesung: 0,
+        },
+        { typ: 'rf', aussage: 'Das Reparaturcafé hat jeden Samstag geöffnet.', loesung: false },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -90,6 +114,20 @@ export default {
       ],
       minWoerter: 60,
       beispielLoesung: 'Ich halte Wohnprojekte, in denen Jung und Alt zusammenleben, für eine sehr gute Idee. Ältere Menschen, deren Familien oft weit weg wohnen, fühlen sich weniger einsam, und junge Eltern bekommen Unterstützung im Alltag. Natürlich gibt es auch Probleme, mit denen man rechnen muss: Wer Ruhe braucht, kann sich durch Kinderlärm gestört fühlen, und gemeinsame Entscheidungen dauern länger. Trotzdem überwiegen für mich die Vorteile. Meine Tante lebt seit drei Jahren in einem solchen Haus, und alles, was sie davon erzählt, klingt positiv: Sie hilft bei den Hausaufgaben und bekommt dafür Hilfe beim Einkaufen. Deshalb sollte die Stadt solche Projekte unbedingt fördern. Julia Moreno',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Halte einen kurzen Vortrag. Du hast 100 Sekunden Zeit.',
+      aufgabe: 'Stell in einem kurzen Vortrag von etwa 100 Sekunden eine Person vor, die in deinem Leben eine wichtige Rolle spielt oder gespielt hat. Verwende dabei Relativsätze, auch mit Präposition, mit dessen / deren oder mit was und wo.',
+      punkte: [
+        'wer diese Person ist und woher du sie kennst',
+        'was du von ihr gelernt hast',
+        'eine Situation, an die du dich besonders gern erinnerst',
+      ],
+      redemittel: ['Ich möchte von … erzählen, mit dem / mit der …', 'Sie ist ein Mensch, auf den man sich verlassen kann.', 'Das Wichtigste, was ich von ihr gelernt habe, ist …', 'Eine Situation, an die ich oft denke, ist …'],
+      maxSekunden: 100,
+      beispielLoesung: 'Ich möchte von meiner Großmutter erzählen, bei der ich als Kind fast jeden Sommer verbracht habe. Sie wohnte in einem kleinen Dorf in den Bergen, wo es damals nicht einmal einen Supermarkt gab. Meine Großmutter war eine Frau, deren Tür immer offen stand: Jeder Nachbar, der ein Problem hatte, kam zuerst zu ihr. Sie hatte nicht viel Geld, aber sie war der zufriedenste Mensch, den ich kenne. Das Wichtigste, was ich von ihr gelernt habe, ist Geduld. Sie hat mir beigebracht, dass man Dinge, die kaputt sind, zuerst repariert und nicht sofort wegwirft. Das gilt übrigens auch für Freundschaften. Eine Situation, an die ich mich besonders gern erinnere, ist mein zehnter Geburtstag. Ich hatte mir ein Fahrrad gewünscht, für das meine Eltern kein Geld hatten. Meine Großmutter hat dann das alte Rad meines Onkels aus dem Keller geholt und es mit mir zusammen neu gestrichen. Dieses Fahrrad, auf das ich unglaublich stolz war, bin ich noch jahrelang gefahren. Alles, was ich heute über Hilfsbereitschaft weiß, habe ich von ihr.',
     },
   ],
 }

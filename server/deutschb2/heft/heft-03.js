@@ -79,6 +79,30 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Du hörst ein Radiointerview mit einer Lernberaterin. Entscheide bei jeder Aufgabe, welche Lösung dem Gehörten entspricht.',
+      audio: {
+        transcript: 'Moderator: Frau Albrecht, Sie beraten seit zwölf Jahren Erwachsene, die Deutsch lernen. Können die meisten ihr Niveau realistisch einschätzen?\nLernberaterin: Leider nicht. Viele halten das Sprechen für ihre größte Schwäche. In unseren Tests zeigt sich aber oft etwas anderes. Die größten Lücken liegen nicht beim Sprechen, sondern beim Schreiben.\nModerator: Woran liegt das?\nLernberaterin: Beim Sprechen bemerkt man jeden Fehler sofort, deshalb fühlt man sich unsicher. Geschriebene Texte korrigiert im Alltag dagegen fast niemand, und so bleiben die Fehler unsichtbar.\nModerator: Was empfehlen Sie nach so einer Standortbestimmung?\nLernberaterin: Einen Lernplan mit kleinen Schritten. Früher habe ich oft drei Stunden am Wochenende empfohlen. Heute rate ich zu zwanzig Minuten täglich, weil man so deutlich mehr behält.\nModerator: Und wie werden Fortschritte sichtbar?\nLernberaterin: Schreiben Sie jeden Monat einen kurzen Text, und zwar immer zum selben Thema. Dann vergleichen Sie die Texte. Nach drei Monaten sehen Sie den Unterschied schwarz auf weiß, und das motiviert mehr als jede Note.',
+      },
+      items: [
+        {
+          typ: 'mc',
+          frage: 'Wo haben viele Lernende laut Frau Albrecht tatsächlich die größten Lücken?',
+          optionen: ['beim Schreiben', 'beim Sprechen', 'beim Hören'],
+          loesung: 0,
+        },
+        { typ: 'rf', aussage: 'Beim Sprechen fühlen sich viele unsicher, weil ihnen ihre Fehler sofort auffallen.', loesung: true },
+        {
+          typ: 'mc',
+          frage: 'Was empfiehlt Frau Albrecht heute für den Lernplan?',
+          optionen: ['drei Stunden am Wochenende', 'eine Stunde an jedem Werktag', 'zwanzig Minuten an jedem Tag'],
+          loesung: 2,
+        },
+        { typ: 'rf', aussage: 'Um Fortschritte zu sehen, soll man jeden Monat über ein neues Thema schreiben.', loesung: false },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -91,6 +115,20 @@ export default {
       ],
       minWoerter: 60,
       beispielLoesung: 'Sehr geehrter Herr Petersen,\nich lerne seit drei Jahren Deutsch und möchte mich jetzt gezielt auf die B2-Prüfung vorbereiten. Meine Stärken sind das Lesen und das Sprechen, weil ich im Alltag viel Deutsch benutze. Beim Schreiben mache ich aber noch viele Fehler, vor allem bei der Verbstellung und beim Konjunktiv II. Mein Ziel ist es, die Prüfung im kommenden Frühjahr zu bestehen. Deshalb würde ich gern einen passenden Kurs finden. Wäre es möglich, nächste Woche einen Termin für ein Beratungsgespräch zu vereinbaren?\nMit freundlichen Grüßen\nValentina Rossi',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Nimm Stellung zu der Aussage. Sprich etwa 90 Sekunden frei und begründe deine Meinung.',
+      aufgabe: 'In einem Lernforum behauptet jemand: „Mit einer App lernt man eine Sprache genauso gut wie in einem Kurs.“ Nimm in einem kurzen Redebeitrag von etwa 90 Sekunden Stellung zu dieser Aussage.',
+      punkte: [
+        'Sag klar, ob du zustimmst oder nicht, und begründe deine Meinung.',
+        'Geh auf ein Argument der Gegenseite ein.',
+        'Berichte kurz von deiner eigenen Erfahrung und zieh ein Fazit.',
+      ],
+      redemittel: ['Meiner Meinung nach …', 'Ich stimme der Aussage nur teilweise zu, weil …', 'Natürlich gibt es auch ein Gegenargument: …', 'Aus eigener Erfahrung weiß ich, dass …'],
+      maxSekunden: 90,
+      beispielLoesung: 'Meiner Meinung nach stimmt diese Aussage nur teilweise. Zwar ist eine App sehr praktisch, weil man überall und jederzeit lernen kann, und für Wortschatz und einfache Grammatik funktioniert das auch gut. Trotzdem glaube ich nicht, dass sie einen Kurs ersetzen kann. In einem Kurs spricht man mit anderen Menschen, und die Lehrerin korrigiert die Fehler sofort. Eine App sagt mir dagegen nur, ob eine Antwort richtig oder falsch ist, zeigt mir aber nicht, wo meine Lücken liegen. Natürlich gibt es auch ein Gegenargument: Ein Kurs ist teuer und findet zu festen Zeiten statt, was nicht zu jedem Beruf passt. Das kann ich gut nachvollziehen. Aus eigener Erfahrung weiß ich allerdings, dass ich allein nicht regelmäßig lerne. Obwohl ich ein Jahr lang fast täglich mit einer App geübt habe, habe ich beim Sprechen kaum Fortschritte gemacht; erst im Kurs bin ich sicherer geworden. Mein Fazit: Die App ist eine sinnvolle Ergänzung, aber ohne einen Kurs und einen klaren Lernplan würde ich die B2-Prüfung wohl nicht schaffen.',
     },
   ],
 }

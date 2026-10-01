@@ -122,6 +122,34 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Du hörst ein Telefongespräch mit einer Personalabteilung. Löse die Aufgaben.',
+      audio: {
+        transcript: 'Frau: Personalabteilung, Hartmann, guten Tag.\nMann: Guten Tag, Frau Hartmann, hier spricht Daniel Novak. Ich habe am Mittwoch um zehn Uhr ein Vorstellungsgespräch bei Ihnen. Leider muss ich Ihnen mitteilen, dass ich an diesem Tag nicht kommen kann.\nFrau: Oh, das ist schade. Darf ich nach dem Grund fragen?\nMann: Selbstverständlich. Mein jetziger Arbeitgeber schickt mich kurzfristig zu einer Schulung nach Köln. Ich möchte mich dafür entschuldigen. Wäre es möglich, den Termin zu verschieben?\nFrau: Einen Moment bitte. Am Donnerstag ist unsere Abteilungsleiterin leider nicht im Haus. Ich könnte Ihnen den Freitag anbieten, und zwar um halb neun.\nMann: Freitag passt mir sehr gut. Müsste ich dafür noch etwas mitbringen?\nFrau: Ihre Unterlagen haben wir bereits. Bringen Sie bitte nur Ihren Ausweis mit, den brauchen Sie am Empfang.\nMann: In Ordnung. Könnten Sie mir den neuen Termin vielleicht noch schriftlich bestätigen?\nFrau: Gern, Sie bekommen heute noch eine E-Mail von mir.\nMann: Vielen Dank für Ihr Verständnis, Frau Hartmann. Auf Wiederhören.',
+      },
+      items: [
+        {
+          typ: 'mc',
+          frage: 'Warum kann Herr Novak am Mittwoch nicht kommen?',
+          optionen: [
+            'Er hat einen dringenden Arzttermin.',
+            'Er muss zu einer Schulung nach Köln fahren.',
+            'Er hat ein Vorstellungsgespräch bei einer anderen Firma.',
+          ],
+          loesung: 1,
+        },
+        { typ: 'rf', aussage: 'Am Donnerstag ist ein Gespräch nicht möglich, weil die Abteilungsleiterin fehlt.', loesung: true },
+        {
+          typ: 'mc',
+          frage: 'Was soll Herr Novak zum Gespräch mitbringen?',
+          optionen: ['seine Bewerbungsunterlagen', 'eine schriftliche Bestätigung', 'seinen Ausweis'],
+          loesung: 2,
+        },
+        { typ: 'rf', aussage: 'Herr Novak soll den neuen Termin selbst per E-Mail bestätigen.', loesung: false },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -134,6 +162,26 @@ export default {
       ],
       minWoerter: 60,
       beispielLoesung: 'Sehr geehrte Frau Yilmaz, leider muss ich Ihnen mitteilen, dass ich am Samstag nicht am Erste-Hilfe-Kurs teilnehmen kann, weil meine Firma mich kurzfristig zu einer Messe nach Hamburg schickt. Bitte entschuldigen Sie die späte Absage. Könnten Sie mir bitte sagen, ob es im nächsten Monat einen weiteren Termin gibt? Falls das nicht möglich ist, würde ich meinen Platz gern an eine Kollegin weitergeben, die sich ebenfalls für den Kurs interessiert. Über eine kurze Antwort würde ich mich sehr freuen. Mit freundlichen Grüßen Lucía Romero',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Sprich eine formelle Nachricht auf den Anrufbeantworter. Sprich höchstens 90 Sekunden und halte das Sie-Register durch.',
+      aufgabe: 'Du gehst für drei Monate beruflich ins Ausland und möchtest deine Wohnung in dieser Zeit untervermieten. Dein Vermieter, Herr Brandt, ist telefonisch nicht zu erreichen. Hinterlass ihm auf dem Anrufbeantworter eine formelle Nachricht im Sie-Register (höchstens 90 Sekunden).',
+      punkte: [
+        'Nenne deinen Namen und den Grund deines Anrufs.',
+        'Bitte ihn höflich um seine Erlaubnis (Konjunktiv II).',
+        'Sag, wann er dich erreichen kann, und bedank dich.',
+      ],
+      redemittel: [
+        'Guten Tag, Herr Brandt, hier spricht …',
+        'Ich rufe an, weil …',
+        'Wäre es möglich, dass …?',
+        'Sie erreichen mich …',
+        'Über einen kurzen Rückruf würde ich mich sehr freuen.',
+      ],
+      maxSekunden: 90,
+      beispielLoesung: 'Guten Tag, Herr Brandt, hier spricht Pablo Serrano, Ihr Mieter aus der Gartenstraße acht. Ich rufe an, weil ich Ihnen etwas mitteilen und Sie um etwas bitten möchte. Meine Firma schickt mich von März bis Mai für ein Projekt nach Lissabon. In dieser Zeit würde ich meine Wohnung gern untervermieten, damit sie nicht drei Monate leer steht. Eine Kollegin von mir, Frau Weber, sucht gerade für genau diesen Zeitraum eine Unterkunft. Sie ist sehr zuverlässig und würde sich gern persönlich bei Ihnen vorstellen. Wäre es möglich, dass Sie mir dafür Ihre Erlaubnis geben? Selbstverständlich könnte ich Ihnen alles auch noch schriftlich schicken. Sie erreichen mich heute und morgen ab siebzehn Uhr unter dieser Nummer. Über einen kurzen Rückruf würde ich mich sehr freuen. Vielen Dank im Voraus und auf Wiederhören.',
     },
   ],
 }

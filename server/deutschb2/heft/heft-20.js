@@ -103,6 +103,43 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Du hörst einen Ausschnitt aus einer Radiosendung, in der sich drei Personen zu einem Vorschlag äußern. Wer vertritt welche Position?',
+      audio: {
+        transcript: 'Moderatorin: Unser Thema heute: Sollen Geschäfte auch sonntags öffnen dürfen? Am Telefon ist Jonas, der selbst im Handel arbeitet. Jonas, was meinen Sie?\nJonas: Ich lehne das entschieden ab. Ich stehe schon jeden Samstag im Laden. Wenn auch noch der Sonntag wegfällt, sehe ich meine Kinder kaum noch.\nModeratorin: Danke. Jetzt zu Nina, die als Ärztin im Schichtdienst arbeitet.\nNina: Ich bin grundsätzlich dafür. Wer wie ich unregelmäßig arbeitet, schafft den Einkauf unter der Woche oft nicht. Allerdings dürfte niemand zur Sonntagsarbeit gezwungen werden, und sie müsste besser bezahlt sein. Sonst halte ich das für unfair.\nModeratorin: Und Martin, Sie führen eine kleine Buchhandlung.\nMartin: Richtig, und ich bin skeptisch. Einerseits wünschen sich das manche Kunden, andererseits bezweifle ich, dass die Leute dadurch mehr kaufen. Sie verteilen ihr Geld nur auf sieben Tage statt auf sechs, und meine Kosten steigen trotzdem.\nModeratorin: Drei Stimmen, drei Meinungen. Vielen Dank!',
+      },
+      items: [
+        {
+          typ: 'mc',
+          frage: 'Wer lehnt die Sonntagsöffnung eindeutig ab?',
+          optionen: ['Jonas', 'Nina', 'Martin'],
+          loesung: 0,
+        },
+        { typ: 'rf', aussage: 'Nina kann ihre Einkäufe problemlos an den Werktagen erledigen.', loesung: false },
+        {
+          typ: 'mc',
+          frage: 'Unter welcher Bedingung befürwortet Nina den Vorschlag?',
+          optionen: [
+            'Die Geschäfte öffnen sonntags nur für wenige Stunden.',
+            'Die Arbeit am Sonntag ist freiwillig und wird besser bezahlt.',
+            'Auch Arztpraxen haben sonntags geöffnet.',
+          ],
+          loesung: 1,
+        },
+        {
+          typ: 'mc',
+          frage: 'Was befürchtet Martin?',
+          optionen: [
+            'Seine Kunden bestellen sonntags lieber im Internet.',
+            'Er findet kein Personal für den Sonntag.',
+            'Seine Ausgaben steigen, ohne dass er mehr verkauft.',
+          ],
+          loesung: 2,
+        },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -115,6 +152,20 @@ export default {
       ],
       minWoerter: 60,
       beispielLoesung: 'Liebe Mitdiskutierende, ich befürworte den Vorschlag, die Innenstadt am Wochenende für Autos zu sperren. Aus meiner Sicht wird das Zentrum dadurch ruhiger und sicherer, vor allem für Familien mit Kindern. Außerdem würden die Cafés und Geschäfte profitieren, weil die Menschen länger bleiben und in Ruhe bummeln. Einerseits verstehe ich die Sorge vieler Händler, dass Kundschaft aus dem Umland wegbleibt. Andererseits könnte die Stadt am Wochenende mehr Busse einsetzen und Parkplätze am Stadtrand anbieten. Ich bin davon überzeugt, dass sich das lohnt. Viele Grüße, Farid',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Gib zwei Meinungen mit eigenen Worten wieder und nimm selbst Stellung. Sprich etwa 100 Sekunden.',
+      aufgabe: 'In einem Forum äußern sich zwei Personen zu der Frage, ob alle jungen Menschen nach der Schule ein soziales Jahr machen sollten. Carla: „Ein Pflichtjahr halte ich für sinnvoll. Man lernt Verantwortung und sieht, wie andere leben.“ Deniz: „Ich bezweifle, dass Zwang etwas bringt. Wer nicht will, hilft niemandem.“ Stell beide Meinungen in etwa 100 Sekunden mit eigenen Worten vor und sag, wie du selbst dazu stehst.',
+      punkte: [
+        'Gib die Meinung von Carla und die von Deniz wieder, ohne ihre Formulierungen zu wiederholen.',
+        'Sag, wem du eher zustimmst, und begründe das mit einem Beispiel.',
+        'Nenne einen Punkt, in dem die andere Person recht hat.',
+      ],
+      redemittel: ['Carla ist der Ansicht, dass …', 'Deniz dagegen ist skeptisch: …', 'Ich stimme eher … zu, weil …', 'In einem Punkt hat … allerdings recht: …'],
+      maxSekunden: 100,
+      beispielLoesung: 'Carla und Deniz sehen das soziale Jahr ganz unterschiedlich. Carla befürwortet ein Pflichtjahr. Aus ihrer Sicht werden junge Leute dadurch selbstständiger und lernen Menschen kennen, die ganz anders leben als sie selbst. Deniz dagegen ist skeptisch. Er glaubt nicht, dass man jemanden zum Helfen zwingen kann, und meint, dass unmotivierte Leute eher stören als nützen. Ich persönlich stimme eher Carla zu. Ich habe nach der Schule selbst ein halbes Jahr in einem Altenheim gearbeitet, und das war eine der wichtigsten Erfahrungen meines Lebens. Vorher wusste ich gar nicht, wie anstrengend Pflege ist. Trotzdem hat Deniz in einem Punkt recht: Wer überhaupt keine Lust hat, ist für die Einrichtung keine Hilfe. Deshalb halte ich es für wichtig, dass man wenigstens selbst wählen kann, wo man arbeitet, zum Beispiel im Krankenhaus, im Kindergarten oder im Umweltschutz. Dann finden die meisten etwas, das zu ihnen passt.',
     },
   ],
 }

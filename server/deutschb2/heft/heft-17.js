@@ -102,6 +102,30 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Du hörst ein Telefongespräch mit dem Kundenservice eines Möbelhauses. Entscheide, welche Aussage dem Gehörten entspricht.',
+      audio: {
+        transcript: 'Mitarbeiter: Möbelhaus Lindner, Kundenservice, guten Tag.\nKundin: Guten Tag, hier ist Petra Sommer. Ich habe vor drei Wochen ein Sofa bestellt, und trotz Ihrer Zusage ist es noch nicht da.\nMitarbeiter: Einen Moment, Frau Sommer. Ja, ich sehe es. Wegen eines Streiks beim Lieferanten kommt es leider zu Verspätungen.\nKundin: Das hätte man mir während der Wartezeit ruhig mitteilen können. Wann wird denn nun geliefert?\nMitarbeiter: Innerhalb der nächsten zehn Tage, voraussichtlich am Donnerstag, dem siebzehnten.\nKundin: Donnerstags arbeite ich. Geht es auch außerhalb der üblichen Lieferzeiten, zum Beispiel abends?\nMitarbeiter: Abends leider nicht, aber wir können Ihnen statt des Donnerstags den Samstagvormittag anbieten.\nKundin: Gut, dann Samstag. Und bekomme ich wegen der Verspätung eine Entschädigung?\nMitarbeiter: Selbstverständlich. Statt eines Gutscheins erlassen wir Ihnen die Lieferkosten von neunundvierzig Euro.\nKundin: Einverstanden. Bekomme ich das auch schriftlich?\nMitarbeiter: Ja, die Bestätigung erhalten Sie noch heute per E-Mail.\nKundin: Vielen Dank, auf Wiederhören.',
+      },
+      items: [
+        {
+          typ: 'mc',
+          frage: 'Warum hat sich die Lieferung verzögert?',
+          optionen: ['wegen eines Fehlers bei der Bestellung', 'wegen eines Streiks beim Lieferanten', 'wegen der großen Nachfrage'],
+          loesung: 1,
+        },
+        { typ: 'rf', aussage: 'Das Sofa wird an einem Donnerstag geliefert.', loesung: false },
+        {
+          typ: 'mc',
+          frage: 'Welche Entschädigung bekommt Frau Sommer?',
+          optionen: ['Sie muss die Lieferkosten nicht bezahlen.', 'Sie bekommt einen Gutschein über 49 Euro.', 'Sie bekommt das Sofa zum halben Preis.'],
+          loesung: 0,
+        },
+        { typ: 'rf', aussage: 'Die Kundin erhält die Vereinbarung noch am selben Tag schriftlich.', loesung: true },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -114,6 +138,20 @@ export default {
       ],
       minWoerter: 60,
       beispielLoesung: 'Hallo zusammen, ich arbeite seit zwei Jahren überwiegend im Homeoffice und möchte meine Erfahrungen teilen. Ein großer Vorteil ist die Zeit: Statt einer Stunde im Stau beginne ich den Tag mit einem Kaffee am Schreibtisch. Trotz dieser Flexibilität gibt es aber auch Nachteile. Während der ersten Monate habe ich mich oft einsam gefühlt, weil der Kontakt zu den Kollegen fehlte. Meiner Meinung nach ist eine Mischung ideal. Arbeitgeber sollten deshalb feste Bürotage einführen, damit das Team sich regelmäßig sieht. Viele Grüße, Noah',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Berichte von einer eigenen Erfahrung. Sprich etwa 90 Sekunden und verwende mindestens zwei Präpositionen mit Genitiv (z. B. wegen, trotz, während, statt).',
+      aufgabe: 'Dein Deutschkurs sammelt Reiseberichte als Audioaufnahmen. Berichte von einer Reise oder einem Ausflug, bei dem nicht alles nach Plan lief. Sprich etwa 90 Sekunden und verwende mindestens zwei Präpositionen mit Genitiv (z. B. wegen, trotz, während, statt).',
+      punkte: [
+        'Wohin ging die Reise und was war geplant?',
+        'Was ist passiert und warum?',
+        'Wie hast du das Problem gelöst und was hast du daraus gelernt?',
+      ],
+      redemittel: ['Wegen … mussten wir …', 'Während der Fahrt …', 'Trotz … sind wir …', 'Statt … haben wir schließlich …'],
+      maxSekunden: 90,
+      beispielLoesung: 'Letzten Sommer wollte ich mit zwei Freundinnen ein Wochenende in Hamburg verbringen. Wir hatten alles geplant: die Zugfahrt, ein kleines Hotel und eine Hafenrundfahrt. Aber wegen eines Unwetters ist unser Zug schon in Hannover stehen geblieben. Während der Wartezeit haben wir versucht, einen Bus zu finden, aber alles war ausgebucht. Trotz des Durcheinanders sind wir ruhig geblieben. Statt des Zuges haben wir schließlich ein Auto gemietet und sind erst um Mitternacht angekommen. Am nächsten Tag hat es immer noch geregnet, deshalb sind wir statt der Hafenrundfahrt ins Museum gegangen. Das war eigentlich sehr schön. Innerhalb eines Tages hatten wir also alle Pläne geändert. Ich habe daraus gelernt, dass man auf Reisen flexibel bleiben muss. Und trotz der Probleme war es eines unserer lustigsten Wochenenden.',
     },
   ],
 }

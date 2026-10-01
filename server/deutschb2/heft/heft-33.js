@@ -100,6 +100,30 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Hör das Radiointerview und löse die Aufgaben.',
+      audio: {
+        transcript: 'Moderatorin: Herr Albrecht, Sie leiten die Personalabteilung eines Reiseunternehmens mit rund vierhundert Beschäftigten. Wie viele Bewerbungen bekommen Sie auf eine Stelle?\nPersonalleiter: Früher waren es oft achtzig, heute sind es eher dreißig. Deshalb laden wir inzwischen fast jeden Zweiten zum Vorstellungsgespräch ein.\nModeratorin: Worauf achten Sie im Lebenslauf zuerst?\nPersonalleiter: Viele denken, auf die Noten. Für mich zählt aber vor allem, welche praktische Erfahrung jemand gesammelt hat, auch in Nebenjobs oder im Verein.\nModeratorin: Und im Gespräch selbst? Was ist der häufigste Fehler?\nPersonalleiter: Dass Bewerber nichts über uns wissen. Wer sich vorher nicht über die Firma informiert hat, fällt sofort auf. Nervosität dagegen stört mich überhaupt nicht.\nModeratorin: Darf man gleich im ersten Gespräch nach Homeoffice und Gehalt fragen?\nPersonalleiter: Nach dem Homeoffice ja, das ist heute ganz normal. Beim Gehalt würde ich warten, bis wir das Thema selbst ansprechen. Das passiert bei uns meistens erst im zweiten Gespräch.',
+      },
+      items: [
+        { typ: 'rf', aussage: 'Herr Albrecht bekommt heute mehr Bewerbungen pro Stelle als früher.', loesung: false },
+        {
+          typ: 'mc',
+          frage: 'Worauf achtet Herr Albrecht im Lebenslauf besonders?',
+          optionen: ['auf gute Noten', 'auf praktische Erfahrung', 'auf Erfahrung im Ausland'],
+          loesung: 1,
+        },
+        {
+          typ: 'mc',
+          frage: 'Was ist für ihn der häufigste Fehler im Vorstellungsgespräch?',
+          optionen: ['Die Bewerber sind zu nervös.', 'Die Bewerber fragen zu früh nach dem Homeoffice.', 'Die Bewerber haben sich nicht über die Firma informiert.'],
+          loesung: 2,
+        },
+        { typ: 'rf', aussage: 'In Herrn Albrechts Firma kommt das Gehalt meistens erst im zweiten Gespräch zur Sprache.', loesung: true },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -112,6 +136,25 @@ export default {
       ],
       minWoerter: 60,
       beispielLoesung: 'Sehr geehrte Frau Lindqvist, mit großem Interesse habe ich Ihre Anzeige für eine Teilzeitstelle im Kundenservice gelesen. Mein Name ist Carla Mendes, und ich habe drei Jahre Erfahrung im Kundenservice eines Möbelhauses gesammelt. Bevor ich meine Bewerbung abschicke, hätte ich eine Frage: Wäre es möglich, zwei Tage pro Woche im Homeoffice zu arbeiten? Da ich zwei kleine Kinder habe, wäre das für meine Work-Life-Balance sehr wichtig. Außerdem möchte ich wissen, bis wann ich Ihnen meine Unterlagen mit Lebenslauf schicken soll. Vielen Dank im Voraus für Ihre Antwort. Mit freundlichen Grüßen, Carla Mendes',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Nimm Stellung. Sprich etwa anderthalb Minuten.',
+      aufgabe: 'Ein Radiosender sammelt Hörermeinungen zur Frage: „Muss man nach Feierabend für die Firma erreichbar sein?“ Sprich deine Stellungnahme (etwa anderthalb Minuten) als Nachricht auf den Anrufbeantworter der Redaktion.',
+      punkte: [
+        'Sag deine Meinung und begründe sie.',
+        'Berichte von einer eigenen Erfahrung oder von einem Beispiel aus deinem Umfeld.',
+        'Nenne ein Gegenargument und geh darauf ein.',
+      ],
+      redemittel: [
+        'Meiner Meinung nach …',
+        'Aus eigener Erfahrung kann ich sagen, dass …',
+        'Natürlich gibt es Situationen, in denen …',
+        'Entscheidend ist für mich, dass …',
+      ],
+      maxSekunden: 100,
+      beispielLoesung: 'Guten Tag, mein Name ist Lucía Herrera, ich arbeite in Teilzeit im Kundenservice. Meiner Meinung nach sollte man nach Feierabend nicht mehr für die Firma erreichbar sein müssen. Wer abends noch E-Mails liest, kann nicht richtig abschalten, und auf Dauer leidet die Work-Life-Balance. Aus eigener Erfahrung kann ich sagen, dass das schnell normal wird: Bei meiner alten Stelle hat mein Chef oft um neun Uhr abends noch Nachrichten geschickt, und ich hatte das Gefühl, sofort antworten zu müssen. Irgendwann konnte ich kaum noch schlafen. Natürlich gibt es Situationen, in denen es wirklich dringend ist, zum Beispiel wenn eine Kollegin krank wird und jemand ihre Schicht übernehmen muss. Das verstehe ich. Aber solche Notfälle sollten die Ausnahme bleiben. Entscheidend ist für mich, dass es im Team klare Regeln gibt: Nach Feierabend ruft man nur im Notfall an, und alles andere wartet bis zum nächsten Morgen. Vielen Dank.',
     },
   ],
 }

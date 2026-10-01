@@ -112,6 +112,34 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Du hörst eine Sprachnachricht einer Tutorin. Löse die Aufgaben.',
+      audio: {
+        transcript: 'Hallo Diego, hier ist Katrin, deine Tutorin. Ich habe deinen Forumsbeitrag von gestern korrigiert und wollte dir kurz eine Rückmeldung geben. Zuerst das Positive. Du bist auf alle drei Inhaltspunkte eingegangen, und dein Text ist in klare Absätze gegliedert. Das war beim letzten Mal noch anders. Auch dein Wortschatz gefällt mir, du findest inzwischen oft einen treffenden Ausdruck. Weniger gut sieht es bei den Strukturen aus. Ich habe vierzehn Fehler gezählt, und fast alle sind Flüchtigkeitsfehler. Das Verb steht bei dir meistens richtig, aber viele Adjektivendungen stimmen nicht, und einige Nomen hast du kleingeschrieben. Solche Fehler findest du selbst, wenn du den Text am Ende überarbeitest. Mein Vorschlag wäre, dass du beim nächsten Text nicht bis zur letzten Minute schreibst, sondern fünf Minuten früher aufhörst und nur noch kontrollierst. Ach ja, noch etwas Organisatorisches. Unsere Stunde am Dienstag muss ich leider verschieben. Passt dir stattdessen Donnerstag um halb sieben? Schreib mir bitte kurz. Bis dann!',
+      },
+      items: [
+        { typ: 'rf', aussage: 'Diego hat in seinem Text einen Inhaltspunkt vergessen.', loesung: false },
+        {
+          typ: 'mc',
+          frage: 'Wie viele Fehler hat Katrin in Diegos Text gezählt?',
+          optionen: ['vier', 'vierzehn', 'vierzig'],
+          loesung: 1,
+        },
+        {
+          typ: 'mc',
+          frage: 'Welche Fehler macht Diego laut Katrin vor allem?',
+          optionen: [
+            'Viele Adjektivendungen sind falsch, und einige Nomen sind kleingeschrieben.',
+            'Das Verb steht meistens an der falschen Stelle.',
+            'Sein Wortschatz ist zu einfach.',
+          ],
+          loesung: 0,
+        },
+        { typ: 'rf', aussage: 'Katrin schlägt vor, die gemeinsame Stunde auf Donnerstag zu verlegen.', loesung: true },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -124,6 +152,25 @@ export default {
       ],
       minWoerter: 60,
       beispielLoesung: 'Hallo Tomasz, dein Problem kenne ich gut! Auch ich habe lange nach „weil“ das Verb an die falsche Stelle gesetzt, obwohl ich die Regel eigentlich kannte. Mein erster Tipp: Lies die Aufgabenstellung immer zweimal und notiere zu jedem Inhaltspunkt Stichwörter, bevor du schreibst. Außerdem hilft es, alte Texte mit einer Liste deiner typischen Fehler zu überarbeiten. In der Prüfung solltest du die letzten fünf Minuten nur für den Schluss-Check nutzen: Artikel, Verbposition, Kommas und Großschreibung. So findest du die meisten Flüchtigkeitsfehler selbst. Viel Erfolg! Amira',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Nimm Stellung zu einer Streitfrage. Sprich etwa 90 Sekunden.',
+      aufgabe: 'In deinem Sprachkurs wird diskutiert, ob man in der Schreibprüfung ein Wörterbuch benutzen dürfen sollte. Nimm dazu in etwa 90 Sekunden Stellung.',
+      punkte: [
+        'Sag klar, ob du dafür oder dagegen bist.',
+        'Begründe deine Meinung mit zwei Argumenten.',
+        'Geh auf ein Gegenargument ein und entkräfte es.',
+      ],
+      redemittel: [
+        'Meiner Meinung nach …',
+        'Erstens … / Zweitens …',
+        'Natürlich verstehe ich das Gegenargument: …',
+        'Trotzdem überzeugt mich das nicht, denn …',
+      ],
+      maxSekunden: 90,
+      beispielLoesung: 'Meiner Meinung nach sollte man in der Schreibprüfung kein Wörterbuch benutzen dürfen. Dafür habe ich zwei Gründe. Erstens kostet das Nachschlagen viel Zeit. Wer für zwei Texte nur fünfundsiebzig Minuten hat, kann nicht jedes dritte Wort suchen. Am Ende fehlt dann die Zeit, um den Text zu überarbeiten, und genau dabei findet man ja die meisten Flüchtigkeitsfehler. Zweitens soll die Prüfung zeigen, was ich wirklich kann. Im Alltag, zum Beispiel in einer Besprechung, muss ich mich auch mit meinem eigenen Wortschatz ausdrücken. Natürlich verstehe ich das Gegenargument: Mit einem Wörterbuch wäre man weniger nervös, und im Beruf darf man schließlich auch nachschlagen. Trotzdem überzeugt mich das nicht, denn ein treffender Ausdruck hilft wenig, wenn der Satz drumherum falsch ist. Deshalb bin ich dagegen. Besser ist es, vor der Prüfung viel zu schreiben und typische Formulierungen zu lernen.',
     },
   ],
 }

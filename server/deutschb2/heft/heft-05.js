@@ -79,6 +79,30 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Du hörst eine Nachricht auf dem Anrufbeantworter. Entscheide bei jeder Aufgabe, welche Lösung dem Gehörten entspricht.',
+      audio: {
+        transcript: 'Guten Tag, Herr Okafor, hier spricht Katrin Lindner von der Personalabteilung. Ich rufe an, damit Sie für Ihren ersten Arbeitstag alles Wichtige wissen. Wir hatten ursprünglich Montag, den dritten März, vereinbart. Da an diesem Tag aber das ganze Team auf einer Messe ist, beginnen Sie erst am Dienstag, und zwar um halb neun. Bevor Sie in Ihre Abteilung gehen, kommen Sie bitte zu mir in den zweiten Stock, um Ihren Mitarbeiterausweis abzuholen. Bringen Sie dafür ein Passfoto mit. Nachdem Sie den Ausweis bekommen haben, zeigt Ihnen ein Kollege das Haus. In der ersten Woche sind Sie nur bis zwölf Uhr in der Abteilung, denn nachmittags finden die Schulungen statt. Den Arbeitsvertrag haben wir Ihnen gestern geschickt. Sofern Sie mit allem einverstanden sind, schicken Sie ihn bitte unterschrieben zurück. Dafür haben Sie Zeit, bis die Woche zu Ende ist, also bis Freitag. Falls Sie noch Fragen haben, erreichen Sie mich heute bis siebzehn Uhr. Auf Wiederhören.',
+      },
+      items: [
+        {
+          typ: 'mc',
+          frage: 'Wann beginnt der erste Arbeitstag von Herrn Okafor?',
+          optionen: ['am Montag um 8:30 Uhr', 'am Dienstag um 8:30 Uhr', 'am Dienstag um 9:30 Uhr'],
+          loesung: 1,
+        },
+        { typ: 'rf', aussage: 'Herr Okafor soll zuerst in seine Abteilung gehen und danach den Ausweis abholen.', loesung: false },
+        {
+          typ: 'mc',
+          frage: 'Was soll Herr Okafor am ersten Tag mitbringen?',
+          optionen: ['ein Passfoto', 'den unterschriebenen Arbeitsvertrag', 'seinen Mitarbeiterausweis'],
+          loesung: 0,
+        },
+        { typ: 'rf', aussage: 'Für den unterschriebenen Vertrag hat Herr Okafor bis Freitag Zeit.', loesung: true },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -91,6 +115,20 @@ export default {
       ],
       minWoerter: 60,
       beispielLoesung: 'Betreff: Anmeldung zum Kurs „Präsentieren im Beruf“ — Sehr geehrte Damen und Herren, hiermit möchte ich mich für Ihren Wochenendkurs „Präsentieren im Beruf“ im Oktober anmelden. Ich besuche den Kurs, um sicherer vor Kunden zu sprechen, denn in meiner neuen Stelle muss ich regelmäßig Projekte vorstellen. Außerdem habe ich eine Frage: Was passiert, falls ich wegen einer Dienstreise einen Termin verpasse? Kann ich ihn dann nachholen? Bitte teilen Sie mir auch mit, was ich erledigen muss, bevor der Kurs beginnt. Muss ich die Gebühr vorher überweisen? Ich würde mich über eine kurze Rückmeldung freuen. Mit freundlichen Grüßen, Paula Richter',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Berichte von einer eigenen Erfahrung. Sprich etwa 90 Sekunden und verwende Konnektoren aus dieser Lektion.',
+      aufgabe: 'In einem Podcast für Deutschlernende erzählen Hörerinnen und Hörer von einem Neuanfang. Berichte von einer wichtigen Veränderung in deinem Leben, zum Beispiel von einem Umzug, einer neuen Stelle oder dem Beginn einer Ausbildung. Sprich etwa 90 Sekunden und verwende Konnektoren wie bevor, nachdem, seit, bis, um … zu, damit oder falls.',
+      punkte: [
+        'Erzähl, wie dein Leben vorher aussah und wozu du dich für die Veränderung entschieden hast (bevor, um … zu oder damit).',
+        'Beschreibe, wie die erste Zeit danach verlief (nachdem, während oder bis).',
+        'Sag, was sich seitdem verändert hat, und gib einen Rat für alle, die dasselbe planen (seit, falls oder wenn).',
+      ],
+      redemittel: ['Bevor ich …, …', 'Nachdem ich … war, …', 'Seit ich …, …', 'Falls ihr …, …'],
+      maxSekunden: 90,
+      beispielLoesung: 'Ich möchte von meinem Umzug nach Deutschland erzählen. Bevor ich nach Hamburg kam, habe ich in Valencia in einem kleinen Hotel gearbeitet. Die Arbeit war in Ordnung, aber ich wollte etwas Neues lernen. Deshalb bin ich vor drei Jahren umgezogen, um hier eine Ausbildung als Hotelkauffrau zu machen. Der Anfang war nicht leicht. Nachdem ich angekommen war, wohnte ich zuerst zwei Monate bei einer Freundin, bis ich endlich ein eigenes Zimmer gefunden hatte. Während ich die Ausbildung gemacht habe, habe ich abends noch einen Deutschkurs besucht, damit mich die Gäste besser verstehen. Das war anstrengend, aber es hat sich gelohnt. Seit ich hier lebe, bin ich viel selbstständiger geworden. Ich habe neue Freunde gefunden und spreche jeden Tag Deutsch. Wenn ich heute zurückdenke, bin ich froh über diesen Schritt. Falls ihr auch einen Umzug ins Ausland plant, habe ich einen Rat: Lernt die Sprache, bevor ihr umzieht, und sucht euch früh eine Wohnung.',
     },
   ],
 }

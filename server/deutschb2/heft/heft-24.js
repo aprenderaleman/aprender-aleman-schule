@@ -90,6 +90,30 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Du hörst ein Telefongespräch wie in Teil 1 der Prüfung. Lies zuerst die Aufgaben und achte beim Hören auf Uhrzeiten, Zahlen und Änderungen.',
+      audio: {
+        transcript: 'Frau: Heizungsbau Lorenz, guten Tag.\nMann: Guten Tag, Keller hier. Ihr Techniker wollte morgen um halb neun zu mir kommen. Leider muss ich den Termin absagen, ich habe kurzfristig eine Besprechung.\nFrau: Kein Problem, Herr Keller, dann verschieben wir ihn. Ginge es am Mittwoch um Viertel vor zwei?\nMann: Mittwochs arbeite ich leider bis abends. Haben Sie am Donnerstag etwas frei?\nFrau: Am Donnerstag ja, allerdings nicht am Nachmittag, sondern nur morgens um Viertel nach sieben.\nMann: Das ist früh, aber es passt. Was kostet eigentlich die Anfahrt? Ein Kollege von Ihnen sprach von dreißig Euro.\nFrau: Dreißig waren es früher. Seit Januar berechnen wir nur noch dreizehn Euro, dafür kostet die Arbeitsstunde jetzt fünfundsechzig Euro.\nMann: In Ordnung. Soll ich mich vorher noch einmal melden?\nFrau: Nicht nötig. Der Techniker ruft Sie an, sobald er losfährt. Erreicht er Sie unter der Nummer, die wir gespeichert haben?\nMann: Ja, die stimmt noch. Vielen Dank!',
+      },
+      items: [
+        {
+          typ: 'mc',
+          frage: 'Wann kommt der Techniker?',
+          optionen: ['am Mittwoch um 13.45 Uhr', 'am Donnerstag um 7.15 Uhr', 'am Donnerstag um 7.45 Uhr'],
+          loesung: 1,
+        },
+        { typ: 'rf', aussage: 'Ursprünglich sollte der Techniker um 9.30 Uhr kommen.', loesung: false },
+        {
+          typ: 'mc',
+          frage: 'Wie viel kostet die Anfahrt?',
+          optionen: ['13 Euro', '30 Euro', '65 Euro'],
+          loesung: 0,
+        },
+        { typ: 'rf', aussage: 'Herr Keller braucht vor dem Termin nicht mehr selbst anzurufen.', loesung: true },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -102,6 +126,20 @@ export default {
       ],
       minWoerter: 60,
       beispielLoesung: 'Betreff: Kurzfristige Änderung meines Abendkurses — Sehr geehrte Damen und Herren, im März habe ich bei Ihnen den Abendkurs Deutsch B2 gebucht, der dienstags um 18 Uhr stattfinden sollte. Gestern habe ich auf meinem Anrufbeantworter erfahren, dass der Kurs ab sofort bereits um 16 Uhr beginnt. Eine schriftliche Mitteilung habe ich nicht bekommen. Da ich bis 17 Uhr arbeite, kann ich den Kurs zu dieser Zeit leider nicht besuchen. Ich bitte Sie deshalb, mir einen gleichwertigen Kurs am Abend anzubieten. Sollte das nicht möglich sein, erwarte ich die Erstattung der vollen Kursgebühr. Ich freue mich auf Ihre baldige Antwort. Mit freundlichen Grüßen, Luis Ferreira',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Sprich eine Nachricht auf einen Anrufbeantworter. Du hast etwa 90 Sekunden.',
+      aufgabe: 'Du hast am Donnerstag um 10.30 Uhr ein Vorstellungsgespräch bei der Firma Baumann, kannst den Termin aber nicht wahrnehmen. Du erreichst nur den Anrufbeantworter der Personalabteilung. Hinterlasse eine höfliche und vollständige Nachricht von etwa 90 Sekunden.',
+      punkte: [
+        'Nenne deinen Namen, den Termin und den Grund für deine Absage.',
+        'Schlag zwei neue Termine mit Tag und Uhrzeit vor.',
+        'Sag, wann und wie man dich am besten erreicht.',
+      ],
+      redemittel: ['Guten Tag, hier spricht …', 'Leider muss ich den Termin am … absagen, weil …', 'Wäre es möglich, das Gespräch auf … zu verschieben?', 'Sie erreichen mich …'],
+      maxSekunden: 90,
+      beispielLoesung: 'Guten Tag, hier spricht Elena Ruiz. Ich habe am Donnerstag um halb elf ein Vorstellungsgespräch bei Ihnen, für die Stelle in der Buchhaltung. Leider muss ich diesen Termin absagen, weil ich an dem Tag kurzfristig eine Prüfung an der Universität habe, die ich nicht verschieben kann. Das tut mir wirklich leid, denn die Stelle interessiert mich sehr. Wäre es möglich, das Gespräch auf einen anderen Tag zu verschieben? Ich könnte am Freitag um neun Uhr oder am Montag ab vierzehn Uhr zu Ihnen kommen. Falls beide Termine nicht passen, richte ich mich selbstverständlich nach Ihnen. Sie erreichen mich am besten nachmittags zwischen drei und sechs Uhr auf dem Handy, die Nummer steht in meiner Bewerbung. Sie können mir aber auch gern eine E-Mail schreiben. Vielen Dank für Ihr Verständnis und auf Wiederhören.',
     },
   ],
 }

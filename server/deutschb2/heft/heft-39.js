@@ -100,6 +100,25 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Du hörst ein Gespräch in einem Elektrogeschäft. Entscheide bei jeder Aufgabe, welche Lösung dem Gehörten entspricht.',
+      audio: {
+        transcript: 'Verkäuferin: Guten Tag, was kann ich für Sie tun?\nKunde: Guten Tag. Ich habe letzte Woche bei Ihnen diese Kaffeemaschine gekauft, und sie funktioniert nicht richtig. Das Wasser wird nicht mehr heiß.\nVerkäuferin: Das tut mir leid. Haben Sie den Kassenbon aufbewahrt?\nKunde: Den finde ich leider nicht mehr. Ich habe aber mit Karte bezahlt, hier ist die Abbuchung auf meinem Kontoauszug.\nVerkäuferin: Das reicht als Nachweis. Dann nehme ich Ihre Reklamation auf. Möchten Sie das Gerät umtauschen, oder soll ich Ihnen den Betrag erstatten?\nKunde: Eigentlich wollte ich mein Geld zurück. Was kostet das Modell denn im Moment?\nVerkäuferin: Sie haben neunundachtzig Euro bezahlt. Seit Montag gibt es zwanzig Prozent Rabatt, also kostet es jetzt nur noch rund einundsiebzig Euro.\nKunde: Aber ich bekomme schon die neunundachtzig Euro zurück, oder?\nVerkäuferin: Selbstverständlich, den vollen Betrag. Das Geld ist in etwa fünf Werktagen auf Ihrem Konto.\nKunde: Gut. Wissen Sie was? Dann nehme ich dieselbe Maschine gleich noch einmal mit, zum günstigeren Preis.\nVerkäuferin: Gern. Diesmal heben Sie den Kassenbon aber bitte gut auf.',
+      },
+      items: [
+        { typ: 'rf', aussage: 'Der Kunde kann der Verkäuferin den Kassenbon zeigen.', loesung: false },
+        {
+          typ: 'mc',
+          frage: 'Was ist das Problem mit der Kaffeemaschine?',
+          optionen: ['Sie verliert Wasser.', 'Sie erhitzt das Wasser nicht mehr.', 'Sie lässt sich nicht mehr einschalten.'],
+          loesung: 1,
+        },
+        { typ: 'mc', frage: 'Welchen Betrag bekommt der Kunde erstattet?', optionen: ['71 Euro', '79 Euro', '89 Euro'], loesung: 2 },
+        { typ: 'rf', aussage: 'Am Ende kauft der Kunde das gleiche Modell noch einmal.', loesung: true },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -112,6 +131,20 @@ export default {
       ],
       minWoerter: 60,
       beispielLoesung: 'Meiner Meinung nach sollte Werbung für Kinder stark eingeschränkt werden, denn Kinder lassen sich besonders leicht von Werbung beeinflussen. Sie verstehen oft nicht, dass ein Clip nur verkaufen will, und bitten ihre Eltern danach ständig um neues Spielzeug oder Süßigkeiten. Andererseits gehört Werbung zum Alltag, und ein komplettes Verbot wäre schwer zu kontrollieren, vor allem im Internet. Besser wäre es, wenn Kinder schon in der Schule lernen, wie Werbung funktioniert. In Chile, wo ich aufgewachsen bin, dürfen ungesunde Lebensmittel nicht mehr mit Comicfiguren beworben werden. Ich finde, das ist ein guter Kompromiss.',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Sprich eine formelle Nachricht auf einen Anrufbeantworter. Sprich etwa 90 Sekunden frei und in ganzen Sätzen.',
+      aufgabe: 'Du hast vor zwei Wochen bei einem Online-Händler einen Staubsauger bestellt. Geliefert wurde ein falsches Modell, und auf deine E-Mail hat niemand reagiert. Du rufst beim Kundenservice an, erreichst aber nur den Anrufbeantworter. Sprich deine Reklamation als formelle Nachricht im Sie-Register auf das Band (etwa 90 Sekunden).',
+      punkte: [
+        'Nenne deinen Namen und beschreib, was du bestellt und was du bekommen hast.',
+        'Erkläre, was du bisher unternommen hast und worüber du dich beschwerst.',
+        'Sag, welche Lösung du erwartest und bis wann du eine Rückmeldung möchtest.',
+      ],
+      redemittel: ['Ich rufe an, weil …', 'Leider musste ich feststellen, dass …', 'Ich möchte mich darüber beschweren, dass …', 'Ich bitte Sie, mir … zu schicken / zu erstatten.'],
+      maxSekunden: 90,
+      beispielLoesung: 'Guten Tag, mein Name ist Elena Ruiz. Ich rufe an, weil es ein Problem mit meiner Bestellung gibt. Vor zwei Wochen habe ich bei Ihnen einen Staubsauger bestellt, und zwar das Modell mit Akku. Die Lieferung kam zwar pünktlich, aber leider musste ich feststellen, dass im Paket ein ganz anderes Gerät war: ein älteres Modell mit Kabel. Auf der Rechnung steht trotzdem der Preis für das teurere Gerät. Ich habe Ihnen deshalb schon vor zehn Tagen eine E-Mail geschrieben und Fotos mitgeschickt. Ich möchte mich darüber beschweren, dass ich bis heute keine Antwort bekommen habe. Ich bitte Sie, mir entweder das richtige Modell zu schicken oder mir den vollen Betrag zu erstatten. Die Kosten für die Rücksendung des falschen Geräts sollten selbstverständlich Sie übernehmen. Bitte rufen Sie mich bis Ende dieser Woche zurück oder antworten Sie auf meine E-Mail. Vielen Dank und auf Wiederhören.',
     },
   ],
 }

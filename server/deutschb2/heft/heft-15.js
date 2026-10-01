@@ -100,6 +100,30 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Du hörst ein Interview im Radio. Entscheide, welche Aussage dem Gehörten entspricht.',
+      audio: {
+        transcript: 'Moderatorin: Herzlich willkommen, Herr Albrecht. Sie leiten seit vier Jahren ein Reparaturcafé in Leipzig. Womit beschäftigen Sie sich dort genau?\nMann: Wir kümmern uns um kaputte Geräte, also um Toaster, Lampen oder Radios. Die Leute bringen sie mit, und wir reparieren sie gemeinsam.\nModeratorin: Wie sind Sie darauf gekommen?\nMann: Ich habe mich immer darüber geärgert, dass so viel weggeworfen wird. Eigentlich träumte ich von einer eigenen Werkstatt, aber dafür fehlte mir das Geld. Das Café war die bessere Lösung.\nModeratorin: Wer nimmt an Ihren Treffen teil?\nMann: Anfangs dachte ich an ältere Menschen. Inzwischen kommen aber vor allem Studierende, die sich für Technik interessieren.\nModeratorin: Und wovon hängt der Erfolg einer Reparatur ab?\nMann: Nicht vom Alter des Geräts, sondern davon, ob wir Ersatzteile bekommen. Darauf müssen wir manchmal wochenlang warten.\nModeratorin: Worüber freuen Sie sich am meisten?\nMann: Darüber, dass die Leute sich gegenseitig helfen. Viele bedanken sich mit einem selbst gebackenen Kuchen bei uns.\nModeratorin: Vielen Dank für das Gespräch.',
+      },
+      items: [
+        {
+          typ: 'mc',
+          frage: 'Wovon hat Herr Albrecht ursprünglich geträumt?',
+          optionen: ['von einer eigenen Werkstatt', 'von einem Café für Studierende', 'von einem Geschäft für gebrauchte Geräte'],
+          loesung: 0,
+        },
+        { typ: 'rf', aussage: 'Ins Reparaturcafé kommen heute hauptsächlich ältere Menschen.', loesung: false },
+        {
+          typ: 'mc',
+          frage: 'Wovon hängt es ab, ob eine Reparatur gelingt?',
+          optionen: ['vom Alter des Geräts', 'von der Erfahrung der Helfer', 'davon, ob Ersatzteile zu bekommen sind'],
+          loesung: 2,
+        },
+        { typ: 'rf', aussage: 'Zum Dank bringen viele Besucher etwas Selbstgebackenes mit.', loesung: true },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -112,6 +136,20 @@ export default {
       ],
       minWoerter: 60,
       beispielLoesung: 'Betreff: Interesse am Patenschaftsprogramm — Sehr geehrte Damen und Herren, mit großem Interesse habe ich den Artikel über Ihr Patenschaftsprogramm gelesen. Ich interessiere mich schon lange für ehrenamtliche Arbeit, und da ich selbst vor einigen Jahren nach Deutschland gekommen bin, weiß ich, wie wichtig Unterstützung im Alltag ist. Gern würde ich mich um ein Kind kümmern und bei den Hausaufgaben helfen. Allerdings arbeite ich Vollzeit. Hängt die Teilnahme davon ab, wie viele Stunden man pro Woche anbieten kann? Brauche ich besondere Erfahrung? Ich würde mich sehr darüber freuen, wenn wir einen Termin für ein persönliches Gespräch vereinbaren könnten. Mit freundlichen Grüßen, Lucía Ferreira',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Nimm Stellung zu der These. Sprich etwa zwei Minuten und verwende mehrere Verben mit Präposition.',
+      aufgabe: 'Das Nachbarschaftszentrum in deinem Stadtteil veranstaltet einen Diskussionsabend zum Thema Ehrenamt. Die These des Abends lautet: „Jeder sollte sich in seiner Freizeit ehrenamtlich engagieren.“ Nimm in einem Redebeitrag von etwa zwei Minuten Stellung und verwende dabei mehrere Verben mit Präposition (z. B. sich kümmern um, abhängen von, denken an).',
+      punkte: [
+        'Sag, was du von der These hältst, und begründe deine Meinung.',
+        'Nenne ein Gegenargument und geh darauf ein.',
+        'Erzähl, wofür du dich selbst engagierst oder gern engagieren würdest.',
+      ],
+      redemittel: ['Ich bin davon überzeugt, dass …', 'Das hängt davon ab, ob …', 'Man sollte auch daran denken, dass …', 'Ich selbst interessiere mich für …'],
+      maxSekunden: 120,
+      beispielLoesung: 'Ich finde, das ist eine interessante These, aber ich bin nur teilweise damit einverstanden. Natürlich ist es gut, wenn sich Menschen um andere kümmern. Ich bin davon überzeugt, dass unsere Gesellschaft ohne Freiwillige nicht funktionieren würde. Denken wir nur an die Sportvereine oder an die Hilfe für ältere Leute. Außerdem lernt man viel, wenn man an solchen Projekten teilnimmt. Man sollte aber auch daran denken, dass nicht jeder die gleichen Möglichkeiten hat. Ob sich jemand engagieren kann, hängt von seiner Situation ab. Wer Vollzeit arbeitet und kleine Kinder hat, hat oft einfach keine Zeit dafür. Deshalb sollte man niemanden dazu zwingen. Ich selbst interessiere mich sehr für Tiere. Wenn ich mehr Zeit hätte, würde ich gern im Tierheim helfen und mich dort um die Hunde kümmern. Im Moment muss ich mich aber auf meine Prüfung konzentrieren. Danach fange ich vielleicht damit an, ich freue mich jedenfalls schon darauf.',
     },
   ],
 }

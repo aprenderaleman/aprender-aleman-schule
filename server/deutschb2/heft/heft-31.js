@@ -99,6 +99,30 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Hör die Sprachnachricht und löse die Aufgaben.',
+      audio: {
+        transcript: 'Hallo Daniela, hier ist Karin, deine Kursleiterin. Ich wollte dir noch kurz eine Rückmeldung zu deinem Probevortrag von heute geben, weil wir im Unterricht keine Zeit mehr hatten. Dein Thema, das Leben auf dem Land, hast du wirklich gut gegliedert. Die Einleitung war klar, und den roten Faden hat man die ganze Zeit gehört. Besonders gefallen hat mir dein Beispiel mit dem Bus, der nur zweimal am Tag fährt. Zwei Dinge solltest du aber noch üben. Erstens warst du schon nach zweieinhalb Minuten fertig, vorgesehen sind ungefähr vier. Erzähl also bei jedem Punkt ein bisschen mehr aus eigener Erfahrung. Zweitens hat am Ende das Fazit gefehlt, du hast einfach aufgehört. Noch etwas Organisatorisches. Die Probeprüfung findet nicht am Donnerstag statt, sondern erst am Freitag, und zwar um Viertel nach neun in Raum zwölf. Bring bitte nur einen Zettel mit Stichwörtern mit. Bis dann, tschüss!',
+      },
+      items: [
+        { typ: 'rf', aussage: 'Die Kursleiterin lobt den Aufbau von Danielas Vortrag.', loesung: true },
+        {
+          typ: 'mc',
+          frage: 'Was soll Daniela laut der Kursleiterin noch üben?',
+          optionen: ['Sie soll langsamer und deutlicher sprechen.', 'Sie soll länger sprechen und mehr von sich selbst erzählen.', 'Sie soll eine kürzere Einleitung vorbereiten.'],
+          loesung: 1,
+        },
+        { typ: 'rf', aussage: 'Daniela hat ihren Vortrag mit einem Fazit abgeschlossen.', loesung: false },
+        {
+          typ: 'mc',
+          frage: 'Wann findet die Probeprüfung statt?',
+          optionen: ['am Freitag um Viertel nach neun', 'am Donnerstag um Viertel nach neun', 'am Freitag um Viertel vor neun'],
+          loesung: 0,
+        },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -111,6 +135,28 @@ export default {
       ],
       minWoerter: 60,
       beispielLoesung: 'Hallo Valentina, ich kenne das Gefühl gut! Ich baue meinen Vortrag immer gleich auf: eine kurze Einleitung mit dem Plan, dann zwei Punkte mit je einem Beispiel und am Ende ein Fazit. Letztes Jahr habe ich im Sprachkurs eine Präsentation über das Wohnen in der Stadt gehalten. Zuerst war ich sehr nervös, aber weil ich nur Stichwörter auf dem Zettel hatte, konnte ich frei sprechen und Blickkontakt halten. Mein Tipp für die Nachfragen: Sag zuerst „Gute Frage!“, dann hast du ein paar Sekunden Zeit. Antworte kurz und stell am Ende eine Gegenfrage. Viel Erfolg! Liebe Grüße, Hamid',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Halte einen kurzen Vortrag und beantworte danach eine Nachfrage. Sprich insgesamt etwa zwei Minuten frei, nur mit Stichwörtern.',
+      aufgabe: 'Halte in deinem Sprachkurs einen kurzen Vortrag (etwa anderthalb Minuten) zum Thema „Ein Haustier in der Stadtwohnung — Vor- und Nachteile“. Gliedere ihn in Einleitung, Hauptteil und Fazit. Danach stellt dir eine Kursteilnehmerin diese Nachfrage: „Und was passiert mit dem Tier, wenn man in den Urlaub fährt?“ Beantworte sie in zwei, drei Sätzen.',
+      punkte: [
+        'Nenne mindestens einen Vorteil und einen Nachteil.',
+        'Berichte von einer eigenen Erfahrung oder gib ein Beispiel.',
+        'Sag deine Meinung und zieh ein kurzes Fazit.',
+        'Beantworte die Nachfrage: erst bestätigen, dann kurz antworten.',
+      ],
+      redemittel: [
+        'Ich möchte heute über … sprechen.',
+        'Ein großer Vorteil ist, dass …',
+        'Ein Beispiel dafür ist …',
+        'Ich komme jetzt zu den Nachteilen.',
+        'Zusammenfassend kann man sagen, dass …',
+        'Gute Frage! …',
+      ],
+      maxSekunden: 120,
+      beispielLoesung: 'Ich möchte heute über die Frage sprechen, ob ein Haustier in eine Stadtwohnung gehört. Zuerst spreche ich über die Vorteile, danach über die Nachteile, und am Ende sage ich meine Meinung. Zuerst einmal zu den Vorteilen. Ein großer Vorteil ist, dass ein Tier vielen Menschen guttut, vor allem denen, die allein wohnen: Man kommt nach Hause, und jemand wartet auf einen. Außerdem bewegt man sich mehr, weil ein Hund bei jedem Wetter nach draußen muss. Ein Beispiel dafür ist meine Nachbarin: Seit sie einen Hund hat, kennt sie das halbe Viertel. Ich komme jetzt zu den Nachteilen. Ein Tier kostet Zeit und Geld, und in einer kleinen Wohnung ohne Garten fühlt sich nicht jedes Tier wohl. Dazu kommt, dass nicht jeder Vermieter Haustiere erlaubt. Meiner Meinung nach hängt es davon ab, wie viel Zeit man wirklich hat. Zusammenfassend kann man sagen, dass ein Haustier das Leben in der Stadt schöner machen kann, wenn man die Verantwortung ernst nimmt. Gibt es noch Fragen? — Gute Frage! Der Urlaub ist tatsächlich ein Problem. Bei uns passt dann eine Freundin auf die Katze auf, sonst müsste ich eine Tierpension bezahlen. Hättest du denn selbst gern ein Tier?',
     },
   ],
 }

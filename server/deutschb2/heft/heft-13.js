@@ -94,6 +94,30 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Du hörst einen Beitrag im Lokalradio. Entscheide, welche Aussage dem Gehörten entspricht.',
+      audio: {
+        transcript: 'Guten Morgen, liebe Hörerinnen und Hörer, hier ist das Stadtmagazin. Nach fast zwei Jahren Bauzeit öffnet am kommenden Samstag die frisch renovierte Markthalle am Hafen wieder ihre Türen. Das ursprünglich für April geplante Eröffnungsfest musste verschoben werden, allerdings nicht aus Geldmangel, sondern wegen des beschädigten Dachs. In der Halle erwarten Sie künftig vierzig Stände mit frischem Obst, hausgemachtem Käse und duftendem Brot aus der Region. Neu ist außerdem ein kleiner Bereich für gebrauchte Bücher und reparierte Fahrräder. Die Stadt reagiert damit auf die wachsende Nachfrage nach günstigen Angeboten, denn die steigenden Preise machen vielen Familien Sorgen. Geöffnet ist die Halle von Dienstag bis Samstag, jeweils von acht bis achtzehn Uhr. Am Eröffnungstag gibt es schon ab sieben Uhr ein kostenloses Frühstück für die ersten hundert Besucher. Wegen des zunehmenden Verkehrs am Hafen empfiehlt die Stadt, mit dem Bus oder dem Fahrrad zu kommen. Der neu gebaute Parkplatz hinter der Halle bietet nämlich nur wenige Plätze.',
+      },
+      items: [
+        { typ: 'rf', aussage: 'Die renovierte Markthalle wird am Samstag wieder eröffnet.', loesung: true },
+        {
+          typ: 'mc',
+          frage: 'Warum musste das Eröffnungsfest verschoben werden?',
+          optionen: ['Der Stadt fehlte das Geld.', 'Das Dach war beschädigt.', 'Die Stände waren noch nicht fertig.'],
+          loesung: 1,
+        },
+        {
+          typ: 'mc',
+          frage: 'Wie viele Stände gibt es künftig in der Halle?',
+          optionen: ['vierzig', 'vierzehn', 'hundert'],
+          loesung: 0,
+        },
+        { typ: 'rf', aussage: 'Das kostenlose Frühstück am Eröffnungstag beginnt um acht Uhr.', loesung: false },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -106,6 +130,20 @@ export default {
       ],
       minWoerter: 60,
       beispielLoesung: 'Ich kaufe seit Jahren fast alles gebraucht und habe damit gute Erfahrungen gemacht. Mein Laptop, mein Fahrrad und sogar mein Sofa stammen aus zweiter Hand. Bei den ständig steigenden Preisen spare ich so jedes Jahr mehrere hundert Euro. Außerdem schont man die Umwelt, weil weniger neue Waren produziert werden. Natürlich gibt es auch Nachteile: Bei gebrauchten Elektrogeräten fehlt oft die Garantie, und man weiß nicht genau, wie der Vorbesitzer damit umgegangen ist. Meine Empfehlung: Wer ein bestimmtes Produkt sucht, sollte zuerst nach einem gut erhaltenen Exemplar schauen und die angebotene Ware vor dem Kauf genau prüfen. Für mich ist Gebrauchtkaufen jedenfalls keine Notlösung, sondern eine clevere Alternative.',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Halte einen kurzen Vortrag. Sprich etwa 90 Sekunden und geh auf alle drei Punkte ein.',
+      aufgabe: 'Dein Deutschkurs sammelt kurze Audiobeiträge zum Thema „Meine Stadt im Wandel“. Beschreibe in etwa 90 Sekunden, wie sich deine Stadt oder dein Viertel in den letzten Jahren verändert hat. Verwende dabei Adjektive und Partizipien vor dem Nomen (die steigenden Mieten, das frisch renovierte Haus).',
+      punkte: [
+        'Was hat sich verändert (z. B. Mieten, Verkehr, Gebäude, Geschäfte)?',
+        'Welche Veränderung findest du positiv, welche negativ?',
+        'Welches geplante Projekt oder welche Lösung wünschst du dir?',
+      ],
+      redemittel: ['In den letzten Jahren hat sich … stark verändert.', 'Positiv finde ich …', 'Ein großes Problem sind die steigenden …', 'Ich wünsche mir deshalb …'],
+      maxSekunden: 90,
+      beispielLoesung: 'Ich möchte kurz über mein Viertel in Valencia sprechen, das sich in den letzten Jahren stark verändert hat. Früher war es eine ruhige Wohngegend mit kleinen Läden, inzwischen gehört es zu den beliebtesten Gegenden der Stadt. Positiv finde ich vor allem die vielen renovierten Häuser und den neu gebauten Radweg am Fluss; auch der frisch eröffnete Markt gefällt mir sehr. Die Kehrseite sind allerdings die steigenden Mieten: Viele Familien, die dort seit Jahrzehnten gewohnt haben, mussten wegziehen, weil sie sich ihre Wohnung nicht mehr leisten konnten. Außerdem stört mich der zunehmende Verkehr, besonders am Wochenende. Ich wünsche mir deshalb mehr bezahlbare Wohnungen und eine durchdachte Lösung für die Autos, zum Beispiel ein Parkhaus am Stadtrand. Die geplante Straßenbahnlinie halte ich zwar für eine gute Idee, aber bis sie fertig ist, dauert es leider noch ein paar Jahre.',
     },
   ],
 }

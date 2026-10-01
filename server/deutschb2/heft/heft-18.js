@@ -126,6 +126,30 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Du hörst die Einführung einer Kursleiterin in einem Vorbereitungskurs. Entscheide, welche Aussage dem Gehörten entspricht.',
+      audio: {
+        transcript: 'Kursleiterin: Liebe Kursteilnehmerinnen und Kursteilnehmer, bevor wir mit dem Training für das Modul Lesen beginnen, möchte ich Ihnen kurz erklären, wie wir arbeiten. In den nächsten drei Wochen lösen wir jeden Dienstag einen kompletten Modellsatz, und zwar nicht zu Hause, sondern hier im Kurs unter Prüfungsbedingungen. Donnerstags besprechen wir dann gemeinsam die Fehler. Aus Erfahrung weiß ich, dass die meisten Teilnehmenden nicht am Wortschatz scheitern, sondern an der Zeit. Deshalb stoppe ich bei jedem Teil die Zeit und sage Ihnen, wann Sie zur nächsten Aufgabe wechseln sollten. Eine frühere Teilnehmerin hat mir erzählt, dass sie in der Prüfung fünfzehn Minuten für einen einzigen Abschnitt gebraucht hat. Am Ende fehlte ihr die Zeit, um ihre Antworten zu übertragen. Mein Rat lautet deshalb, beim Überfliegen nur die Schlüsselwörter zu markieren und nie zu lange bei einer Aufgabe zu bleiben. Bringen Sie nächsten Dienstag bitte eine Uhr mit, aber benutzen Sie dafür nicht Ihr Handy.',
+      },
+      items: [
+        {
+          typ: 'mc',
+          frage: 'Wo lösen die Teilnehmenden die Modellsätze?',
+          optionen: ['zu Hause', 'im Kurs unter Prüfungsbedingungen', 'online in einer Lerngruppe'],
+          loesung: 1,
+        },
+        { typ: 'rf', aussage: 'Beim Üben entscheiden die Teilnehmenden selbst, wann sie zur nächsten Aufgabe wechseln.', loesung: false },
+        {
+          typ: 'mc',
+          frage: 'Was ist der früheren Teilnehmerin in der Prüfung passiert?',
+          optionen: ['Sie hat eine Anweisung falsch verstanden.', 'Sie hat einen Abschnitt übersehen.', 'Sie konnte ihre Antworten am Ende nicht mehr übertragen.'],
+          loesung: 2,
+        },
+        { typ: 'rf', aussage: 'Die Fehler werden jeweils am Donnerstag besprochen.', loesung: true },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -138,6 +162,21 @@ export default {
       ],
       minWoerter: 60,
       beispielLoesung: 'Ich halte eine feste Lesezeit an Schulen für eine sehr gute Idee. Viele Jugendliche lesen heute nur noch kurze Nachrichten auf dem Handy und verlieren die Geduld für längere Texte. Genau diese Fähigkeit brauchen sie aber in der Ausbildung und im Studium. Kritiker sagen, dass dadurch Zeit für andere Fächer fehlt. Zwanzig Minuten am Tag sind jedoch wenig, und gutes Lesen hilft in jedem Fach. Mein Vorschlag: Die Schülerinnen und Schüler sollten ihre Bücher selbst auswählen dürfen, damit das Lesen nicht wie eine Pflicht wirkt. Lina Petrović',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Nimm Stellung zu der These. Sprich etwa zwei Minuten: Nenne deine Position, ein Argument und ein Gegenargument.',
+      aufgabe: 'In einer Diskussionsrunde zum Thema „Lesen heute“ lautet die These: „Gedruckte Bücher und Zeitungen sind überflüssig, weil man heute alles auf dem Bildschirm lesen kann.“ Nimm in einem Diskussionsbeitrag von etwa zwei Minuten Stellung.',
+      punkte: [
+        'Sag klar, ob du der These zustimmst oder nicht.',
+        'Begründe deine Position mit einem Argument und einem Beispiel.',
+        'Nenne ein Gegenargument und erkläre, warum es dich nicht überzeugt.',
+        'Schließe mit einem kurzen Fazit.',
+      ],
+      redemittel: ['Dieser These stimme ich (nicht) zu, weil …', 'Mein wichtigstes Argument ist …', 'Natürlich kann man einwenden, dass …', 'Mein Fazit: …'],
+      maxSekunden: 120,
+      beispielLoesung: 'Dieser These stimme ich nicht zu. Meiner Meinung nach sind gedruckte Bücher und Zeitungen auch heute noch wichtig. Mein wichtigstes Argument ist die Konzentration. Auf dem Bildschirm überfliege ich Texte meistens nur, und ständig kommen neue Nachrichten, die mich ablenken. Mit einem Buch in der Hand lese ich dagegen viel genauer. Ein Beispiel: Für meine Deutschprüfung drucke ich längere Texte immer aus, weil ich dann wichtige Abschnitte markieren und Notizen machen kann. Natürlich kann man einwenden, dass digitales Lesen praktischer und billiger ist. Man hat hunderte Texte auf einem einzigen Gerät, und es wird kein Papier verbraucht. Das stimmt, aber für mich zählt vor allem, wie gut ich einen Text verstehe. Mein Fazit: Der Bildschirm ist ideal, um sich schnell zu informieren. Wer aber einen langen oder schwierigen Text wirklich verstehen will, liest besser auf Papier. Deshalb sind gedruckte Texte für mich nicht überflüssig.',
     },
   ],
 }

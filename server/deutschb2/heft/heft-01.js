@@ -84,6 +84,25 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Du hörst ein Telefongespräch mit einem Prüfungszentrum. Entscheide bei jeder Aufgabe, welche Lösung dem Gehörten entspricht.',
+      audio: {
+        transcript: 'Frau: Prüfungszentrum am Stadtpark, mein Name ist Lang, guten Tag.\nMann: Guten Tag, hier spricht Daniel Ferrer. Ich möchte mich für die B2-Prüfung anmelden, am liebsten für den Termin im Mai.\nFrau: Im Mai sind leider alle Plätze vergeben, Herr Ferrer. Der nächste freie Termin ist am vierzehnten Juni.\nMann: Schade. Dann nehme ich den Juni. Kann ich alle vier Module an einem Tag ablegen?\nFrau: Das geht, aber Sie können sie auch verteilen. Viele legen zuerst nur die schriftlichen Module ab und das Sprechen erst im Juli.\nMann: Das ist mir zu spät. Ich brauche das Zeugnis schon im August für meine Berufsanerkennung, deshalb mache ich lieber alles im Juni.\nFrau: In Ordnung. Das Gesamtpaket kostet zweihundertvierzig Euro. Auf unserer alten Webseite stand noch zweihundertvierzehn, aber dieser Preis gilt nicht mehr.\nMann: Gut. Und wann bekomme ich das Ergebnis?\nFrau: Nach etwa vier Wochen können Sie es online abrufen. Das Zeugnis kommt zwei Wochen später per Post.\nMann: Dann habe ich es rechtzeitig. Vielen Dank!',
+      },
+      items: [
+        { typ: 'rf', aussage: 'Herr Ferrer bekommt einen Platz für den Prüfungstermin im Mai.', loesung: false },
+        {
+          typ: 'mc',
+          frage: 'Wie möchte Herr Ferrer die Module ablegen?',
+          optionen: ['die schriftlichen Module im Juni, das Sprechen im Juli', 'alle vier Module im Juni', 'zuerst nur das Modul Sprechen'],
+          loesung: 1,
+        },
+        { typ: 'mc', frage: 'Wie viel kostet das Gesamtpaket aktuell?', optionen: ['204 Euro', '214 Euro', '240 Euro'], loesung: 2 },
+        { typ: 'rf', aussage: 'Etwa vier Wochen nach der Prüfung kann Herr Ferrer sein Ergebnis im Internet sehen.', loesung: true },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -96,6 +115,20 @@ export default {
       ],
       minWoerter: 60,
       beispielLoesung: 'Sehr geehrte Frau Kaya,\nim April habe ich an Ihrer Schule die B2-Prüfung abgelegt. Lesen, Hören und Sprechen habe ich bestanden, im Modul Schreiben bin ich aber mit 55 Punkten leider durchgefallen. Deshalb möchte ich dieses Modul so bald wie möglich wiederholen. Könnten Sie mir bitte mitteilen, wann der nächste Termin stattfindet und wie hoch die Gebühr für ein einzelnes Modul ist? Außerdem wüsste ich gern, ob ich mich online anmelden kann oder persönlich vorbeikommen muss.\nVielen Dank im Voraus für Ihre Antwort.\nMit freundlichen Grüßen\nRafael Ortega',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Halte einen kurzen Vortrag. Sprich etwa 90 Sekunden frei und in ganzen Sätzen.',
+      aufgabe: 'Ein Kollege möchte das Zertifikat B2 machen, weiß aber nicht, wie die Prüfung funktioniert. Erkläre ihm in einem kurzen Vortrag von etwa 90 Sekunden das Wichtigste.',
+      punkte: [
+        'Nenne die vier Module und sag, was man dort jeweils macht.',
+        'Erkläre, wie viele Punkte man braucht und was passiert, wenn man in einem Modul durchfällt.',
+        'Sag, ob du alle Module an einem Tag ablegen möchtest oder sie lieber verteilst, und begründe deine Entscheidung.',
+      ],
+      redemittel: ['Die Prüfung besteht aus …', 'Pro Modul kann man … erreichen.', 'Das Gute daran ist, dass …', 'Ich persönlich möchte …, weil …'],
+      maxSekunden: 90,
+      beispielLoesung: 'Also, die B2-Prüfung besteht aus vier Modulen: Lesen, Hören, Schreiben und Sprechen. Beim Lesen und Hören löst du Aufgaben zu Texten und Gesprächen, zum Beispiel zu einem Interview. Beim Schreiben verfasst du einen Forumsbeitrag und eine formelle Nachricht, und beim Sprechen hältst du einen kurzen Vortrag und diskutierst über ein Thema. Wichtig ist, dass jedes Modul einzeln bewertet wird. Pro Modul kannst du hundert Punkte erreichen, und ab sechzig Punkten hast du bestanden. Das Gute daran ist: Wenn du in einem Modul durchfällst, musst du nur dieses eine Modul wiederholen, die anderen Ergebnisse bleiben gültig. Ich persönlich möchte die Module auf zwei Termine verteilen, weil ich nach ein paar Stunden schnell müde werde. Zuerst lege ich Lesen und Hören ab und ein paar Wochen später Schreiben und Sprechen. So kann ich mich besser konzentrieren. Mein Tipp für dich: Melde dich früh an, denn die beliebten Termine sind schnell voll.',
     },
   ],
 }

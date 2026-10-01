@@ -85,6 +85,30 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Du hörst eine Ansage vor Beginn einer Prüfung am Computer. Entscheide bei jeder Aufgabe, welche Lösung dem Gehörten entspricht.',
+      audio: {
+        transcript: 'Guten Morgen und herzlich willkommen im Prüfungsraum drei. Vor dem Start habe ich einige Hinweise für Sie. Legen Sie bitte Ihren Ausweis sichtbar auf den Tisch. Handys und Taschen kommen in die Schließfächer im Flur. Wir starten heute mit dem Modul Lesen um neun Uhr fünfzehn, also eine Viertelstunde später als geplant, weil wir zwei Computer neu starten mussten. Das Modul Hören folgt nach einer Pause von zwanzig Minuten. Setzen Sie jetzt bitte die Kopfhörer auf und klicken Sie auf den Testton. Wenn Sie nichts hören, heben Sie die Hand, dann komme ich zu Ihnen. Die Lautstärke regeln Sie selbst. Den Regler finden Sie nicht oben rechts bei der Restzeit, sondern unten links auf dem Bildschirm. Noch ein Hinweis zum Modul Schreiben. An Ihrem Platz liegt ein Blatt Papier für Notizen. Dieses Blatt geben Sie am Ende ab, es wird aber nicht bewertet. Es zählt nur der Text, den Sie ins Eingabefeld tippen. Ich wünsche Ihnen viel Erfolg.',
+      },
+      items: [
+        { typ: 'mc', frage: 'Wann beginnt das Modul Lesen?', optionen: ['um 9:00 Uhr', 'um 9:15 Uhr', 'um 9:50 Uhr'], loesung: 1 },
+        { typ: 'rf', aussage: 'Nach dem Modul Lesen haben die Teilnehmenden zwanzig Minuten Pause.', loesung: true },
+        {
+          typ: 'mc',
+          frage: 'Wo befindet sich der Regler für die Lautstärke?',
+          optionen: ['unten links auf dem Bildschirm', 'oben rechts auf dem Bildschirm', 'direkt am Kopfhörer'],
+          loesung: 0,
+        },
+        {
+          typ: 'mc',
+          frage: 'Was gilt für das Blatt Papier, das am Platz liegt?',
+          optionen: ['Man darf es nach der Prüfung mitnehmen.', 'Es wird eingesammelt und mitbewertet.', 'Es wird eingesammelt, zählt aber nicht für die Bewertung.'],
+          loesung: 2,
+        },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -97,6 +121,20 @@ export default {
       ],
       minWoerter: 60,
       beispielLoesung: 'Hallo zusammen,\nich finde die Prüfung am Computer besser, weil ich schneller tippe als schreibe. Ein großer Vorteil ist, dass man Texte sauber korrigieren und Absätze umstellen kann. Auch beim Hören hilft es, dass jeder eigene Kopfhörer hat. Ein Nachteil ist allerdings, dass man nicht mit dem Stift unterstreichen kann. Deshalb sollte man das Markierungswerkzeug vorher gut kennen. Mein Tipp: Stellt zu Hause die deutsche Tastatur ein und tippt jeden Tag ein paar Sätze mit ä, ö, ü und ß.\nViele Grüße\nKemal',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Sprich eine Sprachnachricht von etwa 90 Sekunden. Sprich frei und in ganzen Sätzen.',
+      aufgabe: 'Deine Freundin Irina legt nächste Woche zum ersten Mal eine Prüfung am Computer ab und ist nervös. Sprich ihr eine Sprachnachricht von etwa 90 Sekunden, in der du ihr erklärst, was sie erwartet, und sie beruhigst.',
+      punkte: [
+        'Beschreibe, wie man am Bildschirm arbeitet (Antworten anklicken, ändern, Aufgaben markieren).',
+        'Erkläre, worauf sie vor dem Start und während der Prüfung achten soll.',
+        'Sag ihr, wie sie die letzten Tage vor der Prüfung zum Üben nutzen kann.',
+      ],
+      redemittel: ['Mach dir keine Sorgen, …', 'Am wichtigsten ist, dass …', 'Achte darauf, dass …', 'Ich empfehle dir, … zu …'],
+      maxSekunden: 90,
+      beispielLoesung: 'Hallo Irina, mach dir keine Sorgen, die Prüfung am Computer ist wirklich nicht schwer. Die Aufgaben und die Zeit sind genau dieselben wie auf Papier, nur das Medium ist anders. Eine Antwort klickst du einfach mit der Maus an, und wenn du unsicher bist, kannst du sie später noch ändern. Schwierige Aufgaben markierst du und kommst am Ende zurück, das spart Zeit. Vor dem Start setzt du die Kopfhörer auf und testest die Lautstärke. Wenn etwas nicht funktioniert, sagst du es sofort der Aufsicht. Während der Prüfung siehst du die Restzeit auf dem Bildschirm. Schau regelmäßig darauf, aber nicht jede Minute, sonst wirst du nur nervös. Und noch ein Tipp für die letzten Tage: Stell auf deinem Laptop die deutsche Tastatur ein und tippe jeden Abend zehn Minuten, dann musst du ä, ö, ü und ß nicht mehr suchen. Am besten schreibst du auch einen Übungstext mit Zeitlimit. Du schaffst das, viel Erfolg!',
     },
   ],
 }

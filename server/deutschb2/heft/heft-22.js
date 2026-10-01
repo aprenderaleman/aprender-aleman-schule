@@ -89,6 +89,34 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Du hörst ein Gespräch bei einer Wohnungsübergabe. Entscheide, welche Aussage dem Gespräch entspricht.',
+      audio: {
+        transcript: 'Mann: So, Frau Ortega, hier sind Ihre Schlüssel. Haben Sie noch Fragen zur Hausordnung?\nFrau: Ja, einige. Bis wann darf ich abends die Waschküche benutzen?\nMann: Bis einundzwanzig Uhr, nicht bis zweiundzwanzig Uhr, wie es noch auf dem alten Schild steht. Und sonntags ist die Nutzung ganz untersagt.\nFrau: Gut zu wissen. Und meine Katze? Im Vertrag steht, Haustiere sind nur mit Zustimmung des Vermieters gestattet.\nMann: Richtig, aber das betrifft Hunde. Für Katzen brauchen Sie keine Erlaubnis, Sie müssen das Tier lediglich bei mir anmelden.\nFrau: Dann melde ich sie hiermit an. Was ist mit meinem Fahrrad?\nMann: Im Hausflur darf es nicht stehen. Der Fahrradkeller ist offen, für Diebstahl haftet die Hausverwaltung dort allerdings nicht.\nFrau: Verstehe. Und wenn in der Wohnung etwas kaputtgeht?\nMann: Dann sind Sie verpflichtet, mir das unverzüglich zu melden, am besten schriftlich. Rufen Sie bitte nur im Notfall an.',
+      },
+      items: [
+        {
+          typ: 'mc',
+          frage: 'Bis wann darf Frau Ortega die Waschküche abends benutzen?',
+          optionen: ['bis 20 Uhr', 'bis 21 Uhr', 'bis 22 Uhr'],
+          loesung: 1,
+        },
+        { typ: 'rf', aussage: 'Für ihre Katze benötigt Frau Ortega die Zustimmung des Vermieters.', loesung: false },
+        { typ: 'rf', aussage: 'Wird das Fahrrad im Keller gestohlen, kommt die Hausverwaltung nicht für den Schaden auf.', loesung: true },
+        {
+          typ: 'mc',
+          frage: 'Was soll Frau Ortega tun, wenn in der Wohnung etwas kaputtgeht?',
+          optionen: [
+            'den Schaden selbst reparieren lassen',
+            'in jedem Fall sofort anrufen',
+            'den Schaden sofort mitteilen, möglichst schriftlich',
+          ],
+          loesung: 2,
+        },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -101,6 +129,20 @@ export default {
       ],
       minWoerter: 60,
       beispielLoesung: 'Betreff: Neue Regel zum Abstellen von Kinderwagen — Sehr geehrte Damen und Herren, in Ihrem Schreiben vom 10. April teilen Sie mit, dass das Abstellen von Kinderwagen im Hausflur ab dem 1. Mai untersagt ist. Für meine Familie ist das ein großes Problem: Wir wohnen im dritten Stock, es gibt keinen Aufzug, und einen Abstellraum hat unser Haus nicht. Ich schlage deshalb vor, im Hof einen überdachten Platz für Kinderwagen und Fahrräder einzurichten. Die Kosten könnten wir Mietparteien gern gemeinsam tragen. Ich bitte Sie, mir bis zum 25. April mitzuteilen, ob diese Lösung möglich ist. Mit freundlichen Grüßen, Amira Haddad',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Erkläre formelle Regeln in Alltagssprache. Sprich etwa 90 Sekunden.',
+      aufgabe: 'Dein neuer Mitbewohner Pablo zieht nächste Woche ein und versteht das Amtsdeutsch der Hausordnung noch nicht gut. Nimm ihm eine Sprachnachricht von etwa 90 Sekunden auf und erkläre ihm diese drei Regeln in Alltagssprache. Regel 1: „Das Abstellen von Fahrrädern im Hausflur ist untersagt.“ Regel 2: „Die Nutzung der Waschküche ist nur werktags von 8 bis 20 Uhr gestattet.“ Regel 3: „Schäden sind dem Vermieter unverzüglich zu melden.“',
+      punkte: [
+        'Erkläre jede der drei Regeln mit einfachen Worten.',
+        'Gib zu mindestens einer Regel ein konkretes Beispiel.',
+        'Sag, welche Regel du sinnvoll und welche du übertrieben findest.',
+      ],
+      redemittel: ['Das heißt, man darf (nicht) …', 'Mit anderen Worten: …', 'Du musst unbedingt …', 'Ehrlich gesagt finde ich …'],
+      maxSekunden: 90,
+      beispielLoesung: 'Hallo Pablo, hier ist Marco. Ich wollte dir kurz die wichtigsten Regeln aus unserer Hausordnung erklären, weil der Text ziemlich kompliziert klingt. Erstens: Du darfst dein Fahrrad nicht im Hausflur abstellen. Das ist verboten, weil der Flur im Notfall frei sein muss. Stell es am besten in den Hof, da gibt es einen Fahrradständer. Zweitens: Die Waschküche darf man nur von Montag bis Samstag benutzen, und zwar zwischen acht Uhr morgens und acht Uhr abends. Am Sonntag darfst du also nicht waschen, und spät abends auch nicht. Ehrlich gesagt finde ich das ein bisschen übertrieben, aber die Nachbarn beschweren sich sonst sofort. Drittens: Wenn in der Wohnung etwas kaputtgeht, zum Beispiel die Heizung, müssen wir das sofort dem Vermieter sagen. Das halte ich für sinnvoll, denn sonst müssen wir den Schaden am Ende vielleicht selbst bezahlen. Wenn du noch Fragen hast, melde dich einfach. Bis nächste Woche!',
     },
   ],
 }

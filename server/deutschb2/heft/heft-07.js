@@ -79,6 +79,30 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Du hörst einen Ausschnitt aus einer Radiosendung mit Höreranruf. Entscheide, welche Aussage dem Gehörten entspricht.',
+      audio: {
+        transcript: 'Moderatorin: Willkommen zurück bei unserer Sendung „Stadtgespräch“. Unsere Frage heute: Was würden Sie ändern, wenn Sie Bürgermeister wären? Am Telefon ist jetzt Herr Wolters. Guten Morgen!\nMann: Guten Morgen! Also, wenn ich Bürgermeister wäre, würde ich zuerst etwas für die Busse tun. Bei uns im Viertel fährt abends nur einmal pro Stunde einer. Wenn der Bus alle zwanzig Minuten käme, würden viel mehr Leute das Auto stehen lassen.\nModeratorin: Das würde aber einiges kosten. Woher käme das Geld?\nMann: Ich würde das Parken im Zentrum teurer machen. Nicht für die Anwohner, sondern für alle, die von außerhalb kommen.\nModeratorin: Und gäbe es noch einen zweiten Wunsch?\nMann: Ja. Wenn ich könnte, würde ich die Bibliothek auch sonntags öffnen. Meine Tochter studiert und hätte dann endlich einen ruhigen Platz zum Lernen. Zu Hause ist es ihr oft zu laut.\nModeratorin: Wären Sie denn selbst gern Bürgermeister, Herr Wolters?\nMann: Ehrlich gesagt, nein. Ich hätte viel zu wenig Geduld für die langen Sitzungen.',
+      },
+      items: [
+        { typ: 'rf', aussage: 'Im Viertel von Herrn Wolters fährt abends alle zwanzig Minuten ein Bus.', loesung: false },
+        {
+          typ: 'mc',
+          frage: 'Für wen würde Herr Wolters das Parken im Zentrum teurer machen?',
+          optionen: ['für die Anwohner', 'für Autofahrer von außerhalb', 'für alle Autofahrer ohne Ausnahme'],
+          loesung: 1,
+        },
+        {
+          typ: 'mc',
+          frage: 'Warum würde er die Bibliothek auch sonntags öffnen?',
+          optionen: ['Seine Tochter könnte dort in Ruhe lernen.', 'Er selbst hat unter der Woche keine Zeit zum Lesen.', 'Sonntags gäbe es dort Veranstaltungen für Familien.'],
+          loesung: 0,
+        },
+        { typ: 'rf', aussage: 'Herr Wolters glaubt, dass ihm für das Amt des Bürgermeisters die Geduld fehlen würde.', loesung: true },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -91,6 +115,20 @@ export default {
       ],
       minWoerter: 60,
       beispielLoesung: 'Betreff: Vorschlag für einen Fahrradraum — Sehr geehrte Damen und Herren, ich wohne seit zwei Jahren in der Lindenstraße 14 und möchte Ihnen einen Vorschlag machen. Zurzeit stehen viele Fahrräder im Treppenhaus, weil es keinen Abstellraum gibt. Wenn es im Keller einen Fahrradraum gäbe, wäre das Treppenhaus frei, und niemand müsste sein Rad in die Wohnung tragen. Der alte Lagerraum neben der Waschküche wäre dafür ideal. Die Bewohner könnten ihn an einem Samstag gemeinsam aufräumen, sodass kaum Kosten entstehen würden. Könnten Sie mir mitteilen, ob das möglich wäre? Ich wäre Ihnen sehr dankbar, wenn Sie sich bis Ende des Monats melden würden. Mit freundlichen Grüßen, Leonie Brandt',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Halte einen kurzen Vortrag. Du hast 90 Sekunden Zeit.',
+      aufgabe: 'Stell dir vor, du hättest ein ganzes Jahr frei und müsstest nicht arbeiten. Erzähl in einem kurzen Vortrag von etwa 90 Sekunden, was du in diesem Jahr tun würdest. Verwende dabei den Konjunktiv II (würde + Infinitiv, wäre, hätte, könnte, müsste).',
+      punkte: [
+        'was du in diesem Jahr machen würdest und warum',
+        'was dabei schwierig wäre',
+        'ob du danach etwas in deinem Leben ändern würdest',
+      ],
+      redemittel: ['Wenn ich ein Jahr frei hätte, würde ich …', 'Am liebsten wäre ich …', 'Schwierig wäre allerdings, dass …', 'Danach würde ich wahrscheinlich …'],
+      maxSekunden: 90,
+      beispielLoesung: 'Also, wenn ich ein ganzes Jahr frei hätte, würde ich zuerst einmal richtig ausschlafen — das wäre schon ein Traum. Danach würde ich für ein paar Monate nach Süddeutschland ziehen, am liebsten in eine kleine Stadt am Bodensee. Dort könnte ich jeden Tag Deutsch sprechen, und ich hätte endlich Zeit für einen Intensivkurs. Außerdem würde ich gern etwas Praktisches lernen, zum Beispiel Möbel bauen. Dafür fehlt mir im Moment einfach die Zeit. Schwierig wäre natürlich das Geld. Ohne Gehalt müsste ich von meinen Ersparnissen leben, und ich weiß nicht, ob die für zwölf Monate reichen würden. Ich müsste also sparsam sein und könnte nicht ständig reisen. Und ehrlich gesagt hätte ich auch ein bisschen Angst, dass mir nach einem halben Jahr langweilig wäre. Trotzdem glaube ich, dass ich danach einiges ändern würde. Ich würde wahrscheinlich weniger Stunden arbeiten, damit mehr Zeit für meine Familie und meine Hobbys bleibt. So ein Jahr wäre für mich also keine Pause, sondern eher ein Neuanfang.',
     },
   ],
 }

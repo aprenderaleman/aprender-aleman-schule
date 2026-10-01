@@ -104,6 +104,34 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Du hörst eine Ansage in einem Prüfungszentrum. Lies zuerst die Aufgaben und markiere die Schlüsselwörter. Löse dann die Aufgaben.',
+      audio: {
+        transcript: 'Guten Morgen und herzlich willkommen im Prüfungszentrum. Bevor wir anfangen, einige Hinweise zum Ablauf. Die schriftliche Prüfung beginnt nicht um neun Uhr, wie in Ihrer Einladung steht, sondern erst um Viertel nach neun, weil noch nicht alle Teilnehmenden da sind. Wir fangen mit dem Lesen an, danach folgt ohne Unterbrechung das Hören. Erst vor dem Schreiben haben Sie zwanzig Minuten Pause. Getränke bekommen Sie am Automaten im Erdgeschoss, die Cafeteria ist heute leider geschlossen. Bitte legen Sie Ihren Ausweis auf den Tisch und schalten Sie Ihre Handys aus. Die Geräte bleiben in Ihrer Tasche, Sie müssen sie nicht abgeben. Für das Hören erhalten Sie Kopfhörer. Falls Ihr Kopfhörer nicht funktioniert, heben Sie bitte sofort die Hand, noch bevor der erste Text beginnt. Die mündliche Prüfung findet am Nachmittag im zweiten Stock statt. Ihre genaue Uhrzeit sehen Sie auf der Liste neben Raum zwölf. Viel Erfolg!',
+      },
+      items: [
+        {
+          typ: 'mc',
+          frage: 'Wann beginnt die schriftliche Prüfung?',
+          optionen: ['um 9.00 Uhr', 'um 9.15 Uhr', 'um 9.45 Uhr'],
+          loesung: 1,
+        },
+        { typ: 'rf', aussage: 'Zwischen dem Lesen und dem Hören haben die Teilnehmenden zwanzig Minuten Pause.', loesung: false },
+        { typ: 'rf', aussage: 'Weil die Cafeteria geschlossen ist, bekommt man Getränke heute am Automaten.', loesung: true },
+        {
+          typ: 'mc',
+          frage: 'Was sollen die Teilnehmenden mit ihren Handys tun?',
+          optionen: [
+            'sie vor Beginn der Prüfung abgeben',
+            'sie ausgeschaltet auf den Tisch legen',
+            'sie ausschalten und in der Tasche lassen',
+          ],
+          loesung: 2,
+        },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -116,6 +144,20 @@ export default {
       ],
       minWoerter: 60,
       beispielLoesung: 'Hallo zusammen, ich finde, dass nicht jeder Hörtext zweimal laufen muss. Im Alltag hört man eine Durchsage am Bahnhof oder eine Nachricht im Radio schließlich auch nur einmal, und trotzdem muss man die wichtigen Informationen verstehen. Eine Prüfung sollte genau diese Fähigkeit testen. Allerdings verstehe ich, dass lange Vorträge beim ersten Hören schwierig sein können — dort wäre ein zweites Hören vielleicht fair. Mein Tipp: Lest vor jedem Text die Aufgaben genau, markiert die Schlüsselwörter und notiert beim Hören nur Zahlen und Stichwörter. So verliert ihr den Faden viel seltener. Viele Grüße, Nadia',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Halte einen kurzen Vortrag wie in der Prüfung. Sprich etwa zwei Minuten.',
+      aufgabe: 'Halte einen Kurzvortrag von etwa zwei Minuten zum Thema „Hörverstehen mit Serien und Podcasts trainieren statt mit dem Lehrbuch“. Stell die Vor- und Nachteile dar und sag am Ende, was du selbst für sinnvoll hältst.',
+      punkte: [
+        'Führe kurz in das Thema ein.',
+        'Nenne mindestens zwei Vorteile und zwei Nachteile.',
+        'Schließ mit deiner eigenen Meinung und einem Beispiel aus deiner Erfahrung.',
+      ],
+      redemittel: ['In meinem Vortrag geht es um …', 'Ein klarer Vorteil ist, dass …', 'Dagegen spricht allerdings, dass …', 'Zusammenfassend würde ich sagen, dass …'],
+      maxSekunden: 120,
+      beispielLoesung: 'In meinem Vortrag geht es um die Frage, ob man das Hörverstehen besser mit Serien und Podcasts trainiert als mit dem Lehrbuch. Viele Lernende machen das heute, und ich möchte kurz die Vor- und Nachteile zeigen. Ein klarer Vorteil ist die Motivation: Wenn mich eine Serie interessiert, höre ich freiwillig jeden Tag Deutsch, auch nach der Arbeit. Außerdem hört man dort echte Sprache, also verschiedene Stimmen, schnelles Tempo und Ausdrücke aus dem Alltag. Dagegen spricht allerdings, dass diese Texte oft zu schwierig sind. Wer nur die Hälfte versteht, verliert schnell die Lust. Ein zweiter Nachteil: Bei einer Serie gibt es keine Aufgaben. Man lernt also nicht, gezielt auf eine Information zu achten, und genau das braucht man in der Prüfung. Das Lehrbuch ist vielleicht langweiliger, aber es trainiert diese Technik Schritt für Schritt. Zusammenfassend würde ich sagen, dass man beides verbinden sollte. Ich selbst höre morgens im Bus einen Podcast, ganz ohne Druck, und einmal pro Woche löse ich einen Modellsatz mit Aufgaben. Seitdem verstehe ich Durchsagen und Gespräche viel besser als früher. Vielen Dank fürs Zuhören.',
     },
   ],
 }

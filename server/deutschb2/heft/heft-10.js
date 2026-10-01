@@ -79,6 +79,30 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Du hörst den Beginn einer Führung durch ein historisches Gebäude. Entscheide, welche Aussage dem Gehörten entspricht.',
+      audio: {
+        transcript: 'Herzlich willkommen in der Alten Weberei! Bevor wir hineingehen, erzähle ich Ihnen kurz etwas zur Geschichte des Gebäudes. Die Fabrik wurde achtzehnhundertneunzig gebaut, und schon wenige Jahre später wurden hier täglich mehrere tausend Meter Stoff produziert. In den besten Zeiten waren über sechshundert Menschen beschäftigt. Neunzehnhundertachtundsiebzig wurde die Produktion eingestellt, weil Stoffe im Ausland billiger hergestellt wurden. Danach stand das Gebäude fast zwanzig Jahre leer. Die Stadt wollte es sogar abreißen, doch das wurde durch eine Bürgerinitiative verhindert. Später ist die Halle Schritt für Schritt saniert worden, und zwar nicht von der Stadt, sondern von einem privaten Verein. Heute ist das Gebäude komplett renoviert. Im Erdgeschoss sind ein Café und ein kleines Museum untergebracht, im ersten Stock werden Ateliers an junge Künstler vermietet. Die alten Maschinen sind übrigens noch erhalten: Jeden ersten Sonntag im Monat wird eine von ihnen für die Besucher in Betrieb genommen. So, und nun folgen Sie mir bitte in die große Halle.',
+      },
+      items: [
+        {
+          typ: 'mc',
+          frage: 'In welchem Jahr wurde die Produktion in der Weberei eingestellt?',
+          optionen: ['1890', '1978', '1987'],
+          loesung: 1,
+        },
+        { typ: 'rf', aussage: 'Der Abriss des Gebäudes wurde durch eine Bürgerinitiative verhindert.', loesung: true },
+        {
+          typ: 'mc',
+          frage: 'Von wem ist die Halle saniert worden?',
+          optionen: ['von einem privaten Verein', 'von der Stadt', 'von einer Gruppe junger Künstler'],
+          loesung: 0,
+        },
+        { typ: 'rf', aussage: 'Die alten Maschinen werden jeden Sonntag für die Besucher in Betrieb genommen.', loesung: false },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -91,6 +115,21 @@ export default {
       ],
       minWoerter: 60,
       beispielLoesung: 'Betreff: Verzögerung der Renovierungsarbeiten in der Gartenstraße 8 — Sehr geehrte Damen und Herren, seit zwei Monaten wird unser Haus renoviert. Laut Ihrem Schreiben sollten die Arbeiten Ende Mai abgeschlossen sein. Inzwischen ist zwar das Dach repariert, aber die Fenster sind noch nicht ausgetauscht worden, und der Aufzug ist seit drei Wochen gesperrt. Außerdem wurde mein Balkon durch herabfallenden Putz beschädigt, und bis heute wurde der Schaden nicht begutachtet. Ich bitte Sie daher, den Schaden umgehend prüfen zu lassen und mir bis Ende der Woche einen verbindlichen Termin für den Abschluss der Arbeiten zu nennen. Mit freundlichen Grüßen, Leonie Hartmann',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Halte einen kurzen Vortrag. Du hast 100 Sekunden Zeit.',
+      aufgabe: 'Stell in einem kurzen Vortrag von etwa 100 Sekunden ein Fest oder eine Tradition aus deiner Heimat vor. Beschreibe genau, was dabei gemacht wird, und verwende dafür das Passiv (wird gefeiert, werden vorbereitet, ist geschmückt).',
+      punkte: [
+        'wann und wo das Fest gefeiert wird',
+        'was vorher vorbereitet wird',
+        'was an den Festtagen gegessen, getrunken und gemacht wird',
+        'was dir persönlich daran gefällt oder nicht gefällt',
+      ],
+      redemittel: ['… wird jedes Jahr im … gefeiert.', 'Schon Wochen vorher werden …', 'Am letzten Abend wird …', 'Mir gefällt besonders, dass …'],
+      maxSekunden: 100,
+      beispielLoesung: 'Ich möchte ein Fest aus meiner Heimatstadt Valencia vorstellen: die Fallas. Sie werden jedes Jahr im März gefeiert, und zwar fast eine ganze Woche lang. Vorbereitet wird das Fest aber schon viel früher. Das ganze Jahr über werden in den Werkstätten riesige Figuren aus Holz und Pappe gebaut, manche sind höher als ein Haus. Kurz vor dem Fest werden sie dann auf den Plätzen und Straßen der Stadt aufgestellt. In dieser Woche ist die Innenstadt für Autos gesperrt, und überall wird Musik gespielt. Gegessen wird natürlich auch viel: Auf der Straße wird Paella gekocht, und an jeder Ecke wird süßes Gebäck mit heißer Schokolade verkauft. Am letzten Abend passiert dann das Wichtigste: Die Figuren werden verbrannt, alle bis auf eine. Diese eine Figur wird vom Publikum gewählt und kommt ins Museum. Mir gefällt an dem Fest besonders, dass die ganze Nachbarschaft zusammen feiert. Nur der Lärm ist manchmal anstrengend, denn schon morgens um acht wird man vom Feuerwerk geweckt.',
     },
   ],
 }

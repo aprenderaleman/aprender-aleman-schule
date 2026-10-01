@@ -99,6 +99,30 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Hör die Diskussion und löse die Aufgaben.',
+      audio: {
+        transcript: 'Mann: Du, Svenja, ich finde, wir sollten unser Auto verkaufen. Es steht fast die ganze Woche nur vor dem Haus und kostet uns trotzdem jeden Monat rund dreihundert Euro.\nFrau: Da hast du recht, billig ist es nicht. Aber ich sehe das ein bisschen anders. Wie sollen wir ohne Auto zu meinen Eltern aufs Land kommen? Dorthin fährt am Wochenende kaum ein Bus.\nMann: Das stimmt schon, daran habe ich gar nicht gedacht. Trotzdem glaube ich, dass Carsharing für diese Fahrten reichen würde. Zur Arbeit fahren wir doch beide mit dem Rad.\nFrau: Vielleicht. Mein Einwand ist nur, dass wir nicht mehr zurückkönnen, wenn das Auto einmal verkauft ist. Wie wäre es, wenn wir es zuerst drei Monate stehen lassen und alles mit Carsharing ausprobieren?\nMann: Das klingt vernünftig. Und wenn es gut funktioniert, verkaufen wir es im Herbst.\nFrau: Einverstanden. Dann sind wir uns einig, dass wir nicht sofort verkaufen, sondern erst testen.',
+      },
+      items: [
+        {
+          typ: 'mc',
+          frage: 'Warum möchte der Mann das Auto verkaufen?',
+          optionen: ['Es ist alt und muss oft repariert werden.', 'Es wird kaum benutzt und verursacht trotzdem hohe Kosten.', 'Er findet in seiner Straße keinen Parkplatz mehr.'],
+          loesung: 1,
+        },
+        { typ: 'rf', aussage: 'Die Frau braucht das Auto vor allem für den Weg zur Arbeit.', loesung: false },
+        { typ: 'rf', aussage: 'Der Mann gibt zu, dass er die Fahrten zu den Eltern nicht bedacht hat.', loesung: true },
+        {
+          typ: 'mc',
+          frage: 'Worauf einigen sich die beiden?',
+          optionen: ['Sie verkaufen das Auto sofort und nutzen ab jetzt Carsharing.', 'Sie behalten das Auto und fahren seltener damit.', 'Sie lassen das Auto drei Monate stehen und entscheiden danach.'],
+          loesung: 2,
+        },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -111,6 +135,26 @@ export default {
       ],
       minWoerter: 60,
       beispielLoesung: 'Ich finde ein totales Handyverbot an Schulen übertrieben. Da hast du recht, dass viele Kinder im Unterricht ständig auf ihr Handy schauen und sich deshalb schlecht konzentrieren. Trotzdem gehört das Handy heute zum Alltag, und Jugendliche sollten lernen, vernünftig damit umzugehen. Außerdem möchten viele Eltern ihre Kinder nach der Schule erreichen können. Wie wäre es also mit einem Kompromiss? Im Unterricht bleiben die Handys in der Tasche, in den Pausen dürfen die Schülerinnen und Schüler sie benutzen. Mit dieser Lösung wären wahrscheinlich die meisten einverstanden.',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Formuliere deinen Beitrag zu einer Diskussion. Sprich etwa anderthalb Minuten.',
+      aufgabe: 'In deinem Sprachkurs wird über die Frage diskutiert: „Sollten alle Radfahrer einen Helm tragen müssen?“ Dein Gesprächspartner sagt: „Eine Helmpflicht ist überflüssig — das soll jeder selbst entscheiden.“ Sprich dazu einen zusammenhängenden Diskussionsbeitrag (etwa anderthalb Minuten).',
+      punkte: [
+        'Geh auf sein Argument ein: erst würdigen, dann einschränken.',
+        'Nenne deine eigene Position und begründe sie mit einem Beispiel.',
+        'Schlag am Ende einen Kompromiss vor.',
+      ],
+      redemittel: [
+        'Da hast du recht, aber …',
+        'Ich sehe das ein bisschen anders: …',
+        'Man darf nicht vergessen, dass …',
+        'Wie wäre es, wenn …?',
+        'Können wir uns darauf einigen, dass …?',
+      ],
+      maxSekunden: 100,
+      beispielLoesung: 'Da hast du recht: Erwachsene sollten grundsätzlich selbst entscheiden können, und eine Pflicht für alle wäre schwer zu kontrollieren. Trotzdem sehe ich das ein bisschen anders. Man darf nicht vergessen, dass ein Unfall mit dem Fahrrad sehr gefährlich sein kann, vor allem in der Stadt, wo so viele Autos unterwegs sind. Ein Kollege von mir ist letztes Jahr gestürzt, als plötzlich eine Autotür aufging. Er hatte zum Glück einen Helm auf und war nach einer Woche wieder bei der Arbeit. Ohne Helm wäre das wahrscheinlich viel schlimmer ausgegangen. Außerdem sind Erwachsene ein Vorbild: Wenn die Eltern keinen Helm tragen, wollen die Kinder auch keinen. Ich verstehe aber deinen Einwand, dass man nicht alles vorschreiben kann. Wie wäre es deshalb mit einem Kompromiss? Für Kinder und Jugendliche bis sechzehn Jahre gilt eine Helmpflicht, und Erwachsene entscheiden weiterhin selbst. Können wir uns darauf einigen?',
     },
   ],
 }

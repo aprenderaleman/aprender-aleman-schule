@@ -100,6 +100,30 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Du hörst einen Radiobeitrag über ein Angebot in einer Stadtbibliothek. Entscheide bei jeder Aufgabe, welche Lösung dem Gehörten entspricht.',
+      audio: {
+        transcript: 'Und nun zu unserem Thema der Woche, dem digitalen Alltag. In der Stadtbibliothek von Lüneburg gibt es seit dem Frühjahr eine Smartphone-Sprechstunde. Dort erklären Schülerinnen und Schüler eines Gymnasiums älteren Menschen, wie man eine App herunterlädt, ein sicheres Passwort wählt oder die Quelle einer Nachricht prüft. Ursprünglich war das Angebot nur für Menschen über siebzig gedacht, inzwischen kommen aber auch deutlich Jüngere. Die Sprechstunde findet nicht mehr dienstags statt, sondern jeden Donnerstag von sechzehn bis achtzehn Uhr. Eine Anmeldung ist nicht nötig, und die Teilnahme kostet nichts. Am häufigsten fragen die Besucher übrigens nicht nach sozialen Netzwerken, sondern nach dem Datenschutz. Viele möchten wissen, welche Daten ihre Apps sammeln und wie man das in den Einstellungen begrenzt. Auch die Jugendlichen profitieren. Sie bekommen dafür zwar kein Geld, aber eine Bescheinigung für ihre Bewerbungsunterlagen. Wegen der großen Nachfrage soll es ab Herbst eine zweite Sprechstunde in einem anderen Stadtteil geben. Wer mithelfen möchte, kann sich direkt an der Information der Bibliothek melden.',
+      },
+      items: [
+        { typ: 'rf', aussage: 'Die Sprechstunde wird heute ausschließlich von Menschen über siebzig besucht.', loesung: false },
+        {
+          typ: 'mc',
+          frage: 'Wann findet die Sprechstunde statt?',
+          optionen: ['dienstags von 16 bis 18 Uhr', 'donnerstags von 16 bis 18 Uhr', 'donnerstags von 18 bis 20 Uhr'],
+          loesung: 1,
+        },
+        {
+          typ: 'mc',
+          frage: 'Wonach fragen die Besucher am häufigsten?',
+          optionen: ['nach dem Datenschutz', 'nach sozialen Netzwerken', 'nach Streamingdiensten'],
+          loesung: 0,
+        },
+        { typ: 'rf', aussage: 'Die Schülerinnen und Schüler erhalten für ihre Hilfe eine Bescheinigung.', loesung: true },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -112,6 +136,20 @@ export default {
       ],
       minWoerter: 60,
       beispielLoesung: 'Sehr geehrte Damen und Herren, vor drei Monaten habe ich Ihren Streamingdienst abonniert. Seit zwei Wochen lässt sich die App auf meinem Fernseher jedoch nicht mehr öffnen, obwohl ich sie bereits zweimal neu heruntergeladen habe. Trotzdem wurde der volle Monatsbeitrag abgebucht. Außerdem erhalte ich seit Kurzem Werbung von anderen Firmen. Ich möchte daher wissen, ob Sie meine Daten weitergegeben haben — der Datenschutz ist mir sehr wichtig. Ich bitte Sie, mir den Betrag für die zwei Wochen zu erstatten. Sollte das Problem nicht bis Ende des Monats gelöst sein, werde ich mein Abonnement kündigen. Mit freundlichen Grüßen, Amira Haddad',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Nimm Stellung zu einer These. Sprich etwa 100 Sekunden frei und in ganzen Sätzen.',
+      aufgabe: 'In einer Diskussionsrunde zum Thema Medien geht es um folgende These: „Soziale Netzwerke schaden uns mehr, als sie nützen.“ Formuliere deine mündliche Stellungnahme zu dieser These (etwa 100 Sekunden, frei gesprochen).',
+      punkte: [
+        'Sag klar, ob du der These zustimmst oder nicht.',
+        'Begründe deine Position mit zwei Argumenten und einem Beispiel aus deinem Alltag.',
+        'Geh auf ein Gegenargument ein und formuliere ein Fazit.',
+      ],
+      redemittel: ['Meiner Meinung nach …', 'Einerseits …, andererseits …', 'Aus meiner Erfahrung kann ich sagen, dass …', 'Mein Fazit: …'],
+      maxSekunden: 100,
+      beispielLoesung: 'Ich stimme der These nur teilweise zu. Meiner Meinung nach schaden soziale Netzwerke nicht automatisch, es kommt auf den Umgang damit an. Einerseits sehe ich natürlich die Probleme: Viele Leute schauen ständig aufs Handy, vergleichen sich mit anderen und geben viel zu viele persönliche Daten preis. Außerdem verbreiten sich falsche Nachrichten dort sehr schnell, weil kaum jemand die Quelle prüft. Andererseits bleibe ich über soziale Netzwerke mit meiner Familie in Kolumbien in Kontakt, und das wäre ohne sie viel schwieriger. Aus meiner Erfahrung kann ich sagen, dass feste Regeln helfen. Ich habe zum Beispiel meine Bildschirmzeit begrenzt und poste nur noch selten etwas. Seitdem kann ich mich besser konzentrieren. Manche sagen, man sollte die Netzwerke einfach löschen. Das halte ich aber für unrealistisch, denn sie gehören heute zum Alltag. Mein Fazit: Soziale Netzwerke sind weder gut noch schlecht. Entscheidend ist, dass wir lernen, bewusst damit umzugehen und abends auch mal abzuschalten.',
     },
   ],
 }

@@ -107,6 +107,34 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Du hörst einen kurzen Vortrag. Löse die Aufgaben. Die Aufgaben folgen der Gliederung des Vortrags.',
+      audio: {
+        transcript: 'Meine Damen und Herren, in meinem Vortrag geht es um Lärm in der Stadt. Ich möchte dabei auf drei Punkte eingehen, nämlich auf die Ursachen, die Folgen für die Gesundheit und mögliche Lösungen. Zunächst zu den Ursachen. Viele denken zuerst an Flugzeuge oder Baustellen. Die wichtigste Lärmquelle ist aber nicht der Flugverkehr, sondern der Straßenverkehr direkt vor unserer Haustür. Außerdem sollten wir über die Folgen sprechen. Eine aktuelle Studie mit viertausend Teilnehmenden zeigt, dass Menschen an lauten Straßen schlechter schlafen und häufiger krank werden. Das Gefährliche daran ist, dass man sich scheinbar an den Lärm gewöhnt, der Körper jedoch weiter mit Stress reagiert. Ein weiterer Aspekt sind die Kosten, denn Wohnungen an ruhigen Straßen sind deutlich teurer. Ruhe wird also zu einer Frage des Geldes. Abschließend zu den Lösungen. Einerseits helfen technische Maßnahmen wie leiserer Asphalt, andererseits ist Tempo dreißig in der Nacht wirksamer und billiger. Zusammenfassend lässt sich sagen, dass Lärm kein Luxusproblem ist, sondern eine Gesundheitsfrage, die die Politik ernster nehmen muss.',
+      },
+      items: [
+        {
+          typ: 'mc',
+          frage: 'Woran denken laut dem Vortrag viele Menschen zuerst, wenn es um Lärm in der Stadt geht?',
+          optionen: ['an den Straßenverkehr vor der eigenen Haustür', 'an Flugzeuge und Baustellen', 'an laute Nachbarn'],
+          loesung: 1,
+        },
+        { typ: 'rf', aussage: 'Laut dem Vortrag reagiert der Körper auch dann mit Stress, wenn man glaubt, sich an den Lärm gewöhnt zu haben.', loesung: true },
+        { typ: 'rf', aussage: 'Leiserer Asphalt wird im Vortrag als wirksamer und billiger bezeichnet als Tempo dreißig in der Nacht.', loesung: false },
+        {
+          typ: 'mc',
+          frage: 'Was ist die Kernaussage am Schluss des Vortrags?',
+          optionen: [
+            'Lärm ist eine Gesundheitsfrage, die die Politik ernster nehmen muss.',
+            'Lärm ist vor allem ein Problem von Menschen mit wenig Geld.',
+            'An Lärm kann man sich mit der Zeit gewöhnen.',
+          ],
+          loesung: 0,
+        },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -119,6 +147,25 @@ export default {
       ],
       minWoerter: 60,
       beispielLoesung: 'Sehr geehrte Damen und Herren, am Donnerstag habe ich den Vortrag von Dr. Hoffmann über gesunden Schlaf besucht. Zunächst möchte ich mich für die interessante Veranstaltung bedanken; besonders die Studie zur Handynutzung am Abend fand ich spannend. Leider funktionierte die Tonanlage nicht richtig, sodass ich im hinteren Teil des Saals vor allem das Fazit kaum verstehen konnte. Deshalb möchte ich Sie bitten, mir die Folien oder eine kurze Zusammenfassung per E-Mail zu schicken. Außerdem wäre es schön, wenn Sie die Technik vor dem nächsten Vortrag überprüfen könnten. Mit freundlichen Grüßen, Carmen Álvarez',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Halte einen kurzen, klar gegliederten Vortrag. Sprich etwa zwei Minuten.',
+      aufgabe: 'Du sollst in deinem Sprachkurs einen Kurzvortrag von etwa zwei Minuten zum Thema „Zu viel Verpackungsmüll im Alltag“ halten. Kündige am Anfang deine Gliederung an und mach die Struktur mit Signalwörtern hörbar.',
+      punkte: [
+        'Beschreibe zunächst das Problem.',
+        'Geh auf zwei Ursachen ein.',
+        'Stell mögliche Lösungen vor und zieh ein Fazit.',
+      ],
+      redemittel: [
+        'In meinem Vortrag geht es um …',
+        'Dabei möchte ich auf drei Punkte eingehen: …',
+        'Zunächst … / Außerdem … / Ein weiterer Aspekt ist …',
+        'Zusammenfassend lässt sich sagen, dass …',
+      ],
+      maxSekunden: 120,
+      beispielLoesung: 'In meinem Vortrag geht es um das Thema Verpackungsmüll im Alltag. Dabei möchte ich auf drei Punkte eingehen: das Problem, die Ursachen und mögliche Lösungen. Zunächst zum Problem. Wenn ich nach dem Einkaufen meine Tasche auspacke, bleibt ein ganzer Berg Plastik und Karton übrig. Bei uns zu Hause ist die Mülltonne schon nach wenigen Tagen voll. Außerdem möchte ich auf die Ursachen eingehen. Einerseits kaufen wir immer mehr im Internet, und jedes Paket bringt zusätzliches Verpackungsmaterial mit. Andererseits sind im Supermarkt sogar Obst und Gemüse oft in Plastik verpackt, obwohl das gar nicht nötig wäre. Ein weiterer Aspekt ist unsere Bequemlichkeit: Der Kaffee zum Mitnehmen ist einfach praktisch. Abschließend zu den Lösungen. Jeder kann etwas tun, zum Beispiel eine eigene Tasche mitnehmen, auf dem Markt einkaufen oder Leitungswasser trinken. Darüber hinaus müsste aber auch die Politik handeln und unnötige Verpackungen verbieten. Zusammenfassend lässt sich sagen, dass wir das Problem nur gemeinsam lösen können: Die Verbraucher müssen ihr Verhalten ändern, und die Hersteller müssen weniger verpacken. Vielen Dank für Ihre Aufmerksamkeit.',
     },
   ],
 }

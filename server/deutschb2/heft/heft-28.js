@@ -121,6 +121,34 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Du hörst einen Radiobeitrag über eine Umfrage. Löse die Aufgaben.',
+      audio: {
+        transcript: 'Bar oder mit Karte? Diese Frage haben wir gestern Menschen auf dem Wochenmarkt in Leipzig gestellt, und die Antworten waren überraschend. Von den sechzig Befragten zahlen nur noch siebzehn am liebsten bar. Eine Rentnerin erklärte uns, dass sie mit Scheinen und Münzen einfach besser sehe, wie viel sie ausgibt. Die meisten anderen bevorzugen die Karte oder das Handy, vor allem die Jüngeren. Ein Student meinte, er habe seit Monaten kein Bargeld mehr in der Tasche gehabt. Trotzdem ist er der Ansicht, dass man das Bargeld nicht abschaffen sollte, denn bei einem Stromausfall funktioniere keine einzige Karte. Interessant war auch die Meinung der Händler. Ein Gemüsehändler sagte uns, er nehme inzwischen gern Karten an, obwohl er für jede Zahlung eine kleine Gebühr zahlen müsse. Dafür habe er abends weniger Arbeit mit dem Zählen der Kasse. Unser Fazit lautet also, dass die Karte zwar immer beliebter wird, ganz auf Bargeld verzichten möchte aber fast niemand.',
+      },
+      items: [
+        {
+          typ: 'mc',
+          frage: 'Wie viele der Befragten zahlen am liebsten bar?',
+          optionen: ['siebzehn', 'siebzig', 'sechzig'],
+          loesung: 0,
+        },
+        { typ: 'rf', aussage: 'Die Rentnerin zahlt lieber bar, weil sie so ihre Ausgaben besser im Blick hat.', loesung: true },
+        { typ: 'rf', aussage: 'Der Student ist dafür, das Bargeld abzuschaffen.', loesung: false },
+        {
+          typ: 'mc',
+          frage: 'Welchen Vorteil der Kartenzahlung nennt der Gemüsehändler?',
+          optionen: [
+            'Er muss keine Gebühren mehr zahlen.',
+            'Seine Kunden kaufen mehr ein als früher.',
+            'Er hat abends weniger Arbeit mit der Kasse.',
+          ],
+          loesung: 2,
+        },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -133,6 +161,25 @@ export default {
       ],
       minWoerter: 60,
       beispielLoesung: 'Das Thema betrifft mich direkt, denn ich wohne mitten in der Altstadt. Meiner Meinung nach sollte die Innenstadt weitgehend autofrei werden. Ein Beispiel aus meinem Alltag: Wenn ich morgens mit dem Fahrrad zur Arbeit fahre, stehen die Autos oft im Stau, und die Luft ist schlecht. Seit unsere Straße am Wochenende gesperrt ist, spielen dort Kinder, und die Cafés sind voll. Natürlich stimmt es, dass ältere Menschen und Handwerker auf das Auto angewiesen sind. Für sie braucht es klare Ausnahmen. Insgesamt bin ich aber davon überzeugt, dass eine autofreie Innenstadt die Lebensqualität für alle verbessert.',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Sprich einen Hörerbeitrag für eine Radiosendung auf. Sprich etwa 90 Sekunden.',
+      aufgabe: 'Eine Radiosendung sammelt Hörermeinungen zum Thema „Urlaub: in die Ferne fliegen oder in der Nähe bleiben?“. Sprich einen Beitrag von etwa 90 Sekunden auf die Mailbox der Redaktion.',
+      punkte: [
+        'Nenne einen Vorteil und einen Nachteil von Fernreisen.',
+        'Erzähl von einer eigenen Reiseerfahrung.',
+        'Zieh am Ende dein persönliches Fazit.',
+      ],
+      redemittel: [
+        'Das Thema betrifft mich persönlich, denn …',
+        'Ein großer Vorteil ist, dass … / Ein Nachteil ist allerdings, dass …',
+        'Aus eigener Erfahrung weiß ich, dass …',
+        'Mein Fazit: …',
+      ],
+      maxSekunden: 90,
+      beispielLoesung: 'Guten Tag, mein Name ist Elena, und das Thema betrifft mich persönlich, denn ich plane gerade meinen Sommerurlaub. Ein großer Vorteil von Fernreisen ist natürlich, dass man etwas völlig Neues kennenlernt: eine andere Kultur, anderes Essen, eine andere Landschaft. Ein Nachteil ist allerdings, dass so eine Reise teuer ist und dass der lange Flug der Umwelt schadet. Aus eigener Erfahrung weiß ich, dass man gar nicht weit fahren muss, um sich zu erholen. Vor zwei Jahren bin ich nach Thailand geflogen. Es war wunderschön, aber nach der Rückreise war ich eine Woche lang müde. Letzten Sommer bin ich dagegen mit dem Zug an die Ostsee gefahren. Schon nach drei Stunden saß ich am Strand, und ich habe mich viel besser erholt. Mein Fazit: Ich bin überzeugt, dass ein Urlaub in der Nähe oft die bessere Wahl ist. Eine Fernreise gönne ich mir trotzdem ab und zu, aber nicht jedes Jahr.',
     },
   ],
 }

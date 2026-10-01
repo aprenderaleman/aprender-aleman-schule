@@ -100,6 +100,30 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Du hörst eine Durchsage im Zug. Entscheide bei jeder Aufgabe, welche Lösung dem Gehörten entspricht.',
+      audio: {
+        transcript: 'Sehr geehrte Fahrgäste, hier spricht Ihre Zugbegleiterin. Wegen einer technischen Störung an der Strecke haben wir zurzeit etwa fünfunddreißig Minuten Verspätung. Wir erreichen Kassel deshalb nicht wie geplant um vierzehn Uhr zwölf, sondern voraussichtlich um vierzehn Uhr siebenundvierzig. Nun zu Ihren Anschlüssen. Der Regionalzug nach Göttingen wartet auf Sie. Er fährt heute ausnahmsweise nicht von Gleis vier, sondern von Gleis sieben. Den Anschluss nach Frankfurt um vierzehn Uhr dreißig werden Sie leider verpassen. Reisende nach Frankfurt nehmen bitte den nächsten Zug um fünfzehn Uhr dreißig vom selben Gleis, Ihre Fahrkarten bleiben gültig. Der Bus nach Bad Wildungen fällt heute aus, bitte wenden Sie sich an die Information in der Bahnhofshalle. Wer sein Ziel mit mehr als sechzig Minuten Verspätung erreicht, kann eine Erstattung beantragen. Die Formulare dafür bekommen Sie bei mir in Wagen fünf oder später im Reisezentrum. Bewahren Sie dafür bitte Ihre Fahrkarte auf. Wir bitten um Ihr Verständnis und wünschen Ihnen trotzdem eine gute Weiterreise.',
+      },
+      items: [
+        {
+          typ: 'mc',
+          frage: 'Wann kommt der Zug voraussichtlich in Kassel an?',
+          optionen: ['um 14:12 Uhr', 'um 14:35 Uhr', 'um 14:47 Uhr'],
+          loesung: 2,
+        },
+        { typ: 'rf', aussage: 'Der Regionalzug nach Göttingen fährt heute von Gleis vier ab.', loesung: false },
+        {
+          typ: 'mc',
+          frage: 'Was sollen Reisende nach Frankfurt tun?',
+          optionen: ['Sie nehmen den Zug, der eine Stunde später fährt.', 'Sie kaufen eine neue Fahrkarte.', 'Sie steigen in den Bus um.'],
+          loesung: 0,
+        },
+        { typ: 'rf', aussage: 'Das Formular für die Erstattung können die Fahrgäste schon im Zug bekommen.', loesung: true },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -112,6 +136,21 @@ export default {
       ],
       minWoerter: 60,
       beispielLoesung: 'Sehr geehrte Damen und Herren, am 14. März bin ich mit dem Zug von Köln nach Hamburg gefahren. Der Zug hatte über zwei Stunden Verspätung, sodass ich in Hamburg den letzten Anschluss nach Kiel verpasst habe. Da an diesem Abend kein Zug mehr fuhr, musste ich kurzfristig eine Unterkunft suchen und 95 Euro für ein Hotelzimmer bezahlen. Außerdem kam ich am nächsten Morgen zu spät zu einem wichtigen Termin. Ich bitte Sie daher, mir die Hälfte des Fahrpreises sowie die Hotelkosten zu erstatten. Eine Kopie des Tickets und die Hotelrechnung finden Sie im Anhang. Mit freundlichen Grüßen, Lucía Fernández',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Halte einen kurzen Vortrag wie in Teil 1 der mündlichen Prüfung. Sprich etwa zwei Minuten frei und in ganzen Sätzen.',
+      aufgabe: 'Dein Vortragsthema lautet: „Viele Touristen — Chance oder Belastung für beliebte Reiseziele?“ Halte einen kurzen, klar gegliederten Vortrag (etwa zwei Minuten), in dem du Vor- und Nachteile abwägst.',
+      punkte: [
+        'Führe in das Thema ein und kündige deine Gliederung an.',
+        'Nenne Vorteile und Nachteile des Tourismus für die Menschen, die an solchen Orten leben.',
+        'Gib ein Beispiel aus deiner eigenen Erfahrung.',
+        'Formuliere zum Schluss ein Fazit.',
+      ],
+      redemittel: ['Ich möchte heute über das Thema … sprechen.', 'Zunächst nenne ich …, danach gehe ich auf … ein.', 'Ein Beispiel aus meiner Erfahrung: …', 'Zusammenfassend lässt sich sagen, dass …'],
+      maxSekunden: 120,
+      beispielLoesung: 'Ich möchte heute über das Thema Tourismus sprechen, genauer gesagt über die Frage, ob viele Touristen für ein beliebtes Reiseziel eine Chance oder eine Belastung sind. Zunächst nenne ich einige Vorteile, danach gehe ich auf die Nachteile ein, und am Ende ziehe ich ein kurzes Fazit. Zu den Vorteilen: Der Tourismus schafft Arbeitsplätze, nicht nur in Hotels und Restaurants, sondern auch im Handel. Außerdem wird in Orte investiert, die viele Gäste anziehen: Bahnstrecken werden ausgebaut und alte Gebäude renoviert. Davon profitieren auch die Einheimischen. Es gibt aber auch Nachteile. Wo immer mehr Wohnungen als Unterkunft für Urlauber vermietet werden, steigen die Mieten, und viele Einheimische können sich das Zentrum nicht mehr leisten. Dazu kommen Lärm, Müll und überfüllte Verkehrsmittel in der Hauptsaison. Ein Beispiel aus meiner Erfahrung: Ich komme aus Valencia. Früher kannte man in meinem Viertel alle Nachbarn, heute gibt es in manchen Häusern fast nur noch Ferienwohnungen. Gleichzeitig arbeitet mein Bruder als Kellner und lebt von genau diesen Gästen. Zusammenfassend lässt sich sagen, dass der Tourismus weder nur gut noch nur schlecht ist. Meiner Meinung nach sollten Städte die Zahl der Ferienwohnungen begrenzen, damit sie auch für ihre Bewohner lebenswert bleiben.',
     },
   ],
 }

@@ -78,6 +78,25 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Du hörst einen Radiobeitrag über einen Handwerksbetrieb. Entscheide bei jeder Aufgabe, welche Lösung dem Gehörten entspricht.',
+      audio: {
+        transcript: 'Und nun zu unserem Thema der Woche. Die Tischlerei Brandner in Kassel arbeitet seit einem halben Jahr nur noch an vier Tagen, und zwar von Montag bis Donnerstag. Der Chef hat das Modell eingeführt, weil er kaum noch Fachkräfte fand. Die Beschäftigten arbeiten jetzt neun Stunden am Tag, sodass die Wochenarbeitszeit nur leicht gesunken ist, nämlich von vierzig auf sechsunddreißig Stunden. Der Lohn ist trotzdem gleich geblieben. Obwohl einige Kunden anfangs skeptisch waren, gab es bisher kaum Beschwerden, denn für Notfälle ist freitags ein Mitarbeiter telefonisch erreichbar. Die Folgen sind deutlich. Auf die letzte Stellenanzeige kamen nicht fünf Bewerbungen wie früher, sondern dreißig. Außerdem sind die Mitarbeiter so selten krank, dass der Betrieb mehr Aufträge schafft als vorher. Ganz ohne Probleme läuft es dennoch nicht. Die langen Tage sind anstrengend, deshalb wünschen sich vor allem ältere Kollegen eine längere Mittagspause. Darüber will der Betrieb im Herbst entscheiden.',
+      },
+      items: [
+        {
+          typ: 'mc',
+          frage: 'Warum hat der Chef die Vier-Tage-Woche eingeführt?',
+          optionen: ['weil er kaum noch Fachkräfte fand', 'weil die Mitarbeiter oft krank waren', 'weil sich Kunden beschwert hatten'],
+          loesung: 0,
+        },
+        { typ: 'rf', aussage: 'Die Beschäftigten arbeiten jetzt vierzig Stunden pro Woche.', loesung: false },
+        { typ: 'rf', aussage: 'Die Beschäftigten verdienen genauso viel wie vor der Umstellung.', loesung: true },
+        { typ: 'mc', frage: 'Wie viele Bewerbungen kamen auf die letzte Stellenanzeige?', optionen: ['fünf', 'dreizehn', 'dreißig'], loesung: 2 },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -90,6 +109,20 @@ export default {
       ],
       minWoerter: 60,
       beispielLoesung: 'Hallo zusammen, ich finde, dass Jugendliche ruhig neben der Schule jobben sollten, denn sie lernen dabei, Verantwortung zu übernehmen. Außerdem verdienen sie ihr eigenes Geld, weil nicht alle Eltern Extras wie den Führerschein bezahlen können. Obwohl ein Job natürlich Zeit kostet, muss die Schule nicht darunter leiden. Wichtig ist nur, dass man nicht mehr als acht Stunden pro Woche arbeitet. Ich selbst habe mit sechzehn in einer Bäckerei gearbeitet, deshalb weiß ich, wie wertvoll diese Erfahrung ist. Trotzdem sollten Eltern darauf achten, dass die Noten stabil bleiben. Viele Grüße, Deniz',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Halte einen kurzen Vortrag über Vor- und Nachteile. Sprich etwa zwei Minuten und verwende Konnektoren aus dieser Lektion.',
+      aufgabe: 'Immer mehr Menschen ziehen aus der Großstadt weg. Halte einen kurzen Vortrag von etwa zwei Minuten zum Thema „Leben auf dem Land“: Stell Vor- und Nachteile dar und sag am Ende deine eigene Meinung. Verbinde deine Sätze mit Konnektoren wie weil, da, obwohl, trotzdem, deshalb oder sodass.',
+      punkte: [
+        'Stell einen Vorteil dar und begründe ihn (weil, da oder denn).',
+        'Stell einen Nachteil dar und schränke ihn ein (obwohl, trotzdem oder dennoch).',
+        'Zieh ein Fazit mit deiner eigenen Meinung (deshalb, daher oder sodass).',
+      ],
+      redemittel: ['Ein großer Vorteil ist, dass …', 'Dagegen spricht, dass …', 'Obwohl …, …', 'Daher bin ich der Meinung, dass …'],
+      maxSekunden: 120,
+      beispielLoesung: 'Ich spreche heute über das Leben auf dem Land. Ein großer Vorteil ist die Ruhe. Viele Familien ziehen aufs Land, weil die Kinder dort draußen spielen können und die Luft besser ist. Außerdem sind die Mieten niedriger als in der Großstadt, sodass man sich oft ein Haus mit Garten leisten kann. Es gibt aber auch Nachteile. Auf dem Land fahren nur wenige Busse, deshalb braucht fast jede Familie ein Auto, manchmal sogar zwei. Auch Ärzte, Geschäfte und Kinos sind oft weit weg. Obwohl heute viele Menschen im Homeoffice arbeiten, müssen die meisten trotzdem regelmäßig in die Stadt fahren, und das kostet Zeit und Geld. Ich selbst bin in einem kleinen Dorf aufgewachsen. Die Kindheit dort war schön, dennoch habe ich mich als Jugendliche oft gelangweilt, denn abends fuhr kein Bus mehr. Mein Fazit: Das Leben auf dem Land ist ideal für Familien mit kleinen Kindern. Ich persönlich brauche aber kurze Wege und viele Angebote, daher bleibe ich lieber in der Stadt.',
     },
   ],
 }

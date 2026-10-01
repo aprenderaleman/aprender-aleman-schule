@@ -100,6 +100,30 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Du hörst einen kurzen Vortrag wie in der Prüfung. Lies zuerst die Aufgaben, hör dann den Vortrag und entscheide, welche Lösung dem Gehörten entspricht.',
+      audio: {
+        transcript: 'Guten Abend und herzlich willkommen zu meinem Vortrag über Pausen im Arbeitsalltag. Viele Beschäftigte glauben, wer durcharbeite, schaffe mehr. Die Forschung zeigt das Gegenteil. Unsere Konzentration lässt bereits nach etwa neunzig Minuten deutlich nach. Wer dann weitermacht, arbeitet langsamer und macht mehr Fehler. Entscheidend ist allerdings nicht die Länge einer Pause, sondern ihre Häufigkeit. Mehrere kurze Unterbrechungen von fünf Minuten wirken besser als eine einzige lange am Mittag. Was aber ist eine gute Pause? Der Blick aufs Handy gehört nicht dazu, denn dabei muss das Gehirn weiter Informationen verarbeiten. Erholsamer ist es, kurz aufzustehen, ans Fenster zu gehen oder ein paar Schritte an der frischen Luft zu machen. In einer Untersuchung mit vierzig Büroangestellten fühlten sich diejenigen, die ihre Pausen draußen verbrachten, am Nachmittag deutlich weniger erschöpft. Ich rate Ihnen daher, Pausen fest in den Kalender einzutragen, genau wie einen Termin. Und an die Führungskräfte unter Ihnen: Gehen Sie mit gutem Beispiel voran. Wo die Chefin nie Pause macht, traut sich das auch sonst niemand.',
+      },
+      items: [
+        {
+          typ: 'mc',
+          frage: 'Wann lässt die Konzentration laut dem Vortrag deutlich nach?',
+          optionen: ['nach etwa 19 Minuten', 'nach etwa 90 Minuten', 'erst nach der Mittagspause'],
+          loesung: 1,
+        },
+        { typ: 'rf', aussage: 'Eine lange Mittagspause ist laut dem Vortrag wirksamer als mehrere kurze Pausen.', loesung: false },
+        {
+          typ: 'mc',
+          frage: 'Warum ist der Blick aufs Handy laut dem Vortrag keine gute Pause?',
+          optionen: ['weil der Bildschirm die Augen anstrengt', 'weil man dabei zu lange sitzen bleibt', 'weil das Gehirn dabei weiter Informationen verarbeiten muss'],
+          loesung: 2,
+        },
+        { typ: 'rf', aussage: 'Im Vortrag wird geraten, Pausen wie Termine im Kalender einzuplanen.', loesung: true },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -112,6 +136,21 @@ export default {
       ],
       minWoerter: 60,
       beispielLoesung: 'Meiner Meinung nach sollte ein soziales Jahr nicht verpflichtend sein, obwohl ich die Idee grundsätzlich gut finde. Wer freiwillig hilft, ist in der Regel motivierter und leistet bessere Arbeit. Befürworter argumentieren zwar, dass ein Pflichtjahr den Zusammenhalt der Gesellschaft stärken würde. Das mag stimmen, aber junge Menschen, die gezwungen werden, verlieren schnell die Lust am Engagement. Stattdessen sollte der Staat das freiwillige soziale Jahr attraktiver machen, etwa durch eine bessere Bezahlung oder Vorteile bei der Studienplatzvergabe. So würden sich mehr junge Leute engagieren, ohne dass man sie dazu zwingen müsste.',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Halte einen Vortrag wie in Teil 1 der mündlichen Prüfung. Bereite dich mit einem Stichwortzettel vor und sprich dann etwa zwei Minuten frei.',
+      aufgabe: 'Dein Vortragsthema lautet: „Ein Jahr im Ausland leben und arbeiten“. Halte einen klar gegliederten Vortrag (etwa zwei Minuten) über die Vor- und Nachteile.',
+      punkte: [
+        'Stell das Thema vor und kündige deine Gliederung an.',
+        'Nenne Vor- und Nachteile eines Jahres im Ausland.',
+        'Berichte von eigenen Erfahrungen oder von einem Beispiel, das du kennst.',
+        'Begründe am Schluss deine eigene Meinung.',
+      ],
+      redemittel: ['In meinem Vortrag geht es um …', 'Ein wichtiger Vorteil ist, dass …', 'Auf der anderen Seite …', 'Dazu möchte ich ein Beispiel geben: …', 'Abschließend möchte ich sagen, dass …'],
+      maxSekunden: 120,
+      beispielLoesung: 'In meinem Vortrag geht es um die Frage, was es bringt, ein Jahr im Ausland zu leben und zu arbeiten. Ich spreche zuerst über die Vorteile, dann über die Nachteile, und zum Schluss sage ich, wie ich selbst darüber denke. Ein wichtiger Vorteil ist, dass man die Sprache viel schneller lernt als in jedem Kurs, weil man sie jeden Tag braucht: beim Einkaufen, auf dem Amt, mit den Kollegen. Außerdem wird man selbstständiger, denn man muss Probleme allein lösen. Und auch bei späteren Bewerbungen ist Auslandserfahrung ein Pluspunkt. Auf der anderen Seite ist so ein Jahr nicht immer leicht. Man lässt Familie und Freunde zurück, und gerade am Anfang fühlen sich viele einsam. Hinzu kommt die Bürokratie: Wohnung, Versicherung, Anerkennung von Abschlüssen, das alles kostet Zeit und Nerven. Dazu möchte ich ein Beispiel geben: Als ich vor zwei Jahren nach Deutschland gekommen bin, habe ich in den ersten Monaten kaum etwas verstanden und wollte fast aufgeben. Erst als ich in einen Sportverein eingetreten bin, habe ich Freunde gefunden, und seitdem fühle ich mich hier zu Hause. Abschließend möchte ich sagen, dass die Vorteile für mich klar überwiegen. Ein Jahr im Ausland ist anstrengend, aber man lernt in dieser Zeit sehr viel, über andere und über sich selbst.',
     },
   ],
 }

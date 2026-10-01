@@ -108,6 +108,30 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Hör den Radiobeitrag und löse die Aufgaben.',
+      audio: {
+        transcript: 'Und nun zu einer Nachricht aus der Region. Beim Stadtfest in Kassel gab es in diesem Jahr zum ersten Mal keine Einwegbecher mehr. Alle Getränke wurden in Mehrwegbechern verkauft, für die die Besucher zwei Euro Pfand bezahlen mussten. Die Stadt ist mit dem Ergebnis zufrieden. Nach dem Fest lag rund vierzig Prozent weniger Müll auf den Straßen als im Vorjahr, auch wenn man ursprünglich sogar mit der Hälfte gerechnet hatte. Kritik gab es trotzdem. Einige Standbesitzer klagten über lange Schlangen, weil das Zurückgeben der Becher Zeit kostete. Auch viele Besucher fanden das System am Anfang aufwendig, die meisten haben sich aber schnell daran gewöhnt. Überraschend ist, was mit dem Pfand für die Becher passiert, die niemand zurückgebracht hat. Das Geld, insgesamt etwa dreitausend Euro, geht nicht an die Stadt, sondern an ein Umweltprojekt für Schulen. Im nächsten Jahr soll das System auch auf dem Weihnachtsmarkt eingeführt werden. Dann will die Stadt zusätzliche Rückgabestellen einrichten, damit niemand lange warten muss.',
+      },
+      items: [
+        {
+          typ: 'mc',
+          frage: 'Wie viel Müll lag nach dem Fest auf den Straßen?',
+          optionen: ['rund vierzig Prozent weniger als im Vorjahr', 'rund vierzehn Prozent weniger als im Vorjahr', 'nur noch halb so viel wie im Vorjahr'],
+          loesung: 0,
+        },
+        { typ: 'rf', aussage: 'Einige Standbesitzer beschwerten sich über Wartezeiten bei der Rückgabe der Becher.', loesung: true },
+        {
+          typ: 'mc',
+          frage: 'Was geschieht mit dem Pfand für die nicht zurückgebrachten Becher?',
+          optionen: ['Die Stadt behält es.', 'Die Standbesitzer teilen es unter sich auf.', 'Es kommt einem Umweltprojekt für Schulen zugute.'],
+          loesung: 2,
+        },
+        { typ: 'rf', aussage: 'Auf dem Weihnachtsmarkt wird das Pfandsystem bereits verwendet.', loesung: false },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -120,6 +144,25 @@ export default {
       ],
       minWoerter: 60,
       beispielLoesung: 'Ich finde, dass die Innenstadt für private Autos gesperrt werden sollte. Der Verkehr verursacht viel Lärm und Verschmutzung, und auf den Straßen ist kaum Platz für Fußgänger und Radfahrer. Es stimmt zwar, dass viele Geschäfte Angst haben, Kunden zu verlieren, aber in anderen Städten hat sich gezeigt, dass autofreie Zonen sogar mehr Menschen anziehen. Wichtig ist nur, dass es gute Alternativen gibt. Ein erster Schritt wäre, die öffentlichen Verkehrsmittel am Wochenende günstiger zu machen und am Stadtrand große Parkplätze mit Busanschluss zu bauen. So müsste niemand auf seinen Einkaufsbummel verzichten.',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Erkläre und bewerte. Sprich etwa anderthalb Minuten.',
+      aufgabe: 'Eine neue Nachbarin ist gerade aus dem Ausland in dein Haus gezogen und kennt Mülltrennung und Pfand noch nicht. Nimm eine Sprachnachricht für sie auf (etwa anderthalb Minuten): Erkläre ihr beides und bewerte, ob sich der Aufwand lohnt.',
+      punkte: [
+        'Erkläre, welcher Müll in welche Tonne kommt.',
+        'Erkläre, was Pfand ist und wie man es zurückbekommt.',
+        'Bewerte das System: Lohnt sich der Aufwand? Begründe deine Meinung.',
+      ],
+      redemittel: [
+        'Bei uns im Haus gibt es …',
+        '… kommt in die blaue / gelbe / braune Tonne.',
+        'Wenn du die Flaschen zurückbringst, …',
+        'Am Anfang fand ich das …, aber inzwischen …',
+      ],
+      maxSekunden: 100,
+      beispielLoesung: 'Hallo Ioana, hier ist Marta aus dem dritten Stock. Du hast mich gestern nach dem Müll gefragt, deshalb erkläre ich dir kurz, wie das bei uns geregelt ist. Bei uns im Haus gibt es vier Tonnen, denn der Müll wird getrennt gesammelt. Papier und Karton kommen in die blaue Tonne, Verpackungen aus Plastik und Metall in die gelbe, Essensreste in die braune, und nur was sich nicht recyceln lässt, gehört in den Restmüll. Glas bringst du zum Container an der Ecke. Dann gibt es noch das Pfand. Für die meisten Flaschen und Dosen zahlst du beim Kauf einen kleinen Betrag, den du zurückbekommst, sobald du sie leer in den Automaten im Supermarkt steckst. Wirf sie also auf keinen Fall weg! Am Anfang fand ich das alles ehrlich gesagt ziemlich aufwendig, aber inzwischen ist es zur Gewohnheit geworden. Ich halte den Aufwand auch für gerechtfertigt: Je sorgfältiger getrennt wird, desto mehr kann recycelt werden und desto weniger landet im Restmüll. Falls du noch Fragen hast, klingel einfach bei mir. Bis bald!',
     },
   ],
 }

@@ -99,6 +99,35 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Du hörst ein Radiointerview wie in der Prüfung. Lies zuerst die Aufgaben, hör dann das Interview und entscheide, welche Lösung dem Gehörten entspricht.',
+      audio: {
+        transcript: 'Moderatorin: In unserer Reihe über nachhaltigen Konsum begrüße ich heute Jens Hartwig. Er hat vor sechs Jahren in Leipzig ein Reparaturcafé gegründet. Herr Hartwig, was genau passiert bei Ihnen?\nExperte: Die Leute bringen kaputte Dinge mit, und unsere Ehrenamtlichen zeigen ihnen, wie man sie repariert. Wichtig ist: Wir reparieren nicht für die Besucher, sondern gemeinsam mit ihnen.\nModeratorin: Was wird denn am häufigsten gebracht?\nExperte: Viele denken an Fahrräder oder Kleidung. Tatsächlich sind es vor allem kleine Elektrogeräte, etwa Wasserkocher oder Lampen. Ungefähr sechzig Prozent davon bekommen wir wieder zum Laufen.\nModeratorin: Und was kostet das?\nExperte: Die Reparatur selbst ist kostenlos. Nur Ersatzteile muss man bezahlen, und über eine Spende freuen wir uns natürlich.\nModeratorin: Kommen die Menschen vor allem, um Geld zu sparen?\nExperte: Das dachte ich anfangs auch. Die meisten sagen aber, sie wollten einfach nichts wegwerfen, was noch zu retten ist. Das Sparen kommt erst an zweiter Stelle.\nModeratorin: Was wünschen Sie sich für die Zukunft?\nExperte: Geräte, die sich überhaupt öffnen lassen. Viele Hersteller verkleben die Gehäuse, und dann sind auch wir machtlos.',
+      },
+      items: [
+        {
+          typ: 'mc',
+          frage: 'Wie wird im Reparaturcafé gearbeitet?',
+          optionen: ['Die Ehrenamtlichen reparieren, während die Besucher warten.', 'Besucher und Ehrenamtliche reparieren die Dinge zusammen.', 'Die Besucher geben ihre Geräte ab und holen sie später wieder ab.'],
+          loesung: 1,
+        },
+        {
+          typ: 'mc',
+          frage: 'Was bringen die Besucher am häufigsten mit?',
+          optionen: ['Fahrräder', 'Kleidung', 'kleine Elektrogeräte'],
+          loesung: 2,
+        },
+        { typ: 'rf', aussage: 'Auch die Ersatzteile bekommen die Besucher kostenlos.', loesung: false },
+        {
+          typ: 'mc',
+          frage: 'Aus welchem Grund kommen die meisten Menschen laut Herrn Hartwig?',
+          optionen: ['Sie möchten nichts wegwerfen, was sich noch reparieren lässt.', 'Sie wollen in erster Linie Geld sparen.', 'Sie möchten selbst ehrenamtlich mitarbeiten.'],
+          loesung: 0,
+        },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -111,6 +140,21 @@ export default {
       ],
       minWoerter: 60,
       beispielLoesung: 'Ich bin grundsätzlich für eine autofreie Innenstadt, weil sie die Lebensqualität deutlich erhöhen würde. Ein großer Vorteil ist, dass die Luft sauberer wird und die Straßen wieder den Menschen gehören: Kinder könnten sicher spielen, und Cafés hätten mehr Platz. Andererseits dürfen wir nicht vergessen, dass ältere und kranke Menschen auf das Auto angewiesen sind. Deshalb schlage ich vor, dass die Busse häufiger fahren und dass es einen günstigen Lieferservice für schwere Einkäufe gibt. Außerdem sollten Menschen mit Behinderung weiterhin mit dem Auto in die Innenstadt fahren dürfen. So hätten am Ende alle etwas davon.',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Halte einen Diskussionsbeitrag wie in der mündlichen Prüfung. Sprich etwa zwei Minuten frei und in ganzen Sätzen.',
+      aufgabe: 'In einer Diskussionsrunde geht es um folgende These: „Wer im Büro arbeitet, sollte selbst entscheiden dürfen, ob er ins Büro kommt oder im Homeoffice bleibt.“ Nimm in einem zusammenhängenden Diskussionsbeitrag (etwa zwei Minuten) Stellung zu dieser These.',
+      punkte: [
+        'Sag klar, ob du der These zustimmst, und nenne dein wichtigstes Argument.',
+        'Stütze deine Position mit einem Beispiel.',
+        'Nenne ein Gegenargument und entkräfte es.',
+        'Schließ mit einem Fazit.',
+      ],
+      redemittel: ['Ich bin der Ansicht, dass …', 'Dafür spricht vor allem, dass …', 'Häufig wird eingewendet, dass …', 'Dem möchte ich entgegenhalten, dass …', 'Alles in allem …'],
+      maxSekunden: 120,
+      beispielLoesung: 'Ich bin der Ansicht, dass Beschäftigte bei dieser Frage mitentscheiden sollten, auch wenn ich eine völlig freie Wahl für schwierig halte. Dafür spricht vor allem, dass viele Menschen zu Hause konzentrierter arbeiten und sich den Arbeitsweg sparen. Wer nicht jeden Tag eine Stunde pendelt, gewinnt Zeit für die Familie und sitzt ausgeruhter am Schreibtisch. Ein Beispiel: Mein Schwager arbeitet in der Buchhaltung und ist seit zwei Jahren drei Tage pro Woche im Homeoffice. Seitdem bringt er morgens seine Tochter in die Kita, und seine Aufgaben erledigt er genauso zuverlässig wie vorher. Häufig wird eingewendet, dass der Zusammenhalt im Team leidet, wenn jeder nur noch zu Hause sitzt. Neue Kolleginnen und Kollegen lernen weniger, und manches Problem ließe sich im Flur in zwei Minuten klären. Das stimmt zum Teil. Dem möchte ich aber entgegenhalten, dass es nicht um alles oder nichts geht. Wenn das Team ein oder zwei feste Tage vereinbart, an denen alle anwesend sind, bleibt der persönliche Kontakt erhalten. Alles in allem bin ich überzeugt, dass mehr Freiheit bei der Wahl des Arbeitsortes beiden Seiten nützt: Die Beschäftigten sind zufriedener, und die Unternehmen finden leichter Fachkräfte. Ganz ohne gemeinsame Regeln funktioniert es allerdings nicht.',
     },
   ],
 }

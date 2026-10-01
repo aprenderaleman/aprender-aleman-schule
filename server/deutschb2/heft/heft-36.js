@@ -108,6 +108,30 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Hör das Telefongespräch und löse die Aufgaben.',
+      audio: {
+        transcript: 'Frau: Praxis Doktor Neumann, guten Tag.\nMann: Guten Tag, Vidal hier. Ich bin seit vier Tagen stark erkältet und habe jetzt auch Fieber. Könnte ich heute noch vorbeikommen?\nFrau: Heute Vormittag ist leider alles voll, Herr Vidal. Ich kann Ihnen heute um Viertel vor fünf einen Termin anbieten oder morgen früh um acht.\nMann: Morgen früh müsste ich eigentlich arbeiten. Dann lieber heute Nachmittag.\nFrau: Gut, ich trage Sie ein. Waren Sie in diesem Jahr schon bei uns?\nMann: Nein, das letzte Mal vor zwei Jahren.\nFrau: Dann bringen Sie bitte unbedingt Ihre Versichertenkarte mit.\nMann: Mache ich. Ich bräuchte außerdem eine Krankmeldung für meinen Arbeitgeber. Bekomme ich die auch am Telefon?\nFrau: Nein, dafür muss die Ärztin Sie erst untersuchen.\nMann: Und ein Rezept für das Medikament vom letzten Mal?\nFrau: Darüber entscheidet Frau Doktor Neumann im Gespräch. Rechnen Sie bitte mit etwas Wartezeit, das Wartezimmer ist heute sehr voll.\nMann: In Ordnung, vielen Dank. Bis später.',
+      },
+      items: [
+        {
+          typ: 'mc',
+          frage: 'Für wann bekommt Herr Vidal einen Termin?',
+          optionen: ['für heute um Viertel vor fünf', 'für heute um Viertel nach fünf', 'für morgen früh um acht'],
+          loesung: 0,
+        },
+        { typ: 'rf', aussage: 'Herr Vidal war in diesem Jahr schon einmal in der Praxis.', loesung: false },
+        { typ: 'rf', aussage: 'Die Krankmeldung bekommt er erst, nachdem die Ärztin ihn untersucht hat.', loesung: true },
+        {
+          typ: 'mc',
+          frage: 'Was erfährt Herr Vidal über das Rezept?',
+          optionen: ['Er kann es sofort an der Anmeldung abholen.', 'Die Ärztin entscheidet darüber, wenn er bei ihr ist.', 'Er braucht dafür einen zweiten Termin.'],
+          loesung: 1,
+        },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -120,6 +144,27 @@ export default {
       ],
       minWoerter: 60,
       beispielLoesung: 'Sehr geehrte Damen und Herren, am Dienstag, dem 14. Mai, hatte ich um 9.30 Uhr einen Termin in Ihrer Praxis. Ich war pünktlich, musste aber fast zwei Stunden im Wartezimmer sitzen. Erst dann hat man mir mitgeteilt, dass die Ärztin mich an diesem Tag nicht mehr behandeln kann. Für diesen Termin hatte ich mir extra einen halben Tag Urlaub genommen, der nun verloren ist. Außerdem habe ich immer noch starke Rückenschmerzen. Ich erwarte, dass Sie mir so bald wie möglich einen neuen Termin anbieten und Ihre Patienten künftig rechtzeitig informieren, wenn es zu Verzögerungen kommt. Mit freundlichen Grüßen, Amara Okafor',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Nimm in einem Diskussionsbeitrag Stellung. Sprich etwa anderthalb Minuten.',
+      aufgabe: 'In einer Gesprächsrunde zum Thema Gesundheit in deinem Betrieb sagt ein Kollege: „Wer Vollzeit arbeitet, hat für gesunde Ernährung und Sport einfach keine Zeit.“ Nimm in einem zusammenhängenden Redebeitrag (etwa anderthalb Minuten) Stellung zu dieser These.',
+      punkte: [
+        'Sag, ob du der These zustimmst, und begründe deine Position.',
+        'Nenne ein Gegenargument und geh darauf ein.',
+        'Gib ein Beispiel aus deinem eigenen Alltag.',
+        'Schließ mit einem kurzen Fazit.',
+      ],
+      redemittel: [
+        'Ich kann diese Meinung nur teilweise teilen.',
+        'Einerseits …, andererseits …',
+        'Ich koche zum Beispiel …',
+        'Natürlich gibt es Wochen, in denen …',
+        'Mein Fazit lautet also: …',
+      ],
+      maxSekunden: 110,
+      beispielLoesung: 'Ich kann diese Meinung nur teilweise teilen. Einerseits stimmt es, dass der Alltag mit einer vollen Stelle anstrengend ist. Wer abends um sieben nach Hause kommt, hat oft keine Lust mehr zu kochen und bestellt lieber eine Pizza. Das kenne ich selbst gut. Andererseits glaube ich, dass es weniger eine Frage der Zeit ist als eine Frage der Gewohnheit. Gesund zu essen dauert nicht unbedingt länger: Ich koche zum Beispiel sonntags für zwei Tage vor und nehme das Essen mit ins Büro. Auch für Bewegung braucht man kein Fitnessstudio. Seit einem Jahr fahre ich mit dem Rad zur Arbeit, das sind jeden Tag vierzig Minuten Sport, ohne dass ich extra Zeit dafür brauche. Natürlich gibt es Wochen, in denen der Stress so groß ist, dass gar nichts klappt. Aber gerade dann hilft mir Bewegung, Stress abzubauen. Mein Fazit lautet also: Zeit hat man nicht, man muss sie sich nehmen, und kleine Schritte reichen schon.',
     },
   ],
 }

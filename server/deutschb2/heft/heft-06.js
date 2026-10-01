@@ -93,6 +93,25 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Du hörst einen kurzen Vortrag über ein Projekt in der Stadt. Entscheide bei jeder Aufgabe, welche Lösung dem Gehörten entspricht.',
+      audio: {
+        transcript: 'Guten Abend, meine Damen und Herren. Ich möchte Ihnen heute unseren Gemeinschaftsgarten in Leipzig vorstellen. Vor sechs Jahren war das Grundstück weder ein Park noch ein Spielplatz, sondern ein leerer Parkplatz. Heute pflanzen dort rund neunzig Menschen sowohl Gemüse als auch Blumen an. Der Garten ist nicht nur ein Ort für Hobbygärtner, sondern auch ein Treffpunkt für die Nachbarschaft. Einerseits kommen Familien mit Kindern, andererseits viele ältere Menschen, die allein leben. Zwar gehört das Grundstück der Stadt, aber wir zahlen keine Miete. Dafür pflegen wir die Fläche selbst und halten sie für alle offen. Dabei haben wir etwas Interessantes beobachtet. Je mehr Menschen mitmachen, desto weniger wird im Garten zerstört oder gestohlen. Ein Problem bleibt allerdings das Wasser. Im Sommer reicht der Regen nicht, deshalb brauchen wir einen eigenen Brunnen. Entweder wir sammeln bis zum Herbst genug Spenden, oder wir müssen die Zahl der Beete verringern. Wenn Sie uns unterstützen möchten, sprechen Sie mich gern nach dem Vortrag an.',
+      },
+      items: [
+        { typ: 'mc', frage: 'Was befand sich früher auf dem Grundstück?', optionen: ['ein Park', 'ein Spielplatz', 'ein Parkplatz'], loesung: 2 },
+        { typ: 'rf', aussage: 'Im Garten machen ungefähr neunzehn Personen mit.', loesung: false },
+        { typ: 'rf', aussage: 'Für das Grundstück müssen die Gärtnerinnen und Gärtner keine Miete zahlen.', loesung: true },
+        {
+          typ: 'mc',
+          frage: 'Was passiert, wenn bis zum Herbst nicht genug Spenden zusammenkommen?',
+          optionen: ['Der Garten muss schließen.', 'Es gibt in Zukunft weniger Beete.', 'Die Stadt bezahlt den Brunnen.'],
+          loesung: 1,
+        },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -105,6 +124,20 @@ export default {
       ],
       minWoerter: 60,
       beispielLoesung: 'Sehr geehrte Damen und Herren, ich wohne seit drei Jahren in der Gartenstraße 14 und muss mich leider über den Zustand des Hauses beschweren. Seit Anfang November funktionieren weder der Aufzug noch die Heizung zuverlässig. Das ist nicht nur unangenehm, sondern auch gefährlich, denn eine ältere Nachbarin kann die Treppen kaum noch steigen. Je länger die Reparatur dauert, desto mehr Bewohner werden krank. Ich habe Sie bereits zweimal telefonisch informiert, bisher ohne Ergebnis. Entweder Sie schicken bis zum 20. November einen Techniker, oder ich werde die Miete mindern. Mit freundlichen Grüßen, Elif Demir',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Nimm in einem Diskussionsbeitrag Stellung zu der These. Sprich etwa zwei Minuten und verwende zweiteilige Konnektoren.',
+      aufgabe: 'In einer Diskussionsrunde lautet die These: „Wer online einkauft, schadet der eigenen Stadt.“ Formuliere deinen Diskussionsbeitrag von etwa zwei Minuten: Wäge beide Seiten ab und vertritt am Ende einen klaren Standpunkt. Verwende dabei zweiteilige Konnektoren wie einerseits … andererseits, zwar … aber oder je … desto.',
+      punkte: [
+        'Stell die zwei Seiten des Themas gegenüber (einerseits … andererseits oder zwar … aber).',
+        'Nenne ein Argument und geh auf ein Gegenargument ein (nicht nur … sondern auch, sowohl … als auch oder weder … noch).',
+        'Formuliere deinen Standpunkt (je … desto oder entweder … oder).',
+      ],
+      redemittel: ['Einerseits …, andererseits …', 'Das ist zwar richtig, aber …', 'Je mehr …, desto …', 'Ich stimme der These also … zu.'],
+      maxSekunden: 120,
+      beispielLoesung: 'Zu dieser These habe ich eine klare Meinung, aber ich möchte zuerst beide Seiten zeigen. Einerseits ist das Einkaufen im Internet sehr bequem, andererseits verlieren die Geschäfte in der Innenstadt immer mehr Kunden. Online findet man nicht nur eine größere Auswahl, sondern oft auch niedrigere Preise. Das ist zwar ein starkes Argument, aber es hat Folgen. Wenn ein Laden schließt, verschwinden sowohl Arbeitsplätze als auch ein Stück Leben in der Stadt. In meinem Viertel gibt es inzwischen weder eine Buchhandlung noch ein Schuhgeschäft. Natürlich kann man dagegen sagen, dass Menschen auf dem Land oder mit wenig Zeit auf Onlineshops angewiesen sind. Das stimmt, und niemand muss ganz darauf verzichten. Trotzdem glaube ich: Je mehr wir online bestellen, desto leerer werden unsere Innenstädte. Entweder wir kaufen wenigstens einen Teil unserer Sachen vor Ort, oder wir müssen akzeptieren, dass die Geschäfte verschwinden. Ich stimme der These also weitgehend zu und kaufe Bücher und Kleidung deshalb bewusst im Laden.',
     },
   ],
 }

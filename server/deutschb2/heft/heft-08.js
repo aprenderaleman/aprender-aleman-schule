@@ -79,6 +79,30 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Du hörst ein Gespräch zwischen zwei Freunden. Entscheide, welche Aussage dem Gehörten entspricht.',
+      audio: {
+        transcript: 'Frau: Hallo Timo! Na, wie war dein Vorstellungsgespräch gestern?\nMann: Ach, Carla, frag lieber nicht. Ich wäre beinahe zu spät gekommen. Die S-Bahn ist ausgefallen, und ich musste ein Taxi nehmen.\nFrau: Du hättest eben früher losfahren sollen. Hast du es denn noch pünktlich geschafft?\nMann: Ja, zwei Minuten vor zehn war ich da. Aber dann kam die nächste Überraschung: Ein Teil des Gesprächs war auf Englisch. Wenn ich das gewusst hätte, hätte ich mich ganz anders vorbereitet.\nFrau: Stand das denn nicht in der Einladung?\nMann: Doch, ganz unten. Ich hätte die E-Mail genauer lesen müssen. Bei den Fragen zur Software lief es dafür richtig gut.\nFrau: Und wann bekommst du Bescheid?\nMann: Eigentlich wollten sie sich erst nächste Woche melden. Aber die Chefin hat mich heute Morgen schon angerufen: Ich bin in der zweiten Runde. Die ist nicht am Donnerstag, wie zuerst geplant, sondern schon am Dienstag.\nFrau: Na siehst du! Dann wäre der ganze Stress gar nicht nötig gewesen.',
+      },
+      items: [
+        { typ: 'rf', aussage: 'Timo ist zu spät zu seinem Vorstellungsgespräch gekommen.', loesung: false },
+        {
+          typ: 'mc',
+          frage: 'Was hat Timo im Gespräch überrascht?',
+          optionen: ['Es gab schwierige Fragen zur Software.', 'Die Chefin war nicht anwesend.', 'Er musste teilweise Englisch sprechen.'],
+          loesung: 2,
+        },
+        { typ: 'rf', aussage: 'In der Einladung stand, dass ein Teil des Gesprächs auf Englisch stattfindet.', loesung: true },
+        {
+          typ: 'mc',
+          frage: 'Wann findet die zweite Runde statt?',
+          optionen: ['am Donnerstag', 'am Dienstag', 'am Freitag'],
+          loesung: 1,
+        },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -91,6 +115,21 @@ export default {
       ],
       minWoerter: 60,
       beispielLoesung: 'Betreff: Beschwerde über die Tagesreise nach Lindenau am 14. Juni — Sehr geehrte Damen und Herren, am vergangenen Samstag habe ich an Ihrer Tagesreise nach Lindenau teilgenommen und war leider sehr enttäuscht. Der Bus kam mit einer Stunde Verspätung, und die Stadtführung fiel ganz aus, weil der Reiseleiter krank war. Wenn Sie uns vorher informiert hätten, hätte ich die Reise verschoben. Außerdem hätten Sie kurzfristig einen anderen Reiseleiter organisieren müssen. So haben wir den ganzen Nachmittag ohne Programm verbracht. Ich würde Sie daher bitten, mir mindestens die Hälfte des Reisepreises zu erstatten. Mit freundlichen Grüßen, Ahmet Yılmaz',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Berichte von einer eigenen Erfahrung. Du hast 100 Sekunden Zeit.',
+      aufgabe: 'Erzähl von einer Entscheidung oder einer Situation in deinem Leben, in der du heute anders handeln würdest. Sprich etwa 100 Sekunden und verwende den Konjunktiv II der Vergangenheit (hätte / wäre + Partizip II, auch mit sollen oder können).',
+      punkte: [
+        'was damals passiert ist',
+        'was du hättest anders machen sollen oder können',
+        'was passiert wäre, wenn du dich anders entschieden hättest',
+        'was du daraus gelernt hast',
+      ],
+      redemittel: ['Ich möchte von … erzählen.', 'Ich hätte damals … sollen.', 'Wenn ich … hätte, wäre / hätte ich …', 'Beinahe wäre / hätte ich …', 'Daraus habe ich gelernt, dass …'],
+      maxSekunden: 100,
+      beispielLoesung: 'Ich möchte von meinem ersten Jahr an der Universität erzählen. Ich habe damals Wirtschaft studiert, weil meine Eltern das für vernünftig hielten. Eigentlich habe ich mich viel mehr für Sprachen interessiert, aber das habe ich niemandem gesagt. Das erste Jahr war dann ziemlich schlimm: Ich hatte keine Lust zu lernen und wäre beinahe durch zwei Prüfungen gefallen. Heute weiß ich, dass ich früher mit meinen Eltern hätte sprechen sollen. Ich hätte auch zur Studienberatung gehen können, aber ich habe mich einfach nicht getraut. Wenn ich gleich am Anfang ehrlich gewesen wäre, hätte ich ein ganzes Jahr gespart, und wahrscheinlich hätte ich auch weniger Stress gehabt. Nach dem zweiten Semester habe ich dann doch gewechselt, und meine Eltern haben viel ruhiger reagiert, als ich gedacht hatte. Ganz umsonst war das Jahr aber nicht: Ohne die Wirtschaftskurse hätte ich meine jetzige Stelle vielleicht nicht bekommen. Gelernt habe ich daraus vor allem eines: Man sollte Probleme sofort ansprechen und nicht monatelang warten.',
     },
   ],
 }

@@ -89,6 +89,30 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Du hörst eine Telefonansage. Entscheide, welche Aussage dem Gehörten entspricht.',
+      audio: {
+        transcript: 'Guten Tag, Sie sind mit dem Bürgerbüro der Stadt Neuhof verbunden. Leider rufen Sie außerhalb unserer Öffnungszeiten an. Bitte beachten Sie die folgenden Hinweise zum Bewohnerparkausweis. Der Ausweis muss persönlich beantragt werden; der Antrag kann weder telefonisch noch per E-Mail gestellt werden. Zum Termin sind der Mietvertrag und die Fahrzeugpapiere mitzubringen. Die Gebühr von fünfundvierzig Euro lässt sich nur mit Karte bezahlen, Barzahlung ist seit Januar nicht mehr möglich. Termine sind ausschließlich online buchbar. Ohne Internetzugang können Sie dienstags zwischen acht und zwölf Uhr auch ohne Termin vorbeikommen. Bitte rechnen Sie dann mit längeren Wartezeiten. Der fertige Ausweis kann nach etwa zwei Wochen abgeholt werden, und zwar nicht im Rathaus, sondern in unserer Außenstelle am Marktplatz. Er darf auch von einer anderen Person abgeholt werden, wenn sie eine schriftliche Vollmacht vorlegt. Wir sind montags bis freitags von acht bis sechzehn Uhr für Sie da, donnerstags sogar bis achtzehn Uhr. Vielen Dank für Ihren Anruf.',
+      },
+      items: [
+        { typ: 'rf', aussage: 'Der Bewohnerparkausweis kann auch per E-Mail beantragt werden.', loesung: false },
+        {
+          typ: 'mc',
+          frage: 'Wie ist die Gebühr zu bezahlen?',
+          optionen: ['nur bar', 'bar oder mit Karte', 'nur mit Karte'],
+          loesung: 2,
+        },
+        {
+          typ: 'mc',
+          frage: 'Welche Möglichkeit haben Personen ohne Internetzugang?',
+          optionen: ['Sie können am Dienstagvormittag ohne Termin kommen.', 'Sie können telefonisch einen Termin vereinbaren.', 'Sie können donnerstags bis achtzehn Uhr ohne Termin kommen.'],
+          loesung: 0,
+        },
+        { typ: 'rf', aussage: 'Der fertige Ausweis ist in der Außenstelle am Marktplatz abzuholen.', loesung: true },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -101,6 +125,21 @@ export default {
       ],
       minWoerter: 60,
       beispielLoesung: 'Ich finde, dass Einwegverpackungen aus Plastik stark reduziert werden müssen. Viele Produkte werden heute doppelt verpackt, obwohl das überhaupt nicht nötig ist. Obst und Gemüse lassen sich problemlos lose verkaufen, und für Käse oder Wurst kann man eigene Dosen mitbringen. Solche Lösungen sind schnell umsetzbar und kosten fast nichts. Ein komplettes Verbot halte ich trotzdem für schwierig, denn manche Lebensmittel sind ohne Verpackung nicht lange haltbar. Hier müsste zuerst geklärt werden, welche umweltfreundlichen Materialien eingesetzt werden können. Deshalb wäre ein schrittweiser Ausstieg aus meiner Sicht die beste Lösung. Rafael',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Nimm Stellung zu der folgenden These. Du hast zwei Minuten Zeit.',
+      aufgabe: 'In einer Diskussionsrunde wird die These vertreten: „Smartphones sollten an Schulen komplett verboten werden.“ Formuliere deinen Diskussionsbeitrag von etwa zwei Minuten. Verwende dabei das Passiv mit Modalverben und Passiversatzformen (muss … werden, lässt sich …, ist … zu …, -bar).',
+      punkte: [
+        'Sag, ob du der These zustimmst.',
+        'Begründe deine Meinung mit einem Argument und einem Beispiel.',
+        'Geh auf ein Gegenargument ein.',
+        'Mach einen Vorschlag, wie sich das Problem lösen lässt.',
+      ],
+      redemittel: ['Ich bin der Ansicht, dass …', '… muss / darf / sollte … werden.', 'Natürlich lässt sich einwenden, dass …', 'Das ist kaum durchsetzbar, weil …', 'So ließe sich das Problem lösen.'],
+      maxSekunden: 120,
+      beispielLoesung: 'Ich bin der Ansicht, dass Smartphones im Unterricht nichts zu suchen haben. Ein komplettes Verbot auf dem ganzen Schulgelände geht mir aber zu weit. Zuerst zu meinem Hauptargument: Im Unterricht muss konzentriert gearbeitet werden, und das ist kaum möglich, wenn ständig Nachrichten gelesen werden. Meine Schwester ist Lehrerin, und sie erzählt, dass sich viele Schüler ohne Handy deutlich besser konzentrieren. Deshalb sollten die Geräte während der Stunde ausgeschaltet werden. Natürlich lässt sich einwenden, dass Smartphones auch zum Lernen benutzt werden können, zum Beispiel als Wörterbuch oder für eine kurze Recherche. Das stimmt, aber dafür gibt es in vielen Schulen inzwischen Tablets. Ein Verbot in den Pausen halte ich dagegen für kaum durchsetzbar. Es ist einfach nicht zu kontrollieren, was achthundert Schüler auf dem Schulhof machen. Mein Vorschlag wäre deshalb ein Kompromiss, der leicht umsetzbar ist: Am Anfang der Stunde werden alle Handys in eine Kiste gelegt, und in der Pause dürfen sie wieder benutzt werden. So ließe sich das Problem lösen, ohne dass alles verboten werden muss.',
     },
   ],
 }

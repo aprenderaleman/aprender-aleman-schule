@@ -102,6 +102,30 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Du hörst die Telefonansage eines Sportzentrums. Entscheide, welche Aussage dem Gehörten entspricht.',
+      audio: {
+        transcript: 'Guten Tag, Sie hören die Ansage des Sportzentrums am Stadtpark. Leider ist unser Büro im Moment nicht besetzt. Bitte beachten Sie die folgenden Hinweise. Die Anmeldung für die neuen Schwimmkurse beginnt nicht, wie angekündigt, am ersten, sondern erst am achten September. Grund dafür ist die Verzögerung bei der Renovierung des Schwimmbads. Eine Anmeldung ist ausschließlich über unsere Internetseite möglich. Nach der Anmeldung erhalten Sie eine Bestätigung per E-Mail. Die Bezahlung erfolgt beim ersten Kurstermin, entweder bar oder mit Karte. Bei einer Absage bis drei Tage vor Kursbeginn entstehen keine Kosten, danach berechnen wir eine Gebühr von fünfzehn Euro. Zum Schwimmen brauchen Sie eine Badekappe, zum Duschen bringen Sie bitte eigene Seife mit. Wegen der großen Nachfrage empfehlen wir eine frühe Anmeldung, denn pro Kurs gibt es nur zwölf Plätze. Bei Fragen erreichen Sie uns montags bis donnerstags von neun bis dreizehn Uhr. Vielen Dank für Ihren Anruf.',
+      },
+      items: [
+        {
+          typ: 'mc',
+          frage: 'Ab wann kann man sich für die Schwimmkurse anmelden?',
+          optionen: ['ab dem achten September', 'ab dem ersten September', 'erst beim ersten Kurstermin'],
+          loesung: 0,
+        },
+        { typ: 'rf', aussage: 'Die Anmeldung ist auch telefonisch möglich.', loesung: false },
+        { typ: 'rf', aussage: 'Wer eine Woche vor Kursbeginn absagt, muss nichts bezahlen.', loesung: true },
+        {
+          typ: 'mc',
+          frage: 'Wie hoch ist die Gebühr bei einer späten Absage?',
+          optionen: ['zwölf Euro', 'fünfzehn Euro', 'fünfzig Euro'],
+          loesung: 1,
+        },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -114,6 +138,20 @@ export default {
       ],
       minWoerter: 60,
       beispielLoesung: 'Betreff: Neue Regeln an der Sprachschule — Sehr geehrte Damen und Herren, vielen Dank für die Information über die neuen Regeln. Das Handyverbot im Unterricht finde ich sinnvoll, denn beim Lernen lenkt das Handy nur ab. Die Gebühr bei kurzfristiger Absage sehe ich dagegen kritisch: Wegen einer plötzlichen Erkrankung kann jeder einmal eine Stunde absagen müssen. Auch die reine Online-Anmeldung ist für ältere Teilnehmende ohne Computer schwierig. Ich schlage daher vor, bei Krankheit mit ärztlichem Attest auf die Gebühr zu verzichten und zur Anmeldung weiterhin auch das Sekretariat zu öffnen. Mit freundlichen Grüßen, Amira Haddad',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Halte einen kurzen Vortrag über Vor- und Nachteile. Sprich etwa zwei Minuten und verwende nominale Wendungen (z. B. beim …, zum …, bei …, wegen …).',
+      aufgabe: 'Immer mehr Menschen kaufen Kleidung, Bücher und sogar Lebensmittel im Internet statt im Geschäft. Stell in einem kurzen Vortrag von etwa zwei Minuten die Vor- und Nachteile des Online-Einkaufs dar und verwende dabei nominale Wendungen (z. B. beim Bestellen, zum Vergleichen der Preise, bei einer Rücksendung, wegen der Lieferzeit).',
+      punkte: [
+        'Beschreibe kurz deine eigenen Erfahrungen beim Einkaufen.',
+        'Nenne mindestens einen Vorteil und einen Nachteil des Online-Einkaufs.',
+        'Sag zum Schluss, was du persönlich bevorzugst, und begründe es.',
+      ],
+      redemittel: ['Ein großer Vorteil ist …', 'Beim Bestellen im Internet …', 'Es gibt aber auch Nachteile: …', 'Zum Schluss möchte ich sagen, dass …'],
+      maxSekunden: 120,
+      beispielLoesung: 'Mein Thema ist das Einkaufen im Internet. Ich selbst bestelle seit einigen Jahren fast alles online, von Büchern bis zu Schuhen; nur für Lebensmittel gehe ich weiterhin auf den Markt. Ein großer Vorteil ist die Zeitersparnis. Beim Bestellen im Internet bin ich nicht von Öffnungszeiten abhängig, und zum Vergleichen der Preise brauche ich nur wenige Minuten. Außerdem ist die Auswahl viel größer als in den Geschäften meiner Stadt. Es gibt aber auch Nachteile. Bei Kleidung fehlt die Anprobe, deshalb passt vieles nicht, und wegen der Rücksendung muss ich dann doch wieder zur Post. Hinzu kommt die Belastung der Umwelt durch Verpackung und Transport. Und nach der Schließung der kleinen Läden wirkt eine Innenstadt schnell leer. Zum Schluss möchte ich sagen: Für mich ist eine Mischung die beste Lösung. Technik und Bücher bestelle ich online, aber beim Kauf von Kleidung ist mir die persönliche Beratung im Geschäft wichtiger.',
     },
   ],
 }
