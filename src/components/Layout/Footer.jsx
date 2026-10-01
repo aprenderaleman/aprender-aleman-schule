@@ -1,5 +1,5 @@
 import React from 'react'
-import { Mail, Instagram, Youtube, ExternalLink } from 'lucide-react'
+import { Instagram, Youtube, ExternalLink } from 'lucide-react'
 import Logo from '../UI/Logo'
 
 // TikTok icon (not in lucide-react)
@@ -46,18 +46,6 @@ export default function Footer() {
                 Aprender-Aleman.de <ExternalLink size={10} />
               </a>
             </p>
-          </div>
-
-          {/* Contact */}
-          <div>
-            <h3 className="font-bold text-white mb-3 text-sm uppercase tracking-wide">Kontakt</h3>
-            <a
-              href="mailto:info@aprender-aleman.de"
-              className="inline-flex items-center gap-2 text-sm text-gray-400 hover:text-orange-400 transition-colors"
-            >
-              <Mail size={16} />
-              info@aprender-aleman.de
-            </a>
           </div>
 
           {/* Social */}

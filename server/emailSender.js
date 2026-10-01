@@ -6,7 +6,9 @@
 
 const RESEND_API_KEY = process.env.RESEND_API_KEY
 const FROM_EMAIL = process.env.EMAIL_FROM || 'Schule <noreply@aprender-aleman.de>'
-const REPLY_TO   = process.env.EMAIL_REPLY_TO || 'info@aprender-aleman.de'
+// Sin fallback publico: si EMAIL_REPLY_TO no esta configurado, no se
+// setea reply-to y las respuestas van al FROM (noreply, que nadie mira).
+const REPLY_TO   = process.env.EMAIL_REPLY_TO || null
 
 let resendClient = null
 async function getResend() {
@@ -50,7 +52,8 @@ async function sendEmail({ to, subject, html, text, from = FROM_EMAIL, replyTo =
     const result = await resend.emails.send({
       from,
       to: [to],
-      reply_to: replyTo,
+      // Solo agregar reply_to si esta configurado; sino Resend usa el from.
+      ...(replyTo ? { reply_to: replyTo } : {}),
       subject,
       html,
       text: text || stripHtml(html),
