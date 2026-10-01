@@ -65,6 +65,19 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Hör das Gespräch — ohne Hilfe. Was ist richtig? ~~(Escucha la conversación, sin ayuda. ¿Qué es correcto?)~~',
+      audio: {
+        transcript: 'Lehrerin: Guten Morgen, Pablo! Wie ist dein Test?\nPablo: Nicht so gut. Ich habe sechs Fehler.\nLehrerin: Sechs Fehler sind kein Problem. Was kannst du schon gut?\nPablo: Lesen kann ich schon gut. Aber Hören kann ich noch nicht. Die Leute sprechen zu schnell.\nLehrerin: Hörst du zu Hause Deutsch?\nPablo: Ja, aber nicht jeden Tag, nur am Wochenende.\nLehrerin: Dann hör bitte jeden Tag zehn Minuten Radio. Und wiederhole am Freitag Lektion zwei.\nPablo: Gut, das mache ich. Danke!',
+      },
+      items: [
+        { typ: 'mc', frage: 'Was kann Pablo noch nicht gut?', optionen: ['Hören', 'Lesen', 'Schreiben'], loesung: 0 },
+        { typ: 'rf', aussage: 'Pablo hört jeden Tag Deutsch.', loesung: false },
+        { typ: 'rf', aussage: 'Pablo wiederholt am Freitag Lektion zwei.', loesung: true },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -77,6 +90,20 @@ export default {
       ],
       minWoerter: 25,
       beispielLoesung: 'Ich lerne schon ein Jahr Deutsch. Wortschatz kann ich schon gut, aber die Vergangenheit kann ich noch nicht. Ich übe jeden Tag zwanzig Minuten am Handy und wiederhole am Wochenende die Lektionen.',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Erzähl von dir — ohne Hilfe. Sprich 45 Sekunden. ~~(Habla de ti, sin ayuda. Habla 45 segundos.)~~',
+      aufgabe: 'Wer bist du und wie ist dein Alltag? Erzähl.',
+      punkte: [
+        'deine Familie',
+        'dein Tag: Wann und wo lernst du Deutsch?',
+        'dein Wochenende: Was machst du gern?',
+      ],
+      redemittel: ['Meine Familie ist …', 'Deutsch lerne ich am … / im …', 'Am Wochenende … ich gern …'],
+      maxSekunden: 45,
+      beispielLoesung: 'Ich bin Carlos. Meine Familie ist nicht groß: Ich habe eine Frau und einen Sohn. Er ist vier Jahre alt. Ich arbeite von Montag bis Freitag. Deutsch lerne ich am Abend, zu Hause in der Küche. Ich übe zwanzig Minuten am Handy. Am Wochenende gehe ich gern mit meinem Sohn in den Park. Am Sonntag koche ich gern für meine Familie.',
     },
   ],
 }

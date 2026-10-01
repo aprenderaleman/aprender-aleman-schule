@@ -97,6 +97,29 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Hör die Durchsage im Prüfungszentrum. Löse die 3 Aufgaben. ~~(Escucha el aviso en el centro de exámenes. Resuelve las 3 tareas.)~~',
+      audio: {
+        transcript: 'Guten Morgen und herzlich willkommen im Prüfungszentrum! Die mündliche Prüfung beginnt heute nicht um neun Uhr, sondern um halb zehn. Sie ist in Raum fünf. Sie sprechen mit einem Partner oder einer Partnerin. Die Prüfung dauert fünfzehn Minuten. Bitte warten Sie nicht vor dem Raum, sondern im Café im Erdgeschoss. Machen Sie dort bitte Ihr Handy aus. Sie brauchen auch Ihren Pass. Haben Sie noch eine Frage? Dann kommen Sie bitte ins Büro in Raum eins. Viel Erfolg!',
+      },
+      items: [
+        {
+          typ: 'mc',
+          frage: 'Wann beginnt die mündliche Prüfung?',
+          optionen: ['um neun Uhr', 'um halb zehn', 'um zehn Uhr'],
+          loesung: 1,
+        },
+        { typ: 'rf', aussage: 'Die Prüfung ist in Raum fünfzehn.', loesung: false },
+        {
+          typ: 'mc',
+          frage: 'Wo warten die Teilnehmer?',
+          optionen: ['vor dem Raum', 'im Büro', 'im Café'],
+          loesung: 2,
+        },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -109,6 +132,20 @@ export default {
       ],
       minWoerter: 25,
       beispielLoesung: 'Hallo! Ich heiße Valeria und ich komme aus Kolumbien. Ich wohne jetzt in Frankfurt und arbeite in einem Café. Ich lerne Deutsch, denn ich möchte hier studieren. Im Juni mache ich die Prüfung.',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Erzähl von deinem Deutschlernen. Sprich 60 Sekunden. ~~(Cuenta cómo aprendes alemán. Habla 60 segundos.)~~',
+      aufgabe: 'Das Thema ist „Deutsch lernen“. Erzähl von dir. Sprich langsam und deutlich.',
+      punkte: [
+        'Wo und wann lernst du Deutsch?',
+        'Was ist für dich leicht? Was ist schwer?',
+        'Du verstehst eine Frage nicht. Was sagst du dann?',
+      ],
+      redemittel: ['Ich lerne seit … Deutsch.', '… ist für mich leicht.', '… ist für mich schwer.', 'Dann sage ich: …'],
+      maxSekunden: 60,
+      beispielLoesung: 'Ich lerne seit einem Jahr Deutsch. Ich habe jeden Dienstag und Donnerstag Kurs, immer am Abend. Zu Hause lerne ich auch mit dem Handy. Lesen ist für mich leicht. Aber das Sprechen ist schwer, und die langen Wörter auch. Manchmal verstehe ich eine Frage nicht. Dann sage ich: Wie bitte? Können Sie das bitte wiederholen? Das hilft immer.',
     },
   ],
 }

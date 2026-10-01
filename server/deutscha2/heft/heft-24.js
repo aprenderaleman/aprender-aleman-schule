@@ -92,6 +92,29 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Hör die Ansage im Deutschkurs. Löse die 3 Aufgaben. ~~(Escucha el aviso de la profesora en el curso de alemán. Resuelve las 3 tareas.)~~',
+      audio: {
+        transcript: 'Guten Morgen zusammen! Am Donnerstag üben wir das Schreiben für die Prüfung. Der Kurs beginnt nicht um neun, sondern schon um halb neun. Zuerst schreibt ihr eine kurze Mitteilung und dann eine E-Mail an einen Freund. Denkt bitte an die Anrede und an den Gruß. Am Ende kontrolliert ihr euren Text. Sind alle Nomen groß? Steht das Verb auf Position zwei? Ein Wörterbuch braucht ihr nicht. Ihr schreibt nicht am Computer, sondern auf Papier. Bringt also einen Stift mit. Eure Texte bekommt ihr am Freitag zurück.',
+      },
+      items: [
+        {
+          typ: 'mc',
+          frage: 'Wann beginnt der Kurs am Donnerstag?',
+          optionen: ['um neun Uhr', 'um halb neun', 'um halb zehn'],
+          loesung: 1,
+        },
+        { typ: 'rf', aussage: 'Die Teilnehmer bekommen ihre Texte am Freitag zurück.', loesung: true },
+        {
+          typ: 'mc',
+          frage: 'Was bringen die Teilnehmer am Donnerstag mit?',
+          optionen: ['ein Wörterbuch', 'einen Computer', 'einen Stift'],
+          loesung: 2,
+        },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'formular',
       titel: 'Schreiben',
@@ -104,6 +127,21 @@ export default {
         { id: 'mitbringen', label: 'Jonas bringt mit:', erwartet: ['das Buch', 'Buch', 'sein Buch', 'dein Buch'] },
         { id: 'von', label: 'Die Mitteilung ist von', erwartet: ['Elif'] },
       ],
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Antworte auf die Fragen. Du hast 60 Sekunden. ~~(Responde a las preguntas. Tienes 60 segundos.)~~',
+      aufgabe: 'Erzähl: Wem schreibst du im Alltag? Was schreibst du?',
+      punkte: [
+        'Wem schreibst du oft?',
+        'Was schreibst du? Nachrichten, E-Mails, Einladungen?',
+        'Schreibst du schon auf Deutsch?',
+        'Was ist für dich schwer? Welche Fehler machst du?',
+      ],
+      redemittel: ['Ich schreibe jeden Tag …', 'Ich schreibe oft an …', 'Auf Deutsch schreibe ich …', 'Ich mache oft Fehler: …'],
+      maxSekunden: 60,
+      beispielLoesung: 'Ich schreibe jeden Tag viele Nachrichten. Am Morgen schreibe ich meiner Schwester, sie wohnt in Madrid. Bei der Arbeit schreibe ich E-Mails an meine Kollegen. Einladungen schreibe ich nicht oft, nur zu meinem Geburtstag. Auf Deutsch schreibe ich noch nicht viel, aber manchmal schreibe ich eine kurze Mitteilung an meine Nachbarin. Das ist für mich schwer. Ich mache oft Fehler: Ich schreibe die Nomen klein und ich vergesse den Gruß am Ende. Jetzt kontrolliere ich meinen Text immer zweimal.',
     },
   ],
 }

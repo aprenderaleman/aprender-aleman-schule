@@ -65,6 +65,19 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Hör die Nachricht auf dem Anrufbeantworter. Was ist richtig? ~~(Escucha el mensaje en el contestador. ¿Qué es correcto?)~~',
+      audio: {
+        transcript: 'Hallo Jonas, hier ist Carla. Morgen machen wir den Ausflug nach Potsdam. Kommst du mit? Der Zug fährt nicht um neun Uhr ab, sondern schon um halb neun. Ich stehe um sieben Uhr auf. Heute Nachmittag kaufe ich noch Brot, Käse und Obst ein. Bring bitte nur Wasser mit. Am Abend kommen wir um acht Uhr zurück. Ich bin jetzt noch im Büro. Ruf mich bitte nach sechs Uhr an. Tschüss!',
+      },
+      items: [
+        { typ: 'mc', frage: 'Wann fährt der Zug ab?', optionen: ['um neun Uhr', 'um halb neun', 'um sieben Uhr'], loesung: 1 },
+        { typ: 'rf', aussage: 'Jonas soll Brot und Käse mitbringen.', loesung: false },
+        { typ: 'rf', aussage: 'Jonas soll Carla nach sechs Uhr anrufen.', loesung: true },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -77,6 +90,21 @@ export default {
       ],
       minWoerter: 25,
       beispielLoesung: 'Ich stehe jeden Tag um halb sieben auf. Nach der Arbeit kaufe ich im Supermarkt ein. Am Abend rufe ich oft meine Schwester an und wir sehen zusammen fern. Um elf Uhr bin ich müde.',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Sprich eine Nachricht für einen Freund. Sprich 45 Sekunden. ~~(Graba un mensaje para un amigo. Habla 45 segundos.)~~',
+      aufgabe: 'Du gehst am Samstag ins Kino. Lade deinen Freund Tom ein. Benutze trennbare Verben.',
+      punkte: [
+        'Wann fängt der Film an?',
+        'Frag Tom: Kommst du mit?',
+        'Wann kommt ihr zurück?',
+        'Wann rufst du noch einmal an?',
+      ],
+      redemittel: ['Hallo Tom, hier ist …', 'Der Film fängt um … an.', 'Kommst du mit?', 'Ich rufe dich … noch einmal an.'],
+      maxSekunden: 45,
+      beispielLoesung: 'Hallo Tom, hier ist Pablo. Am Samstag gehe ich ins Kino. Kommst du mit? Der Film fängt um acht Uhr an. Ich kaufe heute schon die Karten. Danach essen wir noch eine Pizza. Wir kommen um elf Uhr zurück. Ich rufe dich morgen Abend noch einmal an. Tschüss!',
     },
   ],
 }

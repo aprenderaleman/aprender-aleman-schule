@@ -97,6 +97,29 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Hör das Gespräch am Telefon. Löse die 3 Aufgaben. ~~(Escucha la conversación por teléfono. Resuelve las 3 tareas.)~~',
+      audio: {
+        transcript: 'Lena: Hallo Paul, hier ist Lena. Ich möchte dich einladen. Meine Schwester hat Geburtstag und wir feiern am Freitag.\nPaul: Vielen Dank für die Einladung, Lena! Am Freitag? Schade, da muss ich arbeiten.\nLena: Nein, nicht diesen Freitag, sondern nächste Woche. Die Party beginnt um acht Uhr.\nPaul: Dann komme ich gern! Was soll ich mitbringen?\nLena: Getränke haben wir schon. Kannst du einen Salat machen?\nPaul: Na klar. Ich freue mich!',
+      },
+      items: [
+        {
+          typ: 'mc',
+          frage: 'Wer hat Geburtstag?',
+          optionen: ['Lena', 'die Schwester von Lena', 'Paul'],
+          loesung: 1,
+        },
+        { typ: 'rf', aussage: 'Paul kann nicht zur Party kommen.', loesung: false },
+        {
+          typ: 'mc',
+          frage: 'Was bringt Paul mit?',
+          optionen: ['einen Salat', 'Getränke', 'einen Kuchen'],
+          loesung: 0,
+        },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'formular',
       titel: 'Schreiben',
@@ -109,6 +132,16 @@ export default {
         { id: 'person', label: 'Wer kommt auch?', erwartet: ['Paula', 'ihre Freundin Paula', 'die Freundin Paula', 'meine Freundin Paula'] },
         { id: 'uhrzeit', label: 'Sie sind da um', erwartet: ['19.30 Uhr', '19.30', '19:30', '19:30 Uhr', 'halb acht'] },
       ],
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Erzähl von deinem Geburtstag. Sprich 50 Sekunden. ~~(Habla de tu cumpleaños. Habla 50 segundos.)~~',
+      aufgabe: 'Thema: mein Geburtstag. Erzähl: Wie feierst du?',
+      punkte: ['Wann hast du Geburtstag?', 'Wen lädst du ein? Wo feiert ihr?', 'Was bringen deine Freunde mit?'],
+      redemittel: ['Ich habe im … Geburtstag.', 'Ich lade … ein.', 'Wir feiern bei … / in …', '… bringt … mit.'],
+      maxSekunden: 50,
+      beispielLoesung: 'Ich habe im Mai Geburtstag. Ich feiere immer am Samstag, denn dann haben alle Zeit. Ich lade meine Familie und fünf oder sechs Freunde ein. Wir feiern bei mir zu Hause, im Garten. Ich mache Pizza und einen großen Salat. Meine Schwester bringt einen Kuchen mit und meine Freunde bringen die Getränke mit. Wir essen, hören Musik und tanzen. Ich freue mich schon!',
     },
   ],
 }

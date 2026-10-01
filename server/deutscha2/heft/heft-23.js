@@ -91,6 +91,29 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Lies zuerst die 3 Aufgaben. Hör dann das Gespräch bis zum Ende. ~~(Lee primero las 3 tareas. Después escucha la conversación hasta el final.)~~',
+      audio: {
+        transcript: 'Jonas: Hallo Anna! Kochen wir am Freitag zusammen?\nAnna: Hallo Jonas! Am Freitag kann ich leider nicht, da arbeite ich lange. Lieber am Samstag.\nJonas: Gut, dann am Samstag. Passt es dir um sechs?\nAnna: Besser um sieben. Ich gehe vorher noch einkaufen.\nJonas: Okay. Was brauchen wir? Reis und Gemüse?\nAnna: Reis habe ich noch zu Hause. Ich kaufe Gemüse und Fisch.\nJonas: Super, und ich bringe einen Kuchen mit.\nAnna: Gute Idee! Bis Samstag um sieben bei mir.',
+      },
+      items: [
+        {
+          typ: 'mc',
+          frage: 'Wann kochen Anna und Jonas zusammen?',
+          optionen: ['am Freitag', 'am Samstag', 'am Sonntag'],
+          loesung: 1,
+        },
+        { typ: 'rf', aussage: 'Anna und Jonas treffen sich um sechs Uhr.', loesung: false },
+        {
+          typ: 'mc',
+          frage: 'Was kauft Anna?',
+          optionen: ['Reis und Gemüse', 'Reis und Fisch', 'Gemüse und Fisch'],
+          loesung: 2,
+        },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -103,6 +126,20 @@ export default {
       ],
       minWoerter: 25,
       beispielLoesung: 'Hallo Luca, am Samstag kann ich leider nicht, denn ich muss arbeiten. Aber am Sonntag habe ich Zeit. Treffen wir uns um halb drei am Schwimmbad? Bringst du Getränke mit?\nViele Grüße\nMarta',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Erzähl von deinem Plan. Du hast 60 Sekunden. ~~(Cuenta tu plan. Tienes 60 segundos.)~~',
+      aufgabe: 'Du machst am Samstag eine kleine Party mit Freunden. Erzähl von deinem Plan.',
+      punkte: [
+        'Wann und wo trefft ihr euch?',
+        'Was kaufst du ein?',
+        'Was bringen deine Freunde mit?',
+      ],
+      redemittel: ['Am Samstag mache ich …', 'Wir treffen uns um … bei …', 'Ich kaufe … ein.', '… bringt … mit.'],
+      maxSekunden: 60,
+      beispielLoesung: 'Am Samstag mache ich eine kleine Party. Wir treffen uns um sieben Uhr bei mir zu Hause. Im Park feiern wir lieber nicht, denn am Samstag regnet es leider. Am Freitag gehe ich einkaufen. Ich kaufe Brot, Käse und Getränke ein. Meine Freundin Laura bringt einen Salat mit, und Tom bringt Musik mit. Heute Abend rufe ich noch meinen Bruder an. Vielleicht kommt er auch. Ich freue mich schon!',
     },
   ],
 }

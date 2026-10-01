@@ -65,6 +65,19 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Hör den Text aus dem Radio. Was ist richtig? ~~(Escucha el texto de la radio. ¿Qué es correcto?)~~',
+      audio: {
+        transcript: 'Und jetzt ein Tipp für alle Leute in Dresden. Ab Montag ist die neue Stadtbibliothek geöffnet. Dort können Sie Bücher lesen, Musik hören und am Computer arbeiten. Sie möchten Bücher mit nach Hause nehmen? Dann brauchen Sie einen Ausweis. Er kostet nicht zwanzig, sondern zwölf Euro im Jahr. Kinder müssen nichts bezahlen. Im Lesesaal darf man nicht telefonieren und nicht essen. Aber im Café können Sie Kaffee trinken und Kuchen essen. Die Bibliothek ist von Montag bis Samstag geöffnet, immer von zehn bis neunzehn Uhr.',
+      },
+      items: [
+        { typ: 'mc', frage: 'Was kostet der Ausweis im Jahr?', optionen: ['zwölf Euro', 'zwanzig Euro', 'zwei Euro'], loesung: 0 },
+        { typ: 'rf', aussage: 'Kinder müssen für den Ausweis auch bezahlen.', loesung: false },
+        { typ: 'rf', aussage: 'Am Sonntag ist die Bibliothek geschlossen.', loesung: true },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'formular',
       titel: 'Schreiben',
@@ -77,6 +90,20 @@ export default {
         { id: 'schwimmen', label: 'Kann er schwimmen?', erwartet: ['nein', 'Nein', 'noch nicht'] },
         { id: 'telefon', label: 'Telefonnummer', erwartet: ['0157 8899001', '01578899001'] },
       ],
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Sprich eine Nachricht für eine Freundin. Sprich 60 Sekunden. ~~(Graba un mensaje para una amiga. Habla 60 segundos.)~~',
+      aufgabe: 'Deine Freundin Lena möchte am Samstag mit dir ins Kino gehen. Du kannst am Samstag nicht. Sprich eine Nachricht für Lena.',
+      punkte: [
+        'Was musst du am Samstag machen?',
+        'Wann kannst du?',
+        'Was möchtest du mit Lena machen?',
+      ],
+      redemittel: ['Am Samstag kann ich leider nicht.', 'Ich muss …', 'Wollen wir …?', 'Ich möchte lieber …'],
+      maxSekunden: 60,
+      beispielLoesung: 'Hallo Lena! Danke für deine Nachricht. Am Samstag kann ich leider nicht ins Kino gehen. Ich muss bis acht Uhr arbeiten und dann soll ich noch meine Mutter anrufen. Aber am Sonntag habe ich Zeit. Wollen wir am Sonntag zusammen ins Kino gehen? Ich kann um fünf Uhr kommen. Oder möchtest du lieber einen Kaffee trinken? Wir können auch zuerst im Park spazieren gehen. Schreib mir bitte! Tschüs!',
     },
   ],
 }

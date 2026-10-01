@@ -63,6 +63,19 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Hör die Durchsage. Was ist richtig? ~~(Escucha el aviso. ¿Qué es correcto?)~~',
+      audio: {
+        transcript: 'Guten Morgen und herzlich willkommen zur Prüfung am Computer. Bitte zeigen Sie zuerst Ihren Ausweis. Wir beginnen nicht um neun Uhr, sondern um Viertel nach neun. Ihre Handys bleiben bitte hier vorne auf dem Tisch. Nehmen Sie jetzt bitte die Kopfhörer und testen Sie den Ton. Sie hören nichts? Dann sagen Sie das bitte sofort. Die Zeit sehen Sie oben auf dem Bildschirm. Ihre Texte tippen Sie mit der Tastatur. Nach dem Teil Hören machen wir zehn Minuten Pause. Viel Erfolg!',
+      },
+      items: [
+        { typ: 'mc', frage: 'Wann beginnt die Prüfung?', optionen: ['um neun Uhr', 'um halb zehn', 'um Viertel nach neun'], loesung: 2 },
+        { typ: 'rf', aussage: 'Die Handys bleiben in der Tasche.', loesung: false },
+        { typ: 'rf', aussage: 'Die Pause ist nach dem Teil Hören.', loesung: true },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'formular',
       titel: 'Schreiben',
@@ -75,6 +88,20 @@ export default {
         { id: 'kurstag', label: 'Kurstag', erwartet: ['Samstag', 'am Samstag'] },
         { id: 'email', label: 'E-Mail-Adresse', erwartet: ['renata.silva@post.de'] },
       ],
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Erzähl von dir. Sprich 45 Sekunden. ~~(Habla de ti. Habla 45 segundos.)~~',
+      aufgabe: 'Bald machst du die Prüfung am Computer. Erzähl von dir und dem Computer.',
+      punkte: [
+        'Was machst du am Computer oder am Handy?',
+        'Tippst du schnell oder langsam?',
+        'Die Prüfung: am Computer oder auf Papier?',
+      ],
+      redemittel: ['Am Computer … ich oft …', 'Ich tippe …', 'Ich möchte die Prüfung … machen.', 'Das ist leicht / schwer für mich.'],
+      maxSekunden: 45,
+      beispielLoesung: 'Am Computer schreibe ich E-Mails und lerne Deutsch. Am Handy höre ich Musik. Ich tippe ziemlich langsam, vor allem auf Deutsch. Die Tasten für ä, ö und ü finde ich nicht schnell. Ich möchte die Prüfung am Computer machen. Das ist modern und ich muss nicht mit dem Stift schreiben. Aber ich übe jetzt jede Woche mit der Tastatur.',
     },
   ],
 }

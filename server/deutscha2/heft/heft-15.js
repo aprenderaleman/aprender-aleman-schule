@@ -84,6 +84,29 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Hör das Gespräch. Was ist richtig? ~~(Escucha la conversación. ¿Qué es correcto?)~~',
+      audio: {
+        transcript: 'Frau: Hallo Felix! Kommst du am Samstag mit an den See?\nMann: Hallo Nora! Am Samstag kann ich leider nicht, weil ich arbeiten muss.\nFrau: Schade. Und am Sonntag?\nMann: Am Sonntag habe ich Zeit. Aber ich glaube, dass es regnet.\nFrau: Kein Problem. Wenn es regnet, gehen wir ins Schwimmbad. Wenn die Sonne scheint, fahren wir an den See.\nMann: Gute Idee! Fahren wir um zehn?\nFrau: Nein, lieber um elf, weil ich am Sonntag lange schlafen möchte.',
+      },
+      items: [
+        {
+          typ: 'mc',
+          frage: 'Warum kommt Felix am Samstag nicht mit?',
+          optionen: ['Er ist krank.', 'Er möchte lange schlafen.', 'Er muss arbeiten.'],
+          loesung: 2,
+        },
+        { typ: 'rf', aussage: 'Wenn es regnet, fahren Nora und Felix an den See.', loesung: false },
+        {
+          typ: 'mc',
+          frage: 'Um wie viel Uhr wollen sie am Sonntag fahren?',
+          optionen: ['um zehn Uhr', 'um elf Uhr', 'um zwölf Uhr'],
+          loesung: 1,
+        },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -96,6 +119,20 @@ export default {
       ],
       minWoerter: 25,
       beispielLoesung: 'Lieber Leon, danke für die Einladung! Leider kann ich am Freitag nicht kommen, weil ich lange arbeiten muss. Ich finde, dass dein Essen immer super ist. Wenn du am Samstag Zeit hast, koche ich für dich. Ich hoffe, dass das passt. Viele Grüße, Elena',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Erzähl von dir. Sprich 60 Sekunden. ~~(Habla de ti. Habla 60 segundos.)~~',
+      aufgabe: 'Thema: Deutsch lernen. Erzähl von dir. Sprich zu allen drei Punkten. Mach Sätze mit weil und dass und wenn.',
+      punkte: [
+        'Warum lernst du Deutsch? Antworte mit weil.',
+        'Wie findest du die deutsche Sprache? Sag: Ich finde, dass …',
+        'Wann lernst du? Mach einen Satz mit wenn.',
+      ],
+      redemittel: ['Ich lerne Deutsch, weil …', 'Ich finde, dass …', 'Wenn ich Zeit habe, …', 'Ich hoffe, dass …'],
+      maxSekunden: 60,
+      beispielLoesung: 'Ich lerne Deutsch, weil ich in Deutschland arbeiten möchte. Mein Bruder wohnt schon in München. Ich finde, dass Deutsch nicht so leicht ist, aber die Sprache gefällt mir. Ich glaube, dass die Grammatik am schwersten ist. Wenn ich am Abend Zeit habe, lerne ich eine halbe Stunde. Und wenn ich im Bus sitze, höre ich deutsche Musik. Ich hoffe, dass ich bald gut sprechen kann.',
     },
   ],
 }

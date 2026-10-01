@@ -74,6 +74,19 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Hör das Interview im Radio. Richtig oder falsch? Wähle bei der Frage die richtige Antwort. ~~(Escucha la entrevista en la radio. ¿Verdadero o falso? En la pregunta, elige la respuesta correcta.)~~',
+      audio: {
+        transcript: 'Moderator: Guten Morgen! Heute ist Frau Wagner bei uns im Radio. Frau Wagner, was sind Sie von Beruf?\nFrau: Ich bin Kellnerin und arbeite in einem Hotel in Leipzig.\nModerator: Haben Sie immer als Kellnerin gearbeitet?\nFrau: Nein, früher habe ich drei Jahre als Verkäuferin gearbeitet. Dann habe ich eine Ausbildung gemacht.\nModerator: Und wann arbeiten Sie?\nFrau: Von sechs bis vierzehn Uhr. Ich habe also früh Feierabend, das gefällt mir.\nModerator: Und wie sind Ihre Kollegen?\nFrau: Sie sind sehr nett. Nur der Chef ist ein bisschen streng.',
+      },
+      items: [
+        { typ: 'mc', frage: 'Was ist Frau Wagner heute von Beruf?', optionen: ['Kellnerin', 'Verkäuferin', 'Köchin'], loesung: 0 },
+        { typ: 'rf', aussage: 'Frau Wagner hat um 14 Uhr Feierabend.', loesung: true },
+        { typ: 'rf', aussage: 'Der Chef von Frau Wagner ist sehr nett.', loesung: false },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'formular',
       titel: 'Schreiben',
@@ -86,6 +99,27 @@ export default {
         { id: 'stadt', label: 'Stadt', erwartet: ['Stuttgart'] },
         { id: 'arbeitszeit', label: 'Arbeitszeit', erwartet: ['von 9 bis 17 Uhr', '9 bis 17 Uhr', '9-17 Uhr', 'von 9 bis 17'] },
       ],
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Erzähl von deiner Arbeit. Sprich 60 Sekunden. ~~(Habla de tu trabajo. Habla 60 segundos.)~~',
+      aufgabe: 'Erzähl von deiner Arbeit oder von deiner Ausbildung.',
+      punkte: [
+        'Was bist du von Beruf?',
+        'Wo arbeitest du?',
+        'deine Arbeitszeiten',
+        'Was hast du früher gemacht?',
+      ],
+      redemittel: [
+        'Ich bin … von Beruf.',
+        'Ich arbeite als … bei / in …',
+        'Ich arbeite von … bis … Uhr.',
+        'Früher habe ich als … gearbeitet.',
+      ],
+      maxSekunden: 60,
+      beispielLoesung:
+        'Ich bin Verkäufer von Beruf. Ich arbeite bei einer kleinen Firma in Bilbao. Ich arbeite von Montag bis Freitag, von neun bis siebzehn Uhr. Am Wochenende habe ich frei. Früher habe ich zwei Jahre als Kellner in einem Café gearbeitet. Meine Arbeit gefällt mir, weil meine Kollegen sehr nett sind.',
     },
   ],
 }

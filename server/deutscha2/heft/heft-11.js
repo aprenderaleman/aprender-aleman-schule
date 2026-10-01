@@ -69,6 +69,19 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Hör das Gespräch über ein Foto. Was ist richtig? ~~(Escucha la conversación sobre una foto. ¿Qué es correcto?)~~',
+      audio: {
+        transcript: 'Frau: Schau mal, Tim, das ist meine Familie.\nMann: Das Foto ist schön, Clara! Ist das dein Bruder?\nFrau: Nein, das ist nicht mein Bruder, sondern mein Cousin Pablo. Mein Bruder steht hier, neben unserer Oma.\nMann: Und die Frau mit dem Hund?\nFrau: Das ist meine Tante Rosa mit ihrem Hund. Ihr Mann ist nicht auf dem Foto.\nMann: Wohnt deine Familie in Madrid?\nFrau: Meine Eltern ja. Aber mein Bruder wohnt mit seiner Frau in Wien.',
+      },
+      items: [
+        { typ: 'mc', frage: 'Wer ist Pablo?', optionen: ['der Bruder von Clara', 'der Cousin von Clara', 'der Onkel von Clara'], loesung: 1 },
+        { typ: 'rf', aussage: 'Tante Rosa hat einen Hund.', loesung: true },
+        { typ: 'rf', aussage: 'Der Bruder von Clara wohnt in Madrid.', loesung: false },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -81,6 +94,20 @@ export default {
       ],
       minWoerter: 25,
       beispielLoesung: 'Meine Familie ist klein: meine Mutter, mein Vater und meine Schwester. Meine Schwester wohnt mit ihrem Mann in Valencia. Am Sonntag besuche ich oft meinen Opa. Ich telefoniere jeden Tag mit meiner Mutter.',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Sprich 60 Sekunden über einen Freund oder eine Freundin. ~~(Habla 60 segundos sobre un amigo o una amiga.)~~',
+      aufgabe: 'Stell einen Freund oder eine Freundin vor. Benutze sein oder ihr.',
+      punkte: [
+        'Wie heißt dein Freund oder deine Freundin?',
+        'Wo wohnt er oder sie? Mit wem?',
+        'Was sind seine oder ihre Hobbys?',
+      ],
+      redemittel: ['Mein Freund / Meine Freundin heißt …', 'Er wohnt mit seiner … / Sie wohnt mit ihrem …', 'Sein Hobby ist … / Ihr Hobby ist …', 'Ich besuche meinen Freund / meine Freundin …'],
+      maxSekunden: 60,
+      beispielLoesung: 'Meine Freundin heißt Lucía. Sie kommt aus Granada, aber sie wohnt jetzt mit ihrem Mann in Hamburg. Ihre Wohnung ist klein, aber ihr Garten ist sehr schön. Ihre Hobbys sind Kochen und Musik. Am Wochenende spielt sie Gitarre mit ihren Freunden. Im Sommer besuche ich meine Freundin. Dann fahren wir mit ihrem Auto ans Meer.',
     },
   ],
 }

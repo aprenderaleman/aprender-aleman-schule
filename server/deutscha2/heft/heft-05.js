@@ -65,6 +65,19 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Hör die Nachricht von Mira. Was ist richtig? ~~(Escucha el mensaje de Mira. ¿Qué es correcto?)~~',
+      audio: {
+        transcript: 'Hallo Jonas, hier ist Mira. Entschuldigung, gestern war deine Party und ich war nicht da. Ich wollte um sieben kommen, aber ich musste lange im Büro bleiben. Wir hatten sehr viel Arbeit. Um neun war ich endlich fertig, aber dann gab es keinen Bus mehr. Ich konnte dich auch nicht anrufen, mein Handy war zu Hause. Wie war die Party? Hattet ihr viel Spaß? Ich habe ein Geschenk für dich. Hast du am Freitag Zeit? Schreib mir bitte!',
+      },
+      items: [
+        { typ: 'rf', aussage: 'Mira wollte um sieben Uhr auf die Party kommen.', loesung: true },
+        { typ: 'mc', frage: 'Warum war Mira nicht auf der Party?', optionen: ['Sie war krank.', 'Sie musste lange arbeiten.', 'Sie wollte nicht kommen.'], loesung: 1 },
+        { typ: 'rf', aussage: 'Mira hatte ihr Handy im Büro.', loesung: false },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -77,6 +90,20 @@ export default {
       ],
       minWoerter: 25,
       beispielLoesung: 'Gestern war ich in Valencia. Der Tag war sehr schön. Meine Tante und ich hatten viel Zeit und haben zusammen Paella gekocht. Am Abend konnte ich leider nicht lange bleiben. Ich musste früh nach Hause fahren.',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Erzähl mit war, hatte und konnte. Sprich 60 Sekunden. ~~(Cuenta con war, hatte y konnte. Habla 60 segundos.)~~',
+      aufgabe: 'Wie war dein Leben als Kind? Erzähl.',
+      punkte: [
+        'Wo warst du als Kind zu Hause?',
+        'Was hattest du? Ein Fahrrad, einen Hund, viele Freunde?',
+        'Was konntest du gut? Was durftest du nicht?',
+      ],
+      redemittel: ['Als Kind war ich …', 'Ich hatte …', 'Ich konnte gut …', 'Ich durfte nicht …'],
+      maxSekunden: 60,
+      beispielLoesung: 'Als Kind war ich in einem Dorf in Peru zu Hause. Unser Haus war klein, aber der Garten war groß. Ich hatte zwei Brüder und einen Hund. Wir hatten nicht viel Geld, aber wir hatten viel Spaß. Ich konnte sehr gut Fußball spielen und schnell laufen. Am Abend durfte ich nicht lange fernsehen. Um acht musste ich ins Bett gehen. Das wollte ich natürlich nie!',
     },
   ],
 }

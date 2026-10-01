@@ -69,6 +69,19 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Hör das Gespräch in der neuen Wohnung. Was ist richtig? ~~(Escucha la conversación en el piso nuevo. ¿Qué es correcto?)~~',
+      audio: {
+        transcript: 'Mann: Hallo Lena! Wohin stelle ich den Karton mit den Büchern?\nFrau: Ins Wohnzimmer, bitte. Stell den Karton neben das Sofa.\nMann: Und die Lampe? Kommt sie auf den Tisch?\nFrau: Nein, nicht auf den Tisch, sondern auf das Regal im Schlafzimmer.\nMann: Gut. Und wo ist mein Handy? Ich finde es nicht.\nFrau: Es liegt im Flur auf dem Stuhl, unter der Jacke.\nMann: Danke! Jetzt hänge ich noch das Bild über das Bett.',
+      },
+      items: [
+        { typ: 'mc', frage: 'Wohin kommt der Karton mit den Büchern?', optionen: ['auf den Tisch', 'in den Flur', 'neben das Sofa'], loesung: 2 },
+        { typ: 'rf', aussage: 'Die Lampe kommt auf den Tisch.', loesung: false },
+        { typ: 'rf', aussage: 'Das Handy liegt im Flur auf dem Stuhl.', loesung: true },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'formular',
       titel: 'Schreiben',
@@ -81,6 +94,20 @@ export default {
         { id: 'farbe', label: 'Farbe', erwartet: ['blau'] },
         { id: 'telefon', label: 'Telefonnummer', erwartet: ['0163 778899', '0163778899'] },
       ],
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Sprich 60 Sekunden über dein Zimmer. ~~(Habla 60 segundos sobre tu habitación.)~~',
+      aufgabe: 'Beschreib dein Zimmer. Wo sind deine Sachen?',
+      punkte: [
+        'Was steht im Zimmer? Wo?',
+        'Was hängt an der Wand?',
+        'Wohin legst du am Abend dein Handy?',
+      ],
+      redemittel: ['… steht neben / vor / zwischen …', '… liegt auf / unter …', 'An der Wand hängt …', 'Ich lege mein Handy auf / in …'],
+      maxSekunden: 60,
+      beispielLoesung: 'Mein Zimmer ist nicht groß. Das Bett steht neben dem Fenster. Vor dem Bett liegt ein Teppich. Der Schreibtisch steht zwischen dem Schrank und der Tür. Auf dem Schreibtisch steht mein Computer. An der Wand hängt ein Bild von Madrid. Am Abend lege ich mein Handy auf den Schreibtisch, nicht ins Bett.',
     },
   ],
 }

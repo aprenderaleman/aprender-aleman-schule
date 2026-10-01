@@ -4202,14 +4202,19 @@ const isExamStaff = role => ['teacher', 'admin', 'superadmin'].includes(role)
 const TTS_API_KEY = process.env.OPENAI_API_KEY || ''
 const AUDIO_CACHE_DIR = process.env.AUDIO_CACHE_DIR || path.join(__dirname, 'audio-cache')
 const SAFE_ID = /^[\w-]+$/
-const clipFile = (examId, clipId) => path.join(AUDIO_CACHE_DIR, examId, `${clipId}.mp3`)
+// El nombre del mp3 lleva la huella del texto y de las voces: si se corrige
+// un transcript (o cambia el reparto de voces) se genera un audio nuevo en
+// vez de servir el antiguo.
+const clipHash = transcript => crypto.createHash('sha1')
+  .update(JSON.stringify(speechSegments(transcript).map(sg => [sg.voice, sg.text]))).digest('hex').slice(0, 10)
+const clipFile = (examId, clipId, transcript) => path.join(AUDIO_CACHE_DIR, examId, `${clipId}-${clipHash(transcript)}.mp3`)
 const ttsInFlight = new Map()
 
 // Un examen del pool real solo se ofrece si su audio puede servirse.
 function examUsable(exam) {
   if (!needsGeneratedAudio(exam)) return true
   if (TTS_API_KEY) return true
-  return Object.entries(audioClips(exam)).every(([clipId, c]) => c.staticUrl || fs.existsSync(clipFile(exam.id, clipId)))
+  return Object.entries(audioClips(exam)).every(([clipId, c]) => c.staticUrl || fs.existsSync(clipFile(exam.id, clipId, c.transcript)))
 }
 
 function audioUrlFactory() {
@@ -4233,9 +4238,9 @@ async function ttsSpeak(text, voice) {
 // Un clip = sus intervenciones sintetizadas (una voz por hablante, sin leer
 // las etiquetas «Mann:» / «Frau:») y concatenadas en un solo mp3.
 async function synthesizeClip(examId, clipId, transcript) {
-  const file = clipFile(examId, clipId)
+  const file = clipFile(examId, clipId, transcript)
   if (fs.existsSync(file)) return file
-  const key = `${examId}/${clipId}`
+  const key = file
   if (!ttsInFlight.has(key)) {
     ttsInFlight.set(key, (async () => {
       const buffers = []
@@ -4273,7 +4278,8 @@ function heftForStudent(kursDir, id, heft) {
   if (!heft.teile?.some(t => t.typ === 'hoeren')) return heft
   const examId = `heft-${kursDir}`
   const clipId = `l${String(id).padStart(2, '0')}`
-  const serverAudio = !!TTS_API_KEY || fs.existsSync(clipFile(examId, clipId))
+  const transcript = heft.teile.find(t => t.typ === 'hoeren')?.audio?.transcript
+  const serverAudio = !!TTS_API_KEY || fs.existsSync(clipFile(examId, clipId, transcript))
   return {
     ...heft,
     teile: heft.teile.map(t => t.typ !== 'hoeren' ? t : {
@@ -4296,7 +4302,7 @@ app.get('/api/pruefungen/audio/:examId/:clipId', async (req, res) => {
     if (!payload || payload.scope !== 'aud' || payload.e !== examId) return res.status(403).json({ error: 'No autorizado.' })
     const transcript = await clipTranscript(examId, clipId)
     if (!transcript) return res.status(404).json({ error: 'Audio no encontrado.' })
-    if (!fs.existsSync(clipFile(examId, clipId)) && !TTS_API_KEY) return res.status(503).json({ error: 'Audio no disponible.' })
+    if (!fs.existsSync(clipFile(examId, clipId, transcript)) && !TTS_API_KEY) return res.status(503).json({ error: 'Audio no disponible.' })
     const file = await synthesizeClip(examId, clipId, transcript)
     res.setHeader('Content-Type', 'audio/mpeg')
     res.setHeader('Cache-Control', 'private, max-age=3600')

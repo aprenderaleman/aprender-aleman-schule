@@ -68,6 +68,29 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Ein Mann ist neu im Kurs. Hör zu. Löse die 3 Aufgaben. ~~(Un hombre es nuevo en el curso. Escucha. Resuelve las 3 tareas.)~~',
+      audio: {
+        transcript: 'Hallo zusammen! Ich bin neu im Kurs und möchte mich vorstellen. Ich heiße Karim und bin vierunddreißig Jahre alt. Ich komme aus Marokko und wohne seit drei Jahren in Bremen. Ich arbeite in einem Restaurant, aber nicht als Kellner, sondern als Koch. Ich bin verheiratet und habe zwei Kinder. In meiner Freizeit spiele ich gern Gitarre. Am Sonntag habe ich nicht gearbeitet. Ich bin mit meiner Familie an den See gefahren. Das hat Spaß gemacht!',
+      },
+      items: [
+        { typ: 'rf', aussage: 'Karim wohnt seit drei Jahren in Bremen.', loesung: true },
+        {
+          typ: 'mc',
+          frage: 'Was ist Karim von Beruf?',
+          optionen: ['Kellner', 'Verkäufer', 'Koch'],
+          loesung: 2,
+        },
+        {
+          typ: 'mc',
+          frage: 'Was hat Karim am Sonntag gemacht?',
+          optionen: ['Er hat im Restaurant gearbeitet.', 'Er ist an den See gefahren.', 'Er hat Gitarre gespielt.'],
+          loesung: 1,
+        },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -81,6 +104,20 @@ export default {
       minWoerter: 25,
       beispielLoesung:
         'Ich heiße Bruno und bin 31 Jahre alt. Ich komme aus Argentinien und wohne jetzt in Frankfurt. Ich arbeite als Kellner in einem Café. Ich bin nicht verheiratet und habe einen Bruder. Am Wochenende habe ich Fußball gespielt. Das hat Spaß gemacht!',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Erzähl von deinem Tag und von deinen Hobbys. Sprich 60 Sekunden. ~~(Habla de tu día y de tus aficiones. Habla 60 segundos.)~~',
+      aufgabe: 'Deine Themenkarte hat zwei Themen: „Tagesablauf“ und „Hobby“. Erzähl von dir.',
+      punkte: [
+        'dein Tagesablauf: aufstehen, arbeiten oder lernen',
+        'deine Hobbys',
+        'gestern Abend: Was hast du gemacht?',
+      ],
+      redemittel: ['Ich stehe um … Uhr auf.', 'Von … bis … arbeite ich als …', 'In meiner Freizeit … ich gern …', 'Gestern Abend habe ich …'],
+      maxSekunden: 60,
+      beispielLoesung: 'Ich erzähle von meinem Tag. Ich stehe um halb sieben auf und frühstücke mit meinem Mann. Von neun bis fünf arbeite ich als Verkäuferin in einem Geschäft. Am Abend koche ich oder ich lese ein Buch. In meiner Freizeit tanze ich gern und ich höre gern Musik. Am Samstag spiele ich oft Tennis mit einer Freundin. Gestern Abend habe ich einen Film gesehen. Der Film war sehr lustig.',
     },
   ],
 }

@@ -68,6 +68,19 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Hör die Durchsage am Bahnhof. Richtig oder falsch? Wähle bei der Frage die richtige Antwort. ~~(Escucha el aviso en la estación. ¿Verdadero o falso? En la pregunta, elige la respuesta correcta.)~~',
+      audio: {
+        transcript: 'Achtung, liebe Fahrgäste! Der Zug nach München fährt heute nicht um vierzehn Uhr zwanzig, sondern erst um vierzehn Uhr vierzig. Er hat zwanzig Minuten Verspätung. Der Zug fährt heute auch nicht von Gleis fünf, sondern von Gleis acht. Möchten Sie nach Salzburg fahren? Dann müssen Sie in München umsteigen. Fahrkarten können Sie am Schalter neben dem Eingang kaufen. Wir wünschen Ihnen eine gute Reise!',
+      },
+      items: [
+        { typ: 'mc', frage: 'Wann fährt der Zug nach München heute?', optionen: ['um 14:40 Uhr', 'um 14:20 Uhr', 'um 14:04 Uhr'], loesung: 0 },
+        { typ: 'rf', aussage: 'Der Zug fährt heute von Gleis 5 ab.', loesung: false },
+        { typ: 'rf', aussage: 'Nach Salzburg muss man in München umsteigen.', loesung: true },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'formular',
       titel: 'Schreiben',
@@ -80,6 +93,27 @@ export default {
         { id: 'ankunft', label: 'Ankunft im Hotel (Uhrzeit)', erwartet: ['17 Uhr', 'um 17 Uhr', '17:00'] },
         { id: 'telefon', label: 'Telefonnummer', erwartet: ['0157 8833421', '01578833421'] },
       ],
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Erzähl von einer Reise. Sprich 60 Sekunden. ~~(Cuenta un viaje. Habla 60 segundos.)~~',
+      aufgabe: 'Erzähl von deiner letzten Reise oder von deinem letzten Urlaub.',
+      punkte: [
+        'Wohin bist du gefahren? Wann?',
+        'Wie bist du gefahren? Mit dem Zug, mit dem Flugzeug …?',
+        'Wo hast du geschlafen?',
+        'Was hast du dort gemacht?',
+      ],
+      redemittel: [
+        'Im Sommer / Im Mai bin ich nach … gefahren.',
+        'Ich bin mit dem … gefahren / geflogen.',
+        'Ich habe in einem Hotel / bei Freunden geschlafen.',
+        'Dort habe ich …',
+      ],
+      maxSekunden: 60,
+      beispielLoesung:
+        'Im August habe ich eine Reise nach Wien gemacht. Ich bin mit dem Zug gefahren, das Flugzeug war mir zu teuer. Ich bin in München umgestiegen. In Wien habe ich drei Nächte in einem kleinen Hotel geschlafen. Das Zimmer war ruhig und nicht teuer. Ich habe die Stadt gesehen und viel Kaffee getrunken. Die Reise hat mir sehr gut gefallen.',
     },
   ],
 }

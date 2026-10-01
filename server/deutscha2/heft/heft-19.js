@@ -98,6 +98,24 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Hör die Nachricht am Telefon. Löse die 3 Aufgaben. ~~(Escucha el mensaje de voz. Resuelve las 3 tareas.)~~',
+      audio: {
+        transcript: 'Hallo Miriam, hier ist Felix. Ich habe eine wichtige Information für dich. Unser Grillfest findet nicht am Freitag statt, sondern am Samstag um sechs Uhr abends. Am Freitag regnet es leider. Wir feiern im Garten von meinem Bruder. Kannst du einen Salat mitbringen? Getränke habe ich schon gekauft. Ich hole dich um halb sechs mit dem Auto ab. Sag mir bitte bis morgen Bescheid. Viele Grüße und bis bald!',
+      },
+      items: [
+        { typ: 'rf', aussage: 'Das Grillfest findet am Freitag statt.', loesung: false },
+        {
+          typ: 'mc',
+          frage: 'Was soll Miriam mitbringen?',
+          optionen: ['Getränke', 'einen Salat', 'einen Kuchen'],
+          loesung: 1,
+        },
+        { typ: 'rf', aussage: 'Miriam soll Felix bis morgen antworten.', loesung: true },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -110,6 +128,20 @@ export default {
       ],
       minWoerter: 25,
       beispielLoesung: 'Hallo Tarek, am Freitag mache ich ein Fest und ich lade dich ein! Es findet um 19 Uhr bei mir in der Gartenstraße 4 statt. Bringst du bitte Musik mit? Sag mir bitte bis Mittwoch Bescheid.\nViele Grüße\nElena',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Sprich eine Nachricht für deine Freundin. Du hast 45 Sekunden. ~~(Graba un mensaje de voz para tu amiga. Tienes 45 segundos.)~~',
+      aufgabe: 'Deine Freundin Lea hat dich für Samstag zum Essen eingeladen. Du kannst leider nicht kommen. Sprich eine Nachricht für Lea.',
+      punkte: [
+        'Sag danke für die Einladung.',
+        'Sag ab. Warum kannst du nicht kommen?',
+        'Wann hast du Zeit? Sag einen neuen Tag.',
+      ],
+      redemittel: ['Danke für …', 'Leider kann ich am … nicht kommen.', 'Ich muss …', 'Hast du am … Zeit?'],
+      maxSekunden: 45,
+      beispielLoesung: 'Hallo Lea, hier ist Marco. Danke für deine Einladung! Leider kann ich am Samstag nicht kommen. Meine Eltern besuchen mich am Wochenende, und ich hole sie am Samstagabend am Bahnhof ab. Das tut mir wirklich leid. Aber nächste Woche habe ich Zeit. Hast du am Mittwoch Zeit? Dann lade ich dich zum Essen ein. Sag mir bitte Bescheid. Viele Grüße und bis bald!',
     },
   ],
 }

@@ -63,6 +63,24 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Hör das Gespräch am Telefon. Löse die drei Aufgaben. ~~(Escucha la conversación por teléfono. Resuelve las tres tareas.)~~',
+      audio: {
+        transcript: 'Frau: Praxis Doktor Winter, guten Tag.\nMann: Guten Tag, hier ist Jonas Keller. Ich möchte einen Termin machen. Ich habe seit drei Tagen Halsschmerzen und Fieber.\nFrau: Können Sie morgen um neun Uhr kommen, Herr Keller?\nMann: Nein, am Vormittag muss ich leider arbeiten. Geht es auch am Nachmittag?\nFrau: Ja, morgen um sechzehn Uhr ist noch ein Termin frei.\nMann: Das passt gut. Vielen Dank!\nFrau: Bleiben Sie heute im Bett und trinken Sie viel Tee. Gute Besserung!',
+      },
+      items: [
+        { typ: 'rf', aussage: 'Herr Keller hat Bauchschmerzen.', loesung: false },
+        {
+          typ: 'mc',
+          frage: 'Wann ist der Termin?',
+          optionen: ['morgen um 9 Uhr', 'morgen um 16 Uhr', 'heute um 16 Uhr'],
+          loesung: 1,
+        },
+        { typ: 'rf', aussage: 'Herr Keller muss morgen am Vormittag arbeiten.', loesung: true },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -75,6 +93,20 @@ export default {
       ],
       minWoerter: 25,
       beispielLoesung: 'Liebe Frau Lang, ich kann heute leider nicht zur Arbeit kommen. Ich bin erkältet und habe Fieber. Ich bleibe zwei Tage zu Hause. Am Donnerstag komme ich wieder. Viele Grüße, Teresa',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Sprich eine Nachricht für die Arztpraxis. Sprich 45 Sekunden. ~~(Deja un mensaje de voz para la consulta médica. Habla 45 segundos.)~~',
+      aufgabe: 'Du bist krank. Die Arztpraxis ist heute schon geschlossen. Sprich eine Nachricht auf den Anrufbeantworter.',
+      punkte: [
+        'Sag deinen Namen.',
+        'Was tut weh? Seit wann?',
+        'Du möchtest einen Termin. Wann kannst du kommen?',
+      ],
+      redemittel: ['Guten Tag, hier ist …', 'Mein … tut weh.', 'Ich habe seit … Schmerzen.', 'Ich möchte einen Termin machen.'],
+      maxSekunden: 45,
+      beispielLoesung: 'Guten Tag, hier ist Diego Marín. Ich fühle mich nicht gut. Mein Kopf tut weh und ich habe seit gestern Fieber. Ich bin auch erkältet. Ich möchte bitte einen Termin machen. Morgen am Vormittag kann ich kommen. Bitte rufen Sie mich an. Vielen Dank und auf Wiederhören!',
     },
   ],
 }

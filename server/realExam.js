@@ -118,8 +118,8 @@ export function audioClips(exam) {
 const NOT_A_SPEAKER = /^(Achtung|Hinweis|Wichtig|Bitte|Übrigens|Also|Kurz|Beispiel|Frage|Antwort|Tipp|Vorsicht|Thema|Uhrzeit|Preis|Datum|Ort|Zeit)$/
 const FEMALE_ROLE = /^(Frau|Mutter|Tochter|Schwester|Oma|Tante|Freundin|Dame)\b/
 const MALE_ROLE = /^(Mann|Herr|Vater|Sohn|Bruder|Opa|Onkel|Freund|Junge|Reisender|Arzt|Gast|Chef|Kunde|Student)\b/
-const FEMALE_NAMES = new Set('Nele Jana Nadine Sabine Miriam Helena Anna Lena Laura Julia Sara Sarah Maria Lisa Paula Mia Emma Sofia Sophie Carla Lucía Lucia Eva Clara Marie Hanna Hannah Katrin Petra Monika Claudia Andrea Daniela Stefanie Nina Aylin Selin Fatma Elif Ines Marta Elena Carmen Rita Leyla Amira Greta Ida Johanna Katharina Christina Susanne Birgit Heike Ute'.split(' '))
-const MALE_NAMES = new Set('Sven Emre Jakob Felix Tobias Jonas Paul Tom Max Leon Lukas Tim Jan Peter Thomas Michael Stefan Andreas Markus Daniel David Karim Mehmet Ali Marco Luis Carlos Mateo Deniz Ben Finn Noah Tarek Tarik Yusuf Samir Rashid Diego Pablo Javier Miguel Klaus Jürgen Uwe Hans Dieter Martin Benjamin Florian Sebastian Christian Alexander Moritz Niklas Simon Oliver Frank Ralf'.split(' '))
+const FEMALE_NAMES = new Set('Nele Jana Nadine Sabine Miriam Helena Anna Lena Laura Julia Sara Sarah Maria Lisa Paula Mia Emma Sofia Sophie Carla Lucía Lucia Eva Clara Marie Hanna Hannah Katrin Petra Monika Claudia Andrea Daniela Stefanie Nina Aylin Selin Fatma Elif Ines Marta Elena Carmen Rita Leyla Amira Greta Ida Johanna Katharina Christina Susanne Birgit Heike Ute Mira Maren Ivana Sofía Olga Elisa Lea Leonie Emilia Charlotte Luisa Nora Vera Karin Sandra Tanja Anja Silke Renate Ursula Martina Angelika Barbara Kerstin Melanie Jasmin Yasemin Zeynep Aisha Nadia Irina Natalia Ana Isabel Pilar Valentina Camila Alba Marina Carolin Franziska Theresa Antonia Frieda Merle Ronja Pia Svenja Meike Jule Elke Doris Gabi Ella Amelie Judith Esther Ruth Linda Vanessa Jessica Kira Alina Dana Tina Britta Wiebke Annika Rosa Ayse Hatice Dilara Malika'.split(' '))
+const MALE_NAMES = new Set('Sven Emre Jakob Felix Tobias Jonas Paul Tom Max Leon Lukas Tim Jan Peter Thomas Michael Stefan Andreas Markus Daniel David Karim Mehmet Ali Marco Luis Carlos Mateo Deniz Ben Finn Noah Tarek Tarik Yusuf Samir Rashid Diego Pablo Javier Miguel Klaus Jürgen Uwe Hans Dieter Martin Benjamin Florian Sebastian Christian Alexander Moritz Niklas Simon Oliver Frank Ralf Marc Leo Karl Georg Lars Ole Malte Till Erik Henrik Jens Kai Nils Timo Fabian Dominik Patrick Philipp Robert Richard Walter Werner Günter Horst Rolf Bernd Holger Matthias Johannes Julian Elias Emil Anton Theo Oskar Konstantin Vincent Raphael Adrian Rafael Sergio Andrés Jorge Juan José Pedro Antonio Manuel Fernando Alejandro Omar Hassan Ahmed Mustafa Murat Can Kemal Ivan Igor Pavel Marek Piotr Luca Matteo Nico Hannes Henning Torsten Volker Norbert Achim Bastian Björn Carsten Dirk Gerd Heiko Ingo Jochen Lutz Manfred Olaf Rainer Udo Wolfgang Arne Levi Milan Samuel Aaron'.split(' '))
 const VOICES_F = ['nova', 'shimmer']
 const VOICES_M = ['onyx', 'echo']
 const NARRATOR_VOICE = 'alloy'
@@ -131,6 +131,16 @@ function genderOf(label) {
   if (/in$/.test(first) && first.length >= 6) return 'f'      // Kundin, Ärztin, Moderatorin…
   if (/(er|ar|or|eur|ant|ent)$/.test(first)) return 'm'       // Verkäufer, Bibliothekar, Moderator…
   return null                                                  // Ansage, Anrufbeantworter…
+}
+
+// Un monólogo sin etiquetas en el que quien habla se presenta («hier ist
+// Felix», «Mein Name ist Elena Ruiz», «hier spricht Frau Wendt») lo lee una
+// voz de su género y no el narrador neutro.
+function monologueVoice(text) {
+  const m = String(text).slice(0, 220).match(/\b(?:[Hh]ier (?:ist|spricht)|[Ii]ch bin|[Ii]ch heiße|[Mm]ein Name ist)\s+(?:(Herr|Frau)\s+)?([A-ZÄÖÜ][a-zäöüßáéíóú]+)/)
+  if (!m) return null
+  const g = m[1] ? (m[1] === 'Frau' ? 'f' : 'm') : FEMALE_NAMES.has(m[2]) ? 'f' : MALE_NAMES.has(m[2]) ? 'm' : null
+  return g === 'f' ? VOICES_F[0] : g === 'm' ? VOICES_M[0] : null
 }
 
 export function speechSegments(transcript) {
@@ -161,6 +171,10 @@ export function speechSegments(transcript) {
     const last = segs[segs.length - 1]
     if (last && last.speaker === speaker) last.text += ' ' + text
     else segs.push({ speaker, voice, text })
+  }
+  if (segs.length && segs.every(sg => !sg.speaker)) {
+    const v = monologueVoice(segs[0].text)
+    if (v) for (const sg of segs) sg.voice = v
   }
   return segs
 }

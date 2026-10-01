@@ -63,6 +63,19 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Hör die Nachricht. Was ist richtig? ~~(Escucha el mensaje. ¿Qué es correcto?)~~',
+      audio: {
+        transcript: 'Guten Tag, Frau Navarro. Hier ist das Prüfungszentrum in Köln. Ihre Anmeldung für das Zertifikat A2 ist jetzt komplett. Die Prüfung ist nicht am neunten Mai, sondern am sechzehnten Mai. Sie beginnt um neun Uhr. Bitte kommen Sie schon um halb neun. Sie brauchen Ihren Ausweis. Der Teil Sprechen ist am Nachmittag um vierzehn Uhr. Das Ergebnis bekommen Sie nach drei Wochen per E-Mail. Vielen Dank und auf Wiederhören.',
+      },
+      items: [
+        { typ: 'mc', frage: 'Wann ist die Prüfung?', optionen: ['am 9. Mai', 'am 16. Mai', 'am 6. Mai'], loesung: 1 },
+        { typ: 'rf', aussage: 'Frau Navarro muss schon um halb neun da sein.', loesung: true },
+        { typ: 'rf', aussage: 'Der Teil Sprechen ist am Vormittag.', loesung: false },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -75,6 +88,21 @@ export default {
       ],
       minWoerter: 25,
       beispielLoesung: 'Liebe Ana, ich lerne Deutsch. Ich möchte in Berlin arbeiten. Ich mache die Prüfung im Juni in einem Prüfungszentrum. Ich lerne jeden Tag mit meinem Kurs. Liebe Grüße, Paula',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Stell dich vor. Sprich 45 Sekunden. ~~(Preséntate. Habla 45 segundos.)~~',
+      aufgabe: 'Du bist neu im A2-Kurs. Stell dich der Gruppe vor.',
+      punkte: [
+        'dein Name und dein Land',
+        'deine Stadt und deine Arbeit',
+        'Welcher Prüfungsteil ist leicht für dich?',
+        'Welcher Prüfungsteil ist schwer für dich?',
+      ],
+      redemittel: ['Ich heiße … und komme aus …', 'Ich wohne in … und arbeite als …', 'Der Teil … ist leicht für mich.', 'Der Teil … ist schwer für mich.'],
+      maxSekunden: 45,
+      beispielLoesung: 'Hallo! Ich heiße Daniela und ich komme aus Mexiko. Ich wohne jetzt in Leipzig und arbeite als Köchin in einem Restaurant. Bald mache ich das Zertifikat A2. Der Teil Lesen ist leicht für mich, ich lese gern auf Deutsch. Aber der Teil Hören ist schwer für mich. Die Leute sprechen so schnell! Also höre ich jetzt jeden Tag ein bisschen Radio.',
     },
   ],
 }

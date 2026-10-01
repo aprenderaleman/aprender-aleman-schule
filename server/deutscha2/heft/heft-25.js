@@ -91,6 +91,24 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Hör die Nachricht auf dem Anrufbeantworter. Löse die 3 Aufgaben. ~~(Escucha el mensaje en el contestador. Resuelve las 3 tareas.)~~',
+      audio: {
+        transcript: 'Hallo Marco, hier ist Tobias. Ich kann heute leider nicht zum Fußball kommen, denn ich muss länger arbeiten. Meine Kollegin ist krank. Hast du am Samstag Zeit? Nein, warte, am Samstag besuche ich meine Eltern. Können wir am Sonntag um elf Uhr spielen? Ich bringe den Ball und Wasser mit. Ach ja, mein Schlüssel ist noch bei dir. Kannst du ihn bitte mitbringen? Ruf mich später an. Tschüs!',
+      },
+      items: [
+        { typ: 'rf', aussage: 'Tobias ist krank.', loesung: false },
+        {
+          typ: 'mc',
+          frage: 'Wann möchte Tobias Fußball spielen?',
+          optionen: ['heute', 'am Samstag', 'am Sonntag'],
+          loesung: 2,
+        },
+        { typ: 'rf', aussage: 'Marco soll den Schlüssel mitbringen.', loesung: true },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -103,6 +121,16 @@ export default {
       ],
       minWoerter: 25,
       beispielLoesung: 'Hallo Pilar, ich kann morgen leider nicht zum Deutschkurs kommen, denn ich habe einen Termin beim Arzt. Kannst du mir bitte die Hausaufgaben schicken? Vielen Dank! Wir sehen uns am Montag.\nViele Grüße\nAndrés',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Sprich eine kurze Nachricht. Sprich 45 Sekunden. ~~(Graba un mensaje breve. Habla 45 segundos.)~~',
+      aufgabe: 'Du kommst heute später nach Hause. Deine Mitbewohnerin Lena ist nicht am Telefon. Sprich ihr eine Nachricht auf die Mailbox.',
+      punkte: ['Sag: Du kommst später.', 'Sag den Grund.', 'Bitte Lena um etwas.'],
+      redemittel: ['Hallo Lena, hier ist …', 'Ich komme heute später, denn …', 'Kannst du bitte …?', 'Warte bitte nicht …'],
+      maxSekunden: 45,
+      beispielLoesung: 'Hallo Lena, hier ist Andrés. Ich komme heute leider später nach Hause, denn ich muss bis acht Uhr arbeiten. Warte bitte nicht mit dem Essen auf mich. Kannst du bitte Brot und Milch kaufen? Ich habe heute keine Zeit. Vielen Dank! Bis später!',
     },
   ],
 }

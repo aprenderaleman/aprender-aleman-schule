@@ -98,6 +98,24 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Lies zuerst die 3 Aufgaben. Hör dann die Ansage im Radio. ~~(Lee primero las 3 tareas. Después escucha el aviso de la radio.)~~',
+      audio: {
+        transcript: 'Guten Morgen, hier ist das Stadtradio mit den Tipps für das Wochenende. Am Samstag findet im Stadtpark ein großes Musikfest statt. Es beginnt nicht um vierzehn Uhr, sondern erst um sechzehn Uhr. Erwachsene bezahlen dreizehn Euro, Kinder bezahlen nichts. Parkplätze gibt es leider nur wenige. Nehmen Sie also den Bus. Die Linie sieben hält direkt am Eingang. Und das Wetter? Am Samstag regnet es nicht, es wird sonnig und warm. Viel Spaß!',
+      },
+      items: [
+        { typ: 'rf', aussage: 'Das Musikfest beginnt um 14 Uhr.', loesung: false },
+        {
+          typ: 'mc',
+          frage: 'Was bezahlen Erwachsene?',
+          optionen: ['13 Euro', '30 Euro', '3 Euro'],
+          loesung: 0,
+        },
+        { typ: 'rf', aussage: 'Man kann mit dem Bus zum Musikfest fahren.', loesung: true },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -110,6 +128,21 @@ export default {
       ],
       minWoerter: 25,
       beispielLoesung: 'Hallo Clara, ich habe gerade eine Durchsage gehört: Mein Zug hat leider 40 Minuten Verspätung. Ich komme erst um 18.10 Uhr an, auf Gleis 4. Warte doch im Café am Bahnhof!\nBis später\nLukas',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Erzähl von deinem Tag. Du hast 60 Sekunden. ~~(Cuenta cómo es tu día. Tienes 60 segundos.)~~',
+      aufgabe: 'Was machst du morgen? Erzähl von deinem Tag. Sag immer die Uhrzeit und den Ort.',
+      punkte: [
+        'Wann stehst du auf?',
+        'Welchen Termin hast du? Um wie viel Uhr?',
+        'Wo bist du am Nachmittag?',
+        'Was machst du am Abend?',
+      ],
+      redemittel: ['Morgen stehe ich um … auf.', 'Um … Uhr habe ich einen Termin bei …', 'Am Nachmittag bin ich …', 'Am Abend …'],
+      maxSekunden: 60,
+      beispielLoesung: 'Morgen stehe ich um halb sieben auf. Um Viertel nach sieben fahre ich mit dem Bus zur Arbeit. Ich arbeite von acht bis sechzehn Uhr in einem Büro im Zentrum. Um siebzehn Uhr habe ich einen Termin beim Zahnarzt. Die Praxis ist in der Bahnhofstraße. Danach gehe ich noch einkaufen. Am Abend bin ich zu Hause. Um zwanzig Uhr rufe ich meine Mutter an, und dann sehe ich einen Film.',
     },
   ],
 }

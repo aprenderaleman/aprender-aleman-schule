@@ -68,6 +68,19 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Hör den Text aus dem Radio. Was ist richtig? ~~(Escucha el texto de la radio. ¿Qué es correcto?)~~',
+      audio: {
+        transcript: 'Guten Morgen, liebe Hörerinnen und Hörer! Unser Thema heute ist Hilfe im Alltag. Frau Sommer aus Kassel ist siebzig Jahre alt. Seit zwei Jahren hilft sie Kindern bei den Hausaufgaben. Sie fährt nicht mit dem Bus, sondern mit dem Fahrrad zur Schule. Dort hilft sie jeden Dienstag nach dem Unterricht. Die Arbeit mit den Kindern gefällt der Rentnerin sehr. Die Eltern danken Frau Sommer oft mit einem Kuchen. Der Kuchen schmeckt auch den Kindern!',
+      },
+      items: [
+        { typ: 'rf', aussage: 'Frau Sommer hilft seit zwei Jahren.', loesung: true },
+        { typ: 'mc', frage: 'Wie fährt Frau Sommer zur Schule?', optionen: ['mit dem Bus', 'mit dem Auto', 'mit dem Fahrrad'], loesung: 2 },
+        { typ: 'rf', aussage: 'Frau Sommer hilft den Kindern jeden Donnerstag.', loesung: false },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -80,6 +93,20 @@ export default {
       ],
       minWoerter: 25,
       beispielLoesung: 'Hallo Mateo, ich wohne mit meiner Schwester in Bilbao. Zum Deutschkurs fahre ich mit dem Bus. Der Kurs ist bei der Bibliothek. Zu Hause helfe ich meiner Mutter und meinem Vater. Viele Grüße, Rosa',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Sprich 60 Sekunden über deine Stadt. ~~(Habla 60 segundos sobre tu ciudad.)~~',
+      aufgabe: 'Erzähl von deiner Stadt. Benutze den Dativ.',
+      punkte: [
+        'Seit wann wohnst du dort?',
+        'Was gefällt dir in der Stadt? Was gefällt dir nicht?',
+        'Was schmeckt dir dort?',
+      ],
+      redemittel: ['Ich wohne seit … in …', 'Mir gefällt … / Mir gefallen …', '… gefällt mir nicht.', '… schmeckt mir sehr gut.'],
+      maxSekunden: 60,
+      beispielLoesung: 'Ich wohne seit drei Jahren in Sevilla. Die Stadt gefällt mir sehr. Mir gefallen die Parks und das Zentrum. Am Samstag fahre ich oft mit dem Bus zum Markt. Nach dem Einkaufen esse ich bei einer Freundin. Der Verkehr gefällt mir nicht, es gibt zu viele Autos. Aber das Essen schmeckt mir sehr gut, vor allem der Fisch.',
     },
   ],
 }

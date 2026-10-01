@@ -65,6 +65,29 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Wie in der Prüfung: Lies zuerst die drei Aufgaben. Hör dann die Durchsage. ~~(Como en el examen: lee primero las tres tareas. Después escucha el aviso.)~~',
+      audio: {
+        transcript: 'Guten Morgen, liebe Teilnehmerinnen und Teilnehmer, herzlich willkommen im Prüfungszentrum! Die Prüfung beginnt heute nicht um neun Uhr, sondern erst um halb zehn. Bitte gehen Sie nicht in Raum vier, sondern in Raum zwölf im zweiten Stock. Machen Sie Ihr Handy aus und legen Sie Ihre Tasche unter den Tisch. Ein Wörterbuch dürfen Sie nicht benutzen. Nach dem Schreiben haben Sie zwanzig Minuten Pause. Wir wünschen Ihnen viel Erfolg!',
+      },
+      items: [
+        {
+          typ: 'mc',
+          frage: 'Wann beginnt die Prüfung heute?',
+          optionen: ['um 9:00 Uhr', 'um 9:30 Uhr', 'um 10:30 Uhr'],
+          loesung: 1,
+        },
+        {
+          typ: 'mc',
+          frage: 'Wo ist die Prüfung?',
+          optionen: ['in Raum 12', 'in Raum 4', 'in Raum 2'],
+          loesung: 0,
+        },
+        { typ: 'rf', aussage: 'Die Pause ist dreißig Minuten lang.', loesung: false },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -77,6 +100,21 @@ export default {
       ],
       minWoerter: 25,
       beispielLoesung: 'Liebe Elena, es tut mir leid, aber ich kann am Samstag nicht zum Fest kommen. Meine Eltern besuchen mich am Wochenende. Können wir nächste Woche zusammen essen gehen? Viele Grüße, Iván',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Wie in der Prüfung: Erzähl von deinem Wochenende. Sprich 60 Sekunden. ~~(Como en el examen: cuenta tu fin de semana. Habla 60 segundos.)~~',
+      aufgabe: 'Wie war dein letztes Wochenende? Erzähl im Perfekt. Sprich laut und ohne Papier.',
+      punkte: [
+        'Was hast du am Samstag gemacht?',
+        'Was hast du am Sonntag gemacht?',
+        'Mit wem warst du zusammen?',
+        'Wie war das Wochenende?',
+      ],
+      redemittel: ['Am Samstag habe ich …', 'Danach bin ich … gegangen.', 'Am Sonntag war ich …', 'Das Wochenende war …'],
+      maxSekunden: 60,
+      beispielLoesung: 'Mein letztes Wochenende war sehr schön. Am Samstag habe ich lange geschlafen. Dann habe ich eingekauft und die Wohnung aufgeräumt. Am Abend bin ich mit meiner Freundin Carla ins Kino gegangen. Der Film hat mir gut gefallen. Am Sonntag war ich bei meinen Eltern. Wir haben zusammen gekocht und viel geredet. Am Abend war ich müde, aber glücklich.',
     },
   ],
 }

@@ -63,6 +63,19 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Hör die Tipps im Radio. Richtig oder falsch? Wähle bei der Frage die richtige Antwort. ~~(Escucha los consejos en la radio. ¿Verdadero o falso? En la pregunta, elige la respuesta correcta.)~~',
+      audio: {
+        transcript: 'Und jetzt unsere Tipps für Ihre Freizeit am Wochenende. Schwimmen Sie gern? Das Schwimmbad im Stadtpark ist am Samstag von neun bis zwanzig Uhr geöffnet. Wandern Sie lieber? Am Sonntag gibt es eine Wanderung in den Bergen. Die Gruppe trifft sich nicht am Schwimmbad, sondern vor dem Rathaus, um halb zehn. Und am Sonntagabend können Sie ins Kino gehen. Der Film beginnt um achtzehn Uhr und kostet nur fünf Euro. Viel Spaß am Wochenende!',
+      },
+      items: [
+        { typ: 'rf', aussage: 'Das Schwimmbad ist am Samstag bis 20 Uhr geöffnet.', loesung: true },
+        { typ: 'mc', frage: 'Wo trifft sich die Gruppe am Sonntag?', optionen: ['am Schwimmbad', 'vor dem Rathaus', 'vor dem Kino'], loesung: 1 },
+        { typ: 'rf', aussage: 'Der Film am Sonntagabend kostet acht Euro.', loesung: false },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -75,6 +88,27 @@ export default {
       ],
       minWoerter: 25,
       beispielLoesung: 'Am Samstag habe ich Fußball gespielt und Freunde getroffen. Am Sonntag bin ich ins Schwimmbad gegangen. Ich schwimme gern. Musik höre ich auch sehr gern.',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Sprich eine Nachricht für einen Freund. Sprich 45 Sekunden. ~~(Graba un mensaje para un amigo. Habla 45 segundos.)~~',
+      aufgabe: 'Du möchtest am Wochenende etwas mit deinem Freund Jonas machen. Sprich ihm eine Nachricht aufs Handy. Mach einen Vorschlag.',
+      punkte: [
+        'Was wollt ihr machen?',
+        'Wann? Nenn Tag und Uhrzeit.',
+        'Wo trefft ihr euch?',
+        'Warum ist das eine gute Idee?',
+      ],
+      redemittel: [
+        'Hast du am … Zeit?',
+        'Wollen wir zusammen …?',
+        'Wir treffen uns um … Uhr am / vor dem …',
+        'Ich … sehr gern …',
+      ],
+      maxSekunden: 45,
+      beispielLoesung:
+        'Hallo Jonas, hier ist Carlos. Hast du am Samstag Zeit? Wollen wir zusammen ins Schwimmbad gehen? Ich schwimme sehr gern und das Wetter ist am Samstag schön. Wir treffen uns um drei Uhr am Eingang. Danach können wir noch ein Eis essen. Kannst du nicht? Dann vielleicht am Sonntag. Ruf mich bitte an. Tschüs!',
     },
   ],
 }

@@ -97,6 +97,29 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Lies zuerst die 3 Aufgaben. Hör dann die Durchsage. Achte auf Preis, Ort und Uhrzeit. ~~(Lee primero las 3 tareas. Después escucha el aviso por megafonía. Fíjate en el precio, el lugar y la hora.)~~',
+      audio: {
+        transcript: 'Liebe Kundinnen und Kunden, herzlich willkommen im Kaufhaus am Markt. Heute haben wir ein tolles Angebot für Sie. Alle Winterjacken kosten heute nicht sechzig, sondern nur vierzig Euro. Sie finden die Jacken nicht mehr im ersten Stock, sondern im zweiten Stock, direkt neben den Schuhen. Und noch eine Information. Heute schließen wir schon um halb acht. Morgen haben wir wieder bis einundzwanzig Uhr geöffnet. Wir wünschen Ihnen einen schönen Einkauf.',
+      },
+      items: [
+        {
+          typ: 'mc',
+          frage: 'Was kosten die Winterjacken heute?',
+          optionen: ['14 Euro', '40 Euro', '60 Euro'],
+          loesung: 1,
+        },
+        { typ: 'rf', aussage: 'Die Winterjacken sind heute im ersten Stock.', loesung: false },
+        {
+          typ: 'mc',
+          frage: 'Wann schließt das Kaufhaus heute?',
+          optionen: ['um 19.30 Uhr', 'um 20.30 Uhr', 'um 21 Uhr'],
+          loesung: 0,
+        },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'formular',
       titel: 'Schreiben',
@@ -108,6 +131,20 @@ export default {
         { id: 'verspaetung', label: 'Verspätung', erwartet: ['25 Minuten', '25'] },
         { id: 'gleis', label: 'Gleis heute', erwartet: ['11', 'Gleis 11'] },
       ],
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Sprich eine Ansage für das Telefon. Du hast 60 Sekunden. ~~(Graba un mensaje de contestador. Tienes 60 segundos.)~~',
+      aufgabe: 'Du hast ein kleines Café. Sprich die Ansage für den Anrufbeantworter von deinem Café.',
+      punkte: [
+        'der Name und die Adresse',
+        'Wann ist das Café geöffnet? Wann ist es geschlossen?',
+        'ein Angebot mit Preis',
+      ],
+      redemittel: ['Guten Tag, hier ist das Café …', 'Wir haben von … bis … geöffnet.', 'Am … ist das Café geschlossen.', 'Diese Woche im Angebot: …'],
+      maxSekunden: 60,
+      beispielLoesung: 'Guten Tag, hier ist das Café Sonnenblume in der Gartenstraße vierzehn. Im Moment können wir leider nicht ans Telefon gehen. Wir haben von Dienstag bis Sonntag von halb neun bis achtzehn Uhr geöffnet. Am Montag ist das Café geschlossen. Diese Woche haben wir ein Angebot für Sie: Jedes Frühstück kostet nur sechs Euro neunzig. Das ist wirklich günstig! Wir freuen uns auf Ihren Besuch. Auf Wiederhören!',
     },
   ],
 }

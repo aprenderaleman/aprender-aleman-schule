@@ -98,6 +98,24 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Hör das Interview. Löse die 3 Aufgaben. ~~(Escucha la entrevista. Resuelve las 3 tareas.)~~',
+      audio: {
+        transcript: 'Frau: Hallo Pedro! Woher kommst du?\nMann: Ich komme aus Peru, aber ich wohne seit zwei Jahren in Leipzig.\nFrau: Wo arbeitest du?\nMann: Zuerst habe ich in einem Hotel gearbeitet. Jetzt arbeite ich in einer Bäckerei.\nFrau: Wann stehst du auf?\nMann: Sehr früh, um vier Uhr! Die Arbeit beginnt um fünf.\nFrau: Und was isst du zum Frühstück?\nMann: Nur ein Brötchen mit Käse. Kaffee trinke ich nicht, ich trinke lieber Tee.',
+      },
+      items: [
+        {
+          typ: 'mc',
+          frage: 'Wo arbeitet Pedro jetzt?',
+          optionen: ['in einem Hotel', 'in einer Bäckerei', 'in einem Restaurant'],
+          loesung: 1,
+        },
+        { typ: 'rf', aussage: 'Pedro steht um fünf Uhr auf.', loesung: false },
+        { typ: 'rf', aussage: 'Pedro trinkt zum Frühstück Tee.', loesung: true },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'formular',
       titel: 'Schreiben',
@@ -110,6 +128,16 @@ export default {
         { id: 'aufstehen', label: 'Aufstehen', erwartet: ['10 Uhr', '10', 'um 10 Uhr', '10.00 Uhr'] },
         { id: 'hobby', label: 'Hobby', erwartet: ['Musik', 'Gitarre', 'Gitarre spielen', 'Musik / Gitarre'] },
       ],
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Stell Fragen und antworte selbst. Sprich 50 Sekunden. ~~(Haz preguntas y respóndelas tú. Habla 50 segundos.)~~',
+      aufgabe: 'Wie in Sprechen Teil 1: Du hast vier Karten. Auf jeder Karte steht ein Wort. Stell zu jedem Wort eine Frage. Beantworte dann deine Frage selbst. Sprich in ganzen Sätzen.',
+      punkte: ['Karte 1: Frühstück', 'Karte 2: wohnen', 'Karte 3: aufstehen', 'Karte 4: Hobby'],
+      redemittel: ['Was isst du …?', 'Wo … du? / Wann … du?', 'Hast du …?', 'Zum Frühstück esse ich …', 'Ich stehe um … Uhr auf.'],
+      maxSekunden: 50,
+      beispielLoesung: 'Was isst du zum Frühstück? Zum Frühstück esse ich Brot mit Tomate und ich trinke einen Kaffee mit Milch. Wo wohnst du? Ich wohne in Valencia, in einer kleinen Wohnung im Zentrum. Wann stehst du auf? Ich stehe um sieben Uhr auf, denn ich arbeite ab halb neun. Hast du ein Hobby? Ja, ich spiele am Wochenende Fußball mit meinen Freunden.',
     },
   ],
 }

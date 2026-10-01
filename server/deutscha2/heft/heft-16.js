@@ -69,6 +69,24 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Hör die Durchsage am Bahnhof. Was ist richtig? ~~(Escucha el aviso en la estación. ¿Qué es correcto?)~~',
+      audio: {
+        transcript: 'Achtung, eine Durchsage für die Fahrgäste nach Hamburg. Ihr Zug fährt heute nicht von Gleis vier, sondern von Gleis neun. Gehen Sie bitte jetzt zu Gleis neun. Der Zug hat zwanzig Minuten Verspätung und fährt um vierzehn Uhr fünfunddreißig ab. Steigen Sie bitte nur vorne ein, denn die Türen hinten sind kaputt. Haben Sie Fragen? Dann kommen Sie bitte zur Information in der Halle. Vielen Dank und gute Reise!',
+      },
+      items: [
+        {
+          typ: 'mc',
+          frage: 'Von welchem Gleis fährt der Zug nach Hamburg?',
+          optionen: ['von Gleis 4', 'von Gleis 9', 'von Gleis 14'],
+          loesung: 1,
+        },
+        { typ: 'rf', aussage: 'Der Zug fährt um 14 Uhr 35 ab.', loesung: true },
+        { typ: 'rf', aussage: 'Die Fahrgäste sollen hinten einsteigen.', loesung: false },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'formular',
       titel: 'Schreiben',
@@ -81,6 +99,20 @@ export default {
         { id: 'schluessel', label: 'Schlüssel bei', erwartet: ['Familie Weber', 'Weber', 'Familie Weber im 2. Stock'] },
         { id: 'telefon', label: 'Telefon', erwartet: ['0151 2233445', '01512233445'] },
       ],
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Gib Tipps im Imperativ. Sprich 45 Sekunden. ~~(Da consejos en imperativo. Habla 45 segundos.)~~',
+      aufgabe: 'Dein Freund Tim ist krank. Du besuchst ihn. Gib ihm Tipps im Imperativ mit du.',
+      punkte: [
+        'Was soll Tim essen und trinken?',
+        'Was soll er zu Hause machen?',
+        'Was soll er nicht machen?',
+      ],
+      redemittel: ['Trink bitte viel …', 'Iss … / Nimm …', 'Bleib … / Schlaf …', 'Geh bitte nicht …'],
+      maxSekunden: 45,
+      beispielLoesung: 'Hallo Tim! Du bist krank, das tut mir leid! Trink bitte viel Tee und iss eine warme Suppe. Bleib heute im Bett und schlaf viel. Nimm deine Tabletten und mach das Fenster kurz auf. Geh bitte nicht zur Arbeit und mach keinen Sport! Hast du morgen noch Fieber? Dann geh zum Arzt. Und ruf mich an, ich bringe dir Obst. Gute Besserung!',
     },
   ],
 }

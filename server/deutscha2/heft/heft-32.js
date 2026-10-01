@@ -73,6 +73,19 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Hör die Nachricht. Richtig oder falsch? Wähle bei den Fragen die richtige Antwort. ~~(Escucha el mensaje. ¿Verdadero o falso? En las preguntas, elige la respuesta correcta.)~~',
+      audio: {
+        transcript: 'Hallo Marta, hier ist Paul. Ich habe endlich eine neue Wohnung! Sie ist klein, aber sehr hell und ruhig. Sie hat zwei Zimmer, eine Küche und ein Bad. Einen Balkon habe ich leider nicht. Mein Lieblingszimmer ist das Wohnzimmer. Dort steht mein neues Sofa neben dem Fenster. Kommst du am Samstag? Aber bitte nicht um drei, sondern um fünf Uhr. Um drei bin ich noch nicht zu Hause. Wir trinken dann zusammen Kaffee in der Küche. Bis Samstag!',
+      },
+      items: [
+        { typ: 'rf', aussage: 'Die Wohnung von Paul ist hell und ruhig.', loesung: true },
+        { typ: 'mc', frage: 'Was hat die Wohnung nicht?', optionen: ['ein Bad', 'einen Balkon', 'eine Küche'], loesung: 1 },
+        { typ: 'mc', frage: 'Wann soll Marta am Samstag kommen?', optionen: ['um drei Uhr', 'um vier Uhr', 'um fünf Uhr'], loesung: 2 },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'formular',
       titel: 'Schreiben',
@@ -85,6 +98,27 @@ export default {
         { id: 'miete', label: 'Miete', erwartet: ['580 Euro', '580'] },
         { id: 'lieblingszimmer', label: 'Lieblingszimmer', erwartet: ['die Küche', 'Küche'] },
       ],
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Erzähl von deiner Wohnung. Sprich 45 Sekunden. ~~(Habla de tu piso. Habla 45 segundos.)~~',
+      aufgabe: 'Wie wohnst du? Beschreib deine Wohnung oder dein Haus.',
+      punkte: [
+        'Wohnung oder Haus? Wie viele Zimmer?',
+        'Wie ist die Wohnung? Nenn zwei Adjektive.',
+        'dein Lieblingszimmer',
+        'Wo stehen die Möbel? Sag zwei Sätze.',
+      ],
+      redemittel: [
+        'Ich wohne in einer Wohnung / in einem Haus.',
+        'Die Wohnung hat … Zimmer und …',
+        'Mein Lieblingszimmer ist …',
+        '… steht im / in der …',
+      ],
+      maxSekunden: 45,
+      beispielLoesung:
+        'Ich wohne in einer Wohnung in Valencia. Die Wohnung hat drei Zimmer, eine Küche, ein Bad und einen kleinen Balkon. Sie ist nicht groß, aber hell und ruhig. Mein Lieblingszimmer ist das Wohnzimmer. Dort steht ein großes Sofa neben dem Fenster. Der Tisch steht in der Küche, dort essen wir zusammen. Am Abend bin ich gern zu Hause.',
     },
   ],
 }

@@ -68,6 +68,19 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Hör die Durchsage im Kaufhaus. Was ist richtig? ~~(Escucha el aviso en los grandes almacenes. ¿Qué es correcto?)~~',
+      audio: {
+        transcript: 'Liebe Kundinnen und Kunden! Brauchen Sie einen Tisch oder einen Stuhl für den Garten? Heute haben wir im zweiten Stock ein Angebot für Sie. Einen Gartentisch bekommen Sie für neunundvierzig Euro, einen Stuhl für nur fünfzehn Euro. Das Angebot gibt es nicht bis Samstag, sondern nur heute bis zwanzig Uhr. Haben Sie Hunger? Im Café im Erdgeschoss gibt es einen Kaffee und ein Stück Kuchen zusammen für vier Euro fünfzig.',
+      },
+      items: [
+        { typ: 'mc', frage: 'Was kostet ein Stuhl?', optionen: ['15 Euro', '49 Euro', '50 Euro'], loesung: 0 },
+        { typ: 'rf', aussage: 'Das Angebot gibt es bis Samstag.', loesung: false },
+        { typ: 'rf', aussage: 'Im Café gibt es Kaffee und Kuchen für 4,50 Euro.', loesung: true },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'formular',
       titel: 'Schreiben',
@@ -80,6 +93,20 @@ export default {
         { id: 'preis', label: 'Preis (maximal)', erwartet: ['60 Euro', '60'] },
         { id: 'telefon', label: 'Telefonnummer', erwartet: ['0157 2233448', '01572233448'] },
       ],
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Sprich 45 Sekunden über deinen Einkauf. ~~(Habla 45 segundos sobre tu compra.)~~',
+      aufgabe: 'Du gehst heute in die Stadt einkaufen. Was ist dein Plan? Benutze den Akkusativ.',
+      punkte: [
+        'Was brauchst du?',
+        'Was kaufst du für deine Familie oder für einen Freund?',
+        'Was kaufst du heute nicht?',
+      ],
+      redemittel: ['Ich brauche einen … / eine … / ein …', 'Für … kaufe ich …', 'Ich suche auch …', 'Ich kaufe keinen … / keine … / kein …'],
+      maxSekunden: 45,
+      beispielLoesung: 'Heute gehe ich in die Stadt einkaufen. Ich brauche einen Rucksack und eine Jacke für den Winter. Für meinen Bruder kaufe ich ein Buch, er hat am Freitag Geburtstag. Ich suche auch einen Kalender für die Küche. Schuhe kaufe ich heute nicht, ich habe kein Geld mehr. Danach trinke ich noch einen Kaffee.',
     },
   ],
 }

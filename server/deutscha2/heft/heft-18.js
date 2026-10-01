@@ -69,6 +69,24 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Hör die Ansage am Telefon. Was ist richtig? ~~(Escucha el mensaje grabado del teléfono. ¿Qué es correcto?)~~',
+      audio: {
+        transcript: 'Guten Tag, hier ist die Stadtbibliothek am Marktplatz. Im Moment ist die Bibliothek leider geschlossen. Wir haben von Dienstag bis Freitag von zehn bis achtzehn Uhr geöffnet und am Samstag von zehn bis dreizehn Uhr. Am Montag und am Sonntag bleibt die Bibliothek geschlossen. Achtung, die Kinderbücher finden Sie in dieser Woche nicht im ersten Stock, sondern im Erdgeschoss. Brauchen Sie ein Buch länger? Dann schreiben Sie uns bitte eine E-Mail. Vielen Dank für Ihren Anruf!',
+      },
+      items: [
+        { typ: 'rf', aussage: 'Am Montag ist die Bibliothek geöffnet.', loesung: false },
+        {
+          typ: 'mc',
+          frage: 'Bis wann ist die Bibliothek am Samstag geöffnet?',
+          optionen: ['bis 10 Uhr', 'bis 13 Uhr', 'bis 18 Uhr'],
+          loesung: 1,
+        },
+        { typ: 'rf', aussage: 'Die Kinderbücher sind in dieser Woche im Erdgeschoss.', loesung: true },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'formular',
       titel: 'Schreiben',
@@ -81,6 +99,21 @@ export default {
         { id: 'kurstage', label: 'Kurstage', erwartet: ['montags und mittwochs', 'Montag und Mittwoch', 'montags, mittwochs', 'Montag, Mittwoch', 'Mo und Mi'] },
         { id: 'email', label: 'E-Mail', erwartet: ['dilara.aksoy@beispiel.de'] },
       ],
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Sprich eine Nachricht am Telefon. Du hast 60 Sekunden. ~~(Deja un mensaje por teléfono. Tienes 60 segundos.)~~',
+      aufgabe: 'Du hast eine Anzeige gelesen: „Zu verkaufen: Sofa, drei Jahre alt, 60 Euro. Herr Lang, Tel. 0157 220 418“. Du rufst an, aber Herr Lang ist nicht da. Sprich eine Nachricht.',
+      punkte: [
+        'Sag deinen Namen.',
+        'Sag: Du hast die Anzeige gelesen.',
+        'Stell zwei Fragen zum Sofa.',
+        'Sag deine Telefonnummer.',
+      ],
+      redemittel: ['Guten Tag, mein Name ist …', 'Ich habe Ihre Anzeige gelesen.', 'Ich habe noch zwei Fragen: …', 'Rufen Sie mich bitte an. Meine Nummer ist …'],
+      maxSekunden: 60,
+      beispielLoesung: 'Guten Tag, Herr Lang, mein Name ist Lucía Herrera. Ich habe Ihre Anzeige im Supermarkt gelesen. Sie verkaufen ein Sofa für 60 Euro. Ich suche ein Sofa für meine neue Wohnung, deshalb passt die Anzeige sehr gut. Ich habe noch zwei Fragen: Welche Farbe hat das Sofa? Und wie groß ist es? Kann ich es am Samstag um elf Uhr sehen? Rufen Sie mich bitte an. Meine Nummer ist 0151 334 556. Vielen Dank und auf Wiederhören!',
     },
   ],
 }

@@ -65,6 +65,29 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Wie in der Prüfung: Lies zuerst die drei Aufgaben. Hör dann das Gespräch. ~~(Como en el examen: lee primero las tres tareas. Después escucha la conversación.)~~',
+      audio: {
+        transcript: 'Tom: Hallo Anna! Kommst du am Samstag zum Kursfest?\nAnna: Hallo Tom! Ja, klar. Es fängt um sechs Uhr an, oder?\nTom: Nein, nicht um sechs, sondern um sieben. Frau Berger hat es gestern im Kurs gesagt.\nAnna: Gut. Was bringst du mit?\nTom: Ich wollte einen Kuchen backen, aber ich habe keine Zeit. Ich bringe Getränke mit.\nAnna: Dann mache ich einen Salat. Fährst du mit dem Bus?\nTom: Nein, mit dem Fahrrad. Die Schule ist ja nicht weit.\nAnna: Stimmt. Bis Samstag!',
+      },
+      items: [
+        {
+          typ: 'mc',
+          frage: 'Wann fängt das Kursfest an?',
+          optionen: ['um fünf Uhr', 'um sechs Uhr', 'um sieben Uhr'],
+          loesung: 2,
+        },
+        {
+          typ: 'mc',
+          frage: 'Was bringt Tom mit?',
+          optionen: ['einen Kuchen', 'Getränke', 'einen Salat'],
+          loesung: 1,
+        },
+        { typ: 'rf', aussage: 'Tom fährt mit dem Fahrrad zum Fest.', loesung: true },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'formular',
       titel: 'Schreiben',
@@ -77,6 +100,21 @@ export default {
         { id: 'monat', label: 'Prüfung im Monat', erwartet: ['Dezember', 'im Dezember'] },
         { id: 'telefon', label: 'Telefonnummer', erwartet: ['0170 4491238', '01704491238'] },
       ],
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Wie in der Prüfung: Stell dich vor. Sprich 60 Sekunden. ~~(Como en el examen: preséntate. Habla 60 segundos.)~~',
+      aufgabe: 'Erzähl etwas über dich. Sprich laut und ohne Papier.',
+      punkte: [
+        'Name, Alter und Land',
+        'Wohnort und Arbeit',
+        'Familie und Hobby',
+        'Warum lernst du Deutsch?',
+      ],
+      redemittel: ['Ich heiße … und ich bin … Jahre alt.', 'Ich komme aus …, aber jetzt wohne ich in …', 'Ich arbeite als …', 'Ich lerne Deutsch, weil …'],
+      maxSekunden: 60,
+      beispielLoesung: 'Ich heiße Lucía und ich bin 27 Jahre alt. Ich komme aus Kolumbien, aber jetzt wohne ich in Leipzig. Ich arbeite in einem Krankenhaus. Die Arbeit gefällt mir gut. Meine Familie wohnt in Kolumbien: meine Eltern und zwei Schwestern. In meiner Freizeit spiele ich Volleyball und höre Musik. Ich lerne seit einem Jahr Deutsch, weil ich in Deutschland bleiben möchte.',
     },
   ],
 }

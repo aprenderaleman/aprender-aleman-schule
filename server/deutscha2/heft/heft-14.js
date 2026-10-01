@@ -69,6 +69,29 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Hör die Nachricht auf dem Anrufbeantworter. Was ist richtig? ~~(Escucha el mensaje del contestador. ¿Qué es correcto?)~~',
+      audio: {
+        transcript: 'Hallo Markus, hier ist Elif. Ich rufe an, denn ich habe ein Problem. Unser Film beginnt heute um sechs, aber ich muss länger arbeiten. Mein Chef ist krank, deshalb bleibe ich bis sieben im Büro. Um halb neun gibt es den Film noch einmal. Passt das für dich oder möchtest du lieber morgen gehen? Die Karten habe ich schon gekauft und ich bringe sie mit. Ruf mich bitte an. Tschüs!',
+      },
+      items: [
+        {
+          typ: 'mc',
+          frage: 'Warum bleibt Elif länger im Büro?',
+          optionen: ['Sie ist krank.', 'Ihr Chef ist krank.', 'Sie hat ein Problem mit den Karten.'],
+          loesung: 1,
+        },
+        {
+          typ: 'mc',
+          frage: 'Wann gibt es den Film heute noch einmal?',
+          optionen: ['um sechs Uhr', 'um sieben Uhr', 'um halb neun'],
+          loesung: 2,
+        },
+        { typ: 'rf', aussage: 'Elif muss die Karten noch kaufen.', loesung: false },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'formular',
       titel: 'Schreiben',
@@ -81,6 +104,20 @@ export default {
         { id: 'uhrzeit', label: 'Uhrzeit', erwartet: ['18 Uhr', 'um 18 Uhr'] },
         { id: 'essen', label: 'Er isst kein …', erwartet: ['Fleisch', 'kein Fleisch'] },
       ],
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Erzähl von deinem Weg zur Arbeit oder zum Kurs. Sprich 45 Sekunden. ~~(Cuenta cómo vas al trabajo o al curso. Habla 45 segundos.)~~',
+      aufgabe: 'Thema: mein Weg zur Arbeit oder zum Deutschkurs. Erzähl von dir. Benutze denn, aber und deshalb.',
+      punkte: [
+        'Wie fährst du? Nenne den Grund mit denn.',
+        'Was ist gut? Was ist nicht so gut? Mach einen Satz mit aber.',
+        'Das Wetter ist schlecht. Was machst du? Antworte mit deshalb.',
+      ],
+      redemittel: ['Ich fahre mit …, denn …', '… ist billig, aber …', 'Manchmal regnet es, deshalb …', 'Im Sommer … / Im Winter …'],
+      maxSekunden: 45,
+      beispielLoesung: 'Ich fahre jeden Morgen mit dem Bus zur Arbeit, denn ich habe kein Auto. Der Bus ist billig, aber er ist am Morgen sehr voll. Die Fahrt dauert zwanzig Minuten und ich höre Musik. Manchmal regnet es, deshalb nehme ich immer eine Jacke mit. Im Sommer fahre ich lieber mit dem Fahrrad, aber im Winter ist es zu kalt.',
     },
   ],
 }

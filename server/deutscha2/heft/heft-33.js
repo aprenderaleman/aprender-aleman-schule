@@ -73,6 +73,19 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Hör die Durchsage im Supermarkt. Richtig oder falsch? Wähle bei der Frage die richtige Antwort. ~~(Escucha el aviso en el supermercado. ¿Verdadero o falso? En la pregunta, elige la respuesta correcta.)~~',
+      audio: {
+        transcript: 'Liebe Kundinnen und Kunden, herzlich willkommen in unserem Supermarkt! Heute haben wir viele Angebote für Sie. Äpfel kosten heute nur einen Euro neunundneunzig das Kilo. Eine Packung Kaffee ist diese Woche billiger. Sie kostet nicht fünf Euro fünfzig, sondern nur vier Euro fünfzig. Frisches Brot finden Sie direkt neben der Kasse. Und noch eine Information für Sie. Heute schließen wir schon um neunzehn Uhr. Wir wünschen Ihnen einen schönen Einkauf!',
+      },
+      items: [
+        { typ: 'mc', frage: 'Was kostet heute ein Kilo Äpfel?', optionen: ['1,90 Euro', '1,99 Euro', '9,19 Euro'], loesung: 1 },
+        { typ: 'rf', aussage: 'Eine Packung Kaffee kostet diese Woche 5,50 Euro.', loesung: false },
+        { typ: 'rf', aussage: 'Der Supermarkt schließt heute um 19 Uhr.', loesung: true },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -86,6 +99,27 @@ export default {
       minWoerter: 25,
       beispielLoesung:
         'Am Sonntag koche ich für meine Familie Nudeln mit Tomatensoße. Ich kaufe eine Packung Nudeln, zwei Dosen Tomaten und ein Kilo Zwiebeln. Ich kaufe auf dem Markt ein, weil das Gemüse dort frischer ist. Der Käse ist im Supermarkt billiger.',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Sprich auf den Anrufbeantworter. Sprich 45 Sekunden. ~~(Deja un mensaje en el contestador. Habla 45 segundos.)~~',
+      aufgabe: 'Du möchtest am Samstag mit Freunden essen gehen. Du rufst im Restaurant an, aber es ist noch geschlossen. Sprich auf den Anrufbeantworter. Reservier einen Tisch.',
+      punkte: [
+        'Tag und Uhrzeit',
+        'Wie viele Personen?',
+        'Stell eine Frage zum Essen.',
+        'dein Name und deine Telefonnummer',
+      ],
+      redemittel: [
+        'Guten Tag, mein Name ist …',
+        'Ich möchte einen Tisch für … Personen reservieren.',
+        'Wir kommen am … um … Uhr.',
+        'Meine Telefonnummer ist …',
+      ],
+      maxSekunden: 45,
+      beispielLoesung:
+        'Guten Tag, mein Name ist Laura Gómez. Ich möchte einen Tisch reservieren, für Samstag um 20 Uhr. Wir sind vier Personen. Haben Sie einen Tisch am Fenster? Und ich habe noch eine Frage: Haben Sie auch Essen ohne Fleisch? Meine Telefonnummer ist 0176 4455667. Vielen Dank und auf Wiederhören!',
     },
   ],
 }

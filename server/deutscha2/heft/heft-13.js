@@ -69,6 +69,24 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Hör den Text aus dem Radio. Was ist richtig? ~~(Escucha el texto de la radio. ¿Qué es correcto?)~~',
+      audio: {
+        transcript: 'Guten Morgen, hier ist das Stadtradio mit dem Reisetipp. Wie kommen Sie am besten zum Flughafen? Der Bus ist am billigsten. Er kostet nur drei Euro, aber er braucht fünfzig Minuten. Der Zug ist schneller als der Bus. Er braucht nur fünfundzwanzig Minuten und kostet fünf Euro. Das Taxi ist so schnell wie der Zug, aber es ist am teuersten. Sie zahlen vierzig Euro. Unser Tipp für Sie, mit dem Zug fahren Sie am besten.',
+      },
+      items: [
+        { typ: 'rf', aussage: 'Der Bus ist billiger als der Zug.', loesung: true },
+        {
+          typ: 'mc',
+          frage: 'Wie lange braucht der Zug zum Flughafen?',
+          optionen: ['5 Minuten', '25 Minuten', '50 Minuten'],
+          loesung: 1,
+        },
+        { typ: 'rf', aussage: 'Das Taxi ist schneller als der Zug.', loesung: false },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -81,6 +99,20 @@ export default {
       ],
       minWoerter: 25,
       beispielLoesung: 'Liebe Carmen, ich wohne in Málaga. Am besten gefällt mir das Meer. Málaga ist kleiner als Madrid, aber der Winter ist schöner — es ist nicht so kalt wie in Madrid. Am liebsten gehe ich mit meiner Schwester ans Meer. Viele Grüße, Lucía',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Erzähl und vergleiche. Sprich 45 Sekunden. ~~(Cuenta y compara. Habla 45 segundos.)~~',
+      aufgabe: 'Thema: Essen und Trinken. Erzähl von dir und vergleiche. Sprich zu allen drei Punkten.',
+      punkte: [
+        'Was isst du am liebsten?',
+        'Was trinkst du lieber: Kaffee oder Tee?',
+        'Vergleiche: das Essen zu Hause und das Essen im Restaurant.',
+      ],
+      redemittel: ['Am liebsten esse ich …', 'Ich trinke lieber … als …', '… schmeckt mir besser als …', '… ist billiger / teurer als …'],
+      maxSekunden: 45,
+      beispielLoesung: 'Also, am liebsten esse ich Pasta mit Tomatensoße. Fisch esse ich auch gern, aber Pasta schmeckt mir besser. Ich trinke lieber Kaffee als Tee. Am Morgen trinke ich immer zwei Tassen. Das Essen zu Hause ist billiger als das Essen im Restaurant. Und meine Mutter kocht am besten! Aber im Restaurant ist es auch schön. Dort muss ich nicht kochen.',
     },
   ],
 }

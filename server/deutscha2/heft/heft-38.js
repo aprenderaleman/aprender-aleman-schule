@@ -69,6 +69,24 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Hör die Nachricht auf dem Anrufbeantworter. Löse die drei Aufgaben. ~~(Escucha el mensaje del contestador. Resuelve las tres tareas.)~~',
+      audio: {
+        transcript: 'Hallo Lena, hier ist Paul. Am Samstag kann ich leider nicht um zehn Uhr kommen. Ich muss am Vormittag noch einkaufen und meine Wohnung aufräumen. Können wir uns am Nachmittag treffen? Der Film fängt um Viertel nach vier an. Ich hole dich also um halb vier ab. Nach dem Kino können wir zusammen essen gehen. Ruf mich bitte heute Abend an! Tschüs!',
+      },
+      items: [
+        {
+          typ: 'mc',
+          frage: 'Wann holt Paul Lena ab?',
+          optionen: ['um 15:30 Uhr', 'um 16:15 Uhr', 'um 16:30 Uhr'],
+          loesung: 0,
+        },
+        { typ: 'rf', aussage: 'Am Samstagvormittag muss Paul einkaufen.', loesung: true },
+        { typ: 'rf', aussage: 'Paul und Lena gehen vor dem Kino essen.', loesung: false },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'formular',
       titel: 'Schreiben',
@@ -81,6 +99,21 @@ export default {
         { id: 'email', label: 'E-Mail', erwartet: ['damian.k@post-beispiel.de'] },
         { id: 'telefon', label: 'Telefonnummer', erwartet: ['0163 2255781', '01632255781'] },
       ],
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Erzähl von deinem Tag. Sprich 60 Sekunden. ~~(Cuenta cómo es tu día. Habla 60 segundos.)~~',
+      aufgabe: 'Wie ist dein Tag von Montag bis Freitag? Erzähl mit Uhrzeiten.',
+      punkte: [
+        'am Morgen: aufstehen und frühstücken',
+        'am Vormittag und am Nachmittag',
+        'am Abend',
+        'Wann gehst du schlafen?',
+      ],
+      redemittel: ['Ich stehe um … auf.', 'Zuerst … Dann …', 'Am Nachmittag …', 'Um … gehe ich schlafen.'],
+      maxSekunden: 60,
+      beispielLoesung: 'Von Montag bis Freitag stehe ich um halb sieben auf. Zuerst dusche ich, dann frühstücke ich. Um Viertel vor acht fahre ich mit dem Bus zur Arbeit. Am Vormittag arbeite ich im Büro. Am Nachmittag kaufe ich ein oder ich lerne Deutsch. Am Abend koche ich und sehe ein bisschen fern. Um elf Uhr gehe ich schlafen.',
     },
   ],
 }

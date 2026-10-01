@@ -73,6 +73,24 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Hör das Gespräch. Zwei Freunde planen etwas. Löse die 3 Aufgaben. ~~(Escucha la conversación. Dos amigos planean algo. Resuelve las 3 tareas.)~~',
+      audio: {
+        transcript: 'Anna: Hallo Lukas! Hast du am Freitag Zeit? Wollen wir zusammen schwimmen gehen?\nLukas: Hallo Anna! Am Freitag kann ich leider nicht, ich muss lange arbeiten. Wie ist es am Samstag?\nAnna: Samstag passt mir gut. Um zehn Uhr?\nLukas: Das ist mir zu früh. Lieber um elf. Geht das?\nAnna: Ja, gut. Wo treffen wir uns? Vor dem Schwimmbad?\nLukas: Nein, lieber am Bahnhof. Dann fahren wir zusammen mit dem Bus.\nAnna: Gute Idee! Also bis Samstag um elf am Bahnhof.',
+      },
+      items: [
+        {
+          typ: 'mc',
+          frage: 'Wann gehen Anna und Lukas schwimmen?',
+          optionen: ['am Freitag um zehn Uhr', 'am Samstag um zehn Uhr', 'am Samstag um elf Uhr'],
+          loesung: 2,
+        },
+        { typ: 'rf', aussage: 'Der Treffpunkt ist das Schwimmbad.', loesung: false },
+        { typ: 'rf', aussage: 'Anna und Lukas fahren mit dem Bus.', loesung: true },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'formular',
       titel: 'Schreiben',
@@ -85,6 +103,16 @@ export default {
         { id: 'treffpunkt', label: 'Treffpunkt', erwartet: ['Bahnhof', 'am Bahnhof', 'der Bahnhof'] },
         { id: 'telefon', label: 'Telefonnummer', erwartet: ['0157 8833221', '01578833221'] },
       ],
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Mach einen Vorschlag. Sprich 50 Sekunden. ~~(Haz una propuesta. Habla 50 segundos.)~~',
+      aufgabe: 'Dein Freund Tom möchte am Freitag mit dir ins Kino gehen. Du kannst am Freitag nicht. Sprich Tom eine Nachricht auf die Mailbox.',
+      punkte: ['Sag freundlich ab.', 'Mach einen neuen Vorschlag: Tag und Uhrzeit.', 'Sag einen Treffpunkt.'],
+      redemittel: ['Leider kann ich am … nicht.', 'Wie ist es am …?', 'Wollen wir um … Uhr …?', 'Wir treffen uns …'],
+      maxSekunden: 50,
+      beispielLoesung: 'Hallo Tom! Danke für deine Nachricht. Kino ist eine gute Idee, aber leider kann ich am Freitag nicht. Ich muss bis zehn Uhr arbeiten. Wie ist es am Samstag? Wollen wir am Samstag um acht Uhr ins Kino gehen? Wir treffen uns um halb acht an der Bushaltestelle am Markt. Dann trinken wir zuerst noch einen Kaffee. Passt dir das?',
     },
   ],
 }

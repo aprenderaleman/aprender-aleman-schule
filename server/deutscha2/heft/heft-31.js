@@ -74,6 +74,19 @@ export default {
       ],
     },
     {
+      typ: 'hoeren',
+      titel: 'Hören',
+      anweisung: 'Hör das Gespräch. Richtig oder falsch? Wähle bei der Frage die richtige Antwort. ~~(Escucha la conversación. ¿Verdadero o falso? En la pregunta, elige la respuesta correcta.)~~',
+      audio: {
+        transcript: 'Frau: Tom, ist das ein Foto von deiner Familie?\nMann: Ja, Lena. Das sind meine Eltern und das ist mein Bruder Jonas.\nFrau: Ist Jonas verheiratet?\nMann: Nein, er ist ledig. Aber meine Schwester ist verheiratet und hat zwei Kinder.\nFrau: Und dein Bruder, ist er fünfundzwanzig?\nMann: Nein, er ist nicht fünfundzwanzig, sondern schon achtundzwanzig. Er ist sehr lustig.\nFrau: Wohnt deine Familie auch hier in Köln?\nMann: Nein, meine Eltern wohnen in Hamburg. Ich besuche sie oft am Wochenende.',
+      },
+      items: [
+        { typ: 'rf', aussage: 'Der Bruder von Tom ist verheiratet.', loesung: false },
+        { typ: 'mc', frage: 'Wie alt ist Jonas?', optionen: ['22 Jahre', '25 Jahre', '28 Jahre'], loesung: 2 },
+        { typ: 'rf', aussage: 'Die Eltern von Tom wohnen in Hamburg.', loesung: true },
+      ],
+    },
+    {
       typ: 'schreiben',
       variante: 'text',
       titel: 'Schreiben',
@@ -87,6 +100,27 @@ export default {
       minWoerter: 25,
       beispielLoesung:
         'Meine Familie ist klein. Ich habe eine Schwester, sie heißt Carla. Meine Eltern wohnen in Bogotá. Mein Vater ist 62 Jahre alt, sehr nett und lustig. Ich bin ledig und wohne allein in Hamburg. Am Wochenende besuche ich oft meine Großeltern.',
+    },
+    {
+      typ: 'sprechen',
+      titel: 'Sprechen',
+      anweisung: 'Erzähl von einer Person. Sprich 45 Sekunden. ~~(Habla de una persona. Habla 45 segundos.)~~',
+      aufgabe: 'Erzähl von deinem besten Freund oder von deiner besten Freundin.',
+      punkte: [
+        'Name und Alter',
+        'Wo wohnt er oder sie?',
+        'Wie ist er oder sie? Nenn zwei Adjektive.',
+        'Was macht ihr zusammen?',
+      ],
+      redemittel: [
+        'Mein bester Freund / Meine beste Freundin heißt …',
+        'Er / Sie ist … Jahre alt und wohnt in …',
+        'Er / Sie ist sehr … und …',
+        'Wir verstehen uns …',
+      ],
+      maxSekunden: 45,
+      beispielLoesung:
+        'Mein bester Freund heißt Diego. Er ist 30 Jahre alt und wohnt in Valencia. Er ist verheiratet und hat eine kleine Tochter. Diego ist sehr lustig und sympathisch. Wir verstehen uns super. Wir telefonieren jeden Sonntag. Im Sommer besuche ich ihn, dann gehen wir zusammen essen.',
     },
   ],
 }
