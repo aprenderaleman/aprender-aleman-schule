@@ -64,6 +64,19 @@ await build({
   jsx: 'automatic',
   outfile: tmp,
   logLevel: 'silent',
+  // los componentes leen import.meta.env (Vite); fuera de Vite no existe
+  define: { 'import.meta.env': '{}' },
+  // el export no tiene sesión: useAuth devuelve un usuario vacío
+  plugins: [{
+    name: 'auth-stub',
+    setup(b) {
+      b.onResolve({ filter: /context\/AuthContext$/ }, () => ({ path: 'auth-stub', namespace: 'stub' }))
+      b.onLoad({ filter: /.*/, namespace: 'stub' }, () => ({
+        contents: 'export const useAuth = () => ({ user: null }); export const AuthProvider = ({ children }) => children',
+        loader: 'js',
+      }))
+    },
+  }],
   // react/react-dom son CJS con requires dinámicos: que los cargue Node
   external: ['react', 'react-dom', 'react-dom/server', 'react-router-dom'],
 })
