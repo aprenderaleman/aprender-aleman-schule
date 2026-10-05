@@ -90,7 +90,8 @@ export default {
       titel: 'einräumen und gegenüberstellen',
       items: [
         { text: 'Die Wohnung ist **zwar** klein, **aber** sehr zentral.', gl: '— es cierto que … pero' },
-        { text: '**Zwar** regnet es, **aber** wir gehen trotzdem raus.', gl: '— zwar en posición 1 → inversión' },
+        { text: 'Es regnet **zwar**, **aber** wir gehen trotzdem raus.', gl: '— zwar tras el verbo: la posición más habitual' },
+        { text: '**Zwar** regnet es, **aber** wir gehen trotzdem raus.', gl: '— también correcto: zwar en posición 1 → inversión (más enfático, más escrito)' },
         { text: '**Einerseits** möchte ich sparen, **andererseits** brauche ich einen neuen Laptop.', gl: '— por un lado … por otro' },
       ],
     },
