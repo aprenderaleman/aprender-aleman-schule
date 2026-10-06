@@ -68,7 +68,8 @@ export default {
       type: 'prose',
       card: true,
       absaetze: [
-        '**wo für Orte:** Das ist die Stadt, **wo** ich geboren bin. ~~Para lugares, «wo» es la opción fácil y correcta en B1.~~ Auch bei Cafés, Schulen, Ländern: *das Café, wo wir uns getroffen haben*.',
+        '**Orte — in der / in dem oder wo:** Das ist die Stadt, **in der** ich geboren bin. ~~Con un sustantivo con artículo (die Stadt, das Café), la forma cuidada —la que conviene al escribir— es preposición + relativo.~~ Im Alltag hört man auch: *die Stadt, **wo** ich geboren bin* ~~(correcto y muy frecuente al hablar)~~.',
+        '**Immer wo:** nach Städte- und Ländernamen und nach *dort, da, überall*: *Ich wohne in Bremen, **wo** es viele Cafés gibt.* · *Dort, **wo** ich arbeite, ist es ruhig.*',
       ],
     },
 

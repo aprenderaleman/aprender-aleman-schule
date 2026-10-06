@@ -38,7 +38,7 @@ export default {
         { typ: 'satzbau', woerter: ['ist', 'der', 'Chef', 'dort', 'Mann', 'steht', 'mein', 'Der'], loesung: 'Der Mann, der dort steht, ist mein Chef.', alt: ['Der Chef, der dort steht, ist mein Mann.'] },
         {
           typ: 'korrektur',
-          optionen: ['Das ist die Stadt, wo ich geboren bin.', 'Das ist die Stadt, wo ich bin geboren.'],
+          optionen: ['Das ist die Stadt, in der ich geboren bin.', 'Das ist die Stadt, in der ich bin geboren.'],
           loesung: 0,
           warum: 'El relativo es una subordinada: el verbo conjugado va **al final** (*geboren **bin***), no en segunda posición.',
         },
