@@ -156,12 +156,12 @@ export default {
       titel: '2 Lücken',
       anweisung: 'In der formellen E-Mail bittest du oft höflich um etwas. Ergänze:',
       absaetze: [
-        '„Sehr geehrte Frau Weber, ich {1} am Donnerstag leider keine Zeit. {2} wir den Termin auf Freitag verschieben? Mit freundlichen Grüßen …“',
+        '„Sehr geehrte Frau Weber, ich {1} eine Bitte: Am Donnerstag habe ich leider keine Zeit. {2} wir den Termin auf Freitag verschieben? Mit freundlichen Grüßen …“',
       ],
       optionen: ['(1) haben → Konjunktiv II', '(2) können → Konjunktiv II'],
       loesungLabel: 'Lösung',
       loesungen: [
-        '{1} **hätte** — eigene Form von *haben*.',
+        '{1} **hätte** — eigene Form von *haben*; *Ich hätte eine Bitte* leitet die Bitte höflich ein. Der nächste Satz bleibt im Indikativ (*habe … keine Zeit*): Das ist eine Tatsache.',
         '{2} **Könnten** — höfliche Frage, Verb auf Position 1.',
       ],
     },
