@@ -3223,16 +3223,22 @@ Gib detailliertes, konstruktives Feedback. Antworte NUR mit gültigem JSON:
 }
 Bewertung von 0-10. Kein Text außerhalb des JSONs.`
 
+    // 2500 tokens: para textos de 100+ palabras el feedback estructurado
+    // (grammar_errors + vocabulary_suggestions con explicacion en aleman)
+    // ocupa facil 1200-1800 tokens. Con el limite anterior de 1000 el JSON
+    // llegaba truncado y JSON.parse rompia → 500 sin feedback.
     const text = await callAnthropic(
       [{ role: 'user', content: message }],
       userName || 'Student',
       userLevel || 'A1',
-      1000,
+      2500,
       { userId: req.user.id, endpoint: 'evaluate-writing', cacheKey }
     )
-    const jsonMatch = text.match(/\{[\s\S]*\}/)
-    const result = jsonMatch ? JSON.parse(jsonMatch[0]) : null
-    if (!result) return res.status(500).json({ error: 'Error al procesar respuesta de IA.' })
+    const result = safeParseEvalJson(text)
+    if (!result) {
+      console.error('[evaluate-writing] JSON parse failed. Raw snippet:', text.slice(0, 500))
+      return res.status(500).json({ error: 'Error al procesar respuesta de IA.' })
+    }
     putCachedEvaluation(cacheKey, 'evaluate-writing', result).catch(() => {})
     res.json(result)
   } catch (err) {
@@ -3240,6 +3246,34 @@ Bewertung von 0-10. Kein Text außerhalb des JSONs.`
     res.status(500).json({ error: 'Error al evaluar escritura.' })
   }
 })
+
+// Parser tolerante para la respuesta JSON de Haiku: acepta JSON pelado,
+// envuelto en ```json ... ``` y recupera el objeto incluso si vino con
+// texto antes/despues. Si llega truncado (sin cerrar la ultima llave)
+// intenta cerrar al vuelo para no perder el feedback parcial.
+function safeParseEvalJson(text) {
+  if (typeof text !== 'string') return null
+  let candidate = text.trim()
+  // Quitar markdown codeblock si viene
+  const fenced = candidate.match(/```(?:json)?\s*([\s\S]*?)\s*```/i)
+  if (fenced) candidate = fenced[1].trim()
+  // Buscar primer { y ultimo }
+  const first = candidate.indexOf('{')
+  if (first < 0) return null
+  const last = candidate.lastIndexOf('}')
+  const body = last > first ? candidate.slice(first, last + 1) : candidate.slice(first)
+  // Intento directo
+  try { return JSON.parse(body) } catch { /* fallthrough */ }
+  // Reparar: eliminar coma colgante antes de cierre y cerrar llaves si falta
+  let repaired = body.replace(/,\s*([}\]])/g, '$1')
+  const openCurly = (repaired.match(/\{/g) || []).length
+  const closeCurly = (repaired.match(/\}/g) || []).length
+  const openSq = (repaired.match(/\[/g) || []).length
+  const closeSq = (repaired.match(/\]/g) || []).length
+  repaired += ']'.repeat(Math.max(0, openSq - closeSq))
+  repaired += '}'.repeat(Math.max(0, openCurly - closeCurly))
+  try { return JSON.parse(repaired) } catch { return null }
+}
 
 // Explain a wrong answer in Reading / Listening so students learn from it.
 // Cheap call (~$0.0005), and after the first request for a given
@@ -3383,16 +3417,21 @@ Antworte NUR mit gültigem JSON (kein Markdown, kein Codeblock):
 }
 Bewertung von 0-10. Kein Text außerhalb des JSONs.`
 
+    // 2500 tokens: mismo motivo que en evaluate-writing — el JSON de
+    // feedback con grammar_errors + explicaciones + pronunciation_tips se
+    // acerca facil al limite de 1000 y llegaba truncado.
     const reply = await callAnthropicRaw(
       DEFAULT_ANTHROPIC_MODEL,
       systemPrompt,
       [{ role: 'user', content: userMessage }],
-      1000,
+      2500,
       { userId: req.user.id, endpoint: 'evaluate-speaking', cacheKey }
     )
-    const jsonMatch = reply.match(/\{[\s\S]*\}/)
-    if (!jsonMatch) return res.status(500).json({ error: 'Fehler bei der KI-Antwort.' })
-    const result = JSON.parse(jsonMatch[0])
+    const result = safeParseEvalJson(reply)
+    if (!result) {
+      console.error('[evaluate-speaking] JSON parse failed. Raw snippet:', reply.slice(0, 500))
+      return res.status(500).json({ error: 'Fehler bei der KI-Antwort.' })
+    }
     putCachedEvaluation(cacheKey, 'evaluate-speaking', result).catch(() => {})
     res.json(result)
   } catch (err) {
