@@ -20,6 +20,43 @@ export function isSpeechRecognitionSupported() {
   return !!SR
 }
 
+// Defense-in-depth contra APIs de voz que repiten chunks (Zulma vio
+// "ich ich ich hätte ich hätte ich hätte gerne…"). Colapsa cualquier
+// n-grama de 1 a 5 palabras que se repita 3 o mas veces seguidas a una
+// unica aparicion. Si el navegador manda bien el transcript, es no-op.
+export function cleanTranscript(raw) {
+  if (!raw || typeof raw !== 'string') return ''
+  const words = raw.trim().split(/\s+/)
+  if (words.length < 4) return words.join(' ')
+  // Umbral: colapsamos solo cuando un n-grama se repite >= 3 veces
+  // seguidas. Con 2 todavia puede ser legitimo ("ich bin ich bin müde").
+  const MIN_REPEATS_TO_COLLAPSE = 3
+  for (let n = 5; n >= 1; n--) {
+    let i = 0
+    const out = []
+    while (i < words.length) {
+      const chunk = words.slice(i, i + n)
+      if (chunk.length < n) { out.push(...chunk); break }
+      let repeats = 1
+      while (
+        i + n * (repeats + 1) <= words.length &&
+        words.slice(i + n * repeats, i + n * (repeats + 1))
+          .every((w, k) => w.toLowerCase() === chunk[k].toLowerCase())
+      ) repeats++
+      if (repeats >= MIN_REPEATS_TO_COLLAPSE) {
+        out.push(...chunk)
+        i += n * repeats
+      } else {
+        out.push(...chunk)
+        i += n
+      }
+    }
+    words.length = 0
+    words.push(...out)
+  }
+  return words.join(' ')
+}
+
 /**
  * Start recognising German speech. Returns an object with a `stop()`
  * method that resolves to `{transcript, durationSeconds}`. If the browser
@@ -49,14 +86,25 @@ function startWebRecognition({ lang, onPartial, onError }) {
   let finalTranscript = ''
   const startedAt = Date.now()
 
+  // IMPORTANTE: event.results es un snapshot acumulativo — contiene TODOS
+  // los resultados desde el inicio, no solo los nuevos. Hay que recorrerlo
+  // desde 0 y RECONSTRUIR finalTranscript cada vez, no acumular con +=.
+  //
+  // Antes usabamos event.resultIndex como watermark + += al final anterior,
+  // pero en Chrome Android (y otros) resultIndex no se actualiza
+  // consistentemente, asi que los chunks finales se sumaban dos y tres
+  // veces → el transcript explotaba a "ich ich ich hätte ich hätte ich
+  // hätte gerne..." (reportado por Zulma).
   rec.onresult = (event) => {
+    let finalText = ''
     let interim = ''
-    for (let i = event.resultIndex; i < event.results.length; i++) {
+    for (let i = 0; i < event.results.length; i++) {
       const r = event.results[i]
-      if (r.isFinal) finalTranscript += r[0].transcript + ' '
+      if (r.isFinal) finalText += r[0].transcript + ' '
       else interim += r[0].transcript
     }
-    if (onPartial) onPartial((finalTranscript + ' ' + interim).trim())
+    finalTranscript = finalText
+    if (onPartial) onPartial(cleanTranscript(finalTranscript + ' ' + interim))
   }
 
   let doneResolve
@@ -64,7 +112,7 @@ function startWebRecognition({ lang, onPartial, onError }) {
 
   rec.onend = () => {
     doneResolve({
-      transcript: finalTranscript.trim(),
+      transcript: cleanTranscript(finalTranscript),
       durationSeconds: Math.round((Date.now() - startedAt) / 1000),
     })
   }
@@ -139,7 +187,7 @@ function startNativeRecognition({ lang, onPartial, onError }) {
     try { if (listener) await listener.remove() } catch {}
     try { if (plugin) await plugin.stop() } catch {}
     doneResolve({
-      transcript: finalTranscript.trim(),
+      transcript: cleanTranscript(finalTranscript),
       durationSeconds: Math.round((Date.now() - startedAt) / 1000),
     })
     return done
