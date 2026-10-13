@@ -1,19 +1,63 @@
-import React, { useState, useCallback } from 'react'
+import React, { useState, useCallback, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Button from '../UI/Button'
 import LoadingSpinner from '../UI/LoadingSpinner'
 import { evaluateWriting } from '../../utils/ai'
 import { AlertCircle, CheckCircle, Lightbulb, BookOpen, Star, ThumbsUp } from 'lucide-react'
 
+// Clave de autosave por (userId, exerciseId). Si el alumno comparte navegador
+// con alguien, su userId cambia y no leemos el borrador del otro. Si no hay
+// user, cae a 'anon' — mejor que perder el texto.
+function draftKey(exerciseId) {
+  let userId = 'anon'
+  try {
+    const u = JSON.parse(localStorage.getItem('auth_user') || 'null')
+    if (u?.id) userId = u.id
+  } catch { /* ignore */ }
+  return `writing-draft:${userId}:${exerciseId}`
+}
+
+function loadDraft(exerciseId) {
+  try {
+    const raw = localStorage.getItem(draftKey(exerciseId))
+    if (!raw) return null
+    return JSON.parse(raw)   // { text, failedAt? }
+  } catch { return null }
+}
+
+function saveDraft(exerciseId, data) {
+  try { localStorage.setItem(draftKey(exerciseId), JSON.stringify(data)) } catch { /* quota, ignore */ }
+}
+
+function clearDraft(exerciseId) {
+  try { localStorage.removeItem(draftKey(exerciseId)) } catch { /* ignore */ }
+}
+
 export default function WritingExercise({ exercise, userName, userLevel, onComplete }) {
-  const [text, setText] = useState('')
+  // Precargar el borrador en el estado inicial (lazy init) para evitar un
+  // flash de textarea vacio antes del useEffect.
+  const [text, setText] = useState(() => loadDraft(exercise.id)?.text || '')
   const [feedback, setFeedback] = useState(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
   const [submitted, setSubmitted] = useState(false)
+  const [restored, setRestored] = useState(() => !!loadDraft(exercise.id)?.text)
+  // Para evitar que el auto-reintento se dispare en el primer render si el
+  // alumno acaba de entrar — solo reintentamos si veniamos de un fallo.
+  const autoRetryRef = useRef(loadDraft(exercise.id)?.failedAt || null)
 
   const wordCount = text.trim().split(/\s+/).filter(Boolean).length
   const meetsMinimum = wordCount >= (exercise.minWords || 20)
+
+  // Autosave: cada vez que el alumno escribe, persistimos el texto en
+  // localStorage. Jeaneth reporto que su texto se perdia cuando la IA
+  // fallaba — ahora, aunque falle y cierre el navegador, al volver al
+  // ejercicio el texto esta ahi.
+  useEffect(() => {
+    if (submitted) return
+    if (!text) { clearDraft(exercise.id); return }
+    saveDraft(exercise.id, { text, failedAt: autoRetryRef.current })
+  }, [text, submitted, exercise.id])
 
   // Un solo reintento automatico antes de rendirnos. Cuando la corrección
   // falla, NO avanzamos al siguiente ejercicio con score 0 — el alumno se
@@ -32,23 +76,44 @@ export default function WritingExercise({ exercise, userName, userLevel, onCompl
       if (result) {
         setFeedback(result)
         setSubmitted(true)
+        autoRetryRef.current = null
+        // Mantenemos el draft hasta que el alumno aprete "Weiter". Si cierra
+        // antes, al volver recupera texto + reintenta auto.
+        saveDraft(exercise.id, { text })
       } else {
         throw new Error('No feedback returned')
       }
     } catch {
-      setError('Die Bewertung konnte nicht geladen werden. Versuche es erneut — deine Antwort ist gespeichert.')
+      // Marcamos el draft como "fallido" para que al volver reintentemos auto.
+      autoRetryRef.current = new Date().toISOString()
+      saveDraft(exercise.id, { text, failedAt: autoRetryRef.current })
+      setError('Die Bewertung konnte nicht geladen werden. Dein Text ist auf diesem Gerät gespeichert — versuche es erneut oder komm später zurück.')
     }
     setLoading(false)
   }, [text, userName, userLevel, exercise])
 
+  // Auto-reintento al montar: si venimos de un fallo previo (draft con
+  // failedAt), relanzamos el eval sin que el alumno tenga que apretar nada.
+  // Solo una vez por mount y solo si el texto cumple minimo.
+  const didAutoRetry = useRef(false)
+  useEffect(() => {
+    if (didAutoRetry.current) return
+    if (!autoRetryRef.current) return
+    if (!meetsMinimum) return
+    if (submitted || loading) return
+    didAutoRetry.current = true
+    runEval()
+  }, [meetsMinimum, submitted, loading, runEval])
+
   const handleContinue = useCallback(() => {
     // Recien aca reportamos el resultado hacia arriba. Adjuntamos feedback
     // para que se persista en historial y el alumno pueda revisarlo en
-    // Fortschritt.
+    // Fortschritt. Y limpiamos el draft — ya se guardo en el historial.
     if (!feedback) return
+    clearDraft(exercise.id)
     const score = Math.round((feedback.score / 10) * 100)
     onComplete({ score, feedback })
-  }, [feedback, onComplete])
+  }, [feedback, onComplete, exercise.id])
 
   return (
     <div className="space-y-5">
@@ -88,7 +153,11 @@ export default function WritingExercise({ exercise, userName, userLevel, onCompl
       <div>
         <textarea
           value={text}
-          onChange={(e) => !submitted && setText(e.target.value)}
+          onChange={(e) => {
+            if (submitted) return
+            setText(e.target.value)
+            if (restored) setRestored(false)
+          }}
           disabled={submitted || loading}
           placeholder="Schreibe deinen Text hier auf Deutsch..."
           aria-label="Schreibbereich auf Deutsch"
@@ -102,6 +171,24 @@ export default function WritingExercise({ exercise, userName, userLevel, onCompl
           {meetsMinimum && <span className="text-xs text-green-500 font-semibold">Bereit zum Senden</span>}
         </div>
       </div>
+
+      {/* Aviso cuando recuperamos un borrador — para que el alumno sepa
+          que no empieza en blanco. Se oculta en cuanto edita. */}
+      {restored && !submitted && !loading && (
+        <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-xl p-3 flex items-start gap-2">
+          <CheckCircle size={16} className="text-amber-600 shrink-0 mt-0.5" />
+          <p className="text-sm text-amber-800 dark:text-amber-200">
+            Dein Entwurf wurde wiederhergestellt. Du kannst weitermachen oder den Text ändern.
+            <button
+              type="button"
+              onClick={() => { setText(''); setRestored(false); clearDraft(exercise.id); autoRetryRef.current = null }}
+              className="ml-2 underline font-semibold hover:text-amber-900"
+            >
+              Von vorn beginnen
+            </button>
+          </p>
+        </div>
+      )}
 
       {loading && (
         <div className="flex flex-col items-center gap-3 py-6">
