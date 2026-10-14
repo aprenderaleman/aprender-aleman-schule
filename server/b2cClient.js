@@ -13,7 +13,7 @@ function isConfigured() {
 /**
  * Low-level fetch wrapper with timeout + standard headers.
  */
-async function call(pathAndQuery, { method = 'GET' } = {}) {
+async function call(pathAndQuery, { method = 'GET', body } = {}) {
   if (!isConfigured()) {
     const err = new Error('b2c not configured (missing B2C_API_BASE / B2C_INTERNAL_API_KEY)')
     err.code = 'NOT_CONFIGURED'
@@ -32,6 +32,7 @@ async function call(pathAndQuery, { method = 'GET' } = {}) {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
       },
+      ...(body !== undefined ? { body: JSON.stringify(body) } : {}),
       signal: controller.signal,
     })
 
@@ -178,6 +179,7 @@ async function fetchReferralCached(email) {
 }
 
 export {
+  call,
   isConfigured,
   fetchActiveStudents,
   verifyEmail,

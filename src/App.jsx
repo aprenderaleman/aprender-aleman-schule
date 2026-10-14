@@ -22,6 +22,7 @@ import AutoLogin from './pages/AutoLogin'
 import Pruefungen from './pages/Pruefungen'
 import Cursos from './pages/Cursos'
 import PruefungPlayer from './pages/PruefungPlayer'
+import PruefungErgebnis from './pages/PruefungErgebnis'
 import LevelTest from './pages/LevelTest'
 import AdminLayout from './components/Layout/AdminLayout'
 import Paywall from './components/UI/Paywall'
@@ -45,6 +46,10 @@ const AdminUserDetail = lazy(() => import('./pages/admin/AdminUserDetail'))
 const AdminFinances = lazy(() => import('./pages/admin/AdminFinances'))
 const AdminReviews = lazy(() => import('./pages/admin/AdminReviews'))
 const AdminSupervision = lazy(() => import('./pages/admin/AdminSupervision'))
+
+// Revisión de exámenes (equipo docente: teacher, admin, superadmin)
+const ExamReviews = lazy(() => import('./pages/staff/ExamReviews'))
+const ExamReviewDetail = lazy(() => import('./pages/staff/ExamReviewDetail'))
 
 // Cursos por nivel — chunk propio, solo se descargan al entrar
 const DeutschC1 = lazy(() => import('./pages/DeutschC1'))
@@ -104,6 +109,31 @@ function AdminRoute({ children }) {
         {children}
       </Suspense>
     </AdminLayout>
+  )
+}
+
+// Equipo docente: profesores y admins. Usa el chrome normal de la app (Navbar +
+// AppSidebar), no AdminLayout: un profesor no puede entrar en /admin/*.
+// Solo UX — los endpoints /api/admin/pruefungen/reviews aplican staffOnly.
+const REVIEW_ROLES = ['teacher', 'admin', 'superadmin']
+
+function StaffRoute({ children }) {
+  const { user } = useAuth()
+  if (!user) return <Navigate to="/login" replace />
+  if (!REVIEW_ROLES.includes(user.role)) return <Navigate to="/dashboard" replace />
+  return (
+    <div className="min-h-screen bg-background flex flex-col">
+      <Navbar />
+      <main id="main"className="flex-1 max-w-7xl md:pl-72 mx-auto w-full px-4 sm:px-6 py-6 sm:py-8">
+        <Suspense fallback={
+          <div className="flex items-center justify-center py-20">
+            <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-orange-500" />
+          </div>
+        }>
+          {children}
+        </Suspense>
+      </main>
+    </div>
   )
 }
 
@@ -171,6 +201,7 @@ function AppRoutes() {
         {/* Catálogo de los cursos por nivel (A1-C1) */}
         <Route path="/cursos" element={<PaidRoute><Cursos /></PaidRoute>} />
         <Route path="/pruefungen" element={<PaidRoute><Pruefungen /></PaidRoute>} />
+        <Route path="/pruefungen/ergebnis/:attemptId" element={<PaidRoute><PruefungErgebnis /></PaidRoute>} />
         <Route path="/pruefungen/:examId" element={<PaidRoute><PruefungPlayer /></PaidRoute>} />
         {/* Zertifikat C1 — curso restringido */}
         <Route path="/deutschc1" element={<C1Route><DeutschC1 /></C1Route>} />
@@ -188,6 +219,9 @@ function AppRoutes() {
         <Route path="/deutscha1" element={<C1Route><DeutschA1 /></C1Route>} />
         <Route path="/deutscha1/:id" element={<C1Route><DeutschA1 /></C1Route>} />
         <Route path="/deutscha1/:id/heft" element={<C1Route><DeutschA1 heft /></C1Route>} />
+        {/* Revisión de exámenes — equipo docente */}
+        <Route path="/revision-examenes" element={<StaffRoute><ExamReviews /></StaffRoute>} />
+        <Route path="/revision-examenes/:attemptId" element={<StaffRoute><ExamReviewDetail /></StaffRoute>} />
         {/* Admin routes */}
         <Route path="/admin" element={<AdminRoute><AdminDashboard /></AdminRoute>} />
         <Route path="/admin/usuarios" element={<AdminRoute><AdminUsers /></AdminRoute>} />

@@ -3,8 +3,9 @@ import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
   Home, BookOpen, Layers, GraduationCap, BarChart2, Trophy, User,
-  Target, CreditCard, LogOut, X, Zap, Bot, ExternalLink, Library,
+  Target, CreditCard, LogOut, X, Zap, Bot, ExternalLink, Library, ClipboardCheck,
 } from 'lucide-react'
+import { isReviewStaff, usePendingExamReviews } from '../../utils/examReviews'
 import { useAuth } from '../../context/AuthContext'
 import { useProgress } from '../../context/ProgressContext'
 import { useSidebar } from '../../context/SidebarContext'
@@ -22,6 +23,9 @@ const NAV_ITEMS = [
   { to: '/logros',        icon: Trophy,         label: 'Erfolge' },
   { href: 'https://hans.aprender-aleman.de', icon: Bot, label: 'Hans (KI-Lehrer)', external: true },
 ]
+
+// Solo equipo docente (teacher, admin, superadmin): va justo tras «Prüfungen».
+const STAFF_REVIEW_ITEM = { to: '/revision-examenes', icon: ClipboardCheck, label: 'Revisión de exámenes', staffReview: true }
 
 const SECONDARY_ITEMS = [
   { to: '/perfil',  icon: User,        label: 'Profil' },
@@ -52,8 +56,13 @@ export default function AppSidebar() {
   const { isOpen, close } = useSidebar()
   const location = useLocation()
   const navigate = useNavigate()
+  const pendingReviews = usePendingExamReviews(user?.role)
 
   if (!user) return null
+
+  const navItems = isReviewStaff(user.role)
+    ? NAV_ITEMS.flatMap(item => (item.to === '/pruefungen' ? [item, STAFF_REVIEW_ITEM] : [item]))
+    : NAV_ITEMS
 
   const path = location.pathname
   const hidden = (
@@ -118,7 +127,7 @@ export default function AppSidebar() {
 
       {/* Main nav */}
       <nav className="flex-1 overflow-y-auto px-3 space-y-0.5" aria-label="Hauptnavigation">
-        {NAV_ITEMS.map(({ to, href, icon: Icon, label, external }) => {
+        {navItems.map(({ to, href, icon: Icon, label, external, staffReview }) => {
           const active = !external && (path === to || path.startsWith(to + '/'))
           const className =
             'relative flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-colors ' +
@@ -159,7 +168,15 @@ export default function AppSidebar() {
                 />
               )}
               <Icon size={18} strokeWidth={active ? 2.4 : 2} className="shrink-0" />
-              <span>{label}</span>
+              <span className={staffReview ? 'flex-1' : undefined}>{label}</span>
+              {staffReview && pendingReviews > 0 && (
+                <span
+                  className="shrink-0 min-w-[20px] h-5 px-1.5 rounded-full bg-warm text-warm-foreground text-[11px] font-bold flex items-center justify-center"
+                  aria-label={`${pendingReviews} pendientes`}
+                >
+                  {pendingReviews}
+                </span>
+              )}
             </Link>
           )
         })}

@@ -17,7 +17,9 @@ import {
   assertCanStartRealAttempt, withinTimeLimit, examSpec, levelPassStatus, PRUEFUNG_PASS_PCT,
   READINESS_MIN_SIM_PCT, getExam, poolOf, realExamFor, catalog, catalogEntry, publicExam,
   gradeExam, partScores, studentDetail, audioClips, needsGeneratedAudio, speechSegments,
+  REVIEW_COUNTS_SQL,
 } from './realExam.js'
+import { setupExamReview } from './examReview.js'
 import { LEVEL_TEST_QUESTIONS, computeLevel as computeLevelTestLevel } from './level-test-bank.js'
 import { getCourseIndex as getC1Index, getLesson as getC1Lesson } from './deutschc1/index.js'
 import { getCourseIndex as getB2Index, getLesson as getB2Lesson } from './deutschb2/index.js'
@@ -1859,7 +1861,7 @@ app.get('/api/internal/student/progress', async (req, res) => {
                 MAX(finishedAt) AS lastAttemptAt
            FROM schule_pruefungen_attempts
           WHERE userId = ? AND level = ? AND mode = ?
-            AND finishedAt IS NOT NULL AND maxScore > 0
+            AND finishedAt IS NOT NULL AND maxScore > 0 AND ${REVIEW_COUNTS_SQL}
           GROUP BY module`,
         [user.id, level, modeFilter]
       )
@@ -1950,12 +1952,14 @@ app.post('/api/internal/certificate/issue', async (req, res) => {
               (SELECT id FROM schule_pruefungen_attempts a2
                 WHERE a2.userId = a.userId AND a2.level = a.level AND a2.module = a.module
                   AND a2.mode = 'real' AND a2.finishedAt IS NOT NULL AND a2.maxScore > 0
+                  AND (a2.reviewStatus IS NULL OR a2.reviewStatus = 'confirmed')
                 ORDER BY (a2.score / a2.maxScore) DESC, a2.finishedAt ASC LIMIT 1) AS attemptId,
               MAX(score / NULLIF(maxScore, 0) * 100) AS bestPct,
               MAX(passed) AS everPassed
          FROM schule_pruefungen_attempts a
         WHERE a.userId = ? AND a.level = ? AND a.mode = 'real'
           AND a.finishedAt IS NOT NULL AND a.maxScore > 0
+          AND (a.reviewStatus IS NULL OR a.reviewStatus = 'confirmed')
         GROUP BY module`,
       [userId, lvl]
     )
@@ -4063,7 +4067,7 @@ app.get('/api/pruefungen/plan', authMiddleware, subscriptionMiddleware, async (r
     const [attempts] = await pool.query(
       `SELECT module, MAX(score / NULLIF(maxScore,0) * 100) AS bestPct, COUNT(*) AS totalAttempts
        FROM schule_pruefungen_attempts
-       WHERE userId = ? AND finishedAt IS NOT NULL AND maxScore > 0
+       WHERE userId = ? AND finishedAt IS NOT NULL AND maxScore > 0 AND ${REVIEW_COUNTS_SQL}
        GROUP BY module`,
       [req.user.id]
     )
@@ -4099,10 +4103,12 @@ app.get('/api/pruefungen/cert-status', authMiddleware, subscriptionMiddleware, a
     // Best real attempt per module + total finished real attempts
     const [rows] = await pool.query(
       `SELECT module,
-              MAX(score / NULLIF(maxScore, 0) * 100) AS bestPct,
+              MAX(CASE WHEN ${REVIEW_COUNTS_SQL} THEN score / NULLIF(maxScore, 0) * 100 END) AS bestPct,
               SUM(CASE WHEN finishedAt IS NOT NULL THEN 1 ELSE 0 END) AS finishedAttempts,
-              MAX(passed) AS everPassed,
-              MAX(finishedAt) AS lastFinishedAt
+              MAX(CASE WHEN ${REVIEW_COUNTS_SQL} THEN passed END) AS everPassed,
+              MAX(finishedAt) AS lastFinishedAt,
+              SUM(CASE WHEN finishedAt IS NOT NULL AND reviewStatus = 'pending' THEN 1 ELSE 0 END) AS pendingReview,
+              MAX(CASE WHEN finishedAt IS NOT NULL AND ${REVIEW_COUNTS_SQL} THEN id END) AS lastResultId
          FROM schule_pruefungen_attempts
         WHERE userId = ? AND level = ? AND mode = 'real'
         GROUP BY module`,
@@ -4133,7 +4139,10 @@ app.get('/api/pruefungen/cert-status', authMiddleware, subscriptionMiddleware, a
         attemptsLeft: Math.max(0, 3 - finished),
         lastFinishedAt: r.lastFinishedAt,
         nextAvailableAt: inCooldown ? nextAvailableAt.toISOString() : null,
-        canStartRealNow: !inCooldown && finished < 3,
+        // Con un examen en revisión no se empieza otro del mismo módulo.
+        inReview: Number(r.pendingReview) > 0,
+        lastResultId: r.lastResultId || null,
+        canStartRealNow: !inCooldown && finished < 3 && !(Number(r.pendingReview) > 0),
       }
     }
     // Modules never attempted
@@ -4141,6 +4150,7 @@ app.get('/api/pruefungen/cert-status', authMiddleware, subscriptionMiddleware, a
       if (!modules[m]) modules[m] = {
         bestPct: null, passed: false, attempts: 0, attemptsLeft: 3,
         lastFinishedAt: null, nextAvailableAt: null, canStartRealNow: true,
+        inReview: false, lastResultId: null,
       }
     }
 
@@ -4416,6 +4426,8 @@ app.post('/api/pruefungen/attempts', authMiddleware, subscriptionMiddleware, blo
       attemptId: result.insertId,
       startedAt: new Date().toISOString(),
       mode,
+      // El audio de Sprechen se guarda para la revisión del profe (interruptor: EXAM_SPEAKING_AUDIO=off).
+      speakingAudio: mode === 'real' && process.env.EXAM_SPEAKING_AUDIO !== 'off',
       exam: publicExam(exam, audioUrlFactory()),
     })
   } catch (err) {
@@ -4489,13 +4501,24 @@ app.post('/api/pruefungen/attempts/:id/finish', authMiddleware, subscriptionMidd
     const passed = (finalScore / finalMax) >= (PRUEFUNG_PASS_PCT / 100) ? 1 : 0
     // El detalle completo se guarda siempre (el equipo docente puede revisarlo).
     const stored = { detail: graded.detail, ...(feedback?.supervision ? { supervision: feedback.supervision } : {}) }
+    // Examen real de un alumno: Lesen/Hören quedan confirmados; Schreiben y
+    // Sprechen esperan a que un profe confirme la nota.
+    const reviewStatus = examReview.initialReviewStatus({ mode: attempt.mode, exam, role: req.user.role })
 
     await pool.query(
       `UPDATE schule_pruefungen_attempts
-       SET finishedAt = NOW(), score = ?, maxScore = ?, passed = ?, durationSeconds = ?, responses = ?, feedback = ?
+       SET finishedAt = NOW(), score = ?, maxScore = ?, passed = ?, durationSeconds = ?, responses = ?, feedback = ?,
+           reviewStatus = ?, aiScore = ?
        WHERE id = ?`,
-      [finalScore, finalMax, passed, durationSec, JSON.stringify(responses || null), JSON.stringify(stored), attemptId]
+      [finalScore, finalMax, passed, durationSec, JSON.stringify(responses || null), JSON.stringify(stored), reviewStatus, reviewStatus ? finalScore : null, attemptId]
     )
+    examReview.afterFinish(attemptId, { userId: req.user.id, level: attempt.level, reviewStatus })
+    // Un frontend antiguo en caché (PWA) no conoce «en revisión» y pintaría un
+    // resultado vacío: a ese se le responde como antes hasta que se actualice.
+    if (reviewStatus === 'pending' && req.body.reviewAware) {
+      // Sin nota hasta que el profe confirme: nunca hay que retirar un «aprobado».
+      return res.json({ ok: true, mode: attempt.mode, inReview: true, attemptId, review: reviewLink(exam.level, exam.module) })
+    }
     res.json({
       ok: true,
       score: finalScore,
@@ -4523,14 +4546,19 @@ app.get('/api/pruefungen/attempts', authMiddleware, subscriptionMiddleware, asyn
     if (level) { filters.push('level = ?'); params.push(level) }
     const lim = Math.min(parseInt(limit) || 20, 100)
     const [rows] = await pool.query(
-      `SELECT id, provider, level, module, examId, mode, startedAt, finishedAt, score, maxScore, passed, durationSeconds
+      `SELECT id, provider, level, module, examId, mode, startedAt, finishedAt, score, maxScore, passed, durationSeconds, reviewStatus
        FROM schule_pruefungen_attempts
        WHERE ${filters.join(' AND ')}
        ORDER BY startedAt DESC
        LIMIT ${lim}`,
       params
     )
-    res.json({ attempts: rows })
+    // Un examen en revisión no enseña la nota provisional de la IA.
+    res.json({
+      attempts: rows.map(({ reviewStatus, ...r }) => reviewStatus === 'pending'
+        ? { ...r, score: null, passed: null, inReview: true }
+        : { ...r, inReview: false }),
+    })
   } catch (err) {
     console.error('List attempts error:', err)
     res.status(500).json({ error: 'Error al obtener los intentos.' })
@@ -4602,10 +4630,19 @@ async function gradeWithAI(endpoint, cacheParts, message, { userId, userName, le
     recordAIUsage({ userId, endpoint, model: 'CACHE', cacheKey, cacheHit: 1 }).catch(() => {})
     return cached
   }
-  const text = await callAnthropic([{ role: 'user', content: message }], userName, level, 1500, { userId, endpoint, cacheKey })
-  const jsonMatch = text.match(/\{[\s\S]*\}/)
-  if (!jsonMatch) throw new Error('ai_unparseable')
-  const result = normalizeGrading(JSON.parse(jsonMatch[0]))
+  // De vez en cuando la IA devuelve un JSON roto (una comilla sin escapar):
+  // se le pide otra vez antes de dejar al alumno con «no se pudo corregir».
+  let result = null
+  for (let attempt = 1; !result; attempt++) {
+    const text = await callAnthropic([{ role: 'user', content: message }], userName, level, 1500, { userId, endpoint, cacheKey })
+    try {
+      const jsonMatch = text.match(/\{[\s\S]*\}/)
+      if (!jsonMatch) throw new Error('ai_unparseable')
+      result = normalizeGrading(JSON.parse(jsonMatch[0]))
+    } catch (e) {
+      if (attempt >= 2) throw e
+    }
+  }
   putCachedEvaluation(cacheKey, endpoint, result).catch(() => {})
   return result
 }
@@ -4735,7 +4772,7 @@ async function getStudentContext(userId, userLevel) {
     const [pruefRows] = await pool.query(
       `SELECT module, MAX(passed) AS passed, MAX(score/NULLIF(maxScore,0)*100) AS pct
          FROM schule_pruefungen_attempts
-        WHERE userId = ? AND level = ? AND mode = 'real' AND finishedAt IS NOT NULL
+        WHERE userId = ? AND level = ? AND mode = 'real' AND finishedAt IS NOT NULL AND ${REVIEW_COUNTS_SQL}
         GROUP BY module`,
       [userId, lvl]
     )
@@ -5179,6 +5216,13 @@ async function purgeOldRecordings() {
 }
 cron.schedule('15 4 * * *', purgeOldRecordings)
 purgeOldRecordings()
+
+// Revisión docente de exámenes reales (cola, audio de Sprechen, confirmación,
+// avisos por correo y a b2c): server/examReview.js.
+const examReview = setupExamReview(app, {
+  pool, authMiddleware, subscriptionMiddleware, blockIfReadOnly, staffOnly, express,
+  JWT_SECRET, sendEmail, recordingPath, eventsPath, isExamStaff,
+})
 
 const DEUTSCHC1_ROLES = ['superadmin', 'admin', 'teacher', 'student', 'schule_student']
 

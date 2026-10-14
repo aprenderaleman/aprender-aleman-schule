@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
-import { Moon, Sun, Menu, X, LayoutDashboard, Users, LogOut, BookOpen, ChevronLeft, Settings, DollarSign, Star, Video } from 'lucide-react'
+import { Moon, Sun, Menu, X, LayoutDashboard, Users, LogOut, BookOpen, ChevronLeft, Settings, DollarSign, Star, Video, ClipboardCheck } from 'lucide-react'
+import { usePendingExamReviews } from '../../utils/examReviews'
 import { useAuth } from '../../context/AuthContext'
 import { useTheme } from '../../context/ThemeContext'
 import Logo from '../UI/Logo'
@@ -12,6 +13,8 @@ const sidebarLinks = [
   { to: '/admin/finanzen', icon: DollarSign, label: 'Finanzen' },
   { to: '/admin/bewertungen', icon: Star, label: 'Bewertungen' },
   { to: '/admin/supervision', icon: Video, label: 'Supervisión' },
+  // Fuera de /admin/*: la revisión la comparten profesores y admins.
+  { to: '/revision-examenes', icon: ClipboardCheck, label: 'Revisión de exámenes', pendingBadge: true },
 ]
 
 const bottomLinks = [
@@ -25,6 +28,7 @@ export default function AdminLayout({ children }) {
   const navigate = useNavigate()
   const [collapsed, setCollapsed] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
+  const pendingReviews = usePendingExamReviews(user?.role)
 
   const isActive = (link) => link.exact
     ? location.pathname === link.to
@@ -56,7 +60,7 @@ export default function AdminLayout({ children }) {
               key={link.to}
               to={link.to}
               onClick={() => mobile && setMobileOpen(false)}
-              className={`flex items-center ${collapsed && !mobile ? 'justify-center' : 'gap-3'} px-3 py-2.5 rounded-xl text-sm font-medium transition-all ${
+              className={`relative flex items-center ${collapsed && !mobile ? 'justify-center' : 'gap-3'} px-3 py-2.5 rounded-xl text-sm font-medium transition-all ${
                 active
                   ? 'bg-orange-500 text-white shadow-md shadow-orange-200 dark:shadow-orange-900/30'
                   : 'text-gray-600 dark:text-gray-300 hover:bg-orange-50 dark:hover:bg-gray-800 hover:text-orange-600'
@@ -64,7 +68,18 @@ export default function AdminLayout({ children }) {
               title={collapsed && !mobile ? link.label : undefined}
             >
               <Icon size={20} className="shrink-0" />
-              {(!collapsed || mobile) && <span>{link.label}</span>}
+              {(!collapsed || mobile) && <span className="flex-1">{link.label}</span>}
+              {link.pendingBadge && pendingReviews > 0 && (
+                <span
+                  className={
+                    'min-w-[20px] h-5 px-1.5 rounded-full bg-red-500 text-white text-[11px] font-bold flex items-center justify-center ' +
+                    (collapsed && !mobile ? 'absolute top-0.5 right-0.5' : 'shrink-0')
+                  }
+                  aria-label={`${pendingReviews} pendientes`}
+                >
+                  {pendingReviews}
+                </span>
+              )}
             </Link>
           )
         })}

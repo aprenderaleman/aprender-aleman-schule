@@ -68,7 +68,7 @@ function countAnswered(exam, responses) {
       if ((responses[part.id] || '').trim()) n++
     } else if (part.kind === 'speaking-task') {
       const v = responses[part.id]
-      if (v && v.transcript) n++
+      if (v && (v.transcript || v.audio)) n++
     }
   }
   return n
@@ -143,6 +143,10 @@ function PlayerInner({ meta }) {
   const [partIdx, setPartIdx] = useState(0)
   const [secondsLeft, setSecondsLeft] = useState(0)
   const [attemptId, setAttemptId] = useState(null)
+  // Examen real: el audio de cada tarea de Sprechen se guarda en el servidor
+  // para que el profesor pueda escucharlo al revisar.
+  const [recordAudio, setRecordAudio] = useState(false)
+  const audioUploadsRef = useRef(new Set())
   const [grading, setGrading] = useState(false)
   const [result, setResult] = useState(null)
   const [error, setError] = useState(null)
@@ -319,6 +323,7 @@ function PlayerInner({ meta }) {
       const data = await res.json()
       setExam(data.exam)
       setAttemptId(data.attemptId)
+      setRecordAudio(examMode === 'real' && data.speakingAudio !== false)
       setSecondsLeft(data.exam.durationMinutes * 60)
       setPhase('running')
       setPartIdx(0)
@@ -330,6 +335,19 @@ function PlayerInner({ meta }) {
     } catch (err) {
       setError(err.message)
     }
+  }
+
+  // Sube el audio de una tarea de Sprechen. Devuelve una promesa → ¿guardado?
+  const saveSpeakingAudio = (partId, blob) => {
+    const type = (blob.type || 'audio/webm').split(';')[0]
+    const p = fetch(`${API_URL}/api/pruefungen/attempts/${attemptId}/speaking-audio/${partId}`, {
+      method: 'POST',
+      headers: { 'Content-Type': type, Authorization: `Bearer ${getToken()}` },
+      body: blob,
+    }).then(r => r.ok).catch(() => false)
+    audioUploadsRef.current.add(p)
+    p.finally(() => audioUploadsRef.current.delete(p))
+    return p
   }
 
   // `auto` = entrega forzada por el temporizador (sin preguntar nada).
@@ -354,12 +372,20 @@ function PlayerInner({ meta }) {
     // Cerrar la grabación y esperar a que el último trozo esté subido
     // antes de dar el intento por terminado.
     try { await stopRecordingAndFlush() } catch { /* la nota no depende del vídeo */ }
+    // Los audios de Sprechen que aún se estén subiendo (máx. 20 s de espera).
+    if (audioUploadsRef.current.size) {
+      await Promise.race([
+        Promise.allSettled([...audioUploadsRef.current]),
+        new Promise(r => setTimeout(r, 20000)),
+      ])
+    }
     try {
       const res = await fetch(`${API_URL}/api/pruefungen/attempts/${attemptId}/finish`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${getToken()}` },
         body: JSON.stringify({
           responses,
+          reviewAware: true,
           feedback: examMode === 'real'
             ? { supervision: { recorded: true, events: supervisionRef.current } }
             : {},
@@ -368,6 +394,14 @@ function PlayerInner({ meta }) {
       const saved = await res.json().catch(() => ({}))
       // Si no se pudo corregir o guardar, el alumno debe poder reenviar.
       if (!res.ok) throw new Error(saved.error || 'No se pudo corregir el examen. Vuelve a pulsar «Prüfung abgeben».')
+      if (saved.inReview) {
+        // Schreiben/Sprechen reales: sin nota hasta que el profesor confirme.
+        setResult({ inReview: true, review: saved.review || null })
+        setPhase('results')
+        stopCamera()
+        window.scrollTo(0, 0)
+        return
+      }
       setResult({
         score: saved.score,
         maxScore: saved.maxScore,
@@ -560,6 +594,37 @@ function PlayerInner({ meta }) {
   }
 
   /* ───── RESULTS PHASE ───── */
+  if (phase === 'results' && result?.inReview) {
+    return (
+      <div className="min-h-screen bg-background">
+        <Navbar />
+        <main className="max-w-2xl mx-auto px-4 py-10">
+          <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="rounded-2xl p-8 mb-6 text-white bg-gradient-to-br from-indigo-500 to-purple-600">
+            <p className="text-sm font-bold uppercase tracking-wide opacity-90 flex items-center gap-2">
+              <Trophy size={12} /> Examen real · {moduleLabel(exam?.module)}
+            </p>
+            <h1 className="text-3xl md:text-4xl font-extrabold mt-1 flex items-center gap-3">
+              <Clock size={32} className="opacity-90" /> En revisión
+            </h1>
+            <p className="mt-4 text-base opacity-95">
+              Tu examen está entregado y guardado. Tu profesor lo revisará y confirmará la nota final.
+            </p>
+          </motion.div>
+          <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 p-6 space-y-3 text-sm text-gray-700 dark:text-gray-200">
+            <p className="flex items-start gap-2"><CheckCircle2 size={18} className="text-green-600 mt-0.5 shrink-0" /> Hemos recibido todas tus respuestas.</p>
+            <p className="flex items-start gap-2"><Clock size={18} className="text-indigo-500 mt-0.5 shrink-0" /> Todavía no hay nota: la verás aquí, en «Prüfungen», cuando tu profesor la confirme. También te avisaremos por correo electrónico.</p>
+            <p className="flex items-start gap-2"><AlertTriangle size={18} className="text-amber-500 mt-0.5 shrink-0" /> Mientras este examen esté en revisión no puedes repetir este módulo. Los demás módulos siguen disponibles.</p>
+          </div>
+          <div className="mt-6 flex flex-wrap gap-3">
+            <Link to="/pruefungen" className="inline-flex items-center gap-2 bg-indigo-600 text-white font-bold px-5 py-3 rounded-xl hover:bg-indigo-700 transition">
+              Volver a Prüfungen
+            </Link>
+          </div>
+        </main>
+      </div>
+    )
+  }
+
   if (phase === 'results' && result) {
     return (
       <div className="min-h-screen bg-background">
@@ -762,7 +827,12 @@ function PlayerInner({ meta }) {
           ))}
         </div>
 
-        <PartView part={part} responses={responses} setAnswer={setAnswer} />
+        <PartView
+          part={part}
+          responses={responses}
+          setAnswer={setAnswer}
+          saveAudio={recordAudio ? saveSpeakingAudio : null}
+        />
 
         {/* Bottom navigation */}
         <div className="flex items-center justify-between gap-3 mt-8">
@@ -811,7 +881,7 @@ function moduleLabel(m) {
   return { lesen: 'Lesen', hoeren: 'Hören', schreiben: 'Schreiben', sprechen: 'Sprechen' }[m] || m
 }
 
-function PartView({ part, responses, setAnswer }) {
+function PartView({ part, responses, setAnswer, saveAudio }) {
   return (
     <motion.div key={part.id} initial={{ opacity: 0, x: 10 }} animate={{ opacity: 1, x: 0 }} className="space-y-6">
       {/* Instructions */}
@@ -830,7 +900,12 @@ function PartView({ part, responses, setAnswer }) {
         <WritingTaskView part={part} value={responses[part.id] || ''} onChange={(v) => setAnswer(part.id, v)} />
       )}
       {part.kind === 'speaking-task' && (
-        <SpeakingTaskView part={part} value={responses[part.id] || null} onChange={(v) => setAnswer(part.id, v)} />
+        <SpeakingTaskView
+          part={part}
+          value={responses[part.id] || null}
+          onChange={(v) => setAnswer(part.id, v)}
+          saveAudio={saveAudio ? (blob) => saveAudio(part.id, blob) : null}
+        />
       )}
 
       {/* Default: questions array (Lesen/Hören) */}
@@ -1241,9 +1316,9 @@ function WritingTaskResult({ part, detail }) {
 /* ==========================
    Sprechen: recorder (Web Speech) + feedback
    ========================== */
-function SpeakingTaskView({ part, value, onChange }) {
+function SpeakingTaskView({ part, value, onChange, saveAudio = null }) {
   // Phases: idle | preparing | recording | recorded
-  const initialPhase = value && value.transcript ? 'recorded' : 'idle'
+  const initialPhase = value && (value.transcript || value.audio) ? 'recorded' : 'idle'
   const [phase, setPhase] = useState(initialPhase)
   const [secondsLeft, setSecondsLeft] = useState(0)
   const [error, setError] = useState(null)
@@ -1251,12 +1326,52 @@ function SpeakingTaskView({ part, value, onChange }) {
   const recognitionRef = useRef(null)
   const startedAtRef = useRef(0)
   const tickRef = useRef(null)
+  // Audio de la respuesta (solo examen real): null | saving | saved | failed
+  const [audioState, setAudioState] = useState(value?.audio ? 'saved' : null)
+  const audioRef = useRef({ stream: null, rec: null, chunks: [], wanted: false })
+
+  // Graba el micrófono a la vez que el reconocimiento de voz. Es «best
+  // effort»: si el navegador no deja (o no hay MediaRecorder), el examen
+  // sigue adelante solo con la transcripción.
+  const startAudio = () => {
+    if (!saveAudio || !navigator.mediaDevices?.getUserMedia || typeof MediaRecorder === 'undefined') return
+    const a = audioRef.current
+    a.wanted = true
+    a.chunks = []
+    navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
+      if (!a.wanted) { stream.getTracks().forEach(t => t.stop()); return }
+      const mime = ['audio/webm;codecs=opus', 'audio/webm', 'audio/mp4']
+        .find(m => MediaRecorder.isTypeSupported?.(m))
+      const rec = new MediaRecorder(stream, { ...(mime ? { mimeType: mime } : {}), audioBitsPerSecond: 32000 })
+      rec.ondataavailable = e => { if (e.data && e.data.size) a.chunks.push(e.data) }
+      a.stream = stream
+      a.rec = rec
+      rec.start(1000)
+    }).catch(() => { /* sin audio: queda la transcripción */ })
+  }
+
+  // Detiene la grabación. Devuelve el Blob (o null si no había nada).
+  const stopAudio = () => new Promise(resolve => {
+    const a = audioRef.current
+    a.wanted = false
+    const finish = () => {
+      if (a.stream) a.stream.getTracks().forEach(t => t.stop())
+      const blob = a.chunks.length ? new Blob(a.chunks, { type: a.rec?.mimeType || 'audio/webm' }) : null
+      a.stream = null; a.rec = null; a.chunks = []
+      resolve(blob)
+    }
+    if (a.rec && a.rec.state !== 'inactive') {
+      a.rec.onstop = finish
+      try { a.rec.stop() } catch { finish() }
+    } else finish()
+  })
 
   // Cleanup on unmount
   useEffect(() => {
     return () => {
       if (recognitionRef.current) recognitionRef.current.abort()
       if (tickRef.current) clearInterval(tickRef.current)
+      stopAudio()
     }
   }, [])
 
@@ -1299,6 +1414,7 @@ function SpeakingTaskView({ part, value, onChange }) {
       onError: (code) => {
         if (tickRef.current) clearInterval(tickRef.current)
         if (recognitionRef.current) { recognitionRef.current.abort(); recognitionRef.current = null }
+        stopAudio()
         setInterim('')
         setPhase('idle')
         setError(
@@ -1310,6 +1426,7 @@ function SpeakingTaskView({ part, value, onChange }) {
         )
       },
     })
+    startAudio()
     startedAtRef.current = Date.now()
     setPhase('recording')
     const limit = part.maxRecordSeconds || 120
@@ -1333,14 +1450,24 @@ function SpeakingTaskView({ part, value, onChange }) {
     const { transcript } = await recognitionRef.current.stop()
     recognitionRef.current = null
     const durationSeconds = Math.max(1, Math.round((Date.now() - startedAtRef.current) / 1000))
-    onChange({ transcript, durationSeconds })
+    const blob = await stopAudio()
+    const hasAudio = !!(saveAudio && blob && blob.size > 0)
+    onChange({ transcript, durationSeconds, ...(hasAudio ? { audio: true } : {}) })
     setInterim('')
     setPhase('recorded')
+    if (hasAudio) {
+      setAudioState('saving')
+      saveAudio(blob).then(ok => setAudioState(ok ? 'saved' : 'failed'))
+    } else {
+      setAudioState(null)
+    }
   }
 
   const reset = () => {
     if (recognitionRef.current) { recognitionRef.current.abort(); recognitionRef.current = null }
     if (tickRef.current) clearInterval(tickRef.current)
+    stopAudio()
+    setAudioState(null)
     setInterim('')
     setError(null)
     onChange(null)
@@ -1445,10 +1572,26 @@ function SpeakingTaskView({ part, value, onChange }) {
                 <p className="text-sm text-gray-700 dark:text-gray-200 italic">„{value.transcript}"</p>
               </div>
             )}
-            <p className="text-xs text-gray-500 dark:text-gray-400 italic">
-              Deine gesprochene Antwort wurde im Browser transkribiert und wird von der KI bewertet.
-              Aussprache kann nicht automatisch beurteilt werden.
-            </p>
+            {saveAudio ? (
+              <>
+                {!value.transcript && (
+                  <p className="text-xs text-amber-700 dark:text-amber-300">
+                    Die automatische Transkription hat nichts erkannt. Wenn deine Aufnahme gespeichert ist, hört deine Lehrkraft sie an — du kannst aber auch neu aufnehmen.
+                  </p>
+                )}
+                <p className="text-xs text-gray-500 dark:text-gray-400 italic" aria-live="polite">
+                  {audioState === 'saving' && 'Deine Aufnahme wird gespeichert …'}
+                  {audioState === 'saved' && '✓ Deine Aufnahme ist gespeichert. Deine Lehrkraft hört sie an und bestätigt die Note.'}
+                  {audioState === 'failed' && 'Die Tonaufnahme konnte nicht gespeichert werden. Deine Antwort zählt trotzdem: Die Lehrkraft bewertet dann das Transkript.'}
+                  {!audioState && 'Es wurde nur das Transkript gespeichert (keine Tonaufnahme in diesem Browser). Deine Lehrkraft bewertet das Transkript.'}
+                </p>
+              </>
+            ) : (
+              <p className="text-xs text-gray-500 dark:text-gray-400 italic">
+                Deine gesprochene Antwort wurde im Browser transkribiert und wird von der KI bewertet.
+                Aussprache kann nicht automatisch beurteilt werden.
+              </p>
+            )}
           </div>
         )}
       </div>

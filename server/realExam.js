@@ -24,6 +24,10 @@ export const REAL_ATTEMPT_LIFETIME_CAP = 3
 export const REAL_DURATION_GRACE_SECONDS = 5 * 60
 export const PRUEFUNG_PASS_PCT = 60
 export const READINESS_MIN_SIM_PCT = 65
+// Qué intentos reales cuentan para el certificado: los confirmados (Lesen y
+// Hören se confirman solos; Schreiben y Sprechen los confirma un profe) y
+// los anteriores al sistema de revisión (reviewStatus NULL).
+export const REVIEW_COUNTS_SQL = `(reviewStatus IS NULL OR reviewStatus = 'confirmed')`
 const TIME_BONUS = { lesen: 1.15, schreiben: 1.15 }
 
 const LEVEL_MODULES = ['lesen', 'hoeren', 'schreiben', 'sprechen']
@@ -396,6 +400,23 @@ export async function assertCanStartRealAttempt({ pool, userId, level, module, u
           ? `Antes del examen real, haz el simulacro de este módulo y consigue al menos un ${READINESS_MIN_SIM_PCT} %.`
           : `Tu mejor simulacro en este módulo es ${best} %. Necesitas al menos un ${READINESS_MIN_SIM_PCT} % para desbloquear el examen real.`,
       }
+    }
+  }
+
+  // Con un examen de este módulo pendiente de revisión no se empieza otro:
+  // gastaría un intento sin conocer el resultado del anterior.
+  const [pending] = await pool.query(
+    `SELECT id FROM schule_pruefungen_attempts
+      WHERE userId = ? AND level = ? AND module = ? AND mode = 'real'
+        AND finishedAt IS NOT NULL AND reviewStatus = 'pending'
+      LIMIT 1`,
+    [userId, declaredLevel, module]
+  )
+  if (pending.length > 0) {
+    return {
+      status: 409,
+      error: 'Tu último examen de este módulo está en revisión. Podrás volver a presentarte cuando tu profesor confirme el resultado.',
+      code: 'in_review',
     }
   }
 

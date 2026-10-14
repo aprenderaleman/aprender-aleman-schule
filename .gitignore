@@ -30,3 +30,4 @@ ios/App/App.xcodeproj/xcuserdata/
 # Datos generados en el servidor (nunca al repo)
 server/recordings/
 server/audio-cache/
+server/exam-audio/

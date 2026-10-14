@@ -300,6 +300,7 @@ function PruefungsWizard({ onComplete, initialError }) {
 // Texto de estado del examen real de un módulo en la tarjeta del panel.
 function realExamHint(real, cert) {
   if (!real) return `Solo disponible para tu nivel actual${cert?.level ? ` (${cert.level})` : ''}.`
+  if (real.inReview) return 'En revisión · tu profesor está corrigiendo tu examen'
   if (real.passed) return `Aprobado (${real.bestPct}%)`
   if (real.readiness?.ready) return 'Preguntas nuevas · cuenta para el certificado'
   const best = real.readiness?.bestSimPct

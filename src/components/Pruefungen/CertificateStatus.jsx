@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { Trophy, Check, Clock, Lock, BookOpen, Headphones, PenLine, Mic } from 'lucide-react'
 
@@ -109,6 +110,8 @@ export default function CertificateStatus() {
                 'rounded-xl border-2 p-2.5 text-center transition ' +
                 (passed
                   ? 'border-emerald-400 bg-emerald-50 dark:bg-emerald-900/20'
+                  : m?.inReview
+                    ? 'border-indigo-300 bg-indigo-50 dark:bg-indigo-900/20'
                   : m?.bestPct != null
                     ? 'border-amber-300 bg-amber-50 dark:bg-amber-900/10'
                     : 'border-gray-200 dark:border-gray-700 bg-white/60 dark:bg-gray-800/40')
@@ -119,6 +122,20 @@ export default function CertificateStatus() {
               <p className="text-[11px] text-gray-500 dark:text-gray-400 mt-0.5">
                 {m?.bestPct != null ? `${m.bestPct}%` : '—'}
               </p>
+              {/* Schreiben/Sprechen: sin nota hasta que el profesor confirme */}
+              {m?.inReview && (
+                <p className="text-[11px] font-bold text-indigo-700 dark:text-indigo-300 mt-0.5 inline-flex items-center gap-1">
+                  <Clock size={10} /> En revisión
+                </p>
+              )}
+              {!m?.inReview && m?.lastResultId && (
+                <Link
+                  to={`/pruefungen/ergebnis/${m.lastResultId}`}
+                  className="block text-[11px] font-bold text-purple-700 dark:text-purple-300 underline mt-0.5"
+                >
+                  Ver resultado
+                </Link>
+              )}
             </div>
           )
         })}
@@ -192,7 +209,13 @@ export function ModuleStatus({ level, module }) {
           <Check size={12} /> Ya aprobado ({status.bestPct}%)
         </p>
       )}
-      {waitStr && (
+      {status.inReview && (
+        <p className="inline-flex items-start gap-1 text-indigo-700 dark:text-indigo-300 font-bold">
+          <Clock size={12} className="mt-0.5 shrink-0" />
+          <span>Tu último examen de este módulo está en revisión. Podrás repetirlo cuando tu profesor confirme la nota.</span>
+        </p>
+      )}
+      {waitStr && !status.inReview && (
         <p className="inline-flex items-center gap-1">
           <Clock size={12} /> Próximo intento en <strong>{waitStr}</strong>
         </p>
