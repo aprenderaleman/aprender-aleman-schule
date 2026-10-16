@@ -1,17 +1,47 @@
-import React, { useState, useCallback, useRef } from 'react'
+import React, { useState, useCallback, useRef, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import Button from '../UI/Button'
 import { Volume2, Eye, EyeOff, CheckCircle, XCircle, Pause } from 'lucide-react'
 import MistakeExplanation from './MistakeExplanation'
 
+// Draft persistente por (userId, exerciseId). Mismo patron que ReadingExercise:
+// si el alumno responde parcial y cierra, al volver recupera lo respondido.
+function draftKey(exerciseId) {
+  let uid = 'anon'
+  try {
+    const u = JSON.parse(localStorage.getItem('auth_user') || 'null')
+    if (u?.id) uid = u.id
+  } catch { /* ignore */ }
+  return `ex-draft:listening:${uid}:${exerciseId}`
+}
+function loadDraft(exerciseId) {
+  try { return JSON.parse(localStorage.getItem(draftKey(exerciseId)) || 'null') } catch { return null }
+}
+function saveDraft(exerciseId, data) {
+  try { localStorage.setItem(draftKey(exerciseId), JSON.stringify(data)) } catch { /* quota */ }
+}
+function clearDraft(exerciseId) {
+  try { localStorage.removeItem(draftKey(exerciseId)) } catch { /* ignore */ }
+}
+
 export default function ListeningExercise({ exercise, userName, onComplete }) {
-  const [answers, setAnswers] = useState({})
+  const [answers, setAnswers] = useState(() => loadDraft(exercise.id)?.answers || {})
   const [submitted, setSubmitted] = useState(false)
   const [showTranscript, setShowTranscript] = useState(false)
   const [playing, setPlaying] = useState(false)
+  const [restored, setRestored] = useState(() => {
+    const d = loadDraft(exercise.id)
+    return !!(d?.answers && Object.keys(d.answers).length > 0)
+  })
   const audioRef = useRef(null)
   const utteranceRef = useRef(null)
   const useFallbackRef = useRef(false)
+
+  useEffect(() => {
+    if (submitted) return
+    if (Object.keys(answers).length === 0) { clearDraft(exercise.id); return }
+    saveDraft(exercise.id, { answers })
+  }, [answers, submitted, exercise.id])
 
   // Fallback to speechSynthesis if audio file fails
   const speakFallback = useCallback(() => {
@@ -79,7 +109,12 @@ export default function ListeningExercise({ exercise, userName, onComplete }) {
     useFallbackRef.current = true
   }, [])
 
+  const allAnswered = exercise.questions.every((_, i) => answers[i] !== undefined)
+
   const handleSubmit = () => {
+    // Defensa en profundidad: nunca procesar un submit si quedan preguntas
+    // sin responder (ni siquiera por un bypass del boton disabled).
+    if (!allAnswered) return
     setSubmitted(true)
   }
 
@@ -88,15 +123,15 @@ export default function ListeningExercise({ exercise, userName, onComplete }) {
   // "Weiter zur Auswertung" call lifts the result up to the parent so
   // students actually have time to read why they got things wrong.
   const handleContinue = () => {
+    if (!allAnswered) return
     let correct = 0
     exercise.questions.forEach((q, i) => {
       if (answers[i] === q.answer) correct++
     })
     const score = Math.round((correct / exercise.questions.length) * 100)
+    clearDraft(exercise.id)
     onComplete({ score, correct, total: exercise.questions.length })
   }
-
-  const allAnswered = exercise.questions.every((_, i) => answers[i] !== undefined)
 
   const audioSrc = `/audio/exercises/${exercise.id}.mp3`
 
@@ -158,6 +193,23 @@ export default function ListeningExercise({ exercise, userName, onComplete }) {
         </motion.div>
       )}
 
+      {/* Banner cuando recuperamos un intento parcial */}
+      {restored && !submitted && (
+        <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-xl p-3 flex items-start gap-2">
+          <CheckCircle size={16} className="text-amber-600 shrink-0 mt-0.5" />
+          <p className="text-sm text-amber-800 dark:text-amber-200">
+            Du setzt eine Übung fort. Deine bisherigen Antworten sind wiederhergestellt.
+            <button
+              type="button"
+              onClick={() => { setAnswers({}); setRestored(false); clearDraft(exercise.id) }}
+              className="ml-2 underline font-semibold hover:text-amber-900"
+            >
+              Von vorn beginnen
+            </button>
+          </p>
+        </div>
+      )}
+
       {/* Questions */}
       <div className="space-y-4">
         {exercise.questions.map((q, qi) => (
@@ -178,7 +230,11 @@ export default function ListeningExercise({ exercise, userName, onComplete }) {
                 return (
                   <button
                     key={oi}
-                    onClick={() => !submitted && setAnswers(prev => ({ ...prev, [qi]: opt }))}
+                    onClick={() => {
+                      if (submitted) return
+                      setAnswers(prev => ({ ...prev, [qi]: opt }))
+                      if (restored) setRestored(false)
+                    }}
                     disabled={submitted}
                     className={`p-2.5 rounded-lg text-sm text-left font-medium text-gray-700 dark:text-gray-200 transition-all ${cls}`}
                   >

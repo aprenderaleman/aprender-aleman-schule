@@ -1,15 +1,47 @@
-import React, { useState, useCallback } from 'react'
+import React, { useState, useCallback, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Button from '../UI/Button'
 import { BookOpen, CheckCircle, XCircle } from 'lucide-react'
 import { translateWord } from '../../utils/ai'
 import MistakeExplanation from './MistakeExplanation'
 
+// Draft persistente por (userId, exerciseId). Si el alumno responde 2 de 10
+// y cierra la pestaña, al volver recupera lo respondido en vez de perderlo.
+// Nada aqui marca el ejercicio como completado — solo guarda estado parcial.
+function draftKey(exerciseId) {
+  let uid = 'anon'
+  try {
+    const u = JSON.parse(localStorage.getItem('auth_user') || 'null')
+    if (u?.id) uid = u.id
+  } catch { /* ignore */ }
+  return `ex-draft:reading:${uid}:${exerciseId}`
+}
+function loadDraft(exerciseId) {
+  try { return JSON.parse(localStorage.getItem(draftKey(exerciseId)) || 'null') } catch { return null }
+}
+function saveDraft(exerciseId, data) {
+  try { localStorage.setItem(draftKey(exerciseId), JSON.stringify(data)) } catch { /* quota */ }
+}
+function clearDraft(exerciseId) {
+  try { localStorage.removeItem(draftKey(exerciseId)) } catch { /* ignore */ }
+}
+
 export default function ReadingExercise({ exercise, userName, onComplete }) {
-  const [answers, setAnswers] = useState({})
+  const [answers, setAnswers] = useState(() => loadDraft(exercise.id)?.answers || {})
   const [submitted, setSubmitted] = useState(false)
   const [tooltip, setTooltip] = useState({ word: '', translation: '', visible: false })
   const [loadingWord, setLoadingWord] = useState(null)
+  const [restored, setRestored] = useState(() => {
+    const d = loadDraft(exercise.id)
+    return !!(d?.answers && Object.keys(d.answers).length > 0)
+  })
+
+  // Autosave de respuestas parciales
+  useEffect(() => {
+    if (submitted) return
+    if (Object.keys(answers).length === 0) { clearDraft(exercise.id); return }
+    saveDraft(exercise.id, { answers })
+  }, [answers, submitted, exercise.id])
 
   const handleWordClick = useCallback(async (word) => {
     const clean = word.replace(/[.,!?;:]/g, '')
@@ -32,7 +64,13 @@ export default function ReadingExercise({ exercise, userName, onComplete }) {
     setLoadingWord(null)
   }, [exercise.vocabulary])
 
+  const allAnswered = exercise.questions.every((_, i) => answers[i] !== undefined)
+
   const handleSubmit = () => {
+    // Defensa en profundidad: aunque el boton tenga disabled, si por algun
+    // motivo se dispara con respuestas parciales no mostramos resultados
+    // (sino se marcaria el ejercicio como completo con score inflado).
+    if (!allAnswered) return
     setSubmitted(true)
   }
 
@@ -40,15 +78,15 @@ export default function ReadingExercise({ exercise, userName, onComplete }) {
   // per-question feedback (and any AI explanations) — so we don't switch
   // them to the result screen before they had a chance to learn.
   const handleContinue = () => {
+    if (!allAnswered) return
     let correct = 0
     exercise.questions.forEach((q, i) => {
       if (answers[i] === q.answer) correct++
     })
     const score = Math.round((correct / exercise.questions.length) * 100)
+    clearDraft(exercise.id)
     onComplete({ score, correct, total: exercise.questions.length })
   }
-
-  const allAnswered = exercise.questions.every((_, i) => answers[i] !== undefined)
 
   return (
     <div className="space-y-6">
@@ -103,6 +141,23 @@ export default function ReadingExercise({ exercise, userName, onComplete }) {
         </div>
       )}
 
+      {/* Banner cuando recuperamos un intento parcial */}
+      {restored && !submitted && (
+        <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-xl p-3 flex items-start gap-2">
+          <CheckCircle size={16} className="text-amber-600 shrink-0 mt-0.5" />
+          <p className="text-sm text-amber-800 dark:text-amber-200">
+            Du setzt eine Übung fort. Deine bisherigen Antworten sind wiederhergestellt.
+            <button
+              type="button"
+              onClick={() => { setAnswers({}); setRestored(false); clearDraft(exercise.id) }}
+              className="ml-2 underline font-semibold hover:text-amber-900"
+            >
+              Von vorn beginnen
+            </button>
+          </p>
+        </div>
+      )}
+
       {/* Questions */}
       <div className="space-y-5">
         {exercise.questions.map((q, qi) => (
@@ -123,7 +178,11 @@ export default function ReadingExercise({ exercise, userName, onComplete }) {
                 return (
                   <button
                     key={oi}
-                    onClick={() => !submitted && setAnswers(prev => ({ ...prev, [qi]: opt }))}
+                    onClick={() => {
+                      if (submitted) return
+                      setAnswers(prev => ({ ...prev, [qi]: opt }))
+                      if (restored) setRestored(false)
+                    }}
                     disabled={submitted}
                     className={`p-2.5 rounded-lg text-sm font-medium text-left text-gray-700 dark:text-gray-200 transition-all ${cls}`}
                   >
