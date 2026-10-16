@@ -4,10 +4,48 @@ import Button from '../UI/Button'
 import { CheckCircle, XCircle } from 'lucide-react'
 import { haptics } from '../../utils/haptics'
 
+// Draft persistente por (userId, exerciseId). Si el alumno selecciona pero
+// no comprueba ni confirma con "Weiter", al volver recupera su seleccion.
+function draftKey(exerciseId) {
+  let uid = 'anon'
+  try {
+    const u = JSON.parse(localStorage.getItem('auth_user') || 'null')
+    if (u?.id) uid = u.id
+  } catch { /* ignore */ }
+  return `ex-draft:grammar:${uid}:${exerciseId}`
+}
+function loadDraft(exerciseId) {
+  try { return JSON.parse(localStorage.getItem(draftKey(exerciseId)) || 'null') } catch { return null }
+}
+function saveDraft(exerciseId, data) {
+  try { localStorage.setItem(draftKey(exerciseId), JSON.stringify(data)) } catch { /* quota */ }
+}
+function clearDraft(exerciseId) {
+  try { localStorage.removeItem(draftKey(exerciseId)) } catch { /* ignore */ }
+}
+
 export default function GrammarExercise({ exercise, userName, onComplete }) {
-  const [selected, setSelected] = useState(null)
+  const [selected, setSelected] = useState(() => loadDraft(exercise.id)?.selected || null)
   const [submitted, setSubmitted] = useState(false)
-  const [dragOrder, setDragOrder] = useState(exercise.subtype === 'reorder' ? exercise.options : [])
+  const [dragOrder, setDragOrder] = useState(() => {
+    if (exercise.subtype !== 'reorder') return []
+    return loadDraft(exercise.id)?.dragOrder || exercise.options
+  })
+  const [restored, setRestored] = useState(() => {
+    const d = loadDraft(exercise.id)
+    return !!(d?.selected || (d?.dragOrder && d.dragOrder.length))
+  })
+
+  // Autosave del borrador en cada cambio
+  useEffect(() => {
+    if (submitted) return
+    const hasData = selected || (exercise.subtype === 'reorder' && dragOrder.length > 0 && dragOrder.join(' ') !== exercise.options.join(' '))
+    if (!hasData) { clearDraft(exercise.id); return }
+    saveDraft(exercise.id, {
+      selected,
+      ...(exercise.subtype === 'reorder' ? { dragOrder } : {}),
+    })
+  }, [selected, dragOrder, submitted, exercise])
 
   const isCorrect = selected === exercise.answer || (exercise.subtype === 'reorder' && dragOrder.join(' ') === exercise.answer)
 
@@ -24,10 +62,16 @@ export default function GrammarExercise({ exercise, userName, onComplete }) {
 
   // Fires only when the student has read the inline feedback and clicks
   // "Weiter" — keeps the explanation on screen for as long as they need.
+  // Gate defensivo: solo contamos el ejercicio como completo si hubo
+  // submission (selected relleno o reorder movido) y el flujo paso por
+  // handleSubmit (submitted=true). Nunca onComplete con estado vacio.
   const handleContinue = () => {
+    if (!submitted) return
+    if (exercise.subtype !== 'reorder' && !selected) return
     const correct = exercise.subtype === 'reorder'
       ? dragOrder.join(' ') === exercise.answer
       : selected === exercise.answer
+    clearDraft(exercise.id)
     onComplete({
       correct,
       selected: exercise.subtype === 'reorder' ? dragOrder.join(' ') : selected,
@@ -62,9 +106,31 @@ export default function GrammarExercise({ exercise, userName, onComplete }) {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [submitted, selected, exercise])
 
+  const RestoredBanner = () => (restored && !submitted ? (
+    <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-xl p-3 flex items-start gap-2">
+      <CheckCircle size={16} className="text-amber-600 shrink-0 mt-0.5" />
+      <p className="text-sm text-amber-800 dark:text-amber-200">
+        Du setzt eine Übung fort. Deine Auswahl ist wiederhergestellt.
+        <button
+          type="button"
+          onClick={() => {
+            setSelected(null)
+            if (exercise.subtype === 'reorder') setDragOrder(exercise.options)
+            setRestored(false)
+            clearDraft(exercise.id)
+          }}
+          className="ml-2 underline font-semibold hover:text-amber-900"
+        >
+          Von vorn beginnen
+        </button>
+      </p>
+    </div>
+  ) : null)
+
   if (exercise.subtype === 'reorder') {
     return (
       <div className="space-y-6">
+        <RestoredBanner />
         <p className="text-gray-700 dark:text-gray-200 text-lg font-medium">{exercise.question}</p>
 
         <div className="min-h-14 bg-orange-50 dark:bg-orange-900/20 border-2 border-dashed border-orange-300 dark:border-orange-600 rounded-xl p-3 flex flex-wrap gap-2">
@@ -103,6 +169,7 @@ export default function GrammarExercise({ exercise, userName, onComplete }) {
 
   return (
     <div className="space-y-6">
+      <RestoredBanner />
       <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-4">
         <p className="text-lg font-semibold text-gray-800 dark:text-gray-100">{exercise.question}</p>
       </div>
@@ -122,7 +189,7 @@ export default function GrammarExercise({ exercise, userName, onComplete }) {
             <motion.button
               key={i}
               whileTap={{ scale: submitted ? 1 : 0.98 }}
-              onClick={() => !submitted && setSelected(option)}
+              onClick={() => { if (submitted) return; setSelected(option); if (restored) setRestored(false) }}
               disabled={submitted}
               aria-pressed={selected === option}
               className={`p-4 rounded-xl text-left font-medium text-gray-800 dark:text-gray-100 transition-all ${optClass} disabled:cursor-default`}
