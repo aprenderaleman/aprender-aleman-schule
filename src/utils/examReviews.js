@@ -31,7 +31,11 @@ export async function reviewFetch(path, { method = 'GET', body } = {}) {
   })
   const json = await res.json().catch(() => null)
   if (!res.ok) {
-    const err = new Error(json?.error || `Error ${res.status}`)
+    // Un 404 sin mensaje propio es que la ruta no existe en el servidor: la
+    // API desplegada es anterior a la revisión de exámenes.
+    const msg = json?.error
+      || (res.status === 404 ? 'El servidor aún no tiene la revisión de exámenes: hay que redesplegar la API.' : `Error ${res.status}`)
+    const err = new Error(msg)
     err.status = res.status
     throw err
   }
