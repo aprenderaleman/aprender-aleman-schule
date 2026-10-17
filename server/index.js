@@ -1799,7 +1799,7 @@ app.get('/api/referral', authMiddleware, async (req, res) => {
 //   for lvl in a1 a2 b1 b2 c1; do
 //     grep -hoE "id:'[grlws]-${lvl}-[0-9]+'" src/data/*.js | sort -u | wc -l
 //   done
-const LEVEL_EXERCISE_TOTALS = { A1: 132, A2: 129, B1: 128, B2: 128, C1: 128 }
+const LEVEL_EXERCISE_TOTALS = { A1: 142, A2: 139, B1: 138, B2: 138, C1: 138 }
 const PATH_PASS_THRESHOLD = 70        // % score needed to count an exercise as "done"
 const GUARANTEE_PATH_THRESHOLD = 85   // % of the path needed for the level-guarantee flag
 const PRUEFUNG_MODULES = ['lesen', 'hoeren', 'schreiben', 'sprechen']
