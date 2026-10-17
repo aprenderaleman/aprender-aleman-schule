@@ -173,6 +173,22 @@ export function ProgressProvider({ children }) {
         }).then(() => broadcast({ type: 'progress-updated', userId: user?.id }))
       }).catch(() => {})
 
+      // SRS: si el alumno fallo (score < 70) metemos el ejercicio en la
+      // cola de repaso. Si acerto algo que estaba en la cola, lo promueve.
+      // Fire-and-forget — nunca bloquea el flujo del alumno.
+      const srsEndpoint = score < 70 ? '/api/srs/mistake' : '/api/srs/review'
+      const srsBody = score < 70
+        ? { exerciseId }
+        : { exerciseId, correct: true }
+      fetch(`${API_URL}${srsEndpoint}`, {
+        method: 'POST',
+        headers: getAuthHeaders(),
+        body: JSON.stringify(srsBody),
+      }).then(() => {
+        // Avisar al sidebar para que refresque el badge
+        import('../utils/srsCount').then(m => m.notifySrsChanged()).catch(() => {})
+      }).catch(() => {})
+
       return updated
     })
   // eslint-disable-next-line react-hooks/exhaustive-deps

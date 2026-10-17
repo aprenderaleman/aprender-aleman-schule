@@ -8,6 +8,7 @@ import Navbar from '../components/Layout/Navbar'
 import Footer from '../components/Layout/Footer'
 import SkillCard from '../components/Dashboard/SkillCard'
 import StreakCounter from '../components/Dashboard/StreakCounter'
+import HansSuggestion from '../components/Dashboard/HansSuggestion'
 import RecentBadges from '../components/Dashboard/RecentBadges'
 import ReviewChallenge from '../components/Dashboard/ReviewChallenge'
 import LearningRoadmap from '../components/Dashboard/LearningRoadmap'
@@ -52,6 +53,9 @@ export default function Dashboard() {
             Du bist auf Niveau <span className="font-bold text-orange-500">{user?.level}</span>. Lass uns üben!
           </p>
         </motion.div>
+
+        {/* Hans proactivo — sugerencia contextual segun patrones de errores */}
+        <HansSuggestion />
 
         {/* Streak */}
         <motion.div variants={container} initial="hidden" animate="show" className="mb-8">

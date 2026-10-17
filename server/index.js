@@ -3216,14 +3216,15 @@ app.post('/api/ai/evaluate-writing', authMiddleware, aiRateLimit, aiDailyCap, bl
 Schreibaufgabe: ${taskPrompt}
 Einreichung des Studenten: ${submission}
 
-Gib detailliertes, konstruktives Feedback. Antworte NUR mit gültigem JSON:
+Gib detailliertes, konstruktives Feedback UND einen Musterantwort-Text, der dem Niveau entspricht und die Aufgabe gut löst (nicht perfekt — natürlich und erreichbar für dieses Niveau). Antworte NUR mit gültigem JSON:
 {
   "score": 7,
   "grammar_errors": [{"error": "Fehlerhafte Stelle", "correction": "Korrektur", "explanation": "Erklärung"}],
   "vocabulary_suggestions": [{"word": "Wort", "better_alternative": "Bessere Alternative", "reason": "Grund"}],
   "structure_feedback": "Feedback zur Textstruktur",
   "positive_aspects": "Was gut gemacht wurde",
-  "overall_comment": "Gesamtkommentar"
+  "overall_comment": "Gesamtkommentar",
+  "model_answer": "Ein natürlicher Beispieltext auf dem Niveau ${userLevel || 'A1'}, der die Aufgabe gut löst. Länge und Register passend zur Aufgabe. KEINE perfekte Prosa — das Niveau des Lerners."
 }
 Bewertung von 0-10. Kein Text außerhalb des JSONs.`
 
@@ -3417,7 +3418,8 @@ Antworte NUR mit gültigem JSON (kein Markdown, kein Codeblock):
   "pronunciation_tips": ["Tipp zur Aussprache basierend auf typischen Fehlern im Transkript"],
   "positive_aspects": "Was gut gemacht wurde (1-2 Sätze)",
   "fluency_feedback": "Feedback zum Sprachfluss und zur Kohärenz (1-2 Sätze)",
-  "overall_comment": "Ermutigender Gesamtkommentar (1-2 Sätze)"
+  "overall_comment": "Ermutigender Gesamtkommentar (1-2 Sätze)",
+  "model_answer": "Eine natürliche Modellantwort als MÜNDLICHE Rede auf Niveau ${level || 'A1'}, die die Aufgabe gut löst. Dauer entsprechend der Aufgabe. Natürlicher Sprachstil, nicht perfekt — erreichbar für das Niveau."
 }
 Bewertung von 0-10. Kein Text außerhalb des JSONs.`
 
@@ -5493,6 +5495,218 @@ app.get('/{*splat}', (req, res, next) => {
     }
   }
 })()
+
+// ─── AUTO-MIGRATION: SRS (Spaced Repetition) queue ───────
+// Cada vez que el alumno falla una pregunta, el ejercicio entra en esta
+// cola para ser repasado despues (1d → 3d → 7d → 14d → 30d). Mejora la
+// retencion sin crear contenido nuevo — reusa los ejercicios existentes.
+;(async () => {
+  try {
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS schule_srs_queue (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        userId VARCHAR(191) NOT NULL,
+        exerciseId VARCHAR(64) NOT NULL,
+        intervalDays INT DEFAULT 1,
+        nextReviewAt DATETIME NOT NULL,
+        failures INT DEFAULT 0,
+        reviews INT DEFAULT 0,
+        createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+        updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+        UNIQUE KEY uniq_user_ex (userId, exerciseId),
+        INDEX idx_user_due (userId, nextReviewAt)
+      ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+    `)
+  } catch (err) { console.error('[srs-migration]', err.message) }
+})()
+
+// ─── SRS: endpoints ──────────────────────────────────────
+// POST /api/srs/mistake  → ejercicio fallado, programarlo para +1 dia
+// GET  /api/srs/due      → lista los ejercicios cuyo nextReviewAt <= NOW
+// POST /api/srs/review   → tras repasar, promover interval (ok) o resetear (fallo)
+// GET  /api/srs/count    → cantidad pendiente para hoy (badge)
+
+const SRS_INTERVALS = [1, 3, 7, 14, 30, 60]  // dias — tipo Anki simplificado
+
+app.post('/api/srs/mistake', authMiddleware, blockIfReadOnly, async (req, res) => {
+  try {
+    const { exerciseId } = req.body
+    if (!exerciseId) return res.status(400).json({ error: 'exerciseId requerido' })
+    // Upsert: si ya estaba en cola lo reseteamos a 1 dia y bump failures.
+    await pool.query(
+      `INSERT INTO schule_srs_queue (userId, exerciseId, intervalDays, nextReviewAt, failures)
+       VALUES (?, ?, 1, DATE_ADD(NOW(), INTERVAL 1 DAY), 1)
+       ON DUPLICATE KEY UPDATE
+         intervalDays = 1,
+         nextReviewAt = DATE_ADD(NOW(), INTERVAL 1 DAY),
+         failures = failures + 1`,
+      [req.user.id, String(exerciseId)]
+    )
+    res.json({ ok: true })
+  } catch (err) {
+    console.error('SRS mistake error:', err.message)
+    res.status(500).json({ error: 'srs_write_failed' })
+  }
+})
+
+app.get('/api/srs/due', authMiddleware, async (req, res) => {
+  try {
+    const [rows] = await pool.query(
+      `SELECT exerciseId, intervalDays, failures, reviews, nextReviewAt
+       FROM schule_srs_queue
+       WHERE userId = ? AND nextReviewAt <= NOW()
+       ORDER BY nextReviewAt ASC
+       LIMIT 50`,
+      [req.user.id]
+    )
+    res.json({ items: rows })
+  } catch (err) {
+    console.error('SRS due error:', err.message)
+    res.status(500).json({ error: 'srs_read_failed' })
+  }
+})
+
+app.get('/api/srs/count', authMiddleware, async (req, res) => {
+  try {
+    const [[row]] = await pool.query(
+      `SELECT COUNT(*) AS n FROM schule_srs_queue WHERE userId = ? AND nextReviewAt <= NOW()`,
+      [req.user.id]
+    )
+    res.json({ count: row?.n || 0 })
+  } catch {
+    res.json({ count: 0 })  // fail-silent para no romper el dashboard
+  }
+})
+
+// Hans proactivo: analiza los ultimos 30 dias y devuelve una sugerencia
+// contextual si detecta un patron claro (skill debil, racha perdida,
+// mismo ejercicio fallando muchas veces). null si todo esta OK.
+app.get('/api/hans/suggestion', authMiddleware, async (req, res) => {
+  try {
+    const userId = req.user.id
+
+    // 1. Ejercicios de los ultimos 14 dias con score bajo (< 60) agrupados
+    //    por tipo. Si un tipo supera el 40 % de fracasos y hay >= 5
+    //    intentos, es un patron real.
+    const [recent] = await pool.query(
+      `SELECT exerciseType, COUNT(*) AS total, SUM(score < 60) AS fails
+       FROM schule_exercise_results
+       WHERE userId = ?
+         AND completedAt >= DATE_SUB(NOW(), INTERVAL 14 DAY)
+       GROUP BY exerciseType
+       HAVING total >= 5`,
+      [userId]
+    )
+
+    const SKILL_LABEL = {
+      grammar: 'Grammatik', reading: 'Lesen', listening: 'Hören',
+      writing: 'Schreiben', speaking: 'Sprechen',
+    }
+    const weakest = recent
+      .map(r => ({ ...r, failRate: r.total > 0 ? r.fails / r.total : 0 }))
+      .filter(r => r.failRate >= 0.4)
+      .sort((a, b) => b.failRate - a.failRate)[0]
+
+    if (weakest) {
+      const label = SKILL_LABEL[weakest.exerciseType] || weakest.exerciseType
+      const pct = Math.round(weakest.failRate * 100)
+      return res.json({
+        suggestion: `Mir ist aufgefallen, dass dir ${label} in letzter Zeit schwer fällt — du machst ${pct} % Fehler bei den letzten ${weakest.total} Übungen. Lass uns ${label} gezielt trainieren.`,
+        cta: { label: `${label} üben`, href: `/ejercicios?tipo=${weakest.exerciseType}` },
+        topic: weakest.exerciseType,
+      })
+    }
+
+    // 2. SRS: hay cosas pendientes que no ha repasado
+    const [[srs]] = await pool.query(
+      `SELECT COUNT(*) AS n FROM schule_srs_queue WHERE userId = ? AND nextReviewAt <= NOW()`,
+      [userId]
+    )
+    if ((srs?.n || 0) >= 3) {
+      return res.json({
+        suggestion: `Du hast ${srs.n} Übungen zur Wiederholung — die Wörter und Regeln, die du schon kennst. 5 Minuten reichen, damit sie wirklich sitzen.`,
+        cta: { label: 'Jetzt wiederholen', href: '/wiederholung' },
+        topic: 'srs',
+      })
+    }
+
+    // 3. Alumno inactivo > 5 dias
+    const [[last]] = await pool.query(
+      `SELECT MAX(completedAt) AS lastAt FROM schule_exercise_results WHERE userId = ?`,
+      [userId]
+    )
+    if (last?.lastAt) {
+      const daysSince = Math.floor((Date.now() - new Date(last.lastAt).getTime()) / 86400000)
+      if (daysSince >= 5) {
+        return res.json({
+          suggestion: `Hey! ${daysSince} Tage ohne Übung — eine kurze Session heute reicht, um den Rhythmus wieder aufzunehmen. Auch 10 Minuten machen schon einen Unterschied.`,
+          cta: { label: 'Weiter lernen', href: '/ejercicios' },
+          topic: 'streak',
+        })
+      }
+    }
+
+    res.json({ suggestion: null })
+  } catch (err) {
+    console.error('Hans suggestion error:', err.message)
+    res.json({ suggestion: null })  // fail-silent: el dashboard no debe romperse
+  }
+})
+
+app.post('/api/srs/review', authMiddleware, blockIfReadOnly, async (req, res) => {
+  try {
+    const { exerciseId, correct } = req.body
+    if (!exerciseId) return res.status(400).json({ error: 'exerciseId requerido' })
+    const [[row]] = await pool.query(
+      `SELECT intervalDays FROM schule_srs_queue WHERE userId = ? AND exerciseId = ? LIMIT 1`,
+      [req.user.id, String(exerciseId)]
+    )
+    if (!row) {
+      // Nunca estuvo en cola — si llega como fallo lo creamos, si no ignoramos.
+      if (correct === false) {
+        await pool.query(
+          `INSERT INTO schule_srs_queue (userId, exerciseId, intervalDays, nextReviewAt, failures, reviews)
+           VALUES (?, ?, 1, DATE_ADD(NOW(), INTERVAL 1 DAY), 1, 1)`,
+          [req.user.id, String(exerciseId)]
+        )
+      }
+      return res.json({ ok: true })
+    }
+    if (correct === false) {
+      // Fallo → reset a 1 dia, bump failures
+      await pool.query(
+        `UPDATE schule_srs_queue
+         SET intervalDays = 1, nextReviewAt = DATE_ADD(NOW(), INTERVAL 1 DAY),
+             failures = failures + 1, reviews = reviews + 1
+         WHERE userId = ? AND exerciseId = ?`,
+        [req.user.id, String(exerciseId)]
+      )
+    } else {
+      // Correcto → promover al siguiente intervalo. Si ya esta en el ultimo
+      // (60d) y lo acerto, lo sacamos de la cola — ya lo domina.
+      const idx = SRS_INTERVALS.indexOf(row.intervalDays)
+      const nextInterval = idx === -1 ? 3 : SRS_INTERVALS[idx + 1]
+      if (!nextInterval) {
+        await pool.query(
+          `DELETE FROM schule_srs_queue WHERE userId = ? AND exerciseId = ?`,
+          [req.user.id, String(exerciseId)]
+        )
+      } else {
+        await pool.query(
+          `UPDATE schule_srs_queue
+           SET intervalDays = ?, nextReviewAt = DATE_ADD(NOW(), INTERVAL ? DAY),
+               reviews = reviews + 1
+           WHERE userId = ? AND exerciseId = ?`,
+          [nextInterval, nextInterval, req.user.id, String(exerciseId)]
+        )
+      }
+    }
+    res.json({ ok: true })
+  } catch (err) {
+    console.error('SRS review error:', err.message)
+    res.status(500).json({ error: 'srs_write_failed' })
+  }
+})
 
 // ─── AUTO-MIGRATION: b2c integration ─────────────────────────────────
 // Adds the columns and tables required to consume b2c.aprender-aleman.de

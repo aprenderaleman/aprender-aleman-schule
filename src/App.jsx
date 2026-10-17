@@ -20,6 +20,7 @@ import Flashcards from './pages/Flashcards'
 import Pricing from './pages/Pricing'
 import AutoLogin from './pages/AutoLogin'
 import Pruefungen from './pages/Pruefungen'
+import Wiederholung from './pages/Wiederholung'
 import Cursos from './pages/Cursos'
 import PruefungPlayer from './pages/PruefungPlayer'
 import PruefungErgebnis from './pages/PruefungErgebnis'
@@ -200,6 +201,7 @@ function AppRoutes() {
         <Route path="/flashcards" element={<PaidRoute><Flashcards /></PaidRoute>} />
         {/* Catálogo de los cursos por nivel (A1-C1) */}
         <Route path="/cursos" element={<PaidRoute><Cursos /></PaidRoute>} />
+        <Route path="/wiederholung" element={<PaidRoute><Wiederholung /></PaidRoute>} />
         <Route path="/pruefungen" element={<PaidRoute><Pruefungen /></PaidRoute>} />
         <Route path="/pruefungen/ergebnis/:attemptId" element={<PaidRoute><PruefungErgebnis /></PaidRoute>} />
         <Route path="/pruefungen/:examId" element={<PaidRoute><PruefungPlayer /></PaidRoute>} />

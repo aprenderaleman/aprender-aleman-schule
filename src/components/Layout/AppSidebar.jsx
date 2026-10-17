@@ -3,9 +3,10 @@ import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
   Home, BookOpen, Layers, GraduationCap, BarChart2, Trophy, User,
-  Target, CreditCard, LogOut, X, Zap, Bot, ExternalLink, Library, ClipboardCheck,
+  Target, CreditCard, LogOut, X, Zap, Bot, ExternalLink, Library, ClipboardCheck, RotateCw,
 } from 'lucide-react'
 import { isReviewStaff, usePendingExamReviews } from '../../utils/examReviews'
+import { useSrsCount } from '../../utils/srsCount'
 import { useAuth } from '../../context/AuthContext'
 import { useProgress } from '../../context/ProgressContext'
 import { useSidebar } from '../../context/SidebarContext'
@@ -16,6 +17,7 @@ const NAV_ITEMS = [
   { to: '/dashboard',     icon: Home,           label: 'Dashboard' },
   { to: '/cursos',        icon: Library,        label: 'Cursos' },
   { to: '/ejercicios',    icon: BookOpen,       label: 'Übungen' },
+  { to: '/wiederholung',  icon: RotateCw,       label: 'Wiederholung', badge: 'srs' },
   { to: '/flashcards',    icon: Layers,         label: 'Karteikarten' },
   { to: '/pruefungen',    icon: GraduationCap,  label: 'Prüfungen' },
   { to: '/test-de-nivel', icon: Target,         label: 'Niveau-Test' },
@@ -57,6 +59,7 @@ export default function AppSidebar() {
   const location = useLocation()
   const navigate = useNavigate()
   const pendingReviews = usePendingExamReviews(user?.role)
+  const srsCount = useSrsCount(!!user)
 
   if (!user) return null
 
@@ -127,7 +130,7 @@ export default function AppSidebar() {
 
       {/* Main nav */}
       <nav className="flex-1 overflow-y-auto px-3 space-y-0.5" aria-label="Hauptnavigation">
-        {navItems.map(({ to, href, icon: Icon, label, external, staffReview }) => {
+        {navItems.map(({ to, href, icon: Icon, label, external, staffReview, badge }) => {
           const active = !external && (path === to || path.startsWith(to + '/'))
           const className =
             'relative flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-colors ' +
@@ -168,13 +171,21 @@ export default function AppSidebar() {
                 />
               )}
               <Icon size={18} strokeWidth={active ? 2.4 : 2} className="shrink-0" />
-              <span className={staffReview ? 'flex-1' : undefined}>{label}</span>
+              <span className={staffReview || badge === 'srs' ? 'flex-1' : undefined}>{label}</span>
               {staffReview && pendingReviews > 0 && (
                 <span
                   className="shrink-0 min-w-[20px] h-5 px-1.5 rounded-full bg-warm text-warm-foreground text-[11px] font-bold flex items-center justify-center"
                   aria-label={`${pendingReviews} pendientes`}
                 >
                   {pendingReviews}
+                </span>
+              )}
+              {badge === 'srs' && srsCount > 0 && (
+                <span
+                  className="shrink-0 min-w-[20px] h-5 px-1.5 rounded-full bg-warm text-warm-foreground text-[11px] font-bold flex items-center justify-center"
+                  aria-label={`${srsCount} zur Wiederholung`}
+                >
+                  {srsCount}
                 </span>
               )}
             </Link>

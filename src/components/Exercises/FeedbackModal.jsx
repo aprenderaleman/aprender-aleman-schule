@@ -136,6 +136,17 @@ export default function FeedbackModal({ open, onClose, feedback, title }) {
                   </p>
                 </div>
               )}
+
+              {feedback.model_answer && (
+                <details className="bg-indigo-50 dark:bg-indigo-900/20 rounded-xl p-4 border border-indigo-200 dark:border-indigo-800">
+                  <summary className="font-bold text-indigo-700 dark:text-indigo-300 flex items-center gap-2 cursor-pointer text-sm">
+                    <Star size={14} /> Musterantwort
+                  </summary>
+                  <p className="mt-3 text-sm text-gray-700 dark:text-gray-200 leading-relaxed whitespace-pre-line italic border-l-2 border-indigo-300 dark:border-indigo-700 pl-3">
+                    {feedback.model_answer}
+                  </p>
+                </details>
+              )}
             </div>
           </motion.div>
         </motion.div>
