@@ -86,24 +86,35 @@ function startWebRecognition({ lang, onPartial, onError }) {
   let finalTranscript = ''
   const startedAt = Date.now()
 
-  // IMPORTANTE: event.results es un snapshot acumulativo — contiene TODOS
-  // los resultados desde el inicio, no solo los nuevos. Hay que recorrerlo
-  // desde 0 y RECONSTRUIR finalTranscript cada vez, no acumular con +=.
+  // Chrome Android (y Brave) emite finals que se SOLAPAN: primero manda
+  // "ich fahre" como isFinal, luego "ich fahre immer" como otro isFinal,
+  // luego "ich fahre immer ins Bett" como otro. El código anterior
+  // concatenaba todos → "ich fahre ich fahre immer ich fahre immer ins
+  // Bett..." (reportado por Zulma).
   //
-  // Antes usabamos event.resultIndex como watermark + += al final anterior,
-  // pero en Chrome Android (y otros) resultIndex no se actualiza
-  // consistentemente, asi que los chunks finales se sumaban dos y tres
-  // veces → el transcript explotaba a "ich ich ich hätte ich hätte ich
-  // hätte gerne..." (reportado por Zulma).
+  // Fix: cuando un final es PREFIJO del siguiente, lo descartamos (el
+  // posterior lo subsume). Ademas aplicamos cleanTranscript como defensa
+  // adicional contra bucles exactos.
   rec.onresult = (event) => {
-    let finalText = ''
+    const finals = []
     let interim = ''
     for (let i = 0; i < event.results.length; i++) {
       const r = event.results[i]
-      if (r.isFinal) finalText += r[0].transcript + ' '
+      if (r.isFinal) finals.push(r[0].transcript.trim())
       else interim += r[0].transcript
     }
-    finalTranscript = finalText
+    // Colapsa prefijos y duplicados exactos: si finals[i] es prefijo
+    // (o igual) a finals[i+1], descarta i. Chrome Android dispara el
+    // MISMO final varias veces y tambien extensiones solapadas — ambos
+    // casos se arreglan igual.
+    const collapsed = []
+    for (let i = 0; i < finals.length; i++) {
+      const curr = finals[i].toLowerCase()
+      const next = (finals[i + 1] || '').toLowerCase()
+      if (curr && next.startsWith(curr)) continue
+      if (finals[i]) collapsed.push(finals[i])
+    }
+    finalTranscript = collapsed.join(' ')
     if (onPartial) onPartial(cleanTranscript(finalTranscript + ' ' + interim))
   }
 
