@@ -52,25 +52,47 @@ export function ProgressProvider({ children }) {
     let cancelled = false
 
     async function loadProgress() {
+      // Leemos primero localStorage para no perder ejercicios locales si el
+      // servidor devuelve menos (ej. porque un POST reciente aun esta en la
+      // offline queue). Luego mergeamos: completedExercises es la UNION de
+      // local + servidor. Lydia reporto que ejercicios que hizo esta manana
+      // aparecian como no hechos al reconectar — el servidor estaba
+      // devolviendo menos de lo que ella habia completado local.
+      let localData = null
+      try {
+        const stored = localStorage.getItem(`progress_${user.id}`)
+        if (stored) localData = JSON.parse(stored)
+      } catch { /* ignore */ }
+
       try {
         const res = await fetch(`${API_URL}/api/progress`, { headers: getAuthHeaders() })
         if (!res.ok) throw new Error('Failed to load')
         const data = await res.json()
         if (!cancelled) {
+          // Union de completedExercises local + servidor
+          const mergedCompleted = Array.from(new Set([
+            ...(data.completedExercises || []),
+            ...(localData?.completedExercises || []),
+          ]))
+          // Union de achievements
+          const mergedAchievements = Array.from(new Set([
+            ...(data.achievements || []),
+            ...(localData?.achievements || []),
+          ]))
           setProgress({
             ...defaultProgress,
             ...data,
+            // Las skills y xp SI vienen del servidor (fuente de verdad)
+            completedExercises: mergedCompleted,
+            achievements: mergedAchievements,
             level: user?.level || 'A1',
           })
           setLoaded(true)
         }
       } catch {
-        // Fallback: use localStorage if backend is unavailable
-        const stored = localStorage.getItem(`progress_${user.id}`)
-        if (stored && !cancelled) {
-          try {
-            setProgress({ ...defaultProgress, ...JSON.parse(stored), level: user?.level || 'A1' })
-          } catch { /* ignore */ }
+        // Backend caido → usar solo localStorage
+        if (localData && !cancelled) {
+          setProgress({ ...defaultProgress, ...localData, level: user?.level || 'A1' })
         }
         if (!cancelled) setLoaded(true)
       }

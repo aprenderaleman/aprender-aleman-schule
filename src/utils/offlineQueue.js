@@ -39,7 +39,7 @@ export async function queuePost(path, body, { skipIfOnline = false } = {}) {
 
   if (online && !skipIfOnline) {
     try {
-      await fetch(`${API_URL}${path}`, {
+      const res = await fetch(`${API_URL}${path}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -47,7 +47,22 @@ export async function queuePost(path, body, { skipIfOnline = false } = {}) {
         },
         body: JSON.stringify(body),
       })
-      return { queued: false }
+      // IMPORTANTE: fetch solo throw en errores de red. Un 500 del servidor
+      // (deadlock, timeout, bug) devuelve resuelto. Antes no chequeabamos
+      // response.ok, asi que si el servidor fallaba, el ejercicio quedaba
+      // marcado localmente pero NUNCA se persistia → al recargar aparecia
+      // como no hecho (reportado por Lydia 28/10/2026).
+      if (res.ok) return { queued: false }
+      // 4xx (excepto 401/429) significa payload invalido — no sirve
+      // reintentar. 401 significa token expiro — tampoco. Para esos
+      // dropeamos sin encolar (igual que flushQueue). Para 5xx y 429
+      // caemos a persistencia + retry.
+      if (res.status >= 400 && res.status < 500 && res.status !== 429) {
+        console.warn(`[queuePost] ${path} rechazado con ${res.status} — descartado`)
+        return { queued: false, dropped: true, status: res.status }
+      }
+      console.warn(`[queuePost] ${path} fallo con ${res.status} — encolando para retry`)
+      // Fall through — persist and retry later
     } catch {
       // Fall through — persist and retry later
     }
@@ -61,6 +76,11 @@ export async function queuePost(path, body, { skipIfOnline = false } = {}) {
     createdAt: Date.now(),
   })
   await saveQueue(q)
+  // Reintentar en 15s. Si la red/servidor sigue mal, flushQueue dejara
+  // los items en la cola y se reintentara en el proximo online event.
+  // Si vuelve a funcionar, los ejercicios se persisten sin que el alumno
+  // haga nada.
+  setTimeout(() => { flushQueue().catch(() => {}) }, 15000)
   return { queued: true, size: q.length }
 }
 
