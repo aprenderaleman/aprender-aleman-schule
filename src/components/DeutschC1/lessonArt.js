@@ -1,15 +1,17 @@
 // Imágenes de las lecciones (rediseño visual). Clave: «<nivel>/<lección>».
 //   hero: imagen de cabecera
-//   mid:  imagen dentro de la lección; `after` = tras qué sección (0 = la primera)
+//   mid:  imagen dentro de una sección; `sec` = cuál (0 = la primera)
+//   size: 'l' ancho completo · 'm' mediana · 's' pequeña (las dos últimas van
+//         a un lado, con el texto alrededor). Variar para dar ritmo.
 // Son decorativas y públicas (public/kurs-art/). Una lección sin entrada
 // se ve igual, solo que sin imagen.
 export const LESSON_ART = {
   'a1/33': {
-    hero: '/kurs-art/a1/33.webp',
-    mid: { src: '/kurs-art/a1/33-b.webp', after: 1 },
+    hero: '/kurs-art/a1/33.webp', size: 'l',
+    mid: { src: '/kurs-art/a1/33-b.webp', sec: 2, size: 's' },
   },
   'b1/12': {
-    hero: '/kurs-art/b1/12.webp',
+    hero: '/kurs-art/b1/12.webp', size: 'm',
   },
 }
 

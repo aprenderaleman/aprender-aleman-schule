@@ -49,10 +49,18 @@
 
 /* ---------- Cabecera ---------- */
 .c1-v2 .c1-hero {
-  display: block; width: 100%; aspect-ratio: 21 / 9; object-fit: cover;
-  border-radius: 18px; margin: 0 0 24px;
+  display: block; object-fit: cover; border-radius: 18px;
   background: var(--c1-surface);
 }
+/* Tamaños de imagen: grande a todo el ancho; mediana y pequeña a un lado,
+   con el texto alrededor. */
+.c1-v2 .c1-art--l { width: 100%; aspect-ratio: 21 / 9; margin: 0 0 24px; }
+.c1-v2 .c1-art--m { float: right; width: 46%; aspect-ratio: 3 / 2; margin: 0 0 18px 28px; }
+.c1-v2 .c1-art--s { float: right; width: 230px; aspect-ratio: 4 / 3; margin: 0 0 16px 24px; border-radius: 14px; }
+.c1-v2 .c1-sec { clear: both; }
+.c1-v2 .c1-sec::after { content: ""; display: block; clear: both; }
+/* Las tarjetas junto a una imagen flotante se estrechan en vez de pasar por debajo */
+.c1-v2 .c1-sec > .c1-card, .c1-v2 .c1-sec > .c1-steps, .c1-v2 .c1-sec > .c1-tipp { overflow: hidden; }
 .c1-v2 .c1-title { font-size: 46px; margin-bottom: 12px; }
 .c1-v2 .c1-lead { font-size: 18.5px; line-height: 1.55; color: var(--c1-text); max-width: 68ch; }
 .c1-v2 .c1-lead .c1-muted { color: var(--c1-muted); }
@@ -92,10 +100,7 @@
   background: var(--c1-gold-soft); border: 1px solid var(--c1-gold-line);
 }
 
-.c1-v2 .c1-section-art {
-  display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover;
-  border-radius: 16px; margin: 22px 0 0;
-}
+.c1-v2 .c1-section-art { display: block; object-fit: cover; border-radius: 16px; }
 
 /* Texto base algo mayor en toda la lección */
 .c1-v2 .c1-prose p { font-size: 17.5px; line-height: 1.6; }
@@ -231,8 +236,6 @@
 
 /* ---------- Übungsheft ---------- */
 .c1-v2 .c1-rule { display: none; }
-/* En el cuaderno la imagen es una franja: lo importante son los ejercicios */
-.c1-v2 .c1-hero--heft { aspect-ratio: 21 / 5; }
 /* Acentos claros en oscuro: el botón principal necesita letra oscura */
 .c1:not([data-c1-theme="light"]) .c1-v2 .c1-pa-btn--primary { color: #14213A; }
 .c1-v2 .c1-heft-anweisung { font-family: var(--c1-sans); font-size: 16.5px; color: var(--c1-text); margin-bottom: 16px; }
@@ -259,7 +262,9 @@
 
 /* ---------- Móvil ---------- */
 @media (max-width: 860px) {
-  .c1-v2 .c1-hero { aspect-ratio: 16 / 9; border-radius: 12px; }
+  .c1-v2 .c1-hero { border-radius: 12px; }
+  .c1-v2 .c1-art--l, .c1-v2 .c1-art--m { float: none; width: 100%; aspect-ratio: 16 / 9; margin: 0 0 18px; }
+  .c1-v2 .c1-art--s { float: none; width: 62%; margin: 0 auto 16px; border-radius: 12px; }
   .c1-v2 .c1-title { font-size: 34px; }
   .c1-v2 .c1-lead { font-size: 17px; }
   .c1-v2 .c1-sec { margin: 16px -22px 0; padding: 24px 22px; border-radius: 0; }

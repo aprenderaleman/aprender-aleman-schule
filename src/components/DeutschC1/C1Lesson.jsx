@@ -61,7 +61,7 @@ export default function C1Lesson({ lesson, kurs }) {
     <div className={'c1-wrap' + (v2 ? ' c1-v2' : '')} data-block={v2 ? lesson.block : undefined}>
       {lesson.ready ? (
         <>
-          {art?.hero && <img className="c1-hero" src={art.hero} alt="" />}
+          {art?.hero && <img className={`c1-hero c1-art--${art.size || 'l'}`} src={art.hero} alt="" />}
           {lesson.blockStart && lesson.block !== 'G' && !art?.hero && (
             <img
               className="c1-block-art"

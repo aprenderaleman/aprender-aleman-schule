@@ -536,10 +536,10 @@ export default function C1LessonBody({ content, next, base, v2 = false, art = nu
     <>
       {sections.filter(s => s.length > 0).map((s, n) => (
         <section className="c1-sec" key={n}>
-          {s.map(([block, i]) => renderBlock(block, i))}
-          {art?.mid?.after === n && (
-            <img className="c1-section-art" src={art.mid.src} alt="" loading="lazy" />
+          {art?.mid?.sec === n && (
+            <img className={`c1-section-art c1-art--${art.mid.size || 'm'}`} src={art.mid.src} alt="" loading="lazy" />
           )}
+          {s.map(([block, i]) => renderBlock(block, i))}
         </section>
       ))}
     </>

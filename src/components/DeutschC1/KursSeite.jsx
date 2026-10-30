@@ -170,7 +170,7 @@ export default function KursSeite({ kurs, heftMode = false }) {
     const heftBlock = index?.lessons?.find(l => l.id === lessonId)?.block
     body = (
       <div className={'c1-wrap' + (v2 ? ' c1-v2' : '')} data-block={v2 ? heftBlock : undefined}>
-        {art?.hero && <img className="c1-hero c1-hero--heft" src={art.hero} alt="" />}
+        {art?.hero && <img className="c1-hero c1-art--s" src={art.hero} alt="" />}
         <div className="c1-spec"><span className="c1-mod">Übungsheft</span><span className="c1-sep">·</span><span>Lektion {pad(lessonId)}</span></div>
         <h1 className="c1-title">{lesson.titel}</h1>
         <p className="c1-lead">Übe hier, was du in der Lektion gelernt hast.{/A[12]/.test(kurs.name) && <> <span className="c1-gl">(Practica aquí lo que aprendiste en la lección.)</span></>}</p>
