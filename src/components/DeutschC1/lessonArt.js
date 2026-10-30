@@ -1,19 +1,13 @@
+import lessonArtData from './lessonArtData.json'
+
 // Imágenes de las lecciones (rediseño visual). Clave: «<nivel>/<lección>».
 //   hero: imagen de cabecera
 //   mid:  imagen dentro de una sección; `sec` = cuál (0 = la primera)
 //   size: 'l' ancho completo · 'm' mediana · 's' pequeña (las dos últimas van
 //         a un lado, con el texto alrededor). Variar para dar ritmo.
 // Son decorativas y públicas (public/kurs-art/). Una lección sin entrada
-// se ve igual, solo que sin imagen.
-export const LESSON_ART = {
-  'a1/33': {
-    hero: '/kurs-art/a1/33.webp', size: 'l',
-    mid: { src: '/kurs-art/a1/33-b.webp', sec: 2, size: 's' },
-  },
-  'b1/12': {
-    hero: '/kurs-art/b1/12.webp', size: 'm',
-  },
-}
+// se ve igual, solo que sin imagen. El JSON lo genera scripts/gen-lesson-art.mjs.
+export const LESSON_ART = lessonArtData
 
 // Rediseño visual en pruebas: ?diseno=2 lo activa (y se recuerda en este
 // navegador), ?diseno=1 vuelve al actual. El resto de usuarios no lo ve.
