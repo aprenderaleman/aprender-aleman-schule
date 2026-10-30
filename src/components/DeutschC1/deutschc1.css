@@ -636,18 +636,45 @@
 
 /* Tarjeta de acceso al final de la lección */
 .c1-heft-card {
-  display: block; text-decoration: none;
-  background: var(--c1-gold-soft); border: 1.5px solid var(--c1-gold-line);
-  border-radius: 14px; padding: 18px 22px; margin: 24px 0 0;
-  transition: border-color .15s, transform .15s;
+  display: flex; align-items: center; gap: 18px; text-decoration: none;
+  background: #F4A261; color: #0F2847;   /* naranja de marca: destaca en claro y en oscuro */
+  border-radius: 16px; padding: 22px 26px; margin: 32px 0 0;
+  transition: transform .15s, background-color .15s;
+  animation: c1-hc-pulse 2.8s ease-out infinite;
 }
-.c1-heft-card:hover { border-color: var(--c1-gold); transform: translateY(-1px); }
+.c1-heft-card:hover { background: #F7B37C; transform: translateY(-2px); animation-play-state: paused; }
+.c1-heft-card:focus-visible { outline: 3px solid #0F2847; outline-offset: 3px; }
+.c1-heft-card .c1-hc-ico {
+  flex: 0 0 52px; width: 52px; height: 52px; border-radius: 14px; font-size: 26px;
+  display: flex; align-items: center; justify-content: center; background: rgb(255 255 255 / 0.45);
+}
+.c1-heft-card .c1-hc-body { flex: 1 1 auto; min-width: 0; display: block; }
 .c1-heft-card .c1-hc-k {
-  font-family: var(--c1-mono); font-size: 11px; letter-spacing: .12em;
-  text-transform: uppercase; color: var(--c1-gold); margin-bottom: 4px;
+  display: block; font-family: var(--c1-mono); font-size: 11.5px; font-weight: 600; letter-spacing: .12em;
+  text-transform: uppercase; color: #0F2847; margin-bottom: 3px;
 }
-.c1-heft-card .c1-hc-t { color: var(--c1-heading); font-family: var(--c1-serif); font-weight: 600; font-size: 17px; }
-.c1-heft-card .c1-hc-s { color: var(--c1-muted); font-size: 13.5px; margin-top: 2px; }
+.c1-heft-card .c1-hc-t { display: block; color: #0F2847; font-family: var(--c1-serif); font-weight: 600; font-size: 21px; line-height: 1.25; }
+.c1-heft-card .c1-hc-s { display: block; color: #24344D; font-size: 14px; margin-top: 4px; }
+.c1-heft-card .c1-hc-go {
+  flex: 0 0 auto; font-size: 28px; font-weight: 700; line-height: 1; color: #0F2847;
+  animation: c1-hc-nudge 2.8s ease-in-out infinite;
+}
+/* Animación leve: un halo que se expande y una flecha que empuja. El bloque
+   prefers-reduced-motion de este archivo las desactiva. */
+@keyframes c1-hc-pulse {
+  0%   { box-shadow: 0 0 0 0 rgb(244 162 97 / 0.55); }
+  70%  { box-shadow: 0 0 0 14px rgb(244 162 97 / 0); }
+  100% { box-shadow: 0 0 0 0 rgb(244 162 97 / 0); }
+}
+@keyframes c1-hc-nudge {
+  0%, 60%, 100% { transform: translateX(0); }
+  78% { transform: translateX(6px); }
+}
+@media (max-width: 560px) {
+  .c1-heft-card { gap: 14px; padding: 18px; }
+  .c1-heft-card .c1-hc-ico { flex-basis: 44px; width: 44px; height: 44px; font-size: 22px; }
+  .c1-heft-card .c1-hc-t { font-size: 18px; }
+}
 
 /* Ilustración de portada de bloque — solo en la primera lección de cada bloque */
 .c1-block-art {

@@ -90,9 +90,13 @@ export default function C1Lesson({ lesson, kurs }) {
 
       {lesson.heft && (
         <Link to={`${kurs.base}/${lesson.id}/heft`} className="c1-heft-card">
-          <div className="c1-hc-k">📝 Übungsheft</div>
-          <div className="c1-hc-t">Jetzt üben: Aufgaben zu dieser Lektion</div>
-          <div className="c1-hc-s">Grammatik · Lesen · Schreiben — mit Korrektur{/A[12]/.test(kurs.name) ? ' (practica lo aprendido)' : ''}</div>
+          <span className="c1-hc-ico" aria-hidden="true">📝</span>
+          <span className="c1-hc-body">
+            <span className="c1-hc-k">Übungsheft</span>
+            <span className="c1-hc-t">Jetzt üben: Aufgaben zu dieser Lektion</span>
+            <span className="c1-hc-s">Grammatik · Lesen · Hören · Schreiben · Sprechen — mit Korrektur{/A[12]/.test(kurs.name) ? ' (practica lo aprendido)' : ''}</span>
+          </span>
+          <span className="c1-hc-go" aria-hidden="true">→</span>
         </Link>
       )}
       <Pager prev={lesson.prev} next={lesson.next} base={kurs.base} />
