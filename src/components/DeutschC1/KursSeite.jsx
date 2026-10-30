@@ -51,11 +51,11 @@ export default function KursSeite({ kurs, heftMode = false }) {
   const [error, setError] = useState(null)
   const [navOpen, setNavOpen] = useState(false)
 
-  // Tema propio del curso: oscuro por defecto; la preferencia se recuerda
+  // Tema propio del curso: claro por defecto; la preferencia se recuerda
   // por navegador (solo el tema — el progreso sigue sin persistirse).
   const [theme, setTheme] = useState(() => {
-    try { return localStorage.getItem('kurs-theme') === 'light' ? 'light' : 'dark' }
-    catch { return 'dark' }
+    try { return localStorage.getItem('kurs-theme') === 'dark' ? 'dark' : 'light' }
+    catch { return 'light' }
   })
   const toggleTheme = () => setTheme(t => {
     const next = t === 'dark' ? 'light' : 'dark'

@@ -2,7 +2,7 @@
    Zertifikat C1 — estilos del curso.
 
    Todo vive bajo el scope `.c1` para no tocar nada del resto de la app.
-   El curso trae su propio tema (oscuro por defecto, claro con el botón
+   El curso trae su propio tema (claro por defecto, oscuro con el botón
    del sidebar → [data-c1-theme="light"]), independiente del tema global.
 
    El dorado es el acento de "documento de examen": sello de coordenadas,
@@ -11,13 +11,13 @@
    ─────────────────────────────────────────────────────────────── */
 
 /* El curso lleva su PROPIO tema, independiente del tema global de la app:
-   oscuro por defecto, claro vía [data-c1-theme="light"] (botón en el sidebar).
+   claro por defecto vía [data-c1-theme="light"] (el botón del sidebar lo cambia).
    El navy del sidebar y de los paneles de marca no cambia entre modos. */
 .c1 {
   --c1-ink: #0F2847;          /* navy de marca */
   --c1-ink-2: #1E3A66;
 
-  /* Paleta oscura (predeterminada) */
+  /* Paleta oscura */
   --c1-paper: #0E1B2E;
   --c1-surface: #15263F;
   --c1-line: #28395A;
