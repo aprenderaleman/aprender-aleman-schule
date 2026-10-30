@@ -502,10 +502,8 @@ function Ausblick({ block, next, base }) {
   )
 }
 
-export default function C1LessonBody({ content, next, base }) {
-  return (
-    <>
-      {content.map((block, i) => {
+export default function C1LessonBody({ content, next, base, v2 = false, art = null }) {
+  const renderBlock = (block, i) => {
         switch (block.type) {
           case 'wortschatz':       return <Wortschatz       block={block} key={i} />
           case 'pruefungsaufgabe': return <Pruefungsaufgabe block={block} key={i} />
@@ -524,7 +522,26 @@ export default function C1LessonBody({ content, next, base }) {
           case 'uebung':     return <Uebung     block={block} key={i} />
           default:           return null
         }
-      })}
+  }
+
+  if (!v2) return <>{content.map(renderBlock)}</>
+
+  // Rediseño: las secciones que separaba una línea pasan a ser bandas.
+  const sections = [[]]
+  content.forEach((block, i) => {
+    if (block.type === 'rule') sections.push([])
+    else sections[sections.length - 1].push([block, i])
+  })
+  return (
+    <>
+      {sections.filter(s => s.length > 0).map((s, n) => (
+        <section className="c1-sec" key={n}>
+          {s.map(([block, i]) => renderBlock(block, i))}
+          {art?.mid?.after === n && (
+            <img className="c1-section-art" src={art.mid.src} alt="" loading="lazy" />
+          )}
+        </section>
+      ))}
     </>
   )
 }

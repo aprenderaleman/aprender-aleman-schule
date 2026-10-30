@@ -2,6 +2,19 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import C1LessonBody from './C1LessonBody'
 import { renderInline } from './inline'
+import { lessonArt } from './lessonArt'
+import './deutschc1-v2.css'
+
+// Rediseño visual en pruebas: ?diseno=2 lo activa (y se recuerda en este
+// navegador), ?diseno=1 vuelve al actual. El resto de usuarios no lo ve.
+function useDisenoV2() {
+  try {
+    const q = new URLSearchParams(window.location.search).get('diseno')
+    if (q === '2') localStorage.setItem('kurs-diseno', '2')
+    if (q === '1') localStorage.removeItem('kurs-diseno')
+    return localStorage.getItem('kurs-diseno') === '2'
+  } catch { return false }
+}
 
 const pad = n => String(n).padStart(2, '0')
 
@@ -54,11 +67,14 @@ function Pager({ prev, next, base }) {
 }
 
 export default function C1Lesson({ lesson, kurs }) {
+  const v2 = useDisenoV2()
+  const art = v2 ? lessonArt(kurs, lesson.id) : null
   return (
-    <div className="c1-wrap">
+    <div className={'c1-wrap' + (v2 ? ' c1-v2' : '')} data-block={v2 ? lesson.block : undefined}>
       {lesson.ready ? (
         <>
-          {lesson.blockStart && lesson.block !== 'G' && (
+          {art?.hero && <img className="c1-hero" src={art.hero} alt="" />}
+          {lesson.blockStart && lesson.block !== 'G' && !art?.hero && (
             <img
               className="c1-block-art"
               src={`${kurs.artBase}/block-${lesson.block}.svg`}
@@ -70,7 +86,7 @@ export default function C1Lesson({ lesson, kurs }) {
           <h2 className="c1-title">{lesson.h1 || lesson.titel}</h2>
           {lesson.lead && <p className="c1-lead">{renderInline(lesson.lead)}</p>}
           <hr className="c1-rule" />
-          <C1LessonBody content={lesson.content || []} next={lesson.next} base={kurs.base} />
+          <C1LessonBody content={lesson.content || []} next={lesson.next} base={kurs.base} v2={v2} art={art} />
         </>
       ) : (
         <div className="c1-placeholder">
