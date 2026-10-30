@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import C1LessonBody from './C1LessonBody'
+import { renderInline } from './inline'
 
 const pad = n => String(n).padStart(2, '0')
 
@@ -67,7 +68,7 @@ export default function C1Lesson({ lesson, kurs }) {
           )}
           <ExamStamp spec={lesson.spec} />
           <h2 className="c1-title">{lesson.h1 || lesson.titel}</h2>
-          {lesson.lead && <p className="c1-lead">{lesson.lead}</p>}
+          {lesson.lead && <p className="c1-lead">{renderInline(lesson.lead)}</p>}
           <hr className="c1-rule" />
           <C1LessonBody content={lesson.content || []} next={lesson.next} base={kurs.base} />
         </>
