@@ -102,3 +102,22 @@ Cuando el alumno aprueba el nivel con notas confirmadas se guarda una fila en
 `EXAM_AUDIO_DIR`, `EXAM_AUDIO_TTL_DAYS`, `EXAM_SPEAKING_AUDIO`,
 `EXAM_RESULTS_EMAIL`, y para el aviso a b2c las ya existentes `B2C_API_BASE` +
 `B2C_INTERNAL_API_KEY`.
+
+## Registro de Übungshefte
+
+`server/heftProgress.js` guarda cada entrega de un cuaderno como prueba para la
+garantía de nivel. Lo corrige siempre el servidor; la nota que mande el navegador
+se ignora.
+
+- **Hecho** = las 5 partes entregadas y al menos un 50 % en las de corrección
+  automática. Queda fijado con su fecha la primera vez: repetirlo mal no lo quita.
+- `schule_heft_submissions` solo se añade (todos los intentos, también los malos,
+  con su texto). `schule_heft_progress` guarda el estado por alumno y lección.
+- Profesores y «ver como alumno» no registran nada. Sprechen escrito en vez de
+  grabado cuenta y queda marcado como `escrito`.
+- Consulta: `/cuadernos-alumnos` (equipo), `GET /api/admin/hefte?email=`, el campo
+  `hefte` de `/api/pruefungen/cert-status` y de `/api/internal/student/progress` (b2c).
+
+**La garantía aún no lo exige.** El 80 % de cuadernos del nivel (`HEFT_GUARANTEE_PCT`)
+es solo informativo hasta actualizar las condiciones: cambiar los requisitos de una
+garantía ya vendida debe revisarlo un asesor y aplicarse a matrículas nuevas.

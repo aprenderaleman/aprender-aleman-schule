@@ -20,6 +20,7 @@ import {
   REVIEW_COUNTS_SQL,
 } from './realExam.js'
 import { setupExamReview } from './examReview.js'
+import { setupHeftProgress } from './heftProgress.js'
 import { LEVEL_TEST_QUESTIONS, computeLevel as computeLevelTestLevel } from './level-test-bank.js'
 import { getCourseIndex as getC1Index, getLesson as getC1Lesson } from './deutschc1/index.js'
 import { getCourseIndex as getB2Index, getLesson as getB2Lesson } from './deutschb2/index.js'
@@ -1915,6 +1916,8 @@ app.get('/api/internal/student/progress', async (req, res) => {
         // still pick its own combination — both signals are exposed above.
         eligibleForLevelCertificate: allPassed || pathPct >= GUARANTEE_PATH_THRESHOLD,
       },
+      // Cuadernos hechos del nivel. Informativo: aún no condiciona la garantía.
+      hefte: await heftProgress.levelSummary(user.id, level),
     })
   } catch (err) {
     console.error('[internal/student/progress] error:', err.message)
@@ -4199,6 +4202,7 @@ app.get('/api/pruefungen/cert-status', authMiddleware, subscriptionMiddleware, a
       compensation,
       path: { completed, total, pct: pathPct, threshold: GUARANTEE_PATH_THRESHOLD },
       eligibleForCertificate: allPassed || pathPct >= GUARANTEE_PATH_THRESHOLD,
+      hefte: await heftProgress.levelSummary(req.user.id, level),
     })
   } catch (err) {
     console.error('cert-status error:', err.message)
@@ -5342,6 +5346,12 @@ for (const kursDir of ['deutscha1', 'deutscha2', 'deutschb1', 'deutschb2', 'deut
     res.json(heftForStudent(kursDir, id, heft))
   })
 }
+
+// Registro de los cuadernos (prueba para la garantía): server/heftProgress.js.
+const heftProgress = setupHeftProgress(app, {
+  pool, authMiddleware, deutschC1RoleGate, subscriptionMiddleware, blockIfReadOnly, staffOnly, isExamStaff,
+  aiRateLimit, aiDailyCap, gradeSchreibenCore, gradeSprechenCore, ANTHROPIC_API_KEY,
+})
 // ─── SERVE FRONTEND IN PRODUCTION ────────────────────
 const distPath = path.join(__dirname, '..', 'dist')
 app.use(express.static(distPath))
