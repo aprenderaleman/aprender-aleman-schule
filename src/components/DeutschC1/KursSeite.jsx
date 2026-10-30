@@ -60,6 +60,17 @@ export default function KursSeite({ kurs, heftMode = false }) {
     return next
   })
 
+  // Ocultar el menú en escritorio para ganar espacio al presentar la clase.
+  // Se recuerda por navegador, igual que el tema.
+  const [navHidden, setNavHidden] = useState(() => {
+    try { return localStorage.getItem('kurs-nav-hidden') === '1' }
+    catch { return false }
+  })
+  const setHidden = hidden => {
+    setNavHidden(hidden)
+    try { localStorage.setItem('kurs-nav-hidden', hidden ? '1' : '0') } catch { /* modo privado */ }
+  }
+
   const mainRef = useRef(null)
   const sidebarRef = useRef(null)
   useFocusTrap(sidebarRef, navOpen)
@@ -168,7 +179,18 @@ export default function KursSeite({ kurs, heftMode = false }) {
 
   return (
     <div className="c1" data-c1-theme={theme}>
-      <div className={'c1-app' + (navOpen ? ' is-nav-open' : '')}>
+      <div className={'c1-app' + (navOpen ? ' is-nav-open' : '') + (navHidden ? ' is-nav-hidden' : '')}>
+        {navHidden && (
+          <button
+            type="button"
+            className="c1-expand-btn"
+            onClick={() => setHidden(false)}
+            aria-label="Menü einblenden"
+            title="Menü einblenden"
+          >
+            ☰
+          </button>
+        )}
         {index && (
           <C1Sidebar
             kurs={kurs}
@@ -179,6 +201,7 @@ export default function KursSeite({ kurs, heftMode = false }) {
             panelRef={sidebarRef}
             theme={theme}
             onToggleTheme={toggleTheme}
+            onCollapse={() => setHidden(true)}
           />
         )}
 

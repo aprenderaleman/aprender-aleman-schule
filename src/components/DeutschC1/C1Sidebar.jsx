@@ -10,7 +10,7 @@ const pad = n => String(n).padStart(2, '0')
  * desde la topbar (la transición vive en deutschc1.css, que respeta
  * prefers-reduced-motion).
  */
-export default function C1Sidebar({ kurs, blocks, lessons, activeId, onNavigate, panelRef, theme, onToggleTheme }) {
+export default function C1Sidebar({ kurs, blocks, lessons, activeId, onNavigate, panelRef, theme, onToggleTheme, onCollapse }) {
   const activeRef = useRef(null)
 
   // Mantener la lección activa a la vista al saltar de una a otra.
@@ -34,6 +34,16 @@ export default function C1Sidebar({ kurs, blocks, lessons, activeId, onNavigate,
             title={theme === 'dark' ? 'Heller Modus' : 'Dunkler Modus'}
           >
             {theme === 'dark' ? '☀ Hell' : '☾ Dunkel'}
+          </button>
+        )}
+        {onCollapse && (
+          <button
+            type="button"
+            className="c1-theme-btn c1-collapse-btn"
+            onClick={onCollapse}
+            title="Menü ausblenden — mehr Platz für den Unterricht"
+          >
+            ‹‹ Ausblenden
           </button>
         )}
       </div>
