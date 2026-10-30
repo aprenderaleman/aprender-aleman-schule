@@ -5,6 +5,8 @@ import { useFocusTrap } from '../../hooks/useFocusTrap'
 import C1Sidebar from './C1Sidebar'
 import C1Lesson from './C1Lesson'
 import HeftBody from './HeftBody'
+import { lessonArt, useDisenoV2 } from './lessonArt'
+import './deutschc1-v2.css'
 import { Link } from 'react-router-dom'
 import './deutschc1.css'
 
@@ -35,6 +37,7 @@ function State({ kicker, titel, children }) {
 export default function KursSeite({ kurs, heftMode = false }) {
   const { id } = useParams()
   const { getToken } = useAuth()
+  const v2 = useDisenoV2()
 
   const lessonId = Number(id)
   // Ids 91-95 = Geschichten (lectura graduada), si el curso las declara.
@@ -163,8 +166,11 @@ export default function KursSeite({ kurs, heftMode = false }) {
     // tras navegar llega con los datos del modo anterior — mostrar carga.
     body = <State kicker={kurs.name} titel="Lektion wird geladen…">Einen Moment bitte.</State>
   } else if (heftMode) {
+    const art = v2 ? lessonArt(kurs, lessonId) : null
+    const heftBlock = index?.lessons?.find(l => l.id === lessonId)?.block
     body = (
-      <div className="c1-wrap">
+      <div className={'c1-wrap' + (v2 ? ' c1-v2' : '')} data-block={v2 ? heftBlock : undefined}>
+        {art?.hero && <img className="c1-hero c1-hero--heft" src={art.hero} alt="" />}
         <div className="c1-spec"><span className="c1-mod">Übungsheft</span><span className="c1-sep">·</span><span>Lektion {pad(lessonId)}</span></div>
         <h1 className="c1-title">{lesson.titel}</h1>
         <p className="c1-lead">Übe hier, was du in der Lektion gelernt hast.{/A[12]/.test(kurs.name) && <> <span className="c1-gl">(Practica aquí lo que aprendiste en la lección.)</span></>}</p>
@@ -219,7 +225,7 @@ export default function KursSeite({ kurs, heftMode = false }) {
               ☰ Lektionen
             </button>
             <span className="c1-t-title">
-              {lesson ? `${pad(lesson.id)} · ${lesson.titel}` : kurs.name}
+              {lesson ? `${pad(lessonId)} · ${lesson.titel}` : kurs.name}
             </span>
           </div>
 

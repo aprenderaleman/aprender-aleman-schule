@@ -2,19 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import C1LessonBody from './C1LessonBody'
 import { renderInline } from './inline'
-import { lessonArt } from './lessonArt'
-import './deutschc1-v2.css'
-
-// Rediseño visual en pruebas: ?diseno=2 lo activa (y se recuerda en este
-// navegador), ?diseno=1 vuelve al actual. El resto de usuarios no lo ve.
-function useDisenoV2() {
-  try {
-    const q = new URLSearchParams(window.location.search).get('diseno')
-    if (q === '2') localStorage.setItem('kurs-diseno', '2')
-    if (q === '1') localStorage.removeItem('kurs-diseno')
-    return localStorage.getItem('kurs-diseno') === '2'
-  } catch { return false }
-}
+import { lessonArt, useDisenoV2 } from './lessonArt'
 
 const pad = n => String(n).padStart(2, '0')
 

@@ -19,11 +19,26 @@
 .c1-v2 .c1-cardt, .c1-v2 .c1-step h4, .c1-v2 .c1-ws td.c1-k { font-family: var(--c1-sub); font-weight: 600; }
 .c1-v2 button, .c1-v2 select, .c1-v2 input { font-family: inherit; }
 
+/* ---------- Modo oscuro más claro: azul pizarra en vez de casi negro ----------
+   :has() porque el fondo de página y el menú cuelgan de .c1, por encima de .c1-v2. */
+.c1:not([data-c1-theme="light"]):has(.c1-v2) {
+  --c1-ink: #1B365C;
+  --c1-paper: #24344D;
+  --c1-surface: #2F4260;
+  --c1-line: #46597A;
+  --c1-line-strong: rgb(183 196 216 / 0.55);
+  --c1-muted: #B7C4D8;
+  --c1-text: #F4F6FA;
+  --c1-heading: #FFFFFF;
+  --c1-spec-c: #B7C4D8;
+  --c1-code-bg: #3A4E6E;
+}
+
 /* ---------- Color de acento por bloque ---------- */
-.c1-v2[data-block="1"] { --c1-gold: #6FA8DC; --c1-gold-soft: rgb(111 168 220 / 0.14); --c1-gold-line: rgb(111 168 220 / 0.40); }
-.c1-v2[data-block="2"] { --c1-gold: #E08FA0; --c1-gold-soft: rgb(224 143 160 / 0.14); --c1-gold-line: rgb(224 143 160 / 0.40); }
-.c1-v2[data-block="3"] { --c1-gold: #4FBFA5; --c1-gold-soft: rgb(79 191 165 / 0.14); --c1-gold-line: rgb(79 191 165 / 0.40); }
-.c1-v2[data-block="4"] { --c1-gold: #B29AE6; --c1-gold-soft: rgb(178 154 230 / 0.14); --c1-gold-line: rgb(178 154 230 / 0.40); }
+.c1-v2[data-block="1"] { --c1-gold: #8EC1EE; --c1-gold-soft: rgb(142 193 238 / 0.14); --c1-gold-line: rgb(142 193 238 / 0.40); }
+.c1-v2[data-block="2"] { --c1-gold: #F0A9B8; --c1-gold-soft: rgb(240 169 184 / 0.14); --c1-gold-line: rgb(240 169 184 / 0.40); }
+.c1-v2[data-block="3"] { --c1-gold: #6FD6BD; --c1-gold-soft: rgb(111 214 189 / 0.14); --c1-gold-line: rgb(111 214 189 / 0.40); }
+.c1-v2[data-block="4"] { --c1-gold: #C7B3F2; --c1-gold-soft: rgb(199 179 242 / 0.14); --c1-gold-line: rgb(199 179 242 / 0.40); }
 .c1-v2[data-block="5"] { --c1-gold: #F4A261; --c1-gold-soft: rgb(244 162 97 / 0.14); --c1-gold-line: rgb(244 162 97 / 0.40); }
 
 .c1[data-c1-theme="light"] .c1-v2[data-block="1"] { --c1-gold: #1F6FB2; --c1-gold-soft: #E6F0F9; --c1-gold-line: #BCD6EC; }
@@ -48,12 +63,12 @@
   margin: 22px -28px 0; padding: 30px 28px; border-radius: 20px;
 }
 /* Cada sección con su color: fondo y acento (iconos, bordes, etiquetas) a juego */
-.c1-v2 .c1-sec:nth-of-type(6n+1) { background: rgb(111 168 220 / 0.13); --c1-gold: #6FA8DC; --c1-gold-soft: rgb(111 168 220 / 0.16); --c1-gold-line: rgb(111 168 220 / 0.42); }
-.c1-v2 .c1-sec:nth-of-type(6n+2) { background: rgb(79 191 165 / 0.13); --c1-gold: #4FBFA5; --c1-gold-soft: rgb(79 191 165 / 0.16); --c1-gold-line: rgb(79 191 165 / 0.42); }
-.c1-v2 .c1-sec:nth-of-type(6n+3) { background: rgb(178 154 230 / 0.13); --c1-gold: #B29AE6; --c1-gold-soft: rgb(178 154 230 / 0.16); --c1-gold-line: rgb(178 154 230 / 0.42); }
-.c1-v2 .c1-sec:nth-of-type(6n+4) { background: rgb(224 143 160 / 0.13); --c1-gold: #E08FA0; --c1-gold-soft: rgb(224 143 160 / 0.16); --c1-gold-line: rgb(224 143 160 / 0.42); }
-.c1-v2 .c1-sec:nth-of-type(6n+5) { background: rgb(227 176 75 / 0.13); --c1-gold: #E3B04B; --c1-gold-soft: rgb(227 176 75 / 0.16); --c1-gold-line: rgb(227 176 75 / 0.42); }
-.c1-v2 .c1-sec:nth-of-type(6n+6) { background: rgb(124 195 110 / 0.13); --c1-gold: #7CC36E; --c1-gold-soft: rgb(124 195 110 / 0.16); --c1-gold-line: rgb(124 195 110 / 0.42); }
+.c1-v2 .c1-sec:nth-of-type(6n+1) { background: rgb(142 193 238 / 0.20); --c1-gold: #8EC1EE; --c1-gold-soft: rgb(142 193 238 / 0.16); --c1-gold-line: rgb(142 193 238 / 0.42); }
+.c1-v2 .c1-sec:nth-of-type(6n+2) { background: rgb(111 214 189 / 0.20); --c1-gold: #6FD6BD; --c1-gold-soft: rgb(111 214 189 / 0.16); --c1-gold-line: rgb(111 214 189 / 0.42); }
+.c1-v2 .c1-sec:nth-of-type(6n+3) { background: rgb(199 179 242 / 0.20); --c1-gold: #C7B3F2; --c1-gold-soft: rgb(199 179 242 / 0.16); --c1-gold-line: rgb(199 179 242 / 0.42); }
+.c1-v2 .c1-sec:nth-of-type(6n+4) { background: rgb(240 169 184 / 0.20); --c1-gold: #F0A9B8; --c1-gold-soft: rgb(240 169 184 / 0.16); --c1-gold-line: rgb(240 169 184 / 0.42); }
+.c1-v2 .c1-sec:nth-of-type(6n+5) { background: rgb(239 195 106 / 0.20); --c1-gold: #EFC36A; --c1-gold-soft: rgb(239 195 106 / 0.16); --c1-gold-line: rgb(239 195 106 / 0.42); }
+.c1-v2 .c1-sec:nth-of-type(6n+6) { background: rgb(155 217 140 / 0.20); --c1-gold: #9BD98C; --c1-gold-soft: rgb(155 217 140 / 0.16); --c1-gold-line: rgb(155 217 140 / 0.42); }
 .c1[data-c1-theme="light"] .c1-v2 .c1-sec:nth-of-type(6n+1) { background: #E4EFF9; --c1-gold: #1F6FB2; --c1-gold-soft: #E4EFF9; --c1-gold-line: #BCD6EC; }
 .c1[data-c1-theme="light"] .c1-v2 .c1-sec:nth-of-type(6n+2) { background: #E0F3EE; --c1-gold: #0F7F68; --c1-gold-soft: #E0F3EE; --c1-gold-line: #B5E0D6; }
 .c1[data-c1-theme="light"] .c1-v2 .c1-sec:nth-of-type(6n+3) { background: #EDE8FA; --c1-gold: #6B4FB8; --c1-gold-soft: #EDE8FA; --c1-gold-line: #D5C9F0; }
@@ -213,6 +228,31 @@
 }
 .c1-v2 .c1-ausblick p { color: #E8ECF3; font-size: 16.5px; }
 .c1-v2 .c1-ausblick-link { color: #fff; }
+
+/* ---------- Übungsheft ---------- */
+.c1-v2 .c1-rule { display: none; }
+/* En el cuaderno la imagen es una franja: lo importante son los ejercicios */
+.c1-v2 .c1-hero--heft { aspect-ratio: 21 / 5; }
+/* Acentos claros en oscuro: el botón principal necesita letra oscura */
+.c1:not([data-c1-theme="light"]) .c1-v2 .c1-pa-btn--primary { color: #14213A; }
+.c1-v2 .c1-heft-anweisung { font-family: var(--c1-sans); font-size: 16.5px; color: var(--c1-text); margin-bottom: 16px; }
+.c1-v2 .c1-heft-anweisung .c1-muted, .c1-v2 .c1-heft-anweisung .c1-gl { color: var(--c1-muted); }
+.c1-v2 .c1-heft-item {
+  background: var(--c1-surface); border: 1px solid var(--c1-line); border-left: 4px solid var(--c1-gold);
+  border-radius: 12px; padding: 16px 18px; margin-bottom: 12px;
+}
+.c1-v2 .c1-heft-frage { font-size: 17.5px; color: var(--c1-heading); }
+.c1-v2 .c1-heft-frage .c1-gl, .c1-v2 .c1-heft-item .c1-gl { font-size: 14px; }
+.c1-v2 .c1-heft-opt, .c1-v2 .c1-heft-chip { font-family: var(--c1-sans); font-size: 16px; border-radius: 10px; }
+.c1-v2 .c1-heft-sol { font-size: 14.5px; }
+.c1-v2 .c1-heft-lesetext { font-size: 17px; }
+.c1-v2 .c1-heft-feld > span, .c1-v2 .c1-heft-fb-total { font-family: var(--c1-sub); letter-spacing: 0; text-transform: none; font-size: 15px; }
+.c1-v2 .c1-heft-input, .c1-v2 .c1-heft-textarea { font-family: var(--c1-sans); font-size: 16px; border-radius: 10px; }
+.c1-v2 .c1-impuls { border-style: solid; border-left: 4px solid var(--c1-gold); }
+.c1-v2 .c1-impuls .c1-q { font-family: var(--c1-sub); font-weight: 500; font-size: 17.5px; }
+.c1-v2 .c1-pa-btn { font-family: var(--c1-sub); letter-spacing: 0; text-transform: none; font-size: 14.5px; border-radius: 10px; }
+.c1-v2 .c1-heft-redemittel span { font-family: var(--c1-sans); font-size: 15px; }
+.c1-v2 .c1-heft-card .c1-hc-t { font-family: var(--c1-sub); }
 
 /* ---------- Menú oculto: el título crece un poco más ---------- */
 .c1-app.is-nav-hidden .c1-v2 .c1-title { font-size: 54px; }

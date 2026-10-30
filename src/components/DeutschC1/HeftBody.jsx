@@ -637,7 +637,7 @@ export default function HeftBody({ heft, level = 'A1' }) {
   return (
     <div key={runde}>
       {heft.teile.map((teil, t) => (
-        <section key={t}>
+        <section className="c1-sec" key={t}>
           <div className="c1-eyebrow"><span className="c1-ico">{ICONS[teil.typ] || '📝'}</span>{teil.titel}</div>
           {teil.anweisung && <p className="c1-heft-anweisung">{renderInline(teil.anweisung)}</p>}
           {teil.typ === 'schreiben'
