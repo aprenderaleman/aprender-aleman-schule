@@ -74,6 +74,9 @@ export default function KursSeite({ kurs, heftMode = false }) {
     try { localStorage.setItem('kurs-nav-hidden', hidden ? '1' : '0') } catch { /* modo privado */ }
   }
 
+  // Cuadernos hechos por este alumno: check verde del menú y de la tarjeta.
+  const [heftState, setHeftState] = useState({})
+
   const mainRef = useRef(null)
   const sidebarRef = useRef(null)
   useFocusTrap(sidebarRef, navOpen)
@@ -96,6 +99,14 @@ export default function KursSeite({ kurs, heftMode = false }) {
     fetchJson(`${kurs.api}/index`)
       .then(data => { if (!cancelled) setIndex(data) })
       .catch(err => { if (!cancelled) setError(err.status || 'network') })
+    return () => { cancelled = true }
+  }, [fetchJson, kurs.api])
+
+  useEffect(() => {
+    let cancelled = false
+    fetchJson(`${kurs.api}/heft-progress`)
+      .then(data => { if (!cancelled) setHeftState(data.lessons || {}) })
+      .catch(() => {})   // sin estado, el curso se ve igual
     return () => { cancelled = true }
   }, [fetchJson, kurs.api])
 
@@ -176,11 +187,17 @@ export default function KursSeite({ kurs, heftMode = false }) {
         <p className="c1-lead">Übe hier, was du in der Lektion gelernt hast.{/A[12]/.test(kurs.name) && <> <span className="c1-gl">(Practica aquí lo que aprendiste en la lección.)</span></>}</p>
         <Link to={`${kurs.base}/${lessonId}`} className="c1-back" style={{ marginTop: 0 }}>‹ Zur Lektion</Link>
         <hr className="c1-rule" />
-        <HeftBody heft={lesson} level={kurs.name.replace('Deutsch ', '')} />
+        <HeftBody
+          heft={lesson}
+          level={kurs.name.replace('Deutsch ', '')}
+          api={kurs.api}
+          lessonId={lessonId}
+          onProgress={(id, p) => setHeftState(s => ({ ...s, [id]: p }))}
+        />
       </div>
     )
   } else {
-    body = <C1Lesson lesson={lesson} kurs={kurs} />
+    body = <C1Lesson lesson={lesson} kurs={kurs} heftState={heftState[lessonId]} />
   }
 
   return (
@@ -208,6 +225,7 @@ export default function KursSeite({ kurs, heftMode = false }) {
             theme={theme}
             onToggleTheme={toggleTheme}
             onCollapse={() => setHidden(true)}
+            heftState={heftState}
           />
         )}
 

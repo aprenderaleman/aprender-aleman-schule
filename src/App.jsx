@@ -50,6 +50,7 @@ const AdminSupervision = lazy(() => import('./pages/admin/AdminSupervision'))
 
 // Revisión de exámenes (equipo docente: teacher, admin, superadmin)
 const ExamReviews = lazy(() => import('./pages/staff/ExamReviews'))
+const HeftStudents = lazy(() => import('./pages/staff/HeftStudents'))
 const ExamReviewDetail = lazy(() => import('./pages/staff/ExamReviewDetail'))
 
 // Cursos por nivel — chunk propio, solo se descargan al entrar
@@ -223,6 +224,7 @@ function AppRoutes() {
         <Route path="/deutscha1/:id/heft" element={<C1Route><DeutschA1 heft /></C1Route>} />
         {/* Revisión de exámenes — equipo docente */}
         <Route path="/revision-examenes" element={<StaffRoute><ExamReviews /></StaffRoute>} />
+        <Route path="/cuadernos-alumnos" element={<StaffRoute><HeftStudents /></StaffRoute>} />
         <Route path="/revision-examenes/:attemptId" element={<StaffRoute><ExamReviewDetail /></StaffRoute>} />
         {/* Admin routes */}
         <Route path="/admin" element={<AdminRoute><AdminDashboard /></AdminRoute>} />

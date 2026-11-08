@@ -54,9 +54,11 @@ function Pager({ prev, next, base }) {
   )
 }
 
-export default function C1Lesson({ lesson, kurs }) {
+export default function C1Lesson({ lesson, kurs, heftState }) {
   const v2 = useDisenoV2()
   const art = v2 ? lessonArt(kurs, lesson.id) : null
+  const heftDone = !!heftState?.completedAt
+  const heftUrl = `${kurs.base}/${lesson.id}/heft`
   return (
     <div className={'c1-wrap' + (v2 ? ' c1-v2' : '')} data-block={v2 ? lesson.block : undefined}>
       {lesson.ready ? (
@@ -73,6 +75,11 @@ export default function C1Lesson({ lesson, kurs }) {
           <ExamStamp spec={lesson.spec} />
           <h2 className="c1-title">{lesson.h1 || lesson.titel}</h2>
           {lesson.lead && <p className="c1-lead">{renderInline(lesson.lead)}</p>}
+          {lesson.heft && (
+            <Link to={heftUrl} className={'c1-heft-toplink' + (heftDone ? ' is-done' : '')}>
+              {heftDone ? '✓' : '📝'} Übungsheft{heftDone ? ' erledigt' : ' zu dieser Lektion'} →
+            </Link>
+          )}
           <hr className="c1-rule" />
           <C1LessonBody content={lesson.content || []} next={lesson.next} base={kurs.base} v2={v2} art={art} />
         </>
@@ -89,11 +96,17 @@ export default function C1Lesson({ lesson, kurs }) {
       )}
 
       {lesson.heft && (
-        <Link to={`${kurs.base}/${lesson.id}/heft`} className="c1-heft-card">
-          <span className="c1-hc-ico" aria-hidden="true">📝</span>
+        <Link to={heftUrl} className={'c1-heft-card' + (heftDone ? ' is-done' : '')}>
+          <span className="c1-hc-ico" aria-hidden="true">{heftDone ? '✓' : '📝'}</span>
           <span className="c1-hc-body">
             <span className="c1-hc-k">Übungsheft</span>
-            <span className="c1-hc-t">Jetzt üben: Aufgaben zu dieser Lektion</span>
+            <span className="c1-hc-t">
+              {heftDone
+                ? `Erledigt am ${new Date(heftState.completedAt).toLocaleDateString('de-DE')}${heftState.autoPct != null ? ` · ${heftState.autoPct} %` : ''}`
+                : heftState?.partsDone > 0
+                  ? `Weitermachen: ${heftState.partsDone} von ${heftState.partsTotal} Teilen erledigt`
+                  : 'Jetzt üben: Aufgaben zu dieser Lektion'}
+            </span>
             <span className="c1-hc-s">Grammatik · Lesen · Hören · Schreiben · Sprechen — mit Korrektur{/A[12]/.test(kurs.name) ? ' (practica lo aprendido)' : ''}</span>
           </span>
           <span className="c1-hc-go" aria-hidden="true">→</span>

@@ -26,12 +26,6 @@ function shuffled(arr, seed) {
 const sinPunkt = s => norm(String(s).replace(/[.?!,]/g, ''))
 const satzOk = (item, built) => [item.loesung, ...(item.alt || [])].some(l => sinPunkt(l) === sinPunkt(built))
 
-// Consigna que recibe el corrector de IA (anweisung + aufgabe + punkte), sin
-// las glosas españolas ~~(…)~~ ni las marcas de formato, que son ayudas
-// visuales para el alumno.
-const plain = t => String(t || '').replace(/~~[^~]*~~/g, '').replace(/\*\*|__|==/g, '').replace(/\s+/g, ' ').trim()
-const aufgabeText = teil => [plain(teil.anweisung), plain(teil.aufgabe)].filter(Boolean).join('\n') +(teil.punkte?.length ? '\n\nPunkte:\n' + teil.punkte.map(p => `- ${plain(p)}`).join('\n') : '')
-
 // ─── ítems ───────────────────────────────────────────────────────────
 
 function ItemMC({ item, value, onChange, checked, seed }) {
@@ -232,7 +226,7 @@ function renderItem(item, props) {
 
 // ─── Teile ───────────────────────────────────────────────────────────
 
-function TeilItems({ teil, seed, gl, intro = null, afterCheck = null }) {
+function TeilItems({ teil, seed, gl, save, intro = null, afterCheck = null }) {
   const [values, setValues] = useState({})
   const [checked, setChecked] = useState(false)
   const items = teil.items || []
@@ -266,7 +260,7 @@ function TeilItems({ teil, seed, gl, intro = null, afterCheck = null }) {
       ))}
       <div className="c1-pa-actions">
         <button type="button" className="c1-pa-btn c1-pa-btn--primary" disabled={!answered || checked}
-          onClick={() => setChecked(true)}>
+          onClick={() => { setChecked(true); save({ responses: values }) }}>
           Prüfen
         </button>
         <button type="button" className="c1-pa-btn" onClick={() => { setValues({}); setChecked(false) }}>
@@ -308,9 +302,10 @@ function HoerPlayer({ audio, level }) {
   )
 }
 
-function TeilHoeren({ teil, seed, gl, level }) {
+function TeilHoeren({ teil, seed, gl, level, save }) {
   return (
     <TeilItems
+      save={save}
       teil={teil}
       seed={seed}
       gl={gl}
@@ -328,8 +323,7 @@ function TeilHoeren({ teil, seed, gl, level }) {
 // ─── Sprechen ────────────────────────────────────────────────────────
 // El alumno habla, el navegador transcribe y la IA corrige el contenido
 // (no la pronunciación). Sin micrófono/reconocimiento: puede escribirlo.
-function TeilSprechen({ teil, level, gl }) {
-  const { getToken } = useAuth()
+function TeilSprechen({ teil, gl, save }) {
   const [phase, setPhase] = useState('idle') // idle | recording | done
   const [transcript, setTranscript] = useState('')
   const [interim, setInterim] = useState('')
@@ -397,19 +391,8 @@ function TeilSprechen({ teil, level, gl }) {
   const korrigieren = async () => {
     setBusy(true); setError(null)
     try {
-      const res = await fetch(`${API_URL}/api/pruefungen/grade-sprechen`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${getToken()}` },
-        body: JSON.stringify({
-          level,
-          taskType: 'Übungsheft',
-          taskPrompt: aufgabeText(teil),
-          transcript: transcript.trim(),
-          durationSeconds: durationRef.current,
-        }),
-      })
-      if (!res.ok) throw new Error('Korrektur nicht möglich. Versuch es später.')
-      setFb(await res.json())
+      const data = await save({ text: transcript.trim(), durationSeconds: durationRef.current, mode: manual ? 'escrito' : 'voz' })
+      setFb(data.feedback)
     } catch (e) {
       setError(e.message)
     } finally {
@@ -501,7 +484,7 @@ function TeilSprechen({ teil, level, gl }) {
   )
 }
 
-function TeilFormular({ teil }) {
+function TeilFormular({ teil, save }) {
   const [vals, setVals] = useState({})
   const [checked, setChecked] = useState(false)
   // Teléfonos, fechas y códigos: "030 12 34" = "030-1234" = "0301234".
@@ -537,7 +520,7 @@ function TeilFormular({ teil }) {
       </div>
       <div className="c1-pa-actions">
         <button type="button" className="c1-pa-btn c1-pa-btn--primary" disabled={checked}
-          onClick={() => setChecked(true)}>Prüfen</button>
+          onClick={() => { setChecked(true); save({ responses: vals }) }}>Prüfen</button>
         <button type="button" className="c1-pa-btn" onClick={() => { setVals({}); setChecked(false) }}>Zurücksetzen</button>
         {checked && <span className="c1-pa-score">{score} / {teil.felder.length} richtig</span>}
       </div>
@@ -545,8 +528,7 @@ function TeilFormular({ teil }) {
   )
 }
 
-function TeilSchreibenText({ teil, level }) {
-  const { getToken } = useAuth()
+function TeilSchreibenText({ teil, save }) {
   const [text, setText] = useState('')
   const [busy, setBusy] = useState(false)
   const [fb, setFb] = useState(null)
@@ -556,19 +538,8 @@ function TeilSchreibenText({ teil, level }) {
   const korrigieren = async () => {
     setBusy(true); setError(null)
     try {
-      const res = await fetch(`${API_URL}/api/pruefungen/grade-schreiben`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${getToken()}` },
-        body: JSON.stringify({
-          level,
-          taskType: 'Übungsheft',
-          taskPrompt: aufgabeText(teil),
-          submission: text.trim(),
-          minWords: teil.minWoerter,
-        }),
-      })
-      if (!res.ok) throw new Error('Korrektur nicht möglich. Versuch es später.')
-      setFb(await res.json())
+      const data = await save({ text: text.trim() })
+      setFb(data.feedback)
     } catch (e) {
       setError(e.message)
     } finally {
@@ -625,8 +596,70 @@ function TeilSchreibenText({ teil, level }) {
 
 // ─── cuerpo del cuaderno ─────────────────────────────────────────────
 
-export default function HeftBody({ heft, level = 'A1' }) {
+// Barra de estado del cuaderno. Sin datos (profes) no se muestra.
+function HeftStatus({ progress, gl }) {
+  if (!progress || progress.staff) return null
+  const { partsDone, partsTotal, autoPct, completedAt, minPct } = progress
+  if (completedAt) {
+    return (
+      <p className="c1-heft-status is-done" role="status">
+        ✓ Übungsheft erledigt am {new Date(completedAt).toLocaleDateString('de-DE')}
+        {autoPct != null && <> · {autoPct} %</>}
+        {gl && <> <span className="c1-gl">(cuaderno completado)</span></>}
+      </p>
+    )
+  }
+  const low = partsDone === partsTotal && autoPct != null && autoPct < minPct
+  return (
+    <p className={'c1-heft-status' + (low ? ' is-low' : '')} role="status">
+      {low
+        ? <>Alle Teile gemacht, aber nur {autoPct} %. Du brauchst {minPct} % — übe noch einmal.{gl && <> <span className="c1-gl">(Repite las partes con menos aciertos.)</span></>}</>
+        : <>{partsDone} von {partsTotal} Teilen erledigt{gl && <> <span className="c1-gl">(partes hechas)</span></>}</>}
+    </p>
+  )
+}
+
+export default function HeftBody({ heft, level = 'A1', api, lessonId, onProgress }) {
+  const { getToken } = useAuth()
   const [runde, setRunde] = useState(1)
+  const [progress, setProgress] = useState(null)
+  // Si una entrega no se guarda, el alumno tiene que saberlo: es su prueba.
+  const [failed, setFailed] = useState({}) // { [teil]: body }
+
+  useEffect(() => {
+    let cancelled = false
+    fetch(`${API_URL}${api}/heft/${lessonId}/progress`, { headers: { Authorization: `Bearer ${getToken()}` } })
+      .then(r => (r.ok ? r.json() : null))
+      .then(j => { if (!cancelled && j) setProgress(j) })
+      .catch(() => {})
+    return () => { cancelled = true }
+  }, [api, lessonId, getToken])
+
+  const saveTeil = async (t, body) => {
+    let res
+    try {
+      res = await fetch(`${API_URL}${api}/heft/${lessonId}/teil/${t}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${getToken()}` },
+        body: JSON.stringify(body),
+      })
+    } catch {
+      setFailed(f => ({ ...f, [t]: body }))
+      throw new Error('Keine Verbindung. Versuch es noch einmal.')
+    }
+    const data = await res.json().catch(() => ({}))
+    if (!res.ok) {
+      // «Ver como alumno» no registra nada, y no es un fallo.
+      if (data.code !== 'read_only_impersonation') setFailed(f => ({ ...f, [t]: body }))
+      throw new Error(data.error || 'Korrektur nicht möglich. Versuch es später.')
+    }
+    setFailed(({ [t]: _, ...rest }) => rest)
+    if (data.progress) { setProgress(data.progress); onProgress?.(lessonId, data.progress) }
+    return data
+  }
+  // Las partes corregidas en el navegador no esperan: el fallo se avisa aparte.
+  const saveQuiet = t => body => { saveTeil(t, body).catch(() => {}) }
+
   const seedBase = useRef(Math.floor(Math.random() * 100000))
   const seed = seedBase.current + runde * 131
 
@@ -636,20 +669,39 @@ export default function HeftBody({ heft, level = 'A1' }) {
   const gl = /^A/.test(level)
   return (
     <div key={runde}>
-      {heft.teile.map((teil, t) => (
-        <section className="c1-sec" key={t}>
-          <div className="c1-eyebrow"><span className="c1-ico">{ICONS[teil.typ] || '📝'}</span>{teil.titel}</div>
-          {teil.anweisung && <p className="c1-heft-anweisung">{renderInline(teil.anweisung)}</p>}
-          {teil.typ === 'schreiben'
-            ? (teil.variante === 'formular' ? <TeilFormular teil={teil} /> : <TeilSchreibenText teil={teil} level={level} />)
-            : teil.typ === 'sprechen'
-              ? <TeilSprechen teil={teil} level={level} gl={gl} />
-              : teil.typ === 'hoeren'
-                ? <TeilHoeren teil={teil} seed={seed + t * 1000} gl={gl} level={level} />
-                : <TeilItems teil={teil} seed={seed + t * 1000} gl={gl} />}
-          {t < heft.teile.length - 1 && <hr className="c1-rule" />}
-        </section>
-      ))}
+      <HeftStatus progress={progress} gl={gl} />
+      {heft.teile.map((teil, t) => {
+        const part = progress?.parts?.[t]
+        return (
+          <section className="c1-sec" key={t}>
+            <div className="c1-eyebrow">
+              <span className="c1-ico">{ICONS[teil.typ] || '📝'}</span>{teil.titel}
+              {part && (
+                <span className="c1-heft-partdone">
+                  ✓{part.maxScore != null ? ` ${part.score}/${part.maxScore}` : part.aiTotal != null ? ` ${part.aiTotal}/100` : ''}
+                </span>
+              )}
+            </div>
+            {teil.anweisung && <p className="c1-heft-anweisung">{renderInline(teil.anweisung)}</p>}
+            {teil.typ === 'schreiben'
+              ? (teil.variante === 'formular'
+                  ? <TeilFormular teil={teil} save={saveQuiet(t)} />
+                  : <TeilSchreibenText teil={teil} save={body => saveTeil(t, body)} />)
+              : teil.typ === 'sprechen'
+                ? <TeilSprechen teil={teil} gl={gl} save={body => saveTeil(t, body)} />
+                : teil.typ === 'hoeren'
+                  ? <TeilHoeren teil={teil} seed={seed + t * 1000} gl={gl} level={level} save={saveQuiet(t)} />
+                  : <TeilItems teil={teil} seed={seed + t * 1000} gl={gl} save={saveQuiet(t)} />}
+            {failed[t] && !(teil.typ === 'sprechen' || (teil.typ === 'schreiben' && teil.variante !== 'formular')) && (
+              <p className="c1-heft-savefail" role="alert">
+                Nicht gespeichert.{' '}
+                <button type="button" className="c1-pa-btn" onClick={() => saveTeil(t, failed[t]).catch(() => {})}>Erneut speichern</button>
+              </p>
+            )}
+            {t < heft.teile.length - 1 && <hr className="c1-rule" />}
+          </section>
+        )
+      })}
       <hr className="c1-rule" />
       <div className="c1-pa-actions">
         <button type="button" className="c1-pa-btn" onClick={() => setRunde(r => r + 1)}>

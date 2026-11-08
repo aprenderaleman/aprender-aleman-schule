@@ -10,7 +10,7 @@ const pad = n => String(n).padStart(2, '0')
  * desde la topbar (la transición vive en deutschc1.css, que respeta
  * prefers-reduced-motion).
  */
-export default function C1Sidebar({ kurs, blocks, lessons, activeId, onNavigate, panelRef, theme, onToggleTheme, onCollapse }) {
+export default function C1Sidebar({ kurs, blocks, lessons, activeId, onNavigate, panelRef, theme, onToggleTheme, onCollapse, heftState = {} }) {
   const activeRef = useRef(null)
 
   // Mantener la lección activa a la vista al saltar de una a otra.
@@ -71,6 +71,9 @@ export default function C1Sidebar({ kurs, blocks, lessons, activeId, onNavigate,
                   >
                     <span className="c1-num">{l.id > 90 ? `G${l.id - 90}` : pad(l.id)}</span>
                     <span className="c1-lt">{l.titel}</span>
+                    {heftState[l.id]?.completedAt && (
+                      <span className="c1-heft-tick" title="Übungsheft erledigt" aria-label="Übungsheft erledigt">✓</span>
+                    )}
                   </Link>
                 )
               })}

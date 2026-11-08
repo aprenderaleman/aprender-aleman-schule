@@ -15,6 +15,7 @@ const sidebarLinks = [
   { to: '/admin/supervision', icon: Video, label: 'Supervisión' },
   // Fuera de /admin/*: la revisión la comparten profesores y admins.
   { to: '/revision-examenes', icon: ClipboardCheck, label: 'Revisión de exámenes', pendingBadge: true },
+  { to: '/cuadernos-alumnos', icon: BookOpen, label: 'Cuadernos de alumnos' },
 ]
 
 const bottomLinks = [

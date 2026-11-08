@@ -659,6 +659,38 @@
   flex: 0 0 auto; font-size: 28px; font-weight: 700; line-height: 1; color: #0F2847;
   animation: c1-hc-nudge 2.8s ease-in-out infinite;
 }
+/* Cuaderno hecho: verde y sin animación, ya no hace falta llamar la atención */
+.c1-heft-card.is-done { background: #2E9E6B; color: #fff; animation: none; }
+.c1-heft-card.is-done:hover { background: #33AD76; }
+.c1-heft-card.is-done .c1-hc-k, .c1-heft-card.is-done .c1-hc-t, .c1-heft-card.is-done .c1-hc-go { color: #fff; animation: none; }
+.c1-heft-card.is-done .c1-hc-s { color: rgb(255 255 255 / 0.9); }
+.c1-heft-card.is-done .c1-hc-ico { color: #fff; font-weight: 700; background: rgb(255 255 255 / 0.22); }
+.c1-heft-tick {
+  flex: 0 0 auto; margin-left: auto; width: 20px; height: 20px; border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: #2E9E6B; color: #fff; font-size: 12px; font-weight: 700;
+}
+.c1-heft-toplink {
+  display: inline-flex; align-items: center; gap: 6px; margin: 10px 0 0; padding: 5px 12px;
+  border-radius: 999px; font-size: 14px; font-weight: 600; text-decoration: none;
+  color: #0F2847; background: #F4A261;
+}
+.c1-heft-toplink:hover { background: #F7B37C; }
+.c1-heft-toplink.is-done { background: #2E9E6B; color: #fff; }
+.c1-heft-status {
+  margin: 0 0 18px; padding: 10px 16px; border-radius: 12px; font-size: 15px; font-weight: 600;
+  background: var(--c1-surface); border: 1px solid var(--c1-line); color: var(--c1-text);
+}
+.c1-heft-status .c1-gl { font-weight: 400; color: var(--c1-muted); }
+.c1-heft-status.is-done { background: #2E9E6B; border-color: #2E9E6B; color: #fff; }
+.c1-heft-status.is-done .c1-gl { color: rgb(255 255 255 / 0.9); }
+.c1-heft-status.is-low { border-left: 4px solid #F4A261; }
+.c1-heft-partdone {
+  margin-left: auto; padding: 2px 10px; border-radius: 999px; background: #2E9E6B; color: #fff;
+  font-family: var(--c1-sans); font-size: 13px; font-weight: 700; letter-spacing: 0; text-transform: none; white-space: nowrap;
+}
+.c1-heft-savefail { margin: 10px 0 0; font-size: 14px; font-weight: 600; color: #DC2626; }
+
 /* Animación leve: un halo que se expande y una flecha que empuja. El bloque
    prefers-reduced-motion de este archivo las desactiva. */
 @keyframes c1-hc-pulse {

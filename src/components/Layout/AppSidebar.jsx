@@ -28,6 +28,7 @@ const NAV_ITEMS = [
 
 // Solo equipo docente (teacher, admin, superadmin): va justo tras «Prüfungen».
 const STAFF_REVIEW_ITEM = { to: '/revision-examenes', icon: ClipboardCheck, label: 'Revisión de exámenes', staffReview: true }
+const STAFF_HEFT_ITEM = { to: '/cuadernos-alumnos', icon: Library, label: 'Cuadernos de alumnos' }
 
 const SECONDARY_ITEMS = [
   { to: '/perfil',  icon: User,        label: 'Profil' },
@@ -64,7 +65,7 @@ export default function AppSidebar() {
   if (!user) return null
 
   const navItems = isReviewStaff(user.role)
-    ? NAV_ITEMS.flatMap(item => (item.to === '/pruefungen' ? [item, STAFF_REVIEW_ITEM] : [item]))
+    ? NAV_ITEMS.flatMap(item => (item.to === '/pruefungen' ? [item, STAFF_REVIEW_ITEM, STAFF_HEFT_ITEM] : [item]))
     : NAV_ITEMS
 
   const path = location.pathname

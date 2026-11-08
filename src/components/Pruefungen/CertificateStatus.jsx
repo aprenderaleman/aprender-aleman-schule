@@ -141,6 +141,14 @@ export default function CertificateStatus() {
         })}
       </div>
 
+      {/* Cuadernos hechos del nivel */}
+      {data.hefte && (
+        <p className="text-xs text-gray-600 dark:text-gray-300 mb-3 inline-flex items-center gap-1.5">
+          <Check size={13} className="text-emerald-600" />
+          Übungshefte: <strong>{data.hefte.done} / {data.hefte.total}</strong> ({data.hefte.pct}%)
+        </p>
+      )}
+
       {/* Path progress */}
       <div>
         <div className="flex items-center justify-between text-xs mb-1">
