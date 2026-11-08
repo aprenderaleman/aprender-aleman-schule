@@ -1793,16 +1793,36 @@ app.get('/api/referral', authMiddleware, async (req, res) => {
 //   • guarantee — flags the CRM can act on directly, e.g. eligibility
 //                 for the level-guarantee refund.
 //
-// Denominators are hardcoded (LEVEL_EXERCISE_TOTALS) because the
-// exercise catalogue is versioned in the frontend and Coolify's server
-// container doesn't ship the src/ tree. Update these constants when
-// content is added — a grep of the source is enough:
-//   for lvl in a1 a2 b1 b2 c1; do
-//     grep -hoE "id:'[grlws]-${lvl}-[0-9]+'" src/data/*.js | sort -u | wc -l
-//   done
-const LEVEL_EXERCISE_TOTALS = { A1: 142, A2: 139, B1: 138, B2: 138, C1: 138 }
+// Denominators come from server/exerciseTotals.json, generated from
+// src/data by scripts/exercise-totals.mjs (Coolify's server container
+// doesn't ship the src/ tree). `npm run build` fails if it is stale.
+const LEVEL_EXERCISE_TOTALS = JSON.parse(fs.readFileSync(new URL('./exerciseTotals.json', import.meta.url), 'utf8'))
 const PATH_PASS_THRESHOLD = 70        // % score needed to count an exercise as "done"
 const GUARANTEE_PATH_THRESHOLD = 85   // % of the path needed for the level-guarantee flag
+
+// Hasta noviembre 2026 los totales estaban desfasados (faltaban 15
+// ejercicios por nivel) y el % salía inflado. Quien llegó al 85 % con
+// aquellos totales, con ejercicios hechos antes del corte, lo conserva.
+const LEGACY_EXERCISE_TOTALS = { A1: 142, A2: 139, B1: 138, B2: 138, C1: 138 }
+const LEGACY_PATH_CUTOFF = '2026-11-10 00:00:00'
+
+async function pathProgress(userId, level) {
+  const lvl = String(level || '').toUpperCase()
+  const [rows] = await pool.query(
+    `SELECT COUNT(DISTINCT exerciseId) AS n,
+            COUNT(DISTINCT CASE WHEN completedAt < ? THEN exerciseId END) AS legacyN
+       FROM schule_exercise_results
+      WHERE userId = ? AND score >= ? AND exerciseId LIKE ?`,
+    [LEGACY_PATH_CUTOFF, userId, PATH_PASS_THRESHOLD, `%-${lvl.toLowerCase()}-%`]
+  )
+  const completed = Number(rows[0]?.n || 0)
+  const total = LEVEL_EXERCISE_TOTALS[lvl] || 0
+  const pct = total > 0 ? Math.min(100, Math.round((100 * completed) / total)) : 0
+  const legacyTotal = LEGACY_EXERCISE_TOTALS[lvl] || 0
+  const legacy = legacyTotal > 0 && pct < GUARANTEE_PATH_THRESHOLD &&
+    Math.round((100 * Number(rows[0]?.legacyN || 0)) / legacyTotal) >= GUARANTEE_PATH_THRESHOLD
+  return { completed, total, pct, legacy, meets: pct >= GUARANTEE_PATH_THRESHOLD || legacy }
+}
 const PRUEFUNG_MODULES = ['lesen', 'hoeren', 'schreiben', 'sprechen']
 
 app.get('/api/internal/student/progress', async (req, res) => {
@@ -1837,18 +1857,9 @@ app.get('/api/internal/student/progress', async (req, res) => {
 
     // 2. Path progress: unique exerciseIds with score >= threshold whose
     //    ID prefix matches the level (e.g. 'g-b2-…', 'r-b2-…').
-    const levelSuffix = level.toLowerCase()
-    const [rows] = await pool.query(
-      `SELECT COUNT(DISTINCT exerciseId) AS n
-         FROM schule_exercise_results
-        WHERE userId = ?
-          AND score >= ?
-          AND exerciseId LIKE ?`,
-      [user.id, PATH_PASS_THRESHOLD, `%-${levelSuffix}-%`]
-    )
-    const completed = Number(rows[0]?.n || 0)
-    const total = LEVEL_EXERCISE_TOTALS[level] || 0
-    const pathPct = total > 0 ? Math.round((100 * completed) / total) : 0
+    const path = await pathProgress(user.id, level)
+    const { completed, total } = path
+    const pathPct = path.pct
 
     // 3. Prüfung: best result per module at the student's level.
     // ONLY real attempts count for the level-guarantee flag. Simulacros
@@ -1910,11 +1921,13 @@ app.get('/api/internal/student/progress', async (req, res) => {
       },
       guarantee: {
         pathThreshold: GUARANTEE_PATH_THRESHOLD,
-        meetsPathThreshold: pathPct >= GUARANTEE_PATH_THRESHOLD,
+        meetsPathThreshold: path.meets,
+        // true = cumple solo por los totales antiguos (ejercicios previos al corte)
+        meetsPathByLegacyTotals: path.legacy,
         passedPruefung: allPassed,
         // Suggested combined flag for a level certificate. The CRM can
         // still pick its own combination — both signals are exposed above.
-        eligibleForLevelCertificate: allPassed || pathPct >= GUARANTEE_PATH_THRESHOLD,
+        eligibleForLevelCertificate: allPassed || path.meets,
       },
       // Cuadernos hechos del nivel. Informativo: aún no condiciona la garantía.
       hefte: await heftProgress.levelSummary(user.id, level),
@@ -1981,18 +1994,10 @@ app.post('/api/internal/certificate/issue', async (req, res) => {
     const { allPassed, compensated } = levelPassStatus(lvl, modules)
 
     // Path % (same rule as /api/internal/student/progress)
-    const levelSuffix = lvl.toLowerCase()
-    const [pathRows] = await pool.query(
-      `SELECT COUNT(DISTINCT exerciseId) AS n
-         FROM schule_exercise_results
-        WHERE userId = ? AND score >= ? AND exerciseId LIKE ?`,
-      [userId, PATH_PASS_THRESHOLD, `%-${levelSuffix}-%`]
-    )
-    const completed = Number(pathRows[0]?.n || 0)
-    const total = LEVEL_EXERCISE_TOTALS[lvl] || 0
-    const pathPct = total > 0 ? Math.round((100 * completed) / total) : 0
+    const path = await pathProgress(userId, lvl)
+    const pathPct = path.pct
 
-    if (!allPassed && pathPct < GUARANTEE_PATH_THRESHOLD) {
+    if (!allPassed && !path.meets) {
       return res.status(400).json({
         error: 'El alumno no cumple los requisitos para certificar (necesita aprobar los 4 módulos reales —A1/A2: media del 60 % sin ningún módulo por debajo del 40 %; B1-C2: un único módulo entre 50 y 59 % vale con media del 65 %— O alcanzar 85% de la ruta).',
         allPassed,
@@ -4179,16 +4184,7 @@ app.get('/api/pruefungen/cert-status', authMiddleware, subscriptionMiddleware, a
     }
 
     // Path % (same rule as internal endpoints)
-    const levelSuffix = level.toLowerCase()
-    const [pathRows] = await pool.query(
-      `SELECT COUNT(DISTINCT exerciseId) AS n
-         FROM schule_exercise_results
-        WHERE userId = ? AND score >= ? AND exerciseId LIKE ?`,
-      [req.user.id, PATH_PASS_THRESHOLD, `%-${levelSuffix}-%`]
-    )
-    const completed = Number(pathRows[0]?.n || 0)
-    const total = LEVEL_EXERCISE_TOTALS[level] || 0
-    const pathPct = total > 0 ? Math.round((100 * completed) / total) : 0
+    const path = await pathProgress(req.user.id, level)
 
     const { passedCount, allPassed, compensated, avgPct, compensation } = levelPassStatus(level, modules)
 
@@ -4200,8 +4196,8 @@ app.get('/api/pruefungen/cert-status', authMiddleware, subscriptionMiddleware, a
       compensated,
       avgPct,
       compensation,
-      path: { completed, total, pct: pathPct, threshold: GUARANTEE_PATH_THRESHOLD },
-      eligibleForCertificate: allPassed || pathPct >= GUARANTEE_PATH_THRESHOLD,
+      path: { completed: path.completed, total: path.total, pct: path.pct, threshold: GUARANTEE_PATH_THRESHOLD, legacyMet: path.legacy },
+      eligibleForCertificate: allPassed || path.meets,
       hefte: await heftProgress.levelSummary(req.user.id, level),
     })
   } catch (err) {
@@ -4785,7 +4781,7 @@ async function getStudentContext(userId, userLevel) {
 
     const completed = Number(pathRows[0]?.n || 0)
     const total = LEVEL_EXERCISE_TOTALS[lvl] || 0
-    const pathPct = total > 0 ? Math.round((100 * completed) / total) : 0
+    const pathPct = total > 0 ? Math.min(100, Math.round((100 * completed) / total)) : 0
 
     return {
       xp: Number(xpRow?.xp || 0),

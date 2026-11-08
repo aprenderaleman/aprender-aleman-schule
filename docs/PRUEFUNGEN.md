@@ -121,3 +121,13 @@ se ignora.
 **La garantía aún no lo exige.** El 80 % de cuadernos del nivel (`HEFT_GUARANTEE_PCT`)
 es solo informativo hasta actualizar las condiciones: cambiar los requisitos de una
 garantía ya vendida debe revisarlo un asesor y aplicarse a matrículas nuevas.
+
+## Totales de la ruta
+
+El % de la ruta divide los ejercicios hechos (≥70 %) entre `server/exerciseTotals.json`,
+que se genera desde `src/data` con `node scripts/exercise-totals.mjs`. `npm run build`
+falla si está desfasado: al añadir ejercicios, regenerar, commit y redeploy de la API.
+
+Hasta el 10 nov 2026 los totales estaban desfasados (142/139/138/138/138 en vez de
+157/154/153/153/153) y el % salía inflado. Quien llegó al 85 % con aquellos totales y
+ejercicios hechos antes del corte lo conserva (`pathProgress` → `legacy`).

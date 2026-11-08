@@ -161,6 +161,11 @@ export default function CertificateStatus() {
             style={{ width: `${Math.min(100, path.pct)}%` }}
           />
         </div>
+        {path.legacyMet && (
+          <p className="text-xs font-semibold text-emerald-700 dark:text-emerald-400 mt-1">
+            ✓ Ya alcanzaste la meta de la ruta antes de que se añadieran ejercicios nuevos: la conservas.
+          </p>
+        )}
       </div>
     </motion.section>
   )
